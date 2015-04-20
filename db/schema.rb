@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141217215750) do
+ActiveRecord::Schema.define(:version => 20150420104217) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -86,6 +86,112 @@ ActiveRecord::Schema.define(:version => 20141217215750) do
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
+  create_table "inward_remittances", :force => true do |t|
+    t.string   "req_no",                                             :null => false
+    t.string   "req_version",         :limit => 10,                  :null => false
+    t.datetime "req_time",                                           :null => false
+    t.string   "partner_code",        :limit => 20,                  :null => false
+    t.string   "rmtr_full_name"
+    t.string   "rmtr_first_name"
+    t.string   "rmtr_last_name"
+    t.string   "rmtr_address1"
+    t.string   "rmtr_address2"
+    t.string   "rmtr_address3"
+    t.string   "rmtr_postal_code"
+    t.string   "rmtr_city"
+    t.string   "rmtr_state"
+    t.string   "rmtr_country"
+    t.string   "rmtr_email_id"
+    t.string   "rmtr_mobile_no"
+    t.integer  "rmtr_identity_count",                                :null => false
+    t.string   "bene_full_name"
+    t.string   "bene_first_name"
+    t.string   "bene_last_name"
+    t.string   "bene_address1"
+    t.string   "bene_address2"
+    t.string   "bene_address3"
+    t.string   "bene_postal_code"
+    t.string   "bene_city"
+    t.string   "bene_state"
+    t.string   "bene_country"
+    t.string   "bene_email_id"
+    t.string   "bene_mobile_no"
+    t.integer  "bene_identity_count",                                :null => false
+    t.string   "bene_account_no"
+    t.string   "bene_account_ifsc"
+    t.string   "transfer_type",       :limit => 4
+    t.string   "transfer_ccy",        :limit => 5
+    t.float    "transfer_amount"
+    t.string   "rmtr_to_bene_note"
+    t.string   "purpose_code",        :limit => 5
+    t.string   "status_code",         :limit => 25
+    t.string   "bank_ref",            :limit => 20
+    t.string   "bene_ref",            :limit => 20
+    t.string   "rep_no"
+    t.string   "rep_version",         :limit => 10
+    t.datetime "rep_timestamp"
+    t.string   "review_reqd",         :limit => 1,  :default => "N"
+    t.string   "review_pending",      :limit => 1,  :default => "N"
+    t.integer  "attempt_no",                                         :null => false
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
+  end
+
+  add_index "inward_remittances", ["req_no", "partner_code", "attempt_no"], :name => "remittance_unique_index", :unique => true
+
+  create_table "partners", :force => true do |t|
+    t.string   "code",                      :limit => 20,                :null => false
+    t.string   "name",                      :limit => 20,                :null => false
+    t.string   "tech_email_id"
+    t.string   "ops_email_id"
+    t.string   "account_no",                :limit => 20,                :null => false
+    t.string   "account_ifsc",              :limit => 20,                :null => false
+    t.integer  "txn_hold_period_days",                    :default => 7, :null => false
+    t.string   "identity_user_id",          :limit => 20
+    t.float    "low_balance_alert_at"
+    t.string   "remitter_sms_allowed",      :limit => 1
+    t.string   "remitter_email_allowed",    :limit => 1
+    t.string   "beneficiary_sms_allowed",   :limit => 1
+    t.string   "beneficiary_email_allowed", :limit => 1
+    t.string   "allow_neft",                :limit => 1
+    t.string   "allow_rgts",                :limit => 1
+    t.string   "allow_imps",                :limit => 1
+    t.string   "created_by",                :limit => 20
+    t.string   "updated_by",                :limit => 20
+    t.datetime "created_at",                                             :null => false
+    t.datetime "updated_at",                                             :null => false
+  end
+
+  create_table "purpose_codes", :force => true do |t|
+    t.string   "code",                :limit => 5
+    t.string   "description",         :limit => 200
+    t.string   "is_enabled",          :limit => 1
+    t.string   "created_by",          :limit => 20
+    t.string   "updated_by",          :limit => 20
+    t.integer  "lock_version"
+    t.integer  "txn_limit"
+    t.integer  "daily_txn_limit"
+    t.string   "disallowedremtypes",  :limit => 30
+    t.string   "disallowedbenetypes", :limit => 30
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+  end
+
+  create_table "remittance_reviews", :force => true do |t|
+    t.string   "transaction_id",     :limit => 5,    :null => false
+    t.string   "justification_code", :limit => 5,    :null => false
+    t.string   "justification_text", :limit => 2000
+    t.string   "review_status",      :limit => 10,   :null => false
+    t.date     "reviewed_at"
+    t.string   "review_remarks",     :limit => 2000
+    t.string   "reviewed_by",        :limit => 50
+    t.string   "created_by",         :limit => 20
+    t.string   "updated_by",         :limit => 20
+    t.integer  "lock_version"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+  end
+
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.integer  "resource_id"
@@ -126,5 +232,30 @@ ActiveRecord::Schema.define(:version => 20141217215750) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], :name => "index_users_roles_on_user_id_and_role_id"
+
+  create_table "whitelisted_identities", :force => true do |t|
+    t.integer  "partner_id",                           :null => false
+    t.string   "full_name",              :limit => 50
+    t.string   "first_name",             :limit => 50
+    t.string   "last_name",              :limit => 50
+    t.string   "id_type",                :limit => 20
+    t.string   "id_number",              :limit => 50
+    t.string   "id_country"
+    t.date     "id_issue_date"
+    t.date     "id_expiry_date"
+    t.string   "is_verified",            :limit => 1
+    t.date     "verified_at"
+    t.string   "verified_by",            :limit => 20
+    t.integer  "first_used_with_txn_id"
+    t.integer  "last_used_with_txn_id"
+    t.integer  "times_used"
+    t.string   "created_by",             :limit => 20
+    t.string   "updated_by",             :limit => 20
+    t.integer  "lock_version"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+  end
+
+  add_index "whitelisted_identities", ["last_used_with_txn_id"], :name => "index_whitelisted_identities_on_last_used_with_txn_id"
 
 end
