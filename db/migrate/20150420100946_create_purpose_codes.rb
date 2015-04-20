@@ -1,0 +1,18 @@
+class CreatePurposeCodes < ActiveRecord::Migration
+  def change
+    create_table :purpose_codes do |t|
+      t.string :code, :limit => 5
+      t.string :description, :limit => 200
+      t.string :is_enabled, :limit => 1
+      t.string :created_by, :limit => 20
+      t.string :updated_by, :limit => 20
+      t.integer :lock_version
+      t.integer :txn_limit
+      t.integer :daily_txn_limit
+      t.string :disallowedremtypes, :limit => 30
+      t.string :disallowedbenetypes, :limit => 30
+
+      t.timestamps
+    end
+  end
+end
