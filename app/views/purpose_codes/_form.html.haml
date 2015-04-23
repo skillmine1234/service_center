@@ -1,0 +1,46 @@
+= simple_form_for @purpose_code, :html => {:class=>'form-horizontal', :autocomplete=>"off", :id => "purpose_code_form"} do |f|
+  .control-group
+    = f.label ' '
+    #msg-error
+      = error_message_for(@purpose_code, :base, :prepend_text => "")
+  .form-main
+    = f.hidden_field :lock_version
+    .control-group
+      = f.label :code
+      = f.text_field :code
+      #msg-error
+        = error_message_for(@purpose_code, :code, :prepend_text => "")
+    .control-group
+      = f.label :description
+      = f.text_field :description
+      #msg-error
+        = error_message_for(@purpose_code, :description, :prepend_text => "")
+    .control-group
+      = f.label "*Enabled?"
+      = f.text_field :is_enabled
+      #msg-error
+        = error_message_for(@purpose_code, :is_enabled, :prepend_text => "")
+    .control-group
+      = f.label "*Transaction Limit"
+      = f.text_field :txn_limit
+      #msg-error
+        = error_message_for(@purpose_code, :txn_limit, :prepend_text => "")
+    .control-group
+      = f.label "*Daily Transaction Limit"
+      = f.text_field :daily_txn_limit
+      #msg-error
+        = error_message_for(@purpose_code, :daily_txn_limit, :prepend_text => "")
+    .control-group
+      = f.label "Disallowed Remitter Types"
+      = f.text_field :disallowed_rem_types
+      #msg-error
+        = error_message_for(@purpose_code, :disallowed_rem_types, :prepend_text => "")
+    .control-group
+      = f.label "Disallowed Beneficiary Types"
+      = f.number_field :disallowed_bene_types
+      #msg-error
+        = error_message_for(@purpose_code, :disallowed_bene_types, :prepend_text => "")
+  .form-actions
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_purpose_code'
+    = link_to :Cancel,'/purpose_codes', :name => 'cancel', :class=>"cancel btn"
+

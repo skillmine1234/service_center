@@ -1,0 +1,57 @@
+%br
+= link_to 'New Partner', new_purpose_code_path
+%br
+%br
+%h1 Listing purpose_codes
+%br
+= "Total Count: #{@purpose_codes_count}"
+%br
+= will_paginate @purpose_codes
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Code
+    %th{:style=>'text-align:left; background-color: lightblue;'} 
+      Description
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Enabled?
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Transaction Limit
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Daily Transaction Limit
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Created by
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Updated by
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Created At
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Updated At
+  .tbody
+    - @purpose_codes.each do |purpose_code|
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', purpose_code
+        %td{:style=>'text-align:left;'}
+          = link_to 'Edit', edit_purpose_code_path(purpose_code)
+        %td{:style=>'text-align:left;'}
+          = purpose_code.code
+        %td{:style=>'text-align:left;'}
+          = purpose_code.description
+        %td{:style=>'text-align:left;'}
+          = purpose_code.is_enabled
+        %td{:style=>'text-align:left;'}
+          = purpose_code.txn_limit
+        %td{:style=>'text-align:left;'}
+          = purpose_code.daily_txn_limit
+        %td{:style=>'text-align:left;'}
+          = purpose_code.created_user.try(:username)
+        %td{:style=>'text-align:left;'}
+          = purpose_code.updated_user.try(:username)
+        %td{:style=>'text-align:left;'}
+          = purpose_code.created_at.strftime("%d/%m/%Y %I:%M%p")
+        %td{:style=>'text-align:left;'}
+          = purpose_code.updated_at.strftime("%d/%m/%Y %I:%M%p")

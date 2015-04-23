@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150423042654) do
+ActiveRecord::Schema.define(:version => 20150423082638) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -185,18 +185,18 @@ ActiveRecord::Schema.define(:version => 20150423042654) do
   end
 
   create_table "purpose_codes", :force => true do |t|
-    t.string   "code",                :limit => 5
-    t.string   "description",         :limit => 200
-    t.string   "is_enabled",          :limit => 1
-    t.string   "created_by",          :limit => 20
-    t.string   "updated_by",          :limit => 20
+    t.string   "code",                  :limit => 5
+    t.string   "description",           :limit => 200
+    t.string   "is_enabled",            :limit => 1
+    t.string   "created_by",            :limit => 20
+    t.string   "updated_by",            :limit => 20
     t.integer  "lock_version"
     t.integer  "txn_limit"
     t.integer  "daily_txn_limit"
-    t.string   "disallowedremtypes",  :limit => 30
-    t.string   "disallowedbenetypes", :limit => 30
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.string   "disallowed_rem_types",  :limit => 30
+    t.string   "disallowed_bene_types", :limit => 30
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
   end
 
   create_table "remittance_reviews", :force => true do |t|

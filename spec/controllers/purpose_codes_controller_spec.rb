@@ -1,0 +1,165 @@
+require 'spec_helper'
+require "cancan_matcher"
+
+describe PurposeCodesController do
+  include HelperMethods
+
+  before(:each) do
+    @controller.instance_eval { flash.extend(DisableFlashSweeping) }
+    sign_in @user = Factory(:user)
+    @user.add_role :user
+    request.env["HTTP_REFERER"] = "/"
+  end
+
+  describe "GET index" do
+    it "assigns all purpose_codes as @purpose_codes" do
+      purpose_code = Factory(:purpose_code)
+      get :index
+      assigns(:purpose_codes).should eq([purpose_code])
+    end
+  end
+
+  describe "GET show" do
+    it "assigns the requested purpose_code as @purpose_code" do
+      purpose_code = Factory(:purpose_code)
+      get :show, {:id => purpose_code.id}
+      assigns(:purpose_code).should eq(purpose_code)
+    end
+  end
+
+  describe "GET new" do
+    it "assigns a new purpose_code as @purpose_code" do
+      get :new
+      assigns(:purpose_code).should be_a_new(PurposeCode)
+    end
+  end
+
+  describe "GET edit" do
+    it "assigns the requested purpose_code as @purpose_code" do
+      purpose_code = Factory(:purpose_code)
+      get :edit, {:id => purpose_code.id}
+      assigns(:purpose_code).should eq(purpose_code)
+    end
+  end
+
+  describe "POST create" do
+    describe "with valid params" do
+      it "creates a new purpose_code" do
+        params = Factory.attributes_for(:purpose_code)
+        expect {
+          post :create, {:purpose_code => params}
+        }.to change(PurposeCode, :count).by(1)
+        flash[:alert].should  match(/PurposeCode successfuly created/)
+        response.should be_redirect
+      end
+
+      it "assigns a newly created purpose_code as @purpose_code" do
+        params = Factory.attributes_for(:purpose_code)
+        post :create, {:purpose_code => params}
+        assigns(:purpose_code).should be_a(PurposeCode)
+        assigns(:purpose_code).should be_persisted
+      end
+
+      it "redirects to the created purpose_code" do
+        params = Factory.attributes_for(:purpose_code)
+        post :create, {:purpose_code => params}
+        response.should redirect_to(PurposeCode.last)
+      end
+    end
+
+    describe "with invalid params" do
+      it "assigns a newly created but unsaved purpose_code as @purpose_code" do
+        params = Factory.attributes_for(:purpose_code)
+        params[:code] = nil
+        expect {
+          post :create, {:purpose_code => params}
+        }.to change(PurposeCode, :count).by(0)
+        assigns(:purpose_code).should be_a(PurposeCode)
+        assigns(:purpose_code).should_not be_persisted
+      end
+
+      it "re-renders the 'new' template when show_errors is true" do
+        params = Factory.attributes_for(:purpose_code)
+        params[:code] = nil
+        post :create, {:purpose_code => params}
+        response.should render_template("new")
+      end
+    end
+  end
+
+  describe "PUT update" do
+    describe "with valid params" do
+      it "updates the requested purpose_code" do
+        purpose_code = Factory(:purpose_code, :code => "11")
+        params = purpose_code.attributes.slice(*purpose_code.class.accessible_attributes)
+        params[:code] = "15"
+        put :update, {:id => purpose_code.id, :purpose_code => params}
+        purpose_code.reload
+        purpose_code.code.should == "15"
+      end
+
+      it "assigns the requested purpose_code as @purpose_code" do
+        purpose_code = Factory(:purpose_code, :code => "11")
+        params = purpose_code.attributes.slice(*purpose_code.class.accessible_attributes)
+        params[:code] = "15"
+        put :update, {:id => purpose_code.to_param, :purpose_code => params}
+        assigns(:purpose_code).should eq(purpose_code)
+      end
+
+      it "redirects to the purpose_code" do
+        purpose_code = Factory(:purpose_code, :code => "11")
+        params = purpose_code.attributes.slice(*purpose_code.class.accessible_attributes)
+        params[:code] = "15"
+        put :update, {:id => purpose_code.to_param, :purpose_code => params}
+        response.should redirect_to(purpose_code)
+      end
+
+      it "should raise error when tried to update at same time by many" do
+        purpose_code = Factory(:purpose_code, :code => "11")
+        params = purpose_code.attributes.slice(*purpose_code.class.accessible_attributes)
+        params[:code] = "15"
+        purpose_code2 = purpose_code
+        put :update, {:id => purpose_code.id, :purpose_code => params}
+        purpose_code.reload
+        purpose_code.code.should == "15"
+        params[:code] = "18"
+        put :update, {:id => purpose_code2.id, :purpose_code => params}
+        purpose_code.reload
+        purpose_code.code.should == "15"
+        flash[:alert].should  match(/Someone edited the purpose_code the same time you did. Please re-apply your changes to the purpose_code/)
+      end
+    end
+
+    describe "with invalid params" do
+      it "assigns the purpose_code as @purpose_code" do
+        purpose_code = Factory(:purpose_code, :code => "11")
+        params = purpose_code.attributes.slice(*purpose_code.class.accessible_attributes)
+        params[:code] = nil
+        put :update, {:id => purpose_code.to_param, :purpose_code => params}
+        assigns(:purpose_code).should eq(purpose_code)
+        purpose_code.reload
+        params[:code] = nil
+      end
+
+      it "re-renders the 'edit' template when show_errors is true" do
+        purpose_code = Factory(:purpose_code)
+        params = purpose_code.attributes.slice(*purpose_code.class.accessible_attributes)
+        params[:code] = nil
+        put :update, {:id => purpose_code.id, :purpose_code => params, :show_errors => "true"}
+        response.should render_template("edit")
+      end
+    end
+  end
+
+  describe "GET audit_logs" do
+    it "assigns the requested purpose_code as @purpose_code" do
+      purpose_code = Factory(:purpose_code)
+      get :audit_logs, {:id => purpose_code.id, :version_id => 0}
+      assigns(:purpose_code).should eq(purpose_code)
+      assigns(:audit).should eq(purpose_code.audits.first)
+      get :audit_logs, {:id => 12345, :version_id => "i"}
+      assigns(:purpose_code).should eq(nil)
+      assigns(:audit).should eq(nil)
+    end
+  end
+end

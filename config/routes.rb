@@ -6,6 +6,7 @@ RemittanceApp::Application.routes.draw do
   resources :purpose_codes
 
   get '/partner/:id/audit_logs' => 'partners#audit_logs'
+  get '/purpose_code/:id/audit_logs' => 'purpose_codes#audit_logs'
 
   root :to => 'dashboard#overview'
 
