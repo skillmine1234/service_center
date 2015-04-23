@@ -1,0 +1,92 @@
+= simple_form_for @partner, :html => {:class=>'form-horizontal', :autocomplete=>"off", :id => "partner_form"} do |f|
+  .control-group
+    = f.label ' '
+    #msg-error
+      = error_message_for(@partner, :base, :prepend_text => "")
+  .form-main
+    = f.hidden_field :lock_version
+    .control-group
+      = f.label :code
+      = f.text_field :code
+      #msg-error
+        = error_message_for(@partner, :code, :prepend_text => "")
+    .control-group
+      = f.label :name
+      = f.text_field :name
+      #msg-error
+        = error_message_for(@partner, :name, :prepend_text => "")
+    .control-group
+      = f.label :tech_email_id
+      = f.text_field :tech_email_id
+      #msg-error
+        = error_message_for(@partner, :tech_email_id, :prepend_text => "")
+    .control-group
+      = f.label "Operations Email Id"
+      = f.text_field :ops_email_id
+      #msg-error
+        = error_message_for(@partner, :ops_email_id, :prepend_text => "")
+    .control-group
+      = f.label :account_no
+      = f.text_field :account_no
+      #msg-error
+        = error_message_for(@partner, :account_no, :prepend_text => "")
+    .control-group
+      = f.label :account_ifsc
+      = f.text_field :account_ifsc
+      #msg-error
+        = error_message_for(@partner, :account_ifsc, :prepend_text => "")
+    .control-group
+      = f.label "*Transaction Hold Period"
+      = f.number_field :txn_hold_period_days
+      #msg-error
+        = error_message_for(@partner, :txn_hold_period_days, :prepend_text => "")
+    .control-group
+      = f.label "Identity User Id"
+      = f.text_field :identity_user_id
+      #msg-error
+        = error_message_for(@partner, :identity_user_id, :prepend_text => "")
+    .control-group
+      = f.label :low_balance_alert_at
+      = f.text_field :low_balance_alert_at
+      #msg-error
+        = error_message_for(@partner, :low_balance_alert_at, :prepend_text => "")
+  .form-extended
+    .control-group
+      = f.label "Remitter SMS Allowed?"
+      = f.select :remitter_sms_allowed, [['Yes','Y'],['No','N']], :include_blank => "Select"
+      #msg-error
+        = error_message_for(@partner, :remitter_sms_allowed, :prepend_text => "")
+    .control-group
+      = f.label "Remitter Email Allowed?"
+      = f.select :remitter_email_allowed, [['Yes','Y'],['No','N']], :include_blank => "Select"
+      #msg-error
+        = error_message_for(@partner, :remitter_email_allowed, :prepend_text => "")
+    .control-group
+      = f.label "Beneficiary SMS Allowed?"
+      = f.select :beneficiary_sms_allowed, [['Yes','Y'],['No','N']], :include_blank => "Select"
+      #msg-error
+        = error_message_for(@partner, :beneficiary_sms_allowed, :prepend_text => "")
+    .control-group
+      = f.label "Beneficiary Email Allowed?"
+      = f.select :beneficiary_email_allowed, [['Yes','Y'],['No','N']], :include_blank => "Select"
+      #msg-error
+        = error_message_for(@partner, :beneficiary_email_allowed, :prepend_text => "")
+    .control-group
+      = f.label "NEFT Allowed?"
+      = f.select :allow_neft, [['Yes','Y'],['No','N']], :include_blank => "Select"
+      #msg-error
+        = error_message_for(@partner, :allow_neft, :prepend_text => "")
+    .control-group
+      = f.label "RGTS Allowed?"
+      = f.select :allow_rgts, [['Yes','Y'],['No','N']], :include_blank => "Select"
+      #msg-error
+        = error_message_for(@partner, :allow_rgts, :prepend_text => "")
+    .control-group
+      = f.label "IMPS Allowed"
+      = f.select :allow_imps, [['Yes','Y'],['No','N']], :include_blank => "Select"
+      #msg-error
+        = error_message_for(@partner, :allow_imps, :prepend_text => "")
+  .form-actions
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_partner'
+    = link_to :Cancel,'/partners', :name => 'cancel', :class=>"cancel btn"
+

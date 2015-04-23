@@ -1,0 +1,138 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8;'}
+    #form-details
+      %h3 Partner Details 
+      %br
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
+        - if !@partner.nil?
+          %tr
+            %td.label Version
+            %td.value
+              = link_to "#{audit_count(@partner)}", :controller => :partners, :action => :audit_logs, :version_id => audit_count(@partner), :id => @partner.id
+          %tr
+            %td.label Form Errors
+            %td.value
+              = ' '
+            %td#msg-error
+              = error_message_for(@partner, :base, :prepend_text => "")
+          %tr
+            %td.label Code
+            %td.value
+              = @partner.code
+            %td#msg-error
+              = error_message_for(@partner, :code, :prepend_text => "")
+          %tr
+            %td.label Name
+            %td.value
+              = @partner.name
+            %td#msg-error
+              = error_message_for(@partner, :name, :prepend_text => "")
+          %tr
+            %td.label Tech Email Id
+            %td.value
+              = @partner.tech_email_id
+            %td#msg-error
+              = error_message_for(@partner, :tech_email_id, :prepend_text => "")
+          %tr
+            %td.label Operations Email Id
+            %td.value
+              = @partner.ops_email_id
+            %td#msg-error
+              = error_message_for(@partner, :ops_email_id, :prepend_text => "")
+          %tr
+            %td.label Account No
+            %td.value
+              = @partner.account_no
+            %td#msg-error
+              = error_message_for(@partner, :account_no, :prepend_text => "")
+          %tr
+            %td.label Account IFSC
+            %td.value
+              = @partner.account_ifsc
+            %td#msg-error
+              = error_message_for(@partner, :account_ifsc, :prepend_text => "")
+          %tr
+            %td.label Transaction Hold Period Days
+            %td.value
+              = @partner.txn_hold_period_days
+            %td#msg-error
+              = error_message_for(@partner, :txn_hold_period_days, :prepend_text => "")
+          %tr
+            %td.label Identity User Id
+            %td.value
+              = @partner.identity_user_id
+            %td#msg-error
+              = error_message_for(@partner, :identity_user_id, :prepend_text => "")
+          %tr
+            %td.label Low Balance Alert At
+            %td.value
+              = @partner.low_balance_alert_at
+            %td#msg-error
+              = error_message_for(@partner, :low_balance_alert_at, :prepend_text => "")
+          %tr
+            %td.label Remitter SMS Allowed? 
+            %td.value
+              = @partner.remitter_sms_allowed
+            %td#msg-error
+              = error_message_for(@partner, :remitter_sms_allowed, :prepend_text => "")
+          %tr
+            %td.label Remitter Email Allowed? 
+            %td.value
+              = @partner.remitter_email_allowed
+            %td#msg-error
+              = error_message_for(@partner, :remitter_email_allowed, :prepend_text => "")
+          %tr
+            %td.label Beneficiary SMS Allowed? 
+            %td.value
+              = @partner.beneficiary_sms_allowed
+            %td#msg-error
+              = error_message_for(@partner, :beneficiary_sms_allowed, :prepend_text => "")
+          %tr
+            %td.label Beneficiary Email Allowed?
+            %td.value
+              = @partner.beneficiary_email_allowed
+            %td#msg-error
+              = error_message_for(@partner, :bbeneficiary_email_allowed, :prepend_text => "")
+          %tr
+            %td.label NEFT Allowed?
+            %td.value
+              = @partner.allow_neft
+            %td#msg-error
+              = error_message_for(@partner, :allow_neft, :prepend_text => "")
+          %tr
+            %td.label RGTS Allowed?
+            %td
+              = @partner.allow_rgts
+            %td#msg-error
+              = error_message_for(@partner, :allow_rgts, :prepend_text => "")
+          %tr
+            %td.label IMPS Allowed
+            %td
+              = @partner.allow_imps
+            %td#msg-error
+              = error_message_for(@partner, :allow_imps, :prepend_text => "")
+          %tr
+            %td.label Created By
+            %td
+              = @partner.created_user.try(:username)
+            %td#msg-error
+              = error_message_for(@partner, :created_by, :prepend_text => "")
+          %tr
+            %td.label Updated By
+            %td
+              = @partner.updated_user.try(:username)
+            %td#msg-error
+              = error_message_for(@partner, :updated_by, :prepend_text => "")
+          %tr
+            %td.label Created At
+            %td.value
+              = @partner.created_at.strftime("%d/%m/%Y %I:%M%p")
+            %td#msg-error
+              = error_message_for(@partner, :created_at, :prepend_text => "")
+          %tr
+            %td.label Updated At
+            %td.value
+              = @partner.updated_at.strftime("%d/%m/%Y %I:%M%p")
+            %td#msg-error
+              = error_message_for(@partner, :updated_at, :prepend_text => "")
+      = link_to 'Back to partners', partners_path
