@@ -32,6 +32,7 @@ class PartnersController < ApplicationController
     if !@partner.valid?
       render "edit"
     else
+      @partner.updated_by = current_user.id
       @partner.save
       flash[:alert] = 'Partner successfuly modified'
       redirect_to @partner

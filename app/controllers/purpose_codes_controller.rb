@@ -32,6 +32,7 @@ class PurposeCodesController < ApplicationController
     if !@purpose_code.valid?
       render "edit"
     else
+      @purpose_code.updated_by = current_user.id
       @purpose_code.save
       flash[:alert] = 'Purpose Code successfuly modified'
       redirect_to @purpose_code

@@ -17,7 +17,7 @@
         = error_message_for(@purpose_code, :description, :prepend_text => "")
     .control-group
       = f.label "*Enabled?"
-      = f.text_field :is_enabled
+      = f.select :is_enabled, [['Yes','Y'],['No','N']], :include_blank => "Select"
       #msg-error
         = error_message_for(@purpose_code, :is_enabled, :prepend_text => "")
     .control-group
