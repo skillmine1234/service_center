@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-RemittanceApp::Application.load_tasks
+ServiceCenter::Application.load_tasks
