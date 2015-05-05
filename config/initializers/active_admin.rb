@@ -9,7 +9,7 @@ ActiveAdmin.setup do |config|
   # for each of the active admin pages.
   #
   config.download_links = [:csv]
-  config.site_title = "Remittance App"
+  config.site_title = "Service Center"
   config.allow_comments = false
   # config.csv_options = { :col_sep => ';' }
 
