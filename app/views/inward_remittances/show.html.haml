@@ -1,0 +1,127 @@
+.ticket_header
+  %h3
+    Request Token:
+    = @inward_remittance.req_no
+  %h3
+    Request Version:
+    = @inward_remittance.req_version
+  %h3
+    Request Date:
+    = @inward_remittance.req_timestamp.strftime("%d/%m/%Y %I:%M%p")
+.form-horizontal.show_ticket
+  .form-main{:style=>'background-color: #F1F2F8; width: 55%'}
+    #ticket-details
+      %h3 Remitter Details
+      %table.table.no-border
+        %tr
+          %td.label Name
+          %td= @inward_remittance.rmtr_full_name
+        %tr
+          %td.label Address
+          %td= @inward_remittance.remitter_address
+        %tr
+          %td.label City
+          %td= @inward_remittance.rmtr_city
+        %tr
+          %td.label State
+          %td= @inward_remittance.rmtr_state
+        %tr
+          %td.label Country
+          %td= @inward_remittance.rmtr_country
+        %tr
+          %td.label Postal code
+          %td= @inward_remittance.rmtr_postal_code
+        %tr
+          %td.label Email Id
+          %td= @inward_remittance.rmtr_email_id
+        %tr
+          %td.label Mobile No
+          %td= @inward_remittance.rmtr_mobile_no
+        %tr
+          %td.label Identities Count
+          %td= link_to @inward_remittance.rmtr_identity_count,:controller => :inward_remittances, :action => :remitter_identities, :id => @inward_remittance.id
+      %hr{:style=>'background-color: #F1F2F8; width: 220%'}
+      %h3 Beneficiary Details
+      %table.table.no-border
+        %tr
+          %td.label Name
+          %td= @inward_remittance.bene_full_name
+        %tr
+          %td.label Address
+          %td= @inward_remittance.beneficiary_address
+        %tr
+          %td.label City
+          %td= @inward_remittance.bene_city
+        %tr
+          %td.label State
+          %td= @inward_remittance.bene_state
+        %tr
+          %td.label Country
+          %td= @inward_remittance.bene_country
+        %tr
+          %td.label Postal code
+          %td= @inward_remittance.bene_postal_code
+        %tr
+          %td.label Email Id
+          %td= @inward_remittance.rmtr_email_id
+        %tr
+          %td.label Mobile No
+          %td= @inward_remittance.rmtr_mobile_no
+        %tr
+          %td.label Identities Count
+          %td= link_to @inward_remittance.bene_identity_count, :controller => :inward_remittances, :action => :beneficiary_identities, :id => @inward_remittance.id
+  .form-extended{:style=>'background-color: #fafafa; width: 45%'}
+    #ticket-details
+      %h3 Transfer Details
+      %table.table.no-border
+        %tr
+          %td.label Beneficiary Account No
+          %td= @inward_remittance.bene_account_no
+        %tr
+          %td.label Beneficiary Account IFSC
+          %td= @inward_remittance.bene_account_ifsc
+        %tr
+          %td.label Transfer Type
+          %td= @inward_remittance.transfer_type
+        %tr
+          %td.label Transfer CCY
+          %td= @inward_remittance.transfer_amount
+        %tr
+          %td.label Remitter To Beneficiary Note
+          %td= @inward_remittance.rmtr_to_bene_note
+        %tr
+          %td.label Partner Code
+          %td= @inward_remittance.partner_code
+        %tr
+          %td.label Purpose Code
+          %td= @inward_remittance.purpose_code
+        %tr
+          %td.label Status Code
+          %td= @inward_remittance.status_code
+        %tr
+          %td.label Bank Reference Code
+          %td= @inward_remittance.bank_ref
+        %tr
+          %td.label Beneficiary Reference Code
+          %td= @inward_remittance.bene_ref
+      %hr{:style=>'background-color: #F1F2F8; width: 150%'}
+      %h3 Other Details
+      %table.table.no-border
+        %tr
+          %td.label Rep No
+          %td= @inward_remittance.rep_no
+        %tr
+          %td.label Rep Version
+          %td= @inward_remittance.rep_version
+        %tr
+          %td.label Rep Date
+          %td= @inward_remittance.rep_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p")
+        %tr
+          %td.label Review Required
+          %td= @inward_remittance.review_reqd
+        %tr
+          %td.label Review Pending
+          %td= @inward_remittance.review_pending
+        %tr
+          %td.label Attempt No
+          %td= @inward_remittance.attempt_no

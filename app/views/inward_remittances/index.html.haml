@@ -1,0 +1,51 @@
+%br
+%h1 Listing Inward Remittances
+%br
+= "Total Count: #{@inward_remittances_count}"
+%br
+= will_paginate @inward_remittances
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Request No
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Partner Code
+    %th{:style=>'Text-align:left; background-color: lightblue;'}
+      Remitter
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Beneficiary
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Purpose Code
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Transfer Type
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Transfer Amount 
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Review Required ?
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Attempt No
+  .tbody
+    - @inward_remittances.each do |inward_remittance|
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', inward_remittance
+        %td{:style=>'text-align:left;'}
+          = inward_remittance.req_no
+        %td{:style=>'text-align:left;'}
+          = inward_remittance.partner_code
+        %td{:style=>'text-align:left;'}
+          = inward_remittance.rmtr_full_name
+        %td{:style=>'text-align:left;'}
+          = inward_remittance.bene_full_name
+        %td{:style=>'text-align:left;'}
+          = inward_remittance.purpose_code
+        %td{:style=>'text-align:left;'}
+          = inward_remittance.transfer_type
+        %td{:style=>'text-align:left;'}
+          = inward_remittance.transfer_amount
+        %td{:style=>'text-align:left;'}
+          = inward_remittance.review_reqd
+        %td{:style=>'text-align:left;'}
+          = inward_remittance.attempt_no

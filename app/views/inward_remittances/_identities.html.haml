@@ -1,0 +1,55 @@
+= "Total Count: #{@identities.count}"
+%br
+= will_paginate @identities
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Partner Id
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Full Name
+    %th{:style=>'Text-align:left; background-color: lightblue;'}
+      Id Type
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Id Number
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Id Country
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Id Issued Date
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Id Expiry Date 
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Is Verified ?
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Verified At
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Verified By
+  .tbody
+    - @identities.each do |identity|
+      %tr
+        %td{:style=>'text-align:left;'}
+          - if !identity.whitelisted_identity.nil?
+            = "Verified"
+          - else
+            = link_to 'verify', verify_identity_path(:id => identity.id), :confirm => 'Are you sure?'
+        %td{:style=>'text-align:left;'}
+          = identity.partner_id
+        %td{:style=>'text-align:left;'}
+          = identity.full_name
+        %td{:style=>'text-align:left;'}
+          = identity.id_type
+        %td{:style=>'text-align:left;'}
+          = identity.id_number
+        %td{:style=>'text-align:left;'}
+          = identity.id_country
+        %td{:style=>'text-align:left;'}
+          = identity.id_issue_date
+        %td{:style=>'text-align:left;'}
+          = identity.id_expiry_date
+        %td{:style=>'text-align:left;'}
+          = identity.is_verified
+        %td{:style=>'text-align:left;'}
+          = identity.verified_at
+        %td{:style=>'text-align:left;'}
+          = identity.verified_by
