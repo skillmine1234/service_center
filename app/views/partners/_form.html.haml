@@ -16,12 +16,12 @@
       #msg-error
         = error_message_for(@partner, :name, :prepend_text => "")
     .control-group
-      = f.label :tech_email_id
+      = f.label :tech_email_id, "Tech Email", :class => 'control-label'
       = f.text_field :tech_email_id
       #msg-error
         = error_message_for(@partner, :tech_email_id, :prepend_text => "")
     .control-group
-      = f.label "Operations Email Id"
+      = f.label :operations_email_id, "Operations Email Id", :class => 'control-label'
       = f.text_field :ops_email_id
       #msg-error
         = error_message_for(@partner, :ops_email_id, :prepend_text => "")
@@ -31,12 +31,12 @@
       #msg-error
         = error_message_for(@partner, :account_no, :prepend_text => "")
     .control-group
-      = f.label :account_ifsc
+      = f.label :account_ifsc, "*Account IFSC", :class => 'control-label'
       = f.text_field :account_ifsc
       #msg-error
         = error_message_for(@partner, :account_ifsc, :prepend_text => "")
     .control-group
-      = f.label "*Transaction Hold Period"
+      = f.label :transaction_hold_period, "*Transaction hold period", :class => 'control-label'
       = f.number_field :txn_hold_period_days
       #msg-error
         = error_message_for(@partner, :txn_hold_period_days, :prepend_text => "")
@@ -52,37 +52,37 @@
         = error_message_for(@partner, :low_balance_alert_at, :prepend_text => "")
   .form-extended
     .control-group
-      = f.label "Remitter SMS Allowed?"
+      = f.label :remitter_sms_allowed, "Remitter SMS Allowed?", :class => 'control-label'
       = f.select :remitter_sms_allowed, [['Yes','Y'],['No','N']], :include_blank => "Select"
       #msg-error
         = error_message_for(@partner, :remitter_sms_allowed, :prepend_text => "")
     .control-group
-      = f.label "Remitter Email Allowed?"
+      = f.label :remitter_email_allowed, "Remitter Email Allowed?", :class => 'control-label'
       = f.select :remitter_email_allowed, [['Yes','Y'],['No','N']], :include_blank => "Select"
       #msg-error
         = error_message_for(@partner, :remitter_email_allowed, :prepend_text => "")
     .control-group
-      = f.label "Beneficiary SMS Allowed?"
+      = f.label :benificiary_sms_allowed, "Beneficiary SMS Allowed?", :class => 'control-label'
       = f.select :beneficiary_sms_allowed, [['Yes','Y'],['No','N']], :include_blank => "Select"
       #msg-error
         = error_message_for(@partner, :beneficiary_sms_allowed, :prepend_text => "")
     .control-group
-      = f.label "Beneficiary Email Allowed?"
+      = f.label :beneficiary_email_allowed, "Beneficiary Email Allowed?", :class => 'control-label'
       = f.select :beneficiary_email_allowed, [['Yes','Y'],['No','N']], :include_blank => "Select"
       #msg-error
         = error_message_for(@partner, :beneficiary_email_allowed, :prepend_text => "")
     .control-group
-      = f.label "NEFT Allowed?"
+      = f.label :neft_allowd, "NEFT Allowed?", :class => 'control-label'
       = f.select :allow_neft, [['Yes','Y'],['No','N']], :include_blank => "Select"
       #msg-error
         = error_message_for(@partner, :allow_neft, :prepend_text => "")
     .control-group
-      = f.label "RGTS Allowed?"
+      = f.label :rtgs_allowed, "RTGS Allowed?", :class => 'control-label'
       = f.select :allow_rgts, [['Yes','Y'],['No','N']], :include_blank => "Select"
       #msg-error
         = error_message_for(@partner, :allow_rgts, :prepend_text => "")
     .control-group
-      = f.label "IMPS Allowed"
+      = f.label :imps_allowed, "IMPS Allowed", :class => 'control-label'
       = f.select :allow_imps, [['Yes','Y'],['No','N']], :include_blank => "Select"
       #msg-error
         = error_message_for(@partner, :allow_imps, :prepend_text => "")
