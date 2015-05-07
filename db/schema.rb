@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150423082638) do
+ActiveRecord::Schema.define(:version => 20150506140922) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -107,10 +107,29 @@ ActiveRecord::Schema.define(:version => 20150423082638) do
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
+  create_table "identities", :force => true do |t|
+    t.string   "remittance_req_no"
+    t.string   "id_req_type",       :limit => 20, :null => false
+    t.integer  "partner_id",                      :null => false
+    t.string   "full_name",         :limit => 50
+    t.string   "first_name",        :limit => 50
+    t.string   "last_name",         :limit => 50
+    t.string   "id_type",           :limit => 20
+    t.string   "id_number",         :limit => 50
+    t.string   "id_country"
+    t.date     "id_issue_date"
+    t.date     "id_expiry_date"
+    t.string   "created_by",        :limit => 20, :null => false
+    t.string   "updated_by",        :limit => 20, :null => false
+    t.integer  "lock_version"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
+
   create_table "inward_remittances", :force => true do |t|
     t.string   "req_no",                                             :null => false
     t.string   "req_version",         :limit => 10,                  :null => false
-    t.datetime "req_time",                                           :null => false
+    t.datetime "req_timestamp",                                      :null => false
     t.string   "partner_code",        :limit => 20,                  :null => false
     t.string   "rmtr_full_name"
     t.string   "rmtr_first_name"
