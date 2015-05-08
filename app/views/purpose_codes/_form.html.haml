@@ -31,13 +31,13 @@
       #msg-error
         = error_message_for(@purpose_code, :daily_txn_limit, :prepend_text => "")
     .control-group
-      = f.label "Disallowed Remitter Types"
-      = f.text_field :disallowed_rem_types
+      = f.label :disallowed_rem_types, "Disallowed Remitter Types", :class => 'control-label'
+      = f.select :disallowed_rem_types, [['Individual','I'],['Non-Individual','N']], :include_blank => "Select"
       #msg-error
         = error_message_for(@purpose_code, :disallowed_rem_types, :prepend_text => "")
     .control-group
-      = f.label "Disallowed Beneficiary Types"
-      = f.number_field :disallowed_bene_types
+      = f.label :disallowed_bene_types, "Disallowed Beneficiary Types", :class => 'control-label'
+      = f.select :disallowed_bene_types, [['Individual','I'],['Non-Individual','N']], :include_blank => "Select"
       #msg-error
         = error_message_for(@purpose_code, :disallowed_bene_types, :prepend_text => "")
   .form-actions
