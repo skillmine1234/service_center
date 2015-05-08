@@ -17,12 +17,14 @@ class InwardRemittancesController < ApplicationController
   end
 
   def remitter_identities
+    @user = current_user
     inward_remittance = InwardRemittance.find_by_id(params[:id])
     identities = inward_remittance.remitter_identities
     @identities = identities.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
 
   def beneficiary_identities
+    @user = current_user
     inward_remittance = InwardRemittance.find_by_id(params[:id])
     identities = inward_remittance.beneficiary_identities
     @identities = identities.paginate(:per_page => 10, :page => params[:page]) rescue []

@@ -5,6 +5,7 @@ ServiceCenter::Application.routes.draw do
   resources :partners
   resources :purpose_codes
   resources :inward_remittances
+  resources :whitelisted_identities
 
   get '/partner/:id/audit_logs' => 'partners#audit_logs'
   get '/purpose_code/:id/audit_logs' => 'purpose_codes#audit_logs'

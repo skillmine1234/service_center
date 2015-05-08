@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150506140922) do
+ActiveRecord::Schema.define(:version => 20150507101332) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -69,6 +69,18 @@ ActiveRecord::Schema.define(:version => 20150506140922) do
   end
 
   add_index "admin_users_admin_roles", ["admin_user_id", "admin_role_id"], :name => "index_admin_users_admin_roles_on_admin_user_id_and_admin_role_id"
+
+  create_table "attachments", :force => true do |t|
+    t.string   "note"
+    t.string   "file"
+    t.integer  "attachable_id"
+    t.string   "attachable_type"
+    t.string   "user_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "attachments", ["attachable_id"], :name => "index_attachments_on_attachable_id"
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
