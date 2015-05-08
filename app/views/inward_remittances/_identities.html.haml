@@ -56,7 +56,7 @@
 #verifyIdentity.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3 Verify Identity
+    %h3.id_type Verify Identity
     #error_message{:style => 'color:red'}
   .modal-body{:style => "max-height:450px;"}
     = simple_nested_form_for WhitelistedIdentity.new , :html => {:class=>'form-horizontal',:multipart => true, :autocomplete=>"off"} do |f|

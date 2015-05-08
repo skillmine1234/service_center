@@ -1,5 +1,6 @@
 $(document).ready(function(){ 
   $("a.verify-link").on("click", function () {
+    $(".id_type").text("Verify Identity : " + $(this).data('id-type') + " " + $(this).data('id-number'));
     $("#whitelisted_identity_partner_id").val($(this).data('partner-id'));
     $("#whitelisted_identity_full_name").val($(this).data('full-name'));
     $("#whitelisted_identity_first_name").val($(this).data('first-name'));
