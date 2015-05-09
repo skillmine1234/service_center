@@ -1,8 +1,11 @@
 development:
   authenticate_devise_with_ldap: false
+  aml_search_url: "http://api.quantiguous.com:7080/sdn/search?"
 
 test:
   authenticate_devise_with_ldap: false
+  aml_search_url: "http://api.quantiguous.com:7080/sdn/search?"
 
 production:
   authenticate_devise_with_ldap: false
+  aml_search_url: "http://api.quantiguous.com:7080/sdn/search?"

@@ -38,6 +38,7 @@ gem 'activeadmin-sortable'
 gem 'therubyracer'
 gem "daemons"
 gem "audited-activerecord", "~> 3.0"
+gem 'httparty'
 # Used only if oracle db is being used
 group :oracle do
   gem 'activerecord-oracle_enhanced-adapter'

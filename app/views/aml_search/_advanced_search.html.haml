@@ -1,0 +1,45 @@
+= form_tag '', :method => 'get', :class => 'form-horizontal', :autocomplete=>"off" do
+  .form-main
+    .control-group
+      = label_tag "Name","*First name", :class => 'control-label'
+      = text_field_tag "search_params[firstName]"
+    .control-group
+      = label_tag "Last Name", nil, :class => 'control-label'
+      = text_field_tag "search_params[lastName]"
+    .control-group
+      = label_tag "Address Line 1", nil, :class => 'control-label'
+      = text_field_tag "search_params[addressLine1]"
+    .control-group
+      = label_tag "Address Line 2", nil, :class => 'control-label'
+      = text_field_tag "search_params[addressLine1]"
+    .control-group
+      = label_tag "Address Line 3", nil, :class => 'control-label'
+      = text_field_tag "search_params[addressLine1]"
+    .control-group
+      = label_tag "City", nil, :class => 'control-label'
+      = text_field_tag "search_params[city]"
+    .control-group
+      = label_tag "State", nil, :class => 'control-label'
+      = text_field_tag "search_params[state]"
+    .control-group
+      = label_tag "Country", nil, :class => 'control-label'
+      = text_field_tag "search_params[country]"
+  .form-extended
+    .control-group
+      = label_tag "Id Type", nil, :class => 'control-label'
+      = text_field_tag "search_params[idType]"
+    .control-group
+      = label_tag "Id Number", nil, :class => 'control-label'
+      = text_field_tag "search_params[idNumber]"
+    .control-group
+      = label_tag "Id Country", nil, :class => 'control-label'
+      = text_field_tag "search_params[idCountry]"
+    .control-group
+      = label_tag "Id Issue Date", nil, :class => 'control-label'
+      = text_field_tag "search_params[idIssueDate]"
+    .control-group
+      = label_tag "Id Expiry Date", nil, :class => 'control-label'
+      = text_field_tag "search_params[idExpiryDate]"
+  .form-actions
+    = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"
+    %input{:type => 'reset', :value=>'Reset', :class => 'btn'}

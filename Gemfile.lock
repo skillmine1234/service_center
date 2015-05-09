@@ -425,6 +425,7 @@ DEPENDENCIES
   guard-cucumber
   guard-rspec
   haml-rails
+  httparty
   jquery-rails (~> 1.0.14)
   meta_search (>= 1.1.0.pre)
   mime-types
