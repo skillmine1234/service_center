@@ -12,4 +12,20 @@ $(document).ready(function(){
     $("#whitelisted_identity_id_issue_date").val($(this).data('id-issue-date'));
     $('#verifyIdentity').modal();
   });
+
+  $("#search_params_idIssueDate").datepicker(
+  {
+    dateFormat: 'yy-mm-dd',
+    changeMonth: true,
+    changeYear: true,
+    yearRange: "-70:+10"
+  });
+
+  $("#search_params_idExpiryDate").datepicker(
+  {
+    dateFormat: 'yy-mm-dd',
+    changeMonth: true,
+    changeYear: true,
+    yearRange: "-70:+10"
+  });
 });
