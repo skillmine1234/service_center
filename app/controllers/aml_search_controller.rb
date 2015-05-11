@@ -14,8 +14,8 @@ class AmlSearchController < ApplicationController
       if params[:search_params][:firstName].present?
         @search_params = search_params(params[:search_params])
         results = get_response_from_api(CONFIG[:aml_search_url] + @search_params) rescue []
-        @results_count = results.count
-        @results = results.paginate(:per_page => 10, :page => params[:page])
+        @results_count = results.count rescue 0
+        @results = results.paginate(:per_page => 10, :page => params[:page]) unless results.nil?
       else
         flash[:alert] = "First Name should not be empty"
       end

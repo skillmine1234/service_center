@@ -4,12 +4,12 @@
 .collapsible-content
   = render :partial => 'advanced_search'
 
+%br
+%h1 Results
+%br
+= "Total Count: #{@results_count}"
+%br
 - unless @results.nil?
-  %br
-  %h1 Results
-  %br
-  = "Total Count: #{@results_count}"
-  %br
   = will_paginate @results
   %br
   %table.table.table-bordered.table-striped.table-hover
