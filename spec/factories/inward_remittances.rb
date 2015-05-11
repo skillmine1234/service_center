@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :inward_remittance do
     req_no "MyString"
     req_version "MyString"
-    req_time "2015-04-20 15:12:44"
+    req_timestamp "2015-04-20 15:12:44"
     partner_code "MyString"
     rmtr_full_name "MyString"
     rmtr_first_name "MyString"

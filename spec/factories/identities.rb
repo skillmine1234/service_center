@@ -2,20 +2,17 @@
 
 FactoryGirl.define do
   factory :identity do
-    remittance_req_no "MyString"
-    id_req_type "MyString"
-    partner_id ""
-    full_name "MyString"
-    first_name "MyString"
-    last_name "MyString"
-    id_type "MyString"
-    id_number "MyString"
-    id_country "MyString"
-    id_issue_date "2015-04-29"
-    id_expiry_date "2015-04-29"
-    is_verified "MyString"
-    verified_at "2015-04-29"
-    verified_by "MyString"
+    remittance_req_no {Factory(:inward_remittance).id}
+    id_req_type "Remitter"
+    partner_id {Factory(:partner).id}
+    full_name "Foo Bar"
+    first_name "Foo"
+    last_name "Bar"
+    id_type "Passport"
+    id_number "G12424"
+    id_country "India"
+    id_issue_date "2015-04-20"
+    id_expiry_date "2040-05-19"
     created_by "MyString"
     updated_by "MyString"
     lock_version 1

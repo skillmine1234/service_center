@@ -6,7 +6,7 @@ class Attachment < ActiveRecord::Base
   validate :validate_file_name
   ATTACHMENT_LIMIT = 2.megabytes.to_i
   validate :file_size, :only => [:create]
-  BlackList = %w(exe vbs rb sh jar html msi bat com bin vb txt)
+  BlackList = %w(exe vbs rb sh jar html msi bat com bin vb)
   mount_uploader :file, WhitelistedIdentityUploader
 
   def file_size

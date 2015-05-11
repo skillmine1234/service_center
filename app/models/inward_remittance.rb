@@ -11,10 +11,7 @@ class InwardRemittance < ActiveRecord::Base
                   :transfer_amount, :transfer_ccy, :transfer_type
 
   has_one :partner, :primary_key => 'partner_code', :foreign_key => 'code'
-  has_one :purpose, :primary_key => 'purpose_code', :foreign_key => 'code'
-
-  belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
-  belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
+  has_one :purpose, :class_name => 'PurposeCode', :primary_key => 'purpose_code', :foreign_key => 'code'
 
   has_many :remitter_identities, :class_name => 'Identity', :primary_key => 'req_no', :foreign_key => 'remittance_req_no', :conditions => {:id_req_type => 'Remitter'}
   has_many :beneficiary_identities, :class_name => 'Identity', :primary_key => 'req_no', :foreign_key => 'remittance_req_no', :conditions => {:id_req_type => 'Beneficiary'}
@@ -24,10 +21,10 @@ class InwardRemittance < ActiveRecord::Base
 
 
   def remitter_address
-    rmtr_address1.to_s + rmtr_address2.to_s + rmtr_address3.to_s
+    rmtr_address1.to_s + " " + rmtr_address2.to_s + " " + rmtr_address3.to_s
   end
 
   def beneficiary_address
-    bene_address1.to_s + bene_address2.to_s + bene_address3.to_s
+    bene_address1.to_s + " " + bene_address2.to_s + " " + bene_address3.to_s
   end
 end
