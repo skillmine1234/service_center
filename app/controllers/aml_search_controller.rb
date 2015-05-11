@@ -15,7 +15,7 @@ class AmlSearchController < ApplicationController
         @search_params = search_params(params[:search_params])
         results = get_response_from_api(CONFIG[:aml_search_url] + @search_params) rescue []
         @results_count = results.count
-        @results = results.paginate(:per_page => 6, :page => params[:page])
+        @results = results.paginate(:per_page => 10, :page => params[:page])
       else
         flash[:alert] = "First Name should not be empty"
       end
@@ -25,11 +25,11 @@ class AmlSearchController < ApplicationController
   def search_result
     results = get_response_from_api(CONFIG[:aml_search_url] + params[:search_params]) rescue []
     @result = results[params[:index].to_i] rescue nil
-    identities = @result["identities"]["identity"].nil? ? [] : @result["identities"]["identity"]
+    identities = find_values(@result["identities"]["numIdentities"],@result["identities"]["identity"])
     @identities = identities.paginate(:per_page => 4, :page => params[:identities_page]) 
-    aliases = @result["aliases"]["alias"].nil? ? [] : @result["aliases"]["alias"]
+    aliases = find_values(@result["aliases"]["numAliases"],@result["aliases"]["alias"])
     @aliases = aliases.paginate(:per_page => 4, :page => params[:aliases_page]) 
-    addresses = @result["addresses"]["address"].nil? ? [] : @result["addresses"]["address"]
+    addresses = find_values(@result["addresses"]["numAddresses"] , @result["addresses"]["address"])
     @addresses = addresses.paginate(:per_page => 4, :page => params[:addresses_page]) 
   end
 
@@ -46,5 +46,17 @@ class AmlSearchController < ApplicationController
       end
     end
     result[0...-1]
+  end
+
+  def find_values(num,values)
+    p num
+    p values
+    if num == "0"
+      return []
+    elsif num == "1"
+      return [values]
+    else
+      return values
+    end
   end
 end

@@ -14,8 +14,8 @@ ServiceCenter::Application.routes.draw do
   get '/inward_remittances/:id/beneficiary_identities' => 'inward_remittances#beneficiary_identities'
 
   match '/verify_identity' => 'identities#verify_identity'
-  match '/find_search_results' => 'aml_search#find_search_results'
-  match '/search_result' => 'aml_search#search_result'
+  match '/sdn/search' => 'aml_search#find_search_results'
+  match '/sdn/search_result' => 'aml_search#search_result'
 
   root :to => 'dashboard#overview'
 

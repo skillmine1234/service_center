@@ -17,9 +17,6 @@
             %td.label Remarks
             %td.value
               = @result["remarks"]
-      - unless @identities.empty?
-        = render 'identities'
-      - unless @aliases.empty?
-        = render 'aliases'
-      - unless @addresses.empty?
-        = render 'addresses'
+      = render 'identities'
+      = render 'aliases'
+      = render 'addresses'
