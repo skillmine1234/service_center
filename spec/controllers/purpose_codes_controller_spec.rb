@@ -49,7 +49,7 @@ describe PurposeCodesController do
         expect {
           post :create, {:purpose_code => params}
         }.to change(PurposeCode, :count).by(1)
-        flash[:alert].should  match(/PurposeCode successfuly created/)
+        flash[:alert].should  match(/Purpose Code successfuly created/)
         response.should be_redirect
       end
 

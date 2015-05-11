@@ -10,7 +10,7 @@ FactoryGirl.define do
     lock_version 1.5
     txn_limit 1.5
     daily_txn_limit 1.5
-    disallowedremtypes "MyString"
-    disallowedbenetypes "MyString"
+    disallowed_rem_types "MyString"
+    disallowed_bene_types "MyString"
   end
 end
