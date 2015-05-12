@@ -43,8 +43,6 @@ GEM
       arel (~> 3.0.2)
       tzinfo (~> 0.3.29)
     activerecord-oracle_enhanced-adapter (1.4.2)
-    activerecord-sqlserver-adapter (3.2.12)
-      activerecord (~> 3.2.0)
     activeresource (3.2.13)
       activemodel (= 3.2.13)
       activesupport (= 3.2.13)
@@ -371,7 +369,6 @@ GEM
     thor (0.18.1)
     tilt (1.4.1)
     timecop (0.6.2.2)
-    tiny_tds (0.6.1)
     treetop (1.4.14)
       polyglot
       polyglot (>= 0.3.1)
@@ -403,7 +400,6 @@ DEPENDENCIES
   activeadmin
   activeadmin-sortable
   activerecord-oracle_enhanced-adapter
-  activerecord-sqlserver-adapter
   acts_as_commentable (= 3.0.1)
   acts_as_list
   audited-activerecord (~> 3.0)
@@ -461,7 +457,6 @@ DEPENDENCIES
   sunspot_solr
   therubyracer
   timecop
-  tiny_tds
   turnout
   uglifier (>= 1.0.3)
   unicorn

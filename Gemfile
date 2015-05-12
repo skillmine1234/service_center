@@ -44,10 +44,6 @@ group :oracle do
   gem 'activerecord-oracle_enhanced-adapter'
   gem 'ruby-oci8'
 end
-group :mssql do
-  gem 'tiny_tds'
-  gem 'activerecord-sqlserver-adapter'
-end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
