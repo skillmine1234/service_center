@@ -82,3 +82,7 @@ group :development do
   gem 'capistrano-ext'
   gem 'debugger'
 end
+
+group :test do
+  gem 'webmock'
+end

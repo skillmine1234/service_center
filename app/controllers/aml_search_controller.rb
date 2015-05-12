@@ -11,7 +11,7 @@ class AmlSearchController < ApplicationController
 
   def find_search_results
     if params[:search_params].present?
-      if params[:search_params][:firstName].present?
+      if params[:search_params][:firstName].present? 
         @search_params = search_params(params[:search_params])
         results = get_response_from_api(CONFIG[:aml_search_url] + @search_params) rescue []
         @results_count = results.count rescue 0
@@ -49,8 +49,6 @@ class AmlSearchController < ApplicationController
   end
 
   def find_values(num,values)
-    p num
-    p values
     if num == "0"
       return []
     elsif num == "1"
