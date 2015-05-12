@@ -1,4 +1,4 @@
-class Identity < ActiveRecord::Base
+class InwIdentity < ActiveRecord::Base
   attr_accessible :created_by, :first_name, :full_name, :id_country, :id_expiry_date, 
                   :id_issue_date, :id_number, :id_req_type, :id_type, 
                   :last_name, :lock_version, :partner_id, :remittance_req_no, :updated_by 

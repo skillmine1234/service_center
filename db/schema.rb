@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150507101332) do
+ActiveRecord::Schema.define(:version => 20150512090549) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(:version => 20150507101332) do
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
-  create_table "identities", :force => true do |t|
+  create_table "inw_identities", :force => true do |t|
     t.string   "remittance_req_no"
     t.string   "id_req_type",       :limit => 20, :null => false
     t.integer  "partner_id",                      :null => false

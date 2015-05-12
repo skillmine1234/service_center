@@ -13,8 +13,8 @@ class InwardRemittance < ActiveRecord::Base
   has_one :partner, :primary_key => 'partner_code', :foreign_key => 'code'
   has_one :purpose, :class_name => 'PurposeCode', :primary_key => 'purpose_code', :foreign_key => 'code'
 
-  has_many :remitter_identities, :class_name => 'Identity', :primary_key => 'req_no', :foreign_key => 'remittance_req_no', :conditions => {:id_req_type => 'Remitter'}
-  has_many :beneficiary_identities, :class_name => 'Identity', :primary_key => 'req_no', :foreign_key => 'remittance_req_no', :conditions => {:id_req_type => 'Beneficiary'}
+  has_many :remitter_identities, :class_name => 'InwIdentity', :primary_key => 'req_no', :foreign_key => 'remittance_req_no', :conditions => {:id_req_type => 'Remitter'}
+  has_many :beneficiary_identities, :class_name => 'InwIdentity', :primary_key => 'req_no', :foreign_key => 'remittance_req_no', :conditions => {:id_req_type => 'Beneficiary'}
 
   validates_presence_of :req_no, :req_version, :req_timestamp, :partner_code, :rmtr_identity_count, 
                         :bene_identity_count, :attempt_no
