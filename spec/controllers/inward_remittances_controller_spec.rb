@@ -30,7 +30,7 @@ describe InwardRemittancesController do
   describe "GET remitter_identities" do 
     it "assigns the remitter_identities as @identities" do 
       inward_remittance = Factory(:inward_remittance)
-      Factory(:identity, :remittance_req_no => inward_remittance.req_no, :id_req_type => 'Remitter')
+      Factory(:inw_identity, :remittance_req_no => inward_remittance.req_no, :id_req_type => 'Remitter')
       get :remitter_identities, {:id => inward_remittance.id}
       assigns(:identities).first.should eq(inward_remittance.remitter_identities.first)
     end
@@ -39,7 +39,7 @@ describe InwardRemittancesController do
   describe "GET beneficiary_identities" do 
     it "assigns the beneficiary_identities as @identities" do 
       inward_remittance = Factory(:inward_remittance)
-      Factory(:identity, :remittance_req_no => inward_remittance.req_no, :id_req_type => 'Beneficiary')
+      Factory(:inw_identity, :remittance_req_no => inward_remittance.req_no, :id_req_type => 'Beneficiary')
       get :beneficiary_identities, {:id => inward_remittance.id}
       assigns(:identities).first.should eq(inward_remittance.beneficiary_identities.first)
     end
