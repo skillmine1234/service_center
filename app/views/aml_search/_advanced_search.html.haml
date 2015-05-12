@@ -2,44 +2,44 @@
   .form-main
     .control-group
       = label_tag "Name","*First name", :class => 'control-label'
-      = text_field_tag "search_params[firstName]"
+      = text_field_tag "search_params[firstName]", (params[:search_params][:firstName] rescue "")
     .control-group
       = label_tag "Last Name", nil, :class => 'control-label'
-      = text_field_tag "search_params[lastName]"
+      = text_field_tag "search_params[lastName]", (params[:search_params][:lastName] rescue "")
     .control-group
       = label_tag "Address Line 1", nil, :class => 'control-label'
-      = text_field_tag "search_params[addressLine1]"
+      = text_field_tag "search_params[addressLine1]", (params[:search_params][:addressLine1] rescue "")
     .control-group
       = label_tag "Address Line 2", nil, :class => 'control-label'
-      = text_field_tag "search_params[addressLine1]"
+      = text_field_tag "search_params[addressLine2]", (params[:search_params][:addressLine2] rescue "")
     .control-group
       = label_tag "Address Line 3", nil, :class => 'control-label'
-      = text_field_tag "search_params[addressLine1]"
+      = text_field_tag "search_params[addressLine3]", (params[:search_params][:addressLine2] rescue "")
     .control-group
       = label_tag "City", nil, :class => 'control-label'
-      = text_field_tag "search_params[city]"
+      = text_field_tag "search_params[city]", (params[:search_params][:city] rescue "")
     .control-group
       = label_tag "State", nil, :class => 'control-label'
-      = text_field_tag "search_params[state]"
+      = text_field_tag "search_params[state]", (params[:search_params][:state] rescue "")
     .control-group
       = label_tag "Country", nil, :class => 'control-label'
-      = text_field_tag "search_params[country]"
+      = text_field_tag "search_params[country]", (params[:search_params][:country] rescue "")
   .form-extended
     .control-group
       = label_tag "Id Type", nil, :class => 'control-label'
-      = text_field_tag "search_params[idType]"
+      = text_field_tag "search_params[idType]", (params[:search_params][:idType] rescue "")
     .control-group
       = label_tag "Id Number", nil, :class => 'control-label'
-      = text_field_tag "search_params[idNumber]"
+      = text_field_tag "search_params[idNumber]", (params[:search_params][:idNumber] rescue "")
     .control-group
       = label_tag "Id Country", nil, :class => 'control-label'
-      = text_field_tag "search_params[idCountry]"
+      = text_field_tag "search_params[idCountry]", (params[:search_params][:idCountry] rescue "")
     .control-group
       = label_tag "Id Issue Date", nil, :class => 'control-label'
-      = text_field_tag "search_params[idIssueDate]"
+      = text_field_tag "search_params[idIssueDate]", (params[:search_params][:idIssueDate] rescue "")
     .control-group
       = label_tag "Id Expiry Date", nil, :class => 'control-label'
-      = text_field_tag "search_params[idExpiryDate]"
+      = text_field_tag "search_params[idExpiryDate]", (params[:search_params][:idExpiryDate] rescue "")
   .form-actions
     = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"
     %input{:type => 'reset', :value=>'Reset', :class => 'btn'}

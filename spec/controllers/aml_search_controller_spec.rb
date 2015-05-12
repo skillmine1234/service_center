@@ -56,6 +56,13 @@ describe AmlSearchController do
 
     it "should assign results to @results" do
       get :find_search_results, :search_params => {:firstName => "cubana"}
+      response.should be_redirect
+    end
+  end
+
+  context "results" do 
+    it "should assign results to @results" do
+      get :results, :search_params => {:firstName => "cubana"}
       assigns(:results).should == JSON.parse(@result_body)["hits"]["hit"]
       assigns(:search_params).should == "firstName=cubana"
     end
