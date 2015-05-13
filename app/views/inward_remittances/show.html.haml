@@ -1,13 +1,19 @@
 .ticket_header
   %h3
-    Request Token:
+    Status:
+    = @inward_remittance.status_code
+  %h3
+    Partner Reference No:
     = @inward_remittance.req_no
+  %h3 
+    Bank Reference No:
+    = @inward_remittance.rep_no
   %h3
-    Request Version:
-    = @inward_remittance.req_version
+    Attempt No:
+    = @inward_remittance.attempt_no
   %h3
-    Request Date:
-    = @inward_remittance.req_timestamp.strftime("%d/%m/%Y %I:%M%p")
+    Partner Name:
+    = @inward_remittance.partner.name rescue "No Partner for Code #{@inward_remittance.partner_code}"  
 .form-horizontal.show_ticket
   .form-main{:style=>'background-color: #F1F2F8; width: 55%'}
     #ticket-details
@@ -38,6 +44,9 @@
           %td.label Mobile No
           %td= @inward_remittance.rmtr_mobile_no
         %tr
+          %td.label Type
+          %td= @inward_remittance.remitter_type
+        %tr
           %td.label Identities Count
           %td= link_to @inward_remittance.rmtr_identity_count,:controller => :inward_remittances, :action => :remitter_identities, :id => @inward_remittance.id
       %hr{:style=>'background-color: #F1F2F8; width: 220%'}
@@ -63,10 +72,13 @@
           %td= @inward_remittance.bene_postal_code
         %tr
           %td.label Email Id
-          %td= @inward_remittance.rmtr_email_id
+          %td= @inward_remittance.bene_email_id
         %tr
           %td.label Mobile No
-          %td= @inward_remittance.rmtr_mobile_no
+          %td= @inward_remittance.bene_mobile_no
+        %tr
+          %td.label Type
+          %td= @inward_remittance.beneficiary_type
         %tr
           %td.label Identities Count
           %td= link_to @inward_remittance.bene_identity_count, :controller => :inward_remittances, :action => :beneficiary_identities, :id => @inward_remittance.id
@@ -96,9 +108,6 @@
           %td.label Purpose Code
           %td= @inward_remittance.purpose_code
         %tr
-          %td.label Status Code
-          %td= @inward_remittance.status_code
-        %tr
           %td.label Bank Reference Code
           %td= @inward_remittance.bank_ref
         %tr
@@ -108,8 +117,11 @@
       %h3 Other Details
       %table.table.no-border
         %tr
-          %td.label Rep No
-          %td= @inward_remittance.rep_no
+          %td.label Request Version
+          %td= @inward_remittance.req_version
+        %tr
+          %td.label Request Date
+          %td= @inward_remittance.req_timestamp.strftime("%d/%m/%Y %I:%M%p")
         %tr
           %td.label Rep Version
           %td= @inward_remittance.rep_version
@@ -122,6 +134,3 @@
         %tr
           %td.label Review Pending
           %td= @inward_remittance.review_pending
-        %tr
-          %td.label Attempt No
-          %td= @inward_remittance.attempt_no
