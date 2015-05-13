@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150512102305) do
+ActiveRecord::Schema.define(:version => 20150513045404) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -119,6 +119,12 @@ ActiveRecord::Schema.define(:version => 20150512102305) do
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
+  create_table "inw_audit_logs", :force => true do |t|
+    t.integer "inward_remittance_id"
+    t.text    "request_bitstream"
+    t.text    "reply_bitstream"
+  end
+
   create_table "inw_identities", :force => true do |t|
     t.string   "remittance_req_no"
     t.string   "id_req_type",       :limit => 20, :null => false
@@ -139,10 +145,10 @@ ActiveRecord::Schema.define(:version => 20150512102305) do
   end
 
   create_table "inward_remittances", :force => true do |t|
-    t.string   "req_no",                                             :null => false
-    t.string   "req_version",         :limit => 10,                  :null => false
-    t.datetime "req_timestamp",                                      :null => false
-    t.string   "partner_code",        :limit => 20,                  :null => false
+    t.string   "req_no",                                               :null => false
+    t.string   "req_version",         :limit => 10,                    :null => false
+    t.datetime "req_timestamp",                                        :null => false
+    t.string   "partner_code",        :limit => 20,                    :null => false
     t.string   "rmtr_full_name"
     t.string   "rmtr_first_name"
     t.string   "rmtr_last_name"
@@ -155,7 +161,7 @@ ActiveRecord::Schema.define(:version => 20150512102305) do
     t.string   "rmtr_country"
     t.string   "rmtr_email_id"
     t.string   "rmtr_mobile_no"
-    t.integer  "rmtr_identity_count",                                :null => false
+    t.integer  "rmtr_identity_count",                                  :null => false
     t.string   "bene_full_name"
     t.string   "bene_first_name"
     t.string   "bene_last_name"
@@ -168,7 +174,7 @@ ActiveRecord::Schema.define(:version => 20150512102305) do
     t.string   "bene_country"
     t.string   "bene_email_id"
     t.string   "bene_mobile_no"
-    t.integer  "bene_identity_count",                                :null => false
+    t.integer  "bene_identity_count",                                  :null => false
     t.string   "bene_account_no"
     t.string   "bene_account_ifsc"
     t.string   "transfer_type",       :limit => 4
@@ -182,9 +188,13 @@ ActiveRecord::Schema.define(:version => 20150512102305) do
     t.string   "rep_no"
     t.string   "rep_version",         :limit => 10
     t.datetime "rep_timestamp"
-    t.string   "review_reqd",         :limit => 1,  :default => "N"
-    t.string   "review_pending",      :limit => 1,  :default => "N"
-    t.integer  "attempt_no",                                         :null => false
+    t.string   "review_reqd",         :limit => 1,    :default => "N"
+    t.string   "review_pending",      :limit => 1,    :default => "N"
+    t.integer  "attempt_no",                                           :null => false
+    t.string   "beneficiary_type",    :limit => 1
+    t.string   "remitter_type",       :limit => 1
+    t.string   "fault_code",          :limit => 50
+    t.string   "fault_reason",        :limit => 1000
   end
 
   add_index "inward_remittances", ["req_no", "partner_code", "attempt_no"], :name => "remittance_unique_index", :unique => true
