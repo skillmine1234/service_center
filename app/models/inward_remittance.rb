@@ -16,6 +16,8 @@ class InwardRemittance < ActiveRecord::Base
   has_many :remitter_identities, :class_name => 'InwIdentity', :primary_key => 'req_no', :foreign_key => 'remittance_req_no', :conditions => {:id_req_type => 'Remitter'}
   has_many :beneficiary_identities, :class_name => 'InwIdentity', :primary_key => 'req_no', :foreign_key => 'remittance_req_no', :conditions => {:id_req_type => 'Beneficiary'}
 
+  has_one :inw_audit_log
+
   validates_presence_of :req_no, :req_version, :req_timestamp, :partner_code, :rmtr_identity_count, 
                         :bene_identity_count, :attempt_no
 

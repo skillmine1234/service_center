@@ -14,7 +14,7 @@
 //= require jquery-ui.min
 //= require jquery_ujs
 //= require jquery.flot
-//= require generic-app
+//= require service_center
 //= require_tree .
 //= require jquery.superfish
 //= require languages/jquery.validationEngine-en

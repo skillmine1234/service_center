@@ -117,6 +117,12 @@
       %h3 Other Details
       %table.table.no-border
         %tr
+          %td.label Request
+          %td= link_to "Show Request", "#", :class => 'request-link', :href => "#requestText"
+        %tr
+          %td.label Reply
+          %td= link_to "Show Reply", "#", :class => 'reply-link', :href => "#replyText"
+        %tr
           %td.label Request Version
           %td= @inward_remittance.req_version
         %tr
@@ -134,3 +140,19 @@
         %tr
           %td.label Review Pending
           %td= @inward_remittance.review_pending
+#requestText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Request
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    %pre.request_text{:style => 'word-wrap: break-word'}
+      = @inward_remittance.inw_audit_log.request_bit
+#replyText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Reply
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    %pre.reply_text{:style => 'word-wrap: break-word'}
+      = @inward_remittance.inw_audit_log.reply_bit

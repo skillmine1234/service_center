@@ -13,4 +13,12 @@ $(document).ready(function(){
   $('h2.collapsible').click(function(){
     $(this).siblings('.collapsible-content').toggle();
   });
+
+  $("a.request-link").on("click", function () {
+    $('#requestText').modal();
+  });
+
+  $("a.reply-link").on("click", function () {
+    $('#replyText').modal();
+  });
 });
