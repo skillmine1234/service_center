@@ -11,4 +11,12 @@ describe PurposeCode do
       it { should validate_presence_of(att) }
     end
   end
+  
+  context 'disallowed_rem_and_bene_types'do
+    it 'should be a string' do
+      purpose_code = Factory(:purpose_code, :disallowed_bene_types => ["I","N"], :disallowed_rem_types => ["I","N"])
+      purpose_code.disallowed_rem_types.should == "I,N"
+      purpose_code.disallowed_bene_types.should == "I,N"
+    end
+  end
 end

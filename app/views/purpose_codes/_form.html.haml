@@ -12,7 +12,7 @@
         = error_message_for(@purpose_code, :code, :prepend_text => "")
     .control-group
       = f.label :description
-      = f.text_field :description
+      = f.text_area :description, :maxlength => 200, :rows => 10
       #msg-error
         = error_message_for(@purpose_code, :description, :prepend_text => "")
     .control-group
@@ -32,12 +32,12 @@
         = error_message_for(@purpose_code, :daily_txn_limit, :prepend_text => "")
     .control-group
       = f.label :disallowed_rem_types, "Disallowed Remitter Types", :class => 'control-label'
-      = select_tag :disallowed_rem_types, options_for_select([['Individual','I'],['Customer','C']], params[:disallowed_rem_types]), {:multiple => true}
+      = f.select :disallowed_rem_types, PurposeCode.options_for_bene_and_rem_types,{},{ :multiple => true}
       #msg-error
         = error_message_for(@purpose_code, :disallowed_rem_types, :prepend_text => "")
     .control-group
       = f.label :disallowed_bene_types, "Disallowed Beneficiary Types", :class => 'control-label'
-      = select_tag :disallowed_bene_types, options_for_select([['Individual','I'],['Customer','C']], params[:disallowed_bene_types]), {:multiple => true}
+      = f.select :disallowed_bene_types, PurposeCode.options_for_bene_and_rem_types,{}, { :multiple => true}
       #msg-error
         = error_message_for(@purpose_code, :disallowed_bene_types, :prepend_text => "")
   .form-actions

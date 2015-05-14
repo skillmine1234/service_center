@@ -16,6 +16,7 @@ class PurposeCodesController < ApplicationController
       render "new"
     else
       @purpose_code.created_by = current_user.id
+      #puts @purpose_code.attributes
       @purpose_code.save
       flash[:alert] = 'Purpose Code successfuly created'
       redirect_to @purpose_code
@@ -33,6 +34,7 @@ class PurposeCodesController < ApplicationController
       render "edit"
     else
       @purpose_code.updated_by = current_user.id
+      #puts @purpose_code.attributes
       @purpose_code.save
       flash[:alert] = 'Purpose Code successfuly modified'
       redirect_to @purpose_code

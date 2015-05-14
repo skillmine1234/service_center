@@ -19,6 +19,7 @@
 //= require jquery.superfish
 //= require languages/jquery.validationEngine-en
 //= require jquery.validationEngine
+//= require jquery.multiselect.js
 //= require jquery.placeholder
 //= require jquery.flot.pie.js
 //= require jquery.flot.resize.js
