@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150513045404) do
+ActiveRecord::Schema.define(:version => 20150514082917) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -198,6 +198,11 @@ ActiveRecord::Schema.define(:version => 20150513045404) do
   end
 
   add_index "inward_remittances", ["req_no", "partner_code", "attempt_no"], :name => "remittance_unique_index", :unique => true
+
+  create_table "inward_remittances_locks", :force => true do |t|
+    t.string "partner_code"
+    t.string "req_no"
+  end
 
   create_table "partners", :force => true do |t|
     t.string   "code",                      :limit => 20,                :null => false
