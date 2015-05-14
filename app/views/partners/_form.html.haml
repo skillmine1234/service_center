@@ -37,7 +37,7 @@
         = error_message_for(@partner, :account_ifsc, :prepend_text => "")
     .control-group
       = f.label :transaction_hold_period, "*Transaction hold period", :class => 'control-label'
-      = f.number_field :txn_hold_period_days
+      = f.number_field :txn_hold_period_days, min: 1
       #msg-error
         = error_message_for(@partner, :txn_hold_period_days, :prepend_text => "")
     .control-group
