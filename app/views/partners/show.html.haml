@@ -3,6 +3,8 @@
     #form-details
       %h3 Partner Details 
       %br
+      %p{:style => 'text-align:right; padding-right:6px'}
+        = link_to 'Edit', edit_partner_path
       %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
         - if !@partner.nil?
           %tr
@@ -135,4 +137,7 @@
               = @partner.updated_at.strftime("%d/%m/%Y %I:%M%p")
             %td#msg-error
               = error_message_for(@partner, :updated_at, :prepend_text => "")
+    %p{:style => 'padding-left:6px; padding-bottom:6px'}
       = link_to 'Back to partners', partners_path
+
+      

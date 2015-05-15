@@ -3,6 +3,8 @@
     #form-details
       %h3 Purpose Code Details 
       %br
+      %p{:style => 'text-align:right; padding-right:6px'}
+        = link_to 'Edit', edit_purpose_code_path
       %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
         - if !@purpose_code.nil?
           %tr

@@ -7,7 +7,7 @@ describe Partner do
   end
 
   context 'validation' do
-    [:code, :name, :account_no, :account_ifsc, :txn_hold_period_days].each do |att|
+    [:code, :name, :account_no, :txn_hold_period_days].each do |att|
       it { should validate_presence_of(att) }
     end
     it {should validate_numericality_of(:low_balance_alert_at)}
