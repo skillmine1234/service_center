@@ -11,5 +11,9 @@ describe Partner do
       it { should validate_presence_of(att) }
     end
     it {should validate_numericality_of(:low_balance_alert_at)}
+    it do
+      partner = Factory(:partner)
+      should validate_uniqueness_of(:code)
+    end
   end
 end

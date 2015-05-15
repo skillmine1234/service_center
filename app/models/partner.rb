@@ -10,5 +10,6 @@ class Partner < ActiveRecord::Base
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
 
   validates_presence_of :code, :name, :account_no, :account_ifsc, :txn_hold_period_days
+  validates_uniqueness_of :code
   validates :low_balance_alert_at, :numericality => { :greater_than_or_equal_to => 0, :allow_nil => true }
 end
