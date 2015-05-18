@@ -1,17 +1,6 @@
 require 'spec_helper'
 
 describe InwIdentity do
-  context 'association' do
-    it { should belong_to(:created_user)}
-    it { should belong_to(:updated_user)}
-  end
-
-  context 'validation' do
-    [:partner_id, :created_by, :updated_by].each do |att|
-      it { should validate_presence_of(att) }
-    end
-  end
-
   context "whitelisted_identity" do 
     it "should return whitelisted_identity if present" do 
       whitelisted_identity = Factory(:whitelisted_identity)
@@ -20,7 +9,7 @@ describe InwIdentity do
     end
 
     it "should return nil if not present" do 
-      whitelisted_identity = Factory(:whitelisted_identity, :full_name => 'Bar Foo')
+      whitelisted_identity = Factory(:whitelisted_identity, :id_type => 'License')
       identity = Factory(:inw_identity)
       identity.whitelisted_identity.should == nil
     end
@@ -34,7 +23,7 @@ describe InwIdentity do
     end
     
     it "should return 'N' if whitelisted_identity is not present" do 
-      whitelisted_identity = Factory(:whitelisted_identity, :full_name => 'Bar Foo')
+      whitelisted_identity = Factory(:whitelisted_identity, :id_type => 'License')
       identity = Factory(:inw_identity)
       identity.is_verified.should == 'N'
     end
@@ -48,7 +37,7 @@ describe InwIdentity do
     end
     
     it "should return '-' if whitelisted_identity is not present" do 
-      whitelisted_identity = Factory(:whitelisted_identity, :full_name => 'Bar Foo')
+      whitelisted_identity = Factory(:whitelisted_identity, :id_type => 'License')
       identity = Factory(:inw_identity)
       identity.verified_by.should == '-'
     end
@@ -62,7 +51,7 @@ describe InwIdentity do
     end
     
     it "should return '-' if whitelisted_identity is not present" do 
-      whitelisted_identity = Factory(:whitelisted_identity, :full_name => 'Bar Foo')
+      whitelisted_identity = Factory(:whitelisted_identity, :id_type => 'License')
       identity = Factory(:inw_identity)
       identity.verified_at.should == '-'
     end

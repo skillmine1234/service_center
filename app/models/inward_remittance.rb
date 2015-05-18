@@ -13,8 +13,8 @@ class InwardRemittance < ActiveRecord::Base
   has_one :partner, :primary_key => 'partner_code', :foreign_key => 'code'
   has_one :purpose, :class_name => 'PurposeCode', :primary_key => 'purpose_code', :foreign_key => 'code'
 
-  has_many :remitter_identities, :class_name => 'InwIdentity', :primary_key => 'req_no', :foreign_key => 'remittance_req_no', :conditions => {:id_req_type => 'Remitter'}
-  has_many :beneficiary_identities, :class_name => 'InwIdentity', :primary_key => 'req_no', :foreign_key => 'remittance_req_no', :conditions => {:id_req_type => 'Beneficiary'}
+  has_many :remitter_identities, -> { where id_for: 'R'}, :class_name => 'InwIdentity', :foreign_key => 'inw_remittance_id'
+  has_many :beneficiary_identities, -> { where id_for: 'B'}, :class_name => 'InwIdentity', :foreign_key => 'inw_remittance_id'
 
   has_one :inw_audit_log
 

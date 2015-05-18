@@ -7,8 +7,10 @@ describe InwardRemittancesLock do
   end
 
   context 'validation' do
-    [:partner_code, :req_no].each do |att|
-      it { should validate_uniqueness_of(att) }
+    it do
+      Factory(:inward_remittances_lock)
+      should validate_uniqueness_of(:partner_code)
+      should validate_uniqueness_of(:req_no)
     end
   end
 end
