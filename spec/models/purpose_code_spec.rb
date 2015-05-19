@@ -10,6 +10,10 @@ describe PurposeCode do
     [:code, :description, :is_enabled, :txn_limit, :daily_txn_limit].each do |att|
       it { should validate_presence_of(att) }
     end
+
+    [:code].each do |att|
+      it { should validate_uniqueness_of(att) }
+    end
   end
   
   context 'disallowed_rem_and_bene_types'do

@@ -5,10 +5,6 @@
 %table.table.table-bordered.table-striped.table-hover
   .thead
     %th{:style=>'text-align:left; background-color: lightblue;'}
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Partner Id
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Full Name
     %th{:style=>'Text-align:left; background-color: lightblue;'}
       Id Type
     %th{:style=>'text-align:left; background-color: lightblue;'}
@@ -32,11 +28,7 @@
           - if !identity.whitelisted_identity.nil?
             = "Verified"
           - else
-            = link_to 'verify',"#", :class => 'verify-link', :href => "#verifyIdentity", data: { partner_id: identity.partner_id, full_name: identity.full_name, first_name: identity.first_name, last_name: identity.last_name, id_type: identity.id_type, id_number: identity.id_number, id_country: identity.id_country, id_issue_date: identity.id_issue_date, id_expiry_date: identity.id_expiry_date, user_id: user_id} 
-        %td{:style=>'text-align:left;'}
-          = identity.partner_id
-        %td{:style=>'text-align:left;'}
-          = identity.full_name
+            = link_to 'verify',"#", :class => 'verify-link', :href => "#verifyIdentity", data: { partner_id: identity.inward_remittance.partner.try(:id), full_name: identity.full_name, first_name: identity.first_name, last_name: identity.last_name, id_type: identity.id_type, id_number: identity.id_number, id_country: identity.id_country, id_issue_date: identity.id_issue_date, id_expiry_date: identity.id_expiry_date, user_id: user_id} 
         %td{:style=>'text-align:left;'}
           = identity.id_type
         %td{:style=>'text-align:left;'}

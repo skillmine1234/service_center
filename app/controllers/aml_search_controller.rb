@@ -42,7 +42,7 @@ class AmlSearchController < ApplicationController
 
   def get_response_from_api(url)
     response = HTTParty.get(url)
-    response.parsed_response["hits"]["hit"] rescue []
+    find_values(response.parsed_response["hits"]["numHits"],response.parsed_response["hits"]["hit"]) rescue []
   end
 
   def search_params(params)

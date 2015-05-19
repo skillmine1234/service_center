@@ -147,7 +147,7 @@
     #error_message{:style => 'color:red'}
   .modal-body{:style => "max-height:450px;"}
     %pre.request_text{:style => 'word-wrap: break-word'}
-      = @inward_remittance.inw_audit_log.request_bit
+      = @inward_remittance.inw_audit_log.try(:request_bit)
 #replyText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
@@ -155,4 +155,4 @@
     #error_message{:style => 'color:red'}
   .modal-body{:style => "max-height:450px;"}
     %pre.reply_text{:style => 'word-wrap: break-word'}
-      = @inward_remittance.inw_audit_log.reply_bit
+      = @inward_remittance.inw_audit_log.try(:reply_bit)

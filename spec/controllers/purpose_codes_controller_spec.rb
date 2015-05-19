@@ -91,7 +91,7 @@ describe PurposeCodesController do
     describe "with valid params" do
       it "updates the requested purpose_code" do
         purpose_code = Factory(:purpose_code, :code => "11")
-        params = purpose_code.attributes.slice(*purpose_code.class.accessible_attributes)
+        params = purpose_code.attributes.slice(*purpose_code.class.attribute_names)
         params[:code] = "15"
         put :update, {:id => purpose_code.id, :purpose_code => params}
         purpose_code.reload
@@ -100,7 +100,7 @@ describe PurposeCodesController do
 
       it "assigns the requested purpose_code as @purpose_code" do
         purpose_code = Factory(:purpose_code, :code => "11")
-        params = purpose_code.attributes.slice(*purpose_code.class.accessible_attributes)
+        params = purpose_code.attributes.slice(*purpose_code.class.attribute_names)
         params[:code] = "15"
         put :update, {:id => purpose_code.to_param, :purpose_code => params}
         assigns(:purpose_code).should eq(purpose_code)
@@ -108,7 +108,7 @@ describe PurposeCodesController do
 
       it "redirects to the purpose_code" do
         purpose_code = Factory(:purpose_code, :code => "11")
-        params = purpose_code.attributes.slice(*purpose_code.class.accessible_attributes)
+        params = purpose_code.attributes.slice(*purpose_code.class.attribute_names)
         params[:code] = "15"
         put :update, {:id => purpose_code.to_param, :purpose_code => params}
         response.should redirect_to(purpose_code)
@@ -116,7 +116,7 @@ describe PurposeCodesController do
 
       it "should raise error when tried to update at same time by many" do
         purpose_code = Factory(:purpose_code, :code => "11")
-        params = purpose_code.attributes.slice(*purpose_code.class.accessible_attributes)
+        params = purpose_code.attributes.slice(*purpose_code.class.attribute_names)
         params[:code] = "15"
         purpose_code2 = purpose_code
         put :update, {:id => purpose_code.id, :purpose_code => params}
@@ -133,7 +133,7 @@ describe PurposeCodesController do
     describe "with invalid params" do
       it "assigns the purpose_code as @purpose_code" do
         purpose_code = Factory(:purpose_code, :code => "11")
-        params = purpose_code.attributes.slice(*purpose_code.class.accessible_attributes)
+        params = purpose_code.attributes.slice(*purpose_code.class.attribute_names)
         params[:code] = nil
         put :update, {:id => purpose_code.to_param, :purpose_code => params}
         assigns(:purpose_code).should eq(purpose_code)
@@ -143,7 +143,7 @@ describe PurposeCodesController do
 
       it "re-renders the 'edit' template when show_errors is true" do
         purpose_code = Factory(:purpose_code)
-        params = purpose_code.attributes.slice(*purpose_code.class.accessible_attributes)
+        params = purpose_code.attributes.slice(*purpose_code.class.attribute_names)
         params[:code] = nil
         put :update, {:id => purpose_code.id, :purpose_code => params, :show_errors => "true"}
         response.should render_template("edit")

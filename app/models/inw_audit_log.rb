@@ -1,7 +1,7 @@
 require "rexml/document"
 
 class InwAuditLog < ActiveRecord::Base
-  attr_accessible :inward_remittance_id, :reply_bitstream, :request_bitstream
+  # attr_accessible :inward_remittance_id, :reply_bitstream, :request_bitstream
 
   belongs_to :inward_remittance
 

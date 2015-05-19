@@ -4,16 +4,8 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :session_limitable
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
-  # attr_accessible :title, :body
-
   Roles = %w{user}
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :first_name, :last_name, :password, :password_confirmation, :remember_me, :department_id, :location_id,
-                  :username, :emp_id, :inactive, :role_ids, :department_location_ids, :supervisor_id, :mobile_no, :receive_sms
-  # attr_accessible :title, :body
   validate :role_presence
 
   def role_presence

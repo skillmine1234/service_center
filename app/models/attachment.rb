@@ -1,11 +1,11 @@
 class Attachment < ActiveRecord::Base
-  attr_accessible :file, :note, :user_id
+  # attr_accessible :file, :note, :user_id
   belongs_to :attachable, :polymorphic => true
   belongs_to :user
   before_create :set_name
   validate :validate_file_name
   ATTACHMENT_LIMIT = 2.megabytes.to_i
-  validate :file_size, :only => [:create]
+  validate :file_size, :on => [:create]
   BlackList = %w(exe vbs rb sh jar html msi bat com bin vb)
   mount_uploader :file, WhitelistedIdentityUploader
 
