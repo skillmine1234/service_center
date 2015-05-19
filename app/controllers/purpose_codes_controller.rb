@@ -57,5 +57,12 @@ class PurposeCodesController < ApplicationController
     @purpose_code = PurposeCode.find(params[:id]) rescue nil
     @audit = @purpose_code.audits[params[:version_id].to_i] rescue nil
   end
+
+  private
+
+  def purpose_code_params
+    params.require(:purpose_code).permit(:code, :created_by, :daily_txn_limit, :description, :disallowed_bene_types, 
+                                         :disallowed_rem_types, :is_enabled, :lock_version, :txn_limit, :updated_by)
+  end
 end
 

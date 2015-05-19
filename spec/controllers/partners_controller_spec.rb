@@ -91,7 +91,7 @@ describe PartnersController do
     describe "with valid params" do
       it "updates the requested partner" do
         partner = Factory(:partner, :code => "11")
-        params = partner.attributes.slice(*partner.class.accessible_attributes)
+        params = partner.attributes.slice(*partner.class.attribute_names)
         params[:code] = "15"
         put :update, {:id => partner.id, :partner => params}
         partner.reload
@@ -100,7 +100,7 @@ describe PartnersController do
 
       it "assigns the requested partner as @partner" do
         partner = Factory(:partner, :code => "11")
-        params = partner.attributes.slice(*partner.class.accessible_attributes)
+        params = partner.attributes.slice(*partner.class.attribute_names)
         params[:code] = "15"
         put :update, {:id => partner.to_param, :partner => params}
         assigns(:partner).should eq(partner)
@@ -108,7 +108,7 @@ describe PartnersController do
 
       it "redirects to the partner" do
         partner = Factory(:partner, :code => "11")
-        params = partner.attributes.slice(*partner.class.accessible_attributes)
+        params = partner.attributes.slice(*partner.class.attribute_names)
         params[:code] = "15"
         put :update, {:id => partner.to_param, :partner => params}
         response.should redirect_to(partner)
@@ -116,7 +116,7 @@ describe PartnersController do
 
       it "should raise error when tried to update at same time by many" do
         partner = Factory(:partner, :code => "11")
-        params = partner.attributes.slice(*partner.class.accessible_attributes)
+        params = partner.attributes.slice(*partner.class.attribute_names)
         params[:code] = "15"
         partner2 = partner
         put :update, {:id => partner.id, :partner => params}
@@ -133,7 +133,7 @@ describe PartnersController do
     describe "with invalid params" do
       it "assigns the partner as @partner" do
         partner = Factory(:partner, :code => "11")
-        params = partner.attributes.slice(*partner.class.accessible_attributes)
+        params = partner.attributes.slice(*partner.class.attribute_names)
         params[:code] = nil
         put :update, {:id => partner.to_param, :partner => params}
         assigns(:partner).should eq(partner)
@@ -143,7 +143,7 @@ describe PartnersController do
 
       it "re-renders the 'edit' template when show_errors is true" do
         partner = Factory(:partner)
-        params = partner.attributes.slice(*partner.class.accessible_attributes)
+        params = partner.attributes.slice(*partner.class.attribute_names)
         params[:code] = nil
         put :update, {:id => partner.id, :partner => params, :show_errors => "true"}
         response.should render_template("edit")

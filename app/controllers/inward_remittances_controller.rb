@@ -29,4 +29,19 @@ class InwardRemittancesController < ApplicationController
     identities = inward_remittance.beneficiary_identities
     @identities = identities.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
+
+  private
+
+  def inward_remittance_params
+    params.require(:inward_remittance).permit(:attempt_no, :bank_ref, :bene_account_ifsc, :bene_account_no, :bene_address1, 
+                  :bene_address2, :bene_address3, :bene_city, :bene_country, :bene_email_id, 
+                  :bene_first_name, :bene_full_name, :bene_identity_count, :bene_last_name, 
+                  :bene_mobile_no, :bene_postal_code, :bene_ref, :bene_state, :partner_code, 
+                  :purpose_code, :rep_no, :rep_timestamp, :rep_version, :req_no, :req_timestamp, 
+                  :req_version, :review_pending, :review_reqd, :rmtr_address1, :rmtr_address2, 
+                  :rmtr_address3, :rmtr_city, :rmtr_country, :rmtr_email_id, :rmtr_first_name, 
+                  :rmtr_full_name, :rmtr_identity_count, :rmtr_last_name, :rmtr_mobile_no, 
+                  :rmtr_postal_code, :rmtr_state, :rmtr_to_bene_note, :status_code, 
+                  :transfer_amount, :transfer_ccy, :transfer_type)
+  end
 end

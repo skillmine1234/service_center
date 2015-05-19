@@ -49,4 +49,7 @@ $('.modal').on('hidden', function () {
   $(".formError").remove();
 })
 
+$('head').append('<meta content="no-cache" http-equiv="Cache-control">');
+$('head').append('<meta content="no-store" http-equiv="Cache-control">');
+$(".ui-datepicker-inline").width("75em");
 });

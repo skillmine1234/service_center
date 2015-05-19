@@ -1,6 +1,6 @@
 class InwIdentity < ActiveRecord::Base
-  attr_accessible :id_country, :id_expiry_date, :id_issue_date, :id_number, :id_for, :id_type, 
-                  :inw_remittance_id
+  # attr_accessible :id_country, :id_expiry_date, :id_issue_date, :id_number, :id_for, :id_type, 
+  #                 :inw_remittance_id
 
   belongs_to :inward_remittance, :foreign_key => 'inw_remittance_id'
   

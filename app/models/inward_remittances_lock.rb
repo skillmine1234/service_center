@@ -1,5 +1,5 @@
 class InwardRemittancesLock < ActiveRecord::Base
-  attr_accessible :partner_code, :req_no
+  # attr_accessible :partner_code, :req_no
 
   validates_uniqueness_of :partner_code, :req_no
 
