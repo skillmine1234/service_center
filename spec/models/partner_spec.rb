@@ -12,7 +12,7 @@ describe Partner do
     end
     it {should validate_numericality_of(:low_balance_alert_at)}
     it do
-      partner = Factory(:partner, :account_no => '1234567890123456', :account_ifsc => 'abcd0123456',)
+      partner = Factory(:partner, :account_no => '1234567890123456', :account_ifsc => 'abcd0123456')
       should validate_uniqueness_of(:code)
     end
   

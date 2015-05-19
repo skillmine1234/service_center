@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150514082917) do
+ActiveRecord::Schema.define(:version => 20150518114920) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -102,6 +102,14 @@ ActiveRecord::Schema.define(:version => 20150514082917) do
   add_index "audits", ["auditable_id", "auditable_type"], :name => "auditable_index"
   add_index "audits", ["created_at"], :name => "index_audits_on_created_at"
   add_index "audits", ["user_id", "user_type"], :name => "user_index"
+
+  create_table "banks", :force => true do |t|
+    t.string   "ifsc"
+    t.string   "name"
+    t.boolean  "imps_enabled"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0, :null => false
@@ -199,7 +207,7 @@ ActiveRecord::Schema.define(:version => 20150514082917) do
 
   add_index "inward_remittances", ["req_no", "partner_code", "attempt_no"], :name => "remittance_unique_index", :unique => true
 
-  create_table "inward_remittances_locks", :force => true do |t|
+  create_table "inward_remittances_locks", :id => false, :force => true do |t|
     t.string "partner_code"
     t.string "req_no"
   end
@@ -219,7 +227,7 @@ ActiveRecord::Schema.define(:version => 20150514082917) do
     t.string   "beneficiary_sms_allowed",   :limit => 1
     t.string   "beneficiary_email_allowed", :limit => 1
     t.string   "allow_neft",                :limit => 1
-    t.string   "allow_rgts",                :limit => 1
+    t.string   "allow_rtgs",                :limit => 1
     t.string   "allow_imps",                :limit => 1
     t.string   "created_by",                :limit => 20
     t.string   "updated_by",                :limit => 20
@@ -268,6 +276,14 @@ ActiveRecord::Schema.define(:version => 20150514082917) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
+
+  create_table "rules", :force => true do |t|
+    t.string   "pattern_individuals",   :limit => 4000
+    t.string   "pattern_corporates",    :limit => 4000
+    t.string   "pattern_beneficiaries", :limit => 4000
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                                :default => "",    :null => false
