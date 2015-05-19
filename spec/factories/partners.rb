@@ -16,7 +16,7 @@ FactoryGirl.define do
     beneficiary_sms_allowed "MyString"
     beneficiary_email_allowed "MyString"
     allow_neft "MyString"
-    allow_rgts "MyString"
+    allow_rtgs "MyString"
     allow_imps "MyString"
     created_by "MyString"
     updated_by "MyString"
