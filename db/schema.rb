@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20150518082947) do
+ActiveRecord::Schema.define(version: 20150518114920) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -114,20 +113,10 @@ ActiveRecord::Schema.define(version: 20150518082947) do
     t.datetime "updated_at",   null: false
   end
 
-
-  create_table "banks", :force => true do |t|
-    t.string   "ifsc"
-    t.string   "name"
-    t.boolean  "imps_enabled"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
     t.integer  "attempts",   default: 0, null: false
     t.text     "handler",                null: false
-
     t.text     "last_error"
     t.datetime "run_at"
     t.datetime "locked_at"
@@ -229,18 +218,18 @@ ActiveRecord::Schema.define(version: 20150518082947) do
     t.integer  "txn_hold_period_days",                 default: 7, null: false
     t.string   "identity_user_id",          limit: 20
     t.float    "low_balance_alert_at"
-    t.string   "remitter_sms_allowed",      :limit => 1
-    t.string   "remitter_email_allowed",    :limit => 1
-    t.string   "beneficiary_sms_allowed",   :limit => 1
-    t.string   "beneficiary_email_allowed", :limit => 1
-    t.string   "allow_neft",                :limit => 1
-    t.string   "allow_rtgs",                :limit => 1
-    t.string   "allow_imps",                :limit => 1
-    t.string   "created_by",                :limit => 20
-    t.string   "updated_by",                :limit => 20
-    t.datetime "created_at",                                             :null => false
-    t.datetime "updated_at",                                             :null => false
-    t.integer  "lock_version"
+    t.string   "remitter_sms_allowed",      limit: 1
+    t.string   "remitter_email_allowed",    limit: 1
+    t.string   "beneficiary_sms_allowed",   limit: 1
+    t.string   "beneficiary_email_allowed", limit: 1
+    t.string   "allow_neft",                limit: 1
+    t.string   "allow_rtgs",                limit: 1
+    t.string   "allow_imps",                limit: 1
+    t.string   "created_by",                limit: 20
+    t.string   "updated_by",                limit: 20
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "lock_version",                         default: 0, null: false
   end
 
   create_table "purpose_codes", force: :cascade do |t|

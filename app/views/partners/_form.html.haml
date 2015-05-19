@@ -78,7 +78,7 @@
         = error_message_for(@partner, :allow_neft, :prepend_text => "")
     .control-group
       = f.label :rtgs_allowed, "RTGS Allowed?", :class => 'control-label'
-      = f.select :allow_rgts, [['Yes','Y'],['No','N']], :include_blank => "Select"
+      = f.select :allow_rtgs, [['Yes','Y'],['No','N']], :include_blank => "Select"
       #msg-error
         = error_message_for(@partner, :allow_rgts, :prepend_text => "")
     .control-group
