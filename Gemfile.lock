@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/rsim/oracle-enhanced.git
+  revision: 44ef3d208f397e2d3cfe58254a60223b76a5fa01
+  branch: rails42
+  specs:
+    activerecord-oracle_enhanced-adapter (1.5.6)
+
+GIT
   remote: https://github.com/quantiguous/rools
   revision: 64354e44d1cc18e4f35a92610cd1e7d3de547c4b
   specs:
@@ -51,7 +58,6 @@ GEM
       activemodel (= 4.2.0)
       activesupport (= 4.2.0)
       arel (~> 6.0)
-    activerecord-oracle_enhanced-adapter (1.5.6)
     activesupport (4.2.0)
       i18n (~> 0.7)
       json (~> 1.7, >= 1.7.7)
@@ -431,7 +437,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin (~> 1.0.0.pre1)
   activeadmin-sortable
-  activerecord-oracle_enhanced-adapter
+  activerecord-oracle_enhanced-adapter!
   acts_as_commentable (= 3.0.1)
   acts_as_list
   audited-activerecord
