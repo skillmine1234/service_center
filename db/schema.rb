@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150518082947) do
+ActiveRecord::Schema.define(version: 20150519080059) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -223,7 +223,7 @@ ActiveRecord::Schema.define(version: 20150518082947) do
     t.string   "beneficiary_sms_allowed",   limit: 1
     t.string   "beneficiary_email_allowed", limit: 1
     t.string   "allow_neft",                limit: 1
-    t.string   "allow_rgts",                limit: 1
+    t.string   "allow_rtgs",                limit: 1
     t.string   "allow_imps",                limit: 1
     t.string   "created_by",                limit: 20
     t.string   "updated_by",                limit: 20
