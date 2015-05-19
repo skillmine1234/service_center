@@ -437,7 +437,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin (~> 1.0.0.pre1)
   activeadmin-sortable
-  activerecord-oracle_enhanced-adapter
+  activerecord-oracle_enhanced-adapter!
   acts_as_commentable (= 3.0.1)
   acts_as_list
   audited-activerecord

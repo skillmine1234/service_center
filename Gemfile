@@ -40,8 +40,9 @@ gem "audited-activerecord"
 gem 'httparty'
 # gem 'strong_parameters'
 # Used only if oracle db is being used
+gem 'activerecord-oracle_enhanced-adapter', github: 'rsim/oracle-enhanced', branch: 'rails42'
+
 group :oracle do
-  gem 'activerecord-oracle_enhanced-adapter', github: 'rsim/oracle-enhanced', branch: 'rails42'
   gem 'ruby-oci8'
 end
 # Gems used only for assets and not required
