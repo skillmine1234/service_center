@@ -1,0 +1,3 @@
+#!/bin/bash -e
+cp /opt/gufa/packaging/database.yml.sample /opt/gufa/config/database.yml
+cp /opt/gufa/packaging/ldap.yml.sample /opt/gufa/config/ldap.yml
