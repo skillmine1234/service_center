@@ -1,0 +1,60 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8;'}
+    #form-details
+      %h3 Partner Details 
+      %br
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
+        - if !@rule.nil?
+          %tr
+            %td.label Version
+            %td.value
+              = link_to "#{audit_count(@rule)}", :controller => :rules, :action => :audit_logs, :version_id => audit_count(@rule), :id => @rule.id
+          %tr
+            %td.label Form Errors
+            %td.value
+              = ' '
+            %td#msg-error
+              = error_message_for(@rule, :base, :prepend_text => "")
+          %tr
+            %td.label Disallowed Keywords in Name for Individuals
+            %td.value
+              = @rule.pattern_individuals
+            %td#msg-error
+              = error_message_for(@rule, :pattern_individuals, :prepend_text => "")
+          %tr
+            %td.label Required Keywords in Name for Corporates
+            %td.value
+              = @rule.pattern_corporates
+            %td#msg-error
+              = error_message_for(@rule, :pattern_corporates, :prepend_text => "")
+          %tr
+            %td.label Disallowed Keywords in Name for Beneficiaries
+            %td.value
+              = @rule.pattern_beneficiaries
+            %td#msg-error
+              = error_message_for(@rule, :pattern_beneficiaries, :prepend_text => "")
+          %tr
+            %td.label Created By
+            %td
+              = @rule.created_user.try(:username)
+            %td#msg-error
+              = error_message_for(@rule, :created_by, :prepend_text => "")
+          %tr
+            %td.label Updated By
+            %td
+              = @rule.updated_user.try(:username)
+            %td#msg-error
+              = error_message_for(@rule, :updated_by, :prepend_text => "")
+          %tr
+            %td.label Created At
+            %td.value
+              = @rule.created_at.strftime("%d/%m/%Y %I:%M%p")
+            %td#msg-error
+              = error_message_for(@rule, :created_at, :prepend_text => "")
+          %tr
+            %td.label Updated At
+            %td.value
+              = @rule.updated_at.strftime("%d/%m/%Y %I:%M%p")
+            %td#msg-error
+              = error_message_for(@rule, :updated_at, :prepend_text => "")
+      = link_to 'Back to rules', rules_path

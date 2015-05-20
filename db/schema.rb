@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150518082947) do
+ActiveRecord::Schema.define(version: 20150519115931) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -279,6 +279,9 @@ ActiveRecord::Schema.define(version: 20150518082947) do
     t.string   "pattern_beneficiaries", limit: 4000
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "created_by"
+    t.string   "updated_by"
+    t.integer  "lock_version",                       default: 0, null: false
   end
 
   create_table "users", force: :cascade do |t|
