@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+cp config/database.1.yml config/database.yml
+
 mkdir -p log
 touch log/production.log
 
