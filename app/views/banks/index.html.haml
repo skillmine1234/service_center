@@ -1,23 +1,23 @@
 %br
-= link_to 'New Rule', new_rule_path
+= link_to 'New Bank', new_bank_path
 %br
 %br
-%h1 Listing rules
+%h1 Listing banks
 %br
-= "Total Count: #{@rules_count}"
+= "Total Count: #{@banks_count}"
 %br
-= will_paginate @rules
+= will_paginate @banks
 %br
 %table.table.table-bordered.table-striped.table-hover
   .thead
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
-      = "Disallowed Keywords in Name for Individuals"
+      IFSC
     %th{:style=>'text-align:left; background-color: lightblue;'} 
-      = "Required Keywords in Name for Corporates"
+      Name
     %th{:style=>'text-align:left; background-color: lightblue;'}
-      = "Disallowed Keywords in Name for Beneficiaries"
+      IMPS Enabled?
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Created by
     %th{:style=>'text-align:left; background-color: lightblue;'}
@@ -27,23 +27,23 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Updated At
   .tbody
-    - @rules.each do |rule|
+    - @banks.each do |bank|
       %tr
         %td{:style=>'text-align:left;'}
-          = link_to 'Show', rule
+          = link_to 'Show', bank
         %td{:style=>'text-align:left;'}
-          = link_to 'Edit', edit_rule_path(rule)
+          = link_to 'Edit', edit_bank_path(bank)
         %td{:style=>'text-align:left;'}
-          = rule.pattern_individuals
+          = bank.ifsc
         %td{:style=>'text-align:left;'}
-          = rule.pattern_corporates
+          = bank.name
         %td{:style=>'text-align:left;'}
-          = rule.pattern_beneficiaries
+          = bank.imps_enabled
         %td{:style=>'text-align:left;'}
-          = rule.created_user.try(:username)
+          = bank.created_user.try(:username)
         %td{:style=>'text-align:left;'}
-          = rule.updated_user.try(:username)
+          = bank.updated_user.try(:username)
         %td{:style=>'text-align:left;'}
-          = rule.created_at.strftime("%d/%m/%Y %I:%M%p")
+          = bank.created_at.strftime("%d/%m/%Y %I:%M%p")
         %td{:style=>'text-align:left;'}
-          = rule.updated_at.strftime("%d/%m/%Y %I:%M%p")
+          = bank.updated_at.strftime("%d/%m/%Y %I:%M%p")

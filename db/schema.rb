@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150519115931) do
+ActiveRecord::Schema.define(version: 20150520091325) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -109,8 +109,11 @@ ActiveRecord::Schema.define(version: 20150519115931) do
     t.string   "ifsc"
     t.string   "name"
     t.boolean  "imps_enabled"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "created_by"
+    t.string   "updated_by"
+    t.integer  "lock_version", default: 0, null: false
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
