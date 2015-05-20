@@ -38,12 +38,16 @@ gem 'therubyracer'
 gem "daemons"
 gem "audited-activerecord"
 gem 'httparty'
-# Used only if oracle db is being used
 
-group :oracle do
+# required for packaging (specifically asset precompilation during packaging)
+gem "sqlite3"
+
+# oracle is required only in production, CI tools run against sqlite3
+group :production do
   gem 'activerecord-oracle_enhanced-adapter', github: 'rsim/oracle-enhanced', branch: 'rails42'
   gem 'ruby-oci8'
 end
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -55,7 +59,6 @@ end
 
 group :development, :test do
   gem 'sunspot_solr'
-  gem "sqlite3"
   gem "rspec"
   gem 'rspec-rails', "2.14.0"
   gem 'rb-readline', '~> 0.4.2'
