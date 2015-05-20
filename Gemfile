@@ -1,8 +1,5 @@
 source 'https://rubygems.org'
-if RUBY_VERSION =~ /1.9/
-  Encoding.default_external = Encoding::UTF_8
-  Encoding.default_internal = Encoding::UTF_8
-end
+ruby "2.2.2"
 gem 'roo'
 gem "flot-rails"
 gem 'rails', '4.2.0'
