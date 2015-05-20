@@ -56,6 +56,7 @@ end
 
 group :development, :test do
   gem 'sunspot_solr'
+  gem 'dotenv-rails'
   gem "rspec"
   gem 'rspec-rails', "2.14.0"
   gem 'rb-readline', '~> 0.4.2'

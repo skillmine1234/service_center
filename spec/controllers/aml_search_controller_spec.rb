@@ -12,7 +12,7 @@ describe AmlSearchController do
     request.env["HTTP_REFERER"] = "/"
 
     @result_body = "{\"hits\":{\"hit\":[{\"id\":\"735\",\"firstName\":\"nil\",\"lastName\":\"EMPRESA CUBANA DE AVIACION\",\"type\":\"Entity\",\"remarks\":\"nil\",\"identities\":{\"numIdentities\":\"0\",\"identity\":\"nil\"}, \"aliases\":{\"numAliases\":\"0\",\"alias\":\"nil\"}, \"addresses\":{\"numAddresses\":\"0\",\"address\":\"nil\"}}]}}" 
-    stub_request(:get, CONFIG[:aml_search_url] + "firstName=cubana").
+    stub_request(:get, ENV['CONFIG_URL_AML_SEARCH'] + "firstName=cubana").
       with(:headers => {'Accept'=>'*/*', 'User-Agent'=>'Ruby'}).
       to_return(:status => 200, :body => @result_body, :headers => {'Content-Type' => 'application/json'})
   end
@@ -20,7 +20,7 @@ describe AmlSearchController do
   context 'get_response_from_api' do
     it "should return response from api" do 
       h = AmlSearchController.new
-      h.get_response_from_api(CONFIG[:aml_search_url] + "firstName=cubana").should == JSON.parse(@result_body)["hits"]["hit"]
+      h.get_response_from_api(ENV['CONFIG_URL_AML_SEARCH'] + "firstName=cubana").should == JSON.parse(@result_body)["hits"]["hit"]
     end
   end
 
