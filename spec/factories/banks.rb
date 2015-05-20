@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :bank do
-    ifsc "MyString"
+    ifsc "abcd0123456"
     name "MyString"
     imps_enabled false
   end

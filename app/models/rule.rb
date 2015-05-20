@@ -5,9 +5,9 @@ class Rule < ActiveRecord::Base
   before_save :format_fields
 
   def format_fields
-    self.pattern_individuals = self.pattern_individuals.gsub("\r\n",",")
-    self.pattern_corporates = self.pattern_corporates.gsub("\r\n",",")
-    self.pattern_beneficiaries = self.pattern_beneficiaries.gsub("\r\n",",")
+    self.pattern_individuals = self.pattern_individuals.gsub("\r\n",",") rescue nil
+    self.pattern_corporates = self.pattern_corporates.gsub("\r\n",",") rescue nil
+    self.pattern_beneficiaries = self.pattern_beneficiaries.gsub("\r\n",",") rescue nil
   end
 
   def formated_pattern_individuals
