@@ -76,6 +76,10 @@ GEM
     audited-activerecord (4.2.0)
       activerecord (~> 4.0)
       audited (= 4.2.0)
+    bcdatabase (1.0.6)
+      activesupport (>= 2.0)
+      highline (~> 1.5)
+      i18n
     bcrypt (3.1.10)
     bourbon (4.2.3)
       sass (~> 3.4)
@@ -218,7 +222,7 @@ GEM
       ruby_parser (~> 3.5)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
-    httparty (0.13.4)
+    httparty (0.13.5)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     i18n (0.7.0)
@@ -444,6 +448,7 @@ DEPENDENCIES
   acts_as_commentable (= 3.0.1)
   acts_as_list
   audited-activerecord
+  bcdatabase
   cancancan (~> 1.10)
   capistrano
   capistrano-ext

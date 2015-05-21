@@ -43,6 +43,7 @@ gem "sqlite3"
 group :production do
   gem 'activerecord-oracle_enhanced-adapter', github: 'rsim/oracle-enhanced', branch: 'rails42'
   gem 'ruby-oci8'
+  gem 'bcdatabase'
 end
 
 # Gems used only for assets and not required
