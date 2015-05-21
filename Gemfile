@@ -35,6 +35,7 @@ gem 'therubyracer'
 gem "daemons"
 gem "audited-activerecord"
 gem 'httparty'
+gem 'zeroclipboard-rails'
 
 # required for packaging (specifically asset precompilation during packaging)
 gem "sqlite3"
@@ -62,7 +63,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem "rspec"
   gem 'rspec-rails', "2.14.0"
-  gem 'rb-readline', '~> 0.4.2'
+  gem 'rb-readline'
   gem "spork", "> 0.9.0.rc", :require => false
   gem "factory_girl", "2.2.0"
   gem "factory_girl_rails"

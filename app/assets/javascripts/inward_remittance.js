@@ -28,4 +28,6 @@ $(document).ready(function(){
     changeYear: true,
     yearRange: "-70:+10"
   });
+  var clip1 = new ZeroClipboard($("#d_clip_button1"))
+  var clip2 = new ZeroClipboard($("#d_clip_button2"))
 });

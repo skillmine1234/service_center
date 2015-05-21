@@ -146,7 +146,10 @@
     %h3 Request
     #error_message{:style => 'color:red'}
   .modal-body{:style => "max-height:450px;"}
-    %pre.request_text{:style => 'word-wrap: break-word'}
+    .demo-area
+      %button#d_clip_button1.my_clip_button1{"data-clipboard-target" => "request_text"}
+        %b Copy To Clipboard...
+    %pre#request_text{:style => 'word-wrap: break-word'}
       = @inward_remittance.inw_audit_log.try(:request_bit)
 #replyText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
@@ -154,5 +157,8 @@
     %h3 Reply
     #error_message{:style => 'color:red'}
   .modal-body{:style => "max-height:450px;"}
-    %pre.reply_text{:style => 'word-wrap: break-word'}
+    .demo-area
+      %button#d_clip_button2.my_clip_button2{"data-clipboard-target" => "reply_text"}
+        %b Copy To Clipboard...
+    %pre#reply_text{:style => 'word-wrap: break-word'}
       = @inward_remittance.inw_audit_log.try(:reply_bit)
