@@ -44,6 +44,8 @@ group :production do
   gem 'activerecord-oracle_enhanced-adapter', github: 'rsim/oracle-enhanced', branch: 'rails42'
   gem 'ruby-oci8'
   gem 'bcdatabase'
+  gem 'passenger'
+  gem 'rails_12factor'
 end
 
 # Gems used only for assets and not required
