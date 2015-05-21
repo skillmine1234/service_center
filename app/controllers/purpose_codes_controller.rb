@@ -12,11 +12,12 @@ class PurposeCodesController < ApplicationController
 
   def create
     @purpose_code = PurposeCode.new(params[:purpose_code])
+    @purpose_code.disallowed_rem_types=@purpose_code.convert_disallowed_rem_types_to_string(params[:purpose_code][:disallowed_rem_types])
+    @purpose_code.disallowed_bene_types=@purpose_code.convert_disallowed_bene_types_to_string(params[:purpose_code][:disallowed_bene_types])
     if !@purpose_code.valid?
       render "new"
     else
       @purpose_code.created_by = current_user.id
-      #puts @purpose_code.attributes
       @purpose_code.save
       flash[:alert] = 'Purpose Code successfuly created'
       redirect_to @purpose_code
@@ -28,13 +29,15 @@ class PurposeCodesController < ApplicationController
   end
 
   def update
+    puts params
     @purpose_code = PurposeCode.find_by_id(params[:id])
     @purpose_code.attributes = params[:purpose_code]
+   @purpose_code.disallowed_rem_types=@purpose_code.convert_disallowed_rem_types_to_string(params[:purpose_code][:disallowed_rem_types])
+   @purpose_code.disallowed_bene_types=@purpose_code.convert_disallowed_bene_types_to_string(params[:purpose_code][:disallowed_bene_types])
     if !@purpose_code.valid?
       render "edit"
     else
       @purpose_code.updated_by = current_user.id
-      #puts @purpose_code.attributes
       @purpose_code.save
       flash[:alert] = 'Purpose Code successfuly modified'
       redirect_to @purpose_code
@@ -63,8 +66,9 @@ class PurposeCodesController < ApplicationController
   private
 
   def purpose_code_params
-    params.require(:purpose_code).permit(:code, :created_by, :daily_txn_limit, :description, :disallowed_bene_types, 
-                                         :disallowed_rem_types, :is_enabled, :lock_version, :txn_limit, :updated_by)
+    params.require(:purpose_code).permit(:code, :created_by, :daily_txn_limit, :description, {:disallowed_bene_types => []}, 
+                                         {:disallowed_rem_types => []}, :is_enabled, :lock_version, :txn_limit, :updated_by)
   end
+  
 end
 

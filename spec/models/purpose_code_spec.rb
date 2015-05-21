@@ -18,9 +18,21 @@ describe PurposeCode do
   
   context 'disallowed_rem_and_bene_types'do
     it 'should be a string' do
-      purpose_code = Factory(:purpose_code, :disallowed_bene_types => ["I","N"], :disallowed_rem_types => ["I","N"])
-      purpose_code.disallowed_rem_types.should == "I,N"
-      purpose_code.disallowed_bene_types.should == "I,N"
+      purpose_code= Factory.build(:purpose_code)
+      purpose_code.convert_disallowed_rem_types_to_string(["I","N"]).should == "I,N"
+      purpose_code.convert_disallowed_bene_types_to_string(["I","N"]).should == "I,N"
     end
+    
+    it 'should be an array' do
+      purpose_code= Factory.build(:purpose_code, :disallowed_rem_types => "I,N", :disallowed_bene_types => "I,N" )
+      purpose_code.convert_disallowed_rem_types_to_array.should == ["I","N"]
+      purpose_code.convert_disallowed_bene_types_to_array.should == ["I","N"]
+    end
+    
+    it 'should show values on show page' do
+      purpose_code= Factory.build(:purpose_code, :disallowed_rem_types => "I,N")
+      purpose_code.value_for_disallowed_bene_and_rem_types_on_show_page("I,N").should == "Individual,Non-Individual"
+    end
+    
   end
 end
