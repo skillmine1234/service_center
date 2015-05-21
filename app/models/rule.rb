@@ -11,14 +11,14 @@ class Rule < ActiveRecord::Base
   end
 
   def formated_pattern_individuals
-    pattern_individuals.gsub(",","\r\n")
+    pattern_individuals.gsub(",","\r\n") rescue nil
   end
 
   def formated_pattern_corporates
-    pattern_corporates.gsub(",","\r\n")
+    pattern_corporates.gsub(",","\r\n") rescue nil
   end
 
   def formated_pattern_beneficiaries
-    pattern_beneficiaries.gsub(",","\r\n")
+    pattern_beneficiaries.gsub(",","\r\n") rescue nil
   end  
 end
