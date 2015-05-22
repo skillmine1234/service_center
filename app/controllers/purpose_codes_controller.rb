@@ -29,7 +29,6 @@ class PurposeCodesController < ApplicationController
   end
 
   def update
-    puts params
     @purpose_code = PurposeCode.find_by_id(params[:id])
     @purpose_code.attributes = params[:purpose_code]
    @purpose_code.disallowed_rem_types=@purpose_code.convert_disallowed_rem_types_to_string(params[:purpose_code][:disallowed_rem_types])

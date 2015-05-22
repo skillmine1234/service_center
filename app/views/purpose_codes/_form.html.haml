@@ -32,12 +32,12 @@
         = error_message_for(@purpose_code, :daily_txn_limit, :prepend_text => "")
     .control-group
       = f.label :disallowed_rem_types, "Disallowed Remitter Types", :class => 'control-label'
-      = f.select :disallowed_rem_types, options_for_select(PurposeCode.options_for_bene_and_rem_types, @purpose_code.convert_disallowed_rem_types_to_array), {}, {:multiple => true}
+      = f.select :disallowed_rem_types, options_for_select(PurposeCode.options_for_bene_and_rem_types, convert_options_to_array(@purpose_code.disallowed_rem_types)), {}, {:multiple => true}
       #msg-error
         = error_message_for(@purpose_code, :disallowed_rem_types, :prepend_text => "")
     .control-group
       = f.label :disallowed_bene_types, "Disallowed Beneficiary Types", :class => 'control-label'
-      = f.select :disallowed_bene_types, options_for_select(PurposeCode.options_for_bene_and_rem_types, @purpose_code.convert_disallowed_bene_types_to_array),{}, { :multiple => true}
+      = f.select :disallowed_bene_types, options_for_select(PurposeCode.options_for_bene_and_rem_types, convert_options_to_array(@purpose_code.disallowed_bene_types)),{}, { :multiple => true}
       #msg-error
         = error_message_for(@purpose_code, :disallowed_bene_types, :prepend_text => "")
   .form-actions

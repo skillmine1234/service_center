@@ -10,22 +10,12 @@ class PurposeCode < ActiveRecord::Base
     [['Individual','I'],['Non-Individual','N']]
   end
   
-  def convert_disallowed_rem_types_to_array
-    if (self.disallowed_rem_types.is_a? String)
-      self.disallowed_rem_types=self.disallowed_rem_types.split(',')
-    end
-  end
-  
-  def convert_disallowed_bene_types_to_array
-    if (self.disallowed_bene_types.is_a? String)
-      self.disallowed_bene_types=self.disallowed_bene_types.split(',')
-    end
-  end
-  
   def convert_disallowed_bene_types_to_string(value)
     if (value.is_a? Array)
       value.reject!(&:blank?)
       self.disallowed_bene_types=value.join(',')
+    else 
+      ""
     end
   end 
   
@@ -33,17 +23,9 @@ class PurposeCode < ActiveRecord::Base
     if (value.is_a? Array)
       value.reject!(&:blank?)
       self.disallowed_rem_types=value.join(',')
+    else 
+      ""
     end
   end  
-  
-  def value_for_disallowed_bene_and_rem_types_on_show_page(value)
-    if (value == "I,N")
-      "Individual,Non-Individual"
-    elsif (value == "I")
-      "Individual"
-    else
-      "Non-Individual"
-    end
-  end
 
 end
