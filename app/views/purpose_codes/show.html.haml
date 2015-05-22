@@ -3,6 +3,8 @@
     #form-details
       %h3 Purpose Code Details 
       %br
+      %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
+        = link_to 'Edit', edit_purpose_code_path
       %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
         - if !@purpose_code.nil?
           %tr
@@ -48,13 +50,13 @@
           %tr
             %td.label Disallowed Remitter Types
             %td.value
-              = @purpose_code.disallowed_rem_types
+              = disallowed_bene_and_rem_types_on_show_page(@purpose_code.disallowed_rem_types)
             %td#msg-error
               = error_message_for(@purpose_code, :disallowed_rem_types, :prepend_text => "")
           %tr
             %td.label Disallowed Beneficiary Types
             %td.value
-              = @purpose_code.disallowed_bene_types
+              = disallowed_bene_and_rem_types_on_show_page(@purpose_code.disallowed_bene_types)
             %td#msg-error
               = error_message_for(@purpose_code, :disallowed_bene_types, :prepend_text => "")
           %tr
