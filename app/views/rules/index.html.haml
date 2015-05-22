@@ -1,0 +1,49 @@
+%br
+= link_to 'New Rule', new_rule_path
+%br
+%br
+%h1 Listing rules
+%br
+= "Total Count: #{@rules_count}"
+%br
+= will_paginate @rules
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      = "Disallowed Keywords in Name for Individuals"
+    %th{:style=>'text-align:left; background-color: lightblue;'} 
+      = "Required Keywords in Name for Corporates"
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      = "Disallowed Keywords in Name for Beneficiaries"
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Created by
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Updated by
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Created At
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Updated At
+  .tbody
+    - @rules.each do |rule|
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', rule
+        %td{:style=>'text-align:left;'}
+          = link_to 'Edit', edit_rule_path(rule)
+        %td{:style=>'text-align:left;'}
+          = rule.pattern_individuals
+        %td{:style=>'text-align:left;'}
+          = rule.pattern_corporates
+        %td{:style=>'text-align:left;'}
+          = rule.pattern_beneficiaries
+        %td{:style=>'text-align:left;'}
+          = rule.created_user.try(:username)
+        %td{:style=>'text-align:left;'}
+          = rule.updated_user.try(:username)
+        %td{:style=>'text-align:left;'}
+          = rule.created_at.strftime("%d/%m/%Y %I:%M%p")
+        %td{:style=>'text-align:left;'}
+          = rule.updated_at.strftime("%d/%m/%Y %I:%M%p")

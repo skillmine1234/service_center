@@ -1,7 +1,7 @@
 = semantic_form_for [:admin, @user] do |f|
   = f.inputs "User Details" do
     = f.input :username , :label=>"User Id"
-    - unless CONFIG[:authenticate_devise_with_ldap]
+    - unless ENV['DEVISE_AUTHENTICATE_WITH_LDAP'] == "true"
       = f.input :first_name
       = f.input :last_name
       = f.input :email

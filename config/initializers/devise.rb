@@ -6,7 +6,7 @@ Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
-  if CONFIG[:authenticate_devise_with_ldap]
+  if ENV['DEVISE_AUTHENTICATE_WITH_LDAP'] == "true"
     config.ldap_logger = true
     config.ldap_create_user = false
     config.ldap_update_password = false

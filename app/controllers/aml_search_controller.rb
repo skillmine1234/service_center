@@ -24,13 +24,13 @@ class AmlSearchController < ApplicationController
   def results
     @params = params[:search_params]
     @search_params = search_params(params[:search_params])
-    results = get_response_from_api(CONFIG[:aml_search_url] + @search_params) rescue []
+    results = get_response_from_api(ENV['CONFIG_URL_AML_SEARCH'] + @search_params) rescue []
     @results_count = results.count rescue 0
     @results = results.paginate(:per_page => 10, :page => params[:page]) unless results.nil?
   end
 
   def search_result
-    results = get_response_from_api(CONFIG[:aml_search_url] + params[:search_params]) rescue []
+    results = get_response_from_api(ENV['CONFIG_URL_AML_SEARCH'] + params[:search_params]) rescue []
     @result = results[params[:index].to_i] rescue nil
     identities = find_values(@result["identities"]["numIdentities"],@result["identities"]["identity"])
     @identities = identities.paginate(:per_page => 4, :page => params[:identities_page]) 

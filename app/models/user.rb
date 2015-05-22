@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
     :case_sensitive => false
   }
 
-  if CONFIG[:authenticate_devise_with_ldap]
+  if ENV['DEVISE_AUTHENTICATE_WITH_LDAP'] == "true"
     devise :ldap_authenticatable, :trackable
     before_create :get_ldap_name
   else
@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
   end
 
   def sync_from_ldap
-    if CONFIG[:authenticate_devise_with_ldap]
+      if ENV['DEVISE_AUTHENTICATE_WITH_LDAP'] == "true"
       self.first_name = Devise::LdapAdapter.get_ldap_param(self.username, 'givenname') rescue nil
       self.last_name = Devise::LdapAdapter.get_ldap_param(self.username, 'sn') rescue nil
       self.email = Devise::LdapAdapter.get_ldap_param(self.username, 'mail') rescue "#{username}@ratnakarbank.in"

@@ -1,8 +1,5 @@
 source 'https://rubygems.org'
-if RUBY_VERSION =~ /1.9/
-  Encoding.default_external = Encoding::UTF_8
-  Encoding.default_internal = Encoding::UTF_8
-end
+ruby "2.2.2"
 gem 'roo'
 gem "flot-rails"
 gem 'rails', '4.2.0'
@@ -31,19 +28,27 @@ gem 'turnout'
 gem 'delayed_job_active_record'
 gem 'rools', '0.4.1', :git=>'https://github.com/quantiguous/rools'
 gem 'devise_security_extension'
-gem 'secure_headers', require: 'secure_headers'
+gem 'secure_headers'
 gem 'acts_as_list'
 gem 'activeadmin-sortable'
 gem 'therubyracer'
 gem "daemons"
 gem "audited-activerecord"
 gem 'httparty'
-# Used only if oracle db is being used
+gem 'zeroclipboard-rails'
 
-group :oracle do
+# required for packaging (specifically asset precompilation during packaging)
+gem "sqlite3"
+
+# oracle is required only in production, CI tools run against sqlite3
+group :production do
   gem 'activerecord-oracle_enhanced-adapter', github: 'rsim/oracle-enhanced', branch: 'rails42'
   gem 'ruby-oci8'
+  gem 'bcdatabase'
+  gem 'passenger'
+  gem 'rails_12factor'
 end
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -55,10 +60,10 @@ end
 
 group :development, :test do
   gem 'sunspot_solr'
-  gem "sqlite3"
+  gem 'dotenv-rails'
   gem "rspec"
   gem 'rspec-rails', "2.14.0"
-  gem 'rb-readline', '~> 0.4.2'
+  gem 'rb-readline'
   gem "spork", "> 0.9.0.rc", :require => false
   gem "factory_girl", "2.2.0"
   gem "factory_girl_rails"
