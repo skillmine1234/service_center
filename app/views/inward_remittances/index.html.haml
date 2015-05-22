@@ -10,8 +10,8 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Request No
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Partner Code
+    %th{:style=>'Text-align:left; background-color: lightblue;'}
+      Partner Name
     %th{:style=>'Text-align:left; background-color: lightblue;'}
       Remitter
     %th{:style=>'text-align:left; background-color: lightblue;'}
@@ -26,6 +26,8 @@
       Review Required ?
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Attempt No
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Transaction Status
   .tbody
     - @inward_remittances.each do |inward_remittance|
       %tr
@@ -34,7 +36,7 @@
         %td{:style=>'text-align:left;'}
           = inward_remittance.req_no
         %td{:style=>'text-align:left;'}
-          = inward_remittance.partner_code
+          = inward_remittance.partner.try(:name)
         %td{:style=>'text-align:left;'}
           = inward_remittance.rmtr_full_name
         %td{:style=>'text-align:left;'}
@@ -49,3 +51,5 @@
           = inward_remittance.review_reqd
         %td{:style=>'text-align:left;'}
           = inward_remittance.attempt_no
+        %td{:style=>'text-align:left;'}
+          = inward_remittance.status_code
