@@ -3,6 +3,8 @@
     #form-details
       %h3 Partner Details 
       %br
+      %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
+        = link_to 'Edit', edit_partner_path
       %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
         - if !@partner.nil?
           %tr
@@ -100,11 +102,11 @@
             %td#msg-error
               = error_message_for(@partner, :allow_neft, :prepend_text => "")
           %tr
-            %td.label RGTS Allowed?
+            %td.label RTGS Allowed?
             %td
-              = @partner.allow_rgts
+              = @partner.allow_rtgs
             %td#msg-error
-              = error_message_for(@partner, :allow_rgts, :prepend_text => "")
+              = error_message_for(@partner, :allow_rtgs, :prepend_text => "")
           %tr
             %td.label IMPS Allowed
             %td
@@ -135,4 +137,7 @@
               = @partner.updated_at.strftime("%d/%m/%Y %I:%M%p")
             %td#msg-error
               = error_message_for(@partner, :updated_at, :prepend_text => "")
+    %p{:style => 'padding-left:6px; padding-bottom:6px'}
       = link_to 'Back to partners', partners_path
+
+      
