@@ -36,7 +36,7 @@
       #msg-error
         = error_message_for(@partner, :account_ifsc, :prepend_text => "")
     .control-group
-      = f.label :transaction_hold_period, "*Transaction hold period", :class => 'control-label'
+      = f.label :transaction_hold_period, "*Transaction Hold Period", :class => 'control-label'
       = f.number_field :txn_hold_period_days, min: 1
       #msg-error
         = error_message_for(@partner, :txn_hold_period_days, :prepend_text => "")
@@ -46,7 +46,7 @@
       #msg-error
         = error_message_for(@partner, :identity_user_id, :prepend_text => "")
     .control-group
-      = f.label :low_balance_alert_at
+      = f.label :low_balance_alert_at, "Low Balance Alert At", :class => 'control-label'
       = f.text_field :low_balance_alert_at
       #msg-error
         = error_message_for(@partner, :low_balance_alert_at, :prepend_text => "")
@@ -82,7 +82,7 @@
       #msg-error
         = error_message_for(@partner, :allow_rgts, :prepend_text => "")
     .control-group
-      = f.label :imps_allowed, "IMPS Allowed", :class => 'control-label'
+      = f.label :imps_allowed, "IMPS Allowed?", :class => 'control-label'
       = f.select :allow_imps, [['Yes','Y'],['No','N']], :include_blank => "Select"
       #msg-error
         = error_message_for(@partner, :allow_imps, :prepend_text => "")
