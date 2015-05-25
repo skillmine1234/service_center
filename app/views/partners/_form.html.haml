@@ -21,7 +21,7 @@
       #msg-error
         = error_message_for(@partner, :tech_email_id, :prepend_text => "")
     .control-group
-      = f.label :operations_email_id, "Operations Email Id", :class => 'control-label'
+      = f.label :operations_email_id, "Operations Email ID", :class => 'control-label'
       = f.text_field :ops_email_id
       #msg-error
         = error_message_for(@partner, :ops_email_id, :prepend_text => "")
@@ -41,7 +41,7 @@
       #msg-error
         = error_message_for(@partner, :txn_hold_period_days, :prepend_text => "")
     .control-group
-      = f.label "Identity User Id"
+      = f.label :identity_user_id, "Identity User ID", :class => 'control-label'
       = f.text_field :identity_user_id
       #msg-error
         = error_message_for(@partner, :identity_user_id, :prepend_text => "")
