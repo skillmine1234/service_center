@@ -21,4 +21,8 @@ $(document).ready(function(){
   $("a.reply-link").on("click", function () {
     $('#replyText').modal();
   });
+
+  $("a.fault-link").on("click", function () {
+    $('#faultText').modal();
+  });
 });
