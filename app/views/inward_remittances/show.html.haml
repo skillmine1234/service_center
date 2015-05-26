@@ -2,6 +2,9 @@
   %h3
     Status:
     = @inward_remittance.status_code
+    %tr
+      - if @inward_remittance.status_code == "FAILED"
+        = link_to "Fault Text", "#", :class => 'fault-link', :href => "#faultText", :style => "font-weight:100"
   %h3
     Partner Reference No:
     = @inward_remittance.req_no
@@ -140,10 +143,6 @@
         %tr
           %td.label Review Pending
           %td= @inward_remittance.review_pending
-        %tr
-          - if @inward_remittance.status_code == "FAILED"
-            %td.label Fault Details
-            %td= link_to "Show Fault Text", "#", :class => 'fault-link', :href => "#faultText"
 #requestText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
@@ -173,11 +172,11 @@
     #error_message{:style => 'color:red'}
   .modal-body{:style => "max-height:450px;"}
     .demo-area
-      %button#d_clip_button2.my_clip_button2{"data-clipboard-target" => "fault_text"}
-        %b Copy To Clipboard...
     %pre#fault_text{:style => 'word-wrap: break-word'}
+    %table.table.no-border
       %tr
-        %td.label Fault Code
+        %td.label Fault Code: 
         %td= @inward_remittance.fault_code
-        %td.label Fault Reason
+      %tr
+        %td.label Fault Reason:
         %td= @inward_remittance.fault_reason
