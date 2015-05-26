@@ -16,6 +16,25 @@ describe InwardRemittancesController do
       inward_remittance = Factory(:inward_remittance)
       get :index
       assigns(:inward_remittances).should eq([inward_remittance])
+    end    
+
+    it "assigns all inward_remittances with particular request_no" do
+      inward_remittance = Factory(:inward_remittance)
+      get :index, {:req_no => inward_remittance.req_no}
+      assigns(:inward_remittances).should eq([inward_remittance])
+    end
+    
+    it "assigns all inward_remittances with highest attempt_no for particular request_no" do
+      inward_remittances = [Factory(:inward_remittance, :req_no => "TT0114", :attempt_no => 4, :partner_code => "PARTNER1")]
+      inward_remittances << Factory(:inward_remittance, :req_no => "TT0114", :attempt_no => 2, :partner_code => "PARTNER1")
+      inward_remittances << Factory(:inward_remittance, :req_no => "TT0114", :attempt_no => 3, :partner_code => "PARTNER1")
+      inward_remittances << Factory(:inward_remittance, :req_no => "TT0112", :attempt_no => 1, :partner_code => "PARTNER2")
+      
+      inward_remittances_with_max_attempt = [inward_remittances[0]]
+      inward_remittances_with_max_attempt << inward_remittances[3]
+            
+      get :index
+      expect(assigns(:inward_remittances)).to match_array(inward_remittances_with_max_attempt)
     end
   end
 
