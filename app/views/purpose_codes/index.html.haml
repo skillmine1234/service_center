@@ -3,6 +3,11 @@
 %br
 %br
 %h1 Listing Purpose Codes
+%h2.collapsible
+  Advanced Search
+  %span.caret
+.collapsible-content
+  = render :partial => 'advanced_search'
 %br
 = "Total Count: #{@purpose_codes_count}"
 %br

@@ -3,11 +3,26 @@ class PurposeCode < ActiveRecord::Base
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
 
-  validates_presence_of :code, :description, :is_enabled, :txn_limit, :daily_txn_limit
+  validates_presence_of :code, :description, :is_enabled, :txn_limit, :daily_txn_limit, :mtd_txn_cnt_self, :rbi_code
   validates_uniqueness_of :code
-  
+  validates :code, format: {with: /\A[A-Za-z0-9]+\z/}, length: {maximum: 5, minimum: 5}
+  validates :rbi_code, format: {with: /\A[A-Za-z0-9]+\z/}, length: {maximum: 5, minimum: 5}
+  validates :txn_limit, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => '9e20'.to_f, :allow_nil => true }
+  validates :mtd_txn_cnt_self, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => '9e20'.to_f, :allow_nil => true }
+  validates :mtd_txn_limit_self, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => '9e20'.to_f, :allow_nil => true }
+  validates :mtd_txn_cnt_sp, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => '9e20'.to_f, :allow_nil => true }
+  validates :mtd_txn_limit_sp, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => '9e20'.to_f, :allow_nil => true }
+  validate :check_values
+
+  def check_values
+    if !mtd_txn_limit_self.nil? and !txn_limit.nil? and !mtd_txn_limit_sp.nil?
+      errors.add(:mtd_txn_limit_self,"is less than transaction limit") unless mtd_txn_limit_self >= txn_limit.to_f
+      errors.add(:mtd_txn_limit_sp,"is less than transaction limit") unless mtd_txn_limit_sp >= txn_limit.to_f
+    end
+  end
+
   def self.options_for_bene_and_rem_types
-    [['Individual','I'],['Non-Individual','N']]
+    [['Individual','I'],['Customer','C']]
   end
   
   def convert_disallowed_bene_types_to_string(value)
