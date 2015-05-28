@@ -30,6 +30,6 @@ class WhitelistedIdentitiesController < ApplicationController
     params.require(:whitelisted_identity).permit(:created_by, :first_name, :first_used_with_txn_id, :full_name, :id_country, 
                                                  :id_issue_date, :id_expiry_date, :id_number, :id_type, :is_verified, :last_name, 
                                                  :last_used_with_txn_id, :lock_version, :partner_id, :times_used,
-                                                 :updated_by, :verified_at, :verified_by, :attachments_attributes)
+                                                 :updated_by, :verified_at, :verified_by, {:attachments_attributes => [:note, :user_id, :file, :_destroy]})
   end
 end
