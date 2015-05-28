@@ -3,6 +3,11 @@
 %br
 %br
 %h1 Listing partners
+%h2.collapsible
+  Advanced Search
+  %span.caret
+.collapsible-content
+  = render :partial => 'advanced_search'
 %br
 = "Total Count: #{@partners_count}"
 %br
@@ -42,9 +47,9 @@
         %td{:style=>'text-align:left;'}
           = partner.name
         %td{:style=>'text-align:left;'}
-          = partner.tech_email_id
+          = partner.tech_email_id.split(';').first rescue nil
         %td{:style=>'text-align:left;'}
-          = partner.ops_email_id
+          = partner.ops_email_id.split(';').first rescue nil
         %td{:style=>'text-align:left;'}
           = partner.account_no
         %td{:style=>'text-align:left;'}

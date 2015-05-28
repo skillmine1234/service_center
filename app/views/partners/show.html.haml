@@ -24,6 +24,12 @@
             %td#msg-error
               = error_message_for(@partner, :code, :prepend_text => "")
           %tr
+            %td.label Enabled ?
+            %td.value
+              = @partner.enabled
+            %td#msg-error
+              = error_message_for(@partner, :enabled, :prepend_text => "")
+          %tr
             %td.label Name
             %td.value
               = @partner.name

@@ -5,6 +5,7 @@ class PartnersController < ApplicationController
   before_filter :block_inactive_user!
   respond_to :json
   include ApplicationHelper
+  include PartnerHelper
 
   def new
     @partner = Partner.new
@@ -48,7 +49,11 @@ class PartnersController < ApplicationController
   end
 
   def index
-    partners = Partner.order("id desc")
+    if params[:advanced_search].present?
+      partners = find_partners(params).order("id desc")
+    else
+      partners = Partner.order("id desc")
+    end
     @partners_count = partners.count
     @partners = partners.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
@@ -61,11 +66,12 @@ class PartnersController < ApplicationController
   private
 
   def partner_params
-    params.require(:partner).permit(:account_ifsc, :account_no, :allow_imps, :allow_neft, :allow_rgts, 
+    params.require(:partner).permit(:account_ifsc, :account_no, :allow_imps, :allow_neft, :allow_rtgs, 
                                     :beneficiary_email_allowed, :beneficiary_sms_allowed, :code, :created_by, 
                                     :identity_user_id, :low_balance_alert_at, :name, :ops_email_id, 
                                     :remitter_email_allowed, :remitter_sms_allowed, :tech_email_id, 
-                                    :txn_hold_period_days, :updated_by, :lock_version)
+                                    :txn_hold_period_days, :updated_by, :lock_version, :enabled, :customer_id,
+                                    :country, :address_line1, :address_line2, :address_line3,:mmid, :mobile_no)
   end
 end
 

@@ -11,20 +11,30 @@
       #msg-error
         = error_message_for(@partner, :code, :prepend_text => "")
     .control-group
+      = f.label :enabled, :class => 'control-label'
+      = f.check_box :enabled, {:checked => "checked"},"Y","N"
+      #msg-error
+        = error_message_for(@partner, :enabled, :prepend_text => "")
+    .control-group
       = f.label :name
       = f.text_field :name
       #msg-error
         = error_message_for(@partner, :name, :prepend_text => "")
     .control-group
       = f.label :tech_email_id, "Tech Email", :class => 'control-label'
-      = f.text_field :tech_email_id
+      = f.text_field :tech_email_id, :placeholder => "Enter Email IDs seperated by ;"
       #msg-error
         = error_message_for(@partner, :tech_email_id, :prepend_text => "")
     .control-group
       = f.label :operations_email_id, "Operations Email ID", :class => 'control-label'
-      = f.text_field :ops_email_id
+      = f.text_field :ops_email_id, :placeholder => "Enter Email IDs seperated by ;"
       #msg-error
         = error_message_for(@partner, :ops_email_id, :prepend_text => "")
+    .control-group
+      = f.label :customer_id, "*Customer ID", :class => 'control-label'
+      = f.text_field :customer_id
+      #msg-error
+        = error_message_for(@partner, :customer_id, :prepend_text => "")
     .control-group
       = f.label :account_no
       = f.text_field :account_no
@@ -36,7 +46,17 @@
       #msg-error
         = error_message_for(@partner, :account_ifsc, :prepend_text => "")
     .control-group
-      = f.label :transaction_hold_period, "*Transaction Hold Period", :class => 'control-label'
+      = f.label :mmid, "MMID", :class => 'control-label'
+      = f.text_field :mmid, :maxlength => 7
+      #msg-error
+        = error_message_for(@partner, :mmid, :prepend_text => "")
+    .control-group
+      = f.label :mobile_no, "Mobile No", :class => 'control-label'
+      = f.text_field :mobile_no, :maxlength => 10
+      #msg-error
+        = error_message_for(@partner, :mobile_no, :prepend_text => "")
+    .control-group
+      = f.label :transaction_hold_period, "*Transaction Hold Period In Days", :class => 'control-label'
       = f.number_field :txn_hold_period_days, min: 1
       #msg-error
         = error_message_for(@partner, :txn_hold_period_days, :prepend_text => "")
@@ -50,42 +70,62 @@
       = f.text_field :low_balance_alert_at
       #msg-error
         = error_message_for(@partner, :low_balance_alert_at, :prepend_text => "")
-  .form-extended
     .control-group
       = f.label :remitter_sms_allowed, "Remitter SMS Allowed?", :class => 'control-label'
-      = f.select :remitter_sms_allowed, [['Yes','Y'],['No','N']], :include_blank => "Select"
+      = f.check_box :remitter_sms_allowed, {},"Y","N"
       #msg-error
         = error_message_for(@partner, :remitter_sms_allowed, :prepend_text => "")
     .control-group
       = f.label :remitter_email_allowed, "Remitter Email Allowed?", :class => 'control-label'
-      = f.select :remitter_email_allowed, [['Yes','Y'],['No','N']], :include_blank => "Select"
+      = f.check_box :remitter_email_allowed, {},"Y","N"
       #msg-error
         = error_message_for(@partner, :remitter_email_allowed, :prepend_text => "")
+  .form-extended
     .control-group
       = f.label :benificiary_sms_allowed, "Beneficiary SMS Allowed?", :class => 'control-label'
-      = f.select :beneficiary_sms_allowed, [['Yes','Y'],['No','N']], :include_blank => "Select"
+      = f.check_box :beneficiary_sms_allowed, {},"Y","N"
       #msg-error
         = error_message_for(@partner, :beneficiary_sms_allowed, :prepend_text => "")
     .control-group
       = f.label :beneficiary_email_allowed, "Beneficiary Email Allowed?", :class => 'control-label'
-      = f.select :beneficiary_email_allowed, [['Yes','Y'],['No','N']], :include_blank => "Select"
+      = f.check_box :beneficiary_email_allowed, {},"Y","N"
       #msg-error
         = error_message_for(@partner, :beneficiary_email_allowed, :prepend_text => "")
     .control-group
       = f.label :neft_allowd, "NEFT Allowed?", :class => 'control-label'
-      = f.select :allow_neft, [['Yes','Y'],['No','N']], :include_blank => "Select"
+      = f.check_box :allow_neft, {:checked => "checked"},"Y","N"
       #msg-error
         = error_message_for(@partner, :allow_neft, :prepend_text => "")
     .control-group
       = f.label :rtgs_allowed, "RTGS Allowed?", :class => 'control-label'
-      = f.select :allow_rtgs, [['Yes','Y'],['No','N']], :include_blank => "Select"
+      = f.check_box :allow_rtgs, {},"Y","N"
       #msg-error
         = error_message_for(@partner, :allow_rgts, :prepend_text => "")
     .control-group
       = f.label :imps_allowed, "IMPS Allowed?", :class => 'control-label'
-      = f.select :allow_imps, [['Yes','Y'],['No','N']], :include_blank => "Select"
+      = f.check_box :allow_imps, {:checked => "checked"},"Y","N"
       #msg-error
         = error_message_for(@partner, :allow_imps, :prepend_text => "")
+    .control-group
+      = f.label :country, nil, :class => 'control-label'
+      = country_select("partner", "country", except: ["IN"], selected: 'US')
+      #msg-error
+        = error_message_for(@partner, :country, :prepend_text => "")
+    .control-group
+      = f.label :address_line1, nil, :class => 'control-label'
+      = f.text_area :address_line1, :maxlength => 255
+      #msg-error
+        = error_message_for(@partner, :address_line1, :prepend_text => "")
+    .control-group
+      = f.label :address_line2, nil, :class => 'control-label'
+      = f.text_area :address_line2, :maxlength => 255
+      #msg-error
+        = error_message_for(@partner, :address_line2, :prepend_text => "")
+    .control-group
+      = f.label :address_line3, nil, :class => 'control-label'
+      = f.text_area :address_line3, :maxlength => 255
+      #msg-error
+        = error_message_for(@partner, :address_line3, :prepend_text => "")
   .form-actions
     = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_partner'
     = link_to :Cancel,'/partners', :name => 'cancel', :class=>"cancel btn"
