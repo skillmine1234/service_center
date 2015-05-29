@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150528113733) do
+ActiveRecord::Schema.define(version: 20150529043852) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -161,6 +161,18 @@ ActiveRecord::Schema.define(version: 20150528113733) do
     t.integer "inw_remittance_id"
   end
 
+  create_table "inw_remittance_rules", force: :cascade do |t|
+    t.string   "pattern_individuals",   limit: 4000
+    t.string   "pattern_corporates",    limit: 4000
+    t.string   "pattern_beneficiaries", limit: 4000
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "created_by"
+    t.string   "updated_by"
+    t.integer  "lock_version",                       default: 0, null: false
+    t.string   "pattern_salutations",   limit: 2000
+  end
+
   create_table "inward_remittances", force: :cascade do |t|
     t.string   "req_no",                                         null: false
     t.string   "req_version",         limit: 10,                 null: false
@@ -300,17 +312,6 @@ ActiveRecord::Schema.define(version: 20150528113733) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], name: "index_roles_on_name"
-
-  create_table "rules", force: :cascade do |t|
-    t.string   "pattern_individuals",   limit: 4000
-    t.string   "pattern_corporates",    limit: 4000
-    t.string   "pattern_beneficiaries", limit: 4000
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "created_by"
-    t.string   "updated_by"
-    t.integer  "lock_version",                       default: 0, null: false
-  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                             default: "",    null: false

@@ -8,7 +8,7 @@
           %tr
             %td.label Version
             %td.value
-              = link_to "#{audit_count(@rule)}", :controller => :rules, :action => :audit_logs, :version_id => audit_count(@rule), :id => @rule.id
+              = link_to "#{audit_count(@rule)}", :controller => :inw_remittance_rules, :action => :audit_logs, :version_id => audit_count(@rule), :id => @rule.id
           %tr
             %td.label Form Errors
             %td.value
@@ -34,6 +34,12 @@
             %td#msg-error
               = error_message_for(@rule, :pattern_beneficiaries, :prepend_text => "")
           %tr
+            %td.label Known Salutions For Individuals
+            %td.value
+              = @rule.pattern_salutations
+            %td#msg-error
+              = error_message_for(@rule, :pattern_salutations, :prepend_text => "")
+          %tr
             %td.label Created By
             %td
               = @rule.created_user.try(:username)
@@ -57,4 +63,4 @@
               = @rule.updated_at.strftime("%d/%m/%Y %I:%M%p")
             %td#msg-error
               = error_message_for(@rule, :updated_at, :prepend_text => "")
-      = link_to 'Back to rules', rules_path
+      = link_to 'Back to Dashboard', root_path
