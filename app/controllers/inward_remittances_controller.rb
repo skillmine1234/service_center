@@ -16,7 +16,8 @@ class InwardRemittancesController < ApplicationController
       inward_remittances = inward_remittances.where(:req_no => params[:req_no]) 
     else
       maxQuery = InwardRemittance.select("max(attempt_no) as attempt_no,req_no").group(:req_no)      
-      inward_remittances = InwardRemittance.joins("inner join (#{maxQuery.to_sql}) a on a.req_no=inward_remittances.req_no and a.attempt_no=inward_remittances.attempt_no")
+      inward_remittances = InwardRemittance.joins("inner join (#{maxQuery.to_sql}) a on a.req_no=inward_remittances.req_no and a.attempt_no=inward_remittances.attempt_no").order("inward_remittances.id DESC")
+      p "0------------#{inward_remittances.to_sql}"
     end
     @inward_remittances_count = inward_remittances.count
     @inward_remittances = inward_remittances.paginate(:per_page => 10, :page => params[:page]) rescue []
