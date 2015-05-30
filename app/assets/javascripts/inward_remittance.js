@@ -28,6 +28,16 @@ $(document).ready(function(){
     changeYear: true,
     yearRange: "-70:+10"
   });
-  var clip1 = new ZeroClipboard($("#d_clip_button1"))
-  var clip2 = new ZeroClipboard($("#d_clip_button2"))
+  var clip1 = new ZeroClipboard($("#d_clip_button1"));
+  var clip2 = new ZeroClipboard($("#d_clip_button2"));
+
+  $("#from_date").datepicker({
+    dateFormat: 'dd MM yy',
+    minDate: new Date(2001, 1 - 1, 1),
+  });
+
+  $("#to_date").datepicker({
+    dateFormat: 'dd MM yy',
+    minDate: new Date(2001, 1 - 1, 1),
+  });
 });

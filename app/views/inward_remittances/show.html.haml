@@ -1,33 +1,87 @@
-.ticket_header
-  %h3
-    Status:
-    = @inward_remittance.status_code
-    %tr
-      - if @inward_remittance.status_code == "FAILED"
-        = link_to "Fault Text", "#", :class => 'fault-link', :href => "#faultText", :style => "font-weight:100"
-  %h3
-    Partner Reference No:
-    = @inward_remittance.req_no
-  %h3 
-    Bank Reference No:
-    = @inward_remittance.rep_no
-  %h3
-    Attempt No:
-    = link_to @inward_remittance.attempt_no, inward_remittances_path({:req_no => @inward_remittance.req_no})
-  %h3
-    Partner Name:
-    = @inward_remittance.partner.name rescue "No Partner for Code #{@inward_remittance.partner_code}"  
-.form-horizontal.show_ticket
-  .form-main{:style=>'background-color: #F1F2F8; width: 55%'}
+.show_ticket
+  .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; display: inline-block;'}
+    %h3
+      Partner:
+      = @inward_remittance.partner_code 
+      = link_to @inward_remittance.partner.name , @inward_remittance.partner  rescue "No Partner for Code #{@inward_remittance.partner_code}" 
+    %h3
+      Request No:
+      = @inward_remittance.req_no
+    %h3
+      Attempt No:
+      = link_to @inward_remittance.attempt_no, inward_remittances_path({:req_no => @inward_remittance.req_no})
+    %h3
+      Request At:
+      =@inward_remittance.req_timestamp.strftime("%d/%m/%Y %I:%M%p")
+    %h3
+      Request XML:
+      = link_to "Show Request", "#", :class => 'request-link', :href => "#requestText"
+  .header-form-extended{:style=>'background-color: #ecf5fa; width: 50%; display: inline-block;'}
+    %h3
+      Status:
+      = @inward_remittance.status_code
+      %tr
+        - if @inward_remittance.status_code == "FAILED"
+          = link_to "Fault Text", "#", :class => 'fault-link', :href => "#faultText", :style => "font-weight:100"
+      %tr
+        - if !@inward_remittance.inward_remittances_lock.nil?
+          = "Locked"
+
+    %h3 
+      Reply No:
+      = @inward_remittance.rep_no
+    %h3 
+      Bank Reference No:
+      = @inward_remittance.bank_ref
+    %h3
+      Replied At:
+      = @inward_remittance.rep_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p")
+      = "(" + @inward_remittance.reply_time + " mins)"
+    %h3
+      Reply XML:
+      = link_to "Show Reply", "#", :class => 'reply-link', :href => "#replyText"
+
+  .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; display: inline-block;'}
     #ticket-details
-      %h3 Remitter Details
+      %h3 Transfer Details
+      %table.table.no-border
+        %tr
+          %td.label Purpose Code
+          - if @inward_remittance.purpose.nil?
+            %td= @inward_remittance.purpose_code
+          - else
+            %td= link_to @inward_remittance.purpose_code, @inward_remittance.purpose
+        %tr
+          %td.label Transfer Type
+          %td= @inward_remittance.transfer_type
+        - if @inward_remittance.req_transfer_type != @inward_remittance.transfer_type
+          %tr
+            %td.label Request Transfer Type
+            %td= @inward_remittance.transfer_type
+        %tr
+          %td.label Self Transfer?
+          %td= check_box_tag :transfer,@inward_remittance.is_self_transfer, @inward_remittance.self_transfer?, {:disabled => false}
+      %hr{:style=>'background-color: #F1F2F8; width: 220%'}    
+      %h3 
+        = "Remitter: " + "#{@inward_remittance.remitter_type}" + " (" 
+        = link_to @inward_remittance.rmtr_identity_count,:controller => :inward_remittances, :action => :remitter_identities, :id => @inward_remittance.id 
+        = " Identities)"
       %table.table.no-border
         %tr
           %td.label Name
           %td= @inward_remittance.rmtr_full_name
         %tr
           %td.label Address
-          %td= @inward_remittance.remitter_address
+          %td= @inward_remittance.rmtr_address1
+        %tr
+          %td.label 
+          %td= @inward_remittance.rmtr_address2
+        %tr
+          %td.label 
+          %td= @inward_remittance.rmtr_address3
+        %tr
+          %td.label Postal code
+          %td= @inward_remittance.rmtr_postal_code
         %tr
           %td.label City
           %td= @inward_remittance.rmtr_city
@@ -38,29 +92,50 @@
           %td.label Country
           %td= @inward_remittance.rmtr_country
         %tr
-          %td.label Postal code
-          %td= @inward_remittance.rmtr_postal_code
-        %tr
           %td.label Email ID
           %td= @inward_remittance.rmtr_email_id
         %tr
           %td.label Mobile No
           %td= @inward_remittance.rmtr_mobile_no
+  .header-form-extended{:style=>'background-color: #F1F2F8; width: 50%;  display: inline-block;'}
+    #ticket-details
+      %h3
+      .space{:style=>'height: 15px;'}
+      %table.table.no-border
         %tr
-          %td.label Type
-          %td= @inward_remittance.remitter_type
+          %td.label Transfer Amount
+          %td= @inward_remittance.transfer_amount
         %tr
-          %td.label Identities Count
-          %td= link_to @inward_remittance.rmtr_identity_count,:controller => :inward_remittances, :action => :remitter_identities, :id => @inward_remittance.id
-      %hr{:style=>'background-color: #F1F2F8; width: 220%'}
-      %h3 Beneficiary Details
+          %td.label Beneficiary Account No
+          %td= @inward_remittance.bene_account_no
+        %tr
+          %td.label Beneficiary Account IFSC
+          %td= @inward_remittance.bene_account_ifsc
+      - if @inward_remittance.req_transfer_type != @inward_remittance.transfer_type
+        .space{:style=>'height: 30px;'}
+      - else
+        .space{:style=>'height: 2px;'}
+      %hr{:style=>'background-color: #F1F2F8; width: 200%'}
+      %h3
+        = "Beneficiary: " + "#{@inward_remittance.beneficiary_type}" + " (" 
+        = link_to @inward_remittance.rmtr_identity_count,:controller => :inward_remittances, :action => :beneficiary_identities, :id => @inward_remittance.id
+        = " Identities)"
       %table.table.no-border
         %tr
           %td.label Name
           %td= @inward_remittance.bene_full_name
         %tr
           %td.label Address
-          %td= @inward_remittance.beneficiary_address
+          %td= @inward_remittance.bene_address1
+        %tr
+          %td.label 
+          %td= @inward_remittance.bene_address2
+        %tr
+          %td.label 
+          %td= @inward_remittance.bene_address3
+        %tr
+          %td.label Postal code
+          %td= @inward_remittance.bene_postal_code
         %tr
           %td.label City
           %td= @inward_remittance.bene_city
@@ -71,78 +146,17 @@
           %td.label Country
           %td= @inward_remittance.bene_country
         %tr
-          %td.label Postal code
-          %td= @inward_remittance.bene_postal_code
-        %tr
           %td.label Email ID
           %td= @inward_remittance.bene_email_id
         %tr
           %td.label Mobile No
           %td= @inward_remittance.bene_mobile_no
-        %tr
-          %td.label Type
-          %td= @inward_remittance.beneficiary_type
-        %tr
-          %td.label Identities Count
-          %td= link_to @inward_remittance.bene_identity_count, :controller => :inward_remittances, :action => :beneficiary_identities, :id => @inward_remittance.id
-  .form-extended{:style=>'background-color: #fafafa; width: 45%'}
-    #ticket-details
-      %h3 Transfer Details
-      %table.table.no-border
-        %tr
-          %td.label Beneficiary Account No
-          %td= @inward_remittance.bene_account_no
-        %tr
-          %td.label Beneficiary Account IFSC
-          %td= @inward_remittance.bene_account_ifsc
-        %tr
-          %td.label Transfer Type
-          %td= @inward_remittance.transfer_type
-        %tr
-          %td.label Transfer CCY
-          %td= @inward_remittance.transfer_amount
-        %tr
-          %td.label Remitter To Beneficiary Note
-          %td= @inward_remittance.rmtr_to_bene_note
-        %tr
-          %td.label Partner Code
-          %td= @inward_remittance.partner_code
-        %tr
-          %td.label Purpose Code
-          %td= @inward_remittance.purpose_code
-        %tr
-          %td.label Bank Reference Code
-          %td= @inward_remittance.bank_ref
-        %tr
-          %td.label Beneficiary Reference Code
-          %td= @inward_remittance.bene_ref
-      %hr{:style=>'background-color: #F1F2F8; width: 150%'}
-      %h3 Other Details
-      %table.table.no-border
-        %tr
-          %td.label Request
-          %td= link_to "Show Request", "#", :class => 'request-link', :href => "#requestText"
-        %tr
-          %td.label Reply
-          %td= link_to "Show Reply", "#", :class => 'reply-link', :href => "#replyText"
-        %tr
-          %td.label Request Version
-          %td= @inward_remittance.req_version
-        %tr
-          %td.label Request Date
-          %td= @inward_remittance.req_timestamp.strftime("%d/%m/%Y %I:%M%p")
-        %tr
-          %td.label Rep Version
-          %td= @inward_remittance.rep_version
-        %tr
-          %td.label Rep Date
-          %td= @inward_remittance.rep_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p")
-        %tr
-          %td.label Review Required
-          %td= @inward_remittance.review_reqd
-        %tr
-          %td.label Review Pending
-          %td= @inward_remittance.review_pending
+      .space{:style=>'height: 2px;'}
+  .header-form-main{:style=>'background-color: #ecf5fa; width: 100%; display: inline-block;'}
+    %table.table.no-border
+      %tr
+        %td.label Remitter To Beneficiary Note
+        %td= @inward_remittance.rmtr_to_bene_note
 #requestText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×

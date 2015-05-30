@@ -5,6 +5,7 @@ class InwardRemittancesController < ApplicationController
   before_filter :block_inactive_user!
   respond_to :json
   include ApplicationHelper
+  include InwardRemittanceHelper
 
   def show
     @inward_remittance = InwardRemittance.find_by_id(params[:id])
@@ -12,11 +13,15 @@ class InwardRemittancesController < ApplicationController
 
   def index
     inward_remittances = InwardRemittance.order("id desc")
-    if params[:req_no]
-      inward_remittances = inward_remittances.where(:req_no => params[:req_no]) 
+    if params[:advanced_search].present?
+      inward_remittances = find_inward_remittances(params).order("id desc")
     else
-      maxQuery = InwardRemittance.select("max(attempt_no) as attempt_no,req_no").group(:req_no)      
-      inward_remittances = InwardRemittance.joins("inner join (#{maxQuery.to_sql}) a on a.req_no=inward_remittances.req_no and a.attempt_no=inward_remittances.attempt_no")
+      if params[:req_no]
+        inward_remittances = inward_remittances.where(:req_no => params[:req_no]) 
+      else
+        maxQuery = InwardRemittance.select("max(attempt_no) as attempt_no,req_no").group(:req_no)      
+        inward_remittances = InwardRemittance.joins("inner join (#{maxQuery.to_sql}) a on a.req_no=inward_remittances.req_no and a.attempt_no=inward_remittances.attempt_no")
+      end
     end
     @inward_remittances_count = inward_remittances.count
     @inward_remittances = inward_remittances.paginate(:per_page => 10, :page => params[:page]) rescue []

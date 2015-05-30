@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150529043852) do
+ActiveRecord::Schema.define(version: 20150530132552) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -150,15 +150,17 @@ ActiveRecord::Schema.define(version: 20150529043852) do
   end
 
   create_table "inw_identities", force: :cascade do |t|
-    t.string  "id_for",            limit: 20, null: false
-    t.string  "id_type",           limit: 20
-    t.string  "id_number",         limit: 50
+    t.string  "id_for",                  limit: 20, null: false
+    t.string  "id_type",                 limit: 20
+    t.string  "id_number",               limit: 50
     t.string  "id_country"
     t.date    "id_issue_date"
     t.date    "id_expiry_date"
     t.date    "verified_at"
-    t.string  "verified_by",       limit: 20
+    t.string  "verified_by",             limit: 20
     t.integer "inw_remittance_id"
+    t.integer "whitelisted_identity_id"
+    t.string  "was_auto_matched"
   end
 
   create_table "inw_remittance_rules", force: :cascade do |t|
@@ -174,13 +176,11 @@ ActiveRecord::Schema.define(version: 20150529043852) do
   end
 
   create_table "inward_remittances", force: :cascade do |t|
-    t.string   "req_no",                                         null: false
-    t.string   "req_version",         limit: 10,                 null: false
-    t.datetime "req_timestamp",                                  null: false
-    t.string   "partner_code",        limit: 20,                 null: false
+    t.string   "req_no",                              null: false
+    t.string   "req_version",            limit: 10,   null: false
+    t.datetime "req_timestamp",                       null: false
+    t.string   "partner_code",           limit: 20,   null: false
     t.string   "rmtr_full_name"
-    t.string   "rmtr_first_name"
-    t.string   "rmtr_last_name"
     t.string   "rmtr_address1"
     t.string   "rmtr_address2"
     t.string   "rmtr_address3"
@@ -190,10 +190,8 @@ ActiveRecord::Schema.define(version: 20150529043852) do
     t.string   "rmtr_country"
     t.string   "rmtr_email_id"
     t.string   "rmtr_mobile_no"
-    t.integer  "rmtr_identity_count",                            null: false
+    t.integer  "rmtr_identity_count",                 null: false
     t.string   "bene_full_name"
-    t.string   "bene_first_name"
-    t.string   "bene_last_name"
     t.string   "bene_address1"
     t.string   "bene_address2"
     t.string   "bene_address3"
@@ -203,28 +201,28 @@ ActiveRecord::Schema.define(version: 20150529043852) do
     t.string   "bene_country"
     t.string   "bene_email_id"
     t.string   "bene_mobile_no"
-    t.integer  "bene_identity_count",                            null: false
+    t.integer  "bene_identity_count",                 null: false
     t.string   "bene_account_no"
     t.string   "bene_account_ifsc"
-    t.string   "transfer_type",       limit: 4
-    t.string   "transfer_ccy",        limit: 5
+    t.string   "transfer_type",          limit: 4
+    t.string   "transfer_ccy",           limit: 5
     t.float    "transfer_amount"
     t.string   "rmtr_to_bene_note"
-    t.string   "purpose_code",        limit: 5
-    t.string   "status_code",         limit: 25
-    t.string   "bank_ref",            limit: 20
-    t.string   "bene_ref",            limit: 20
+    t.string   "purpose_code",           limit: 5
+    t.string   "status_code",            limit: 25
+    t.string   "bank_ref",               limit: 30
     t.string   "rep_no"
-    t.string   "rep_version",         limit: 10
+    t.string   "rep_version",            limit: 10
     t.datetime "rep_timestamp"
-    t.string   "review_reqd",         limit: 1,    default: "N"
-    t.string   "review_pending",      limit: 1,    default: "N"
-    t.integer  "attempt_no",                                     null: false
+    t.integer  "attempt_no",                          null: false
     t.datetime "updated_at"
-    t.string   "beneficiary_type",    limit: 1
-    t.string   "remitter_type",       limit: 1
-    t.string   "fault_code",          limit: 50
-    t.string   "fault_reason",        limit: 1000
+    t.string   "beneficiary_type",       limit: 1
+    t.string   "remitter_type",          limit: 1
+    t.string   "fault_code",             limit: 50
+    t.string   "fault_reason",           limit: 1000
+    t.string   "is_self_transfer",       limit: 1
+    t.string   "is_same_party_transfer", limit: 1
+    t.string   "req_transfer_type"
   end
 
   add_index "inward_remittances", ["req_no", "partner_code", "attempt_no"], name: "remittance_unique_index", unique: true
