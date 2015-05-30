@@ -11,6 +11,7 @@ describe WhitelistedIdentitiesController do
     request.env["HTTP_REFERER"] = "/"
   end
 
+
   describe "POST create" do
     describe "with valid params" do
       it "creates a new whitelisted_identitiy" do
@@ -54,5 +55,34 @@ describe WhitelistedIdentitiesController do
         response.should be_redirect
       end
     end
+    
+    describe "GET index" do
+      it "assigns all whitelisted identities as @whitelisted_identities" do
+        whitelisted_identity = Factory(:whitelisted_identity)
+        get :index
+        assigns(:whitelisted_identities).should eq([whitelisted_identity])
+      end
+    end
+
+    describe "GET show" do
+      it "assigns the requested whitelisted identity as @whitelisted_identity" do
+        whitelisted_identity = Factory(:whitelisted_identity)
+        get :show, {:id => whitelisted_identity.id}
+        assigns(:whitelisted_identity).should eq(whitelisted_identity)
+      end
+    end
+    
   end
+#  describe "GET " do
+#    describe 'download Attachment' do
+#      it 'should download attachment' do
+#        whitelisted_identity = Factory.build(:whitelisted_identity)
+#        puts "whitelisted_identity.id = #{whitelisted_identity.id}"
+#        attachment = Factory.build(:attachment, user_id: @user.id, attachable_id: whitelisted_identity.id, attachable_type: "WhitelistedIdentity", file: "/uploads/Screen_Shot_2015-05-19_at_7.02.24_pm.png")
+#        puts "attachment.id = #{attachment.id}"
+#        get :download_attachment, attachment_id: attachment.id
+#        assigns(:whitelisted_identity).should eq(whitelisted_identity)
+#      end
+#   end
+# end
 end

@@ -1,0 +1,126 @@
+.form-horizontal.show_form
+  .form-main{:style=>'background-color: #F1F2F8; width: 65%'}
+    #form-details
+      %h3 Whitelisted Identity Details 
+      %br
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
+        %tr
+          %td.label Partner ID
+          %td.value
+            = @whitelisted_identity.partner_id
+        %tr
+          %td.label Full Name
+          %td.value
+            = @whitelisted_identity.full_name
+        %tr
+          %td.label First Name
+          %td.value
+            = @whitelisted_identity.first_name
+        %tr
+          %td.label Last Name
+          %td.value
+            = @whitelisted_identity.last_name
+        %tr
+          %td.label ID Type
+          %td.value
+            = @whitelisted_identity.id_type
+        %tr
+          %td.label ID Number
+          %td.value
+            = @whitelisted_identity.id_number
+        %tr
+          %td.label ID Country
+          %td.value
+            = @whitelisted_identity.id_country
+        %tr
+          %td.label ID Issue Date
+          %td.value
+            = @whitelisted_identity.id_issue_date
+        %tr
+          %td.label ID Expiry Date
+          %td.value
+            = @whitelisted_identity.id_expiry_date
+        %tr
+          %td.label Is Verified? 
+          %td.value
+            = @whitelisted_identity.is_verified
+        %tr
+          %td.label Verified At
+          %td.value
+            = @whitelisted_identity.verified_at
+        %tr
+          %td.label Verified By
+          %td.value
+            = @whitelisted_identity.verified_by
+        %tr
+          %td.label First Used With Transaction ID
+          %td.value
+            = @whitelisted_identity.first_used_with_txn_id
+        %tr
+          %td.label Last Used With Transaction ID
+          %td
+            = @whitelisted_identity.last_used_with_txn_id
+        %tr
+          %td.label Times Used
+          %td
+            = @whitelisted_identity.times_used
+        %tr
+          %td.label Created By
+          %td
+            = @whitelisted_identity.created_user.try(:username)
+        %tr
+          %td.label Updated By
+          %td
+            = @whitelisted_identity.updated_user.try(:username)
+        %tr
+          %td.label Lock Version
+          %td.value
+            = @whitelisted_identity.lock_version
+        %tr
+          %td.label Created At
+          %td.value
+            = @whitelisted_identity.created_at
+        %tr
+          %td.label Updated At
+          %td.value
+            = @whitelisted_identity.updated_at
+    %p{:style => 'padding-left:6px; padding-bottom:6px'}
+      = link_to 'Back to whitelisted identities', whitelisted_identities_path
+            
+            
+  .form-extended{:style=>'background-color: #fafafa; width: 35%'}
+    #form-details
+      %h3 Attachments(#{(@whitelisted_identity.attachments.count)})
+      - unless @whitelisted_identity.attachments.nil?
+        #attachment
+          - @whitelisted_identity.attachments.order("created_at desc").limit(3).each do |attachment|
+            .alert-info
+              =File.basename(attachment.file.path)
+              %br
+              =attachment.note
+              &nbsp &nbsp
+            = link_to 'Download', download_attachment_path(:attachment_id => attachment.id)
+            %p.muted
+              = "#{(attachment.user.try(:name))} added the attachment on #{attachment.created_at.to_formatted_s(:long)}"
+              %br
+              %br
+          - if @whitelisted_identity.attachments.count > 3
+            %input#view_attachments{:name => "view", :type => "button", :value => "View All Attachments"}
+            &nbsp
+        #full_attachments{:hidden => true}
+          - @whitelisted_identity.attachments.order("created_at desc").each do |attachment|
+            .alert-info
+              =attachment.file
+              %br
+              =attachment.note
+              &nbsp &nbsp
+            = link_to 'Download', download_attachment_path(:attachment_id => attachment.id)
+            %p.muted
+              = "#{attachment.user.try(:name)} added the attachment on #{attachment.created_at.to_formatted_s(:long)}"
+            %hr
+          %input#hide_attachments{:name => "hide", :type => "button", :value => "Hide Attachments"}
+
+          
+
+
+      

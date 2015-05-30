@@ -16,7 +16,9 @@ ServiceCenter::Application.routes.draw do
 
   get '/inward_remittances/:id/remitter_identities' => 'inward_remittances#remitter_identities'
   get '/inward_remittances/:id/beneficiary_identities' => 'inward_remittances#beneficiary_identities'
-
+  
+  get '/download_attachment' => 'whitelisted_identities#download_attachment'
+  
   get '/sdn/search' => 'aml_search#find_search_results'
   get '/sdn/search_results' => 'aml_search#results'
   get '/sdn/search_result' => 'aml_search#search_result'
