@@ -18,6 +18,8 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
+      Enabled
+    %th{:style=>'text-align:left; background-color: lightblue;'}
       Code
     %th{:style=>'text-align:left; background-color: lightblue;'} 
       Name
@@ -28,11 +30,13 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Account No
     %th{:style=>'text-align:left; background-color: lightblue;'}
-      Created by
+      NEFT Allowed?
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      RTGS Allowed?
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      IMPS Allowed?
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Updated by
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Created At
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Updated At
   .tbody
@@ -42,6 +46,8 @@
           = link_to 'Show', partner
         %td{:style=>'text-align:left;'}
           = link_to 'Edit', edit_partner_path(partner)
+        %td{:style=>'text-align:left;'}
+          = partner.enabled
         %td{:style=>'text-align:left;'}
           = partner.code
         %td{:style=>'text-align:left;'}
@@ -53,10 +59,12 @@
         %td{:style=>'text-align:left;'}
           = partner.account_no
         %td{:style=>'text-align:left;'}
-          = partner.created_user.try(:username)
+          = partner.allow_neft
+        %td{:style=>'text-align:left;'}
+          = partner.allow_rtgs
+        %td{:style=>'text-align:left;'}
+          = partner.allow_imps
         %td{:style=>'text-align:left;'}
           = partner.updated_user.try(:username)
-        %td{:style=>'text-align:left;'}
-          = partner.created_at.strftime("%d/%m/%Y %I:%M%p")
         %td{:style=>'text-align:left;'}
           = partner.updated_at.strftime("%d/%m/%Y %I:%M%p")

@@ -7,7 +7,7 @@
     = f.hidden_field :lock_version
     .control-group
       = f.label :code
-      = f.text_field :code
+      = f.text_field :code, :maxlength => 20
       #msg-error
         = error_message_for(@partner, :code, :prepend_text => "")
     .control-group
@@ -17,17 +17,17 @@
         = error_message_for(@partner, :enabled, :prepend_text => "")
     .control-group
       = f.label :name
-      = f.text_field :name
+      = f.text_field :name, :maxlength => 20
       #msg-error
         = error_message_for(@partner, :name, :prepend_text => "")
     .control-group
-      = f.label :tech_email_id, "Tech Email", :class => 'control-label'
-      = f.text_field :tech_email_id, :placeholder => "Enter Email IDs seperated by ;"
+      = f.label :tech_email_id, "Tech Email ID", :class => 'control-label'
+      = f.text_field :tech_email_id, :placeholder => "Enter Email IDs separated by ;"
       #msg-error
         = error_message_for(@partner, :tech_email_id, :prepend_text => "")
     .control-group
       = f.label :operations_email_id, "Operations Email ID", :class => 'control-label'
-      = f.text_field :ops_email_id, :placeholder => "Enter Email IDs seperated by ;"
+      = f.text_field :ops_email_id, :placeholder => "Enter Email IDs separated by ;"
       #msg-error
         = error_message_for(@partner, :ops_email_id, :prepend_text => "")
     .control-group
@@ -37,12 +37,12 @@
         = error_message_for(@partner, :customer_id, :prepend_text => "")
     .control-group
       = f.label :account_no
-      = f.text_field :account_no
+      = f.text_field :account_no, :maxlength => 20
       #msg-error
         = error_message_for(@partner, :account_no, :prepend_text => "")
     .control-group
       = f.label :account_ifsc, "Account IFSC", :class => 'control-label'
-      = f.text_field :account_ifsc
+      = f.text_field :account_ifsc, :maxlength => 20
       #msg-error
         = error_message_for(@partner, :account_ifsc, :prepend_text => "")
     .control-group

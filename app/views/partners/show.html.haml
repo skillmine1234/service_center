@@ -48,6 +48,12 @@
             %td#msg-error
               = error_message_for(@partner, :ops_email_id, :prepend_text => "")
           %tr
+            %td.label Customer ID
+            %td.value
+              = @partner.customer_id
+            %td#msg-error
+              = error_message_for(@partner, :customer_id, :prepend_text => "")
+          %tr
             %td.label Account No
             %td.value
               = @partner.account_no
@@ -60,17 +66,23 @@
             %td#msg-error
               = error_message_for(@partner, :account_ifsc, :prepend_text => "")
           %tr
+            %td.label MMID
+            %td.value
+              = @partner.mmid
+            %td#msg-error
+              = error_message_for(@partner, :mmid, :prepend_text => "")
+          %tr
+            %td.label Mobile No
+            %td.value
+              = @partner.mobile_no
+            %td#msg-error
+              = error_message_for(@partner, :mobile_no, :prepend_text => "")
+          %tr
             %td.label Transaction Hold Period Days
             %td.value
               = @partner.txn_hold_period_days
             %td#msg-error
               = error_message_for(@partner, :txn_hold_period_days, :prepend_text => "")
-          %tr
-            %td.label Identity User ID
-            %td.value
-              = @partner.identity_user_id
-            %td#msg-error
-              = error_message_for(@partner, :identity_user_id, :prepend_text => "")
           %tr
             %td.label Low Balance Alert At
             %td.value
@@ -114,36 +126,35 @@
             %td#msg-error
               = error_message_for(@partner, :allow_rtgs, :prepend_text => "")
           %tr
-            %td.label IMPS Allowed
+            %td.label IMPS Allowed?
             %td
               = @partner.allow_imps
             %td#msg-error
               = error_message_for(@partner, :allow_imps, :prepend_text => "")
           %tr
-            %td.label Created By
-            %td
-              = @partner.created_user.try(:username)
-            %td#msg-error
-              = error_message_for(@partner, :created_by, :prepend_text => "")
-          %tr
-            %td.label Updated By
-            %td
-              = @partner.updated_user.try(:username)
-            %td#msg-error
-              = error_message_for(@partner, :updated_by, :prepend_text => "")
-          %tr
-            %td.label Created At
+            %td.label Country
             %td.value
-              = @partner.created_at.strftime("%d/%m/%Y %I:%M%p")
+              = @partner.country
             %td#msg-error
-              = error_message_for(@partner, :created_at, :prepend_text => "")
+              = error_message_for(@partner, :country, :prepend_text => "")
           %tr
-            %td.label Updated At
+            %td.label Address Line 1
             %td.value
-              = @partner.updated_at.strftime("%d/%m/%Y %I:%M%p")
+              = @partner.address_line1
             %td#msg-error
-              = error_message_for(@partner, :updated_at, :prepend_text => "")
-    %p{:style => 'padding-left:6px; padding-bottom:6px'}
+              = error_message_for(@partner, :address_line1, :prepend_text => "")
+          %tr
+            %td.label Address Line 2
+            %td.value
+              = @partner.address_line2
+            %td#msg-error
+              = error_message_for(@partner, :address_line2, :prepend_text => "")
+          %tr
+            %td.label Address Line 3
+            %td.value
+              = @partner.address_line3
+            %td#msg-error
+              = error_message_for(@partner, :address_line3, :prepend_text => "")
       = link_to 'Back to partners', partners_path
 
       

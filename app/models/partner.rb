@@ -15,8 +15,8 @@ class Partner < ActiveRecord::Base
   validates :code, format: {with: /\A[A-Za-z0-9]+\z/}
   validates :name, format: {with: /\A[A-Za-z0-9]+\z/}
   validates :customer_id, :numericality => {:only_integer => true}
-  validates :mmid, :numericality => {:only_integer => true}, length: {maximum: 7, minimum: 7}, :allow_nil => true
-  validates :mobile_no, :numericality => {:only_integer => true}, length: {maximum: 10, minimum: 10}, :allow_nil => true
+  validates :mmid, :numericality => {:only_integer => true}, length: {maximum: 7, minimum: 7}, :allow_blank => true
+  validates :mobile_no, :numericality => {:only_integer => true}, length: {maximum: 10, minimum: 10}, :allow_blank => true
 
   validate :imps_and_mmid
   validate :check_email_addresses
