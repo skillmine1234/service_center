@@ -36,7 +36,7 @@
     %h3
       Replied At:
       = @inward_remittance.rep_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p")
-      = "(" + @inward_remittance.reply_time + " mins)"
+      = "(" + @inward_remittance.reply_time.to_s + " mins)"
     %h3
       Reply XML:
       = link_to "Show Reply", "#", :class => 'reply-link', :href => "#replyText"
