@@ -43,7 +43,7 @@
         %td{:style=>'text-align:left;'}
           = inward_remittance.attempt_no
         %td{:style=>'text-align:left;'}
-          = inward_remittance.partner_code + inward_remittance.partner.try(:name)
+          = inward_remittance.partner_code.to_s + inward_remittance.partner.try(:name).to_s
         %td{:style=>'text-align:left;'}
           = inward_remittance.rmtr_full_name
         %td{:style=>'text-align:left;'}
