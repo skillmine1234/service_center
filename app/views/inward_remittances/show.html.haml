@@ -57,7 +57,7 @@
         - if @inward_remittance.req_transfer_type != @inward_remittance.transfer_type
           %tr
             %td.label Request Transfer Type
-            %td= @inward_remittance.transfer_type
+            %td= @inward_remittance.req_transfer_type
         %tr
           %td.label Self Transfer?
           %td= check_box_tag :transfer,@inward_remittance.is_self_transfer, @inward_remittance.self_transfer?, {:disabled => false}
@@ -115,7 +115,7 @@
         .space{:style=>'height: 30px;'}
       - else
         .space{:style=>'height: 2px;'}
-      %hr{:style=>'background-color: #F1F2F8; width: 150%'}
+      %hr{:style=>'background-color: #F1F2F8; width: 120%'}
       %h3
         = "Beneficiary: " + "#{@inward_remittance.beneficiary_type}" + " (" 
         = link_to @inward_remittance.rmtr_identity_count,:controller => :inward_remittances, :action => :beneficiary_identities, :id => @inward_remittance.id
