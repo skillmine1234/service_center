@@ -46,13 +46,16 @@ describe InwRemittanceRule do
 
   context "validate_keywords" do 
     it "should validate keywords" do 
-      rule = Factory.build(:inw_remittance_rule, :pattern_individuals => "1234,ese sdgs", :pattern_corporates => "1234@,esesdgs", :pattern_beneficiaries => "1234,ese sdgs", :pattern_salutations => "1234@,esesdgs")
+      rule = Factory.build(:inw_remittance_rule, :pattern_individuals => "1234,ese$sdgs", :pattern_corporates => "1234@,esesdgs", :pattern_beneficiaries => "1234,ese@sdgs", :pattern_remitters => "1234,ese$sdgs", :pattern_salutations => "1234@,esesdgs")
       rule.should_not be_valid
-      rule.errors_on("pattern_individuals").should == ["are invalid due to ese sdgs"]
+      rule.errors_on("pattern_individuals").should == ["are invalid due to ese$sdgs"]
       rule.errors_on("pattern_corporates").should == ["are invalid due to 1234@"]
-      rule.errors_on("pattern_beneficiaries").should == ["are invalid due to ese sdgs"]
+      rule.errors_on("pattern_beneficiaries").should == ["are invalid due to ese@sdgs"]
+      rule.errors_on("pattern_remitters").should == ["are invalid due to ese$sdgs"]
       rule.errors_on("pattern_salutations").should == ["are invalid due to 1234@"]
-      rule = Factory.build(:inw_remittance_rule, :pattern_individuals => "1234,esesdgs", :pattern_corporates => "1234,esesdgs", :pattern_beneficiaries => "1234,esesdgs", :pattern_salutations => "1234,esesdgs")
+      rule = Factory.build(:inw_remittance_rule, :pattern_individuals => "1234,esesdgs", :pattern_corporates => "1234,esesdgs", :pattern_beneficiaries => "1234,esesdgs", :pattern_remitters => "1234,esesdgs", :pattern_salutations => "1234,esesdgs")
+      rule.should be_valid
+      rule = Factory.build(:inw_remittance_rule, :pattern_individuals => "1234,ese sdgs", :pattern_corporates => "1234,ese-sdgs", :pattern_beneficiaries => "1234,(esesdgs)", :pattern_remitters => "1234,ese-sdgs", :pattern_salutations => "1234,e-(ses) dgs")
       rule.should be_valid
     end
   end

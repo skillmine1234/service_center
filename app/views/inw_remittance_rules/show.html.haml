@@ -34,6 +34,12 @@
             %td#msg-error
               = error_message_for(@rule, :pattern_beneficiaries, :prepend_text => "")
           %tr
+            %td.label Disallowed Keywords in Name for Remitters
+            %td.value
+              = @rule.pattern_remitters
+            %td#msg-error
+              = error_message_for(@rule, :pattern_remitters, :prepend_text => "")
+          %tr
             %td.label Known Salutions For Individuals
             %td.value
               = @rule.pattern_salutations
