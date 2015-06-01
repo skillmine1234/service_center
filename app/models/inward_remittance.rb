@@ -21,7 +21,7 @@ class InwardRemittance < ActiveRecord::Base
   end
 
   def reply_time
-    ((req_timestamp - rep_timestamp)/1.minute).round rescue '0'
+    ((rep_timestamp - req_timestamp)/1.minute).round rescue '0'
   end
 
   def self_transfer?
