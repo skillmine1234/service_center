@@ -7,8 +7,6 @@ FactoryGirl.define do
     req_timestamp "2015-04-20 15:12:44"
     partner_code "MyString"
     rmtr_full_name "MyString"
-    rmtr_first_name "MyString"
-    rmtr_last_name "MyString"
     rmtr_address1 "MyString"
     rmtr_address2 "MyString"
     rmtr_address3 "MyString"
@@ -20,8 +18,6 @@ FactoryGirl.define do
     rmtr_mobile_no "MyString"
     rmtr_identity_count 1
     bene_full_name "MyString"
-    bene_first_name "MyString"
-    bene_last_name "MyString"
     bene_address1 "MyString"
     bene_address2 "MyString"
     bene_address3 "MyString"
@@ -41,12 +37,9 @@ FactoryGirl.define do
     purpose_code "MyString"
     status_code "MyString"
     bank_ref "MyString"
-    bene_ref "MyString"
     rep_no "MyString"
     rep_version "MyString"
     rep_timestamp "2015-04-20 15:12:44"
-    review_reqd "MyString"
-    review_pending "MyString"
     attempt_no 1.5
   end
 end

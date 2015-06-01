@@ -11,13 +11,19 @@ module PurposeCodeHelper
 
   
   def disallowed_bene_and_rem_types_on_show_page(value)
-    if (value == "I,N")
-      "Individual,Non-Individual"
+    if (value == "I,C")
+      "Individual,Customer"
     elsif (value == "I")
       "Individual"
-    elsif (value == "N")
-      "Non-Individual"
+    elsif (value == "C")
+      "Customer"
     end
   end
   
+  def find_purpose_codes(params)
+    purpose_codes = PurposeCode
+    purpose_codes = purpose_codes.where("code=?",params[:code]) if params[:code].present?
+    purpose_codes = purpose_codes.where("is_enabled=?",params[:enabled]) if params[:enabled].present?
+    purpose_codes
+  end
 end

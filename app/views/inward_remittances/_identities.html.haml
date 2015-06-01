@@ -28,7 +28,7 @@
           - if !identity.whitelisted_identity.nil?
             = "Verified"
           - else
-            = link_to 'verify',"#", :class => 'verify-link', :href => "#verifyIdentity", data: { partner_id: identity.inward_remittance.partner.try(:id), full_name: identity.full_name, first_name: identity.first_name, last_name: identity.last_name, id_type: identity.id_type, id_number: identity.id_number, id_country: identity.id_country, id_issue_date: identity.id_issue_date, id_expiry_date: identity.id_expiry_date, user_id: user_id} 
+            = link_to 'verify',"#", :class => 'verify-link', :href => "#verifyIdentity", data: { partner_id: identity.inward_remittance.partner.try(:id), full_name: identity.full_name, id_type: identity.id_type, id_number: identity.id_number, id_country: identity.id_country, id_issue_date: identity.id_issue_date, id_expiry_date: identity.id_expiry_date, user_id: user_id} 
         %td{:style=>'text-align:left;'}
           = identity.id_type
         %td{:style=>'text-align:left;'}
@@ -58,8 +58,6 @@
           .control-group.hidden
             = f.hidden_field :partner_id
             = f.hidden_field :full_name
-            = f.hidden_field :first_name
-            = f.hidden_field :last_name
             = f.hidden_field :id_type
             = f.hidden_field :id_number
             = f.hidden_field :id_country

@@ -72,28 +72,4 @@ describe InwIdentity do
       identity.full_name.should == identity.inward_remittance.bene_full_name
     end
   end
-
-  context "first_name" do 
-    it "should return remitter first name if the id_for is 'R'" do 
-      identity = Factory(:inw_identity)
-      identity.first_name.should == identity.inward_remittance.rmtr_first_name
-    end
-
-    it "should return beneficiary first name if the id_for is not 'R'" do 
-      identity = Factory(:inw_identity)
-      identity.first_name.should == identity.inward_remittance.bene_first_name
-    end
-  end
-
-  context "last_name" do 
-    it "should return remitter last name if the id_for is 'R'" do 
-      identity = Factory(:inw_identity)
-      identity.last_name.should == identity.inward_remittance.rmtr_last_name
-    end
-
-    it "should return beneficiary full name if the id_for is not 'R'" do 
-      identity = Factory(:inw_identity)
-      identity.last_name.should == identity.inward_remittance.bene_last_name
-    end
-  end
 end

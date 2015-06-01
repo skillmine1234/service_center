@@ -24,29 +24,47 @@
             %td#msg-error
               = error_message_for(@purpose_code, :code, :prepend_text => "")
           %tr
-            %td.label Description
-            %td.value
-              = @purpose_code.description
-            %td#msg-error
-              = error_message_for(@purpose_code, :description, :prepend_text => "")
-          %tr
             %td.label Enabled?
             %td.value
               = @purpose_code.is_enabled
             %td#msg-error
               = error_message_for(@purpose_code, :is_enabled, :prepend_text => "")
           %tr
-            %td.label Transaction Limit
+            %td.label Description
+            %td.value
+              = @purpose_code.description
+            %td#msg-error
+              = error_message_for(@purpose_code, :description, :prepend_text => "")
+          %tr
+            %td.label Maximum Transaction Value
             %td.value
               = @purpose_code.txn_limit
             %td#msg-error
               = error_message_for(@purpose_code, :txn_limit, :prepend_text => "")
           %tr
-            %td.label Daily Transaction Limit
+            %td.label Monthly Transaction Count (Self)
             %td.value
-              = @purpose_code.daily_txn_limit
+              = @purpose_code.mtd_txn_cnt_self
             %td#msg-error
-              = error_message_for(@purpose_code, :daily_txn_limit, :prepend_text => "")
+              = error_message_for(@purpose_code, :mtd_txn_cnt_self, :prepend_text => "")
+          %tr
+            %td.label Monthly Transaction Value (Self)
+            %td.value
+              = @purpose_code.mtd_txn_cnt_self
+            %td#msg-error
+              = error_message_for(@purpose_code, :mtd_txn_limit_self, :prepend_text => "")
+          %tr
+            %td.label Monthly Transaction Count (Same Party)
+            %td.value
+              = @purpose_code.mtd_txn_cnt_self
+            %td#msg-error
+              = error_message_for(@purpose_code, :mtd_txn_cnt_sp, :prepend_text => "")
+          %tr
+            %td.label Monthly Transaction Value (Same Party)
+            %td.value
+              = @purpose_code.mtd_txn_cnt_self
+            %td#msg-error
+              = error_message_for(@purpose_code, :mtd_txn_limit_sp, :prepend_text => "")
           %tr
             %td.label Disallowed Remitter Types
             %td.value
@@ -60,27 +78,9 @@
             %td#msg-error
               = error_message_for(@purpose_code, :disallowed_bene_types, :prepend_text => "")
           %tr
-            %td.label Created By
+            %td.label RBI Purpose Code
             %td
-              = @purpose_code.created_user.try(:username)
+              = @purpose_code.rbi_code
             %td#msg-error
               = error_message_for(@purpose_code, :created_by, :prepend_text => "")
-          %tr
-            %td.label Updated By
-            %td
-              = @purpose_code.updated_user.try(:username)
-            %td#msg-error
-              = error_message_for(@purpose_code, :updated_by, :prepend_text => "")
-          %tr
-            %td.label Created At
-            %td.value
-              = @purpose_code.created_at.strftime("%d/%m/%Y %I:%M%p")
-            %td#msg-error
-              = error_message_for(@purpose_code, :created_at, :prepend_text => "")
-          %tr
-            %td.label Updated At
-            %td.value
-              = @purpose_code.updated_at.strftime("%d/%m/%Y %I:%M%p")
-            %td#msg-error
-              = error_message_for(@purpose_code, :updated_at, :prepend_text => "")
       = link_to 'Back to purpose_codes', purpose_codes_path

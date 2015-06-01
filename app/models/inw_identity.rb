@@ -23,12 +23,4 @@ class InwIdentity < ActiveRecord::Base
   def full_name
     id_for == "R" ? inward_remittance.rmtr_full_name : inward_remittance.bene_full_name
   end
-
-  def first_name
-    id_for == "R" ? inward_remittance.rmtr_first_name : inward_remittance.bene_first_name
-  end
-
-  def last_name
-    id_for == "R" ? inward_remittance.rmtr_last_name : inward_remittance.bene_last_name
-  end
 end

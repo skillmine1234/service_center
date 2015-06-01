@@ -1,0 +1,28 @@
+= form_tag '', :method => 'get', :class => 'form-horizontal', :autocomplete=>"off" do
+  .control-group
+    = label_tag "Status", nil, :class => 'control-label'
+    = text_field_tag :status, params[:status]
+  .control-group
+    = label_tag "Request No", nil, :class => 'control-label'
+    = text_field_tag :request_no, params[:request_no]
+  .control-group
+    = label_tag "Partner Code", nil, :class => 'control-label'
+    = text_field_tag :partner_code, params[:partner_code]
+  .control-group
+    = label_tag "Transfer Type", nil, :class => 'control-label'
+    = text_field_tag :transfer_type, params[:transfer_type]
+  .control-group
+    = label_tag "Transfer Amount", nil, :class => 'control-label'
+    = text_field_tag :transfer_amount, params[:transfer_amount]
+  .control-group
+    = label_tag "Request Date", nil, :class => 'control-label'
+    = text_field_tag :from_date, params[:from_date]
+    And
+    = text_field_tag :to_date, params[:to_date]
+  = hidden_field_tag :advanced_search, :true
+  .form-actions
+    = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"
+    %input{:type => 'reset', :value=>'Reset', :class => 'btn'}
+
+:javascript
+  var in_advanced_search = true;

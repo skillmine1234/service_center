@@ -15,14 +15,14 @@
     = link_to '/partners' do
       = image_tag 'partner.png', :size => "80x80"
     %br
-      = "Partner"
+      = "Partners"
   .box
     = link_to '/purpose_codes' do
       = image_tag 'purpose_code.gif', :size => "80x80"
     %br
-      = "Purpose Code"
+      = "Purpose Codes"
   .box
-    = link_to '/rules' do
+    = link_to edit_inw_remittance_rule_path(InwRemittanceRule.first) do
       = image_tag 'rules.jpeg', :size => "80x80"
     %br
       = "Rules"

@@ -5,7 +5,8 @@ class PurposeCodesController < ApplicationController
   before_filter :block_inactive_user!
   respond_to :json
   include ApplicationHelper
-
+  include PurposeCodeHelper
+  
   def new
     @purpose_code = PurposeCode.new
   end
@@ -52,7 +53,11 @@ class PurposeCodesController < ApplicationController
   end
 
   def index
-    purpose_codes = PurposeCode.order("id desc")
+    if params[:advanced_search].present?
+      purpose_codes = find_purpose_codes(params).order("id desc")
+    else
+      purpose_codes = PurposeCode.order("id desc")
+    end
     @purpose_codes_count = purpose_codes.count
     @purpose_codes = purpose_codes.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
@@ -66,7 +71,8 @@ class PurposeCodesController < ApplicationController
 
   def purpose_code_params
     params.require(:purpose_code).permit(:code, :created_by, :daily_txn_limit, :description, {:disallowed_bene_types => []}, 
-                                         {:disallowed_rem_types => []}, :is_enabled, :lock_version, :txn_limit, :updated_by)
+                                         {:disallowed_rem_types => []}, :is_enabled, :lock_version, :txn_limit, :updated_by,
+                                         :mtd_txn_cnt_self, :mtd_txn_limit_self, :mtd_txn_cnt_sp, :mtd_txn_limit_cp, :rbi_code)
   end
   
 end

@@ -20,7 +20,12 @@
       = f.text_area :pattern_beneficiaries, :style => 'width:300px; height:100px', :placeholder => "Enter the keywords one below the other", :value => f.object.formated_pattern_beneficiaries
       #msg-error
         = error_message_for(@rule, :pattern_beneficiaries, :prepend_text => "")
+    .control-group
+      = f.label :pattern_salutations, "Known Salutations For Individuals", :class => 'control-label'
+      = f.text_area :pattern_salutations, :style => 'width:300px; height:100px', :placeholder => "Enter the salutations one below the other", :value => f.object.formated_pattern_salutations
+      #msg-error
+        = error_message_for(@rule, :pattern_salutations, :prepend_text => "")
   .form-actions
-    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_partner'
-    = link_to :Cancel,'/rules', :name => 'cancel', :class=>"cancel btn"
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_rule', :value => "Create Rule"
+    = link_to :Cancel,root_path, :name => 'cancel', :class=>"cancel btn"
 

@@ -6,12 +6,12 @@ ServiceCenter::Application.routes.draw do
   resources :purpose_codes
   resources :inward_remittances
   resources :whitelisted_identities
-  resources :rules
+  resources :inw_remittance_rules
   resources :banks
 
   get '/partner/:id/audit_logs' => 'partners#audit_logs'
   get '/purpose_code/:id/audit_logs' => 'purpose_codes#audit_logs'
-  get '/rule/:id/audit_logs' => 'rules#audit_logs'
+  get '/inw_remittance_rule/:id/audit_logs' => 'inw_remittance_rules#audit_logs'
   get '/bank/:id/audit_logs' => 'banks#audit_logs'
 
   get '/inward_remittances/:id/remitter_identities' => 'inward_remittances#remitter_identities'

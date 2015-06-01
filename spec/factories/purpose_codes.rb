@@ -1,8 +1,9 @@
 # Read about factories at http://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
+  sequence(:code1) { |n| "ABC#{n}#{n}" }
   factory :purpose_code do
-    code "MyString"
+    code FactoryGirl.generate(:code1)
     description "MyString"
     is_enabled "MyString"
     created_by ""
@@ -12,5 +13,10 @@ FactoryGirl.define do
     daily_txn_limit 1.5
     disallowed_rem_types "MyString"
     disallowed_bene_types "MyString"
+    mtd_txn_cnt_self 2
+    mtd_txn_limit_self 100
+    mtd_txn_cnt_sp 2
+    mtd_txn_limit_sp 100
+    rbi_code '12345'
   end
 end
