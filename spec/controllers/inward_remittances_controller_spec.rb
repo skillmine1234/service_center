@@ -36,6 +36,19 @@ describe InwardRemittancesController do
       get :index
       expect(assigns(:inward_remittances)).to match_array(inward_remittances_with_max_attempt)
     end
+    
+    it "assigns all inward_remittances in descending order of id" do
+      inward_remittances1 = [Factory(:inward_remittance, :req_no => "TT0222", :attempt_no => 1, :partner_code => "PARTNER1")]
+      inward_remittances1 << Factory(:inward_remittance, :req_no => "TT0223", :attempt_no => 1, :partner_code => "PARTNER1")
+      inward_remittances1 << Factory(:inward_remittance, :req_no => "TT0224", :attempt_no => 1, :partner_code => "PARTNER1")
+      
+      inward_remittances_with_proper_order = [inward_remittances1[2]]
+      inward_remittances_with_proper_order << inward_remittances1[1]
+      inward_remittances_with_proper_order << inward_remittances1[0]
+      
+      get :index
+      expect(assigns(:inward_remittances)).to match_array(inward_remittances_with_proper_order)
+    end
   end
 
   describe "GET show" do
