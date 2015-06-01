@@ -115,7 +115,7 @@
         .space{:style=>'height: 30px;'}
       - else
         .space{:style=>'height: 2px;'}
-      %hr{:style=>'background-color: #F1F2F8; width: 200%'}
+      %hr{:style=>'background-color: #F1F2F8; width: 150%'}
       %h3
         = "Beneficiary: " + "#{@inward_remittance.beneficiary_type}" + " (" 
         = link_to @inward_remittance.rmtr_identity_count,:controller => :inward_remittances, :action => :beneficiary_identities, :id => @inward_remittance.id
