@@ -16,4 +16,6 @@ unless Rails.env == 'production'
   Role.delete_all
 
   Role.create(:name=>"user")
+
+  InwRemittanceRule.create!(:pattern_salutations => "Mr,Mrs,Miss,Dr,Ms,PRof,Rev,Lady,Sir,Capt,Major,LtCol,Col")
 end

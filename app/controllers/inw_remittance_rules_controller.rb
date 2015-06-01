@@ -36,6 +36,11 @@ class InwRemittanceRulesController < ApplicationController
     @audit = @rule.audits[params[:version_id].to_i] rescue nil
   end
 
+  def error_msg
+    flash[:alert] = "Rule is not yet configured"
+    redirect_to :root
+  end
+
   private
 
   def inw_remittance_rule_params

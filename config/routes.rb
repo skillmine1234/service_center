@@ -21,6 +21,8 @@ ServiceCenter::Application.routes.draw do
   get '/sdn/search_results' => 'aml_search#results'
   get '/sdn/search_result' => 'aml_search#search_result'
 
+  get '/error_msg' => "inw_remittance_rules#error_msg"
+
   root :to => 'dashboard#overview'
 
   # See how all your routes lay out with "rake routes"
