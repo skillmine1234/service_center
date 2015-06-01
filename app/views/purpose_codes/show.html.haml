@@ -83,4 +83,10 @@
               = @purpose_code.rbi_code
             %td#msg-error
               = error_message_for(@purpose_code, :created_by, :prepend_text => "")
+          %tr
+            %td.label Disallowed Keywords in Name for Beneficiaries
+            %td.value
+              = @rule.pattern_beneficiaries
+            %td#msg-error
+              = error_message_for(@rule, :pattern_beneficiaries, :prepend_text => "")
       = link_to 'Back to purpose_codes', purpose_codes_path

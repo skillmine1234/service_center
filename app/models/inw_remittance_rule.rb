@@ -11,7 +11,7 @@ class InwRemittanceRule < ActiveRecord::Base
       value = self.send(values)
       unless value.nil?
         value.split(/,/).each do |val| 
-          unless val =~ /\A[A-Za-z0-9-()\s]+\Z/
+          unless val =~ /\A[A-Za-z0-9\-\(\)\s]+\Z/
             invalid_values << val
           end
         end

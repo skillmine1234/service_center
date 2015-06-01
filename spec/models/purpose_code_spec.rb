@@ -75,6 +75,23 @@ describe PurposeCode do
         purpose_code.errors_on("mtd_txn_limit_sp").should == ["is less than transaction limit"]
       end
     end
+
+    context "formated_pattern_beneficiaries" do 
+      it "should format pattern_beneficiaries" do 
+        purpose_code = Factory.build(:purpose_code, :pattern_beneficiaries => "1,2")
+        purpose_code.formated_pattern_beneficiaries.should == "1\r\n2"
+      end 
+    end
+
+    context "validate_keywords" do 
+      it "should validate keywords" do 
+        purpose_code = Factory.build(:purpose_code, :pattern_beneficiaries => "1234,ese@sdgs")
+        purpose_code.should_not be_valid
+        purpose_code.errors_on("pattern_beneficiaries").should == ["are invalid due to ese@sdgs"]
+        purpose_code = Factory.build(:purpose_code, :pattern_beneficiaries => "1234,esesdgs")
+        purpose_code.should be_valid
+      end
+    end
   end
   
   context 'disallowed_rem_and_bene_types_to_string'do

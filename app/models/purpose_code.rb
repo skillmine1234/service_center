@@ -13,6 +13,28 @@ class PurposeCode < ActiveRecord::Base
   validates :mtd_txn_cnt_sp, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => '9e20'.to_f, :allow_nil => true }
   validates :mtd_txn_limit_sp, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => '9e20'.to_f, :allow_nil => true }
   validate :check_values
+  validate :validate_keywords
+  before_validation :format_fields
+
+  def validate_keywords
+    unless pattern_beneficiaries.nil?
+      invalid_values = []
+      self.pattern_beneficiaries.split(/,/).each do |val| 
+        unless val =~ /\A[A-Za-z0-9\-\(\)\s]+\Z/
+          invalid_values << val
+        end
+      end
+      errors.add(:pattern_beneficiaries, "are invalid due to #{invalid_values.join(',')}") unless invalid_values.empty?
+    end
+  end
+
+  def format_fields
+    self.pattern_beneficiaries = self.pattern_beneficiaries.gsub("\r\n",",") rescue nil
+  end
+
+  def formated_pattern_beneficiaries
+    pattern_beneficiaries.gsub(",","\r\n") rescue nil
+  end 
 
   def check_values
     if !mtd_txn_limit_self.nil? and !txn_limit.nil? and !mtd_txn_limit_sp.nil?
