@@ -1,7 +1,7 @@
 # Read about factories at http://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  sequence(:code1) { |n| "ABC#{n}#{n}" }
+  sequence(:code1) {|n| "%04i" % "#{n}"}
   factory :purpose_code do
     code FactoryGirl.generate(:code1)
     description "MyString"
@@ -17,6 +17,6 @@ FactoryGirl.define do
     mtd_txn_limit_self 100
     mtd_txn_cnt_sp 2
     mtd_txn_limit_sp 100
-    rbi_code '12345'
+    rbi_code FactoryGirl.generate(:code1)
   end
 end

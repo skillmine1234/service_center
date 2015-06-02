@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150601055351) do
+ActiveRecord::Schema.define(version: 20150602080521) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -235,7 +235,7 @@ ActiveRecord::Schema.define(version: 20150601055351) do
   end
 
   create_table "partners", force: :cascade do |t|
-    t.string   "code",                      limit: 20,             null: false
+    t.string   "code",                      limit: 4,              null: false
     t.string   "name",                      limit: 20,             null: false
     t.string   "tech_email_id"
     t.string   "ops_email_id"
@@ -267,7 +267,7 @@ ActiveRecord::Schema.define(version: 20150601055351) do
   end
 
   create_table "purpose_codes", force: :cascade do |t|
-    t.string   "code",                  limit: 5
+    t.string   "code",                  limit: 4
     t.string   "description",           limit: 200
     t.string   "is_enabled",            limit: 1
     t.string   "created_by",            limit: 20
@@ -283,7 +283,7 @@ ActiveRecord::Schema.define(version: 20150601055351) do
     t.float    "mtd_txn_limit_self"
     t.float    "mtd_txn_cnt_sp",        limit: 8
     t.float    "mtd_txn_limit_sp"
-    t.string   "rbi_code",              limit: 5
+    t.string   "rbi_code",              limit: 4
     t.string   "pattern_beneficiaries", limit: 4000
   end
 

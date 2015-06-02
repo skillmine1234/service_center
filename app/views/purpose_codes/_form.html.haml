@@ -7,7 +7,7 @@
     = f.hidden_field :lock_version
     .control-group
       = f.label :code
-      = f.text_field :code
+      = f.text_field :code, :maxlength => 4
       #msg-error
         = error_message_for(@purpose_code, :code, :prepend_text => "")
     .control-group
@@ -21,17 +21,12 @@
       #msg-error
         = error_message_for(@purpose_code, :description, :prepend_text => "")
     .control-group
-      = f.label :transaction_limit, "*Transaction Limit", :class => 'control-label'
+      = f.label :transaction_limit, "*Maximum Transaction Value", :class => 'control-label'
       = f.text_field :txn_limit
       #msg-error
         = error_message_for(@purpose_code, :txn_limit, :prepend_text => "")
     .control-group
-      = f.label :daily_transaction_limit, "*Daily Transaction Limit", :class => 'control-label'
-      = f.text_field :daily_txn_limit
-      #msg-error
-        = error_message_for(@purpose_code, :daily_txn_limit, :prepend_text => "")
-    .control-group
-      = f.label :mtd_txn_cnt_self, "*Monthly Transaction Count (Self)", :class => 'control-label'
+      = f.label :mtd_txn_cnt_self, "Monthly Transaction Count (Self)", :class => 'control-label'
       = f.text_field :mtd_txn_cnt_self
       #msg-error
         = error_message_for(@purpose_code, :mtd_txn_cnt_self, :prepend_text => "")
@@ -63,7 +58,7 @@
         = error_message_for(@purpose_code, :disallowed_bene_types, :prepend_text => "")
     .control-group
       = f.label :rbi_code, "*RBI Purpose Code", :class => 'control-label'
-      = f.text_field :rbi_code
+      = f.text_field :rbi_code, :maxlength => 4
       #msg-error
         = error_message_for(@purpose_code, :rbi_code, :prepend_text => "")
     .control-group

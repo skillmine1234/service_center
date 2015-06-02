@@ -38,9 +38,9 @@ describe PurposeCodeHelper do
       purpose_code = Factory(:purpose_code,:is_enabled => 'Y')
       find_purpose_codes({:enabled => 'Y'}).should == [purpose_code]
       find_purpose_codes({:enabled => 'N'}).should == []
-      purpose_code = Factory(:purpose_code,:code => '12324')
-      find_purpose_codes({:code => '12324'}).should == [purpose_code]
-      find_purpose_codes({:code => '32123'}).should == []  
+      purpose_code = Factory(:purpose_code,:code => '1232')
+      find_purpose_codes({:code => '1232'}).should == [purpose_code]
+      find_purpose_codes({:code => '3212'}).should == []  
     end
   end  
 end
