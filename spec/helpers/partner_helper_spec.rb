@@ -7,9 +7,9 @@ describe PartnerHelper do
       partner = Factory(:partner,:enabled => 'Y')
       find_partners({:enabled => 'Y'}).should == [partner]
       find_partners({:enabled => 'N'}).should == []
-      partner = Factory(:partner,:code => '123')
-      find_partners({:code => '123'}).should == [partner]
-      find_partners({:code => '321'}).should == []  
+      partner = Factory(:partner,:code => '1231')
+      find_partners({:code => '1231'}).should == [partner]
+      find_partners({:code => '3211'}).should == []  
       partner = Factory(:partner,:account_no => '1234567891')
       find_partners({:account_no => '1234567891'}).should == [partner]
       find_partners({:account_no => '3212434323'}).should == []     

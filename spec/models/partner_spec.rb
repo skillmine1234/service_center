@@ -55,18 +55,18 @@ describe Partner do
     context "code format" do
       it "should allow valid format" do 
         [:code,:name].each do |att|
-          should allow_value('abcd12V').for(att)
+          should allow_value('a12V').for(att)
           should allow_value('abcd').for(att)
           should allow_value('1234').for(att)
-          should allow_value('aABCD').for(att)
+          should allow_value('aBCD').for(att)
         end
       end
 
       it "should not allow invalid format" do 
         [:code,:name].each do |att|
-          should_not allow_value('abcd 12V').for(att)
-          should_not allow_value('@abcd').for(att)
-          should_not allow_value('1234\n').for(att)
+          should_not allow_value('ab d').for(att)
+          should_not allow_value('@acd').for(att)
+          should_not allow_value('134\n').for(att)
         end
       end
     end
