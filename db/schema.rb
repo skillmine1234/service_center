@@ -11,52 +11,52 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150602094154) do
+ActiveRecord::Schema.define(version: 20150602124944) do
 
   create_table "active_admin_comments", force: :cascade do |t|
-    t.string   "resource_id",   limit: 255, null: false
-    t.string   "resource_type", limit: 255, null: false
+    t.string   "resource_id",   null: false
+    t.string   "resource_type", null: false
     t.integer  "author_id"
-    t.string   "author_type",   limit: 255
+    t.string   "author_type"
     t.text     "body"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.string   "namespace",     limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "namespace"
   end
 
   add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
   add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace"
-  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_admin_notes_on_resource_type_and_resource_id"
+  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
 
   create_table "admin_roles", force: :cascade do |t|
-    t.string   "name",          limit: 255
+    t.string   "name"
     t.integer  "resource_id"
-    t.string   "resource_type", limit: 255
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.string   "resource_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "admin_roles", ["name", "resource_type", "resource_id"], name: "index_admin_roles_on_name_and_resource_type_and_resource_id"
   add_index "admin_roles", ["name"], name: "index_admin_roles_on_name"
 
   create_table "admin_users", force: :cascade do |t|
-    t.string   "email",                  limit: 255, default: "",    null: false
-    t.string   "encrypted_password",     limit: 255, default: "",    null: false
-    t.string   "reset_password_token",   limit: 255
+    t.string   "email",                             default: "",    null: false
+    t.string   "encrypted_password",                default: "",    null: false
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                      default: 0
+    t.integer  "sign_in_count",                     default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",     limit: 255
-    t.string   "last_sign_in_ip",        limit: 255
-    t.datetime "created_at",                                         null: false
-    t.datetime "updated_at",                                         null: false
-    t.string   "username",               limit: 255
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "username"
     t.string   "unique_session_id",      limit: 20
-    t.boolean  "inactive",                           default: false
-    t.integer  "failed_attempts",                    default: 0
-    t.string   "unlock_token",           limit: 255
+    t.boolean  "inactive",                          default: false
+    t.integer  "failed_attempts",                   default: 0
+    t.string   "unlock_token"
     t.datetime "locked_at"
   end
 
@@ -68,33 +68,33 @@ ActiveRecord::Schema.define(version: 20150602094154) do
     t.integer "admin_role_id"
   end
 
-  add_index "admin_users_admin_roles", ["admin_user_id", "admin_role_id"], name: "index_admin_users_admin_roles_on_admin_user_id_and_admin_role_id"
+  add_index "admin_users_admin_roles", ["admin_user_id", "admin_role_id"], name: "index_on_user_roles"
 
   create_table "attachments", force: :cascade do |t|
-    t.string   "note",            limit: 255
-    t.string   "file",            limit: 255
+    t.string   "note"
+    t.string   "file"
     t.integer  "attachable_id"
-    t.string   "attachable_type", limit: 255
-    t.string   "user_id",         limit: 255
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.string   "attachable_type"
+    t.string   "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "attachments", ["attachable_id"], name: "index_attachments_on_attachable_id"
 
   create_table "audits", force: :cascade do |t|
     t.integer  "auditable_id"
-    t.string   "auditable_type",  limit: 255
+    t.string   "auditable_type"
     t.integer  "associated_id"
-    t.string   "associated_type", limit: 255
+    t.string   "associated_type"
     t.integer  "user_id"
-    t.string   "user_type",       limit: 255
-    t.string   "username",        limit: 255
-    t.string   "action",          limit: 255
+    t.string   "user_type"
+    t.string   "username"
+    t.string   "action"
     t.text     "audited_changes"
-    t.integer  "version",                     default: 0
-    t.string   "comment",         limit: 255
-    t.string   "remote_address",  limit: 255
+    t.integer  "version",         default: 0
+    t.string   "comment"
+    t.string   "remote_address"
     t.datetime "created_at"
     t.string   "request_uuid"
   end
@@ -117,17 +117,17 @@ ActiveRecord::Schema.define(version: 20150602094154) do
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
-    t.integer  "priority",               default: 0, null: false
-    t.integer  "attempts",               default: 0, null: false
-    t.text     "handler",                            null: false
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
     t.text     "last_error"
     t.datetime "run_at"
     t.datetime "locked_at"
     t.datetime "failed_at"
-    t.string   "locked_by",  limit: 255
-    t.string   "queue",      limit: 255
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
@@ -150,12 +150,14 @@ ActiveRecord::Schema.define(version: 20150602094154) do
   end
 
   create_table "inw_identities", force: :cascade do |t|
-    t.string  "id_for",                  limit: 20,  null: false
+    t.string  "id_for",                  limit: 20, null: false
     t.string  "id_type",                 limit: 20
     t.string  "id_number",               limit: 50
-    t.string  "id_country",              limit: 255
+    t.string  "id_country"
     t.date    "id_issue_date"
     t.date    "id_expiry_date"
+    t.date    "verified_at"
+    t.string  "verified_by",             limit: 20
     t.integer "inw_remittance_id"
     t.integer "whitelisted_identity_id"
     t.string  "was_auto_matched"
@@ -175,45 +177,46 @@ ActiveRecord::Schema.define(version: 20150602094154) do
   end
 
   create_table "inward_remittances", force: :cascade do |t|
-    t.string   "req_no",                 limit: 255,  null: false
+    t.string   "req_no",                              null: false
     t.string   "req_version",            limit: 10,   null: false
     t.datetime "req_timestamp",                       null: false
     t.string   "partner_code",           limit: 20,   null: false
-    t.string   "rmtr_full_name",         limit: 255
-    t.string   "rmtr_address1",          limit: 255
-    t.string   "rmtr_address2",          limit: 255
-    t.string   "rmtr_address3",          limit: 255
-    t.string   "rmtr_postal_code",       limit: 255
-    t.string   "rmtr_city",              limit: 255
-    t.string   "rmtr_state",             limit: 255
-    t.string   "rmtr_country",           limit: 255
-    t.string   "rmtr_email_id",          limit: 255
-    t.string   "rmtr_mobile_no",         limit: 255
+    t.string   "rmtr_full_name"
+    t.string   "rmtr_address1"
+    t.string   "rmtr_address2"
+    t.string   "rmtr_address3"
+    t.string   "rmtr_postal_code"
+    t.string   "rmtr_city"
+    t.string   "rmtr_state"
+    t.string   "rmtr_country"
+    t.string   "rmtr_email_id"
+    t.string   "rmtr_mobile_no"
     t.integer  "rmtr_identity_count",                 null: false
-    t.string   "bene_full_name",         limit: 255
-    t.string   "bene_address1",          limit: 255
-    t.string   "bene_address2",          limit: 255
-    t.string   "bene_address3",          limit: 255
-    t.string   "bene_postal_code",       limit: 255
-    t.string   "bene_city",              limit: 255
-    t.string   "bene_state",             limit: 255
-    t.string   "bene_country",           limit: 255
-    t.string   "bene_email_id",          limit: 255
-    t.string   "bene_mobile_no",         limit: 255
+    t.string   "bene_full_name"
+    t.string   "bene_address1"
+    t.string   "bene_address2"
+    t.string   "bene_address3"
+    t.string   "bene_postal_code"
+    t.string   "bene_city"
+    t.string   "bene_state"
+    t.string   "bene_country"
+    t.string   "bene_email_id"
+    t.string   "bene_mobile_no"
     t.integer  "bene_identity_count",                 null: false
-    t.string   "bene_account_no",        limit: 255
-    t.string   "bene_account_ifsc",      limit: 255
+    t.string   "bene_account_no"
+    t.string   "bene_account_ifsc"
     t.string   "transfer_type",          limit: 4
     t.string   "transfer_ccy",           limit: 5
     t.float    "transfer_amount"
-    t.string   "rmtr_to_bene_note",      limit: 255
+    t.string   "rmtr_to_bene_note"
     t.string   "purpose_code",           limit: 5
     t.string   "status_code",            limit: 25
     t.string   "bank_ref",               limit: 30
-    t.string   "rep_no",                 limit: 255
+    t.string   "rep_no"
     t.string   "rep_version",            limit: 10
     t.datetime "rep_timestamp"
     t.integer  "attempt_no",                          null: false
+    t.datetime "updated_at"
     t.string   "beneficiary_type",       limit: 1
     t.string   "remitter_type",          limit: 1
     t.string   "fault_code",             limit: 50
@@ -227,19 +230,19 @@ ActiveRecord::Schema.define(version: 20150602094154) do
   add_index "inward_remittances", ["req_no", "partner_code", "attempt_no"], name: "remittance_unique_index", unique: true
 
   create_table "inward_remittances_locks", id: false, force: :cascade do |t|
-    t.string  "partner_code",         limit: 255
+    t.string  "partner_code"
     t.integer "inward_remittance_id"
     t.string  "created_at"
   end
 
   create_table "partners", force: :cascade do |t|
-    t.string   "code",                      limit: 4,               null: false
-    t.string   "name",                      limit: 20,              null: false
-    t.string   "tech_email_id",             limit: 255
-    t.string   "ops_email_id",              limit: 255
-    t.string   "account_no",                limit: 20,              null: false
+    t.string   "code",                      limit: 4,              null: false
+    t.string   "name",                      limit: 20,             null: false
+    t.string   "tech_email_id"
+    t.string   "ops_email_id"
+    t.string   "account_no",                limit: 20,             null: false
     t.string   "account_ifsc",              limit: 20
-    t.integer  "txn_hold_period_days",                  default: 7, null: false
+    t.integer  "txn_hold_period_days",                 default: 7, null: false
     t.string   "identity_user_id",          limit: 20
     t.float    "low_balance_alert_at"
     t.string   "remitter_sms_allowed",      limit: 1
@@ -251,13 +254,13 @@ ActiveRecord::Schema.define(version: 20150602094154) do
     t.string   "allow_imps",                limit: 1
     t.string   "created_by",                limit: 20
     t.string   "updated_by",                limit: 20
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
-    t.integer  "lock_version",                          default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "lock_version",                         default: 0, null: false
     t.string   "enabled",                   limit: 1
     t.string   "customer_id"
-    t.string   "mmid"
-    t.string   "mobile_no"
+    t.string   "mmid",                      limit: 7
+    t.string   "mobile_no",                 limit: 10
     t.string   "country"
     t.string   "address_line1"
     t.string   "address_line2"
@@ -275,13 +278,13 @@ ActiveRecord::Schema.define(version: 20150602094154) do
     t.integer  "daily_txn_limit"
     t.string   "disallowed_rem_types",  limit: 30
     t.string   "disallowed_bene_types", limit: 30
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.float    "mtd_txn_cnt_self",      limit: 8
     t.float    "mtd_txn_limit_self"
     t.float    "mtd_txn_cnt_sp",        limit: 8
     t.float    "mtd_txn_limit_sp"
-    t.string   "rbi_code",              limit: 4
+    t.string   "rbi_code",              limit: 5
     t.string   "pattern_beneficiaries", limit: 4000
   end
 
@@ -296,40 +299,40 @@ ActiveRecord::Schema.define(version: 20150602094154) do
     t.string   "created_by",         limit: 20
     t.string   "updated_by",         limit: 20
     t.integer  "lock_version"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "roles", force: :cascade do |t|
-    t.string   "name",          limit: 255
+    t.string   "name"
     t.integer  "resource_id"
-    t.string   "resource_type", limit: 255
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.string   "resource_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], name: "index_roles_on_name"
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  limit: 255, default: "",    null: false
-    t.string   "encrypted_password",     limit: 255, default: "",    null: false
-    t.string   "reset_password_token",   limit: 255
+    t.string   "email",                             default: "",    null: false
+    t.string   "encrypted_password",                default: "",    null: false
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                      default: 0,     null: false
+    t.integer  "sign_in_count",                     default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",     limit: 255
-    t.string   "last_sign_in_ip",        limit: 255
-    t.datetime "created_at",                                         null: false
-    t.datetime "updated_at",                                         null: false
-    t.string   "username",               limit: 255
-    t.boolean  "inactive",                           default: false
-    t.string   "first_name",             limit: 255
-    t.string   "last_name",              limit: 255
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "username"
+    t.boolean  "inactive",                          default: false
+    t.string   "first_name"
+    t.string   "last_name"
     t.string   "unique_session_id",      limit: 20
-    t.string   "mobile_no",              limit: 255
+    t.string   "mobile_no"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
@@ -342,13 +345,13 @@ ActiveRecord::Schema.define(version: 20150602094154) do
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
 
   create_table "whitelisted_identities", force: :cascade do |t|
-    t.integer  "partner_id",                         null: false
+    t.integer  "partner_id",                        null: false
     t.string   "full_name",              limit: 50
     t.string   "first_name",             limit: 50
     t.string   "last_name",              limit: 50
     t.string   "id_type",                limit: 20
     t.string   "id_number",              limit: 50
-    t.string   "id_country",             limit: 255
+    t.string   "id_country"
     t.date     "id_issue_date"
     t.date     "id_expiry_date"
     t.string   "is_verified",            limit: 1
@@ -360,8 +363,8 @@ ActiveRecord::Schema.define(version: 20150602094154) do
     t.string   "created_by",             limit: 20
     t.string   "updated_by",             limit: 20
     t.integer  "lock_version"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "whitelisted_identities", ["last_used_with_txn_id"], name: "index_whitelisted_identities_on_last_used_with_txn_id"

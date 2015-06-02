@@ -7,33 +7,51 @@ describe PurposeCode do
   end
 
   context 'validation' do
-    [:code, :description, :is_enabled, :txn_limit, :rbi_code].each do |att|
+    [:code, :description, :is_enabled, :txn_limit].each do |att|
       it { should validate_presence_of(att) }
     end
 
     [:code].each do |att|
       it { should validate_uniqueness_of(att) }
     end
-    [:code,:rbi_code].each do |att|
+    [:code].each do |att|
       it { should validate_length_of(att).is_at_least(4) }
       it { should validate_length_of(att).is_at_most(4) }
     end
 
+    [:rbi_code].each do |att|
+      it { should validate_length_of(att).is_at_least(5) }
+      it { should validate_length_of(att).is_at_most(5) }
+    end
+
     context "code format" do
       it "should allow valid format" do 
-        [:code,:rbi_code].each do |att|
+        [:code].each do |att|
           should allow_value('ab1V').for(att)
           should allow_value('acde').for(att)
           should allow_value('1343').for(att)
           should allow_value('aBCD').for(att)
         end
+
+        [:rbi_code].each do |att|
+          should allow_value('ab1Vi').for(att)
+          should allow_value('acde0').for(att)
+          should allow_value('13439').for(att)
+          should allow_value('aBCDk').for(att)
+        end
       end
 
       it "should not allow invalid format" do 
-        [:code,:rbi_code].each do |att|
+        [:code].each do |att|
           should_not allow_value('a 1V').for(att)
           should_not allow_value('@acd').for(att)
           should_not allow_value('134\n').for(att)
+        end
+
+        [:rbi_code].each do |att|
+          should_not allow_value('va 1V').for(att)
+          should_not allow_value('b@acd').for(att)
+          should_not allow_value('8134\n').for(att)
         end
       end
     end
