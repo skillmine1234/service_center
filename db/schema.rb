@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150602085257) do
+ActiveRecord::Schema.define(version: 20150602094154) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   limit: 255, null: false
@@ -238,7 +238,7 @@ ActiveRecord::Schema.define(version: 20150602085257) do
     t.string   "tech_email_id",             limit: 255
     t.string   "ops_email_id",              limit: 255
     t.string   "account_no",                limit: 20,              null: false
-    t.string   "account_ifsc",              limit: 20,              null: false
+    t.string   "account_ifsc",              limit: 20
     t.integer  "txn_hold_period_days",                  default: 7, null: false
     t.string   "identity_user_id",          limit: 20
     t.float    "low_balance_alert_at"
