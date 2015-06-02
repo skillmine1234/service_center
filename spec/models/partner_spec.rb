@@ -64,7 +64,7 @@ describe Partner do
 
       it "should not allow invalid format" do 
         [:code,:name].each do |att|
-          should_not allow_value('ab d').for(att)
+          should_not allow_value('ab*d').for(att)
           should_not allow_value('@acd').for(att)
           should_not allow_value('134\n').for(att)
         end
@@ -77,6 +77,9 @@ describe Partner do
         partner.should be_valid
         partner.errors_on(:account_ifsc).should == []
         partner = Factory.build(:partner, :account_ifsc => 'abcd01234bh', :account_no => '1234567890123456')
+        partner.should be_valid
+        partner.errors_on(:account_ifsc).should == []
+        partner = Factory.build(:partner, :account_ifsc => nil, :account_no => '1234567890123456')
         partner.should be_valid
         partner.errors_on(:account_ifsc).should == []
         partner = Factory.build(:partner, :account_ifsc => 'abcd11234bh', :account_no => '1234567890123456')
