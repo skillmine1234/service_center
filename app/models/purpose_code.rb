@@ -44,7 +44,7 @@ class PurposeCode < ActiveRecord::Base
   end
 
   def self.options_for_bene_and_rem_types
-    [['Individual','I'],['Customer','C']]
+    [['Individual','I'],['Corporates','C']]
   end
   
   def convert_disallowed_bene_types_to_string(value)

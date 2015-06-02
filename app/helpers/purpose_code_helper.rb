@@ -12,11 +12,11 @@ module PurposeCodeHelper
   
   def disallowed_bene_and_rem_types_on_show_page(value)
     if (value == "I,C")
-      "Individual,Customer"
+      "Individual,Corporates"
     elsif (value == "I")
       "Individual"
     elsif (value == "C")
-      "Customer"
+      "Corporates"
     end
   end
   

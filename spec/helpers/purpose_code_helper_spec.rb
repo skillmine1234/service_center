@@ -25,11 +25,11 @@ describe PurposeCodeHelper do
   context 'disallowed_rem_and_bene_types_values_on_show_page'do    
     it 'should show values on show page' do
       purpose_code= Factory.build(:purpose_code, :disallowed_rem_types => "I,C")
-      disallowed_bene_and_rem_types_on_show_page("I,C").should == "Individual,Customer"
+      disallowed_bene_and_rem_types_on_show_page("I,C").should == "Individual,Corporates"
       purpose_code= Factory.build(:purpose_code, :disallowed_rem_types => "I")
       disallowed_bene_and_rem_types_on_show_page("I").should == "Individual"
       purpose_code= Factory.build(:purpose_code, :disallowed_rem_types => "C")
-      disallowed_bene_and_rem_types_on_show_page("C").should == "Customer"
+      disallowed_bene_and_rem_types_on_show_page("C").should == "Corporates"
     end
   end
 
