@@ -7,7 +7,7 @@ describe PurposeCode do
   end
 
   context 'validation' do
-    [:code, :description, :is_enabled, :txn_limit, :daily_txn_limit, :rbi_code].each do |att|
+    [:code, :description, :is_enabled, :txn_limit, :rbi_code].each do |att|
       it { should validate_presence_of(att) }
     end
 

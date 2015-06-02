@@ -3,7 +3,7 @@ class PurposeCode < ActiveRecord::Base
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
 
-  validates_presence_of :code, :description, :is_enabled, :txn_limit, :daily_txn_limit, :rbi_code
+  validates_presence_of :code, :description, :is_enabled, :txn_limit, :rbi_code
   validates_uniqueness_of :code
   validates :code, format: {with: /\A[A-Za-z0-9]+\z/}, length: {maximum: 4, minimum: 4}
   validates :rbi_code, format: {with: /\A[A-Za-z0-9]+\z/}, length: {maximum: 4, minimum: 4}
