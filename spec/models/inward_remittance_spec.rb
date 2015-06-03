@@ -27,4 +27,20 @@ describe InwardRemittance do
       inward_remittance.beneficiary_address.should == "addr1 addr2 addr3"
     end
   end
+  
+  context "reply_time" do 
+    it "should return reply time" do 
+      inward_remittance = Factory(:inward_remittance, :rep_timestamp => '2015-04-20 20:12:44', :req_timestamp => '2015-04-20 15:12:44')
+      inward_remittance.reply_time.should == 300
+    end
+  end
+  
+  context "self_transfer?" do 
+    it "should return is_self_transfer?" do 
+      inward_remittance = Factory.build(:inward_remittance, :is_self_transfer => 'Y')
+      inward_remittance.self_transfer?.should == true
+      inward_remittance = Factory.build(:inward_remittance, :is_self_transfer => 'N')
+      inward_remittance.self_transfer?.should == false
+    end
+  end
 end

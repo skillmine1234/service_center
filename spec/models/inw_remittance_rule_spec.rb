@@ -66,4 +66,23 @@ describe InwRemittanceRule do
       rule.errors_on("pattern_salutations").should == ["are invalid due to empty spaces"]
     end
   end
+  
+  context "formated_pattern_remitters" do 
+    it "should format formated_pattern_remitters" do 
+      rule = Factory.build(:inw_remittance_rule, :pattern_remitters => "1,2")
+      rule.formated_pattern_remitters.should == "1\r\n2"
+    end
+  end
+  
+  context "format_fields" do
+    it "should format format_fields" do
+      rule = Factory.build(:inw_remittance_rule, :pattern_individuals => "1\r\n2", :pattern_corporates => "1\r\n2", :pattern_beneficiaries => "1\r\n2", :pattern_remitters => "1\r\n2", :pattern_salutations => "1\r\n2")
+      rule.format_fields
+      rule.pattern_individuals.should == "1,2"
+      rule.pattern_corporates.should == "1,2"
+      rule.pattern_beneficiaries.should == "1,2"
+      rule.pattern_remitters.should == "1,2"
+      rule.pattern_salutations.should == "1,2"
+    end
+  end
 end

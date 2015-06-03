@@ -131,5 +131,25 @@ describe PurposeCode do
       purpose_code.convert_disallowed_bene_types_to_string("C").should == ""
       
     end
-  end    
+  end   
+  
+  context "formated_pattern_beneficiaries" do 
+    it "should format pattern_beneficiaries" do 
+      purpose_code = Factory.build(:purpose_code, :pattern_beneficiaries => "1,2")
+      purpose_code.formated_pattern_beneficiaries.should == "1\r\n2"
+    end
+  end  
+  
+  context "options_for_bene_and_rem_types" do
+    it "should return options for disallowed remitter and beneficiary types" do
+      PurposeCode.options_for_bene_and_rem_types.should == [['Individual','I'],['Corporates','C']]
+    end
+  end
+  
+  context "format_fields" do 
+    it "should format fields" do 
+      purpose_code = Factory.build(:purpose_code, :pattern_beneficiaries => "1\r\n2")
+      purpose_code.format_fields.should == "1,2"
+    end
+  end  
 end
