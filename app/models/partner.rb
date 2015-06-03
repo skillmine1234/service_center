@@ -12,7 +12,7 @@ class Partner < ActiveRecord::Base
   validates :account_no, :numericality => {:only_integer => true}, length: {in: 10..16}
   validates :account_ifsc, format: {with: /\A[A-Z|a-z]{4}[0][A-Za-z0-9]{6}+\z/, :allow_blank => true }
   validates :txn_hold_period_days, :numericality => { :greater_than => 0, :less_than => 16}
-  validates :code, format: {with: /\A[A-Za-z0-9]+\z/}, length: {maximum: 10, minimum: 10}
+  validates :code, format: {with: /\A[A-Za-z0-9]+\z/}, length: {maximum: 10, minimum: 1}
   validates :name, format: {with: /\A[A-Za-z0-9\s]+\z/}
   validates :customer_id, :numericality => {:only_integer => true}
   validates :mmid, :numericality => {:only_integer => true}, length: {maximum: 7, minimum: 7}, :allow_blank => true
@@ -23,7 +23,7 @@ class Partner < ActiveRecord::Base
 
   def imps_and_mmid
     errors.add(:mmid,"is mandatory") if allow_imps == 'Y' and mmid.to_s.empty?
-    errors.add(:allow_imps,"should be checked") if allow_imps == 'N' and !mmid.to_s.empty?
+    errors.add(:mobile_no,"is mandatory") if allow_imps == 'Y' and mobile_no.to_s.empty?
   end
 
   def check_email_addresses

@@ -104,10 +104,10 @@ describe Partner do
         partner.errors_on("mmid").should == ["is mandatory"]
       end
 
-      it "imps should be 'Y' if mmid is present" do 
-        partner = Factory.build(:partner, :allow_imps => 'N')
+      it "should validate if mobile_no if imps is true" do 
+        partner = Factory.build(:partner, :mobile_no => nil, :allow_imps => 'Y')
         partner.should_not be_valid
-        partner.errors_on("allow_imps").should == ["should be checked"]
+        partner.errors_on("mobile_no").should == ["is mandatory"]
       end
     end
 
