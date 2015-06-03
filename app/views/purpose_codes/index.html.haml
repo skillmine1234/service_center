@@ -51,13 +51,13 @@
         %td{:style=>'text-align:left;'}
           = purpose_code.description
         %td{:style=>'text-align:left;'}
-          = purpose_code.txn_limit
+          = '%.2f' % purpose_code.txn_limit
         %td{:style=>'text-align:left;'}
-          = purpose_code.mtd_txn_limit_self
+          = purpose_code.mtd_txn_limit_self.nil? ? purpose_code.mtd_txn_limit_self : '%.2f' % purpose_code.mtd_txn_limit_self
         %td{:style=>'text-align:left;'}
           = purpose_code.mtd_txn_cnt_self
         %td{:style=>'text-align:left;'}
-          = purpose_code.mtd_txn_limit_sp
+          = purpose_code.mtd_txn_limit_sp.nil? ? purpose_code.mtd_txn_limit_sp : '%.2f' % purpose_code.mtd_txn_limit_sp
         %td{:style=>'text-align:left;'}
           = purpose_code.mtd_txn_cnt_sp
         %td{:style=>'text-align:left;'}
