@@ -7,33 +7,51 @@ describe PurposeCode do
   end
 
   context 'validation' do
-    [:code, :description, :is_enabled, :txn_limit, :daily_txn_limit, :mtd_txn_cnt_self, :rbi_code].each do |att|
+    [:code, :description, :is_enabled, :txn_limit].each do |att|
       it { should validate_presence_of(att) }
     end
 
     [:code].each do |att|
       it { should validate_uniqueness_of(att) }
     end
-    [:code,:rbi_code].each do |att|
+    [:code].each do |att|
+      it { should validate_length_of(att).is_at_least(4) }
+      it { should validate_length_of(att).is_at_most(4) }
+    end
+
+    [:rbi_code].each do |att|
       it { should validate_length_of(att).is_at_least(5) }
       it { should validate_length_of(att).is_at_most(5) }
     end
 
     context "code format" do
       it "should allow valid format" do 
-        [:code,:rbi_code].each do |att|
-          should allow_value('abc1V').for(att)
-          should allow_value('abcde').for(att)
-          should allow_value('12343').for(att)
-          should allow_value('aABCD').for(att)
+        [:code].each do |att|
+          should allow_value('ab1V').for(att)
+          should allow_value('acde').for(att)
+          should allow_value('1343').for(att)
+          should allow_value('aBCD').for(att)
+        end
+
+        [:rbi_code].each do |att|
+          should allow_value('ab1Vi').for(att)
+          should allow_value('acde0').for(att)
+          should allow_value('13439').for(att)
+          should allow_value('aBCDk').for(att)
         end
       end
 
       it "should not allow invalid format" do 
-        [:code,:rbi_code].each do |att|
-          should_not allow_value('abc 1V').for(att)
-          should_not allow_value('@abcd').for(att)
-          should_not allow_value('1234\n').for(att)
+        [:code].each do |att|
+          should_not allow_value('a 1V').for(att)
+          should_not allow_value('@acd').for(att)
+          should_not allow_value('134\n').for(att)
+        end
+
+        [:rbi_code].each do |att|
+          should_not allow_value('va 1V').for(att)
+          should_not allow_value('b@acd').for(att)
+          should_not allow_value('8134\n').for(att)
         end
       end
     end
@@ -73,6 +91,23 @@ describe PurposeCode do
         purpose_code = Factory.build(:purpose_code, :mtd_txn_limit_sp => 1000, :txn_limit => 1200)
         purpose_code.should_not be_valid
         purpose_code.errors_on("mtd_txn_limit_sp").should == ["is less than transaction limit"]
+      end
+    end
+
+    context "formated_pattern_beneficiaries" do 
+      it "should format pattern_beneficiaries" do 
+        purpose_code = Factory.build(:purpose_code, :pattern_beneficiaries => "1,2")
+        purpose_code.formated_pattern_beneficiaries.should == "1\r\n2"
+      end 
+    end
+
+    context "validate_keywords" do 
+      it "should validate keywords" do 
+        purpose_code = Factory.build(:purpose_code, :pattern_beneficiaries => "1234,ese@sdgs")
+        purpose_code.should_not be_valid
+        purpose_code.errors_on("pattern_beneficiaries").should == ["are invalid due to ese@sdgs"]
+        purpose_code = Factory.build(:purpose_code, :pattern_beneficiaries => "1234,esesdgs")
+        purpose_code.should be_valid
       end
     end
   end

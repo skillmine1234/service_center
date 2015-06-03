@@ -15,7 +15,7 @@ class AmlSearchController < ApplicationController
         if params[:search_params][:firstName].present?
           redirect_to :action => 'results', :params => params
         else
-          flash[:alert] = "First Name should not be empty"
+          flash[:alert] = "Name should not be empty"
         end
       end
     end

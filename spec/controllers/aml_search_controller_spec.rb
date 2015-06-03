@@ -51,7 +51,7 @@ describe AmlSearchController do
   context "find_search_results" do 
     it "should return error if first name is empty" do
       get :find_search_results, :search_params => {:firstName => ""}
-      flash[:alert].should  match(/First Name should not be empty/)
+      flash[:alert].should  match(/Name should not be empty/)
     end
 
     it "should assign results to @results" do

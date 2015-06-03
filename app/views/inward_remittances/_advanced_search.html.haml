@@ -1,7 +1,7 @@
 = form_tag '', :method => 'get', :class => 'form-horizontal', :autocomplete=>"off" do
   .control-group
     = label_tag "Status", nil, :class => 'control-label'
-    = text_field_tag :status, params[:status]
+    = select_tag :status, options_for_select([['ONHOLD','ONHOLD'],['SENT_TO_BENEFICIARY','SENT_TO_BENEFICIARY'],['COMPLETED','COMPLETED'],['FAILED','FAILED']],params[:status]),:prompt => 'ANY'
   .control-group
     = label_tag "Request No", nil, :class => 'control-label'
     = text_field_tag :request_no, params[:request_no]
@@ -9,11 +9,16 @@
     = label_tag "Partner Code", nil, :class => 'control-label'
     = text_field_tag :partner_code, params[:partner_code]
   .control-group
+    = label_tag "Request Transfer Type", nil, :class => 'control-label'
+    = select_tag :req_transfer_type, options_for_select([['NEFT','NEFT'],['IMPS','IMPS'],['RTGS','RTGS']],params[:req_transfer_type]),:prompt => 'ANY'
+  .control-group
     = label_tag "Transfer Type", nil, :class => 'control-label'
-    = text_field_tag :transfer_type, params[:transfer_type]
+    = select_tag :transfer_type, options_for_select([['NEFT','NEFT'],['IMPS','IMPS'],['RTGS','RTGS'],['FT','FT']],params[:transfer_type]),:prompt => 'ANY'
   .control-group
     = label_tag "Transfer Amount", nil, :class => 'control-label'
-    = text_field_tag :transfer_amount, params[:transfer_amount]
+    = text_field_tag :from_amount, params[:from_amount]
+    And
+    = text_field_tag :to_amount, params[:to_amount]
   .control-group
     = label_tag "Request Date", nil, :class => 'control-label'
     = text_field_tag :from_date, params[:from_date]

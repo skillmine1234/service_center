@@ -22,10 +22,16 @@
     %br
       = "Purpose Codes"
   .box
-    = link_to edit_inw_remittance_rule_path(InwRemittanceRule.first) do
-      = image_tag 'rules.jpeg', :size => "80x80"
-    %br
-      = "Rules"
+    - if !InwRemittanceRule.first.nil?
+      = link_to edit_inw_remittance_rule_path(InwRemittanceRule.first) do
+        = image_tag 'rules.jpeg', :size => "80x80"
+      %br
+        = "Rules"
+    - else
+      = link_to error_msg_path do
+        = image_tag 'rules.jpeg', :size => "80x80"
+      %br
+        = "Rules"
   .box
     = link_to '/banks' do
       = image_tag 'bank.jpeg', :size => "80x80"

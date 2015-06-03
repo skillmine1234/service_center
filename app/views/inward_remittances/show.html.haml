@@ -12,7 +12,7 @@
       = link_to @inward_remittance.attempt_no, inward_remittances_path({:req_no => @inward_remittance.req_no})
     %h3
       Request At:
-      =@inward_remittance.req_timestamp.strftime("%d/%m/%Y %I:%M%p")
+      = @inward_remittance.req_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p")
     %h3
       Request XML:
       = link_to "Show Request", "#", :class => 'request-link', :href => "#requestText"
@@ -60,7 +60,7 @@
             %td= @inward_remittance.req_transfer_type
         %tr
           %td.label Self Transfer?
-          %td= check_box_tag :transfer,@inward_remittance.is_self_transfer, @inward_remittance.self_transfer?, {:disabled => false}
+          %td= check_box_tag :transfer,@inward_remittance.is_self_transfer, @inward_remittance.self_transfer?, {:disabled => true}
       %hr{:style=>'background-color: #F1F2F8; width: 220%'}    
       %h3 
         = "Remitter: " + "#{@inward_remittance.remitter_type}" + " (" 

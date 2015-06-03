@@ -50,19 +50,19 @@
           %tr
             %td.label Monthly Transaction Value (Self)
             %td.value
-              = @purpose_code.mtd_txn_cnt_self
+              = @purpose_code.mtd_txn_limit_self
             %td#msg-error
               = error_message_for(@purpose_code, :mtd_txn_limit_self, :prepend_text => "")
           %tr
             %td.label Monthly Transaction Count (Same Party)
             %td.value
-              = @purpose_code.mtd_txn_cnt_self
+              = @purpose_code.mtd_txn_cnt_sp
             %td#msg-error
               = error_message_for(@purpose_code, :mtd_txn_cnt_sp, :prepend_text => "")
           %tr
             %td.label Monthly Transaction Value (Same Party)
             %td.value
-              = @purpose_code.mtd_txn_cnt_self
+              = @purpose_code.mtd_txn_limit_sp
             %td#msg-error
               = error_message_for(@purpose_code, :mtd_txn_limit_sp, :prepend_text => "")
           %tr
@@ -82,5 +82,11 @@
             %td
               = @purpose_code.rbi_code
             %td#msg-error
-              = error_message_for(@purpose_code, :created_by, :prepend_text => "")
+              = error_message_for(@purpose_code, :rbi_code, :prepend_text => "")
+          %tr
+            %td.label Required Names In Beneficiaries
+            %td.value
+              = @purpose_code.pattern_beneficiaries
+            %td#msg-error
+              = error_message_for(@purpose_code, :pattern_beneficiaries, :prepend_text => "")
       = link_to 'Back to purpose_codes', purpose_codes_path

@@ -90,49 +90,49 @@ describe PartnersController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested partner" do
-        partner = Factory(:partner, :code => "11")
+        partner = Factory(:partner, :code => "1111111111")
         params = partner.attributes.slice(*partner.class.attribute_names)
-        params[:code] = "15"
+        params[:code] = "1555511111"
         put :update, {:id => partner.id, :partner => params}
         partner.reload
-        partner.code.should == "15"
+        partner.code.should == "1555511111"
       end
 
       it "assigns the requested partner as @partner" do
-        partner = Factory(:partner, :code => "11")
+        partner = Factory(:partner, :code => "1111111111")
         params = partner.attributes.slice(*partner.class.attribute_names)
-        params[:code] = "15"
+        params[:code] = "1555511111"
         put :update, {:id => partner.to_param, :partner => params}
         assigns(:partner).should eq(partner)
       end
 
       it "redirects to the partner" do
-        partner = Factory(:partner, :code => "11")
+        partner = Factory(:partner, :code => "1111111111")
         params = partner.attributes.slice(*partner.class.attribute_names)
-        params[:code] = "15"
+        params[:code] = "1555511111"
         put :update, {:id => partner.to_param, :partner => params}
         response.should redirect_to(partner)
       end
 
       it "should raise error when tried to update at same time by many" do
-        partner = Factory(:partner, :code => "11")
+        partner = Factory(:partner, :code => "1111111111")
         params = partner.attributes.slice(*partner.class.attribute_names)
-        params[:code] = "15"
+        params[:code] = "1555511111"
         partner2 = partner
         put :update, {:id => partner.id, :partner => params}
         partner.reload
-        partner.code.should == "15"
-        params[:code] = "18"
+        partner.code.should == "1555511111"
+        params[:code] = "1888811111"
         put :update, {:id => partner2.id, :partner => params}
         partner.reload
-        partner.code.should == "15"
+        partner.code.should == "1555511111"
         flash[:alert].should  match(/Someone edited the partner the same time you did. Please re-apply your changes to the partner/)
       end
     end
 
     describe "with invalid params" do
       it "assigns the partner as @partner" do
-        partner = Factory(:partner, :code => "11")
+        partner = Factory(:partner, :code => "1111111111")
         params = partner.attributes.slice(*partner.class.attribute_names)
         params[:code] = nil
         put :update, {:id => partner.to_param, :partner => params}

@@ -17,20 +17,22 @@
       Status
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Request No
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Attempt No
     %th{:style=>'Text-align:left; background-color: lightblue;'}
-      Partner Name
+      Partner
     %th{:style=>'Text-align:left; background-color: lightblue;'}
       Remitter Name
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Beneficiary Name
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Request Transfer Type
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Transfer Type
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Transfer Amount 
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Request Date
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Response Date
   .tbody
     - @inward_remittances.each do |inward_remittance|   
       %tr
@@ -41,16 +43,18 @@
         %td{:style=>'text-align:left;'}
           = inward_remittance.req_no
         %td{:style=>'text-align:left;'}
-          = inward_remittance.attempt_no
-        %td{:style=>'text-align:left;'}
-          = inward_remittance.partner_code.to_s + inward_remittance.partner.try(:name).to_s
+          = inward_remittance.partner_code.to_s + "-" +inward_remittance.partner.try(:name).to_s
         %td{:style=>'text-align:left;'}
           = inward_remittance.rmtr_full_name
         %td{:style=>'text-align:left;'}
           = inward_remittance.bene_full_name
         %td{:style=>'text-align:left;'}
+          = inward_remittance.req_transfer_type
+        %td{:style=>'text-align:left;'}
           = inward_remittance.transfer_type
         %td{:style=>'text-align:left;'}
           = inward_remittance.transfer_amount
         %td{:style=>'text-align:left;'}
-          =inward_remittance.req_timestamp.strftime("%d/%m/%Y %I:%M%p")
+          = inward_remittance.req_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p")
+        %td{:style=>'text-align:left;'}
+          = inward_remittance.rep_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p")

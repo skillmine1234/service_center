@@ -55,18 +55,18 @@ describe Partner do
     context "code format" do
       it "should allow valid format" do 
         [:code,:name].each do |att|
-          should allow_value('abcd12V').for(att)
-          should allow_value('abcd').for(att)
-          should allow_value('1234').for(att)
-          should allow_value('aABCD').for(att)
+          should allow_value('a12232424V').for(att)
+          should allow_value('abcddfgdfg').for(att)
+          should allow_value('1234545435').for(att)
+          should allow_value('aBCDdfdsgs').for(att)
         end
       end
 
       it "should not allow invalid format" do 
         [:code,:name].each do |att|
-          should_not allow_value('abcd 12V').for(att)
-          should_not allow_value('@abcd').for(att)
-          should_not allow_value('1234\n').for(att)
+          should_not allow_value('ab*dsgdsgf').for(att)
+          should_not allow_value('@acddsfdfd').for(att)
+          should_not allow_value('134\ndsfdsg').for(att)
         end
       end
     end
@@ -77,6 +77,9 @@ describe Partner do
         partner.should be_valid
         partner.errors_on(:account_ifsc).should == []
         partner = Factory.build(:partner, :account_ifsc => 'abcd01234bh', :account_no => '1234567890123456')
+        partner.should be_valid
+        partner.errors_on(:account_ifsc).should == []
+        partner = Factory.build(:partner, :account_ifsc => nil, :account_no => '1234567890123456')
         partner.should be_valid
         partner.errors_on(:account_ifsc).should == []
         partner = Factory.build(:partner, :account_ifsc => 'abcd11234bh', :account_no => '1234567890123456')

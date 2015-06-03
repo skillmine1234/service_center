@@ -90,49 +90,49 @@ describe PurposeCodesController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested purpose_code" do
-        purpose_code = Factory(:purpose_code, :code => "11111")
+        purpose_code = Factory(:purpose_code, :code => "1111")
         params = purpose_code.attributes.slice(*purpose_code.class.attribute_names)
-        params[:code] = "15555"
+        params[:code] = "1555"
         put :update, {:id => purpose_code.id, :purpose_code => params}
         purpose_code.reload
-        purpose_code.code.should == "15555"
+        purpose_code.code.should == "1555"
       end
 
       it "assigns the requested purpose_code as @purpose_code" do
-        purpose_code = Factory(:purpose_code, :code => "11111")
+        purpose_code = Factory(:purpose_code, :code => "1111")
         params = purpose_code.attributes.slice(*purpose_code.class.attribute_names)
-        params[:code] = "15555"
+        params[:code] = "1555"
         put :update, {:id => purpose_code.to_param, :purpose_code => params}
         assigns(:purpose_code).should eq(purpose_code)
       end
 
       it "redirects to the purpose_code" do
-        purpose_code = Factory(:purpose_code, :code => "11111")
+        purpose_code = Factory(:purpose_code, :code => "1111")
         params = purpose_code.attributes.slice(*purpose_code.class.attribute_names)
-        params[:code] = "15555"
+        params[:code] = "1555"
         put :update, {:id => purpose_code.to_param, :purpose_code => params}
         response.should redirect_to(purpose_code)
       end
 
       it "should raise error when tried to update at same time by many" do
-        purpose_code = Factory(:purpose_code, :code => "11111")
+        purpose_code = Factory(:purpose_code, :code => "1111")
         params = purpose_code.attributes.slice(*purpose_code.class.attribute_names)
-        params[:code] = "15555"
+        params[:code] = "1555"
         purpose_code2 = purpose_code
         put :update, {:id => purpose_code.id, :purpose_code => params}
         purpose_code.reload
-        purpose_code.code.should == "15555"
-        params[:code] = "18888"
+        purpose_code.code.should == "1555"
+        params[:code] = "1888"
         put :update, {:id => purpose_code2.id, :purpose_code => params}
         purpose_code.reload
-        purpose_code.code.should == "15555"
+        purpose_code.code.should == "1555"
         flash[:alert].should  match(/Someone edited the purpose_code the same time you did. Please re-apply your changes to the purpose_code/)
       end
     end
 
     describe "with invalid params" do
       it "assigns the purpose_code as @purpose_code" do
-        purpose_code = Factory(:purpose_code, :code => "11111")
+        purpose_code = Factory(:purpose_code, :code => "1111")
         params = purpose_code.attributes.slice(*purpose_code.class.attribute_names)
         params[:code] = nil
         put :update, {:id => purpose_code.to_param, :purpose_code => params}
