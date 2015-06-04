@@ -10,10 +10,15 @@ describe InwardRemittanceHelper do
       
       inward_remittance = Factory(:inward_remittance,:req_no => 'R1234')
       find_inward_remittances({:request_no => 'R1234'}).should == [inward_remittance]
+      find_inward_remittances({:request_no => 'r1234'}).should == [inward_remittance]
+      find_inward_remittances({:request_no => 'r12'}).should == [inward_remittance]
+      find_inward_remittances({:request_no => 'R12'}).should == [inward_remittance]
       find_inward_remittances({:request_no => '4321R'}).should == []
       
       inward_remittance = Factory(:inward_remittance,:partner_code => 'PARTNER1')
       find_inward_remittances({:partner_code => 'PARTNER1'}).should == [inward_remittance]
+      find_inward_remittances({:partner_code => 'PART'}).should == [inward_remittance]
+      find_inward_remittances({:partner_code => 'part'}).should == [inward_remittance]
       find_inward_remittances({:partner_code => 'PARTNER2'}).should == []
       
       inward_remittance = Factory(:inward_remittance,:req_transfer_type => 'IMPS')
