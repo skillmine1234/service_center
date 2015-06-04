@@ -18,9 +18,9 @@
     .control-group
       = f.label :imps_enabled, "*IMPS Enabled ?", :class => 'control-label'
       - if f.object.imps_enabled.nil?
-        = f.check_box :imps_enabled, {:checked => "checked"},"Y","N"
+        = f.check_box :imps_enabled, {:checked => "checked"},1,0
       - else
-        = f.check_box :imps_enabled, {},"Y","N"
+        = f.check_box :imps_enabled, {},1,0
       #msg-error
         = error_message_for(@bank, :imps_enabled, :prepend_text => "")
   .form-actions

@@ -30,7 +30,7 @@
           %tr
             %td.label IMPS Enabled?
             %td.value
-              = @bank.imps_enabled
+              = @bank.imps_enabled?
             %td#msg-error
               = error_message_for(@bank, :imps_enabled, :prepend_text => "")
           %tr
