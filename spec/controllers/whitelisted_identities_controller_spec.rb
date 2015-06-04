@@ -76,12 +76,9 @@ describe WhitelistedIdentitiesController do
 #  describe "GET " do
 #    describe 'download Attachment' do
 #      it 'should download attachment' do
-#        whitelisted_identity = Factory.build(:whitelisted_identity)
-#        puts "whitelisted_identity.id = #{whitelisted_identity.id}"
-#        attachment = Factory.build(:attachment, user_id: @user.id, attachable_id: whitelisted_identity.id, attachable_type: "WhitelistedIdentity", file: "/uploads/Screen_Shot_2015-05-19_at_7.02.24_pm.png")
-#        puts "attachment.id = #{attachment.id}"
+#        whitelisted_identity = Factory(:whitelisted_identity)
+#        attachment = Factory(:attachment, user_id: @user.id, attachable_id: whitelisted_identity.id, attachable_type: "WhitelistedIdentity", file: "/uploads/Screen_Shot_2015-05-19_at_7.02.24_pm.png")
 #        get :download_attachment, attachment_id: attachment.id
-#        assigns(:whitelisted_identity).should eq(whitelisted_identity)
 #      end
 #   end
 # end

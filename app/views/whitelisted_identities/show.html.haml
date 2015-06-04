@@ -88,37 +88,33 @@
       = link_to 'Back to whitelisted identities', whitelisted_identities_path
             
             
-  .form-extended{:style=>'background-color: #fafafa; width: 35%'}
+  .form-extended{:style=>'background-color: #fafafa; width: 35%; height: 50.5em'}
     #form-details
       %h3 Attachments(#{(@whitelisted_identity.attachments.count)})
       - unless @whitelisted_identity.attachments.nil?
         #attachment
           - @whitelisted_identity.attachments.order("created_at desc").limit(3).each do |attachment|
             .alert-info
-              =File.basename(attachment.file.path)
-              %br
               =attachment.note
               &nbsp &nbsp
             = link_to 'Download', download_attachment_path(:attachment_id => attachment.id)
             %p.muted
               = "#{(attachment.user.try(:name))} added the attachment on #{attachment.created_at.to_formatted_s(:long)}"
-              %br
+              %hr
               %br
           - if @whitelisted_identity.attachments.count > 3
-            %input#view_attachments{:name => "view", :type => "button", :value => "View All Attachments"}
+            %input#view_attachments{:name => "view", :type => "button", :value => "View All Attachments", :class => 'btn'}
             &nbsp
         #full_attachments{:hidden => true}
           - @whitelisted_identity.attachments.order("created_at desc").each do |attachment|
             .alert-info
-              =attachment.file
-              %br
               =attachment.note
               &nbsp &nbsp
             = link_to 'Download', download_attachment_path(:attachment_id => attachment.id)
             %p.muted
               = "#{attachment.user.try(:name)} added the attachment on #{attachment.created_at.to_formatted_s(:long)}"
             %hr
-          %input#hide_attachments{:name => "hide", :type => "button", :value => "Hide Attachments"}
+          %input#hide_attachments{:name => "hide", :type => "button", :value => "Hide Attachments", :class => 'btn'}
 
           
 

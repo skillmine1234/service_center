@@ -20,7 +20,7 @@ class WhitelistedIdentitiesController < ApplicationController
       redirect_to :back
     else
       @whitelisted_identity.created_by = current_user.id
-      @whitelisted_identity.save!
+      @whitelisted_identity.save
       flash[:alert] = 'Identity successfuly verified'
       redirect_to :back
     end
