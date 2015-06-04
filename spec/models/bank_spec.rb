@@ -29,5 +29,14 @@ describe Bank do
         bank.should_not be_valid
       end
     end
+
+    context "imps_enabled?" do 
+      it "should return 'Y' if imps_enabled is true and 'N' if false" do 
+        bank = Factory(:bank, :imps_enabled => 1)
+        bank.imps_enabled?.should == 'Y'
+        bank = Factory(:bank, :imps_enabled => 0)
+        bank.imps_enabled?.should == 'N'
+      end
+    end
   end
 end

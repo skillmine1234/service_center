@@ -38,7 +38,7 @@
           %tr
             %td.label Maximum Transaction Value
             %td.value
-              = @purpose_code.txn_limit
+              = '%.2f' % @purpose_code.txn_limit
             %td#msg-error
               = error_message_for(@purpose_code, :txn_limit, :prepend_text => "")
           %tr
@@ -50,7 +50,7 @@
           %tr
             %td.label Monthly Transaction Value (Self)
             %td.value
-              = @purpose_code.mtd_txn_limit_self
+              = @purpose_code.mtd_txn_limit_self.nil? ? @purpose_code.mtd_txn_limit_self : '%.2f' % @purpose_code.mtd_txn_limit_self
             %td#msg-error
               = error_message_for(@purpose_code, :mtd_txn_limit_self, :prepend_text => "")
           %tr
@@ -62,7 +62,7 @@
           %tr
             %td.label Monthly Transaction Value (Same Party)
             %td.value
-              = @purpose_code.mtd_txn_limit_sp
+              = @purpose_code.mtd_txn_limit_sp.nil? ? @purpose_code.mtd_txn_limit_sp : '%.2f' % @purpose_code.mtd_txn_limit_sp
             %td#msg-error
               = error_message_for(@purpose_code, :mtd_txn_limit_sp, :prepend_text => "")
           %tr

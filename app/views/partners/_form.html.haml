@@ -12,7 +12,10 @@
         = error_message_for(@partner, :code, :prepend_text => "")
     .control-group
       = f.label :enabled,"Enabled?", :class => 'control-label'
-      = f.check_box :enabled, {:checked => "checked"},"Y","N"
+      - if f.object.enabled.nil?
+        = f.check_box :enabled, {:checked => "checked"},"Y","N"
+      - else 
+        = f.check_box :enabled, {},"Y","N"
       #msg-error
         = error_message_for(@partner, :enabled, :prepend_text => "")
     .control-group
@@ -46,16 +49,6 @@
       #msg-error
         = error_message_for(@partner, :account_ifsc, :prepend_text => "")
     .control-group
-      = f.label :mmid, "MMID", :class => 'control-label'
-      = f.text_field :mmid, :maxlength => 7
-      #msg-error
-        = error_message_for(@partner, :mmid, :prepend_text => "")
-    .control-group
-      = f.label :mobile_no, "Mobile No", :class => 'control-label'
-      = f.text_field :mobile_no, :maxlength => 10
-      #msg-error
-        = error_message_for(@partner, :mobile_no, :prepend_text => "")
-    .control-group
       = f.label :transaction_hold_period, "*Transaction Hold Period In Days", :class => 'control-label'
       = f.number_field :txn_hold_period_days, min: 1
       #msg-error
@@ -75,20 +68,22 @@
       = f.check_box :remitter_email_allowed, {},"Y","N"
       #msg-error
         = error_message_for(@partner, :remitter_email_allowed, :prepend_text => "")
-  .form-extended
-    .control-group
-      = f.label :benificiary_sms_allowed, "Beneficiary SMS Allowed?", :class => 'control-label'
-      = f.check_box :beneficiary_sms_allowed, {},"Y","N"
-      #msg-error
-        = error_message_for(@partner, :beneficiary_sms_allowed, :prepend_text => "")
-    .control-group
-      = f.label :beneficiary_email_allowed, "Beneficiary Email Allowed?", :class => 'control-label'
-      = f.check_box :beneficiary_email_allowed, {},"Y","N"
-      #msg-error
-        = error_message_for(@partner, :beneficiary_email_allowed, :prepend_text => "")
+    / .control-group
+    /   = f.label :benificiary_sms_allowed, "Beneficiary SMS Allowed?", :class => 'control-label'
+    /   = f.check_box :beneficiary_sms_allowed, {},"Y","N"
+    /   #msg-error
+    /     = error_message_for(@partner, :beneficiary_sms_allowed, :prepend_text => "")
+    / .control-group
+    /   = f.label :beneficiary_email_allowed, "Beneficiary Email Allowed?", :class => 'control-label'
+    /   = f.check_box :beneficiary_email_allowed, {},"Y","N"
+    /   #msg-error
+    /     = error_message_for(@partner, :beneficiary_email_allowed, :prepend_text => "")
     .control-group
       = f.label :neft_allowd, "NEFT Allowed?", :class => 'control-label'
-      = f.check_box :allow_neft, {:checked => "checked"},"Y","N"
+      - if f.object.allow_neft.nil?
+        = f.check_box :allow_neft, {:checked => "checked"},"Y","N"
+      - else
+        = f.check_box :allow_neft, {},"Y","N"
       #msg-error
         = error_message_for(@partner, :allow_neft, :prepend_text => "")
     .control-group
@@ -96,11 +91,25 @@
       = f.check_box :allow_rtgs, {},"Y","N"
       #msg-error
         = error_message_for(@partner, :allow_rgts, :prepend_text => "")
+  .form-extended
     .control-group
       = f.label :imps_allowed, "IMPS Allowed?", :class => 'control-label'
-      = f.check_box :allow_imps, {:checked => "checked"},"Y","N"
+      - if f.object.allow_imps.nil?
+        = f.check_box :allow_imps, {:checked => "checked"},"Y","N"
+      - else
+        = f.check_box :allow_imps, {},"Y","N"
       #msg-error
         = error_message_for(@partner, :allow_imps, :prepend_text => "")
+    .control-group
+      = f.label :mmid, "MMID", :class => 'control-label'
+      = f.text_field :mmid, :maxlength => 7
+      #msg-error
+        = error_message_for(@partner, :mmid, :prepend_text => "")
+    .control-group
+      = f.label :mobile_no, "Mobile No", :class => 'control-label'
+      = f.text_field :mobile_no, :maxlength => 10
+      #msg-error
+        = error_message_for(@partner, :mobile_no, :prepend_text => "")
     .control-group
       = f.label :country, nil, :class => 'control-label'
       = country_select("partner", "country", except: ["IN"], selected: 'US')

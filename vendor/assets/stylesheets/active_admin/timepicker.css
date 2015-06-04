@@ -3,7 +3,7 @@
   width: 160px;
 }
 .ui-timepicker-div .ui-widget-header {
-    background: url("datepicker-header-bg.png") no-repeat 0px 0px;
+    background: image-url("datepicker-header-bg.png") no-repeat 0px 0px;
     height: 8px;
     padding: 16px 17px;
     position: relative;

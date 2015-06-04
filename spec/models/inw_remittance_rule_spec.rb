@@ -57,6 +57,32 @@ describe InwRemittanceRule do
       rule.should be_valid
       rule = Factory.build(:inw_remittance_rule, :pattern_individuals => "1234,ese sdgs", :pattern_corporates => "1234,ese-sdgs", :pattern_beneficiaries => "1234,(esesdgs)", :pattern_remitters => "1234,ese-sdgs", :pattern_salutations => "1234,e-(ses) dgs")
       rule.should be_valid
+      rule = Factory.build(:inw_remittance_rule, :pattern_individuals => " ", :pattern_corporates => " ", :pattern_beneficiaries => " ", :pattern_remitters => " , ", :pattern_salutations => " , , ")
+      rule.should_not be_valid
+      rule.errors_on("pattern_individuals").should == ["are invalid due to empty spaces"]
+      rule.errors_on("pattern_corporates").should == ["are invalid due to empty spaces"]
+      rule.errors_on("pattern_beneficiaries").should == ["are invalid due to empty spaces"]
+      rule.errors_on("pattern_remitters").should == ["are invalid due to empty spaces"]
+      rule.errors_on("pattern_salutations").should == ["are invalid due to empty spaces"]
+    end
+  end
+  
+  context "formated_pattern_remitters" do 
+    it "should format formated_pattern_remitters" do 
+      rule = Factory.build(:inw_remittance_rule, :pattern_remitters => "1,2")
+      rule.formated_pattern_remitters.should == "1\r\n2"
+    end
+  end
+  
+  context "format_fields" do
+    it "should format format_fields" do
+      rule = Factory.build(:inw_remittance_rule, :pattern_individuals => "1\r\n2", :pattern_corporates => "1\r\n2", :pattern_beneficiaries => "1\r\n2", :pattern_remitters => "1\r\n2", :pattern_salutations => "1\r\n2")
+      rule.format_fields
+      rule.pattern_individuals.should == "1,2"
+      rule.pattern_corporates.should == "1,2"
+      rule.pattern_beneficiaries.should == "1,2"
+      rule.pattern_remitters.should == "1,2"
+      rule.pattern_salutations.should == "1,2"
     end
   end
 end

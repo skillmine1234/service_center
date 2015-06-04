@@ -104,10 +104,10 @@ describe Partner do
         partner.errors_on("mmid").should == ["is mandatory"]
       end
 
-      it "imps should be 'Y' if mmid is present" do 
-        partner = Factory.build(:partner, :allow_imps => 'N')
+      it "should validate if mobile_no if imps is true" do 
+        partner = Factory.build(:partner, :mobile_no => nil, :allow_imps => 'Y')
         partner.should_not be_valid
-        partner.errors_on("allow_imps").should == ["should be checked"]
+        partner.errors_on("mobile_no").should == ["is mandatory"]
       end
     end
 
@@ -119,6 +119,15 @@ describe Partner do
         partner.errors_on("ops_email_id").should == ["are invalid due to 1234,esesdgs"]
         partner = Factory.build(:partner, :tech_email_id => "foo@ruby.com", :ops_email_id => "foo@ruby.com;bar@ruby.com")
         partner.should be_valid
+      end
+    end
+
+    context "country_name" do 
+      it "should return full name for the country code" do 
+        partner = Factory.build(:partner, :country => 'US')
+        partner.country_name.should == 'United States'
+        partner = Factory.build(:partner, :country => nil)
+        partner.country_name.should == nil
       end
     end
   end

@@ -38,7 +38,7 @@
         %td{:style=>'text-align:left;'}
           = bank.name
         %td{:style=>'text-align:left;'}
-          = bank.imps_enabled
+          = bank.imps_enabled?
         %td{:style=>'text-align:left;'}
           = bank.created_user.try(:username)
         %td{:style=>'text-align:left;'}

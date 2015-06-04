@@ -8,15 +8,18 @@ class InwRemittanceRule < ActiveRecord::Base
   def validate_keywords
     ["pattern_individuals","pattern_corporates", "pattern_beneficiaries","pattern_remitters","pattern_salutations"].each do |values|
       invalid_values = []
+      invalid_spaces = []
       value = self.send(values)
       unless value.nil?
-        value.split(/,/).each do |val| 
-          unless val =~ /\A[A-Za-z0-9\-\(\)\s]+\Z/
+        value.split(/,/).each do |val|
+          invalid_spaces << true if val.strip.empty? 
+          unless val =~ /\A[A-Za-z0-9\-\(\)\s]+\Z/ 
             invalid_values << val
           end
         end
       end
       errors.add(values.to_sym, "are invalid due to #{invalid_values.join(',')}") unless invalid_values.empty?
+      errors.add(values.to_sym, "are invalid due to empty spaces") unless invalid_spaces.empty?
     end
   end
 

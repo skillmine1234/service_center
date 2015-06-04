@@ -11,8 +11,11 @@
       #msg-error
         = error_message_for(@purpose_code, :code, :prepend_text => "")
     .control-group
-      = f.label :enabled, 'Enabled?', :class => 'control-label'
-      = f.check_box :is_enabled, {:checked => "checked"},"Y","N"
+      = f.label :enabled,"Enabled?", :class => 'control-label'
+      - if f.object.is_enabled.nil?
+        = f.check_box :is_enabled, {:checked => "checked"},"Y","N"
+      - else 
+        = f.check_box :is_enabled, {},"Y","N"
       #msg-error
         = error_message_for(@purpose_code, :is_enabled, :prepend_text => "")
     .control-group
