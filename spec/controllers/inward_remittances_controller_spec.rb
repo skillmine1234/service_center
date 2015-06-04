@@ -36,8 +36,20 @@ describe InwardRemittancesController do
       get :index
       expect(assigns(:inward_remittances)).to match_array(inward_remittances_with_max_attempt)
     end
+
+    it "assigns all inward_remittances with highest attempt_no for particular request_no on advanced search" do
+      inward_remittances = [Factory(:inward_remittance, :req_no => "TT0114", :attempt_no => 4, :partner_code => "PARTNER1")]
+      inward_remittances << Factory(:inward_remittance, :req_no => "TT0114", :attempt_no => 2, :partner_code => "PARTNER1")
+      inward_remittances << Factory(:inward_remittance, :req_no => "TT0114", :attempt_no => 3, :partner_code => "PARTNER1")
+      inward_remittances << Factory(:inward_remittance, :req_no => "TT0112", :attempt_no => 1, :partner_code => "PARTNER2")
+      
+      inward_remittances_with_max_attempt = [inward_remittances[0]]
+            
+      get :index, :advanced_search => true, :request_no => 'TT0114'
+      expect(assigns(:inward_remittances)).to match_array(inward_remittances_with_max_attempt)
+    end
     
-   it "assigns all inward_remittances in descending order of id" do
+    it "assigns all inward_remittances in descending order of id" do
      inward_remittances = [Factory(:inward_remittance, :req_no => "TT0222", :attempt_no => 1, :partner_code => "PARTNER1")]
      inward_remittances << Factory(:inward_remittance, :req_no => "TT0223", :attempt_no => 1, :partner_code => "PARTNER1")
      inward_remittances << Factory(:inward_remittance, :req_no => "TT0224", :attempt_no => 1, :partner_code => "PARTNER1")

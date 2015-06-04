@@ -13,14 +13,13 @@ class InwardRemittancesController < ApplicationController
 
   def index
     inward_remittances = InwardRemittance.order("id desc")
-    if params[:advanced_search].present?
-      inward_remittances = find_inward_remittances(params).order("id desc")
+    if params[:req_no]
+      inward_remittances = inward_remittances.where(:req_no => params[:req_no]).order("id desc") 
     else
-      if params[:req_no]
-        inward_remittances = inward_remittances.where(:req_no => params[:req_no]).order("id desc") 
-      else
-        maxQuery = InwardRemittance.select("max(attempt_no) as attempt_no,req_no").group(:req_no)      
-        inward_remittances = InwardRemittance.joins("inner join (#{maxQuery.to_sql}) a on a.req_no=inward_remittances.req_no and a.attempt_no=inward_remittances.attempt_no").order("inward_remittances.id DESC")
+      maxQuery = InwardRemittance.select("max(attempt_no) as attempt_no,req_no").group(:req_no)      
+      inward_remittances = InwardRemittance.joins("inner join (#{maxQuery.to_sql}) a on a.req_no=inward_remittances.req_no and a.attempt_no=inward_remittances.attempt_no").order("inward_remittances.id DESC")
+      if params[:advanced_search].present?
+        inward_remittances = find_inward_remittances(inward_remittances,params)
       end
     end
     @inward_remittances_count = inward_remittances.count
