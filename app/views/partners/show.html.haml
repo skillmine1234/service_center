@@ -66,18 +66,6 @@
             %td#msg-error
               = error_message_for(@partner, :account_ifsc, :prepend_text => "")
           %tr
-            %td.label MMID
-            %td.value
-              = @partner.mmid
-            %td#msg-error
-              = error_message_for(@partner, :mmid, :prepend_text => "")
-          %tr
-            %td.label Mobile No
-            %td.value
-              = @partner.mobile_no
-            %td#msg-error
-              = error_message_for(@partner, :mobile_no, :prepend_text => "")
-          %tr
             %td.label Transaction Hold Period Days
             %td.value
               = @partner.txn_hold_period_days
@@ -132,9 +120,21 @@
             %td#msg-error
               = error_message_for(@partner, :allow_imps, :prepend_text => "")
           %tr
+            %td.label MMID
+            %td.value
+              = @partner.mmid
+            %td#msg-error
+              = error_message_for(@partner, :mmid, :prepend_text => "")
+          %tr
+            %td.label Mobile No
+            %td.value
+              = @partner.mobile_no
+            %td#msg-error
+              = error_message_for(@partner, :mobile_no, :prepend_text => "")
+          %tr
             %td.label Country
             %td.value
-              = @partner.country
+              = @partner.country_name
             %td#msg-error
               = error_message_for(@partner, :country, :prepend_text => "")
           %tr

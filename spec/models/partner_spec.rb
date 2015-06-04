@@ -121,5 +121,14 @@ describe Partner do
         partner.should be_valid
       end
     end
+
+    context "country_name" do 
+      it "should return full name for the country code" do 
+        partner = Factory.build(:partner, :country => 'US')
+        partner.country_name.should == 'United States'
+        partner = Factory.build(:partner, :country => nil)
+        partner.country_name.should == nil
+      end
+    end
   end
 end

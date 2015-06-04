@@ -40,4 +40,9 @@ class Partner < ActiveRecord::Base
       errors.add(email_id.to_sym, "are invalid due to #{invalid_ids.join(',')}") unless invalid_ids.empty?
     end
   end
+
+  def country_name
+    country = ISO3166::Country[self.country]
+    country.translations[I18n.locale.to_s] || country.name rescue nil
+  end
 end
