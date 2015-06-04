@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :attachment do
     note "MyString"
-    file ActionDispatch::Http::UploadedFile.new(:tempfile => File.new("#{Rails.root}/spec/fixtures/rails.png"), :filename => "rails.png")
+    file Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/rails.png')))
     attachable nil
   end
 end

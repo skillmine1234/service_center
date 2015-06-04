@@ -20,7 +20,7 @@ class WhitelistedIdentitiesController < ApplicationController
       redirect_to :back
     else
       @whitelisted_identity.created_by = current_user.id
-      @whitelisted_identity.save!
+      @whitelisted_identity.save
       flash[:alert] = 'Identity successfuly verified'
       redirect_to :back
     end
@@ -38,10 +38,10 @@ class WhitelistedIdentitiesController < ApplicationController
   
   def download_attachment
     attachment = Attachment.find_by_id(params[:attachment_id])
-    if attachment.nil? || attachment.file.blank?
+    if attachment.nil?
      flash[:notice] = "File not found"
      redirect_to :back
-    elsif File.file?(attachment.file.path) == false
+    elsif attachment.file.blank? || File.file?(attachment.file.path) == false
       flash[:notice] = 'The attachment has been archived, and is no longer available for download.'
       redirect_to attachment.attachable
     else
