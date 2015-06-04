@@ -118,7 +118,7 @@
       %hr{:style=>'background-color: #F1F2F8; width: 120%'}
       %h3
         = "Beneficiary: " + "#{@inward_remittance.beneficiary_type}" + " (" 
-        = link_to @inward_remittance.rmtr_identity_count,:controller => :inward_remittances, :action => :beneficiary_identities, :id => @inward_remittance.id
+        = link_to @inward_remittance.bene_identity_count,:controller => :inward_remittances, :action => :beneficiary_identities, :id => @inward_remittance.id
         = " Identities)"
       %table.table.no-border
         %tr
