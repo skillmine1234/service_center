@@ -70,16 +70,20 @@ describe WhitelistedIdentitiesController do
         get :show, {:id => whitelisted_identity.id}
         assigns(:whitelisted_identity).should eq(whitelisted_identity)
       end
-    end
-    
+    end    
   end
-#  describe "GET " do
-#    describe 'download Attachment' do
-#      it 'should download attachment' do
-#        whitelisted_identity = Factory(:whitelisted_identity)
-#        attachment = Factory(:attachment, user_id: @user.id, attachable_id: whitelisted_identity.id, attachable_type: "WhitelistedIdentity", file: "/uploads/Screen_Shot_2015-05-19_at_7.02.24_pm.png")
-#        get :download_attachment, attachment_id: attachment.id
-#      end
-#   end
-# end
+  
+   describe "GET " do
+     describe 'download Attachment' do
+       it 'should download attachment' do
+         whitelisted_identity = Factory(:whitelisted_identity)
+         get :download_attachment, attachment_id: 0
+         flash[:notice].should match /File not found/
+         attachment = Factory(:attachment, user_id: @user.id, attachable_id: whitelisted_identity.id, attachable_type: "WhitelistedIdentity")
+         File.delete(attachment.file.path)
+         get :download_attachment, attachment_id: attachment.id
+         flash[:notice].should match /The attachment has been archived, and is no longer available for download./
+       end
+     end
+    end
 end
