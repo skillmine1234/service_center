@@ -20,14 +20,16 @@ class PurposeCode < ActiveRecord::Base
     unless pattern_beneficiaries.nil?
       invalid_values = []
       invalid_spaces = []
-      self.pattern_beneficiaries.split(/,/).each do |val| 
+      value = self.pattern_beneficiaries.split(/,/)
+      invalid_spaces << true if !value.to_s.empty? and value.split(/,/).empty?
+      value.each do |val| 
         invalid_spaces << true if val.strip.empty? 
         unless val =~ /\A[A-Za-z0-9\-\(\)\s]+\Z/
           invalid_values << val
         end
       end
       errors.add(:pattern_beneficiaries, "are invalid due to #{invalid_values.join(',')}") unless invalid_values.empty?
-      errors.add(:pattern_beneficiaries, "are invalid due to empty spaces") unless invalid_spaces.empty?
+      errors.add(:pattern_beneficiaries, "are invalid due to empty values") unless invalid_spaces.empty?
     end
   end
 

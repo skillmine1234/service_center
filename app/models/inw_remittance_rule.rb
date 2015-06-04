@@ -11,6 +11,7 @@ class InwRemittanceRule < ActiveRecord::Base
       invalid_spaces = []
       value = self.send(values)
       unless value.nil?
+        invalid_spaces << true if !value.to_s.empty? and value.split(/,/).empty?
         value.split(/,/).each do |val|
           invalid_spaces << true if val.strip.empty? 
           unless val =~ /\A[A-Za-z0-9\-\(\)\s]+\Z/ 
@@ -19,7 +20,7 @@ class InwRemittanceRule < ActiveRecord::Base
         end
       end
       errors.add(values.to_sym, "are invalid due to #{invalid_values.join(',')}") unless invalid_values.empty?
-      errors.add(values.to_sym, "are invalid due to empty spaces") unless invalid_spaces.empty?
+      errors.add(values.to_sym, "are invalid due to empty values") unless invalid_spaces.empty?
     end
   end
 

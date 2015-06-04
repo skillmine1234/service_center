@@ -59,11 +59,11 @@ describe InwRemittanceRule do
       rule.should be_valid
       rule = Factory.build(:inw_remittance_rule, :pattern_individuals => " ", :pattern_corporates => " ", :pattern_beneficiaries => " ", :pattern_remitters => " , ", :pattern_salutations => " , , ")
       rule.should_not be_valid
-      rule.errors_on("pattern_individuals").should == ["are invalid due to empty spaces"]
-      rule.errors_on("pattern_corporates").should == ["are invalid due to empty spaces"]
-      rule.errors_on("pattern_beneficiaries").should == ["are invalid due to empty spaces"]
-      rule.errors_on("pattern_remitters").should == ["are invalid due to empty spaces"]
-      rule.errors_on("pattern_salutations").should == ["are invalid due to empty spaces"]
+      rule.errors_on("pattern_individuals").should == ["are invalid due to empty values"]
+      rule.errors_on("pattern_corporates").should == ["are invalid due to empty values"]
+      rule.errors_on("pattern_beneficiaries").should == ["are invalid due to empty values"]
+      rule.errors_on("pattern_remitters").should == ["are invalid due to empty values"]
+      rule.errors_on("pattern_salutations").should == ["are invalid due to empty values"]
     end
   end
   

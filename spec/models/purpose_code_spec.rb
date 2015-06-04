@@ -110,7 +110,7 @@ describe PurposeCode do
         purpose_code.should be_valid
         purpose_code = Factory.build(:purpose_code, :pattern_beneficiaries => " , ")
         purpose_code.should_not be_valid
-        purpose_code.errors_on("pattern_beneficiaries").should == ["are invalid due to empty spaces"]
+        purpose_code.errors_on("pattern_beneficiaries").should == ["are invalid due to empty values"]
       end
     end
   end
