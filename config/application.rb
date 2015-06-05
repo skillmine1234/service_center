@@ -66,5 +66,7 @@ module ServiceCenter
     config.generators do |g|
       g.test_framework :rspec
     end
+
+    config.active_job.queue_adapter = :delayed_job
   end
 end

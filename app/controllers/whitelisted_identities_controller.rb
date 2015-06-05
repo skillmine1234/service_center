@@ -14,13 +14,14 @@ class WhitelistedIdentitiesController < ApplicationController
 
   def create
     @whitelisted_identity = WhitelistedIdentity.new(params[:whitelisted_identity])
-    
     if !@whitelisted_identity.valid?
       flash[:alert] = @whitelisted_identity.errors.full_messages.to_sentence
       redirect_to :back
     else
       @whitelisted_identity.created_by = current_user.id
-      @whitelisted_identity.save
+      if @whitelisted_identity.save
+        EmailAlert.send_email(@whitelisted_identity.inward_remittance.req_no,@whitelisted_identity.partner.ops_email_id) rescue nil
+      end
       flash[:alert] = 'Identity successfuly verified'
       redirect_to :back
     end
