@@ -5,8 +5,7 @@ class Partner < ActiveRecord::Base
 
   validates_presence_of :code, :enabled, :name, :account_no, :txn_hold_period_days,
                         :customer_id, :remitter_email_allowed, :remitter_sms_allowed,
-                        :beneficiary_email_allowed, :beneficiary_sms_allowed, :allow_imps, 
-                        :allow_neft, :allow_rtgs, :country
+                        :allow_imps, :allow_neft, :allow_rtgs, :country
   validates_uniqueness_of :code
   validates :low_balance_alert_at, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => '9e20'.to_f, :allow_nil => true }
   validates :account_no, :numericality => {:only_integer => true}, length: {in: 10..16}

@@ -8,8 +8,7 @@ describe Partner do
 
   context 'validation' do
     [:code, :enabled, :name, :account_no, :txn_hold_period_days,
-    :remitter_email_allowed, :remitter_sms_allowed,
-    :beneficiary_email_allowed, :beneficiary_sms_allowed, :allow_imps, 
+    :remitter_email_allowed, :remitter_sms_allowed, :allow_imps, 
     :allow_neft, :allow_rtgs, :country].each do |att|
       it { should validate_presence_of(att) }
     end
