@@ -6,6 +6,7 @@ class WhitelistedIdentity < ActiveRecord::Base
 
   accepts_nested_attributes_for :attachments
 
+  validates_uniqueness_of :id_type, :scope => [:id_number,:id_country,:id_issue_date,:id_expiry_date], :message => "Identity is already whitelisted"
 
   validates_presence_of :partner_id, :is_verified, :created_by, :updated_by
 
