@@ -9,7 +9,7 @@ class Partner < ActiveRecord::Base
   validates_uniqueness_of :code
   validates :low_balance_alert_at, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => '9e20'.to_f, :allow_nil => true }
   validates :account_no, :numericality => {:only_integer => true}, length: {in: 10..16}
-  validates :account_ifsc, format: {with: /\A[A-Z|a-z]{4}[0][A-Za-z0-9]{6}+\z/, :allow_blank => true }
+  validates :account_ifsc, format: {with: /\A[A-Z|a-z]{4}[0][A-Za-z0-9]{6}+\z/, :allow_blank => true, message: "Invalide IFSC Format" }
   validates :txn_hold_period_days, :numericality => { :greater_than => 0, :less_than => 16}
   validates :code, format: {with: /\A[A-Za-z0-9]+\z/}, length: {maximum: 10, minimum: 1}
   validates :name, format: {with: /\A[A-Za-z0-9\s]+\z/}
@@ -21,8 +21,8 @@ class Partner < ActiveRecord::Base
   validate :check_email_addresses
 
   def imps_and_mmid
-    errors.add(:mmid,"is mandatory") if allow_imps == 'Y' and mmid.to_s.empty?
-    errors.add(:mobile_no,"is mandatory") if allow_imps == 'Y' and mobile_no.to_s.empty?
+    errors.add(:mmid,"MMID Mandatory for IMPS") if allow_imps == 'Y' and mmid.to_s.empty?
+    errors.add(:mobile_no,"Mobile No Mandatory for IMPS") if allow_imps == 'Y' and mobile_no.to_s.empty?
   end
 
   def check_email_addresses

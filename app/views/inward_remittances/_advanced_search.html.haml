@@ -17,12 +17,12 @@
   .control-group
     = label_tag "Transfer Amount", nil, :class => 'control-label'
     = text_field_tag :from_amount, params[:from_amount]
-    And
+    To
     = text_field_tag :to_amount, params[:to_amount]
   .control-group
     = label_tag "Request Date", nil, :class => 'control-label'
     = text_field_tag :from_date, params[:from_date]
-    And
+    To
     = text_field_tag :to_date, params[:to_date]
   = hidden_field_tag :advanced_search, :true
   = hidden_field_tag :req_no, params[:req_no]

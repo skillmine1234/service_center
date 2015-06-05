@@ -83,16 +83,16 @@ describe Partner do
         partner.errors_on(:account_ifsc).should == []
         partner = Factory.build(:partner, :account_ifsc => 'abcd11234bh', :account_no => '1234567890123456')
         partner.should_not be_valid
-        partner.errors_on(:account_ifsc).should == ["is invalid"]
+        partner.errors_on(:account_ifsc).should == ["Invalide IFSC Format"]
         partner = Factory.build(:partner, :account_ifsc => 'abcdef', :account_no => '1234567890123456')
         partner.should_not be_valid
-        partner.errors_on(:account_ifsc).should == ["is invalid"]
+        partner.errors_on(:account_ifsc).should == ["Invalide IFSC Format"]
         partner = Factory.build(:partner, :account_ifsc => '123456', :account_no => '1234567890123456')
         partner.should_not be_valid
-        partner.errors_on(:account_ifsc).should == ["is invalid"]
+        partner.errors_on(:account_ifsc).should == ["Invalide IFSC Format"]
         partner = Factory.build(:partner, :account_ifsc => '123 456', :account_no => '1234567890123456')
         partner.should_not be_valid
-        partner.errors_on(:account_ifsc).should == ["is invalid"]
+        partner.errors_on(:account_ifsc).should == ["Invalide IFSC Format"]
       end
     end
 
@@ -100,13 +100,13 @@ describe Partner do
       it "should validate if mmid if imps is true" do 
         partner = Factory.build(:partner, :mmid => nil, :allow_imps => 'Y')
         partner.should_not be_valid
-        partner.errors_on("mmid").should == ["is mandatory"]
+        partner.errors_on("mmid").should == ["MMID Mandatory for IMPS"]
       end
 
       it "should validate if mobile_no if imps is true" do 
         partner = Factory.build(:partner, :mobile_no => nil, :allow_imps => 'Y')
         partner.should_not be_valid
-        partner.errors_on("mobile_no").should == ["is mandatory"]
+        partner.errors_on("mobile_no").should == ["Mobile No Mandatory for IMPS"]
       end
     end
 

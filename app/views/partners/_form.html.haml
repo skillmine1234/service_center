@@ -94,10 +94,7 @@
   .form-extended
     .control-group
       = f.label :imps_allowed, "IMPS Allowed?", :class => 'control-label'
-      - if f.object.allow_imps.nil?
-        = f.check_box :allow_imps, {:checked => "checked"},"Y","N"
-      - else
-        = f.check_box :allow_imps, {},"Y","N"
+      = f.check_box :allow_imps, {},"Y","N"
       #msg-error
         = error_message_for(@partner, :allow_imps, :prepend_text => "")
     .control-group
