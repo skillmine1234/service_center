@@ -7,7 +7,7 @@
         - if !@rule.nil?
           %tr
             %td.label Version
-            %td.value
+            %td.value{:style => 'width:500px'}
               = link_to "#{audit_count(@rule)}", :controller => :inw_remittance_rules, :action => :audit_logs, :version_id => audit_count(@rule), :id => @rule.id
           %tr
             %td.label Form Errors
