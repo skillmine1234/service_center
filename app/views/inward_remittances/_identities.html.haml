@@ -8,7 +8,7 @@
           %tr
             %td
               %h3 
-                = "Identity:" + @identities.index(identity).to_s
+                = "Identity:" + (@identities.index(identity) + 1).to_s
           %tr
             %td.label Status
             %td.value
