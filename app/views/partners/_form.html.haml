@@ -20,7 +20,7 @@
         = error_message_for(@partner, :enabled, :prepend_text => "")
     .control-group
       = f.label :name
-      = f.text_field :name, :maxlength => 20
+      = f.text_field :name, :maxlength => 60
       #msg-error
         = error_message_for(@partner, :name, :prepend_text => "")
     .control-group

@@ -6,7 +6,7 @@ class PurposeCode < ActiveRecord::Base
   validates_presence_of :code, :description, :is_enabled, :txn_limit
   validates_uniqueness_of :code
   validates :code, format: {with: /\A[A-Za-z0-9]+\z/}, length: {maximum: 4, minimum: 4}
-  validates :rbi_code, format: {with: /\A[A-Za-z0-9]+\z/}, length: {maximum: 5, minimum: 5}
+  validates :rbi_code, format: {with: /\A[A-Za-z0-9]+\z/}, length: {maximum: 5, minimum: 5}, :allow_blank => true
   validates :txn_limit, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => '9e20'.to_f, :allow_nil => true }
   validates :mtd_txn_cnt_self, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => '9e20'.to_f, :allow_nil => true }
   validates :mtd_txn_limit_self, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => '9e20'.to_f, :allow_nil => true }
