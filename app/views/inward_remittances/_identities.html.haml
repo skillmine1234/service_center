@@ -1,50 +1,74 @@
-= "Total Count: #{@identities.count}"
-%br
-= will_paginate @identities
-%br
-%table.table.table-bordered.table-striped.table-hover
-  .thead
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-    %th{:style=>'Text-align:left; background-color: lightblue;'}
-      Id Type
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Id Number
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Id Country
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Id Issued Date
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Id Expiry Date 
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Is Verified ?
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Verified At
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Verified By
-  .tbody
-    - @identities.each do |identity|
-      %tr
-        %td{:style=>'text-align:left;'}
-          - if !identity.whitelisted_identity.nil?
-            = "Verified"
-          - else
-            = link_to 'verify',"#", :class => 'verify-link', :href => "#verifyIdentity", data: { partner_id: identity.inward_remittance.partner.try(:id), full_name: identity.full_name, id_type: identity.id_type, id_number: identity.id_number, id_country: identity.id_country, id_issue_date: identity.id_issue_date, id_expiry_date: identity.id_expiry_date, user_id: user_id} 
-        %td{:style=>'text-align:left;'}
-          = identity.id_type
-        %td{:style=>'text-align:left;'}
-          = identity.id_number
-        %td{:style=>'text-align:left;'}
-          = identity.id_country
-        %td{:style=>'text-align:left;'}
-          = identity.id_issue_date
-        %td{:style=>'text-align:left;'}
-          = identity.id_expiry_date
-        %td{:style=>'text-align:left;'}
-          = identity.is_verified
-        %td{:style=>'text-align:left;'}
-          = identity.verified_at
-        %td{:style=>'text-align:left;'}
-          = identity.verified_by
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8;'}
+    #form-details
+      %h3 Identities
+      %br
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
+        - @identities.each do |identity|
+          %tr
+            %td
+              %h3 
+                = "Identity:" + @identities.index(identity).to_s
+          %tr
+            %td.label Status
+            %td.value
+              - if !identity.whitelisted_identity.nil?
+                = "Verified"
+              - else
+                = link_to 'verify',"#", :class => 'verify-link', :href => "#verifyIdentity", data: { partner_id: identity.inward_remittance.partner.try(:id), full_name: identity.full_name, id_type: identity.id_type, id_number: identity.id_number, id_country: identity.id_country, id_issue_date: identity.id_issue_date, id_expiry_date: identity.id_expiry_date, user_id: user_id, inward_remittance_id: identity.inward_remittance.try(:id)} 
+          %tr
+            %td.label Partner Name
+            %td.value
+              = identity.inward_remittance.partner_name
+          %tr
+            %td.label Request No
+            %td.value
+              = identity.inward_remittance.req_no
+          %tr
+            %td.label Details and Attachments
+            %td.value
+              - if !identity.whitelisted_identity.nil?
+                = link_to 'View', identity.whitelisted_identity
+          %tr
+            %td.label Name
+            %td.value
+              = identity.full_name
+          %tr
+            %td.label Id Type
+            %td.value
+              = identity.id_type
+          %tr
+            %td.label Id Number
+            %td.value
+              = identity.id_number
+          %tr
+            %td.label Issued By
+            %td.value
+              = identity.id_number
+            %tr
+            %td.label Issued Date
+            %td.value
+              = identity.id_issue_date
+          %tr
+            %td.label Expiry Date
+            %td.value
+              = identity.id_expiry_date
+          %tr
+            %td.label Auto Matched?
+            %td.value
+              = identity.was_auto_matched
+          %tr
+            %td.label Verified By
+            %td.value
+              = identity.verified_by
+          %tr
+            %td.label Verified At
+            %td.value
+              = identity.verified_at
+          %tr
+            %td
+              %hr{:style=>'background-color: #F1F2F8; width: 200%'}
+
 #verifyIdentity.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
@@ -70,10 +94,12 @@
             = f.hidden_field :updated_by, :value => user_id
             = f.hidden_field :lock_version, :value => 0
             = f.hidden_field :times_used, :value => 1
+            = f.hidden_field :first_used_with_txn_id
+            = f.hidden_field :last_used_with_txn_id
             = f.fields_for :attachments, :input_html => { :rows => 3} do |attachment_form|
               = attachment_form.label :note
               = attachment_form.text_area :note, :style => 'width:300px; height:30px', :maxlength => 255
-              = attachment_form.hidden_field :user_id, :value => user_id
+              = attachment_form.hidden_field :user_id, :value => @user_id
               = attachment_form.label :file
               = attachment_form.file_field :file
               = attachment_form.link_to_remove content_tag(:span, content_tag(:i, '', :class=>"icon icon-remove") + "Remove"), :class => 'remove'

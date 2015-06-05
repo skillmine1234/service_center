@@ -4,6 +4,7 @@ class InwardRemittance < ActiveRecord::Base
 
   has_many :remitter_identities, -> { where id_for: 'R'}, :class_name => 'InwIdentity', :foreign_key => 'inw_remittance_id'
   has_many :beneficiary_identities, -> { where id_for: 'B'}, :class_name => 'InwIdentity', :foreign_key => 'inw_remittance_id'
+  has_many :identities, :class_name => 'InwIdentity', :foreign_key => 'inw_remittance_id'
 
   has_one :inw_audit_log
   has_one :inward_remittances_lock
@@ -26,5 +27,9 @@ class InwardRemittance < ActiveRecord::Base
 
   def self_transfer?
     is_self_transfer=='Y' ? true : false
+  end
+
+  def partner_name
+    partner.try(:name) rescue nil
   end
 end

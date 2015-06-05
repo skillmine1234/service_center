@@ -10,6 +10,8 @@ $(document).ready(function(){
     $("#whitelisted_identity_id_country").val($(this).data('id-country'));
     $("#whitelisted_identity_id_expiry_date").val($(this).data('id-expiry-date'));
     $("#whitelisted_identity_id_issue_date").val($(this).data('id-issue-date'));
+    $("#whitelisted_identity_first_used_with_txn_id").val($(this).data('inward-remittance-id'));
+    $("#whitelisted_identity_last_used_with_txn_id").val($(this).data('inward-remittance-id'));
     $('#verifyIdentity').modal();
   });
 
