@@ -25,7 +25,8 @@
     To
     = text_field_tag :to_date, params[:to_date]
   = hidden_field_tag :advanced_search, :true
-  = hidden_field_tag :req_no, params[:req_no]
+  - if params[:req_no].present?
+    = hidden_field_tag :req_no, params[:req_no]
   .form-actions
     = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"
     %input{:type => 'reset', :value=>'Reset', :class => 'btn'}
