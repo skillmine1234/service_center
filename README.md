@@ -1,5 +1,5 @@
 service_center
-====
+==============
 
 Service Center App
 
@@ -11,3 +11,4 @@ The following are the environment variables required to be set:
 4. SMTP_ADDRESS 
 5. SMTP_USERNAME 
 6. SMTP_PASSWORD 
+7. CONFIG_UPLOAD_PATH

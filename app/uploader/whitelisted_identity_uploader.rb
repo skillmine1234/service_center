@@ -25,7 +25,11 @@ class WhitelistedIdentityUploader < CarrierWave::Uploader::Base
   # This is a sensible default for uploaders that are meant to be mounted:
   # if Rails.env.production?
   def store_dir
-    "uploads"
+    if Rails.env == "production"
+      ENV['CONFIG_UPLOAD_PATH']
+    else
+      "uploads"
+    end
   end
   # end
 
