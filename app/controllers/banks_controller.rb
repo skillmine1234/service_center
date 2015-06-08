@@ -17,7 +17,7 @@ class BanksController < ApplicationController
     else
       @bank.created_by = current_user.id
       @bank.save
-      flash[:alert] = 'Bank successfuly created'
+      flash[:alert] = 'Bank successfully created'
       redirect_to @bank
     end
   end 
@@ -34,7 +34,7 @@ class BanksController < ApplicationController
     else
       @bank.updated_by = current_user.id
       @bank.save
-      flash[:alert] = 'Bank successfuly modified'
+      flash[:alert] = 'Bank successfully modified'
       redirect_to @bank
     end
     rescue ActiveRecord::StaleObjectError

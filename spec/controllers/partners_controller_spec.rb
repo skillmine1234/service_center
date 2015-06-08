@@ -49,7 +49,7 @@ describe PartnersController do
         expect {
           post :create, {:partner => params}
         }.to change(Partner, :count).by(1)
-        flash[:alert].should  match(/Partner successfuly created/)
+        flash[:alert].should  match(/Partner successfully created/)
         response.should be_redirect
       end
 

@@ -20,7 +20,7 @@ class PurposeCodesController < ApplicationController
     else
       @purpose_code.created_by = current_user.id
       @purpose_code.save
-      flash[:alert] = 'Purpose Code successfuly created'
+      flash[:alert] = 'Purpose Code successfully created'
       redirect_to @purpose_code
     end
   end 
@@ -39,7 +39,7 @@ class PurposeCodesController < ApplicationController
     else
       @purpose_code.updated_by = current_user.id
       @purpose_code.save
-      flash[:alert] = 'Purpose Code successfuly modified'
+      flash[:alert] = 'Purpose Code successfully modified'
       redirect_to @purpose_code
     end
     rescue ActiveRecord::StaleObjectError

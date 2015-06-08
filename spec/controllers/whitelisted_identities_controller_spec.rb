@@ -19,7 +19,7 @@ describe WhitelistedIdentitiesController do
         expect {
           post :create, {:whitelisted_identity => params}
         }.to change(WhitelistedIdentity, :count).by(1)
-        flash[:alert].should  match(/Identity successfuly verified/)
+        flash[:alert].should  match(/Identity successfully verified/)
         response.should be_redirect
       end
 

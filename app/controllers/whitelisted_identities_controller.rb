@@ -22,7 +22,7 @@ class WhitelistedIdentitiesController < ApplicationController
       if @whitelisted_identity.save
         EmailAlert.send_email(@whitelisted_identity.inward_remittance.req_no,@whitelisted_identity.partner.ops_email_id) rescue nil
       end
-      flash[:alert] = 'Identity successfuly verified'
+      flash[:alert] = 'Identity successfully verified'
       redirect_to :back
     end
   end 

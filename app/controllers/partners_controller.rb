@@ -18,7 +18,8 @@ class PartnersController < ApplicationController
     else
       @partner.created_by = current_user.id
       @partner.save
-      flash[:alert] = 'Partner successfuly created'
+
+      flash[:alert] = 'Partner successfully created'
       redirect_to @partner
     end
   end 
@@ -35,7 +36,7 @@ class PartnersController < ApplicationController
     else
       @partner.updated_by = current_user.id
       @partner.save
-      flash[:alert] = 'Partner successfuly modified'
+      flash[:alert] = 'Partner successfully modified'
       redirect_to @partner
     end
     rescue ActiveRecord::StaleObjectError

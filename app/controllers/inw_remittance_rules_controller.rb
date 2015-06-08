@@ -18,7 +18,7 @@ class InwRemittanceRulesController < ApplicationController
     else
       @rule.updated_by = current_user.id
       @rule.save
-      flash[:alert] = 'Rule successfuly modified'
+      flash[:alert] = 'Rule successfully modified'
       redirect_to @rule
     end
     rescue ActiveRecord::StaleObjectError

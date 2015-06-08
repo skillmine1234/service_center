@@ -49,7 +49,7 @@ describe BanksController do
         expect {
           post :create, {:bank => params}
         }.to change(Bank, :count).by(1)
-        flash[:alert].should  match(/Bank successfuly created/)
+        flash[:alert].should  match(/Bank successfully created/)
         response.should be_redirect
       end
 
