@@ -10,12 +10,14 @@ ServiceCenter::Application.routes.draw do
   resources :inw_remittance_rules
   resources :banks
   resources :ecol_rules
+  resources :ecol_customers
 
   get '/partner/:id/audit_logs' => 'partners#audit_logs'
   get '/purpose_code/:id/audit_logs' => 'purpose_codes#audit_logs'
   get '/inw_remittance_rule/:id/audit_logs' => 'inw_remittance_rules#audit_logs'
   get '/bank/:id/audit_logs' => 'banks#audit_logs'
   get '/ecol_rule/:id/audit_logs' => 'ecol_rules#audit_logs'
+  get '/ecol_customer/:id/audit_logs' => 'ecol_customers#audit_logs'
 
   get '/inward_remittances/:id/remitter_identities' => 'inward_remittances#remitter_identities'
   get '/inward_remittances/:id/beneficiary_identities' => 'inward_remittances#beneficiary_identities'
