@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150602134503) do
+ActiveRecord::Schema.define(version: 20150605133847) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -69,6 +69,12 @@ ActiveRecord::Schema.define(version: 20150602134503) do
   end
 
   add_index "admin_users_admin_roles", ["admin_user_id", "admin_role_id"], name: "index_on_user_roles"
+
+  create_table "api_keys", force: :cascade do |t|
+    t.string   "access_token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "attachments", force: :cascade do |t|
     t.string   "note"
@@ -237,7 +243,7 @@ ActiveRecord::Schema.define(version: 20150602134503) do
 
   create_table "partners", force: :cascade do |t|
     t.string   "code",                      limit: 10,             null: false
-    t.string   "name",                      limit: 20,             null: false
+    t.string   "name",                      limit: 60,             null: false
     t.string   "tech_email_id"
     t.string   "ops_email_id"
     t.string   "account_no",                limit: 20,             null: false
@@ -269,7 +275,7 @@ ActiveRecord::Schema.define(version: 20150602134503) do
 
   create_table "purpose_codes", force: :cascade do |t|
     t.string   "code",                  limit: 4
-    t.string   "description",           limit: 200
+    t.string   "description",           limit: 255
     t.string   "is_enabled",            limit: 1
     t.string   "created_by",            limit: 20
     t.string   "updated_by",            limit: 20
