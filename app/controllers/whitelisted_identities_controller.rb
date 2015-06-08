@@ -20,7 +20,7 @@ class WhitelistedIdentitiesController < ApplicationController
     else
       @whitelisted_identity.created_by = current_user.id
       if @whitelisted_identity.save
-        EmailAlert.send_email(@whitelisted_identity.inward_remittance.req_no,@whitelisted_identity.partner.ops_email_id) rescue nil
+        EmailAlert.send_email(@whitelisted_identity.inward_remittance,@whitelisted_identity.partner.ops_email_id) rescue nil
       end
       flash[:alert] = 'Identity successfully verified'
       redirect_to :back

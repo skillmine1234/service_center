@@ -205,6 +205,7 @@ GEM
     faker (1.4.3)
       i18n (~> 0.5)
     ffi (1.9.8)
+    florrick (1.1.2)
     flot-rails (0.0.6)
       jquery-rails
     formtastic (3.1.3)
@@ -494,6 +495,7 @@ DEPENDENCIES
   factory_girl (= 2.2.0)
   factory_girl_rails
   faker
+  florrick (~> 1.1)
   flot-rails
   haml-rails
   httparty

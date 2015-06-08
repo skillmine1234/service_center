@@ -12,6 +12,9 @@ class InwardRemittance < ActiveRecord::Base
   validates_presence_of :req_no, :req_version, :req_timestamp, :partner_code, :rmtr_identity_count, 
                         :bene_identity_count, :attempt_no
 
+  florrick do
+    string :req_no
+  end
 
   def remitter_address
     rmtr_address1.to_s + " " + rmtr_address2.to_s + " " + rmtr_address3.to_s

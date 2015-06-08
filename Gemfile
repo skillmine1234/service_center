@@ -39,7 +39,7 @@ gem 'zeroclipboard-rails'
 gem 'country_select', github: 'stefanpenner/country_select'
 # required for packaging (specifically asset precompilation during packaging)
 gem "sqlite3"
-
+gem 'florrick', '~> 1.1'
 # oracle is required only in production, CI tools run against sqlite3
 group :production do
   gem 'activerecord-oracle_enhanced-adapter', github: 'rsim/oracle-enhanced', branch: 'rails42'
