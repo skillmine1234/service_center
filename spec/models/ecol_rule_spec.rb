@@ -24,10 +24,10 @@ describe EcolRule do
     end
 
     it "should not allow invalid format" do 
+      ecol_rule = Factory.build(:ecol_rule, :cod_acct_no => '-1dfghhhhh', :stl_gl_inward => '@acddsfdfd', :stl_gl_return => '134\ndsfdsg')
+      ecol_rule.save == false
       [:cod_acct_no, :stl_gl_inward, :stl_gl_return].each do |att|
-        should_not allow_value('-1dfghhhhh').for(att)
-        should_not allow_value('@acddsfdfd').for(att)
-        should_not allow_value('134\ndsfdsg').for(att)
+        ecol_rule.errors_on(att).should == ["Invalid format, expected format is : {[a-z|A-Z|0-9]}"]
       end
     end
   end
@@ -38,9 +38,12 @@ describe EcolRule do
     end 
     
     it "should not allow invalid format" do
-      should_not allow_value('abcd0QWERTY').for(:ifsc)
-      should_not allow_value('abcdQWERTY').for(:ifsc)
-      should_not allow_value('ab0QWER').for(:ifsc)
+      ecol_rule = Factory.build(:ecol_rule, :ifsc => 'abcd0QWERTY')
+      ecol_rule.errors_on(:ifsc).should == ["Invalid format, expected format is : {[A-Z]{4}[0][A-Z|0-9]{6}}"]
+      ecol_rule = Factory.build(:ecol_rule, :ifsc => 'abcdQWERTY')
+      ecol_rule.errors_on(:ifsc).should == ["Invalid format, expected format is : {[A-Z]{4}[0][A-Z|0-9]{6}}"]
+      ecol_rule = Factory.build(:ecol_rule, :ifsc => 'ab0QWER')
+      ecol_rule.errors_on(:ifsc).should == ["Invalid format, expected format is : {[A-Z]{4}[0][A-Z|0-9]{6}}"]
     end 
   end
 end

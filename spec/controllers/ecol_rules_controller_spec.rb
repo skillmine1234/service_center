@@ -31,16 +31,16 @@ describe EcolRulesController do
       it "updates the requested rule" do
         ecol_rule = Factory(:ecol_rule, :ifsc => "ABCD0QWERTY")
         params = ecol_rule.attributes.slice(*ecol_rule.class.attribute_names)
-        params[:ecol_rule] = "ABCD0QWERTY"
+        params[:ifsc] = "CDAB0QWERTY"
         put :update, {:id => ecol_rule.id, :ecol_rule => params}
         ecol_rule.reload
-        ecol_rule.ifsc.should == "ABCD0QWERTY"
+        ecol_rule.ifsc.should == "CDAB0QWERTY"
       end
 
       it "assigns the requested rule as @ecol_rule" do
         ecol_rule = Factory(:ecol_rule, :ifsc => "ABCD0QWERTY")
         params = ecol_rule.attributes.slice(*ecol_rule.class.attribute_names)
-        params[:ifsc] = "ABCD0QWERTY"
+        params[:ifsc] = "CDAB0QWERTY"
         put :update, {:id => ecol_rule.to_param, :ecol_rule => params}
         assigns(:ecol_rule).should eq(ecol_rule)
       end
@@ -48,7 +48,7 @@ describe EcolRulesController do
       it "redirects to the rule" do
         ecol_rule = Factory(:ecol_rule, :ifsc => "ABCD0QWERTY")
         params = ecol_rule.attributes.slice(*ecol_rule.class.attribute_names)
-        params[:ifsc] = "ABCD0QWERTY"
+        params[:ifsc] = "CDAB0QWERTY"
         put :update, {:id => ecol_rule.to_param, :ecol_rule => params}
         response.should redirect_to(ecol_rule)
       end

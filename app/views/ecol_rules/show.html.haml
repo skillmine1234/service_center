@@ -39,4 +39,16 @@
               = @ecol_rule.stl_gl_return
             %td#msg-error
               = error_message_for(@ecol_rule, :stl_gl_return, :prepend_text => "")
+          %tr
+            %td.label Updated By
+            %td.value
+              = @ecol_rule.updated_user.try(:username)
+            %td#msg-error
+              = error_message_for(@ecol_rule, :updated_by, :prepend_text => "")
+          %tr
+            %td.label Updated At
+            %td.value
+              = @ecol_rule.updated_at
+            %td#msg-error
+              = error_message_for(@ecol_rule, :updated_at, :prepend_text => "")
       = link_to 'Back to Dashboard', root_path              

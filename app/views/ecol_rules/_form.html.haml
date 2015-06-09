@@ -7,22 +7,22 @@
     = f.hidden_field :lock_version
     .control-group
       = f.label :ifsc, "*IFSC Code", :class => 'control-label'
-      = f.text_field :ifsc
+      = f.text_field :ifsc, :maxlength => 11
       #msg-error
         = error_message_for(@ecol_rule, :ifsc, :prepend_text => "")
     .control-group
       = f.label :cod_acct_no, "*Pool Account No", :class => 'control-label'
-      = f.text_field :cod_acct_no
+      = f.text_field :cod_acct_no, :maxlength => 15
       #msg-error
         = error_message_for(@ecol_rule, :cod_acct_no, :prepend_text => "")
     .control-group
       = f.label :stl_gl_inward, "*Settlement GL (Inward)", :class => 'control-label'
-      = f.text_field :stl_gl_inward
+      = f.text_field :stl_gl_inward, :maxlength => 15
       #msg-error
         = error_message_for(@ecol_rule, :stl_gl_inward, :prepend_text => "")
     .control-group
       = f.label :stl_gl_return, "*Settlement GL (Return)", :class => 'control-label'
-      = f.text_field :stl_gl_return
+      = f.text_field :stl_gl_return, :maxlength => 15
       #msg-error
         = error_message_for(@ecol_rule, :stl_gl_return, :prepend_text => "")
 
