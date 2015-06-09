@@ -1,0 +1,141 @@
+= simple_form_for @ecol_customer, :html => {:class=>'form-horizontal', :autocomplete=>"off", :id => "ecol_customer_form"} do |f|
+  .control-group
+    = f.label ' '
+    #msg-error
+      = error_message_for(@ecol_customer, :base, :prepend_text => "")
+  .form-main
+    = f.hidden_field :lock_version
+    .control-group
+      = f.label :code, "*Customer Code", :class => 'control-label'
+      = f.text_field :code
+      #msg-error
+        = error_message_for(@ecol_customer, :code, :prepend_text => "")
+    .control-group
+      = f.label :name, "*Customer Name", :class => 'control-label'
+      = f.text_field :name
+      #msg-error
+        = error_message_for(@ecol_customer, :name, :prepend_text => "")
+    .control-group
+      = f.label :is_enabled, "Enabled?", :class => 'control-label'
+      = f.check_box :is_enabled, {},"Y","N"
+    .control-group
+      = f.label :val_method, "*Validation Method", :class => 'control-label'
+      = f.select :val_method, options_for_select([['None','N'],['Web Service','W'],['Database Lookup','D']], @ecol_customer.val_method),:prompt => 'SELECT'
+      #msg-error
+        = error_message_for(@ecol_customer, :val_method, :prepend_text => "")
+    .control-group
+      = f.label :token_1_type, "*Account Token 1", :class => 'control-label'
+      = f.select :token_1_type, options_for_select([['None','N'],['Sub Code','SC'],['Remitter Code','RC'],['Invoice Number','IN']], @ecol_customer.token_1_type),:prompt => 'SELECT'
+      #msg-error
+        = error_message_for(@ecol_customer, :token_1_type, :prepend_text => "")
+    .control-group
+      = f.label :token_1_length, "*Account Token 1 Length", :class => 'control-label'
+      = f.number_field :token_1_length, :min => 0, :max => 29
+      #msg-error
+        = error_message_for(@ecol_customer, :token_1_length, :prepend_text => "")
+    .control-group
+      = f.label :val_token_1, "Validate Account Token 1", :class => 'control-label'
+      = f.check_box :val_token_1, {},"Y","N"
+      #msg-error
+        = error_message_for(@ecol_customer, :val_token_1, :prepend_text => "")
+    .control-group
+      = f.label :token_2_type, "*Account Token 2", :class => 'control-label'
+      = f.select :token_2_type, options_for_select([['None','N'],['Sub Code','SC'],['Remitter Code','RC'],['Invoice Number','IN']], @ecol_customer.token_2_type),:prompt => 'SELECT'
+      #msg-error
+        = error_message_for(@ecol_customer, :token_2_type, :prepend_text => "")
+    .control-group
+      = f.label :token_2_length, "*Account Token 2 Length", :class => 'control-label'
+      = f.number_field :token_2_length, :min => 0, :max => 29
+      #msg-error
+        = error_message_for(@ecol_customer, :token_2_length, :prepend_text => "")
+    .control-group
+      = f.label :val_token_2, "Validate Account Token 2", :class => 'control-label'
+      = f.check_box :val_token_2, {},"Y","N"
+      #msg-error
+        = error_message_for(@ecol_customer, :val_token_2, :prepend_text => "")
+    .control-group
+      = f.label :token_3_type, "*Account Token 3", :class => 'control-label'
+      = f.select :token_3_type, options_for_select([['None','N'],['Sub Code','SC'],['Remitter Code','RC'],['Invoice Number','IN']], @ecol_customer.token_3_type),:prompt => 'SELECT'
+      #msg-error
+        = error_message_for(@ecol_customer, :token_3_type, :prepend_text => "")
+    .control-group
+      = f.label :token_3_length, "*Account Token 3 Length", :class => 'control-label'
+      = f.number_field :token_3_length, :min => 0, :max => 29
+      #msg-error
+        = error_message_for(@ecol_customer, :token_3_length, :prepend_text => "")
+    .control-group
+      = f.label :val_token_3, "Validate Account Token 3", :class => 'control-label'
+      = f.check_box :val_token_3, {},"Y","N"
+      #msg-error
+        = error_message_for(@ecol_customer, :val_token_3, :prepend_text => "")
+    .control-group
+      = f.label :val_txn_date, "Validate Transaction Date", :class => 'control-label'
+      = f.check_box :val_txn_date, {},"Y","N"
+      #msg-error
+        = error_message_for(@ecol_customer, :val_txn_date, :prepend_text => "")
+    .control-group
+      = f.label :val_txn_amt, "Validate Transaction Amount", :class => 'control-label'
+      = f.check_box :val_txn_amt, {},"Y","N"
+      #msg-error
+        = error_message_for(@ecol_customer, :val_txn_amt, :prepend_text => "")
+    .control-group
+      = f.label :val_ben_name, "Validate Beneficiary Name", :class => 'control-label'
+      = f.check_box :val_ben_name, {},"Y","N"
+      #msg-error
+        = error_message_for(@ecol_customer, :val_ben_name, :prepend_text => "")
+    .control-group
+      = f.label :val_rem_acct, "Validate Remitter Account", :class => 'control-label'
+      = f.check_box :val_rem_acct, {},"Y","N"
+      #msg-error
+        = error_message_for(@ecol_customer, :val_rem_acct, :prepend_text => "")
+    .control-group
+      = f.label :return_if_val_fails, "Return If Validation Fails", :class => 'control-label'
+      = f.check_box :return_if_val_fails, {},"Y","N"
+      #msg-error
+        = error_message_for(@ecol_customer, :return_if_val_fails, :prepend_text => "")
+    .control-group
+      = f.label :file_upld_mthd, "LookUp File Upload Treatment", :class => 'control-label'
+      = f.select :file_upld_mthd, options_for_select([['Full', 'F'],['Incremental','I']], @ecol_customer.file_upld_mthd), :prompt => 'SELECT'
+      #msg-error
+        = error_message_for(@ecol_customer, :file_upld_mthd, :prepend_text => "")
+    .control-group
+      = f.label :credit_acct_no, "*Default Credit Account No", :class => 'control-label'
+      = f.text_field :credit_acct_no
+      #msg-error
+        = error_message_for(@ecol_customer, :credit_acct_no, :prepend_text => "")
+    .control-group
+      = f.label :nrtv_sufx_1, "*Narration Suffix 1", :class => 'control-label'
+      = f.select :nrtv_sufx_1, options_for_select([['None','N'],['Sub Code','SC'],['Remitter Code','RC'],['Invoice Number','IN'],['Remitter Name','RN'],['Original Remitter Name','ORN'],['Original Remitter Account','ORA']], @ecol_customer.nrtv_sufx_1),:prompt => 'SELECT'
+      #msg-error
+        = error_message_for(@ecol_customer, :nrtv_sufx_1, :prepend_text => "")
+    .control-group
+      = f.label :nrtv_sufx_2, "*Narration Suffix 2", :class => 'control-label'
+      = f.select :nrtv_sufx_2, options_for_select([['None','N'],['Sub Code','SC'],['Remitter Code','RC'],['Invoice Number','IN'],['Remitter Name','RN'],['Original Remitter Name','ORN'],['Original Remitter Account','ORA']], @ecol_customer.nrtv_sufx_2),:prompt => 'SELECT'
+      #msg-error
+        = error_message_for(@ecol_customer, :nrtv_sufx_2, :prepend_text => "")
+    .control-group
+      = f.label :nrtv_sufx_3, "*Narration Suffix 3", :class => 'control-label'
+      = f.select :nrtv_sufx_3, options_for_select([['None','N'],['Sub Code','SC'],['Remitter Code','RC'],['Invoice Number','IN'],['Remitter Name','RN'],['Original Remitter Name','ORN'],['Original Remitter Account','ORA']], @ecol_customer.nrtv_sufx_3),:prompt => 'SELECT'
+      #msg-error
+        = error_message_for(@ecol_customer, :nrtv_sufx_3, :prepend_text => "")    
+    .control-group
+      = f.label :rmtr_alert_on, "*Send Alerts To Remitter On", :class => 'control-label'
+      = f.select :rmtr_alert_on, options_for_select([['Never','N'],['On Pass','P'],['On Return','R'],['Always','A']], @ecol_customer.rmtr_alert_on), :prompt => 'SELECT'
+      #msg-error
+        = error_message_for(@ecol_customer, :rmtr_alert_on, :prepend_text => "")
+    .control-group
+      = f.label :rmtr_pass_txt, "SMS Text for Passed Payment", :class => 'control-label'
+      = f.text_area :rmtr_pass_txt, :maxlength => 500, :rows => 10, :style => 'width:300px; height:100px' 
+      #msg-error
+        = error_message_for(@ecol_customer, :rmtr_pass_txt, :prepend_text => "")
+    .control-group
+      = f.label :rmtr_return_txt, "SMS Text for Returned Payment", :class => 'control-label'
+      = f.text_area :rmtr_return_txt, :maxlength => 500, :rows => 10, :style => 'width:300px; height:100px'
+      #msg-error
+        = error_message_for(@ecol_customer, :rmtr_return_txt, :prepend_text => "")
+
+
+  .form-actions
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_customer', :value => 'Create Customer'
+    = link_to :Cancel,'/ecol_customers', :name => 'cancel', :class=>"cancel btn"
+

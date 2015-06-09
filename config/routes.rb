@@ -1,4 +1,5 @@
 ServiceCenter::Application.routes.draw do
+
   devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
 
@@ -8,6 +9,8 @@ ServiceCenter::Application.routes.draw do
   resources :whitelisted_identities
   resources :inw_remittance_rules
   resources :banks
+  resources :ecol_rules
+  resources :ecol_customers
 
   namespace :api do
     namespace :v1 do
@@ -19,6 +22,8 @@ ServiceCenter::Application.routes.draw do
   get '/purpose_code/:id/audit_logs' => 'purpose_codes#audit_logs'
   get '/inw_remittance_rule/:id/audit_logs' => 'inw_remittance_rules#audit_logs'
   get '/bank/:id/audit_logs' => 'banks#audit_logs'
+  get '/ecol_rule/:id/audit_logs' => 'ecol_rules#audit_logs'
+  get '/ecol_customer/:id/audit_logs' => 'ecol_customers#audit_logs'
 
   get '/inward_remittances/:id/remitter_identities' => 'inward_remittances#remitter_identities'
   get '/inward_remittances/:id/beneficiary_identities' => 'inward_remittances#beneficiary_identities'
@@ -30,6 +35,7 @@ ServiceCenter::Application.routes.draw do
   get '/sdn/search_result' => 'aml_search#search_result'
 
   get '/error_msg' => "inw_remittance_rules#error_msg"
+  get '/error_msg' => "ecol_rules#error_msg"
 
   root :to => 'dashboard#overview'
 

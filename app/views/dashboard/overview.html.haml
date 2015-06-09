@@ -42,3 +42,14 @@
       = image_tag 'white_list_icon.jpg', :size => "80x80"
     %br
       = "Whitelisted Identities"
+  .box
+    - if !EcolRule.first.nil?
+      = link_to edit_ecol_rule_path(EcolRule.first) do
+        = image_tag 'ecol_rule.png', :size => "80x80"
+    %br
+      = "E-Collect Rules"
+  .box
+    = link_to '/ecol_customers' do
+      = image_tag 'ecol_customer.gif', :size => "80x80"
+    %br
+      = "E-Collect Customer"
