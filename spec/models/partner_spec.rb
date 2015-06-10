@@ -9,7 +9,7 @@ describe Partner do
   context 'validation' do
     [:code, :enabled, :name, :account_no, :txn_hold_period_days,
     :remitter_email_allowed, :remitter_sms_allowed, :allow_imps, 
-    :allow_neft, :allow_rtgs, :country].each do |att|
+    :allow_neft, :allow_rtgs, :country, :account_ifsc].each do |att|
       it { should validate_presence_of(att) }
     end
     [:account_no, :low_balance_alert_at, :mmid, :mobile_no, :txn_hold_period_days].each do |att|
@@ -78,21 +78,18 @@ describe Partner do
         partner = Factory.build(:partner, :account_ifsc => 'abcd01234bh', :account_no => '1234567890123456')
         partner.should be_valid
         partner.errors_on(:account_ifsc).should == []
-        partner = Factory.build(:partner, :account_ifsc => nil, :account_no => '1234567890123456')
-        partner.should be_valid
-        partner.errors_on(:account_ifsc).should == []
         partner = Factory.build(:partner, :account_ifsc => 'abcd11234bh', :account_no => '1234567890123456')
         partner.should_not be_valid
-        partner.errors_on(:account_ifsc).should == ["Invalide IFSC Format"]
+        partner.errors_on(:account_ifsc).should == ["invalid format - expected format is : {[A-Z|a-z]{4}[0][A-Za-z0-9]{6}}"]
         partner = Factory.build(:partner, :account_ifsc => 'abcdef', :account_no => '1234567890123456')
         partner.should_not be_valid
-        partner.errors_on(:account_ifsc).should == ["Invalide IFSC Format"]
+        partner.errors_on(:account_ifsc).should == ["invalid format - expected format is : {[A-Z|a-z]{4}[0][A-Za-z0-9]{6}}"]
         partner = Factory.build(:partner, :account_ifsc => '123456', :account_no => '1234567890123456')
         partner.should_not be_valid
-        partner.errors_on(:account_ifsc).should == ["Invalide IFSC Format"]
+        partner.errors_on(:account_ifsc).should == ["invalid format - expected format is : {[A-Z|a-z]{4}[0][A-Za-z0-9]{6}}"]
         partner = Factory.build(:partner, :account_ifsc => '123 456', :account_no => '1234567890123456')
         partner.should_not be_valid
-        partner.errors_on(:account_ifsc).should == ["Invalide IFSC Format"]
+        partner.errors_on(:account_ifsc).should == ["invalid format - expected format is : {[A-Z|a-z]{4}[0][A-Za-z0-9]{6}}"]
       end
     end
 

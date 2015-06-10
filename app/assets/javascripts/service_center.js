@@ -25,4 +25,9 @@ $(document).ready(function(){
   $("a.fault-link").on("click", function () {
     $('#faultText').modal();
   });
+
+  $("#aml_reset").on('click', function(){
+    $('input#search_params_firstName').val('');
+    $('input#search_params_idNumber').val('');
+  })
 });

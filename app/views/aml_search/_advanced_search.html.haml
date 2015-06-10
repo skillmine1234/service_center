@@ -43,4 +43,4 @@
   /     = text_field_tag "search_params[idExpiryDate]", (params[:search_params][:idExpiryDate] rescue "")
   .form-actions
     = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"
-    %input{:type => 'reset', :value=>'Reset', :class => 'btn'}
+    = button_tag "Reset", :type => 'button', :value=>'Reset', :class => 'btn', :id => 'aml_reset'

@@ -3,6 +3,7 @@ class WhitelistedIdentity < ActiveRecord::Base
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
   belongs_to :inward_remittance, :foreign_key => 'first_used_with_txn_id', :class_name => 'InwardRemittance'
+  belongs_to :partner
 
   accepts_nested_attributes_for :attachments
 

@@ -89,16 +89,16 @@ describe BanksController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested bank" do
-        bank = Factory(:bank, :name => "11")
+        bank = Factory(:bank, :name => "abcd")
         params = bank.attributes.slice(*bank.class.attribute_names)
-        params[:name] = "15"
+        params[:name] = "bank"
         put :update, {:id => bank.id, :bank => params}
         bank.reload
-        bank.name.should == "15"
+        bank.name.should == "bank"
       end
 
       it "assigns the requested bank as @bank" do
-        bank = Factory(:bank, :name => "11")
+        bank = Factory(:bank, :name => "abcd")
         params = bank.attributes.slice(*bank.class.attribute_names)
         params[:name] = "15"
         put :update, {:id => bank.to_param, :bank => params}
@@ -106,32 +106,32 @@ describe BanksController do
       end
 
       it "redirects to the bank" do
-        bank = Factory(:bank, :name => "11")
+        bank = Factory(:bank, :name => "abcd")
         params = bank.attributes.slice(*bank.class.attribute_names)
-        params[:name] = "15"
+        params[:name] = "bank"
         put :update, {:id => bank.to_param, :bank => params}
         response.should redirect_to(bank)
       end
 
       it "should raise error when tried to update at same time by many" do
-        bank = Factory(:bank, :name => "11")
+        bank = Factory(:bank, :name => "abcd")
         params = bank.attributes.slice(*bank.class.attribute_names)
-        params[:name] = "15"
+        params[:name] = "bank"
         bank2 = bank
         put :update, {:id => bank.id, :bank => params}
         bank.reload
-        bank.name.should == "15"
-        params[:name] = "18"
+        bank.name.should == "bank"
+        params[:name] = "bcd"
         put :update, {:id => bank2.id, :bank => params}
         bank.reload
-        bank.name.should == "15"
+        bank.name.should == "bank"
         flash[:alert].should  match(/Someone edited the bank the same time you did. Please re-apply your changes to the bank/)
       end
     end
 
     describe "with invalid params" do
       it "assigns the bank as @bank" do
-        bank = Factory(:bank, :name => "11")
+        bank = Factory(:bank, :name => "abcd")
         params = bank.attributes.slice(*bank.class.attribute_names)
         params[:name] = nil
         put :update, {:id => bank.to_param, :bank => params}
