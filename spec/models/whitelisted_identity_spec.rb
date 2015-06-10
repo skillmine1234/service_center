@@ -6,6 +6,7 @@ describe WhitelistedIdentity do
     it { should belong_to(:created_user)}
     it { should belong_to(:updated_user)}
     it { should belong_to(:inward_remittance)}
+    it { should belong_to(:partner)}
   end
 
   context 'validation' do
