@@ -44,7 +44,7 @@
       #msg-error
         = error_message_for(@partner, :account_no, :prepend_text => "")
     .control-group
-      = f.label :account_ifsc, "Account IFSC", :class => 'control-label'
+      = f.label :account_ifsc, "*Account IFSC", :class => 'control-label'
       = f.text_field :account_ifsc, :maxlength => 20
       #msg-error
         = error_message_for(@partner, :account_ifsc, :prepend_text => "")
