@@ -3,6 +3,8 @@ class Group < ActiveRecord::Base
     case name
     when "inward-remittance"
       ['Partner','Bank','PurposeCode','WhitelistedIdentity','InwIdentity','InwardRemittance', 'InwRemittanceRule']
+    when "e-collect"
+      ['EcolRule','EcolCustomer']
     else
       []
     end

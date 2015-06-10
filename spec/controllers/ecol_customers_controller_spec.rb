@@ -5,8 +5,7 @@ describe EcolCustomersController do
   
   before(:each) do
     @controller.instance_eval { flash.extend(DisableFlashSweeping) }
-    sign_in @user = Factory(:user)
-    @user.add_role :user
+    sign_in @user = Factory(:user, :group_id => Factory(:group, :name => 'e-collect').id)
     request.env["HTTP_REFERER"] = "/"
   end
 

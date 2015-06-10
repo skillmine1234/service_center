@@ -6,7 +6,7 @@ describe Group do
       group = Factory(:group,:name => 'inward-remittance')
       group.model_list.should == ['Partner','Bank','PurposeCode','WhitelistedIdentity','InwIdentity','InwardRemittance', 'InwRemittanceRule']
       group = Factory(:group,:name => 'e-collect')
-      group.model_list.should == []
+      group.model_list.should == ['EcolRule','EcolCustomer']
     end
   end
 end
