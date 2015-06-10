@@ -48,7 +48,7 @@ describe EcolCustomersController do
         expect {
           post :create, {:ecol_customer => params}
         }.to change(EcolCustomer, :count).by(1)
-        flash[:alert].should  match(/Customer successfuly created/)
+        flash[:alert].should  match(/Customer successfully created/)
         response.should be_redirect
       end
 
