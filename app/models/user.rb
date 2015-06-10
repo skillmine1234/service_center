@@ -2,20 +2,14 @@ class User < ActiveRecord::Base
   rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+  belongs_to :role
+  belongs_to :group
+
   devise :session_limitable
 
-  Roles = %w{user}
+  Roles = %w{user approver editor}
 
-  validate :role_presence
-
-  def role_presence
-    if roles.empty? && Rails.env != "test"
-      errors.add(:role, "atleast one role must be added")
-      false
-    else
-      true
-    end
-  end
+  validates_presence_of :role_id, :group_id
 
   validates :username, :presence => true,
   :uniqueness => {
@@ -37,6 +31,10 @@ class User < ActiveRecord::Base
       return true
     end
     return false
+  end
+
+  def has_role?(role_name)
+    role.try(:name) == role_name.to_s ? true : false
   end
 
   def name

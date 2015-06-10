@@ -1,55 +1,58 @@
 %br
-.slide-container
-  .box
-    = link_to '/inward_remittances' do
-      = image_tag 'remittance.jpeg', :size => "80x80"
-    %br
-      = "Inward Remittance"
-  .box
-    = link_to '/sdn/search' do
-      = image_tag 'aml.jpeg', :size => "80x80"
-    %br
-      = "AML Search"
-.slide-container
-  .box
-    = link_to '/partners' do
-      = image_tag 'partner.png', :size => "80x80"
-    %br
-      = "Partners"
-  .box
-    = link_to '/purpose_codes' do
-      = image_tag 'purpose_code.gif', :size => "80x80"
-    %br
-      = "Purpose Codes"
-  .box
-    - if !InwRemittanceRule.first.nil?
-      = link_to edit_inw_remittance_rule_path(InwRemittanceRule.first) do
-        = image_tag 'rules.jpeg', :size => "80x80"
+- if @current_user.group.try(:name) == "inward-remittance"
+  .slide-container
+    .box
+      = link_to '/inward_remittances' do
+        = image_tag 'remittance.jpeg', :size => "80x80"
       %br
-        = "Inward Remittance Rules"
-    - else
-      = link_to error_msg_path do
-        = image_tag 'rules.jpeg', :size => "80x80"
+        = "Inward Remittance"
+    .box
+      = link_to '/sdn/search' do
+        = image_tag 'aml.jpeg', :size => "80x80"
       %br
-        = "Rules"
-  .box
-    = link_to '/banks' do
-      = image_tag 'bank.jpeg', :size => "80x80"
-    %br
-      = "Banks"
-  .box
-    = link_to '/whitelisted_identities' do
-      = image_tag 'white_list_icon.jpg', :size => "80x80"
-    %br
-      = "Whitelisted Identities"
-  .box
-    - if !EcolRule.first.nil?
-      = link_to edit_ecol_rule_path(EcolRule.first) do
-        = image_tag 'ecol_rule.png', :size => "80x80"
-    %br
-      = "E-Collect Rules"
-  .box
-    = link_to '/ecol_customers' do
-      = image_tag 'ecol_customer.gif', :size => "80x80"
-    %br
-      = "E-Collect Customer"
+        = "AML Search"
+  .slide-container
+    .box
+      = link_to '/partners' do
+        = image_tag 'partner.png', :size => "80x80"
+      %br
+        = "Partners"
+    .box
+      = link_to '/purpose_codes' do
+        = image_tag 'purpose_code.gif', :size => "80x80"
+      %br
+        = "Purpose Codes"
+    .box
+      - if !InwRemittanceRule.first.nil?
+        = link_to edit_inw_remittance_rule_path(InwRemittanceRule.first) do
+          = image_tag 'rules.jpeg', :size => "80x80"
+        %br
+          = "Inward Remittance Rules"
+      - else
+        = link_to error_msg_path do
+          = image_tag 'rules.jpeg', :size => "80x80"
+        %br
+          = "Rules"
+    .box
+      = link_to '/banks' do
+        = image_tag 'bank.jpeg', :size => "80x80"
+      %br
+        = "Banks"
+    .box
+      = link_to '/whitelisted_identities' do
+        = image_tag 'white_list_icon.jpg', :size => "80x80"
+      %br
+        = "Whitelisted Identities"
+- elsif @current_user.group.try(:name) == "e-collect"
+  .slide-container
+    .box
+      - if !EcolRule.first.nil?
+        = link_to edit_ecol_rule_path(EcolRule.first) do
+          = image_tag 'ecol_rule.png', :size => "80x80"
+      %br
+        = "E-Collect Rules"
+    .box
+      = link_to '/ecol_customers' do
+        = image_tag 'ecol_customer.gif', :size => "80x80"
+      %br
+        = "E-Collect Customer"

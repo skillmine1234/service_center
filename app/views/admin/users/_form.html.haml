@@ -1,19 +1,20 @@
 = semantic_form_for [:admin, @user] do |f|
   = f.inputs "User Details" do
-    = f.input :username , :label=>"User Id"
+    = f.input :username , :label=>"User Id", :input_html => { :style => 'display:inline-block; width: 250px;' }
     - unless ENV['DEVISE_AUTHENTICATE_WITH_LDAP'] == "true"
-      = f.input :first_name
-      = f.input :last_name
-      = f.input :email
-      = f.input :mobile_no
-      = f.input :password
-      = f.input :password_confirmation
+      = f.input :first_name, :input_html => { :style => 'display:inline-block; width: 250px;' }
+      = f.input :last_name, :input_html => { :style => 'display:inline-block; width: 250px;' }
+      = f.input :email, :input_html => { :style => 'display:inline-block; width: 250px;' }
+      = f.input :mobile_no, :input_html => { :style => 'display:inline-block; width: 250px;' }
+      = f.input :password, :input_html => { :style => 'display:inline-block; width: 250px;' }
+      = f.input :password_confirmation, :input_html => { :style => 'display:inline-block; width: 250px;' }
     - else
       = f.input :first_name, :as=>:hidden
     %li
       = f.check_box :inactive
       = f.label "Inactive", :for => 'inactive_generic_app'
-    = f.input :role, :as => :multiple_select, :collection => Role.all.collect {|r| [r.name.camelize, r.id]}
+    = f.input :role, :label => "*Role", :include_blank => 'Select', :input_html => { :style => 'display:inline-block; width: 250px;' }
+    = f.input :group, :label => "*Group", :include_blank => 'Select', :input_html => { :style => 'display:inline-block; width: 250px;' }
   = f.actions do
     = f.action :submit
     %li.cancel

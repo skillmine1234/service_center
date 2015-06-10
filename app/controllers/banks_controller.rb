@@ -1,6 +1,7 @@
 require 'will_paginate/array'
 
 class BanksController < ApplicationController
+  load_and_authorize_resource
   before_filter :authenticate_user!
   before_filter :block_inactive_user!
   respond_to :json
@@ -48,6 +49,7 @@ class BanksController < ApplicationController
   end
 
   def index
+    p 'hiii'
     banks = Bank.order("id desc")
     @banks_count = banks.count
     @banks = banks.paginate(:per_page => 10, :page => params[:page]) rescue []

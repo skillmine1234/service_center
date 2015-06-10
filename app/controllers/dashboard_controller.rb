@@ -6,5 +6,6 @@ class DashboardController < ApplicationController
   respond_to :html, :js, :json, :xml
 
   def overview
+    @current_user = current_user
   end
 end

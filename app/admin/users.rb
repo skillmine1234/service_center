@@ -1,7 +1,6 @@
 ActiveAdmin.register User do
-  permit_params :email, :first_name, :last_name, :password, :password_confirmation, :remember_me, :department_id, :location_id,
-                :username, :emp_id, :inactive, :supervisor_id, :mobile_no, :receive_sms,
-                :title, :body, role_ids: [], department_location_ids: []
+  permit_params :email, :first_name, :last_name, :password, :password_confirmation, :remember_me,
+                :username, :inactive, :title, :body, :role_id, :mobile_no, :group_id
   filter :id
   filter :username, :label=>"User Id"
   filter :email
@@ -12,7 +11,8 @@ ActiveAdmin.register User do
   filter :created_at
   filter :updated_at
   filter :sign_in_count
-  filter :roles_name, :as => :select, :collection => proc {(User::Roles).collect {|r| [r.humanize, r]}.sort}
+  filter :role
+  filter :group
 
   index do
     column "Id" do |user|
@@ -29,9 +29,8 @@ ActiveAdmin.register User do
     column :last_sign_in_at
     column :sign_in_count
     column :inactive
-    column :roles do |u|
-      u.roles.pluck(:name)
-    end
+    column :role
+    column :group
     actions
   end
 
@@ -48,9 +47,8 @@ ActiveAdmin.register User do
       row :last_sign_in_at
       row :sign_in_count
       row :inactive
-      row :roles do |u|
-        u.roles.pluck(:name)
-      end
+      row :role
+      row :group
       row :created_at
       row :updated_at
     end
@@ -69,6 +67,7 @@ ActiveAdmin.register User do
     column("Last sign In At") {|user| user.last_sign_in_at}
     column("Sign in count") {|user| user.sign_in_count}
     column("Inactive") {|user| user.inactive}
-    column("Roles") {|user| user.roles.collect{|role| role.name}}
+    column("Role") {|user| user.role}
+    column("Group") {|user| user.group}
   end
 end

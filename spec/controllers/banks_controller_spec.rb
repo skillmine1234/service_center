@@ -7,7 +7,6 @@ describe BanksController do
   before(:each) do
     @controller.instance_eval { flash.extend(DisableFlashSweeping) }
     sign_in @user = Factory(:user)
-    @user.add_role :user
     request.env["HTTP_REFERER"] = "/"
   end
 
