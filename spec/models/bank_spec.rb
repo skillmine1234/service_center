@@ -30,6 +30,24 @@ describe Bank do
       end
     end
 
+    context "name format" do
+      it "should allow valid format" do 
+        [:name].each do |att|
+          should allow_value('abcddfgdfg').for(att)
+          should allow_value('aBCDdfdsgs').for(att)
+        end
+      end
+
+      it "should not allow invalid format" do 
+        [:name].each do |att|
+          should_not allow_value('ab*dsgdsgf').for(att)
+          should_not allow_value('a12232424V').for(att)
+          should_not allow_value('@acddsfdfd').for(att)
+          should_not allow_value('134\ndsfdsg').for(att)
+        end
+      end
+    end
+
     context "imps_enabled?" do 
       it "should return 'Y' if imps_enabled is true and 'N' if false" do 
         bank = Factory(:bank, :imps_enabled => 1)
