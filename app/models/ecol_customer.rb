@@ -16,7 +16,7 @@ class EcolCustomer < ActiveRecord::Base
   validates_inclusion_of :nrtv_sufx_1, :nrtv_sufx_2, :nrtv_sufx_3, :in => %w( N SC RC IN RN ORN ORA )
   validates_inclusion_of :rmtr_alert_on, :in => %w( N P R A )
   
-  validates :code, format: {with: /\A[a-z|A-Z|0-9]{1,15}+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}' }, length: {maximum: 15, minimum: 1}
+  validates :code, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}' }, length: {maximum: 15, minimum: 1}
   validates :name, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}' }, length: {maximum: 15, minimum: 1}
   validates :credit_acct_no, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}' }, length: {maximum: 25, minimum: 1}
   validates :rmtr_pass_txt, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}' }, length: {maximum: 500, minimum: 1}, :allow_blank => true

@@ -10,11 +10,26 @@ describe EcolCustomer do
       :val_token_2, :token_3_type, :token_3_length, :val_token_3, :val_txn_date, :val_txn_amt, :val_ben_name, :val_rem_acct, 
       :return_if_val_fails, :credit_acct_no, :nrtv_sufx_1, :nrtv_sufx_2, :nrtv_sufx_3, :rmtr_alert_on].each do |att|
       it { should validate_presence_of(att) }
-    end    
+    end 
+       
     it do 
       ecol_customer = Factory(:ecol_customer)
       should validate_uniqueness_of(:code)   
     end
+    
+    it do
+      ecol_customer = Factory(:ecol_customer)
+      [:code, :name].each do |att|
+        should validate_length_of(att).is_at_least(1).is_at_most(15)
+      end
+      
+      should validate_length_of(:credit_acct_no).is_at_least(1).is_at_most(25)
+      
+      [:rmtr_pass_txt, :rmtr_return_txt].each do |att|
+        should validate_length_of(att).is_at_most(500)
+      end
+    end
+    
     it do
       ecol_customer = Factory(:ecol_customer)
       should validate_inclusion_of(:val_method).in_array(['N', 'W', 'D'])
@@ -37,7 +52,7 @@ describe EcolCustomer do
       should_not allow_value('@CUST01').for(:code)
       should_not allow_value('CUST01/').for(:code)
       should_not allow_value('CUST-01').for(:code)
-    end 
+    end     
   end
   
   context "field format" do 
