@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :bank do
-    ifsc "abcd0123456"
+    sequence(:ifsc) {|n| "abcd0" + "%06i" % "#{n}" }
     name "MyString"
     imps_enabled false
   end

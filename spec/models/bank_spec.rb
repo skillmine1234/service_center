@@ -12,6 +12,7 @@ describe Bank do
     end
 
     # it {should validate_inclusion_of(:imps_enabled).in_array([true,false]) }
+    it {should validate_uniqueness_of(:ifsc) }
 
     context "ifsc format" do 
       it "should validate the format of ifsc" do 
