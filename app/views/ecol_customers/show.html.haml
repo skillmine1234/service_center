@@ -179,6 +179,30 @@
               = @ecol_customer.rmtr_return_txt
             %td#msg-error
               = error_message_for(@ecol_customer, :rmtr_return_txt, :prepend_text => "") 
+          %tr
+            %td.label Created By
+            %td.value
+              = @ecol_customer.created_user.try(:username)
+            %td#msg-error
+              = error_message_for(@ecol_customer, :created_by, :prepend_text => "")
+          %tr
+            %td.label Updated By
+            %td.value
+              = @ecol_customer.updated_user.try(:username)
+            %td#msg-error
+              = error_message_for(@ecol_customer, :updated_by, :prepend_text => "")
+          %tr
+            %td.label Created At
+            %td.value
+              = @ecol_customer.created_at
+            %td#msg-error
+              = error_message_for(@ecol_customer, :created_at, :prepend_text => "")
+          %tr
+            %td.label Updated At
+            %td.value
+              = @ecol_customer.updated_at
+            %td#msg-error
+              = error_message_for(@ecol_customer, :updated_at, :prepend_text => "")
       = link_to 'Back to Customers', ecol_customers_path
       
       

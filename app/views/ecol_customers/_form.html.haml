@@ -7,12 +7,12 @@
     = f.hidden_field :lock_version
     .control-group
       = f.label :code, "*Customer Code", :class => 'control-label'
-      = f.text_field :code
+      = f.text_field :code, :maxlength => 15
       #msg-error
         = error_message_for(@ecol_customer, :code, :prepend_text => "")
     .control-group
       = f.label :name, "*Customer Name", :class => 'control-label'
-      = f.text_field :name
+      = f.text_field :name, :maxlength => 15
       #msg-error
         = error_message_for(@ecol_customer, :name, :prepend_text => "")
     .control-group
@@ -20,12 +20,12 @@
       = f.check_box :is_enabled, {},"Y","N"
     .control-group
       = f.label :val_method, "*Validation Method", :class => 'control-label'
-      = f.select :val_method, options_for_select([['None','N'],['Web Service','W'],['Database Lookup','D']], @ecol_customer.val_method),:prompt => 'SELECT'
+      = f.select :val_method, options_for_select(EcolCustomer.options_for_val_method, @ecol_customer.val_method),:prompt => 'SELECT'
       #msg-error
         = error_message_for(@ecol_customer, :val_method, :prepend_text => "")
     .control-group
       = f.label :token_1_type, "*Account Token 1", :class => 'control-label'
-      = f.select :token_1_type, options_for_select([['None','N'],['Sub Code','SC'],['Remitter Code','RC'],['Invoice Number','IN']], @ecol_customer.token_1_type),:prompt => 'SELECT'
+      = f.select :token_1_type, options_for_select(EcolCustomer.options_for_acct_tokens, @ecol_customer.token_1_type),:prompt => 'SELECT'
       #msg-error
         = error_message_for(@ecol_customer, :token_1_type, :prepend_text => "")
     .control-group
@@ -40,7 +40,7 @@
         = error_message_for(@ecol_customer, :val_token_1, :prepend_text => "")
     .control-group
       = f.label :token_2_type, "*Account Token 2", :class => 'control-label'
-      = f.select :token_2_type, options_for_select([['None','N'],['Sub Code','SC'],['Remitter Code','RC'],['Invoice Number','IN']], @ecol_customer.token_2_type),:prompt => 'SELECT'
+      = f.select :token_2_type, options_for_select(EcolCustomer.options_for_acct_tokens, @ecol_customer.token_2_type),:prompt => 'SELECT'
       #msg-error
         = error_message_for(@ecol_customer, :token_2_type, :prepend_text => "")
     .control-group
@@ -55,7 +55,7 @@
         = error_message_for(@ecol_customer, :val_token_2, :prepend_text => "")
     .control-group
       = f.label :token_3_type, "*Account Token 3", :class => 'control-label'
-      = f.select :token_3_type, options_for_select([['None','N'],['Sub Code','SC'],['Remitter Code','RC'],['Invoice Number','IN']], @ecol_customer.token_3_type),:prompt => 'SELECT'
+      = f.select :token_3_type, options_for_select(EcolCustomer.options_for_acct_tokens, @ecol_customer.token_3_type),:prompt => 'SELECT'
       #msg-error
         = error_message_for(@ecol_customer, :token_3_type, :prepend_text => "")
     .control-group
@@ -95,32 +95,32 @@
         = error_message_for(@ecol_customer, :return_if_val_fails, :prepend_text => "")
     .control-group
       = f.label :file_upld_mthd, "LookUp File Upload Treatment", :class => 'control-label'
-      = f.select :file_upld_mthd, options_for_select([['Full', 'F'],['Incremental','I']], @ecol_customer.file_upld_mthd), :prompt => 'SELECT'
+      = f.select :file_upld_mthd, options_for_select(EcolCustomer.options_for_file_upld_mthd, @ecol_customer.file_upld_mthd), :prompt => 'SELECT'
       #msg-error
         = error_message_for(@ecol_customer, :file_upld_mthd, :prepend_text => "")
     .control-group
       = f.label :credit_acct_no, "*Default Credit Account No", :class => 'control-label'
-      = f.text_field :credit_acct_no
+      = f.text_field :credit_acct_no, :maxlength => 25
       #msg-error
         = error_message_for(@ecol_customer, :credit_acct_no, :prepend_text => "")
     .control-group
       = f.label :nrtv_sufx_1, "*Narration Suffix 1", :class => 'control-label'
-      = f.select :nrtv_sufx_1, options_for_select([['None','N'],['Sub Code','SC'],['Remitter Code','RC'],['Invoice Number','IN'],['Remitter Name','RN'],['Original Remitter Name','ORN'],['Original Remitter Account','ORA']], @ecol_customer.nrtv_sufx_1),:prompt => 'SELECT'
+      = f.select :nrtv_sufx_1, options_for_select(EcolCustomer.options_for_nrtv_sufxs, @ecol_customer.nrtv_sufx_1),:prompt => 'SELECT'
       #msg-error
         = error_message_for(@ecol_customer, :nrtv_sufx_1, :prepend_text => "")
     .control-group
       = f.label :nrtv_sufx_2, "*Narration Suffix 2", :class => 'control-label'
-      = f.select :nrtv_sufx_2, options_for_select([['None','N'],['Sub Code','SC'],['Remitter Code','RC'],['Invoice Number','IN'],['Remitter Name','RN'],['Original Remitter Name','ORN'],['Original Remitter Account','ORA']], @ecol_customer.nrtv_sufx_2),:prompt => 'SELECT'
+      = f.select :nrtv_sufx_2, options_for_select(EcolCustomer.options_for_nrtv_sufxs, @ecol_customer.nrtv_sufx_2),:prompt => 'SELECT'
       #msg-error
         = error_message_for(@ecol_customer, :nrtv_sufx_2, :prepend_text => "")
     .control-group
       = f.label :nrtv_sufx_3, "*Narration Suffix 3", :class => 'control-label'
-      = f.select :nrtv_sufx_3, options_for_select([['None','N'],['Sub Code','SC'],['Remitter Code','RC'],['Invoice Number','IN'],['Remitter Name','RN'],['Original Remitter Name','ORN'],['Original Remitter Account','ORA']], @ecol_customer.nrtv_sufx_3),:prompt => 'SELECT'
+      = f.select :nrtv_sufx_3, options_for_select(EcolCustomer.options_for_nrtv_sufxs, @ecol_customer.nrtv_sufx_3),:prompt => 'SELECT'
       #msg-error
         = error_message_for(@ecol_customer, :nrtv_sufx_3, :prepend_text => "")    
     .control-group
       = f.label :rmtr_alert_on, "*Send Alerts To Remitter On", :class => 'control-label'
-      = f.select :rmtr_alert_on, options_for_select([['Never','N'],['On Pass','P'],['On Return','R'],['Always','A']], @ecol_customer.rmtr_alert_on), :prompt => 'SELECT'
+      = f.select :rmtr_alert_on, options_for_select(EcolCustomer.options_for_rmtr_alert_on, @ecol_customer.rmtr_alert_on), :prompt => 'SELECT'
       #msg-error
         = error_message_for(@ecol_customer, :rmtr_alert_on, :prepend_text => "")
     .control-group
