@@ -6,7 +6,7 @@
   .form-main{:style => 'width:100%'}
     = f.hidden_field :lock_version
     .control-group
-      = f.label :ifsc, "IFSC", :class => 'control-label'
+      = f.label :ifsc, "*IFSC", :class => 'control-label'
       = f.text_field :ifsc
       #msg-error
         = error_message_for(@bank, :ifsc, :prepend_text => "")
@@ -16,7 +16,7 @@
       #msg-error
         = error_message_for(@bank, :name, :prepend_text => "")
     .control-group
-      = f.label :imps_enabled, "*IMPS Enabled ?", :class => 'control-label'
+      = f.label :imps_enabled, "IMPS Enabled ?", :class => 'control-label'
       - if f.object.imps_enabled.nil?
         = f.check_box :imps_enabled, {:checked => "checked"},1,0
       - else
