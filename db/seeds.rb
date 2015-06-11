@@ -13,9 +13,12 @@ if AdminUser.all.empty?
   end
 end
 
-if Role.all.empty?
-  Role.create(:name=>"user")
-end
+Role.create(:name=>"user") if Role.find_by_name("user").nil?
+Role.create(:name=>"editor") if Role.find_by_name("editor").nil?
+Role.create(:name=>"approver") if Role.find_by_name("approver").nil?
+
+Group.create(:name=>"inward-remittance") if Group.find_by_name("inward-remittance").nil?
+Group.create(:name=>"e-collect") if Group.find_by_name("e-collect").nil?
 
 if InwRemittanceRule.all.empty?
   InwRemittanceRule.create!(:pattern_salutations => "Mr,Mrs,Miss,Dr,Ms,PRof,Rev,Lady,Sir,Capt,Major,LtCol,Col")
