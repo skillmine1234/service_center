@@ -27,3 +27,8 @@ end
 if EcolRule.all.empty?  
   EcolRule.create(:ifsc => "QGPL0123456", :cod_acct_no => "0123456789", :stl_gl_inward => "123456789", :stl_gl_return => "123456789")
 end
+
+if ScService.all.empty?
+  ScService.create(:code => 'AML', :name => 'Anti Money Laundering')
+  ScService.create(:code => 'ECOL', :name => 'Ecollect')
+end
