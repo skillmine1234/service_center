@@ -3,19 +3,43 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   belongs_to :role
-  belongs_to :group
+  has_and_belongs_to_many :groups, :join_table => :users_groups
 
   devise :session_limitable
 
   Roles = %w{user approver editor}
 
-  validates_presence_of :role_id, :group_id
+  Groups = %w{inward-remittance e-collect}
+
+  validates_presence_of :role_id
 
   validates :username, :presence => true,
   :uniqueness => {
     :message => "This user id already exists in the system.",
     :case_sensitive => false
   }
+  validate :group_presence
+
+  def group_presence
+    if groups.empty? && Rails.env != "test"
+      errors.add(:group, "atleast one group must be added")
+      false
+    else
+      true
+    end
+  end
+
+  def group_names
+    groups.pluck(:name) rescue []
+  end
+
+  def group_model_list
+    list = []
+    groups.each do |group|
+      list << group.model_list
+    end
+    list.flatten rescue []
+  end
 
   if ENV['DEVISE_AUTHENTICATE_WITH_LDAP'] == "true"
     devise :ldap_authenticatable, :trackable

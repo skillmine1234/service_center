@@ -1,5 +1,6 @@
 %br
-- if @current_user.group.try(:name) == "inward-remittance"
+- if @current_user.group_names.include?("inward-remittance")
+  %h1 Inward Remittance
   .slide-container
     .box
       = link_to '/inward_remittances' do
@@ -43,7 +44,9 @@
         = image_tag 'white_list_icon.jpg', :size => "80x80"
       %br
         = "Whitelisted Identities"
-- elsif @current_user.group.try(:name) == "e-collect"
+- if @current_user.group_names.include?("e-collect")
+  %h1 E-Collect
+  .slide-container
   .slide-container
     .box
       - if !EcolRule.first.nil?

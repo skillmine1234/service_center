@@ -1,4 +1,6 @@
 class Group < ActiveRecord::Base
+  has_and_belongs_to_many :users, :join_table => :users_groups
+
   def model_list
     case name
     when "inward-remittance"
@@ -9,4 +11,5 @@ class Group < ActiveRecord::Base
       []
     end
   end
+
 end

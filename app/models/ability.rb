@@ -8,9 +8,9 @@ class Ability
     super_admin_permissions if @user.has_role? :super_admin
     admin_permissions if @user.has_role? :admin
     user_admin_permissions if @user.has_role? :user_admin
-    user_permissions(@user.group.model_list) if @user.has_role? :user
-    editor_permissions(@user.group.model_list) if @user.has_role? :editor
-    approver_permissions(@user.group.model_list) if @user.has_role? :approver
+    user_permissions(@user.group_model_list) if @user.has_role? :user
+    editor_permissions(@user.group_model_list) if @user.has_role? :editor
+    approver_permissions(@user.group_model_list) if @user.has_role? :approver
     can :read, ActiveAdmin::Page, :name => "Dashboard"
   end
 
