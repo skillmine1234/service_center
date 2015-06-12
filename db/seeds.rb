@@ -32,3 +32,11 @@ if ScService.all.empty?
   ScService.create(:code => 'AML', :name => 'Anti Money Laundering')
   ScService.create(:code => 'ECOL', :name => 'Ecollect')
 end
+
+if IncomingFileType.all.empty? and !ScService.all.empty?
+  sc1 = ScService.find_by_name("AML")
+  sc2 = ScService.find_by_name("ECOL")
+  IncomingFileType.create(:sc_service_id => sc1.id, :code => 'SDN', :name => 'Specially Designated Individuals')
+  IncomingFileType.create(:sc_service_id => sc1.id, :code => 'OFAC', :name => 'Office of Foreign Assets Control')
+  IncomingFileType.create(:sc_service_id => sc2.id, :code => 'RMTRS', :name => 'Remitters')
+end
