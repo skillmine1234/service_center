@@ -10,7 +10,8 @@ describe Bank do
     [:ifsc, :name].each do |att|
       it { should validate_presence_of(att) }
     end
-    
+
+    # it {should validate_inclusion_of(:imps_enabled).in_array([true,false]) }
     # it do
     #   bank = Factory(:bank)
     #   should validate_uniqueness_of(:ifsc)

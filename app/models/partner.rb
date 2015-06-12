@@ -13,7 +13,7 @@ class Partner < ActiveRecord::Base
   validates :txn_hold_period_days, :numericality => { :greater_than => 0, :less_than => 16}
   validates :code, format: {with: /\A[A-Za-z0-9]+\z/, message: "invalid format - expected format is : {[A-Za-z0-9\s]}"}, length: {maximum: 10, minimum: 1}
   validates :name, format: {with: /\A[A-Za-z0-9\s]+\z/, message: "invalid format - expected format is : {[A-Za-z0-9\s]}"}
-  validates :customer_id, :numericality => {:only_integer => true}
+  validates :customer_id, :numericality => {:only_integer => true}, length: {maximum: 15}
   validates :mmid, :numericality => {:only_integer => true}, length: {maximum: 7, minimum: 7}, :allow_blank => true
   validates :mobile_no, :numericality => {:only_integer => true}, length: {maximum: 10, minimum: 10}, :allow_blank => true
 

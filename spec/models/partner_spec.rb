@@ -26,6 +26,7 @@ describe Partner do
     it { should validate_length_of(:mobile_no).is_at_most(10) }
     it { should validate_length_of(:mmid).is_at_least(7) }
     it { should validate_length_of(:mmid).is_at_most(7) }
+    it { should validate_length_of(:customer_id).is_at_most(15) }
 
     context "txn_hold_period_days" do 
       it "should accept value 1 to 15" do
