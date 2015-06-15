@@ -1,0 +1,196 @@
+.form-horizontal.show_form
+  .form-main{:style=>'background-color: #F1F2F8; width: 65%'}
+    #form-details
+      %h3 E-Collect Transaction Details 
+      %br
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
+        %tr
+          %td.label Status
+          %td.value
+            = @ecol_transaction.status
+        %tr
+          %td.label Transfer Type
+          %td.value
+            = @ecol_transaction.transfer_type
+        %tr
+          %td.label Unique Ref No
+          %td.value
+            = @ecol_transaction.transfer_unique_no
+        %tr
+          %td.label Transfer Status
+          %td.value
+            = @ecol_transaction.transfer_status
+        %tr
+          %td.label Transfer Date
+          %td.value
+            = @ecol_transaction.transfer_date
+        %tr
+          %td.label Transfer Currency
+          %td.value
+            = @ecol_transaction.transfer_ccy
+        %tr
+          %td.label Transfer Amount
+          %td.value
+            = @ecol_transaction.transfer_amount
+        %tr
+          %td.label Remitter Ref No
+          %td.value
+            = @ecol_transaction.rmtr_ref
+        %tr
+          %td.label Remitter Name
+          %td.value
+            = @ecol_transaction.rmtr_full_name
+        %tr
+          %td.label Remitter Address 
+          %td.value
+            = @ecol_transaction.rmtr_address
+        %tr
+          %td.label Remitter Account Type
+          %td.value
+            = @ecol_transaction.rmtr_account_type
+        %tr
+          %td.label Remitter Account Number
+          %td.value
+            = @ecol_transaction.rmtr_account_no
+        %tr
+          %td.label Remitter Account IFSC
+          %td.value
+            = @ecol_transaction.rmtr_account_ifsc
+        %tr
+          %td.label Beneficiary Name
+          %td
+            = @ecol_transaction.bene_full_name
+        %tr
+          %td.label Beneficiary Address
+          %td
+            = @ecol_transaction.bene_full_address
+        %tr
+          %td.label Beneficiary Account Type
+          %td
+            = @ecol_transaction.bene_account_type
+        %tr
+          %td.label Beneficiary Account Number
+          %td
+            = @ecol_transaction.bene_account_no
+        %tr
+          %td.label Beneficiary Account IFSC
+          %td
+            = @ecol_transaction.bene_account_ifsc
+        %tr
+          %td.label Remitter To Beneficiary Note
+          %td.value
+            = @ecol_transaction.rmtr_to_bene_note
+        %tr
+          %td.label Received At
+          %td.value
+            = @ecol_transaction.received_at
+        %tr
+          %td.label Customer Code
+          %td.value
+            = @ecol_transaction.customer_code
+        %tr
+          %td.label Customer Sub Code
+          %td.value
+            = @ecol_transaction.customer_subcode
+        %tr
+          %td.label Remitter Code
+          %td.value
+            = @ecol_transaction.remitter_code
+        %tr
+          %td.label Invoice Number
+          %td.value
+            = @ecol_transaction.invoice_no
+        %tr
+          %td.label Validate At
+          %td.value
+            = @ecol_transaction.validate_at
+        %tr
+          %td.label Validated At
+          %td.value
+            = @ecol_transaction.validated_at
+        %tr
+          %td.label Validation Success
+          %td.value
+            = @ecol_transaction.vaidation_status
+        %tr
+          %td.label Credited At
+          %td.value
+            = @ecol_transaction.credited_at
+        %tr
+          %td.label Credit Success
+          %td.value
+            = @ecol_transaction.credit_status
+        %tr
+          %td.label Credit Ref No
+          %td.value
+            = @ecol_transaction.credit_ref
+        %tr
+          %td.label Credit Attempt At
+          %td.value
+            = @ecol_transaction.credit_attempt_at
+        %tr
+          %td.label Total Credit Attempts
+          %td.value
+            = @ecol_transaction.credit_attempt_no
+        %tr
+          %td.label Returned At
+          %td.value
+            = @ecol_transaction.returned_at
+        %tr
+          %td.label Return Status
+          %td.value
+            = @ecol_transaction.return_status
+        %tr
+          %td.label Return Reference
+          %td.value
+            = @ecol_transaction.return_ref
+        %tr
+          %td.label Return Attempt At
+          %td.value
+            = @ecol_transaction.return_attempt_at
+        %tr
+          %td.label Return Attempt No
+          %td.value
+            = @ecol_transaction.return_attempt_no
+        %tr
+          %td.label Settled At
+          %td.value
+            = @ecol_transaction.settled_at 
+        %tr
+          %td.label Settlement Success
+          %td.value
+            = @ecol_transaction.settle_status
+        %tr
+          %td.label Settlement Ref
+          %td.value
+            = @ecol_transaction.settle_ref 
+        %tr
+          %td.label Settlement Attempt At
+          %td.value
+            = @ecol_transaction.settle_attempt_at
+        %tr
+          %td.label Total Settlement Attempts
+          %td.value
+            = @ecol_transaction.settle_attempt_no
+        %tr
+          %td.label Fault At
+          %td.value
+            = @ecol_transaction.fault_at
+        %tr
+          %td.label Fault Code
+          %td.value
+            = @ecol_transaction.fault_code 
+        %tr
+          %td.label Fault Reason
+          %td.value
+            = @ecol_transaction.fault_reason 
+    %p{:style => 'padding-left:6px; padding-bottom:6px'}
+      = link_to 'Back to Transactions', ecol_transactions_path
+            
+            
+
+
+          
+
+
+      

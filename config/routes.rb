@@ -12,7 +12,7 @@ ServiceCenter::Application.routes.draw do
   resources :ecol_rules
   resources :ecol_customers
   resources :ecol_remitters
-  # resources :ecol_transactions
+  resources :ecol_transactions
   resources :udf_attributes
 
   get '/partner/:id/audit_logs' => 'partners#audit_logs'

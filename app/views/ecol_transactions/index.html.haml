@@ -1,0 +1,52 @@
+%br
+%h1 Listing E-Collect transactions
+%h2.collapsible
+  Advanced Search
+  %span.caret
+.collapsible-content
+  = render :partial => 'advanced_search'
+%br
+= "Total Count: #{@ecol_transactions_count}"
+%br
+= will_paginate @ecol_transactions
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Status
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Transfer Type
+    %th{:style=>'Text-align:left; background-color: lightblue;'}
+      Unique Ref No
+    %th{:style=>'Text-align:left; background-color: lightblue;'}
+      Transfer Date
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Transfer Amount
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Customer Code
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Customer Sub Code
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Remitter Code 
+  .tbody
+    - @ecol_transactions.each do |ecol_transaction|   
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', ecol_transaction
+        %td{:style=>'text-align:left;'}
+          = ecol_transaction.status
+        %td{:style=>'text-align:left;'}
+          = ecol_transaction.transfer_type
+        %td{:style=>'text-align:left;'}
+          = ecol_transaction.transfer_unique_no
+        %td{:style=>'text-align:left;'}
+          = ecol_transaction.transfer_date
+        %td{:style=>'text-align:left;'}
+          = ecol_transaction.transfer_amount
+        %td{:style=>'text-align:left;'}
+          = ecol_transaction.customer_code
+        %td{:style=>'text-align:left;'}
+          = ecol_transaction.customer_subcode
+        %td{:style=>'text-align:left;'}
+          = ecol_transaction.remitter_code
