@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :ecol_customer do
-    code "ABCD0123456"
+    code "CUST00"
     name "MyString"
     is_enabled "Y"
     val_method "D"
