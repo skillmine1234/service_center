@@ -11,6 +11,9 @@ ServiceCenter::Application.routes.draw do
   resources :banks
   resources :ecol_rules
   resources :ecol_customers
+  # resources :ecol_remitters
+  # resources :ecol_transactions
+  resources :udf_attributes
 
   get '/partner/:id/audit_logs' => 'partners#audit_logs'
   get '/purpose_code/:id/audit_logs' => 'purpose_codes#audit_logs'
@@ -18,6 +21,8 @@ ServiceCenter::Application.routes.draw do
   get '/bank/:id/audit_logs' => 'banks#audit_logs'
   get '/ecol_rule/:id/audit_logs' => 'ecol_rules#audit_logs'
   get '/ecol_customer/:id/audit_logs' => 'ecol_customers#audit_logs'
+  # get '/ecol_remitter/:id/audit_logs' => 'ecol_remitters#audit_logs'
+  get '/udf_attribute/:id/audit_logs' => 'udf_attributes#audit_logs'
 
   get '/inward_remittances/:id/remitter_identities' => 'inward_remittances#remitter_identities'
   get '/inward_remittances/:id/beneficiary_identities' => 'inward_remittances#beneficiary_identities'
