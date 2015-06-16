@@ -72,7 +72,7 @@ describe IncomingFile do
 
   context "upload_time" do 
     it "should equal to the difference between ended_at and started_at" do 
-      incoming_file = Factory(:incoming_file, :started_at => Time.zone.now, :completed_at => Time.zone.now.advance(:minutes => 3))
+      incoming_file = Factory(:incoming_file, :started_at => Time.zone.now, :ended_at => Time.zone.now.advance(:minutes => 3))
       incoming_file.upload_time.should == (incoming_file.ended_at - incoming_file.started_at).round(2)
     end
   end
