@@ -47,10 +47,9 @@ class EcolRemittersController < ApplicationController
     end
   
     def index
+      ecol_remitters = filter_ecol_remitter(params)
       if params[:advanced_search].present?
-        ecol_remitters = find_ecol_remitters(params).order("id desc")
-      else
-        ecol_remitters = EcolRemitter.order("id desc")
+        ecol_remitters = find_ecol_remitters(ecol_remitters,params).order("id desc")
       end
       @ecol_remitters_count = ecol_remitters.count
       @ecol_remitters = ecol_remitters.paginate(:per_page => 10, :page => params[:page]) rescue []

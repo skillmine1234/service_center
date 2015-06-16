@@ -1,0 +1,28 @@
+%br
+%br
+%h1 File Summary
+%br
+
+%h1 
+  = @incoming_file.file_name
+%br
+%table.table.table-bordered.table-striped.table-hover.align_center
+  %thead
+    %tr
+      %th{:style=>'text-align:left;'}
+      %th{:style=>'text-align:left;'}
+        Total Records
+      %th{:style=>'text-align:left;'}
+        Success
+      %th{:style=>'text-align:left;'}
+        Failed
+  %tbody
+    %tr
+      %td{:style=>'text-align:left;'}
+        = "Remitter"
+      %td{:style=>'text-align:left;'}
+        = @incoming_file.ecol_remitters.count + @incoming_file.incoming_file_records.count
+      %td{:style=>'text-align:left;'}
+        = link_to @incoming_file.ecol_remitters.count, ecol_remitters_path(:incoming_file_id => @incoming_file.id)
+      %td{:style=>'text-align:left;'}
+        = link_to @incoming_file.incoming_file_records.count, incoming_file_records_path(:incoming_file_id => @incoming_file.id)

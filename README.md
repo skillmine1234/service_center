@@ -12,3 +12,4 @@ The following are the environment variables required to be set:
 5. SMTP_USERNAME 
 6. SMTP_PASSWORD 
 7. CONFIG_UPLOAD_PATH
+8. CONFIG_FILE_UPLOAD_PATH

@@ -14,6 +14,8 @@ ServiceCenter::Application.routes.draw do
   resources :ecol_remitters
   resources :ecol_transactions
   resources :udf_attributes
+  resources :incoming_files
+  resources :incoming_file_records
 
   namespace :api do
     namespace :v1 do

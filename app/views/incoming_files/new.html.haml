@@ -1,0 +1,20 @@
+.ticket_header_new
+  %h4
+    = "Upload Files"
+
+= simple_form_for @incoming_file, :html => {:class=>'form-horizontal', :autocomplete=>"off", :id => "upload_form"} do |f|
+  .form-main
+    .control-group
+      = f.label :service_name,nil,:class => 'control-label'
+      = f.select :service_name, ScService.all.map {|u| [u.name, u.code]}, :include_blank => 'select'
+    .control-group
+      = f.label :file_type,nil,:class => 'control-label'
+      = f.select :file_type, IncomingFileType.all.map {|u| [u.name, u.code]}, :include_blank => 'select'
+    .control-group
+      = f.label :file,nil,:class => 'control-label'
+      = f.file_field :file
+      = f.hidden_field :created_by, :value => current_user.id
+      = f.hidden_field :status, :value => 'N'
+  .form-actions
+    = f.button "submit", :class=>"btn btn-primary", :id => 'submit_file'
+    = link_to :Cancel,'/incoming_files', :name => 'cancel', :class=>"cancel btn"

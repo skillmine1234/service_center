@@ -1,0 +1,48 @@
+%h4
+  %br
+  &nbsp;
+  %br
+  = "Total Count: #{@record_count}"
+%br
+= will_paginate @records
+%table.table.table-bordered.table-striped.table-hover{:style => 'width:100%; border:1px'}
+  .thead
+    %tr
+      %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+        Record Number Count
+      %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+        Record Text
+      %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+        Status
+      %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+        Fault Text
+  .tbody
+    - @records.each do |record|
+      %tr
+        %td{:style=>'width:25%; text-align:left;'}
+          = record.record_no
+        %td{:style=>'width:25%; text-align:left;'}
+          = record.record_txt
+        %td{:style=>'width:25%; text-align:left;'}
+          = record.status
+        %td{:style=>'text-align:left;'}
+          - if record.fault_code.nil? or record.fault_reason.nil?
+            .span{:class =>"has-tooltip", "data-toggle" => 'tooltip',"title" => "No Fault Text Available for this record", "data-placement" => 'bottom', "data-html" => true}
+              Show Fault Text
+          - else
+            = link_to "Show Fault Text", "#", :class => 'active-link', :href => "#faultText", data: { fault_reason: record.fault_reason, fault_code: record.fault_code} 
+#faultText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Fault Text
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    %table.table.no-border
+      %tr
+        %td.label Fault Code: 
+        %td
+          %label.fault_code{:style => 'word-wrap: break-word'}
+      %tr
+        %td.label Fault Reason:
+        %td
+          %label.fault_reason{:style => 'word-wrap: break-word'}

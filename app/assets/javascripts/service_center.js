@@ -26,6 +26,16 @@ $(document).ready(function(){
     $('#faultText').modal();
   });
 
+  $("a.active-link").on("click", function () {
+    var f_code = $(this).data('fault-code');
+    var f_reason = $(this).data('fault-reason');
+    $(".modal-body .fault_code").text("");
+    $(".modal-body .fault_code").text(f_code);
+    $(".modal-body .fault_reason").text("");
+    $(".modal-body .fault_reason").text(f_reason);
+    $('#faultText').modal();
+  });
+  
   $("#aml_reset").on('click', function(){
     $('input#search_params_firstName').val('');
     $('input#search_params_idNumber').val('');
