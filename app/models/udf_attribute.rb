@@ -98,8 +98,12 @@ class UdfAttribute < ActiveRecord::Base
   
     
     def cross_field_validations
-      if (self.is_enabled == 'Y' && (self.label_text.blank? || self.control_type.blank?))
-        errors.add(:is_enabled, "Label_text and control_type fields are mandatory if is_enabled is Y")
+      if (self.is_enabled == 'Y' && self.label_text.blank?) 
+        errors.add(:label_text, "Label_text is mandatory if is_enabled is Y")
+      end
+      
+      if (self.is_enabled == 'Y' && self.control_type.blank?)
+        errors.add(:control_type, "Control_type is mandatory if is_enabled is Y")
       end
       
       if (self.control_type ==  "DropDown" && (!self.max_length.blank? || !self.min_length.blank?))
