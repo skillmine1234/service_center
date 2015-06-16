@@ -5,14 +5,15 @@ FactoryGirl.define do
     incoming_file_id 1 
     customer_code "CUST00"
     customer_subcode "MyString"
+    remitter_code "MyString"
     credit_acct_no "MyString"
     customer_subcode_email "MyString"
     customer_subcode_mobile "9876543210"
-    remitter_name "MyStirng"
-    remitter_address "Mystring"
-    remitter_acct_no "Mystring"
-    remitter_email "MyString"
-    remitter_mobile "9876543210"
+    rmtr_name "MyStirng"
+    rmtr_address "Mystring"
+    rmtr_acct_no "Mystring"
+    rmtr_email "MyString"
+    rmtr_mobile "9876543210"
     invoice_no "MyString"
     invoice_amt 1
     invoice_amt_tol_pct 1
