@@ -1,0 +1,134 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8;'}
+    #form-details
+      %h3 E-Collect Remitter Details 
+      %br
+      %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
+        = link_to 'Edit', edit_ecol_remitter_path
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
+        - if !@ecol_remitter.nil?
+          %tr
+            %td.label Version
+            %td.value
+              = link_to "#{audit_count(@ecol_remitter)}", :controller => :ecol_remitters, :action => :audit_logs, :version_id => audit_count(@ecol_remitter), :id => @ecol_remitter.id
+          %tr
+            %td.label Form Errors
+            %td.value
+              = ' '
+            %td#msg-error
+              = error_message_for(@ecol_remitter, :base, :prepend_text => "")
+          %tr
+            %td.label Customer Code
+            %td.value
+              = @ecol_remitter.customer_code
+            %td#msg-error
+              = error_message_for(@ecol_remitter, :customer_code, :prepend_text => "")
+          %tr
+            %td.label Customer Sub Code
+            %td.value
+              = @ecol_remitter.customer_subcode
+            %td#msg-error
+              = error_message_for(@ecol_remitter, :customer_subcode, :prepend_text => "")
+          %tr
+            %td.label Remitter Code
+            %td.value
+              = @ecol_remitter.remitter_code
+            %td#msg-error
+              = error_message_for(@ecol_remitter, :remitter_code, :prepend_text => "")
+          %tr
+            %td.label Credit Accout No
+            %td.value
+              = @ecol_remitter.credit_acct_no
+            %td#msg-error
+              = error_message_for(@ecol_remitter, :credit_acct_no, :prepend_text => "")
+          %tr
+            %td.label Customer Sub Code Email
+            %td.value
+              = @ecol_remitter.customer_subcode_email
+            %td#msg-error
+              = error_message_for(@ecol_remitter, :customer_subcode_email, :prepend_text => "")
+          %tr
+            %td.label Customer Sub Code Mobile
+            %td.value
+              = @ecol_remitter.customer_subcode_mobile
+            %td#msg-error
+              = error_message_for(@ecol_remitter, :customer_subcode_mobile, :prepend_text => "")
+          %tr
+            %td.label Remitter Name
+            %td.value
+              = @ecol_remitter.remitter_name
+            %td#msg-error
+              = error_message_for(@ecol_remitter, :remitter_name, :prepend_text => "")
+          %tr
+            %td.label Remitter Address
+            %td.value
+              = @ecol_remitter.remitter_address
+            %td#msg-error
+              = error_message_for(@ecol_remitter, :remitter_address, :prepend_text => "")
+          %tr
+            %td.label Remitter Account No
+            %td.value
+              = @ecol_remitter.remitter_acct_no
+            %td#msg-error
+              = error_message_for(@ecol_remitter, :remitter_acct_no, :prepend_text => "")
+          %tr
+            %td.label Remitter Email
+            %td.value
+              = @ecol_remitter.remitter_email
+            %td#msg-error
+              = error_message_for(@ecol_remitter, :remitter_email, :prepend_text => "")
+          %tr
+            %td.label Remitter Mobile
+            %td.value
+              = @ecol_remitter.remitter_mobile
+            %td#msg-error
+              = error_message_for(@ecol_remitter, :remitter_mobile, :prepend_text => "")
+          %tr
+            %td.label Invoice No
+            %td.value
+              = @ecol_remitter.invoice_no
+            %td#msg-error
+              = error_message_for(@ecol_remitter, :invoice_no, :prepend_text => "")
+          %tr
+            %td.label Invoice Amount
+            %td.value
+              = @ecol_remitter.invoice_amt
+            %td#msg-error
+              = error_message_for(@ecol_remitter, :invoice_amt, :prepend_text => "")
+          %tr
+            %td.label Invoice Amount Tolerance (%)
+            %td.value
+              = @ecol_remitter.invoice_amt_tol_pct
+            %td#msg-error
+              = error_message_for(@ecol_remitter, :invoice_amt_tol_pct, :prepend_text => "")
+          %tr
+            %td.label Minimum Credit Amount
+            %td.value
+              = @ecol_remitter.min_credit_amt
+            %td#msg-error
+              = error_message_for(@ecol_remitter, :min_credit_amt, :prepend_text => "")
+          %tr
+            %td.label Maximum Credit Amount
+            %td.value
+              = @ecol_remitter.max_credit_amt
+            %td#msg-error
+              = error_message_for(@ecol_remitter, :max_credit_amt, :prepend_text => "")
+          %tr
+            %td.label Invoice Due Date
+            %td.value
+              = @ecol_remitter.due_date
+            %td#msg-error
+              = error_message_for(@ecol_remitter, :due_date, :prepend_text => "")
+          %tr
+            %td.label Invoice Due Date Tolerance (Days)
+            %td.value
+              = @ecol_remitter.due_date_tol_days
+            %td#msg-error
+              = error_message_for(@ecol_remitter, :due_date_tol_days, :prepend_text => "")
+      = link_to 'Back to Remitters', ecol_remitters_path
+      
+      
+      
+      
+      
+           
