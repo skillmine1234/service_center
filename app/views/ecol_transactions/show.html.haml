@@ -58,9 +58,34 @@
         %tr
           %td.label Remitter Sms Notify Reference
           %td= @ecol_transaction.rmtr_sms_notify_ref
+      .space{:style=>'height: 18px;'}
+      %hr{:style=>'background-color: #F1F2F8; width: 220%'}
+      %h3 Transfer Details
+      %table.table.no-border
+        %tr
+          %td.label Transfer Type
+          %td= @ecol_transaction.transfer_type
+        %tr
+          %td.label Transfer Status
+          %td= @ecol_transaction.transfer_status
+        %tr
+          %td.label Transfer Date
+          %td= @ecol_transaction.transfer_date
+      .space{:style=>'height: 14px;'}
+      %hr{:style=>'background-color: #F1F2F8; width: 220%'}    
+      %h3 
+        = "Remitter"
+      %table.table.no-border
+        %tr
+          %td.label Name
+          %td= @ecol_transaction.rmtr_full_name
+        %tr
+          %td.label Address
+          %td= @ecol_transaction.rmtr_address
   .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; display: inline-block;'}
     #ticket-details
-      %h3 
+      %h3
+      .space{:style=>'height: 15px;'}
       %table.table.no-border
         %tr
           %td.label Credit Status
@@ -81,7 +106,7 @@
           %td.label Settle Attempt No
           %td= @ecol_transaction.settle_attempt_no
         %tr
-          %td.label Retruned At
+          %td.label Returned At
           %td= @ecol_transaction.returned_at
         %tr
           %td.label Retrun Status
@@ -90,37 +115,14 @@
           %td.label Return Reference
           %td= @ecol_transaction.settle_ref
         %tr
-          %td.label Retrun Attempt At
+          %td.label Return Attempt At
           %td= @ecol_transaction.return_attempt_at
         %tr
-          %td.label Retrun Attempt No
+          %td.label Return Attempt No
           %td= @ecol_transaction.return_attempt_no
-
-  .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; display: inline-block;'}
-    #ticket-details
-      %h3 Transfer Details
-      %table.table.no-border
-        %tr
-          %td.label Transfer Type
-          %td= @ecol_transaction.transfer_type
-        %tr
-          %td.label Transfer Status
-          %td= @ecol_transaction.transfer_status
-        %tr
-          %td.label Transfer Date
-          %td= @ecol_transaction.transfer_date
-      %hr{:style=>'background-color: #F1F2F8; width: 220%'}    
-      %h3 
-        = "Remitter"
-      %table.table.no-border
-        %tr
-          %td.label Name
-          %td= @ecol_transaction.rmtr_full_name
-        %tr
-          %td.label Address
-          %td= @ecol_transaction.rmtr_address
-  .header-form-extended{:style=>'background-color: #F1F2F8; width: 50%;  display: inline-block;'}
-    #ticket-details
+      .space{:style=>'height: 3px;'}
+      %hr{:style=>'background-color: #F1F2F8; width: 120%'}
+      #ticket-details
       %h3
       .space{:style=>'height: 15px;'}
       %table.table.no-border
