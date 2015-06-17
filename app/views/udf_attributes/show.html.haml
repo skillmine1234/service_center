@@ -62,34 +62,13 @@
           %tr
             %td.label Constraints
             %td.value
-            - if !@udf_attribute.length.blank? 
-              %td.label Length:
-              %td.value
-                = @udf_attribute.length
-            - if !@udf_attribute.max_length.blank?
-              %td.label Max Length:
-              %td.value
-                = @udf_attribute.max_length
-            - if !@udf_attribute.min_length.blank?
-              %td.label Min Length:
-              %td.value
-                = @udf_attribute.min_length
-            - if !@udf_attribute.max_value.blank?
-              %td.label Max Value:
-              %td.value
-                = @udf_attribute.max_value
-            - if !@udf_attribute.min_value.blank?
-              %td.label Min Value:
-              %td.value
-                = @udf_attribute.min_value
-              
+              = @udf_attribute.constraints              
             %td#msg-error
               = error_message_for(@udf_attribute, :constraints, :prepend_text => "")
           %tr
             %td.label Select Options
             %td.value
-              %textarea{ :readonly => true }
-                = @udf_attribute.select_options
+              = @udf_attribute.select_options
             %td#msg-error
               = error_message_for(@udf_attribute, :select_options, :prepend_text => "")
 

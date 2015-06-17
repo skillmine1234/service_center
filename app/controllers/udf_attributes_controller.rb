@@ -33,6 +33,10 @@ class UdfAttributesController < ApplicationController
       flash[:alert] = 'Udf successfully modified'
       redirect_to @udf_attribute
     end
+    rescue ActiveRecord::StaleObjectError
+      @udf_attribute.reload
+      flash[:alert] = 'Someone edited the udf the same time you did. Please re-apply your changes to the udf.'
+      render "edit"
   end
 
   def show
@@ -55,7 +59,8 @@ private
 
 def udf_attribute_params
   params.require(:udf_attribute).permit(:class_name, :attribute_name, :label_text, :is_enabled, :is_mandatory, 
-  :control_type, :data_type, :constraints, :select_options,:length, :max_length, :min_length, :min_value, :max_value)
+  :control_type, :data_type, :constraints, :select_options,:length, :max_length, :min_length, :min_value, 
+  :max_value, :lock_version)
   
 end
   

@@ -48,8 +48,7 @@ describe EcolRemittersController do
     describe "with valid params" do
       it "creates a new ecol_remitter" do
         ecol_customer = Factory(:ecol_customer)
-        ecol_remitter = Factory(:ecol_remitter, :ecol_customer => ecol_customer)
-        params = ecol_remitter.attributes.slice(*ecol_remitter.class.attribute_names)
+        params = Factory.attributes_for(:ecol_remitter, :ecol_customer => ecol_customer)
         expect {
           post :create, {:ecol_remitter => params}
         }.to change(EcolRemitter, :count).by(1)
@@ -59,8 +58,7 @@ describe EcolRemittersController do
 
       it "assigns a newly created ecol_remitter as @ecol_remitter" do
         ecol_customer = Factory(:ecol_customer)
-        ecol_remitter = Factory(:ecol_remitter, :ecol_customer => ecol_customer)
-        params = ecol_remitter.attributes.slice(*ecol_remitter.class.attribute_names)
+        params = Factory.attributes_for(:ecol_remitter, :ecol_customer => ecol_customer)
         post :create, {:ecol_remitter => params}
         assigns(:ecol_remitter).should be_a(EcolRemitter)
         assigns(:ecol_remitter).should be_persisted
@@ -68,8 +66,7 @@ describe EcolRemittersController do
 
       it "redirects to the created ecol_remitter" do
         ecol_customer = Factory(:ecol_customer)
-        ecol_remitter = Factory(:ecol_remitter, :ecol_customer => ecol_customer)
-        params = ecol_remitter.attributes.slice(*ecol_remitter.class.attribute_names)
+        params = Factory.attributes_for(:ecol_remitter, :ecol_customer => ecol_customer)
         post :create, {:ecol_remitter => params}
         response.should redirect_to(EcolRemitter.last)
       end
@@ -78,8 +75,7 @@ describe EcolRemittersController do
     describe "with invalid params" do
       it "assigns a newly created but unsaved ecol_remitter as @ecol_remitter" do
         ecol_customer = Factory(:ecol_customer)
-        ecol_remitter = Factory(:ecol_remitter, :ecol_customer => ecol_customer)
-        params = ecol_remitter.attributes.slice(*ecol_remitter.class.attribute_names)
+        params = Factory.attributes_for(:ecol_remitter, :ecol_customer => ecol_customer)
         params[:customer_code] = nil
         expect {
           post :create, {:ecol_remitter => params}
@@ -90,8 +86,7 @@ describe EcolRemittersController do
 
       it "re-renders the 'new' template when show_errors is true" do
         ecol_customer = Factory(:ecol_customer)
-        ecol_remitter = Factory(:ecol_remitter, :ecol_customer => ecol_customer)
-        params = ecol_remitter.attributes.slice(*ecol_remitter.class.attribute_names)
+        params = Factory.attributes_for(:ecol_remitter, :ecol_customer => ecol_customer)
         params[:customer_code] = nil
         post :create, {:ecol_remitter => params}
         response.should render_template("new")

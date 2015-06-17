@@ -8,18 +8,23 @@ describe EcolRemitter do
   end
   
   context 'validation' do
-    [:customer_code, :remitter_name].each do |att|
+    [:customer_code, :remitter_code, :rmtr_name].each do |att|
       it { should validate_presence_of(att) }
     end
     
     [:invoice_amt, :invoice_amt_tol_pct, :min_credit_amt, :max_credit_amt, :due_date_tol_days].each do |att|
       it { should validate_numericality_of(att) }
     end
+
+    it do 
+      ecol_remitter = Factory(:ecol_remitter)
+      should validate_uniqueness_of(:customer_code).scoped_to(:remitter_code, :customer_subcode, :invoice_no)     
+    end
   end
   
   context 'fields format' do
     it 'should allow valid format' do
-      [:remitter_code, :credit_acct_no, :remitter_acct_no, :invoice_no].each do |att|
+      [:remitter_code, :credit_acct_no, :rmtr_acct_no, :invoice_no].each do |att|
         should allow_value('aaAAbbBB00').for(att)
         should allow_value('AAABBBC090').for(att)
         should allow_value('aaa0000bn').for(att)
@@ -30,9 +35,9 @@ describe EcolRemitter do
     
     it 'should not allow invalid format' do
       ecol_remitter = Factory.build(:ecol_remitter, :customer_code => '-1dfghhhhh', :remitter_code => '.09jnj823', :credit_acct_no => '@acddsfdfd', 
-      :remitter_acct_no => '134\ndsfdsg', :invoice_no => '&dbsdh^')
+      :rmtr_acct_no => '134\ndsfdsg', :invoice_no => '&dbsdh^')
       ecol_remitter.save == false 
-      [:remitter_code, :credit_acct_no, :remitter_acct_no, :invoice_no].each do |att|
+      [:remitter_code, :credit_acct_no, :rmtr_acct_no, :invoice_no].each do |att|
         ecol_remitter.errors_on(att).should == ['Invalid format, expected format is : {[a-z|A-Z|0-9]}']
       end
     end
@@ -40,17 +45,18 @@ describe EcolRemitter do
   
   context 'email format' do
     it 'should allow valid format' do
-      [:customer_subcode_email, :remitter_email].each do |att|
-        should allow_value('a@h.com').for(att)
-        should allow_value('abcdefgh').for(att)
-        should allow_value('A@H.COM').for(att)
-        should allow_value('ABCDEFGH').for(att)
+      ecol_remitter = Factory.build(:ecol_remitter, :customer_subcode => '1213')
+      [:customer_subcode_email, :rmtr_email].each do |att|
+        ecol_remitter.should allow_value('a@h.com').for(att)
+        ecol_remitter.should allow_value('abcdefgh').for(att)
+        ecol_remitter.should allow_value('A@H.COM').for(att)
+        ecol_remitter.should allow_value('ABCDEFGH').for(att)
       end
     end
     
     it 'should not allow invalid format' do
-      ecol_remitter = Factory.build(:ecol_remitter, :customer_subcode_email => 'ASJD\987', :remitter_email => '!uhbd8765')
-      [:customer_subcode_email, :remitter_email].each do |att|
+      ecol_remitter = Factory.build(:ecol_remitter, :customer_subcode_email => 'ASJD\987', :rmtr_email => '!uhbd8765')
+      [:customer_subcode_email, :rmtr_email].each do |att|
         ecol_remitter.errors_on(att).should == ['Invalid format, expected format is : {[a-z|A-Z|0-9|@|.]}']
       end
     end
@@ -58,22 +64,23 @@ describe EcolRemitter do
   
   context 'mobile number format' do
     it 'should allow valid format' do
-      [:customer_subcode_mobile, :remitter_mobile].each do |att|
-        should allow_value('9876543210').for(att)
+      ecol_remitter = Factory.build(:ecol_remitter, :customer_subcode => '1213')
+      [:customer_subcode_mobile, :rmtr_mobile].each do |att|
+        ecol_remitter.should allow_value('9876543210').for(att)
       end
     end
     
     it 'should not allow invalid format' do
-      ecol_remitter = Factory.build(:ecol_remitter, :customer_subcode_mobile => 'ASJD\987', :remitter_mobile => '!uhbd8765')
-      [:customer_subcode_mobile, :remitter_mobile].each do |att|
-        ecol_remitter.errors_on(att).should == ['Invalid format, expected format is : {[0-9]{10}}']
+      ecol_remitter = Factory.build(:ecol_remitter, :customer_subcode_mobile => 'ASJD\98709', :rmtr_mobile => '-0!uhbd876')
+      [:customer_subcode_mobile, :rmtr_mobile].each do |att|
+        ecol_remitter.errors_on(att).should == ['Invalid format, expected format is : {[0-9]}']
       end
     end
   end
   
   context 'remitter name & address format' do
     it 'should allow valid format' do
-      [:remitter_name, :remitter_address].each do |att|
+      [:rmtr_name, :rmtr_address].each do |att|
         should allow_value('Abcd(09),op').for(att)
         should allow_value('Abcde:fgh').for(att)
         should allow_value('Abcd-op?').for(att)
@@ -81,9 +88,9 @@ describe EcolRemitter do
     end
 
     it 'should not allow invalid format' do
-      ecol_remitter = Factory.build(:ecol_remitter, :remitter_name => 'Anjkds**', :remitter_address => '@ajdjh&NK#')
+      ecol_remitter = Factory.build(:ecol_remitter, :rmtr_name => 'Anjkds**', :rmtr_address => '@ajdjh&NK#')
       ecol_remitter.save == false
-      [:remitter_name, :remitter_address].each do |att|
+      [:rmtr_name, :rmtr_address].each do |att|
         ecol_remitter.errors_on(att).should == ['Invalid format, expected format is : {[a-z|A-Z|0-9|\:|\/|\-|\?|\+|\(|\)|\.|\,]}']
       end
     end
@@ -91,9 +98,10 @@ describe EcolRemitter do
   
   context 'if_customer_subcode_is_nil' do
     it 'should perform validation if customer_subcode is nil' do
-      ecol_remitter = Factory.build(:ecol_remitter, :customer_subcode => "", :customer_subcode_mobile => '9876543210', :customer_subcode_email => 'a@b.com')
+      ecol_remitter = Factory.build(:ecol_remitter, :customer_subcode => nil, :customer_subcode_mobile => '9876543210', :customer_subcode_email => 'a@b.com')
       ecol_remitter.save == false
-      ecol_remitter.errors[:base].should == ['Customer Sub Code Email and Mobile should be nil if Customer Sub Code is nil']
+      ecol_remitter.errors[:customer_subcode_email].should == ['should be empty when customer_subcode is empty']
+      ecol_remitter.errors[:customer_subcode_mobile].should == ['should be empty when customer_subcode is empty']
     end
   end
   

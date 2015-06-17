@@ -8,7 +8,7 @@ FactoryGirl.define do
     transfer_status "MyString"
     transfer_date "2015-04-20"
     transfer_ccy "abcde"
-    transfer_amount 1
+    transfer_amt 1
     rmtr_account_no "MyString"
     rmtr_account_ifsc "MyString"
     bene_account_no "MyString"

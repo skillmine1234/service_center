@@ -19,6 +19,7 @@ class UdfAttribute < ActiveRecord::Base
     validate :validate_data_type
     validate :validate_constraint_input
     validate :cross_field_validations
+    validates_uniqueness_of :attribute_name, :scope => "class_name"
     
     def validate_constraint_input
       if self.data_type == "String" and !self.length.to_s.empty? and (!self.min_length.to_s.empty? or !self.max_length.to_s.empty?)
@@ -72,6 +73,7 @@ class UdfAttribute < ActiveRecord::Base
     end
     
     def regenerate_accessor_fields
+      p constraints
       constraints.each do |k,v|
         v.is_a?(Hash) ? self.send("#{k.to_s}=",v[v.keys.first]) : self.send("#{k.to_s}=", v)
       end
@@ -98,8 +100,12 @@ class UdfAttribute < ActiveRecord::Base
   
     
     def cross_field_validations
-      if (self.is_enabled == 'Y' && (self.label_text.blank? || self.control_type.blank?))
-        errors.add(:is_enabled, "Label_text and control_type fields are mandatory if is_enabled is Y")
+      if (self.is_enabled == 'Y' && self.label_text.blank?) 
+        errors.add(:label_text, "Label_text is mandatory if is_enabled is Y")
+      end
+      
+      if (self.is_enabled == 'Y' && self.control_type.blank?)
+        errors.add(:control_type, "Control_type is mandatory if is_enabled is Y")
       end
       
       if (self.control_type ==  "DropDown" && (!self.max_length.blank? || !self.min_length.blank?))

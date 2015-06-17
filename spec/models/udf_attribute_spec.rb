@@ -6,6 +6,11 @@ describe UdfAttribute do
       it { should validate_presence_of(att) }
     end
 
+    it do 
+      udf_attribute = Factory(:udf_attribute)
+      should validate_uniqueness_of(:attribute_name).scoped_to(:class_name)
+    end
+
     context "validate_data_type" do 
       it "should return error if the data type is not present when the control type is TextBox" do 
         udf = Factory.build(:udf_attribute, :control_type => 'TextBox', :data_type => nil)
@@ -115,9 +120,13 @@ describe UdfAttribute do
   
   context "cross_field_validations" do
     it "should perform cross field validations" do
-      udf = Factory.build(:udf_attribute, :is_enabled => 'Y', :label_text => nil, :control_type => nil)
+      udf = Factory.build(:udf_attribute, :is_enabled => 'Y', :label_text => nil)
       udf.save == false
-      udf.errors_on(:is_enabled).should == ['Label_text and control_type fields are mandatory if is_enabled is Y']
+      udf.errors_on(:label_text).should == ['Label_text is mandatory if is_enabled is Y']
+      
+      udf = Factory.build(:udf_attribute, :is_enabled => 'Y', :control_type => nil)
+      udf.save == false
+      udf.errors_on(:control_type).should == ['Control_type is mandatory if is_enabled is Y']
 
       udf = Factory.build(:udf_attribute, :control_type => 'DropDown', :max_length => 1, :min_length => 1)
       udf.save == false

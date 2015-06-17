@@ -112,6 +112,21 @@ describe UdfAttributesController do
         put :update, {:id => udf_attribute.to_param, :udf_attribute => params}
         response.should redirect_to(udf_attribute)
       end
+      
+      it "should raise error when tried to update at same time by many" do
+        udf_attribute = Factory(:udf_attribute, :class_name => "EcolRemitter")
+        params = udf_attribute.attributes.slice(*udf_attribute.class.attribute_names)
+        params[:class_name] = "EcolCustomer"
+        udf_attribute2 = udf_attribute
+        put :update, {:id => udf_attribute.id, :udf_attribute => params}
+        udf_attribute.reload
+        udf_attribute.class_name.should == "EcolCustomer"
+        params[:class_name] = "EcolTransaction"
+        put :update, {:id => udf_attribute2.id, :udf_attribute => params}
+        udf_attribute.reload
+        udf_attribute.class_name.should == "EcolCustomer"
+        flash[:alert].should  match(/Someone edited the udf the same time you did. Please re-apply your changes to the udf/)
+      end
     end
 
     describe "with invalid params" do

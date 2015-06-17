@@ -26,6 +26,8 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Credit Accout No
     %th{:style=>'text-align:left; background-color: lightblue;'}
+      Remitter Name
+    %th{:style=>'text-align:left; background-color: lightblue;'}
       Remitter Account No
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Invoice No
@@ -50,11 +52,13 @@
         %td{:style=>'text-align:left;'}
           = ecol_remitter.credit_acct_no
         %td{:style=>'text-align:left;'}
-          = ecol_remitter.remitter_name
+          = ecol_remitter.rmtr_name
         %td{:style=>'text-align:left;'}
-          = ecol_remitter.remitter_acct_no
+          = ecol_remitter.rmtr_acct_no
         %td{:style=>'text-align:left;'}
           = ecol_remitter.invoice_no
         %td{:style=>'text-align:left;'}
           = ecol_remitter.invoice_amt
+        %td{:style=>'text-align:left;'}
+          = ecol_remitter.due_date
 

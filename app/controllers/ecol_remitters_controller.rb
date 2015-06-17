@@ -65,8 +65,8 @@ class EcolRemittersController < ApplicationController
 
   def ecol_remitter_params
     params.require(:ecol_remitter).permit(:incoming_file_id, :customer_code, :customer_subcode, :remitter_code,
-    :ecol_customer_id, :credit_acct_no, :customer_subcode_email, :customer_subcode_mobile, :remitter_name,
-    :remitter_address, :remitter_acct_no, :remitter_email, :remitter_mobile, :invoice_no, :invoice_amt,
+    :ecol_customer_id, :credit_acct_no, :customer_subcode_email, :customer_subcode_mobile, :rmtr_name,
+    :rmtr_address, :rmtr_acct_no, :rmtr_email, :rmtr_mobile, :invoice_no, :invoice_amt,
     :invoice_amt_tol_pct, :min_credit_amt, :max_credit_amt, :due_date, :due_date_tol_days, :udf1, :udf2, :udf3,
     :udf4, :udf5, :udf6, :udf7, :udf8, :udf9, :udf10, :udf11, :udf12, :udf13, :udf14, :udf15, :udf16, :udf17,
     :udf18, :udf19, :udf20, :created_by, :updated_by, :lock_version)
