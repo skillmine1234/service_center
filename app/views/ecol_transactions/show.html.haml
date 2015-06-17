@@ -1,196 +1,169 @@
-.form-horizontal.show_form
-  .form-main{:style=>'background-color: #F1F2F8; width: 65%'}
-    #form-details
-      %h3 E-Collect Transaction Details 
-      %br
-      %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
-        %tr
-          %td.label Status
-          %td.value
-            = @ecol_transaction.status
-        %tr
-          %td.label Transfer Type
-          %td.value
-            = @ecol_transaction.transfer_type
-        %tr
-          %td.label Unique Ref No
-          %td.value
-            = @ecol_transaction.transfer_unique_no
-        %tr
-          %td.label Transfer Status
-          %td.value
-            = @ecol_transaction.transfer_status
-        %tr
-          %td.label Transfer Date
-          %td.value
-            = @ecol_transaction.transfer_date
-        %tr
-          %td.label Transfer Currency
-          %td.value
-            = @ecol_transaction.transfer_ccy
-        %tr
-          %td.label Transfer Amount
-          %td.value
-            = @ecol_transaction.transfer_amount
-        %tr
-          %td.label Remitter Ref No
-          %td.value
-            = @ecol_transaction.rmtr_ref
-        %tr
-          %td.label Remitter Name
-          %td.value
-            = @ecol_transaction.rmtr_full_name
-        %tr
-          %td.label Remitter Address 
-          %td.value
-            = @ecol_transaction.rmtr_address
-        %tr
-          %td.label Remitter Account Type
-          %td.value
-            = @ecol_transaction.rmtr_account_type
-        %tr
-          %td.label Remitter Account Number
-          %td.value
-            = @ecol_transaction.rmtr_account_no
-        %tr
-          %td.label Remitter Account IFSC
-          %td.value
-            = @ecol_transaction.rmtr_account_ifsc
-        %tr
-          %td.label Beneficiary Name
-          %td
-            = @ecol_transaction.bene_full_name
-        %tr
-          %td.label Beneficiary Address
-          %td
-            = @ecol_transaction.bene_full_address
-        %tr
-          %td.label Beneficiary Account Type
-          %td
-            = @ecol_transaction.bene_account_type
-        %tr
-          %td.label Beneficiary Account Number
-          %td
-            = @ecol_transaction.bene_account_no
-        %tr
-          %td.label Beneficiary Account IFSC
-          %td
-            = @ecol_transaction.bene_account_ifsc
-        %tr
-          %td.label Remitter To Beneficiary Note
-          %td.value
-            = @ecol_transaction.rmtr_to_bene_note
-        %tr
-          %td.label Received At
-          %td.value
-            = @ecol_transaction.received_at
-        %tr
-          %td.label Customer Code
-          %td.value
-            = @ecol_transaction.customer_code
+.show_ticket
+  .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; display: inline-block;'}
+    %h3
+      Customer:
+      = @ecol_transaction.customer_code 
+      = link_to @ecol_transaction.customer.name , @ecol_transaction.customer  rescue "No Partner for Code #{@ecol_transaction.customer_code}" 
+    %h3
+      Transfer Unique No:
+      = @ecol_transaction.transfer_unique_no
+    %h3
+      Received At:
+      = @ecol_transaction.received_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+  .header-form-extended{:style=>'background-color: #ecf5fa; width: 50%; display: inline-block;'}
+    %h3
+      Status:
+      = @ecol_transaction.status
+      %tr
+        - if @ecol_transaction.status == "FAILED"
+          = link_to "Fault Text", "#", :class => 'fault-link', :href => "#faultText", :style => "font-weight:100"
+    %h3 
+      Remitter Reference No:
+      = @ecol_transaction.rmtr_ref
+    %h3
+      Settled At:
+      = @ecol_transaction.settled_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+      /= "(" + @ecol_transaction.settled_at.to_s + " mins)"
+  .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; display: inline-block;'}
+    #ticket-details
+      %h3 E-Collect Details
+      %table.table.no-border
         %tr
           %td.label Customer Sub Code
-          %td.value
-            = @ecol_transaction.customer_subcode
+          %td= @ecol_transaction.customer_subcode
         %tr
           %td.label Remitter Code
-          %td.value
-            = @ecol_transaction.remitter_code
-        %tr
-          %td.label Invoice Number
-          %td.value
-            = @ecol_transaction.invoice_no
-        %tr
-          %td.label Validate At
-          %td.value
-            = @ecol_transaction.validate_at
+          %td= @ecol_transaction.remitter_code
         %tr
           %td.label Validated At
-          %td.value
-            = @ecol_transaction.validated_at
+          %td= @ecol_transaction.validated_at
         %tr
-          %td.label Validation Success
-          %td.value
-            = @ecol_transaction.vaidation_status
+          %td.label Validation Status
+          %td= @ecol_transaction.vaidation_status
         %tr
           %td.label Credited At
-          %td.value
-            = @ecol_transaction.credited_at
+          %td= @ecol_transaction.credited_at
         %tr
-          %td.label Credit Success
-          %td.value
-            = @ecol_transaction.credit_status
+          %td.label Invoice No
+          %td= @ecol_transaction.invoice_no
         %tr
-          %td.label Credit Ref No
-          %td.value
-            = @ecol_transaction.credit_ref
+          %td.label Validate At
+          %td= @ecol_transaction.validate_at
         %tr
           %td.label Credit Attempt At
-          %td.value
-            = @ecol_transaction.credit_attempt_at
+          %td= @ecol_transaction.credit_attempt_at
         %tr
-          %td.label Total Credit Attempts
-          %td.value
-            = @ecol_transaction.credit_attempt_no
+          %td.label Remitter Email Notify Reference
+          %td= @ecol_transaction.rmtr_email_notify_ref
         %tr
-          %td.label Returned At
-          %td.value
-            = @ecol_transaction.returned_at
+          %td.label Remitter Sms Notify Reference
+          %td= @ecol_transaction.rmtr_sms_notify_ref
+  .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; display: inline-block;'}
+    #ticket-details
+      %h3 
+      %table.table.no-border
         %tr
-          %td.label Return Status
-          %td.value
-            = @ecol_transaction.return_status
+          %td.label Credit Status
+          %td= @ecol_transaction.credit_status
+        %tr
+          %td.label Credit Reference
+          %td= @ecol_transaction.credit_ref
+        %tr
+          %td.label Credit Attempt No
+          %td= @ecol_transaction.credit_attempt_no
+        %tr
+          %td.label Settle Status
+          %td= @ecol_transaction.settle_status
+        %tr
+          %td.label Settle Reference
+          %td= @ecol_transaction.settle_ref
+        %tr
+          %td.label Settle Attempt No
+          %td= @ecol_transaction.settle_attempt_no
+        %tr
+          %td.label Retruned At
+          %td= @ecol_transaction.returned_at
+        %tr
+          %td.label Retrun Status
+          %td= @ecol_transaction.return_status
         %tr
           %td.label Return Reference
-          %td.value
-            = @ecol_transaction.return_ref
+          %td= @ecol_transaction.settle_ref
         %tr
-          %td.label Return Attempt At
-          %td.value
-            = @ecol_transaction.return_attempt_at
+          %td.label Retrun Attempt At
+          %td= @ecol_transaction.return_attempt_at
         %tr
-          %td.label Return Attempt No
-          %td.value
-            = @ecol_transaction.return_attempt_no
-        %tr
-          %td.label Settled At
-          %td.value
-            = @ecol_transaction.settled_at 
-        %tr
-          %td.label Settlement Success
-          %td.value
-            = @ecol_transaction.settle_status
-        %tr
-          %td.label Settlement Ref
-          %td.value
-            = @ecol_transaction.settle_ref 
-        %tr
-          %td.label Settlement Attempt At
-          %td.value
-            = @ecol_transaction.settle_attempt_at
-        %tr
-          %td.label Total Settlement Attempts
-          %td.value
-            = @ecol_transaction.settle_attempt_no
-        %tr
-          %td.label Fault At
-          %td.value
-            = @ecol_transaction.fault_at
-        %tr
-          %td.label Fault Code
-          %td.value
-            = @ecol_transaction.fault_code 
-        %tr
-          %td.label Fault Reason
-          %td.value
-            = @ecol_transaction.fault_reason 
-    %p{:style => 'padding-left:6px; padding-bottom:6px'}
-      = link_to 'Back to Transactions', ecol_transactions_path
-            
-            
+          %td.label Retrun Attempt No
+          %td= @ecol_transaction.return_attempt_no
 
-
-          
-
-
-      
+  .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; display: inline-block;'}
+    #ticket-details
+      %h3 Transfer Details
+      %table.table.no-border
+        %tr
+          %td.label Transfer Type
+          %td= @ecol_transaction.transfer_type
+        %tr
+          %td.label Transfer Status
+          %td= @ecol_transaction.transfer_status
+        %tr
+          %td.label Transfer Date
+          %td= @ecol_transaction.transfer_date
+      %hr{:style=>'background-color: #F1F2F8; width: 220%'}    
+      %h3 
+        = "Remitter"
+      %table.table.no-border
+        %tr
+          %td.label Name
+          %td= @ecol_transaction.rmtr_full_name
+        %tr
+          %td.label Address
+          %td= @ecol_transaction.rmtr_address
+  .header-form-extended{:style=>'background-color: #F1F2F8; width: 50%;  display: inline-block;'}
+    #ticket-details
+      %h3
+      .space{:style=>'height: 15px;'}
+      %table.table.no-border
+        %tr
+          %td.label Transfer Amount
+          %td= @ecol_transaction.transfer_amt
+        %tr
+          %td.label Transfer Currency
+          %td= @ecol_transaction.transfer_ccy
+        %tr
+          %td.label Beneficiary Account No
+          %td= @ecol_transaction.bene_account_no
+        %tr
+          %td.label Beneficiary Account IFSC
+          %td= @ecol_transaction.bene_account_ifsc
+      %hr{:style=>'background-color: #F1F2F8; width: 120%'}
+      %h3
+        = "Beneficiary"
+      %table.table.no-border
+        %tr
+          %td.label Name
+          %td= @ecol_transaction.bene_full_name
+        %tr
+          %td.label Address
+          %td= @ecol_transaction.bene_full_address
+      .space{:style=>'height: 2px;'}
+  .header-form-main{:style=>'background-color: #ecf5fa; width: 100%; display: inline-block;'}
+    %table.table.no-border
+      %tr
+        %td.label Remitter To Beneficiary Note
+        %td= @ecol_transaction.rmtr_to_bene_note
+#faultText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Fault Text
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    .demo-area
+    %pre#fault_text{:style => 'word-wrap: break-word'}
+    %table.table.no-border
+      %tr
+        %td.label Fault Code: 
+        %td= @ecol_transaction.fault_code
+      %tr
+        %td.label Fault Reason:
+        %td= @ecol_transaction.fault_reason
