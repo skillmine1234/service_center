@@ -36,8 +36,9 @@ class EcolRemitter < ActiveRecord::Base
   validate :constraints
   
   def validate_customer_subcode_details
-    if (self.customer_subcode.blank? && (!self.customer_subcode_email.blank? || !self.customer_subcode_mobile.blank?)) 
-      errors[:base] << "Customer Sub Code Email and Mobile should be nil if Customer Sub Code is nil"
+    if self.customer_subcode.blank? 
+      errors.add(:customer_subcode_email,"should be empty when customer_subcode is empty") if !self.customer_subcode_email.blank?
+      errors.add(:customer_subcode_mobile,"should be empty when customer_subcode is empty") if !self.customer_subcode_mobile.blank?
     end
   end 
   

@@ -45,11 +45,12 @@ describe EcolRemitter do
   
   context 'email format' do
     it 'should allow valid format' do
+      ecol_remitter = Factory.build(:ecol_remitter, :customer_subcode => '1213')
       [:customer_subcode_email, :rmtr_email].each do |att|
-        should allow_value('a@h.com').for(att)
-        should allow_value('abcdefgh').for(att)
-        should allow_value('A@H.COM').for(att)
-        should allow_value('ABCDEFGH').for(att)
+        ecol_remitter.should allow_value('a@h.com').for(att)
+        ecol_remitter.should allow_value('abcdefgh').for(att)
+        ecol_remitter.should allow_value('A@H.COM').for(att)
+        ecol_remitter.should allow_value('ABCDEFGH').for(att)
       end
     end
     
@@ -63,8 +64,9 @@ describe EcolRemitter do
   
   context 'mobile number format' do
     it 'should allow valid format' do
+      ecol_remitter = Factory.build(:ecol_remitter, :customer_subcode => '1213')
       [:customer_subcode_mobile, :rmtr_mobile].each do |att|
-        should allow_value('9876543210').for(att)
+        ecol_remitter.should allow_value('9876543210').for(att)
       end
     end
     
@@ -98,7 +100,8 @@ describe EcolRemitter do
     it 'should perform validation if customer_subcode is nil' do
       ecol_remitter = Factory.build(:ecol_remitter, :customer_subcode => nil, :customer_subcode_mobile => '9876543210', :customer_subcode_email => 'a@b.com')
       ecol_remitter.save == false
-      ecol_remitter.errors[:base].should == ['Customer Sub Code Email and Mobile should be nil if Customer Sub Code is nil']
+      ecol_remitter.errors[:customer_subcode_email].should == ['should be empty when customer_subcode is empty']
+      ecol_remitter.errors[:customer_subcode_mobile].should == ['should be empty when customer_subcode is empty']
     end
   end
   
