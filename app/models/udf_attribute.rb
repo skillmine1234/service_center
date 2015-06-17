@@ -19,6 +19,7 @@ class UdfAttribute < ActiveRecord::Base
     validate :validate_data_type
     validate :validate_constraint_input
     validate :cross_field_validations
+    validates_uniqueness_of :attribute_name, :scope => "class_name"
     
     def validate_constraint_input
       if self.data_type == "String" and !self.length.to_s.empty? and (!self.min_length.to_s.empty? or !self.max_length.to_s.empty?)
@@ -72,6 +73,7 @@ class UdfAttribute < ActiveRecord::Base
     end
     
     def regenerate_accessor_fields
+      p constraints
       constraints.each do |k,v|
         v.is_a?(Hash) ? self.send("#{k.to_s}=",v[v.keys.first]) : self.send("#{k.to_s}=", v)
       end

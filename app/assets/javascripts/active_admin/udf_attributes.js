@@ -3,6 +3,10 @@ $(document).ready(function(){
     $("#udf_attribute_control_type").on("change",function(){
         var controlType = $(this).val();
         if(controlType == "TextBox"){
+          $('#udf_attribute_data_type').val('');
+          $('#udf_attribute_length').val('');
+          $('#udf_attribute_min_length').val('');
+          $('#udf_attribute_max_length').val('');
           $('#udf_attribute_min_value').val('');
           $('#udf_attribute_max_value').val('');
           $('#udf_attribute_select_options').val('');
@@ -56,8 +60,10 @@ $(document).ready(function(){
           $('#udf_attribute_max_length').prop('disabled',false);
           $('#udf_attribute_min_value').val('');
           $('#udf_attribute_max_value').val('');
+          $('#udf_attribute_select_options').val('');
           $('#udf_attribute_min_value').prop('disabled',true);
           $('#udf_attribute_max_value').prop('disabled',true);
+          $('#udf_attribute_select_options').prop('disabled',true);
         }
         else if(dataType == "Numeric"){
           $('#udf_attribute_length').prop('disabled',true);
@@ -66,8 +72,10 @@ $(document).ready(function(){
           $('#udf_attribute_length').val('');
           $('#udf_attribute_min_length').val('');
           $('#udf_attribute_max_length').val('');
+          $('#udf_attribute_select_options').val('');
           $('#udf_attribute_min_value').prop('disabled',false);
           $('#udf_attribute_max_value').prop('disabled',false);
+          $('#udf_attribute_select_options').prop('disabled',true);
         }
         else{
           $('#udf_attribute_length').prop('disabled',true);
@@ -75,11 +83,13 @@ $(document).ready(function(){
           $('#udf_attribute_max_length').prop('disabled',true);
           $('#udf_attribute_min_value').prop('disabled',true);
           $('#udf_attribute_max_value').prop('disabled',true);
+          $('#udf_attribute_select_options').prop('disabled',true);
           $('#udf_attribute_length').val('');
           $('#udf_attribute_min_length').val('');
           $('#udf_attribute_max_length').val('');
           $('#udf_attribute_min_value').val('');
           $('#udf_attribute_max_value').val('');
+          $('#udf_attribute_select_options').val('');
         };
     });
 
@@ -133,5 +143,8 @@ $(document).ready(function(){
       $('#udf_attribute_min_value').prop('disabled',true);
       $('#udf_attribute_max_value').prop('disabled',true);
     };
-    
+
+  $('#udf_attribute_form').on('submit', function(){
+    $(this).find(':input').removeAttr('disabled');
+  });
 });

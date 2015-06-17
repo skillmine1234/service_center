@@ -6,6 +6,11 @@ describe UdfAttribute do
       it { should validate_presence_of(att) }
     end
 
+    it do 
+      udf_attribute = Factory(:udf_attribute)
+      should validate_uniqueness_of(:attribute_name).scoped_to(:class_name)
+    end
+
     context "validate_data_type" do 
       it "should return error if the data type is not present when the control type is TextBox" do 
         udf = Factory.build(:udf_attribute, :control_type => 'TextBox', :data_type => nil)
