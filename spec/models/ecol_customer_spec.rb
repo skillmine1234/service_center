@@ -19,14 +19,21 @@ describe EcolCustomer do
     
     it do
       ecol_customer = Factory(:ecol_customer)
-      [:code, :name].each do |att|
-        should validate_length_of(att).is_at_least(1).is_at_most(15)
-      end
+      should validate_length_of(:code).is_at_least(1).is_at_most(15)
+      
+      should validate_length_of(:name).is_at_least(1).is_at_most(255)
       
       should validate_length_of(:credit_acct_no).is_at_least(1).is_at_most(25)
       
       [:rmtr_pass_txt, :rmtr_return_txt].each do |att|
         should validate_length_of(att).is_at_most(500)
+      end
+    end
+    
+    it do
+      ecol_customer = Factory(:ecol_customer)
+      [:token_1_length, :token_2_length, :token_3_length].each do |att|
+        should validate_numericality_of(att)
       end
     end
     
@@ -55,10 +62,36 @@ describe EcolCustomer do
     end     
   end
   
-  context "field format" do 
-    [:name, :credit_acct_no,:rmtr_pass_txt, :rmtr_return_txt].each do |att|
+  context "customer name format" do 
+    it "should allow valid format" do
+      should allow_value('ABCDCo').for(:name)
+      should allow_value('ABCD Co').for(:name)
+    end 
+
+    it "should not allow invalid format" do
+      should_not allow_value('@AbcCo').for(:name)
+      should_not allow_value('/ab0QWER').for(:name)
+    end 
+  end
+  
+  context "account no format" do 
+    it "should allow valid format" do
+      should allow_value('1234567890').for(:credit_acct_no)
+    end 
+
+    it "should not allow invalid format" do
+      should_not allow_value('Absdjhsd').for(:credit_acct_no)
+      should_not allow_value('@AbcCo').for(:credit_acct_no)
+      should_not allow_value('/ab0QWER').for(:credit_acct_no)
+    end 
+  end
+  
+  context "sms text format" do 
+    [:rmtr_pass_txt, :rmtr_return_txt].each do |att|
       it "should allow valid format" do
         should allow_value('ABCDCo').for(att)
+        should allow_value('ABCD.Co').for(att)
+        should allow_value('ABCD, Co').for(att)
       end 
   
       it "should not allow invalid format" do

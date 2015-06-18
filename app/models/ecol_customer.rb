@@ -10,6 +10,8 @@ class EcolCustomer < ActiveRecord::Base
   
   validates_uniqueness_of :code
   
+  validates :token_1_length, :token_2_length, :token_3_length, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 20}
+  
   validates_inclusion_of :val_method, :in => %w( N W D )
   validates_inclusion_of :token_1_type, :token_2_type, :token_3_type, :in => %w( N SC RC IN )
   validates_inclusion_of :file_upld_mthd, :in => %w( F I ), :allow_blank => true
@@ -17,10 +19,10 @@ class EcolCustomer < ActiveRecord::Base
   validates_inclusion_of :rmtr_alert_on, :in => %w( N P R A )
   
   validates :code, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}' }, length: {maximum: 15, minimum: 1}
-  validates :name, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}' }, length: {maximum: 15, minimum: 1}
-  validates :credit_acct_no, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}' }, length: {maximum: 25, minimum: 1}
-  validates :rmtr_pass_txt, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}' }, length: {maximum: 500, minimum: 1}, :allow_blank => true
-  validates :rmtr_return_txt, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}' }, length: {maximum: 500, minimum: 1}, :allow_blank => true
+  validates :name, format: {with: /\A[a-z|A-Z|0-9 ]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9 ]}' }, length: {maximum: 255, minimum: 1}
+  validates :credit_acct_no, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9]}' }, length: {maximum: 25, minimum: 1}
+  validates :rmtr_pass_txt, format: {with: /\A[a-z|A-Z|0-9|\.|\, ]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\.|\, ]}' }, length: {maximum: 500, minimum: 1}, :allow_blank => true
+  validates :rmtr_return_txt, format: {with: /\A[a-z|A-Z|0-9|\.|\, ]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\.|\, ]}' }, length: {maximum: 500, minimum: 1}, :allow_blank => true
   
   validate :val_tokens_should_be_N_if_val_method_is_N,
   :file_upld_mthd_is_mandatory_if_val_method_is_D,
