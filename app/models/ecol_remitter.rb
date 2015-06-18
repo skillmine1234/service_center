@@ -14,8 +14,8 @@ class EcolRemitter < ActiveRecord::Base
   validates :credit_acct_no, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}' }, length: {maximum: 25, minimum: 1}, :allow_blank =>true
   validates :customer_subcode_email, format: {with: /\A[a-z|A-Z|0-9|\@|\.]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|@|.]}'}, length: {maximum: 100, minimum: 3}, :allow_blank =>true
   validates :customer_subcode_mobile, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9]}' }, length: {maximum: 10, minimum: 10}, :allow_blank =>true 
-  validates :rmtr_name, presence: true, format: {with: /\A[a-z|A-Z|0-9|\:|\/|\-|\?|\+|\(|\)|\.|\,]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\:|\/|\-|\?|\+|\(|\)|\.|\,]}'}, length: {maximum: 100, minimum: 2}
-  validates :rmtr_address, format: {with: /\A[a-z|A-Z|0-9|\:|\/|\-|\?|\+|\(|\)|\.|\,]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\:|\/|\-|\?|\+|\(|\)|\.|\,]}'}, length: {maximum: 100, minimum: 2}, :allow_blank =>true
+  validates :rmtr_name, presence: true, format: {with: /\A[a-z|A-Z|0-9|\:|\/|\-|\?|\+|\(|\)|\.|\, ]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\:|\/|\-|\?|\+|\(|\)|\.|\, ]}'}, length: {maximum: 100, minimum: 2}
+  validates :rmtr_address, format: {with: /\A[a-z|A-Z|0-9|\:|\/|\-|\?|\+|\(|\)|\.|\, ]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\:|\/|\-|\?|\+|\(|\)|\.|\, ]}'}, length: {maximum: 100, minimum: 2}, :allow_blank =>true
   validates :rmtr_acct_no, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}' }, length: {maximum: 25, minimum: 1}, :allow_blank =>true
   validates :rmtr_email, format: {with: /\A[a-z|A-Z|0-9|@|.]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|@|.]}' }, length: {maximum: 100, minimum: 3}, :allow_blank =>true
   validates :rmtr_mobile, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9]}'}, length: {maximum: 10, minimum: 10}, :allow_blank =>true

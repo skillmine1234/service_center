@@ -84,6 +84,7 @@ describe EcolRemitter do
         should allow_value('Abcd(09),op').for(att)
         should allow_value('Abcde:fgh').for(att)
         should allow_value('Abcd-op?').for(att)
+        should allow_value('Abcd op jk').for(att)
       end
     end
 
@@ -91,7 +92,7 @@ describe EcolRemitter do
       ecol_remitter = Factory.build(:ecol_remitter, :rmtr_name => 'Anjkds**', :rmtr_address => '@ajdjh&NK#')
       ecol_remitter.save == false
       [:rmtr_name, :rmtr_address].each do |att|
-        ecol_remitter.errors_on(att).should == ['Invalid format, expected format is : {[a-z|A-Z|0-9|\:|\/|\-|\?|\+|\(|\)|\.|\,]}']
+        ecol_remitter.errors_on(att).should == ['Invalid format, expected format is : {[a-z|A-Z|0-9|\:|\/|\-|\?|\+|\(|\)|\.|\, ]}']
       end
     end
   end
