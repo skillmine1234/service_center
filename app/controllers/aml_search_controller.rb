@@ -36,7 +36,7 @@ class AmlSearchController < ApplicationController
 
   def search_result
     begin
-      results = get_response_from_api(ENV['CONFIG_URL_AML_SEARCH'] + params[:search_params]) rescue []
+      results = get_response_from_api(ENV['CONFIG_URL_AML_SEARCH'] + params[:search_params])
       @result = results[params[:index].to_i] rescue nil
       identities = find_values(@result["identities"]["numIdentities"],@result["identities"]["identity"])
       @identities = identities.paginate(:per_page => 4, :page => params[:identities_page]) 
@@ -52,7 +52,7 @@ class AmlSearchController < ApplicationController
 
   def get_response_from_api(url)
     response = HTTParty.get(url)
-    find_values(response.parsed_response["hits"]["numHits"],response.parsed_response["hits"]["hit"]) rescue []
+    find_values(response.parsed_response["hits"]["numHits"],response.parsed_response["hits"]["hit"])
   end
 
   def search_params(params)
