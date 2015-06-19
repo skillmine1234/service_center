@@ -40,3 +40,9 @@ if IncomingFileType.all.empty? and !ScService.all.empty?
   IncomingFileType.create(:sc_service_id => sc1.id, :code => 'OFAC', :name => 'Office of Foreign Assets Control')
   IncomingFileType.create(:sc_service_id => sc2.id, :code => 'RMTRS', :name => 'Remitters')
 end
+
+if EcolFetchStatistic.all.empty? 
+  EcolFetchStatistic.create(:last_neft_at => Time.zone.now, :last_neft_id => 0, :last_neft_cnt => 0,
+                            :tot_neft_cnt => 0, :last_rtgs_at => Time.zone.now, :last_rtgs_id => 0,
+                            :last_rtgs_cnt => 0, :tot_rtgs_cnt => 0)
+end

@@ -6,7 +6,7 @@ class Group < ActiveRecord::Base
     when "inward-remittance"
       ['Partner','Bank','PurposeCode','WhitelistedIdentity','InwIdentity','InwardRemittance', 'InwRemittanceRule']
     when "e-collect"
-      ['EcolRule','EcolCustomer']
+      ['EcolRule','EcolCustomer','EcolRemitter','EcolTransaction','UdfAttribute','IncomingFile','EcolFetchStatistic']
     else
       []
     end

@@ -16,6 +16,7 @@ ServiceCenter::Application.routes.draw do
   resources :udf_attributes
   resources :incoming_files
   resources :incoming_file_records
+  resources :ecol_fetch_statistics
 
   namespace :api do
     namespace :v1 do
