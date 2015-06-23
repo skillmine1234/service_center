@@ -19,19 +19,22 @@ class EcolCustomer < ActiveRecord::Base
   validates_inclusion_of :rmtr_alert_on, :in => %w( N P R A )
   
   validates :code, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}' }, length: {maximum: 15, minimum: 1}
-  validates :name, format: {with: /\A[a-z|A-Z|0-9 ]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9 ]}' }, length: {maximum: 255, minimum: 1}
+  validates :name, format: {with: /\A[a-z|A-Z|0-9\s]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9\s]}' }, length: {maximum: 255, minimum: 1}
   validates :credit_acct_no, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9]}' }, length: {maximum: 25, minimum: 1}
-  validates :rmtr_pass_txt, format: {with: /\A[a-z|A-Z|0-9|\.|\, ]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\.|\, ]}' }, length: {maximum: 500, minimum: 1}, :allow_blank => true
-  validates :rmtr_return_txt, format: {with: /\A[a-z|A-Z|0-9|\.|\, ]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\.|\, ]}' }, length: {maximum: 500, minimum: 1}, :allow_blank => true
+  validates :rmtr_pass_txt, format: {with: /\A[a-z|A-Z|0-9|\.|\,\s]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\.|\,\s]}' }, length: {maximum: 500, minimum: 1}, :allow_blank => true
+  validates :rmtr_return_txt, format: {with: /\A[a-z|A-Z|0-9|\.|\,\s]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\.|\,\s]}' }, length: {maximum: 500, minimum: 1}, :allow_blank => true
   
   validate :val_tokens_should_be_N_if_val_method_is_N,
   :file_upld_mthd_is_mandatory_if_val_method_is_D,
   :same_value_cannot_be_selected_for_all_acct_tokens,
+  :acct_token_2_and_3_should_be_N_if_acct_token_1_is_N,
+  :acct_token_3_should_be_N_if_acct_toekn_2_is_N,
   :same_value_cannot_be_selected_for_all_nrtv_sufxs,
   :rmtr_pass_txt_is_mandatory_if_rmtr_alert_on_is_P_or_A,
   :rmtr_return_txt_is_mandatory_if_rmtr_alert_on_is_R_or_A,
   :nrtv_sufx_2_and_3_should_be_N_if_nrtv_sufx_1_is_N,
-  :nrtv_sufx_3_should_be_N_if_nrtv_sufx_2_is_N
+  :nrtv_sufx_3_should_be_N_if_nrtv_sufx_2_is_N,
+  :customer_code_format
   
       
   def val_tokens_should_be_N_if_val_method_is_N
@@ -49,8 +52,22 @@ class EcolCustomer < ActiveRecord::Base
   end
   
   def same_value_cannot_be_selected_for_all_acct_tokens
-    if ((self.token_1_type == self.token_2_type)  || (self.token_2_type == self.token_3_type) || (self.token_1_type == self.token_3_type))
-      errors[:base] << "Can't allow same value for all tokens"
+    if (((self.token_1_type == self.token_2_type) && ((self.token_1_type != "N") && (self.token_2_type != "N"))) || 
+      ((self.token_2_type == self.token_3_type) && ((self.token_2_type != "N") && (self.token_3_type != "N"))) || 
+      ((self.token_1_type == self.token_3_type) && ((self.token_1_type != "N") && (self.token_3_type != "N"))))
+      errors[:base] << "Can't allow same value for all tokens except for 'None'"
+    end
+  end
+  
+  def acct_token_2_and_3_should_be_N_if_acct_token_1_is_N
+    if (self.token_1_type == "N" && (self.token_2_type != "N" || self.token_3_type != "N"))
+      errors[:base] << "If Account Token 1 is None, then Account Token 2 & Account Token 3 should also be None"
+    end
+  end
+  
+  def acct_token_3_should_be_N_if_acct_toekn_2_is_N
+    if (self.token_2_type == "N" && self.token_3_type != "N")
+      errors[:base] << "If Account Token 2 is None, then Account Token 3 also should be None"
     end
   end
   
@@ -104,6 +121,26 @@ class EcolCustomer < ActiveRecord::Base
   
   def self.options_for_rmtr_alert_on
     [['Never','N'],['On Pass','P'],['On Return','R'],['Always','A']]
+  end
+  
+  def self.options_for_val_txn_date
+    [['Exact','E'],['Range','R'],['None','N']]
+  end
+  
+  def self.options_for_val_txn_amt
+    [['Exact','E'],['Range','R'],['Percentage','P'],['None','N']]
+  end
+  
+  def customer_code_format
+    if !code.nil? && code.start_with?("9")
+      unless code =~ /\A(9[0-9]{3})\Z/i
+        errors.add(:code, "the code can be either a 4 digit number starting with 9, or a 6 character alpha-numeric code, that does not start with 9")
+      end
+    else
+      unless code =~ /\A[0-9A-Za-z]{6}\Z/i
+        errors.add(:code, "the code can be either a 4 digit number starting with 9, or a 6 character alpha-numeric code, that does not start with 9")
+      end
+    end
   end
   
 end
