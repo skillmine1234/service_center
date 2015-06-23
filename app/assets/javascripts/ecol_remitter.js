@@ -12,25 +12,25 @@ $(document).ready(function(){
     var customer_subcode =  $(this).val();
     if (customer_subcode == ''){
       $('#ecol_remitter_customer_subcode_email').val('');
-      $('#ecol_remitter_customer_subcode_email').prop('disabled',true);
+      $('#ecol_remitter_customer_subcode_email').prop('readOnly',true);
       $('#ecol_remitter_customer_subcode_mobile').val('');
-      $('#ecol_remitter_customer_subcode_mobile').prop('disabled',true);
+      $('#ecol_remitter_customer_subcode_mobile').prop('readOnly',true);
     }
     else{
-      $('#ecol_remitter_customer_subcode_email').prop('disabled',false);
-      $('#ecol_remitter_customer_subcode_mobile').prop('disabled',false);
+      $('#ecol_remitter_customer_subcode_email').prop('readOnly',false);
+      $('#ecol_remitter_customer_subcode_mobile').prop('readOnly',false);
     }
   });
   
   if ($('#ecol_remitter_customer_subcode').val() == ''){
     $('#ecol_remitter_customer_subcode_email').val('');
-    $('#ecol_remitter_customer_subcode_email').prop('disabled',true);
+    $('#ecol_remitter_customer_subcode_email').prop('readOnly',true);
     $('#ecol_remitter_customer_subcode_mobile').val('');
-    $('#ecol_remitter_customer_subcode_mobile').prop('disabled',true);
+    $('#ecol_remitter_customer_subcode_mobile').prop('readOnly',true);
   }
   else{
-    $('#ecol_remitter_customer_subcode_email').prop('disabled',false);
-    $('#ecol_remitter_customer_subcode_mobile').prop('disabled',false);
+    $('#ecol_remitter_customer_subcode_email').prop('readOnly',false);
+    $('#ecol_remitter_customer_subcode_mobile').prop('readOnly',false);
   }
   
 });
