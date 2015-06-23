@@ -23,7 +23,7 @@ describe EcolCustomer do
       
       should validate_length_of(:name).is_at_least(1).is_at_most(255)
       
-      should validate_length_of(:credit_acct_no).is_at_least(1).is_at_most(25)
+      should validate_length_of(:credit_acct_no).is_at_least(10).is_at_most(25)
       
       [:rmtr_pass_txt, :rmtr_return_txt].each do |att|
         should validate_length_of(att).is_at_most(500)

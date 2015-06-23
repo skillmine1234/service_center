@@ -20,7 +20,7 @@ describe EcolRemitter do
       ecol_remitter = Factory(:ecol_remitter)
       should validate_uniqueness_of(:customer_code).scoped_to(:remitter_code, :customer_subcode, :invoice_no)  
       
-      should validate_length_of(:credit_acct_no).is_at_most(15)   
+      should validate_length_of(:credit_acct_no).is_at_most(25)   
     end
   end
   
