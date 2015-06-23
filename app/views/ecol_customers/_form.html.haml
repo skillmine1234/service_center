@@ -12,7 +12,7 @@
         = error_message_for(@ecol_customer, :code, :prepend_text => "")
     .control-group
       = f.label :name, "*Customer Name", :class => 'control-label'
-      = f.text_field :name, :maxlength => 15
+      = f.text_field :name, :style => "width: 500px;"
       #msg-error
         = error_message_for(@ecol_customer, :name, :prepend_text => "")
     .control-group
@@ -70,12 +70,12 @@
         = error_message_for(@ecol_customer, :val_token_3, :prepend_text => "")
     .control-group
       = f.label :val_txn_date, "Validate Transaction Date", :class => 'control-label'
-      = f.check_box :val_txn_date, {},"Y","N"
+      = f.select :val_txn_date, options_for_select(EcolCustomer.options_for_val_txn_date, @ecol_customer.val_txn_date),:prompt => 'SELECT'
       #msg-error
         = error_message_for(@ecol_customer, :val_txn_date, :prepend_text => "")
     .control-group
       = f.label :val_txn_amt, "Validate Transaction Amount", :class => 'control-label'
-      = f.check_box :val_txn_amt, {},"Y","N"
+      = f.select :val_txn_amt, options_for_select(EcolCustomer.options_for_val_txn_amt, @ecol_customer.val_txn_amt),:prompt => 'SELECT'
       #msg-error
         = error_message_for(@ecol_customer, :val_txn_amt, :prepend_text => "")
     .control-group

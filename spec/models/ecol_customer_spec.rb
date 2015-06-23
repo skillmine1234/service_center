@@ -19,14 +19,21 @@ describe EcolCustomer do
     
     it do
       ecol_customer = Factory(:ecol_customer)
-      [:code, :name].each do |att|
-        should validate_length_of(att).is_at_least(1).is_at_most(15)
-      end
+      should validate_length_of(:code).is_at_least(1).is_at_most(15)
+      
+      should validate_length_of(:name).is_at_least(1).is_at_most(255)
       
       should validate_length_of(:credit_acct_no).is_at_least(1).is_at_most(25)
       
       [:rmtr_pass_txt, :rmtr_return_txt].each do |att|
         should validate_length_of(att).is_at_most(500)
+      end
+    end
+    
+    it do
+      ecol_customer = Factory(:ecol_customer)
+      [:token_1_length, :token_2_length, :token_3_length].each do |att|
+        should validate_numericality_of(att)
       end
     end
     
@@ -45,7 +52,8 @@ describe EcolCustomer do
   
   context "code format" do 
     it "should allow valid format" do
-      should allow_value('CUST01').for(:code)
+      should allow_value('9876').for(:code)
+      should allow_value('ABCD90').for(:code)
     end 
     
     it "should not allow invalid format" do
@@ -55,10 +63,36 @@ describe EcolCustomer do
     end     
   end
   
-  context "field format" do 
-    [:name, :credit_acct_no,:rmtr_pass_txt, :rmtr_return_txt].each do |att|
+  context "customer name format" do 
+    it "should allow valid format" do
+      should allow_value('ABCDCo').for(:name)
+      should allow_value('ABCD Co').for(:name)
+    end 
+
+    it "should not allow invalid format" do
+      should_not allow_value('@AbcCo').for(:name)
+      should_not allow_value('/ab0QWER').for(:name)
+    end 
+  end
+  
+  context "account no format" do 
+    it "should allow valid format" do
+      should allow_value('1234567890').for(:credit_acct_no)
+    end 
+
+    it "should not allow invalid format" do
+      should_not allow_value('Absdjhsd').for(:credit_acct_no)
+      should_not allow_value('@AbcCo').for(:credit_acct_no)
+      should_not allow_value('/ab0QWER').for(:credit_acct_no)
+    end 
+  end
+  
+  context "sms text format" do 
+    [:rmtr_pass_txt, :rmtr_return_txt].each do |att|
       it "should allow valid format" do
         should allow_value('ABCDCo').for(att)
+        should allow_value('ABCD.Co').for(att)
+        should allow_value('ABCD, Co').for(att)
       end 
   
       it "should not allow invalid format" do
@@ -94,7 +128,7 @@ describe EcolCustomer do
         
     it "should check if val_tokens are N if val_method is N" do 
       ecol_customer = Factory.build(:ecol_customer, :val_method => "N", :val_token_1 => "Y", :val_token_2 => "Y", 
-      :val_token_3 => "N", :val_txn_date => "N", :val_txn_amt => "Y")
+      :val_token_3 => "N", :val_txn_date => "N", :val_txn_amt => "P")
       ecol_customer.save.should == false
       ecol_customer.errors[:base].should == ["If Validation Method is None, then all the Validation Account Tokens should also be N"]
     end
@@ -110,9 +144,25 @@ describe EcolCustomer do
     end
     
     it "should check the value of all account tokens" do 
-      ecol_customer = Factory.build(:ecol_customer, :token_1_type => "N", :token_2_type => "N", :token_3_type => "N")
+      ecol_customer = Factory.build(:ecol_customer, :token_1_type => "SC", :token_2_type => "SC", :token_3_type => "SC")
       ecol_customer.save.should == false
-      ecol_customer.errors[:base].should == ["Can't allow same value for all tokens"]
+      ecol_customer.errors[:base].should == ["Can't allow same value for all tokens except for 'None'"]
+      
+      ecol_customer = Factory.build(:ecol_customer, :token_1_type => "N", :token_2_type => "N", :token_3_type => "N")
+      ecol_customer.save.should == true
+      ecol_customer.errors[:base].should == []
+    end
+    
+    it "should check the value of acct token 2 & 3 if acct token 1 is N" do
+      ecol_customer = Factory.build(:ecol_customer, :token_1_type => "N", :token_2_type => "SC", :token_3_type => "IN")
+      ecol_customer.save.should == false
+      ecol_customer.errors[:base].should == ["If Account Token 1 is None, then Account Token 2 & Account Token 3 should also be None"]
+    end
+    
+    it "should check the value of acct token 3 if acct token 2 is N" do
+      ecol_customer = Factory.build(:ecol_customer, :token_1_type => "IN", :token_2_type => "N", :token_3_type => "SC")
+      ecol_customer.save.should == false
+      ecol_customer.errors[:base].should == ["If Account Token 2 is None, then Account Token 3 also should be None"]
     end
     
     it "should check the value of all narration suffixes" do
@@ -169,6 +219,31 @@ describe EcolCustomer do
     
     it "should return options for rmtr alert on" do
       EcolCustomer.options_for_rmtr_alert_on == [['Never','N'],['On Pass','P'],['On Return','R'],['Always','A']]
+    end
+
+    it "should return options for val txn date" do
+      EcolCustomer.options_for_val_txn_amt == [['Exact','E'],['Range','R'],['None','N']]
+    end
+    
+    it "should return options for val txn amt" do
+      EcolCustomer.options_for_val_txn_amt == [['Exact','E'],['Range','R'],['Percentage','P'],['None','N']]
+    end
+  end
+  
+  context "customer_code_format" do
+    it "should validate customer code format" do
+      ecol_customer = Factory.build(:ecol_customer, :code => '9876')
+      ecol_customer.save.should == true
+      
+      ecol_customer = Factory.build(:ecol_customer, :code => '876098')
+      ecol_customer.save.should == true
+      
+      ecol_customer = Factory.build(:ecol_customer, :code => 'abcdef')
+      ecol_customer.save.should == true
+      
+      ecol_customer = Factory.build(:ecol_customer, :code => '98760988767')
+      ecol_customer.save.should == false
+      ecol_customer.errors_on(:code).should == ["the code can be either a 4 digit number starting with 9, or a 6 character alpha-numeric code, that does not start with 9"]
     end
   end
   

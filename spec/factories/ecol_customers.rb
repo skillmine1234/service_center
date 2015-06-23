@@ -2,17 +2,17 @@
 
 FactoryGirl.define do
   factory :ecol_customer do
-    code "CUST00"
+    code "abcdef"
     name "MyString"
     is_enabled "Y"
     val_method "D"
     token_1_type "N"
     token_1_length 0
     val_token_1 "N"
-    token_2_type "RC"
+    token_2_type "N"
     token_2_length 0
     val_token_2 "N"
-    token_3_type "IN"
+    token_3_type "N"
     token_3_length 0
     val_token_3 "N"
     val_txn_date "N"
