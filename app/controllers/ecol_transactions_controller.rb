@@ -6,8 +6,9 @@ class EcolTransactionsController < ApplicationController
   include EcolTransactionsHelper
   
   def index
+    ecol_transactions = EcolTransaction.order("id desc")
     if params[:advanced_search].present?
-      ecol_transactions = find_ecol_transactions(params).order("id desc")
+      ecol_transactions = find_ecol_transactions(ecol_transactions,params).order("id desc")
     else
       ecol_transactions = EcolTransaction.order("id desc")
     end
