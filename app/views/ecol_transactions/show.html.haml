@@ -62,6 +62,8 @@
         %tr
           %td.label Remitter Sms Notify Reference
           %td= @ecol_transaction.rmtr_sms_notify_ref
+        %br
+        %br
       .space{:style=>'height: 18px;'}
       %hr{:style=>'background-color: #F1F2F8; width: 220%'}
       %h3 Transfer Details
@@ -91,6 +93,9 @@
       %h3
       .space{:style=>'height: 15px;'}
       %table.table.no-border
+        %tr
+          %td.label Credit Account Number
+          %td= @ecol_transaction.credit_acct_no
         %tr
           %td.label Credit Status
           %td= @ecol_transaction.credit_status
