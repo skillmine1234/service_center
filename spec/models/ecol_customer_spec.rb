@@ -21,7 +21,7 @@ describe EcolCustomer do
       ecol_customer = Factory(:ecol_customer)
       should validate_length_of(:code).is_at_least(1).is_at_most(15)
       
-      should validate_length_of(:name).is_at_least(1).is_at_most(255)
+      should validate_length_of(:name).is_at_least(5).is_at_most(50)
       
       should validate_length_of(:credit_acct_no).is_at_least(10).is_at_most(25)
       
