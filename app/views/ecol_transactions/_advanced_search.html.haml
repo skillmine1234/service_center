@@ -5,6 +5,25 @@
   .control-group
     = label_tag "Customer Code", "Customer Code", :class => 'control-label'
     = text_field_tag :customer_code, params[:customer_code]
+  .control-group
+    = label_tag "Status", nil , :class => 'control-label'
+    = text_field_tag :status, params[:status]
+  .control-group
+    = label_tag "Transfer Type", "Transfer Type" , :class => 'control-label'
+    = text_field_tag :transfer_type, params[:transfer_type]
+  .control-group
+    = label_tag "Beneficiary Account Number", "Beneficiary Account Number" , :class => 'control-label'
+    = text_field_tag :bene_account_no, params[:bene_account_no]
+  .control-group
+    = label_tag "Transfer Date", "Transfer Date", :class => 'control-label'
+    = text_field_tag :from_date, params[:from_date]
+    To
+    = text_field_tag :to_date, params[:to_date]
+  .control-group
+    = label_tag "Transfer Amount", "Transfer Amount", :class => 'control-label'
+    = text_field_tag :from_amount, params[:from_amount]
+    To
+    = text_field_tag :to_amount, params[:to_amount]
   = hidden_field_tag :advanced_search, :true
   .form-actions
     = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"

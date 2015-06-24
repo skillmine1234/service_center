@@ -18,7 +18,12 @@ describe EcolRemitter do
 
     it do 
       ecol_remitter = Factory(:ecol_remitter)
-      should validate_uniqueness_of(:customer_code).scoped_to(:remitter_code, :customer_subcode, :invoice_no)     
+      should validate_uniqueness_of(:customer_code).scoped_to(:remitter_code, :customer_subcode, :invoice_no)
+    end
+    
+    it do 
+      ecol_remitter = Factory(:ecol_remitter, :credit_acct_no => '1234567890')
+      should validate_length_of(:credit_acct_no).is_at_least(10).is_at_most(25)
     end
   end
   
@@ -96,7 +101,7 @@ describe EcolRemitter do
       ecol_remitter = Factory.build(:ecol_remitter, :rmtr_name => 'Anjkds**', :rmtr_address => '@ajdjh&NK#')
       ecol_remitter.save == false
       [:rmtr_name, :rmtr_address].each do |att|
-        ecol_remitter.errors_on(att).should == ['Invalid format, expected format is : {[a-z|A-Z|0-9|\:|\/|\-|\?|\+|\(|\)|\.|\, ]}']
+        ecol_remitter.errors_on(att).should == ['Invalid format, expected format is : {[a-z|A-Z|0-9|\:|\/|\-|\?|\+|\(|\)|\.|\,\s]}']
       end
     end
   end
