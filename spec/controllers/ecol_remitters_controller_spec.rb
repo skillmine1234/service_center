@@ -12,8 +12,7 @@ describe EcolRemittersController do
   
   describe "GET index" do
     it "assigns all ecol_remitters as @ecol_remitters" do
-      ecol_customer = Factory(:ecol_customer)
-      ecol_remitter = Factory(:ecol_remitter, :ecol_customer => ecol_customer)
+      ecol_remitter = Factory(:ecol_remitter)
       get :index
       assigns(:ecol_remitters).should eq([ecol_remitter])
     end
@@ -21,8 +20,7 @@ describe EcolRemittersController do
   
   describe "GET show" do
     it "assigns the requested ecol_remitter as @ecol_remitter" do
-      ecol_customer = Factory(:ecol_customer)
-      ecol_remitter = Factory(:ecol_remitter, :ecol_customer => ecol_customer)
+      ecol_remitter = Factory(:ecol_remitter)
       get :show, {:id => ecol_remitter.id}
       assigns(:ecol_remitter).should eq(ecol_remitter)
     end
@@ -37,8 +35,7 @@ describe EcolRemittersController do
 
   describe "GET edit" do
     it "assigns the requested ecol_remitter as @ecol_remitter" do
-      ecol_customer = Factory(:ecol_customer)
-      ecol_remitter = Factory(:ecol_remitter, :ecol_customer => ecol_customer)
+      ecol_remitter = Factory(:ecol_remitter)
       get :edit, {:id => ecol_remitter.id}
       assigns(:ecol_remitter).should eq(ecol_remitter)
     end
@@ -47,8 +44,7 @@ describe EcolRemittersController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new ecol_remitter" do
-        ecol_customer = Factory(:ecol_customer)
-        params = Factory.attributes_for(:ecol_remitter, :ecol_customer => ecol_customer)
+        params = Factory.attributes_for(:ecol_remitter)
         expect {
           post :create, {:ecol_remitter => params}
         }.to change(EcolRemitter, :count).by(1)
@@ -57,16 +53,14 @@ describe EcolRemittersController do
       end
 
       it "assigns a newly created ecol_remitter as @ecol_remitter" do
-        ecol_customer = Factory(:ecol_customer)
-        params = Factory.attributes_for(:ecol_remitter, :ecol_customer => ecol_customer)
+        params = Factory.attributes_for(:ecol_remitter)
         post :create, {:ecol_remitter => params}
         assigns(:ecol_remitter).should be_a(EcolRemitter)
         assigns(:ecol_remitter).should be_persisted
       end
 
       it "redirects to the created ecol_remitter" do
-        ecol_customer = Factory(:ecol_customer)
-        params = Factory.attributes_for(:ecol_remitter, :ecol_customer => ecol_customer)
+        params = Factory.attributes_for(:ecol_remitter)
         post :create, {:ecol_remitter => params}
         response.should redirect_to(EcolRemitter.last)
       end
@@ -74,8 +68,7 @@ describe EcolRemittersController do
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved ecol_remitter as @ecol_remitter" do
-        ecol_customer = Factory(:ecol_customer)
-        params = Factory.attributes_for(:ecol_remitter, :ecol_customer => ecol_customer)
+        params = Factory.attributes_for(:ecol_remitter)
         params[:customer_code] = nil
         expect {
           post :create, {:ecol_remitter => params}
@@ -85,8 +78,7 @@ describe EcolRemittersController do
       end
 
       it "re-renders the 'new' template when show_errors is true" do
-        ecol_customer = Factory(:ecol_customer)
-        params = Factory.attributes_for(:ecol_remitter, :ecol_customer => ecol_customer)
+        params = Factory.attributes_for(:ecol_remitter)
         params[:customer_code] = nil
         post :create, {:ecol_remitter => params}
         response.should render_template("new")
@@ -97,8 +89,7 @@ describe EcolRemittersController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested ecol_remitter" do
-        ecol_customer = Factory(:ecol_customer)
-        ecol_remitter = Factory(:ecol_remitter, :ecol_customer => ecol_customer, :customer_subcode => "CUST01")
+        ecol_remitter = Factory(:ecol_remitter, :customer_subcode => "CUST01")
         params = ecol_remitter.attributes.slice(*ecol_remitter.class.attribute_names)
         params[:customer_subcode] = "CUST02"
         put :update, {:id => ecol_remitter.id, :ecol_remitter => params}
@@ -107,8 +98,7 @@ describe EcolRemittersController do
       end
 
       it "assigns the requested ecol_remitter as @ecol_remitter" do
-        ecol_customer = Factory(:ecol_customer)
-        ecol_remitter = Factory(:ecol_remitter, :ecol_customer => ecol_customer, :customer_subcode => "CUST01")
+        ecol_remitter = Factory(:ecol_remitter, :customer_subcode => "CUST01")
         params = ecol_remitter.attributes.slice(*ecol_remitter.class.attribute_names)
         params[:customer_subcode] = "CUST02"
         put :update, {:id => ecol_remitter.to_param, :ecol_remitter => params}
@@ -116,8 +106,7 @@ describe EcolRemittersController do
       end
 
       it "redirects to the ecol_remitter" do
-        ecol_customer = Factory(:ecol_customer)
-        ecol_remitter = Factory(:ecol_remitter, :ecol_customer => ecol_customer, :customer_subcode => "CUST01")
+        ecol_remitter = Factory(:ecol_remitter, :customer_subcode => "CUST01")
         params = ecol_remitter.attributes.slice(*ecol_remitter.class.attribute_names)
         params[:customer_subcode] = "CUST02"
         put :update, {:id => ecol_remitter.to_param, :ecol_remitter => params}
@@ -125,8 +114,7 @@ describe EcolRemittersController do
       end
 
       it "should raise error when tried to update at same time by many" do
-        ecol_customer = Factory(:ecol_customer)
-        ecol_remitter = Factory(:ecol_remitter, :ecol_customer => ecol_customer, :customer_subcode => "CUST01")
+        ecol_remitter = Factory(:ecol_remitter, :customer_subcode => "CUST01")
         params = ecol_remitter.attributes.slice(*ecol_remitter.class.attribute_names)
         params[:customer_subcode] = "CUST02"
         ecol_remitter2 = ecol_remitter
@@ -143,8 +131,7 @@ describe EcolRemittersController do
 
     describe "with invalid params" do
       it "assigns the ecol_remitter as @ecol_remitter" do
-        ecol_customer = Factory(:ecol_customer)
-        ecol_remitter = Factory(:ecol_remitter, :ecol_customer => ecol_customer, :remitter_code => "01")
+        ecol_remitter = Factory(:ecol_remitter, :remitter_code => "01")
         params = ecol_remitter.attributes.slice(*ecol_remitter.class.attribute_names)
         params[:remitter_code] = nil
         put :update, {:id => ecol_remitter.to_param, :ecol_remitter => params}
@@ -154,8 +141,7 @@ describe EcolRemittersController do
       end
 
       it "re-renders the 'edit' template when show_errors is true" do
-        ecol_customer = Factory(:ecol_customer)
-        ecol_remitter = Factory(:ecol_remitter, :ecol_customer => ecol_customer)
+        ecol_remitter = Factory(:ecol_remitter)
         params = ecol_remitter.attributes.slice(*ecol_remitter.class.attribute_names)
         params[:customer_code] = nil
         put :update, {:id => ecol_remitter.id, :ecol_remitter => params, :show_errors => "true"}
@@ -166,8 +152,7 @@ describe EcolRemittersController do
  
  describe "GET audit_logs" do
    it "assigns the requested ecol_remitter as @ecol_remitter" do
-     ecol_customer = Factory(:ecol_customer)
-     ecol_remitter = Factory(:ecol_remitter, :ecol_customer => ecol_customer)
+     ecol_remitter = Factory(:ecol_remitter)
      get :audit_logs, {:id => ecol_remitter.id, :version_id => 0}
      assigns(:ecol_remitter).should eq(ecol_remitter)
      assigns(:audit).should eq(ecol_remitter.audits.first)

@@ -4,7 +4,6 @@ describe EcolRemitter do
   context 'association' do
     it { should belong_to(:created_user) }
     it { should belong_to(:updated_user) }
-    it { should belong_to(:ecol_customer) }
   end
   
   context 'validation' do
