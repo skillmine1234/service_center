@@ -9,6 +9,9 @@
     = label_tag "Status", nil , :class => 'control-label'
     = text_field_tag :status, params[:status]
   .control-group
+    = label_tag "Transfer Type", "Transfer Type" , :class => 'control-label'
+    = text_field_tag :transfer_type, params[:transfer_type]
+  .control-group
     = label_tag "Beneficiary Account Number", "Beneficiary Account Number" , :class => 'control-label'
     = text_field_tag :bene_account_no, params[:bene_account_no]
   .control-group
