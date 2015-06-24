@@ -41,6 +41,10 @@
           %td.label Validation Status
           %td= @ecol_transaction.validation_status
         %tr
+          %td.label Validation Result
+          %td
+            = link_to "Show Result", "#", :class => 'result-link', :href => "#resultText", :style => "font-weight:100"
+        %tr
           %td.label Credited At
           %td= @ecol_transaction.credited_at
         %tr
@@ -109,7 +113,7 @@
           %td.label Returned At
           %td= @ecol_transaction.returned_at
         %tr
-          %td.label Retrun Status
+          %td.label Return Status
           %td= @ecol_transaction.return_status
         %tr
           %td.label Return Reference
@@ -120,7 +124,7 @@
         %tr
           %td.label Return Attempt No
           %td= @ecol_transaction.return_attempt_no
-      .space{:style=>'height: 3px;'}
+      .space{:style=>'height: 29px;'}
       %hr{:style=>'background-color: #F1F2F8; width: 120%'}
       #ticket-details
       %h3
@@ -169,3 +173,15 @@
       %tr
         %td.label Fault Reason:
         %td= @ecol_transaction.fault_reason
+#resultText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Validation Result
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    %pre#result_text{:style => 'word-wrap: break-word'}
+      = @ecol_transaction.validation_result
+
+
+
+

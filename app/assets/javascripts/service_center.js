@@ -26,6 +26,10 @@ $(document).ready(function(){
     $('#faultText').modal();
   });
 
+  $("a.result-link").on("click", function () {
+    $('#resultText').modal();
+  });
+
   $("a.active-link").on("click", function () {
     var f_code = $(this).data('fault-code');
     var f_reason = $(this).data('fault-reason');
