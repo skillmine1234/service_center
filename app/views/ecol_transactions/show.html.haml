@@ -3,7 +3,7 @@
     %h3
       Customer:
       = @ecol_transaction.customer_code 
-      = link_to @ecol_transaction.customer.name , @ecol_transaction.customer  rescue "No Customer for Code #{@ecol_transaction.customer_code}" 
+      = link_to @ecol_transaction.ecol_customer.name , @ecol_transaction.ecol_customer  rescue "No Customer for Code #{@ecol_transaction.customer_code}" 
     %h3
       Transfer Unique No:
       = @ecol_transaction.transfer_unique_no
@@ -24,6 +24,85 @@
       Settled At:
       = @ecol_transaction.settled_at.try(:strftime, "%d/%m/%Y %I:%M%p")
       /= "(" + @ecol_transaction.settled_at.to_s + " mins)"
+  .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; display: inline-block;'}
+    #ticket-details
+      %h3 
+        Validation Details:
+        = link_to @ecol_transaction.validation_status, "#", :class => 'result-link', :href => "#resultText", :style => "font-weight:100"
+      %table.table.no-border
+        %tr
+          %td.label Beneficiary Account Number
+          %td= @ecol_transaction.bene_account_no
+        %tr
+          %td.label Customer Code 
+          %td= @ecol_transaction.customer_code rescue "-" 
+        %tr
+          %td.label 
+            Token 1 : 
+            = show_page_value_for_account_tokens(@ecol_transaction.ecol_customer.token_1_type) rescue "-"
+          %td
+            - if !@ecol_transaction.ecol_customer.nil?
+              - if @ecol_transaction.ecol_customer.token_1_type == 'SC'
+                = @ecol_transaction.customer_subcode
+              - elsif @ecol_transaction.ecol_customer.token_1_type == 'RC'
+                = @ecol_transaction.remitter_code
+              - elsif @ecol_transaction.ecol_customer.token_1_type == 'IN'
+                = @ecol_transaction.invoice_no
+            - else
+              = "-"
+          %td= "(#{@ecol_transaction.ecol_customer.val_token_1 rescue "-"})" 
+        %tr
+          %td.label 
+            Token 2 : 
+            = show_page_value_for_account_tokens(@ecol_transaction.ecol_customer.token_2_type) rescue "-"
+          %td
+            - if !@ecol_transaction.ecol_customer.nil?
+              - if @ecol_transaction.ecol_customer.token_2_type == 'SC'
+                = @ecol_transaction.customer_subcode
+              - elsif @ecol_transaction.ecol_customer.token_2_type == 'RC'
+                = @ecol_transaction.remitter_code
+              - elsif @ecol_transaction.ecol_customer.token_2_type == 'IN'
+                = @ecol_transaction.invoice_no
+            - else
+              = "-"
+          %td= "(#{@ecol_transaction.ecol_customer.val_token_2 rescue "-"})" 
+        %tr
+          %td.label 
+            Token 3 : 
+            = show_page_value_for_account_tokens(@ecol_transaction.ecol_customer.token_3_type) rescue "-"
+          %td
+            - if !@ecol_transaction.ecol_customer.nil?
+              - if @ecol_transaction.ecol_customer.token_3_type == 'SC'
+                = @ecol_transaction.customer_subcode
+              - if @ecol_transaction.ecol_customer.token_3_type == 'RC'
+                = @ecol_transaction.remitter_code
+              - if @ecol_transaction.ecol_customer.token_3_type == 'IN'
+                = @ecol_transaction.invoice_no
+            - else
+              = "-"
+          %td= "(#{@ecol_transaction.ecol_customer.val_token_3 rescue "-"})"
+  .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; display: inline-block;'}
+    #ticket-details
+      %br
+      %br
+      %br
+      %table.table.no-border  
+        %tr
+          %td.label Transfer Amount
+          %td= @ecol_transaction.transfer_amt
+          %td= "(#{@ecol_transaction.ecol_customer.val_txn_amt rescue "-"})" 
+        %tr
+          %td.label Transfer Date
+          %td= @ecol_transaction.transfer_date
+          %td= "(#{@ecol_transaction.ecol_customer.val_txn_date rescue "-"})" 
+        %tr
+          %td.label Remitter Account Number
+          %td= @ecol_transaction.rmtr_account_no
+          %td= "(#{@ecol_transaction.ecol_customer.val_rem_acct rescue "-"})"
+        %tr
+          %td.label Beneficiary Name
+          %td= @ecol_transaction.bene_full_name
+          %td= "(#{@ecol_transaction.ecol_customer.val_ben_name rescue "-"})"
   .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; display: inline-block;'}
     #ticket-details
       %h3 E-Collect Details
@@ -91,8 +170,9 @@
   .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; display: inline-block;'}
     #ticket-details
       %h3
-      .space{:style=>'height: 15px;'}
+      .space{:style=>'height: 6px;'}
       %table.table.no-border
+        %br 
         %tr
           %td.label Credit Account Number
           %td= @ecol_transaction.credit_acct_no
