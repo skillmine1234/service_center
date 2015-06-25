@@ -35,52 +35,29 @@
           %td= @ecol_transaction.bene_account_no
         %tr
           %td.label Customer Code 
-          %td= @ecol_transaction.customer_code rescue "-" 
+          %td= link_to @ecol_transaction.customer_code , @ecol_transaction.ecol_customer  rescue "No Customer for Code #{@ecol_transaction.customer_code}" 
         %tr
           %td.label 
             Token 1 : 
             = show_page_value_for_account_tokens(@ecol_transaction.ecol_customer.token_1_type) rescue "-"
           %td
-            - if !@ecol_transaction.ecol_customer.nil?
-              - if @ecol_transaction.ecol_customer.token_1_type == 'SC'
-                = @ecol_transaction.customer_subcode
-              - elsif @ecol_transaction.ecol_customer.token_1_type == 'RC'
-                = @ecol_transaction.remitter_code
-              - elsif @ecol_transaction.ecol_customer.token_1_type == 'IN'
-                = @ecol_transaction.invoice_no
-            - else
-              = "-"
+            = ecol_transaction_token_show(0)
           %td= "(#{@ecol_transaction.ecol_customer.val_token_1 rescue "-"})" 
         %tr
           %td.label 
             Token 2 : 
             = show_page_value_for_account_tokens(@ecol_transaction.ecol_customer.token_2_type) rescue "-"
           %td
-            - if !@ecol_transaction.ecol_customer.nil?
-              - if @ecol_transaction.ecol_customer.token_2_type == 'SC'
-                = @ecol_transaction.customer_subcode
-              - elsif @ecol_transaction.ecol_customer.token_2_type == 'RC'
-                = @ecol_transaction.remitter_code
-              - elsif @ecol_transaction.ecol_customer.token_2_type == 'IN'
-                = @ecol_transaction.invoice_no
-            - else
-              = "-"
+            = ecol_transaction_token_show(1)
           %td= "(#{@ecol_transaction.ecol_customer.val_token_2 rescue "-"})" 
         %tr
           %td.label 
             Token 3 : 
             = show_page_value_for_account_tokens(@ecol_transaction.ecol_customer.token_3_type) rescue "-"
           %td
-            - if !@ecol_transaction.ecol_customer.nil?
-              - if @ecol_transaction.ecol_customer.token_3_type == 'SC'
-                = @ecol_transaction.customer_subcode
-              - if @ecol_transaction.ecol_customer.token_3_type == 'RC'
-                = @ecol_transaction.remitter_code
-              - if @ecol_transaction.ecol_customer.token_3_type == 'IN'
-                = @ecol_transaction.invoice_no
-            - else
-              = "-"
+            = ecol_transaction_token_show(2)
           %td= "(#{@ecol_transaction.ecol_customer.val_token_3 rescue "-"})"
+      .space{:style=>'height: 2px;'}
   .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; display: inline-block;'}
     #ticket-details
       %br
@@ -90,11 +67,23 @@
         %tr
           %td.label Transfer Amount
           %td= @ecol_transaction.transfer_amt
-          %td= "(#{@ecol_transaction.ecol_customer.val_txn_amt rescue "-"})" 
+          %td
+            - unless @ecol_transaction.ecol_customer.nil?
+              - if @ecol_transaction.ecol_customer.val_txn_amt == 'E'
+                = "(#{@ecol_transaction.ecol_remitter.invoice_amt rescue "-"})"
+              - elsif @ecol_transaction.ecol_customer.val_txn_amt == 'R' 
+                = "(between #{@ecol_transaction.ecol_remitter.min_credit_amt rescue "-"} and #{@ecol_transaction.ecol_remitter.max_credit_amt rescue "-"})"
+              - elsif @ecol_transaction.ecol_customer.val_txn_amt == 'P' 
+                = "(within #{@ecol_transaction.ecol_remitter.invoice_amt_tol_pct rescue "-"}% to #{@ecol_transaction.ecol_remitter.invoice_amt rescue "-"})"
         %tr
           %td.label Transfer Date
           %td= @ecol_transaction.transfer_date
-          %td= "(#{@ecol_transaction.ecol_customer.val_txn_date rescue "-"})" 
+          %td
+            - unless @ecol_transaction.ecol_customer.nil?
+              - if @ecol_transaction.ecol_customer.val_txn_date == 'E'
+                = "(#{@ecol_transaction.ecol_remitter.due_date rescue "-"})"
+              - elsif @ecol_transaction.ecol_customer.val_txn_date == 'R' 
+                = "(within #{@ecol_transaction.ecol_remitter.due_date_tol_days rescue "-"} days of #{@ecol_transaction.ecol_remitter.due_date rescue "-"})"
         %tr
           %td.label Remitter Account Number
           %td= @ecol_transaction.rmtr_account_no

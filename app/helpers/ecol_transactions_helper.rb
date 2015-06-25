@@ -11,4 +11,25 @@ module EcolTransactionsHelper
     ecol_transactions = ecol_transactions.where("transfer_amt>=? and transfer_amt<=?",params[:from_amount].to_f,params[:to_amount].to_f) if params[:to_amount].present? and params[:from_amount].present?
     ecol_transactions
   end
+  
+  def ecol_transaction_token_show(indx)
+    unless @ecol_transaction.ecol_customer.nil?
+      token_types = @ecol_transaction.ecol_customer.account_token_types
+      case token_types[indx]
+      when 'SC'
+        token_value = @ecol_transaction.customer_subcode
+      when 'RC'
+        token_value = @ecol_transaction.remitter_code
+        unless @ecol_transaction.ecol_remitter.nil?
+          link_to token_value, @ecol_transaction.ecol_remitter
+        else
+          token_value
+        end
+      when 'IN'
+        token_value = @ecol_transaction.invoice_no
+      end
+    else
+      "-"
+    end
+  end
 end

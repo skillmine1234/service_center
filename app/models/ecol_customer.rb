@@ -143,4 +143,8 @@ class EcolCustomer < ActiveRecord::Base
     end
   end
   
+  def account_token_types
+    [self.token_1_type, self.token_2_type, self.token_3_type]
+  end  
+   
 end
