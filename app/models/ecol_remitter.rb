@@ -48,7 +48,7 @@ class EcolRemitter < ActiveRecord::Base
   
   def customer_code_should_exist
     ecol_customer = EcolCustomer.where(:code => self.customer_code)
-    if ecol_customer.nil? 
+    if ecol_customer.empty? 
       errors.add(:customer_code, "Invalid Customer")
     end
   end

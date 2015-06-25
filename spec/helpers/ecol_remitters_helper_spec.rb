@@ -13,7 +13,8 @@ describe EcolRemittersHelper do
       find_ecol_remitters(EcolRemitter,{:customer_subcode => "SC"}).should == [ecol_remitter]
       find_ecol_remitters(EcolRemitter,{:customer_subcode => "CS"}).should == [] 
       
-      ecol_remitter = Factory(:ecol_remitter, :remitter_code => "RC")
+      ecol_customer = Factory(:ecol_customer, :code => 'CUST10')
+      ecol_remitter = Factory(:ecol_remitter, :customer_code => 'CUST10', :remitter_code => "RC")
       find_ecol_remitters(EcolRemitter,{:remitter_code => "RC"}).should == [ecol_remitter]
       find_ecol_remitters(EcolRemitter,{:remitter_code => "CR"}).should == []      
     end

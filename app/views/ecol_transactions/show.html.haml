@@ -3,7 +3,7 @@
     %h3
       Customer:
       = @ecol_transaction.customer_code 
-      = link_to @ecol_transaction.customer.name , @ecol_transaction.customer  rescue "No Partner for Code #{@ecol_transaction.customer_code}" 
+      = link_to @ecol_transaction.customer.name , @ecol_transaction.customer  rescue "No Customer for Code #{@ecol_transaction.customer_code}" 
     %h3
       Transfer Unique No:
       = @ecol_transaction.transfer_unique_no
