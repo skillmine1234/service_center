@@ -1,5 +1,5 @@
 class EcolCustomersController < ApplicationController
-  load_and_authorize_resource
+  authorize_resource
   before_filter :authenticate_user!
   before_filter :block_inactive_user!
   respond_to :json
@@ -16,24 +16,29 @@ class EcolCustomersController < ApplicationController
       render "new"
     else
       @ecol_customer.created_by = current_user.id
-      @ecol_customer.save
+      @ecol_customer.save!
       flash[:alert] = 'Customer successfully created'
       redirect_to @ecol_customer
     end
   end
   
   def edit
-    @ecol_customer = EcolCustomer.find_by_id(params[:id])
+    ecol_customer = EcolCustomer.unscoped.find_by_id(params[:id])
+    if ecol_customer.approval_status == 'A'
+      another_record = EcolCustomer.unscoped.where("code =? and approval_status=?",ecol_customer.code,'U').first rescue nil
+    end
+    another_record.nil? ? @ecol_customer = ecol_customer : @ecol_customer = another_record  
+    params[:id] = @ecol_customer.id
   end
   
   def update
-    @ecol_customer = EcolCustomer.find_by_id(params[:id])
-    @ecol_customer.attributes = params[:ecol_customer]
+    @ecol_customer = EcolCustomer.unscoped.find_by_id(params[:id])
+    @ecol_customer = checking_record_for_update(@ecol_customer,params[:ecol_customer])
     if !@ecol_customer.valid?
       render "edit"
     else
       @ecol_customer.updated_by = current_user.id
-      @ecol_customer.save
+      @ecol_customer.save!
       flash[:alert] = 'Customer successfully modified'
       redirect_to @ecol_customer
     end
@@ -44,7 +49,7 @@ class EcolCustomersController < ApplicationController
   end
   
   def show
-    @ecol_customer = EcolCustomer.find_by_id(params[:id])
+    @ecol_customer = EcolCustomer.unscoped.find_by_id(params[:id])
   end
 
   def index
@@ -58,10 +63,26 @@ class EcolCustomersController < ApplicationController
   end
   
   def audit_logs
-    @ecol_customer = EcolCustomer.find(params[:id]) rescue nil
+    @ecol_customer = EcolCustomer.unscoped.find(params[:id]) rescue nil
     @audit = @ecol_customer.audits[params[:version_id].to_i] rescue nil
   end
-  
+
+  def approve
+    @ecol_customer = EcolCustomer.unscoped.find(params[:id]) rescue nil
+    approved_record = EcolCustomer.where("code=? and approval_status=? and lock_version =?",@ecol_customer.code,'A',@ecol_customer.approved_version).first 
+    @ecol_customer.approval_status = 'A'
+    EcolCustomer.transaction do
+      old_record = remove_old_records(@ecol_customer,approved_record)
+      if @ecol_customer.save 
+        flash[:alert] = "Ecollect Customer record was approved successfully"
+      else
+        flash[:alert] = @ecol_customer.errors.full_messages
+        raise ActiveRecord::Rollback
+      end
+    end
+    redirect_to @ecol_customer
+  end
+
   private
 
   def ecol_customer_params

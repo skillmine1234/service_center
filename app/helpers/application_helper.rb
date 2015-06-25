@@ -36,4 +36,34 @@ module ApplicationHelper
     count = resource.audits.count
     count > 0 ? count - 1 : 0
   end 
+
+  def enable_approve_button?(record)
+    record.approval_status == 'U' ? true : false
+  end
+
+  def checking_record_for_update(record,params)
+    if record.approval_status == 'A'
+      params = set_params(record,params)
+      new_record = record.class.new
+      new_record.attributes = params
+      new_record
+    else
+      record.attributes = params
+      record
+    end
+  end
+
+  def set_params(record,params)
+    params[:id] = nil
+    params[:lock_version] = record.lock_version
+    params[:approved_version] = record.lock_version
+    params[:approval_status] = 'U'
+    params[:last_action] = 'U'
+    params
+  end
+
+  def remove_old_records(record,approved_record)
+    approved_record.delete unless approved_record.nil?
+    record.ecol_unapproved_record.delete unless record.ecol_unapproved_record.nil? 
+  end
 end

@@ -17,6 +17,7 @@ ServiceCenter::Application.routes.draw do
   resources :incoming_files
   resources :incoming_file_records
   resources :ecol_fetch_statistics
+  resources :ecol_unapproved_records
 
   namespace :api do
     namespace :v1 do
@@ -44,6 +45,8 @@ ServiceCenter::Application.routes.draw do
 
   get '/error_msg' => "inw_remittance_rules#error_msg"
   get '/error_msg' => "ecol_rules#error_msg"
+
+  put '/ecol_customer/:id/approve' => "ecol_customers#approve"
 
   root :to => 'dashboard#overview'
 

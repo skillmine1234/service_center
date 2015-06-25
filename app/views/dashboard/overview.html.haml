@@ -52,6 +52,11 @@
         = image_tag 'upload.png', :size => "80x80"
       %br
         = "File Uploads"
+    .box  
+      = link_to '/ecol_unapproved_records' do
+        = image_tag 'work-list.jpg', :size => "80x80"
+      %br
+        = "Approval Worklist"
   .slide-container
     .box
       - if !EcolRule.first.nil?

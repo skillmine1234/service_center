@@ -4,7 +4,7 @@ describe EcolRemittersHelper do
   
   context "find_ecol_remitters" do 
     it "should return ecol remitters" do
-      ecol_customer = Factory(:ecol_customer, :code => 'CUST00')
+      ecol_customer = Factory(:ecol_customer, :code => 'CUST00', :approval_status => 'A')
       ecol_remitter = Factory(:ecol_remitter, :customer_code => "CUST00")
       find_ecol_remitters(EcolRemitter,{:customer_code => "CUST00"}).should == [ecol_remitter]
       find_ecol_remitters(EcolRemitter,{:customer_code => "CUST01"}).should == [] 
@@ -13,7 +13,7 @@ describe EcolRemittersHelper do
       find_ecol_remitters(EcolRemitter,{:customer_subcode => "SC"}).should == [ecol_remitter]
       find_ecol_remitters(EcolRemitter,{:customer_subcode => "CS"}).should == [] 
       
-      ecol_customer = Factory(:ecol_customer, :code => 'CUST10')
+      ecol_customer = Factory(:ecol_customer, :code => 'CUST10', :approval_status => 'A')
       ecol_remitter = Factory(:ecol_remitter, :customer_code => 'CUST10', :remitter_code => "RC")
       find_ecol_remitters(EcolRemitter,{:remitter_code => "RC"}).should == [ecol_remitter]
       find_ecol_remitters(EcolRemitter,{:remitter_code => "CR"}).should == []      

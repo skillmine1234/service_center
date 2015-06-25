@@ -65,7 +65,7 @@ describe EcolRemitter do
       ecol_remitter.should_not be_valid
       ecol_remitter.errors_on("customer_subcode_email").should == ["invalid email ASJD"]
       ecol_remitter.errors_on("rmtr_email").should == ["invalid email !d2@8765"]
-      ecol_customer = Factory(:ecol_customer, :code => 'qwerty')
+      ecol_customer = Factory(:ecol_customer, :code => 'qwerty', :approval_status => 'A')
       ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'qwerty', :customer_subcode_email  => "foo@ruby.com", :rmtr_email => "foo@ruby.com")
       ecol_remitter.should be_valid
     end

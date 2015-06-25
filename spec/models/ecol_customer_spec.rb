@@ -13,8 +13,8 @@ describe EcolCustomer do
     end 
        
     it do 
-      ecol_customer = Factory(:ecol_customer)
-      should validate_uniqueness_of(:code)   
+      ecol_customer = Factory(:ecol_customer, :approval_status => 'A')
+      should validate_uniqueness_of(:code).scoped_to(:approval_status)   
     end
     
     it do
@@ -247,4 +247,20 @@ describe EcolCustomer do
     end
   end
   
+  context "create_ecol_unapproved_records" do 
+    it "should create ecol_unapproved_record if the approval_status is 'U' and there is no previous record" do
+      ecol_customer = Factory(:ecol_customer)
+      ecol_customer.reload
+      ecol_customer.ecol_unapproved_record.should_not be_nil
+      record = ecol_customer.ecol_unapproved_record
+      ecol_customer.name = 'Foo'
+      ecol_customer.save
+      ecol_customer.ecol_unapproved_record.should == record
+    end
+
+    it "should not create ecol_unapproved_record if the approval_status is 'A'" do
+      ecol_customer = Factory(:ecol_customer, :approval_status => 'A')
+      ecol_customer.ecol_unapproved_record.should be_nil
+    end
+  end        
 end

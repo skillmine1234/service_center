@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :ecol_remitter do
     incoming_file_id 1 
-    customer_code {Factory(:ecol_customer).code}
+    customer_code {Factory(:ecol_customer, :approval_status => 'A').code}
     customer_subcode "MyString"
     remitter_code "MyString"
     credit_acct_no "1234567890"
