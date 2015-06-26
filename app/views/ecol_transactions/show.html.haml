@@ -41,21 +41,21 @@
             Token 1 : 
             = show_page_value_for_account_tokens(@ecol_transaction.ecol_customer.token_1_type) rescue "-"
           %td
-            = ecol_transaction_token_show(0)
+            = ecol_transaction_token_show(@ecol_transaction, 0)
           %td= "(#{@ecol_transaction.ecol_customer.val_token_1 rescue "-"})" 
         %tr
           %td.label 
             Token 2 : 
             = show_page_value_for_account_tokens(@ecol_transaction.ecol_customer.token_2_type) rescue "-"
           %td
-            = ecol_transaction_token_show(1)
+            = ecol_transaction_token_show(@ecol_transaction, 1)
           %td= "(#{@ecol_transaction.ecol_customer.val_token_2 rescue "-"})" 
         %tr
           %td.label 
             Token 3 : 
             = show_page_value_for_account_tokens(@ecol_transaction.ecol_customer.token_3_type) rescue "-"
           %td
-            = ecol_transaction_token_show(2)
+            = ecol_transaction_token_show(@ecol_transaction, 2)
           %td= "(#{@ecol_transaction.ecol_customer.val_token_3 rescue "-"})"
       .space{:style=>'height: 2px;'}
   .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; display: inline-block;'}

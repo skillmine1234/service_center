@@ -247,4 +247,11 @@ describe EcolCustomer do
     end
   end
   
+  context "account_token_types" do
+    it "returns an array of account tokens" do 
+      ecol_customer = Factory(:ecol_customer)
+      ecol_customer.account_token_types.should == [ecol_customer.token_1_type, ecol_customer.token_2_type, ecol_customer.token_3_type]
+    end
+  end
+  
 end

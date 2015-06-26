@@ -12,21 +12,21 @@ module EcolTransactionsHelper
     ecol_transactions
   end
   
-  def ecol_transaction_token_show(indx)
-    unless @ecol_transaction.ecol_customer.nil?
-      token_types = @ecol_transaction.ecol_customer.account_token_types
+  def ecol_transaction_token_show(ecol_transaction, indx)
+    unless ecol_transaction.ecol_customer.nil?
+      token_types = ecol_transaction.ecol_customer.account_token_types
       case token_types[indx]
       when 'SC'
-        token_value = @ecol_transaction.customer_subcode
+        token_value = ecol_transaction.customer_subcode
       when 'RC'
-        token_value = @ecol_transaction.remitter_code
-        unless @ecol_transaction.ecol_remitter.nil?
-          link_to token_value, @ecol_transaction.ecol_remitter
+        token_value = ecol_transaction.remitter_code
+        unless ecol_transaction.ecol_remitter.nil?
+          link_to token_value, ecol_transaction.ecol_remitter
         else
           token_value
         end
       when 'IN'
-        token_value = @ecol_transaction.invoice_no
+        token_value = ecol_transaction.invoice_no
       end
     else
       "-"
