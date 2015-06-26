@@ -7,8 +7,8 @@ describe UdfAttribute do
     end
 
     it do 
-      udf_attribute = Factory(:udf_attribute)
-      should validate_uniqueness_of(:attribute_name).scoped_to(:class_name)
+      udf_attribute = Factory(:udf_attribute,:approval_status => 'A')
+      should validate_uniqueness_of(:attribute_name).scoped_to(:class_name,:approval_status)
     end
 
     context "validate_data_type" do 
@@ -142,5 +142,22 @@ describe UdfAttribute do
       ['udf17','udf17'],['udf18','udf18'],['udf19','udf19'],['udf20','udf20']]   
     end
   end
+
+  context "create_ecol_unapproved_records" do 
+    it "should create ecol_unapproved_record if the approval_status is 'U' and there is no previous record" do
+      udf_attribute = Factory(:udf_attribute)
+      udf_attribute.reload
+      udf_attribute.ecol_unapproved_record.should_not be_nil
+      record = udf_attribute.ecol_unapproved_record
+      udf_attribute.min_length = '6'
+      udf_attribute.save
+      udf_attribute.ecol_unapproved_record.should == record
+    end
+
+    it "should not create ecol_unapproved_record if the approval_status is 'A'" do
+      udf_attribute = Factory(:udf_attribute, :approval_status => 'A')
+      udf_attribute.ecol_unapproved_record.should be_nil
+    end
+  end        
   
 end

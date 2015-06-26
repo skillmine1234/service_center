@@ -6,17 +6,23 @@
   .form-main
     = f.hidden_field :lock_version
     .control-group
-      = f.label :class_name, "Class Name", :class => 'control-label'
-      = f.select :class_name, options_for_select([['EcolRemitter','EcolRemitter']], @udf_attribute.class_name),:prompt => 'Select'
+      = f.label :class_name, "*Class Name", :class => 'control-label'
+      - if f.object.new_record?
+        = f.select :class_name, options_for_select([['EcolRemitter','EcolRemitter']], @udf_attribute.class_name), {:include_blank => "Select"}
+      - else
+        = f.select :class_name, options_for_select([['EcolRemitter','EcolRemitter']], @udf_attribute.class_name), {:include_blank => "Select"}, {:disabled => true}
       #msg-error
         = error_message_for(@udf_attribute, :class_name, :prepend_text => "")
     .control-group
-      = f.label :attribute_name, "Attribute Name", :class => 'control-label'
-      = f.select :attribute_name, options_for_select(UdfAttribute.options_for_attribute_name, @udf_attribute.attribute_name),:prompt => 'Select'
+      = f.label :attribute_name, "*Attribute Name", :class => 'control-label'
+      - if f.object.new_record?
+        = f.select :attribute_name, options_for_select(UdfAttribute.options_for_attribute_name, @udf_attribute.attribute_name), {:include_blank => "Select"}
+      - else
+        = f.select :attribute_name, options_for_select(UdfAttribute.options_for_attribute_name, @udf_attribute.attribute_name), {:include_blank => "Select"}, {:disabled => true}
       #msg-error
         = error_message_for(@udf_attribute, :attribute_name, :prepend_text => "")
     .control-group
-      = f.label :is_enabled, "Is Enabled", :class => 'control-label'
+      = f.label :is_enabled, "Enabled ?", :class => 'control-label'
       = f.check_box :is_enabled, {},"Y","N"
       #msg-error
         = error_message_for(@udf_attribute, :is_enabled, :prepend_text => "")

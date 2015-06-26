@@ -27,7 +27,7 @@ describe UdfAttributesController do
   
   describe "GET index" do
     it "assigns all udf_attributes as @udf_attributes" do
-      udf_attribute = Factory(:udf_attribute)
+      udf_attribute = Factory(:udf_attribute,:approval_status => 'A')
       get :index
       assigns(:udf_attributes).should eq([udf_attribute])
     end
@@ -39,6 +39,19 @@ describe UdfAttributesController do
       get :edit, {:id => udf_attribute.id}
       assigns(:udf_attribute).should eq(udf_attribute)
     end
+
+    it "assigns the requested udf_attribute with status 'A' as @udf_attribute" do
+      udf_attribute = Factory(:udf_attribute,:approval_status => 'A')
+      get :edit, {:id => udf_attribute.id}
+      assigns(:udf_attribute).should eq(udf_attribute)
+    end
+
+    it "assigns the requested udf_attribute with status 'U' as @udf_attribute if unapproved record exisits" do
+      udf_attribute1 = Factory(:udf_attribute,:approval_status => 'A')
+      udf_attribute2 = Factory(:udf_attribute,:class_name => udf_attribute1.class_name, :attribute_name => udf_attribute1.attribute_name, :approval_status => 'U')
+      get :edit, {:id => udf_attribute1.id}
+      assigns(:udf_attribute).should eq(udf_attribute2)
+    end
   end
   
   describe "POST create" do
@@ -47,7 +60,7 @@ describe UdfAttributesController do
         params = Factory.attributes_for(:udf_attribute)
         expect {
           post :create, {:udf_attribute => params}
-        }.to change(UdfAttribute, :count).by(1)
+        }.to change(UdfAttribute.unscoped, :count).by(1)
         flash[:alert].should  match(/Udf successfully created/)
         response.should be_redirect
       end
@@ -62,7 +75,7 @@ describe UdfAttributesController do
       it "redirects to the created udf_attribute" do
         params = Factory.attributes_for(:udf_attribute)
         post :create, {:udf_attribute => params}
-        response.should redirect_to(UdfAttribute.last)
+        response.should redirect_to(UdfAttribute.unscoped.last)
       end
     end
     
@@ -95,6 +108,18 @@ describe UdfAttributesController do
         put :update, {:id => udf_attribute.id, :udf_attribute => params}
         udf_attribute.reload
         udf_attribute.class_name.should == "EcolCustomer"
+      end
+
+      it "if the record is Approved, creates another udf_attribute unapproved record" do
+        udf_attribute = Factory(:udf_attribute, :min_length => '6',:approval_status => 'A')
+        params = udf_attribute.attributes.slice(*udf_attribute.class.attribute_names)
+        params[:min_length] = "7"
+        put :update, {:id => udf_attribute.id, :udf_attribute => params}
+        udf_attribute.reload
+        udf_attribute2 = UdfAttribute.unscoped.last
+        udf_attribute2.min_length.should == 7
+        udf_attribute2.id.should_not == udf_attribute.id
+        udf_attribute.min_length.should_not == 6
       end
 
       it "assigns the requested udf_attribute as @udf_attribute" do
@@ -162,4 +187,16 @@ describe UdfAttributesController do
     end
   end
   
+  describe "PUT approve" do
+    it "unapproved record can be approved and old approved record will be deleted" do
+      @user.role_id = Factory(:role, :name => 'approver').id
+      @user.save
+      udf_attribute1 = Factory(:udf_attribute, :approval_status => 'A')
+      udf_attribute2 = Factory(:udf_attribute, :class_name => udf_attribute1.class_name, :attribute_name => udf_attribute1.attribute_name, :approval_status => 'U', :min_length => '6', :approved_version => udf_attribute1.lock_version)
+      put :approve, {:id => udf_attribute2.id}
+      udf_attribute2.reload
+      udf_attribute2.approval_status.should == 'A'
+      UdfAttribute.find_by_id(udf_attribute1.id).should be_nil
+    end
+  end
 end

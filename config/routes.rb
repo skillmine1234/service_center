@@ -47,6 +47,7 @@ ServiceCenter::Application.routes.draw do
   get '/error_msg' => "ecol_rules#error_msg"
 
   put '/ecol_customer/:id/approve' => "ecol_customers#approve"
+  put '/udf_attribute/:id/approve' => "udf_attributes#approve"
 
   root :to => 'dashboard#overview'
 

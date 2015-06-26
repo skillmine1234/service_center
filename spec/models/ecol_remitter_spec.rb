@@ -117,7 +117,7 @@ describe EcolRemitter do
   
   context "length" do
     it "should validate the length of the input if length constraint is present" do 
-      udf_attribute = Factory(:udf_attribute, :attribute_name => 'udf4', :label_text => 'Udf4', :control_type => 'TextBox', :data_type => 'String', :length => 3, :is_enabled => 'Y')
+      udf_attribute = Factory(:udf_attribute, :attribute_name => 'udf4', :label_text => 'Udf4', :control_type => 'TextBox', :data_type => 'String', :length => 3, :is_enabled => 'Y',:approval_status => 'A')
       ecol_customer = Factory(:ecol_customer, :code => 'qwerty')
       ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'qwerty', :udf4 => '1234')
       ecol_remitter.should_not be_valid
@@ -129,7 +129,7 @@ describe EcolRemitter do
 
   context "minimum length" do
     it "should validate the length of the input if minimum length constraint is present" do
-      udf_attribute = Factory(:udf_attribute, :attribute_name => 'udf4', :label_text => 'Udf4', :control_type => 'TextBox', :data_type => 'String', :min_length => 3, :is_enabled => 'Y')
+      udf_attribute = Factory(:udf_attribute, :attribute_name => 'udf4', :label_text => 'Udf4', :control_type => 'TextBox', :data_type => 'String', :min_length => 3, :is_enabled => 'Y',:approval_status => 'A')
       ecol_customer = Factory(:ecol_customer, :code => 'qwerty')
       ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'qwerty', :udf4 => '12')
       ecol_remitter.should_not be_valid
@@ -141,7 +141,7 @@ describe EcolRemitter do
 
   context "maximum length" do
     it "should validate the length of the input if maximum length constraint is present" do
-      udf_attribute = Factory(:udf_attribute, :attribute_name => 'udf4', :label_text => 'Udf4', :control_type => 'TextBox', :data_type => 'String', :max_length => 3, :is_enabled => 'Y')
+      udf_attribute = Factory(:udf_attribute, :attribute_name => 'udf4', :label_text => 'Udf4', :control_type => 'TextBox', :data_type => 'String', :max_length => 3, :is_enabled => 'Y',:approval_status => 'A')
       ecol_customer = Factory(:ecol_customer, :code => 'qwerty')
       ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'qwerty', :udf4 => '12678')
       ecol_remitter.should_not be_valid
@@ -153,7 +153,7 @@ describe EcolRemitter do
 
   context "minimum value" do
     it "should validate the value of the input if minimum value constraint is present" do
-      udf_attribute = Factory(:udf_attribute, :attribute_name => 'udf4', :label_text => 'Udf4', :control_type => 'TextBox', :data_type => 'Numeric', :min_value => 30, :is_enabled => 'Y')
+      udf_attribute = Factory(:udf_attribute, :attribute_name => 'udf4', :label_text => 'Udf4', :control_type => 'TextBox', :data_type => 'Numeric', :min_value => 30, :is_enabled => 'Y',:approval_status => 'A')
       ecol_customer = Factory(:ecol_customer, :code => 'qwerty')
       ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'qwerty', :udf4 => "20")
       ecol_remitter.should_not be_valid
@@ -165,7 +165,7 @@ describe EcolRemitter do
 
   context "maximum value" do
     it "should validate the value of the input if maximum value constraint is present" do
-      udf_attribute = Factory(:udf_attribute, :attribute_name => 'udf4', :label_text => 'Udf4', :control_type => 'TextBox', :data_type => 'Numeric', :max_value => 30, :is_enabled => 'Y')
+      udf_attribute = Factory(:udf_attribute, :attribute_name => 'udf4', :label_text => 'Udf4', :control_type => 'TextBox', :data_type => 'Numeric', :max_value => 30, :is_enabled => 'Y',:approval_status => 'A')
       ecol_customer = Factory(:ecol_customer, :code => 'qwerty')
       ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'qwerty', :udf4 => "12678")
       ecol_remitter.should_not be_valid
@@ -177,7 +177,7 @@ describe EcolRemitter do
 
   context "mandatory" do
     it "should validate the value of the input if maximum value constraint is present" do
-      udf_attribute = Factory(:udf_attribute, :attribute_name => 'udf4', :label_text => 'Udf4', :control_type => 'TextBox', :data_type => 'Numeric', :is_mandatory => 'Y', :is_enabled => 'Y')
+      udf_attribute = Factory(:udf_attribute, :attribute_name => 'udf4', :label_text => 'Udf4', :control_type => 'TextBox', :data_type => 'Numeric', :is_mandatory => 'Y', :is_enabled => 'Y',:approval_status => 'A')
       ecol_customer = Factory(:ecol_customer, :code => 'qwerty')
       ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'qwerty', :udf4 => nil)
       ecol_remitter.should_not be_valid
