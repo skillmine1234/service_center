@@ -1,0 +1,286 @@
+= simple_form_for @ecol_transaction, :html => {:class=>'form-horizontal', :autocomplete=>"off", :id => "ecol_remitter_form"} do |f|
+  .control-group
+    = f.label ' '
+    #msg-error
+      = error_message_for(@ecol_transaction, :base, :prepend_text => "")
+  .form-main 
+    .control-group
+      = f.label :status, "Status", :class => 'control-label'
+      = f.text_field :status
+      #msg-error
+        = error_message_for(@ecol_transaction, :status, :prepend_text => "")
+    .control-group
+      = f.label :transfer_type, "Transfer Type", :class => 'control-label'
+      = f.text_field :transfer_type
+      #msg-error
+        = error_message_for(@ecol_transaction, :transfer_type, :prepend_text => "")
+    .control-group
+      = f.label :transfer_unique_no, "Transfer Unique No", :class => 'control-label'
+      = f.text_field :transfer_unique_no
+      #msg-error
+        = error_message_for(@ecol_transaction, :transfer_unique_no, :prepend_text => "")
+    .control-group
+      = f.label :transfer_status, "Transfer Status", :class => 'control-label'
+      = f.text_field :transfer_status, :maxlength => 15
+      #msg-error
+        = error_message_for(@ecol_transaction, :transfer_status, :prepend_text => "")
+    .control-group
+      = f.label :transfer_date, "Transfer Date", :class => 'control-label'
+      = f.text_field :transfer_date
+      #msg-error
+        = error_message_for(@ecol_transaction, :transfer_date, :prepend_text => "")
+    .control-group
+      = f.label :transfer_ccy, "Transfer Currency", :class => 'control-label'
+      = f.text_field :transfer_ccy
+      #msg-error
+        = error_message_for(@ecol_transaction, :transfer_ccy, :prepend_text => "")
+    .control-group
+      = f.label :transfer_amt, "Transfer Amount", :class => 'control-label'
+      = f.text_field :transfer_amt
+      #msg-error
+        = error_message_for(@ecol_transaction, :transfer_amt, :prepend_text => "")
+    .control-group
+      = f.label :rmtr_ref, "Remitter Reference", :class => 'control-label'
+      = f.text_area :rmtr_ref
+      #msg-error
+        = error_message_for(@ecol_transaction, :rmtr_ref, :prepend_text => "")
+    .control-group
+      = f.label :rmtr_full_name, "Remitter Full Name", :class => 'control-label'
+      = f.text_field :rmtr_full_name
+      #msg-error
+        = error_message_for(@ecol_transaction, :rmtr_full_name, :prepend_text => "")
+    .control-group
+      = f.label :rmtr_address, "Remitter Address", :class => 'control-label'
+      = f.text_field :rmtr_address
+      #msg-error
+        = error_message_for(@ecol_transaction, :rmtr_address, :prepend_text => "")
+    .control-group
+      = f.label :rmtr_account_type, "Remitter Account Type", :class => 'control-label'
+      = f.text_field :rmtr_account_type
+      #msg-error
+        = error_message_for(@ecol_transaction, :rmtr_account_type, :prepend_text => "")
+    .control-group
+      = f.label :rmtr_account_no, "Remitter Account No", :class => 'control-label'
+      = f.text_field :rmtr_account_no
+      #msg-error
+        = error_message_for(@ecol_transaction, :rmtr_account_no, :prepend_text => "")
+    .control-group
+      = f.label :rmtr_account_ifsc, "Remitter Account IFSC", :class => 'control-label'
+      = f.text_field :rmtr_account_ifsc
+      #msg-error
+        = error_message_for(@ecol_transaction, :rmtr_account_ifsc, :prepend_text => "")
+    .control-group
+      = f.label :bene_full_name, "Beneficiary Full Name", :class => 'control-label'
+      = f.text_field :bene_full_name
+      #msg-error
+        = error_message_for(@ecol_transaction, :bene_full_name, :prepend_text => "")
+    .control-group
+      = f.label :bene_account_type, "Beneficiary Account Type", :class => 'control-label'
+      = f.text_field :bene_account_type
+      #msg-error
+        = error_message_for(@ecol_transaction, :bene_account_type, :prepend_text => "")
+    .control-group
+      = f.label :bene_account_no, "Beneficiary Account No", :class => 'control-label'
+      = f.text_field :bene_account_no
+      #msg-error
+        = error_message_for(@ecol_transaction, :bene_account_no, :prepend_text => "")
+    .control-group
+      = f.label :bene_account_ifsc, "Beneficiary Account IFSC", :class => 'control-label'
+      = f.text_field :bene_account_ifsc
+      #msg-error
+        = error_message_for(@ecol_transaction, :bene_account_ifsc, :prepend_text => "")
+    .control-group
+      = f.label :rmtr_to_bene_note, "Remitter to Beneficiary Note", :class => 'control-label'
+      = f.text_field :rmtr_to_bene_note
+      #msg-error
+        = error_message_for(@ecol_transaction, :rmtr_to_bene_note, :prepend_text => "")
+    .control-group
+      = f.label :received_at, "Received At", :class => 'control-label'
+      = f.text_field :received_at
+      #msg-error
+        = error_message_for(@ecol_transaction, :received_at, :prepend_text => "")
+    .control-group
+      = f.label :customer_code, "Customer Code", :class => 'control-label'
+      = f.text_field :customer_code
+      #msg-error
+        = error_message_for(@ecol_transaction, :customer_code, :prepend_text => "")
+    .control-group
+      = f.label :customer_subcode, "Customer Sub Code", :class => 'control-label'
+      = f.text_field :customer_subcode
+      #msg-error
+        = error_message_for(@ecol_transaction, :customer_subcode, :prepend_text => "")
+    .control-group
+      = f.label :remitter_code, "Remitter Code", :class => 'control-label'
+      = f.text_field :remitter_code
+      #msg-error
+        = error_message_for(@ecol_transaction, :remitter_code, :prepend_text => "")
+    .control-group
+      = f.label :validated_at, "Validated At", :class => 'control-label'
+      = f.text_field :validated_at
+      #msg-error
+        = error_message_for(@ecol_transaction, :validated_at, :prepend_text => "")
+    .control-group
+      = f.label :validation_status, "Validation Status", :class => 'control-label'
+      = f.text_field :validation_status
+      #msg-error
+        = error_message_for(@ecol_transaction, :validation_status, :prepend_text => "")
+    .control-group
+      = f.label :credited_at, "Credited At", :class => 'control-label'
+      = f.text_field :credited_at
+      #msg-error
+        = error_message_for(@ecol_transaction, :credited_at, :prepend_text => "")
+    .control-group
+      = f.label :credit_status, "Credit Status", :class => 'control-label'
+      = f.text_field :credit_status
+      #msg-error
+        = error_message_for(@ecol_transaction, :credit_status, :prepend_text => "")
+    .control-group
+      = f.label :credit_ref, "Credit Reference", :class => 'control-label'
+      = f.text_field :credit_ref
+      #msg-error
+        = error_message_for(@ecol_transaction, :credit_ref, :prepend_text => "")
+    .control-group
+      = f.label :credit_attempt_no, "Credit Attempt No", :class => 'control-label'
+      = f.text_field :credit_attempt_no
+      #msg-error
+        = error_message_for(@ecol_transaction, :credit_attempt_no, :prepend_text => "")
+    .control-group
+      = f.label :rmtr_email_notify_ref, "Remitter Email Notify Reference", :class => 'control-label'
+      = f.text_field :rmtr_email_notify_ref
+      #msg-error
+        = error_message_for(@ecol_transaction, :rmtr_email_notify_ref, :prepend_text => "")
+    .control-group
+      = f.label :rmtr_sms_notify_ref, "Remitter SMS Notify Reference", :class => 'control-label'
+      = f.text_field :rmtr_sms_notify_ref
+      #msg-error
+        = error_message_for(@ecol_transaction, :rmtr_sms_notify_ref, :prepend_text => "")
+    .control-group
+      = f.label :settled_at, "Settled At", :class => 'control-label'
+      = f.text_field :settled_at
+      #msg-error
+        = error_message_for(@ecol_transaction, :settled_at, :prepend_text => "")
+    .control-group
+      = f.label :settle_status, "Settle Status", :class => 'control-label'
+      = f.text_field :settle_status
+      #msg-error
+        = error_message_for(@ecol_transaction, :settle_status, :prepend_text => "")
+    .control-group
+      = f.label :settle_ref, "Settle Reference", :class => 'control-label'
+      = f.text_field :settle_ref
+      #msg-error
+        = error_message_for(@ecol_transaction, :settle_ref, :prepend_text => "")
+    .control-group
+      = f.label :settle_attempt_no, "Settle Attempt No", :class => 'control-label'
+      = f.text_field :settle_attempt_no
+      #msg-error
+        = error_message_for(@ecol_transaction, :settle_attempt_no, :prepend_text => "")
+    .control-group
+      = f.label :fault_at, "Fault At", :class => 'control-label'
+      = f.text_field :fault_at
+      #msg-error
+        = error_message_for(@ecol_transaction, :fault_at, :prepend_text => "")
+    .control-group
+      = f.label :fault_code, "Fault Code", :class => 'control-label'
+      = f.text_field :fault_code
+      #msg-error
+        = error_message_for(@ecol_transaction, :fault_code, :prepend_text => "")
+    .control-group
+      = f.label :fault_reason, "Fault Reason", :class => 'control-label'
+      = f.text_field :fault_reason
+      #msg-error
+        = error_message_for(@ecol_transaction, :fault_reason, :prepend_text => "")
+    .control-group
+      = f.label :invoice_no, "Invoice No", :class => 'control-label'
+      = f.text_field :invoice_no
+      #msg-error
+        = error_message_for(@ecol_transaction, :invoice_no, :prepend_text => "")
+    .control-group
+      = f.label :validate_at, "Validate At", :class => 'control-label'
+      = f.text_field :validate_at
+      #msg-error
+        = error_message_for(@ecol_transaction, :validate_at, :prepend_text => "")
+    .control-group
+      = f.label :credit_attempt_at, "Credit Attempt At", :class => 'control-label'
+      = f.text_field :credit_attempt_at
+      #msg-error
+        = error_message_for(@ecol_transaction, :credit_attempt_at, :prepend_text => "")
+    .control-group
+      = f.label :returned_at, "Returned At", :class => 'control-label'
+      = f.text_field :returned_at
+      #msg-error
+        = error_message_for(@ecol_transaction, :returned_at, :prepend_text => "")
+    .control-group
+      = f.label :return_status, "Return Status", :class => 'control-label'
+      = f.text_field :return_status
+      #msg-error
+        = error_message_for(@ecol_transaction, :return_status, :prepend_text => "")
+    .control-group
+      = f.label :return_ref, "Return Reference", :class => 'control-label'
+      = f.text_field :return_ref
+      #msg-error
+        = error_message_for(@ecol_transaction, :return_ref, :prepend_text => "")
+    .control-group
+      = f.label :return_attempt_at, "Return Attempt At", :class => 'control-label'
+      = f.text_field :return_attempt_at
+      #msg-error
+        = error_message_for(@ecol_transaction, :return_attempt_at, :prepend_text => "")
+    .control-group
+      = f.label :return_attempt_no, "Return Attempt No", :class => 'control-label'
+      = f.text_field :return_attempt_no
+      #msg-error
+        = error_message_for(@ecol_transaction, :return_attempt_no, :prepend_text => "")
+    .control-group
+      = f.label :settle_attempt_at, "Settle Attempt No", :class => 'control-label'
+      = f.text_field :settle_attempt_at
+      #msg-error
+        = error_message_for(@ecol_transaction, :settle_attempt_at, :prepend_text => "")
+    .control-group
+      = f.label :bene_full_address, "Beneficiary Full Address", :class => 'control-label'
+      = f.text_field :bene_full_address
+      #msg-error
+        = error_message_for(@ecol_transaction, :bene_full_address, :prepend_text => "")
+    .control-group
+      = f.label :validation_result, "Validation Result", :class => 'control-label'
+      = f.text_field :validation_result
+      #msg-error
+        = error_message_for(@ecol_transaction, :validation_result, :prepend_text => "")
+    .control-group
+      = f.label :credit_acct_no, "Credit Account No", :class => 'control-label'
+      = f.text_field :credit_acct_no
+      #msg-error
+        = error_message_for(@ecol_transaction, :credit_acct_no, :prepend_text => "")
+    .control-group
+      = f.label :credit_result, "Credit Result", :class => 'control-label'
+      = f.text_field :credit_result
+      #msg-error
+        = error_message_for(@ecol_transaction, :credit_result, :prepend_text => "")
+    .control-group
+      = f.label :settle_result, "Settle Result", :class => 'control-label'
+      = f.text_field :settle_result
+      #msg-error
+        = error_message_for(@ecol_transaction, :settle_result, :prepend_text => "")
+    .control-group
+      = f.label :return_result, "Return Result", :class => 'control-label'
+      = f.text_field :return_result
+      #msg-error
+        = error_message_for(@ecol_transaction, :return_result, :prepend_text => "")
+    .control-group
+      = f.label :do_credit, "Do Credit", :class => 'control-label'
+      = f.text_field :do_credit
+      #msg-error
+        = error_message_for(@ecol_transaction, :do_credit, :prepend_text => "")
+    .control-group
+      = f.label :do_return, "Do Return", :class => 'control-label'
+      = f.text_field :do_return
+      #msg-error
+        = error_message_for(@ecol_transaction, :do_return, :prepend_text => "")
+    .control-group
+      = f.label :ecol_remitter_id, "Ecol Remitter ID", :class => 'control-label'
+      = f.text_field :ecol_remitter_id
+      #msg-error
+        = error_message_for(@ecol_transaction, :return_result, :prepend_text => "")
+
+  .form-actions
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_customer', :value => 'Create Transaction'
+    = link_to :Cancel,'/ecol_transactions', :name => 'cancel', :class=>"cancel btn"
+

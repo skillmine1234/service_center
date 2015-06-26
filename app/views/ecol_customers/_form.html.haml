@@ -79,15 +79,15 @@
       #msg-error
         = error_message_for(@ecol_customer, :val_txn_amt, :prepend_text => "")
     .control-group
-      = f.label :val_ben_name, "Validate Beneficiary Name", :class => 'control-label'
-      = f.check_box :val_ben_name, {},"Y","N"
-      #msg-error
-        = error_message_for(@ecol_customer, :val_ben_name, :prepend_text => "")
-    .control-group
       = f.label :val_rem_acct, "Validate Remitter Account", :class => 'control-label'
       = f.check_box :val_rem_acct, {},"Y","N"
       #msg-error
         = error_message_for(@ecol_customer, :val_rem_acct, :prepend_text => "")
+    .control-group
+      = f.label :val_ben_name, "Validate Beneficiary Name", :class => 'control-label'
+      = f.check_box :val_ben_name, {},"Y","N"
+      #msg-error
+        = error_message_for(@ecol_customer, :val_ben_name, :prepend_text => "")
     .control-group
       = f.label :return_if_val_fails, "Return If Validation Fails", :class => 'control-label'
       = f.check_box :return_if_val_fails, {},"Y","N"

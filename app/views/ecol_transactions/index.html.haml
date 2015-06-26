@@ -1,4 +1,7 @@
 %br
+= link_to 'New E-Collect Transaction', new_ecol_transaction_path
+%br
+%br
 %h1 Listing E-Collect transactions
 %h2.collapsible
   Advanced Search
@@ -13,6 +16,7 @@
 %table.table.table-bordered.table-striped.table-hover
   .thead
     %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}  
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Status
     %th{:style=>'text-align:left; background-color: lightblue;'}
@@ -39,11 +43,17 @@
       Credit Status
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Return Status
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Do Credit
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Do Return
   .tbody
     - @ecol_transactions.each do |ecol_transaction|   
       %tr
         %td{:style=>'text-align:left;'}
           = link_to 'Show', ecol_transaction
+        %td{:style=>'text-align:left;'}
+          = link_to 'Edit', edit_ecol_transaction_path(ecol_transaction)
         %td{:style=>'text-align:left;'}
           = ecol_transaction.status
         %td{:style=>'text-align:left;'}
@@ -70,3 +80,7 @@
           = ecol_transaction.credit_status
         %td{:style=>'text-align:left;'}
           = ecol_transaction.return_status
+        %td{:style=>'text-align:left;'}
+          = ecol_transaction.do_credit
+        %td{:style=>'text-align:left;'}
+          = ecol_transaction.do_return
