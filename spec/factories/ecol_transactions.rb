@@ -9,6 +9,7 @@ FactoryGirl.define do
     transfer_date "2015-04-20"
     transfer_ccy "abcde"
     transfer_amt 1
+    rmtr_full_name "MyString"
     rmtr_account_no "MyString"
     rmtr_account_ifsc "MyString"
     bene_account_no "MyString"

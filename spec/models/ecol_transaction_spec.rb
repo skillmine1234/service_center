@@ -8,5 +8,7 @@ describe EcolTransaction do
       :bene_account_ifsc, :received_at].each do |att|
         it { should validate_presence_of(att) }
       end
+      
+      it { should validate_numericality_of(:transfer_amt)}
   end
 end

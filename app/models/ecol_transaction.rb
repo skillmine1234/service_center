@@ -6,4 +6,6 @@ class EcolTransaction < ActiveRecord::Base
   :transfer_date, :transfer_ccy, :transfer_amt, :rmtr_account_no, :rmtr_account_ifsc,
   :bene_account_no, :bene_account_ifsc, :received_at
   
+  validates :transfer_amt, :numericality => { :greater_than => 0 }
+  
 end
