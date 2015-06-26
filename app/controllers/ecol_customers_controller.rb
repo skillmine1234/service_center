@@ -68,6 +68,6 @@ class EcolCustomersController < ApplicationController
     params.require(:ecol_customer).permit(:code, :name, :is_enabled, :val_method, :token_1_type, :token_1_length, :val_token_1, :token_2_type,
   :token_2_length, :val_token_2, :token_3_type, :token_3_length, :val_token_3, :val_txn_date, :val_txn_amt, :val_ben_name,
   :val_rem_acct, :return_if_val_fails, :file_upld_mthd, :credit_acct_no, :nrtv_sufx_1, :nrtv_sufx_2, :nrtv_sufx_3, :rmtr_alert_on,
-  :rmtr_pass_txt, :rmtr_return_txt, :created_by, :updated_by, :lock_version)
+  :rmtr_pass_txt, :rmtr_return_txt, :created_by, :updated_by, :lock_version, :auto_credit, :auto_return)
   end
 end

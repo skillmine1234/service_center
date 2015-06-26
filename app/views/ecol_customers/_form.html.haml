@@ -133,6 +133,16 @@
       = f.text_area :rmtr_return_txt, :maxlength => 500, :rows => 10, :style => 'width:300px; height:100px'
       #msg-error
         = error_message_for(@ecol_customer, :rmtr_return_txt, :prepend_text => "")
+    .control-group
+      = f.label :auto_credit, "Auto Credit", :class => 'control-label'
+      = f.check_box :auto_credit, {},"Y","N"
+      #msg-error
+        = error_message_for(@ecol_customer, :auto_credit, :prepend_text => "")
+    .control-group
+      = f.label :auto_return, "Auto Return", :class => 'control-label'
+      = f.check_box :auto_return, {},"Y","N"
+      #msg-error
+        = error_message_for(@ecol_customer, :auto_return, :prepend_text => "")
 
 
   .form-actions

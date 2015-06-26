@@ -178,7 +178,19 @@
             %td.value
               = @ecol_customer.rmtr_return_txt
             %td#msg-error
-              = error_message_for(@ecol_customer, :rmtr_return_txt, :prepend_text => "") 
+              = error_message_for(@ecol_customer, :rmtr_return_txt, :prepend_text => "")
+          %tr
+            %td.label Auto Credit
+            %td.value
+              = @ecol_customer.auto_credit
+            %td#msg-error
+              = error_message_for(@ecol_customer, :auto_credit, :prepend_text => "")
+          %tr
+            %td.label Auto Return
+            %td.value
+              = @ecol_customer.auto_return
+            %td#msg-error
+              = error_message_for(@ecol_customer, :auto_return, :prepend_text => "") 
           %tr
             %td.label Created By
             %td.value
