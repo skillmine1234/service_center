@@ -144,7 +144,7 @@ describe EcolCustomer do
     end
     
     it "should check the value of all account tokens" do 
-      ecol_customer = Factory.build(:ecol_customer, :token_1_type => "SC", :token_2_type => "SC", :token_3_type => "SC")
+      ecol_customer = Factory.build(:ecol_customer, :token_1_type => "SC", :token_1_length => 1, :token_2_type => "SC", :token_2_length => 1, :token_3_type => "SC", :token_3_length => 1)
       ecol_customer.save.should == false
       ecol_customer.errors[:base].should == ["Can't allow same value for all tokens except for 'None'"]
       
@@ -154,13 +154,13 @@ describe EcolCustomer do
     end
     
     it "should check the value of acct token 2 & 3 if acct token 1 is N" do
-      ecol_customer = Factory.build(:ecol_customer, :token_1_type => "N", :token_2_type => "SC", :token_3_type => "IN")
+      ecol_customer = Factory.build(:ecol_customer, :token_1_type => "N", :token_2_type => "SC", :token_2_length => 1, :token_3_type => "IN", :token_3_length => 1)
       ecol_customer.save.should == false
       ecol_customer.errors[:base].should == ["If Account Token 1 is None, then Account Token 2 & Account Token 3 should also be None"]
     end
     
     it "should check the value of acct token 3 if acct token 2 is N" do
-      ecol_customer = Factory.build(:ecol_customer, :token_1_type => "IN", :token_2_type => "N", :token_3_type => "SC")
+      ecol_customer = Factory.build(:ecol_customer, :token_1_type => "IN", :token_1_length => 1, :token_2_type => "N", :token_3_type => "SC", :token_3_length => 1)
       ecol_customer.save.should == false
       ecol_customer.errors[:base].should == ["If Account Token 2 is None, then Account Token 3 also should be None"]
     end
@@ -251,6 +251,17 @@ describe EcolCustomer do
     it "returns an array of account tokens" do 
       ecol_customer = Factory(:ecol_customer)
       ecol_customer.account_token_types.should == [ecol_customer.token_1_type, ecol_customer.token_2_type, ecol_customer.token_3_type]
+    end
+  end
+  
+  context "validate_account_token_length" do
+    it "should validate length of account tokens" do
+      ecol_customer = Factory.build(:ecol_customer, :token_1_type => 'SC', :token_1_length => 1)
+      ecol_customer.save == true
+      ecol_customer = Factory.build(:ecol_customer, :token_1_type => 'SC', :token_1_length => 0)
+      ecol_customer.save == false
+      ecol_customer = Factory.build(:ecol_customer, :token_1_type => 'N', :token_1_length => 0)
+      ecol_customer.save == true    
     end
   end
   

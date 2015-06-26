@@ -34,7 +34,8 @@ class EcolCustomer < ActiveRecord::Base
   :rmtr_return_txt_is_mandatory_if_rmtr_alert_on_is_R_or_A,
   :nrtv_sufx_2_and_3_should_be_N_if_nrtv_sufx_1_is_N,
   :nrtv_sufx_3_should_be_N_if_nrtv_sufx_2_is_N,
-  :customer_code_format
+  :customer_code_format, 
+  :validate_account_token_length
   
       
   def val_tokens_should_be_N_if_val_method_is_N
@@ -146,5 +147,13 @@ class EcolCustomer < ActiveRecord::Base
   def account_token_types
     [self.token_1_type, self.token_2_type, self.token_3_type]
   end  
+  
+  def validate_account_token_length
+    if ((self.token_1_type != 'N' && self.token_1_length == 0) || 
+      (self.token_2_type != 'N' && self.token_2_length == 0) || 
+      (self.token_3_type != 'N' && self.token_3_length == 0))
+      errors[:base] << "If Account Token Type is None then the corresponding Token Length should be greater than 0"
+    end
+  end
    
 end
