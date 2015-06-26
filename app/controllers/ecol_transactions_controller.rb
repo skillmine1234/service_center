@@ -65,7 +65,7 @@ class EcolTransactionsController < ApplicationController
     :tokenzation_status, :customer_code, :customer_subcode, :remitter_code, :validated_at, :vaidation_status,
     :credited_at, :credit_status, :credit_ref, :credit_attempt_no, :rmtr_email_notify_ref, :rmtr_sms_notify_ref,
     :settled_at, :settle_status, :settle_ref, :settle_attempt_no, :fault_at, :fault_code, :fault_reason, :created_at,
-    :updated_at, :do_credit, :do_update)
+    :updated_at)
   end
   
 end
