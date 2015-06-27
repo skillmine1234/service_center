@@ -1,36 +1,20 @@
 %br
 %h1 E-Collect Unapproved Records
 %br
-= form_tag '', :method => 'get', :class => 'form-horizontal', :autocomplete=>"off" do
-  .form-main
-    .control-group
-      = label_tag "Record Value",nil, :class => 'control-label'
-      = text_field_tag "record_value", params[:record_value]
-    .control-group
-      = label_tag "Record Type",nil, :class => 'control-label'
-      = select_tag "record_type", options_for_select([['EcolRule','EcolRule'],['EcolCustomer','EcolCustomer'],['EcolRemitter','EcolRemitter'],['UdfAttribute','UdfAttribute']],params[:record_type]), :prompt => 'Any'
-      = hidden_field_tag :advanced_search,"true"
-  .form-actions
-    = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"
-
 - unless @records.nil?
-  = "Total Count: #{@records_count}"
   %br
   = will_paginate @records
   %br
   %table.table.table-bordered.table-striped.table-hover
     .thead
       %th{:style=>'text-align:left; background-color: lightblue;'}
-      %th{:style=>'text-align:left; background-color: lightblue;'}
-        Record Value
-      %th{:style=>'text-align:left; background-color: lightblue;'}
         Record Type
+      %th{:style=>'text-align:left; background-color: lightblue;'}
+        Record Count
     .tbody
       - @records.each do |record|
         %tr
           %td{:style=>'text-align:left;'}
-            = link_to 'Show', record.ecol_approvable
+            = record[:record_type]
           %td{:style=>'text-align:left;'}
-            = record.unique_value
-          %td{:style=>'text-align:left;'}
-            = record.ecol_approvable_type
+            = link_to record[:record_count], {:controller => record[:record_type].tableize, :action => :index, :approval_status => 'U'}

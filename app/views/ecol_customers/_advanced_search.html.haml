@@ -8,6 +8,7 @@
   .control-group
     = label_tag "Default Credit Account No", nil, :class => 'control-label'
     = text_field_tag :credit_acct_no, params[:credit_acct_no]
+    = hidden_field_tag :approval_status, params[:approval_status]
   .form-actions
     = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"
     %input{:type => 'reset', :value=>'Reset', :class => 'btn'}

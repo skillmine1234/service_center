@@ -1,5 +1,5 @@
 - can = can? :approve, @record
-- approve_flag = enable_approve_button?(@record)
+- approve_flag = @record.enable_approve_button?
 %a.btn{"data-toggle" => "modal", :href => "#{!(can && approve_flag) ? '#' : '#myModalApprove'}", :role => "button", :class => "btn btn-primary #{(can && approve_flag) ? '' : 'disabled'}"} Approve
 .modal.hide.fade{"id" => "myModalApprove", "aria-hidden" => "true", "aria-labelledby" => "  myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header

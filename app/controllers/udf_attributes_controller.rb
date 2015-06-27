@@ -22,16 +22,16 @@ class UdfAttributesController < ApplicationController
 
   def edit
     udf_attribute = UdfAttribute.unscoped.find_by_id(params[:id])
-    if udf_attribute.approval_status == 'A'
-      another_record = UdfAttribute.unscoped.where("class_name =? and attribute_name =? and approval_status=?",udf_attribute.class_name,udf_attribute.attribute_name,'U').first rescue nil
+    if udf_attribute.approval_status == 'A' && udf_attribute.unapproved_record.nil?
+      params = (udf_attribute.attributes).merge({:approved_id => udf_attribute.id,:approved_version => udf_attribute.lock_version})
+      udf_attribute = UdfAttribute.new(params)
     end
-    another_record.nil? ? @udf_attribute = udf_attribute : @udf_attribute = another_record  
-    params[:id] = @udf_attribute.id
+    @udf_attribute = udf_attribute
   end
 
   def update
     @udf_attribute = UdfAttribute.unscoped.find_by_id(params[:id])
-    @udf_attribute = checking_record_for_update(@udf_attribute,params[:udf_attribute])
+    @udf_attribute.attributes = params[:udf_attribute]
     if !@udf_attribute.valid?
       render "edit"
     else
@@ -50,7 +50,7 @@ class UdfAttributesController < ApplicationController
   end
 
   def index
-    udf_attributes = UdfAttribute.order("id desc")
+    udf_attributes = (params[:approval_status].present? and params[:approval_status] == 'U') ? UdfAttribute.unscoped.where("approval_status =?",'U').order("id desc") : UdfAttribute.order("id desc")
     @udf_attributes_count = udf_attributes.count
     @udf_attributes = udf_attributes.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
@@ -62,14 +62,12 @@ class UdfAttributesController < ApplicationController
 
   def approve
     @udf_attribute = UdfAttribute.unscoped.find(params[:id]) rescue nil
-    approved_record = UdfAttribute.where("class_name=? and attribute_name=? and approval_status=? and lock_version =?",@udf_attribute.class_name,@udf_attribute.attribute_name,'A',@udf_attribute.approved_version).first 
-    @udf_attribute.approval_status = 'A'
     UdfAttribute.transaction do
-      old_record = remove_old_records(@udf_attribute,approved_record)
-      if @udf_attribute.save 
-        flash[:alert] = "Udf Attribute record was approved successfully"
+      approval = @udf_attribute.approve
+      if @udf_attribute.save! and approval.empty?
+        flash[:alert] = "UDF Attribute record was approved successfully"
       else
-        flash[:alert] = @udf_attribute.errors.full_messages
+        flash[:alert] = @udf_attribute.errors.full_messages << approval
         raise ActiveRecord::Rollback
       end
     end
@@ -81,6 +79,6 @@ private
   def udf_attribute_params
     params.require(:udf_attribute).permit(:class_name, :attribute_name, :label_text, :is_enabled, :is_mandatory, 
     :control_type, :data_type, :constraints, :select_options,:length, :max_length, :min_length, :min_value, 
-    :max_value, :lock_version)
+    :max_value, :lock_version, :approved_version, :approved_id)
   end
 end

@@ -1,5 +1,5 @@
 class UdfAttribute < ActiveRecord::Base
-  audited except: [:approval_status, :last_action]
+  include Approval
   attr_writer :length, :max_length, :min_length, :min_value, :max_value
   attr_reader :length, :max_length, :min_length, :min_value, :max_value
 
@@ -22,18 +22,6 @@ class UdfAttribute < ActiveRecord::Base
   validate :validate_constraint_input
   validate :cross_field_validations
   validates_uniqueness_of :attribute_name, :scope => [:class_name,:approval_status]
-
-  after_save :create_ecol_unapproved_records
-  
-  def self.default_scope
-    where approval_status: 'A'
-  end
-
-  def create_ecol_unapproved_records
-    if approval_status == 'U' and ecol_unapproved_record.nil?
-      EcolUnapprovedRecord.create!(:ecol_approvable => self, :unique_value => attribute_name)
-    end
-  end
 
   def validate_constraint_input
     if self.data_type == "String" and !self.length.to_s.empty? and (!self.min_length.to_s.empty? or !self.max_length.to_s.empty?)

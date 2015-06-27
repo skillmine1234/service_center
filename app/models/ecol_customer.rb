@@ -1,10 +1,8 @@
-class EcolCustomer < ActiveRecord::Base
-  audited except: [:approval_status, :last_action]
-  
+class EcolCustomer < ActiveRecord::Base  
+  include Approval
+
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
-
-  has_one :ecol_unapproved_record, :as => :ecol_approvable
   
   validates_presence_of :code, :name, :is_enabled, :val_method, :token_1_type, :token_1_length, :val_token_1, :token_2_type,
   :token_2_length, :val_token_2, :token_3_type, :token_3_length, :val_token_3, :val_txn_date, :val_txn_amt, :val_ben_name, :val_rem_acct, 
@@ -37,18 +35,6 @@ class EcolCustomer < ActiveRecord::Base
   :nrtv_sufx_2_and_3_should_be_N_if_nrtv_sufx_1_is_N,
   :nrtv_sufx_3_should_be_N_if_nrtv_sufx_2_is_N,
   :customer_code_format
-
-  after_save :create_ecol_unapproved_records
-  
-  def self.default_scope
-    where approval_status: 'A'
-  end
-
-  def create_ecol_unapproved_records
-    if approval_status == 'U' and ecol_unapproved_record.nil?
-      EcolUnapprovedRecord.create!(:ecol_approvable => self, :unique_value => code)
-    end
-  end
 
   def val_tokens_should_be_N_if_val_method_is_N
     if (self.val_method == "N" && (self.val_token_1 != "N" || self.val_token_2 != "N" || self.val_token_3 != "N" || self.val_txn_date != "N" || self.val_txn_amt != "N")) 
