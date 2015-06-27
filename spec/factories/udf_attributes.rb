@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :udf_attribute do
     class_name "EcolRemitter"
-    attribute_name "udf1"
+    sequence(:attribute_name) {|n| "udf#{n}" }
     is_enabled 'N'
     is_mandatory 'N'
     control_type 'CheckBox'

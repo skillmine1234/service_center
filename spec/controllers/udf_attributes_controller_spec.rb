@@ -31,6 +31,12 @@ describe UdfAttributesController do
       get :index
       assigns(:udf_attributes).should eq([udf_attribute])
     end
+
+    it "assigns all unapproved udf_attributes as @udf_attributes when approval_status is passed" do
+      udf_attribute = Factory(:udf_attribute, :approval_status => 'U')
+      get :index, :approval_status => 'U'
+      assigns(:udf_attributes).should eq([udf_attribute])
+    end
   end
   
   describe "GET edit" do
@@ -46,11 +52,11 @@ describe UdfAttributesController do
       assigns(:udf_attribute).should eq(udf_attribute)
     end
 
-    it "assigns the requested udf_attribute with status 'U' as @udf_attribute if unapproved record exisits" do
-      udf_attribute1 = Factory(:udf_attribute,:approval_status => 'A')
-      udf_attribute2 = Factory(:udf_attribute,:class_name => udf_attribute1.class_name, :attribute_name => udf_attribute1.attribute_name, :approval_status => 'U')
-      get :edit, {:id => udf_attribute1.id}
-      assigns(:udf_attribute).should eq(udf_attribute2)
+    it "assigns the new udf_attribute with requested udf_attribute params when status 'A' as @udf_attribute" do
+      udf_attribute = Factory(:udf_attribute,:approval_status => 'A')
+      params = (udf_attribute.attributes).merge({:approved_id => udf_attribute.id,:approved_version => udf_attribute.lock_version})
+      get :edit, {:id => udf_attribute.id}
+      assigns(:udf_attribute).should eq(UdfAttribute.new(params))
     end
   end
   
@@ -108,18 +114,6 @@ describe UdfAttributesController do
         put :update, {:id => udf_attribute.id, :udf_attribute => params}
         udf_attribute.reload
         udf_attribute.class_name.should == "EcolCustomer"
-      end
-
-      it "if the record is Approved, creates another udf_attribute unapproved record" do
-        udf_attribute = Factory(:udf_attribute, :min_length => '6',:approval_status => 'A')
-        params = udf_attribute.attributes.slice(*udf_attribute.class.attribute_names)
-        params[:min_length] = "7"
-        put :update, {:id => udf_attribute.id, :udf_attribute => params}
-        udf_attribute.reload
-        udf_attribute2 = UdfAttribute.unscoped.last
-        udf_attribute2.min_length.should == 7
-        udf_attribute2.id.should_not == udf_attribute.id
-        udf_attribute.min_length.should_not == 6
       end
 
       it "assigns the requested udf_attribute as @udf_attribute" do
@@ -192,7 +186,7 @@ describe UdfAttributesController do
       @user.role_id = Factory(:role, :name => 'approver').id
       @user.save
       udf_attribute1 = Factory(:udf_attribute, :approval_status => 'A')
-      udf_attribute2 = Factory(:udf_attribute, :class_name => udf_attribute1.class_name, :attribute_name => udf_attribute1.attribute_name, :approval_status => 'U', :min_length => '6', :approved_version => udf_attribute1.lock_version)
+      udf_attribute2 = Factory(:udf_attribute, :approval_status => 'U', :min_length => '6', :approved_version => udf_attribute1.lock_version, :approved_id => udf_attribute1.id)
       put :approve, {:id => udf_attribute2.id}
       udf_attribute2.reload
       udf_attribute2.approval_status.should == 'A'

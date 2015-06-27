@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :ecol_unapproved_record do
-    approvable_id 1
-    approvable_type "MyString"
+    ecol_approvable_id 1
+    ecol_approvable_type "MyString"
   end
 end

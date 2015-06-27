@@ -36,7 +36,11 @@ describe EcolCustomersHelper do
       
       ecol_customer = Factory(:ecol_customer, :code => "9543", :credit_acct_no => "9876543210", :approval_status => 'A')
       find_ecol_customers({:credit_acct_no => "9876543210"}).should == [ecol_customer]
-      find_ecol_customers({:credit_acct_no => "0123456789"}).should_not == [ecol_customer]    
+      find_ecol_customers({:credit_acct_no => "0123456789"}).should_not == [ecol_customer]  
+
+      ecol_customer = Factory(:ecol_customer, :code => "9876", :approval_status => 'U')  
+      find_ecol_customers({:approval_status => "U"}).should == [ecol_customer]
+      find_ecol_customers({}).should_not == [ecol_customer]
     end
   end
 end

@@ -15,6 +15,12 @@ describe EcolCustomersController do
       get :index
       assigns(:ecol_customers).should eq([ecol_customer])
     end
+
+    it "assigns all unapproved ecol_customers as @ecol_customers when approval_status is passed" do
+      ecol_customer = Factory(:ecol_customer, :approval_status => 'U')
+      get :index, :approval_status => 'U'
+      assigns(:ecol_customers).should eq([ecol_customer])
+    end
   end
 
   describe "GET show" do
@@ -45,11 +51,11 @@ describe EcolCustomersController do
       assigns(:ecol_customer).should eq(ecol_customer)
     end
 
-    it "assigns the requested ecol_customer with status 'U' as @ecol_customer if unapproved record exisits" do
-      ecol_customer1 = Factory(:ecol_customer,:approval_status => 'A')
-      ecol_customer2 = Factory(:ecol_customer,:code => ecol_customer1.code,:approval_status => 'U')
-      get :edit, {:id => ecol_customer1.id}
-      assigns(:ecol_customer).should eq(ecol_customer2)
+    it "assigns the new ecol_customer with requested ecol_customer params when status 'A' as @ecol_customer" do
+      ecol_customer = Factory(:ecol_customer,:approval_status => 'A')
+      params = (ecol_customer.attributes).merge({:approved_id => ecol_customer.id,:approved_version => ecol_customer.lock_version})
+      get :edit, {:id => ecol_customer.id}
+      assigns(:ecol_customer).should eq(EcolCustomer.new(params))
     end
   end
   
@@ -107,18 +113,6 @@ describe EcolCustomersController do
         put :update, {:id => ecol_customer.id, :ecol_customer => params}
         ecol_customer.reload
         ecol_customer.code.should == "CUST02"
-      end
-
-      it "if the record is Approved, creates another ecol_customer unapproved record" do
-        ecol_customer = Factory(:ecol_customer, :code => "CUST01", :approval_status => 'A')
-        params = ecol_customer.attributes.slice(*ecol_customer.class.attribute_names)
-        params[:code] = "CUST02"
-        put :update, {:id => ecol_customer.id, :ecol_customer => params}
-        ecol_customer.reload
-        ecol_customer2 = EcolCustomer.unscoped.last
-        ecol_customer2.code.should == "CUST02"
-        ecol_customer2.id.should_not == ecol_customer.id
-        ecol_customer.code.should_not == "CUST02"
       end
 
       it "assigns the requested ecol_customer as @ecol_customer" do
@@ -191,7 +185,7 @@ describe EcolCustomersController do
       @user.role_id = Factory(:role, :name => 'approver').id
       @user.save
       ecol_customer1 = Factory(:ecol_customer, :code => "CUST01", :approval_status => 'A')
-      ecol_customer2 = Factory(:ecol_customer, :code => "CUST01", :approval_status => 'U', :name => 'Foobar', :approved_version => ecol_customer1.lock_version)
+      ecol_customer2 = Factory(:ecol_customer, :code => "CUST01", :approval_status => 'U', :name => 'Foobar', :approved_version => ecol_customer1.lock_version, :approved_id => ecol_customer1.id)
       put :approve, {:id => ecol_customer2.id}
       ecol_customer2.reload
       ecol_customer2.approval_status.should == 'A'
