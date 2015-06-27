@@ -41,5 +41,7 @@ FactoryGirl.define do
     udf18 "Mystring"
     udf19 "Mystring"
     udf20 "Mystring"
+    approval_status 'U'
+    last_action 'C'
   end
 end

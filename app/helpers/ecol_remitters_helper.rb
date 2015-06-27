@@ -1,9 +1,9 @@
 module EcolRemittersHelper
   def filter_ecol_remitter(params)
     if params[:incoming_file_id].present?
-      ecol_remitters = EcolRemitter.where("incoming_file_id =?",params[:incoming_file_id]).order("id desc")
+      ecol_remitters = EcolRemitter.unscoped.where("incoming_file_id =?",params[:incoming_file_id]).order("id desc")
     else
-      ecol_remitters = EcolRemitter.order("id desc")
+      ecol_remitters = (params[:approval_status].present? and params[:approval_status] == 'U') ? EcolRemitter.unscoped.where("approval_status =?",'U').order("id desc") : EcolRemitter.order("id desc")
     end
     ecol_remitters
   end

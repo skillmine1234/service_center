@@ -1,0 +1,32 @@
+%br
+%h1 Unapproved E-Collect Rule
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      IFSC Code
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Pool Account No
+    %th{:style=>'text-align:left; background-color: lightblue;'} 
+      Remitter Code
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Settlement GL (Inward)
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Settlement GL (Return)
+  .tbody
+    - @ecol_rules.each do |ecol_rule|
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', ecol_rule
+        %td{:style=>'text-align:left;'}
+          = link_to 'Edit', edit_ecol_rule_path(ecol_rule)
+        %td{:style=>'text-align:left;'}
+          = ecol_rule.ifsc
+        %td{:style=>'text-align:left;'}
+          = ecol_rule.cod_acct_no
+        %td{:style=>'text-align:left;'}
+          = ecol_rule.stl_gl_inward
+        %td{:style=>'text-align:left;'}
+          = ecol_rule.stl_gl_return

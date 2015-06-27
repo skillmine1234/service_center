@@ -1,8 +1,7 @@
 class EcolRemitter < ActiveRecord::Base
   include UdfValidation
   include EcolCustomersHelper
-  
-  audited
+  include Approval
   
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
@@ -27,7 +26,7 @@ class EcolRemitter < ActiveRecord::Base
   validates :due_date_tol_days, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 28, :allow_nil => true }
   validates :due_date, presence: true
   
-  validates_uniqueness_of :customer_code, :scope => [:remitter_code, :customer_subcode, :invoice_no]
+  validates_uniqueness_of :customer_code, :scope => [:remitter_code, :customer_subcode, :invoice_no,:approval_status]
   
   validate :validate_customer_subcode_details, :customer_code_should_exist, :check_email_address
   

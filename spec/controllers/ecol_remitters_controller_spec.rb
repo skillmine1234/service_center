@@ -12,8 +12,14 @@ describe EcolRemittersController do
   
   describe "GET index" do
     it "assigns all ecol_remitters as @ecol_remitters" do
-      ecol_remitter = Factory(:ecol_remitter)
+      ecol_remitter = Factory(:ecol_remitter, :approval_status => 'A')
       get :index
+      assigns(:ecol_remitters).should eq([ecol_remitter])
+    end
+
+    it "assigns all unapproved ecol_remitter as @ecol_remitters when approval_status is passed" do
+      ecol_remitter = Factory(:ecol_remitter, :approval_status => 'U')
+      get :index, :approval_status => 'U'
       assigns(:ecol_remitters).should eq([ecol_remitter])
     end
   end
@@ -39,6 +45,19 @@ describe EcolRemittersController do
       get :edit, {:id => ecol_remitter.id}
       assigns(:ecol_remitter).should eq(ecol_remitter)
     end
+
+    it "assigns the requested ecol_remitter with status 'A' as @ecol_remitter" do
+      ecol_remitter = Factory(:ecol_remitter,:approval_status => 'A')
+      get :edit, {:id => ecol_remitter.id}
+      assigns(:ecol_remitter).should eq(ecol_remitter)
+    end
+
+    it "assigns the new ecol_remitter with requested ecol_remitter params when status 'A' as @ecol_remitter" do
+      ecol_remitter = Factory(:ecol_remitter,:approval_status => 'A')
+      params = (ecol_remitter.attributes).merge({:approved_id => ecol_remitter.id,:approved_version => ecol_remitter.lock_version})
+      get :edit, {:id => ecol_remitter.id}
+      assigns(:ecol_remitter).should eq(EcolRemitter.new(params))
+    end
   end
   
   describe "POST create" do
@@ -47,7 +66,7 @@ describe EcolRemittersController do
         params = Factory.attributes_for(:ecol_remitter)
         expect {
           post :create, {:ecol_remitter => params}
-        }.to change(EcolRemitter, :count).by(1)
+        }.to change(EcolRemitter.unscoped, :count).by(1)
         flash[:alert].should  match(/Remitter successfully created/)
         response.should be_redirect
       end
@@ -62,7 +81,7 @@ describe EcolRemittersController do
       it "redirects to the created ecol_remitter" do
         params = Factory.attributes_for(:ecol_remitter)
         post :create, {:ecol_remitter => params}
-        response.should redirect_to(EcolRemitter.last)
+        response.should redirect_to(EcolRemitter.unscoped.last)
       end
     end
 
@@ -150,7 +169,7 @@ describe EcolRemittersController do
     end
   end
  
- describe "GET audit_logs" do
+  describe "GET audit_logs" do
    it "assigns the requested ecol_remitter as @ecol_remitter" do
      ecol_remitter = Factory(:ecol_remitter)
      get :audit_logs, {:id => ecol_remitter.id, :version_id => 0}
@@ -160,6 +179,18 @@ describe EcolRemittersController do
      assigns(:ecol_remitter).should eq(nil)
      assigns(:audit).should eq(nil)
    end
- end
+  end
 
+  describe "PUT approve" do
+    it "unapproved record can be approved and old approved record will be deleted" do
+      @user.role_id = Factory(:role, :name => 'approver').id
+      @user.save
+      ecol_remitter1 = Factory(:ecol_remitter, :approval_status => 'A')
+      ecol_remitter2 = Factory(:ecol_remitter, :approval_status => 'U', :approved_version => ecol_remitter1.lock_version, :approved_id => ecol_remitter1.id)
+      put :approve, {:id => ecol_remitter2.id}
+      ecol_remitter2.reload
+      ecol_remitter2.approval_status.should == 'A'
+      EcolRemitter.find_by_id(ecol_remitter1.id).should be_nil
+    end
+  end
 end

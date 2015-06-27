@@ -1,5 +1,6 @@
 require 'spec_helper'
-
 describe EcolUnapprovedRecord do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context 'association' do
+    it { should belong_to(:ecol_approvable) }
+  end
 end
