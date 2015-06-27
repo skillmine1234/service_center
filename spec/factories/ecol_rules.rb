@@ -6,5 +6,7 @@ FactoryGirl.define do
     cod_acct_no "1234567890"
     stl_gl_inward "1234567890"
     stl_gl_return "1234567890"
+    approval_status 'U'
+    last_action 'C'
   end
 end

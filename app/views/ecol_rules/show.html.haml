@@ -3,6 +3,10 @@
     #form-details
       %h3 E-Collect Rule Details 
       %br
+      %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
+        - can = can? :edit, @ecol_rule
+        %a.btn{:href => "#{!(can) ? '#' : '/ecol_rules/' + @ecol_rule.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
+        = render 'ecol_customers/approve', :@record => @ecol_rule
       %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
         - if !@ecol_rule.nil?
           %tr

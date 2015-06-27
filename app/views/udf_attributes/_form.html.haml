@@ -5,18 +5,23 @@
       = error_message_for(@udf_attribute, :base, :prepend_text => "")
   .form-main
     = f.hidden_field :lock_version
+    = f.hidden_field :approved_id
+    = f.hidden_field :approved_version
     .control-group
-      = f.label :class_name, "Class Name", :class => 'control-label'
-      = f.select :class_name, options_for_select([['EcolRemitter','EcolRemitter']], @udf_attribute.class_name),:prompt => 'Select'
+      = f.label :class_name, "*Class Name", :class => 'control-label'
+      = f.select :class_name, options_for_select([['EcolRemitter','EcolRemitter']], @udf_attribute.class_name), {:include_blank => "Select"}
       #msg-error
         = error_message_for(@udf_attribute, :class_name, :prepend_text => "")
     .control-group
-      = f.label :attribute_name, "Attribute Name", :class => 'control-label'
-      = f.select :attribute_name, options_for_select(UdfAttribute.options_for_attribute_name, @udf_attribute.attribute_name),:prompt => 'Select'
+      = f.label :attribute_name, "*Attribute Name", :class => 'control-label'
+      - if f.object.new_record?
+        = f.select :attribute_name, options_for_select(UdfAttribute.options_for_attribute_name, @udf_attribute.attribute_name), {:include_blank => "Select"}
+      - else
+        = f.select :attribute_name, options_for_select(UdfAttribute.options_for_attribute_name, @udf_attribute.attribute_name), {:include_blank => "Select"}, {:disabled => true}
       #msg-error
         = error_message_for(@udf_attribute, :attribute_name, :prepend_text => "")
     .control-group
-      = f.label :is_enabled, "Is Enabled", :class => 'control-label'
+      = f.label :is_enabled, "Enabled ?", :class => 'control-label'
       = f.check_box :is_enabled, {},"Y","N"
       #msg-error
         = error_message_for(@udf_attribute, :is_enabled, :prepend_text => "")
@@ -54,6 +59,7 @@
       #msg-error
         = error_message_for(@udf_attribute, :select_options, :prepend_text => "")
   .form-actions
-    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_udf', :value => 'Create Udf Attribute'
+    - f.object.new_record? ? label_name = "Create" : label_name = "Update"
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_udf', :value => label_name + ' Udf Attribute'
     = link_to :Cancel,'/udf_attributes', :name => 'cancel', :class=>"cancel btn"
         

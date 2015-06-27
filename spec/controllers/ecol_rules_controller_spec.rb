@@ -9,6 +9,60 @@ describe EcolRulesController do
     request.env["HTTP_REFERER"] = "/"
   end
 
+  describe "POST create" do
+    describe "with valid params" do
+      it "creates a new ecol_rule" do
+        params = Factory.attributes_for(:ecol_rule)
+        expect {
+          post :create, {:ecol_rule => params}
+        }.to change(EcolRule.unscoped, :count).by(1)
+        flash[:alert].should  match(/Rule successfully created/)
+        response.should be_redirect
+      end
+
+      it "assigns a newly created ecol_rule as @ecol_rule" do
+        params = Factory.attributes_for(:ecol_rule)
+        post :create, {:ecol_rule => params}
+        assigns(:ecol_rule).should be_a(EcolRule)
+        assigns(:ecol_rule).should be_persisted
+      end
+
+      it "redirects to the created ecol_rule" do
+        params = Factory.attributes_for(:ecol_rule)
+        post :create, {:ecol_rule => params}
+        response.should redirect_to(EcolRule.unscoped.last)
+      end
+    end
+
+    describe "with invalid params" do
+      it "assigns a newly created but unsaved ecol_rule as @ecol_rule" do
+        params = Factory.attributes_for(:ecol_rule)
+        params[:ifsc] = nil
+        expect {
+          post :create, {:ecol_rule => params}
+        }.to change(EcolRule, :count).by(0)
+        assigns(:ecol_rule).should be_a(EcolRule)
+        assigns(:ecol_rule).should_not be_persisted
+      end
+
+      it "re-renders the 'new' template when show_errors is true" do
+        params = Factory.attributes_for(:ecol_rule)
+        params[:ifsc] = nil
+        post :create, {:ecol_rule => params}
+        response.should render_template("new")
+      end
+    end
+  end
+
+  describe "GET index" do
+    it "assigns all ecol_rules with approval_status 'U' as @ecol_rules" do
+      ecol_rule1 = Factory(:ecol_rule, :approval_status => 'A')
+      ecol_rule2 = Factory(:ecol_rule, :approval_status => 'U')
+      get :index
+      assigns(:ecol_rules).should eq([ecol_rule2])
+    end
+  end
+
   describe "GET show" do
     it "assigns the requested rule as @ecol_rule" do
       ecol_rule = Factory(:ecol_rule)
@@ -22,6 +76,19 @@ describe EcolRulesController do
       ecol_rule = Factory(:ecol_rule)
       get :edit, {:id => ecol_rule.id}
       assigns(:ecol_rule).should eq(ecol_rule)
+    end
+
+    it "assigns the requested ecol_rule with status 'A' as @ecol_rule" do
+      ecol_rule = Factory(:ecol_rule,:approval_status => 'A')
+      get :edit, {:id => ecol_rule.id}
+      assigns(:ecol_rule).should eq(ecol_rule)
+    end
+
+    it "assigns the new ecol_rule with requested ecol_rule params when status 'A' as @ecol_rule" do
+      ecol_rule = Factory(:ecol_rule,:approval_status => 'A')
+      params = (ecol_rule.attributes).merge({:approved_id => ecol_rule.id,:approved_version => ecol_rule.lock_version})
+      get :edit, {:id => ecol_rule.id}
+      assigns(:ecol_rule).should eq(EcolRule.new(params))
     end
   end
   
@@ -90,4 +157,16 @@ describe EcolRulesController do
     end
   end
 
+  describe "PUT approve" do
+    it "unapproved record can be approved and old approved record will be deleted" do
+      @user.role_id = Factory(:role, :name => 'approver').id
+      @user.save
+      ecol_rule1 = Factory(:ecol_rule, :approval_status => 'A')
+      ecol_rule2 = Factory(:ecol_rule, :approval_status => 'U', :approved_version => ecol_rule1.lock_version, :approved_id => ecol_rule1.id)
+      put :approve, {:id => ecol_rule2.id}
+      ecol_rule2.reload
+      ecol_rule2.approval_status.should == 'A'
+      EcolRule.find_by_id(ecol_rule1.id).should be_nil
+    end
+  end
 end

@@ -1,14 +1,27 @@
 require 'spec_helper'
 
 describe UdfAttribute do
+  context 'association' do
+    it { should have_one(:ecol_unapproved_record) }
+    it { should belong_to(:unapproved_record) }
+    it { should belong_to(:approved_record) }
+  end
+
   context 'validation' do
     [:class_name, :attribute_name, :is_enabled].each do |att|
       it { should validate_presence_of(att) }
     end
 
     it do 
-      udf_attribute = Factory(:udf_attribute)
-      should validate_uniqueness_of(:attribute_name).scoped_to(:class_name)
+      udf_attribute = Factory(:udf_attribute,:approval_status => 'A')
+      should validate_uniqueness_of(:attribute_name).scoped_to(:class_name,:approval_status)
+    end
+
+    it "should validate_unapproved_record" do 
+      udf_attribute1 = Factory(:udf_attribute,:approval_status => 'A')
+      udf_attribute2 = Factory(:udf_attribute, :approved_id => udf_attribute1.id)
+      udf_attribute1.should_not be_valid
+      udf_attribute1.errors_on(:base).should == ["Unapproved Record Already Exists for this record"]
     end
 
     context "validate_data_type" do 
@@ -142,5 +155,72 @@ describe UdfAttribute do
       ['udf17','udf17'],['udf18','udf18'],['udf19','udf19'],['udf20','udf20']]   
     end
   end
-  
+
+  context "default_scope" do 
+    it "should only return 'A' records by default" do 
+      udf_attribute1 = Factory(:udf_attribute, :approval_status => 'A') 
+      udf_attribute2 = Factory(:udf_attribute)
+      UdfAttribute.all.should == [udf_attribute1]
+      udf_attribute2.approval_status = 'A'
+      udf_attribute2.save!
+      UdfAttribute.all.should == [udf_attribute1,udf_attribute2]
+    end
+  end    
+
+  context "create_ecol_unapproved_records" do 
+    it "should create ecol_unapproved_record if the approval_status is 'U' and there is no previous record" do
+      udf_attribute = Factory(:udf_attribute)
+      udf_attribute.reload
+      udf_attribute.ecol_unapproved_record.should_not be_nil
+      record = udf_attribute.ecol_unapproved_record
+      udf_attribute.min_length = '6'
+      udf_attribute.save
+      udf_attribute.ecol_unapproved_record.should == record
+    end
+
+    it "should not create ecol_unapproved_record if the approval_status is 'A'" do
+      udf_attribute = Factory(:udf_attribute, :approval_status => 'A')
+      udf_attribute.ecol_unapproved_record.should be_nil
+    end
+  end        
+
+  context "remove_ecol_unapproved_records" do 
+    it "should remove ecol_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
+      udf_attribute = Factory(:udf_attribute)
+      udf_attribute.reload
+      udf_attribute.ecol_unapproved_record.should_not be_nil
+      record = udf_attribute.ecol_unapproved_record
+      udf_attribute.min_length = '6'
+      udf_attribute.save
+      udf_attribute.ecol_unapproved_record.should == record
+      udf_attribute.approval_status = 'A'
+      udf_attribute.save
+      udf_attribute.remove_ecol_unapproved_records
+      udf_attribute.reload
+      udf_attribute.ecol_unapproved_record.should be_nil
+    end
+  end  
+
+  context "approve" do 
+    it "should approve unapproved_record" do 
+      udf_attribute = Factory(:udf_attribute, :approval_status => 'U')
+      udf_attribute.approve.should == ""
+      udf_attribute.approval_status.should == 'A'
+    end
+
+    it "should return error when trying to approve unmatched version" do 
+      udf_attribute = Factory(:udf_attribute, :approval_status => 'A')
+      udf_attribute2 = Factory(:udf_attribute, :approval_status => 'U', :approved_id => udf_attribute.id, :approved_version => 6)
+      udf_attribute2.approve.should == "The record version is different from that of the approved version" 
+    end
+  end
+
+  context "enable_approve_button?" do 
+    it "should return true if approval_status is 'U' else false" do 
+      udf_attribute1 = Factory(:udf_attribute, :approval_status => 'A')
+      udf_attribute2 = Factory(:udf_attribute, :approval_status => 'U')
+      udf_attribute1.enable_approve_button?.should == false
+      udf_attribute2.enable_approve_button?.should == true
+    end
+  end
 end

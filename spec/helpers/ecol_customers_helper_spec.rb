@@ -26,17 +26,21 @@ describe EcolCustomersHelper do
   
   context "find_ecol_customers" do 
     it "should return ecol customers" do
-      ecol_customer = Factory(:ecol_customer, :code => "9876")
+      ecol_customer = Factory(:ecol_customer, :code => "9876", :approval_status => 'A')
       find_ecol_customers({:code => "9876"}).should == [ecol_customer]
       find_ecol_customers({:code => "9000"}).should_not == [ecol_customer]    
       
-      ecol_customer = Factory(:ecol_customer, :code => "9654", :is_enabled => "N")
+      ecol_customer = Factory(:ecol_customer, :code => "9654", :is_enabled => "N", :approval_status => 'A')
       find_ecol_customers({:is_enabled => "N"}).should == [ecol_customer]
       find_ecol_customers({:is_enabled => "Y"}).should_not == [ecol_customer]
       
-      ecol_customer = Factory(:ecol_customer, :code => "9543", :credit_acct_no => "9876543210")
+      ecol_customer = Factory(:ecol_customer, :code => "9543", :credit_acct_no => "9876543210", :approval_status => 'A')
       find_ecol_customers({:credit_acct_no => "9876543210"}).should == [ecol_customer]
-      find_ecol_customers({:credit_acct_no => "0123456789"}).should_not == [ecol_customer]    
+      find_ecol_customers({:credit_acct_no => "0123456789"}).should_not == [ecol_customer]  
+
+      ecol_customer = Factory(:ecol_customer, :code => "9876", :approval_status => 'U')  
+      find_ecol_customers({:approval_status => "U"}).should == [ecol_customer]
+      find_ecol_customers({}).should_not == [ecol_customer]
     end
   end
 end

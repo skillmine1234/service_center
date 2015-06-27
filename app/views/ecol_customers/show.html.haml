@@ -4,7 +4,9 @@
       %h3 E-Collect Customer Details 
       %br
       %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
-        = link_to 'Edit', edit_ecol_customer_path
+        - can = can? :edit, @ecol_customer
+        %a.btn{:href => "#{!(can) ? '#' : '/ecol_customers/' + @ecol_customer.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
+        = render 'approve', :@record => @ecol_customer
       %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
         - if !@ecol_customer.nil?
           %tr

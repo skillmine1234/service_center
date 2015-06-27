@@ -17,6 +17,7 @@ ServiceCenter::Application.routes.draw do
   resources :incoming_files
   resources :incoming_file_records
   resources :ecol_fetch_statistics
+  resources :ecol_unapproved_records
 
   namespace :api do
     namespace :v1 do
@@ -42,8 +43,13 @@ ServiceCenter::Application.routes.draw do
   get '/sdn/search_results' => 'aml_search#results'
   get '/sdn/search_result' => 'aml_search#search_result'
 
-  get '/error_msg' => "inw_remittance_rules#error_msg"
-  get '/error_msg' => "ecol_rules#error_msg"
+  get '/inw_error_msg' => "inw_remittance_rules#error_msg"
+  get '/ecol_error_msg' => "ecol_rules#error_msg"
+
+  put '/ecol_customer/:id/approve' => "ecol_customers#approve"
+  put '/udf_attribute/:id/approve' => "udf_attributes#approve"
+  put '/ecol_remitter/:id/approve' => "ecol_remitters#approve"
+  put '/ecol_rule/:id/approve' => "ecol_rules#approve"
 
   root :to => 'dashboard#overview'
 

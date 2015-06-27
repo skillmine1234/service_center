@@ -30,10 +30,10 @@
         %br
           = "Inward Remittance Rules"
       - else
-        = link_to error_msg_path do
+        = link_to inw_error_msg_path do
           = image_tag 'rules.jpeg', :size => "80x80"
         %br
-          = "Rules"
+          = "Inward Remittance Rules"
     .box
       = link_to '/banks' do
         = image_tag 'bank.jpeg', :size => "80x80"
@@ -52,13 +52,23 @@
         = image_tag 'upload.png', :size => "80x80"
       %br
         = "File Uploads"
+    .box  
+      = link_to '/ecol_unapproved_records' do
+        = image_tag 'work-list.jpg', :size => "80x80"
+      %br
+        = "Approval Worklist"
   .slide-container
     .box
       - if !EcolRule.first.nil?
         = link_to edit_ecol_rule_path(EcolRule.first) do
           = image_tag 'ecol_rule.png', :size => "80x80"
-      %br
-        = "E-Collect Rules"
+        %br
+          = "E-Collect Rules"
+      - else
+        = link_to ecol_error_msg_path do
+          = image_tag 'rules.jpeg', :size => "80x80"
+        %br
+          = "E-Collect Rules"
     .box
       = link_to '/ecol_customers' do
         = image_tag 'ecol_customer.gif', :size => "80x80"

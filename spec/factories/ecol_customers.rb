@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :ecol_customer do
-    code "abcdef"
+    sequence(:code) {|n| "9" + "%03i" % "#{n}" }
     name "MyString"
     is_enabled "Y"
     val_method "D"
@@ -28,5 +28,7 @@ FactoryGirl.define do
     rmtr_alert_on "N"
     rmtr_pass_txt "MyString"
     rmtr_return_txt "MyString"
+    approval_status 'U'
+    last_action 'C'
   end
 end

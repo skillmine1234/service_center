@@ -4,6 +4,9 @@ describe EcolRemitter do
   context 'association' do
     it { should belong_to(:created_user) }
     it { should belong_to(:updated_user) }
+    it { should have_one(:ecol_unapproved_record) }
+    it { should belong_to(:unapproved_record) }
+    it { should belong_to(:approved_record) }
   end
   
   context 'validation' do
@@ -16,13 +19,20 @@ describe EcolRemitter do
     end
 
     it do 
-      ecol_remitter = Factory(:ecol_remitter)
-      should validate_uniqueness_of(:customer_code).scoped_to(:remitter_code, :customer_subcode, :invoice_no)
+      ecol_remitter = Factory(:ecol_remitter, :approval_status => 'A')
+      should validate_uniqueness_of(:customer_code).scoped_to(:remitter_code, :customer_subcode, :invoice_no, :approval_status)
     end
     
     it do 
       ecol_remitter = Factory(:ecol_remitter, :credit_acct_no => '1234567890')
       should validate_length_of(:credit_acct_no).is_at_least(10).is_at_most(25)
+    end
+    
+    it "should validate_unapproved_record" do 
+      ecol_remitter1 = Factory(:ecol_remitter,:approval_status => 'A')
+      ecol_remitter2 = Factory(:ecol_remitter, :approved_id => ecol_remitter1.id)
+      ecol_remitter1.should_not be_valid
+      ecol_remitter1.errors_on(:base).should == ["Unapproved Record Already Exists for this record"]
     end
   end
   
@@ -65,7 +75,7 @@ describe EcolRemitter do
       ecol_remitter.should_not be_valid
       ecol_remitter.errors_on("customer_subcode_email").should == ["invalid email ASJD"]
       ecol_remitter.errors_on("rmtr_email").should == ["invalid email !d2@8765"]
-      ecol_customer = Factory(:ecol_customer, :code => 'qwerty')
+      ecol_customer = Factory(:ecol_customer, :code => 'qwerty', :approval_status => 'A')
       ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'qwerty', :customer_subcode_email  => "foo@ruby.com", :rmtr_email => "foo@ruby.com")
       ecol_remitter.should be_valid
     end
@@ -117,7 +127,7 @@ describe EcolRemitter do
   
   context "length" do
     it "should validate the length of the input if length constraint is present" do 
-      udf_attribute = Factory(:udf_attribute, :attribute_name => 'udf4', :label_text => 'Udf4', :control_type => 'TextBox', :data_type => 'String', :length => 3, :is_enabled => 'Y')
+      udf_attribute = Factory(:udf_attribute, :attribute_name => 'udf4', :label_text => 'Udf4', :control_type => 'TextBox', :data_type => 'String', :length => 3, :is_enabled => 'Y',:approval_status => 'A')
       ecol_customer = Factory(:ecol_customer, :code => 'qwerty')
       ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'qwerty', :udf4 => '1234')
       ecol_remitter.should_not be_valid
@@ -129,7 +139,7 @@ describe EcolRemitter do
 
   context "minimum length" do
     it "should validate the length of the input if minimum length constraint is present" do
-      udf_attribute = Factory(:udf_attribute, :attribute_name => 'udf4', :label_text => 'Udf4', :control_type => 'TextBox', :data_type => 'String', :min_length => 3, :is_enabled => 'Y')
+      udf_attribute = Factory(:udf_attribute, :attribute_name => 'udf4', :label_text => 'Udf4', :control_type => 'TextBox', :data_type => 'String', :min_length => 3, :is_enabled => 'Y',:approval_status => 'A')
       ecol_customer = Factory(:ecol_customer, :code => 'qwerty')
       ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'qwerty', :udf4 => '12')
       ecol_remitter.should_not be_valid
@@ -141,7 +151,7 @@ describe EcolRemitter do
 
   context "maximum length" do
     it "should validate the length of the input if maximum length constraint is present" do
-      udf_attribute = Factory(:udf_attribute, :attribute_name => 'udf4', :label_text => 'Udf4', :control_type => 'TextBox', :data_type => 'String', :max_length => 3, :is_enabled => 'Y')
+      udf_attribute = Factory(:udf_attribute, :attribute_name => 'udf4', :label_text => 'Udf4', :control_type => 'TextBox', :data_type => 'String', :max_length => 3, :is_enabled => 'Y',:approval_status => 'A')
       ecol_customer = Factory(:ecol_customer, :code => 'qwerty')
       ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'qwerty', :udf4 => '12678')
       ecol_remitter.should_not be_valid
@@ -153,7 +163,7 @@ describe EcolRemitter do
 
   context "minimum value" do
     it "should validate the value of the input if minimum value constraint is present" do
-      udf_attribute = Factory(:udf_attribute, :attribute_name => 'udf4', :label_text => 'Udf4', :control_type => 'TextBox', :data_type => 'Numeric', :min_value => 30, :is_enabled => 'Y')
+      udf_attribute = Factory(:udf_attribute, :attribute_name => 'udf4', :label_text => 'Udf4', :control_type => 'TextBox', :data_type => 'Numeric', :min_value => 30, :is_enabled => 'Y',:approval_status => 'A')
       ecol_customer = Factory(:ecol_customer, :code => 'qwerty')
       ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'qwerty', :udf4 => "20")
       ecol_remitter.should_not be_valid
@@ -165,7 +175,7 @@ describe EcolRemitter do
 
   context "maximum value" do
     it "should validate the value of the input if maximum value constraint is present" do
-      udf_attribute = Factory(:udf_attribute, :attribute_name => 'udf4', :label_text => 'Udf4', :control_type => 'TextBox', :data_type => 'Numeric', :max_value => 30, :is_enabled => 'Y')
+      udf_attribute = Factory(:udf_attribute, :attribute_name => 'udf4', :label_text => 'Udf4', :control_type => 'TextBox', :data_type => 'Numeric', :max_value => 30, :is_enabled => 'Y',:approval_status => 'A')
       ecol_customer = Factory(:ecol_customer, :code => 'qwerty')
       ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'qwerty', :udf4 => "12678")
       ecol_remitter.should_not be_valid
@@ -177,7 +187,7 @@ describe EcolRemitter do
 
   context "mandatory" do
     it "should validate the value of the input if maximum value constraint is present" do
-      udf_attribute = Factory(:udf_attribute, :attribute_name => 'udf4', :label_text => 'Udf4', :control_type => 'TextBox', :data_type => 'Numeric', :is_mandatory => 'Y', :is_enabled => 'Y')
+      udf_attribute = Factory(:udf_attribute, :attribute_name => 'udf4', :label_text => 'Udf4', :control_type => 'TextBox', :data_type => 'Numeric', :is_mandatory => 'Y', :is_enabled => 'Y',:approval_status => 'A')
       ecol_customer = Factory(:ecol_customer, :code => 'qwerty')
       ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'qwerty', :udf4 => nil)
       ecol_remitter.should_not be_valid
@@ -196,4 +206,71 @@ describe EcolRemitter do
     end
   end
   
+  context "default_scope" do 
+    it "should only return 'A' records by default" do 
+      ecol_remitter1 = Factory(:ecol_remitter, :approval_status => 'A') 
+      ecol_remitter2 = Factory(:ecol_remitter)
+      EcolRemitter.all.should == [ecol_remitter1]
+      ecol_remitter2.approval_status = 'A'
+      ecol_remitter2.save
+      EcolRemitter.all.should == [ecol_remitter1,ecol_remitter2]
+    end
+  end    
+
+  context "create_ecol_unapproved_records" do 
+    it "should create ecol_unapproved_record if the approval_status is 'U' and there is no previous record" do
+      ecol_remitter = Factory(:ecol_remitter)
+      ecol_remitter.reload
+      ecol_remitter.ecol_unapproved_record.should_not be_nil
+      record = ecol_remitter.ecol_unapproved_record
+      ecol_remitter.rmtr_name = 'Foo'
+      ecol_remitter.save
+      ecol_remitter.ecol_unapproved_record.should == record
+    end
+
+    it "should not create ecol_unapproved_record if the approval_status is 'A'" do
+      ecol_remitter = Factory(:ecol_remitter, :approval_status => 'A')
+      ecol_remitter.ecol_unapproved_record.should be_nil
+    end
+  end  
+
+  context "remove_ecol_unapproved_records" do 
+    it "should remove ecol_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
+      ecol_remitter = Factory(:ecol_remitter)
+      ecol_remitter.reload
+      ecol_remitter.ecol_unapproved_record.should_not be_nil
+      record = ecol_remitter.ecol_unapproved_record
+      ecol_remitter.invoice_no = 'Foo'
+      ecol_remitter.save
+      ecol_remitter.ecol_unapproved_record.should == record
+      ecol_remitter.approval_status = 'A'
+      ecol_remitter.save
+      ecol_remitter.remove_ecol_unapproved_records
+      ecol_remitter.reload
+      ecol_remitter.ecol_unapproved_record.should be_nil
+    end
+  end  
+
+  context "approve" do 
+    it "should approve unapproved_record" do 
+      ecol_remitter = Factory(:ecol_remitter, :approval_status => 'U')
+      ecol_remitter.approve.should == ""
+      ecol_remitter.approval_status.should == 'A'
+    end
+
+    it "should return error when trying to approve unmatched version" do 
+      ecol_remitter = Factory(:ecol_remitter, :approval_status => 'A')
+      ecol_remitter2 = Factory(:ecol_remitter, :approval_status => 'U', :approved_id => ecol_remitter.id, :approved_version => 6)
+      ecol_remitter2.approve.should == "The record version is different from that of the approved version" 
+    end
+  end
+
+  context "enable_approve_button?" do 
+    it "should return true if approval_status is 'U' else false" do 
+      ecol_remitter1 = Factory(:ecol_remitter, :approval_status => 'A')
+      ecol_remitter2 = Factory(:ecol_remitter, :approval_status => 'U')
+      ecol_remitter1.enable_approve_button?.should == false
+      ecol_remitter2.enable_approve_button?.should == true
+    end
+  end
 end

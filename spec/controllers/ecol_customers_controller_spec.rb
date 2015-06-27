@@ -11,8 +11,14 @@ describe EcolCustomersController do
 
   describe "GET index" do
     it "assigns all ecol_customers as @ecol_customers" do
-      ecol_customer = Factory(:ecol_customer)
+      ecol_customer = Factory(:ecol_customer, :approval_status => 'A')
       get :index
+      assigns(:ecol_customers).should eq([ecol_customer])
+    end
+
+    it "assigns all unapproved ecol_customers as @ecol_customers when approval_status is passed" do
+      ecol_customer = Factory(:ecol_customer, :approval_status => 'U')
+      get :index, :approval_status => 'U'
       assigns(:ecol_customers).should eq([ecol_customer])
     end
   end
@@ -33,10 +39,23 @@ describe EcolCustomersController do
   end
 
   describe "GET edit" do
-    it "assigns the requested ecol_customer as @ecol_customer" do
-      ecol_customer = Factory(:ecol_customer)
+    it "assigns the requested ecol_customer with status 'U' as @ecol_customer" do
+      ecol_customer = Factory(:ecol_customer, :approval_status => 'U')
       get :edit, {:id => ecol_customer.id}
       assigns(:ecol_customer).should eq(ecol_customer)
+    end
+
+    it "assigns the requested ecol_customer with status 'A' as @ecol_customer" do
+      ecol_customer = Factory(:ecol_customer,:approval_status => 'A')
+      get :edit, {:id => ecol_customer.id}
+      assigns(:ecol_customer).should eq(ecol_customer)
+    end
+
+    it "assigns the new ecol_customer with requested ecol_customer params when status 'A' as @ecol_customer" do
+      ecol_customer = Factory(:ecol_customer,:approval_status => 'A')
+      params = (ecol_customer.attributes).merge({:approved_id => ecol_customer.id,:approved_version => ecol_customer.lock_version})
+      get :edit, {:id => ecol_customer.id}
+      assigns(:ecol_customer).should eq(EcolCustomer.new(params))
     end
   end
   
@@ -46,7 +65,7 @@ describe EcolCustomersController do
         params = Factory.attributes_for(:ecol_customer)
         expect {
           post :create, {:ecol_customer => params}
-        }.to change(EcolCustomer, :count).by(1)
+        }.to change(EcolCustomer.unscoped, :count).by(1)
         flash[:alert].should  match(/Customer successfully created/)
         response.should be_redirect
       end
@@ -61,7 +80,7 @@ describe EcolCustomersController do
       it "redirects to the created ecol_customer" do
         params = Factory.attributes_for(:ecol_customer)
         post :create, {:ecol_customer => params}
-        response.should redirect_to(EcolCustomer.last)
+        response.should redirect_to(EcolCustomer.unscoped.last)
       end
     end
 
@@ -149,15 +168,28 @@ describe EcolCustomersController do
     end
   end
  
- describe "GET audit_logs" do
-   it "assigns the requested ecol_customer as @ecol_customer" do
-     ecol_customer = Factory(:ecol_customer)
-     get :audit_logs, {:id => ecol_customer.id, :version_id => 0}
-     assigns(:ecol_customer).should eq(ecol_customer)
-     assigns(:audit).should eq(ecol_customer.audits.first)
-     get :audit_logs, {:id => 12345, :version_id => "i"}
-     assigns(:ecol_customer).should eq(nil)
-     assigns(:audit).should eq(nil)
-   end
- end
+  describe "GET audit_logs" do
+    it "assigns the requested ecol_customer as @ecol_customer" do
+      ecol_customer = Factory(:ecol_customer)
+      get :audit_logs, {:id => ecol_customer.id, :version_id => 0}
+      assigns(:ecol_customer).should eq(ecol_customer)
+      assigns(:audit).should eq(ecol_customer.audits.first)
+      get :audit_logs, {:id => 12345, :version_id => "i"}
+      assigns(:ecol_customer).should eq(nil)
+      assigns(:audit).should eq(nil)
+    end
+  end
+
+  describe "PUT approve" do
+    it "unapproved record can be approved and old approved record will be deleted" do
+      @user.role_id = Factory(:role, :name => 'approver').id
+      @user.save
+      ecol_customer1 = Factory(:ecol_customer, :code => "CUST01", :approval_status => 'A')
+      ecol_customer2 = Factory(:ecol_customer, :code => "CUST01", :approval_status => 'U', :name => 'Foobar', :approved_version => ecol_customer1.lock_version, :approved_id => ecol_customer1.id)
+      put :approve, {:id => ecol_customer2.id}
+      ecol_customer2.reload
+      ecol_customer2.approval_status.should == 'A'
+      EcolCustomer.find_by_id(ecol_customer1.id).should be_nil
+    end
+  end
 end

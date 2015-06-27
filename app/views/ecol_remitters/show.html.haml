@@ -4,7 +4,9 @@
       %h3 E-Collect Remitter Details 
       %br
       %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
-        = link_to 'Edit', edit_ecol_remitter_path
+        - can = can? :edit, @ecol_remitter
+        %a.btn{:href => "#{!(can) ? '#' : '/ecol_remitters/' + @ecol_remitter.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
+        = render 'ecol_customers/approve', :@record => @ecol_remitter
       %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
         - if !@ecol_remitter.nil?
           %tr

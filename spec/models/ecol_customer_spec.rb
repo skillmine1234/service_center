@@ -3,6 +3,9 @@ describe EcolCustomer do
   context 'association' do
     it { should belong_to(:created_user) }
     it { should belong_to(:updated_user) }
+    it { should have_one(:ecol_unapproved_record) }
+    it { should belong_to(:unapproved_record) }
+    it { should belong_to(:approved_record) }
   end
   
   context 'validation' do
@@ -13,8 +16,8 @@ describe EcolCustomer do
     end 
        
     it do 
-      ecol_customer = Factory(:ecol_customer)
-      should validate_uniqueness_of(:code)   
+      ecol_customer = Factory(:ecol_customer, :approval_status => 'A')
+      should validate_uniqueness_of(:code).scoped_to(:approval_status)   
     end
     
     it do
@@ -47,6 +50,13 @@ describe EcolCustomer do
     end
     [:nrtv_sufx_1, :nrtv_sufx_2, :nrtv_sufx_3].each do |att|
       it { should validate_inclusion_of(att).in_array(['N', 'SC', 'RC', 'IN', 'RN', 'ORN', 'ORA']) }
+    end
+
+    it "should validate_unapproved_record" do 
+      ecol_customer1 = Factory(:ecol_customer,:approval_status => 'A')
+      ecol_customer2 = Factory(:ecol_customer, :approved_id => ecol_customer1.id)
+      ecol_customer1.should_not be_valid
+      ecol_customer1.errors_on(:base).should == ["Unapproved Record Already Exists for this record"]
     end
   end
   
@@ -246,7 +256,7 @@ describe EcolCustomer do
       ecol_customer.errors_on(:code).should == ["the code can be either a 4 digit number starting with 9, or a 6 character alpha-numeric code, that does not start with 9"]
     end
   end
-  
+
   context "account_token_types" do
     it "returns an array of account tokens" do 
       ecol_customer = Factory(:ecol_customer)
@@ -265,4 +275,71 @@ describe EcolCustomer do
     end
   end
   
+  context "default_scope" do 
+    it "should only return 'A' records by default" do 
+      ecol_customer1 = Factory(:ecol_customer, :approval_status => 'A') 
+      ecol_customer2 = Factory(:ecol_customer)
+      EcolCustomer.all.should == [ecol_customer1]
+      ecol_customer2.approval_status = 'A'
+      ecol_customer2.save
+      EcolCustomer.all.should == [ecol_customer1,ecol_customer2]
+    end
+  end    
+
+  context "create_ecol_unapproved_records" do 
+    it "should create ecol_unapproved_record if the approval_status is 'U' and there is no previous record" do
+      ecol_customer = Factory(:ecol_customer)
+      ecol_customer.reload
+      ecol_customer.ecol_unapproved_record.should_not be_nil
+      record = ecol_customer.ecol_unapproved_record
+      ecol_customer.name = 'Foo'
+      ecol_customer.save
+      ecol_customer.ecol_unapproved_record.should == record
+    end
+
+    it "should not create ecol_unapproved_record if the approval_status is 'A'" do
+      ecol_customer = Factory(:ecol_customer, :approval_status => 'A')
+      ecol_customer.ecol_unapproved_record.should be_nil
+    end
+  end  
+
+  context "remove_ecol_unapproved_records" do 
+    it "should remove ecol_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
+      ecol_customer = Factory(:ecol_customer)
+      ecol_customer.reload
+      ecol_customer.ecol_unapproved_record.should_not be_nil
+      record = ecol_customer.ecol_unapproved_record
+      ecol_customer.name = 'Foo'
+      ecol_customer.save
+      ecol_customer.ecol_unapproved_record.should == record
+      ecol_customer.approval_status = 'A'
+      ecol_customer.save
+      ecol_customer.remove_ecol_unapproved_records
+      ecol_customer.reload
+      ecol_customer.ecol_unapproved_record.should be_nil
+    end
+  end  
+
+  context "approve" do 
+    it "should approve unapproved_record" do 
+      ecol_customer = Factory(:ecol_customer, :approval_status => 'U')
+      ecol_customer.approve.should == ""
+      ecol_customer.approval_status.should == 'A'
+    end
+
+    it "should return error when trying to approve unmatched version" do 
+      ecol_customer = Factory(:ecol_customer, :approval_status => 'A')
+      ecol_customer2 = Factory(:ecol_customer, :approval_status => 'U', :approved_id => ecol_customer.id, :approved_version => 6)
+      ecol_customer2.approve.should == "The record version is different from that of the approved version" 
+    end
+  end
+
+  context "enable_approve_button?" do 
+    it "should return true if approval_status is 'U' else false" do 
+      ecol_customer1 = Factory(:ecol_customer, :approval_status => 'A')
+      ecol_customer2 = Factory(:ecol_customer, :approval_status => 'U')
+      ecol_customer1.enable_approve_button?.should == false
+      ecol_customer2.enable_approve_button?.should == true
+    end
+  end
 end
