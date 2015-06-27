@@ -5,6 +5,6 @@ class AddApprovalColumnsToEcolRemitters < ActiveRecord::Migration
     add_column :ecol_remitters, :approved_version, :integer
     add_column :ecol_remitters, :approved_id, :integer
     remove_index :ecol_remitters, :name => 'ecol_remitters_unique_index'
-    add_index :ecol_remitters, [:customer_code, :customer_subcode, :remitter_code,:approval_status], :unique => true, :name => 'remitter_index_on_status'
+    add_index :ecol_remitters, [:customer_code, :customer_subcode, :remitter_code,:invoice_no,:approval_status], :unique => true, :name => 'remitter_index_on_status'
   end
 end
