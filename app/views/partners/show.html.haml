@@ -78,6 +78,12 @@
             %td#msg-error
               = error_message_for(@partner, :low_balance_alert_at, :prepend_text => "")
           %tr
+            %td.label User Identity
+            %td.value
+              = @partner.identity_user_id
+            %td#msg-error
+              = error_message_for(@partner, :identity_user_id, :prepend_text => "")
+          %tr
             %td.label Remitter SMS Allowed? 
             %td.value
               = @partner.remitter_sms_allowed

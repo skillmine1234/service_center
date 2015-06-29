@@ -9,7 +9,7 @@ describe Partner do
   context 'validation' do
     [:code, :enabled, :name, :account_no, :txn_hold_period_days,
     :remitter_email_allowed, :remitter_sms_allowed, :allow_imps, 
-    :allow_neft, :allow_rtgs, :country, :account_ifsc].each do |att|
+    :allow_neft, :allow_rtgs, :country, :account_ifsc, :identity_user_id].each do |att|
       it { should validate_presence_of(att) }
     end
     [:account_no, :low_balance_alert_at, :mmid, :mobile_no, :txn_hold_period_days].each do |att|
