@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby "2.2.2"
 gem 'roo'
 gem "flot-rails"
-gem 'rails', '4.2.0'
+gem 'rails', '4.2.2'
 gem 'haml-rails'
 gem "devise", ">= 2.2.3"
 gem 'cancancan', '~> 1.10'
@@ -43,7 +43,7 @@ gem 'florrick', '~> 1.1'
 gem 'unscoped_associations'
 # oracle is required only in production, CI tools run against sqlite3
 group :production do
-  gem 'activerecord-oracle_enhanced-adapter', github: 'rsim/oracle-enhanced', branch: 'rails42'
+  gem 'activerecord-oracle_enhanced-adapter',:git => 'git://github.com/rsim/oracle-enhanced.git'
   gem 'ruby-oci8'
   gem 'bcdatabase'
   gem 'passenger'
