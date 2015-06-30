@@ -13,3 +13,4 @@ The following are the environment variables required to be set:
 6. SMTP_PASSWORD 
 7. CONFIG_UPLOAD_PATH
 8. CONFIG_FILE_UPLOAD_PATH
+9. CONFIG_LOGO_PATH
