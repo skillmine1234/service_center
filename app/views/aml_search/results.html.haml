@@ -21,7 +21,7 @@
       - @results.each do |result|
         %tr
           %td{:style=>'text-align:left; width: 30%'}
-            = link_to result["firstName"].to_s + result["lastName"].to_s, :controller => 'aml_search', :action => 'search_result', :index => @results.index(result), :search_params => @search_params
+            = link_to result["firstName"].to_s + " " + result["lastName"].to_s, :controller => 'aml_search', :action => 'search_result', :index => @results.index(result), :search_params => @search_params
           %td{:style=>'text-align:left; width: 30%'}
             = result["type"]
           %td{:style=>'text-align:left; width: 30%'}
