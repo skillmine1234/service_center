@@ -10,7 +10,8 @@ describe WhitelistedIdentity do
   end
 
   context 'validation' do
-    [:partner_id, :is_verified, :created_by, :updated_by].each do |att|
+    [:partner_id, :is_verified, :created_by, :updated_by, 
+     :id_type, :id_number,:id_country,:id_issue_date,:id_expiry_date].each do |att|
       it { should validate_presence_of(att) }
     end
   end
