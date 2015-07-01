@@ -28,13 +28,13 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Transfer Amount
     %th{:style=>'text-align:left; background-color: lightblue;'}
-      Customer Code
+      Customer
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Customer Sub Code
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Remitter Code 
     %th{:style=>'text-align:left; background-color: lightblue;'}
-      Customer Name
+      Beneficiary Account Number
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Transfer Status
     %th{:style=>'text-align:left; background-color: lightblue;'}
@@ -66,12 +66,13 @@
           = ecol_transaction.transfer_amt
         %td{:style=>'text-align:left;'}
           = ecol_transaction.customer_code
+          = ecol_transaction.ecol_customer.try(:name)
         %td{:style=>'text-align:left;'}
           = ecol_transaction.customer_subcode
         %td{:style=>'text-align:left;'}
           = ecol_transaction.remitter_code
         %td{:style=>'text-align:left;'}
-          = ecol_transaction.ecol_customer.try(:name)
+          = ecol_transaction.bene_account_no
         %td{:style=>'text-align:left;'}
           = ecol_transaction.transfer_status
         %td{:style=>'text-align:left;'}
