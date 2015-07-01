@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/rsim/oracle-enhanced.git
-  revision: 7263d4d2c23b57e5c6216712913595d80a1d614d
+  revision: 912adbb7a2cc5a7e12e1f2a97b9d8e5a20d9a8ca
   specs:
     activerecord-oracle_enhanced-adapter (1.6.0)
 
@@ -36,7 +36,7 @@ GEM
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
     actionview (4.2.2)
       activesupport (= 4.2.2)
-      builder (~> 3.1)
+      builder (~> 3.2.2)
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
@@ -544,3 +544,6 @@ DEPENDENCIES
   whenever
   will_paginate
   zeroclipboard-rails
+
+BUNDLED WITH
+   1.10.5

@@ -41,6 +41,7 @@ gem 'country_select', github: 'stefanpenner/country_select'
 gem "sqlite3"
 gem 'florrick', '~> 1.1'
 gem 'unscoped_associations'
+
 # oracle is required only in production, CI tools run against sqlite3
 group :production do
   gem 'activerecord-oracle_enhanced-adapter',:git => 'git://github.com/rsim/oracle-enhanced.git'
@@ -76,8 +77,6 @@ group :development, :test do
   gem "unicorn"
   gem 'rake'
   gem 'test-unit'
-  # gem 'guard-rspec', '3.1.0'
-  # gem 'guard-cucumber','1.4.0'
   gem 'cucumber-rails', :require => false
   gem 'coveralls', :require => false
   gem 'selenium-webdriver'
