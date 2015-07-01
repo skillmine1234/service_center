@@ -44,7 +44,7 @@ gem 'unscoped_associations'
 
 # oracle is required only in production, CI tools run against sqlite3
 group :production do
-  gem 'activerecord-oracle_enhanced-adapter',:git => 'http://github.com/rsim/oracle-enhanced.git'
+  gem 'activerecord-oracle_enhanced-adapter',:git => 'git://github.com/rsim/oracle-enhanced.git'
   gem 'ruby-oci8'
   gem 'bcdatabase'
   gem 'passenger'

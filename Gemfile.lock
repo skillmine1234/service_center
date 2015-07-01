@@ -1,16 +1,16 @@
 GIT
+  remote: git://github.com/rsim/oracle-enhanced.git
+  revision: 912adbb7a2cc5a7e12e1f2a97b9d8e5a20d9a8ca
+  specs:
+    activerecord-oracle_enhanced-adapter (1.6.0)
+
+GIT
   remote: git://github.com/stefanpenner/country_select.git
   revision: 20f83bda911abd7c1d5cb96fd37f9ea22d892f0e
   specs:
     country_select (2.2.0)
       countries (~> 0.11.0)
       sort_alphabetical (~> 1.0)
-
-GIT
-  remote: http://github.com/rsim/oracle-enhanced.git
-  revision: 912adbb7a2cc5a7e12e1f2a97b9d8e5a20d9a8ca
-  specs:
-    activerecord-oracle_enhanced-adapter (1.6.0)
 
 GIT
   remote: https://github.com/quantiguous/rools
