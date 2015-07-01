@@ -1,7 +1,7 @@
 .form-horizontal.show_form
   .form-main-with-color{:style=>'background-color: #F1F2F8;'}
     #form-details
-      %h3 Udf Attribute Details
+      %h3 UDF Attribute Details
       %br
       %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
         - can = can? :edit, @udf_attribute
@@ -32,7 +32,7 @@
             %td#msg-error
               = error_message_for(@udf_attribute, :attribute_name, :prepend_text => "")
           %tr
-            %td.label Is Enabled
+            %td.label Is Enabled?
             %td.value
               = @udf_attribute.is_enabled
             %td#msg-error
@@ -44,7 +44,7 @@
             %td#msg-error
               = error_message_for(@udf_attribute, :label_text, :prepend_text => "")
           %tr
-            %td.label Is Mandatory
+            %td.label Is Mandatory?
             %td.value
               = @udf_attribute.is_mandatory
             %td#msg-error
@@ -74,7 +74,7 @@
             %td#msg-error
               = error_message_for(@udf_attribute, :select_options, :prepend_text => "")
 
-      = link_to 'Back to Udf Attributes', udf_attributes_path
+      = link_to 'Back to UDF Attributes', udf_attributes_path
       
       
       

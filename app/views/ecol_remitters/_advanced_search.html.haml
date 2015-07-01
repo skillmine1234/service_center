@@ -1,12 +1,12 @@
 = form_tag '', :method => 'get', :class => 'form-horizontal', :autocomplete=>"off" do
   .control-group
-    = label_tag "Customer Code", nil, :class => 'control-label'
+    = label_tag "Customer Code", "Customer Code", :class => 'control-label'
     = text_field_tag :customer_code, params[:customer_code]
   .control-group
-    = label_tag "Sub Code", nil, :class => 'control-label'
+    = label_tag "Sub Code", "Sub Code", :class => 'control-label'
     = text_field_tag :customer_subcode, params[:customer_subcode]
   .control-group
-    = label_tag "Remitter Code", nil, :class => 'control-label'
+    = label_tag "Remitter Code", "Remitter Code", :class => 'control-label'
     = text_field_tag :remitter_code, params[:remitter_code]
   .form-actions
     = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"

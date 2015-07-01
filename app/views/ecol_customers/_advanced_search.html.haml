@@ -1,12 +1,12 @@
 = form_tag '', :method => 'get', :class => 'form-horizontal', :autocomplete=>"off" do
   .control-group
-    = label_tag "Customer Code", nil, :class => 'control-label'
+    = label_tag "Customer Code", "Customer Code", :class => 'control-label'
     = text_field_tag :code, params[:code]
   .control-group
-    = label_tag "Enabled?", nil, :class => 'control-label'
+    = label_tag "Enabled?", "Enabled?", :class => 'control-label'
     = select_tag :is_enabled, options_for_select([['Yes','Y'],['No','N']],params[:is_enabled]),:prompt => "ANY"
   .control-group
-    = label_tag "Default Credit Account No", nil, :class => 'control-label'
+    = label_tag "Default Credit Account No", "Default Credit Account No", :class => 'control-label'
     = text_field_tag :credit_acct_no, params[:credit_acct_no]
     = hidden_field_tag :approval_status, params[:approval_status]
   .form-actions

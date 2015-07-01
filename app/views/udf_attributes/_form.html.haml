@@ -21,7 +21,7 @@
       #msg-error
         = error_message_for(@udf_attribute, :attribute_name, :prepend_text => "")
     .control-group
-      = f.label :is_enabled, "Enabled ?", :class => 'control-label'
+      = f.label :is_enabled, "Is Enabled ?", :class => 'control-label'
       = f.check_box :is_enabled, {},"Y","N"
       #msg-error
         = error_message_for(@udf_attribute, :is_enabled, :prepend_text => "")
@@ -31,7 +31,7 @@
       #msg-error
         = error_message_for(@udf_attribute, :label_text, :prepend_text => "")
     .control-group
-      = f.label :is_mandatory, "Is Mandatory", :class => 'control-label'
+      = f.label :is_mandatory, "Is Mandatory?", :class => 'control-label'
       = f.check_box :is_mandatory, {},"Y","N"
       #msg-error
         = error_message_for(@udf_attribute, :is_mandatory, :prepend_text => "")
@@ -47,11 +47,11 @@
         = error_message_for(@udf_attribute, :data_type, :prepend_text => "")
     - UdfAttribute::TextValidators.each do |k,v|
       .control-group
-        = f.label k
+        = f.label k, label_value(k), :class => 'control-label'
         = f.text_field k, :as => v.first, :input_html => { :style => "width: 250px" }, :class => 'control-group' 
     - UdfAttribute::NumericValidators.each do |k,v|
       .control-group
-        = f.label k
+        = f.label k, label_value(k), :class => 'control-label'
         = f.text_field k, :as => v.first, :input_html => { :style => "width: 250px" }, :class => 'control-group'
     .control-group
       = f.label :select_options, "Select Options", :class => 'control-label'
@@ -60,6 +60,6 @@
         = error_message_for(@udf_attribute, :select_options, :prepend_text => "")
   .form-actions
     - f.object.new_record? ? label_name = "Create" : label_name = "Update"
-    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_udf', :value => label_name + ' Udf Attribute'
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_udf', :value => label_name + ' UDF Attribute'
     = link_to :Cancel,'/udf_attributes', :name => 'cancel', :class=>"cancel btn"
         
