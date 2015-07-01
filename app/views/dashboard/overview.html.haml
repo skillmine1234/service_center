@@ -90,10 +90,8 @@
       %br
         = "UDF Attributes"
     .box
-      = link_to '/ecol_fetch_statistics' do
-        = image_tag 'statistic.jpeg', :size => "80x80"
-      / - if !EcolFetchStatistic.first.nil?
-      /   = link_to EcolFetchStatistic.first do
-      /     = image_tag 'statistic.jpeg', :size => "80x80"
+      - if !EcolFetchStatistic.first.nil?
+        = link_to EcolFetchStatistic.first do
+          = image_tag 'statistic.jpeg', :size => "80x80"
       %br
         = "E-Collect Fetch Statistics"
