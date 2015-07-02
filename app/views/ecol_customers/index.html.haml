@@ -30,7 +30,9 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Account Token 3
     %th{:style=>'text-align:left; background-color: lightblue;'}
-      Default Credit Account No
+      Credit Account No (Validation Passed)
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Credit Account No (Validation Failed)
 
   .tbody
     - @ecol_customers.each do |ecol_customer|
@@ -52,5 +54,7 @@
         %td{:style=>'text-align:left;'}
           = ecol_customer.token_3_type
         %td{:style=>'text-align:left;'}
-          = ecol_customer.credit_acct_no
+          = ecol_customer.credit_acct_val_pass
+        %td{:style=>'text-align:left;'}
+          = ecol_customer.credit_acct_val_fail
 
