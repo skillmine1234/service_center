@@ -6,8 +6,11 @@
     = label_tag "Enabled?", "Enabled?", :class => 'control-label'
     = select_tag :is_enabled, options_for_select([['Yes','Y'],['No','N']],params[:is_enabled]),:prompt => "ANY"
   .control-group
-    = label_tag "Default Credit Account No", "Default Credit Account No", :class => 'control-label'
-    = text_field_tag :credit_acct_no, params[:credit_acct_no]
+    = label_tag "Credit Account No (Validation Pass)", "Credit Account No (Validation Pass)", :class => 'control-label'
+    = text_field_tag :credit_acct_val_pass, params[:credit_acct_val_pass]
+  .control-group
+    = label_tag "Credit Account No (Validation Fail)", "Credit Account No (Validation Fail)", :class => 'control-label'
+    = text_field_tag :credit_acct_val_fail, params[:credit_acct_val_fail]
     = hidden_field_tag :approval_status, params[:approval_status]
   .form-actions
     = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"

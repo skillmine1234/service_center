@@ -36,6 +36,23 @@
       #msg-error
         = error_message_for(@ecol_customer, :token_1_length, :prepend_text => "")
     .control-group
+      = f.label :token_1_starts_with, "*Account Token 1 Pattern:"
+      .control-group
+        = f.label :token_1_starts_with, "Starts With", :class => 'control-label'
+        = f.text_field :token_1_starts_with
+        #msg-error
+          = error_message_for(@ecol_customer, :token_1_starts_with, :prepend_text => "")
+      .control-group
+        = f.label :token_1_contains, "Contains", :class => 'control-label'
+        = f.text_field :token_1_contains
+        #msg-error
+          = error_message_for(@ecol_customer, :token_1_contains, :prepend_text => "")
+      .control-group
+        = f.label :token_1_ends_with, "Ends With", :class => 'control-label'
+        = f.text_field :token_1_ends_with
+        #msg-error
+          = error_message_for(@ecol_customer, :token_1_ends_with, :prepend_text => "")
+    .control-group
       = f.label :val_token_1, "Validate Account Token 1", :class => 'control-label'
       = f.check_box :val_token_1, {},"Y","N"
       #msg-error
@@ -50,6 +67,23 @@
       = f.number_field :token_2_length, :min => 0, :max => 29
       #msg-error
         = error_message_for(@ecol_customer, :token_2_length, :prepend_text => "")
+    .control-group
+      = f.label :token_2_starts_with, "*Account Token 2 Pattern:"
+      .control-group
+        = f.label :token_2_starts_with, "Starts With", :class => 'control-label'
+        = f.text_field :token_2_starts_with
+        #msg-error
+          = error_message_for(@ecol_customer, :token_2_starts_with, :prepend_text => "")
+      .control-group
+        = f.label :token_2_contains, "Contains", :class => 'control-label'
+        = f.text_field :token_2_contains
+        #msg-error
+          = error_message_for(@ecol_customer, :token_2_contains, :prepend_text => "")
+      .control-group
+        = f.label :token_2_ends_with, "Ends With", :class => 'control-label'
+        = f.text_field :token_2_ends_with
+        #msg-error
+          = error_message_for(@ecol_customer, :token_2_ends_with, :prepend_text => "")
     .control-group
       = f.label :val_token_2, "Validate Account Token 2", :class => 'control-label'
       = f.check_box :val_token_2, {},"Y","N"
@@ -66,10 +100,32 @@
       #msg-error
         = error_message_for(@ecol_customer, :token_3_length, :prepend_text => "")
     .control-group
+      = f.label :token_3_starts_with, "*Account Token 3 Pattern:"
+      .control-group
+        = f.label :token_3_starts_with, "Starts With", :class => 'control-label'
+        = f.text_field :token_3_starts_with
+        #msg-error
+          = error_message_for(@ecol_customer, :token_3_starts_with, :prepend_text => "")
+      .control-group
+        = f.label :token_3_contains, "Contains", :class => 'control-label'
+        = f.text_field :token_3_contains
+        #msg-error
+          = error_message_for(@ecol_customer, :token_3_contains, :prepend_text => "")
+      .control-group
+        = f.label :token_3_ends_with, "Ends With", :class => 'control-label'
+        = f.text_field :token_3_ends_with
+        #msg-error
+          = error_message_for(@ecol_customer, :token_3_ends_with, :prepend_text => "")
+    .control-group
       = f.label :val_token_3, "Validate Account Token 3", :class => 'control-label'
       = f.check_box :val_token_3, {},"Y","N"
       #msg-error
         = error_message_for(@ecol_customer, :val_token_3, :prepend_text => "")
+    .control-group
+      = f.label :val_last_token_length, "Validate Last Token Length", :class => 'control-label'
+      = f.check_box :val_last_token_length, {},"Y","N"
+      #msg-error
+        = error_message_for(@ecol_customer, :val_last_token_length, :prepend_text => "")
     .control-group
       = f.label :val_txn_date, "Validate Transaction Date", :class => 'control-label'
       = f.select :val_txn_date, options_for_select(EcolCustomer.options_for_val_txn_date, @ecol_customer.val_txn_date),:prompt => 'SELECT'
@@ -91,6 +147,11 @@
       #msg-error
         = error_message_for(@ecol_customer, :val_ben_name, :prepend_text => "")
     .control-group
+      = f.label :val_rmtr_name, "Validate Remitter Name", :class => 'control-label'
+      = f.check_box :val_rmtr_name, {},"Y","N"
+      #msg-error
+        = error_message_for(@ecol_customer, :val_rmtr_name, :prepend_text => "")
+    .control-group
       = f.label :return_if_val_fails, "Return If Validation Fails", :class => 'control-label'
       = f.check_box :return_if_val_fails, {},"Y","N"
       #msg-error
@@ -101,10 +162,15 @@
       #msg-error
         = error_message_for(@ecol_customer, :file_upld_mthd, :prepend_text => "")
     .control-group
-      = f.label :credit_acct_no, "*Default Credit Account No", :class => 'control-label'
-      = f.text_field :credit_acct_no, :maxlength => 25
+      = f.label :credit_acct_val_pass, "*Credit Account No(Validation Pass)", :class => 'control-label'
+      = f.text_field :credit_acct_val_pass, :maxlength => 25
       #msg-error
-        = error_message_for(@ecol_customer, :credit_acct_no, :prepend_text => "")
+        = error_message_for(@ecol_customer, :credit_acct_val_pass, :prepend_text => "")
+    .control-group
+      = f.label :credit_acct_val_fail, "*Credit Account No(Validation Fail)", :class => 'control-label'
+      = f.text_field :credit_acct_val_fail, :maxlength => 25
+      #msg-error
+        = error_message_for(@ecol_customer, :credit_acct_val_fail, :prepend_text => "")
     .control-group
       = f.label :nrtv_sufx_1, "*Narration Suffix 1", :class => 'control-label'
       = f.select :nrtv_sufx_1, options_for_select(EcolCustomer.options_for_nrtv_sufxs, @ecol_customer.nrtv_sufx_1),:prompt => 'SELECT'

@@ -11,7 +11,7 @@ describe EcolCustomer do
   context 'validation' do
     [:code, :name, :is_enabled, :val_method, :token_1_type, :token_1_length, :val_token_1, :token_2_type, :token_2_length, 
       :val_token_2, :token_3_type, :token_3_length, :val_token_3, :val_txn_date, :val_txn_amt, :val_ben_name, :val_rem_acct, 
-      :return_if_val_fails, :credit_acct_no, :nrtv_sufx_1, :nrtv_sufx_2, :nrtv_sufx_3, :rmtr_alert_on].each do |att|
+      :return_if_val_fails, :nrtv_sufx_1, :nrtv_sufx_2, :nrtv_sufx_3, :rmtr_alert_on, :credit_acct_val_pass, :credit_acct_val_fail].each do |att|
       it { should validate_presence_of(att) }
     end 
        
@@ -26,7 +26,8 @@ describe EcolCustomer do
       
       should validate_length_of(:name).is_at_least(5).is_at_most(50)
       
-      should validate_length_of(:credit_acct_no).is_at_least(10).is_at_most(25)
+      should validate_length_of(:credit_acct_val_pass).is_at_least(10).is_at_most(25)
+      should validate_length_of(:credit_acct_val_fail).is_at_least(10).is_at_most(25)
       
       [:rmtr_pass_txt, :rmtr_return_txt].each do |att|
         should validate_length_of(att).is_at_most(500)
@@ -74,7 +75,7 @@ describe EcolCustomer do
   end
   
   context "customer name format" do 
-    it "should allow valid format" do
+    it "should allow valid format" do     
       should allow_value('ABCDCo').for(:name)
       should allow_value('ABCD Co').for(:name)
     end 
@@ -86,14 +87,16 @@ describe EcolCustomer do
   end
   
   context "account no format" do 
-    it "should allow valid format" do
-      should allow_value('1234567890').for(:credit_acct_no)
-    end 
+    [:credit_acct_val_pass, :credit_acct_val_fail].each do |att|
+      it "should allow valid format" do
+        should allow_value('1234567890').for(att)
+      end
 
-    it "should not allow invalid format" do
-      should_not allow_value('Absdjhsd').for(:credit_acct_no)
-      should_not allow_value('@AbcCo').for(:credit_acct_no)
-      should_not allow_value('/ab0QWER').for(:credit_acct_no)
+      it "should not allow invalid format" do
+        should_not allow_value('Absdjhsd').for(att)
+        should_not allow_value('@AbcCo').for(att)
+        should_not allow_value('/ab0QWER').for(att)
+      end
     end 
   end
   
@@ -224,7 +227,7 @@ describe EcolCustomer do
     end
     
     it "should return options for nrtv sufxs" do
-      EcolCustomer.options_for_nrtv_sufxs.should == [['None','N'],['Sub Code','SC'],['Remitter Code','RC'],['Invoice Number','IN'],['Remitter Name','RN'],['Original Remitter Name','ORN'],['Original Remitter Account','ORA']]
+      EcolCustomer.options_for_nrtv_sufxs.should == [['None','N'],['Sub Code','SC'],['Remitter Code','RC'],['Invoice Number','IN'],['Remitter Name','RN'],['Original Remitter Name','ORN'],['Original Remitter Account','ORA'],['UTR','UTR']]
     end
     
     it "should return options for rmtr alert on" do

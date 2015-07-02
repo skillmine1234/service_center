@@ -27,7 +27,8 @@ module EcolCustomersHelper
     ecol_customers = ecol_customers.where("approval_status=?",params[:approval_status]) if params[:approval_status].present?
     ecol_customers = ecol_customers.where("code=?",params[:code]) if params[:code].present?
     ecol_customers = ecol_customers.where("is_enabled=?",params[:is_enabled]) if params[:is_enabled].present?
-    ecol_customers = ecol_customers.where("credit_acct_no=?",params[:credit_acct_no]) if params[:credit_acct_no].present?
+    ecol_customers = ecol_customers.where("credit_acct_val_pass=?",params[:credit_acct_val_pass]) if params[:credit_acct_val_pass].present?
+    ecol_customers = ecol_customers.where("credit_acct_val_fail=?",params[:credit_acct_val_fail]) if params[:credit_acct_val_fail].present?
     ecol_customers
   end
 

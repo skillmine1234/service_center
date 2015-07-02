@@ -32,15 +32,19 @@ describe EcolCustomersHelper do
       
       ecol_customer = Factory(:ecol_customer, :code => "9654", :is_enabled => "N", :approval_status => 'A')
       find_ecol_customers({:is_enabled => "N"}).should == [ecol_customer]
-      find_ecol_customers({:is_enabled => "Y"}).should_not == [ecol_customer]
-      
-      ecol_customer = Factory(:ecol_customer, :code => "9543", :credit_acct_no => "9876543210", :approval_status => 'A')
-      find_ecol_customers({:credit_acct_no => "9876543210"}).should == [ecol_customer]
-      find_ecol_customers({:credit_acct_no => "0123456789"}).should_not == [ecol_customer]  
+      find_ecol_customers({:is_enabled => "Y"}).should_not == [ecol_customer] 
 
       ecol_customer = Factory(:ecol_customer, :code => "9876", :approval_status => 'U')  
       find_ecol_customers({:approval_status => "U"}).should == [ecol_customer]
       find_ecol_customers({}).should_not == [ecol_customer]
+      
+      ecol_customer = Factory(:ecol_customer, :code => "9888", :approval_status => 'A', :credit_acct_val_pass => '7634456786')
+      find_ecol_customers({:credit_acct_val_pass => '7634456786'}).should == [ecol_customer]
+      find_ecol_customers({:credit_acct_val_pass => '0987654321'}).should_not == [ecol_customer] 
+    
+      ecol_customer = Factory(:ecol_customer, :code => "9777", :approval_status => 'A', :credit_acct_val_fail => '7634456786')
+      find_ecol_customers({:credit_acct_val_fail => '7634456786'}).should == [ecol_customer]
+      find_ecol_customers({:credit_acct_val_fail => '8756456789'}).should_not == [ecol_customer] 
     end
   end
 end

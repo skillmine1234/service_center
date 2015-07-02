@@ -6,7 +6,7 @@ class EcolCustomer < ActiveRecord::Base
   
   validates_presence_of :code, :name, :is_enabled, :val_method, :token_1_type, :token_1_length, :val_token_1, :token_2_type,
   :token_2_length, :val_token_2, :token_3_type, :token_3_length, :val_token_3, :val_txn_date, :val_txn_amt, :val_ben_name, :val_rem_acct, 
-  :return_if_val_fails, :credit_acct_no, :nrtv_sufx_1, :nrtv_sufx_2, :nrtv_sufx_3, :rmtr_alert_on
+  :return_if_val_fails, :nrtv_sufx_1, :nrtv_sufx_2, :nrtv_sufx_3, :rmtr_alert_on, :credit_acct_val_pass, :credit_acct_val_fail
   
   validates_uniqueness_of :code, :scope => :approval_status
   
@@ -15,12 +15,12 @@ class EcolCustomer < ActiveRecord::Base
   validates_inclusion_of :val_method, :in => %w( N W D )
   validates_inclusion_of :token_1_type, :token_2_type, :token_3_type, :in => %w( N SC RC IN )
   validates_inclusion_of :file_upld_mthd, :in => %w( F I ), :allow_blank => true
-  validates_inclusion_of :nrtv_sufx_1, :nrtv_sufx_2, :nrtv_sufx_3, :in => %w( N SC RC IN RN ORN ORA )
+  validates_inclusion_of :nrtv_sufx_1, :nrtv_sufx_2, :nrtv_sufx_3, :in => %w( N SC RC IN RN ORN ORA UTR )
   validates_inclusion_of :rmtr_alert_on, :in => %w( N P R A )
   
   validates :code, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}' }, length: {maximum: 15, minimum: 1}
   validates :name, format: {with: /\A[a-z|A-Z|0-9\s]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9\s]}' }, length: {maximum: 50, minimum: 5}
-  validates :credit_acct_no, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9]}' }, length: {maximum: 25, minimum: 10}
+  validates :credit_acct_val_pass, :credit_acct_val_fail, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9]}' }, length: {maximum: 25, minimum: 10}
   validates :rmtr_pass_txt, format: {with: /\A[a-z|A-Z|0-9|\.|\,\s]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\.|\,\s]}' }, length: {maximum: 500, minimum: 1}, :allow_blank => true
   validates :rmtr_return_txt, format: {with: /\A[a-z|A-Z|0-9|\.|\,\s]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\.|\,\s]}' }, length: {maximum: 500, minimum: 1}, :allow_blank => true
   
@@ -116,7 +116,7 @@ class EcolCustomer < ActiveRecord::Base
   end
   
   def self.options_for_nrtv_sufxs
-    [['None','N'],['Sub Code','SC'],['Remitter Code','RC'],['Invoice Number','IN'],['Remitter Name','RN'],['Original Remitter Name','ORN'],['Original Remitter Account','ORA']]
+    [['None','N'],['Sub Code','SC'],['Remitter Code','RC'],['Invoice Number','IN'],['Remitter Name','RN'],['Original Remitter Name','ORN'],['Original Remitter Account','ORA'],['UTR','UTR']]
   end
   
   def self.options_for_rmtr_alert_on
@@ -151,7 +151,7 @@ class EcolCustomer < ActiveRecord::Base
     if ((self.token_1_type != 'N' && self.token_1_length == 0) || 
       (self.token_2_type != 'N' && self.token_2_length == 0) || 
       (self.token_3_type != 'N' && self.token_3_length == 0))
-      errors[:base] << "If Account Token Type is None then the corresponding Token Length should be greater than 0"
+      errors[:base] << "If Account Token Type is not None then the corresponding Token Length should be greater than 0"
     end
   end
    

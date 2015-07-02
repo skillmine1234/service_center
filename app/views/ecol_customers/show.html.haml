@@ -56,6 +56,23 @@
             %td#msg-error
               = error_message_for(@ecol_customer, :token_1_length, :prepend_text => "")
           %tr
+            %td.label Account Token 1 Pattern
+            %td.label Starts With:
+            %td.value
+              = @ecol_customer.token_1_starts_with
+            %td#msg-error
+              = error_message_for(@ecol_customer, :token_1_starts_with, :prepend_text => "")
+            %td.label Contains:
+            %td.value
+              = @ecol_customer.token_1_contains
+            %td#msg-error
+              = error_message_for(@ecol_customer, :token_1_contains, :prepend_text => "")
+            %td.label Ends With:
+            %td.value
+              = @ecol_customer.token_1_ends_with
+            %td#msg-error
+              = error_message_for(@ecol_customer, :token_1_ends_with, :prepend_text => "")
+          %tr
             %td.label Validate Account Token 1
             %td.value
               = @ecol_customer.val_token_1
@@ -73,6 +90,23 @@
               = @ecol_customer.token_2_length
             %td#msg-error
               = error_message_for(@ecol_customer, :token_2_length, :prepend_text => "")
+          %tr
+            %td.label Account Token 2 Pattern
+            %td.label Starts With:
+            %td.value
+              = @ecol_customer.token_2_starts_with
+            %td#msg-error
+              = error_message_for(@ecol_customer, :token_2_starts_with, :prepend_text => "")
+            %td.label Contains:
+            %td.value
+              = @ecol_customer.token_2_contains
+            %td#msg-error
+              = error_message_for(@ecol_customer, :token_2_contains, :prepend_text => "")
+            %td.label Ends With:
+            %td.value
+              = @ecol_customer.token_2_ends_with
+            %td#msg-error
+              = error_message_for(@ecol_customer, :token_2_ends_with, :prepend_text => "")
           %tr
             %td.label Validate Account Token 2
             %td.value
@@ -92,7 +126,30 @@
             %td#msg-error
               = error_message_for(@ecol_customer, :token_3_length, :prepend_text => "")
           %tr
+            %td.label Account Token 3 Pattern
+            %td.label Starts With:
+            %td.value
+              = @ecol_customer.token_3_starts_with
+            %td#msg-error
+              = error_message_for(@ecol_customer, :token_3_starts_with, :prepend_text => "")
+            %td.label Contains:
+            %td.value
+              = @ecol_customer.token_3_contains
+            %td#msg-error
+              = error_message_for(@ecol_customer, :token_3_contains, :prepend_text => "")
+            %td.label Ends With:
+            %td.value
+              = @ecol_customer.token_3_ends_with
+            %td#msg-error
+              = error_message_for(@ecol_customer, :token_3_ends_with, :prepend_text => "")
+          %tr
             %td.label Validate Account Token 3
+            %td.value
+              = @ecol_customer.val_token_3
+            %td#msg-error
+              = error_message_for(@ecol_customer, :val_token_3, :prepend_text => "")
+          %tr
+            %td.label Validate Last Token Length
             %td.value
               = @ecol_customer.val_token_3
             %td#msg-error
@@ -116,6 +173,12 @@
             %td#msg-error
               = error_message_for(@ecol_customer, :val_ben_name, :prepend_text => "")
           %tr
+            %td.label Validate Remitter Name
+            %td.value
+              = @ecol_customer.val_rmtr_name
+            %td#msg-error
+              = error_message_for(@ecol_customer, :val_rmtr_name, :prepend_text => "")
+          %tr
             %td.label Validate Remitter Account
             %td.value
               = @ecol_customer.val_rem_acct
@@ -134,11 +197,17 @@
             %td#msg-error
               = error_message_for(@ecol_customer, :file_upld_mthd, :prepend_text => "")
           %tr
-            %td.label Default Credit Account No
+            %td.label Credit Account No (Validation Pass)
             %td.value
-              = @ecol_customer.credit_acct_no
+              = @ecol_customer.credit_acct_val_pass
             %td#msg-error
-              = error_message_for(@ecol_customer, :credit_acct_no, :prepend_text => "")
+              = error_message_for(@ecol_customer, :credit_acct_val_pass, :prepend_text => "")
+          %tr
+            %td.label Credit Account No (Validation Pass)
+            %td.value
+              = @ecol_customer.credit_acct_val_fail
+            %td#msg-error
+              = error_message_for(@ecol_customer, :credit_acct_val_fail, :prepend_text => "")
           %tr
             %td.label LookUp File Upload Treatment
             %td.value
