@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/rsim/oracle-enhanced.git
-  revision: 912adbb7a2cc5a7e12e1f2a97b9d8e5a20d9a8ca
+  revision: da33a2c1719d04033f93a5efeac106ec22aece92
   specs:
-    activerecord-oracle_enhanced-adapter (1.6.0)
+    activerecord-oracle_enhanced-adapter (1.6.1)
 
 GIT
   remote: git://github.com/stefanpenner/country_select.git
@@ -255,7 +255,7 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.9.3)
-    libv8 (3.16.14.9)
+    libv8 (3.16.14.11)
     loofah (2.0.2)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
