@@ -44,6 +44,18 @@
             %td#msg-error
               = error_message_for(@ecol_rule, :stl_gl_return, :prepend_text => "")
           %tr
+            %td.label NEFT Sender IFSC
+            %td.value
+              = @ecol_rule.neft_sender_ifsc
+            %td#msg-error
+              = error_message_for(@ecol_rule, :neft_sender_ifsc, :prepend_text => "")
+          %tr
+            %td.label CBS User ID
+            %td.value
+              = @ecol_rule.cbs_userid
+            %td#msg-error
+              = error_message_for(@ecol_rule, :cbs_userid, :prepend_text => "")
+          %tr
             %td.label Updated By
             %td.value
               = @ecol_rule.updated_user.try(:username)

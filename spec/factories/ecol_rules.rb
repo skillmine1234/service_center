@@ -8,5 +8,7 @@ FactoryGirl.define do
     stl_gl_return "1234567890"
     approval_status 'U'
     last_action 'C'
+    neft_sender_ifsc 'ASDF0123456'
+    cbs_userid 'KFCJSDH'
   end
 end

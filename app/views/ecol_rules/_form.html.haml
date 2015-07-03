@@ -27,6 +27,16 @@
       = f.text_field :stl_gl_return, :maxlength => 15
       #msg-error
         = error_message_for(@ecol_rule, :stl_gl_return, :prepend_text => "")
+    .control-group
+      = f.label :neft_sender_ifsc, "*NEFT Sender IFSC", :class => 'control-label'
+      = f.text_field :neft_sender_ifsc, :maxlength => 11
+      #msg-error
+        = error_message_for(@ecol_rule, :neft_sender_ifsc, :prepend_text => "")
+    .control-group
+      = f.label :cbs_userid, "*CBS User ID", :class => 'control-label'
+      = f.text_field :cbs_userid, :maxlength => 50
+      #msg-error
+        = error_message_for(@ecol_rule, :cbs_userid, :prepend_text => "")
 
   .form-actions
     = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_rule', :value => "Update Rule"

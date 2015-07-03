@@ -15,6 +15,10 @@
       Settlement GL (Inward)
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Settlement GL (Return)
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      NEFT Sender IFSC
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      CBS User ID
   .tbody
     - @ecol_rules.each do |ecol_rule|
       %tr
@@ -27,6 +31,6 @@
         %td{:style=>'text-align:left;'}
           = ecol_rule.cod_acct_no
         %td{:style=>'text-align:left;'}
-          = ecol_rule.stl_gl_inward
+          = ecol_rule.neft_sender_ifsc
         %td{:style=>'text-align:left;'}
-          = ecol_rule.stl_gl_return
+          = ecol_rule.cbs_userid
