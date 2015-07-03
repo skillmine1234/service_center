@@ -41,10 +41,10 @@
         %td{:style=>'text-align:left;'}
           = link_to 'Show Summary', :controller => "incoming_files", :action => "show", :id => incoming_file.id
         %td{:style=>'text-align:left;'}
-          - if incoming_file.status == "N"
+          - if incoming_file.approval_status == "U"
             = link_to 'Destroy', incoming_file, :method => :delete, :data => { :confirm => 'Are you sure?' }
           - else
-            .span{:class =>"has-tooltip", "data-toggle" => 'tooltip',"title" => "Job has been processed, it is not allowed to delete this record", "data-placement" => 'bottom', "data-html" => true}
+            .span{:class =>"has-tooltip", "data-toggle" => 'tooltip',"title" => "Incoming File has been approved, it is not allowed to delete this record", "data-placement" => 'bottom', "data-html" => true}
               Destroy
         %td{:style=>'text-align:left;'}
           = incoming_file.sc_service.try(:name) || incoming_file.service_name

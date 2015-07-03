@@ -1,5 +1,5 @@
 class IncomingFile < ActiveRecord::Base  
-  audited
+  include Approval
 
   SIZE_LIMIT = 50.megabytes.to_i
   validate :validate_file_name 

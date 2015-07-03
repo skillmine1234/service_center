@@ -12,5 +12,7 @@ FactoryGirl.define do
     status "N"
     started_at "2015-06-15"
     ended_at "2015-06-15"
+    approval_status 'U'
+    last_action 'C'
   end
 end

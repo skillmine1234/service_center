@@ -26,18 +26,18 @@ class IncomingFilesController < ApplicationController
     if params[:advanced_search].present?
       incoming_files = find_incoming_files(params).order("id desc")
     else
-      incoming_files = IncomingFile.order("id desc")
+      incoming_files = (params[:approval_status].present? and params[:approval_status] == 'U') ? IncomingFile.unscoped.where("approval_status =?",'U').order("id desc") : IncomingFile.order("id desc")
     end
     @files_count = incoming_files.count
     @incoming_files = incoming_files.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
 
   def show
-    @incoming_file = IncomingFile.find_by_id(params[:id])
+    @incoming_file = IncomingFile.unscoped.find_by_id(params[:id])
   end
 
   def destroy
-    @incoming_file = IncomingFile.find_by_id(params[:id])
+    @incoming_file = IncomingFile.unscoped.find_by_id(params[:id])
     if @incoming_file.status == "N"
       if @incoming_file.destroy
         FileUtils.rm_f @incoming_file.file.path
@@ -46,6 +46,22 @@ class IncomingFilesController < ApplicationController
       flash[:alert] = "delete is disabled since the file has already been proccessed"
     end
     redirect_to incoming_files_path
+  end
+
+  def approve
+    @incoming_file = IncomingFile.unscoped.find(params[:id]) rescue nil 
+    IncomingFile.transaction do
+      approval = @incoming_file.approve
+      if @incoming_file.save! and approval.empty?
+        sf = CarrierWave::SanitizedFile.new @incoming_file.file
+        sf.move_to(Rails.root.join(ENV['CONFIG_APPROVED_FILE_UPLOAD_PATH'],@incoming_file.file_name))
+        flash[:alert] = "Incoming File record was approved successfully"
+      else
+        flash[:alert] = @incoming_file.errors.full_messages << approval
+        raise ActiveRecord::Rollback
+      end
+    end
+    redirect_to @incoming_file
   end
 
   def incoming_file_params

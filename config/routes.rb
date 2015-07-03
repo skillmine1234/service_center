@@ -50,6 +50,7 @@ ServiceCenter::Application.routes.draw do
   put '/udf_attribute/:id/approve' => "udf_attributes#approve"
   put '/ecol_remitter/:id/approve' => "ecol_remitters#approve"
   put '/ecol_rule/:id/approve' => "ecol_rules#approve"
+  put '/incoming_file/:id/approve' => "incoming_files#approve"
 
   root :to => 'dashboard#overview'
 

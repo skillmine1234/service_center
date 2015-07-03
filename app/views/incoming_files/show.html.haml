@@ -6,6 +6,8 @@
 %h1 
   = @incoming_file.file_name
 %br
+%p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
+  = render 'ecol_customers/approve', :@record => @incoming_file
 %table.table.table-bordered.table-striped.table-hover.align_center
   %thead
     %tr

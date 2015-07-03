@@ -41,7 +41,7 @@ describe IncomingFile do
     end
 
     it "should not allow same file to be uploaded again" do 
-      file = Factory(:incoming_file, :file_name => nil)
+      file = Factory(:incoming_file, :file_name => nil,:approval_status => 'A')
       file2 = Factory.build(:incoming_file, :file_name => nil)
       file2.save.should be_false
       file2.errors.messages.should == { :file => ["'#{file.file.file.original_filename}' already exists"] }
@@ -74,6 +74,67 @@ describe IncomingFile do
     it "should equal to the difference between ended_at and started_at" do 
       incoming_file = Factory(:incoming_file, :started_at => Time.zone.now, :ended_at => Time.zone.now.advance(:minutes => 3))
       incoming_file.upload_time.should == (incoming_file.ended_at - incoming_file.started_at).round(2)
+    end
+  end
+
+  context "default_scope" do 
+    it "should only return 'A' records by default" do 
+      incoming_file1 = Factory(:incoming_file, :approval_status => 'A') 
+      incoming_file2 = Factory(:incoming_file)
+      IncomingFile.all.should == [incoming_file1]
+      incoming_file2.approval_status = 'A'
+      incoming_file2.save
+      IncomingFile.all.should == [incoming_file1,incoming_file2]
+    end
+  end    
+
+  context "create_ecol_unapproved_records" do 
+    it "should create ecol_unapproved_record if the approval_status is 'U' and there is no previous record" do
+      incoming_file = Factory(:incoming_file)
+      incoming_file.reload
+      incoming_file.ecol_unapproved_record.should_not be_nil
+    end
+
+    it "should not create ecol_unapproved_record if the approval_status is 'A'" do
+      incoming_file = Factory(:incoming_file, :approval_status => 'A')
+      incoming_file.ecol_unapproved_record.should be_nil
+    end
+  end  
+
+  context "remove_ecol_unapproved_records" do 
+    it "should remove ecol_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
+      incoming_file = Factory(:incoming_file)
+      incoming_file.reload
+      incoming_file.ecol_unapproved_record.should_not be_nil
+      record = incoming_file.ecol_unapproved_record
+      incoming_file.approval_status = 'A'
+      incoming_file.save
+      incoming_file.remove_ecol_unapproved_records
+      incoming_file.reload
+      incoming_file.ecol_unapproved_record.should be_nil
+    end
+  end  
+
+  context "approve" do 
+    it "should approve unapproved_record" do 
+      incoming_file = Factory(:incoming_file, :approval_status => 'U')
+      incoming_file.approve.should == ""
+      incoming_file.approval_status.should == 'A'
+    end
+
+    it "should return error when trying to approve unmatched version" do 
+      incoming_file = Factory(:incoming_file, :approval_status => 'A')
+      incoming_file2 = Factory(:incoming_file, :approval_status => 'U', :approved_id => incoming_file.id, :approved_version => 6)
+      incoming_file2.approve.should == "The record version is different from that of the approved version" 
+    end
+  end
+
+  context "enable_approve_button?" do 
+    it "should return true if approval_status is 'U' else false" do 
+      incoming_file1 = Factory(:incoming_file, :approval_status => 'A')
+      incoming_file2 = Factory(:incoming_file, :approval_status => 'U')
+      incoming_file1.enable_approve_button?.should == false
+      incoming_file2.enable_approve_button?.should == true
     end
   end
 end

@@ -5,6 +5,9 @@
 = simple_form_for @incoming_file, :html => {:class=>'form-horizontal', :autocomplete=>"off", :id => "upload_form"} do |f|
   .form-main
     .control-group
+      = f.hidden_field :lock_version
+      = f.hidden_field :approved_id
+      = f.hidden_field :approved_version
       = f.label :service_name,nil,:class => 'control-label'
       = f.select :service_name, ScService.all.map {|u| [u.name, u.code]}, :include_blank => 'select'
     .control-group
