@@ -10,7 +10,7 @@ describe EcolRule do
   end
   
   context 'validation' do
-    [:ifsc, :cod_acct_no, :stl_gl_inward, :stl_gl_return].each do |att|
+    [:ifsc, :cod_acct_no, :stl_gl_inward, :stl_gl_return, :neft_sender_ifsc, :cbs_userid].each do |att|
       it { should validate_presence_of(att) }
     end
     
