@@ -66,7 +66,7 @@
         = error_message_for(@purpose_code, :rbi_code, :prepend_text => "")
     .control-group
       = f.label :pattern_beneficiaries, "Required Names In Beneficiaries", :class => 'control-label'
-      = f.text_area :pattern_beneficiaries, :style => 'height:150px', :placeholder => "Enter the keywords one below the other", :value => h(f.object.formated_pattern_beneficiaries)
+      = f.text_area :pattern_beneficiaries, :style => 'height:150px', :placeholder => "Enter the keywords one below the other", :value => sanitize(f.object.formated_pattern_beneficiaries)
       #msg-error
         = error_message_for(@purpose_code, :pattern_beneficiaries, :prepend_text => "")
   .form-actions
