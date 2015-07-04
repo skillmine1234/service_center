@@ -6,4 +6,9 @@ module IncomingFileHelper
     incoming_files = incoming_files.where("lower(file_name) LIKE ?","%#{params[:file_name].downcase}%") if params[:file_name].present?
     incoming_files
   end
+
+  def move_incoming_file(incoming_file)
+    sf = CarrierWave::SanitizedFile.new incoming_file.file
+    sf.move_to(Rails.root.join(ENV['CONFIG_APPROVED_FILE_UPLOAD_PATH'],incoming_file.file_name))
+  end
 end

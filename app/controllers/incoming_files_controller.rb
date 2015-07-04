@@ -53,8 +53,7 @@ class IncomingFilesController < ApplicationController
     IncomingFile.transaction do
       approval = @incoming_file.approve
       if @incoming_file.save! and approval.empty?
-        sf = CarrierWave::SanitizedFile.new @incoming_file.file
-        sf.move_to(Rails.root.join(ENV['CONFIG_APPROVED_FILE_UPLOAD_PATH'],@incoming_file.file_name))
+        move_incoming_file(@incoming_file)
         flash[:alert] = "Incoming File record was approved successfully"
       else
         flash[:alert] = @incoming_file.errors.full_messages << approval
