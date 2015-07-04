@@ -14,7 +14,7 @@
         = error_message_for(@ecol_customer, :code, :prepend_text => "")
     .control-group
       = f.label :name, "*Customer Name", :class => 'control-label'
-      = f.text_field :name, :maxlength => 50, :style => "width: 500px;"
+      = f.text_field :name, :maxlength => 50, :style => "width: 400px;"
       #msg-error
         = error_message_for(@ecol_customer, :name, :prepend_text => "")
     .control-group
@@ -121,6 +121,7 @@
       = f.check_box :val_token_3, {},"Y","N"
       #msg-error
         = error_message_for(@ecol_customer, :val_token_3, :prepend_text => "")
+  .form-extended
     .control-group
       = f.label :val_last_token_length, "Validate Last Token Length", :class => 'control-label'
       = f.check_box :val_last_token_length, {},"Y","N"
@@ -142,15 +143,15 @@
       #msg-error
         = error_message_for(@ecol_customer, :val_rem_acct, :prepend_text => "")
     .control-group
-      = f.label :val_ben_name, "Validate Beneficiary Name", :class => 'control-label'
-      = f.check_box :val_ben_name, {},"Y","N"
-      #msg-error
-        = error_message_for(@ecol_customer, :val_ben_name, :prepend_text => "")
-    .control-group
       = f.label :val_rmtr_name, "Validate Remitter Name", :class => 'control-label'
       = f.check_box :val_rmtr_name, {},"Y","N"
       #msg-error
         = error_message_for(@ecol_customer, :val_rmtr_name, :prepend_text => "")
+    .control-group
+      = f.label :val_ben_name, "Validate Beneficiary Name", :class => 'control-label'
+      = f.check_box :val_ben_name, {},"Y","N"
+      #msg-error
+        = error_message_for(@ecol_customer, :val_ben_name, :prepend_text => "")
     .control-group
       = f.label :return_if_val_fails, "Return If Validation Fails", :class => 'control-label'
       = f.check_box :return_if_val_fails, {},"Y","N"

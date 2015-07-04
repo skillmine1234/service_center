@@ -149,7 +149,7 @@ describe EcolCustomer do
     it "should check if file_upld_mthd is present if val_method is D" do
       ecol_customer = Factory.build(:ecol_customer, :val_method => "D", :file_upld_mthd => nil)
       ecol_customer.save.should == false
-      ecol_customer.errors_on(:file_upld_mthd).should == ["Can't be blank if Validation Method is Database Lookup"]
+      ecol_customer.errors_on(:file_upld_mthd).should == ["Can't be blank or None if Validation Method is Database Lookup"]
 
       ecol_customer = Factory.build(:ecol_customer, :val_method => "N", :file_upld_mthd => "F")
       ecol_customer.save.should == false
@@ -223,7 +223,7 @@ describe EcolCustomer do
     end
     
     it "should return options for file upld mthd" do
-      EcolCustomer.options_for_file_upld_mthd.should == [['Full', 'F'],['Incremental','I']]
+      EcolCustomer.options_for_file_upld_mthd.should == [['None','N'],['Full', 'F'],['Incremental','I']]
     end
     
     it "should return options for nrtv sufxs" do
@@ -343,6 +343,15 @@ describe EcolCustomer do
       ecol_customer2 = Factory(:ecol_customer, :approval_status => 'U')
       ecol_customer1.enable_approve_button?.should == false
       ecol_customer2.enable_approve_button?.should == true
+    end
+  end
+  
+  context "value_of_validation_fields" do
+    it "should validate value of validate fields" do
+      ecol_customer = Factory.build(:ecol_customer, :approval_status => 'A', :val_token_1 => 'N', :val_token_2 => 'N', :val_token_3 => 'N', 
+      :val_txn_date => 'Y', :val_txn_amt => 'Y', :val_rem_acct => 'Y')
+      ecol_customer.save.should == false
+      ecol_customer.errors[:base].should == ["Transaction Date, Transaction Amount and Remitter Account cannot be validated as no Token is validated"]
     end
   end
 end

@@ -1,5 +1,7 @@
 class EcolCustomer < ActiveRecord::Base  
   include Approval
+  
+  before_save :set_validation_fields_to_N
 
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
@@ -14,7 +16,7 @@ class EcolCustomer < ActiveRecord::Base
   
   validates_inclusion_of :val_method, :in => %w( N W D )
   validates_inclusion_of :token_1_type, :token_2_type, :token_3_type, :in => %w( N SC RC IN )
-  validates_inclusion_of :file_upld_mthd, :in => %w( F I ), :allow_blank => true
+  validates_inclusion_of :file_upld_mthd, :in => %w( N F I ), :allow_blank => true
   validates_inclusion_of :nrtv_sufx_1, :nrtv_sufx_2, :nrtv_sufx_3, :in => %w( N SC RC IN RN ORN ORA UTR )
   validates_inclusion_of :rmtr_alert_on, :in => %w( N P R A )
   
@@ -35,7 +37,8 @@ class EcolCustomer < ActiveRecord::Base
   :nrtv_sufx_2_and_3_should_be_N_if_nrtv_sufx_1_is_N,
   :nrtv_sufx_3_should_be_N_if_nrtv_sufx_2_is_N,
   :customer_code_format, 
-  :validate_account_token_length
+  :validate_account_token_length,
+  :value_of_validation_fields
 
   def val_tokens_should_be_N_if_val_method_is_N
     if (self.val_method == "N" && (self.val_token_1 != "N" || self.val_token_2 != "N" || self.val_token_3 != "N" || self.val_txn_date != "N" || self.val_txn_amt != "N")) 
@@ -44,9 +47,9 @@ class EcolCustomer < ActiveRecord::Base
   end
   
   def file_upld_mthd_is_mandatory_if_val_method_is_D
-    if (self.val_method == "D" && self.file_upld_mthd.blank?)
-      errors.add(:file_upld_mthd, "Can't be blank if Validation Method is Database Lookup")
-    elsif (self.val_method != "D" && !(self.file_upld_mthd.blank?))
+    if (self.val_method == "D" && (self.file_upld_mthd.blank? || self.file_upld_mthd == 'N'))
+      errors.add(:file_upld_mthd, "Can't be blank or None if Validation Method is Database Lookup")
+    elsif (self.val_method != "D" && (self.file_upld_mthd != 'N' && !self.file_upld_mthd.blank?))
       errors.add(:file_upld_mthd, "Can't be selected as Validation Method is not Database Lookup")
     end
   end
@@ -112,7 +115,7 @@ class EcolCustomer < ActiveRecord::Base
   end
   
   def self.options_for_file_upld_mthd
-    [['Full', 'F'],['Incremental','I']]
+    [['None','N'],['Full', 'F'],['Incremental','I']]
   end
   
   def self.options_for_nrtv_sufxs
@@ -152,6 +155,27 @@ class EcolCustomer < ActiveRecord::Base
       (self.token_2_type != 'N' && self.token_2_length == 0) || 
       (self.token_3_type != 'N' && self.token_3_length == 0))
       errors[:base] << "If Account Token Type is not None then the corresponding Token Length should be greater than 0"
+    end
+  end
+  
+  def value_of_validation_fields
+    if (self.val_token_1 == 'N' && self.val_token_2 == 'N' && self.val_token_3 == 'N' &&
+       (self.val_txn_date != 'N' || self.val_txn_amt != 'N' || self.val_rem_acct != 'N'))
+      errors[:base] << "Transaction Date, Transaction Amount and Remitter Account cannot be validated as no Token is validated"
+    end
+  end
+  
+  def set_validation_fields_to_N
+    if self.val_method == 'N'
+      self.val_token_1 = 'N'
+      self.val_token_2 = 'N'
+      self.val_token_3 = 'N'
+      self.val_txn_date = 'N'
+      self.val_txn_amt = 'N'
+      self.val_ben_name = 'N'
+      self.val_rem_acct = 'N'
+      self.return_if_val_fails = 'N'
+      self.file_upld_mthd = 'N'
     end
   end
    
