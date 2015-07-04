@@ -2,7 +2,7 @@ $(document).ready(function(){
   
   $("#ecol_customer_val_method").on("change",function(){
     var val_method =  $(this).val();
-    if (val_method == 'N'){
+    if (val_method === 'N'){
       $('#ecol_customer_val_token_1').val('N');
       $('#ecol_customer_val_token_1').prop('disabled',true);
       $('#ecol_customer_val_token_2').val('N');
@@ -26,7 +26,7 @@ $(document).ready(function(){
       $("#ecol_customer_file_upld_mthd").val('N');
       $('#ecol_customer_file_upld_mthd').prop('disabled',true);
     }
-    else if (val_method == 'W'){
+    else if (val_method === 'W'){
       $('#ecol_customer_file_upld_mthd').val('N');
       $("#ecol_customer_file_upld_mthd").prop('disabled',true);
       $('#ecol_customer_val_txn_date').prop('disabled',false);
@@ -51,7 +51,7 @@ $(document).ready(function(){
   });
   
   
-  if ($('#ecol_customer_val_method').val() == 'N'){
+  if ($('#ecol_customer_val_method').val() === 'N'){
     $('#ecol_customer_val_token_1').val('N');
     $('#ecol_customer_val_token_1').prop('disabled',true);
     $('#ecol_customer_val_token_2').val('N');
@@ -75,7 +75,7 @@ $(document).ready(function(){
     $("#ecol_customer_file_upld_mthd").val('N');
     $('#ecol_customer_file_upld_mthd').prop('disabled',true);
   }
-  else if ($('#ecol_customer_val_method').val() == 'W'){
+  else if ($('#ecol_customer_val_method').val() === 'W'){
     $('#ecol_customer_file_upld_mthd').val('N');
     $("#ecol_customer_file_upld_mthd").prop('disabled',true);
     $('#ecol_customer_val_txn_date').prop('disabled',false);
@@ -99,7 +99,7 @@ $(document).ready(function(){
   
   $("#ecol_customer_token_1_type").on("change",function(){
     var token_1_type =  $(this).val();
-    if (token_1_type == 'N'){
+    if (token_1_type === 'N'){
       $('#ecol_customer_val_token_1').val('N');
       $('#ecol_customer_val_token_1').prop('disabled',true);
       $('#ecol_customer_token_1_length').val(0);
@@ -120,7 +120,7 @@ $(document).ready(function(){
     }
   });
   
-  if ($('#ecol_customer_token_1_type').val() == 'N'){
+  if ($('#ecol_customer_token_1_type').val() === 'N'){
     $('#ecol_customer_val_token_1').val('N');
     $('#ecol_customer_val_token_1').prop('disabled',true);
     $('#ecol_customer_token_1_length').val(0);
@@ -142,7 +142,7 @@ $(document).ready(function(){
   
   $("#ecol_customer_token_2_type").on("change",function(){
     var token_2_type =  $(this).val();
-    if (token_2_type == 'N'){
+    if (token_2_type === 'N'){
       $('#ecol_customer_val_token_2').val('N');
       $('#ecol_customer_val_token_2').prop('disabled',true);
       $('#ecol_customer_token_2_length').val(0);
@@ -163,7 +163,7 @@ $(document).ready(function(){
     }
   });
   
-  if ($('#ecol_customer_token_2_type').val() == 'N'){
+  if ($('#ecol_customer_token_2_type').val() === 'N'){
     $('#ecol_customer_val_token_2').val('N');
     $('#ecol_customer_val_token_2').prop('disabled',true);
     $('#ecol_customer_token_2_length').val(0);
@@ -185,7 +185,7 @@ $(document).ready(function(){
   
   $("#ecol_customer_token_3_type").on("change",function(){
     var token_3_type =  $(this).val();
-    if (token_3_type == 'N'){
+    if (token_3_type === 'N'){
       $('#ecol_customer_val_token_3').val('N');
       $('#ecol_customer_val_token_3').prop('disabled',true);
       $('#ecol_customer_token_3_length').val(0);
@@ -207,7 +207,7 @@ $(document).ready(function(){
     }
   });
   
-  if ($('#ecol_customer_token_3_type').val() == 'N'){
+  if ($('#ecol_customer_token_3_type').val() === 'N'){
     $('#ecol_customer_val_token_3').val('N');
     $('#ecol_customer_val_token_3').prop('disabled',true);
     $('#ecol_customer_token_3_length').val(0);
