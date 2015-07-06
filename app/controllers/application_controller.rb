@@ -23,6 +23,12 @@ class ApplicationController < ActionController::Base
     response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
   end
 
+  def sign_out(*args)
+    current_user.update_attribute(:current_sign_in_token, "") unless current_user.nil?
+    current_admin_user.update_attribute(:current_sign_in_token, "") unless current_admin_user.nil?   
+    super
+  end
+
   def block_inactive_user!
     if current_user.unregistered?
       redirect_to "/inactive.html"
