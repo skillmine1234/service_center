@@ -6,83 +6,26 @@ describe InwRemittanceRule do
     it { should belong_to(:updated_user) }
   end
 
-  context "format_fields" do 
-    it "should format the fields" do 
-      rule = Factory(:inw_remittance_rule, :pattern_individuals => "1\r\n2", :pattern_corporates => "12\r\n5", :pattern_beneficiaries => "1\r\n2\r\n3")
-      rule.format_fields
-      rule.pattern_individuals.should == "1,2"
-      rule.pattern_corporates.should == "12,5"
-      rule.pattern_beneficiaries.should == "1,2,3"
-    end
-  end
-
-  context "formated_pattern_individuals" do 
-    it "should format pattern_individuals" do 
-      rule = Factory.build(:inw_remittance_rule, :pattern_individuals => "1,2")
-      rule.formated_pattern_individuals.should == "1\r\n2"
-    end
-  end
-
-  context "formated_pattern_corporates" do 
-    it "should format pattern_corporates" do 
-      rule = Factory.build(:inw_remittance_rule, :pattern_corporates => "1,2")
-      rule.formated_pattern_corporates.should == "1\r\n2"
-    end
-  end
-
-  context "formated_pattern_beneficiaries" do 
-    it "should format pattern_beneficiaries" do 
-      rule = Factory.build(:inw_remittance_rule, :pattern_beneficiaries => "1,2")
-      rule.formated_pattern_beneficiaries.should == "1\r\n2"
-    end
-  end
-
-  context "formated_pattern_salutations" do 
-    it "should format formated_pattern_salutations" do 
-      rule = Factory.build(:inw_remittance_rule, :pattern_salutations => "1,2")
-      rule.formated_pattern_salutations.should == "1\r\n2"
-    end
-  end
-
   context "validate_keywords" do 
     it "should validate keywords" do 
-      rule = Factory.build(:inw_remittance_rule, :pattern_individuals => "1234,ese$sdgs", :pattern_corporates => "1234@,esesdgs", :pattern_beneficiaries => "1234,ese@sdgs", :pattern_remitters => "1234,ese$sdgs", :pattern_salutations => "1234@,esesdgs")
+      rule = Factory.build(:inw_remittance_rule, :pattern_individuals => "1234 ese$sdgs", :pattern_corporates => "1234@,esesdgs", :pattern_beneficiaries => "1234 ese@sdgs", :pattern_remitters => "1234 ese$sdgs", :pattern_salutations => "1234@ esesdgs")
       rule.should_not be_valid
-      rule.errors_on("pattern_individuals").should == ["are invalid due to ese$sdgs"]
-      rule.errors_on("pattern_corporates").should == ["are invalid due to 1234@"]
-      rule.errors_on("pattern_beneficiaries").should == ["are invalid due to ese@sdgs"]
-      rule.errors_on("pattern_remitters").should == ["are invalid due to ese$sdgs"]
-      rule.errors_on("pattern_salutations").should == ["are invalid due to 1234@"]
-      rule = Factory.build(:inw_remittance_rule, :pattern_individuals => "1234,esesdgs", :pattern_corporates => "1234,esesdgs", :pattern_beneficiaries => "1234,esesdgs", :pattern_remitters => "1234,esesdgs", :pattern_salutations => "1234,esesdgs")
+      rule.errors_on("pattern_individuals").should == ["is invalid"]
+      rule.errors_on("pattern_corporates").should == ["is invalid"]
+      rule.errors_on("pattern_beneficiaries").should == ["is invalid"]
+      rule.errors_on("pattern_remitters").should == ["is invalid"]
+      rule.errors_on("pattern_salutations").should == ["is invalid"]
+      rule = Factory.build(:inw_remittance_rule, :pattern_individuals => "1234 esesdgs", :pattern_corporates => "1234 esesdgs", :pattern_beneficiaries => "1234 esesdgs", :pattern_remitters => "1234 esesdgs", :pattern_salutations => "1234 esesdgs")
       rule.should be_valid
-      rule = Factory.build(:inw_remittance_rule, :pattern_individuals => "1234,ese sdgs", :pattern_corporates => "1234,ese-sdgs", :pattern_beneficiaries => "1234,(esesdgs)", :pattern_remitters => "1234,ese-sdgs", :pattern_salutations => "1234,e-(ses) dgs")
+      rule = Factory.build(:inw_remittance_rule, :pattern_individuals => "1234 ese sdgs", :pattern_corporates => "1234 ese-sdgs", :pattern_beneficiaries => "1234 (esesdgs)", :pattern_remitters => "1234 ese-sdgs", :pattern_salutations => "1234 e-(ses) dgs")
       rule.should be_valid
-      rule = Factory.build(:inw_remittance_rule, :pattern_individuals => " ", :pattern_corporates => " ", :pattern_beneficiaries => " ", :pattern_remitters => " , ", :pattern_salutations => " , , ")
-      rule.should_not be_valid
-      rule.errors_on("pattern_individuals").should == ["are invalid due to empty values"]
-      rule.errors_on("pattern_corporates").should == ["are invalid due to empty values"]
-      rule.errors_on("pattern_beneficiaries").should == ["are invalid due to empty values"]
-      rule.errors_on("pattern_remitters").should == ["are invalid due to empty values"]
-      rule.errors_on("pattern_salutations").should == ["are invalid due to empty values"]
-    end
-  end
-  
-  context "formated_pattern_remitters" do 
-    it "should format formated_pattern_remitters" do 
-      rule = Factory.build(:inw_remittance_rule, :pattern_remitters => "1,2")
-      rule.formated_pattern_remitters.should == "1\r\n2"
-    end
-  end
-  
-  context "format_fields" do
-    it "should format format_fields" do
-      rule = Factory.build(:inw_remittance_rule, :pattern_individuals => "1\r\n2", :pattern_corporates => "1\r\n2", :pattern_beneficiaries => "1\r\n2", :pattern_remitters => "1\r\n2", :pattern_salutations => "1\r\n2")
-      rule.format_fields
-      rule.pattern_individuals.should == "1,2"
-      rule.pattern_corporates.should == "1,2"
-      rule.pattern_beneficiaries.should == "1,2"
-      rule.pattern_remitters.should == "1,2"
-      rule.pattern_salutations.should == "1,2"
+      rule = Factory.build(:inw_remittance_rule, :pattern_individuals => "  ", :pattern_corporates => " ", :pattern_beneficiaries => " ", :pattern_remitters => "  ", :pattern_salutations => "   ")
+      rule.should be_valid
+      rule.pattern_individuals.should == ""
+      rule.pattern_corporates.should == ""
+      rule.pattern_beneficiaries.should == ""
+      rule.pattern_remitters.should == ""
+      rule.pattern_salutations.should == ""
     end
   end
 end

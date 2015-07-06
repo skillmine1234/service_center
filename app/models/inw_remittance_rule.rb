@@ -2,53 +2,19 @@ class InwRemittanceRule < ActiveRecord::Base
   audited
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
-  before_validation :format_fields
-  validate :validate_keywords
+  validates_format_of :pattern_beneficiaries, :with => /\A\w[\w\-\(\)\s\r\n]*\z/, :allow_blank => true
+  validates_format_of :pattern_corporates, :with => /\A\w[\w\-\(\)\s\r\n]*\z/, :allow_blank => true
+  validates_format_of :pattern_individuals, :with => /\A\w[\w\-\(\)\s\r\n]*\z/, :allow_blank => true
+  validates_format_of :pattern_remitters, :with => /\A\w[\w\-\(\)\s\r\n]*\z/, :allow_blank => true
+  validates_format_of :pattern_salutations, :with => /\A\w[\w\-\(\)\s\r\n]*\z/, :allow_blank => true
 
-  def validate_keywords
-    ["pattern_individuals","pattern_corporates", "pattern_beneficiaries","pattern_remitters","pattern_salutations"].each do |values|
-      invalid_values = []
-      invalid_spaces = []
-      value = self.send(values)
-      unless value.nil?
-        invalid_spaces << true if !value.to_s.empty? and value.split(/,/).empty?
-        value.split(/,/).each do |val|
-          invalid_spaces << true if val.strip.empty? 
-          unless val =~ /\A[A-Za-z0-9\-\(\)\s]+\Z/ 
-            invalid_values << val
-          end
-        end
-      end
-      errors.add(values.to_sym, "are invalid due to #{invalid_values.join(',')}") unless invalid_values.empty?
-      errors.add(values.to_sym, "are invalid due to empty values") unless invalid_spaces.empty?
-    end
+  before_validation :squish_patterns
+
+  def squish_patterns
+    self.pattern_beneficiaries = pattern_beneficiaries.squeeze(' ').strip.each_line.reject{|x| x.strip == ''}.join unless pattern_beneficiaries.nil?
+    self.pattern_corporates = pattern_corporates.squeeze(' ').strip.each_line.reject{|x| x.strip == ''}.join unless pattern_corporates.nil?
+    self.pattern_individuals = pattern_individuals.squeeze(' ').strip.each_line.reject{|x| x.strip == ''}.join unless pattern_individuals.nil?
+    self.pattern_remitters = pattern_remitters.squeeze(' ').strip.each_line.reject{|x| x.strip == ''}.join unless pattern_remitters.nil?
+    self.pattern_salutations = pattern_salutations.squeeze(' ').strip.each_line.reject{|x| x.strip == ''}.join unless pattern_salutations.nil?
   end
-
-  def format_fields
-    self.pattern_individuals = self.pattern_individuals.gsub("\r\n",",") rescue nil
-    self.pattern_corporates = self.pattern_corporates.gsub("\r\n",",") rescue nil
-    self.pattern_beneficiaries = self.pattern_beneficiaries.gsub("\r\n",",") rescue nil
-    self.pattern_remitters = self.pattern_remitters.gsub("\r\n",",") rescue nil
-    self.pattern_salutations = self.pattern_salutations.gsub("\r\n",",") rescue nil
-  end
-
-  def formated_pattern_individuals
-    pattern_individuals.gsub(",","\r\n") rescue nil
-  end
-
-  def formated_pattern_corporates
-    pattern_corporates.gsub(",","\r\n") rescue nil
-  end
-
-  def formated_pattern_beneficiaries
-    pattern_beneficiaries.gsub(",","\r\n") rescue nil
-  end  
-
-  def formated_pattern_remitters
-    pattern_remitters.gsub(",","\r\n") rescue nil
-  end  
-
-  def formated_pattern_salutations
-    pattern_salutations.gsub(",","\r\n") rescue nil
-  end  
 end

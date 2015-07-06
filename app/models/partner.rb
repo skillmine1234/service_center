@@ -37,7 +37,7 @@ class Partner < ActiveRecord::Base
           end
         end
       end
-      errors.add(email_id.to_sym, "are invalid due to #{invalid_ids.join(',')}") unless invalid_ids.empty?
+      errors.add(email_id.to_sym, "is invalid") unless invalid_ids.empty?
     end
   end
 

@@ -94,23 +94,16 @@ describe PurposeCode do
       end
     end
 
-    context "formated_pattern_beneficiaries" do 
-      it "should format pattern_beneficiaries" do 
-        purpose_code = Factory.build(:purpose_code, :pattern_beneficiaries => "1,2")
-        purpose_code.formated_pattern_beneficiaries.should == "1\r\n2"
-      end 
-    end
-
     context "validate_keywords" do 
       it "should validate keywords" do 
-        purpose_code = Factory.build(:purpose_code, :pattern_beneficiaries => "1234,ese@sdgs")
+        purpose_code = Factory.build(:purpose_code, :pattern_beneficiaries => "1234 ese@sdgs")
         purpose_code.should_not be_valid
-        purpose_code.errors_on("pattern_beneficiaries").should == ["are invalid due to ese@sdgs"]
-        purpose_code = Factory.build(:purpose_code, :pattern_beneficiaries => "1234,esesdgs")
+        purpose_code.errors_on("pattern_beneficiaries").should == ["is invalid"]
+        purpose_code = Factory.build(:purpose_code, :pattern_beneficiaries => "1234 esesdgs")
         purpose_code.should be_valid
-        purpose_code = Factory.build(:purpose_code, :pattern_beneficiaries => " , ")
-        purpose_code.should_not be_valid
-        purpose_code.errors_on("pattern_beneficiaries").should == ["are invalid due to empty values"]
+        purpose_code = Factory.build(:purpose_code, :pattern_beneficiaries => "  ")
+        purpose_code.should be_valid
+        purpose_code.pattern_beneficiaries.should == ""
       end
     end
   end
@@ -133,23 +126,9 @@ describe PurposeCode do
     end
   end   
   
-  context "formated_pattern_beneficiaries" do 
-    it "should format pattern_beneficiaries" do 
-      purpose_code = Factory.build(:purpose_code, :pattern_beneficiaries => "1,2")
-      purpose_code.formated_pattern_beneficiaries.should == "1\r\n2"
-    end
-  end  
-  
   context "options_for_bene_and_rem_types" do
     it "should return options for disallowed remitter and beneficiary types" do
       PurposeCode.options_for_bene_and_rem_types.should == [['Individual','I'],['Corporates','C']]
     end
   end
-  
-  context "format_fields" do 
-    it "should format fields" do 
-      purpose_code = Factory.build(:purpose_code, :pattern_beneficiaries => "1\r\n2")
-      purpose_code.format_fields.should == "1,2"
-    end
-  end  
 end

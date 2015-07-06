@@ -112,8 +112,8 @@ describe Partner do
       it "should validate email address" do 
         partner = Factory.build(:partner, :tech_email_id => "1234;esesdgs", :ops_email_id => "1234;esesdgs")
         partner.should_not be_valid
-        partner.errors_on("tech_email_id").should == ["are invalid due to 1234,esesdgs"]
-        partner.errors_on("ops_email_id").should == ["are invalid due to 1234,esesdgs"]
+        partner.errors_on("tech_email_id").should == ["is invalid"]
+        partner.errors_on("ops_email_id").should == ["is invalid"]
         partner = Factory.build(:partner, :tech_email_id => "foo@ruby.com", :ops_email_id => "foo@ruby.com;bar@ruby.com")
         partner.should be_valid
       end
