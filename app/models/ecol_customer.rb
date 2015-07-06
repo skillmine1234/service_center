@@ -60,6 +60,7 @@ class EcolCustomer < ActiveRecord::Base
   end
   
   def set_validation_fields_to_N
+    "++++++++++++++++++++++++++++++++"
     if self.val_method == 'N'
       self.val_token_1 = 'N'
       self.val_token_2 = 'N'
