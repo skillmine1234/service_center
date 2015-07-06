@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def sign_out(*args)
+    #to invalidate session on sign out
     current_user.update_attribute(:unique_session_id, "") unless current_user.nil?
     current_admin_user.update_attribute(:unique_session_id, "") unless current_admin_user.nil?   
     super
