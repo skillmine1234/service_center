@@ -1,0 +1,30 @@
+%br
+%br
+%h1 E-Collect Transaction Summary
+%br
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead 
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Status
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Pending Approval
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Total
+  .tbody
+    - @ecol_transaction_statuses.each do |s|
+      %tr
+        %td{:style=>'text-align:left;'}
+          = s 
+        %td{:style=>'text-align:left;'}
+          - case s
+          - when "ALL"
+            = link_to txn_summary_count(@ecol_transaction_summary, s, ['Y']), ecol_transactions_path({:pending => 'Y'})
+          - else
+            = link_to txn_summary_count(@ecol_transaction_summary, s, ['Y']), ecol_transactions_path({:status => s, :pending => 'Y'})
+        %td{:style=>'text-align:left;'}
+          - case s
+          - when "ALL"
+            = link_to txn_summary_count(@ecol_transaction_summary, s, ['Y','N']), ecol_transactions_path
+          - else
+            = link_to txn_summary_count(@ecol_transaction_summary, s, ['Y','N']), ecol_transactions_path({:status => s})

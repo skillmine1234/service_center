@@ -2,86 +2,136 @@
 = link_to 'New E-Collect Transaction', new_ecol_transaction_path
 %br
 %br
-%h1 Listing E-Collect Transactions
+%h1 Listing E-Collect transactions
 %h2.collapsible
   Advanced Search
   %span.caret
 .collapsible-content
   = render :partial => 'advanced_search'
 %br
+%br
 = "Total Count: #{@ecol_transactions_count}"
 %br
 = will_paginate @ecol_transactions
-%br
-%table.table.table-bordered.table-striped.table-hover
-  .thead
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-    %th{:style=>'text-align:left; background-color: lightblue;'}  
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Status
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Transfer Type
-    %th{:style=>'Text-align:left; background-color: lightblue;'}
-      Unique Ref No
-    %th{:style=>'Text-align:left; background-color: lightblue;'}
-      Transfer Date
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Transfer Amount
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Customer
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Customer Sub Code
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Remitter Code 
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Beneficiary Account Number
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Transfer Status
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Validation Status
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Credit Status
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Return Status
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Do Credit
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Do Return
-  .tbody
-    - @ecol_transactions.each do |ecol_transaction|   
+
+= form_tag edit_multiple_ecol_transactions_path do
+  %table.table.table-bordered.table-striped.table-hover
+    .thead
+      %th{:style=>'text-align:left; background-color: lightblue;'}
+      %th{:style=>'text-align:left; background-color: lightblue;'}
+        = check_box_tag(:select_all, value = "1", checked = false, options = {})
+      %th{:style=>'text-align:left; background-color: lightblue;'}
+        Beneficiary Account Number
+      %th{:style=>'text-align:left; background-color: lightblue;'}
+        Beneficiary Name
+      %th{:style=>'Text-align:left; background-color: lightblue;'}
+        Remitter Name
+      %th{:style=>'Text-align:left; background-color: lightblue;'}
+        Transfer Date
+      %th{:style=>'text-align:left; background-color: lightblue;'}
+        Transfer Amount
+      %th{:style=>'text-align:left; background-color: lightblue;'}
+        Status
+      %th{:style=>'text-align:left; background-color: lightblue;'}
+        Pending Approval
+      %th{:style=>'text-align:left; background-color: lightblue;'}
+        Settlement Status 
+      %th{:style=>'text-align:left; background-color: lightblue;'}
+        Validation Status
+        
+    .tbody
+      - @ecol_transactions.each do |ecol_transaction|   
+        %tr
+          %td{:style=>'text-align:left;'}
+            = link_to 'Show', ecol_transaction
+          %td{:style=>'text-align:left;'}
+            = check_box_tag "ecol_transaction_ids[]", ecol_transaction.id, false, class: 'txn_select'
+          %td{:style=>'text-align:left;'}
+            = ecol_transaction.bene_account_no
+          %td{:style=>'text-align:left;'}
+            = ecol_transaction.bene_full_name
+          %td{:style=>'text-align:left;'}
+            = ecol_transaction.rmtr_full_name
+          %td{:style=>'text-align:left;'}
+            = ecol_transaction.transfer_date
+          %td{:style=>'text-align:left;'}
+            = ecol_transaction.transfer_amt
+          %td{:style=>'text-align:left;'}
+            - if !ecol_transaction.credit_result.nil? && !ecol_transaction.return_result.nil?
+              - if ecol_transaction.status == "CREDIT_FAILED"
+                = link_to ecol_transaction.status, "#", :class => 'result-link', :href => "#creditText", data: { credit_status: ecol_transaction.credit_status, credit_result: ecol_transaction.credit_result}
+              - elsif ecol_transaction.status == "RETURN_FALED"
+                = link_to ecol_transaction.status, "#", :class => 'result-link', :href => "#returnText", data: { return_status: ecol_transaction.return_status, return_result: ecol_transaction.return_result}
+              - else
+                = ecol_transaction.status
+            - else
+              = ecol_transaction.status
+          %td{:style=>'text-align:left;'}
+            = ecol_transaction.pending_approval
+          %td{:style=>'text-align:left;'}
+            - if !ecol_transaction.settle_result.nil?
+              = link_to ecol_transaction.settle_status, "#", :class => 'result-link', :href => "#settleText", data: { settle_result: ecol_transaction.settle_result}
+            - else
+              = ecol_transaction.settle_status
+          %td{:style=>'text-align:left;'}
+            - if !ecol_transaction.validation_result.nil?
+              = link_to ecol_transaction.validation_status, "#", :class => 'result-link', :href => "#validationText", data: { validation_result: ecol_transaction.validation_result}
+            - else
+              = ecol_transaction.validation_status
+                  
+  .form-actions
+    = submit_tag "Approve Checked", :name => nil, :class => 'btn btn-primary', :id => "approve_button"
+    %input{:type => 'reset', :value=>'Reset', :class => 'btn'}    
+#resultText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Validation Result
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    %table.table.no-border
       %tr
-        %td{:style=>'text-align:left;'}
-          = link_to 'Show', ecol_transaction
-        %td{:style=>'text-align:left;'}
-          = link_to 'Edit', edit_ecol_transaction_path(ecol_transaction)
-        %td{:style=>'text-align:left;'}
-          = ecol_transaction.status
-        %td{:style=>'text-align:left;'}
-          = ecol_transaction.transfer_type
-        %td{:style=>'text-align:left;'}
-          = ecol_transaction.transfer_unique_no
-        %td{:style=>'text-align:left;'}
-          = ecol_transaction.transfer_date
-        %td{:style=>'text-align:left;'}
-          = ecol_transaction.transfer_amt
-        %td{:style=>'text-align:left;'}
-          = ecol_transaction.customer_code
-          = ecol_transaction.ecol_customer.try(:name)
-        %td{:style=>'text-align:left;'}
-          = ecol_transaction.customer_subcode
-        %td{:style=>'text-align:left;'}
-          = ecol_transaction.remitter_code
-        %td{:style=>'text-align:left;'}
-          = ecol_transaction.bene_account_no
-        %td{:style=>'text-align:left;'}
-          = ecol_transaction.transfer_status
-        %td{:style=>'text-align:left;'}
-          = ecol_transaction.validation_status
-        %td{:style=>'text-align:left;'}
-          = ecol_transaction.credit_status
-        %td{:style=>'text-align:left;'}
-          = ecol_transaction.return_status
-        %td{:style=>'text-align:left;'}
-          = ecol_transaction.do_credit
-        %td{:style=>'text-align:left;'}
-          = ecol_transaction.do_return
+        %td.label Validation Result : 
+        %td
+          %label.validation_result{:style => 'word-wrap: break-word'}
+#settleText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Settlement Result
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    %table.table.no-border
+      %tr
+        %td.label Settlement Result : 
+        %td
+          %label.settle_result{:style => 'word-wrap: break-word'}
+#returnText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Return Result
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    %table.table.no-border
+      %tr
+        %td.label Return Status : 
+        %td
+          %label.return_status{:style => 'word-wrap: break-word'}
+      %tr
+        %td.label Return Result : 
+        %td
+          %label.return_result{:style => 'word-wrap: break-word'}
+#creditText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Credit Result
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    %table.table.no-border
+      %tr
+        %td.label Credit Status : 
+        %td
+          %label.credit_status{:style => 'word-wrap: break-word'}
+      %tr
+        %td.label Credit Result : 
+        %td
+          %label.credit_result{:style => 'word-wrap: break-word'}
+

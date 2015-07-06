@@ -1,0 +1,13 @@
+%h1 Editing Multiple E-Collect Transactions
+%br
+= simple_form_for :ecol_transaction, :url => update_multiple_ecol_transactions_path, :html => { :method => :put, :class => 'form-horizontal', :autocomplete=>"off"} do |f| 
+  .control-group
+    - if !@ecol_transactions.nil?
+      - @ecol_transactions.each do |ecol_transaction|
+        = hidden_field_tag "ecol_transaction_ids[]", ecol_transaction.id
+      .control-group
+        = f.label :pending_approval, "Approve Transaction", :class => 'control-label'
+        = f.check_box :pending_approval, {},"Y","N"    
+  .form-actions
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'approve_transaction', :value => 'Approve'
+    = link_to "Cancel", "/ecol_transactions", :class=>"cancel btn"

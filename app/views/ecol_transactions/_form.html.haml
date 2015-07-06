@@ -265,20 +265,15 @@
       #msg-error
         = error_message_for(@ecol_transaction, :return_result, :prepend_text => "")
     .control-group
-      = f.label :do_credit, "Do Credit", :class => 'control-label'
-      = f.text_field :do_credit
+      = f.label :pending_approval, "Pending Approval", :class => 'control-label'
+      = f.text_field :pending_approval
       #msg-error
-        = error_message_for(@ecol_transaction, :do_credit, :prepend_text => "")
-    .control-group
-      = f.label :do_return, "Do Return", :class => 'control-label'
-      = f.text_field :do_return
-      #msg-error
-        = error_message_for(@ecol_transaction, :do_return, :prepend_text => "")
+        = error_message_for(@ecol_transaction, :pending_approval, :prepend_text => "")
     .control-group
       = f.label :ecol_remitter_id, "Ecol Remitter ID", :class => 'control-label'
       = f.text_field :ecol_remitter_id
       #msg-error
-        = error_message_for(@ecol_transaction, :return_result, :prepend_text => "")
+        = error_message_for(@ecol_transaction, :ecol_remitter_id, :prepend_text => "")
 
   .form-actions
     = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_customer', :value => 'Create Transaction'

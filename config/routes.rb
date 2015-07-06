@@ -12,7 +12,12 @@ ServiceCenter::Application.routes.draw do
   resources :ecol_rules
   resources :ecol_customers
   resources :ecol_remitters
-  resources :ecol_transactions
+  resources :ecol_transactions do
+    collection do
+      post 'edit_multiple'
+      put  'update_multiple'
+    end
+  end
   resources :udf_attributes
   resources :incoming_files
   resources :incoming_file_records
@@ -38,6 +43,8 @@ ServiceCenter::Application.routes.draw do
   get '/inward_remittances/:id/beneficiary_identities' => 'inward_remittances#beneficiary_identities'
   
   get '/download_attachment' => 'whitelisted_identities#download_attachment'
+  
+  get '/summary' => 'ecol_transactions#summary'
   
   get '/sdn/search' => 'aml_search#find_search_results'
   get '/sdn/search_results' => 'aml_search#results'
