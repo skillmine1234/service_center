@@ -45,7 +45,7 @@ module EcolRemitterValidation
           end
         end
       end
-      errors.add(email_id.to_sym, "invalid email #{invalid_ids.join(',')}") unless invalid_ids.empty?
+      errors.add(email_id.to_sym, "is invalid") unless invalid_ids.empty?
     end
   end
 
