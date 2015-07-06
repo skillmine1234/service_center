@@ -48,7 +48,7 @@ class IncomingFile < ActiveRecord::Base
 
   def validate_unique_file
     if file.filename.present?
-      if IncomingFile.where("file_name=?",file.filename).count > 0
+      if IncomingFile.unscoped.where("file_name=?",file.filename).count > 0
         errors.add(:file, "'#{file.file.original_filename}' already exists") and return false
       end
     end

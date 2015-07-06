@@ -41,7 +41,7 @@ describe IncomingFile do
     end
 
     it "should not allow same file to be uploaded again" do 
-      file = Factory(:incoming_file, :file_name => nil,:approval_status => 'A')
+      file = Factory(:incoming_file, :file_name => nil)
       file2 = Factory.build(:incoming_file, :file_name => nil)
       file2.save.should be_false
       file2.errors.messages.should == { :file => ["'#{file.file.file.original_filename}' already exists"] }
