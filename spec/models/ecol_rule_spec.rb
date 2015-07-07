@@ -43,9 +43,11 @@ describe EcolRule do
   end
   
   context "ifsc format" do 
-    it "should allow valid format" do
-      should allow_value('ABCD0QWERTY').for(:ifsc)
-    end 
+    [:ifsc, :neft_sender_ifsc].each do |att|
+      it "should allow valid format" do
+        should allow_value('ABCD0QWERTY').for(att)
+      end 
+    end
     
     it "should not allow invalid format" do
       ecol_rule = Factory.build(:ecol_rule, :ifsc => 'abcd0QWERTY')
