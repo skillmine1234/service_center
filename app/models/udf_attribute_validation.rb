@@ -6,7 +6,10 @@ module UdfAttributeValidation
     validate :validate_data_type
     validate :validate_constraint_input
     validate :cross_field_validations
+    validate :validate_length
+    validate :validate_value
     validates_uniqueness_of :attribute_name, :scope => [:class_name,:approval_status]
+    validates_numericality_of :max_value, :min_value, :length, :max_length, :min_length, :allow_blank => true
   end
 
   def validate_constraint_input
@@ -18,6 +21,18 @@ module UdfAttributeValidation
   def validate_data_type
     if control_type == "TextBox" and data_type.to_s.empty?
       errors.add(:data_type, "should be present for TextBox control") 
+    end
+  end
+
+  def validate_length
+    if self.data_type == "String" and !self.min_length.to_s.empty? and !self.max_length.to_s.empty?
+      errors.add(:data_type, "Min length should be less than max length") if min_length.to_i > max_length.to_i
+    end
+  end
+
+  def validate_value
+    if self.data_type == "Numeric" and !self.min_value.to_s.empty? and !self.max_value.to_s.empty?
+      errors.add(:data_type, "Min value should be less than max value") if min_value.to_i > max_value.to_i
     end
   end
 
