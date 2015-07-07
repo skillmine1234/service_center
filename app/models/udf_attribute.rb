@@ -10,7 +10,7 @@ class UdfAttribute < ActiveRecord::Base
   DATA_TYPES = %w(String Numeric Date)
   TextValidators = {:length => ['number', 'is'], :min_length => ['number', 'minimum'], :max_length => ['number', 'maximum']}.freeze
   NumericValidators = {:min_value => ['number', 'minimum'], :max_value => ['number', 'maximum']}.freeze
-  
+    
   serialize :constraints
   serialize :select_options
   
@@ -73,8 +73,6 @@ class UdfAttribute < ActiveRecord::Base
   end
     
   def self.options_for_attribute_name
-    [['udf1','udf1'],['udf2','udf2'],['udf3','udf3'],['udf4','udf4'],['udf5','udf5'],['udf6','udf6'],['udf7','udf7'],['udf8','udf8'],
-    ['udf9','udf9'],['udf10','udf10'],['udf11','udf11'],['udf12','udf12'],['udf13','udf13'],['udf14','udf14'],['udf15','udf15'],['udf16','udf16'],
-    ['udf17','udf17'],['udf18','udf18'],['udf19','udf19'],['udf20','udf20']]      
+    %w(udf1 udf2 udf3 udf4 udf5 udf6 udf7 udf8 udf9 udf10 udf11 udf12 udf13 udf14 udf15 udf16 udf17 udf18 udf19 udf20) - self.unscoped.all.map {|u| u.attribute_name}
   end  
 end
