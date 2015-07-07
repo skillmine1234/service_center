@@ -4,10 +4,12 @@ module EcolTransactionsHelper
     ecol_transactions = transactions
     ecol_transactions = ecol_transactions.where("TRIM(transfer_unique_no)=?",params[:transfer_unique_no].strip) if params[:transfer_unique_no].present?
     ecol_transactions = ecol_transactions.where("customer_code=?",params[:customer_code]) if params[:customer_code].present?
+    ecol_transactions = ecol_transactions.where("status=? and pending_approval=?",params[:status],params[:pending]) if params[:status].present? and params[:pending].present?
+    ecol_transactions = ecol_transactions.where("pending_approval=?",params[:pending]) if params[:pending].present?
     ecol_transactions = ecol_transactions.where("status=?",params[:status]) if params[:status].present?
     ecol_transactions = ecol_transactions.where("transfer_type=?",params[:transfer_type]) if params[:transfer_type].present? 
     ecol_transactions = ecol_transactions.where("bene_account_no=?",params[:bene_account_no]) if params[:bene_account_no].present?
-    ecol_transactions = ecol_transactions.where("transfer_date>=? and transfer_date<=?",params[:from_date],params[:to_date]) if params[:to_date].present? and params[:from_date].present?
+    ecol_transactions = ecol_transactions.where("transfer_date>=? and transfer_date<=?",params[:from_transfer_date],params[:to_transfer_date]) if params[:to_transfer_date].present? and params[:from_transfer_date].present?
     ecol_transactions = ecol_transactions.where("transfer_amt>=? and transfer_amt<=?",params[:from_amount].to_f,params[:to_amount].to_f) if params[:to_amount].present? and params[:from_amount].present?
     ecol_transactions
   end
@@ -32,4 +34,10 @@ module EcolTransactionsHelper
       "-"
     end
   end
+  
+  def txn_summary_count(status_hash,key) 
+    count = status_hash[key] rescue 0 
+    count.nil? ? 0 : count
+  end
+  
 end

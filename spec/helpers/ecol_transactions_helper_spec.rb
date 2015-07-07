@@ -16,11 +16,15 @@ describe EcolTransactionsHelper do
       find_ecol_transactions(val,{:customer_code => "123456"}).should == [ecol_transaction]
       find_ecol_transactions(val,{:customer_code => "9876112"}).should_not == [ecol_transaction]
       
-      ecol_transaction = Factory(:ecol_transaction, :status => "PENDING", :transfer_unique_no => "oiopoi")
-      find_ecol_transactions(val,{:status => "PENDING"}).should == [ecol_transaction]
+      ecol_transaction = Factory(:ecol_transaction, :status => "NEW", :transfer_unique_no => "ojkpoi", :pending_approval => "Y")
+      find_ecol_transactions(val,{:status => "NEW",:pending_approval => "Y"}).should == [ecol_transaction]
+      find_ecol_transactions(val,{:status => "FAILED",:pending_approval => "Y"}).should_not == [ecol_transaction]
+      
+      ecol_transaction = Factory(:ecol_transaction, :status => "SUCCESS", :transfer_unique_no => "oiopoi")
+      find_ecol_transactions(val,{:status => "SUCCESS"}).should == [ecol_transaction]
       find_ecol_transactions(val,{:status => "FAILED"}).should_not == [ecol_transaction]
       
-      ecol_transaction = Factory(:ecol_transaction, :transfer_type => "ASD", :transfer_unique_no => "oiopoi")
+      ecol_transaction = Factory(:ecol_transaction, :transfer_type => "ASD", :transfer_unique_no => "fvsdfaw")
       find_ecol_transactions(val,{:transfer_type => "ASD"}).should == [ecol_transaction]
       find_ecol_transactions(val,{:transfer_type => "AAA"}).should_not == [ecol_transaction] 
       
@@ -31,8 +35,8 @@ describe EcolTransactionsHelper do
       ecol_transaction = [Factory(:ecol_transaction, :transfer_date => '2014-09-09', :transfer_unique_no => "xswert")]
       ecol_transaction << Factory(:ecol_transaction, :transfer_date => '2014-10-09', :transfer_unique_no => "oyntrg")
       ecol_transaction << Factory(:ecol_transaction, :transfer_date => '2014-11-09', :transfer_unique_no => "kucbfb")
-      find_ecol_transactions(val,{:from_date => '2014-09-01', :to_date => '2014-12-01'}).should == ecol_transaction
-      find_ecol_transactions(val,{:from_date => '2014-09-09', :to_date => '2014-09-12'}).should == [ecol_transaction[0]]
+      find_ecol_transactions(val,{:from_transfer_date => '2014-09-01', :to_transfer_date => '2014-12-01'}).should == ecol_transaction
+      find_ecol_transactions(val,{:from_transfer_date => '2014-09-09', :to_transfer_date => '2014-09-12'}).should == [ecol_transaction[0]]
       
       ecol_transaction = [Factory(:ecol_transaction, :transfer_amt => '10000', :transfer_unique_no => "76543")]
       ecol_transaction << Factory(:ecol_transaction, :transfer_amt => '9000', :transfer_unique_no => "98657")
@@ -55,6 +59,14 @@ describe EcolTransactionsHelper do
       ecol_transaction_token_show(ecol_transaction,1).should == nil
       ecol_transaction = Factory(:ecol_transaction, :customer_code => '9999', :transfer_type => "QWE", :transfer_unique_no => "lklklk")
       ecol_transaction_token_show(ecol_transaction,1).should == '-'
+    end
+  end
+  
+  context "txn_summary_count" do
+    it "should return correct count" do
+      txn_summary_count({["NEW","N"] => 1, ["NEW","Y"] => 1, ["SUCCESS","N"] => 1},['NEW','Y']).should == 1
+      txn_summary_count({["FAILED","N"] => 1, ["SUCCESS","Y"] => 1, ["SUCCESS","N"] => 1},['SUCCESS','Y']).should == 1
+      txn_summary_count({["FAILED","N"] => 1, ["SUCCESS","Y"] => 1, ["SUCCESS","N"] => 1},['FAILED','Y']).should == 0
     end
   end
 end

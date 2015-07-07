@@ -35,18 +35,12 @@ class EcolTransactionsController < ApplicationController
       flash[:alert] = 'Transaction successfully modified'
       redirect_to @ecol_transaction
     end
-    rescue ActiveRecord::StaleObjectError
-      @ecol_transaction.reload
-      flash[:alert] = 'Someone edited the transaction the same time you did. Please re-apply your changes to the transaction.'
-      render "edit"
   end
   
   def index
     ecol_transactions = EcolTransaction.order("id desc")
-    if params[:advanced_search].present?
+    if params[:advanced_search].present? || params[:summary].present?
       ecol_transactions = find_ecol_transactions(ecol_transactions,params).order("id desc")
-    else
-      ecol_transactions = EcolTransaction.order("id desc")
     end
     @ecol_transactions_count = ecol_transactions.count
     @ecol_transactions = ecol_transactions.paginate(:per_page => 10, :page => params[:page]) rescue []
@@ -54,6 +48,32 @@ class EcolTransactionsController < ApplicationController
   
   def show
     @ecol_transaction = EcolTransaction.find_by_id(params[:id])
+  end
+  
+  def summary 
+    ecol_transactions = EcolTransaction.order("id desc")
+    @ecol_transaction_summary = EcolTransaction.group(:status, :pending_approval).count
+    @ecol_transaction_statuses = EcolTransaction.group(:status).count.keys
+    @total_pending_records = EcolTransaction.where(:pending_approval => 'Y').count
+    @total_records = EcolTransaction.count
+  end
+  
+  def edit_multiple
+    if params[:ecol_transaction_ids]
+      @ecol_transactions = EcolTransaction.find(params[:ecol_transaction_ids])
+    else
+      flash[:notice] = "You haven't selected any transaction records!"
+      redirect_to ecol_transactions_path
+    end
+  end
+
+  def update_multiple
+    @ecol_transactions = EcolTransaction.find(params[:ecol_transaction_ids])
+    @ecol_transactions.each do |ecol_transaction|
+      ecol_transaction.update_attributes(:pending_approval => "N")
+    end
+    flash[:notice] = "Updated transactions!"
+    redirect_to ecol_transactions_path
   end
   
   private
@@ -65,7 +85,7 @@ class EcolTransactionsController < ApplicationController
     :tokenzation_status, :customer_code, :customer_subcode, :remitter_code, :validated_at, :vaidation_status,
     :credited_at, :credit_status, :credit_ref, :credit_attempt_no, :rmtr_email_notify_ref, :rmtr_sms_notify_ref,
     :settled_at, :settle_status, :settle_ref, :settle_attempt_no, :fault_at, :fault_code, :fault_reason, :created_at,
-    :updated_at, :do_credit, :do_return, :ecol_remitter_id)
+    :updated_at, :ecol_remitter_id, :pending_approval)
   end
   
 end
