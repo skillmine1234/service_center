@@ -12,9 +12,25 @@ describe UdfAttribute do
       it { should validate_presence_of(att) }
     end
 
+    [:min_length, :max_length, :length, :min_value, :max_value].each do |att|
+      it { should validate_numericality_of(att) }
+    end
+
     it do 
       udf_attribute = Factory(:udf_attribute,:approval_status => 'A')
       should validate_uniqueness_of(:attribute_name).scoped_to(:class_name,:approval_status)
+    end
+
+    it "should validate_length" do 
+      udf_attribute1 = Factory.build(:udf_attribute,:data_type => 'String',:min_length => 20, :max_length => 10)
+      udf_attribute1.should_not be_valid
+      udf_attribute1.errors_on(:data_type).should == ["Min length should be less than max length"]
+    end
+
+    it "should validate_value" do 
+      udf_attribute1 = Factory.build(:udf_attribute,:data_type => 'Numeric',:min_value => 20, :max_value => 10)
+      udf_attribute1.should_not be_valid
+      udf_attribute1.errors_on(:data_type).should == ["Min value should be less than max value"]
     end
 
     it "should validate_unapproved_record" do 
@@ -149,10 +165,7 @@ describe UdfAttribute do
   
   context "options_for_attribute_name" do
     it  "should return options for attribute name" do
-      UdfAttribute.options_for_attribute_name.should ==  [['udf1','udf1'],['udf2','udf2'],['udf3','udf3'],['udf4','udf4'],
-      ['udf5','udf5'],['udf6','udf6'],['udf7','udf7'],['udf8','udf8'],['udf9','udf9'],['udf10','udf10'],
-      ['udf11','udf11'],['udf12','udf12'],['udf13','udf13'],['udf14','udf14'],['udf15','udf15'],['udf16','udf16'],
-      ['udf17','udf17'],['udf18','udf18'],['udf19','udf19'],['udf20','udf20']]   
+      UdfAttribute.options_for_attribute_name.should ==  ["udf1", "udf2", "udf3", "udf4", "udf5", "udf6", "udf7", "udf8", "udf9", "udf10", "udf11", "udf12", "udf13", "udf14", "udf15", "udf16", "udf17", "udf18", "udf19", "udf20"] 
     end
   end
 
