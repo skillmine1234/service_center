@@ -2,7 +2,7 @@
 = link_to 'New E-Collect Transaction', new_ecol_transaction_path
 %br
 %br
-%h1 Listing E-Collect transactions
+%h1 Listing E-Collect Transactions
 %h2.collapsible
   Advanced Search
   %span.caret
@@ -59,9 +59,9 @@
           %td{:style=>'text-align:left;'}
             - if !ecol_transaction.credit_result.nil? && !ecol_transaction.return_result.nil?
               - if ecol_transaction.status == "CREDIT_FAILED"
-                = link_to ecol_transaction.status, "#", :class => 'result-link', :href => "#creditText", data: { credit_status: ecol_transaction.credit_status, credit_result: ecol_transaction.credit_result}
+                = link_to ecol_transaction.status, "#", :class => 'credit-link', :href => "#creditText", data: { credit_status: ecol_transaction.credit_status, credit_result: ecol_transaction.credit_result}
               - elsif ecol_transaction.status == "RETURN_FALED"
-                = link_to ecol_transaction.status, "#", :class => 'result-link', :href => "#returnText", data: { return_status: ecol_transaction.return_status, return_result: ecol_transaction.return_result}
+                = link_to ecol_transaction.status, "#", :class => 'return-link', :href => "#returnText", data: { return_status: ecol_transaction.return_status, return_result: ecol_transaction.return_result}
               - else
                 = ecol_transaction.status
             - else
@@ -70,68 +70,18 @@
             = ecol_transaction.pending_approval
           %td{:style=>'text-align:left;'}
             - if !ecol_transaction.settle_result.nil?
-              = link_to ecol_transaction.settle_status, "#", :class => 'result-link', :href => "#settleText", data: { settle_result: ecol_transaction.settle_result}
+              = link_to ecol_transaction.settle_status, "#", :class => 'settle-link', :href => "#settleText", data: { settle_result: ecol_transaction.settle_result}
             - else
               = ecol_transaction.settle_status
           %td{:style=>'text-align:left;'}
             - if !ecol_transaction.validation_result.nil?
-              = link_to ecol_transaction.validation_status, "#", :class => 'result-link', :href => "#validationText", data: { validation_result: ecol_transaction.validation_result}
+              = link_to ecol_transaction.validation_status, "#", :class => 'validation-link', :href => "#validationText", data: { validation_result: ecol_transaction.validation_result}
             - else
               = ecol_transaction.validation_status
                   
   .form-actions
     = submit_tag "Approve Checked", :name => nil, :class => 'btn btn-primary', :id => "approve_button"
     %input{:type => 'reset', :value=>'Reset', :class => 'btn'}    
-#resultText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-header
-    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3 Validation Result
-    #error_message{:style => 'color:red'}
-  .modal-body{:style => "max-height:450px;"}
-    %table.table.no-border
-      %tr
-        %td.label Validation Result : 
-        %td
-          %label.validation_result{:style => 'word-wrap: break-word'}
-#settleText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-header
-    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3 Settlement Result
-    #error_message{:style => 'color:red'}
-  .modal-body{:style => "max-height:450px;"}
-    %table.table.no-border
-      %tr
-        %td.label Settlement Result : 
-        %td
-          %label.settle_result{:style => 'word-wrap: break-word'}
-#returnText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-header
-    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3 Return Result
-    #error_message{:style => 'color:red'}
-  .modal-body{:style => "max-height:450px;"}
-    %table.table.no-border
-      %tr
-        %td.label Return Status : 
-        %td
-          %label.return_status{:style => 'word-wrap: break-word'}
-      %tr
-        %td.label Return Result : 
-        %td
-          %label.return_result{:style => 'word-wrap: break-word'}
-#creditText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-header
-    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3 Credit Result
-    #error_message{:style => 'color:red'}
-  .modal-body{:style => "max-height:450px;"}
-    %table.table.no-border
-      %tr
-        %td.label Credit Status : 
-        %td
-          %label.credit_status{:style => 'word-wrap: break-word'}
-      %tr
-        %td.label Credit Result : 
-        %td
-          %label.credit_result{:style => 'word-wrap: break-word'}
+
+= render :partial => 'modal_boxes'
 

@@ -17,14 +17,13 @@
         %td{:style=>'text-align:left;'}
           = s 
         %td{:style=>'text-align:left;'}
-          - case s
-          - when "ALL"
-            = link_to txn_summary_count(@ecol_transaction_summary, s, ['Y']), ecol_transactions_path({:pending => 'Y'})
-          - else
-            = link_to txn_summary_count(@ecol_transaction_summary, s, ['Y']), ecol_transactions_path({:status => s, :pending => 'Y'})
+          = link_to txn_summary_count(@ecol_transaction_summary, [s,'Y']), ecol_transactions_path({:status => s, :pending => 'Y', :summary => true})
         %td{:style=>'text-align:left;'}
-          - case s
-          - when "ALL"
-            = link_to txn_summary_count(@ecol_transaction_summary, s, ['Y','N']), ecol_transactions_path
-          - else
-            = link_to txn_summary_count(@ecol_transaction_summary, s, ['Y','N']), ecol_transactions_path({:status => s})
+          = link_to txn_summary_count(@ecol_transaction_summary, [s, 'Y']) + txn_summary_count(@ecol_transaction_summary, [s, 'N']), ecol_transactions_path({:status => s, :summary => true})
+    %tr
+      %td{:style=>'text-align:left;'}
+        = 'ALL'
+      %td{:style=>'text-align:left;'}
+        = link_to @total_pending_records, ecol_transactions_path({:pending => 'Y', :summary => true})
+      %td{:style=>'text-align:left;'}
+        = link_to @total_records, ecol_transactions_path

@@ -39,14 +39,7 @@ class EcolTransactionsController < ApplicationController
   
   def index
     ecol_transactions = EcolTransaction.order("id desc")
-    
-    if params[:status] and params[:pending]
-      ecol_transactions = find_ecol_transactions(ecol_transactions,params).order("id desc")  
-    elsif params[:pending]
-      ecol_transactions = find_ecol_transactions(ecol_transactions,params).order("id desc")
-    elsif params[:status]
-      ecol_transactions = find_ecol_transactions(ecol_transactions,params).order("id desc")
-    elsif params[:advanced_search].present?
+    if params[:advanced_search].present? || params[:summary].present?
       ecol_transactions = find_ecol_transactions(ecol_transactions,params).order("id desc")
     end
     @ecol_transactions_count = ecol_transactions.count
@@ -59,24 +52,25 @@ class EcolTransactionsController < ApplicationController
   
   def summary 
     ecol_transactions = EcolTransaction.order("id desc")
-    @ecol_transaction_summary = (EcolTransaction.group(:status, :pending_approval).count).to_a
+    @ecol_transaction_summary = EcolTransaction.group(:status, :pending_approval).count
     @ecol_transaction_statuses = EcolTransaction.group(:status).count.keys
-    @ecol_transaction_statuses << "ALL"
+    @total_pending_records = EcolTransaction.where(:pending_approval => 'Y').count
+    @total_records = EcolTransaction.count
   end
   
   def edit_multiple
     if params[:ecol_transaction_ids]
       @ecol_transactions = EcolTransaction.find(params[:ecol_transaction_ids])
-    else 
+    else
       flash[:notice] = "You haven't selected any transaction records!"
       redirect_to ecol_transactions_path
     end
   end
-  
+
   def update_multiple
     @ecol_transactions = EcolTransaction.find(params[:ecol_transaction_ids])
     @ecol_transactions.each do |ecol_transaction|
-      ecol_transaction.update_attributes!(params[:ecol_transaction].reject { |k,v| v == 'Y'})
+      ecol_transaction.update_attributes(:pending_approval => "N")
     end
     flash[:notice] = "Updated transactions!"
     redirect_to ecol_transactions_path

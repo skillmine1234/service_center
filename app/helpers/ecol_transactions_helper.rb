@@ -35,8 +35,13 @@ module EcolTransactionsHelper
     end
   end
   
-  def txn_summary_count(status_hash,status,pending)
-    status_hash.inject(0) { |status_count, obj| (obj[0][0] == status || status == "ALL") && pending.include?(obj[0][1]) ? status_count + obj[1] : status_count }
+  def txn_summary_count(status_hash,key) 
+    count = status_hash[key]
+    if count.nil?
+      return 0
+    else
+      return count
+    end
   end
   
 end

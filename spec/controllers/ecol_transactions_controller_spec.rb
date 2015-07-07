@@ -139,8 +139,10 @@ describe EcolTransactionsController do
     it "renders summary" do
       ecol_transaction = Factory(:ecol_transaction, :status => 'NEW', :pending_approval => 'Y')
       get :summary
-      assigns(:ecol_transaction_summary).should eq([[['NEW','Y'],1]])
-      assigns(:ecol_transaction_statuses).should eq(['NEW','ALL'])
+      assigns(:ecol_transaction_summary).should eq({['NEW','Y']=>1})
+      assigns(:ecol_transaction_statuses).should eq(['NEW'])
+      assigns(:total_pending_records).should eq(1)
+      assigns(:total_records).should eq(1)
     end
   end 
   
