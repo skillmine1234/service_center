@@ -24,7 +24,7 @@
         = error_message_for(@ecol_remitter, :remitter_code, :prepend_text => "")
     .control-group
       = f.label :credit_acct_no, "Credit Account No", :class => 'control-label'
-      = f.text_field :credit_acct_no, :maxlength => 15
+      = f.text_field :credit_acct_no, :maxlength => 25
       #msg-error
         = error_message_for(@ecol_remitter, :credit_acct_no, :prepend_text => "")
     .control-group
