@@ -217,19 +217,19 @@
           %tr
             %td.label Narration Suffix 1
             %td.value
-              = @ecol_customer.nrtv_sufx_1
+              = show_page_value_for_nrtv_sufx(@ecol_customer.nrtv_sufx_1)
             %td#msg-error
               = error_message_for(@ecol_customer, :nrtv_sufx_1, :prepend_text => "")
           %tr
             %td.label Narration Suffix 2
             %td.value
-              = @ecol_customer.nrtv_sufx_2
+              = show_page_value_for_nrtv_sufx(@ecol_customer.nrtv_sufx_2)
             %td#msg-error
               = error_message_for(@ecol_customer, :nrtv_sufx_2, :prepend_text => "")
           %tr
             %td.label Narration Suffix 3
             %td.value
-              = @ecol_customer.nrtv_sufx_3
+              = show_page_value_for_nrtv_sufx(@ecol_customer.nrtv_sufx_3)
             %td#msg-error
               = error_message_for(@ecol_customer, :nrtv_sufx_3, :prepend_text => "")
           %tr

@@ -32,4 +32,28 @@ module EcolCustomersHelper
     ecol_customers
   end
 
+  def show_page_value_for_nrtv_sufx(value)
+    case value
+    when "N"
+      "None"
+    when "SC"
+      "Sub Code"
+    when "RC"
+      "Remitter Code"
+    when "IN"
+      "Invoice Number"
+    when "RN"
+      "Remitter Name"
+    when "ORN"
+      "Original Remitter Name"
+    when "ORA"
+      "Original Remitter Account"
+    when "TUN"
+      "Transfer Unique No"
+    when "UDF1"
+      "User Defined Field 1"
+    when "UDF2"
+      "User Defined Field 2"  
+    end
+  end
 end

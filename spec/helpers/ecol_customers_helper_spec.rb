@@ -47,4 +47,19 @@ describe EcolCustomersHelper do
       find_ecol_customers({:credit_acct_val_fail => '8756456789'}).should_not == [ecol_customer] 
     end
   end
+  
+  context "show_page_value_for_nrtv_sufx" do
+    it "should show description for nrtv_sufx" do
+      show_page_value_for_nrtv_sufx("N").should == "None"
+      show_page_value_for_nrtv_sufx("SC").should == "Sub Code"
+      show_page_value_for_nrtv_sufx("RC").should == "Remitter Code"
+      show_page_value_for_nrtv_sufx("RN").should == "Remitter Name"
+      show_page_value_for_nrtv_sufx("IN").should =="Invoice Number"
+      show_page_value_for_nrtv_sufx("ORN").should == "Original Remitter Name"
+      show_page_value_for_nrtv_sufx("ORA").should == "Original Remitter Account"
+      show_page_value_for_nrtv_sufx("TUN").should == "Transfer Unique No"
+      show_page_value_for_nrtv_sufx("UDF1").should == "User Defined Field 1"
+      show_page_value_for_nrtv_sufx("UDF2").should == "User Defined Field 2"
+    end
+  end
 end
