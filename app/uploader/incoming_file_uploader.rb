@@ -19,7 +19,7 @@ class IncomingFileUploader < CarrierWave::Uploader::Base
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
     if Rails.env == "production"
-      ENV['CONFIG_UPLOAD_PATH']
+      ENV['CONFIG_FILE_UPLOAD_PATH']
     else
       "uploads"
     end
