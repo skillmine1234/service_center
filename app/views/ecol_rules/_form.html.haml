@@ -39,6 +39,7 @@
         = error_message_for(@ecol_rule, :cbs_userid, :prepend_text => "")
 
   .form-actions
-    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_rule', :value => "Update E-Collect Rules"
+    - (f.object.new_record? and f.object.ifsc.nil?) ? label_name = "Create" : label_name = "Update"
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_rule', :value => label_name + ' E-Collect Rules'
     = link_to :Cancel,root_path, :name => 'cancel', :class=>"cancel btn"
 

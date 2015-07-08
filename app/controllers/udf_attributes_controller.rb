@@ -14,6 +14,7 @@ class UdfAttributesController < ApplicationController
     if !@udf_attribute.valid?
       render "new"
     else
+      @udf_attribute.created_by = current_user.id
       @udf_attribute.save
       flash[:alert] = 'Udf successfully created and is pending for approval'
       redirect_to @udf_attribute
@@ -35,6 +36,7 @@ class UdfAttributesController < ApplicationController
     if !@udf_attribute.valid?
       render "edit"
     else
+      @udf_attribute.updated_by = current_user.id
       @udf_attribute.save
       flash[:alert] = 'Udf successfully modified and is pending for approval'
       redirect_to @udf_attribute

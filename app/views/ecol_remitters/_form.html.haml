@@ -103,6 +103,7 @@
         = render :partial => 'ecol_remitters/udf_fields', :locals => {:f => f , :c => c, :entity => @ecol_remitter}
 
   .form-actions
-    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_customer', :value => 'Create Remitter'
+    - (f.object.new_record? and f.object.customer_code.nil?) ? label_name = "Create" : label_name = "Update"
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_remitter', :value => label_name + ' Remitter'
     = link_to :Cancel,'/ecol_remitters', :name => 'cancel', :class=>"cancel btn"
 

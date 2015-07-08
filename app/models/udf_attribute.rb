@@ -5,6 +5,8 @@ class UdfAttribute < ActiveRecord::Base
   attr_reader :length, :max_length, :min_length, :min_value, :max_value
 
   has_one :ecol_unapproved_record, :as => :ecol_approvable
+  belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
+  belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
 
   CONTROL_TYPES = %w(TextBox DropDown CheckBox)
   DATA_TYPES = %w(String Numeric Date)
@@ -72,7 +74,13 @@ class UdfAttribute < ActiveRecord::Base
     self.constraints = hash
   end
     
-  def self.options_for_attribute_name
-    %w(udf1 udf2 udf3 udf4 udf5 udf6 udf7 udf8 udf9 udf10 udf11 udf12 udf13 udf14 udf15 udf16 udf17 udf18 udf19 udf20) - self.unscoped.all.map {|u| u.attribute_name}
+  def self.options_for_attribute_name(name)
+    existing_values = self.unscoped.all.map {|u| u.attribute_name}
+    values = existing_values.delete(name)
+    %w(udf1 udf2 udf3 udf4 udf5 udf6 udf7 udf8 udf9 udf10 udf11 udf12 udf13 udf14 udf15 udf16 udf17 udf18 udf19 udf20) - existing_values
   end  
+
+  def self.check
+    return true if !(1==1) 
+  end
 end
