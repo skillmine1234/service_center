@@ -227,7 +227,7 @@ describe EcolCustomer do
     end
     
     it "should return options for nrtv sufxs" do
-      EcolCustomer.options_for_nrtv_sufxs.should == [['None','N'],['Sub Code','SC'],['Remitter Code','RC'],['Invoice Number','IN'],['Remitter Name','RN'],['Original Remitter Name','ORN'],['Original Remitter Account','ORA'],['UTR','UTR']]
+      EcolCustomer.options_for_nrtv_sufxs.should == [['None','N'],['Sub Code','SC'],['Remitter Code','RC'],['Invoice Number','IN'],['Remitter Name','RN'],['Original Remitter Name','ORN'],['Original Remitter Account','ORA'],['Transfer Unique No','TUN'],['User Defined Field 1','UDF1'],['User Defined Field 2','UDF2']]
     end
     
     it "should return options for rmtr alert on" do
