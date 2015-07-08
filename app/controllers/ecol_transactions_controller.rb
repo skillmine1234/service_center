@@ -6,37 +6,6 @@ class EcolTransactionsController < ApplicationController
   include ApplicationHelper
   include EcolTransactionsHelper
   
-  def new
-    @ecol_transaction = EcolTransaction.new
-  end
-
-  def create
-    @ecol_transaction = EcolTransaction.new(params[:ecol_transaction])
-    if !@ecol_transaction.valid?
-      render "new"
-    else
-      @ecol_transaction.save
-      flash[:alert] = 'Transaction successfully created'
-      redirect_to @ecol_transaction
-    end
-  end
-
-  def edit
-    @ecol_transaction = EcolTransaction.find_by_id(params[:id])
-  end
-
-  def update
-    @ecol_transaction = EcolTransaction.find_by_id(params[:id])
-    @ecol_transaction.attributes = params[:ecol_transaction]
-    if !@ecol_transaction.valid?
-      render "edit"
-    else
-      @ecol_transaction.save
-      flash[:alert] = 'Transaction successfully modified'
-      redirect_to @ecol_transaction
-    end
-  end
-  
   def index
     ecol_transactions = EcolTransaction.order("id desc")
     if params[:advanced_search].present? || params[:summary].present?
