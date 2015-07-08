@@ -50,7 +50,7 @@ describe EcolCustomer do
       it { should validate_inclusion_of(att).in_array(['N', 'SC', 'RC', 'IN']) }
     end
     [:nrtv_sufx_1, :nrtv_sufx_2, :nrtv_sufx_3].each do |att|
-      it { should validate_inclusion_of(att).in_array(['N', 'SC', 'RC', 'IN', 'RN', 'ORN', 'ORA']) }
+      it { should validate_inclusion_of(att).in_array(['N', 'SC', 'RC', 'IN', 'RN', 'ORN', 'ORA', 'TUN', 'UDF1', 'UDF2']) }
     end
 
     it "should validate_unapproved_record" do 
