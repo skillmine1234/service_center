@@ -10,3 +10,6 @@
     = simple_form_for @record, :url => {:action => 'approve'}, :method => :put, :html=>{:id=>"transition"} do |ef|
       = ef.input :updated_by, :as => :hidden, :input_html => {:value => current_user.id}
       = submit_tag "Approve", :class=>"btn btn-primary transition_button", :id => "transition_button"
+%p{:style => 'color:green;'}
+  = created_or_edited_by(@record)
+%br

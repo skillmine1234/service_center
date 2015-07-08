@@ -16,7 +16,7 @@ class EcolRulesController < ApplicationController
     else
       @ecol_rule.created_by = current_user.id
       @ecol_rule.save
-      flash[:alert] = 'Rule successfully created'
+      flash[:alert] = 'Rule successfully created and is pending for approval'
       redirect_to @ecol_rule
     end
   end
@@ -38,7 +38,7 @@ class EcolRulesController < ApplicationController
     else
       @ecol_rule.updated_by = current_user.id
       @ecol_rule.save
-      flash[:alert] = 'Rule successfuly modified'
+      flash[:alert] = 'Rule successfuly modified and is pending for approval'
       redirect_to @ecol_rule
     end
     rescue ActiveRecord::StaleObjectError

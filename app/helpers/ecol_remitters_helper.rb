@@ -15,4 +15,12 @@ module EcolRemittersHelper
     ecol_remitters = ecol_remitters.where("remitter_code=?",params[:remitter_code]) if params[:remitter_code].present?
     ecol_remitters
   end
+
+  def created_or_edited_by(resource)
+    if resource.approval_status == 'U' and resource.approved_record.nil?
+      "New Record Created By #{resource.created_user.try(:name)}"
+    elsif resource.approval_status == 'U' and !resource.approved_record.nil?
+      resource.updated_user.nil? ? "Record Edited By #{resource.created_user.try(:name)}" : "Record Edited By #{resource.updated_user.try(:name)}"
+    end
+  end
 end

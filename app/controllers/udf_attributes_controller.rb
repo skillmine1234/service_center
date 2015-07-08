@@ -15,7 +15,7 @@ class UdfAttributesController < ApplicationController
       render "new"
     else
       @udf_attribute.save
-      flash[:alert] = 'Udf successfully created'
+      flash[:alert] = 'Udf successfully created and is pending for approval'
       redirect_to @udf_attribute
     end
   end
@@ -36,7 +36,7 @@ class UdfAttributesController < ApplicationController
       render "edit"
     else
       @udf_attribute.save
-      flash[:alert] = 'Udf successfully modified'
+      flash[:alert] = 'Udf successfully modified and is pending for approval'
       redirect_to @udf_attribute
     end
     rescue ActiveRecord::StaleObjectError

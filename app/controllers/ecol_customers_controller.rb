@@ -17,7 +17,7 @@ class EcolCustomersController < ApplicationController
     else
       @ecol_customer.created_by = current_user.id
       @ecol_customer.save!
-      flash[:alert] = 'Customer successfully created'
+      flash[:alert] = 'Customer successfully created and is pending for approval'
       redirect_to @ecol_customer
     end
   end
@@ -39,7 +39,7 @@ class EcolCustomersController < ApplicationController
     else
       @ecol_customer.updated_by = current_user.id
       @ecol_customer.save!
-      flash[:alert] = 'Customer successfully modified'
+      flash[:alert] = 'Customer successfully modified and is pending for approval'
       redirect_to @ecol_customer
     end
     rescue ActiveRecord::StaleObjectError

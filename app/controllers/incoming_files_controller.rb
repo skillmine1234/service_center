@@ -14,7 +14,7 @@ class IncomingFilesController < ApplicationController
   def create
     @incoming_file = IncomingFile.new(params[:incoming_file])
     if @incoming_file.save
-      flash[:alert] = "File is successfully uploaded"
+      flash[:alert] = "File is successfully uploaded and is pending for approval"
       redirect_to incoming_files_path
     else
       flash[:notice] = @incoming_file.errors.full_messages
