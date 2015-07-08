@@ -14,10 +14,7 @@
         = error_message_for(@udf_attribute, :class_name, :prepend_text => "")
     .control-group
       = f.label :attribute_name, "*Attribute Name", :class => 'control-label'
-      - if f.object.new_record?
-        = f.select :attribute_name, options_for_select(UdfAttribute.options_for_attribute_name, @udf_attribute.attribute_name), {:include_blank => "Select"}
-      - else
-        = f.select :attribute_name, options_for_select(UdfAttribute.options_for_attribute_name, @udf_attribute.attribute_name), {:include_blank => "Select"}, {:disabled => true}
+      = f.select :attribute_name, options_for_select(UdfAttribute.options_for_attribute_name(f.object.attribute_name), @udf_attribute.attribute_name), {:include_blank => "Select"}
       #msg-error
         = error_message_for(@udf_attribute, :attribute_name, :prepend_text => "")
     .control-group
@@ -67,7 +64,7 @@
       %p{:style => 'color:green;'}
         = "eg: For Gender the options could be <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\"Male\": \"01\" <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \"Female\": \"02\"".html_safe
   .form-actions
-    - f.object.new_record? ? label_name = "Create" : label_name = "Update"
+    - (f.object.new_record? and f.object.class_name.nil?) ? label_name = "Create" : label_name = "Update"
     = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_udf', :value => label_name + ' UDF Attribute'
     = link_to :Cancel,'/udf_attributes', :name => 'cancel', :class=>"cancel btn"
         

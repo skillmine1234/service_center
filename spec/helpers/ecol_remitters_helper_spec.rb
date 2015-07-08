@@ -27,4 +27,23 @@ describe EcolRemittersHelper do
       find_ecol_remitters(EcolRemitter,{:remitter_code => "CR"}).should == []           
     end
   end
+
+  context "created_or_edited_by" do 
+    it "should return created by" do 
+      user = Factory(:user)
+      ecol_remitter = Factory(:ecol_remitter, :approval_status => 'U', :created_by => user.id)
+      created_or_edited_by(ecol_remitter).should == "New Record Created By #{ecol_remitter.created_user.try(:name)}"
+    end
+
+    it "should return edited by" do 
+      user = Factory(:user)
+      user2 = Factory(:user)
+      ecol_remitter = Factory(:ecol_remitter, :approval_status => 'A')
+      ecol_remitter2 = Factory(:ecol_remitter,:approved_id => ecol_remitter.id, :created_by => user.id)
+      created_or_edited_by(ecol_remitter2).should == "Record Edited By #{ecol_remitter2.created_user.try(:name)}"
+      ecol_remitter2.updated_by = user2.id
+      ecol_remitter2.save
+      created_or_edited_by(ecol_remitter2).should == "Record Edited By #{ecol_remitter2.updated_user.try(:name)}"
+    end
+  end
 end

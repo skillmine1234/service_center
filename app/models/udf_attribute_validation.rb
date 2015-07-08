@@ -9,7 +9,7 @@ module UdfAttributeValidation
     validate :validate_length
     validate :validate_value
     validates_uniqueness_of :attribute_name, :scope => [:class_name,:approval_status]
-    validates_numericality_of :max_value, :min_value, :length, :max_length, :min_length, :allow_blank => true
+    validates :max_value, :min_value, :length, :max_length, :min_length, :numericality => { :greater_than => 0}, :allow_blank => true
   end
 
   def validate_constraint_input

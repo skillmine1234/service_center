@@ -17,7 +17,7 @@ class EcolRemittersController < ApplicationController
     else
       @ecol_remitter.created_by = current_user.id
       @ecol_remitter.save
-      flash[:alert] = 'Remitter successfully created'
+      flash[:alert] = 'Remitter successfully created and is pending for approval'
       redirect_to @ecol_remitter
     end
   end
@@ -39,7 +39,7 @@ class EcolRemittersController < ApplicationController
     else
       @ecol_remitter.updated_by = current_user.id
       @ecol_remitter.save
-      flash[:alert] = 'Remitter successfully modified'
+      flash[:alert] = 'Remitter successfully modified and is pending for approval'
       redirect_to @ecol_remitter
     end
     rescue ActiveRecord::StaleObjectError

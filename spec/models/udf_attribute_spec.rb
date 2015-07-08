@@ -14,8 +14,16 @@ describe UdfAttribute do
 
     [:min_length, :max_length, :length, :min_value, :max_value].each do |att|
       it { should validate_numericality_of(att) }
+      it "should allow valid format" do
+        should allow_value(1).for(att)
+        should allow_value(10).for(att)
+      end 
+      it "should not allow valid format" do
+        should_not allow_value(0).for(att)
+        should_not allow_value(-1).for(att)
+      end 
     end
-
+      
     it do 
       udf_attribute = Factory(:udf_attribute,:approval_status => 'A')
       should validate_uniqueness_of(:attribute_name).scoped_to(:class_name,:approval_status)
@@ -165,7 +173,9 @@ describe UdfAttribute do
   
   context "options_for_attribute_name" do
     it  "should return options for attribute name" do
-      UdfAttribute.options_for_attribute_name.should ==  ["udf1", "udf2", "udf3", "udf4", "udf5", "udf6", "udf7", "udf8", "udf9", "udf10", "udf11", "udf12", "udf13", "udf14", "udf15", "udf16", "udf17", "udf18", "udf19", "udf20"] 
+      UdfAttribute.options_for_attribute_name(nil).should ==  ["udf1", "udf2", "udf3", "udf4", "udf5", "udf6", "udf7", "udf8", "udf9", "udf10", "udf11", "udf12", "udf13", "udf14", "udf15", "udf16", "udf17", "udf18", "udf19", "udf20"] 
+      Factory(:udf_attribute, :attribute_name => "udf1")
+      UdfAttribute.options_for_attribute_name("udf1").should ==  ["udf1","udf2", "udf3", "udf4", "udf5", "udf6", "udf7", "udf8", "udf9", "udf10", "udf11", "udf12", "udf13", "udf14", "udf15", "udf16", "udf17", "udf18", "udf19", "udf20"] 
     end
   end
 
