@@ -22,11 +22,11 @@ module EcolCustomerOptions
     end
   
     def self.options_for_val_txn_date
-      [['Exact','E'],['Range','R'],['None','N']]
+      [['None','N'],['Exact','E'],['Range','R']]
     end
   
     def self.options_for_val_txn_amt
-      [['Exact','E'],['Range','R'],['Percentage','P'],['None','N']]
+      [['None','N'],['Exact','E'],['Range','R'],['Percentage','P']]
     end
   end
 end
