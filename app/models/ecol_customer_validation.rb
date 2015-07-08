@@ -1,8 +1,7 @@
 module EcolCustomerValidation
   extend ActiveSupport::Concern
   included do
-    validate :val_tokens_should_be_N_if_val_method_is_N,
-    :file_upld_mthd_is_mandatory_if_val_method_is_D,
+    validate :file_upld_mthd_is_mandatory_if_val_method_is_D,
     :same_value_cannot_be_selected_for_all_acct_tokens,
     :acct_token_2_and_3_should_be_N_if_acct_token_1_is_N,
     :acct_token_3_should_be_N_if_acct_toekn_2_is_N,
@@ -16,17 +15,9 @@ module EcolCustomerValidation
     :value_of_validation_fields
   end
   
-  def val_tokens_should_be_N_if_val_method_is_N
-    if (self.val_method == "N" && (self.val_token_1 != "N" || self.val_token_2 != "N" || self.val_token_3 != "N" || self.val_txn_date != "N" || self.val_txn_amt != "N")) 
-      errors[:base] << "If Validation Method is None, then all the Validation Account Tokens should also be N"
-    end
-  end
-  
   def file_upld_mthd_is_mandatory_if_val_method_is_D
-    if (self.val_method == "D" && (self.file_upld_mthd.blank? || self.file_upld_mthd == 'N'))
+    if (self.val_method == "D" && (self.file_upld_mthd != 'I' && self.file_upld_mthd != 'F') || self.file_upld_mthd.blank?)
       errors.add(:file_upld_mthd, "Can't be blank or None if Validation Method is Database Lookup")
-    elsif (self.val_method != "D" && (self.file_upld_mthd != 'N' && !self.file_upld_mthd.blank?))
-      errors.add(:file_upld_mthd, "Can't be selected as Validation Method is not Database Lookup")
     end
   end
   
