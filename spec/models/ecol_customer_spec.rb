@@ -127,10 +127,33 @@ describe EcolCustomer do
         end
       end
     
+    [
+      %w( N I ),
+      %w( N F ),
+      %w( D P ),
+      %w( W Q )
+    ].each do |val_method, file_upld_mthd|
+        it "does not allow the combination val_method=#{val_method} and file_upld_mthd=#{file_upld_mthd}" do
+          ecol_customer = Factory.build(:ecol_customer, :file_upld_mthd => file_upld_mthd, :val_method => val_method)
+          ecol_customer.save.should == false
+        end
+    end
+        
+    it "should check if val_tokens are N if val_method is N" do 
+      ecol_customer = Factory.build(:ecol_customer, :val_method => "N", :val_token_1 => "Y", :val_token_2 => "Y", 
+      :val_token_3 => "N", :val_txn_date => "N", :val_txn_amt => "P")
+      ecol_customer.save.should == false
+      ecol_customer.errors[:base].should == ["If Validation Method is None, then all the Validation Account Tokens should also be N"]
+    end
+    
     it "should check if file_upld_mthd is present if val_method is D" do
       ecol_customer = Factory.build(:ecol_customer, :val_method => "D", :file_upld_mthd => nil)
       ecol_customer.save.should == false
       ecol_customer.errors_on(:file_upld_mthd).should == ["Can't be blank or None if Validation Method is Database Lookup"]
+
+      ecol_customer = Factory.build(:ecol_customer, :val_method => "N", :file_upld_mthd => "F")
+      ecol_customer.save.should == false
+      ecol_customer.errors_on(:file_upld_mthd).should == ["Can't be selected as Validation Method is not Database Lookup"]
     end
     
     it "should check the value of all account tokens" do 
@@ -334,7 +357,7 @@ describe EcolCustomer do
   
   context "set_validation_fields_to_N" do
     it "should set validation fields to N" do
-      ecol_customer = Factory.build(:ecol_customer, :approval_status => 'A', :val_method => 'N', :val_token_1 => 'Y')
+      ecol_customer = Factory.build(:ecol_customer, :approval_status => 'A', :val_method => 'N')
       ecol_customer.save
       ecol_customer.val_token_1.should == 'N'
       ecol_customer.val_token_2.should == 'N'
