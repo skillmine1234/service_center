@@ -70,10 +70,11 @@ class EcolRemittersController < ApplicationController
     @ecol_remitter = EcolRemitter.unscoped.find(params[:id]) rescue nil
     EcolRemitter.transaction do
       approval = @ecol_remitter.approve
-      if @ecol_remitter.save! and approval.empty?
+      if @ecol_remitter.save and approval.empty?
         flash[:alert] = "Ecollect Remitter record was approved successfully"
       else
-        flash[:alert] = @ecol_remitter.errors.full_messages << approval
+        msg = approval.empty? ? @ecol_remitter.errors.full_messages : @ecol_remitter.errors.full_messages << approval
+        flash[:alert] = msg
         raise ActiveRecord::Rollback
       end
     end
