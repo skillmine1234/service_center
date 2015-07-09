@@ -169,7 +169,7 @@ $(document).ready(function(){
   }
   
   $("#udf_attribute_min_length").on("change",function(){
-    if ($("#udf_attribute_min_length").val() != '' && $("#udf_attribute_max_length").val() != ''){
+    if ($("#udf_attribute_min_length").val() != '' || $("#udf_attribute_max_length").val() != ''){
       $("#udf_attribute_length").val('');
       $("#udf_attribute_length").prop('readOnly',true);
     }
@@ -178,13 +178,13 @@ $(document).ready(function(){
     }
   });
   
-  if ($("#udf_attribute_min_length").val() != '' && $("#udf_attribute_max_length").val() != ''){
+  if ($("#udf_attribute_min_length").val() != '' || $("#udf_attribute_max_length").val() != ''){
     $("#udf_attribute_length").val('');
     $("#udf_attribute_length").prop('readOnly',true);
   }
   
   $("#udf_attribute_max_length").on("change",function(){
-    if ($("#udf_attribute_min_length").val() != '' && $("#udf_attribute_max_length").val() != ''){
+    if ($("#udf_attribute_min_length").val() != '' || $("#udf_attribute_max_length").val() != ''){
       $("#udf_attribute_length").val('');
       $("#udf_attribute_length").prop('readOnly',true);
     }
