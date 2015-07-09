@@ -147,4 +147,51 @@ $(document).ready(function(){
   $('#udf_attribute_form').on('submit', function(){
     $(this).find(':input').removeAttr('disabled');
   });
+  
+  $("#udf_attribute_length").on("change",function(){
+    if ($("#udf_attribute_length").val() != ''){
+      $('#udf_attribute_min_length').val('');
+      $('#udf_attribute_min_length').prop('readOnly',true);
+      $('#udf_attribute_max_length').val('');
+      $('#udf_attribute_max_length').prop('readOnly',true);
+    }
+    else{
+      $('#udf_attribute_min_length').prop('readOnly',false);
+      $('#udf_attribute_max_length').prop('readOnly',false);
+    }
+  });
+  
+  if ($("#udf_attribute_length").val() != ''){
+    $('#udf_attribute_min_length').val('');
+    $('#udf_attribute_min_length').prop('readOnly',true);
+    $('#udf_attribute_max_length').val('');
+    $('#udf_attribute_max_length').prop('readOnly',true);
+  }
+  
+  $("#udf_attribute_min_length").on("change",function(){
+    if ($("#udf_attribute_min_length").val() != '' && $("#udf_attribute_max_length").val() != ''){
+      $("#udf_attribute_length").val('');
+      $("#udf_attribute_length").prop('readOnly',true);
+    }
+    else{
+      $("#udf_attribute_length").prop('readOnly',false);
+    }
+  });
+  
+  if ($("#udf_attribute_min_length").val() != '' && $("#udf_attribute_max_length").val() != ''){
+    $("#udf_attribute_length").val('');
+    $("#udf_attribute_length").prop('readOnly',true);
+  }
+  
+  $("#udf_attribute_max_length").on("change",function(){
+    if ($("#udf_attribute_min_length").val() != '' && $("#udf_attribute_max_length").val() != ''){
+      $("#udf_attribute_length").val('');
+      $("#udf_attribute_length").prop('readOnly',true);
+    }
+    else{
+      $("#udf_attribute_length").prop('readOnly',false);
+    }
+  });
+  
+  
 });
