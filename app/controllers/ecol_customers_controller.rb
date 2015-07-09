@@ -71,10 +71,11 @@ class EcolCustomersController < ApplicationController
     @ecol_customer = EcolCustomer.unscoped.find(params[:id]) rescue nil
     EcolCustomer.transaction do
       approval = @ecol_customer.approve
-      if @ecol_customer.save! and approval.empty?
+      if @ecol_customer.save and approval.empty?
         flash[:alert] = "Ecollect Customer record was approved successfully"
       else
-        flash[:alert] = @ecol_customer.errors.full_messages << approval
+        msg = approval.empty? ? @ecol_customer.errors.full_messages : @ecol_customer.errors.full_messages << approval
+        flash[:alert] = msg
         raise ActiveRecord::Rollback
       end
     end

@@ -71,10 +71,11 @@ class EcolRulesController < ApplicationController
     @ecol_rule = EcolRule.unscoped.find(params[:id]) rescue nil
     EcolRule.transaction do
       approval = @ecol_rule.approve
-      if @ecol_rule.save! and approval.empty?
+      if @ecol_rule.save and approval.empty?
         flash[:alert] = "Ecollect Rule record was approved successfully"
       else
-        flash[:alert] = @ecol_rule.errors.full_messages << approval
+        msg = approval.empty? ? @ecol_rule.errors.full_messages : @ecol_rule.errors.full_messages << approval
+        flash[:alert] = msg
         raise ActiveRecord::Rollback
       end
     end

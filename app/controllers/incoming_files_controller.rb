@@ -52,11 +52,12 @@ class IncomingFilesController < ApplicationController
     @incoming_file = IncomingFile.unscoped.find(params[:id]) rescue nil 
     IncomingFile.transaction do
       approval = @incoming_file.approve
-      if @incoming_file.save! and approval.empty?
+      if @incoming_file.save and approval.empty?
         move_incoming_file(@incoming_file)
         flash[:alert] = "Incoming File record was approved successfully"
       else
-        flash[:alert] = @incoming_file.errors.full_messages << approval
+        msg = approval.empty? ? @incoming_file.errors.full_messages : @incoming_file.errors.full_messages << approval
+        flash[:alert] = msg
         raise ActiveRecord::Rollback
       end
     end
