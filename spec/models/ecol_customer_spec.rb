@@ -354,20 +354,5 @@ describe EcolCustomer do
       ecol_customer.errors[:base].should == ["Transaction Date, Transaction Amount and Remitter Account cannot be validated as no Token is validated"]
     end
   end
-  
-  context "set_validation_fields_to_N" do
-    it "should set validation fields to N" do
-      ecol_customer = Factory.build(:ecol_customer, :approval_status => 'A', :val_method => 'N')
-      ecol_customer.save
-      ecol_customer.val_token_1.should == 'N'
-      ecol_customer.val_token_2.should == 'N'
-      ecol_customer.val_token_3.should == 'N'
-      ecol_customer.val_txn_date.should == 'N'
-      ecol_customer.val_txn_amt.should == 'N'
-      ecol_customer.val_ben_name.should == 'N'
-      ecol_customer.val_rem_acct.should == 'N'
-      ecol_customer.return_if_val_fails.should == 'N'
-      ecol_customer.file_upld_mthd.should == 'N'   
-    end
-  end
+
 end

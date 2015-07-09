@@ -227,5 +227,8 @@ $(document).ready(function(){
     $('#ecol_customer_token_3_ends_with').prop('readOnly',false);
   }
   
+  $('#ecol_customer_form').bind('submit', function() {
+      $(this).find(':input').removeAttr('disabled');
+  });
   
 });

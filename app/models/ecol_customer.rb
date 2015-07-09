@@ -2,8 +2,6 @@ class EcolCustomer < ActiveRecord::Base
   include Approval
   include EcolCustomerValidation
   include EcolCustomerOptions
-  
-  before_save :set_validation_fields_to_N
 
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
@@ -56,20 +54,6 @@ class EcolCustomer < ActiveRecord::Base
     if (self.val_token_1 == 'N' && self.val_token_2 == 'N' && self.val_token_3 == 'N' &&
        (self.val_txn_date != 'N' || self.val_txn_amt != 'N' || self.val_rem_acct != 'N'))
       errors[:base] << "Transaction Date, Transaction Amount and Remitter Account cannot be validated as no Token is validated"
-    end
-  end
-  
-  def set_validation_fields_to_N
-    if self.val_method == 'N'
-      self.val_token_1 = 'N'
-      self.val_token_2 = 'N'
-      self.val_token_3 = 'N'
-      self.val_txn_date = 'N'
-      self.val_txn_amt = 'N'
-      self.val_ben_name = 'N'
-      self.val_rem_acct = 'N'
-      self.return_if_val_fails = 'N'
-      self.file_upld_mthd = 'N'
     end
   end
    
