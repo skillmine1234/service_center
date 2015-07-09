@@ -203,17 +203,11 @@
             %td#msg-error
               = error_message_for(@ecol_customer, :credit_acct_val_pass, :prepend_text => "")
           %tr
-            %td.label Credit Account No (Validation Pass)
+            %td.label Credit Account No (Validation Fail)
             %td.value
               = @ecol_customer.credit_acct_val_fail
             %td#msg-error
               = error_message_for(@ecol_customer, :credit_acct_val_fail, :prepend_text => "")
-          %tr
-            %td.label LookUp File Upload Treatment
-            %td.value
-              = @ecol_customer.file_upld_mthd
-            %td#msg-error
-              = error_message_for(@ecol_customer, :file_upld_mthd, :prepend_text => "")
           %tr
             %td.label Narration Suffix 1
             %td.value
