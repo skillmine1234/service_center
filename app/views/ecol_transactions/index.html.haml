@@ -43,7 +43,8 @@
           %td{:style=>'text-align:left;'}
             = link_to 'Show', ecol_transaction
           %td{:style=>'text-align:left;'}
-            = check_box_tag "ecol_transaction_ids[]", ecol_transaction.id, false, class: 'txn_select'
+            - if ecol_transaction.pending_approval == 'Y'
+              = check_box_tag "ecol_transaction_ids[]", ecol_transaction.id, false, class: 'txn_select'
           %td{:style=>'text-align:left;'}
             = ecol_transaction.bene_account_no
           %td{:style=>'text-align:left;'}
