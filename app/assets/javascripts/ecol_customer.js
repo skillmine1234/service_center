@@ -227,6 +227,50 @@ $(document).ready(function(){
     $('#ecol_customer_token_3_ends_with').prop('readOnly',false);
   }
   
+  
+  $("#ecol_customer_val_method").on("change",function(){
+    var val_method =  $(this).val();
+    for (var i=1; i<=3; i++){
+      if (val_method == 'N' || val_method == 'W'){
+        $("#ecol_customer_nrtv_sufx_" + i).val('N');
+        $("#ecol_customer_nrtv_sufx_" + i).children('option[value="SC"]').prop("disabled",true);
+        $("#ecol_customer_nrtv_sufx_" + i).children('option[value="RC"]').prop("disabled",true);
+        $("#ecol_customer_nrtv_sufx_" + i).children('option[value="IN"]').prop("disabled",true);
+        $("#ecol_customer_nrtv_sufx_" + i).children('option[value="RN"]').prop("disabled",true);
+        $("#ecol_customer_nrtv_sufx_" + i).children('option[value="UDF1"]').prop("disabled",true);
+        $("#ecol_customer_nrtv_sufx_" + i).children('option[value="UDF2"]').prop("disabled",true);
+      }
+      else {
+        $("#ecol_customer_nrtv_sufx_" + i).children('option[value="SC"]').prop("disabled",false);
+        $("#ecol_customer_nrtv_sufx_" + i).children('option[value="RC"]').prop("disabled",false);
+        $("#ecol_customer_nrtv_sufx_" + i).children('option[value="IN"]').prop("disabled",false);
+        $("#ecol_customer_nrtv_sufx_" + i).children('option[value="RN"]').prop("disabled",false);
+        $("#ecol_customer_nrtv_sufx_" + i).children('option[value="UDF1"]').prop("disabled",false);
+        $("#ecol_customer_nrtv_sufx_" + i).children('option[value="UDF2"]').prop("disabled",false);
+      }
+    }
+  });
+  
+  
+  for (var i=1; i<=3; i++){
+    if ($('#ecol_customer_val_method').val() == 'N' || $('#ecol_customer_val_method').val() == 'W'){
+      $("#ecol_customer_nrtv_sufx_" + i).children('option[value="SC"]').prop("disabled",true);
+      $("#ecol_customer_nrtv_sufx_" + i).children('option[value="RC"]').prop("disabled",true);
+      $("#ecol_customer_nrtv_sufx_" + i).children('option[value="IN"]').prop("disabled",true);
+      $("#ecol_customer_nrtv_sufx_" + i).children('option[value="RN"]').prop("disabled",true);
+      $("#ecol_customer_nrtv_sufx_" + i).children('option[value="UDF1"]').prop("disabled",true);
+      $("#ecol_customer_nrtv_sufx_" + i).children('option[value="UDF2"]').prop("disabled",true);
+    }
+    else {
+      $("#ecol_customer_nrtv_sufx_" + i).children('option[value="SC"]').prop("disabled",false);
+      $("#ecol_customer_nrtv_sufx_" + i).children('option[value="RC"]').prop("disabled",false);
+      $("#ecol_customer_nrtv_sufx_" + i).children('option[value="IN"]').prop("disabled",false);
+      $("#ecol_customer_nrtv_sufx_" + i).children('option[value="RN"]').prop("disabled",false);
+      $("#ecol_customer_nrtv_sufx_" + i).children('option[value="UDF1"]').prop("disabled",false);
+      $("#ecol_customer_nrtv_sufx_" + i).children('option[value="UDF2"]').prop("disabled",false);   
+    }
+  }
+  
   $('#ecol_customer_form').bind('submit', function() {
       $(this).find(':input').removeAttr('disabled');
   });
