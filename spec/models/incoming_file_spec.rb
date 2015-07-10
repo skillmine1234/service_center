@@ -4,7 +4,7 @@ describe IncomingFile do
   context 'association' do
     it { should belong_to(:created_user) }
     it { should belong_to(:updated_user) }
-    it { should have_many(:incoming_file_records) }
+    it { should have_many(:failed_records) }
     it { should have_many(:ecol_remitters)}
     it { should belong_to(:sc_service) }
     it { should belong_to(:incoming_file_type) }

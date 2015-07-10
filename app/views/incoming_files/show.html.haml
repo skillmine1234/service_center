@@ -27,4 +27,4 @@
       %td{:style=>'text-align:left;'}
         = link_to @incoming_file.ecol_remitters.count, ecol_remitters_path(:incoming_file_id => @incoming_file.id)
       %td{:style=>'text-align:left;'}
-        = link_to @incoming_file.incoming_file_records.count, incoming_file_records_path(:incoming_file_id => @incoming_file.id)
+        = link_to @incoming_file.failed_records.count, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'FAILED')

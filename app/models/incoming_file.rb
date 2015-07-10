@@ -19,7 +19,7 @@ class IncomingFile < ActiveRecord::Base
   has_many :ecol_remitters, :autosave => true
   belongs_to :sc_service, :foreign_key => 'service_name', :primary_key => 'code'
   belongs_to :incoming_file_type, :foreign_key => 'file_type', :primary_key => 'code'
-  has_many :incoming_file_records
+  has_many :failed_records, -> { where status: 'FAILED' }, class_name: 'IncomingFileRecord'
 
   mount_uploader :file, IncomingFileUploader
 
