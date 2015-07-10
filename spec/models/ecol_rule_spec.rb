@@ -24,7 +24,7 @@ describe EcolRule do
   
   context "fields format" do
     it "should allow valid format" do 
-      [:cod_acct_no, :stl_gl_inward, :stl_gl_return].each do |att|
+      [:cod_acct_no, :stl_gl_inward, :stl_gl_return, :cbs_userid].each do |att|
         should allow_value('aaAAbbBB00').for(att)
         should allow_value('AAABBBC090').for(att)
         should allow_value('aaa0000bn').for(att)
@@ -34,9 +34,10 @@ describe EcolRule do
     end
 
     it "should not allow invalid format" do 
-      ecol_rule = Factory.build(:ecol_rule, :cod_acct_no => '-1dfghhhhh', :stl_gl_inward => '@acddsfdfd', :stl_gl_return => '134\ndsfdsg')
+      ecol_rule = Factory.build(:ecol_rule, :cod_acct_no => '-1dfghhhhh', :stl_gl_inward => '@acddsfdfd', :stl_gl_return => '134\ndsfdsg', 
+      :cbs_userid => '@,.9023jsf')
       ecol_rule.save == false
-      [:cod_acct_no, :stl_gl_inward, :stl_gl_return].each do |att|
+      [:cod_acct_no, :stl_gl_inward, :stl_gl_return, :cbs_userid].each do |att|
         ecol_rule.errors_on(att).should == ["Invalid format, expected format is : {[a-z|A-Z|0-9]}"]
       end
     end
