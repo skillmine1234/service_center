@@ -5,8 +5,12 @@ $(document).ready(function(){
     dateFormat: 'yy-mm-dd',
     changeMonth: true,
     changeYear: true,
-    yearRange: ":+70"
+    yearRange: "-70:+70"
   });
+  
+  $('#ecol_remitter_due_date').datepicker("setDate", $('#ecol_remitter_due_date').val());
+  
+  $("#ecol_remitter_due_date").prop("readOnly",true);
   
   $("#ecol_remitter_customer_subcode").on("change",function(){
     var customer_subcode =  $(this).val();

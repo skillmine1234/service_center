@@ -69,7 +69,7 @@
         = error_message_for(@ecol_remitter, :invoice_no, :prepend_text => "")
     .control-group
       = f.label :invoice_amt, "*Invoice Amount", :class => 'control-label'
-      = f.text_field :invoice_amt
+      = f.text_field :invoice_amt, :maxlength => 15
       #msg-error
         = error_message_for(@ecol_remitter, :invoice_amt, :prepend_text => "")
     .control-group
@@ -79,12 +79,12 @@
         = error_message_for(@ecol_remitter, :invoice_amt_tol_pct, :prepend_text => "")
     .control-group
       = f.label :min_credit_amt, "Minimum Credit Amount", :class => 'control-label'
-      = f.text_field :min_credit_amt
+      = f.text_field :min_credit_amt, :maxlength => 15
       #msg-error
         = error_message_for(@ecol_remitter, :min_credit_amt, :prepend_text => "")
     .control-group
       = f.label :max_credit_amt, "Maximum Credit Amount", :class => 'control-label'
-      = f.text_field :max_credit_amt
+      = f.text_field :max_credit_amt, :maxlength => 15
       #msg-error
         = error_message_for(@ecol_remitter, :max_credit_amt, :prepend_text => "")
     .control-group
