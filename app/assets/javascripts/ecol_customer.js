@@ -121,7 +121,6 @@ $(document).ready(function(){
   });
   
   if ($('#ecol_customer_token_1_type').val() === 'N'){
-    $('#ecol_customer_val_token_1').val('N');
     $('#ecol_customer_val_token_1').prop('disabled',true);
     $('#ecol_customer_token_1_length').val(0);
     $('#ecol_customer_token_1_length').prop('readOnly',true);
@@ -164,7 +163,6 @@ $(document).ready(function(){
   });
   
   if ($('#ecol_customer_token_2_type').val() === 'N'){
-    $('#ecol_customer_val_token_2').val('N');
     $('#ecol_customer_val_token_2').prop('disabled',true);
     $('#ecol_customer_token_2_length').val(0);
     $('#ecol_customer_token_2_length').prop('readOnly',true);
@@ -208,7 +206,6 @@ $(document).ready(function(){
   });
   
   if ($('#ecol_customer_token_3_type').val() === 'N'){
-    $('#ecol_customer_val_token_3').val('N');
     $('#ecol_customer_val_token_3').prop('disabled',true);
     $('#ecol_customer_token_3_length').val(0);
     $('#ecol_customer_token_3_length').prop('readOnly',true);
