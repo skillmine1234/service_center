@@ -14,7 +14,7 @@ describe IncomingFileRecordsController do
     it "assigns all incoming_file as @incoming_files" do
       incoming_file = Factory(:incoming_file)
       incoming_file_record = Factory(:incoming_file_record, :incoming_file_id => incoming_file.id)
-      get :index, :incoming_file_id => incoming_file.id
+      get :index, :incoming_file_id => incoming_file.id, :status => 'FAILED'
       assigns(:records).should eq([incoming_file_record])
       assigns(:records_count).should eq(1)
     end

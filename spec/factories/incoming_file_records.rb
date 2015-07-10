@@ -5,7 +5,7 @@ FactoryGirl.define do
     incoming_file_id 1
     record_no 1
     record_txt "MyText"
-    status "MyString"
+    status "FAILED"
     fault_code "MyString"
     fault_reason "MyString"
   end
