@@ -6,7 +6,7 @@ class IncomingFileRecordsController < ApplicationController
   respond_to :json, :html
 
   def index
-    records = IncomingFileRecord.where("incoming_file_id =?",params[:incoming_file_id]).order("id desc")
+    records = IncomingFileRecord.where("incoming_file_id =? and status =?",params[:incoming_file_id],params[:status]).order("id desc")
     @records_count = records.count
     @records = records.paginate(:per_page => 10, :page => params[:page]) rescue []
   end

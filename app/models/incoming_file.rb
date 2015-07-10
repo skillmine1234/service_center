@@ -20,6 +20,7 @@ class IncomingFile < ActiveRecord::Base
   belongs_to :sc_service, :foreign_key => 'service_name', :primary_key => 'code'
   belongs_to :incoming_file_type, :foreign_key => 'file_type', :primary_key => 'code'
   has_many :failed_records, -> { where status: 'FAILED' }, class_name: 'IncomingFileRecord'
+  has_many :incoming_file_records
 
   mount_uploader :file, IncomingFileUploader
 
