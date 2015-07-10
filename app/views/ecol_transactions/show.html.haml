@@ -24,7 +24,7 @@
       Settled At:
       = @ecol_transaction.settled_at.try(:strftime, "%d/%m/%Y %I:%M%p")
       /= "(" + @ecol_transaction.settled_at.to_s + " mins)"
-  .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; height: 300px;display: inline-block;'}
+  .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; height: 350px;display: inline-block;'}
     #ticket-details
       %h3 
         Validation Details:
@@ -35,7 +35,11 @@
           %td= @ecol_transaction.bene_account_no
         %tr
           %td.label Customer Code 
-          %td= link_to @ecol_transaction.customer_code , @ecol_transaction.ecol_customer  rescue "No Customer for Code #{@ecol_transaction.customer_code}" 
+          %td
+            - if !@ecol_transaction.ecol_customer.nil?
+              = link_to @ecol_transaction.customer_code , @ecol_transaction.ecol_customer
+            - else
+              = @ecol_transaction.customer_code
         %tr
           %td.label 
             Token 1 : 
@@ -57,7 +61,7 @@
           %td
             = ecol_transaction_token_show(@ecol_transaction, 2)
             = "(#{@ecol_transaction.ecol_customer.val_token_3 rescue "-"})"
-  .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; height: 300px; display: inline-block;'}
+  .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; height: 350px; display: inline-block;'}
     #ticket-details
       %br
       %br
@@ -88,6 +92,11 @@
           %td
             = @ecol_transaction.rmtr_account_no
             = "(#{@ecol_transaction.ecol_customer.val_rem_acct rescue "-"})"
+        %tr
+          %td.label Remitter Name
+          %td
+            = @ecol_transaction.rmtr_full_name
+            = "(#{@ecol_transaction.ecol_customer.val_rmtr_name rescue "-"})"
         %tr
           %td.label Beneficiary Name
           %td
@@ -134,7 +143,7 @@
         %br
         %br
       .space{:style=>'height: 18px;'}
-      %hr{:style=>'background-color: #F1F2F8; width: 220%'}
+      %hr{:style=>'background-color: #F1F2F8; width: 200%'}
       %h3 Transfer Details
       %table.table.no-border
         %tr
@@ -147,7 +156,7 @@
           %td.label Transfer Date
           %td= @ecol_transaction.transfer_date
       .space{:style=>'height: 14px;'}
-      %hr{:style=>'background-color: #F1F2F8; width: 220%'}    
+      %hr{:style=>'background-color: #F1F2F8; width: 200%'}    
       %h3 
         = "Remitter"
       %table.table.no-border
