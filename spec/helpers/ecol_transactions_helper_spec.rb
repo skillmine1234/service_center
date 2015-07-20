@@ -69,4 +69,13 @@ describe EcolTransactionsHelper do
       txn_summary_count({["FAILED","N"] => 1, ["SUCCESS","Y"] => 1, ["SUCCESS","N"] => 1},['FAILED','Y']).should == 0
     end
   end
+  
+  context "show_page_value_for_validation_status" do
+    it "should return show page value for valiadation status" do
+      ecol_transaction = Factory(:ecol_transaction, :transfer_unique_no => "121212", :validation_status => "0")
+      show_page_value_for_validation_status(ecol_transaction, "0").should == "SUCCESS"
+      ecol_transaction = Factory(:ecol_transaction, :transfer_unique_no => "121213", :validation_status => "abcd")
+      show_page_value_for_validation_status(ecol_transaction, "abcd").should == "abcd"
+    end
+  end
 end

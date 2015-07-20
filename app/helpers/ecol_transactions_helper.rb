@@ -40,4 +40,12 @@ module EcolTransactionsHelper
     count.nil? ? 0 : count
   end
   
+  def show_page_value_for_validation_status(ecol_transaction,value)
+    if (value == "0")
+      "SUCCESS"
+    else
+      ecol_transaction.validation_status
+    end
+  end
+  
 end

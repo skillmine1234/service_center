@@ -76,7 +76,7 @@
             - if !ecol_transaction.validation_result.nil?
               = link_to ecol_transaction.validation_status, "#", :class => 'validation-link', :href => "#validationText", data: { validation_result: ecol_transaction.validation_result}
             - else
-              = ecol_transaction.validation_status
+              = show_page_value_for_validation_status(ecol_transaction, ecol_transaction.validation_status)
                   
   .form-actions
     = submit_tag "Approve Checked", :name => nil, :class => 'btn btn-primary', :id => "approve_button"
