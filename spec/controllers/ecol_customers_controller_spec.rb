@@ -182,7 +182,7 @@ describe EcolCustomersController do
 
   describe "PUT approve" do
     it "unapproved record can be approved and old approved record will be deleted" do
-      @user.role_id = Factory(:role, :name => 'approver').id
+      @user.role_id = Factory(:role, :name => 'supervisor').id
       @user.save
       ecol_customer1 = Factory(:ecol_customer, :code => "CUST01", :approval_status => 'A')
       ecol_customer2 = Factory(:ecol_customer, :code => "CUST01", :approval_status => 'U', :name => 'Foobar', :approved_version => ecol_customer1.lock_version, :approved_id => ecol_customer1.id)

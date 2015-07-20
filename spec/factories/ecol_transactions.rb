@@ -15,6 +15,6 @@ FactoryGirl.define do
     bene_account_no "MyString"
     bene_account_ifsc "MyString"
     received_at "2015-05-10 12:12:00"
-    pending_approval "N"
+    pending_confirmation "N"
   end
 end

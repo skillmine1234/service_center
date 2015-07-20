@@ -10,7 +10,7 @@ describe User do
       user = Factory(:user, :role_id => Factory(:role, :name => :user).id)
       user.has_role?(:user).should === true
       user.has_role?(:editor).should === false
-      user.has_role?(:approver).should === false
+      user.has_role?(:supervisor).should === false
     end
   end
 

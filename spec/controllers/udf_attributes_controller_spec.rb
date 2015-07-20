@@ -183,7 +183,7 @@ describe UdfAttributesController do
   
   describe "PUT approve" do
     it "unapproved record can be approved and old approved record will be deleted" do
-      @user.role_id = Factory(:role, :name => 'approver').id
+      @user.role_id = Factory(:role, :name => 'supervisor').id
       @user.save
       udf_attribute1 = Factory(:udf_attribute, :approval_status => 'A')
       udf_attribute2 = Factory(:udf_attribute, :approval_status => 'U', :min_length => '6', :approved_version => udf_attribute1.lock_version, :approved_id => udf_attribute1.id)

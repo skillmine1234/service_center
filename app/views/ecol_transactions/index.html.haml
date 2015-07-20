@@ -43,7 +43,7 @@
           %td{:style=>'text-align:left;'}
             = link_to 'Show', ecol_transaction
           %td{:style=>'text-align:left;'}
-            - if ecol_transaction.pending_approval == 'Y'
+            - if ecol_transaction.pending_confirmation == 'Y'
               = check_box_tag "ecol_transaction_ids[]", ecol_transaction.id, false, class: 'txn_select'
           %td{:style=>'text-align:left;'}
             = ecol_transaction.bene_account_no
@@ -66,7 +66,7 @@
             - else
               = ecol_transaction.status
           %td{:style=>'text-align:left;'}
-            = ecol_transaction.pending_approval
+            = ecol_transaction.pending_confirmation
           %td{:style=>'text-align:left;'}
             - if !ecol_transaction.settle_result.nil?
               = link_to ecol_transaction.settle_status, "#", :class => 'settle-link', :href => "#settleText", data: { settle_result: ecol_transaction.settle_result}

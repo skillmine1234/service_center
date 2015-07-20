@@ -90,7 +90,7 @@ describe IncomingFilesController do
 
   describe "PUT approve" do
     it "unapproved record can be approved and old approved record will be deleted" do
-      @user.role_id = Factory(:role, :name => 'approver').id
+      @user.role_id = Factory(:role, :name => 'supervisor').id
       @user.save
       incoming_file1 = Factory(:incoming_file, :approval_status => 'A')
       incoming_file2 = Factory(:incoming_file, :approval_status => 'U', :approved_version => incoming_file1.lock_version, :approved_id => incoming_file1.id)

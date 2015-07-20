@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
   devise :session_limitable
 
-  Roles = %w{user approver editor}
+  Roles = %w{user supervisor editor}
 
   Groups = %w{inward-remittance e-collect}
 

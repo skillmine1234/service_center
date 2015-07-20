@@ -10,7 +10,7 @@ class Ability
     user_admin_permissions if @user.has_role? :user_admin
     user_permissions(@user.group_model_list) if @user.has_role? :user
     editor_permissions(@user.group_model_list) if @user.has_role? :editor
-    approver_permissions(@user.group_model_list) if @user.has_role? :approver
+    supervisor_permissions(@user.group_model_list) if @user.has_role? :supervisor
     can :read, ActiveAdmin::Page, :name => "Dashboard"
   end
 
@@ -28,7 +28,7 @@ class Ability
     end
   end
 
-  def approver_permissions(models)
+  def supervisor_permissions(models)
     models.each do |model_name|
       can :read, model_name.constantize
       can :approve, model_name.constantize
