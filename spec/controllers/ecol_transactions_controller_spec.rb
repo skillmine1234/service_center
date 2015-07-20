@@ -28,7 +28,7 @@ describe EcolTransactionsController do
   
   describe "GET summary" do
     it "renders summary" do
-      ecol_transaction = Factory(:ecol_transaction, :status => 'NEW', :pending_confirmation => 'Y')
+      ecol_transaction = Factory(:ecol_transaction, :status => 'NEW', :pending_approval => 'Y')
       get :summary
       assigns(:ecol_transaction_summary).should eq({['NEW','Y']=>1})
       assigns(:ecol_transaction_statuses).should eq(['NEW'])
@@ -52,13 +52,13 @@ describe EcolTransactionsController do
   
   describe "PUT update_multiple" do
     it "updates the requested ecol_transactions" do
-      ecol_transaction = Factory(:ecol_transaction, :transfer_unique_no => "vvvvv", :pending_confirmation => 'Y')
+      ecol_transaction = Factory(:ecol_transaction, :transfer_unique_no => "vvvvv", :pending_approval => 'Y')
       params = ecol_transaction.attributes.slice(*ecol_transaction.class.attribute_names)
-      params[:pending_confirmation] = "N"
+      params[:pending_approval] = "N"
       put :update_multiple, {:ecol_transaction_ids => [ecol_transaction.id], :ecol_transaction => params}
       response.should redirect_to(ecol_transactions_path)
       ecol_transaction.reload
-      ecol_transaction.pending_confirmation.should == "N"
+      ecol_transaction.pending_approval.should == "N"
     end
   end
 

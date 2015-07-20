@@ -6,7 +6,7 @@
       - @ecol_transactions.each do |ecol_transaction|
         = hidden_field_tag "ecol_transaction_ids[]", ecol_transaction.id
       .control-group
-        = f.label :pending_confirmation, "Are you to sure you want to Approve?", :class => 'control-label'  
+        = f.label :pending_approval, "Are you to sure you want to Approve?", :class => 'control-label'  
   .form-actions
     = f.button "submit" ,:class=>"btn btn-primary", :id => 'approve_transaction', :value => 'Confirm'
     = link_to "Cancel", "/ecol_transactions", :class=>"cancel btn"

@@ -21,9 +21,9 @@ class EcolTransactionsController < ApplicationController
   
   def summary 
     ecol_transactions = EcolTransaction.order("id desc")
-    @ecol_transaction_summary = EcolTransaction.group(:status, :pending_confirmation).count
+    @ecol_transaction_summary = EcolTransaction.group(:status, :pending_approval).count
     @ecol_transaction_statuses = EcolTransaction.group(:status).count.keys
-    @total_pending_records = EcolTransaction.where(:pending_confirmation => 'Y').count
+    @total_pending_records = EcolTransaction.where(:pending_approval => 'Y').count
     @total_records = EcolTransaction.count
   end
   
@@ -39,7 +39,7 @@ class EcolTransactionsController < ApplicationController
   def update_multiple
     @ecol_transactions = EcolTransaction.find(params[:ecol_transaction_ids])
     @ecol_transactions.each do |ecol_transaction|
-      ecol_transaction.update_attributes(:pending_confirmation => "N")
+      ecol_transaction.update_attributes(:pending_approval => "N")
     end
     flash[:notice] = "Updated transactions!"
     redirect_to ecol_transactions_path
@@ -54,7 +54,7 @@ class EcolTransactionsController < ApplicationController
     :tokenzation_status, :customer_code, :customer_subcode, :remitter_code, :validated_at, :vaidation_status,
     :credited_at, :credit_status, :credit_ref, :credit_attempt_no, :rmtr_email_notify_ref, :rmtr_sms_notify_ref,
     :settled_at, :settle_status, :settle_ref, :settle_attempt_no, :fault_at, :fault_code, :fault_reason, :created_at,
-    :updated_at, :ecol_remitter_id, :pending_confirmation)
+    :updated_at, :ecol_remitter_id, :pending_approval)
   end
   
 end

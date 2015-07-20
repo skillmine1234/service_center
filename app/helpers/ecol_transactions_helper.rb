@@ -4,8 +4,8 @@ module EcolTransactionsHelper
     ecol_transactions = transactions
     ecol_transactions = ecol_transactions.where("TRIM(transfer_unique_no)=?",params[:transfer_unique_no].strip) if params[:transfer_unique_no].present?
     ecol_transactions = ecol_transactions.where("customer_code=?",params[:customer_code]) if params[:customer_code].present?
-    ecol_transactions = ecol_transactions.where("status=? and pending_confirmation=?",params[:status],params[:pending]) if params[:status].present? and params[:pending].present?
-    ecol_transactions = ecol_transactions.where("pending_confirmation=?",params[:pending]) if params[:pending].present?
+    ecol_transactions = ecol_transactions.where("status=? and pending_approval=?",params[:status],params[:pending]) if params[:status].present? and params[:pending].present?
+    ecol_transactions = ecol_transactions.where("pending_approval=?",params[:pending]) if params[:pending].present?
     ecol_transactions = ecol_transactions.where("status=?",params[:status]) if params[:status].present?
     ecol_transactions = ecol_transactions.where("transfer_type=?",params[:transfer_type]) if params[:transfer_type].present? 
     ecol_transactions = ecol_transactions.where("bene_account_no=?",params[:bene_account_no]) if params[:bene_account_no].present?

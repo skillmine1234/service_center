@@ -16,9 +16,9 @@ describe EcolTransactionsHelper do
       find_ecol_transactions(val,{:customer_code => "123456"}).should == [ecol_transaction]
       find_ecol_transactions(val,{:customer_code => "9876112"}).should_not == [ecol_transaction]
       
-      ecol_transaction = Factory(:ecol_transaction, :status => "NEW", :transfer_unique_no => "ojkpoi", :pending_confirmation => "Y")
-      find_ecol_transactions(val,{:status => "NEW",:pending_confirmation => "Y"}).should == [ecol_transaction]
-      find_ecol_transactions(val,{:status => "FAILED",:pending_confirmation => "Y"}).should_not == [ecol_transaction]
+      ecol_transaction = Factory(:ecol_transaction, :status => "NEW", :transfer_unique_no => "ojkpoi", :pending_approval => "Y")
+      find_ecol_transactions(val,{:status => "NEW",:pending_approval => "Y"}).should == [ecol_transaction]
+      find_ecol_transactions(val,{:status => "FAILED",:pending_approval => "Y"}).should_not == [ecol_transaction]
       
       ecol_transaction = Factory(:ecol_transaction, :status => "SUCCESS", :transfer_unique_no => "oiopoi")
       find_ecol_transactions(val,{:status => "SUCCESS"}).should == [ecol_transaction]
