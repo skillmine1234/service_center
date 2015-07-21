@@ -1,5 +1,6 @@
 class UdfAttribute < ActiveRecord::Base
   include Approval
+  include EcolApproval
   include UdfAttributeValidation
   attr_writer :length, :max_length, :min_length, :min_value, :max_value
   attr_reader :length, :max_length, :min_length, :min_value, :max_value

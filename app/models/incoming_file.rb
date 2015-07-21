@@ -1,5 +1,6 @@
 class IncomingFile < ActiveRecord::Base  
   include Approval
+  include EcolApproval
 
   SIZE_LIMIT = 50.megabytes.to_i
   validate :validate_file_name 
