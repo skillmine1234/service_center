@@ -43,5 +43,11 @@ $(document).ready(function(){
   $("#aml_reset").on('click', function(){
     $('input#search_params_firstName').val('');
     $('input#search_params_idNumber').val('');
-  })
+  });
+
+  $("#ecol_customer_reset").on('click', function(){
+    $('input#customer_code').val('');
+    $('input#customer_subcode').val('');
+    $('input#remitter_code').val('');
+  });
 });
