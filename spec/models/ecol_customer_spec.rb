@@ -38,6 +38,11 @@ describe EcolCustomer do
       ecol_customer = Factory(:ecol_customer)
       [:token_1_length, :token_2_length, :token_3_length].each do |att|
         should validate_numericality_of(att)
+        should allow_value(0).for(att)
+        should allow_value(29).for(att)
+        should_not allow_value(30).for(att)
+        should_not allow_value(-1).for(att)
+        should allow_value(15).for(att)
       end
     end
     

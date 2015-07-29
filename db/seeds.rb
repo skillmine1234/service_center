@@ -21,7 +21,7 @@ Group.create(:name=>"inward-remittance") if Group.find_by_name("inward-remittanc
 Group.create(:name=>"e-collect") if Group.find_by_name("e-collect").nil?
 
 if InwRemittanceRule.all.empty?
-  InwRemittanceRule.create!(:pattern_salutations => "Mr,Mrs,Miss,Dr,Ms,PRof,Rev,Lady,Sir,Capt,Major,LtCol,Col")
+  InwRemittanceRule.create!(:pattern_salutations => "Mr\r\nMrs\r\nMiss\r\nDr\r\nMs\r\nPRof\r\nRev\r\nLady\r\nSir\r\nCapt\r\nMajor\r\nLtCol\r\nCol")
 end
 
 if EcolRule.all.empty?  

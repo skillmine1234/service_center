@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150605133847) do
+ActiveRecord::Schema.define(version: 20150720132521) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -72,8 +72,8 @@ ActiveRecord::Schema.define(version: 20150605133847) do
 
   create_table "api_keys", force: :cascade do |t|
     t.string   "access_token"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "attachments", force: :cascade do |t|
@@ -122,6 +122,8 @@ ActiveRecord::Schema.define(version: 20150605133847) do
     t.integer  "lock_version", default: 0, null: false
   end
 
+  add_index "banks", ["ifsc"], name: "index_banks_on_ifsc", unique: true
+
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
     t.integer  "attempts",   default: 0, null: false
@@ -137,6 +139,284 @@ ActiveRecord::Schema.define(version: 20150605133847) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+
+  create_table "ecol_customers", force: :cascade do |t|
+    t.string   "code",                  limit: 15,                null: false
+    t.string   "name",                  limit: 100,               null: false
+    t.string   "is_enabled",            limit: 1,   default: "Y", null: false
+    t.string   "val_method",            limit: 1,                 null: false
+    t.string   "token_1_type",          limit: 3,   default: "N", null: false
+    t.integer  "token_1_length",                    default: 0,   null: false
+    t.string   "val_token_1",           limit: 1,   default: "N", null: false
+    t.string   "token_2_type",          limit: 3,   default: "N", null: false
+    t.integer  "token_2_length",                    default: 0,   null: false
+    t.string   "val_token_2",           limit: 1,   default: "N", null: false
+    t.string   "token_3_type",          limit: 3,   default: "N", null: false
+    t.integer  "token_3_length",                    default: 0,   null: false
+    t.string   "val_token_3",           limit: 1,   default: "N", null: false
+    t.string   "val_txn_date",          limit: 1,   default: "N", null: false
+    t.string   "val_txn_amt",           limit: 1,   default: "N", null: false
+    t.string   "val_ben_name",          limit: 1,   default: "N", null: false
+    t.string   "val_rem_acct",          limit: 1,   default: "N", null: false
+    t.string   "return_if_val_fails",   limit: 1,   default: "N", null: false
+    t.string   "file_upld_mthd",        limit: 1
+    t.string   "credit_acct_val_pass",  limit: 25,                null: false
+    t.string   "nrtv_sufx_1",           limit: 3,   default: "N", null: false
+    t.string   "nrtv_sufx_2",           limit: 3,   default: "N", null: false
+    t.string   "nrtv_sufx_3",           limit: 3,   default: "N", null: false
+    t.string   "rmtr_alert_on",         limit: 1,   default: "N", null: false
+    t.string   "rmtr_pass_txt",         limit: 500
+    t.string   "rmtr_return_txt",       limit: 500
+    t.string   "created_by",            limit: 20
+    t.string   "updated_by",            limit: 20
+    t.integer  "lock_version",                      default: 0,   null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.string   "approval_status",       limit: 1,   default: "U", null: false
+    t.string   "last_action",           limit: 1,   default: "C"
+    t.integer  "approved_version"
+    t.string   "auto_credit",           limit: 1,   default: "N"
+    t.string   "auto_return",           limit: 1,   default: "N"
+    t.integer  "approved_id"
+    t.string   "val_last_token_length", limit: 1,   default: "N"
+    t.string   "token_1_starts_with",   limit: 29
+    t.string   "token_1_contains",      limit: 29
+    t.string   "token_1_ends_with",     limit: 29
+    t.string   "token_2_starts_with",   limit: 29
+    t.string   "token_2_contains",      limit: 29
+    t.string   "token_2_ends_with",     limit: 29
+    t.string   "token_3_starts_with",   limit: 29
+    t.string   "token_3_contains",      limit: 29
+    t.string   "token_3_ends_with",     limit: 29
+    t.string   "credit_acct_val_fail",  limit: 25,                null: false
+    t.string   "val_rmtr_name",         limit: 1,   default: "N"
+  end
+
+  add_index "ecol_customers", ["code", "approval_status"], name: "customer_index_on_status", unique: true
+
+  create_table "ecol_fetch_statistics", force: :cascade do |t|
+    t.datetime "last_neft_at",  null: false
+    t.integer  "last_neft_id",  null: false
+    t.integer  "last_neft_cnt", null: false
+    t.integer  "tot_neft_cnt",  null: false
+    t.datetime "last_rtgs_at",  null: false
+    t.integer  "last_rtgs_id",  null: false
+    t.integer  "last_rtgs_cnt", null: false
+    t.integer  "tot_rtgs_cnt",  null: false
+  end
+
+  create_table "ecol_pending_credits", force: :cascade do |t|
+    t.string   "broker_uuid",         limit: 500, null: false
+    t.integer  "ecol_transaction_id",             null: false
+    t.datetime "created_at",                      null: false
+  end
+
+  create_table "ecol_pending_returns", force: :cascade do |t|
+    t.string   "broker_uuid",         limit: 500, null: false
+    t.integer  "ecol_transaction_id",             null: false
+    t.datetime "created_at",                      null: false
+  end
+
+  create_table "ecol_pending_settlements", force: :cascade do |t|
+    t.string   "broker_uuid",         limit: 500, null: false
+    t.integer  "ecol_transaction_id",             null: false
+    t.datetime "created_at",                      null: false
+  end
+
+  create_table "ecol_pending_validations", force: :cascade do |t|
+    t.string   "broker_uuid",         limit: 500, null: false
+    t.integer  "ecol_transaction_id",             null: false
+    t.datetime "created_at",                      null: false
+  end
+
+  create_table "ecol_remitters", force: :cascade do |t|
+    t.integer  "incoming_file_id"
+    t.string   "customer_code",           limit: 15,                         null: false
+    t.string   "customer_subcode",        limit: 15
+    t.string   "remitter_code",           limit: 28
+    t.string   "credit_acct_no",          limit: 25
+    t.string   "customer_subcode_email",  limit: 100
+    t.string   "customer_subcode_mobile", limit: 10
+    t.string   "rmtr_name",               limit: 100,                        null: false
+    t.string   "rmtr_address",            limit: 105
+    t.string   "rmtr_acct_no",            limit: 25
+    t.string   "rmtr_email",              limit: 100
+    t.string   "rmtr_mobile",             limit: 10
+    t.string   "invoice_no",              limit: 28
+    t.float    "invoice_amt",                                                null: false
+    t.float    "invoice_amt_tol_pct"
+    t.float    "min_credit_amt"
+    t.float    "max_credit_amt"
+    t.date     "due_date",                            default: '1950-01-01', null: false
+    t.integer  "due_date_tol_days",                   default: 0
+    t.string   "udf1",                    limit: 255
+    t.string   "udf2",                    limit: 255
+    t.string   "udf3",                    limit: 255
+    t.string   "udf4",                    limit: 255
+    t.string   "udf5",                    limit: 255
+    t.string   "udf6",                    limit: 255
+    t.string   "udf7",                    limit: 255
+    t.string   "udf8",                    limit: 255
+    t.string   "udf9",                    limit: 255
+    t.string   "udf10",                   limit: 255
+    t.string   "udf11",                   limit: 255
+    t.string   "udf12",                   limit: 255
+    t.string   "udf13",                   limit: 255
+    t.string   "udf14",                   limit: 255
+    t.string   "udf15",                   limit: 255
+    t.string   "udf16",                   limit: 255
+    t.string   "udf17",                   limit: 255
+    t.string   "udf18",                   limit: 255
+    t.string   "udf19",                   limit: 255
+    t.string   "udf20",                   limit: 255
+    t.string   "created_by",              limit: 20
+    t.string   "updated_by",              limit: 20
+    t.integer  "lock_version",                        default: 0,            null: false
+    t.datetime "created_at",                                                 null: false
+    t.datetime "updated_at",                                                 null: false
+    t.string   "approval_status",         limit: 1,   default: "U",          null: false
+    t.string   "last_action",             limit: 1,   default: "C"
+    t.integer  "approved_version"
+    t.integer  "approved_id"
+  end
+
+  add_index "ecol_remitters", ["customer_code", "customer_subcode", "remitter_code", "invoice_no", "approval_status"], name: "remitter_index_on_status", unique: true
+
+  create_table "ecol_rules", force: :cascade do |t|
+    t.string   "ifsc",             limit: 11,               null: false
+    t.string   "cod_acct_no",      limit: 15,               null: false
+    t.string   "stl_gl_inward",    limit: 15,               null: false
+    t.string   "stl_gl_return",    limit: 15,               null: false
+    t.string   "created_by",       limit: 20
+    t.string   "updated_by",       limit: 20
+    t.integer  "lock_version",                default: 0,   null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.string   "approval_status",  limit: 1,  default: "U", null: false
+    t.string   "last_action",      limit: 1,  default: "C"
+    t.integer  "approved_version"
+    t.integer  "approved_id"
+    t.string   "neft_sender_ifsc", limit: 11,               null: false
+    t.string   "cbs_userid",       limit: 50,               null: false
+  end
+
+  create_table "ecol_transactions", force: :cascade do |t|
+    t.string   "status",                limit: 20,   default: "N", null: false
+    t.string   "transfer_type",         limit: 4,                  null: false
+    t.string   "transfer_unique_no",    limit: 64,                 null: false
+    t.string   "transfer_status",       limit: 25,                 null: false
+    t.date     "transfer_date",                                    null: false
+    t.string   "transfer_ccy",          limit: 5,                  null: false
+    t.float    "transfer_amt",                                     null: false
+    t.string   "rmtr_ref",              limit: 64
+    t.string   "rmtr_full_name",        limit: 255,                null: false
+    t.string   "rmtr_address",          limit: 255
+    t.string   "rmtr_account_type",     limit: 10
+    t.string   "rmtr_account_no",       limit: 64,                 null: false
+    t.string   "rmtr_account_ifsc",     limit: 20,                 null: false
+    t.string   "bene_full_name",        limit: 255
+    t.string   "bene_account_type",     limit: 10
+    t.string   "bene_account_no",       limit: 64,                 null: false
+    t.string   "bene_account_ifsc",     limit: 20,                 null: false
+    t.string   "rmtr_to_bene_note",     limit: 255
+    t.datetime "received_at",                                      null: false
+    t.string   "customer_code",         limit: 15
+    t.string   "customer_subcode",      limit: 15
+    t.string   "remitter_code",         limit: 28
+    t.datetime "validated_at"
+    t.string   "validation_status",     limit: 50
+    t.datetime "credited_at"
+    t.string   "credit_status",         limit: 50
+    t.string   "credit_ref",            limit: 64
+    t.integer  "credit_attempt_no"
+    t.string   "rmtr_email_notify_ref", limit: 64
+    t.string   "rmtr_sms_notify_ref",   limit: 64
+    t.datetime "settled_at"
+    t.string   "settle_status",         limit: 50
+    t.string   "settle_ref",            limit: 64
+    t.integer  "settle_attempt_no"
+    t.datetime "fault_at"
+    t.string   "fault_code",            limit: 50
+    t.string   "fault_reason",          limit: 1000
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
+    t.string   "invoice_no",            limit: 28
+    t.datetime "validate_at"
+    t.datetime "credit_attempt_at"
+    t.datetime "returned_at"
+    t.string   "return_status",         limit: 50
+    t.string   "return_ref",            limit: 64
+    t.datetime "return_attempt_at"
+    t.integer  "return_attempt_no",     limit: 8
+    t.datetime "settle_attempt_at"
+    t.string   "bene_full_address",     limit: 255
+    t.string   "validation_result",     limit: 1000
+    t.string   "credit_acct_no",        limit: 25
+    t.string   "credit_result",         limit: 1000
+    t.string   "settle_result",         limit: 1000
+    t.string   "return_result",         limit: 1000
+    t.integer  "ecol_remitter_id"
+    t.string   "pending_approval",      limit: 1,    default: "Y"
+  end
+
+  add_index "ecol_transactions", ["transfer_type", "transfer_unique_no"], name: "ecol_transaction_unique_index", unique: true
+
+  create_table "ecol_unapproved_records", force: :cascade do |t|
+    t.integer  "ecol_approvable_id"
+    t.string   "ecol_approvable_type"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "incoming_file_records", force: :cascade do |t|
+    t.integer  "incoming_file_id"
+    t.integer  "record_no"
+    t.text     "record_txt"
+    t.string   "status",           limit: 20
+    t.string   "fault_code",       limit: 50
+    t.string   "fault_reason",     limit: 500
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  create_table "incoming_file_types", force: :cascade do |t|
+    t.integer "sc_service_id",            null: false
+    t.string  "code",          limit: 50, null: false
+    t.string  "name",          limit: 50, null: false
+  end
+
+  add_index "incoming_file_types", ["code"], name: "index_incoming_file_types_on_code", unique: true
+  add_index "incoming_file_types", ["name"], name: "index_incoming_file_types_on_name", unique: true
+  add_index "incoming_file_types", ["sc_service_id"], name: "index_incoming_file_types_on_sc_service_id", unique: true
+
+  create_table "incoming_files", force: :cascade do |t|
+    t.string   "service_name",     limit: 10
+    t.string   "file_type",        limit: 10
+    t.string   "file"
+    t.string   "file_name",        limit: 50
+    t.integer  "size_in_bytes"
+    t.integer  "line_count"
+    t.string   "status",           limit: 1
+    t.date     "started_at"
+    t.date     "ended_at"
+    t.string   "created_by",       limit: 20
+    t.string   "updated_by",       limit: 20
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.string   "fault_code",       limit: 50
+    t.string   "fault_reason",     limit: 500
+    t.string   "approval_status",  limit: 1,   default: "U", null: false
+    t.string   "last_action",      limit: 1,   default: "C"
+    t.integer  "approved_version"
+    t.integer  "approved_id"
+    t.integer  "lock_version"
+  end
 
   create_table "inw_audit_logs", force: :cascade do |t|
     t.integer "inward_remittance_id"
@@ -236,7 +516,6 @@ ActiveRecord::Schema.define(version: 20150605133847) do
   add_index "inward_remittances", ["req_no", "partner_code", "attempt_no"], name: "remittance_unique_index", unique: true
 
   create_table "inward_remittances_locks", id: false, force: :cascade do |t|
-    t.string  "partner_code"
     t.integer "inward_remittance_id"
     t.string  "created_at"
   end
@@ -249,7 +528,7 @@ ActiveRecord::Schema.define(version: 20150605133847) do
     t.string   "account_no",                limit: 20,             null: false
     t.string   "account_ifsc",              limit: 20
     t.integer  "txn_hold_period_days",                 default: 7, null: false
-    t.string   "identity_user_id",          limit: 20
+    t.string   "identity_user_id",          limit: 20,             null: false
     t.float    "low_balance_alert_at"
     t.string   "remitter_sms_allowed",      limit: 1
     t.string   "remitter_email_allowed",    limit: 1
@@ -264,7 +543,7 @@ ActiveRecord::Schema.define(version: 20150605133847) do
     t.datetime "updated_at"
     t.integer  "lock_version",                         default: 0, null: false
     t.string   "enabled",                   limit: 1
-    t.string   "customer_id"
+    t.string   "customer_id",               limit: 15
     t.string   "mmid",                      limit: 7
     t.string   "mobile_no",                 limit: 10
     t.string   "country"
@@ -280,15 +559,15 @@ ActiveRecord::Schema.define(version: 20150605133847) do
     t.string   "created_by",            limit: 20
     t.string   "updated_by",            limit: 20
     t.integer  "lock_version",                       default: 0, null: false
-    t.float    "txn_limit",             limit: 8
+    t.float    "txn_limit"
     t.integer  "daily_txn_limit"
     t.string   "disallowed_rem_types",  limit: 30
     t.string   "disallowed_bene_types", limit: 30
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.float    "mtd_txn_cnt_self",      limit: 8
+    t.float    "mtd_txn_cnt_self"
     t.float    "mtd_txn_limit_self"
-    t.float    "mtd_txn_cnt_sp",        limit: 8
+    t.float    "mtd_txn_cnt_sp"
     t.float    "mtd_txn_limit_sp"
     t.string   "rbi_code",              limit: 5
     t.string   "pattern_beneficiaries", limit: 4000
@@ -320,13 +599,44 @@ ActiveRecord::Schema.define(version: 20150605133847) do
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], name: "index_roles_on_name"
 
+  create_table "sc_services", force: :cascade do |t|
+    t.string "code", limit: 50, null: false
+    t.string "name", limit: 50, null: false
+  end
+
+  add_index "sc_services", ["code"], name: "index_sc_services_on_code", unique: true
+  add_index "sc_services", ["name"], name: "index_sc_services_on_name", unique: true
+
+  create_table "udf_attributes", force: :cascade do |t|
+    t.string   "class_name",       limit: 100,               null: false
+    t.string   "attribute_name",   limit: 100,               null: false
+    t.string   "label_text",       limit: 100
+    t.string   "is_enabled",       limit: 1,   default: "Y", null: false
+    t.string   "is_mandatory",     limit: 1,   default: "N"
+    t.string   "control_type",     limit: 255
+    t.string   "data_type",        limit: 255
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.integer  "lock_version",                 default: 0,   null: false
+    t.string   "approval_status",  limit: 1,   default: "U", null: false
+    t.string   "last_action",      limit: 1,   default: "C"
+    t.integer  "approved_version"
+    t.integer  "approved_id"
+    t.text     "constraints"
+    t.text     "select_options"
+    t.string   "created_by",       limit: 20
+    t.string   "updated_by",       limit: 20
+  end
+
+  add_index "udf_attributes", ["class_name", "attribute_name", "approval_status"], name: "udf_attribute_index_on_status", unique: true
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                             default: "",    null: false
-    t.string   "encrypted_password",                default: "",    null: false
+    t.string   "encrypted_password",                default: ""
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                     default: 0,     null: false
+    t.integer  "sign_in_count",                     default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -339,9 +649,15 @@ ActiveRecord::Schema.define(version: 20150605133847) do
     t.string   "last_name"
     t.string   "unique_session_id",      limit: 20
     t.string   "mobile_no"
+    t.integer  "role_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
+
+  create_table "users_groups", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "group_id"
+  end
 
   create_table "users_roles", id: false, force: :cascade do |t|
     t.integer "user_id"

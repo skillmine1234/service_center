@@ -13,7 +13,7 @@ class EcolCustomer < ActiveRecord::Base
   
   validates_uniqueness_of :code, :scope => :approval_status
   
-  validates :token_1_length, :token_2_length, :token_3_length, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 20}
+  validates :token_1_length, :token_2_length, :token_3_length, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 29}
   
   validates_inclusion_of :val_method, :in => %w( N W D )
   validates_inclusion_of :token_1_type, :token_2_type, :token_3_type, :in => %w( N SC RC IN )
