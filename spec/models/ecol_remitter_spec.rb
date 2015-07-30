@@ -20,8 +20,8 @@ describe EcolRemitter do
 
     [:invoice_amt, :min_credit_amt, :max_credit_amt].each do |att|
       it { should allow_value(1.23).for(att) }
+      it { should allow_value(1.2).for(att) }
       it { should_not allow_value(1.234).for(att) }
-      it { should_not allow_value(0).for(att) }
     end
 
     it do 
