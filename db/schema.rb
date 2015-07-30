@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150729104102) do
+ActiveRecord::Schema.define(version: 20150730113513) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -209,6 +209,12 @@ ActiveRecord::Schema.define(version: 20150729104102) do
     t.string   "broker_uuid",         limit: 500, null: false
     t.integer  "ecol_transaction_id",             null: false
     t.datetime "created_at",                      null: false
+  end
+
+  create_table "ecol_pending_notifications", force: :cascade do |t|
+    t.string   "broker_uuid",         limit: 500
+    t.integer  "ecol_transaction_id"
+    t.datetime "created_at"
   end
 
   create_table "ecol_pending_returns", force: :cascade do |t|

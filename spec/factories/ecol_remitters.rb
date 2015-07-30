@@ -15,10 +15,10 @@ FactoryGirl.define do
     rmtr_email "foo@ruby.com"
     rmtr_mobile "9876543210"
     invoice_no "MyString"
-    invoice_amt 1
+    invoice_amt 1.23
     invoice_amt_tol_pct 1
-    min_credit_amt 1
-    max_credit_amt 1
+    min_credit_amt 1.45
+    max_credit_amt 1.43
     due_date "2015-09-09"
     due_date_tol_days 1
     udf1 "Mystring"

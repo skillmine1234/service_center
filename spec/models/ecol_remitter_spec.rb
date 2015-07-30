@@ -18,6 +18,12 @@ describe EcolRemitter do
       it { should validate_numericality_of(att) }
     end
 
+    [:invoice_amt, :min_credit_amt, :max_credit_amt].each do |att|
+      it { should allow_value(1.23).for(att) }
+      it { should_not allow_value(1.234).for(att) }
+      it { should_not allow_value(0).for(att) }
+    end
+
     it do 
       ecol_remitter = Factory(:ecol_remitter, :approval_status => 'A')
       should validate_uniqueness_of(:customer_code).scoped_to(:remitter_code, :customer_subcode, :invoice_no, :approval_status)

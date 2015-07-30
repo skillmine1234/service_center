@@ -12,10 +12,10 @@ module EcolRemitterValidation
     validates :rmtr_mobile, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9]}'}, length: {maximum: 10, minimum: 10}, :allow_blank =>true
     validates :invoice_no, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}' }, length: {maximum: 28, minimum: 1}, :allow_blank =>true
   
-    validates :invoice_amt, presence: true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => '9e15'.to_f, :allow_nil => true }
+    validates :invoice_amt, presence: true, :format => { :with => /\A\d+(?:\.\d{2})?\z/ , :message => "only 2 decimal places are allowed"}, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => '9e15'.to_f, :allow_nil => true }
     validates :invoice_amt_tol_pct, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100, :allow_nil => true }
-    validates :min_credit_amt, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => '9e15'.to_f, :allow_nil => true }
-    validates :max_credit_amt, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => '9e15'.to_f, :allow_nil => true }
+    validates :min_credit_amt, :format => { :with => /\A\d+(?:\.\d{2})?\z/ , :message => "only 2 decimal places are allowed" }, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => '9e15'.to_f, :allow_nil => true }
+    validates :max_credit_amt, :format => { :with => /\A\d+(?:\.\d{2})?\z/ , :message => "only 2 decimal places are allowed" }, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => '9e15'.to_f, :allow_nil => true }
     validates :due_date_tol_days, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 28, :allow_nil => true }
     validates :due_date, presence: true
   

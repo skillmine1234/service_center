@@ -94,7 +94,7 @@
           %tr
             %td.label Invoice Amount
             %td.value
-              = number_with_precision(@ecol_remitter.invoice_amt, :precision => 2) || 0
+              = @ecol_remitter.invoice_amt
             %td#msg-error
               = error_message_for(@ecol_remitter, :invoice_amt, :prepend_text => "")
           %tr
@@ -106,13 +106,13 @@
           %tr
             %td.label Minimum Credit Amount
             %td.value
-              = number_with_precision(@ecol_remitter.min_credit_amt, :precision => 2) || 0
+              = @ecol_remitter.min_credit_amt
             %td#msg-error
               = error_message_for(@ecol_remitter, :min_credit_amt, :prepend_text => "")
           %tr
             %td.label Maximum Credit Amount
             %td.value
-              = number_with_precision(@ecol_remitter.max_credit_amt, :precision => 2) || 0
+              = @ecol_remitter.max_credit_amt
             %td#msg-error
               = error_message_for(@ecol_remitter, :max_credit_amt, :prepend_text => "")
           %tr
