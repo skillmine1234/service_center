@@ -23,6 +23,7 @@ ServiceCenter::Application.routes.draw do
   resources :incoming_file_records
   resources :ecol_fetch_statistics
   resources :ecol_unapproved_records
+  resources :inw_unapproved_records
 
   namespace :api do
     namespace :v1 do

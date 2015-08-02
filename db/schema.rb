@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150730113513) do
+ActiveRecord::Schema.define(version: 20150802122901) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -466,6 +466,13 @@ ActiveRecord::Schema.define(version: 20150730113513) do
     t.integer  "lock_version",                       default: 0, null: false
     t.string   "pattern_salutations",   limit: 2000
     t.string   "pattern_remitters",     limit: 4000
+  end
+
+  create_table "inw_unapproved_records", force: :cascade do |t|
+    t.integer  "inw_approvable_id"
+    t.string   "inw_approvable_type"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   create_table "inward_remittances", force: :cascade do |t|
