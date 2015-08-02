@@ -4,8 +4,6 @@ require 'spork'
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Spork.prefork do
-  require 'coveralls'
-  Coveralls.wear!('rails')
 
   ENV["RAILS_ENV"] ||= 'test'
   require 'factory_girl'
