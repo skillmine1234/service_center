@@ -3,6 +3,10 @@
     #form-details
       %h3 Bank Details 
       %br
+      %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
+        - can = can? :edit, @bank
+        %a.btn{:href => "#{!(can) ? '#' : '/banks/' + @bank.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
+        = render 'ecol_customers/approve', :@record => @bank
       %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
         - if !@bank.nil?
           %tr

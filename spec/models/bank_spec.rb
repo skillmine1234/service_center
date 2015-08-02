@@ -4,6 +4,9 @@ describe Bank do
   context 'association' do
     it { should belong_to(:created_user) }
     it { should belong_to(:updated_user) }
+    it { should have_one(:inw_unapproved_record) }
+    it { should belong_to(:unapproved_record) }
+    it { should belong_to(:approved_record) }
   end
 
   context 'validation' do
@@ -12,10 +15,10 @@ describe Bank do
     end
 
     # it {should validate_inclusion_of(:imps_enabled).in_array([true,false]) }
-    # it do
-    #   bank = Factory(:bank)
-    #   should validate_uniqueness_of(:ifsc)
-    # end
+    it do
+      bank = Factory(:bank)
+      should validate_uniqueness_of(:ifsc).scoped_to(:approval_status)
+    end
 
     context "ifsc format" do 
       it "should validate the format of ifsc" do 
@@ -61,4 +64,73 @@ describe Bank do
       end
     end
   end
+  
+  context "default_scope" do 
+    it "should only return 'A' records by default" do 
+      bank1 = Factory(:bank, :approval_status => 'A') 
+      bank2 = Factory(:bank)
+      Bank.all.should == [bank1]
+      bank2.approval_status = 'A'
+      bank2.save
+      Bank.all.should == [bank1,bank2]
+    end
+  end    
+
+  context "create_inw_unapproved_records" do 
+    it "should create inw_unapproved_record if the approval_status is 'U' and there is no previous record" do
+      bank = Factory(:bank)
+      bank.reload
+      bank.inw_unapproved_record.should_not be_nil
+      record = bank.inw_unapproved_record
+      bank.name = 'Fooo'
+      bank.save
+      bank.inw_unapproved_record.should == record
+    end
+
+    it "should not create inw_unapproved_record if the approval_status is 'A'" do
+      bank = Factory(:bank, :approval_status => 'A')
+      bank.inw_unapproved_record.should be_nil
+    end
+  end  
+
+  context "remove_inw_unapproved_records" do 
+    it "should remove inw_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
+      bank = Factory(:bank)
+      bank.reload
+      bank.inw_unapproved_record.should_not be_nil
+      record = bank.inw_unapproved_record
+      bank.name = 'Foo'
+      bank.save
+      bank.inw_unapproved_record.should == record
+      bank.approval_status = 'A'
+      bank.save
+      bank.remove_inw_unapproved_records
+      bank.reload
+      bank.inw_unapproved_record.should be_nil
+    end
+  end  
+
+  context "approve" do 
+    it "should approve unapproved_record" do 
+      bank = Factory(:bank, :approval_status => 'U')
+      bank.approve.should == ""
+      bank.approval_status.should == 'A'
+    end
+
+    it "should return error when trying to approve unmatched version" do 
+      bank = Factory(:bank, :approval_status => 'A')
+      bank2 = Factory(:bank, :approval_status => 'U', :approved_id => bank.id, :approved_version => 6)
+      bank2.approve.should == "The record version is different from that of the approved version" 
+    end
+  end
+
+  context "enable_approve_button?" do 
+    it "should return true if approval_status is 'U' else false" do 
+      bank1 = Factory(:bank, :approval_status => 'A')
+      bank2 = Factory(:bank, :approval_status => 'U')
+      bank1.enable_approve_button?.should == false
+      bank2.enable_approve_button?.should == true
+    end
+  end
+  
 end

@@ -12,8 +12,13 @@ describe BanksController do
 
   describe "GET index" do
     it "assigns all banks as @banks" do
-      bank = Factory(:bank)
+      bank = Factory(:bank, :approval_status => 'A')
       get :index
+      assigns(:banks).should eq([bank])
+    end
+    it "assigns all unapproved banks as @banks when approval_status is passed" do
+      bank = Factory(:bank, :approval_status => 'U')
+      get :index, :approval_status => 'U'
       assigns(:banks).should eq([bank])
     end
   end
@@ -39,6 +44,19 @@ describe BanksController do
       get :edit, {:id => bank.id}
       assigns(:bank).should eq(bank)
     end
+    
+    it "assigns the requested bank with status 'A' as @bank" do
+      bank = Factory(:bank,:approval_status => 'A')
+      get :edit, {:id => bank.id}
+      assigns(:bank).should eq(bank)
+    end
+
+    it "assigns the new bank with requested bank params when status 'A' as @bank" do
+      bank = Factory(:bank,:approval_status => 'A')
+      params = (bank.attributes).merge({:approved_id => bank.id,:approved_version => bank.lock_version})
+      get :edit, {:id => bank.id}
+      assigns(:bank).should eq(Bank.new(params))
+    end
   end
 
   describe "POST create" do
@@ -47,7 +65,7 @@ describe BanksController do
         params = Factory.attributes_for(:bank)
         expect {
           post :create, {:bank => params}
-        }.to change(Bank, :count).by(1)
+        }.to change(Bank.unscoped, :count).by(1)
         flash[:alert].should  match(/Bank successfully created/)
         response.should be_redirect
       end
@@ -62,7 +80,7 @@ describe BanksController do
       it "redirects to the created bank" do
         params = Factory.attributes_for(:bank)
         post :create, {:bank => params}
-        response.should redirect_to(Bank.last)
+        response.should redirect_to(Bank.unscoped.last)
       end
     end
 
@@ -159,6 +177,19 @@ describe BanksController do
       get :audit_logs, {:id => 12345, :version_id => "i"}
       assigns(:bank).should eq(nil)
       assigns(:audit).should eq(nil)
+    end
+  end
+  
+  describe "PUT approve" do
+    it "unapproved record can be approved and old approved record will be deleted" do
+      @user.role_id = Factory(:role, :name => 'supervisor').id
+      @user.save
+      bank1 = Factory(:bank, :approval_status => 'A')
+      bank2 = Factory(:bank, :approval_status => 'U', :approved_version => bank1.lock_version, :approved_id => bank1.id)
+      put :approve, {:id => bank2.id}
+      bank2.reload
+      bank2.approval_status.should == 'A'
+      Bank.find_by_id(bank1.id).should be_nil
     end
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150802132155) do
+ActiveRecord::Schema.define(version: 20150802133004) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -115,14 +115,18 @@ ActiveRecord::Schema.define(version: 20150802132155) do
     t.string   "ifsc"
     t.string   "name"
     t.boolean  "imps_enabled"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
     t.string   "created_by"
     t.string   "updated_by"
-    t.integer  "lock_version", default: 0, null: false
+    t.integer  "lock_version",               default: 0,   null: false
+    t.string   "approval_status",  limit: 1, default: "U", null: false
+    t.string   "last_action",      limit: 1, default: "C"
+    t.integer  "approved_version"
+    t.integer  "approved_id"
   end
 
-  add_index "banks", ["ifsc"], name: "index_banks_on_ifsc", unique: true
+  add_index "banks", ["ifsc", "approval_status"], name: "index_banks_on_ifsc_and_approval_status", unique: true
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
