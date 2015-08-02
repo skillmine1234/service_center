@@ -4,6 +4,9 @@ describe PurposeCode do
   context 'association' do
     it { should belong_to(:created_user) }
     it { should belong_to(:updated_user) }
+    it { should have_one(:inw_unapproved_record) }
+    it { should belong_to(:unapproved_record) }
+    it { should belong_to(:approved_record) }
   end
 
   context 'validation' do
@@ -11,9 +14,11 @@ describe PurposeCode do
       it { should validate_presence_of(att) }
     end
 
-    [:code].each do |att|
-      it { should validate_uniqueness_of(att) }
+    it do
+      purpose_code = Factory(:purpose_code) 
+      should validate_uniqueness_of(:code).scoped_to(:approval_status)
     end
+    
     [:code].each do |att|
       it { should validate_length_of(att).is_at_least(4) }
       it { should validate_length_of(att).is_at_most(4) }
@@ -22,6 +27,13 @@ describe PurposeCode do
     [:rbi_code].each do |att|
       it { should validate_length_of(att).is_at_least(5) }
       it { should validate_length_of(att).is_at_most(5) }
+    end
+    
+    it "should validate_unapproved_record" do 
+      purpose_code1 = Factory(:purpose_code,:approval_status => 'A')
+      purpose_code2 = Factory(:purpose_code, :approved_id => purpose_code1.id)
+      purpose_code1.should_not be_valid
+      purpose_code1.errors_on(:base).should == ["Unapproved Record Already Exists for this record"]
     end
 
     context "code format" do
@@ -131,4 +143,73 @@ describe PurposeCode do
       PurposeCode.options_for_bene_and_rem_types.should == [['Individual','I'],['Corporates','C']]
     end
   end
+  
+  context "default_scope" do 
+    it "should only return 'A' records by default" do 
+      purpose_code1 = Factory(:purpose_code, :approval_status => 'A') 
+      purpose_code2 = Factory(:purpose_code, :code => "0002")
+      PurposeCode.all.should == [purpose_code1]
+      purpose_code2.approval_status = 'A'
+      purpose_code2.save
+      PurposeCode.all.should == [purpose_code1, purpose_code2]
+    end
+  end    
+
+  context "create_inw_unapproved_records" do 
+    it "should create inw_unapproved_record if the approval_status is 'U' and there is no previous record" do
+      purpose_code = Factory(:purpose_code)
+      purpose_code.reload
+      purpose_code.inw_unapproved_record.should_not be_nil
+      record = purpose_code.inw_unapproved_record
+      purpose_code.description = 'Fooo'
+      purpose_code.save
+      purpose_code.inw_unapproved_record.should == record
+    end
+
+    it "should not create inw_unapproved_record if the approval_status is 'A'" do
+      purpose_code = Factory(:purpose_code, :approval_status => 'A')
+      purpose_code.inw_unapproved_record.should be_nil
+    end
+  end  
+
+  context "remove_inw_unapproved_records" do 
+    it "should remove inw_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
+      purpose_code = Factory(:purpose_code)
+      purpose_code.reload
+      purpose_code.inw_unapproved_record.should_not be_nil
+      record = purpose_code.inw_unapproved_record
+      purpose_code.description = 'Foo'
+      purpose_code.save
+      purpose_code.inw_unapproved_record.should == record
+      purpose_code.approval_status = 'A'
+      purpose_code.save
+      purpose_code.remove_inw_unapproved_records
+      purpose_code.reload
+      purpose_code.inw_unapproved_record.should be_nil
+    end
+  end  
+
+  context "approve" do 
+    it "should approve unapproved_record" do 
+      purpose_code = Factory(:purpose_code, :approval_status => 'U')
+      purpose_code.approve.should == ""
+      purpose_code.approval_status.should == 'A'
+    end
+
+    it "should return error when trying to approve unmatched version" do 
+      purpose_code = Factory(:purpose_code, :approval_status => 'A')
+      purpose_code2 = Factory(:purpose_code, :approval_status => 'U', :approved_id => purpose_code.id, :approved_version => 6)
+      purpose_code2.approve.should == "The record version is different from that of the approved version" 
+    end
+  end
+
+  context "enable_approve_button?" do 
+    it "should return true if approval_status is 'U' else false" do 
+      purpose_code1 = Factory(:purpose_code, :approval_status => 'A')
+      purpose_code2 = Factory(:purpose_code, :approval_status => 'U')
+      purpose_code1.enable_approve_button?.should == false
+      purpose_code2.enable_approve_button?.should == true
+    end
+  end
+  
 end

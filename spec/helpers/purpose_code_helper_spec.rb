@@ -35,10 +35,10 @@ describe PurposeCodeHelper do
 
   context 'find_purpose_code'do
     it 'should return purpose_codes' do
-      purpose_code = Factory(:purpose_code,:is_enabled => 'Y')
+      purpose_code = Factory(:purpose_code,:is_enabled => 'Y', :approval_status => 'A')
       find_purpose_codes({:enabled => 'Y'}).should == [purpose_code]
       find_purpose_codes({:enabled => 'N'}).should == []
-      purpose_code = Factory(:purpose_code,:code => '1232')
+      purpose_code = Factory(:purpose_code,:code => '1232', :approval_status => 'A')
       find_purpose_codes({:code => '1232'}).should == [purpose_code]
       find_purpose_codes({:code => '3212'}).should == []  
     end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150802124712) do
+ActiveRecord::Schema.define(version: 20150802132155) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -575,7 +575,7 @@ ActiveRecord::Schema.define(version: 20150802124712) do
     t.string   "is_enabled",            limit: 1
     t.string   "created_by",            limit: 20
     t.string   "updated_by",            limit: 20
-    t.integer  "lock_version",                       default: 0, null: false
+    t.integer  "lock_version",                       default: 0,   null: false
     t.float    "txn_limit"
     t.integer  "daily_txn_limit"
     t.string   "disallowed_rem_types",  limit: 30
@@ -588,6 +588,10 @@ ActiveRecord::Schema.define(version: 20150802124712) do
     t.float    "mtd_txn_limit_sp"
     t.string   "rbi_code",              limit: 5
     t.string   "pattern_beneficiaries", limit: 4000
+    t.string   "approval_status",       limit: 1,    default: "U", null: false
+    t.string   "last_action",           limit: 1,    default: "C"
+    t.integer  "approved_version"
+    t.integer  "approved_id"
   end
 
   create_table "remittance_reviews", force: :cascade do |t|

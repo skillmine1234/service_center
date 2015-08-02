@@ -13,8 +13,13 @@ describe PurposeCodesController do
 
   describe "GET index" do
     it "assigns all purpose_codes as @purpose_codes" do
-      purpose_code = Factory(:purpose_code)
+      purpose_code = Factory(:purpose_code, :approval_status => 'A')
       get :index
+      assigns(:purpose_codes).should eq([purpose_code])
+    end
+    it "assigns all unapproved purpose_codes as @purpose_codes when approval_status is passed" do
+      purpose_code = Factory(:purpose_code, :approval_status => 'U')
+      get :index, :approval_status => 'U'
       assigns(:purpose_codes).should eq([purpose_code])
     end
   end
@@ -40,6 +45,19 @@ describe PurposeCodesController do
       get :edit, {:id => purpose_code.id}
       assigns(:purpose_code).should eq(purpose_code)
     end
+    
+    it "assigns the requested purpose_code with status 'A' as @purpose_code" do
+      purpose_code = Factory(:purpose_code,:approval_status => 'A')
+      get :edit, {:id => purpose_code.id}
+      assigns(:purpose_code).should eq(purpose_code)
+    end
+
+    it "assigns the new partner with requested purpose_code params when status 'A' as @purpose_code" do
+      purpose_code = Factory(:purpose_code,:approval_status => 'A')
+      params = (purpose_code.attributes).merge({:approved_id => purpose_code.id,:approved_version => purpose_code.lock_version})
+      get :edit, {:id => purpose_code.id}
+      assigns(:purpose_code).should eq(PurposeCode.new(params))
+    end
   end
 
   describe "POST create" do
@@ -48,7 +66,7 @@ describe PurposeCodesController do
         params = Factory.attributes_for(:purpose_code)
         expect {
           post :create, {:purpose_code => params}
-        }.to change(PurposeCode, :count).by(1)
+        }.to change(PurposeCode.unscoped, :count).by(1)
         flash[:alert].should  match(/Purpose Code successfully created/)
         response.should be_redirect
       end
@@ -63,7 +81,7 @@ describe PurposeCodesController do
       it "redirects to the created purpose_code" do
         params = Factory.attributes_for(:purpose_code)
         post :create, {:purpose_code => params}
-        response.should redirect_to(PurposeCode.last)
+        response.should redirect_to(PurposeCode.unscoped.last)
       end
     end
 
@@ -162,4 +180,18 @@ describe PurposeCodesController do
       assigns(:audit).should eq(nil)
     end
   end
+  
+  describe "PUT approve" do
+    it "unapproved record can be approved and old approved record will be deleted" do
+      @user.role_id = Factory(:role, :name => 'supervisor').id
+      @user.save
+      purpose_code1 = Factory(:purpose_code, :approval_status => 'A')
+      purpose_code2 = Factory(:purpose_code, :approval_status => 'U', :approved_version => purpose_code1.lock_version, :approved_id => purpose_code1.id)
+      put :approve, {:id => purpose_code2.id}
+      purpose_code2.reload
+      purpose_code2.approval_status.should == 'A'
+      PurposeCode.find_by_id(purpose_code1.id).should be_nil
+    end
+  end
+  
 end
