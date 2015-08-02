@@ -1,6 +1,6 @@
 class PatchForCrossScriptingChanges < ActiveRecord::Migration
   def change
-    codes = PurposeCode.all
+    codes = PurposeCode.unscoped.all
     codes.each do |code|
       code.pattern_beneficiaries.gsub!(",","\r\n") unless code.pattern_beneficiaries.nil?
       code.save(:validate => false)
