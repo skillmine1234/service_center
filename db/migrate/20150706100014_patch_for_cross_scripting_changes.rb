@@ -6,7 +6,7 @@ class PatchForCrossScriptingChanges < ActiveRecord::Migration
       code.save(:validate => false)
     end
 
-    rules = InwRemittanceRule.all
+    rules = InwRemittanceRule.unscoped.all
     rules.each do |rule|
       rule.pattern_beneficiaries.gsub!(",","\r\n") unless rule.pattern_beneficiaries.nil?
       rule.pattern_corporates.gsub!(",","\r\n") unless rule.pattern_corporates.nil?

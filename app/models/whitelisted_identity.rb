@@ -1,4 +1,7 @@
 class WhitelistedIdentity < ActiveRecord::Base
+  include Approval
+  include InwApproval
+  
   has_many :attachments, :as => :attachable
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
@@ -7,7 +10,7 @@ class WhitelistedIdentity < ActiveRecord::Base
 
   accepts_nested_attributes_for :attachments
 
-  validates_uniqueness_of :id_type, :scope => [:id_number,:id_country,:id_issue_date,:id_expiry_date], :message => "Identity is already whitelisted"
+  validates_uniqueness_of :id_type, :scope => [:id_number,:id_country,:id_issue_date,:id_expiry_date,:approval_status]
 
   validates_presence_of :partner_id, :is_verified, :created_by, :updated_by, :id_type, :id_number,:id_country,:id_issue_date,:id_expiry_date
 

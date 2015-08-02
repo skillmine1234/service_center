@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150802134249) do
+ActiveRecord::Schema.define(version: 20150802135101) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -696,7 +696,7 @@ ActiveRecord::Schema.define(version: 20150802134249) do
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
 
   create_table "whitelisted_identities", force: :cascade do |t|
-    t.integer  "partner_id",                        null: false
+    t.integer  "partner_id",                                      null: false
     t.string   "full_name",              limit: 50
     t.string   "first_name",             limit: 50
     t.string   "last_name",              limit: 50
@@ -716,6 +716,10 @@ ActiveRecord::Schema.define(version: 20150802134249) do
     t.integer  "lock_version"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "approval_status",        limit: 1,  default: "U", null: false
+    t.string   "last_action",            limit: 1,  default: "C"
+    t.integer  "approved_version"
+    t.integer  "approved_id"
   end
 
   add_index "whitelisted_identities", ["last_used_with_txn_id"], name: "index_whitelisted_identities_on_last_used_with_txn_id"

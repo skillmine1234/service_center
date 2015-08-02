@@ -18,7 +18,7 @@ describe WhitelistedIdentitiesController do
         params = Factory.attributes_for(:whitelisted_identity)
         expect {
           post :create, {:whitelisted_identity => params}
-        }.to change(WhitelistedIdentity, :count).by(1)
+        }.to change(WhitelistedIdentity.unscoped, :count).by(1)
         flash[:alert].should  match(/Identity successfully verified/)
         response.should be_redirect
       end
@@ -58,8 +58,14 @@ describe WhitelistedIdentitiesController do
     
     describe "GET index" do
       it "assigns all whitelisted identities as @whitelisted_identities" do
-        whitelisted_identity = Factory(:whitelisted_identity)
+        whitelisted_identity = Factory(:whitelisted_identity, :approval_status => 'A')
         get :index
+        assigns(:whitelisted_identities).should eq([whitelisted_identity])
+      end
+      
+      it "assigns all unapproved whitelisted identities as @whitelisted identities when approval_status is passed" do
+        whitelisted_identity = Factory(:whitelisted_identity, :approval_status => 'U')
+        get :index, :approval_status => 'U'
         assigns(:whitelisted_identities).should eq([whitelisted_identity])
       end
     end
@@ -76,7 +82,7 @@ describe WhitelistedIdentitiesController do
    describe "GET " do
      describe 'download Attachment' do
        it 'should download attachment' do
-         whitelisted_identity = Factory(:whitelisted_identity)
+         whitelisted_identity = Factory(:whitelisted_identity, :approval_status => 'A')
          get :download_attachment, attachment_id: 0
          flash[:notice].should match /File not found/
          attachment = Factory(:attachment, user_id: @user.id, attachable_id: whitelisted_identity.id, attachable_type: "WhitelistedIdentity")
@@ -85,5 +91,19 @@ describe WhitelistedIdentitiesController do
          flash[:notice].should match /The attachment has been archived, and is no longer available for download./
        end
      end
-    end
+   end
+   
+   describe "PUT approve" do
+     it "unapproved record can be approved and old approved record will be deleted" do
+       @user.role_id = Factory(:role, :name => 'supervisor').id
+       @user.save
+       whitelisted_identity1 = Factory(:whitelisted_identity, :approval_status => 'A')
+       whitelisted_identity2 = Factory(:whitelisted_identity, :approval_status => 'U', :approved_version => whitelisted_identity1.lock_version, :approved_id => whitelisted_identity1.id)
+       put :approve, {:id => whitelisted_identity2.id}
+       whitelisted_identity2.reload
+       whitelisted_identity2.approval_status.should == 'A'
+       WhitelistedIdentity.find_by_id(whitelisted_identity1.id).should be_nil
+     end
+   end
+  
 end

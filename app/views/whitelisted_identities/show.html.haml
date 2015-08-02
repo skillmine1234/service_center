@@ -3,6 +3,8 @@
     #form-details
       %h3 Whitelisted Identity Details 
       %br
+      %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
+        = render 'ecol_customers/approve', :@record => @whitelisted_identity
       %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
         %tr
           %td.label Partner ID
