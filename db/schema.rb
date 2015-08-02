@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150802122901) do
+ActiveRecord::Schema.define(version: 20150802124712) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -534,14 +534,14 @@ ActiveRecord::Schema.define(version: 20150802122901) do
   end
 
   create_table "partners", force: :cascade do |t|
-    t.string   "code",                      limit: 10,             null: false
-    t.string   "name",                      limit: 60,             null: false
+    t.string   "code",                      limit: 10,               null: false
+    t.string   "name",                      limit: 60,               null: false
     t.string   "tech_email_id"
     t.string   "ops_email_id"
-    t.string   "account_no",                limit: 20,             null: false
+    t.string   "account_no",                limit: 20,               null: false
     t.string   "account_ifsc",              limit: 20
-    t.integer  "txn_hold_period_days",                 default: 7, null: false
-    t.string   "identity_user_id",          limit: 20,             null: false
+    t.integer  "txn_hold_period_days",                 default: 7,   null: false
+    t.string   "identity_user_id",          limit: 20,               null: false
     t.float    "low_balance_alert_at"
     t.string   "remitter_sms_allowed",      limit: 1
     t.string   "remitter_email_allowed",    limit: 1
@@ -554,7 +554,7 @@ ActiveRecord::Schema.define(version: 20150802122901) do
     t.string   "updated_by",                limit: 20
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "lock_version",                         default: 0, null: false
+    t.integer  "lock_version",                         default: 0,   null: false
     t.string   "enabled",                   limit: 1
     t.string   "customer_id",               limit: 15
     t.string   "mmid",                      limit: 7
@@ -563,6 +563,10 @@ ActiveRecord::Schema.define(version: 20150802122901) do
     t.string   "address_line1"
     t.string   "address_line2"
     t.string   "address_line3"
+    t.string   "approval_status",           limit: 1,  default: "U", null: false
+    t.string   "last_action",               limit: 1,  default: "C"
+    t.integer  "approved_version"
+    t.integer  "approved_id"
   end
 
   create_table "purpose_codes", force: :cascade do |t|

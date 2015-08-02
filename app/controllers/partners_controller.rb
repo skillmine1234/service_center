@@ -1,7 +1,7 @@
 require 'will_paginate/array'
 
 class PartnersController < ApplicationController
-  load_and_authorize_resource
+  authorize_resource
   before_filter :authenticate_user!
   before_filter :block_inactive_user!
   respond_to :json
@@ -18,26 +18,31 @@ class PartnersController < ApplicationController
       render "new"
     else
       @partner.created_by = current_user.id
-      @partner.save
+      @partner.save!
 
-      flash[:alert] = 'Partner successfully created'
+      flash[:alert] = 'Partner successfully created and is pending for approval'
       redirect_to @partner
     end
   end 
 
   def edit
-    @partner = Partner.find_by_id(params[:id])
+    partner = Partner.unscoped.find_by_id(params[:id])
+    if partner.approval_status == 'A' && partner.unapproved_record.nil?
+      params = (partner.attributes).merge({:approved_id => partner.id,:approved_version => partner.lock_version})
+      partner = Partner.new(params)
+    end
+    @partner = partner   
   end
 
   def update
-    @partner = Partner.find_by_id(params[:id])
+    @partner = Partner.unscoped.find_by_id(params[:id])
     @partner.attributes = params[:partner]
     if !@partner.valid?
       render "edit"
     else
       @partner.updated_by = current_user.id
-      @partner.save
-      flash[:alert] = 'Partner successfully modified'
+      @partner.save!
+      flash[:alert] = 'Partner successfully modified and is pending for approval'
       redirect_to @partner
     end
     rescue ActiveRecord::StaleObjectError
@@ -47,22 +52,37 @@ class PartnersController < ApplicationController
   end 
 
   def show
-    @partner = Partner.find_by_id(params[:id])
+    @partner = Partner.unscoped.find_by_id(params[:id])
   end
 
   def index
     if params[:advanced_search].present?
       partners = find_partners(params).order("id desc")
     else
-      partners = Partner.order("id desc")
+      partners = (params[:approval_status].present? and params[:approval_status] == 'U') ? Partner.unscoped.where("approval_status =?",'U').order("id desc") : Partner.order("id desc")
     end
     @partners_count = partners.count
     @partners = partners.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
 
   def audit_logs
-    @partner = Partner.find(params[:id]) rescue nil
+    @partner = Partner.unscoped.find(params[:id]) rescue nil
     @audit = @partner.audits[params[:version_id].to_i] rescue nil
+  end
+  
+  def approve
+    @partner = Partner.unscoped.find(params[:id]) rescue nil
+    Partner.transaction do
+      approval = @partner.approve
+      if @partner.save and approval.empty?
+        flash[:alert] = "Partner record was approved successfully"
+      else
+        msg = approval.empty? ? @partner.errors.full_messages : @partner.errors.full_messages << approval
+        flash[:alert] = msg
+        raise ActiveRecord::Rollback
+      end
+    end
+    redirect_to @partner
   end
 
   private
@@ -73,7 +93,7 @@ class PartnersController < ApplicationController
                                     :identity_user_id, :low_balance_alert_at, :name, :ops_email_id, 
                                     :remitter_email_allowed, :remitter_sms_allowed, :tech_email_id, 
                                     :txn_hold_period_days, :updated_by, :lock_version, :enabled, :customer_id,
-                                    :country, :address_line1, :address_line2, :address_line3,:mmid, :mobile_no)
+                                    :country, :address_line1, :address_line2, :address_line3,:mmid, :mobile_no,
+                                    :approved_id, :approved_version)
   end
 end
-

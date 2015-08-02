@@ -13,8 +13,13 @@ describe PartnersController do
 
   describe "GET index" do
     it "assigns all partners as @partners" do
-      partner = Factory(:partner)
+      partner = Factory(:partner, :approval_status => 'A')
       get :index
+      assigns(:partners).should eq([partner])
+    end
+    it "assigns all unapproved partners as @partners when approval_status is passed" do
+      partner = Factory(:partner, :approval_status => 'U')
+      get :index, :approval_status => 'U'
       assigns(:partners).should eq([partner])
     end
   end
@@ -40,6 +45,19 @@ describe PartnersController do
       get :edit, {:id => partner.id}
       assigns(:partner).should eq(partner)
     end
+    
+    it "assigns the requested partner with status 'A' as @partner" do
+      partner = Factory(:partner,:approval_status => 'A')
+      get :edit, {:id => partner.id}
+      assigns(:partner).should eq(partner)
+    end
+
+    it "assigns the new partner with requested partner params when status 'A' as @partner" do
+      partner = Factory(:partner,:approval_status => 'A')
+      params = (partner.attributes).merge({:approved_id => partner.id,:approved_version => partner.lock_version})
+      get :edit, {:id => partner.id}
+      assigns(:partner).should eq(Partner.new(params))
+    end
   end
 
   describe "POST create" do
@@ -48,7 +66,7 @@ describe PartnersController do
         params = Factory.attributes_for(:partner)
         expect {
           post :create, {:partner => params}
-        }.to change(Partner, :count).by(1)
+        }.to change(Partner.unscoped, :count).by(1)
         flash[:alert].should  match(/Partner successfully created/)
         response.should be_redirect
       end
@@ -63,7 +81,7 @@ describe PartnersController do
       it "redirects to the created partner" do
         params = Factory.attributes_for(:partner)
         post :create, {:partner => params}
-        response.should redirect_to(Partner.last)
+        response.should redirect_to(Partner.unscoped.last)
       end
     end
 
@@ -162,4 +180,18 @@ describe PartnersController do
       assigns(:audit).should eq(nil)
     end
   end
+  
+  describe "PUT approve" do
+    it "unapproved record can be approved and old approved record will be deleted" do
+      @user.role_id = Factory(:role, :name => 'supervisor').id
+      @user.save
+      partner1 = Factory(:partner, :approval_status => 'A')
+      partner2 = Factory(:partner, :approval_status => 'U', :approved_version => partner1.lock_version, :approved_id => partner1.id)
+      put :approve, {:id => partner2.id}
+      partner2.reload
+      partner2.approval_status.should == 'A'
+      Partner.find_by_id(partner1.id).should be_nil
+    end
+  end
+  
 end

@@ -4,6 +4,9 @@ describe Partner do
   context 'association' do
     it { should belong_to(:created_user) }
     it { should belong_to(:updated_user) }
+    it { should have_one(:inw_unapproved_record) }
+    it { should belong_to(:unapproved_record) }
+    it { should belong_to(:approved_record) }
   end
 
   context 'validation' do
@@ -16,8 +19,15 @@ describe Partner do
       it {should validate_numericality_of(att)}
     end
     it do
-      partner = Factory(:partner, :account_no => '1234567890123456', :account_ifsc => 'abcd0123456')
-      should validate_uniqueness_of(:code)
+      partner = Factory(:partner, :account_no => '1234567890123456', :account_ifsc => 'abcd0123456', :approval_status => 'A')
+      should validate_uniqueness_of(:code).scoped_to(:approval_status)
+    end
+    
+    it "should validate_unapproved_record" do 
+      partner1 = Factory(:partner,:approval_status => 'A')
+      partner2 = Factory(:partner, :approved_id => partner1.id)
+      partner1.should_not be_valid
+      partner1.errors_on(:base).should == ["Unapproved Record Already Exists for this record"]
     end
   
     it { should validate_length_of(:account_no).is_at_least(10) }
@@ -128,4 +138,73 @@ describe Partner do
       end
     end
   end
+  
+  context "default_scope" do 
+    it "should only return 'A' records by default" do 
+      partner1 = Factory(:partner, :approval_status => 'A') 
+      partner2 = Factory(:partner)
+      Partner.all.should == [partner1]
+      partner2.approval_status = 'A'
+      partner2.save
+      Partner.all.should == [partner1,partner2]
+    end
+  end    
+
+  context "create_inw_unapproved_records" do 
+    it "should create inw_unapproved_record if the approval_status is 'U' and there is no previous record" do
+      partner = Factory(:partner)
+      partner.reload
+      partner.inw_unapproved_record.should_not be_nil
+      record = partner.inw_unapproved_record
+      partner.name = 'Fooo'
+      partner.save
+      partner.inw_unapproved_record.should == record
+    end
+
+    it "should not create inw_unapproved_record if the approval_status is 'A'" do
+      partner = Factory(:partner, :approval_status => 'A')
+      partner.inw_unapproved_record.should be_nil
+    end
+  end  
+
+  context "remove_inw_unapproved_records" do 
+    it "should remove inw_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
+      partner = Factory(:partner)
+      partner.reload
+      partner.inw_unapproved_record.should_not be_nil
+      record = partner.inw_unapproved_record
+      partner.name = 'Foo'
+      partner.save
+      partner.inw_unapproved_record.should == record
+      partner.approval_status = 'A'
+      partner.save
+      partner.remove_inw_unapproved_records
+      partner.reload
+      partner.inw_unapproved_record.should be_nil
+    end
+  end  
+
+  context "approve" do 
+    it "should approve unapproved_record" do 
+      partner = Factory(:partner, :approval_status => 'U')
+      partner.approve.should == ""
+      partner.approval_status.should == 'A'
+    end
+
+    it "should return error when trying to approve unmatched version" do 
+      partner = Factory(:partner, :approval_status => 'A')
+      partner2 = Factory(:partner, :approval_status => 'U', :approved_id => partner.id, :approved_version => 6)
+      partner2.approve.should == "The record version is different from that of the approved version" 
+    end
+  end
+
+  context "enable_approve_button?" do 
+    it "should return true if approval_status is 'U' else false" do 
+      partner1 = Factory(:partner, :approval_status => 'A')
+      partner2 = Factory(:partner, :approval_status => 'U')
+      partner1.enable_approve_button?.should == false
+      partner2.enable_approve_button?.should == true
+    end
+  end
+  
 end

@@ -1,5 +1,7 @@
 class Partner < ActiveRecord::Base
-  audited
+  include Approval
+  include InwApproval
+
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
 
@@ -7,7 +9,7 @@ class Partner < ActiveRecord::Base
                         :customer_id, :remitter_email_allowed, :remitter_sms_allowed,
                         :allow_imps, :allow_neft, :allow_rtgs, :country, :account_ifsc,
                         :identity_user_id
-  validates_uniqueness_of :code
+  validates_uniqueness_of :code, :scope => :approval_status
   validates :low_balance_alert_at, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => '9e20'.to_f, :allow_nil => true }
   validates :account_no, :numericality => {:only_integer => true}, length: {in: 10..16}
   validates :account_ifsc, format: {with: /\A[A-Z|a-z]{4}[0][A-Za-z0-9]{6}+\z/, :allow_blank => true, message: "invalid format - expected format is : {[A-Z|a-z]{4}[0][A-Za-z0-9]{6}}" }

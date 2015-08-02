@@ -5,6 +5,8 @@
       = error_message_for(@partner, :base, :prepend_text => "")
   .form-main
     = f.hidden_field :lock_version
+    = f.hidden_field :approved_id
+    = f.hidden_field :approved_version
     .control-group
       = f.label :code
       = f.text_field :code, :maxlength => 10
@@ -133,6 +135,6 @@
       #msg-error
         = error_message_for(@partner, :address_line3, :prepend_text => "")
   .form-actions
-    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_partner'
+    - (f.object.new_record? and f.object.code.nil?) ? label_name = "Create" : label_name = "Update"
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_partner', :value => label_name + ' Partner'
     = link_to :Cancel,'/partners', :name => 'cancel', :class=>"cancel btn"
-

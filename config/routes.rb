@@ -59,6 +59,7 @@ ServiceCenter::Application.routes.draw do
   put '/ecol_remitter/:id/approve' => "ecol_remitters#approve"
   put '/ecol_rule/:id/approve' => "ecol_rules#approve"
   put '/incoming_file/:id/approve' => "incoming_files#approve"
+  put '/partner/:id/approve' => "partners#approve"
 
   root :to => 'dashboard#overview'
 
