@@ -5,6 +5,8 @@
       = error_message_for(@rule, :base, :prepend_text => "")
   .form-main{:style => 'width:100%'}
     = f.hidden_field :lock_version
+    = f.hidden_field :approved_id
+    = f.hidden_field :approved_version
     .control-group
       = f.label :pattern_individuals, "Disallowed Keywords in Name for Individuals", :class => 'control-label'
       = f.text_area :pattern_individuals, :style => 'width:450px; height:100px', :placeholder => "Enter the keywords one below the other"

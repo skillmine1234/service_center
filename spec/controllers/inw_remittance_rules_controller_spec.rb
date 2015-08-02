@@ -10,6 +10,32 @@ describe InwRemittanceRulesController do
     @user.add_role :user
     request.env["HTTP_REFERER"] = "/"
   end
+  
+  describe "POST create" do
+    describe "with valid params" do
+      it "creates a new inw_remittance_rule" do
+        params = Factory.attributes_for(:inw_remittance_rule)
+        expect {
+          post :create, {:inw_remittance_rule => params}
+        }.to change(InwRemittanceRule.unscoped, :count).by(1)
+        flash[:alert].should  match(/Rule successfully created/)
+        response.should be_redirect
+      end
+
+      it "assigns a newly created inw_remittance_rule as @rule" do
+        params = Factory.attributes_for(:inw_remittance_rule)
+        post :create, {:inw_remittance_rule => params}
+        assigns(:rule).should be_a(InwRemittanceRule)
+        assigns(:rule).should be_persisted
+      end
+
+      it "redirects to the created inw_remittance_rule" do
+        params = Factory.attributes_for(:inw_remittance_rule)
+        post :create, {:inw_remittance_rule => params}
+        response.should redirect_to(InwRemittanceRule.unscoped.last)
+      end
+    end
+  end
 
   describe "GET show" do
     it "assigns the requested rule as @rule" do
@@ -91,4 +117,18 @@ describe InwRemittanceRulesController do
       response.should redirect_to(:root)
     end
   end
+  
+  describe "PUT approve" do
+    it "unapproved record can be approved and old approved record will be deleted" do
+      @user.role_id = Factory(:role, :name => 'supervisor').id
+      @user.save
+      inw_rule1 = Factory(:inw_remittance_rule, :approval_status => 'A')
+      inw_rule2 = Factory(:inw_remittance_rule, :approval_status => 'U', :approved_version => inw_rule1.lock_version, :approved_id => inw_rule1.id)
+      put :approve, {:id => inw_rule2.id}
+      inw_rule2.reload
+      inw_rule2.approval_status.should == 'A'
+      InwRemittanceRule.find_by_id(inw_rule1.id).should be_nil
+    end
+  end
+  
 end

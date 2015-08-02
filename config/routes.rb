@@ -62,6 +62,7 @@ ServiceCenter::Application.routes.draw do
   put '/partner/:id/approve' => "partners#approve"
   put '/purpose_code/:id/approve' => "purpose_codes#approve"
   put '/bank/:id/approve' => "banks#approve"
+  put '/inw_remittance_rule/:id/approve' => "inw_remittance_rules#approve"
 
   root :to => 'dashboard#overview'
 
