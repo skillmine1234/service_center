@@ -78,7 +78,6 @@ group :development, :test do
   gem 'rake'
   gem 'test-unit'
   gem 'cucumber-rails', :require => false
-  gem 'coveralls', :require => false
   gem 'selenium-webdriver'
   gem 'faker'
 end
