@@ -13,6 +13,8 @@ if AdminUser.all.empty?
   end
 end
 
+AdminRole.create(:name => 'approver_admin') if AdminRole.find_by_name("approver_admin").nil?
+
 Role.create(:name=>"user") if Role.find_by_name("user").nil?
 Role.create(:name=>"editor") if Role.find_by_name("editor").nil?
 Role.create(:name=>"supervisor") if Role.find_by_name("supervisor").nil?

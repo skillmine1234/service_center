@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150802135101) do
+ActiveRecord::Schema.define(version: 20150807132545) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -658,6 +658,35 @@ ActiveRecord::Schema.define(version: 20150802135101) do
   end
 
   add_index "udf_attributes", ["class_name", "attribute_name", "approval_status"], name: "udf_attribute_index_on_status", unique: true
+
+  create_table "user_groups", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.integer  "lock_version",                default: 0,   null: false
+    t.string   "approval_status",  limit: 1,  default: "U", null: false
+    t.string   "last_action",      limit: 1,  default: "C"
+    t.integer  "approved_version"
+    t.integer  "approved_id"
+    t.string   "created_by",       limit: 20
+    t.string   "updated_by",       limit: 20
+    t.boolean  "disabled"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_roles", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "lock_version",                default: 0,   null: false
+    t.string   "approval_status",  limit: 1,  default: "U", null: false
+    t.string   "last_action",      limit: 1,  default: "C"
+    t.integer  "approved_version"
+    t.integer  "approved_id"
+    t.string   "created_by",       limit: 20
+    t.string   "updated_by",       limit: 20
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                             default: "",    null: false

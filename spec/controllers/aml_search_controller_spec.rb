@@ -8,7 +8,7 @@ describe AmlSearchController do
   before(:each) do
     @controller.instance_eval { flash.extend(DisableFlashSweeping) }
     sign_in @user = Factory(:user)
-    @user.add_role :user
+    Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'editor').id)
     request.env["HTTP_REFERER"] = "/"
 
     @result_body = "{\"hits\":{\"hit\":[{\"id\":\"735\",\"firstName\":\"nil\",\"lastName\":\"EMPRESA CUBANA DE AVIACION\",\"type\":\"Entity\",\"remarks\":\"nil\",\"identities\":{\"numIdentities\":\"0\",\"identity\":\"nil\"}, \"aliases\":{\"numAliases\":\"0\",\"alias\":\"nil\"}, \"addresses\":{\"numAddresses\":\"0\",\"address\":\"nil\"}}]}}" 

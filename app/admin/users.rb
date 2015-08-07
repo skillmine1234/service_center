@@ -1,4 +1,5 @@
 ActiveAdmin.register User do
+  menu :parent => "User Config", :priority => 0
   permit_params :email, :first_name, :last_name, :password, :password_confirmation, :remember_me,
                 :username, :inactive, :title, :body, :role_id, :mobile_no, group_ids: []
 

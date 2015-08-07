@@ -2,8 +2,9 @@ class User < ActiveRecord::Base
   rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  belongs_to :role
-  has_and_belongs_to_many :groups, :join_table => :users_groups
+  has_one :user_role
+  has_many :user_groups, -> {where disabled: false}
+  has_many :groups, :through => :user_groups
 
   devise :session_limitable
 
@@ -11,22 +12,14 @@ class User < ActiveRecord::Base
 
   Groups = %w{inward-remittance e-collect}
 
-  validates_presence_of :role_id
-
   validates :username, :presence => true,
   :uniqueness => {
     :message => "This user id already exists in the system.",
     :case_sensitive => false
   }
-  validate :group_presence
 
-  def group_presence
-    if groups.empty? && Rails.env != "test"
-      errors.add(:group, "atleast one group must be added")
-      false
-    else
-      true
-    end
+  def role
+    user_role.try(:role)
   end
 
   def group_names

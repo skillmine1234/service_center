@@ -7,7 +7,7 @@ describe WhitelistedIdentitiesController do
   before(:each) do
     @controller.instance_eval { flash.extend(DisableFlashSweeping) }
     sign_in @user = Factory(:user)
-    @user.add_role :user
+    Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'editor').id)
     request.env["HTTP_REFERER"] = "/"
   end
 
@@ -94,15 +94,17 @@ describe WhitelistedIdentitiesController do
    end
    
    describe "PUT approve" do
-     it "unapproved record can be approved and old approved record will be deleted" do
-       @user.role_id = Factory(:role, :name => 'supervisor').id
-       @user.save
-       whitelisted_identity1 = Factory(:whitelisted_identity, :approval_status => 'A')
-       whitelisted_identity2 = Factory(:whitelisted_identity, :approval_status => 'U', :approved_version => whitelisted_identity1.lock_version, :approved_id => whitelisted_identity1.id)
-       put :approve, {:id => whitelisted_identity2.id}
-       whitelisted_identity2.reload
-       whitelisted_identity2.approval_status.should == 'A'
-       WhitelistedIdentity.find_by_id(whitelisted_identity1.id).should be_nil
+      it "unapproved record can be approved and old approved record will be deleted" do
+        user_role = UserRole.find_by_user_id(@user.id)
+        user_role.delete
+        Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
+        p @user.role
+        whitelisted_identity1 = Factory(:whitelisted_identity, :approval_status => 'A')
+        whitelisted_identity2 = Factory(:whitelisted_identity, :approval_status => 'U', :approved_version => whitelisted_identity1.lock_version, :approved_id => whitelisted_identity1.id)
+        put :approve, {:id => whitelisted_identity2.id}
+        whitelisted_identity2.reload
+        whitelisted_identity2.approval_status.should == 'A'
+        WhitelistedIdentity.find_by_id(whitelisted_identity1.id).should be_nil
      end
    end
   

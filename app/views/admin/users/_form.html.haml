@@ -13,8 +13,6 @@
     %li
       = f.check_box :inactive
       = f.label "Inactive", :for => 'inactive_generic_app'
-    = f.input :role, :label => "*Role", :include_blank => 'Select', :input_html => { :style => 'display:inline-block; width: 250px;' }
-    = f.input :group, :as => :multiple_select, :collection => Group.all.collect {|r| [r.name.camelize, r.id]}, :input_html => { :style => 'display:inline-block; width: 250px;' }
   = f.actions do
     = f.action :submit
     %li.cancel

@@ -7,6 +7,7 @@ describe IncomingFilesController do
   before(:each) do
     @controller.instance_eval { flash.extend(DisableFlashSweeping) }
     sign_in @user = Factory(:user)
+    Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'editor').id)
     request.env["HTTP_REFERER"] = "/"
   end
 
@@ -90,8 +91,9 @@ describe IncomingFilesController do
 
   describe "PUT approve" do
     it "unapproved record can be approved and old approved record will be deleted" do
-      @user.role_id = Factory(:role, :name => 'supervisor').id
-      @user.save
+      user_role = UserRole.find_by_user_id(@user.id)
+      user_role.delete
+      Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
       incoming_file1 = Factory(:incoming_file, :approval_status => 'A')
       incoming_file2 = Factory(:incoming_file, :approval_status => 'U', :approved_version => incoming_file1.lock_version, :approved_id => incoming_file1.id)
       put :approve, {:id => incoming_file2.id}

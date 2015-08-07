@@ -7,6 +7,7 @@ describe BanksController do
   before(:each) do
     @controller.instance_eval { flash.extend(DisableFlashSweeping) }
     sign_in @user = Factory(:user)
+    Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'editor').id)
     request.env["HTTP_REFERER"] = "/"
   end
 
@@ -182,8 +183,9 @@ describe BanksController do
   
   describe "PUT approve" do
     it "unapproved record can be approved and old approved record will be deleted" do
-      @user.role_id = Factory(:role, :name => 'supervisor').id
-      @user.save
+      user_role = UserRole.find_by_user_id(@user.id)
+      user_role.delete
+      Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
       bank1 = Factory(:bank, :approval_status => 'A')
       bank2 = Factory(:bank, :approval_status => 'U', :approved_version => bank1.lock_version, :approved_id => bank1.id)
       put :approve, {:id => bank2.id}

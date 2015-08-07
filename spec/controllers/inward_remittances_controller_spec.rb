@@ -7,7 +7,7 @@ describe InwardRemittancesController do
   before(:each) do
     @controller.instance_eval { flash.extend(DisableFlashSweeping) }
     sign_in @user = Factory(:user)
-    @user.add_role :user
+    Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'editor').id)
     request.env["HTTP_REFERER"] = "/"
   end
 

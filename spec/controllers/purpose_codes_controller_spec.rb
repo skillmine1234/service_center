@@ -7,7 +7,7 @@ describe PurposeCodesController do
   before(:each) do
     @controller.instance_eval { flash.extend(DisableFlashSweeping) }
     sign_in @user = Factory(:user)
-    @user.add_role :user
+    Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'editor').id)
     request.env["HTTP_REFERER"] = "/"
   end
 
@@ -183,8 +183,9 @@ describe PurposeCodesController do
   
   describe "PUT approve" do
     it "unapproved record can be approved and old approved record will be deleted" do
-      @user.role_id = Factory(:role, :name => 'supervisor').id
-      @user.save
+      user_role = UserRole.find_by_user_id(@user.id)
+      user_role.delete
+      Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
       purpose_code1 = Factory(:purpose_code, :approval_status => 'A')
       purpose_code2 = Factory(:purpose_code, :approval_status => 'U', :approved_version => purpose_code1.lock_version, :approved_id => purpose_code1.id)
       put :approve, {:id => purpose_code2.id}

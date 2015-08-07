@@ -8,6 +8,7 @@ class Ability
     super_admin_permissions if @user.has_role? :super_admin
     admin_permissions if @user.has_role? :admin
     user_admin_permissions if @user.has_role? :user_admin
+    approver_admin_permissions if @user.has_role? :approver_admin
     user_permissions(@user.group_model_list) if @user.has_role? :user
     editor_permissions(@user.group_model_list) if @user.has_role? :editor
     supervisor_permissions(@user.group_model_list) if @user.has_role? :supervisor
@@ -41,7 +42,10 @@ class Ability
     can :manage, AdminUser, :id=>@user.id
     cannot :destroy, AdminUser
     cannot :create, AdminUser
-    can :manage, Role
+    can :manage, UserRole
+    cannot :destroy, UserRole
+    can :manage, UserGroup
+    cannot :destroy, UserGroup
   end
 
   def admin_permissions
@@ -53,5 +57,12 @@ class Ability
   def super_admin_permissions
     can :manage, AdminUser
     cannot :destroy, AdminUser, :id=>@user.id
+  end
+
+  def approver_admin_permissions
+    can :read, UserRole
+    can :approve, UserRole
+    can :read, UserGroup
+    can :approve, UserGroup
   end
 end
