@@ -9,6 +9,6 @@ FactoryGirl.define do
     approval_status 'U'
     last_action 'C'
     neft_sender_ifsc 'ASDF0123456'
-    cbs_userid 'KFCJSDH'
+    customer_id 'KFCJSDH'
   end
 end

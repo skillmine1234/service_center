@@ -28,7 +28,7 @@ end
 
 if EcolRule.all.empty?  
   EcolRule.create(:ifsc => "QGPL0123456", :cod_acct_no => "0123456789", :stl_gl_inward => "123456789", :stl_gl_return => "123456789", :approval_status => 'A',
-  :neft_sender_ifsc => "ABCD0123456", :cbs_userid => "QWEASD")
+  :neft_sender_ifsc => "ABCD0123456", :customer_id => "QWEASD")
 end
 
 if ScService.all.empty?

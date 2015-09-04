@@ -18,7 +18,7 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       NEFT Sender IFSC
     %th{:style=>'text-align:left; background-color: lightblue;'}
-      CBS User ID
+      Customer ID
   .tbody
     - @ecol_rules.each do |ecol_rule|
       %tr
@@ -33,4 +33,4 @@
         %td{:style=>'text-align:left;'}
           = ecol_rule.neft_sender_ifsc
         %td{:style=>'text-align:left;'}
-          = ecol_rule.cbs_userid
+          = ecol_rule.customer_id

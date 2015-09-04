@@ -50,11 +50,11 @@
             %td#msg-error
               = error_message_for(@ecol_rule, :neft_sender_ifsc, :prepend_text => "")
           %tr
-            %td.label CBS User ID
+            %td.label Customer ID
             %td.value
-              = @ecol_rule.cbs_userid
+              = @ecol_rule.customer_id
             %td#msg-error
-              = error_message_for(@ecol_rule, :cbs_userid, :prepend_text => "")
+              = error_message_for(@ecol_rule, :customer_id, :prepend_text => "")
           %tr
             %td.label Updated By
             %td.value
