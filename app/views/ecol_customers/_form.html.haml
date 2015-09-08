@@ -163,6 +163,11 @@
       #msg-error
         = error_message_for(@ecol_customer, :file_upld_mthd, :prepend_text => "")
     .control-group
+      = f.label :customer_id, "*Customer ID", :class => 'control-label'
+      = f.text_field :customer_id, :maxlength => 50
+      #msg-error
+        = error_message_for(@ecol_customer, :customer_id, :prepend_text => "")
+    .control-group
       = f.label :credit_acct_val_pass, "*Credit Account No(Validation Pass)", :class => 'control-label'
       = f.text_field :credit_acct_val_pass, :maxlength => 25
       #msg-error

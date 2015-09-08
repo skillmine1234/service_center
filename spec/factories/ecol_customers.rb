@@ -31,5 +31,6 @@ FactoryGirl.define do
     rmtr_return_txt "MyString"
     approval_status 'U'
     last_action 'C'
+    customer_id 1234
   end
 end

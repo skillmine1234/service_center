@@ -11,7 +11,8 @@ describe EcolCustomer do
   context 'validation' do
     [:code, :name, :is_enabled, :val_method, :token_1_type, :token_1_length, :val_token_1, :token_2_type, :token_2_length, 
       :val_token_2, :token_3_type, :token_3_length, :val_token_3, :val_txn_date, :val_txn_amt, :val_ben_name, :val_rem_acct, 
-      :return_if_val_fails, :nrtv_sufx_1, :nrtv_sufx_2, :nrtv_sufx_3, :rmtr_alert_on, :credit_acct_val_pass, :credit_acct_val_fail].each do |att|
+      :return_if_val_fails, :nrtv_sufx_1, :nrtv_sufx_2, :nrtv_sufx_3, :rmtr_alert_on, :credit_acct_val_pass, :credit_acct_val_fail,
+      :customer_id].each do |att|
       it { should validate_presence_of(att) }
     end 
        
@@ -25,6 +26,7 @@ describe EcolCustomer do
       should validate_length_of(:code).is_at_least(1).is_at_most(15)
       
       should validate_length_of(:name).is_at_least(5).is_at_most(50)
+      should validate_length_of(:customer_id).is_at_most(50)
       
       should validate_length_of(:credit_acct_val_pass).is_at_least(10).is_at_most(25)
       should validate_length_of(:credit_acct_val_fail).is_at_least(10).is_at_most(25)
@@ -43,6 +45,17 @@ describe EcolCustomer do
         should_not allow_value(30).for(att)
         should_not allow_value(-1).for(att)
         should allow_value(15).for(att)
+      end
+    end
+
+    it do
+      ecol_customer = Factory(:ecol_customer)
+      [:customer_id].each do |att|
+        should allow_value('209').for(att)
+        should allow_value('29').for(att)
+        should_not allow_value('030').for(att)
+        should_not allow_value('-1').for(att)
+        should allow_value('15').for(att)
       end
     end
     
