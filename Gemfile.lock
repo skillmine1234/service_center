@@ -360,9 +360,6 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
-    scenic (0.3.0)
-      activerecord (>= 4.0.0)
-      railties (>= 4.0.0)
     secure_headers (2.2.1)
       user_agent_parser
     selenium-webdriver (2.46.2)
@@ -501,7 +498,6 @@ DEPENDENCIES
   ruby-oci8
   rufus-scheduler
   sass-rails
-  scenic
   secure_headers
   selenium-webdriver
   shoulda-matchers

@@ -41,7 +41,6 @@ gem 'country_select', github: 'stefanpenner/country_select'
 gem "sqlite3"
 gem 'florrick', '~> 1.1'
 gem 'unscoped_associations'
-gem 'scenic'
 
 # oracle is required only in production, CI tools run against sqlite3
 group :production do
