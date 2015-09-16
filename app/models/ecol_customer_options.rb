@@ -8,7 +8,11 @@ module EcolCustomerOptions
     def self.options_for_acct_tokens
       [['None','N'],['Sub Code','SC'],['Remitter Code','RC'],['Invoice Number','IN']]
     end
-  
+    
+    def self.options_for_customer_alert
+      [['Always','A'],['On Credit','P'],['On Return','R'],['Never','N']]
+    end
+
     def self.options_for_file_upld_mthd
       [['None','N'],['Full', 'F'],['Incremental','I']]
     end

@@ -158,6 +158,11 @@
       #msg-error
         = error_message_for(@ecol_customer, :return_if_val_fails, :prepend_text => "")
     .control-group
+      = f.label :cust_alert_on, "Customer Alert On", :class => 'control-label'
+      = f.select :cust_alert_on, options_for_select(EcolCustomer.options_for_customer_alert, @ecol_customer.cust_alert_on), :prompt => 'SELECT'
+      #msg-error
+        = error_message_for(@ecol_customer, :cust_alert_on, :prepend_text => "")
+    .control-group
       = f.label :file_upld_mthd, "LookUp File Upload Treatment", :class => 'control-label'
       = f.select :file_upld_mthd, options_for_select(EcolCustomer.options_for_file_upld_mthd, @ecol_customer.file_upld_mthd), :prompt => 'SELECT'
       #msg-error

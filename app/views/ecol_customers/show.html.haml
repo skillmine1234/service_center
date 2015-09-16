@@ -191,6 +191,12 @@
             %td#msg-error
               = error_message_for(@ecol_customer, :return_if_val_fails, :prepend_text => "")
           %tr
+            %td.label Customer Alert On
+            %td.value
+              = @ecol_customer.cust_alert_on
+            %td#msg-error
+              = error_message_for(@ecol_customer, :cust_alert_on, :prepend_text => "")
+          %tr
             %td.label LookUp File Upload Treatment
             %td.value
               = @ecol_customer.file_upld_mthd

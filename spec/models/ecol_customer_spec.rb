@@ -240,6 +240,10 @@ describe EcolCustomer do
       EcolCustomer.options_for_acct_tokens.should == [['None','N'],['Sub Code','SC'],['Remitter Code','RC'],['Invoice Number','IN']]
     end
     
+    it "should return options for customer alert" do
+      EcolCustomer.options_for_customer_alert.should == [['Always','A'],['On Credit','P'],['On Return','R'],['Never','N']]
+    end
+
     it "should return options for file upld mthd" do
       EcolCustomer.options_for_file_upld_mthd.should == [['None','N'],['Full', 'F'],['Incremental','I']]
     end
