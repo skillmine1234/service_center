@@ -47,4 +47,15 @@ $(document).ready(function(){
     $('#returnText').modal();
   });
   
+  $(".val-request-link").on("click", function () {
+    var request = $(this).data('request');
+    $("div.request").text(request);
+    $('#requestText').modal();
+  });
+  
+  $(".val-reply-link").on("click", function () {
+    var reply = $(this).data('reply');
+    $("div.reply").text(reply);
+    $('#replyText').modal();
+  });
 });

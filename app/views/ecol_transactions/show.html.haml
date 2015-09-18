@@ -2,11 +2,11 @@
   .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'}
     %h3
       Customer:
-      = @ecol_transaction.customer_code 
-      = link_to @ecol_transaction.ecol_customer.name , @ecol_transaction.ecol_customer  rescue "No Customer for Code #{@ecol_transaction.customer_code}" 
+      = @ecol_transaction.try(:customer_code) 
+      = link_to @ecol_transaction.ecol_customer.name , @ecol_transaction.ecol_customer  rescue "No Customer for Code #{@ecol_transaction.try(:customer_code)}" 
     %h3
       Transfer Unique No:
-      = @ecol_transaction.transfer_unique_no
+      = @ecol_transaction.try(:transfer_unique_no)
     %h3
       Received At:
       = @ecol_transaction.received_at.try(:strftime, "%d/%m/%Y %I:%M%p")
@@ -27,7 +27,7 @@
   .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; height: 350px;display: inline-block;'}
     #ticket-details
       %h3 
-        Validation Details:
+        Validation Result:
         = link_to @ecol_transaction.validation_status, "#", :class => 'result-link', :href => "#resultText", :style => "font-weight:100"
       %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed;'} 
         %tr
@@ -40,6 +40,10 @@
               = link_to @ecol_transaction.customer_code , @ecol_transaction.ecol_customer
             - else
               = @ecol_transaction.customer_code
+        %tr
+          %td.label Validations
+          - if !@ecol_transaction.ecol_customer.nil? and @ecol_transaction.ecol_customer.val_method == 'W'
+            %td= link_to "Show", {:controller => 'ecol_transactions', :action => 'ecol_validations', :id => @ecol_transaction.id}
         %tr
           %td.label 
             Token 1 : 
@@ -113,16 +117,6 @@
           %td.label Remitter Code
           %td= @ecol_transaction.remitter_code
         %tr
-          %td.label Validated At
-          %td= @ecol_transaction.validated_at
-        %tr
-          %td.label Validation Status
-          %td= @ecol_transaction.validation_status
-        %tr
-          %td.label Validation Result
-          %td
-            = link_to "Show Result", "#", :class => 'result-link', :href => "#resultText", :style => "font-weight:100"
-        %tr
           %td.label Credited At
           %td= @ecol_transaction.credited_at
         %tr
@@ -140,6 +134,12 @@
         %tr
           %td.label Remitter Sms Notify Reference
           %td= @ecol_transaction.rmtr_sms_notify_ref
+        %tr
+          %td.label Credit Account Number
+          %td= @ecol_transaction.credit_acct_no
+        %tr
+          %td.label Credit Status
+          %td= @ecol_transaction.credit_status
         %br
         %br
       .space{:style=>'height: 18px;'}
@@ -166,24 +166,29 @@
         %tr
           %td.label Address
           %td= @ecol_transaction.rmtr_address
+      .space{:style=>'height: 10px;'}
+      %hr{:style=>'background-color: #F1F2F8; width: 200%'}    
+      %h3 Notification Details
+      %table.table.no-border
+        %tr
+          %td.label Customer Alert On
+          %td= @ecol_transaction.ecol_customer.try(:cust_alert_on)
+        %tr
+          %td.label Notifications
+          - if @ecol_transaction.ecol_customer.try(:cust_alert_on) != 'N'
+            %td= link_to "Show", {:controller => 'ecol_transactions', :action => 'ecol_notifications', :id => @ecol_transaction.id}
   .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; height: 800px;display: inline-block;'}
     #ticket-details
       %h3
       .space{:style=>'height: 6px;'}
       %table.table.no-border
-        %br 
-        %tr
-          %td.label Credit Account Number
-          %td= @ecol_transaction.credit_acct_no
-        %tr
-          %td.label Credit Status
-          %td= @ecol_transaction.credit_status
+        %br
         %tr
           %td.label Credit Reference
           %td= @ecol_transaction.credit_ref
         %tr
           %td.label Credit Attempt No
-          %td= @ecol_transaction.credit_attempt_no
+          %td= @ecol_transaction.credit_attempt_no 
         %tr
           %td.label Settle Status
           %td= @ecol_transaction.settle_status
@@ -208,7 +213,7 @@
         %tr
           %td.label Return Attempt No
           %td= @ecol_transaction.return_attempt_no
-      .space{:style=>'height: 29px;'}
+      .space{:style=>'height: 59px;'}
       %hr{:style=>'background-color: #F1F2F8; width: 100%'}
       #ticket-details
       %h3
@@ -236,7 +241,8 @@
         %tr
           %td.label Address
           %td= @ecol_transaction.bene_full_address
-      .space{:style=>'height: 2px;'}
+      .space{:style=>'height: 11px;'}
+      %hr{:style=>'background-color: #F1F2F8; width: 100%'}
   .header-form-main{:style=>'background-color: #ecf5fa; width: 100%; height: 100px;display: inline-block;'}
     %table.table.no-border
       %tr

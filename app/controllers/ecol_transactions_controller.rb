@@ -44,6 +44,16 @@ class EcolTransactionsController < ApplicationController
     flash[:notice] = "Updated transactions!"
     redirect_to ecol_transactions_path
   end
+
+  def ecol_validations
+    @ecol_transaction = EcolTransaction.find(params[:id])
+    @ecol_validations = @ecol_transaction.ecol_validations rescue []
+  end
+
+  def ecol_notifications
+    @ecol_transaction = EcolTransaction.find(params[:id])
+    @ecol_notifications = @ecol_transaction.ecol_notifications rescue []
+  end
   
   private
 

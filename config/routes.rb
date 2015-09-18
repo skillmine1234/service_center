@@ -65,6 +65,9 @@ ServiceCenter::Application.routes.draw do
   put '/inw_remittance_rule/:id/approve' => "inw_remittance_rules#approve"
   put '/whitelisted_identity/:id/approve' => "whitelisted_identities#approve"
 
+  get '/ecol_transactions/:id/ecol_validations' => 'ecol_transactions#ecol_validations'
+  get '/ecol_transactions/:id/ecol_notifications' => 'ecol_transactions#ecol_notifications'
+
   root :to => 'dashboard#overview'
 
   # See how all your routes lay out with "rake routes"
