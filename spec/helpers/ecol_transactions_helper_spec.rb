@@ -78,4 +78,44 @@ describe EcolTransactionsHelper do
       show_page_value_for_validation_status(ecol_transaction, "abcd").should == "abcd"
     end
   end
+
+  context "pending_status" do
+    it "should true if status is CREDIT FAILED, RETURN FAILED or VALIDATION ERROR" do
+      pending_status('CREDIT FAILED').should == true
+      pending_status('RETURN FAILED').should == true
+      pending_status('VALIDATION ERROR').should == true
+    end
+
+    it "should false for other statuses" do
+      pending_status('CREDIT').should == false
+      pending_status('RETURN').should == false
+    end
+  end
+
+  context "find_pending_status" do
+    it "should return the first word" do
+      find_pending_status('CREDIT FAILED').should == 'CREDIT'
+      find_pending_status('RETURN FAILED').should == 'RETURN'
+      find_pending_status('VALIDATION ERROR').should == 'VALIDATION'
+    end
+  end
+
+  context "approval_status" do
+    it "should true if status is PENDING CREDIT, PENDING RETURN" do
+      approval_status('PENDING CREDIT').should == true
+      approval_status('PENDING RETURN').should == true
+    end
+
+    it "should false for other statuses" do
+      approval_status('CREDIT').should == false
+      approval_status('RETURN').should == false
+    end
+  end
+
+  context "find_approval_status" do
+    it "should return the first word" do
+      find_approval_status('PENDING CREDIT').should == 'CREDIT'
+      find_approval_status('PENDING RETURN').should == 'RETURN'
+    end
+  end
 end

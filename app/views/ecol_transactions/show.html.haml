@@ -49,8 +49,7 @@
           %td
             = ecol_transaction_token_show(@ecol_transaction, 0)
           %td
-            - if @ecol_transaction.try(:ecol_customer).try(:val_method) == 'D'
-              = "(Expected: #{@ecol_transaction.ecol_customer.val_token_1 rescue "-"})" 
+            = "(#{@ecol_transaction.ecol_customer.val_token_1 rescue "-"})" 
         %tr
           %td.label 
             Token 2 : 
@@ -58,8 +57,7 @@
           %td
             = ecol_transaction_token_show(@ecol_transaction, 1)
           %td
-            - if @ecol_transaction.try(:ecol_customer).try(:val_method) == 'D'
-              = "(Expected: #{@ecol_transaction.ecol_customer.val_token_2 rescue "-"})" 
+            = "(#{@ecol_transaction.ecol_customer.val_token_2 rescue "-"})" 
         %tr
           %td.label 
             Token 3 : 
@@ -67,8 +65,7 @@
           %td
             = ecol_transaction_token_show(@ecol_transaction, 2)
           %td
-            - if @ecol_transaction.try(:ecol_customer).try(:val_method) == 'D'
-              = "(Expected: #{@ecol_transaction.ecol_customer.val_token_3 rescue "-"})"
+            = "(#{@ecol_transaction.ecol_customer.val_token_3 rescue "-"})"
 
       .space{:style=>'height: 150px;'}
       %hr{:style=>'background-color: #F1F2F8; width: 200%'}

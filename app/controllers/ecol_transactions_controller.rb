@@ -48,7 +48,6 @@ class EcolTransactionsController < ApplicationController
 
   def approve_transaction
     @ecol_transaction = EcolTransaction.find(params[:id])
-    status = "PENDING " + params[:commit].split(' ')[1].upcase
     if @ecol_transaction.update_attributes(:pending_approval => "N")
       flash[:notice] = "Ecollect Transaction is sucessfully approved"
     else
