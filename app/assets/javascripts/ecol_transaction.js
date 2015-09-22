@@ -58,4 +58,18 @@ $(document).ready(function(){
     $("div.reply").text(reply);
     $('#replyText').modal();
   });
+
+  $(".val-fault-link").on("click", function () {
+    var reply = $(this).data('reply');
+    $("div.reply").text(reply);
+    $('#faultLink').modal();
+  });
+
+  $(".settle-result").on("click", function () {
+    $('#settleResult').modal();
+  });
+
+  $(".notify-result").on("click", function () {
+    $('#notifyResult').modal();
+  });
 });

@@ -1,0 +1,25 @@
+%br
+- if pending_status(@ecol_transaction.status)
+  - state = find_pending_status(@ecol_transaction.status)
+  %a.btn{"data-toggle" => "modal", :href => "#{'#myModal'+state.to_s}", :role => "button", :class => "btn btn-primary"} RETRY #{state}
+  .modal.hide.fade{"id" => "myModal#{state}", "aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+    .modal-header
+      %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+      %h3#myModalLabel  RETRY #{state}
+      #error_message{:style => 'color:red'}
+    .modal-body
+      = simple_form_for @ecol_transaction, :method=>:put, :html=>{} do |ef|
+        = hidden_field_tag(:state, state)
+        = submit_tag "RETRY #{state}", :class=>"btn btn-primary transition_button", :id => "transition_button"
+- if approval_status(@ecol_transaction.status) and @ecol_transaction.pending_approval == 'Y'
+  - state = find_approval_status(@ecol_transaction.status)
+  %a.btn{"data-toggle" => "modal", :href => "#{'#myModal'+state.to_s}", :role => "button", :class => "btn btn-primary"} APPROVE #{state}
+  .modal.hide.fade{"id" => "myModal#{state}", "aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+    .modal-header
+      %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+      %h3#myModalLabel  APPROVE #{state}
+      #error_message{:style => 'color:red'}
+    .modal-body
+      = simple_form_for :ecol_transaction, :url => url_for(:action => 'approve_transaction', :controller => 'ecol_transactions'), :method=>:put, :html=>{} do |ef|
+        = hidden_field_tag(:id, @ecol_transaction.id)
+        = submit_tag "APPROVE #{state}", :class=>"btn btn-primary transition_button", :id => "transition_button"

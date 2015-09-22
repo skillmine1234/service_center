@@ -64,8 +64,8 @@ ServiceCenter::Application.routes.draw do
   put '/inw_remittance_rule/:id/approve' => "inw_remittance_rules#approve"
   put '/whitelisted_identity/:id/approve' => "whitelisted_identities#approve"
 
-  get '/ecol_transactions/:id/ecol_validations' => 'ecol_transactions#ecol_validations'
-  get '/ecol_transactions/:id/ecol_notifications' => 'ecol_transactions#ecol_notifications'
+  get '/ecol_transactions/:id/ecol_audit_logs/:step_name' => 'ecol_transactions#ecol_audit_logs'
+  put '/ecol_transactions/:id/approve' => "ecol_transactions#approve_transaction"
 
   root :to => 'dashboard#overview'
 

@@ -43,5 +43,20 @@ module EcolTransactionsHelper
   def show_page_value_for_validation_status(ecol_transaction,value)
     value == "0" ? "SUCCESS" : ecol_transaction.validation_status
   end
-  
+
+  def pending_status(state)
+    (state == 'CREDIT FAILED' or state == 'RETURN FAILED' or state == 'VALIDATION ERROR')
+  end
+
+  def find_pending_status(state)
+    state.split(' ').first if (state == 'CREDIT FAILED' or state == 'RETURN FAILED' or state == 'VALIDATION ERROR')
+  end
+
+  def approval_status(state)
+    (state == 'PENDING CREDIT' or state == 'PENDING RETURN')
+  end
+
+  def find_approval_status(state)
+    state.split(' ').last if (state == 'PENDING CREDIT' or state == 'PENDING RETURN')
+  end
 end

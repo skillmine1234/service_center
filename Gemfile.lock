@@ -13,6 +13,13 @@ GIT
       sort_alphabetical (~> 1.0)
 
 GIT
+  remote: https://github.com/quantiguous/lazy_columns.git
+  revision: afdcabc9df0bce3e8fd409e857219e7eadcd42f9
+  specs:
+    lazy_columns (0.5.9)
+      activerecord (>= 3.1)
+
+GIT
   remote: https://github.com/quantiguous/rools
   revision: 64354e44d1cc18e4f35a92610cd1e7d3de547c4b
   specs:
@@ -482,6 +489,7 @@ DEPENDENCIES
   haml-rails
   httparty
   jquery-rails (= 2.0.2)
+  lazy_columns!
   mime-types
   nested_form
   passenger

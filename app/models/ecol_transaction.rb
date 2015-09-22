@@ -1,8 +1,8 @@
 class EcolTransaction < ActiveRecord::Base
   has_one :ecol_customer, :primary_key => 'customer_code', :foreign_key => 'code'
   has_one :ecol_remitter, :primary_key => 'ecol_remitter_id', :foreign_key => 'id'
-  has_many :ecol_validations
-  has_many :ecol_notifications
+  has_many :credit_logs, -> { where :step_name => 'CREDIT' }, :class_name => 'EcolAuditLog'
+  has_many :return_logs, -> { where :step_name => 'RETURN' }, :class_name => 'EcolAuditLog'
   
   validates_presence_of :status, :transfer_type, :transfer_unique_no, :transfer_status, 
   :transfer_date, :transfer_ccy, :transfer_amt, :rmtr_account_no, :rmtr_account_ifsc,

@@ -41,6 +41,7 @@ gem 'country_select', github: 'stefanpenner/country_select'
 gem "sqlite3"
 gem 'florrick', '~> 1.1'
 gem 'unscoped_associations'
+gem 'lazy_columns', :git=>'https://github.com/quantiguous/lazy_columns.git'
 
 # oracle is required only in production, CI tools run against sqlite3
 group :production do

@@ -46,16 +46,37 @@ class EcolTransactionsController < ApplicationController
     redirect_to :back
   end
 
-  def ecol_validations
+  def approve_transaction
     @ecol_transaction = EcolTransaction.find(params[:id])
-    @ecol_validations = @ecol_transaction.ecol_validations rescue []
+    status = "PENDING " + params[:commit].split(' ')[1].upcase
+    if @ecol_transaction.update_attributes(:pending_approval => "N")
+      flash[:notice] = "Ecollect Transaction is sucessfully approved"
+    else
+      flash[:notice] = @ecol_transaction.errors.full_messages
+    end   
+    redirect_to :back
   end
 
-  def ecol_notifications
+  def ecol_audit_logs
     @ecol_transaction = EcolTransaction.find(params[:id])
-    @ecol_notifications = @ecol_transaction.ecol_notifications rescue []
+    if params[:step_name] == 'CREDIT'
+      @ecol_values = @ecol_transaction.credit_logs rescue []
+    else
+      @ecol_values = @ecol_transaction.return_logs rescue []
+    end
   end
-  
+
+  def update
+    @ecol_transaction = EcolTransaction.find(params[:id])
+    @ecol_transaction.status = 'PENDING ' + params[:state]
+    if !@ecol_transaction.save
+      flash[:notice] = @ecol_transaction.errors.full_messages
+    else
+      flash[:notice] = "Ecollect Transaction is sucessfully updated"
+    end
+    redirect_to :back
+  end
+
   private
 
   def ecol_transaction_params
