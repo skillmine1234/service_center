@@ -59,9 +59,9 @@ class EcolTransactionsController < ApplicationController
   def ecol_audit_logs
     @ecol_transaction = EcolTransaction.find(params[:id])
     if params[:step_name] == 'CREDIT'
-      @ecol_values = @ecol_transaction.credit_logs rescue []
+      @ecol_values = @ecol_transaction.credit_logs.order("id desc") rescue []
     else
-      @ecol_values = @ecol_transaction.return_logs rescue []
+      @ecol_values = @ecol_transaction.return_logs.order("id desc") rescue []
     end
   end
 
