@@ -37,29 +37,35 @@ describe EcolTransactionsController do
     end
   end 
   
-  describe "POST edit_multiple" do
-    it "assigns the requested ecol_transactions as @ecol_transactions" do
-      ecol_transaction1 = Factory(:ecol_transaction, :transfer_unique_no => 'kjuioh')
-      ecol_transaction2 = Factory(:ecol_transaction, :transfer_unique_no => 'kjuipp')
-      ecol_transactions = [ecol_transaction1,ecol_transaction2]
-      get :edit_multiple, {:ecol_transaction_ids => [ecol_transaction1.id,ecol_transaction2.id]}
-      assigns(:ecol_transactions).should eq(ecol_transactions)
-      
-      get :edit_multiple, {:ecol_transaction_ids => []}
-      assigns(:ecol_transactions).should_not eq(ecol_transactions)
-    end
-  end
-  
   describe "PUT update_multiple" do
-    it "updates the requested ecol_transactions" do
-      ecol_transaction = Factory(:ecol_transaction, :transfer_unique_no => "vvvvv", :pending_approval => 'Y')
+    it "updates the requested credit ecol_transactions" do
+      ecol_transaction = Factory(:ecol_transaction, :status => 'PENDING CREDIT', :transfer_unique_no => "vvvvv", :pending_approval => 'Y')
       params = ecol_transaction.attributes.slice(*ecol_transaction.class.attribute_names)
       params[:pending_approval] = "N"
-      put :update_multiple, {:ecol_transaction_ids => [ecol_transaction.id], :ecol_transaction => params}
-      response.should redirect_to(ecol_transactions_path)
+      put :update_multiple, {:ecol_transaction_ids => [ecol_transaction.id], :ecol_transaction => params, :commit => 'Approve Credit'}
+      response.should be_redirect
       ecol_transaction.reload
       ecol_transaction.pending_approval.should == "N"
     end
-  end
 
+    it "updates the requested return ecol_transactions" do
+      ecol_transaction = Factory(:ecol_transaction, :status => 'PENDING RETURN', :transfer_unique_no => "vvvvv", :pending_approval => 'Y')
+      params = ecol_transaction.attributes.slice(*ecol_transaction.class.attribute_names)
+      params[:pending_approval] = "N"
+      put :update_multiple, {:ecol_transaction_ids => [ecol_transaction.id], :ecol_transaction => params, :commit => 'Approve Return'}
+      response.should be_redirect
+      ecol_transaction.reload
+      ecol_transaction.pending_approval.should == "N"
+    end
+
+    it "updates the requested return ecol_transactions" do
+      ecol_transaction = Factory(:ecol_transaction, :status => 'PENDING RETURN', :transfer_unique_no => "vvvvv", :pending_approval => 'Y')
+      params = ecol_transaction.attributes.slice(*ecol_transaction.class.attribute_names)
+      params[:pending_approval] = "N"
+      put :update_multiple, {:ecol_transaction_ids => [ecol_transaction.id], :ecol_transaction => params, :commit => 'Approve Credit'}
+      response.should be_redirect
+      ecol_transaction.reload
+      ecol_transaction.pending_approval.should == "Y"
+    end
+  end
 end

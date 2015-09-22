@@ -16,7 +16,7 @@ $(document).ready(function(){
     yearRange: "-10:+70"
   });
   
-  $("#select_all").on("change",function(){
+  $("input#select_all").on("change",function(){
     $('.txn_select').prop("checked", $(this).prop("checked"));
   });
   $('.txn_select').prop("checked", $(this).prop("checked"));

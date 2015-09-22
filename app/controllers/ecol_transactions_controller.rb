@@ -26,23 +26,24 @@ class EcolTransactionsController < ApplicationController
     @total_pending_records = EcolTransaction.where(:pending_approval => 'Y').count
     @total_records = EcolTransaction.count
   end
-  
-  def edit_multiple
-    if params[:ecol_transaction_ids]
-      @ecol_transactions = EcolTransaction.find(params[:ecol_transaction_ids])
-    else
-      flash[:notice] = "You haven't selected any transaction records!"
-      redirect_to ecol_transactions_path
-    end
-  end
 
   def update_multiple
-    @ecol_transactions = EcolTransaction.find(params[:ecol_transaction_ids])
-    @ecol_transactions.each do |ecol_transaction|
-      ecol_transaction.update_attributes(:pending_approval => "N")
-    end
-    flash[:notice] = "Updated transactions!"
-    redirect_to ecol_transactions_path
+    if params[:ecol_transaction_ids]
+      @ecol_transactions = EcolTransaction.find(params[:ecol_transaction_ids])
+      status = "PENDING " + params[:commit].split(' ')[1].upcase
+      selected_records = @ecol_transactions.select{|transaction| transaction.status != status}
+      if selected_records.empty?
+        @ecol_transactions.each do |ecol_transaction|
+          ecol_transaction.update_attributes(:pending_approval => "N")
+        end
+        flash[:notice] = "Updated transactions!"
+      else
+        flash[:notice] = "Please select only " + status + " transactions"
+      end
+    else
+      flash[:notice] = "You haven't selected any transaction records!"
+    end    
+    redirect_to :back
   end
 
   def ecol_validations

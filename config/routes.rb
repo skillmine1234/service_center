@@ -14,7 +14,6 @@ ServiceCenter::Application.routes.draw do
   resources :ecol_remitters
   resources :ecol_transactions do
     collection do
-      post 'edit_multiple'
       put  'update_multiple'
     end
   end
