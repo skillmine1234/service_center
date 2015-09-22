@@ -8,8 +8,14 @@
       Transfer Unique No:
       = @ecol_transaction.try(:transfer_unique_no)
     %h3
-      Received At:
-      = @ecol_transaction.received_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+      Transfer Type
+      = @ecol_transaction.transfer_type
+    %h3
+      Transfer Status
+      = @ecol_transaction.transfer_status
+    %h3
+      Transfer Date
+      = @ecol_transaction.transfer_date.try(:strftime, "%d/%m/%Y %I:%M%p")
   .header-form-extended{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'}
     %h3
       Status:
@@ -23,6 +29,9 @@
     %h3
       Settled At:
       = @ecol_transaction.settled_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+    %h3
+      Received At:
+      = @ecol_transaction.received_at.try(:strftime, "%d/%m/%Y %I:%M%p")
       /= "(" + @ecol_transaction.settled_at.to_s + " mins)"
   .toolbar
     = render :partial => 'action_toolbar'
@@ -74,7 +83,10 @@
           %tr
             %td.label Credit Attempt
             %td
-              = link_to @ecol_transaction.credit_attempt_no, {:controller => 'ecol_transactions', :action => 'ecol_audit_logs', :id => @ecol_transaction.id, :step_name => 'CREDIT'}
+              - if !@ecol_transaction.credit_attempt_no.nil?
+                = link_to @ecol_transaction.credit_attempt_no, {:controller => 'ecol_transactions', :action => 'ecol_audit_logs', :id => @ecol_transaction.id, :step_name => 'CREDIT'}
+              - else
+                = "-"
           - if @ecol_transaction.status == 'CREDITED'
             %tr
               %td.label Credited At
@@ -99,7 +111,10 @@
           %tr
             %td.label Return Attempt
             %td
-              = link_to @ecol_transaction.return_attempt_no, {:controller => 'ecol_transactions', :action => 'ecol_audit_logs', :id => @ecol_transaction.id, :step_name => 'RETURN'}
+              - if !@ecol_transaction.return_attempt_no.nil?
+                = link_to @ecol_transaction.return_attempt_no, {:controller => 'ecol_transactions', :action => 'ecol_audit_logs', :id => @ecol_transaction.id, :step_name => 'RETURN'}
+              - else
+                = "-"
           - if @ecol_transaction.status == 'RETURN'
             %tr
               %td.label Returned At
@@ -121,6 +136,13 @@
       %h3 Settlement Status
       %table.table.no-border
         %tr
+          %td.label Settle Attempt
+          %td
+            - if !@ecol_transaction.settle_attempt_no.nil?
+              = link_to @ecol_transaction.settle_attempt_no, {:controller => 'ecol_transactions', :action => 'ecol_audit_logs', :id => @ecol_transaction.id, :step_name => 'SETTLE'}
+            - else
+              = "-"
+        %tr
           %td.label Settle Attempt At
           %td= @ecol_transaction.settle_attempt_at
         %tr
@@ -131,6 +153,13 @@
       %h3 Notification Status
       %table.table.no-border
         %tr
+          %td.label Notify Attempt
+          %td
+            - if !@ecol_transaction.notify_attempt_no.nil?
+              = link_to @ecol_transaction.notify_attempt_no, {:controller => 'ecol_transactions', :action => 'ecol_audit_logs', :id => @ecol_transaction.id, :step_name => 'NOTIFY'}
+            - else
+              = "-"
+        %tr
           %td.label Customer Alert At
           %td= @ecol_transaction.try(:ecol_customer).try(:cust_alert_on)
         %tr
@@ -139,46 +168,6 @@
         %tr
           %td.label Notify Status
           %td= @ecol_transaction.notify_status
-      .space{:style=>'height: 5px;'}
-      %hr{:style=>'background-color: #F1F2F8; width: 200%'}
-      %h3 E-Collect Details
-      %table.table.no-border
-        %tr
-          %td.label Customer Sub Code
-          %td= @ecol_transaction.customer_subcode
-        %tr
-          %td.label Remitter Code
-          %td= @ecol_transaction.remitter_code
-        %tr
-          %td.label Credited At
-          %td= @ecol_transaction.credited_at
-
-      %hr{:style=>'background-color: #F1F2F8; width: 200%'}
-      %h3 Transfer Details
-      %table.table.no-border
-        %tr
-          %td.label Transfer Type
-          %td= @ecol_transaction.transfer_type
-        %tr
-          %td.label Transfer Status
-          %td= @ecol_transaction.transfer_status
-        %tr
-          %td.label Transfer Date
-          %td= @ecol_transaction.transfer_date
-      %hr{:style=>'background-color: #F1F2F8; width: 200%'}    
-      %h3 
-        = "Remitter"
-      .tablewrapper{:style=>'height: 150px;'}
-        %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed;'}
-          %tr
-            %td.label Name
-            %td
-              = @ecol_transaction.rmtr_full_name
-          %tr
-            %td.label Address
-            %td
-              = @ecol_transaction.rmtr_address
-      .space{:style=>'height: 20px;'}
   .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; display: inline-block;'}
     #ticket-details
       %br
@@ -255,7 +244,7 @@
               = link_to "Show Result", "#", :class => 'settle-result', :href => "#settleResult", :style => "font-weight:100"
         .space{:style=>'height: 63px;'}
       - else
-        .space{:style=>'height: 110px;'}
+        .space{:style=>'height: 140px;'}
     %hr{:style=>'background-color: #F1F2F8; width: 100%'}
     %br
       - if @ecol_transaction.notify_status == 'NOTIFIED'
@@ -272,49 +261,7 @@
               = link_to "Show Result", "#", :class => 'notify-result', :href => "#notifyResult", :style => "font-weight:100"
         .space{:style=>'height: 65px;'}
       - else
-        .space{:style=>'height: 110px;'}
-      %hr{:style=>'background-color: #F1F2F8; width: 100%'}
-      %h3
-      .space{:style=>'height: 15px;'}
-      %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed;'} 
-        %tr
-          %td.label Invoice No
-          %td= @ecol_transaction.invoice_no
-        %tr
-          %td.label Remitter Email Notify Reference
-          %td= @ecol_transaction.rmtr_email_notify_ref
-        %tr
-          %td.label Remitter Sms Notify Reference
-          %td= @ecol_transaction.rmtr_sms_notify_ref
-      %h3
-      .space{:style=>'height: 5px;'}
-      %hr{:style=>'background-color: #F1F2F8; width: 100%'}   
-      %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed;'} 
-        %tr
-          %td.label Transfer Amount
-          %td= @ecol_transaction.transfer_amt
-        %tr
-          %td.label Transfer Currency
-          %td= @ecol_transaction.transfer_ccy
-        %tr
-          %td.label Beneficiary Account No
-          %td= @ecol_transaction.bene_account_no
-        %tr
-          %td.label Beneficiary Account IFSC
-          %td= @ecol_transaction.bene_account_ifsc
-      %hr{:style=>'background-color: #F1F2F8; width: 100%'}
-      %h3
-        = "Beneficiary"
-      .tablewrapper{:style=>'height: 150px;'}
-        %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed;'} 
-          %tr
-            %td.label Name
-            %td
-              = @ecol_transaction.bene_full_name
-          %tr
-            %td.label Address
-            %td
-              = @ecol_transaction.bene_full_address
+        .space{:style=>'height: 112px;'}
   .header-form-main{:style=>'background-color: #ecf5fa; width: 100%; height: 100px;display: inline-block;'}
     %table.table.no-border
       %tr
