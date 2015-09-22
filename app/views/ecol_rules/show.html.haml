@@ -38,12 +38,6 @@
             %td#msg-error
               = error_message_for(@ecol_rule, :stl_gl_inward, :prepend_text => "")
           %tr
-            %td.label Settlement GL (Return)
-            %td.value
-              = @ecol_rule.stl_gl_return
-            %td#msg-error
-              = error_message_for(@ecol_rule, :stl_gl_return, :prepend_text => "")
-          %tr
             %td.label NEFT Sender IFSC
             %td.value
               = @ecol_rule.neft_sender_ifsc
