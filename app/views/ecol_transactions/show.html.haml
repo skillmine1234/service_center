@@ -31,43 +31,42 @@
       %h3 
         Validation Result:
         = link_to @ecol_transaction.validation_status, "#", :class => 'result-link', :href => "#resultText", :style => "font-weight:100"
-      %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed;'} 
-        %tr
-          %td.label Beneficiary Account Number
-          %td= @ecol_transaction.bene_account_no
-        %tr
-          %td.label Customer Code 
-          %td
-            - if !@ecol_transaction.ecol_customer.nil?
-              = link_to @ecol_transaction.customer_code , @ecol_transaction.ecol_customer
-            - else
-              = @ecol_transaction.customer_code
-        %tr
-          %td.label 
-            Token 1 : 
-            = show_page_value_for_account_tokens(@ecol_transaction.ecol_customer.token_1_type) rescue ""
-          %td
-            = ecol_transaction_token_show(@ecol_transaction, 0)
-          %td
-            = "(#{@ecol_transaction.ecol_customer.val_token_1 rescue "-"})" 
-        %tr
-          %td.label 
-            Token 2 : 
-            = show_page_value_for_account_tokens(@ecol_transaction.ecol_customer.token_2_type) rescue ""
-          %td
-            = ecol_transaction_token_show(@ecol_transaction, 1)
-          %td
-            = "(#{@ecol_transaction.ecol_customer.val_token_2 rescue "-"})" 
-        %tr
-          %td.label 
-            Token 3 : 
-            = show_page_value_for_account_tokens(@ecol_transaction.ecol_customer.token_3_type) rescue ""
-          %td
-            = ecol_transaction_token_show(@ecol_transaction, 2)
-          %td
-            = "(#{@ecol_transaction.ecol_customer.val_token_3 rescue "-"})"
-
-      .space{:style=>'height: 150px;'}
+      .tablewrapper
+        %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; height: 80%;'} 
+          %tr
+            %td.label Beneficiary Account Number
+            %td= @ecol_transaction.bene_account_no
+          %tr
+            %td.label Customer Code 
+            %td
+              - if !@ecol_transaction.ecol_customer.nil?
+                = link_to @ecol_transaction.customer_code , @ecol_transaction.ecol_customer
+              - else
+                = @ecol_transaction.customer_code
+          %tr
+            %td.label 
+              Token 1 : 
+              = show_page_value_for_account_tokens(@ecol_transaction.ecol_customer.token_1_type) rescue ""
+            %td
+              = ecol_transaction_token_show(@ecol_transaction, 0)
+            %td
+              = "(#{@ecol_transaction.ecol_customer.val_token_1 rescue "-"})" 
+          %tr
+            %td.label 
+              Token 2 : 
+              = show_page_value_for_account_tokens(@ecol_transaction.ecol_customer.token_2_type) rescue ""
+            %td
+              = ecol_transaction_token_show(@ecol_transaction, 1)
+            %td
+              = "(#{@ecol_transaction.ecol_customer.val_token_2 rescue "-"})" 
+          %tr
+            %td.label 
+              Token 3 : 
+              = show_page_value_for_account_tokens(@ecol_transaction.ecol_customer.token_3_type) rescue ""
+            %td
+              = ecol_transaction_token_show(@ecol_transaction, 2)
+            %td
+              = "(#{@ecol_transaction.ecol_customer.val_token_3 rescue "-"})"
       %hr{:style=>'background-color: #F1F2F8; width: 200%'}
       - if @ecol_transaction.status == 'CREDITED' or @ecol_transaction.status == 'PENDING CREDIT' or @ecol_transaction.status == 'CREDIT FAILED'
         %h3 Credit Result
@@ -169,112 +168,114 @@
       %hr{:style=>'background-color: #F1F2F8; width: 200%'}    
       %h3 
         = "Remitter"
-      %table.table.no-border
-        %tr
-          %td.label Name
-          %td= @ecol_transaction.rmtr_full_name
-        %tr
-          %td.label Address
-          %td= @ecol_transaction.rmtr_address
+      .tablewrapper{:style=>'height: 150px;'}
+        %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed;'}
+          %tr
+            %td.label Name
+            %td
+              = @ecol_transaction.rmtr_full_name
+          %tr
+            %td.label Address
+            %td
+              = @ecol_transaction.rmtr_address
       .space{:style=>'height: 20px;'}
   .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; display: inline-block;'}
     #ticket-details
       %br
-      %br
-      %br
-      %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed;'}  
-        %tr
-          %td.label Transfer Amount
-          %td= @ecol_transaction.transfer_amt
-          %td
-            - if @ecol_transaction.try(:ecol_customer).try(:val_method) == 'D'
-              - unless @ecol_transaction.ecol_customer.nil?
-                - if @ecol_transaction.ecol_customer.val_txn_amt == 'E'
-                  = "(Expected: #{@ecol_transaction.ecol_remitter.invoice_amt rescue "-"})"
-                - elsif @ecol_transaction.ecol_customer.val_txn_amt == 'R' 
-                  = "(Expected: between #{@ecol_transaction.ecol_remitter.min_credit_amt rescue "-"} and #{@ecol_transaction.ecol_remitter.max_credit_amt rescue "-"})"
-                - elsif @ecol_transaction.ecol_customer.val_txn_amt == 'P' 
-                  = "(Expected: within #{@ecol_transaction.ecol_remitter.invoice_amt_tol_pct rescue "-"}% to #{@ecol_transaction.ecol_remitter.invoice_amt rescue "-"})"
-        %tr
-          %td.label Transfer Date
-          %td= @ecol_transaction.transfer_date
-          %td
-            - if @ecol_transaction.try(:ecol_customer).try(:val_method) == 'D'
-              - unless @ecol_transaction.ecol_customer.nil?
-                - if @ecol_transaction.ecol_customer.val_txn_date == 'E'
-                  = "(Expected: #{@ecol_transaction.ecol_remitter.due_date rescue "-"})"
-                - elsif @ecol_transaction.ecol_customer.val_txn_date == 'R' 
-                  = "(Expected: within #{@ecol_transaction.ecol_remitter.due_date_tol_days rescue "-"} days of #{@ecol_transaction.ecol_remitter.due_date rescue "-"})"
-        %tr
-          %td.label Remitter Account Number
-          %td
-            = @ecol_transaction.rmtr_account_no
-          %td
-            - if @ecol_transaction.try(:ecol_customer).try(:val_method) == 'D'
-              = "(Expected: #{@ecol_transaction.ecol_customer.val_rem_acct rescue "-"})"
-        %tr
-          %td.label Remitter Name
-          %td
-            = @ecol_transaction.rmtr_full_name
-          %td
-            - if @ecol_transaction.try(:ecol_customer).try(:val_method) == 'D'
-              = "(Expected: #{@ecol_transaction.ecol_customer.val_rmtr_name rescue "-"})"
-        %tr
-          %td.label Beneficiary Name
-          %td
-            = @ecol_transaction.bene_full_name
-          %td
-            - if @ecol_transaction.try(:ecol_customer).try(:val_method) == 'D'
-              = "(Expected: #{@ecol_transaction.ecol_customer.val_ben_name rescue "-"})"
-      .space{:style=>'height: 60px;'}
+      .tablewrapper{:style=>'height: 230px;'}
+        %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; height: 100%;'}  
+          %tr
+            %td.label Transfer Amount
+            %td= @ecol_transaction.transfer_amt
+            %td
+              - if @ecol_transaction.try(:ecol_customer).try(:val_method) == 'D'
+                - unless @ecol_transaction.ecol_customer.nil?
+                  - if @ecol_transaction.ecol_customer.val_txn_amt == 'E'
+                    = "(Expected: #{@ecol_transaction.ecol_remitter.invoice_amt rescue "-"})"
+                  - elsif @ecol_transaction.ecol_customer.val_txn_amt == 'R' 
+                    = "(Expected: between #{@ecol_transaction.ecol_remitter.min_credit_amt rescue "-"} and #{@ecol_transaction.ecol_remitter.max_credit_amt rescue "-"})"
+                  - elsif @ecol_transaction.ecol_customer.val_txn_amt == 'P' 
+                    = "(Expected: within #{@ecol_transaction.ecol_remitter.invoice_amt_tol_pct rescue "-"}% to #{@ecol_transaction.ecol_remitter.invoice_amt rescue "-"})"
+          %tr
+            %td.label Transfer Date
+            %td= @ecol_transaction.transfer_date
+            %td
+              - if @ecol_transaction.try(:ecol_customer).try(:val_method) == 'D'
+                - unless @ecol_transaction.ecol_customer.nil?
+                  - if @ecol_transaction.ecol_customer.val_txn_date == 'E'
+                    = "(Expected: #{@ecol_transaction.ecol_remitter.due_date rescue "-"})"
+                  - elsif @ecol_transaction.ecol_customer.val_txn_date == 'R' 
+                    = "(Expected: within #{@ecol_transaction.ecol_remitter.due_date_tol_days rescue "-"} days of #{@ecol_transaction.ecol_remitter.due_date rescue "-"})"
+          %tr
+            %td.label Remitter Account Number
+            %td
+              = @ecol_transaction.rmtr_account_no
+            %td
+              - if @ecol_transaction.try(:ecol_customer).try(:val_method) == 'D'
+                = "(Expected: #{@ecol_transaction.ecol_customer.val_rem_acct rescue "-"})"
+          %tr
+            %td.label Remitter Name
+            %td
+              = @ecol_transaction.rmtr_full_name
+            %td
+              - if @ecol_transaction.try(:ecol_customer).try(:val_method) == 'D'
+                = "(Expected: #{@ecol_transaction.ecol_customer.val_rmtr_name rescue "-"})"
+          %tr
+            %td.label Beneficiary Name
+            %td
+              = @ecol_transaction.bene_full_name
+            %td
+              - if @ecol_transaction.try(:ecol_customer).try(:val_method) == 'D'
+                = "(Expected: #{@ecol_transaction.ecol_customer.val_ben_name rescue "-"})"
+      .space{:style=>'height: 10px;'}
       %hr{:style=>'background-color: #F1F2F8; width: 100%'}
-        - if @ecol_transaction.status == 'CREDITED' or @ecol_transaction.status == 'RETURNED'
-          .space{:style=>'height: 50px;'}
-          %hr{:style=>'background-color: #F1F2F8; width: 100%'}
-        - elsif @ecol_transaction.status == 'PENDING CREDIT' or @ecol_transaction.status == 'PENDING RETURN'
-          .space{:style=>'height: 100px;'}
-          %hr{:style=>'background-color: #F1F2F8; width: 100%'}
-        - elsif @ecol_transaction.status == 'CREDIT FAILED' or @ecol_transaction.status == 'RETURN FAILED'
-          .space{:style=>'height: 100px;'}
-          %hr{:style=>'background-color: #F1F2F8; width: 100%'}
-        - if @ecol_transaction.settle_status == 'SETTLED'
-          %table.table.no-border
-            %tr
-              %td.label Settled At
-              %td= @ecol_transaction.settled_at
-            %tr
-              %td.label Settle Reference
-              %td= @ecol_transaction.settle_ref
-          .space{:style=>'height: 35px;'}
-        - elsif @ecol_transaction.settle_status == 'FAILED'
-          %table.table.no-border
-            %tr
-              %td.label Settle Result
-              %td
-                = link_to "Show Result", "#", :class => 'settle-result', :href => "#settleResult", :style => "font-weight:100"
-          .space{:style=>'height: 60px;'}
-        - else
-          .space{:style=>'height: 105px;'}
-      %hr{:style=>'background-color: #F1F2F8; width: 100%'}
-      %br
-        - if @ecol_transaction.notify_status == 'NOTIFIED'
-          %table.table.no-border
-            %tr
-              %td.label Notified At
-              %td= @ecol_transaction.notified_at
-            %tr
-              %td.label Notify Reference
-              %td= @ecol_transaction.notify_ref
-          .space{:style=>'height: 20px;'}
-        - elsif @ecol_transaction.notify_status == 'FAILED'
-          %table.table.no-border
-            %tr
-              %td.label Notify Result
-              %td
-                = link_to "Show Result", "#", :class => 'notify-result', :href => "#notifyResult", :style => "font-weight:100"
-          .space{:style=>'height: 45px;'}
-        - else
-          .space{:style=>'height: 90px;'}
+      - if @ecol_transaction.status == 'CREDITED' or @ecol_transaction.status == 'RETURNED'
+        .space{:style=>'height: 50px;'}
+        %hr{:style=>'background-color: #F1F2F8; width: 100%'}
+      - elsif @ecol_transaction.status == 'PENDING CREDIT' or @ecol_transaction.status == 'PENDING RETURN'
+        .space{:style=>'height: 100px;'}
+        %hr{:style=>'background-color: #F1F2F8; width: 100%'}
+      - elsif @ecol_transaction.status == 'CREDIT FAILED' or @ecol_transaction.status == 'RETURN FAILED'
+        .space{:style=>'height: 100px;'}
+        %hr{:style=>'background-color: #F1F2F8; width: 100%'}
+      - if @ecol_transaction.settle_status == 'SETTLED'
+        %table.table.no-border
+          %tr
+            %td.label Settled At
+            %td= @ecol_transaction.settled_at
+          %tr
+            %td.label Settle Reference
+            %td= @ecol_transaction.settle_ref
+        .space{:style=>'height: 35px;'}
+      - elsif @ecol_transaction.settle_status == 'FAILED'
+        %table.table.no-border
+          %tr
+            %td.label Settle Result
+            %td
+              = link_to "Show Result", "#", :class => 'settle-result', :href => "#settleResult", :style => "font-weight:100"
+        .space{:style=>'height: 60px;'}
+      - else
+        .space{:style=>'height: 110px;'}
+    %hr{:style=>'background-color: #F1F2F8; width: 100%'}
+    %br
+      - if @ecol_transaction.notify_status == 'NOTIFIED'
+        %table.table.no-border
+          %tr
+            %td.label Notified At
+            %td= @ecol_transaction.notified_at
+          %tr
+            %td.label Notify Reference
+            %td= @ecol_transaction.notify_ref
+        .space{:style=>'height: 20px;'}
+      - elsif @ecol_transaction.notify_status == 'FAILED'
+        %table.table.no-border
+          %tr
+            %td.label Notify Result
+            %td
+              = link_to "Show Result", "#", :class => 'notify-result', :href => "#notifyResult", :style => "font-weight:100"
+        .space{:style=>'height: 45px;'}
+      - else
+        .space{:style=>'height: 110px;'}
       %hr{:style=>'background-color: #F1F2F8; width: 100%'}
       %h3
       .space{:style=>'height: 15px;'}
@@ -307,14 +308,16 @@
       %hr{:style=>'background-color: #F1F2F8; width: 100%'}
       %h3
         = "Beneficiary"
-      %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed;'} 
-        %tr
-          %td.label Name
-          %td= @ecol_transaction.bene_full_name
-        %tr
-          %td.label Address
-          %td= @ecol_transaction.bene_full_address
-      .space{:style=>'height: 15px;'}
+      .tablewrapper{:style=>'height: 150px;'}
+        %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed;'} 
+          %tr
+            %td.label Name
+            %td
+              = @ecol_transaction.bene_full_name
+          %tr
+            %td.label Address
+            %td
+              = @ecol_transaction.bene_full_address
   .header-form-main{:style=>'background-color: #ecf5fa; width: 100%; height: 100px;display: inline-block;'}
     %table.table.no-border
       %tr
