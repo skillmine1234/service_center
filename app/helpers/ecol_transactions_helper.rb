@@ -7,6 +7,7 @@ module EcolTransactionsHelper
     ecol_transactions = ecol_transactions.where("status=? and pending_approval=?",params[:status],params[:pending]) if params[:status].present? and params[:pending].present?
     ecol_transactions = ecol_transactions.where("pending_approval=?",params[:pending]) if params[:pending].present?
     ecol_transactions = ecol_transactions.where("status=?",params[:status]) if params[:status].present?
+    ecol_transactions = ecol_transactions.where("notify_status=?",params[:notification_status]) if params[:notification_status].present?
     ecol_transactions = ecol_transactions.where("transfer_type=?",params[:transfer_type]) if params[:transfer_type].present? 
     ecol_transactions = ecol_transactions.where("bene_account_no=?",params[:bene_account_no]) if params[:bene_account_no].present?
     ecol_transactions = ecol_transactions.where("transfer_date>=? and transfer_date<=?",params[:from_transfer_date],params[:to_transfer_date]) if params[:to_transfer_date].present? and params[:from_transfer_date].present?

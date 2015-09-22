@@ -23,6 +23,10 @@ describe EcolTransactionsHelper do
       ecol_transaction = Factory(:ecol_transaction, :status => "SUCCESS", :transfer_unique_no => "oiopoi")
       find_ecol_transactions(val,{:status => "SUCCESS"}).should == [ecol_transaction]
       find_ecol_transactions(val,{:status => "FAILED"}).should_not == [ecol_transaction]
+
+      ecol_transaction = Factory(:ecol_transaction, :status => 'SUCCESS', :notify_status => "PENDING NOTIFICATION", :transfer_unique_no => "oi wrw")
+      find_ecol_transactions(val,{:notification_status => "PENDING NOTIFICATION"}).should == [ecol_transaction]
+      find_ecol_transactions(val,{:notification_status => "FAILED"}).should_not == [ecol_transaction]
       
       ecol_transaction = Factory(:ecol_transaction, :transfer_type => "ASD", :transfer_unique_no => "fvsdfaw")
       find_ecol_transactions(val,{:transfer_type => "ASD"}).should == [ecol_transaction]

@@ -9,6 +9,9 @@
     = label_tag "Status", nil , :class => 'control-label'
     = select_tag :status, options_for_select([['NEW','NEW'],['PENDING VALIDATION','PENDING VALIDATION'],['VALIDATION ERROR','VALIDATION ERROR'],['PENDING CREDIT','PENDING CREDIT'],['PENDING RETURN','PENDING RETURN'],['CREDIT FAILED','CREDIT FAILED'],['RETURN FAILED','RETURN FAILED'],['CREDITED','CREDITED'],['RETURNED','RETURNED']],params[:status]),:prompt => 'ANY'
   .control-group
+    = label_tag "Notification Status", nil , :class => 'control-label'
+    = select_tag :status, options_for_select([['PENDING NOTIFICATION','PENDING NOTIFICATION'],['NOTIFICATION FAILED','NOTIFICATION FAILED'],['NOTIFIED: OK','NOTIFIED: OK'],['NOTIFIED: REJECT','NOTIFIED: REJECT']],params[:notification_status]),:prompt => 'ANY'
+  .control-group
     = label_tag "Transfer Type", "Transfer Type" , :class => 'control-label'
     = select_tag :transfer_type, options_for_select([['NEFT','NEFT'],['RTGS','RTGS']],params[:transfer_type]),:prompt => 'ANY'
   .control-group
