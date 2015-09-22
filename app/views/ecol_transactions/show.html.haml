@@ -246,14 +246,14 @@
           %tr
             %td.label Settle Reference
             %td= @ecol_transaction.settle_ref
-        .space{:style=>'height: 35px;'}
+        .space{:style=>'height: 40px;'}
       - elsif @ecol_transaction.settle_status == 'FAILED'
         %table.table.no-border
           %tr
             %td.label Settle Result
             %td
               = link_to "Show Result", "#", :class => 'settle-result', :href => "#settleResult", :style => "font-weight:100"
-        .space{:style=>'height: 60px;'}
+        .space{:style=>'height: 63px;'}
       - else
         .space{:style=>'height: 110px;'}
     %hr{:style=>'background-color: #F1F2F8; width: 100%'}
@@ -263,17 +263,14 @@
           %tr
             %td.label Notified At
             %td= @ecol_transaction.notified_at
-          %tr
-            %td.label Notify Reference
-            %td= @ecol_transaction.notify_ref
-        .space{:style=>'height: 20px;'}
+        .space{:style=>'height: 65px;'}
       - elsif @ecol_transaction.notify_status == 'FAILED'
         %table.table.no-border
           %tr
             %td.label Notify Result
             %td
               = link_to "Show Result", "#", :class => 'notify-result', :href => "#notifyResult", :style => "font-weight:100"
-        .space{:style=>'height: 45px;'}
+        .space{:style=>'height: 65px;'}
       - else
         .space{:style=>'height: 110px;'}
       %hr{:style=>'background-color: #F1F2F8; width: 100%'}
