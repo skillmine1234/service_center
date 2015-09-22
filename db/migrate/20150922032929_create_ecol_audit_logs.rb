@@ -4,15 +4,18 @@ class CreateEcolAuditLogs < ActiveRecord::Migration
       t.integer :ecol_transaction_id, :null => false
       t.string :step_name, :null => false
       t.integer :attempt_no, :null => false
-      t.string :fault_code, :limit => 20
+      t.string :fault_code, :limit => 50
       t.string :fault_reason, :limit => 1000
-      t.text :req_bitstream, :null => false
+      t.date :req_timestamp
+      t.date :rep_timestamp
+      t.text :req_bitstream
       t.text :rep_bitstream
       t.text :fault_bitstream
 
       t.timestamps null: false
     end
 
-    add_index :ecol_audit_logs, [:step_name,:attempt_no], :unique => true, :name => 'uk_ecolsb_audit_logs1'
+    add_index :ecol_audit_logs, [:ecol_transaction_id,:step_name,:attempt_no], :unique => true, :name => 'uk_ecol_audit_logs'
   end
 end
+
