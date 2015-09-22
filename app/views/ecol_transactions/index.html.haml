@@ -56,15 +56,7 @@
           %td{:style=>'text-align:left;'}
             = ecol_transaction.transfer_amt
           %td{:style=>'text-align:left;'}
-            - if !ecol_transaction.credit_result.nil? && !ecol_transaction.return_result.nil?
-              - if ecol_transaction.status == "CREDIT_FAILED"
-                = link_to ecol_transaction.status, "#", :class => 'credit-link', :href => "#creditText", data: { credit_status: ecol_transaction.credit_status, credit_result: ecol_transaction.credit_result}
-              - elsif ecol_transaction.status == "RETURN_FALED"
-                = link_to ecol_transaction.status, "#", :class => 'return-link', :href => "#returnText", data: { return_status: ecol_transaction.return_status, return_result: ecol_transaction.return_result}
-              - else
-                = ecol_transaction.status
-            - else
-              = ecol_transaction.status
+            = ecol_transaction.status
           %td{:style=>'text-align:left;'}
             = ecol_transaction.pending_approval
           %td{:style=>'text-align:left;'}
