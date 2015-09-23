@@ -109,6 +109,33 @@ describe EcolTransactionsController do
       ecol_transaction.reload
       ecol_transaction.status = 'PENDING RETURN'
     end
+
+    it "updates the requested credit ecol_transactions" do
+      ecol_transaction = Factory(:ecol_transaction, :status => 'VALIDATION ERROR', :transfer_unique_no => "vvvvv", :pending_approval => 'Y')
+      params = ecol_transaction.attributes.slice(*ecol_transaction.class.attribute_names)
+      put :update, :id => ecol_transaction.id, :state => 'VALIDATION'
+      response.should be_redirect
+      ecol_transaction.reload
+      ecol_transaction.status = 'PENDING VALIDATION'
+    end
+
+    it "updates the requested return ecol_transactions" do
+      ecol_transaction = Factory(:ecol_transaction, :settle_status => 'SETTLEMENT FAILED', :transfer_unique_no => "vvvvv", :pending_approval => 'Y')
+      params = ecol_transaction.attributes.slice(*ecol_transaction.class.attribute_names)
+      put :update, :id => ecol_transaction.id, :state => 'SETTLEMENT'
+      response.should be_redirect
+      ecol_transaction.reload
+      ecol_transaction.settle_status = 'PENDING SETTLEMENT'
+    end
+
+    it "updates the requested return ecol_transactions" do
+      ecol_transaction = Factory(:ecol_transaction, :settle_status => 'NOTIFICATION FAILED', :transfer_unique_no => "vvvvv", :pending_approval => 'Y')
+      params = ecol_transaction.attributes.slice(*ecol_transaction.class.attribute_names)
+      put :update, :id => ecol_transaction.id, :state => 'NOTIFICATION'
+      response.should be_redirect
+      ecol_transaction.reload
+      ecol_transaction.settle_status = 'PENDING NOTIFICATION'
+    end
   end
 
   describe "GET ecol_audit_logs" do
