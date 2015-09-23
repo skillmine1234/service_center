@@ -153,10 +153,10 @@
       #msg-error
         = error_message_for(@ecol_customer, :val_ben_name, :prepend_text => "")
     .control-group
-      = f.label :return_if_val_fails, "Return If Validation Fails", :class => 'control-label'
-      = f.check_box :return_if_val_fails, {},"Y","N"
+      = f.label :return_if_val_reject, "Return If Validation Fails", :class => 'control-label'
+      = f.check_box :return_if_val_reject, {},"Y","N"
       #msg-error
-        = error_message_for(@ecol_customer, :return_if_val_fails, :prepend_text => "")
+        = error_message_for(@ecol_customer, :return_if_val_reject, :prepend_text => "")
     .control-group
       = f.label :cust_alert_on, "Customer Alert On", :class => 'control-label'
       = f.select :cust_alert_on, options_for_select(EcolCustomer.options_for_customer_alert, @ecol_customer.cust_alert_on), :prompt => 'SELECT'

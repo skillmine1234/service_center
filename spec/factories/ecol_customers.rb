@@ -19,7 +19,7 @@ FactoryGirl.define do
     val_txn_amt "N"
     val_ben_name "N"
     val_rem_acct "N"
-    return_if_val_fails "N"
+    return_if_val_reject "N"
     file_upld_mthd "N"
     credit_acct_val_pass "0987654321"
     credit_acct_val_fail "1234567890"

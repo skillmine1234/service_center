@@ -187,9 +187,9 @@
           %tr
             %td.label Return If Validation Fails
             %td.value
-              = @ecol_customer.return_if_val_fails
+              = @ecol_customer.return_if_val_reject
             %td#msg-error
-              = error_message_for(@ecol_customer, :return_if_val_fails, :prepend_text => "")
+              = error_message_for(@ecol_customer, :return_if_val_reject, :prepend_text => "")
           %tr
             %td.label Customer Alert On
             %td.value

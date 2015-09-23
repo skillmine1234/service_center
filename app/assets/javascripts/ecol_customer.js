@@ -21,8 +21,8 @@ $(document).ready(function(){
       $('#ecol_customer_val_rmtr_name').prop('disabled',true);
       $('#ecol_customer_val_last_token_length').val('N');
       $('#ecol_customer_val_last_token_length').prop('disabled',true);
-      $('#ecol_customer_return_if_val_fails').val('N');
-      $('#ecol_customer_return_if_val_fails').prop('disabled',true);
+      $('#ecol_customer_return_if_val_reject').val('N');
+      $('#ecol_customer_return_if_val_reject').prop('disabled',true);
       $("#ecol_customer_file_upld_mthd").val('N');
       $('#ecol_customer_file_upld_mthd').prop('disabled',true);
     }
@@ -35,7 +35,7 @@ $(document).ready(function(){
       $('#ecol_customer_val_rem_acct').prop('disabled',false);
       $('#ecol_customer_val_rmtr_name').prop('disabled',false);
       $('#ecol_customer_val_last_token_length').prop('disabled',false);
-      $('#ecol_customer_return_if_val_fails').prop('disabled',false);
+      $('#ecol_customer_return_if_val_reject').prop('disabled',false);
     }
     else{
       $('#ecol_customer_val_txn_date').prop('disabled',false);
@@ -44,7 +44,7 @@ $(document).ready(function(){
       $('#ecol_customer_val_rem_acct').prop('disabled',false);
       $('#ecol_customer_val_rmtr_name').prop('disabled',false);
       $('#ecol_customer_val_last_token_length').prop('disabled',false);
-      $('#ecol_customer_return_if_val_fails').prop('disabled',false);
+      $('#ecol_customer_return_if_val_reject').prop('disabled',false);
       $('#ecol_customer_file_upld_mthd').prop('disabled',false);
     }
 
@@ -70,8 +70,8 @@ $(document).ready(function(){
     $('#ecol_customer_val_rmtr_name').prop('disabled',true);
     $('#ecol_customer_val_last_token_length').val('N');
     $('#ecol_customer_val_last_token_length').prop('disabled',true);
-    $('#ecol_customer_return_if_val_fails').val('N');
-    $('#ecol_customer_return_if_val_fails').prop('disabled',true);
+    $('#ecol_customer_return_if_val_reject').val('N');
+    $('#ecol_customer_return_if_val_reject').prop('disabled',true);
     $("#ecol_customer_file_upld_mthd").val('N');
     $('#ecol_customer_file_upld_mthd').prop('disabled',true);
   }
@@ -84,7 +84,7 @@ $(document).ready(function(){
     $('#ecol_customer_val_rem_acct').prop('disabled',false);
     $('#ecol_customer_val_rmtr_name').prop('disabled',false);
     $('#ecol_customer_val_last_token_length').prop('disabled',false);
-    $('#ecol_customer_return_if_val_fails').prop('disabled',false);
+    $('#ecol_customer_return_if_val_reject').prop('disabled',false);
   }
   else{
     $('#ecol_customer_val_txn_date').prop('disabled',false);
@@ -93,7 +93,7 @@ $(document).ready(function(){
     $('#ecol_customer_val_rem_acct').prop('disabled',false);
     $('#ecol_customer_val_rmtr_name').prop('disabled',false);
     $('#ecol_customer_val_last_token_length').prop('disabled',false);
-    $('#ecol_customer_return_if_val_fails').prop('disabled',false);
+    $('#ecol_customer_return_if_val_reject').prop('disabled',false);
     $('#ecol_customer_file_upld_mthd').prop('disabled',false);
   } 
   
