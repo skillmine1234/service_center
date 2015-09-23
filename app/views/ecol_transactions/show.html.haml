@@ -41,8 +41,15 @@
       = link_to @ecol_transaction.validation_status, "#", :class => 'result-link', :href => "#resultText", :style => "font-weight:100"
     %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:left;'}  
       %tr
-        %td.label Beneficiary Account Number
-        %td= @ecol_transaction.bene_account_no
+        %td.label Validation Attempt
+        %td
+          - if !@ecol_transaction.validate_attempt_no.nil?
+            = link_to @ecol_transaction.validate_attempt_no, {:controller => 'ecol_transactions', :action => 'ecol_audit_logs', :id => @ecol_transaction.id, :step_name => 'VALIDATION'}
+          - else
+            = "-"
+      %tr
+        %td.label Validation Attempted At
+        %td= @ecol_transaction.validate_attempt_at.try(:strftime, "%d/%m/%Y %I:%M%p")
       %tr
         %td.label Customer Code 
         %td
@@ -98,6 +105,9 @@
         %td
           .span{:class =>"has-tooltip", "data-toggle" => 'tooltip',"title" => "(should be validated? #{@ecol_transaction.ecol_customer.val_rmtr_name rescue "-"})" , "data-placement" => 'bottom', "data-html" => true}
             = @ecol_transaction.rmtr_full_name
+      %tr
+        %td.label Beneficiary Account Number
+        %td= @ecol_transaction.bene_account_no
       %tr
         %td.label Beneficiary Name
         %td
