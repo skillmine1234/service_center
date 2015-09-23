@@ -62,6 +62,6 @@ module EcolTransactionsHelper
   end
 
   def find_logs(params,transaction)
-    transaction.ecol_audit_logs.where('step_name=?',params[:step_name]) rescue []
+    transaction.ecol_audit_logs.where('step_name=?',params[:step_name]).order("attempt_no desc") rescue []
   end
 end
