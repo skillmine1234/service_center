@@ -9,4 +9,29 @@ class EcolTransaction < ActiveRecord::Base
   
   validates :transfer_amt, :numericality => { :greater_than => 0 }
   
+  def expected_transfer_amt
+    if ecol_customer.try(:val_method) == 'D'
+      unless ecol_customer.nil?
+        if ecol_customer.val_txn_amt == 'E'
+          "#{ecol_remitter.invoice_amt rescue "-"}"
+        elsif ecol_customer.val_txn_amt == 'R' 
+          "between #{ecol_remitter.min_credit_amt rescue "-"} and #{ecol_remitter.max_credit_amt rescue "-"}"
+        elsif ecol_customer.val_txn_amt == 'P' 
+          "within #{ecol_remitter.invoice_amt_tol_pct rescue "-"}% to #{ecol_remitter.invoice_amt rescue "-"}"
+        end
+      end
+    end
+  end
+
+  def expected_transfer_date
+    if ecol_customer.try(:val_method) == 'D'
+      unless ecol_customer.nil?
+        if ecol_customer.val_txn_date == 'E'
+          "#{ecol_remitter.due_date rescue "-"}"
+        elsif ecol_customer.val_txn_date == 'R' 
+          "within #{ecol_remitter.due_date_tol_days rescue "-"} days of #{ecol_remitter.due_date rescue "-"}"
+        end
+      end
+    end
+  end
 end
