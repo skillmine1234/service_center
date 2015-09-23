@@ -32,6 +32,7 @@ $(document).ready(function(){
   });
   var clip1 = new ZeroClipboard($("#d_clip_button1"));
   var clip2 = new ZeroClipboard($("#d_clip_button2"));
+  var clip3 = new ZeroClipboard($("#d_clip_button3"));
 
   $("#from_date").datepicker({
     dateFormat: 'dd MM yy',

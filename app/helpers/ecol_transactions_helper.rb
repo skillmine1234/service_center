@@ -60,4 +60,8 @@ module EcolTransactionsHelper
   def find_approval_status(state)
     state.split(' ').last if (state == 'PENDING CREDIT' or state == 'PENDING RETURN')
   end
+
+  def find_logs(params,transaction)
+    transaction.ecol_audit_logs.where('step_name=?',params[:step_name]) rescue []
+  end
 end

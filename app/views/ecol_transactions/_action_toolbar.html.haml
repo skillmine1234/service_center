@@ -11,7 +11,7 @@
       = simple_form_for @ecol_transaction, :method=>:put, :html=>{} do |ef|
         = hidden_field_tag(:state, state)
         = submit_tag "RETRY #{state}", :class=>"btn btn-primary transition_button", :id => "transition_button"
-- if approval_status(@ecol_transaction.status) and @ecol_transaction.pending_approval == 'Y'
+- if approval_status(@ecol_transaction.status)
   - state = find_approval_status(@ecol_transaction.status)
   %a.btn{"data-toggle" => "modal", :href => "#{'#myModal'+state.to_s}", :role => "button", :class => "btn btn-primary"} APPROVE #{state}
   .modal.hide.fade{"id" => "myModal#{state}", "aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}

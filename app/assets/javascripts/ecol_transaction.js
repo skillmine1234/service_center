@@ -60,8 +60,8 @@ $(document).ready(function(){
   });
 
   $(".val-fault-link").on("click", function () {
-    var reply = $(this).data('reply');
-    $("div.reply").text(reply);
+    var fault = $(this).data('fault');
+    $("div.fault").text(fault);
     $('#faultLink').modal();
   });
 

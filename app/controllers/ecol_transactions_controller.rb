@@ -1,3 +1,4 @@
+require 'will_paginate/array'
 class EcolTransactionsController < ApplicationController
   authorize_resource
   before_filter :authenticate_user!
@@ -58,15 +59,9 @@ class EcolTransactionsController < ApplicationController
 
   def ecol_audit_logs
     @ecol_transaction = EcolTransaction.find(params[:id])
-    if params[:step_name] == 'CREDIT'
-      @ecol_values = @ecol_transaction.credit_logs.order("attempt_no desc") rescue []
-    elsif params[:step_name] == 'RETURN'
-      @ecol_values = @ecol_transaction.return_logs.order("attempt_no desc") rescue []
-    elsif params[:step_name] == 'SETTLE'
-      @ecol_values = @ecol_transaction.settle_logs.order("attempt_no desc") rescue []
-    elsif params[:step_name] == 'NOTIFY'
-      @ecol_values = @ecol_transaction.notify_logs.order("attempt_no desc") rescue []
-    end
+    ecol_values = find_logs(params, @ecol_transaction)
+    @ecol_values_count = ecol_values.count
+    @ecol_values = ecol_values.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
 
   def update
