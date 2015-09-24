@@ -60,7 +60,7 @@ class EcolTransactionsController < ApplicationController
   def ecol_audit_logs
     @ecol_transaction = EcolTransaction.find(params[:id])
     ecol_values = find_logs(params, @ecol_transaction)
-    @ecol_values_count = ecol_values.count
+    @ecol_values_count = ecol_values.count(:id)
     @ecol_values = ecol_values.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
 
