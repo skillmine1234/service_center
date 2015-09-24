@@ -8,13 +8,13 @@
       Transfer Unique No:
       = @ecol_transaction.try(:transfer_unique_no)
     %h3
-      Transfer Type
+      Transfer Type:
       = @ecol_transaction.transfer_type
     %h3
-      Transfer Status
+      Transfer Status:
       = @ecol_transaction.transfer_status
     %h3
-      Transfer Date
+      Transfer Date:
       = @ecol_transaction.transfer_date.try(:strftime, "%d/%m/%Y %I:%M%p")
   .header-form-extended{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'}
     %h3
@@ -92,7 +92,7 @@
         %td
           - if @ecol_transaction.try(:ecol_customer).try(:val_method) == 'D'
             .span{:class =>"has-tooltip", "data-toggle" => 'tooltip',"title" => "(Expected Value: #{@ecol_transaction.expected_transfer_date rescue "-"})" , "data-placement" => 'bottom', "data-html" => true}
-              = @ecol_transaction.transfer_date
+              = @ecol_transaction.transfer_date.try(:strftime, "%d/%m/%Y %I:%M%p")
           - else
             = @ecol_transaction.transfer_date
       %tr
