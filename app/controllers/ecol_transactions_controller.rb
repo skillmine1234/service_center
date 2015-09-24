@@ -31,12 +31,11 @@ class EcolTransactionsController < ApplicationController
   def update_multiple
     if params[:ecol_transaction_ids]
       @ecol_transactions = EcolTransaction.find(params[:ecol_transaction_ids])
-      status = "PENDING " + params[:commit].split(' ')[1].upcase
-      selected_records = @ecol_transactions.select{|transaction| transaction.status != status}
+      result = check_transactions(@ecol_transactions,params)
+      selected_records = result[:records]
+      status = result[:status] 
       if selected_records.empty?
-        @ecol_transactions.each do |ecol_transaction|
-          ecol_transaction.update_attributes(:pending_approval => "N")
-        end
+        @ecol_transactions = update_transactions(@ecol_transactions,params)
         flash[:notice] = "Updated transactions!"
       else
         flash[:notice] = "Please select only " + status + " transactions"

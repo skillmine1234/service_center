@@ -44,7 +44,7 @@
         %td.label Validation Attempt
         %td
           - if !@ecol_transaction.validate_attempt_no.nil?
-            = link_to @ecol_transaction.validate_attempt_no, {:controller => 'ecol_transactions', :action => 'ecol_audit_logs', :id => @ecol_transaction.id, :step_name => 'VALIDATION'}
+            = link_to @ecol_transaction.validate_attempt_no, {:controller => 'ecol_transactions', :action => 'ecol_audit_logs', :id => @ecol_transaction.id, :step_name => 'VALIDATE'}
           - else
             = "-"
       %tr

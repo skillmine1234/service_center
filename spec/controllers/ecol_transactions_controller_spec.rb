@@ -42,7 +42,7 @@ describe EcolTransactionsController do
       ecol_transaction = Factory(:ecol_transaction, :status => 'PENDING CREDIT', :transfer_unique_no => "vvvvv", :pending_approval => 'Y')
       params = ecol_transaction.attributes.slice(*ecol_transaction.class.attribute_names)
       params[:pending_approval] = "N"
-      put :update_multiple, {:ecol_transaction_ids => [ecol_transaction.id], :ecol_transaction => params, :commit => 'Approve Credit'}
+      put :update_multiple, {:ecol_transaction_ids => [ecol_transaction.id], :ecol_transaction => params, :status => 'PENDING CREDIT', :approval => 'Y'}
       response.should be_redirect
       ecol_transaction.reload
       ecol_transaction.pending_approval.should == "N"
@@ -52,20 +52,60 @@ describe EcolTransactionsController do
       ecol_transaction = Factory(:ecol_transaction, :status => 'PENDING RETURN', :transfer_unique_no => "vvvvv", :pending_approval => 'Y')
       params = ecol_transaction.attributes.slice(*ecol_transaction.class.attribute_names)
       params[:pending_approval] = "N"
-      put :update_multiple, {:ecol_transaction_ids => [ecol_transaction.id], :ecol_transaction => params, :commit => 'Approve Return'}
+      put :update_multiple, {:ecol_transaction_ids => [ecol_transaction.id], :ecol_transaction => params, :status => 'PENDING RETURN', :approval => 'Y'}
       response.should be_redirect
       ecol_transaction.reload
       ecol_transaction.pending_approval.should == "N"
     end
 
     it "updates the requested return ecol_transactions" do
-      ecol_transaction = Factory(:ecol_transaction, :status => 'PENDING RETURN', :transfer_unique_no => "vvvvv", :pending_approval => 'Y')
+      ecol_transaction = Factory(:ecol_transaction, :status => 'RETURN FAILED', :transfer_unique_no => "vvvvv", :pending_approval => 'Y')
       params = ecol_transaction.attributes.slice(*ecol_transaction.class.attribute_names)
       params[:pending_approval] = "N"
-      put :update_multiple, {:ecol_transaction_ids => [ecol_transaction.id], :ecol_transaction => params, :commit => 'Approve Credit'}
+      put :update_multiple, {:ecol_transaction_ids => [ecol_transaction.id], :ecol_transaction => params, :status => 'RETURN FAILED', :approval => 'N'}
       response.should be_redirect
       ecol_transaction.reload
-      ecol_transaction.pending_approval.should == "Y"
+      ecol_transaction.status.should == "PENDING RETURN"
+    end
+
+    it "updates the requested credit ecol_transactions" do
+      ecol_transaction = Factory(:ecol_transaction, :status => 'CREDIT FAILED', :transfer_unique_no => "vvvvv", :pending_approval => 'Y')
+      params = ecol_transaction.attributes.slice(*ecol_transaction.class.attribute_names)
+      params[:pending_approval] = "N"
+      put :update_multiple, {:ecol_transaction_ids => [ecol_transaction.id], :ecol_transaction => params, :status => 'CREDIT FAILED', :approval => 'N'}
+      response.should be_redirect
+      ecol_transaction.reload
+      ecol_transaction.status.should == "PENDING CREDIT"
+    end
+
+    it "updates the requested valdation ecol_transactions" do
+      ecol_transaction = Factory(:ecol_transaction, :status => 'VALIDATION FAILED', :transfer_unique_no => "vvvvv", :pending_approval => 'N')
+      params = ecol_transaction.attributes.slice(*ecol_transaction.class.attribute_names)
+      params[:pending_approval] = "N"
+      put :update_multiple, {:ecol_transaction_ids => [ecol_transaction.id], :ecol_transaction => params, :status => 'VALIDATION FAILED', :approval => 'N'}
+      response.should be_redirect
+      ecol_transaction.reload
+      ecol_transaction.status.should == "PENDING VALIDATION"
+    end
+
+    it "updates the requested valdation ecol_transactions" do
+      ecol_transaction = Factory(:ecol_transaction, :settle_status => 'SETTLEMENT FAILED', :transfer_unique_no => "vvvvv", :pending_approval => 'N')
+      params = ecol_transaction.attributes.slice(*ecol_transaction.class.attribute_names)
+      params[:pending_approval] = "N"
+      put :update_multiple, {:ecol_transaction_ids => [ecol_transaction.id], :ecol_transaction => params, :settle_status => 'SETTLEMENT FAILED', :approval => 'N'}
+      response.should be_redirect
+      ecol_transaction.reload
+      ecol_transaction.settle_status.should == "PENDING SETTLEMENT"
+    end
+
+    it "updates the requested valdation ecol_transactions" do
+      ecol_transaction = Factory(:ecol_transaction, :notify_status => 'NOTIFICATION FAILED', :transfer_unique_no => "vvvvv", :pending_approval => 'N')
+      params = ecol_transaction.attributes.slice(*ecol_transaction.class.attribute_names)
+      params[:pending_approval] = "N"
+      put :update_multiple, {:ecol_transaction_ids => [ecol_transaction.id], :ecol_transaction => params, :notify_status => 'NOTIFICATION FAILED', :approval => 'N'}
+      response.should be_redirect
+      ecol_transaction.reload
+      ecol_transaction.notify_status.should == "PENDING NOTIFICATION"
     end
   end
 

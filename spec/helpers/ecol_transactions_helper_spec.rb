@@ -122,4 +122,65 @@ describe EcolTransactionsHelper do
       find_approval_status('PENDING RETURN').should == 'RETURN'
     end
   end
+
+  context "find_logs" do
+    it "should return the logs" do
+      transaction = Factory(:ecol_transaction)
+      log = Factory(:ecol_audit_log, :ecol_transaction_id => transaction.id, :step_name => 'CREDIT')
+      find_logs({:step_name => 'CREDIT'},transaction).should == transaction.ecol_audit_logs
+      find_logs({:step_name => 'RETURN'},transaction).should == []
+    end
+  end
+
+  context "check_transactions" do
+    it "should return records and status" do
+      transaction = Factory(:ecol_transaction, :status => 'PENDING CREDIT')
+      check_transactions([transaction],{:status => 'PENDING CREDIT'}).should == {:records => [],:status => 'PENDING CREDIT'}
+    end
+
+    it "should return records and status" do
+      transaction = Factory(:ecol_transaction, :status => 'PENDING RETURN')
+      check_transactions([transaction],{:status => 'PENDING CREDIT'}).should == {:records => [transaction],:status => 'PENDING CREDIT'}
+    end
+
+    it "should return settlement records and status" do
+      transaction = Factory(:ecol_transaction, :settle_status => 'SETTLEMENT FAILED')
+      check_transactions([transaction],{:settle_status => 'SETTLEMENT FAILED'}).should == {:records => [],:status => 'SETTLEMENT FAILED'}
+    end
+
+    it "should return notification records and status" do
+      transaction = Factory(:ecol_transaction, :notify_status => 'NOTIFICATION FAILED')
+      check_transactions([transaction],{:notify_status => 'NOTIFICATION FAILED'}).should == {:records => [],:status => 'NOTIFICATION FAILED'}
+    end
+  end
+
+  context "update_transactions" do
+    it "should update approval records" do
+      transaction = Factory(:ecol_transaction, :status => 'PENDING CREDIT', :pending_approval => 'Y')
+      update_transactions([transaction],{:approval => 'Y', :status => 'PENDING CREDIT'})
+      transaction.reload
+      transaction.pending_approval.should == 'N'
+    end
+
+    it "should update status records" do
+      transaction = Factory(:ecol_transaction, :status => 'CREDIT FAILED', :pending_approval => 'N')
+      update_transactions([transaction],{:approval => 'N', :status => 'CREDIT FAILED'})
+      transaction.reload
+      transaction.status.should == 'PENDING CREDIT'
+    end
+
+    it "should update settlement records" do
+      transaction = Factory(:ecol_transaction, :status => 'SETTLEMENT FAILED', :pending_approval => 'N')
+      update_transactions([transaction],{:approval => 'N', :settle_status => 'SETTLEMENT FAILED'})
+      transaction.reload
+      transaction.settle_status.should == 'PENDING SETTLEMENT'
+    end
+
+    it "should update notification records" do
+      transaction = Factory(:ecol_transaction, :status => 'NOTIFICATION FAILED', :pending_approval => 'N')
+      update_transactions([transaction],{:approval => 'N', :notify_status => 'NOTIFICATION FAILED'})
+      transaction.reload
+      transaction.notify_status.should == 'PENDING NOTIFICATION'
+    end
+  end
 end

@@ -43,7 +43,7 @@
           %td{:style=>'text-align:left;'}
             = link_to 'Show', ecol_transaction
           %td{:style=>'text-align:left;'}
-            - if ecol_transaction.pending_approval == 'Y'
+            - if ecol_transaction.pending_approval == 'Y' or pending_status(ecol_transaction.status) or ecol_transaction.settle_status == "SETTLEMENT FAILED" or ecol_transaction.notify_status == "NOTIFICATION FAILED"
               = check_box_tag "ecol_transaction_ids[]", ecol_transaction.id, false, class: 'txn_select'
           %td{:style=>'text-align:left;'}
             = ecol_transaction.bene_account_no
@@ -70,8 +70,14 @@
             - else
               = show_page_value_for_validation_status(ecol_transaction, ecol_transaction.validation_status)
   .form-actions
-    = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_ticket', data: {:confirm=>"Are you sure?"}, :value => "Approve Return", :status => 'PENDING RETURN' 
-    = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_ticket', data: {:confirm=>"Are you sure?"}, :value => "Approve Credit", :status => 'PENDING CREDIT'
+    = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_ticket', data: {:confirm=>"Are you sure?"}, :value => "Approve Return", :status => 'PENDING RETURN' , :approval => 'Y'
+    = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_ticket', data: {:confirm=>"Are you sure?"}, :value => "Approve Credit", :status => 'PENDING CREDIT' , :approval => 'Y'
+    = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_ticket', data: {:confirm=>"Are you sure?"}, :value => "Retry Return", :status => 'RETURN FAILED' , :approval => 'N'
+    = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_ticket', data: {:confirm=>"Are you sure?"}, :value => "Retry Credit", :status => 'CREDIT FAILED' , :approval => 'N'
+    = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_ticket', data: {:confirm=>"Are you sure?"}, :value => "Retry Validation", :status => 'VALIDATION FAILED' , :approval => 'N'
+    = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_ticket', data: {:confirm=>"Are you sure?"}, :value => "Retry Settlement", :settle_status => 'SETTLEMENT FAILED' , :approval => 'N'
+    = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_ticket', data: {:confirm=>"Are you sure?"}, :value => "Retry Notification", :notify_status => 'NOTIFICATION FAILED' , :approval => 'N'
+
 
 = render :partial => 'modal_boxes'
 

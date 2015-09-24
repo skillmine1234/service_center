@@ -62,6 +62,30 @@ module EcolTransactionsHelper
   end
 
   def find_logs(params,transaction)
-    transaction.ecol_audit_logs.where('step_name=?',params[:step_name]).order("attempt_no desc") rescue []
+    transaction.ecol_audit_logs.where('step_name=?',params[:step_name]).order("attempt_no desc")
+  end
+
+  def check_transactions(transactions,params)
+    if params[:status].present?
+      {:records => transactions.select{|transaction| transaction.status != params[:status]}, :status => params[:status]}
+    elsif params[:settle_status].present?
+      {:records => transactions.select{|transaction| transaction.settle_status != params[:settle_status]}, :status => params[:settle_status]}
+    elsif params[:notify_status].present?
+      {:records => transactions.select{|transaction| transaction.notify_status != params[:notify_status]}, :status => params[:notify_status]}
+    end
+  end
+
+  def update_transactions(transactions,params)
+    transactions.each do |ecol_transaction|
+      if params[:approval] == 'Y'
+        ecol_transaction.update_attributes(:pending_approval => "N")
+      elsif params[:status].present?
+        ecol_transaction.update_attributes(:status => 'PENDING ' + params[:status].split(' ')[0])  
+      elsif params[:settle_status].present?
+        ecol_transaction.update_attributes(:settle_status => 'PENDING ' + params[:settle_status].split(' ')[0])  
+      elsif params[:notify_status].present?
+        ecol_transaction.update_attributes(:notify_status => 'PENDING ' + params[:notify_status].split(' ')[0])  
+      end
+    end
   end
 end
