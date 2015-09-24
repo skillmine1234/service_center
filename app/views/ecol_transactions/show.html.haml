@@ -32,7 +32,9 @@
     %h3
       Received At:
       = @ecol_transaction.received_at.try(:strftime, "%d/%m/%Y %I:%M%p")
-      /= "(" + @ecol_transaction.settled_at.to_s + " mins)"
+    %h3
+      Audit Logs:
+      = link_to 'Show', {:controller => 'ecol_transactions', :action => 'ecol_audit_logs', :id => @ecol_transaction.id, :step_name => 'ALL'}
   .toolbar
     = render :partial => 'action_toolbar'
   .header-form-main{:style=>'background-color: #F1F2F8; width: 100%; display: inline-block;'}
