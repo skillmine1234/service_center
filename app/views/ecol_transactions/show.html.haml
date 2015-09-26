@@ -142,6 +142,7 @@
             %td.label Fault Text
             %td
               = link_to "Fault Text", "#", :class => 'fault-link', :href => "#faultText", :style => "font-weight:100"
+      %hr{:style=>'background-color: #F1F2F8; width: 100%'}
     - elsif @ecol_transaction.status == 'RETURN' or @ecol_transaction.status == 'PENDING RETURN' or @ecol_transaction.status == 'RETURN FAILED'
       %h3 Return Result
       %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:left;'} 
@@ -168,7 +169,7 @@
             %td.label Fault Text
             %td
               = link_to "Fault Text", "#", :class => 'fault-link', :href => "#faultText", :style => "font-weight:100"
-    %hr{:style=>'background-color: #F1F2F8; width: 100%'}
+      %hr{:style=>'background-color: #F1F2F8; width: 100%'}
     %h3 Settlement Status
     %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:left;'}  
       %tr

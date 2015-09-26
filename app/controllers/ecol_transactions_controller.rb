@@ -12,7 +12,7 @@ class EcolTransactionsController < ApplicationController
     if params[:advanced_search].present? || params[:summary].present?
       ecol_transactions = find_ecol_transactions(ecol_transactions,params).order("id desc")
     end
-    @ecol_transactions_count = ecol_transactions.count
+    @ecol_transactions_count = ecol_transactions.count(:id)
     @ecol_transactions = ecol_transactions.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
   
@@ -22,10 +22,10 @@ class EcolTransactionsController < ApplicationController
   
   def summary 
     ecol_transactions = EcolTransaction.order("id desc")
-    @ecol_transaction_summary = EcolTransaction.group(:status, :pending_approval).count
-    @ecol_transaction_statuses = EcolTransaction.group(:status).count.keys
-    @total_pending_records = EcolTransaction.where(:pending_approval => 'Y').count
-    @total_records = EcolTransaction.count
+    @ecol_transaction_summary = EcolTransaction.group(:status, :pending_approval).count(:id)
+    @ecol_transaction_statuses = EcolTransaction.group(:status).count(:id).keys
+    @total_pending_records = EcolTransaction.where(:pending_approval => 'Y').count(:id)
+    @total_records = EcolTransaction.count(:id)
   end
 
   def update_multiple
