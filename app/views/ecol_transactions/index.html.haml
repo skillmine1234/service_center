@@ -31,7 +31,7 @@
       %th{:style=>'text-align:left; background-color: lightblue;'}
         Status
       %th{:style=>'text-align:left; background-color: lightblue;'}
-        Pending Confirmation
+        Pending Approval
       %th{:style=>'text-align:left; background-color: lightblue;'}
         Settlement Status 
       %th{:style=>'text-align:left; background-color: lightblue;'}
@@ -60,7 +60,10 @@
           %td{:style=>'text-align:left;'}
             = ecol_transaction.pending_approval
           %td{:style=>'text-align:left;'}
-            = link_to ecol_transaction.settle_status, "#", :class => 'settle-link', :href => "#settleText", data: { settle_result: ecol_transaction.settle_result}
+            - if !ecol_transaction.settle_status.nil?
+              = link_to ecol_transaction.settle_status, "#", :class => 'settle-link', :href => "#settleText", data: { settle_result: (ecol_transaction.settle_result || '-')}
+            - else
+              = '-'
           %td{:style=>'text-align:left;'}
             = link_to ecol_transaction.validation_status, "#", :class => 'validation-link', :href => "#validationText", data: { validation_result: ecol_transaction.validation_result}
   .form-actions
