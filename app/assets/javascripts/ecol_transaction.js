@@ -74,6 +74,16 @@ $(document).ready(function(){
   });
 
   $("#update_transactions").submit(function(){
-    $("#submit_transaction").prop('disabled', true);
+    $("#submit_transaction1").prop('disabled', true);
+    $("#submit_transaction2").prop('disabled', true);
+    $("#submit_transaction3").prop('disabled', true);
+    $("#submit_transaction4").prop('disabled', true);
+    $("#submit_transaction5").prop('disabled', true);
+    $("#submit_transaction6").prop('disabled', true);
+    $("#submit_transaction7").prop('disabled', true);
+  });
+
+  $(".ecol_transaction").submit(function(){
+    $("#transition_button").prop('disabled', true);
   });
 });
