@@ -60,15 +60,9 @@
           %td{:style=>'text-align:left;'}
             = ecol_transaction.pending_approval
           %td{:style=>'text-align:left;'}
-            - if !ecol_transaction.settle_result.nil?
-              = link_to ecol_transaction.settle_status, "#", :class => 'settle-link', :href => "#settleText", data: { settle_result: ecol_transaction.settle_result}
-            - else
-              = ecol_transaction.settle_status
+            = link_to ecol_transaction.settle_status, "#", :class => 'settle-link', :href => "#settleText", data: { settle_result: ecol_transaction.settle_result}
           %td{:style=>'text-align:left;'}
-            - if !ecol_transaction.validation_result.nil?
-              = link_to ecol_transaction.validation_status, "#", :class => 'validation-link', :href => "#validationText", data: { validation_result: ecol_transaction.validation_result}
-            - else
-              = show_page_value_for_validation_status(ecol_transaction, ecol_transaction.validation_status)
+            = link_to ecol_transaction.validation_status, "#", :class => 'validation-link', :href => "#validationText", data: { validation_result: ecol_transaction.validation_result}
   .form-actions
     = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_ticket', data: {:confirm=>"Are you sure?"}, :value => "Approve Return", :status => 'PENDING RETURN' , :approval => 'Y'
     = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_ticket', data: {:confirm=>"Are you sure?"}, :value => "Approve Credit", :status => 'PENDING CREDIT' , :approval => 'Y'
