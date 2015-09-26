@@ -72,4 +72,8 @@ $(document).ready(function(){
   $(".notify-result").on("click", function () {
     $('#notifyResult').modal();
   });
+
+  $("#update_transactions").submit(function(){
+    $("#submit_transaction").prop('disabled', true);
+  });
 });

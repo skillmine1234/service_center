@@ -28,6 +28,14 @@ describe EcolTransactionsHelper do
       find_ecol_transactions(val,{:notification_status => "PENDING NOTIFICATION"}).should == [ecol_transaction]
       find_ecol_transactions(val,{:notification_status => "FAILED"}).should_not == [ecol_transaction]
       
+      ecol_transaction = Factory(:ecol_transaction, :status => 'SUCCESS', :settle_status => "PENDING SETTLEMENT", :transfer_unique_no => "oiopoi d")
+      find_ecol_transactions(val,{:settle_status => "PENDING SETTLEMENT"}).should == [ecol_transaction]
+      find_ecol_transactions(val,{:settle_status => "FAILED"}).should_not == [ecol_transaction]
+
+      ecol_transaction = Factory(:ecol_transaction, :status => 'SUCCESS', :validation_status => "PENDING VALIDATION", :transfer_unique_no => "o iopoi")
+      find_ecol_transactions(val,{:validation_status => "PENDING VALIDATION"}).should == [ecol_transaction]
+      find_ecol_transactions(val,{:validation_status => "FAILED"}).should_not == [ecol_transaction]
+
       ecol_transaction = Factory(:ecol_transaction, :transfer_type => "ASD", :transfer_unique_no => "fvsdfaw")
       find_ecol_transactions(val,{:transfer_type => "ASD"}).should == [ecol_transaction]
       find_ecol_transactions(val,{:transfer_type => "AAA"}).should_not == [ecol_transaction] 
