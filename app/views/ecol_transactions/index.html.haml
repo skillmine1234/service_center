@@ -64,11 +64,11 @@
           %td{:style=>'text-align:left;'}
             = link_to ecol_transaction.validation_status, "#", :class => 'validation-link', :href => "#validationText", data: { validation_result: ecol_transaction.validation_result}
   .form-actions
+    = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_ticket', data: {:confirm=>"Are you sure?"}, :value => "Retry Validation", :status => 'VALIDATION FAILED' , :approval => 'N'
     = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_ticket', data: {:confirm=>"Are you sure?"}, :value => "Approve Return", :status => 'PENDING RETURN' , :approval => 'Y'
     = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_ticket', data: {:confirm=>"Are you sure?"}, :value => "Approve Credit", :status => 'PENDING CREDIT' , :approval => 'Y'
     = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_ticket', data: {:confirm=>"Are you sure?"}, :value => "Retry Return", :status => 'RETURN FAILED' , :approval => 'N'
     = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_ticket', data: {:confirm=>"Are you sure?"}, :value => "Retry Credit", :status => 'CREDIT FAILED' , :approval => 'N'
-    = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_ticket', data: {:confirm=>"Are you sure?"}, :value => "Retry Validation", :status => 'VALIDATION FAILED' , :approval => 'N'
     = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_ticket', data: {:confirm=>"Are you sure?"}, :value => "Retry Settlement", :settle_status => 'SETTLEMENT FAILED' , :approval => 'N'
     = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_ticket', data: {:confirm=>"Are you sure?"}, :value => "Retry Notification", :notify_status => 'NOTIFICATION FAILED' , :approval => 'N'
 
