@@ -177,6 +177,14 @@ describe EcolTransactionsHelper do
       transaction.status.should == 'PENDING CREDIT'
     end
 
+    it "should update validation" do
+      transaction = Factory(:ecol_transaction, :status => 'VALIDATION FAILED', :pending_approval => 'N')
+      update_transactions([transaction],{:approval => 'N', :status => 'VALIDATION FAILED'})
+      transaction.reload
+      transaction.status.should == 'PENDING VALIDATION'
+      transaction.validation_status.should == 'PENDING VALIDATION'
+    end
+
     it "should update settlement records" do
       transaction = Factory(:ecol_transaction, :status => 'SETTLEMENT FAILED', :pending_approval => 'N')
       update_transactions([transaction],{:approval => 'N', :settle_status => 'SETTLEMENT FAILED'})

@@ -74,13 +74,13 @@
     = hidden_field_tag :approval
     = hidden_field_tag :notify_status
     = hidden_field_tag :settle_status
-    = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_transaction1', data: {:confirm=>"Are you sure?"}, :value => "Retry Validation", :params => {:status => 'VALIDATION FAILED' , :approval => 'N'}
-    = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_transaction2', data: {:confirm=>"Are you sure?"}, :value => "Approve Return", :status => 'PENDING RETURN' , :approval => 'Y'
-    = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_transaction3', data: {:confirm=>"Are you sure?"}, :value => "Approve Credit", :status => 'PENDING CREDIT' , :approval => 'Y'
-    = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_transaction4', data: {:confirm=>"Are you sure?"}, :value => "Retry Return", :status => 'RETURN FAILED' , :approval => 'N'
-    = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_transaction5', data: {:confirm=>"Are you sure?"}, :value => "Retry Credit", :status => 'CREDIT FAILED' , :approval => 'N'
-    = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_transaction6', data: {:confirm=>"Are you sure?"}, :value => "Retry Settlement", :settle_status => 'SETTLEMENT FAILED' , :approval => 'N'
-    = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_transaction7', data: {:confirm=>"Are you sure?"}, :value => "Retry Notification", :notify_status => 'NOTIFICATION FAILED' , :approval => 'N'
+    = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_transaction1', data: {:confirm=>"Are you sure?"}, :value => "Retry Validation"
+    = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_transaction2', data: {:confirm=>"Are you sure?"}, :value => "Approve Return"
+    = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_transaction3', data: {:confirm=>"Are you sure?"}, :value => "Approve Credit"
+    = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_transaction4', data: {:confirm=>"Are you sure?"}, :value => "Retry Return"
+    = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_transaction5', data: {:confirm=>"Are you sure?"}, :value => "Retry Credit"
+    = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_transaction6', data: {:confirm=>"Are you sure?"}, :value => "Retry Settlement"
+    = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_transaction7', data: {:confirm=>"Are you sure?"}, :value => "Retry Notification"
 
 
 = render :partial => 'modal_boxes'

@@ -86,7 +86,11 @@ module EcolTransactionsHelper
       if params[:approval] == 'Y'
         ecol_transaction.update_attributes(:pending_approval => "N")
       elsif params[:status].present?
-        ecol_transaction.update_attributes(:status => 'PENDING ' + params[:status].split(' ')[0])  
+        if params[:status].split(' ')[0] == 'VALIDATION'
+          ecol_transaction.update_attributes(:status => 'PENDING ' + params[:status].split(' ')[0], :validation_status => 'PENDING ' + params[:status].split(' ')[0]) 
+        else
+          ecol_transaction.update_attributes(:status => 'PENDING ' + params[:status].split(' ')[0]) 
+        end 
       elsif params[:settle_status].present?
         ecol_transaction.update_attributes(:settle_status => 'PENDING ' + params[:settle_status].split(' ')[0])  
       elsif params[:notify_status].present?
