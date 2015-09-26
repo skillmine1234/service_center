@@ -92,10 +92,10 @@ describe EcolTransactionsHelper do
   end
 
   context "pending_status" do
-    it "should true if status is CREDIT FAILED, RETURN FAILED or VALIDATION ERROR" do
+    it "should true if status is CREDIT FAILED, RETURN FAILED or VALIDATION FAILED" do
       pending_status('CREDIT FAILED').should == true
       pending_status('RETURN FAILED').should == true
-      pending_status('VALIDATION ERROR').should == true
+      pending_status('VALIDATION FAILED').should == true
     end
 
     it "should false for other statuses" do
@@ -108,7 +108,7 @@ describe EcolTransactionsHelper do
     it "should return the first word" do
       find_pending_status('CREDIT FAILED').should == 'CREDIT'
       find_pending_status('RETURN FAILED').should == 'RETURN'
-      find_pending_status('VALIDATION ERROR').should == 'VALIDATION'
+      find_pending_status('VALIDATION FAILED').should == 'VALIDATION'
     end
   end
 

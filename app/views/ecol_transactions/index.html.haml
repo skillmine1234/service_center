@@ -67,7 +67,11 @@
           %td{:style=>'text-align:left;'}
             = link_to ecol_transaction.validation_status, "#", :class => 'validation-link', :href => "#validationText", data: { validation_result: ecol_transaction.validation_result}
   .form-actions
-    = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_transaction1', data: {:confirm=>"Are you sure?"}, :value => "Retry Validation", :status => 'VALIDATION FAILED' , :approval => 'N'
+    = hidden_field_tag :status
+    = hidden_field_tag :approval
+    = hidden_field_tag :notify_status
+    = hidden_field_tag :settle_status
+    = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_transaction1', data: {:confirm=>"Are you sure?"}, :value => "Retry Validation", :params => {:status => 'VALIDATION FAILED' , :approval => 'N'}
     = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_transaction2', data: {:confirm=>"Are you sure?"}, :value => "Approve Return", :status => 'PENDING RETURN' , :approval => 'Y'
     = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_transaction3', data: {:confirm=>"Are you sure?"}, :value => "Approve Credit", :status => 'PENDING CREDIT' , :approval => 'Y'
     = f.button :submit ,:class=>"btn btn-primary", :id => 'submit_transaction4', data: {:confirm=>"Are you sure?"}, :value => "Retry Return", :status => 'RETURN FAILED' , :approval => 'N'

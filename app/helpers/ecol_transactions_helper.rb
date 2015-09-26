@@ -48,11 +48,11 @@ module EcolTransactionsHelper
   end
 
   def pending_status(state)
-    (state == 'CREDIT FAILED' or state == 'RETURN FAILED' or state == 'VALIDATION ERROR')
+    (state == 'CREDIT FAILED' or state == 'RETURN FAILED' or state == 'VALIDATION FAILED')
   end
 
   def find_pending_status(state)
-    state.split(' ').first if (state == 'CREDIT FAILED' or state == 'RETURN FAILED' or state == 'VALIDATION ERROR')
+    state.split(' ').first if (state == 'CREDIT FAILED' or state == 'RETURN FAILED' or state == 'VALIDATION FAILED')
   end
 
   def approval_status(state)
@@ -72,11 +72,11 @@ module EcolTransactionsHelper
   end
 
   def check_transactions(transactions,params)
-    if params[:status].present?
+    if !params[:status].to_s.empty?
       {:records => transactions.select{|transaction| transaction.status != params[:status]}, :status => params[:status]}
-    elsif params[:settle_status].present?
+    elsif !params[:settle_status].to_s.empty?
       {:records => transactions.select{|transaction| transaction.settle_status != params[:settle_status]}, :status => params[:settle_status]}
-    elsif params[:notify_status].present?
+    elsif !params[:notify_status].to_s.empty?
       {:records => transactions.select{|transaction| transaction.notify_status != params[:notify_status]}, :status => params[:notify_status]}
     end
   end

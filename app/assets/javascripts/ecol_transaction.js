@@ -73,17 +73,63 @@ $(document).ready(function(){
     $('#notifyResult').modal();
   });
 
-  $("#update_transactions").submit(function(){
-    $("#submit_transaction1").prop('disabled', true);
-    $("#submit_transaction2").prop('disabled', true);
-    $("#submit_transaction3").prop('disabled', true);
-    $("#submit_transaction4").prop('disabled', true);
-    $("#submit_transaction5").prop('disabled', true);
-    $("#submit_transaction6").prop('disabled', true);
-    $("#submit_transaction7").prop('disabled', true);
-  });
-
   $(".ecol_transaction").submit(function(){
     $("#transition_button").prop('disabled', true);
+  });
+
+  $("#submit_transaction1").click(function(){
+    $('input#status').val('VALIDATION FAILED');
+    $('input#approval').val('N');
+    $("#update_transactions").submit(function(){
+      $("#submit_transaction1").prop('disabled', true);
+    });
+  });
+
+  $("#submit_transaction2").click(function(){
+    $('input#status').val('PENDING RETURN');
+    $('input#approval').val('Y');
+    $("#update_transactions").submit(function(){
+      $("#submit_transaction2").prop('disabled', true);
+    });
+  });
+
+  $("#submit_transaction3").click(function(){
+    $('input#status').val('PENDING CREDIT');
+    $('input#approval').val('Y');
+    $("#update_transactions").submit(function(){
+      $("#submit_transaction3").prop('disabled', true);
+    });
+  });
+
+  $("#submit_transaction4").click(function(){
+    $('input#status').val('RETURN FAILED');
+    $('input#approval').val('N');
+    $("#update_transactions").submit(function(){
+      $("#submit_transaction4").prop('disabled', true);
+    });
+  });
+
+  $("#submit_transaction5").click(function(){
+    $('input#status').val('CREDIT FAILED');
+    $('input#approval').val('N');
+    $("#update_transactions").submit(function(){
+      $("#submit_transaction5").prop('disabled', true);
+    });
+  });
+
+  $("#submit_transaction6").click(function(){
+    $('input#settle_status').val('SETTLEMENT FAILED');
+    $('input#approval').val('N');
+    $("#update_transactions").submit(function(){
+      $("#submit_transaction6").prop('disabled', true);
+    });
+  });
+
+  $("#submit_transaction7").click(function(){
+    $('input#notify_status').val('NOTIFICATION FAILED');
+    $('input#approval').val('N');
+    $("#update_transactions").submit(function(){
+      $("#submit_transaction7").prop('disabled', true);
+    });
   });
 });
