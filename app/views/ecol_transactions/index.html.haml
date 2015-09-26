@@ -65,7 +65,10 @@
             - else
               = '-'
           %td{:style=>'text-align:left;'}
-            = link_to ecol_transaction.validation_status, "#", :class => 'validation-link', :href => "#validationText", data: { validation_result: ecol_transaction.validation_result}
+            - if !ecol_transaction.validation_result.nil?
+              = link_to ecol_transaction.validation_status, "#", :class => 'validation-link', :href => "#validationText", data: { validation_result: ecol_transaction.validation_result}
+            - else
+              = ecol_transaction.validation_status
   .form-actions
     = hidden_field_tag :status
     = hidden_field_tag :approval

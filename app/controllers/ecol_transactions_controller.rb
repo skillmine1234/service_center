@@ -71,6 +71,7 @@ class EcolTransactionsController < ApplicationController
       @ecol_transaction.notify_status = 'PENDING ' + params[:state]
     else
       @ecol_transaction.status = 'PENDING ' + params[:state]
+      @ecol_transaction.validation_status = 'PENDING ' + params[:state] if params[:state] == 'VALIDATION'
     end
     if !@ecol_transaction.save
       flash[:notice] = @ecol_transaction.errors.full_messages

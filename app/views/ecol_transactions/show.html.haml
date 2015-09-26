@@ -40,7 +40,10 @@
   .header-form-main{:style=>'background-color: #F1F2F8; width: 100%; display: inline-block;'}
     %h3 
       Validation Result:
-      = link_to @ecol_transaction.validation_status, "#", :class => 'result-link', :href => "#resultText", :style => "font-weight:100"
+      - if !@ecol_transaction.validation_result.nil?
+        = link_to @ecol_transaction.validation_status, "#", :class => 'result-link', :href => "#resultText", :style => "font-weight:100"
+      - else
+        = @ecol_transaction.validation_status
     %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:left;'}  
       %tr
         %td.label Validation Attempt

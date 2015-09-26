@@ -157,6 +157,7 @@ describe EcolTransactionsController do
       response.should be_redirect
       ecol_transaction.reload
       ecol_transaction.status = 'PENDING VALIDATION'
+      ecol_transaction.notify_status = 'PENDING VALIDATION'
     end
 
     it "updates the requested return ecol_transactions" do
