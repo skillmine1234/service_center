@@ -149,7 +149,7 @@
             %td
               = link_to "Fault Text", "#", :class => 'fault-link', :href => "#faultText", :style => "font-weight:100"
       %hr{:style=>'background-color: #F1F2F8; width: 100%'}
-    - elsif @ecol_transaction.status == 'RETURN' or @ecol_transaction.status == 'PENDING RETURN' or @ecol_transaction.status == 'RETURN FAILED'
+    - elsif @ecol_transaction.status == 'RETURNED' or @ecol_transaction.status == 'PENDING RETURN' or @ecol_transaction.status == 'RETURN FAILED'
       %h3 Return Result
       %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:left;'} 
         %tr
@@ -159,7 +159,7 @@
               = link_to @ecol_transaction.return_attempt_no, {:controller => 'ecol_transactions', :action => 'ecol_audit_logs', :id => @ecol_transaction.id, :step_name => 'RETURN'}
             - else
               = "-"
-        - if @ecol_transaction.status == 'RETURN'
+        - if @ecol_transaction.status == 'RETURNED'
           %tr
             %td.label Returned At
             %td= @ecol_transaction.returned_at.try(:strftime, "%d/%m/%Y %I:%M%p")
