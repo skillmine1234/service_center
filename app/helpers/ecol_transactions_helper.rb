@@ -56,11 +56,11 @@ module EcolTransactionsHelper
   end
 
   def approval_status(state)
-    (state == 'PENDING CREDIT' or state == 'PENDING RETURN')
+    (state == 'PENDING CREDIT' or state == 'PENDING RETURN' or state == 'CREDIT FAILED' or state == 'RETURN FAILED')
   end
 
   def find_approval_status(state)
-    state.split(' ').last if (state == 'PENDING CREDIT' or state == 'PENDING RETURN')
+    (state == 'PENDING CREDIT' or state == 'PENDING RETURN') ? state.split(' ').last : state.split(' ').first
   end
 
   def find_logs(params,transaction)

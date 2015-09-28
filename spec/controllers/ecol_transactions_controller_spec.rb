@@ -113,7 +113,6 @@ describe EcolTransactionsController do
     it "updates the requested credit ecol_transactions" do
       ecol_transaction = Factory(:ecol_transaction, :status => 'PENDING CREDIT', :transfer_unique_no => "vvvvv", :pending_approval => 'Y')
       params = ecol_transaction.attributes.slice(*ecol_transaction.class.attribute_names)
-      params[:pending_approval] = "N"
       put :approve_transaction, :id => ecol_transaction.id
       response.should be_redirect
       ecol_transaction.reload
@@ -123,11 +122,20 @@ describe EcolTransactionsController do
     it "updates the requested return ecol_transactions" do
       ecol_transaction = Factory(:ecol_transaction, :status => 'PENDING RETURN', :transfer_unique_no => "vvvvv", :pending_approval => 'Y')
       params = ecol_transaction.attributes.slice(*ecol_transaction.class.attribute_names)
-      params[:pending_approval] = "N"
       put :approve_transaction, :id => ecol_transaction.id
       response.should be_redirect
       ecol_transaction.reload
       ecol_transaction.pending_approval.should == "N"
+    end
+
+    it "updates the requested return ecol_transactions" do
+      ecol_transaction = Factory(:ecol_transaction, :status => 'PENDING RETURN', :transfer_unique_no => "vvvvv", :pending_approval => 'N')
+      params = ecol_transaction.attributes.slice(*ecol_transaction.class.attribute_names)
+      put :approve_transaction, :id => ecol_transaction.id
+      response.should be_redirect
+      ecol_transaction.reload
+      ecol_transaction.pending_approval.should == "N"
+      flash[:notice].should  match(/Transaction is already approved/)
     end
   end
 

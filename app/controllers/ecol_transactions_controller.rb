@@ -48,10 +48,14 @@ class EcolTransactionsController < ApplicationController
 
   def approve_transaction
     @ecol_transaction = EcolTransaction.find(params[:id])
-    if @ecol_transaction.update_attributes(:pending_approval => "N")
-      flash[:notice] = "Ecollect Transaction is sucessfully approved"
+    if @ecol_transaction.pending_approval == 'Y'
+      if @ecol_transaction.update_attributes(:pending_approval => "N")
+        flash[:notice] = "Ecollect Transaction is sucessfully approved"
+      else
+        flash[:notice] = @ecol_transaction.errors.full_messages
+      end
     else
-      flash[:notice] = @ecol_transaction.errors.full_messages
+      flash[:notice] = "Transaction is already approved"
     end   
     redirect_to :back
   end
