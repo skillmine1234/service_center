@@ -41,7 +41,6 @@ describe EcolTransactionsController do
     it "updates the requested credit ecol_transactions" do
       ecol_transaction = Factory(:ecol_transaction, :status => 'PENDING CREDIT', :transfer_unique_no => "vvvvv", :pending_approval => 'Y')
       params = ecol_transaction.attributes.slice(*ecol_transaction.class.attribute_names)
-      params[:pending_approval] = "N"
       put :update_multiple, {:ecol_transaction_ids => [ecol_transaction.id], :ecol_transaction => params, :status => 'PENDING CREDIT', :approval => 'Y'}
       response.should be_redirect
       ecol_transaction.reload
@@ -66,46 +65,47 @@ describe EcolTransactionsController do
       response.should be_redirect
       ecol_transaction.reload
       ecol_transaction.status.should == "PENDING RETURN"
+      ecol_transaction.pending_approval.should == "N"
     end
 
     it "updates the requested credit ecol_transactions" do
       ecol_transaction = Factory(:ecol_transaction, :status => 'CREDIT FAILED', :transfer_unique_no => "vvvvv", :pending_approval => 'Y')
       params = ecol_transaction.attributes.slice(*ecol_transaction.class.attribute_names)
-      params[:pending_approval] = "N"
       put :update_multiple, {:ecol_transaction_ids => [ecol_transaction.id], :ecol_transaction => params, :status => 'CREDIT FAILED', :approval => 'N'}
       response.should be_redirect
       ecol_transaction.reload
       ecol_transaction.status.should == "PENDING CREDIT"
+      ecol_transaction.pending_approval.should == "N"
     end
 
     it "updates the requested valdation ecol_transactions" do
-      ecol_transaction = Factory(:ecol_transaction, :status => 'VALIDATION FAILED', :transfer_unique_no => "vvvvv", :pending_approval => 'N')
+      ecol_transaction = Factory(:ecol_transaction, :status => 'VALIDATION FAILED', :transfer_unique_no => "vvvvv", :pending_approval => 'Y')
       params = ecol_transaction.attributes.slice(*ecol_transaction.class.attribute_names)
-      params[:pending_approval] = "N"
       put :update_multiple, {:ecol_transaction_ids => [ecol_transaction.id], :ecol_transaction => params, :status => 'VALIDATION FAILED', :approval => 'N'}
       response.should be_redirect
       ecol_transaction.reload
       ecol_transaction.status.should == "PENDING VALIDATION"
+      ecol_transaction.pending_approval.should == "N"
     end
 
     it "updates the requested valdation ecol_transactions" do
-      ecol_transaction = Factory(:ecol_transaction, :settle_status => 'SETTLEMENT FAILED', :transfer_unique_no => "vvvvv", :pending_approval => 'N')
+      ecol_transaction = Factory(:ecol_transaction, :settle_status => 'SETTLEMENT FAILED', :transfer_unique_no => "vvvvv", :pending_approval => 'Y')
       params = ecol_transaction.attributes.slice(*ecol_transaction.class.attribute_names)
-      params[:pending_approval] = "N"
       put :update_multiple, {:ecol_transaction_ids => [ecol_transaction.id], :ecol_transaction => params, :settle_status => 'SETTLEMENT FAILED', :approval => 'N'}
       response.should be_redirect
       ecol_transaction.reload
       ecol_transaction.settle_status.should == "PENDING SETTLEMENT"
+      ecol_transaction.pending_approval.should == "N"
     end
 
     it "updates the requested valdation ecol_transactions" do
-      ecol_transaction = Factory(:ecol_transaction, :notify_status => 'NOTIFICATION FAILED', :transfer_unique_no => "vvvvv", :pending_approval => 'N')
+      ecol_transaction = Factory(:ecol_transaction, :notify_status => 'NOTIFICATION FAILED', :transfer_unique_no => "vvvvv", :pending_approval => 'Y')
       params = ecol_transaction.attributes.slice(*ecol_transaction.class.attribute_names)
-      params[:pending_approval] = "N"
       put :update_multiple, {:ecol_transaction_ids => [ecol_transaction.id], :ecol_transaction => params, :notify_status => 'NOTIFICATION FAILED', :approval => 'N'}
       response.should be_redirect
       ecol_transaction.reload
       ecol_transaction.notify_status.should == "PENDING NOTIFICATION"
+      ecol_transaction.pending_approval.should == "N"
     end
   end
 
@@ -138,7 +138,8 @@ describe EcolTransactionsController do
       put :update, :id => ecol_transaction.id, :state => 'CREDIT'
       response.should be_redirect
       ecol_transaction.reload
-      ecol_transaction.status = 'PENDING CREDIT'
+      ecol_transaction.status.should == 'PENDING CREDIT'
+      ecol_transaction.pending_approval.should == 'N'
     end
 
     it "updates the requested return ecol_transactions" do
@@ -147,7 +148,8 @@ describe EcolTransactionsController do
       put :update, :id => ecol_transaction.id, :state => 'RETURN'
       response.should be_redirect
       ecol_transaction.reload
-      ecol_transaction.status = 'PENDING RETURN'
+      ecol_transaction.status.should == 'PENDING RETURN'
+      ecol_transaction.pending_approval.should == 'N'
     end
 
     it "updates the requested credit ecol_transactions" do
@@ -156,8 +158,9 @@ describe EcolTransactionsController do
       put :update, :id => ecol_transaction.id, :state => 'VALIDATION'
       response.should be_redirect
       ecol_transaction.reload
-      ecol_transaction.status = 'PENDING VALIDATION'
-      ecol_transaction.notify_status = 'PENDING VALIDATION'
+      ecol_transaction.status.should == 'PENDING VALIDATION'
+      ecol_transaction.validation_status.should == 'PENDING VALIDATION'
+      ecol_transaction.pending_approval.should == 'N'
     end
 
     it "updates the requested return ecol_transactions" do
@@ -166,7 +169,8 @@ describe EcolTransactionsController do
       put :update, :id => ecol_transaction.id, :state => 'SETTLEMENT'
       response.should be_redirect
       ecol_transaction.reload
-      ecol_transaction.settle_status = 'PENDING SETTLEMENT'
+      ecol_transaction.settle_status.should == 'PENDING SETTLEMENT'
+      ecol_transaction.pending_approval.should == 'N'
     end
 
     it "updates the requested return ecol_transactions" do
@@ -175,7 +179,8 @@ describe EcolTransactionsController do
       put :update, :id => ecol_transaction.id, :state => 'NOTIFICATION'
       response.should be_redirect
       ecol_transaction.reload
-      ecol_transaction.settle_status = 'PENDING NOTIFICATION'
+      ecol_transaction.notify_status.should == 'PENDING NOTIFICATION'
+      ecol_transaction.pending_approval.should == 'N'
     end
   end
 
