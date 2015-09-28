@@ -102,7 +102,7 @@
             .span{:class =>"has-tooltip", "data-toggle" => 'tooltip',"title" => "(Expected Value: #{@ecol_transaction.expected_transfer_date rescue "-"})" , "data-placement" => 'bottom', "data-html" => true}
               = @ecol_transaction.transfer_date.try(:strftime, "%d/%m/%Y %I:%M%p")
           - else
-            = @ecol_transaction.transfer_date
+            = @ecol_transaction.transfer_date.try(:strftime, "%d/%m/%Y %I:%M%p")
       %tr
         %td.label Remitter Account Number
         %td
@@ -187,7 +187,7 @@
             = "-"
       %tr
         %td.label Settle Attempt At
-        %td= @ecol_transaction.settle_attempt_at
+        %td= @ecol_transaction.settle_attempt_at.try(:strftime, "%d/%m/%Y %I:%M%p")
       %tr
         %td.label Settle Status
         %td= @ecol_transaction.settle_status
@@ -221,7 +221,7 @@
         %td= @ecol_transaction.try(:ecol_customer).try(:cust_alert_on)
       %tr
         %td.label Notify Attempt At
-        %td= @ecol_transaction.notify_attempt_at
+        %td= @ecol_transaction.notify_attempt_at.try(:strftime, "%d/%m/%Y %I:%M%p")
       %tr
         %td.label Notify Status
         %td= @ecol_transaction.notify_status
