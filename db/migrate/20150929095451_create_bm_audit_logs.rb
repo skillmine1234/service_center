@@ -2,7 +2,7 @@ class CreateBmAuditLogs < ActiveRecord::Migration
   def change
     create_table :bm_audit_logs do |t|
       t.string :app_id, :limit => 50, :null => false, :comment => 'the identifier for the client'
-      t.string :req_no, :null => false, :comment => 'the unique request number sent by the client'
+      t.string :req_no, :limit => 32, :null => false, :comment => 'the unique request number sent by the client'
       t.integer :attempt_no, :null => false, :comment => 'the attempt number of the request, failed requests can be retried'
       t.string :status_code, :limit => 25, :null => false, :comment => 'the status of this request'
       t.string :bm_auditable_type, :limit => 50, :null => false, :comment => 'the name of the table that represents the request that is related to this record'
