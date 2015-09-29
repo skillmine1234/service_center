@@ -3,7 +3,7 @@ class CreateBmRules < ActiveRecord::Migration
     create_table :bm_rules do |t|
       t.string :cod_acct_no, :limit => 16, :null => false, :comment => 'the pool account assigned to the aggregator, the balance is owed to the aggregator'
       t.string :customer_id, :limit => 15, :null => false, :comment => 'the customer-id that owns the pool account'
-      t.string :cod_gl_suspense :limit => 16, :null => false, :comment => 'the suspense gl assigned to the aggregator, the balance is pending reconciliation'
+      t.string :cod_gl_suspense, :limit => 16, :null => false, :comment => 'the suspense gl assigned to the aggregator, the balance is pending reconciliation'
       t.string :bene_acct_no, :null => false, :comment => 'the aggregators account no, funds are remitted to this account'
       t.string :bene_account_ifsc, :null => false, :comment => 'the IFSC code of the bank that holds the aggregators account.'
       t.string :neft_sender_ifsc, :null => false, :comment => 'the IFSC code of your bank, that should be used while remitting funds to the aggregator'
