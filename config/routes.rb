@@ -24,6 +24,8 @@ ServiceCenter::Application.routes.draw do
   resources :ecol_unapproved_records
   resources :inw_unapproved_records
   resources :bm_unapproved_records
+  resources :bm_rules
+  resources :bm_billers
 
   namespace :api do
     namespace :v1 do
