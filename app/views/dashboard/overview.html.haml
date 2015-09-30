@@ -105,3 +105,11 @@
           = image_tag 'statistic.jpeg', :size => "80x80"
       %br
         = "E-Collect Fetch Statistics"
+- if @current_user.group_names.include?("bill-management")
+  %h1 Bill-Management
+  .slide-container
+    .box  
+      = link_to '/bm_unapproved_records' do
+        = image_tag 'work-list.jpg', :size => "80x80"
+      %br
+        = "Approval Worklist"

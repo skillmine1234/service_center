@@ -21,6 +21,7 @@ Role.create(:name=>"supervisor") if Role.find_by_name("supervisor").nil?
 
 Group.create(:name=>"inward-remittance") if Group.find_by_name("inward-remittance").nil?
 Group.create(:name=>"e-collect") if Group.find_by_name("e-collect").nil?
+Group.create(:name=>"bill-management") if Group.find_by_name("bill-management").nil?
 
 if InwRemittanceRule.all.empty?
   InwRemittanceRule.create!(:pattern_salutations => "Mr\r\nMrs\r\nMiss\r\nDr\r\nMs\r\nPRof\r\nRev\r\nLady\r\nSir\r\nCapt\r\nMajor\r\nLtCol\r\nCol")

@@ -7,6 +7,8 @@ class Group < ActiveRecord::Base
       ['Partner','Bank','PurposeCode','WhitelistedIdentity','InwIdentity','InwardRemittance', 'InwRemittanceRule','InwUnapprovedRecord']
     when "e-collect"
       ['EcolUnapprovedRecord','EcolRule','EcolCustomer','EcolRemitter','EcolTransaction','UdfAttribute','IncomingFile','EcolFetchStatistic']
+    when "bill-management"
+      ['BmRule','BmBiller','BmBillPayment','BmUnapprovedRecord']
     else
       []
     end
