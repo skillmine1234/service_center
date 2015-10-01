@@ -27,7 +27,7 @@ ServiceCenter::Application.routes.draw do
   resources :bm_rules
   resources :bm_billers
   resources :bm_bill_payments
-  
+
   namespace :api do
     namespace :v1 do
       resources :whitelisted_identities
@@ -74,6 +74,7 @@ ServiceCenter::Application.routes.draw do
   get '/ecol_transactions/:id/ecol_audit_logs/:step_name' => 'ecol_transactions#ecol_audit_logs'
   put '/ecol_transactions/:id/approve' => "ecol_transactions#approve_transaction"
 
+  get '/bm_bill_payments/:id/audit_logs/:step_name' => 'bm_bill_payments#audit_logs'
   root :to => 'dashboard#overview'
 
   # See how all your routes lay out with "rake routes"

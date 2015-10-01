@@ -12,4 +12,12 @@ module BmBillPaymentHelper
     bill_payments = bill_payments.where("bm_bill_payments.bill_id=?",params[:bill_id]) if params[:bill_id].present?
     bill_payments
   end
+
+  def find_logs(params,transaction)
+    if params[:step_name] != 'ALL'
+      transaction.bm_billpay_steps.where('step_name=?',params[:step_name]).order("attempt_no desc") rescue []
+    else
+      transaction.bm_billpay_steps.order("id desc") rescue []
+    end      
+  end
 end

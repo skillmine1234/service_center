@@ -26,4 +26,27 @@ describe BmBillPaymentsController do
       assigns(:bill_payment).should eq(bm_bill_payment)
     end
   end
+
+  describe "GET audit_logs" do
+    it "returns the debit log" do
+      bill_payment = Factory(:bm_bill_payment)
+      log = Factory(:bm_billpay_step, :bm_bill_payment_id => bill_payment.id, :step_name => 'DEBIT')
+      get :audit_logs, :id => bill_payment.id, :step_name => 'DEBIT'
+      assigns[:bill_values].should == [log]
+    end
+
+    it "returns the billpay log" do
+      bill_payment = Factory(:bm_bill_payment)
+      log = Factory(:bm_billpay_step, :bm_bill_payment_id => bill_payment.id, :step_name => 'BILLPAY')
+      get :audit_logs, :id => bill_payment.id, :step_name => 'BILLPAY'
+      assigns[:bill_values].should == [log]
+    end
+
+    it "returns the reversal log" do
+      bill_payment = Factory(:bm_bill_payment)
+      log = Factory(:bm_billpay_step, :bm_bill_payment_id => bill_payment.id, :step_name => 'REVERSAL')
+      get :audit_logs, :id => bill_payment.id, :step_name => 'REVERSAL'
+      assigns[:bill_values].should == [log]
+    end
+  end
 end

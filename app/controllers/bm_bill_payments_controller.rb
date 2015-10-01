@@ -19,6 +19,13 @@ class BmBillPaymentsController < ApplicationController
     @bm_bill_payments = bm_bill_payments.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
 
+  def audit_logs
+    @bill_payment = BmBillPayment.find(params[:id])
+    bill_values = find_logs(params, @bill_payment)
+    @bill_values_count = bill_values.count(:id)
+    @bill_values = bill_values.paginate(:per_page => 10, :page => params[:page]) rescue []
+  end
+
   private
 
   def bm_bill_payment_params

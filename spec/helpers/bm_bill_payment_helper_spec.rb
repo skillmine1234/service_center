@@ -47,4 +47,13 @@ describe BmBillPaymentHelper do
       find_bm_bill_payments(val,{:bill_id => 'Be2312'}).should == []   
     end
   end
+
+  context "find_logs" do
+    it "should return the logs" do
+      transaction = Factory(:bm_bill_payment)
+      log = Factory(:bm_billpay_step, :bm_bill_payment_id => transaction.id, :step_name => 'DEBIT')
+      find_logs({:step_name => 'DEBIT'},transaction).should == transaction.bm_billpay_steps
+      find_logs({:step_name => 'RETURN'},transaction).should == []
+    end
+  end
 end

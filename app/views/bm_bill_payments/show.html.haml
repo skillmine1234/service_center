@@ -9,6 +9,9 @@
     %h3
       Attempt No:
       = @bill_payment.attempt_no
+    %h3
+      Audit Logs:
+      = link_to 'Show', {:controller => 'bm_bill_payments', :action => 'audit_logs', :id => @bill_payment.id, :step_name => 'ALL'}
   .header-form-extended{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'}
     %h3
       Status:
@@ -56,7 +59,11 @@
         %td= @bill_payment.debit_req_ref
       %tr
         %td.label Debit Attempt No
-        %td= @bill_payment.debit_attempt_no
+        %td
+          - if !@bill_payment.debit_attempt_no.nil? 
+            = link_to @bill_payment.debit_attempt_no, {:controller => 'bm_bill_payments', :action => 'audit_logs', :id => @bill_payment.id, :step_name => 'DEBIT'}
+          - else
+            = "-"
       %tr
         %td.label Debit Attempted At
         %td= @bill_payment.debit_attempt_at.try(:strftime, "%d/%m/%Y %I:%M%p")
@@ -75,7 +82,11 @@
         %td= @bill_payment.reversal_req_ref
       %tr
         %td.label Reversal Attempt No
-        %td= @bill_payment.reversal_attempt_no
+        %td
+          - if !@bill_payment.reversal_attempt_no.nil? 
+            = link_to @bill_payment.reversal_attempt_no, {:controller => 'bm_bill_payments', :action => 'audit_logs', :id => @bill_payment.id, :step_name => 'REVERSAL'}
+          - else
+            = "-"
       %tr
         %td.label Reversal Attempted At
         %td= @bill_payment.reversal_attempt_at.try(:strftime, "%d/%m/%Y %I:%M%p")
@@ -94,7 +105,11 @@
         %td= @bill_payment.billpay_req_ref
       %tr
         %td.label Bill Pay Attempt No
-        %td= @bill_payment.billpay_attempt_no
+        %td
+          - if !@bill_payment.billpay_attempt_no.nil? 
+            = link_to @bill_payment.billpay_attempt_no, {:controller => 'bm_bill_payments', :action => 'audit_logs', :id => @bill_payment.id, :step_name => 'BILLPAY'}
+          - else
+            = "-"
       %tr
         %td.label Bill Pay Attempted At
         %td= @bill_payment.billpay_attempt_at.try(:strftime, "%d/%m/%Y %I:%M%p")
