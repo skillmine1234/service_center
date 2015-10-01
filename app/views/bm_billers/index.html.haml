@@ -1,0 +1,55 @@
+%br
+= link_to 'New Biller', new_bm_biller_path
+%br
+%br
+%h1 Listing Billers
+%h2.collapsible
+  Advanced Search
+  %span.caret
+.collapsible-content
+  = render :partial => 'advanced_search'
+%br
+= "Total Count: #{@bm_billers_count}"
+%br
+= will_paginate @bm_billers
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Biller Code
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Biller Name
+    %th{:style=>'text-align:left; background-color: lightblue;'} 
+      Biller Category
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Biller Location
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Processing Method
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Is Enabled?
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      No. Of Parameters
+
+  .tbody
+    - @bm_billers.each do |bm_biller|
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', bm_biller
+        %td{:style=>'text-align:left;'}
+          = link_to 'Edit', edit_bm_biller_path(bm_biller)
+        %td{:style=>'text-align:left;'}
+          = bm_biller.biller_code
+        %td{:style=>'text-align:left;'}
+          = bm_biller.biller_name
+        %td{:style=>'text-align:left;'}
+          = bm_biller.biller_category
+        %td{:style=>'text-align:left;'}
+          = bm_biller.biller_location
+        %td{:style=>'text-align:left;'}
+          = bm_biller.processing_method
+        %td{:style=>'text-align:left;'}
+          = bm_biller.is_enabled
+        %td{:style=>'text-align:left;'}
+          = bm_biller.num_params
