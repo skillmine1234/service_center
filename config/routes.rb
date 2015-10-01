@@ -26,7 +26,8 @@ ServiceCenter::Application.routes.draw do
   resources :bm_unapproved_records
   resources :bm_rules
   resources :bm_billers
-
+  resources :bm_bill_payments
+  
   namespace :api do
     namespace :v1 do
       resources :whitelisted_identities

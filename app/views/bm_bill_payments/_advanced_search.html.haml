@@ -1,0 +1,39 @@
+= form_tag '', :method => 'get', :class => 'form-horizontal', :autocomplete=>"off" do
+  .control-group
+    = label_tag "Status", nil, :class => 'control-label'
+    = select_tag :status, options_for_select([['NEW','NEW'],['DEBITED','DEBITED'],['FAILED','FAILED'],['PAID','PAID'],['REVERSED','REVERSED']],params[:status]),:prompt => 'ANY'
+  .control-group
+    = label_tag "Request No", nil, :class => 'control-label'
+    = text_field_tag :request_no, params[:request_no]
+  .control-group
+    = label_tag "Customer ID", nil, :class => 'control-label'
+    = text_field_tag :cust_id, params[:cust_id]
+  .control-group
+    = label_tag "Debit Account No", nil, :class => 'control-label'
+    = text_field_tag :debit_no, params[:debit_no]
+  .control-group
+    = label_tag "Transaction Kind", nil, :class => 'control-label'
+    = text_field_tag :txn_kind, params[:txn_kind]
+  .control-group
+    = label_tag "Transaction Amount", nil, :class => 'control-label'
+    = text_field_tag :from_amount, params[:from_amount]
+    To
+    = text_field_tag :to_amount, params[:to_amount]
+  .control-group
+    = label_tag "Biller Code", nil, :class => 'control-label'
+    = text_field_tag :biller_code, params[:biller_code]
+  .control-group
+    = label_tag "Biller Account No", nil, :class => 'control-label'
+    = text_field_tag :biller_acct_no, params[:biller_acct_no]
+  .control-group
+    = label_tag "Bill ID", nil, :class => 'control-label'
+    = text_field_tag :bill_id, params[:bill_id]
+  = hidden_field_tag :advanced_search, :true
+  - if params[:req_no].present?
+    = hidden_field_tag :req_no, params[:req_no]
+  .form-actions
+    = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"
+    %input{:type => 'reset', :value=>'Reset', :class => 'btn'}
+
+:javascript
+  var in_advanced_search = true;

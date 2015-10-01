@@ -1,0 +1,133 @@
+.show_ticket
+  .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'} 
+    %h3
+      App Id:
+      = @bill_payment.app_id
+    %h3
+      Request No:
+      = @bill_payment.req_no
+    %h3
+      Attempt No:
+      = @bill_payment.attempt_no
+  .header-form-extended{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'}
+    %h3
+      Status:
+      = @bill_payment.status
+      %tr
+        - if @bill_payment.status == "FAILED"
+          = link_to "Fault Text", "#", :class => 'fault-link', :href => "#faultText", :style => "font-weight:100"
+    %h3 
+      Reconciled?:
+      = @bill_payment.is_reconciled
+    %h3 
+      Reconciled At:
+      = @bill_payment.is_reconciled.try(:strftime, "%d/%m/%Y %I:%M%p")
+  .header-form-main{:style=>'background-color: #F1F2F8; width: 100%; display: inline-block;'}
+    %h3 
+      Request:
+    %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:left;'}  
+      %tr
+        %td.label Customer ID
+        %td= @bill_payment.customer_id
+      %tr
+        %td.label Debit Account No
+        %td= @bill_payment.debit_account_no
+      %tr
+        %td.label Transaction Kind
+        %td= @bill_payment.txn_kind
+      %tr
+        %td.label Transaction Amount
+        %td= @bill_payment.txn_amount        
+    %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:right;'}  
+      %tr
+        %td.label Biller Code
+        %td= @bill_payment.biller_code
+      %tr
+        %td.label Biller Account No
+        %td= @bill_payment.biller_acct_no
+      %tr
+        %td.label Bill ID
+        %td= @bill_payment.bill_id
+    %hr{:style=>'background-color: #F1F2F8; width: 100%'}
+    %h3 Debit Result
+    %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:left;'}  
+      %tr
+        %td.label Debit Request Reference
+        %td= @bill_payment.debit_req_ref
+      %tr
+        %td.label Debit Attempt No
+        %td= @bill_payment.debit_attempt_no
+      %tr
+        %td.label Debit Attempted At
+        %td= @bill_payment.debit_attempt_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+    %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:right;'}  
+      %tr
+        %td.label Debit Reply Reference
+        %td= @bill_payment.debit_rep_ref
+      %tr
+        %td.label Debit At
+        %td= @bill_payment.debited_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+    %hr{:style=>'background-color: #F1F2F8; width: 100%'}
+    %h3 Reversal Result
+    %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:left;'} 
+      %tr
+        %td.label Reversal Request Reference
+        %td= @bill_payment.reversal_req_ref
+      %tr
+        %td.label Reversal Attempt No
+        %td= @bill_payment.reversal_attempt_no
+      %tr
+        %td.label Reversal Attempted At
+        %td= @bill_payment.reversal_attempt_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+    %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:right;'}  
+      %tr
+        %td.label Reversal Reply Reference
+        %td= @bill_payment.reversal_rep_ref
+      %tr
+        %td.label Reversed At
+        %td= @bill_payment.reversal_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+    %hr{:style=>'background-color: #F1F2F8; width: 100%'}
+    %h3 Bill Pay Result
+    %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:left;'} 
+      %tr
+        %td.label Bill Pay Request Reference
+        %td= @bill_payment.billpay_req_ref
+      %tr
+        %td.label Bill Pay Attempt No
+        %td= @bill_payment.billpay_attempt_no
+      %tr
+        %td.label Bill Pay Attempted At
+        %td= @bill_payment.billpay_attempt_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+    %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:right;'}  
+      %tr
+        %td.label Bill Pay Reply Reference
+        %td= @bill_payment.billpay_rep_ref
+      %tr
+        %td.label Bill Paid At
+        %td= @bill_payment.billpaid_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+    %hr{:style=>'background-color: #F1F2F8; width: 100%'}
+    %h3 Refund Result
+    %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:left;'}  
+      %tr
+        %tr
+          %td.label Refund Reference
+          %td= @bill_payment.refund_ref
+        %tr
+          %td.label Refund At
+          %td= @bill_payment.refund_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+    %hr{:style=>'background-color: #F1F2F8; width: 100%'}
+#faultText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Fault Text
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    .demo-area
+    %pre#fault_text{:style => 'word-wrap: break-word'}
+    %table.table.no-border
+      %tr
+        %td.label Fault Code: 
+        %td= @bill_payment.fault_code
+      %tr
+        %td.label Fault Reason:
+        %td= @bill_payment.fault_reason

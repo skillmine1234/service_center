@@ -1,0 +1,56 @@
+%br
+%h1 Listing Bill Payments
+%h2.collapsible
+  Advanced Search
+  %span.caret
+.collapsible-content
+  = render :partial => 'advanced_search'
+%br
+= "Total Count: #{@bm_bill_payments_count}"
+%br
+= will_paginate @bm_bill_payments
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Status
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Request No
+    %th{:style=>'Text-align:left; background-color: lightblue;'}
+      Customer Id
+    %th{:style=>'Text-align:left; background-color: lightblue;'}
+      Debit Account No
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Transaction Kind
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Transaction Amount
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Biller Code
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Biller Account No
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Bill ID
+  .tbody
+    - @bm_bill_payments.each do |bm_bill_payment|   
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', bm_bill_payment
+        %td{:style=>'text-align:left;'}
+          = bm_bill_payment.status
+        %td{:style=>'text-align:left;'}
+          = bm_bill_payment.req_no
+        %td{:style=>'text-align:left;'}
+          = bm_bill_payment.customer_id
+        %td{:style=>'text-align:left;'}
+          = bm_bill_payment.debit_account_no
+        %td{:style=>'text-align:left;'}
+          = bm_bill_payment.txn_kind
+        %td{:style=>'text-align:left;'}
+          = bm_bill_payment.txn_amount
+        %td{:style=>'text-align:left;'}
+          = bm_bill_payment.biller_code
+        %td{:style=>'text-align:left;'}
+          = bm_bill_payment.biller_acct_no
+        %td{:style=>'text-align:left;'}
+          = bm_bill_payment.bill_id
