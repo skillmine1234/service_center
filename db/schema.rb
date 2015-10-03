@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150807135704) do
+ActiveRecord::Schema.define(version: 20150930131718) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -58,9 +58,11 @@ ActiveRecord::Schema.define(version: 20150807135704) do
     t.integer  "failed_attempts",                   default: 0
     t.string   "unlock_token"
     t.datetime "locked_at"
+    t.datetime "password_changed_at"
   end
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true
+  add_index "admin_users", ["password_changed_at"], name: "index_admin_users_on_password_changed_at"
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
 
   create_table "admin_users_admin_roles", id: false, force: :cascade do |t|
@@ -128,6 +130,326 @@ ActiveRecord::Schema.define(version: 20150807135704) do
 
   add_index "banks", ["ifsc", "approval_status"], name: "index_banks_on_ifsc_and_approval_status", unique: true
 
+  create_table "bm_add_biller_accts", force: :cascade do |t|
+    t.string   "app_id",             limit: 50,   null: false
+    t.string   "req_no",             limit: 32,   null: false
+    t.integer  "attempt_no",                      null: false
+    t.string   "req_version",        limit: 5,    null: false
+    t.datetime "req_timestamp",                   null: false
+    t.string   "customer_id",        limit: 15,   null: false
+    t.string   "biller_code",        limit: 50,   null: false
+    t.integer  "num_params",                      null: false
+    t.string   "param1",             limit: 100
+    t.string   "param2",             limit: 100
+    t.string   "param3",             limit: 100
+    t.string   "param4",             limit: 100
+    t.string   "param5",             limit: 100
+    t.string   "status_code",        limit: 50,   null: false
+    t.string   "rep_version",        limit: 5
+    t.string   "rep_no",             limit: 32
+    t.datetime "rep_timestamp"
+    t.string   "biller_acct_no",     limit: 50
+    t.string   "biller_acct_status", limit: 50
+    t.string   "fault_code",         limit: 50
+    t.string   "fault_reason",       limit: 1000
+  end
+
+  add_index "bm_add_biller_accts", ["app_id", "req_no", "attempt_no"], name: "attempt_no_index_add_accts", unique: true
+
+  create_table "bm_aggregator_payments", force: :cascade do |t|
+    t.string   "cod_acct_no",       limit: 50, null: false
+    t.string   "neft_sender_ifsc",             null: false
+    t.string   "bene_acct_no",      limit: 50, null: false
+    t.string   "bene_account_ifsc",            null: false
+    t.float    "payment_amount"
+    t.string   "bank_ref",          limit: 64
+    t.integer  "lock_version",                 null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.string   "approval_status",   limit: 1,  null: false
+    t.string   "last_action",       limit: 1
+    t.integer  "approved_version"
+    t.integer  "approved_id"
+  end
+
+  create_table "bm_audit_logs", force: :cascade do |t|
+    t.string   "app_id",            limit: 50,   null: false
+    t.string   "req_no",            limit: 32,   null: false
+    t.integer  "attempt_no",                     null: false
+    t.string   "status_code",       limit: 25,   null: false
+    t.string   "bm_auditable_type", limit: 50,   null: false
+    t.integer  "bm_auditable_id",                null: false
+    t.string   "fault_code",        limit: 50
+    t.string   "fault_reason",      limit: 1000
+    t.text     "req_bitstream"
+    t.datetime "req_timestamp"
+    t.text     "rep_bitstream"
+    t.datetime "rep_timestamp"
+    t.text     "fault_bitstream"
+  end
+
+  add_index "bm_audit_logs", ["app_id", "req_no", "attempt_no"], name: "attempt_no_index_audit_logs", unique: true
+  add_index "bm_audit_logs", ["bm_auditable_type", "bm_auditable_id"], name: "auditable_index_audit_logs", unique: true
+
+  create_table "bm_bill_payments", force: :cascade do |t|
+    t.string   "app_id",              limit: 50,   null: false
+    t.string   "req_no",              limit: 32,   null: false
+    t.integer  "attempt_no",                       null: false
+    t.string   "req_version",         limit: 5,    null: false
+    t.datetime "req_timestamp",                    null: false
+    t.string   "customer_id",         limit: 15,   null: false
+    t.string   "debit_account_no",    limit: 50,   null: false
+    t.string   "txn_kind",            limit: 50,   null: false
+    t.float    "txn_amount",                       null: false
+    t.string   "biller_code",         limit: 50,   null: false
+    t.string   "biller_acct_no",      limit: 50
+    t.string   "bill_id",             limit: 50
+    t.string   "status",              limit: 50,   null: false
+    t.string   "fault_code",          limit: 50
+    t.string   "fault_reason",        limit: 1000
+    t.string   "debit_req_ref",       limit: 64
+    t.integer  "debit_attempt_no"
+    t.datetime "debit_attempt_at"
+    t.string   "debit_rep_ref",       limit: 64
+    t.datetime "debited_at"
+    t.string   "billpay_req_ref",     limit: 64
+    t.integer  "billpay_attempt_no"
+    t.datetime "billpay_attempt_at"
+    t.string   "billpay_rep_ref",     limit: 64
+    t.datetime "billpaid_at"
+    t.string   "reversal_req_ref",    limit: 64
+    t.integer  "reversal_attempt_no"
+    t.datetime "reversal_attempt_at"
+    t.string   "reversal_rep_ref",    limit: 64
+    t.datetime "reversal_at"
+    t.string   "refund_ref",          limit: 64
+    t.datetime "refund_at"
+    t.string   "is_reconciled",       limit: 1
+    t.datetime "reconciled_at"
+  end
+
+  add_index "bm_bill_payments", ["app_id", "req_no", "attempt_no"], name: "attepmt_index_bill_payments", unique: true
+
+  create_table "bm_billers", force: :cascade do |t|
+    t.string   "biller_code",       limit: 100,               null: false
+    t.string   "biller_name",       limit: 100,               null: false
+    t.string   "biller_category",   limit: 100,               null: false
+    t.string   "biller_location",   limit: 100,               null: false
+    t.string   "processing_method", limit: 100,               null: false
+    t.string   "is_enabled",        limit: 1,                 null: false
+    t.integer  "num_params",                                  null: false
+    t.string   "param1_name",       limit: 100
+    t.string   "param1_pattern",    limit: 100
+    t.string   "param1_tooltip",    limit: 100
+    t.string   "param2_name",       limit: 100
+    t.string   "param2_pattern",    limit: 100
+    t.string   "param2_tooltip",    limit: 100
+    t.string   "param3_name",       limit: 100
+    t.string   "param3_pattern",    limit: 100
+    t.string   "param3_tooltip",    limit: 100
+    t.string   "param4_name",       limit: 100
+    t.string   "param4_pattern",    limit: 100
+    t.string   "param4_tooltip",    limit: 100
+    t.string   "param5_name",       limit: 100
+    t.string   "param5_pattern",    limit: 100
+    t.string   "param5_tooltip",    limit: 100
+    t.integer  "lock_version",                                null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.string   "approval_status",   limit: 1,   default: "U", null: false
+    t.string   "last_action",       limit: 1
+    t.integer  "approved_version"
+    t.integer  "approved_id"
+    t.string   "created_by",        limit: 20
+    t.string   "updated_by",        limit: 20
+  end
+
+  add_index "bm_billers", ["biller_code", "approval_status"], name: "index_bm_billers_on_biller_code_and_approval_status", unique: true
+
+  create_table "bm_billpay_steps", force: :cascade do |t|
+    t.integer  "bm_bill_payment_id",              null: false
+    t.integer  "step_no",                         null: false
+    t.integer  "attempt_no",                      null: false
+    t.string   "step_name",          limit: 100,  null: false
+    t.string   "status_code",        limit: 25,   null: false
+    t.string   "fault_code",         limit: 50
+    t.string   "fault_reason",       limit: 1000
+    t.string   "req_reference"
+    t.text     "req_bitstream"
+    t.datetime "req_timestamp"
+    t.string   "rep_reference"
+    t.text     "rep_bitstream"
+    t.datetime "rep_timestamp"
+    t.text     "fault_bitstream"
+  end
+
+  add_index "bm_billpay_steps", ["bm_bill_payment_id", "step_no", "attempt_no"], name: "attepmt_no_index_billpay_steps", unique: true
+
+  create_table "bm_del_biller_accts", force: :cascade do |t|
+    t.string   "app_id",         limit: 50,   null: false
+    t.string   "req_no",         limit: 32,   null: false
+    t.integer  "attempt_no",                  null: false
+    t.string   "req_version",    limit: 5,    null: false
+    t.datetime "req_timestamp",               null: false
+    t.string   "customer_id",    limit: 15,   null: false
+    t.string   "biller_acct_no", limit: 50
+    t.string   "status_code",    limit: 50,   null: false
+    t.string   "rep_version",    limit: 5
+    t.string   "rep_no",         limit: 32
+    t.datetime "rep_timestamp"
+    t.string   "fault_code",     limit: 50
+    t.string   "fault_reason",   limit: 1000
+  end
+
+  add_index "bm_del_biller_accts", ["app_id", "req_no", "attempt_no"], name: "attempt_no_index_del_accts", unique: true
+
+  create_table "bm_pay_bills", force: :cascade do |t|
+    t.string   "app_id",              limit: 50,   null: false
+    t.string   "req_no",              limit: 32,   null: false
+    t.integer  "attempt_no",                       null: false
+    t.string   "req_version",         limit: 5,    null: false
+    t.datetime "req_timestamp",                    null: false
+    t.string   "customer_id",         limit: 15,   null: false
+    t.string   "debit_account_no",    limit: 50,   null: false
+    t.string   "bill_id",             limit: 50,   null: false
+    t.string   "status_code",         limit: 50,   null: false
+    t.string   "rep_version",         limit: 5
+    t.string   "rep_no",              limit: 32
+    t.datetime "rep_timestamp"
+    t.string   "debit_reference_no",  limit: 32
+    t.string   "biller_reference_no", limit: 32
+    t.string   "fault_code",          limit: 50
+    t.string   "fault_reason",        limit: 1000
+  end
+
+  add_index "bm_pay_bills", ["app_id", "req_no", "attempt_no"], name: "attempt_no_index_pay_bills", unique: true
+
+  create_table "bm_pay_to_biller_accts", force: :cascade do |t|
+    t.string   "app_id",              limit: 50,   null: false
+    t.string   "req_no",              limit: 32,   null: false
+    t.integer  "attempt_no",                       null: false
+    t.string   "req_version",         limit: 5,    null: false
+    t.datetime "req_timestamp",                    null: false
+    t.string   "customer_id",         limit: 15,   null: false
+    t.string   "debit_account_no",    limit: 50,   null: false
+    t.string   "biller_account_no",   limit: 50,   null: false
+    t.string   "payment_kind",        limit: 100,  null: false
+    t.date     "bill_date"
+    t.string   "bill_number",         limit: 50
+    t.date     "due_date"
+    t.float    "bill_amount"
+    t.float    "payment_amount"
+    t.string   "status_code",         limit: 50,   null: false
+    t.string   "rep_version",         limit: 5
+    t.string   "rep_no",              limit: 32
+    t.datetime "rep_timestamp"
+    t.string   "debit_reference_no",  limit: 32
+    t.string   "biller_reference_no", limit: 32
+    t.string   "fault_code",          limit: 50
+    t.string   "fault_reason",        limit: 1000
+  end
+
+  add_index "bm_pay_to_biller_accts", ["app_id", "req_no", "attempt_no"], name: "attempt_no_index_biller_acct", unique: true
+
+  create_table "bm_pay_to_billers", force: :cascade do |t|
+    t.string   "app_id",              limit: 50,   null: false
+    t.string   "req_no",              limit: 32,   null: false
+    t.integer  "attempt_no",                       null: false
+    t.string   "req_version",         limit: 5,    null: false
+    t.datetime "req_timestamp",                    null: false
+    t.string   "customer_id",         limit: 15,   null: false
+    t.string   "debit_account_no",    limit: 50,   null: false
+    t.string   "biller_code",         limit: 50,   null: false
+    t.integer  "num_params",                       null: false
+    t.string   "param1",              limit: 100
+    t.string   "param2",              limit: 100
+    t.string   "param3",              limit: 100
+    t.string   "param4",              limit: 100
+    t.string   "param5",              limit: 100
+    t.string   "payment_kind",        limit: 100,  null: false
+    t.date     "bill_date"
+    t.string   "bill_number",         limit: 50
+    t.date     "due_date"
+    t.float    "bill_amount"
+    t.float    "payment_amount"
+    t.string   "status_code",         limit: 50,   null: false
+    t.string   "rep_version",         limit: 5
+    t.string   "rep_no",              limit: 32
+    t.datetime "rep_timestamp"
+    t.string   "debit_reference_no",  limit: 32
+    t.string   "biller_reference_no", limit: 32
+    t.string   "fault_code",          limit: 50
+    t.string   "fault_reason",        limit: 1000
+  end
+
+  add_index "bm_pay_to_billers", ["app_id", "req_no", "attempt_no"], name: "attempt_no_index_pay_billers", unique: true
+
+  create_table "bm_pending_billpays", force: :cascade do |t|
+    t.string   "broker_uuid",        null: false
+    t.integer  "bm_bill_payment_id", null: false
+    t.datetime "created_at",         null: false
+  end
+
+  create_table "bm_pending_debit_reversals", force: :cascade do |t|
+    t.string   "broker_uuid",        null: false
+    t.integer  "bm_bill_payment_id", null: false
+    t.datetime "created_at",         null: false
+  end
+
+  create_table "bm_pending_debits", force: :cascade do |t|
+    t.string   "broker_uuid",        null: false
+    t.integer  "bm_bill_payment_id", null: false
+    t.datetime "created_at",         null: false
+  end
+
+  create_table "bm_rules", force: :cascade do |t|
+    t.string   "cod_acct_no",       limit: 16, null: false
+    t.string   "customer_id",       limit: 15, null: false
+    t.string   "cod_gl_suspense",   limit: 16, null: false
+    t.string   "bene_acct_no",                 null: false
+    t.string   "bene_account_ifsc",            null: false
+    t.string   "neft_sender_ifsc",             null: false
+    t.integer  "lock_version",                 null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.string   "approval_status",   limit: 1,  null: false
+    t.string   "last_action",       limit: 1
+    t.integer  "approved_version"
+    t.integer  "approved_id"
+    t.string   "created_by",        limit: 20
+    t.string   "updated_by",        limit: 20
+  end
+
+  create_table "bm_top_ups", force: :cascade do |t|
+    t.string   "app_id",              limit: 50,   null: false
+    t.string   "req_no",              limit: 32,   null: false
+    t.integer  "attempt_no",                       null: false
+    t.string   "req_version",         limit: 5,    null: false
+    t.datetime "req_timestamp",                    null: false
+    t.string   "customer_id",         limit: 15,   null: false
+    t.string   "debit_account_no",    limit: 50,   null: false
+    t.string   "biller_code",         limit: 50,   null: false
+    t.string   "param1",              limit: 100,  null: false
+    t.float    "topup_amount",                     null: false
+    t.string   "status_code",         limit: 50,   null: false
+    t.string   "rep_version",         limit: 5
+    t.string   "rep_no",              limit: 32
+    t.datetime "rep_timestamp"
+    t.string   "debit_reference_no",  limit: 32
+    t.string   "biller_reference_no", limit: 32
+    t.string   "fault_code",          limit: 50
+    t.string   "fault_reason",        limit: 1000
+  end
+
+  add_index "bm_top_ups", ["app_id", "req_no", "attempt_no"], name: "attempt_no_index_top_ups", unique: true
+
+  create_table "bm_unapproved_records", force: :cascade do |t|
+    t.integer  "bm_approvable_id"
+    t.string   "bm_approvable_type"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
     t.integer  "attempts",   default: 0, null: false
@@ -143,6 +465,23 @@ ActiveRecord::Schema.define(version: 20150807135704) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+
+  create_table "ecol_audit_logs", force: :cascade do |t|
+    t.integer  "ecol_transaction_id",              null: false
+    t.string   "step_name",                        null: false
+    t.integer  "attempt_no",                       null: false
+    t.string   "fault_code",          limit: 50
+    t.string   "fault_reason",        limit: 1000
+    t.date     "req_timestamp"
+    t.date     "rep_timestamp"
+    t.text     "req_bitstream"
+    t.text     "rep_bitstream"
+    t.text     "fault_bitstream"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+  end
+
+  add_index "ecol_audit_logs", ["ecol_transaction_id", "step_name", "attempt_no"], name: "uk_ecol_audit_logs", unique: true
 
   create_table "ecol_customers", force: :cascade do |t|
     t.string   "code",                  limit: 15,                null: false
@@ -162,7 +501,7 @@ ActiveRecord::Schema.define(version: 20150807135704) do
     t.string   "val_txn_amt",           limit: 1,   default: "N", null: false
     t.string   "val_ben_name",          limit: 1,   default: "N", null: false
     t.string   "val_rem_acct",          limit: 1,   default: "N", null: false
-    t.string   "return_if_val_fails",   limit: 1,   default: "N", null: false
+    t.string   "return_if_val_reject",  limit: 1,   default: "N", null: false
     t.string   "file_upld_mthd",        limit: 1
     t.string   "credit_acct_val_pass",  limit: 25,                null: false
     t.string   "nrtv_sufx_1",           limit: 3,   default: "N", null: false
@@ -194,9 +533,12 @@ ActiveRecord::Schema.define(version: 20150807135704) do
     t.string   "token_3_ends_with",     limit: 29
     t.string   "credit_acct_val_fail",  limit: 25,                null: false
     t.string   "val_rmtr_name",         limit: 1,   default: "N"
+    t.string   "cust_alert_on",         limit: 1,   default: "N", null: false
+    t.string   "customer_id",           limit: 50,  default: "0", null: false
   end
 
   add_index "ecol_customers", ["code", "approval_status"], name: "customer_index_on_status", unique: true
+  add_index "ecol_customers", ["code", "approval_status"], name: "index_ecol_customers_on_code_and_approval_status", unique: true
 
   create_table "ecol_fetch_statistics", force: :cascade do |t|
     t.datetime "last_neft_at",  null: false
@@ -207,6 +549,19 @@ ActiveRecord::Schema.define(version: 20150807135704) do
     t.integer  "last_rtgs_id",  null: false
     t.integer  "last_rtgs_cnt", null: false
     t.integer  "tot_rtgs_cnt",  null: false
+  end
+
+  create_table "ecol_notifications", force: :cascade do |t|
+    t.integer  "ecol_transaction_id"
+    t.string   "ecol_customer_id"
+    t.string   "notification_for",    limit: 1
+    t.string   "status_code",         limit: 10
+    t.text     "req_bitstream"
+    t.text     "rep_bitstream"
+    t.datetime "req_timestamp"
+    t.datetime "rep_timestamp"
+    t.string   "fault_code"
+    t.string   "fault_reason"
   end
 
   create_table "ecol_pending_credits", force: :cascade do |t|
@@ -296,7 +651,6 @@ ActiveRecord::Schema.define(version: 20150807135704) do
     t.string   "ifsc",             limit: 11,               null: false
     t.string   "cod_acct_no",      limit: 15,               null: false
     t.string   "stl_gl_inward",    limit: 15,               null: false
-    t.string   "stl_gl_return",    limit: 15,               null: false
     t.string   "created_by",       limit: 20
     t.string   "updated_by",       limit: 20
     t.integer  "lock_version",                default: 0,   null: false
@@ -307,7 +661,7 @@ ActiveRecord::Schema.define(version: 20150807135704) do
     t.integer  "approved_version"
     t.integer  "approved_id"
     t.string   "neft_sender_ifsc", limit: 11,               null: false
-    t.string   "cbs_userid",       limit: 50,               null: false
+    t.string   "customer_id",      limit: 50,               null: false
   end
 
   create_table "ecol_transactions", force: :cascade do |t|
@@ -336,7 +690,6 @@ ActiveRecord::Schema.define(version: 20150807135704) do
     t.datetime "validated_at"
     t.string   "validation_status",     limit: 50
     t.datetime "credited_at"
-    t.string   "credit_status",         limit: 50
     t.string   "credit_ref",            limit: 64
     t.integer  "credit_attempt_no"
     t.string   "rmtr_email_notify_ref", limit: 64
@@ -351,10 +704,9 @@ ActiveRecord::Schema.define(version: 20150807135704) do
     t.datetime "created_at",                                       null: false
     t.datetime "updated_at",                                       null: false
     t.string   "invoice_no",            limit: 28
-    t.datetime "validate_at"
+    t.datetime "validate_attempt_at"
     t.datetime "credit_attempt_at"
     t.datetime "returned_at"
-    t.string   "return_status",         limit: 50
     t.string   "return_ref",            limit: 64
     t.datetime "return_attempt_at"
     t.integer  "return_attempt_no",     limit: 8
@@ -362,11 +714,15 @@ ActiveRecord::Schema.define(version: 20150807135704) do
     t.string   "bene_full_address",     limit: 255
     t.string   "validation_result",     limit: 1000
     t.string   "credit_acct_no",        limit: 25
-    t.string   "credit_result",         limit: 1000
     t.string   "settle_result",         limit: 1000
-    t.string   "return_result",         limit: 1000
     t.integer  "ecol_remitter_id"
     t.string   "pending_approval",      limit: 1,    default: "Y"
+    t.integer  "notify_attempt_no",     limit: 8
+    t.datetime "notify_attempt_at"
+    t.datetime "notified_at"
+    t.string   "notify_status",         limit: 50
+    t.string   "notify_result",         limit: 1000
+    t.integer  "validate_attempt_no"
   end
 
   add_index "ecol_transactions", ["transfer_type", "transfer_unique_no"], name: "ecol_transaction_unique_index", unique: true
@@ -376,6 +732,20 @@ ActiveRecord::Schema.define(version: 20150807135704) do
     t.string   "ecol_approvable_type"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+  end
+
+  create_table "ecol_validations", force: :cascade do |t|
+    t.integer  "ecol_transaction_id"
+    t.string   "ecol_customer_id"
+    t.string   "status_code",         limit: 10
+    t.text     "req_bitstream"
+    t.text     "rep_bitstream"
+    t.datetime "req_timestamp"
+    t.datetime "datetime"
+    t.datetime "rep_timestamp"
+    t.string   "fault_code"
+    t.string   "string"
+    t.string   "fault_reason"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -532,6 +902,8 @@ ActiveRecord::Schema.define(version: 20150807135704) do
     t.string   "is_same_party_transfer", limit: 1
     t.string   "req_transfer_type",      limit: 4
     t.float    "bal_available"
+    t.string   "service_id"
+    t.date     "reconciled_at"
   end
 
   add_index "inward_remittances", ["req_no", "partner_code", "attempt_no"], name: "remittance_unique_index", unique: true

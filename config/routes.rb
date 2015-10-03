@@ -42,6 +42,7 @@ ServiceCenter::Application.routes.draw do
   get '/ecol_remitter/:id/audit_logs' => 'ecol_remitters#audit_logs'
   get '/udf_attribute/:id/audit_logs' => 'udf_attributes#audit_logs'
   get '/bm_biller/:id/audit_logs' => 'bm_billers#audit_logs'
+  get '/bm_rule/:id/audit_logs' => 'bm_rules#audit_logs'
 
   get '/inward_remittances/:id/remitter_identities' => 'inward_remittances#remitter_identities'
   get '/inward_remittances/:id/beneficiary_identities' => 'inward_remittances#beneficiary_identities'
@@ -56,6 +57,7 @@ ServiceCenter::Application.routes.draw do
 
   get '/inw_error_msg' => "inw_remittance_rules#error_msg"
   get '/ecol_error_msg' => "ecol_rules#error_msg"
+  get '/bm_rule_error_msg' => "bm_rules#error_msg"
 
   put '/ecol_customer/:id/approve' => "ecol_customers#approve"
   put '/udf_attribute/:id/approve' => "udf_attributes#approve"
@@ -69,6 +71,7 @@ ServiceCenter::Application.routes.draw do
   put '/whitelisted_identity/:id/approve' => "whitelisted_identities#approve"
   
   put '/bm_biller/:id/approve' => "bm_billers#approve"
+  put '/bm_rule/:id/approve' => "bm_rules#approve"
 
   get '/ecol_transactions/:id/ecol_audit_logs/:step_name' => 'ecol_transactions#ecol_audit_logs'
   put '/ecol_transactions/:id/approve' => "ecol_transactions#approve_transaction"
