@@ -113,16 +113,11 @@
         = image_tag 'work-list.jpg', :size => "80x80"
       %br
         = "Approval Worklist"
-    .box  
-      = link_to '/bm_billers' do
-        = image_tag 'biller_icon.jpg', :size => "80x80"
-      %br
-        = "Billers"
   .slide-container
     .box
       - if !BmRule.first.nil?
         = link_to edit_bm_rule_path(BmRule.first) do
-          = image_tag 'ecol_rule.png', :size => "80x80"
+          = image_tag 'bm_rule.png', :size => "80x80"
         %br
           = "Bm Rules"
       - else
@@ -130,3 +125,13 @@
           = image_tag 'rules.jpeg', :size => "80x80"
         %br
           = "Bm Rules"
+    .box  
+      = link_to '/bm_billers' do
+        = image_tag 'biller_icon.jpg', :size => "80x80"
+      %br
+        = "Billers"
+    .box  
+      = link_to '/bm_bill_payments' do
+        = image_tag 'bills.jpg', :size => "80x80"
+      %br
+        = "Bill Payments"
