@@ -1,0 +1,45 @@
+= simple_form_for @bm_rule, :html => {:class=>'form-horizontal', :autocomplete=>"off", :id => "bm_rule_form"} do |f|
+  .control-group
+    = f.label ' '
+    #msg-error
+      = error_message_for(@bm_rule, :base, :prepend_text => "")
+  .form-main{:style => 'width:100%'}
+    = f.hidden_field :lock_version
+    = f.hidden_field :approved_id
+    = f.hidden_field :approved_version
+    .control-group
+      = f.label :cod_acct_no, "*COD Account No", :class => 'control-label'
+      = f.text_field :cod_acct_no, :maxlength => 16
+      #msg-error
+        = error_message_for(@bm_rule, :cod_acct_no, :prepend_text => "")
+    .control-group
+      = f.label :customer_id, "*Customer ID", :class => 'control-label'
+      = f.text_field :customer_id, :maxlength => 15
+      #msg-error
+        = error_message_for(@bm_rule, :customer_id, :prepend_text => "")
+    .control-group
+      = f.label :cod_gl_suspense, "*COD GL Suspense", :class => 'control-label'
+      = f.text_field :cod_gl_suspense, :maxlength => 16
+      #msg-error
+        = error_message_for(@bm_rule, :cod_gl_suspense, :prepend_text => "")
+    .control-group
+      = f.label :bene_acct_no, "*Beneficiary Account No", :class => 'control-label'
+      = f.text_field :bene_acct_no
+      #msg-error
+        = error_message_for(@bm_rule, :bene_acct_no, :prepend_text => "")
+    .control-group
+      = f.label :bene_account_ifsc, "*Beneficiary Account IFSC", :class => 'control-label'
+      = f.text_field :bene_account_ifsc
+      #msg-error
+        = error_message_for(@bm_rule, :bene_account_ifsc, :prepend_text => "")
+    .control-group
+      = f.label :neft_sender_ifsc, "*NEFT Sender IFSC", :class => 'control-label'
+      = f.text_field :neft_sender_ifsc
+      #msg-error
+        = error_message_for(@bm_rule, :neft_sender_ifsc, :prepend_text => "")
+
+  .form-actions
+    - (f.object.new_record? and f.object.cod_acct_no.nil?) ? label_name = "Create" : label_name = "Update"
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_rule', :value => label_name + ' Bm Rules'
+    = link_to :Cancel,root_path, :name => 'cancel', :class=>"cancel btn"
+
