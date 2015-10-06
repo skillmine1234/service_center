@@ -32,4 +32,5 @@ Factory.define(:bm_bill_payment) do |i|
   i.refund_at nil
   i.is_reconciled 'Y'
   i.reconciled_at  Time.zone.now
+  i.pending_approval 'Y'
 end

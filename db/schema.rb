@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151005065045) do
+ActiveRecord::Schema.define(version: 20151005145900) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -192,19 +192,19 @@ ActiveRecord::Schema.define(version: 20151005065045) do
   add_index "bm_audit_logs", ["bm_auditable_type", "bm_auditable_id"], name: "auditable_index_audit_logs", unique: true
 
   create_table "bm_bill_payments", force: :cascade do |t|
-    t.string   "app_id",              limit: 50,   null: false
-    t.string   "req_no",              limit: 32,   null: false
-    t.integer  "attempt_no",                       null: false
-    t.string   "req_version",         limit: 5,    null: false
-    t.datetime "req_timestamp",                    null: false
-    t.string   "customer_id",         limit: 15,   null: false
-    t.string   "debit_account_no",    limit: 50,   null: false
-    t.string   "txn_kind",            limit: 50,   null: false
-    t.float    "txn_amount",                       null: false
-    t.string   "biller_code",         limit: 50,   null: false
+    t.string   "app_id",              limit: 50,                 null: false
+    t.string   "req_no",              limit: 32,                 null: false
+    t.integer  "attempt_no",                                     null: false
+    t.string   "req_version",         limit: 5,                  null: false
+    t.datetime "req_timestamp",                                  null: false
+    t.string   "customer_id",         limit: 15,                 null: false
+    t.string   "debit_account_no",    limit: 50,                 null: false
+    t.string   "txn_kind",            limit: 50,                 null: false
+    t.float    "txn_amount",                                     null: false
+    t.string   "biller_code",         limit: 50,                 null: false
     t.string   "biller_acct_no",      limit: 50
     t.string   "bill_id",             limit: 50
-    t.string   "status",              limit: 50,   null: false
+    t.string   "status",              limit: 50,                 null: false
     t.string   "fault_code",          limit: 50
     t.string   "fault_reason",        limit: 1000
     t.string   "debit_req_ref",       limit: 64
@@ -226,6 +226,7 @@ ActiveRecord::Schema.define(version: 20151005065045) do
     t.datetime "refund_at"
     t.string   "is_reconciled",       limit: 1
     t.datetime "reconciled_at"
+    t.string   "pending_approval",    limit: 1,    default: "Y"
   end
 
   add_index "bm_bill_payments", ["app_id", "req_no", "attempt_no"], name: "attepmt_index_bill_payments", unique: true
@@ -807,6 +808,8 @@ ActiveRecord::Schema.define(version: 20151005065045) do
     t.text    "request_bitstream"
     t.text    "reply_bitstream"
   end
+
+  add_index "inw_audit_logs", ["inward_remittance_id"], name: "index_inw_audit_logs_on_inward_remittance_id", unique: true
 
   create_table "inw_cbs_response_codes", force: :cascade do |t|
     t.string   "cbs_name"

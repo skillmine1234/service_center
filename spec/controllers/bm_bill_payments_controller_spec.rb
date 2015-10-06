@@ -27,6 +27,17 @@ describe BmBillPaymentsController do
     end
   end
 
+  describe "GET summary" do
+    it "renders summary" do
+      bm_bill_payment = Factory(:bm_bill_payment, :status => 'NEW', :pending_approval => 'Y')
+      get :summary
+      assigns(:bm_bill_payments_summary).should eq({['NEW','Y']=>1})
+      assigns(:bm_bill_payments_statuses).should eq(['NEW'])
+      assigns(:total_pending_records).should eq(1)
+      assigns(:total_records).should eq(1)
+    end
+  end
+
   describe "GET audit_logs" do
     it "returns the debit log" do
       bill_payment = Factory(:bm_bill_payment)

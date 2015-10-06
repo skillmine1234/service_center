@@ -20,4 +20,10 @@ module BmBillPaymentHelper
       transaction.bm_billpay_steps.order("id desc") rescue []
     end      
   end
+
+  def txn_summary_count(status_hash,key)
+    count = status_hash[key] rescue 0
+    count.nil? ? 0 : count
+  end
+
 end

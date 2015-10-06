@@ -19,6 +19,14 @@ class BmBillPaymentsController < ApplicationController
     @bm_bill_payments = bm_bill_payments.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
 
+  def summary
+    bm_bill_payments = BmBillPayment.order("id desc")
+    @bm_bill_payments_summary = BmBillPayment.group(:status, :pending_approval).count(:id)
+    @bm_bill_payments_statuses = BmBillPayment.group(:status).count(:id).keys
+    @total_pending_records = BmBillPayment.where(:pending_approval => 'Y').count(:id)
+    @total_records = BmBillPayment.count(:id)
+  end
+
   def audit_logs
     @bill_payment = BmBillPayment.find(params[:id])
     bill_values = find_logs(params, @bill_payment)
@@ -35,6 +43,6 @@ class BmBillPaymentsController < ApplicationController
           :debit_attempt_at, :debit_rep_ref, :debited_at, :billpay_req_ref, :billpay_attempt_no, 
           :billpay_attempt_at, :billpay_rep_ref, :billpaid_at, :reversal_req_ref, :reversal_attempt_no, 
           :reversal_attempt_at, :reversal_rep_ref, :reversal_at, :refund_ref, :refund_at, 
-          :is_reconciled, :reconciled_at)
+          :is_reconciled, :reconciled_at, :pending_approval)
   end
 end

@@ -51,6 +51,7 @@ ServiceCenter::Application.routes.draw do
   get '/download_attachment' => 'whitelisted_identities#download_attachment'
   
   get '/summary' => 'ecol_transactions#summary'
+  get '/bm_bill_payments_summary' => 'bm_bill_payments#summary'
   
   get '/sdn/search' => 'aml_search#find_search_results'
   get '/sdn/search_results' => 'aml_search#results'
