@@ -58,6 +58,7 @@ class IncomingFile < ActiveRecord::Base
 
   def update_size_and_file_name
     self.size_in_bytes = self.file.file.try(:size).to_s
+    self.line_count =  %x{wc -l "#{self.file.path}"}.split.first.to_i
     self.file_name = self.file.filename if file_name.nil?
   end
 
