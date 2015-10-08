@@ -50,7 +50,7 @@
         %td{:style=>'text-align:left;'}
           = incoming_file.incoming_file_type.try(:name) || incoming_file.file_type
         %td{:style=>'text-align:left;'}
-          = incoming_file.file_name
+          = link_to incoming_file.file_name, {:controller => "incoming_files", :action => "view_raw_content", :id => incoming_file.id}, :target => "_blank"
         %td{:style=>'text-align:left;'}
           = incoming_file.size_in_bytes
         %td{:style=>'text-align:left;'}

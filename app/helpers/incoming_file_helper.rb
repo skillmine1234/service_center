@@ -11,4 +11,10 @@ module IncomingFileHelper
     sf = CarrierWave::SanitizedFile.new incoming_file.file
     sf.move_to(Rails.root.join(ENV['CONFIG_APPROVED_FILE_UPLOAD_PATH'],incoming_file.file_name))
   end
+
+  def raw_file_content(file_content_str)
+    file_content = "File is empty."
+    file_content = file_content_str.strip.gsub(/$/, "").gsub('$', "").gsub(/\n\s+/, "\n") if file_content_str
+    file_content
+  end
 end

@@ -32,6 +32,22 @@ class IncomingFilesController < ApplicationController
     @incoming_files = incoming_files.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
 
+  def view_raw_content
+    puts "----- in view_raw_content (incoming_files controller) -----"
+    puts "-- starts --"
+    @incoming_file = IncomingFile.unscoped.find_by_id(params[:id])
+    @file_abs_url = "#{Rails.root}/public#{@incoming_file.file.url}"
+    puts "@file_abs_url (check for file path, coming from env var) :- "
+    puts @file_abs_url
+    puts "-- ends --"
+    File.exists?(@file_abs_url) ? @raw_file_content = %x(cat -ne #{@file_abs_url}) : @raw_file_content = nil
+    @result = {filename: @incoming_file.file_name, content: @raw_file_content}
+    respond_to do |format|
+      format.html
+      format.json { render json: @result }
+    end
+  end
+
   def show
     @incoming_file = IncomingFile.unscoped.find_by_id(params[:id])
   end

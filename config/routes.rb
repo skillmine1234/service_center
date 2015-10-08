@@ -79,6 +79,8 @@ ServiceCenter::Application.routes.draw do
   put '/ecol_transactions/:id/approve' => "ecol_transactions#approve_transaction"
 
   get '/bm_bill_payments/:id/audit_logs/:step_name' => 'bm_bill_payments#audit_logs'
+
+  get '/view_raw_content/:id' => "incoming_files#view_raw_content"
   root :to => 'dashboard#overview'
 
   # See how all your routes lay out with "rake routes"
