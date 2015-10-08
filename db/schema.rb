@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151005145900) do
+ActiveRecord::Schema.define(version: 20151007124234) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -236,24 +236,24 @@ ActiveRecord::Schema.define(version: 20151005145900) do
     t.string   "biller_name",       limit: 100,               null: false
     t.string   "biller_category",   limit: 100,               null: false
     t.string   "biller_location",   limit: 100,               null: false
-    t.string   "processing_method", limit: 100,               null: false
+    t.string   "processing_method", limit: 1,                 null: false
     t.string   "is_enabled",        limit: 1,                 null: false
     t.integer  "num_params",                                  null: false
     t.string   "param1_name",       limit: 100
     t.string   "param1_pattern",    limit: 100
-    t.string   "param1_tooltip",    limit: 100
+    t.string   "param1_tooltip",    limit: 255
     t.string   "param2_name",       limit: 100
     t.string   "param2_pattern",    limit: 100
-    t.string   "param2_tooltip",    limit: 100
+    t.string   "param2_tooltip",    limit: 255
     t.string   "param3_name",       limit: 100
     t.string   "param3_pattern",    limit: 100
-    t.string   "param3_tooltip",    limit: 100
+    t.string   "param3_tooltip",    limit: 255
     t.string   "param4_name",       limit: 100
     t.string   "param4_pattern",    limit: 100
-    t.string   "param4_tooltip",    limit: 100
+    t.string   "param4_tooltip",    limit: 255
     t.string   "param5_name",       limit: 100
     t.string   "param5_pattern",    limit: 100
-    t.string   "param5_tooltip",    limit: 100
+    t.string   "param5_tooltip",    limit: 255
     t.integer  "lock_version",                                null: false
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
@@ -913,6 +913,7 @@ ActiveRecord::Schema.define(version: 20151005145900) do
     t.date     "reconciled_at"
   end
 
+  add_index "inward_remittances", ["bank_ref", "partner_code", "purpose_code"], name: "inw_index_on_codes"
   add_index "inward_remittances", ["req_no", "partner_code", "attempt_no"], name: "remittance_unique_index", unique: true
 
   create_table "inward_remittances_locks", id: false, force: :cascade do |t|
