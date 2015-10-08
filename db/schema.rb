@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151007124234) do
+ActiveRecord::Schema.define(version: 20151008074144) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -201,7 +201,7 @@ ActiveRecord::Schema.define(version: 20151007124234) do
     t.string   "debit_account_no",    limit: 50,                 null: false
     t.string   "txn_kind",            limit: 50,                 null: false
     t.float    "txn_amount",                                     null: false
-    t.string   "biller_code",         limit: 50,                 null: false
+    t.string   "biller_code",         limit: 50
     t.string   "biller_acct_no",      limit: 50
     t.string   "bill_id",             limit: 50
     t.string   "status",              limit: 50,                 null: false
@@ -227,6 +227,10 @@ ActiveRecord::Schema.define(version: 20151007124234) do
     t.string   "is_reconciled",       limit: 1
     t.datetime "reconciled_at"
     t.string   "pending_approval",    limit: 1,    default: "Y"
+    t.string   "service_id"
+    t.string   "rep_no",              limit: 32
+    t.string   "rep_version",         limit: 5
+    t.datetime "rep_timestamp"
   end
 
   add_index "bm_bill_payments", ["app_id", "req_no", "attempt_no"], name: "attepmt_index_bill_payments", unique: true
@@ -913,7 +917,6 @@ ActiveRecord::Schema.define(version: 20151007124234) do
     t.date     "reconciled_at"
   end
 
-  add_index "inward_remittances", ["bank_ref", "partner_code", "purpose_code"], name: "inw_index_on_codes"
   add_index "inward_remittances", ["req_no", "partner_code", "attempt_no"], name: "remittance_unique_index", unique: true
 
   create_table "inward_remittances_locks", id: false, force: :cascade do |t|

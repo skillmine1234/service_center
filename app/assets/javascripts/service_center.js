@@ -45,9 +45,31 @@ $(document).ready(function(){
     $('input#search_params_idNumber').val('');
   });
 
-  $("#ecol_customer_reset").on('click', function(){
+  $("#ecol_remitter_reset").on('click', function(){
     $('input#customer_code').val('');
     $('input#customer_subcode').val('');
     $('input#remitter_code').val('');
+  });
+
+  $("#ecol_customer_reset").on('click', function(){
+    $('input#code').val('');
+    $('select#is_enabled').val('');
+    $('input#credit_acct_val_pass').val('');
+    $('input#credit_acct_val_fail').val('');
+  });
+
+  $("#ecol_transaction_reset").on('click', function(){
+    $('input#transfer_unique_no').val('');
+    $('input#customer_code').val('');
+    $('select#status').val('');
+    $('select#notification_status').val('');
+    $('select#validation_status').val('');
+    $('select#settle_status').val('');
+    $('select#transfer_type').val('');
+    $('input#bene_account_no').val('');
+    $('input#from_transfer_date').val('');
+    $('input#to_transfer_date').val('');
+    $('input#from_amount').val('');
+    $('input#to_amount').val('');
   });
 });
