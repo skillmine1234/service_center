@@ -6,7 +6,7 @@
       %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
         - can = can? :edit, @bm_biller
         %a.btn{:href => "#{!(can) ? '#' : '/bm_billers/' + @bm_biller.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
-        = render 'ecol_customers/approve', :@record => @bm_biller
+        = render 'approve', :@record => @bm_biller
       %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
         - if !@bm_biller.nil?
           %tr

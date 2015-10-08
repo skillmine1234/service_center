@@ -10,6 +10,13 @@ describe BmRulesController do
     request.env["HTTP_REFERER"] = "/"
   end
 
+  describe "GET new" do
+    it "assigns a new bm_rule as @bm_rule" do
+      get :new
+      assigns(:bm_rule).should be_a_new(BmRule)
+    end
+  end
+
   describe "POST create" do
     describe "with valid params" do
       it "creates a new bm_rule" do

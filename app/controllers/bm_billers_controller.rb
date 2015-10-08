@@ -4,6 +4,7 @@ class BmBillersController < ApplicationController
   before_filter :block_inactive_user!
   respond_to :json
   include ApplicationHelper
+  include BmBillersHelper
   
   def new
     @bm_biller = BmBiller.new
