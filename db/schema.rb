@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151008072247) do
+ActiveRecord::Schema.define(version: 20151008074144) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",                  null: false
@@ -201,7 +201,7 @@ ActiveRecord::Schema.define(version: 20151008072247) do
     t.string   "debit_account_no",    limit: 50,                                null: false
     t.string   "txn_kind",            limit: 50,                                null: false
     t.float    "txn_amount",                                                    null: false
-    t.string   "biller_code",         limit: 50,                                null: false
+    t.string   "biller_code",         limit: 50
     t.string   "biller_acct_no",      limit: 50
     t.string   "bill_id",             limit: 50
     t.string   "status",              limit: 50,                                null: false
