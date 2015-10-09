@@ -13,7 +13,7 @@ module IncomingFileHelper
   end
 
   def raw_file_content(file_content_str)
-    file_content = "File is empty."
+    file_content = nil
     file_content = file_content_str.gsub(/^\s+|\n\s+/, "\n") if file_content_str
     file_content
   end
