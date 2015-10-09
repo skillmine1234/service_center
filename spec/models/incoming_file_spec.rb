@@ -146,4 +146,20 @@ describe IncomingFile do
       IncomingFile.unscoped.all.should_not be_empty
     end
   end
+
+  context "check is approved and get file_path" do
+    it "should return approval_status and file_path" do
+      incoming_file1 = Factory(:incoming_file, :approval_status => 'A')
+      approved1 = true
+      file_path1 = Rails.root.join(ENV['CONFIG_APPROVED_FILE_UPLOAD_PATH'], incoming_file1.file_name)
+      result1 = {is_approved: approved1, file_path: file_path1}
+      result1.should == {is_approved: approved1, file_path: file_path1}
+      incoming_file2 = Factory(:incoming_file, :approval_status => 'U')
+      approved2 = false
+      file_path2 = Rails.root.join(ENV['CONFIG_FILE_UPLOAD_PATH'], incoming_file2.file_name)
+      result2 = {is_approved: approved2, file_path: file_path2}
+      result2.should == {is_approved: approved2, file_path: file_path2}
+    end
+  end
+
 end

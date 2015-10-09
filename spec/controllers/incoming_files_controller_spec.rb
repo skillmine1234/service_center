@@ -31,9 +31,13 @@ describe IncomingFilesController do
     it "should display raw content of a file" do
       incoming_file = Factory(:incoming_file)
       get :view_raw_content, {:id => incoming_file.id}
+      file_extension = Rack::Mime::MIME_TYPES.invert[incoming_file.file.content_type].split(".").last
+      file_extension.should == IncomingFile::ExtensionList[0]
       file_abs_url = "#{incoming_file.file.file.instance_variable_get :@file}"
       file_abs_url.should == "#{incoming_file.file.file.instance_variable_get :@file}"
       expect(IncomingFile).to receive(:`).exactly(0).times.with("cat -ne #{file_abs_url}")
+      response.should render_template("view_raw_content")
+      response.status.should eq(200)
     end
   end
 

@@ -33,21 +33,21 @@ class IncomingFilesController < ApplicationController
   end
 
   def view_raw_content
-    puts "----- in view_raw_content (incoming_files controller) -----"
-    puts "-- starts --"
+    puts 'in view_raw_content method (incoming_files_controller)'
     @incoming_file = IncomingFile.unscoped.find_by_id(params[:id])
-    puts "Rails.env :- #{Rails.env}"
-    (Rails.env == "production") ?
-        @file_abs_url = @incoming_file.file.url :
-        @file_abs_url = "#{Rails.root}/public#{@incoming_file.file.url}"
-    puts "@file_abs_url (check for file path, coming from env var) :- "
-    puts @file_abs_url
-    puts "-- ends --"
-    File.exists?(@file_abs_url) ? @raw_file_content = %x(cat -nb #{@file_abs_url}) : @raw_file_content = nil
-    @result = {filename: @incoming_file.file_name, content: @raw_file_content}
-    respond_to do |format|
-      format.html
-      format.json { render json: @result }
+    file_extension = Rack::Mime::MIME_TYPES.invert[@incoming_file.file.content_type].split(".").last if @incoming_file.file.content_type
+    puts "@incoming_file.is_approved?[:file_path] :- #{@incoming_file.is_approved?[:file_path]}"
+    if file_extension && file_extension == IncomingFile::ExtensionList[0]
+      puts 'in if file extension present and is txt'
+      @raw_file_content = %x(cat -nb #{@incoming_file.is_approved?[:file_path]})
+      @result = {filename: @incoming_file.file_name, content: @raw_file_content}
+      respond_to do |format|
+        format.html
+        format.json { render json: @result }
+      end
+    else
+      puts 'in else file extension is not present'
+      send_file @incoming_file.is_approved?[:file_path], :disposition => 'inline'
     end
   end
 

@@ -79,4 +79,19 @@ class IncomingFile < ActiveRecord::Base
       end
     end
   end
+
+  def is_approved?
+    approved = self.approval_status == 'A' ? true : false
+    file_path = nil
+    if Rails.env == "production"
+      approved ?
+          file_path = Rails.root.join(ENV['CONFIG_APPROVED_FILE_UPLOAD_PATH'], self.file_name) :
+          file_path = Rails.root.join(ENV['CONFIG_FILE_UPLOAD_PATH'], self.file_name)
+    else
+      file_path = "#{Rails.root}/public#{self.file.url}"
+    end
+    result = {is_approved: approved, file_path: file_path}
+    result
+  end
+
 end
