@@ -44,6 +44,7 @@ db/data.yml
 /public/uploads/
 /public/stylesheets/compiled
 /public/system/*
+/spec/tmp/*
 /cache
 /solr/data/
 /solr/pids/
