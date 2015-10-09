@@ -70,4 +70,13 @@ class IncomingFile < ActiveRecord::Base
   def upload_time
     (ended_at - started_at).round(2) rescue '-'
   end
+
+  def self.create_incoming_file
+    Dir.foreach(ENV['CONFIG_AUTO_FILE_UPLOAD_PATH']) do |fname|
+      next if fname == '.' or fname == '..' or fname == '.DS_Store'
+      if IncomingFile.create(:file => File.new(ENV['CONFIG_AUTO_FILE_UPLOAD_PATH'] + "/" + fname), :service_name => 'Ecollect', :file_type => 'Remitters', :status => 'N')
+        FileUtils.rm_f ENV['CONFIG_AUTO_FILE_UPLOAD_PATH'] + "/" + fname
+      end
+    end
+  end
 end

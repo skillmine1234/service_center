@@ -137,4 +137,13 @@ describe IncomingFile do
       incoming_file2.enable_approve_button?.should == true
     end
   end
+
+  context "auto incoming file creation" do 
+    it "should go through the folder and create incoming_file for that folder" do 
+      ENV['CONFIG_AUTO_FILE_UPLOAD_PATH'] = 'spec/fixtures/files'
+      file = File.open('spec/fixtures/files/Test2.txt', "w")
+      incoming_file = IncomingFile.create_incoming_file
+      IncomingFile.unscoped.all.should_not be_empty
+    end
+  end
 end
