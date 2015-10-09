@@ -14,7 +14,7 @@ module IncomingFileHelper
 
   def raw_file_content(file_content_str)
     file_content = "File is empty."
-    file_content = file_content_str.strip.gsub(/$/, "").gsub('$', "").gsub(/\n\s+/, "\n") if file_content_str
+    file_content = file_content_str.gsub(/^\s+|\n\s+/, "\n") if file_content_str
     file_content
   end
 end

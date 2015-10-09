@@ -36,11 +36,14 @@ class IncomingFilesController < ApplicationController
     puts "----- in view_raw_content (incoming_files controller) -----"
     puts "-- starts --"
     @incoming_file = IncomingFile.unscoped.find_by_id(params[:id])
-    @file_abs_url = "#{Rails.root}/public#{@incoming_file.file.url}"
+    puts "Rails.env :- #{Rails.env}"
+    (Rails.env == "production") ?
+        @file_abs_url = @incoming_file.file.url :
+        @file_abs_url = "#{Rails.root}/public#{@incoming_file.file.url}"
     puts "@file_abs_url (check for file path, coming from env var) :- "
     puts @file_abs_url
     puts "-- ends --"
-    File.exists?(@file_abs_url) ? @raw_file_content = %x(cat -ne #{@file_abs_url}) : @raw_file_content = nil
+    File.exists?(@file_abs_url) ? @raw_file_content = %x(cat -nb #{@file_abs_url}) : @raw_file_content = nil
     @result = {filename: @incoming_file.file_name, content: @raw_file_content}
     respond_to do |format|
       format.html
