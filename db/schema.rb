@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151008074144) do
+ActiveRecord::Schema.define(version: 20151010114110) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -813,8 +813,6 @@ ActiveRecord::Schema.define(version: 20151008074144) do
     t.text    "reply_bitstream"
   end
 
-  add_index "inw_audit_logs", ["inward_remittance_id"], name: "index_inw_audit_logs_on_inward_remittance_id", unique: true
-
   create_table "inw_cbs_response_codes", force: :cascade do |t|
     t.string   "cbs_name"
     t.string   "function_name"
@@ -959,6 +957,15 @@ ActiveRecord::Schema.define(version: 20151008074144) do
     t.integer  "approved_version"
     t.integer  "approved_id"
   end
+
+  create_table "pending_inward_remittances", force: :cascade do |t|
+    t.integer  "inward_remittance_id", limit: 30,  null: false
+    t.string   "broker_uuid",          limit: 255, null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+  end
+
+  add_index "pending_inward_remittances", ["inward_remittance_id"], name: "index_pending_inward_remittances_on_inward_remittance_id", unique: true
 
   create_table "purpose_codes", force: :cascade do |t|
     t.string   "code",                  limit: 4
