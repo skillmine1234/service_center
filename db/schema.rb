@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151012115840) do
+ActiveRecord::Schema.define(version: 20151012152601) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",                  null: false
@@ -231,6 +231,15 @@ ActiveRecord::Schema.define(version: 20151012115840) do
     t.string   "rep_no",              limit: 32
     t.string   "rep_version",         limit: 5
     t.datetime "rep_timestamp"
+    t.string   "param1",              limit: 100
+    t.string   "param2",              limit: 100
+    t.string   "param3",              limit: 100
+    t.string   "param4",              limit: 100
+    t.string   "param5",              limit: 100
+    t.string   "cod_pool_acct_no",    limit: 100
+    t.datetime "bill_date"
+    t.datetime "due_date"
+    t.string   "bill_number",         limit: 50
   end
 
   add_index "bm_bill_payments", ["app_id", "req_no", "attempt_no"], name: "attepmt_index_bill_payments", unique: true
@@ -408,21 +417,22 @@ ActiveRecord::Schema.define(version: 20151012115840) do
   end
 
   create_table "bm_rules", force: :cascade do |t|
-    t.string   "cod_acct_no",       limit: 16,                              null: false
-    t.string   "customer_id",       limit: 15,                              null: false
-    t.string   "cod_gl_suspense",   limit: 16,                              null: false
-    t.string   "bene_acct_no",                                              null: false
-    t.string   "bene_account_ifsc",                                         null: false
-    t.string   "neft_sender_ifsc",                                          null: false
-    t.integer  "lock_version",                 precision: 38,               null: false
-    t.datetime "created_at",                                                null: false
-    t.datetime "updated_at",                                                null: false
-    t.string   "approval_status",                             default: "A", null: false
+    t.string   "cod_acct_no",       limit: 16,                               null: false
+    t.string   "customer_id",       limit: 15,                               null: false
+    t.string   "cod_gl_suspense",   limit: 16,                               null: false
+    t.string   "bene_acct_no",                                               null: false
+    t.string   "bene_account_ifsc",                                          null: false
+    t.string   "neft_sender_ifsc",                                           null: false
+    t.integer  "lock_version",                 precision: 38,                null: false
+    t.datetime "created_at",                                                 null: false
+    t.datetime "updated_at",                                                 null: false
+    t.string   "approval_status",                             default: "A",  null: false
     t.string   "last_action",                                 default: "C"
     t.integer  "approved_version",             precision: 38
     t.integer  "approved_id",                  precision: 38
     t.string   "created_by",        limit: 20
     t.string   "updated_by",        limit: 20
+    t.string   "source_id",         limit: 50,                default: "qg", null: false
   end
 
   create_table "bm_top_ups", force: :cascade do |t|
