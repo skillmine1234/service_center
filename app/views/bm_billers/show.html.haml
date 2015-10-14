@@ -56,6 +56,12 @@
             %td#msg-error
               = error_message_for(@bm_biller, :is_enabled, :prepend_text => "")
           %tr
+            %td.label Partial Pay
+            %td.value
+              = @bm_biller.partial_pay
+            %td#msg-error
+              = error_message_for(@bm_biller, :partial_pay, :prepend_text => "")
+          %tr
             %td.label No. Of Parameters
             %td.value
               = @bm_biller.num_params

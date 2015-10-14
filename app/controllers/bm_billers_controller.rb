@@ -90,7 +90,7 @@ class BmBillersController < ApplicationController
                                       :is_enabled, :num_params, :param1_name, :param1_pattern, :param1_tooltip, :param2_name,
                                       :param2_pattern, :param2_tooltip, :param3_name, :param3_pattern, :param3_tooltip, 
                                       :param4_name, :param4_pattern, :param4_tooltip, :param5_name, :param5_pattern, 
-                                      :param5_tooltip, :lock_version, :approval_status, :last_action, :approved_version, 
+                                      :param5_tooltip, :partial_pay, :lock_version, :approval_status, :last_action, :approved_version, 
                                       :approved_id, :created_by, :updated_by)
   end
 

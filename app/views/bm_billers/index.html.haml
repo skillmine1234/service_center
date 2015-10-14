@@ -30,6 +30,8 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Is Enabled?
     %th{:style=>'text-align:left; background-color: lightblue;'}
+      Partial Pay
+    %th{:style=>'text-align:left; background-color: lightblue;'}
       No. Of Parameters
 
   .tbody
@@ -51,5 +53,7 @@
           = bm_biller.processing_method
         %td{:style=>'text-align:left;'}
           = bm_biller.is_enabled
+        %td{:style=>'text-align:left;'}
+          = bm_biller.partial_pay
         %td{:style=>'text-align:left;'}
           = bm_biller.num_params

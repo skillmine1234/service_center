@@ -38,6 +38,11 @@
       #msg-error
         = error_message_for(@bm_biller, :is_enabled, :prepend_text => "")
     .control-group
+      = f.label :partial_pay, "Partial Pay", :class => 'control-label'
+      = f.check_box :partial_pay, {},"Y","N"
+      #msg-error
+        = error_message_for(@bm_biller, :partial_pay, :prepend_text => "")
+    .control-group
       = f.label :num_params, "*No. Of Parameters", :class => 'control-label'
       = f.number_field :num_params, :min => 0, :max => 5
       #msg-error
