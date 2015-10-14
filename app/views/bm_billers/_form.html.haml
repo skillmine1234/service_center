@@ -28,7 +28,7 @@
       #msg-error
         = error_message_for(@bm_biller, :biller_location, :prepend_text => "")
     .control-group
-      = f.label :processing_method, "*Processing Method", :class => 'control-label'
+      = f.label :processing_method, "*Biller Type", :class => 'control-label'
       = f.select :processing_method, options_for_select(BmBiller.options_for_processing_method, @bm_biller.processing_method),:prompt => 'SELECT'
       #msg-error
         = error_message_for(@bm_biller, :processing_method, :prepend_text => "")
