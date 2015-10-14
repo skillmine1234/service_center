@@ -29,12 +29,12 @@
         = error_message_for(@bm_biller, :biller_location, :prepend_text => "")
     .control-group
       = f.label :processing_method, "*Processing Method", :class => 'control-label'
-      = f.text_field :processing_method, :maxlength => 1
+      = f.select :processing_method, options_for_select(BmBiller.options_for_processing_method, @bm_biller.processing_method),:prompt => 'SELECT'
       #msg-error
         = error_message_for(@bm_biller, :processing_method, :prepend_text => "")
     .control-group
       = f.label :is_enabled, "*Is Enabled?", :class => 'control-label'
-      = f.check_box :is_enabled, {},"Y","N"
+      = f.check_box :is_enabled, {},"1","0"
       #msg-error
         = error_message_for(@bm_biller, :is_enabled, :prepend_text => "")
     .control-group
@@ -54,7 +54,7 @@
         = error_message_for(@bm_biller, :param1_pattern, :prepend_text => "")
     .control-group
       = f.label :param1_tooltip, "Parameter 1 Tooltip", :class => 'control-label'
-      = f.text_field :param1_tooltip, :maxlength => 255
+      = f.text_area :param1_tooltip, :style => 'height:100px', :maxlength => 255
       #msg-error
         = error_message_for(@bm_biller, :param1_tooltip, :prepend_text => "")
     .control-group
@@ -69,7 +69,7 @@
         = error_message_for(@bm_biller, :param2_pattern, :prepend_text => "")
     .control-group
       = f.label :param2_tooltip, "Parameter 2 Tooltip", :class => 'control-label'
-      = f.text_field :param2_tooltip, :maxlength => 255
+      = f.text_area :param2_tooltip, :style => 'height:100px', :maxlength => 255
       #msg-error
         = error_message_for(@bm_biller, :param2_tooltip, :prepend_text => "")
   .form-extended
@@ -85,7 +85,7 @@
         = error_message_for(@bm_biller, :param3_pattern, :prepend_text => "")
     .control-group
       = f.label :param3_tooltip, "Parameter 3 Tooltip", :class => 'control-label'
-      = f.text_field :param3_tooltip, :maxlength => 255
+      = f.text_area :param3_tooltip, :style => 'height:100px', :maxlength => 255
       #msg-error
         = error_message_for(@bm_biller, :param3_tooltip, :prepend_text => "")
     .control-group
@@ -100,7 +100,7 @@
         = error_message_for(@bm_biller, :param4_pattern, :prepend_text => "")
     .control-group
       = f.label :param4_tooltip, "Parameter 4 Tooltip", :class => 'control-label'
-      = f.text_field :param4_tooltip, :maxlength => 255
+      = f.text_area :param4_tooltip, :style => 'height:100px', :maxlength => 255
       #msg-error
         = error_message_for(@bm_biller, :param4_tooltip, :prepend_text => "")
     .control-group
@@ -115,7 +115,7 @@
         = error_message_for(@bm_biller, :param5_pattern, :prepend_text => "")
     .control-group
       = f.label :param5_tooltip, "Parameter 5 Tooltip", :class => 'control-label'
-      = f.text_field :param5_tooltip, :maxlength => 255
+      = f.text_area :param5_tooltip, :style => 'height:100px', :maxlength => 255
       #msg-error
         = error_message_for(@bm_biller, :param5_tooltip, :prepend_text => "")
         

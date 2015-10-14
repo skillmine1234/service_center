@@ -8,5 +8,6 @@ FactoryGirl.define do
     processing_method "MyString"
     is_enabled "N"
     num_params 0
+    approval_status "U"
   end
 end
