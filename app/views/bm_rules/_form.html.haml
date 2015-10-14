@@ -24,17 +24,17 @@
         = error_message_for(@bm_rule, :cod_gl_suspense, :prepend_text => "")
     .control-group
       = f.label :bene_acct_no, "*Beneficiary Account No", :class => 'control-label'
-      = f.text_field :bene_acct_no
+      = f.text_field :bene_acct_no, :maxlength => 16
       #msg-error
         = error_message_for(@bm_rule, :bene_acct_no, :prepend_text => "")
     .control-group
       = f.label :bene_account_ifsc, "*Beneficiary Account IFSC", :class => 'control-label'
-      = f.text_field :bene_account_ifsc
+      = f.text_field :bene_account_ifsc, :maxlength => 11
       #msg-error
         = error_message_for(@bm_rule, :bene_account_ifsc, :prepend_text => "")
     .control-group
       = f.label :neft_sender_ifsc, "*NEFT Sender IFSC", :class => 'control-label'
-      = f.text_field :neft_sender_ifsc
+      = f.text_field :neft_sender_ifsc, :maxlength => 11
       #msg-error
         = error_message_for(@bm_rule, :neft_sender_ifsc, :prepend_text => "")
 
