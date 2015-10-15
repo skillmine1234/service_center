@@ -246,8 +246,7 @@ $(document).ready(function(){
         $("#ecol_customer_nrtv_sufx_" + i).children('option[value="UDF2"]').prop("disabled",false);
       }
     }
-  });
-  
+  });  
   
   for (var i=1; i<=3; i++){
     if ($('#ecol_customer_val_method').val() == 'N' || $('#ecol_customer_val_method').val() == 'W'){
@@ -266,6 +265,39 @@ $(document).ready(function(){
       $("#ecol_customer_nrtv_sufx_" + i).children('option[value="UDF1"]').prop("disabled",false);
       $("#ecol_customer_nrtv_sufx_" + i).children('option[value="UDF2"]').prop("disabled",false);   
     }
+  }
+  
+  $("#ecol_customer_rmtr_alert_on").on("change",function(){
+    var rmtr_alert =  $(this).val();
+    if (rmtr_alert == 'P') {
+      $("#ecol_customer_rmtr_return_txt").val('');
+      $("#ecol_customer_rmtr_return_txt").prop("disabled",true);
+      $("#ecol_customer_rmtr_pass_txt").prop("disabled",false);
+    }
+    else if (rmtr_alert == 'R') {
+      $("#ecol_customer_rmtr_pass_txt").val('');
+      $("#ecol_customer_rmtr_pass_txt").prop("disabled",true);
+      $("#ecol_customer_rmtr_return_txt").prop("disabled",false);
+    }
+    else {
+      $("#ecol_customer_rmtr_return_txt").prop("disabled",false);
+      $("#ecol_customer_rmtr_pass_txt").prop("disabled",false);
+    }
+  });
+  
+  if ($("#ecol_customer_rmtr_alert_on").val() == 'P') {
+    $("#ecol_customer_rmtr_return_txt").val('');
+    $("#ecol_customer_rmtr_return_txt").prop("disabled",true);
+    $("#ecol_customer_rmtr_pass_txt").prop("disabled",false);
+  }
+  else if ($("#ecol_customer_rmtr_alert_on").val() == 'R') {
+    $("#ecol_customer_rmtr_pass_txt").val('');
+    $("#ecol_customer_rmtr_pass_txt").prop("disabled",true);
+    $("#ecol_customer_rmtr_return_txt").prop("disabled",false);
+  }
+  else {
+    $("#ecol_customer_rmtr_return_txt").prop("disabled",false);
+    $("#ecol_customer_rmtr_pass_txt").prop("disabled",false);
   }
   
   $('#ecol_customer_form').bind('submit', function() {
