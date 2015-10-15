@@ -21,6 +21,8 @@
       Customer Id
     %th{:style=>'Text-align:left; background-color: lightblue;'}
       Debit Account No
+    %th{:style=>'Text-align:left; background-color: lightblue;'}
+      Debit Request Ref
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Transaction Kind
     %th{:style=>'text-align:left; background-color: lightblue;'}
@@ -44,6 +46,8 @@
           = bm_bill_payment.customer_id
         %td{:style=>'text-align:left;'}
           = bm_bill_payment.debit_account_no
+        %td{:style=>'text-align:left;'}
+          = bm_bill_payment.debit_req_ref
         %td{:style=>'text-align:left;'}
           = bm_bill_payment.txn_kind
         %td{:style=>'text-align:left;'}
