@@ -4,7 +4,6 @@ FactoryGirl.define do
   factory :bm_rule do
     cod_acct_no "1234567890"
     customer_id "KFCJSDH"
-    cod_gl_suspense "ABCDEFGH12"
     bene_acct_no "ACC122ABC"
     bene_account_ifsc "ASDF0123456"
     neft_sender_ifsc "ASDF0543210"

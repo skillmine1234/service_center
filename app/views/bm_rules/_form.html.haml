@@ -18,11 +18,6 @@
       #msg-error
         = error_message_for(@bm_rule, :customer_id, :prepend_text => "")
     .control-group
-      = f.label :cod_gl_suspense, "*Suspense GL", :class => 'control-label'
-      = f.text_field :cod_gl_suspense, :maxlength => 16
-      #msg-error
-        = error_message_for(@bm_rule, :cod_gl_suspense, :prepend_text => "")
-    .control-group
       = f.label :bene_acct_no, "*Beneficiary Account No", :class => 'control-label'
       = f.text_field :bene_acct_no, :maxlength => 16
       #msg-error

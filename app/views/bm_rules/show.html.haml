@@ -32,12 +32,6 @@
             %td#msg-error
               = error_message_for(@bm_rule, :customer_id, :prepend_text => "")
           %tr
-            %td.label Suspense GL
-            %td.value
-              = @bm_rule.cod_gl_suspense
-            %td#msg-error
-              = error_message_for(@bm_rule, :cod_gl_suspense, :prepend_text => "")
-          %tr
             %td.label Beneficiary Account No
             %td.value
               = @bm_rule.bene_acct_no

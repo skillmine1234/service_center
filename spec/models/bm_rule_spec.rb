@@ -10,7 +10,7 @@ describe BmRule do
   end
 
   context 'validation' do
-    [:cod_acct_no, :customer_id, :cod_gl_suspense, :bene_acct_no, :bene_account_ifsc, :neft_sender_ifsc, :lock_version, :approval_status].each do |att|
+    [:cod_acct_no, :customer_id, :bene_acct_no, :bene_account_ifsc, :neft_sender_ifsc, :lock_version, :approval_status].each do |att|
       it { should validate_presence_of(att) }
     end
 
@@ -23,7 +23,7 @@ describe BmRule do
 
     context "fields format" do
       it "should allow valid format" do
-        [:cod_acct_no, :customer_id, :cod_gl_suspense, :bene_acct_no].each do |att|
+        [:cod_acct_no, :customer_id, :bene_acct_no].each do |att|
           should allow_value('aaAAbbBB00').for(att)
           should allow_value('AAABBBC090').for(att)
           should allow_value('aaa0000bn').for(att)
@@ -33,10 +33,9 @@ describe BmRule do
       end
 
       it "should not allow invalid format" do
-        bm_rule = Factory.build(:bm_rule, :cod_acct_no => '-1dfghhhhh', :cod_gl_suspense => '@acddsfdfd',
-                                  :customer_id => '@,.9023jsf', :bene_acct_no => '(*&^%^)')
+        bm_rule = Factory.build(:bm_rule, :cod_acct_no => '-1dfghhhhh', :customer_id => '@,.9023jsf', :bene_acct_no => '(*&^%^)')
         bm_rule.save == false
-        [:cod_acct_no, :cod_gl_suspense, :customer_id, :bene_acct_no].each do |att|
+        [:cod_acct_no, :customer_id, :bene_acct_no].each do |att|
           bm_rule.errors_on(att).should == ["Invalid format, expected format is : {[a-z|A-Z|0-9]}"]
         end
       end

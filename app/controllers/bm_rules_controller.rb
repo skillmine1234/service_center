@@ -85,7 +85,7 @@ class BmRulesController < ApplicationController
   private
 
   def bm_rule_params
-    params.require(:bm_rule).permit(:cod_acct_no, :customer_id, :cod_gl_suspense, :bene_acct_no, :bene_account_ifsc,
+    params.require(:bm_rule).permit(:cod_acct_no, :customer_id, :bene_acct_no, :bene_account_ifsc,
                                     :neft_sender_ifsc, :lock_version, :approval_status, :last_action,
                                     :approved_version, :approved_id)
   end
