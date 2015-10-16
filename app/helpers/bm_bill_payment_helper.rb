@@ -21,7 +21,7 @@ module BmBillPaymentHelper
     end      
   end
 
-  def txn_summary_count(status_hash,key)
+  def payment_summary_count(status_hash,key)
     count = status_hash[key] rescue 0
     count.nil? ? 0 : count
   end
