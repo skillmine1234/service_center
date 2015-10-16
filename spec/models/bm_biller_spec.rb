@@ -87,4 +87,10 @@ describe BmBiller do
       bm_biller2.enable_approve_button?.should == true
     end
   end
+  
+  context "options_for_processing_method" do
+    it "should return options for processing method" do
+      BmBiller.options_for_processing_method.should == [['Presentment','T'],['Payee','P'],['Both','A']]
+    end
+  end
 end

@@ -3,6 +3,15 @@
     = label_tag "Biller Code", "Biller Code", :class => 'control-label'
     = text_field_tag :biller_code, params[:biller_code]
   .control-group
+    = label_tag "Biller Name", "Biller Name", :class => 'control-label'
+    = text_field_tag :biller_name, params[:biller_name]
+  .control-group
+    = label_tag "Biller Category", "Biller Category", :class => 'control-label'
+    = text_field_tag :biller_category, params[:biller_category]
+  .control-group
+    = label_tag "Biller Type", "Biller Type", :class => 'control-label'
+    = select_tag :processing_method, options_for_select([['Presentment','T'],['Payee','P'],['Both','A']], params[:processing_method]),:prompt => "ANY"
+  .control-group
     = label_tag "Enabled?", "Enabled?", :class => 'control-label'
     = select_tag :is_enabled, options_for_select([['Yes','Y'],['No','N']],params[:is_enabled]),:prompt => "ANY"
     = hidden_field_tag :approval_status, params[:approval_status]
