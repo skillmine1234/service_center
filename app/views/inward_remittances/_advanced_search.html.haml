@@ -1,7 +1,7 @@
 = form_tag '', :method => 'get', :class => 'form-horizontal', :autocomplete=>"off" do
   .control-group
     = label_tag "Status", nil, :class => 'control-label'
-    = select_tag :status, options_for_select([['ONHOLD','ONHOLD'],['SENT_TO_BENE','SENT_TO_BENE'],['COMPLETED','COMPLETED'],['FAILED','FAILED']],params[:status]),:prompt => 'ANY'
+    = select_tag :status, options_for_select([['ONHOLD','ONHOLD'],['SENT_TO_BENEFICIARY','SENT_TO_BENEFICIARY'],['COMPLETED','COMPLETED'],['FAILED','FAILED']],params[:status]),:prompt => 'ANY'
   .control-group
     = label_tag "Request No", nil, :class => 'control-label'
     = text_field_tag :request_no, params[:request_no]
