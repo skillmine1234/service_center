@@ -13,7 +13,8 @@ module EcolCustomerValidation
     :nrtv_sufx_3_should_be_N_if_nrtv_sufx_2_is_N,
     :customer_code_format, 
     :validate_account_token_length,
-    :value_of_validation_fields
+    :value_of_validation_fields,
+    :presence_of_credit_acct_no_val_fail
   end
   
   def val_tokens_should_be_N_if_val_method_is_N
@@ -79,6 +80,12 @@ module EcolCustomerValidation
   def nrtv_sufx_3_should_be_N_if_nrtv_sufx_2_is_N
     if (self.nrtv_sufx_2 == "N" && self.nrtv_sufx_3 != "N")
       errors[:base] << "If Narrative Suffix 2 is None, then Narrative Suffix 3 also should be None"
+    end
+  end
+  
+  def presence_of_credit_acct_no_val_fail
+    if self.return_if_val_reject == 'N' and self.credit_acct_val_fail.blank?
+      errors.add(:credit_acct_val_fail, "Since transaction is not to be returned on validation failure(as 'Return if Validation Fails' box is unchecked) Credit Account No(Validation Fail) field cannot be blank")
     end
   end
 end
