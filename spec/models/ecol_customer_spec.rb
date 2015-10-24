@@ -105,7 +105,7 @@ describe EcolCustomer do
   end
   
   context "account no format" do 
-    [:credit_acct_val_pass].each do |att|
+    [:credit_acct_val_pass, :credit_acct_val_pass].each do |att|
       it "should allow valid format" do
         should allow_value('1234567890').for(att)
       end
@@ -228,6 +228,12 @@ describe EcolCustomer do
       ecol_customer = Factory.build(:ecol_customer, :nrtv_sufx_1 => "RC", :nrtv_sufx_2 => "N", :nrtv_sufx_3 => "SC")
       ecol_customer.save.should == false
       ecol_customer.errors[:base].should == ["If Narrative Suffix 2 is None, then Narrative Suffix 3 also should be None"]
+    end
+    
+    it "should check if crefit_acct_val_fail is present if return_if_val_fail is N" do
+      ecol_customer = Factory.build(:ecol_customer, :return_if_val_reject => 'N', :credit_acct_val_fail => nil)
+      ecol_customer.save.should == false
+      ecol_customer.errors_on(:credit_acct_val_fail).should == ["Since transaction is not to be returned on validation failure(as 'Return if Validation Fails' box is unchecked) Credit Account No(Validation Fail) field cannot be blank"]
     end
   end
   
