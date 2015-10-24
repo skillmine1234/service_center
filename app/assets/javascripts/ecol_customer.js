@@ -279,6 +279,10 @@ $(document).ready(function(){
       $("#ecol_customer_rmtr_pass_txt").prop("disabled",true);
       $("#ecol_customer_rmtr_return_txt").prop("disabled",false);
     }
+    else if (rmtr_alert == 'N') {
+      $("#ecol_customer_rmtr_pass_txt").prop("disabled",true);
+      $("#ecol_customer_rmtr_return_txt").prop("disabled",true);
+    }
     else {
       $("#ecol_customer_rmtr_return_txt").prop("disabled",false);
       $("#ecol_customer_rmtr_pass_txt").prop("disabled",false);
@@ -295,6 +299,10 @@ $(document).ready(function(){
     $("#ecol_customer_rmtr_pass_txt").prop("disabled",true);
     $("#ecol_customer_rmtr_return_txt").prop("disabled",false);
   }
+  else if ($("#ecol_customer_rmtr_alert_on").val() == 'N') {
+    $("#ecol_customer_rmtr_pass_txt").prop("disabled",true);
+    $("#ecol_customer_rmtr_return_txt").prop("disabled",true);
+  }
   else {
     $("#ecol_customer_rmtr_return_txt").prop("disabled",false);
     $("#ecol_customer_rmtr_pass_txt").prop("disabled",false);
@@ -304,4 +312,21 @@ $(document).ready(function(){
       $(this).find(':input').removeAttr('disabled');
   });
   
+  if ($('#ecol_customer_return_if_val_reject').attr('checked')) {
+    $("#ecol_customer_credit_acct_val_fail").val('');
+    $("#ecol_customer_credit_acct_val_fail").prop("disabled",true);
+  }
+  else {
+    $("#ecol_customer_credit_acct_val_fail").prop("disabled",false);
+  }
+  
+  $("#ecol_customer_return_if_val_reject").on("click",function(){
+    if ($(this).attr('checked')) {
+      $("#ecol_customer_credit_acct_val_fail").val('');
+      $("#ecol_customer_credit_acct_val_fail").prop("disabled",true);
+    }
+    else {
+      $("#ecol_customer_credit_acct_val_fail").prop("disabled",false);
+    }
+  });
 });
