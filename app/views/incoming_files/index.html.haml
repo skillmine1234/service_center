@@ -58,7 +58,7 @@
         %td{:style=>'text-align:left;'}
           = incoming_file.job_status
         %td{:style=>'text-align:left;'}
-          = incoming_file.started_at
+          = incoming_file.started_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
         %td{:style=>'text-align:left;'}
           = incoming_file.upload_time
         %td{:style=>'text-align:left;'}

@@ -56,9 +56,9 @@
             %td#msg-error
               = error_message_for(@ecol_rule, :updated_by, :prepend_text => "")
           %tr
-            %td.label Updated At
+            %td.label Updated At.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
             %td.value
-              = @ecol_rule.updated_at
+              = @ecol_rule.updated_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
             %td#msg-error
               = error_message_for(@ecol_rule, :updated_at, :prepend_text => "")
       = link_to 'Back to Dashboard', root_path              

@@ -15,7 +15,7 @@
       = @ecol_transaction.transfer_status
     %h3
       Transfer Date:
-      = @ecol_transaction.transfer_date.try(:strftime, "%d/%m/%Y %I:%M%p")
+      = @ecol_transaction.transfer_date.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
   .header-form-extended{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'}
     %h3
       Status:
@@ -28,10 +28,10 @@
       = @ecol_transaction.rmtr_ref
     %h3
       Settled At:
-      = @ecol_transaction.settled_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+      = @ecol_transaction.settled_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
     %h3
       Received At:
-      = @ecol_transaction.received_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+      = @ecol_transaction.received_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
     %h3
       Audit Logs:
       = link_to 'Show', {:controller => 'ecol_transactions', :action => 'ecol_audit_logs', :id => @ecol_transaction.id, :step_name => 'ALL'}
@@ -57,7 +57,7 @@
             = "-"
       %tr
         %td.label Validation Attempted At
-        %td= @ecol_transaction.validate_attempt_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+        %td= @ecol_transaction.validate_attempt_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
       %tr
         %td.label Customer Code 
         %td
@@ -100,9 +100,9 @@
         %td
           - if @ecol_transaction.try(:ecol_customer).try(:val_method) == 'D'
             .span{:class =>"has-tooltip", "data-toggle" => 'tooltip',"title" => "(Expected Value: #{@ecol_transaction.expected_transfer_date rescue "-"})" , "data-placement" => 'bottom', "data-html" => true}
-              = @ecol_transaction.transfer_date.try(:strftime, "%d/%m/%Y %I:%M%p")
+              = @ecol_transaction.transfer_date.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
           - else
-            = @ecol_transaction.transfer_date.try(:strftime, "%d/%m/%Y %I:%M%p")
+            = @ecol_transaction.transfer_date.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
       %tr
         %td.label Remitter Account Number
         %td
@@ -135,14 +135,14 @@
         - if @ecol_transaction.status == 'CREDITED'
           %tr
             %td.label Credited At
-            %td= @ecol_transaction.credited_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td= @ecol_transaction.credited_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
           %tr
             %td.label Credit Reference
             %td= @ecol_transaction.credit_ref
         - elsif @ecol_transaction.status == 'PENDING CREDIT'
           %tr
             %td.label Credit Attempted At
-            %td= @ecol_transaction.credit_attempt_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td= @ecol_transaction.credit_attempt_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
         - elsif @ecol_transaction.status == 'CREDIT FAILED'
           %tr
             %td.label Fault Text
@@ -162,14 +162,14 @@
         - if @ecol_transaction.status == 'RETURNED'
           %tr
             %td.label Returned At
-            %td= @ecol_transaction.returned_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td= @ecol_transaction.returned_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
           %tr
             %td.label Return Reference
             %td= @ecol_transaction.return_ref
         - elsif @ecol_transaction.status == 'PENDING RETURN'
           %tr
             %td.label Return Attempted At
-            %td= @ecol_transaction.return_attempt_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td= @ecol_transaction.return_attempt_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
         - elsif @ecol_transaction.status == 'RETURN FAILED'
           %tr
             %td.label Fault Text
@@ -187,7 +187,7 @@
             = "-"
       %tr
         %td.label Settle Attempt At
-        %td= @ecol_transaction.settle_attempt_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+        %td= @ecol_transaction.settle_attempt_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
       %tr
         %td.label Settle Status
         %td= @ecol_transaction.settle_status
@@ -221,7 +221,7 @@
         %td= @ecol_transaction.try(:ecol_customer).try(:cust_alert_on)
       %tr
         %td.label Notify Attempt At
-        %td= @ecol_transaction.notify_attempt_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+        %td= @ecol_transaction.notify_attempt_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
       %tr
         %td.label Notify Status
         %td= @ecol_transaction.notify_status

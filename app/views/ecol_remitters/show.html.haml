@@ -154,13 +154,13 @@
           %tr
             %td.label Created At
             %td.value
-              = @ecol_remitter.created_at
+              = @ecol_remitter.created_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
             %td#msg-error
               = error_message_for(@ecol_remitter, :created_at, :prepend_text => "")
           %tr
             %td.label Updated At
             %td.value
-              = @ecol_remitter.updated_at
+              = @ecol_remitter.updated_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
             %td#msg-error
               = error_message_for(@ecol_remitter, :updated_at, :prepend_text => "")
       = link_to 'Back to Remitters', ecol_remitters_path
