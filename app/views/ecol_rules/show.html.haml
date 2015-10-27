@@ -56,7 +56,7 @@
             %td#msg-error
               = error_message_for(@ecol_rule, :updated_by, :prepend_text => "")
           %tr
-            %td.label Updated At.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td.label Updated At
             %td.value
               = @ecol_rule.updated_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
             %td#msg-error

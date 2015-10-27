@@ -32,7 +32,7 @@
           %tr
             %td.label Last RTGS At
             %td.value
-              = @ecol_fetch_statistic.last_rtgs_at.utc.strftime("%d/%m/%Y %I:%M%p")
+              = @ecol_fetch_statistic.last_rtgs_at.utc.strftime("%d/%m/%Y %I:%M%p") rescue " "
             %td#msg-error
               = error_message_for(@ecol_fetch_statistic, :last_rtgs_at, :prepend_text => "")
           %tr
