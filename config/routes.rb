@@ -27,6 +27,7 @@ ServiceCenter::Application.routes.draw do
   resources :bm_rules
   resources :bm_billers
   resources :bm_bill_payments
+  resources :bm_aggregator_payments
 
   namespace :api do
     namespace :v1 do
@@ -44,6 +45,7 @@ ServiceCenter::Application.routes.draw do
   get '/udf_attribute/:id/audit_logs' => 'udf_attributes#audit_logs'
   get '/bm_biller/:id/audit_logs' => 'bm_billers#audit_logs'
   get '/bm_rule/:id/audit_logs' => 'bm_rules#audit_logs'
+  get '/bm_aggregator_payment/:id/audit_logs' => 'bm_aggregator_payments#audit_logs'
 
   get '/inward_remittances/:id/remitter_identities' => 'inward_remittances#remitter_identities'
   get '/inward_remittances/:id/beneficiary_identities' => 'inward_remittances#beneficiary_identities'
@@ -74,6 +76,7 @@ ServiceCenter::Application.routes.draw do
   
   put '/bm_biller/:id/approve' => "bm_billers#approve"
   put '/bm_rule/:id/approve' => "bm_rules#approve"
+  put '/bm_aggregator_payment/:id/approve' => "bm_aggregator_payments#approve"
 
   get '/ecol_transactions/:id/ecol_audit_logs/:step_name' => 'ecol_transactions#ecol_audit_logs'
   put '/ecol_transactions/:id/approve' => "ecol_transactions#approve_transaction"

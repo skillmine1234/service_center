@@ -14,7 +14,7 @@ describe BmUnapprovedRecordsController do
     it "assigns all bm_unapproved_records as @bm_unapproved_records" do
       bm_unapproved_record = Factory(:bm_unapproved_record, :bm_approvable_type => 'BmRule')
       get :index
-      assigns(:records).should eq([{:record_type=>"BmRule", :record_count=>1}, {:record_type=>"BmBiller", :record_count=>0}])
+      assigns(:records).should eq([{:record_type=>"BmRule", :record_count=>1}, {:record_type=>"BmBiller", :record_count=>0}, {:record_type=>"BmAggregatorPayment", :record_count=>0}])
     end
   end
 end

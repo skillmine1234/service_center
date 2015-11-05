@@ -8,7 +8,7 @@ class Group < ActiveRecord::Base
     when "e-collect"
       ['EcolUnapprovedRecord','EcolRule','EcolCustomer','EcolRemitter','EcolTransaction','UdfAttribute','IncomingFile','EcolFetchStatistic']
     when "bill-management"
-      ['BmRule','BmBiller','BmBillPayment','BmUnapprovedRecord']
+      ['BmRule','BmBiller','BmBillPayment','BmAggregatorPayment','BmUnapprovedRecord']
     else
       []
     end

@@ -1,0 +1,118 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8;'}
+    #form-details
+      %h3 Aggregator Payment Details 
+      %br
+      %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
+        - unless @bm_aggregator_payment.approval_status == 'A'
+          - can = can? :edit, @bm_aggregator_payment
+          %a.btn{:href => "#{!(can) ? '#' : '/bm_aggregator_payments/' + @bm_aggregator_payment.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
+        = render 'bm_billers/approve', :@record => @bm_aggregator_payment
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
+        - if !@bm_aggregator_payment.nil?
+          %tr
+            %td.label Version
+            %td.value
+              = link_to "#{audit_count(@bm_aggregator_payment)}", :controller => :bm_aggregator_payments, :action => :audit_logs, :version_id => audit_count(@bm_aggregator_payment), :id => @bm_aggregator_payment.id
+          %tr
+            %td.label Form Errors
+            %td.value
+              = ' '
+            %td#msg-error
+              = error_message_for(@bm_aggregator_payment, :base, :prepend_text => "")
+          %tr
+            %td.label Pool Account No
+            %td.value
+              = @bm_aggregator_payment.cod_acct_no
+            %td#msg-error
+              = error_message_for(@bm_aggregator_payment, :cod_acct_no, :prepend_text => "")
+          %tr
+            %td.label NEFT Sender IFSC
+            %td.value
+              = @bm_aggregator_payment.neft_sender_ifsc
+            %td#msg-error
+              = error_message_for(@bm_aggregator_payment, :neft_sender_ifsc, :prepend_text => "")
+          %tr
+            %td.label Beneficiary Account No
+            %td.value
+              = @bm_aggregator_payment.bene_acct_no
+            %td#msg-error
+              = error_message_for(@bm_aggregator_payment, :bene_acct_no, :prepend_text => "")
+          %tr
+            %td.label Beneficiary Account IFSC
+            %td.value
+              = @bm_aggregator_payment.bene_account_ifsc
+            %td#msg-error
+              = error_message_for(@bm_aggregator_payment, :bene_account_ifsc, :prepend_text => "")
+          %tr
+            %td.label Payment Amount
+            %td.value
+              = @bm_aggregator_payment.payment_amount
+            %td#msg-error
+              = error_message_for(@bm_aggregator_payment, :payment_amount, :prepend_text => "")
+          %tr
+            %td.label Bank Reference
+            %td.value
+              = @bm_aggregator_payment.bank_ref
+            %td#msg-error
+              = error_message_for(@bm_aggregator_payment, :bank_ref, :prepend_text => "")
+          %tr
+            %td.label Status
+            %td.value
+              = @bm_aggregator_payment.status
+            %td#msg-error
+              = error_message_for(@bm_aggregator_payment, :status, :prepend_text => "")
+          %tr
+            %td.label Fault Code
+            %td.value
+              = @bm_aggregator_payment.fault_code
+            %td#msg-error
+              = error_message_for(@bm_aggregator_payment, :fault_code, :prepend_text => "")
+          %tr
+            %td.label Fault Reason
+            %td.value
+              = @bm_aggregator_payment.fault_reason
+            %td#msg-error
+              = error_message_for(@bm_aggregator_payment, :fault_reason, :prepend_text => "")
+          %tr
+            %td.label NEFT Request Reference
+            %td.value
+              = @bm_aggregator_payment.neft_req_ref
+            %td#msg-error
+              = error_message_for(@bm_aggregator_payment, :neft_req_ref, :prepend_text => "")
+          %tr
+            %td.label NEFT Attempt No
+            %td.value
+              = @bm_aggregator_payment.neft_attempt_no
+            %td#msg-error
+              = error_message_for(@bm_aggregator_payment, :neft_attempt_no, :prepend_text => "")
+          %tr
+            %td.label NEFT Attempt At
+            %td.value
+              = @bm_aggregator_payment.neft_attemp_at
+            %td#msg-error
+              = error_message_for(@bm_aggregator_payment, :neft_attemp_at, :prepend_text => "")
+          %tr
+            %td.label NEFT Reply Reference
+            %td.value
+              = @bm_aggregator_payment.neft_rep_ref
+            %td#msg-error
+              = error_message_for(@bm_aggregator_payment, :neft_rep_ref, :prepend_text => "")
+          %tr
+            %td.label NEFT Completed At
+            %td.value
+              = @bm_aggregator_payment.neft_completed_at
+            %td#msg-error
+              = error_message_for(@bm_aggregator_payment, :neft_completed_at, :prepend_text => "")
+          %tr
+            %td.label Created At
+            %td.value
+              = @bm_aggregator_payment.created_at
+            %td#msg-error
+              = error_message_for(@bm_aggregator_payment, :created_at, :prepend_text => "")
+          %tr
+            %td.label Updated At
+            %td.value
+              = @bm_aggregator_payment.updated_at
+            %td#msg-error
+              = error_message_for(@bm_aggregator_payment, :updated_at, :prepend_text => "")
