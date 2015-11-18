@@ -126,6 +126,9 @@
       %h3 Credit Result
       %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:left;'}  
         %tr
+          %td.label Credit Account No
+          %td= @ecol_transaction.credit_acct_no
+        %tr
           %td.label Credit Attempt
           %td
             - if !@ecol_transaction.credit_attempt_no.nil?
@@ -237,11 +240,31 @@
           %td.label Notify Result
           %td
             = link_to "Show Result", "#", :class => 'notify-result', :href => "#notifyResult", :style => "font-weight:100"
-  .header-form-main{:style=>'background-color: #ecf5fa; width: 100%; height: 100px;display: inline-block;'}
+  .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; height: 180px;display: inline-block;'}
     %table.table.no-border
+      %tr
+        %td.label Remitter Address 
+        %td= @ecol_transaction.rmtr_address
+      %tr
+        %td.label Remitter Account Type 
+        %td= @ecol_transaction.rmtr_account_type
+      %tr
+        %td.label Remitter Account IFSC 
+        %td= @ecol_transaction.rmtr_account_ifsc
       %tr
         %td.label Remitter To Beneficiary Note
         %td= @ecol_transaction.rmtr_to_bene_note
+  .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; height: 180px;display: inline-block;'}
+    %table.table.no-border
+      %tr
+        %td.label Beneficiary Address 
+        %td= @ecol_transaction.bene_full_address
+      %tr
+        %td.label Beneficiary Account Type 
+        %td= @ecol_transaction.bene_account_type
+      %tr
+        %td.label Beneficiary Account IFSC 
+        %td= @ecol_transaction.bene_account_ifsc
 #faultText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
