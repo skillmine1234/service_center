@@ -30,7 +30,7 @@ module EcolCustomerOptions
     end
   
     def self.options_for_val_txn_amt
-      [['None','N'],['Exact and Above','E'],['Range','R'],['Percentage','P']]
+      [['None','N'],['Exact','E'],['Range','R'],['Percentage','P']]
     end
   end
 end

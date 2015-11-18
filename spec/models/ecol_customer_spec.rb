@@ -267,7 +267,7 @@ describe EcolCustomer do
     end
     
     it "should return options for val txn amt" do
-      EcolCustomer.options_for_val_txn_amt == [['None','N'],['Exact and Above','E'],['Range','R'],['Percentage','P']]
+      EcolCustomer.options_for_val_txn_amt == [['None','N'],['Exact','E'],['Range','R'],['Percentage','P']]
     end
   end
   
