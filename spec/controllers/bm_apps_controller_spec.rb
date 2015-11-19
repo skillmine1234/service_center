@@ -188,7 +188,7 @@ describe BmAppsController do
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
       bm_app1 = Factory(:bm_app, :app_id => "BILL01", :approval_status => 'A')
-      bm_app2 = Factory(:bm_app, :app_id => "BILL01", :approval_status => 'U', :approved_version => bm_app1.lock_version, :approved_id => bm_app1.id)
+      bm_app2 = Factory(:bm_app, :app_id => "BILL01", :approval_status => 'U', :channel_id => "sdfwe232", :approved_version => bm_app1.lock_version, :approved_id => bm_app1.id)
       put :approve, {:id => bm_app2.id}
       bm_app2.reload
       bm_app2.approval_status.should == 'A'
