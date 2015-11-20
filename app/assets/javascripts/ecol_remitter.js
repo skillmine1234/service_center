@@ -1,15 +1,11 @@
 $(document).ready(function(){
   
-  // $("#ecol_remitter_due_date").datepicker(
-  // {
-  //   dateFormat: 'yy-mm-dd',
-  //   changeMonth: true,
-  //   changeYear: true,
-  //   yearRange: "-70:+70"
-  // });
-	
-  $('#ecol_remitter_due_date').datetimepicker({
-    dateFormat: 'dd MM yy'
+  $("#ecol_remitter_due_date").datepicker(
+  {
+    dateFormat: 'yy-mm-dd',
+    changeMonth: true,
+    changeYear: true,
+    yearRange: "-70:+70"
   });
   
   $('#ecol_remitter_due_date').datepicker("setDate", $('#ecol_remitter_due_date').val());
