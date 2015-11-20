@@ -11,17 +11,17 @@
       = f.label :cod_acct_no, "*Pool Account No", :class => 'control-label'
       = f.text_field :cod_acct_no, :maxlength => 50
       #msg-error
-        = error_message_for(@bm_aggregator_payment, :biller_code, :prepend_text => "")
+        = error_message_for(@bm_aggregator_payment, :cod_acct_no, :prepend_text => "")
     .control-group
       = f.label :neft_sender_ifsc, "*NEFT Sender IFSC", :class => 'control-label'
       = f.text_field :neft_sender_ifsc, :maxlength => 11
       #msg-error
-        = error_message_for(@bm_aggregator_payment, :biller_name, :prepend_text => "")
+        = error_message_for(@bm_aggregator_payment, :neft_sender_ifsc, :prepend_text => "")
     .control-group
       = f.label :bene_acct_no, "*Beneficiary Account No", :class => 'control-label'
       = f.text_field :bene_acct_no, :maxlength => 50
       #msg-error
-        = error_message_for(@bm_aggregator_payment, :biller_category, :prepend_text => "")
+        = error_message_for(@bm_aggregator_payment, :bene_acct_no, :prepend_text => "")
     .control-group
       = f.label :bene_account_ifsc, "*Beneficiary Account IFSC", :class => 'control-label'
       = f.text_field :bene_account_ifsc, :maxlength => 11
@@ -40,5 +40,5 @@
 
   .form-actions
     - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
-    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_biller', :value => label_name + ' Biller'
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_biller', :value => label_name + ' Aggregator Payment'
     = link_to :Cancel,'/bm_aggregator_payments', :name => 'cancel', :class=>"cancel btn"
