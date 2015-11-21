@@ -58,7 +58,7 @@ describe BmBiller do
     
       it "should not allow invalid format" do
         should_not allow_value('@Param').for(att)
-        should_not allow_value('param/').for(att)
+        should_not allow_value('param!!').for(att)
         should_not allow_value('Param-8c*').for(att)
       end
     end   
