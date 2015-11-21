@@ -9,7 +9,7 @@
     = f.hidden_field :approved_version
     .control-group
       = f.label :biller_code, "*Biller Code", :class => 'control-label'
-      = f.text_field :biller_code, :maxlength => 100
+      = f.text_field :biller_code, :maxlength => 20
       #msg-error
         = error_message_for(@bm_biller, :biller_code, :prepend_text => "")
     .control-group
@@ -24,7 +24,7 @@
         = error_message_for(@bm_biller, :biller_category, :prepend_text => "")
     .control-group
       = f.label :biller_location, "*Biller Location", :class => 'control-label'
-      = f.text_field :biller_location, :maxlength => 100
+      = f.text_field :biller_location, :maxlength => 25
       #msg-error
         = error_message_for(@bm_biller, :biller_location, :prepend_text => "")
     .control-group

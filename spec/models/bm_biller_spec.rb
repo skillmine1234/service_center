@@ -20,6 +20,50 @@ describe BmBiller do
     end
   end
   
+  context "biller code format" do 
+    it "should allow valid format" do
+      should allow_value('9876').for(:biller_code)
+      should allow_value('ABCD90').for(:biller_code)
+    end 
+    
+    it "should not allow invalid format" do
+      should_not allow_value('@CUST01').for(:biller_code)
+      should_not allow_value('CUST01/').for(:biller_code)
+      should_not allow_value('CUST-01').for(:biller_code)
+    end     
+  end
+  
+  context "biller_name biller_location format" do 
+    [:biller_name, :biller_location].each do |att|
+      it "should allow valid format" do
+        should allow_value('BillerName').for(att)
+        should allow_value('Biller Name').for(att)
+      end 
+    
+      it "should not allow invalid format" do
+        should_not allow_value('@Biller').for(att)
+        should_not allow_value('Biller/').for(att)
+        should_not allow_value('Biller-8c*').for(att)
+      end 
+    end    
+  end
+  
+  context "parameter name format" do 
+    [:param1_name, :param2_name, :param3_name, :param4_name, :param5_name].each do |att|
+      it "should allow valid format" do
+        should allow_value('Param').for(att)
+        should allow_value('Param1').for(att)
+        should allow_value('Param(1)').for(att)
+      end 
+    
+      it "should not allow invalid format" do
+        should_not allow_value('@Param').for(att)
+        should_not allow_value('param/').for(att)
+        should_not allow_value('Param-8c*').for(att)
+      end
+    end   
+  end
+  
   context "default_scope" do 
     it "should only return 'A' records by default" do 
       bm_biller1 = Factory(:bm_biller, :approval_status => 'A') 
@@ -90,7 +134,7 @@ describe BmBiller do
   
   context "options_for_processing_method" do
     it "should return options for processing method" do
-      BmBiller.options_for_processing_method.should == [['Presentment','T'],['Payee','P'],['Both','A']]
+      BmBiller.options_for_processing_method.should == [['Presentment','T'],['Payee','P'],['Both','A'],['Recharge','R']]
     end
   end
 end
