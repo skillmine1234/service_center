@@ -10,4 +10,16 @@ module BmBillersHelper
     bm_billers
   end
 
+  def description_for_biller_type(value)
+    case value
+    when "T"
+      "Presentment"
+    when "P"
+      "Payee"
+    when "A"
+      "Both"
+    when "R"
+      "Recharge"
+    end
+  end
 end

@@ -17,8 +17,8 @@ class BmBillersController < ApplicationController
     else
       @bm_biller.created_by = current_user.id
       @bm_biller.save!
-
-      flash[:alert] = 'Biller successfully created and is pending for approval'
+      
+      flash[:alert] = "Biller successfully #{params[:approved_id].nil? ? 'created' : 'updated'} and is pending for approval"
       redirect_to @bm_biller
     end
   end 

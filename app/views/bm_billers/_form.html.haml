@@ -34,7 +34,7 @@
         = error_message_for(@bm_biller, :processing_method, :prepend_text => "")
     .control-group
       = f.label :is_enabled, "*Is Enabled?", :class => 'control-label'
-      = f.check_box :is_enabled, {},"1","0"
+      = f.check_box :is_enabled, {},"Y","N"
       #msg-error
         = error_message_for(@bm_biller, :is_enabled, :prepend_text => "")
     .control-group
@@ -126,6 +126,6 @@
         
 
   .form-actions
-    - (f.object.new_record? and f.object.biller_code.nil?) ? label_name = "Create" : label_name = "Update"
+    - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
     = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_biller', :value => label_name + ' Biller'
     = link_to :Cancel,'/bm_billers', :name => 'cancel', :class=>"cancel btn"

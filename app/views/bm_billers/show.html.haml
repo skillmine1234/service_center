@@ -46,7 +46,7 @@
           %tr
             %td.label Biller Type
             %td.value
-              = @bm_biller.processing_method
+              = description_for_biller_type(@bm_biller.processing_method)
             %td#msg-error
               = error_message_for(@bm_biller, :processing_method, :prepend_text => "")
           %tr
