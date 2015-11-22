@@ -39,6 +39,6 @@
         = error_message_for(@bm_aggregator_payment, :bank_ref, :prepend_text => "")      
 
   .form-actions
-    - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
-    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_biller', :value => label_name + ' Aggregator Payment'
+    - (f.object.new_record?) ? label_name = "Make" : label_name = "Update"
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_biller', :value => label_name + ' Payment'
     = link_to :Cancel,'/bm_aggregator_payments', :name => 'cancel', :class=>"cancel btn"
