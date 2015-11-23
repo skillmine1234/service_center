@@ -14,7 +14,8 @@ module EcolCustomerValidation
     :customer_code_format, 
     :validate_account_token_length,
     :value_of_validation_fields,
-    :presence_of_credit_acct_no_val_fail
+    :presence_of_credit_acct_no_val_fail,
+    :value_of_ntrv_sufx_if_val_method_is_N
   end
   
   def val_tokens_should_be_N_if_val_method_is_N
@@ -86,6 +87,12 @@ module EcolCustomerValidation
   def presence_of_credit_acct_no_val_fail
     if (self.val_method == 'W' or self.val_method == 'D') and self.return_if_val_reject == 'N' and self.credit_acct_val_fail.blank?
       errors.add(:credit_acct_val_fail, "Since transaction is not to be returned on validation failure(as 'Return if Validation Fails' box is unchecked) Credit Account No(Validation Fail) field cannot be blank")
+    end
+  end
+  
+  def value_of_ntrv_sufx_if_val_method_is_N
+    if self.val_method == 'N' and ((self.nrtv_sufx_1 == 'RN' or self.nrtv_sufx_1 == 'UDF1' or self.nrtv_sufx_1 == 'UDF2') or (self.nrtv_sufx_2 == 'RN' or self.nrtv_sufx_2 == 'UDF1' or self.nrtv_sufx_2 == 'UDF2') or (self.nrtv_sufx_3 == 'RN' or self.nrtv_sufx_3 == 'UDF1' or self.nrtv_sufx_3 == 'UDF2'))
+      errors[:base] << "If Validation Method is None, then Narrative Suffixes cannot be 'Remitter Name', 'User Defined Field 1' or 'User Defined Field 2'"
     end
   end
 end
