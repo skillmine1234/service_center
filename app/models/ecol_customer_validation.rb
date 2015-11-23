@@ -84,7 +84,7 @@ module EcolCustomerValidation
   end
   
   def presence_of_credit_acct_no_val_fail
-    if self.return_if_val_reject == 'N' and self.credit_acct_val_fail.blank?
+    if (self.val_method == 'W' or self.val_method == 'D') and self.return_if_val_reject == 'N' and self.credit_acct_val_fail.blank?
       errors.add(:credit_acct_val_fail, "Since transaction is not to be returned on validation failure(as 'Return if Validation Fails' box is unchecked) Credit Account No(Validation Fail) field cannot be blank")
     end
   end
