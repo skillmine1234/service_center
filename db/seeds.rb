@@ -38,8 +38,7 @@ if ScService.all.empty?
 end
 
 if BmRule.all.empty?
-  BmRule.create(:cod_acct_no => "0123456789", :customer_id => "QWEASD", :cod_gl_suspense => "1111111111",
-                :bene_acct_no => "0123456788", :bene_account_ifsc => "IFSC0123456", :neft_sender_ifsc => 'IFSC0123456')
+  BmRule.create(:cod_acct_no => "0123456789", :customer_id => "QWEASD", :bene_acct_no => "0123456788", :bene_account_ifsc => "IFSC0123456", :neft_sender_ifsc => 'IFSC0123456')
 end
 
 if IncomingFileType.all.empty? and !ScService.all.empty?
@@ -48,10 +47,4 @@ if IncomingFileType.all.empty? and !ScService.all.empty?
   IncomingFileType.create(:sc_service_id => sc1.id, :code => 'SDN', :name => 'Specially Designated Individuals')
   IncomingFileType.create(:sc_service_id => sc1.id, :code => 'OFAC', :name => 'Office of Foreign Assets Control')
   IncomingFileType.create(:sc_service_id => sc2.id, :code => 'RMTRS', :name => 'Remitters')
-end
-
-if EcolFetchStatistic.all.empty?
-  EcolFetchStatistic.create(:last_neft_at => Time.zone.now, :last_neft_id => 0, :last_neft_cnt => 0,
-                            :tot_neft_cnt => 0, :last_rtgs_at => Time.zone.now, :last_rtgs_id => 0,
-                            :last_rtgs_cnt => 0, :tot_rtgs_cnt => 0)
 end
