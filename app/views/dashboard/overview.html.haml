@@ -99,12 +99,6 @@
         = image_tag 'udf_attribute.gif', :size => "80x80"
       %br
         = "UDF Attributes"
-    .box
-      - if !EcolFetchStatistic.first.nil?
-        = link_to EcolFetchStatistic.first do
-          = image_tag 'statistic.jpeg', :size => "80x80"
-      %br
-        = "E-Collect Fetch Statistics"
 - if @current_user.group_names.include?("bill-management")
   %h1 Bill-Management
   .slide-container
