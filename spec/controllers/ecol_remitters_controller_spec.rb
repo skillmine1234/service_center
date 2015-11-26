@@ -182,16 +182,34 @@ describe EcolRemittersController do
   end
 
   describe "PUT approve" do
-    it "unapproved record can be approved and old approved record will be deleted" do
+    it "(edit) unapproved record can be approved and old approved record will be updated" do
       user_role = UserRole.find_by_user_id(@user.id)
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
       ecol_remitter1 = Factory(:ecol_remitter, :approval_status => 'A')
-      ecol_remitter2 = Factory(:ecol_remitter, :approval_status => 'U', :approved_version => ecol_remitter1.lock_version, :approved_id => ecol_remitter1.id)
+      ecol_remitter2 = Factory(:ecol_remitter, :remitter_code => 'BarFoo', :approval_status => 'U', :approved_version => ecol_remitter1.lock_version, :approved_id => ecol_remitter1.id, :created_by => 666)
+      # the following line is required for reload to get triggered (TODO)
+      ecol_remitter1.approval_status.should == 'A'
+
       put :approve, {:id => ecol_remitter2.id}
-      ecol_remitter2.reload
-      ecol_remitter2.approval_status.should == 'A'
-      EcolRemitter.find_by_id(ecol_remitter1.id).should be_nil
+
+      ecol_remitter1.reload
+      ecol_remitter1.remitter_code.should == 'BarFoo'
+      ecol_remitter1.updated_by.should == "666"
+      EcolRemitter.find_by_id(ecol_remitter2.id).should be_nil
     end
+
+    it "(create) unapproved record can be approved" do
+      user_role = UserRole.find_by_user_id(@user.id)
+      user_role.delete
+      Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
+      ecol_customer1 = Factory(:ecol_customer)
+      ecol_remitter = Factory(:ecol_remitter, :remitter_code => 'BarFoo', :approval_status => 'U')
+      put :approve, {:id => ecol_remitter.id}
+      ecol_remitter.reload
+      ecol_remitter.remitter_code.should == 'BarFoo'
+      ecol_remitter.approval_status.should == 'A'
+    end
+
   end
 end

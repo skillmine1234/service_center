@@ -73,7 +73,7 @@ class InwRemittanceRulesController < ApplicationController
     @rule = InwRemittanceRule.unscoped.find(params[:id]) rescue nil
     InwRemittanceRule.transaction do
       approval = @rule.approve
-      if @rule.save and approval.empty?
+      if (@rule.destroyed? || @rule.save) and approval.empty?
         flash[:alert] = "Rule record was approved successfully"
       else
         msg = approval.empty? ? @rule.errors.full_messages : @rule.errors.full_messages << approval

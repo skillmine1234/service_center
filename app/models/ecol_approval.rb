@@ -4,7 +4,7 @@ module EcolApproval
     has_one :ecol_unapproved_record, :as => :ecol_approvable
 
     after_create :create_ecol_unapproved_records
-    after_update :remove_ecol_unapproved_records
+    after_destroy :remove_ecol_unapproved_records
   end
 
   def create_ecol_unapproved_records
@@ -14,7 +14,7 @@ module EcolApproval
   end
 
   def remove_ecol_unapproved_records
-    if approval_status == 'A' and !ecol_unapproved_record.nil?
+    if approval_status == 'U'
       ecol_unapproved_record.delete
     end
   end

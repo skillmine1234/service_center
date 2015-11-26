@@ -119,17 +119,34 @@ describe InwRemittanceRulesController do
   end
   
   describe "PUT approve" do
-    it "unapproved record can be approved and old approved record will be deleted" do
+    it "(edit) unapproved record can be approved and old approved record will be updated" do
       user_role = UserRole.find_by_user_id(@user.id)
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
-      inw_rule1 = Factory(:inw_remittance_rule, :approval_status => 'A')
-      inw_rule2 = Factory(:inw_remittance_rule, :approval_status => 'U', :approved_version => inw_rule1.lock_version, :approved_id => inw_rule1.id)
-      put :approve, {:id => inw_rule2.id}
-      inw_rule2.reload
-      inw_rule2.approval_status.should == 'A'
-      InwRemittanceRule.find_by_id(inw_rule1.id).should be_nil
+      rule1 = Factory(:inw_remittance_rule, :approval_status => 'A')
+      rule2 = Factory(:inw_remittance_rule, :approval_status => 'U', :pattern_individuals => '1234', :approved_version => rule1.lock_version, :approved_id => rule1.id, :created_by => 666)
+      # the following line is required for reload to get triggered (TODO)
+      rule1.approval_status.should == 'A'
+
+      put :approve, {:id => rule2.id}
+
+      rule1.reload
+      rule1.pattern_individuals.should == '1234'
+      rule1.updated_by.should == "666"
+      Bank.find_by_id(rule2.id).should be_nil
     end
+
+    it "(create) unapproved record can be approved" do
+      user_role = UserRole.find_by_user_id(@user.id)
+      user_role.delete
+      Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
+      rule = Factory(:inw_remittance_rule, :pattern_individuals => '1234', :approval_status => 'U')
+      put :approve, {:id => rule.id}
+      rule.reload
+      rule.pattern_individuals.should == '1234'
+      rule.approval_status.should == 'A'
+    end
+
   end
   
 end

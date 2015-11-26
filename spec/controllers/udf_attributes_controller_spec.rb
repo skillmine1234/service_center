@@ -182,16 +182,33 @@ describe UdfAttributesController do
   end
   
   describe "PUT approve" do
-    it "unapproved record can be approved and old approved record will be deleted" do
+    it "(edit) unapproved record can be approved and old approved record will be updated" do
       user_role = UserRole.find_by_user_id(@user.id)
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
       udf_attribute1 = Factory(:udf_attribute, :approval_status => 'A')
-      udf_attribute2 = Factory(:udf_attribute, :approval_status => 'U', :min_length => '6', :approved_version => udf_attribute1.lock_version, :approved_id => udf_attribute1.id)
+      udf_attribute2 = Factory(:udf_attribute, :class_name => 'EcolRemitter', :approval_status => 'U', :approved_version => udf_attribute1.lock_version, :approved_id => udf_attribute1.id, :created_by => 666)
+      # the following line is required for reload to get triggered (TODO)
+      udf_attribute1.approval_status.should == 'A'
+      EcolUnapprovedRecord.count.should == 1
       put :approve, {:id => udf_attribute2.id}
-      udf_attribute2.reload
-      udf_attribute2.approval_status.should == 'A'
-      UdfAttribute.find_by_id(udf_attribute1.id).should be_nil
+      EcolUnapprovedRecord.count.should == 0
+      udf_attribute1.reload
+      udf_attribute1.class_name.should == 'EcolRemitter'
+      udf_attribute1.updated_by.should == "666"
+      UdfAttribute.find_by_id(udf_attribute2.id).should be_nil
     end
+
+    it "(create) unapproved record can be approved" do
+      user_role = UserRole.find_by_user_id(@user.id)
+      user_role.delete
+      Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
+      udf_attribute = Factory(:udf_attribute,:class_name => 'EcolRemitter', :approval_status => 'U')
+      put :approve, {:id => udf_attribute.id}
+      udf_attribute.reload
+      udf_attribute.class_name.should == 'EcolRemitter'
+      udf_attribute.approval_status.should == 'A'
+    end
+
   end
 end

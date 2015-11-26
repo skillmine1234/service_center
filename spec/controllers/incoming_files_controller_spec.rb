@@ -103,19 +103,49 @@ describe IncomingFilesController do
     end
   end
 
+  # describe "PUT approve" do
+  #   it "unapproved record can be approved and old approved record will be deleted" do
+  #     user_role = UserRole.find_by_user_id(@user.id)
+  #     user_role.delete
+  #     Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
+  #     incoming_file1 = Factory(:incoming_file, :approval_status => 'A')
+  #     incoming_file2 = Factory(:incoming_file, :approval_status => 'U', :approved_version => incoming_file1.lock_version, :approved_id => incoming_file1.id)
+  #     put :approve, {:id => incoming_file2.id}
+  #     incoming_file2.reload
+  #     incoming_file2.approval_status.should == 'A'
+  #     IncomingFile.find_by_id(incoming_file1.id).should be_nil
+  #     File.file?(Rails.root.join(ENV['CONFIG_APPROVED_FILE_UPLOAD_PATH'],incoming_file2.file_name)).should == true
+  #     File.file?(incoming_file2.file.path).should == false
+  #   end
+  # end
+  
   describe "PUT approve" do
-    it "unapproved record can be approved and old approved record will be deleted" do
+    it "(edit) unapproved record can be approved and old approved record will be updated" do
       user_role = UserRole.find_by_user_id(@user.id)
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
       incoming_file1 = Factory(:incoming_file, :approval_status => 'A')
-      incoming_file2 = Factory(:incoming_file, :approval_status => 'U', :approved_version => incoming_file1.lock_version, :approved_id => incoming_file1.id)
+      incoming_file2 = Factory(:incoming_file, :approval_status => 'U', :approved_version => incoming_file1.lock_version, :approved_id => incoming_file1.id, :created_by => 666)
+      # the following line is required for reload to get triggered (TODO)
+      incoming_file1.approval_status.should == 'A'
+      EcolUnapprovedRecord.count.should == 1
       put :approve, {:id => incoming_file2.id}
-      incoming_file2.reload
-      incoming_file2.approval_status.should == 'A'
-      IncomingFile.find_by_id(incoming_file1.id).should be_nil
+      EcolUnapprovedRecord.count.should == 0
+      incoming_file1.reload
+      incoming_file1.updated_by.should == "666"
+      IncomingFile.find_by_id(incoming_file2.id).should be_nil
       File.file?(Rails.root.join(ENV['CONFIG_APPROVED_FILE_UPLOAD_PATH'],incoming_file2.file_name)).should == true
       File.file?(incoming_file2.file.path).should == false
+    end
+
+    it "(create) unapproved record can be approved" do
+      user_role = UserRole.find_by_user_id(@user.id)
+      user_role.delete
+      Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
+      incoming_file = Factory(:incoming_file, :approval_status => 'U')
+      put :approve, {:id => incoming_file.id}
+      incoming_file.reload
+      incoming_file.approval_status.should == 'A'
     end
   end
 end

@@ -182,17 +182,34 @@ describe PartnersController do
   end
   
   describe "PUT approve" do
-    it "unapproved record can be approved and old approved record will be deleted" do
+    it "(edit) unapproved record can be approved and old approved record will be updated" do
       user_role = UserRole.find_by_user_id(@user.id)
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
       partner1 = Factory(:partner, :approval_status => 'A')
-      partner2 = Factory(:partner, :approval_status => 'U', :approved_version => partner1.lock_version, :approved_id => partner1.id)
+      partner2 = Factory(:partner, :name => 'BarFoo', :approval_status => 'U', :approved_version => partner1.lock_version, :approved_id => partner1.id, :created_by => 666)
+      # the following line is required for reload to get triggered (TODO)
+      partner1.approval_status.should == 'A'
+      InwUnapprovedRecord.count.should == 1
       put :approve, {:id => partner2.id}
-      partner2.reload
-      partner2.approval_status.should == 'A'
-      Partner.find_by_id(partner1.id).should be_nil
+      InwUnapprovedRecord.count.should == 0
+      partner1.reload
+      partner1.name.should == 'BarFoo'
+      partner1.updated_by.should == "666"
+      Partner.find_by_id(partner2.id).should be_nil
     end
+
+    it "(create) unapproved record can be approved" do
+      user_role = UserRole.find_by_user_id(@user.id)
+      user_role.delete
+      Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
+      partner = Factory(:partner, :name => 'BarFoo', :approval_status => 'U')
+      put :approve, {:id => partner.id}
+      partner.reload
+      partner.name.should == 'BarFoo'
+      partner.approval_status.should == 'A'
+    end
+
   end
   
 end

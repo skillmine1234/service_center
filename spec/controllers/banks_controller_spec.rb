@@ -182,16 +182,33 @@ describe BanksController do
   end
   
   describe "PUT approve" do
-    it "unapproved record can be approved and old approved record will be deleted" do
+    it "(edit) unapproved record can be approved and old approved record will be updated" do
       user_role = UserRole.find_by_user_id(@user.id)
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
       bank1 = Factory(:bank, :approval_status => 'A')
-      bank2 = Factory(:bank, :approval_status => 'U', :approved_version => bank1.lock_version, :approved_id => bank1.id)
+      bank2 = Factory(:bank, :approval_status => 'U', :name => 'Bar Foo', :approved_version => bank1.lock_version, :approved_id => bank1.id, :created_by => 666)
+      # the following line is required for reload to get triggered (TODO)
+      bank1.approval_status.should == 'A'
+
       put :approve, {:id => bank2.id}
-      bank2.reload
-      bank2.approval_status.should == 'A'
-      Bank.find_by_id(bank1.id).should be_nil
+
+      bank1.reload
+      bank1.name.should == 'Bar Foo'
+      bank1.updated_by.should == "666"
+      Bank.find_by_id(bank2.id).should be_nil
     end
+
+    it "(create) unapproved record can be approved" do
+      user_role = UserRole.find_by_user_id(@user.id)
+      user_role.delete
+      Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
+      bank = Factory(:bank, :name => 'Bar Foo', :approval_status => 'U')
+      put :approve, {:id => bank.id}
+      bank.reload
+      bank.name.should == 'Bar Foo'
+      bank.approval_status.should == 'A'
+    end
+
   end
 end

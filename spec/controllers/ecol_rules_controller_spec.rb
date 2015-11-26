@@ -159,16 +159,32 @@ describe EcolRulesController do
   end
 
   describe "PUT approve" do
-    it "unapproved record can be approved and old approved record will be deleted" do
+    it "(edit) unapproved record can be approved and old approved record will be updated" do
       user_role = UserRole.find_by_user_id(@user.id)
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
       ecol_rule1 = Factory(:ecol_rule, :approval_status => 'A')
-      ecol_rule2 = Factory(:ecol_rule, :approval_status => 'U', :approved_version => ecol_rule1.lock_version, :approved_id => ecol_rule1.id)
+      ecol_rule2 = Factory(:ecol_rule, :stl_gl_inward => '9876543210', :approval_status => 'U', :approved_version => ecol_rule1.lock_version, :approved_id => ecol_rule1.id, :created_by => 666)
+      # the following line is required for reload to get triggered (TODO)
+      ecol_rule1.approval_status.should == 'A'
+      EcolUnapprovedRecord.count.should == 1
       put :approve, {:id => ecol_rule2.id}
-      ecol_rule2.reload
-      ecol_rule2.approval_status.should == 'A'
-      EcolRule.find_by_id(ecol_rule1.id).should be_nil
+      EcolUnapprovedRecord.count.should == 0
+      ecol_rule1.reload
+      ecol_rule1.stl_gl_inward.should == '9876543210'
+      ecol_rule1.updated_by.should == "666"
+      EcolRule.find_by_id(ecol_rule2.id).should be_nil
+    end
+
+    it "(create) unapproved record can be approved" do
+      user_role = UserRole.find_by_user_id(@user.id)
+      user_role.delete
+      Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
+      ecol_rule = Factory(:ecol_rule, :stl_gl_inward => '9876543210', :approval_status => 'U')
+      put :approve, {:id => ecol_rule.id}
+      ecol_rule.reload
+      ecol_rule.stl_gl_inward.should == '9876543210'
+      ecol_rule.approval_status.should == 'A'
     end
   end
 end

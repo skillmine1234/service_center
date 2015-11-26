@@ -66,7 +66,7 @@ class UdfAttributesController < ApplicationController
     @udf_attribute = UdfAttribute.unscoped.find(params[:id]) rescue nil
     UdfAttribute.transaction do
       approval = @udf_attribute.approve
-      if @udf_attribute.save and approval.empty?
+      if (@udf_attribute.destroyed? || @udf_attribute.save) and approval.empty?
         flash[:alert] = "UDF Attribute record was approved successfully"
       else
         msg = approval.empty? ? @udf_attribute.errors.full_messages : @udf_attribute.errors.full_messages << approval

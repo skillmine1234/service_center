@@ -94,18 +94,34 @@ describe WhitelistedIdentitiesController do
    end
    
    describe "PUT approve" do
-      it "unapproved record can be approved and old approved record will be deleted" do
-        user_role = UserRole.find_by_user_id(@user.id)
-        user_role.delete
-        Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
-        p @user.role
-        whitelisted_identity1 = Factory(:whitelisted_identity, :approval_status => 'A')
-        whitelisted_identity2 = Factory(:whitelisted_identity, :approval_status => 'U', :approved_version => whitelisted_identity1.lock_version, :approved_id => whitelisted_identity1.id)
-        put :approve, {:id => whitelisted_identity2.id}
-        whitelisted_identity2.reload
-        whitelisted_identity2.approval_status.should == 'A'
-        WhitelistedIdentity.find_by_id(whitelisted_identity1.id).should be_nil
+     it "(edit) unapproved record can be approved and old approved record will be updated" do
+       user_role = UserRole.find_by_user_id(@user.id)
+       user_role.delete
+       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
+       whitelisted_identity1 = Factory(:whitelisted_identity, :approval_status => 'A')
+       whitelisted_identity2 = Factory(:whitelisted_identity, :approval_status => 'U', :full_name => 'Bar Foo', :approved_version => whitelisted_identity1.lock_version, :approved_id => whitelisted_identity1.id, :created_by => 666)
+       # the following line is required for reload to get triggered (TODO)
+       whitelisted_identity1.approval_status.should == 'A'
+
+       put :approve, {:id => whitelisted_identity2.id}
+
+       whitelisted_identity1.reload
+       whitelisted_identity1.full_name.should == 'Bar Foo'
+       whitelisted_identity1.updated_by.should == "666"
+       WhitelistedIdentity.find_by_id(whitelisted_identity2.id).should be_nil
      end
+
+     it "(create) unapproved record can be approved" do
+       user_role = UserRole.find_by_user_id(@user.id)
+       user_role.delete
+       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
+       whitelisted_identity = Factory(:whitelisted_identity, :full_name => 'Bar Foo', :approval_status => 'U')
+       put :approve, {:id => whitelisted_identity.id}
+       whitelisted_identity.reload
+       whitelisted_identity.full_name.should == 'Bar Foo'
+       whitelisted_identity.approval_status.should == 'A'
+     end
+
    end
   
 end

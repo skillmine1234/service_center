@@ -4,7 +4,7 @@ module InwApproval
     has_one :inw_unapproved_record, :as => :inw_approvable
 
     after_create :create_inw_unapproved_records
-    after_update :remove_inw_unapproved_records
+    after_destroy :remove_inw_unapproved_records
   end
 
   def create_inw_unapproved_records
@@ -14,7 +14,7 @@ module InwApproval
   end
 
   def remove_inw_unapproved_records
-    if approval_status == 'A' and !inw_unapproved_record.nil?
+    if approval_status == 'U'
       inw_unapproved_record.delete
     end
   end

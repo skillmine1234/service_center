@@ -182,16 +182,33 @@ describe EcolCustomersController do
   end
 
   describe "PUT approve" do
-    it "unapproved record can be approved and old approved record will be deleted" do
+    it "(edit) unapproved record can be approved and old approved record will be updated" do
       user_role = UserRole.find_by_user_id(@user.id)
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
       ecol_customer1 = Factory(:ecol_customer, :code => "CUST01", :approval_status => 'A')
-      ecol_customer2 = Factory(:ecol_customer, :code => "CUST01", :approval_status => 'U', :name => 'Foobar', :approved_version => ecol_customer1.lock_version, :approved_id => ecol_customer1.id)
+      ecol_customer2 = Factory(:ecol_customer, :code => "CUST01", :approval_status => 'U', :name => 'Foobar', :approved_version => ecol_customer1.lock_version, :approved_id => ecol_customer1.id, :created_by => 666)
+      # the following line is required for reload to get triggered (TODO)
+      ecol_customer1.approval_status.should == 'A'
+
       put :approve, {:id => ecol_customer2.id}
-      ecol_customer2.reload
-      ecol_customer2.approval_status.should == 'A'
-      EcolCustomer.find_by_id(ecol_customer1.id).should be_nil
+
+      ecol_customer1.reload
+      ecol_customer1.name.should == 'Foobar'
+      ecol_customer1.updated_by.should == "666"
+      EcolCustomer.find_by_id(ecol_customer2.id).should be_nil
     end
+
+    it "(create) unapproved record can be approved" do
+      user_role = UserRole.find_by_user_id(@user.id)
+      user_role.delete
+      Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
+      ecol_customer = Factory(:ecol_customer, :code => "CUST01", :approval_status => 'U', :name => 'Foobar')
+      put :approve, {:id => ecol_customer.id}
+      ecol_customer.reload
+      ecol_customer.name.should == 'Foobar'
+      ecol_customer.approval_status.should == 'A'
+    end
+
   end
 end
