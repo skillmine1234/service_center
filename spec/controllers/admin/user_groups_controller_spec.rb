@@ -167,9 +167,9 @@ describe Admin::UserGroupsController do
       user_group1 = Factory(:user_group, :approval_status => 'A')
       user_group2 = Factory(:user_group, :approval_status => 'U', :approved_version => user_group1.lock_version, :approved_id => user_group1.id)
       put :approve, {:id => user_group2.id}
-      user_group2.reload
-      user_group2.approval_status.should == 'A'
-      UserGroup.find_by_id(user_group1.id).should be_nil
+      user_group1.reload
+      user_group1.approval_status.should == 'A'
+      UserGroup.find_by_id(user_group2.id).should be_nil
     end
   end
 end

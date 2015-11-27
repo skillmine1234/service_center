@@ -167,9 +167,9 @@ describe Admin::UserRolesController do
       user_role1 = Factory(:user_role, :approval_status => 'A')
       user_role2 = Factory(:user_role, :approval_status => 'U', :approved_version => user_role1.lock_version, :approved_id => user_role1.id)
       put :approve, {:id => user_role2.id}
-      user_role2.reload
-      user_role2.approval_status.should == 'A'
-      UserRole.find_by_id(user_role1.id).should be_nil
+      user_role1.reload
+      user_role1.approval_status.should == 'A'
+      UserRole.find_by_id(user_role2.id).should be_nil
     end
   end
 end

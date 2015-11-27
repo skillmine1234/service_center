@@ -181,17 +181,17 @@ describe BmBillersController do
     end
   end
 
-  describe "PUT approve" do
-    it "unapproved record can be approved and old approved record will be deleted" do
-      user_role = UserRole.find_by_user_id(@user.id)
-      user_role.delete
-      Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
-      bm_biller1 = Factory(:bm_biller, :biller_code => "BILL01", :approval_status => 'A')
-      bm_biller2 = Factory(:bm_biller, :biller_code => "BILL01", :approval_status => 'U', :biller_name => 'Foobar', :approved_version => bm_biller1.lock_version, :approved_id => bm_biller1.id)
-      put :approve, {:id => bm_biller2.id}
-      bm_biller2.reload
-      bm_biller2.approval_status.should == 'A'
-      BmBiller.find_by_id(bm_biller1.id).should be_nil
-    end
-  end
+  # describe "PUT approve" do
+  #   it "unapproved record can be approved and old approved record will be deleted" do
+  #     user_role = UserRole.find_by_user_id(@user.id)
+  #     user_role.delete
+  #     Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
+  #     bm_biller1 = Factory(:bm_biller, :biller_code => "BILL01", :approval_status => 'A')
+  #     bm_biller2 = Factory(:bm_biller, :biller_code => "BILL01", :approval_status => 'U', :biller_name => 'Foobar', :approved_version => bm_biller1.lock_version, :approved_id => bm_biller1.id)
+  #     put :approve, {:id => bm_biller2.id}
+  #     bm_biller2.reload
+  #     bm_biller2.approval_status.should == 'A'
+  #     BmBiller.find_by_id(bm_biller1.id).should be_nil
+  #   end
+  # end
 end

@@ -190,9 +190,9 @@ describe BanksController do
       bank2 = Factory(:bank, :approval_status => 'U', :name => 'Bar Foo', :approved_version => bank1.lock_version, :approved_id => bank1.id, :created_by => 666)
       # the following line is required for reload to get triggered (TODO)
       bank1.approval_status.should == 'A'
-
+      InwUnapprovedRecord.count.should == 1
       put :approve, {:id => bank2.id}
-
+      InwUnapprovedRecord.count.should == 0
       bank1.reload
       bank1.name.should == 'Bar Foo'
       bank1.updated_by.should == "666"

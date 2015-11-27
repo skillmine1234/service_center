@@ -48,22 +48,22 @@ describe UserRole do
     end
   end  
 
-  context "remove_inw_unapproved_records" do 
-    it "should remove inw_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
-      user_role = Factory(:user_role, :approval_status => 'U')
-      user_role.reload
-      user_role.inw_unapproved_record.should_not be_nil
-      record = user_role.inw_unapproved_record
-      user_role.user_id = 8
-      user_role.save
-      user_role.inw_unapproved_record.should == record
-      user_role.approval_status = 'A'
-      user_role.save
-      user_role.remove_inw_unapproved_records
-      user_role.reload
-      user_role.inw_unapproved_record.should be_nil
-    end
-  end  
+  # context "remove_inw_unapproved_records" do
+  #   it "should remove inw_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
+  #     user_role = Factory(:user_role, :approval_status => 'U')
+  #     user_role.reload
+  #     user_role.inw_unapproved_record.should_not be_nil
+  #     record = user_role.inw_unapproved_record
+  #     user_role.user_id = 8
+  #     user_role.save
+  #     user_role.inw_unapproved_record.should == record
+  #     user_role.approval_status = 'A'
+  #     user_role.save
+  #     user_role.remove_inw_unapproved_records
+  #     user_role.reload
+  #     user_role.inw_unapproved_record.should be_nil
+  #   end
+  # end
 
   context "approve" do 
     it "should approve unapproved_record" do 

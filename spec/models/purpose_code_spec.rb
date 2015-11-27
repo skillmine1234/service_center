@@ -172,22 +172,22 @@ describe PurposeCode do
     end
   end  
 
-  context "remove_inw_unapproved_records" do 
-    it "should remove inw_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
-      purpose_code = Factory(:purpose_code)
-      purpose_code.reload
-      purpose_code.inw_unapproved_record.should_not be_nil
-      record = purpose_code.inw_unapproved_record
-      purpose_code.description = 'Foo'
-      purpose_code.save
-      purpose_code.inw_unapproved_record.should == record
-      purpose_code.approval_status = 'A'
-      purpose_code.save
-      purpose_code.remove_inw_unapproved_records
-      purpose_code.reload
-      purpose_code.inw_unapproved_record.should be_nil
-    end
-  end  
+  # context "remove_inw_unapproved_records" do
+  #   it "should remove inw_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
+  #     purpose_code = Factory(:purpose_code)
+  #     purpose_code.reload
+  #     purpose_code.inw_unapproved_record.should_not be_nil
+  #     record = purpose_code.inw_unapproved_record
+  #     purpose_code.description = 'Foo'
+  #     purpose_code.save
+  #     purpose_code.inw_unapproved_record.should == record
+  #     purpose_code.approval_status = 'A'
+  #     purpose_code.save
+  #     purpose_code.remove_inw_unapproved_records
+  #     purpose_code.reload
+  #     purpose_code.inw_unapproved_record.should be_nil
+  #   end
+  # end 
 
   context "approve" do 
     it "should approve unapproved_record" do 

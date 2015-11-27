@@ -207,22 +207,22 @@ describe UdfAttribute do
     end
   end        
 
-  context "remove_ecol_unapproved_records" do 
-    it "should remove ecol_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
-      udf_attribute = Factory(:udf_attribute)
-      udf_attribute.reload
-      udf_attribute.ecol_unapproved_record.should_not be_nil
-      record = udf_attribute.ecol_unapproved_record
-      udf_attribute.min_length = '6'
-      udf_attribute.save
-      udf_attribute.ecol_unapproved_record.should == record
-      udf_attribute.approval_status = 'A'
-      udf_attribute.save
-      udf_attribute.remove_ecol_unapproved_records
-      udf_attribute.reload
-      udf_attribute.ecol_unapproved_record.should be_nil
-    end
-  end  
+  # context "remove_ecol_unapproved_records" do
+  #   it "should remove ecol_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
+  #     udf_attribute = Factory(:udf_attribute)
+  #     udf_attribute.reload
+  #     udf_attribute.ecol_unapproved_record.should_not be_nil
+  #     record = udf_attribute.ecol_unapproved_record
+  #     udf_attribute.min_length = '6'
+  #     udf_attribute.save
+  #     udf_attribute.ecol_unapproved_record.should == record
+  #     udf_attribute.approval_status = 'A'
+  #     udf_attribute.save
+  #     udf_attribute.remove_ecol_unapproved_records
+  #     udf_attribute.reload
+  #     udf_attribute.ecol_unapproved_record.should be_nil
+  #   end
+  # end
 
   context "approve" do 
     it "should approve unapproved_record" do 

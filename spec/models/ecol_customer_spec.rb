@@ -334,22 +334,22 @@ describe EcolCustomer do
     end
   end  
 
-  context "remove_ecol_unapproved_records" do 
-    it "should remove ecol_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
-      ecol_customer = Factory(:ecol_customer)
-      ecol_customer.reload
-      ecol_customer.ecol_unapproved_record.should_not be_nil
-      record = ecol_customer.ecol_unapproved_record
-      ecol_customer.name = 'Foo'
-      ecol_customer.save
-      ecol_customer.ecol_unapproved_record.should == record
-      ecol_customer.approval_status = 'A'
-      ecol_customer.save
-      ecol_customer.remove_ecol_unapproved_records
-      ecol_customer.reload
-      ecol_customer.ecol_unapproved_record.should be_nil
-    end
-  end  
+  # context "remove_ecol_unapproved_records" do
+  #   it "should remove ecol_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
+  #     ecol_customer = Factory(:ecol_customer)
+  #     ecol_customer.reload
+  #     ecol_customer.ecol_unapproved_record.should_not be_nil
+  #     record = ecol_customer.ecol_unapproved_record
+  #     ecol_customer.name = 'Foo'
+  #     ecol_customer.save
+  #     ecol_customer.ecol_unapproved_record.should == record
+  #     ecol_customer.approval_status = 'A'
+  #     ecol_customer.save
+  #     ecol_customer.remove_ecol_unapproved_records
+  #     ecol_customer.reload
+  #     ecol_customer.ecol_unapproved_record.should be_nil
+  #   end
+  # end
 
   context "approve" do 
     it "should approve unapproved_record" do 

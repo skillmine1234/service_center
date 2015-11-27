@@ -49,22 +49,22 @@ describe UserGroup do
     end
   end  
 
-  context "remove_inw_unapproved_records" do 
-    it "should remove inw_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
-      user_group = Factory(:user_group, :approval_status => 'U')
-      user_group.reload
-      user_group.inw_unapproved_record.should_not be_nil
-      record = user_group.inw_unapproved_record
-      user_group.user_id = 8
-      user_group.save
-      user_group.inw_unapproved_record.should == record
-      user_group.approval_status = 'A'
-      user_group.save
-      user_group.remove_inw_unapproved_records
-      user_group.reload
-      user_group.inw_unapproved_record.should be_nil
-    end
-  end  
+  # context "remove_inw_unapproved_records" do
+  #   it "should remove inw_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
+  #     user_group = Factory(:user_group, :approval_status => 'U')
+  #     user_group.reload
+  #     user_group.inw_unapproved_record.should_not be_nil
+  #     record = user_group.inw_unapproved_record
+  #     user_group.user_id = 8
+  #     user_group.save
+  #     user_group.inw_unapproved_record.should == record
+  #     user_group.approval_status = 'A'
+  #     user_group.save
+  #     user_group.remove_inw_unapproved_records
+  #     user_group.reload
+  #     user_group.inw_unapproved_record.should be_nil
+  #   end
+  # end  
 
   context "approve" do 
     it "should approve unapproved_record" do 

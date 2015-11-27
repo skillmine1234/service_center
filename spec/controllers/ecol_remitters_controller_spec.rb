@@ -190,9 +190,9 @@ describe EcolRemittersController do
       ecol_remitter2 = Factory(:ecol_remitter, :remitter_code => 'BarFoo', :approval_status => 'U', :approved_version => ecol_remitter1.lock_version, :approved_id => ecol_remitter1.id, :created_by => 666)
       # the following line is required for reload to get triggered (TODO)
       ecol_remitter1.approval_status.should == 'A'
-
+      EcolUnapprovedRecord.count.should == 1
       put :approve, {:id => ecol_remitter2.id}
-
+      EcolUnapprovedRecord.count.should == 0
       ecol_remitter1.reload
       ecol_remitter1.remitter_code.should == 'BarFoo'
       ecol_remitter1.updated_by.should == "666"

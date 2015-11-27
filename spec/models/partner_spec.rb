@@ -167,22 +167,22 @@ describe Partner do
     end
   end  
 
-  context "remove_inw_unapproved_records" do 
-    it "should remove inw_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
-      partner = Factory(:partner)
-      partner.reload
-      partner.inw_unapproved_record.should_not be_nil
-      record = partner.inw_unapproved_record
-      partner.name = 'Foo'
-      partner.save
-      partner.inw_unapproved_record.should == record
-      partner.approval_status = 'A'
-      partner.save
-      partner.remove_inw_unapproved_records
-      partner.reload
-      partner.inw_unapproved_record.should be_nil
-    end
-  end  
+  # context "remove_inw_unapproved_records" do
+  #   it "should remove inw_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
+  #     partner = Factory(:partner)
+  #     partner.reload
+  #     partner.inw_unapproved_record.should_not be_nil
+  #     record = partner.inw_unapproved_record
+  #     partner.name = 'Foo'
+  #     partner.save
+  #     partner.inw_unapproved_record.should == record
+  #     partner.approval_status = 'A'
+  #     partner.save
+  #     partner.remove_inw_unapproved_records
+  #     partner.reload
+  #     partner.inw_unapproved_record.should be_nil
+  #   end
+  # end
 
   context "approve" do 
     it "should approve unapproved_record" do 

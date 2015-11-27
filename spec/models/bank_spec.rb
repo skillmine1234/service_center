@@ -93,22 +93,22 @@ describe Bank do
     end
   end  
 
-  context "remove_inw_unapproved_records" do 
-    it "should remove inw_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
-      bank = Factory(:bank)
-      bank.reload
-      bank.inw_unapproved_record.should_not be_nil
-      record = bank.inw_unapproved_record
-      bank.name = 'Foo'
-      bank.save
-      bank.inw_unapproved_record.should == record
-      bank.approval_status = 'A'
-      bank.save
-      bank.remove_inw_unapproved_records
-      bank.reload
-      bank.inw_unapproved_record.should be_nil
-    end
-  end  
+  # context "remove_inw_unapproved_records" do
+  #   it "should remove inw_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
+  #     bank = Factory(:bank)
+  #     bank.reload
+  #     bank.inw_unapproved_record.should_not be_nil
+  #     record = bank.inw_unapproved_record
+  #     bank.name = 'Foo'
+  #     bank.save
+  #     bank.inw_unapproved_record.should == record
+  #     bank.approval_status = 'A'
+  #     bank.save
+  #     bank.remove_inw_unapproved_records
+  #     bank.reload
+  #     bank.inw_unapproved_record.should be_nil
+  #   end
+  # end
 
   context "approve" do 
     it "should approve unapproved_record" do 

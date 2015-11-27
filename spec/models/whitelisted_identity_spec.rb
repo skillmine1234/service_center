@@ -95,22 +95,22 @@ describe WhitelistedIdentity do
     end
   end  
 
-  context "remove_inw_unapproved_records" do 
-    it "should remove inw_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
-      whitelisted_identity = Factory(:whitelisted_identity)
-      whitelisted_identity.reload
-      whitelisted_identity.inw_unapproved_record.should_not be_nil
-      record = whitelisted_identity.inw_unapproved_record
-      whitelisted_identity.id_type = 'Foo'
-      whitelisted_identity.save
-      whitelisted_identity.inw_unapproved_record.should == record
-      whitelisted_identity.approval_status = 'A'
-      whitelisted_identity.save
-      whitelisted_identity.remove_inw_unapproved_records
-      whitelisted_identity.reload
-      whitelisted_identity.inw_unapproved_record.should be_nil
-    end
-  end  
+  # context "remove_inw_unapproved_records" do
+  #   it "should remove inw_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
+  #     whitelisted_identity = Factory(:whitelisted_identity)
+  #     whitelisted_identity.reload
+  #     whitelisted_identity.inw_unapproved_record.should_not be_nil
+  #     record = whitelisted_identity.inw_unapproved_record
+  #     whitelisted_identity.id_type = 'Foo'
+  #     whitelisted_identity.save
+  #     whitelisted_identity.inw_unapproved_record.should == record
+  #     whitelisted_identity.approval_status = 'A'
+  #     whitelisted_identity.save
+  #     whitelisted_identity.remove_inw_unapproved_records
+  #     whitelisted_identity.reload
+  #     whitelisted_identity.inw_unapproved_record.should be_nil
+  #   end
+  # end
 
   context "approve" do 
     it "should approve unapproved_record" do 

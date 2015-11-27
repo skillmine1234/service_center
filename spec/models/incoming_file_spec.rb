@@ -101,19 +101,19 @@ describe IncomingFile do
     end
   end  
 
-  context "remove_ecol_unapproved_records" do 
-    it "should remove ecol_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
-      incoming_file = Factory(:incoming_file)
-      incoming_file.reload
-      incoming_file.ecol_unapproved_record.should_not be_nil
-      record = incoming_file.ecol_unapproved_record
-      incoming_file.approval_status = 'A'
-      incoming_file.save
-      incoming_file.remove_ecol_unapproved_records
-      incoming_file.reload
-      incoming_file.ecol_unapproved_record.should be_nil
-    end
-  end  
+  # context "remove_ecol_unapproved_records" do
+  #   it "should remove ecol_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
+  #     incoming_file = Factory(:incoming_file)
+  #     incoming_file.reload
+  #     incoming_file.ecol_unapproved_record.should_not be_nil
+  #     record = incoming_file.ecol_unapproved_record
+  #     incoming_file.approval_status = 'A'
+  #     incoming_file.save
+  #     incoming_file.remove_ecol_unapproved_records
+  #     incoming_file.reload
+  #     incoming_file.ecol_unapproved_record.should be_nil
+  #   end
+  # end 
 
   context "approve" do 
     it "should approve unapproved_record" do 

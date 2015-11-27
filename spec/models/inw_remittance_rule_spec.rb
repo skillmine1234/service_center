@@ -70,21 +70,21 @@ describe InwRemittanceRule do
     end
   end  
 
-  context "remove_inw_unapproved_records" do 
-    it "should remove inw_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
-      inw_rule = Factory(:inw_remittance_rule)
-      inw_rule.reload
-      inw_rule.inw_unapproved_record.should_not be_nil
-      record = inw_rule.inw_unapproved_record
-      inw_rule.save
-      inw_rule.inw_unapproved_record.should == record
-      inw_rule.approval_status = 'A'
-      inw_rule.save
-      inw_rule.remove_inw_unapproved_records
-      inw_rule.reload
-      inw_rule.inw_unapproved_record.should be_nil
-    end
-  end  
+  # context "remove_inw_unapproved_records" do
+  #   it "should remove inw_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
+  #     inw_rule = Factory(:inw_remittance_rule)
+  #     inw_rule.reload
+  #     inw_rule.inw_unapproved_record.should_not be_nil
+  #     record = inw_rule.inw_unapproved_record
+  #     inw_rule.save
+  #     inw_rule.inw_unapproved_record.should == record
+  #     inw_rule.approval_status = 'A'
+  #     inw_rule.save
+  #     inw_rule.remove_inw_unapproved_records
+  #     inw_rule.reload
+  #     inw_rule.inw_unapproved_record.should be_nil
+  #   end
+  # end
 
   context "approve" do 
     it "should approve unapproved_record" do 

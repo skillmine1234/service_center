@@ -190,9 +190,9 @@ describe EcolCustomersController do
       ecol_customer2 = Factory(:ecol_customer, :code => "CUST01", :approval_status => 'U', :name => 'Foobar', :approved_version => ecol_customer1.lock_version, :approved_id => ecol_customer1.id, :created_by => 666)
       # the following line is required for reload to get triggered (TODO)
       ecol_customer1.approval_status.should == 'A'
-
+      EcolUnapprovedRecord.count.should == 1
       put :approve, {:id => ecol_customer2.id}
-
+      EcolUnapprovedRecord.count.should == 0
       ecol_customer1.reload
       ecol_customer1.name.should == 'Foobar'
       ecol_customer1.updated_by.should == "666"

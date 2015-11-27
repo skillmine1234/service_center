@@ -102,9 +102,9 @@ describe WhitelistedIdentitiesController do
        whitelisted_identity2 = Factory(:whitelisted_identity, :approval_status => 'U', :full_name => 'Bar Foo', :approved_version => whitelisted_identity1.lock_version, :approved_id => whitelisted_identity1.id, :created_by => 666)
        # the following line is required for reload to get triggered (TODO)
        whitelisted_identity1.approval_status.should == 'A'
-
+       InwUnapprovedRecord.count.should == 1
        put :approve, {:id => whitelisted_identity2.id}
-
+       InwUnapprovedRecord.count.should == 0
        whitelisted_identity1.reload
        whitelisted_identity1.full_name.should == 'Bar Foo'
        whitelisted_identity1.updated_by.should == "666"
