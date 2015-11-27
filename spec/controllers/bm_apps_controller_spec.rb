@@ -182,18 +182,36 @@ describe BmAppsController do
     end
   end
 
-  # describe "PUT approve" do
-  #   it "unapproved record can be approved and old approved record will be deleted" do
-  #     user_role = UserRole.find_by_user_id(@user.id)
-  #     user_role.delete
-  #     Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
-  #     bm_app1 = Factory(:bm_app, :app_id => "BILL01", :approval_status => 'A')
-  #     bm_app2 = Factory(:bm_app, :app_id => "BILL01", :approval_status => 'U', :channel_id => "sdfwe232", :approved_version => bm_app1.lock_version, :approved_id => bm_app1.id)
-  #     put :approve, {:id => bm_app2.id}
-  #     bm_app2.reload
-  #     bm_app2.approval_status.should == 'A'
-  #     BmApp.find_by_id(bm_app1.id).should be_nil
-  #   end
-  # end
+  describe "PUT approve" do
+    it "(edit) unapproved record can be approved and old approved record will be updated" do
+      user_role = UserRole.find_by_user_id(@user.id)
+      user_role.delete
+      Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
+      bm_app1 = Factory(:bm_app, :approval_status => 'A')
+      bm_app2 = Factory(:bm_app, :approval_status => 'U', :channel_id => 'Bar Foo', :approved_version => bm_app1.lock_version, :approved_id => bm_app1.id, :created_by => 666)
+      # the following line is required for reload to get triggered (TODO)
+      bm_app1.approval_status.should == 'A'
+      BmUnapprovedRecord.count.should == 1
+      put :approve, {:id => bm_app2.id}
+      BmUnapprovedRecord.count.should == 0
+      bm_app1.reload
+      bm_app1.channel_id.should == 'Bar Foo'
+      bm_app1.updated_by.should == "666"
+      BmBiller.find_by_id(bm_app2.id).should be_nil
+    end
+
+    it "(create) unapproved record can be approved" do
+      user_role = UserRole.find_by_user_id(@user.id)
+      user_role.delete
+      Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
+      bm_app = Factory(:bm_app, :channel_id => 'Bar Foo', :approval_status => 'U')
+      BmUnapprovedRecord.count.should == 1
+      put :approve, {:id => bm_app.id}
+      BmUnapprovedRecord.count.should == 0
+      bm_app.reload
+      bm_app.channel_id.should == 'Bar Foo'
+      bm_app.approval_status.should == 'A'
+    end
+  end
 
 end

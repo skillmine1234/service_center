@@ -3,19 +3,26 @@ module BmApproval
   included do
     has_one :bm_unapproved_record, :as => :bm_approvable
 
-    after_create :create_bm_unapproved_records
-    after_update :remove_bm_unapproved_records
+    after_create :on_create_create_bm_unapproved_record
+    after_destroy :on_destory_remove_bm_unapproved_records
+    after_update :on_update_remove_bm_unapproved_records
   end
 
-  def create_bm_unapproved_records
-    if approval_status == 'U' and bm_unapproved_record.nil?
+  def on_create_create_bm_unapproved_record
+    if approval_status == 'U'
       BmUnapprovedRecord.create!(:bm_approvable => self)
     end
   end
-
-  def remove_bm_unapproved_records
-    if approval_status == 'A' and !bm_unapproved_record.nil?
+  
+  def on_destory_remove_bm_unapproved_records
+    if approval_status == 'U'
       bm_unapproved_record.delete
     end
   end
+  
+  def on_update_remove_bm_unapproved_records
+    if approval_status == 'A' and approval_status_was == 'U'
+      bm_unapproved_record.delete
+    end
+  end 
 end

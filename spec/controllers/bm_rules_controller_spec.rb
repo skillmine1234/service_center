@@ -165,17 +165,35 @@ describe BmRulesController do
     end
   end
 
-  # describe "PUT approve" do
-  #   it "unapproved record can be approved and old approved record will be deleted" do
-  #     user_role = UserRole.find_by_user_id(@user.id)
-  #     user_role.delete
-  #     Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
-  #     bm_rule1 = Factory(:bm_rule, :approval_status => 'A')
-  #     bm_rule2 = Factory(:bm_rule, :approval_status => 'U', :approved_version => bm_rule1.lock_version, :approved_id => bm_rule1.id)
-  #     put :approve, {:id => bm_rule2.id}
-  #     bm_rule2.reload
-  #     bm_rule2.approval_status.should == 'A'
-  #     BmRule.find_by_id(bm_rule1.id).should be_nil
-  #   end
-  # end
+  describe "PUT approve" do
+    it "(edit) unapproved record can be approved and old approved record will be updated" do
+      user_role = UserRole.find_by_user_id(@user.id)
+      user_role.delete
+      Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
+      bm_rule1 = Factory(:bm_rule, :approval_status => 'A')
+      bm_rule2 = Factory(:bm_rule, :approval_status => 'U', :cod_acct_no => '09789654321', :approved_version => bm_rule1.lock_version, :approved_id => bm_rule1.id, :created_by => 666)
+      # the following line is required for reload to get triggered (TODO)
+      bm_rule1.approval_status.should == 'A'
+      BmUnapprovedRecord.count.should == 1
+      put :approve, {:id => bm_rule2.id}
+      BmUnapprovedRecord.count.should == 0
+      bm_rule1.reload
+      bm_rule1.cod_acct_no.should == '09789654321'
+      bm_rule1.updated_by.should == "666"
+      BmRule.find_by_id(bm_rule2.id).should be_nil
+    end
+
+    it "(create) unapproved record can be approved" do
+      user_role = UserRole.find_by_user_id(@user.id)
+      user_role.delete
+      Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
+      bm_rule = Factory(:bm_rule, :cod_acct_no => '09789654321', :approval_status => 'U')
+      BmUnapprovedRecord.count.should == 1
+      put :approve, {:id => bm_rule.id}
+      BmUnapprovedRecord.count.should == 0
+      bm_rule.reload
+      bm_rule.cod_acct_no.should == '09789654321'
+      bm_rule.approval_status.should == 'A'
+    end
+  end
 end
