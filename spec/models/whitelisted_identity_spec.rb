@@ -78,39 +78,51 @@ describe WhitelistedIdentity do
     end
   end    
 
-  context "create_inw_unapproved_records" do 
-    it "should create inw_unapproved_record if the approval_status is 'U' and there is no previous record" do
+  context "inw_unapproved_records" do 
+    it "oncreate: should create inw_unapproved_record if the approval_status is 'U'" do
+      whitelisted_identity = Factory(:whitelisted_identity)
+      whitelisted_identity.reload
+      whitelisted_identity.inw_unapproved_record.should_not be_nil
+    end
+
+    it "oncreate: should not create inw_unapproved_record if the approval_status is 'A'" do
+      whitelisted_identity = Factory(:whitelisted_identity, :approval_status => 'A')
+      whitelisted_identity.inw_unapproved_record.should be_nil
+    end
+
+    it "onupdate: should not remove inw_unapproved_record if approval_status did not change from U to A" do
       whitelisted_identity = Factory(:whitelisted_identity)
       whitelisted_identity.reload
       whitelisted_identity.inw_unapproved_record.should_not be_nil
       record = whitelisted_identity.inw_unapproved_record
-      whitelisted_identity.id_type = 'Fooo'
+      # we are editing the U record, before it is approved
+      whitelisted_identity.id_type = 'Aadhar'
       whitelisted_identity.save
+      whitelisted_identity.reload
       whitelisted_identity.inw_unapproved_record.should == record
     end
-
-    it "should not create inw_unapproved_record if the approval_status is 'A'" do
-      whitelisted_identity = Factory(:whitelisted_identity, :approval_status => 'A')
+    
+    it "onupdate: should remove inw_unapproved_record if the approval_status changed from 'U' to 'A' (approval)" do
+      whitelisted_identity = Factory(:whitelisted_identity)
+      whitelisted_identity.reload
+      whitelisted_identity.inw_unapproved_record.should_not be_nil
+      # the approval process changes the approval_status from U to A for a newly edited record
+      whitelisted_identity.approval_status = 'A'
+      whitelisted_identity.save
+      whitelisted_identity.reload
       whitelisted_identity.inw_unapproved_record.should be_nil
     end
-  end  
-
-  # context "remove_inw_unapproved_records" do
-  #   it "should remove inw_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
-  #     whitelisted_identity = Factory(:whitelisted_identity)
-  #     whitelisted_identity.reload
-  #     whitelisted_identity.inw_unapproved_record.should_not be_nil
-  #     record = whitelisted_identity.inw_unapproved_record
-  #     whitelisted_identity.id_type = 'Foo'
-  #     whitelisted_identity.save
-  #     whitelisted_identity.inw_unapproved_record.should == record
-  #     whitelisted_identity.approval_status = 'A'
-  #     whitelisted_identity.save
-  #     whitelisted_identity.remove_inw_unapproved_records
-  #     whitelisted_identity.reload
-  #     whitelisted_identity.inw_unapproved_record.should be_nil
-  #   end
-  # end
+    
+    it "ondestroy: should remove inw_unapproved_record if the record with approval_status 'U' was destroyed (approval) " do
+      whitelisted_identity = Factory(:whitelisted_identity)
+      whitelisted_identity.reload
+      whitelisted_identity.inw_unapproved_record.should_not be_nil
+      record = whitelisted_identity.inw_unapproved_record
+      # the approval process destroys the U record, for an edited record 
+      whitelisted_identity.destroy
+      InwUnapprovedRecord.find_by_id(record.id).should be_nil
+    end
+  end
 
   context "approve" do 
     it "should approve unapproved_record" do 

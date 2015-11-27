@@ -190,39 +190,51 @@ describe UdfAttribute do
     end
   end    
 
-  context "create_ecol_unapproved_records" do 
-    it "should create ecol_unapproved_record if the approval_status is 'U' and there is no previous record" do
+  context "ecol_unapproved_records" do 
+    it "oncreate: should create ecol_unapproved_record if the approval_status is 'U'" do
+      udf_attribute = Factory(:udf_attribute)
+      udf_attribute.reload
+      udf_attribute.ecol_unapproved_record.should_not be_nil
+    end
+
+    it "oncreate: should not create ecol_unapproved_record if the approval_status is 'A'" do
+      udf_attribute = Factory(:udf_attribute, :approval_status => 'A')
+      udf_attribute.ecol_unapproved_record.should be_nil
+    end
+
+    it "onupdate: should not remove ecol_unapproved_record if approval_status did not change from U to A" do
       udf_attribute = Factory(:udf_attribute)
       udf_attribute.reload
       udf_attribute.ecol_unapproved_record.should_not be_nil
       record = udf_attribute.ecol_unapproved_record
-      udf_attribute.min_length = '6'
+      # we are editing the U record, before it is approved
+      udf_attribute.class_name = 'EcolRemitter'
       udf_attribute.save
+      udf_attribute.reload
       udf_attribute.ecol_unapproved_record.should == record
     end
-
-    it "should not create ecol_unapproved_record if the approval_status is 'A'" do
-      udf_attribute = Factory(:udf_attribute, :approval_status => 'A')
+    
+    it "onupdate: should remove ecol_unapproved_record if the approval_status changed from 'U' to 'A' (approval)" do
+      udf_attribute = Factory(:udf_attribute)
+      udf_attribute.reload
+      udf_attribute.ecol_unapproved_record.should_not be_nil
+      # the approval process changes the approval_status from U to A for a newly edited record
+      udf_attribute.approval_status = 'A'
+      udf_attribute.save
+      udf_attribute.reload
       udf_attribute.ecol_unapproved_record.should be_nil
     end
-  end        
-
-  # context "remove_ecol_unapproved_records" do
-  #   it "should remove ecol_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
-  #     udf_attribute = Factory(:udf_attribute)
-  #     udf_attribute.reload
-  #     udf_attribute.ecol_unapproved_record.should_not be_nil
-  #     record = udf_attribute.ecol_unapproved_record
-  #     udf_attribute.min_length = '6'
-  #     udf_attribute.save
-  #     udf_attribute.ecol_unapproved_record.should == record
-  #     udf_attribute.approval_status = 'A'
-  #     udf_attribute.save
-  #     udf_attribute.remove_ecol_unapproved_records
-  #     udf_attribute.reload
-  #     udf_attribute.ecol_unapproved_record.should be_nil
-  #   end
-  # end
+    
+    it "ondestroy: should remove ecol_unapproved_record if the record with approval_status 'U' was destroyed (approval) " do
+      udf_attribute = Factory(:udf_attribute)
+      udf_attribute.reload
+      udf_attribute.ecol_unapproved_record.should_not be_nil
+      record = udf_attribute.ecol_unapproved_record
+      # the approval process destroys the U record, for an edited record 
+      udf_attribute.destroy
+      EcolUnapprovedRecord.find_by_id(record.id).should be_nil
+    end
+  end
 
   context "approve" do 
     it "should approve unapproved_record" do 
