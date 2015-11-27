@@ -204,7 +204,9 @@ describe PartnersController do
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
       partner = Factory(:partner, :name => 'BarFoo', :approval_status => 'U')
+      InwUnapprovedRecord.count.should == 1
       put :approve, {:id => partner.id}
+      InwUnapprovedRecord.count.should == 0
       partner.reload
       partner.name.should == 'BarFoo'
       partner.approval_status.should == 'A'

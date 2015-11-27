@@ -141,7 +141,9 @@ describe InwRemittanceRulesController do
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
       rule = Factory(:inw_remittance_rule, :pattern_individuals => '1234', :approval_status => 'U')
+      InwUnapprovedRecord.count.should == 1
       put :approve, {:id => rule.id}
+      InwUnapprovedRecord.count.should == 0
       rule.reload
       rule.pattern_individuals.should == '1234'
       rule.approval_status.should == 'A'

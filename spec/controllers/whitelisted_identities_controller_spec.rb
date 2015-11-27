@@ -116,7 +116,9 @@ describe WhitelistedIdentitiesController do
        user_role.delete
        Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
        whitelisted_identity = Factory(:whitelisted_identity, :full_name => 'Bar Foo', :approval_status => 'U')
+       InwUnapprovedRecord.count.should == 1
        put :approve, {:id => whitelisted_identity.id}
+       InwUnapprovedRecord.count.should == 0
        whitelisted_identity.reload
        whitelisted_identity.full_name.should == 'Bar Foo'
        whitelisted_identity.approval_status.should == 'A'

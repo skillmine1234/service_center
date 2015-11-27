@@ -38,8 +38,6 @@ module Approval
         ['id', 'approved_id', 'approval_status', 'lock_version', 'approved_version', 'created_at', 'updated_at', 'updated_by', 'created_by'].exclude?(attr)
       end
       
-      p attributes
-      
       self.class.unscoped do
         approved_record = self.approved_record
         approved_record.assign_attributes(attributes)

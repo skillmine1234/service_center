@@ -42,6 +42,8 @@ describe EcolRemittersHelper do
       ecol_remitter2 = Factory(:ecol_remitter,:approved_id => ecol_remitter.id, :created_by => user.id)
       created_or_edited_by(ecol_remitter2).should == "Record Edited By #{ecol_remitter2.created_user.try(:name)}"
       ecol_remitter2.updated_by = user2.id
+      p "&&&&&&&&&&&"
+      p ecol_remitter2
       ecol_remitter2.save
       created_or_edited_by(ecol_remitter2).should == "Record Edited By #{ecol_remitter2.updated_user.try(:name)}"
     end

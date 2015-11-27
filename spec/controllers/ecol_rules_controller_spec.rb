@@ -181,7 +181,9 @@ describe EcolRulesController do
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
       ecol_rule = Factory(:ecol_rule, :stl_gl_inward => '9876543210', :approval_status => 'U')
+      EcolUnapprovedRecord.count.should == 1
       put :approve, {:id => ecol_rule.id}
+      EcolUnapprovedRecord.count.should == 0
       ecol_rule.reload
       ecol_rule.stl_gl_inward.should == '9876543210'
       ecol_rule.approval_status.should == 'A'
