@@ -84,7 +84,7 @@ class BmAggregatorPaymentsController < ApplicationController
   private
 
   def bm_aggregator_payment_params
-    params.require(:bm_aggregator_payment).permit(:cod_acct_no, :neft_sender_ifsc, :bene_acct_no, :bene_account_ifsc, :payment_amount, 
+    params.require(:bm_aggregator_payment).permit(:cod_acct_no, :neft_sender_ifsc, :bene_acct_no, :bene_acct_ifsc, :payment_amount, 
                                                   :bank_ref, :lock_version, :approval_status, :last_action, :approved_version, 
                                                   :approved_id, :status, :fault_code, :fault_reason, :neft_req_ref, :neft_attempt_no, 
                                                   :neft_attemp_at, :neft_rep_ref, :neft_completed_at)
