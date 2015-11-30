@@ -204,7 +204,9 @@ describe PurposeCodesController do
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
       purpose_code = Factory(:purpose_code, :description => 'BarFoo', :approval_status => 'U')
+      InwUnapprovedRecord.count.should == 1
       put :approve, {:id => purpose_code.id}
+      InwUnapprovedRecord.count.should == 0
       purpose_code.reload
       purpose_code.description.should == 'BarFoo'
       purpose_code.approval_status.should == 'A'

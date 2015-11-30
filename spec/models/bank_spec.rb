@@ -76,39 +76,51 @@ describe Bank do
     end
   end    
 
-  context "create_inw_unapproved_records" do 
-    it "should create inw_unapproved_record if the approval_status is 'U' and there is no previous record" do
+  context "inw_unapproved_records" do 
+    it "oncreate: should create inw_unapproved_record if the approval_status is 'U'" do
+      bank = Factory(:bank)
+      bank.reload
+      bank.inw_unapproved_record.should_not be_nil
+    end
+
+    it "oncreate: should not create inw_unapproved_record if the approval_status is 'A'" do
+      bank = Factory(:bank, :approval_status => 'A')
+      bank.inw_unapproved_record.should be_nil
+    end
+
+    it "onupdate: should not remove inw_unapproved_record if approval_status did not change from U to A" do
       bank = Factory(:bank)
       bank.reload
       bank.inw_unapproved_record.should_not be_nil
       record = bank.inw_unapproved_record
+      # we are editing the U record, before it is approved
       bank.name = 'Fooo'
       bank.save
+      bank.reload
       bank.inw_unapproved_record.should == record
     end
-
-    it "should not create inw_unapproved_record if the approval_status is 'A'" do
-      bank = Factory(:bank, :approval_status => 'A')
+    
+    it "onupdate: should remove inw_unapproved_record if the approval_status changed from 'U' to 'A' (approval)" do
+      bank = Factory(:bank)
+      bank.reload
+      bank.inw_unapproved_record.should_not be_nil
+      # the approval process changes the approval_status from U to A for a newly edited record
+      bank.approval_status = 'A'
+      bank.save
+      bank.reload
       bank.inw_unapproved_record.should be_nil
     end
-  end  
-
-  # context "remove_inw_unapproved_records" do
-  #   it "should remove inw_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
-  #     bank = Factory(:bank)
-  #     bank.reload
-  #     bank.inw_unapproved_record.should_not be_nil
-  #     record = bank.inw_unapproved_record
-  #     bank.name = 'Foo'
-  #     bank.save
-  #     bank.inw_unapproved_record.should == record
-  #     bank.approval_status = 'A'
-  #     bank.save
-  #     bank.remove_inw_unapproved_records
-  #     bank.reload
-  #     bank.inw_unapproved_record.should be_nil
-  #   end
-  # end
+    
+    it "ondestroy: should remove inw_unapproved_record if the record with approval_status 'U' was destroyed (approval) " do
+      bank = Factory(:bank)
+      bank.reload
+      bank.inw_unapproved_record.should_not be_nil
+      record = bank.inw_unapproved_record
+      # the approval process destroys the U record, for an edited record 
+      bank.destroy
+      InwUnapprovedRecord.find_by_id(record.id).should be_nil
+    end
+  end
 
   context "approve" do 
     it "should approve unapproved_record" do 

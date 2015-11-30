@@ -75,39 +75,51 @@ describe BmBiller do
     end
   end    
 
-  context "create_bm_unapproved_records" do 
-    it "should create bm_unapproved_record if the approval_status is 'U' and there is no previous record" do
+  context "bm_unapproved_records" do 
+    it "oncreate: should create bm_unapproved_record if the approval_status is 'U'" do
       bm_biller = Factory(:bm_biller)
       bm_biller.reload
       bm_biller.bm_unapproved_record.should_not be_nil
-      record = bm_biller.bm_unapproved_record
-      bm_biller.biller_name = 'Foo'
-      bm_biller.save
-      bm_biller.bm_unapproved_record.should == record
     end
 
-    it "should not create bm_unapproved_record if the approval_status is 'A'" do
+    it "oncreate: should not create bm_unapproved_record if the approval_status is 'A'" do
       bm_biller = Factory(:bm_biller, :approval_status => 'A')
       bm_biller.bm_unapproved_record.should be_nil
     end
-  end  
 
-  context "remove_bm_unapproved_records" do 
-    it "should remove bm_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
+    it "onupdate: should not remove bm_unapproved_record if approval_status did not change from U to A" do
       bm_biller = Factory(:bm_biller)
       bm_biller.reload
       bm_biller.bm_unapproved_record.should_not be_nil
       record = bm_biller.bm_unapproved_record
-      bm_biller.biller_name = 'Foo'
+      # we are editing the U record, before it is approved
+      bm_biller.biller_location = 'Fooo'
       bm_biller.save
+      bm_biller.reload
       bm_biller.bm_unapproved_record.should == record
+    end
+    
+    it "onupdate: should remove bm_unapproved_record if the approval_status changed from 'U' to 'A' (approval)" do
+      bm_biller = Factory(:bm_biller)
+      bm_biller.reload
+      bm_biller.bm_unapproved_record.should_not be_nil
+      # the approval process changes the approval_status from U to A for a newly edited record
       bm_biller.approval_status = 'A'
       bm_biller.save
-      bm_biller.remove_bm_unapproved_records
       bm_biller.reload
       bm_biller.bm_unapproved_record.should be_nil
     end
-  end  
+    
+    it "ondestroy: should remove bm_unapproved_record if the record with approval_status 'U' was destroyed (approval) " do
+      bm_biller = Factory(:bm_biller)
+      bm_biller.reload
+      bm_biller.bm_unapproved_record.should_not be_nil
+      record = bm_biller.bm_unapproved_record
+      # the approval process destroys the U record, for an edited record 
+      bm_biller.destroy
+      BmUnapprovedRecord.find_by_id(record.id).should be_nil
+    end
+  end
 
   context "approve" do 
     it "should approve unapproved_record" do 

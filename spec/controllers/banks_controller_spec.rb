@@ -204,7 +204,9 @@ describe BanksController do
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
       bank = Factory(:bank, :name => 'Bar Foo', :approval_status => 'U')
+      InwUnapprovedRecord.count.should == 1
       put :approve, {:id => bank.id}
+      InwUnapprovedRecord.count.should == 0
       bank.reload
       bank.name.should == 'Bar Foo'
       bank.approval_status.should == 'A'

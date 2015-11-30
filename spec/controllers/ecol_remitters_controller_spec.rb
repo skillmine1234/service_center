@@ -203,9 +203,10 @@ describe EcolRemittersController do
       user_role = UserRole.find_by_user_id(@user.id)
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
-      ecol_customer1 = Factory(:ecol_customer)
       ecol_remitter = Factory(:ecol_remitter, :remitter_code => 'BarFoo', :approval_status => 'U')
+      EcolUnapprovedRecord.count.should == 1
       put :approve, {:id => ecol_remitter.id}
+      EcolUnapprovedRecord.count.should == 0
       ecol_remitter.reload
       ecol_remitter.remitter_code.should == 'BarFoo'
       ecol_remitter.approval_status.should == 'A'

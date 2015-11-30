@@ -204,7 +204,9 @@ describe UdfAttributesController do
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
       udf_attribute = Factory(:udf_attribute,:class_name => 'EcolRemitter', :approval_status => 'U')
+      EcolUnapprovedRecord.count.should == 1
       put :approve, {:id => udf_attribute.id}
+      EcolUnapprovedRecord.count.should == 0
       udf_attribute.reload
       udf_attribute.class_name.should == 'EcolRemitter'
       udf_attribute.approval_status.should == 'A'

@@ -54,37 +54,51 @@ describe InwRemittanceRule do
     end
   end    
 
-  context "create_inw_unapproved_records" do 
-    it "should create inw_unapproved_record if the approval_status is 'U' and there is no previous record" do
+  context "inw_unapproved_records" do 
+    it "oncreate: should create inw_unapproved_record if the approval_status is 'U'" do
+      inw_rule = Factory(:inw_remittance_rule)
+      inw_rule.reload
+      inw_rule.inw_unapproved_record.should_not be_nil
+    end
+
+    it "oncreate: should not create inw_unapproved_record if the approval_status is 'A'" do
+      inw_rule = Factory(:inw_remittance_rule, :approval_status => 'A')
+      inw_rule.inw_unapproved_record.should be_nil
+    end
+
+    it "onupdate: should not remove inw_unapproved_record if approval_status did not change from U to A" do
       inw_rule = Factory(:inw_remittance_rule)
       inw_rule.reload
       inw_rule.inw_unapproved_record.should_not be_nil
       record = inw_rule.inw_unapproved_record
+      # we are editing the U record, before it is approved
+      inw_rule.pattern_individuals = 'abcd'
       inw_rule.save
+      inw_rule.reload
       inw_rule.inw_unapproved_record.should == record
     end
-
-    it "should not create ecol_unapproved_record if the approval_status is 'A'" do
-      inw_rule = Factory(:inw_remittance_rule, :approval_status => 'A')
+    
+    it "onupdate: should remove inw_unapproved_record if the approval_status changed from 'U' to 'A' (approval)" do
+      inw_rule = Factory(:inw_remittance_rule)
+      inw_rule.reload
+      inw_rule.inw_unapproved_record.should_not be_nil
+      # the approval process changes the approval_status from U to A for a newly edited record
+      inw_rule.approval_status = 'A'
+      inw_rule.save
+      inw_rule.reload
       inw_rule.inw_unapproved_record.should be_nil
     end
-  end  
-
-  # context "remove_inw_unapproved_records" do
-  #   it "should remove inw_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
-  #     inw_rule = Factory(:inw_remittance_rule)
-  #     inw_rule.reload
-  #     inw_rule.inw_unapproved_record.should_not be_nil
-  #     record = inw_rule.inw_unapproved_record
-  #     inw_rule.save
-  #     inw_rule.inw_unapproved_record.should == record
-  #     inw_rule.approval_status = 'A'
-  #     inw_rule.save
-  #     inw_rule.remove_inw_unapproved_records
-  #     inw_rule.reload
-  #     inw_rule.inw_unapproved_record.should be_nil
-  #   end
-  # end
+    
+    it "ondestroy: should remove inw_unapproved_record if the record with approval_status 'U' was destroyed (approval) " do
+      inw_rule = Factory(:inw_remittance_rule)
+      inw_rule.reload
+      inw_rule.inw_unapproved_record.should_not be_nil
+      record = inw_rule.inw_unapproved_record
+      # the approval process destroys the U record, for an edited record 
+      inw_rule.destroy
+      InwUnapprovedRecord.find_by_id(record.id).should be_nil
+    end
+  end
 
   context "approve" do 
     it "should approve unapproved_record" do 

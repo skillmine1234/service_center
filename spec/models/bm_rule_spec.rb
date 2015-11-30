@@ -78,35 +78,49 @@ describe BmRule do
     end
   end
 
-  context "create_bm_unapproved_records" do
-    it "should create bm_unapproved_record if the approval_status is 'U' and there is no previous record" do
+  context "bm_unapproved_records" do 
+    it "oncreate: should create bm_unapproved_record if the approval_status is 'U'" do
       bm_rule = Factory(:bm_rule)
       bm_rule.reload
       bm_rule.bm_unapproved_record.should_not be_nil
-      record = bm_rule.bm_unapproved_record
-      bm_rule.save
-      bm_rule.bm_unapproved_record.should == record
     end
 
-    it "should not create bm_unapproved_record if the approval_status is 'A'" do
+    it "oncreate: should not create bm_unapproved_record if the approval_status is 'A'" do
       bm_rule = Factory(:bm_rule, :approval_status => 'A')
       bm_rule.bm_unapproved_record.should be_nil
     end
-  end
 
-  context "remove_bm_unapproved_records" do
-    it "should remove bm_unapproved_record if the approval_status is 'A' and there is unapproved_record" do
+    it "onupdate: should not remove bm_unapproved_record if approval_status did not change from U to A" do
       bm_rule = Factory(:bm_rule)
       bm_rule.reload
       bm_rule.bm_unapproved_record.should_not be_nil
       record = bm_rule.bm_unapproved_record
+      # we are editing the U record, before it is approved
+      bm_rule.cod_acct_no = '0987654321'
       bm_rule.save
+      bm_rule.reload
       bm_rule.bm_unapproved_record.should == record
+    end
+    
+    it "onupdate: should remove bm_unapproved_record if the approval_status changed from 'U' to 'A' (approval)" do
+      bm_rule = Factory(:bm_rule)
+      bm_rule.reload
+      bm_rule.bm_unapproved_record.should_not be_nil
+      # the approval process changes the approval_status from U to A for a newly edited record
       bm_rule.approval_status = 'A'
       bm_rule.save
-      bm_rule.remove_bm_unapproved_records
       bm_rule.reload
       bm_rule.bm_unapproved_record.should be_nil
+    end
+    
+    it "ondestroy: should remove bm_unapproved_record if the record with approval_status 'U' was destroyed (approval) " do
+      bm_rule = Factory(:bm_rule)
+      bm_rule.reload
+      bm_rule.bm_unapproved_record.should_not be_nil
+      record = bm_rule.bm_unapproved_record
+      # the approval process destroys the U record, for an edited record 
+      bm_rule.destroy
+      BmUnapprovedRecord.find_by_id(record.id).should be_nil
     end
   end
 

@@ -181,17 +181,35 @@ describe BmBillersController do
     end
   end
 
-  # describe "PUT approve" do
-  #   it "unapproved record can be approved and old approved record will be deleted" do
-  #     user_role = UserRole.find_by_user_id(@user.id)
-  #     user_role.delete
-  #     Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
-  #     bm_biller1 = Factory(:bm_biller, :biller_code => "BILL01", :approval_status => 'A')
-  #     bm_biller2 = Factory(:bm_biller, :biller_code => "BILL01", :approval_status => 'U', :biller_name => 'Foobar', :approved_version => bm_biller1.lock_version, :approved_id => bm_biller1.id)
-  #     put :approve, {:id => bm_biller2.id}
-  #     bm_biller2.reload
-  #     bm_biller2.approval_status.should == 'A'
-  #     BmBiller.find_by_id(bm_biller1.id).should be_nil
-  #   end
-  # end
+  describe "PUT approve" do
+    it "(edit) unapproved record can be approved and old approved record will be updated" do
+      user_role = UserRole.find_by_user_id(@user.id)
+      user_role.delete
+      Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
+      bm_biller1 = Factory(:bm_biller, :approval_status => 'A')
+      bm_biller2 = Factory(:bm_biller, :approval_status => 'U', :biller_location => 'Bar Foo', :approved_version => bm_biller1.lock_version, :approved_id => bm_biller1.id, :created_by => 666)
+      # the following line is required for reload to get triggered (TODO)
+      bm_biller1.approval_status.should == 'A'
+      BmUnapprovedRecord.count.should == 1
+      put :approve, {:id => bm_biller2.id}
+      BmUnapprovedRecord.count.should == 0
+      bm_biller1.reload
+      bm_biller1.biller_location.should == 'Bar Foo'
+      bm_biller1.updated_by.should == "666"
+      BmApp.find_by_id(bm_biller2.id).should be_nil
+    end
+
+    it "(create) unapproved record can be approved" do
+      user_role = UserRole.find_by_user_id(@user.id)
+      user_role.delete
+      Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
+      bm_biller = Factory(:bm_biller, :biller_location => 'Bar Foo', :approval_status => 'U')
+      BmUnapprovedRecord.count.should == 1
+      put :approve, {:id => bm_biller.id}
+      BmUnapprovedRecord.count.should == 0
+      bm_biller.reload
+      bm_biller.biller_location.should == 'Bar Foo'
+      bm_biller.approval_status.should == 'A'
+    end
+  end
 end

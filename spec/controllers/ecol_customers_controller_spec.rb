@@ -204,7 +204,9 @@ describe EcolCustomersController do
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
       ecol_customer = Factory(:ecol_customer, :code => "CUST01", :approval_status => 'U', :name => 'Foobar')
+      EcolUnapprovedRecord.count.should == 1
       put :approve, {:id => ecol_customer.id}
+      EcolUnapprovedRecord.count.should == 0
       ecol_customer.reload
       ecol_customer.name.should == 'Foobar'
       ecol_customer.approval_status.should == 'A'
