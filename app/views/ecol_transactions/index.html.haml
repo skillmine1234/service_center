@@ -52,7 +52,7 @@
           %td{:style=>'text-align:left;'}
             = ecol_transaction.rmtr_full_name
           %td{:style=>'text-align:left;'}
-            = ecol_transaction.transfer_date.try(:strftime, "%d/%m/%Y %I:%M%p")
+            = ecol_transaction.transfer_date.try(:strftime, "%d/%m/%Y")
           %td{:style=>'text-align:left;'}
             = ecol_transaction.transfer_amt
           %td{:style=>'text-align:left;'}

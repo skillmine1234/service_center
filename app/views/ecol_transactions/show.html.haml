@@ -15,7 +15,7 @@
       = @ecol_transaction.transfer_status
     %h3
       Transfer Date:
-      = @ecol_transaction.transfer_date.utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
+      = @ecol_transaction.transfer_date.try(:strftime, "%d/%m/%Y") rescue ""
   .header-form-extended{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'}
     %h3
       Status:
