@@ -37,6 +37,7 @@ gem "audited-activerecord"
 gem 'httparty'
 gem 'zeroclipboard-rails'
 gem 'country_select', github: 'stefanpenner/country_select'
+gem 'faraday'
 # required for packaging (specifically asset precompilation during packaging)
 gem "sqlite3"
 gem 'florrick', '~> 1.1'

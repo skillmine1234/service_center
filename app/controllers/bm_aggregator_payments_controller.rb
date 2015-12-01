@@ -67,18 +67,30 @@ class BmAggregatorPaymentsController < ApplicationController
   end
   
   def approve
-    @bm_biller = BmAggregatorPayment.unscoped.find(params[:id]) rescue nil
+    @bm_aggregator_payment = BmAggregatorPayment.unscoped.find(params[:id]) rescue nil
     BmAggregatorPayment.transaction do
-      approval = @bm_biller.approve
-      if @bm_biller.save and approval.empty?
+      approval = @bm_aggregator_payment.approve
+      if @bm_aggregator_payment.save and approval.empty?
         flash[:alert] = "BmAggregatorPayment record was approved successfully"
+        # api_options = {:scheme => self.scheme, :host => self.host, :port => self.port, :username => self.username, :password => self.password}
+
+        api_req_url = "https://api.quantiguous.com"
+
+        conn = Faraday.new(:url => api_req_url, :ssl => {:verify => false}) do |c|
+          c.use Faraday::Request::UrlEncoded
+          c.use Faraday::Request::BasicAuthentication, "guest", "qg123$#"
+          c.use Faraday::Response::Logger
+          c.use Faraday::Adapter::NetHttp
+        end
+
+        response = conn.post "#{api_req_url}/bm/aggregator_payments", {:id => @bm_aggregator_payment.id}
       else
-        msg = approval.empty? ? @bm_biller.errors.full_messages : @bm_biller.errors.full_messages << approval
+        msg = approval.empty? ? @bm_aggregator_payment.errors.full_messages : @bm_aggregator_payment.errors.full_messages << approval
         flash[:alert] = msg
         raise ActiveRecord::Rollback
       end
     end
-    redirect_to @bm_biller
+    redirect_to @bm_aggregator_payment
   end
   
   private
