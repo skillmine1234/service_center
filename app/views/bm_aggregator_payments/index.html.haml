@@ -27,8 +27,6 @@
       Beneficiary Account IFSC
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Payment Amount
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Bank Reference
 
   .tbody
     - @bm_aggregator_payments.each do |bm_aggregator_payment|
@@ -50,5 +48,3 @@
           = bm_aggregator_payment.bene_acct_ifsc
         %td{:style=>'text-align:left;'}
           = bm_aggregator_payment.payment_amount
-        %td{:style=>'text-align:left;'}
-          = bm_aggregator_payment.bank_ref

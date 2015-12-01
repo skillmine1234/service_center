@@ -6,7 +6,7 @@ class BmAggregatorPayment < ActiveRecord::Base
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
   has_one :bm_audit_log, :as => :bm_auditable
   
-  validates_presence_of :cod_acct_no, :neft_sender_ifsc, :bene_acct_no, :bene_acct_ifsc, :status
+  validates_presence_of :cod_acct_no, :neft_sender_ifsc, :bene_acct_no, :bene_acct_ifsc, :status, :bene_name, :customer_id, :service_id, :payment_amount, :rmtr_name, :rmtr_to_bene_note
 
   def self.form_values(attribute)
     case attribute

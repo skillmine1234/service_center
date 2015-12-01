@@ -72,8 +72,7 @@ class BmAggregatorPaymentsController < ApplicationController
       approval = @bm_aggregator_payment.approve
       if @bm_aggregator_payment.save and approval.empty?
         flash[:alert] = "BmAggregatorPayment record was approved successfully"
-        # api_options = {:scheme => self.scheme, :host => self.host, :port => self.port, :username => self.username, :password => self.password}
-
+        
         api_req_url = "https://api.quantiguous.com"
 
         conn = Faraday.new(:url => api_req_url, :ssl => {:verify => false}) do |c|
@@ -83,7 +82,7 @@ class BmAggregatorPaymentsController < ApplicationController
           c.use Faraday::Adapter::NetHttp
         end
 
-        response = conn.post "#{api_req_url}/bm/aggregator_payments", {:id => @bm_aggregator_payment.id}
+        response = conn.post "/bm/aggregator_payments", {:id => "#{@bm_aggregator_payment.id}"}
       else
         msg = approval.empty? ? @bm_aggregator_payment.errors.full_messages : @bm_aggregator_payment.errors.full_messages << approval
         flash[:alert] = msg
@@ -97,8 +96,9 @@ class BmAggregatorPaymentsController < ApplicationController
 
   def bm_aggregator_payment_params
     params.require(:bm_aggregator_payment).permit(:cod_acct_no, :neft_sender_ifsc, :bene_acct_no, :bene_acct_ifsc, :payment_amount, 
-                                                  :bank_ref, :lock_version, :approval_status, :last_action, :approved_version, 
+                                                  :lock_version, :approval_status, :last_action, :approved_version, 
                                                   :approved_id, :status, :fault_code, :fault_reason, :neft_req_ref, :neft_attempt_no, 
-                                                  :neft_attemp_at, :neft_rep_ref, :neft_completed_at)
+                                                  :neft_attempt_at, :neft_rep_ref, :neft_completed_at, :bene_name, :customer_id, :service_id, 
+                                                  :rmtr_name, :rmtr_to_bene_note)
   end
 end
