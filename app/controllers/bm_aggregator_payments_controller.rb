@@ -82,7 +82,7 @@ class BmAggregatorPaymentsController < ApplicationController
           c.use Faraday::Adapter::NetHttp
         end
 
-        response = conn.post "/bm/aggregator_payments", {:id => "#{@bm_aggregator_payment.id}"}
+        response = conn.post "/bm/aggregator_payments/?id=#{@bm_aggregator_payment.id rescue nil}"
       else
         msg = approval.empty? ? @bm_aggregator_payment.errors.full_messages : @bm_aggregator_payment.errors.full_messages << approval
         flash[:alert] = msg
