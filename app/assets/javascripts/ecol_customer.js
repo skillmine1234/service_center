@@ -44,6 +44,12 @@ $(document).ready(function(){
 			else {
 				$('#ecol_customer_credit_acct_val_fail').prop('disabled',false);
 			}
+			for (i=1; i<=3; i++) {
+				if ($('#ecol_customer_token_' + i + '_type').val() === 'SC' || $('#ecol_customer_token_' + i + '_type').val() === 'RC' || $('#ecol_customer_token_' + i + '_type').val() === 'IN'){
+					$('#ecol_customer_val_token_' + i).val('N');
+					$('#ecol_customer_val_token_' + i).prop('disabled',true);
+				}
+			}
     }
     else{
       $('#ecol_customer_val_txn_date').prop('disabled',false);
@@ -59,6 +65,11 @@ $(document).ready(function(){
 			}
 			else {
 				$('#ecol_customer_credit_acct_val_fail').prop('disabled',false);
+			}
+			for (i=1; i<=3; i++) {
+				if ($('#ecol_customer_token_' + i + '_type').val() === 'SC' || $('#ecol_customer_token_' + i + '_type').val() === 'RC' || $('#ecol_customer_token_' + i + '_type').val() === 'IN'){
+					$('#ecol_customer_val_token_' + i).prop('disabled',false);
+				}
 			}
     }
 
@@ -107,6 +118,12 @@ $(document).ready(function(){
 		else {
 			$('#ecol_customer_credit_acct_val_fail').prop('disabled',false);
 		}
+		for (i=1; i<=3; i++) {
+			if ($('#ecol_customer_token_' + i + '_type').val() === 'SC' || $('#ecol_customer_token_' + i + '_type').val() === 'RC' || $('#ecol_customer_token_' + i + '_type').val() === 'IN'){
+				$('#ecol_customer_val_token_' + i).val('N');
+				$('#ecol_customer_val_token_' + i).prop('disabled',true);
+			}
+		}
   }
   else{
     $('#ecol_customer_val_txn_date').prop('disabled',false);
@@ -122,6 +139,11 @@ $(document).ready(function(){
 		}
 		else {
 			$('#ecol_customer_credit_acct_val_fail').prop('disabled',false);
+		}
+		for (i=1; i<=3; i++) {
+			if ($('#ecol_customer_token_' + i + '_type').val() === 'SC' || $('#ecol_customer_token_' + i + '_type').val() === 'RC' || $('#ecol_customer_token_' + i + '_type').val() === 'IN'){
+				$('#ecol_customer_val_token_' + i).prop('disabled',false);
+			}
 		}
   } 
   
@@ -140,7 +162,14 @@ $(document).ready(function(){
       $('#ecol_customer_token_1_ends_with').prop('readOnly',true);
     }
     else{
-      $('#ecol_customer_val_token_1').prop('disabled',false);
+      // $('#ecol_customer_val_token_1').prop('disabled',false);
+			if ($('#ecol_customer_val_method').val() == 'N' || $('#ecol_customer_val_method').val() == 'W') {
+				$('#ecol_customer_val_token_1').val('N');
+				$('#ecol_customer_val_token_1').prop('disabled',true);
+			}
+			else {
+				$('#ecol_customer_val_token_1').prop('disabled',false);
+			}
       $('#ecol_customer_token_1_length').prop('readOnly',false);
       $('#ecol_customer_token_1_starts_with').prop('readOnly',false);
       $('#ecol_customer_token_1_contains').prop('readOnly',false);
@@ -160,7 +189,14 @@ $(document).ready(function(){
     $('#ecol_customer_token_1_ends_with').prop('readOnly',true);
   }
   else{
-    $('#ecol_customer_val_token_1').prop('disabled',false);
+    // $('#ecol_customer_val_token_1').prop('disabled',false);
+		if ($('#ecol_customer_val_method').val() === 'N' || $('#ecol_customer_val_method').val() === 'W') {
+			$('#ecol_customer_val_token_1').val('N');
+			$('#ecol_customer_val_token_1').prop('disabled',true);
+		}
+		else {
+			$('#ecol_customer_val_token_1').prop('disabled',false);
+		}
     $('#ecol_customer_token_1_length').prop('readOnly',false);
     $('#ecol_customer_token_1_starts_with').prop('readOnly',false);
     $('#ecol_customer_token_1_contains').prop('readOnly',false);
@@ -182,7 +218,14 @@ $(document).ready(function(){
       $('#ecol_customer_token_2_ends_with').prop('readOnly',true);
     }
     else{
-      $('#ecol_customer_val_token_2').prop('disabled',false);
+      // $('#ecol_customer_val_token_2').prop('disabled',false);
+			if ($('#ecol_customer_val_method').val() === 'N' || $('#ecol_customer_val_method').val() === 'W') {
+				$('#ecol_customer_val_token_2').val('N');
+				$('#ecol_customer_val_token_2').prop('disabled',true);
+			}
+			else {
+				$('#ecol_customer_val_token_2').prop('disabled',false);
+			}
       $('#ecol_customer_token_2_length').prop('readOnly',false);
       $('#ecol_customer_token_2_starts_with').prop('readOnly',false);
       $('#ecol_customer_token_2_contains').prop('readOnly',false);
@@ -202,7 +245,14 @@ $(document).ready(function(){
     $('#ecol_customer_token_2_ends_with').prop('readOnly',true);
   }
   else{
-    $('#ecol_customer_val_token_2').prop('disabled',false);
+    // $('#ecol_customer_val_token_2').prop('disabled',false);
+		if ($('#ecol_customer_val_method').val() === 'N' || $('#ecol_customer_val_method').val() === 'W') {
+			$('#ecol_customer_val_token_2').val('N');
+			$('#ecol_customer_val_token_2').prop('disabled',true);
+		}
+		else {
+			$('#ecol_customer_val_token_2').prop('disabled',false);
+		}
     $('#ecol_customer_token_2_length').prop('readOnly',false);
     $('#ecol_customer_token_2_starts_with').prop('readOnly',false);
     $('#ecol_customer_token_2_contains').prop('readOnly',false);
@@ -225,7 +275,14 @@ $(document).ready(function(){
       $('#ecol_customer_token_3_ends_with').prop('readOnly',true);
     }
     else{
-      $('#ecol_customer_val_token_3').prop('disabled',false);
+      // $('#ecol_customer_val_token_3').prop('disabled',false);
+			if ($('#ecol_customer_val_method').val() === 'N' || $('#ecol_customer_val_method').val() === 'W') {
+				$('#ecol_customer_val_token_3').val('N');
+				$('#ecol_customer_val_token_3').prop('disabled',true);
+			}
+			else {
+				$('#ecol_customer_val_token_3').prop('disabled',false);
+			}
       $('#ecol_customer_token_3_length').prop('readOnly',false);
       $('#ecol_customer_token_3_starts_with').prop('readOnly',false);
       $('#ecol_customer_token_3_contains').prop('readOnly',false);
@@ -245,7 +302,14 @@ $(document).ready(function(){
     $('#ecol_customer_token_3_ends_with').prop('readOnly',true);
   }
   else{
-    $('#ecol_customer_val_token_3').prop('disabled',false);
+    // $('#ecol_customer_val_token_3').prop('disabled',false);
+		if ($('#ecol_customer_val_method').val() == 'N' || $('#ecol_customer_val_method').val() == 'W') {
+			$('#ecol_customer_val_token_3').val('N');
+			$('#ecol_customer_val_token_3').prop('disabled',true);
+		}
+		else {
+			$('#ecol_customer_val_token_3').prop('disabled',false);
+		}
     $('#ecol_customer_token_3_length').prop('readOnly',false);
     $('#ecol_customer_token_3_starts_with').prop('readOnly',false);
     $('#ecol_customer_token_3_contains').prop('readOnly',false);
