@@ -33,6 +33,7 @@ class Ability
     models.each do |model_name|
       can :read, model_name.constantize
       can :approve, model_name.constantize
+      can :hit_api, model_name.constantize
     end
   end
 
