@@ -1,5 +1,5 @@
 class BmAggregatorPaymentsController < ApplicationController
-  # authorize_resource
+  authorize_resource
   before_filter :authenticate_user!
   before_filter :block_inactive_user!
   respond_to :json
@@ -16,7 +16,7 @@ class BmAggregatorPaymentsController < ApplicationController
       render "new"
     else
       @bm_aggregator_payment.save!
-
+      
       flash[:alert] = 'Aggregator Payment successfully created and is pending for approval'
       redirect_to @bm_aggregator_payment
     end
@@ -25,8 +25,10 @@ class BmAggregatorPaymentsController < ApplicationController
   def edit
     bm_aggregator_payment = BmAggregatorPayment.unscoped.find_by_id(params[:id])
     if bm_aggregator_payment.approval_status == 'A' && bm_aggregator_payment.unapproved_record.nil?
-      params = (bm_aggregator_payment.attributes).merge({:approved_id => bm_aggregator_payment.id,:approved_version => bm_aggregator_payment.lock_version})
-      bm_aggregator_payment = BmAggregatorPayment.new(params)
+      # params = (bm_aggregator_payment.attributes).merge({:approved_id => bm_aggregator_payment.id,:approved_version => bm_aggregator_payment.lock_version})
+      # bm_aggregator_payment = BmAggregatorPayment.new(params)
+      flash[:notice] = "You cannot edit this record!"
+      redirect_to bm_aggregator_payments_path
     end
     @bm_aggregator_payment = bm_aggregator_payment   
   end
@@ -72,23 +74,28 @@ class BmAggregatorPaymentsController < ApplicationController
       approval = @bm_aggregator_payment.approve
       if @bm_aggregator_payment.save and approval.empty?
         flash[:alert] = "BmAggregatorPayment record was approved successfully"
-        
-        api_req_url = "https://api.quantiguous.com"
-
-        conn = Faraday.new(:url => api_req_url, :ssl => {:verify => false}) do |c|
-          c.use Faraday::Request::UrlEncoded
-          c.use Faraday::Request::BasicAuthentication, "guest", "qg123$#"
-          c.use Faraday::Response::Logger
-          c.use Faraday::Adapter::NetHttp
-        end
-
-        response = conn.post "/bm/aggregator_payments/?id=#{@bm_aggregator_payment.id rescue nil}"
+        redirect_to hit_api_path(:id => @bm_aggregator_payment.id)
       else
         msg = approval.empty? ? @bm_aggregator_payment.errors.full_messages : @bm_aggregator_payment.errors.full_messages << approval
         flash[:alert] = msg
         raise ActiveRecord::Rollback
+        redirect_to @bm_aggregator_payment
       end
     end
+  end
+  
+  def hit_api
+    @bm_aggregator_payment = BmAggregatorPayment.find(params[:id]) rescue nil
+    api_req_url = ENV['CONFIG_URL_BM_AGGR_PAYMENT']
+
+    conn = Faraday.new(:url => api_req_url, :ssl => {:verify => false}) do |c|
+      c.use Faraday::Request::UrlEncoded
+      c.use Faraday::Response::Logger
+      c.use Faraday::Adapter::NetHttp
+    end
+    response = conn.post "#{api_req_url}/?id=#{@bm_aggregator_payment.id}"
+    status_code = response.env.status
+    flash[:alert] = "Api was hit and Status code of response is #{status_code}"
     redirect_to @bm_aggregator_payment
   end
   

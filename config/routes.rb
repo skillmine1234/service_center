@@ -85,6 +85,7 @@ ServiceCenter::Application.routes.draw do
   put '/ecol_transactions/:id/approve' => "ecol_transactions#approve_transaction"
 
   get '/bm_bill_payments/:id/audit_logs/:step_name' => 'bm_bill_payments#audit_logs'
+  get '/bm_aggregator_payment/hit_api/:id' => 'bm_aggregator_payments#hit_api', as: :hit_api
 
   get '/view_raw_content/:id' => "incoming_files#view_raw_content"
   root :to => 'dashboard#overview'

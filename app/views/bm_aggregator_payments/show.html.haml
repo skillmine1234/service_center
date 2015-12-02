@@ -14,6 +14,10 @@
             %td.label Version
             %td.value
               = link_to "#{audit_count(@bm_aggregator_payment)}", :controller => :bm_aggregator_payments, :action => :audit_logs, :version_id => audit_count(@bm_aggregator_payment), :id => @bm_aggregator_payment.id
+			
+      - if @bm_aggregator_payment.approval_status == 'A'and @bm_aggregator_payment.status == 'NEW'
+        %div{:style=>'padding-left: 1000px;'}
+          = link_to 'Hit Api', hit_api_path(@bm_aggregator_payment.id), :class => 'btn'
 							
 .show_ticket
   .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'}
