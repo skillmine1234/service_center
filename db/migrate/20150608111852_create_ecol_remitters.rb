@@ -15,10 +15,10 @@ class CreateEcolRemitters < ActiveRecord::Migration
       t.string :remitter_email, :limit => 100
       t.string :remitter_mobile, :limit => 10
       t.string :invoice_no, :limit => 28
-      t.float :invoice_amt
-      t.float :invoice_amt_tol_pct
-      t.float :min_credit_amt
-      t.float :max_credit_amt
+      t.decimal :invoice_amt
+      t.decimal :invoice_amt_tol_pct
+      t.decimal :min_credit_amt
+      t.decimal :max_credit_amt
       t.datetime :due_date
       t.integer :due_date_tol_days
       t.string :udf1, :limit => 255

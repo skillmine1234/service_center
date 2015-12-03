@@ -9,7 +9,7 @@ class CreateBmBillPayments < ActiveRecord::Migration
       t.string :customer_id, :limit => 15, :null => false, :comment => 'the unique id of the customer that initiated the request'
       t.string :debit_account_no, :limit => 50, :null => false, :comment => 'the account chosen by the customer to be debited'
       t.string :txn_kind, :limit => 50, :null => false, :comment => 'the kind of the transaction: specifies which of biller_code, biller_account_no, bill_id will be available'
-      t.float :txn_amount, :null => false, :comment => 'the transaction amount'
+      t.decimal :txn_amount, :null => false, :comment => 'the transaction amount'
       t.string :biller_code, :limit => 50, :null => false, :comment => 'the biller account registered for the customer, this identifies the biller and parameters'
       t.string :biller_acct_no, :limit => 50, :comment => 'the biller account registered for the customer, this identifies the biller and parameters'
       t.string :bill_id, :limit => 50, :comment => 'the unique identifier of the bill, as received in getBill operation'
