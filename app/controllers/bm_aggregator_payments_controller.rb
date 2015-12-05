@@ -15,6 +15,7 @@ class BmAggregatorPaymentsController < ApplicationController
     if !@bm_aggregator_payment.valid?
       render "new"
     else
+      @bm_aggregator_payment.created_by = current_user.id
       @bm_aggregator_payment.save!
       
       flash[:alert] = 'Aggregator Payment successfully created and is pending for approval'
@@ -27,7 +28,7 @@ class BmAggregatorPaymentsController < ApplicationController
     if bm_aggregator_payment.approval_status == 'A' && bm_aggregator_payment.unapproved_record.nil?
       # params = (bm_aggregator_payment.attributes).merge({:approved_id => bm_aggregator_payment.id,:approved_version => bm_aggregator_payment.lock_version})
       # bm_aggregator_payment = BmAggregatorPayment.new(params)
-      flash[:notice] = "You cannot edit this record!"
+      flash[:notice] = "You cannot edit this record as it is already approved!"
       redirect_to bm_aggregator_payments_path
     end
     @bm_aggregator_payment = bm_aggregator_payment   
@@ -39,6 +40,7 @@ class BmAggregatorPaymentsController < ApplicationController
     if !@bm_aggregator_payment.valid?
       render "edit"
     else
+      @bm_aggregator_payment.updated_by = current_user.id
       @bm_aggregator_payment.save!
       flash[:alert] = 'Aggregator Payment successfully modified and is pending for approval'
       redirect_to @bm_aggregator_payment
@@ -99,6 +101,13 @@ class BmAggregatorPaymentsController < ApplicationController
     redirect_to @bm_aggregator_payment
   end
   
+  def destroy
+    bm_aggregator_payment = BmAggregatorPayment.unscoped.delete(params[:id])
+    unapproved_record = BmUnapprovedRecord.find_by(:bm_approvable_id => params[:id]).delete
+    flash[:alert] = "BmAggregatorPayment record has been deleted!"
+    redirect_to bm_aggregator_payments_path
+  end
+  
   private
 
   def bm_aggregator_payment_params
@@ -106,6 +115,6 @@ class BmAggregatorPaymentsController < ApplicationController
                                                   :lock_version, :approval_status, :last_action, :approved_version, 
                                                   :approved_id, :status, :fault_code, :fault_reason, :neft_req_ref, :neft_attempt_no, 
                                                   :neft_attempt_at, :neft_rep_ref, :neft_completed_at, :bene_name, :customer_id, :service_id, 
-                                                  :rmtr_name, :rmtr_to_bene_note)
+                                                  :rmtr_name, :rmtr_to_bene_note, :created_by, :updated_by)
   end
 end

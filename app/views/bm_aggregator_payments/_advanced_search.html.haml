@@ -17,6 +17,11 @@
     To
     = text_field_tag :to_amount, params[:to_amount]
   .control-group
+    = label_tag "Payment Date", "Payment Date", :class => 'control-label'
+    = text_field_tag :from_date, params[:from_date]
+    To
+    = text_field_tag :to_date, params[:to_date]
+  .control-group
     = label_tag "Status", nil, :class => 'control-label'
     = select_tag :status, options_for_select([['NEW','NEW'],['IN_PROCESS','IN_PROCESS'],['FAILED','FAILED'],['COMPLETED','COMPLETED']],params[:status]),:prompt => 'ANY'
 
