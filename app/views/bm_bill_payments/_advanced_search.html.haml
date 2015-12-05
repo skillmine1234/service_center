@@ -28,6 +28,11 @@
   .control-group
     = label_tag "Bill ID", nil, :class => 'control-label'
     = text_field_tag :bill_id, params[:bill_id]
+  .control-group
+    = label_tag "Bill Paid At", "Bill Paid At", :class => 'control-label'
+    = text_field_tag :from_date, params[:from_date]
+    To
+    = text_field_tag :to_date, params[:to_date]
   = hidden_field_tag :advanced_search, :true
   - if params[:req_no].present?
     = hidden_field_tag :req_no, params[:req_no]

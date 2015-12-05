@@ -45,6 +45,12 @@ describe BmBillPaymentHelper do
       bm_bill_payment = Factory(:bm_bill_payment,:bill_id => 'AV123')
       find_bm_bill_payments(val,{:bill_id => 'AV123'}).should == [bm_bill_payment]
       find_bm_bill_payments(val,{:bill_id => 'Be2312'}).should == []   
+      
+      bm_bill_payment = [Factory(:bm_bill_payment, :billpaid_at => '2015-04-25')]
+      bm_bill_payment << Factory(:bm_bill_payment, :billpaid_at => '2015-04-26')
+      bm_bill_payment << Factory(:bm_bill_payment, :billpaid_at => '2015-04-27')
+      find_bm_bill_payments(val,{:from_date => '2015-04-25', :to_date => '2015-04-27'}).should == bm_bill_payment
+      find_bm_bill_payments(val,{:from_date => '2015-04-28', :to_date => '2015-04-30'}).should == []
     end
   end
 

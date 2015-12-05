@@ -10,6 +10,7 @@ module BmBillPaymentHelper
     bill_payments = bill_payments.where("bm_bill_payments.biller_code=?",params[:biller_code]) if params[:biller_code].present?
     bill_payments = bill_payments.where("bm_bill_payments.biller_acct_no=?",params[:biller_acct_no]) if params[:biller_acct_no].present?
     bill_payments = bill_payments.where("bm_bill_payments.bill_id=?",params[:bill_id]) if params[:bill_id].present?
+    bill_payments = bill_payments.where("bm_bill_payments.billpaid_at>=? and bm_bill_payments.billpaid_at<=?",Time.zone.parse(params[:from_date]).beginning_of_day,Time.zone.parse(params[:to_date]).end_of_day) if params[:from_date].present? and params[:to_date].present?
     bill_payments
   end
 
