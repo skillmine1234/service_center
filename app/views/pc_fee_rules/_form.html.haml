@@ -1,0 +1,135 @@
+= simple_form_for @pc_fee_rule, :html => {:class=>'form-horizontal', :autocomplete=>"off", :id => "pc_fee_rule_form"} do |f|
+  .control-group
+    = f.label ' '
+    #msg-error
+      = error_message_for(@pc_fee_rule, :base, :prepend_text => "")
+  .form-main
+    = f.hidden_field :lock_version
+    = f.hidden_field :approved_id
+    = f.hidden_field :approved_version
+    = f.hidden_field :pc_app_id
+    .control-group
+      = f.label :app_id, "*App ID", :class => 'control-label'
+      = f.text_field :app_id, :maxlength => 20
+      #msg-error
+        = error_message_for(@pc_fee_rule, :app_id, :prepend_text => "")
+    .control-group
+      = f.label :txn_kind, "*Transaction Kind", :class => 'control-label'
+      = f.select :txn_kind, options_for_select(PcFeeRule.options_for_txn_kind, @pc_fee_rule.txn_kind), :prompt => 'Select'
+      #msg-error
+        = error_message_for(@pc_fee_rule, :txn_kind, :prepend_text => "")
+    .control-group
+      = f.label :no_of_tiers, "*No. of Tiers", :class => 'control-label'
+      = f.number_field :no_of_tiers, :min => 1, :max => 3
+      #msg-error
+        = error_message_for(@pc_fee_rule, :no_of_tiers, :prepend_text => "")    
+    .control-group
+      = f.label :tier1_from_amt, "Tier 1 From Amount", :class => 'control-label'
+      = f.text_field :tier1_from_amt
+      #msg-error
+        = error_message_for(@pc_fee_rule, :tier1_from_amt, :prepend_text => "")
+    .control-group
+      = f.label :tier1_to_amt, "Tier 1 To Amount", :class => 'control-label'
+      = f.text_field :tier1_to_amt
+      #msg-error
+        = error_message_for(@pc_fee_rule, :tier1_to_amt, :prepend_text => "")
+    .control-group
+      = f.label :tier1_method, "Tier 1 Method", :class => 'control-label'
+      = f.select :tier1_method, options_for_select(PcFeeRule.options_for_tier_method, @pc_fee_rule), :prompt => 'Select'
+      #msg-error
+        = error_message_for(@pc_fee_rule, :tier1_method, :prepend_text => "")
+    .control-group
+      = f.label :tier1_fixed_amt, "Tier 1 Fixed Amount", :class => 'control-label'
+      = f.text_field :tier1_fixed_amt
+      #msg-error
+        = error_message_for(@pc_fee_rule, :tier1_fixed_amt, :prepend_text => "")
+    .control-group
+      = f.label :tier1_pct_value, "Tier 1 Percentage Value", :class => 'control-label'
+      = f.text_field :tier1_pct_value
+      #msg-error
+        = error_message_for(@pc_fee_rule, :tier1_pct_value, :prepend_text => "")
+    .control-group
+      = f.label :tier1_min_sc_amt, "Tier 1 Min. SC Amount", :class => 'control-label'
+      = f.text_field :tier1_min_sc_amt
+      #msg-error
+        = error_message_for(@pc_fee_rule, :tier1_min_sc_amt, :prepend_text => "")
+    .control-group
+      = f.label :tier1_max_sc_amt, "Tier 1 Max. SC Amount", :class => 'control-label'
+      = f.text_field :tier1_max_sc_amt
+      #msg-error
+        = error_message_for(@pc_fee_rule, :tier1_max_sc_amt, :prepend_text => "")
+    .control-group
+      = f.label :tier2_from_amt, "Tier 2 From Amount", :class => 'control-label'
+      = f.text_field :tier2_from_amt
+      #msg-error
+        = error_message_for(@pc_fee_rule, :tier2_from_amt, :prepend_text => "")
+    .control-group
+      = f.label :tier2_to_amt, "Tier 2 From Amount", :class => 'control-label'
+      = f.text_field :tier2_to_amt
+      #msg-error
+        = error_message_for(@pc_fee_rule, :tier2_to_amt, :prepend_text => "")
+    .control-group
+      = f.label :tier2_method, "Tier 2 Method", :class => 'control-label'
+      = f.select :tier2_method, options_for_select(PcFeeRule.options_for_tier_method, @pc_fee_rule), :prompt => 'Select'
+      #msg-error
+        = error_message_for(@pc_fee_rule, :tier2_method, :prepend_text => "")
+    .control-group
+      = f.label :tier2_fixed_amt, "Tier 2 Fixed Amount", :class => 'control-label'
+      = f.text_field :tier2_fixed_amt
+      #msg-error
+        = error_message_for(@pc_fee_rule, :tier2_fixed_amt, :prepend_text => "")
+    .control-group
+      = f.label :tier2_pct_value, "Tier 2 Percentage Value", :class => 'control-label'
+      = f.text_field :tier2_pct_value
+      #msg-error
+        = error_message_for(@pc_fee_rule, :tier2_pct_value, :prepend_text => "")
+    .control-group
+      = f.label :tier2_min_sc_amt, "Tier 2 Min. SC Amount", :class => 'control-label'
+      = f.text_field :tier2_min_sc_amt
+      #msg-error
+        = error_message_for(@pc_fee_rule, :tier2_min_sc_amt, :prepend_text => "")
+    .control-group
+      = f.label :tier2_max_sc_amt, "Tier 2 Max. SC Amount", :class => 'control-label'
+      = f.text_field :tier2_max_sc_amt
+      #msg-error
+        = error_message_for(@pc_fee_rule, :tier2_max_sc_amt, :prepend_text => "")
+    .control-group
+      = f.label :tier3_from_amt, "Tier 3 From Amount", :class => 'control-label'
+      = f.text_field :tier3_from_amt
+      #msg-error
+        = error_message_for(@pc_fee_rule, :tier3_from_amt, :prepend_text => "")
+    .control-group
+      = f.label :tier3_to_amt, "Tier 3 From Amount", :class => 'control-label'
+      = f.text_field :tier3_to_amt
+      #msg-error
+        = error_message_for(@pc_fee_rule, :tier3_to_amt, :prepend_text => "")
+    .control-group
+      = f.label :tier3_method, "Tier 3 Method", :class => 'control-label'
+      = f.select :tier3_method, options_for_select(PcFeeRule.options_for_tier_method, @pc_fee_rule), :prompt => 'Select'
+      #msg-error
+        = error_message_for(@pc_fee_rule, :tier3_method, :prepend_text => "")
+    .control-group
+      = f.label :tier3_fixed_amt, "Tier 3 Fixed Amount", :class => 'control-label'
+      = f.text_field :tier3_fixed_amt
+      #msg-error
+        = error_message_for(@pc_fee_rule, :tier3_fixed_amt, :prepend_text => "")
+    .control-group
+      = f.label :tier3_pct_value, "Tier 3 Percentage Value", :class => 'control-label'
+      = f.text_field :tier3_pct_value
+      #msg-error
+        = error_message_for(@pc_fee_rule, :tier3_pct_value, :prepend_text => "")
+    .control-group
+      = f.label :tier3_min_sc_amt, "Tier 3 Min. SC Amount", :class => 'control-label'
+      = f.text_field :tier3_min_sc_amt
+      #msg-error
+        = error_message_for(@pc_fee_rule, :tier3_min_sc_amt, :prepend_text => "")
+    .control-group
+      = f.label :tier3_max_sc_amt, "Tier 3 Max. SC Amount", :class => 'control-label'
+      = f.text_field :tier3_max_sc_amt
+      #msg-error
+        = error_message_for(@pc_fee_rule, :tier3_max_sc_amt, :prepend_text => "")
+
+  .form-actions
+    - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_pc_fee_rule', :value => label_name + ' PC Fee Rule'
+    = link_to :Cancel,'/pc_fee_rules', :name => 'cancel', :class=>"cancel btn"

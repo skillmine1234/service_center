@@ -144,3 +144,22 @@
         = image_tag 'bm_app_icon.png', :size => "80x80"
       %br
         = "BM Apps"
+- if @current_user.group_names.include?("prepaid-card")
+  %h1 Prepaid Card
+  .slide-container
+    .box  
+      = link_to '/pc_unapproved_records' do
+        = image_tag 'work-list.jpg', :size => "80x80"
+      %br
+        = "Approval Worklist"
+  .slide-container
+    .box  
+      = link_to '/pc_apps' do
+        = image_tag 'pc_apps.png', :size => "80x80"
+      %br
+        = "PC Apps"
+    .box  
+      = link_to '/pc_fee_rules' do
+        = image_tag 'pc_fee_rules.png', :size => "80x80"
+      %br
+        = "PC Fee Rules"

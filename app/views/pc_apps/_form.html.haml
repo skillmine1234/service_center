@@ -1,0 +1,34 @@
+= simple_form_for @pc_app, :html => {:class=>'form-horizontal', :autocomplete=>"off", :id => "pc_app_form"} do |f|
+  .control-group
+    = f.label ' '
+    #msg-error
+      = error_message_for(@pc_app, :base, :prepend_text => "")
+  .form-main
+    = f.hidden_field :lock_version
+    = f.hidden_field :approved_id
+    = f.hidden_field :approved_version
+    .control-group
+      = f.label :app_id, "*App ID", :class => 'control-label'
+      = f.text_field :app_id, :maxlength => 20
+      #msg-error
+        = error_message_for(@pc_app, :app_id, :prepend_text => "")
+    .control-group
+      = f.label :card_acct, "*Card Account", :class => 'control-label'
+      = f.text_field :card_acct, :maxlength => 20
+      #msg-error
+        = error_message_for(@pc_app, :card_acct, :prepend_text => "")    
+    .control-group
+      = f.label :sc_gl_income, "*SC Income Account", :class => 'control-label'
+      = f.text_field :sc_gl_income, :maxlength => 20
+      #msg-error
+        = error_message_for(@pc_app, :sc_gl_income, :prepend_text => "")
+    .control-group
+      = f.label :is_enabled, "Is Enabled ?", :class => 'control-label'
+      = f.check_box :is_enabled, {},"Y","N"
+      #msg-error
+        = error_message_for(@pc_app, :is_enabled, :prepend_text => "")
+
+  .form-actions
+    - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_pc_app', :value => label_name + ' PC App'
+    = link_to :Cancel,'/pc_apps', :name => 'cancel', :class=>"cancel btn"

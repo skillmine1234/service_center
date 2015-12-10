@@ -9,6 +9,8 @@ class Group < ActiveRecord::Base
       ['EcolUnapprovedRecord','EcolRule','EcolCustomer','EcolRemitter','EcolTransaction','UdfAttribute','IncomingFile','EcolFetchStatistic']
     when "bill-management"
       ['BmRule','BmBiller','BmBillPayment','BmAggregatorPayment','BmApp','BmUnapprovedRecord']
+    when "prepaid-card"
+      ['PcApp','PcFeeRule','PcUnapprovedRecord']
     else
       []
     end
