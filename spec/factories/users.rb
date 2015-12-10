@@ -12,6 +12,7 @@ FactoryGirl.define do
       Factory(:user_group, :user_id => user.id, :group_id => Factory(:group, :name => 'inward-remittance').id)
       Factory(:user_group, :user_id => user.id, :group_id => Factory(:group, :name => 'e-collect').id)
       Factory(:user_group, :user_id => user.id, :group_id => Factory(:group, :name => 'bill-management').id)
+      Factory(:user_group, :user_id => user.id, :group_id => Factory(:group, :name => 'prepaid-card').id)
     end
   end
 end
