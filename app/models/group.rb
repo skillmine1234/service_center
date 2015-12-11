@@ -12,7 +12,7 @@ class Group < ActiveRecord::Base
     when "prepaid-card"
       ['PcApp','PcFeeRule','PcUnapprovedRecord']
     when "flex-proxy"
-      ['FpUnapprovedRecord']
+      ['FpOperation','FpUnapprovedRecord']
     else
       []
     end

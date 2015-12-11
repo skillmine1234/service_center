@@ -1,0 +1,52 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8;'}
+    #form-details
+      %h3 FP Operation Details 
+      %br
+      %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
+        - unless @fp_operation.approval_status == 'A'
+          - can = can? :edit, @fp_operation
+          %a.btn{:href => "#{!(can) ? '#' : '/fp_operations/' + @fp_operation.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
+        = render 'fp_operations/approve', :@record => @fp_operation
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
+        - if !@fp_operation.nil?
+          %tr
+            %td.label Version
+            %td.value
+              = link_to "#{audit_count(@fp_operation)}", :controller => :fp_operations, :action => :audit_logs, :version_id => audit_count(@fp_operation), :id => @fp_operation.id
+          %tr
+            %td.label Form Errors
+            %td.value
+              = ' '
+            %td#msg-error
+              = error_message_for(@fp_operation, :base, :prepend_text => "")
+          %tr
+            %td.label Operation Name
+            %td.value
+              = @fp_operation.operation_name
+            %td#msg-error
+              = error_message_for(@fp_operation, :operation_name, :prepend_text => "")
+          %tr
+            %td.label Created By
+            %td.value
+              = @fp_operation.created_user.try(:username)
+            %td#msg-error
+              = error_message_for(@fp_operation, :created_by, :prepend_text => "")
+          %tr
+            %td.label Updated By
+            %td.value
+              = @fp_operation.updated_user.try(:username)
+            %td#msg-error
+              = error_message_for(@fp_operation, :updated_by, :prepend_text => "")
+          %tr
+            %td.label Created At
+            %td.value
+              = @fp_operation.created_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td#msg-error
+              = error_message_for(@fp_operation, :created_at, :prepend_text => "")
+          %tr
+            %td.label Updated At
+            %td.value
+              = @fp_operation.updated_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td#msg-error
+              = error_message_for(@fp_operation, :updated_at, :prepend_text => "")

@@ -1,0 +1,32 @@
+%br
+= link_to 'New FP Operation', new_fp_operation_path
+%br
+%br
+%h1 Listing FP Operations
+%h2.collapsible
+  Advanced Search
+  %span.caret
+.collapsible-content
+  = render :partial => 'advanced_search'
+%br
+= "Total Count: #{@fp_operations_count}"
+%br
+= will_paginate @fp_operations
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Operation Name
+
+  .tbody
+    - @fp_operations.each do |fp_operation|
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', fp_operation
+        %td{:style=>'text-align:left;'}
+          - if fp_operation.approval_status == 'U'
+            = link_to 'Edit', edit_fp_operation_path(fp_operation)
+        %td{:style=>'text-align:left;'}
+          = fp_operation.operation_name
