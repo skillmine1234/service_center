@@ -20,7 +20,7 @@ describe User do
   context "group_names" do 
     it "should return names if the user has_role" do 
       user = Factory(:user)
-      user.group_names.should == ["inward-remittance","e-collect","bill-management","prepaid-card"]
+      user.group_names.should == ["inward-remittance","e-collect","bill-management","prepaid-card","flex-proxy"]
     end
   end
 end
