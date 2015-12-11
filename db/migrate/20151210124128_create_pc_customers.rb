@@ -12,8 +12,8 @@ class CreatePcCustomers < ActiveRecord::Migration
       t.string :cust_uid, :limit => 255, :comment => "the unique no of the customer"
       t.date :birth_date, :comment => "the birth date of the customer"
       t.string :nationality, :limit => 255, :comment => "the nationality of the customer"
-      t.integer :country_code, :limit => 255, :comment => "the code of country where mobile no belongs to"
-      t.date :reg_date, :limit => 255, :comment => "the registration date of the customer"
+      t.integer :country_code, :comment => "the code of country where mobile no belongs to"
+      t.date :reg_date, :comment => "the registration date of the customer"
       t.string :gender, :limit => 255, :comment => "the gender of the customer"
       t.string :doc_type, :limit => 255, :comment => "the type of the document"
       t.string :doc_no, :limit => 255, :comment => "the unique no of the document"
@@ -31,16 +31,13 @@ class CreatePcCustomers < ActiveRecord::Migration
       t.string :card_name, :limit => 255, :comment => "the name of the card"
       t.string :card_desc, :limit => 255, :comment => "the description of the card"
       t.string :card_status, :limit => 255, :comment => "the status of the card"
-      t.date :card_issue_date, :limit => 255, :comment => "the issue date of the card"
-      t.integer :card_expiry_year, :comment => "the status of the card"
-      t.string :card_status, :limit => 255, :comment => "the status of the card"
-      t.date :card_issue_date, :limit => 255, :comment => "the issue date of the card"
+      t.date :card_issue_date, :comment => "the issue date of the card"
       t.integer :card_expiry_year, :comment => "the expiry year of the card"
       t.integer :card_expiry_month, :comment => "the expiry month of the card"
       t.string :card_currency_code, :limit => 255, :comment => "the currency code of the card amount"
       t.decimal :available_funds, :comment => "the available funds in card"
     end
     add_index :pc_customers, [:card_uid, :card_no], :unique => true
-    add_index :pc_customers, [:mobile_no, :email_id, :doc_no, :proxy_card_no], :unique => true, :name => "uk_on_mob_no_email_doc_no_and_proxy_card"
+    add_index :pc_customers, [:mobile_no, :email_id, :doc_no, :proxy_card_no], :unique => true, :name => "pc_customers_unique_constraint"
   end
 end
