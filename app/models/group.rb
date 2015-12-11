@@ -11,6 +11,8 @@ class Group < ActiveRecord::Base
       ['BmRule','BmBiller','BmBillPayment','BmAggregatorPayment','BmApp','BmUnapprovedRecord']
     when "prepaid-card"
       ['PcApp','PcFeeRule','PcUnapprovedRecord']
+    when "flex-proxy"
+      ['FpUnapprovedRecord']
     else
       []
     end

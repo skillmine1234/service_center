@@ -32,6 +32,7 @@ ServiceCenter::Application.routes.draw do
   resources :pc_apps
   resources :pc_unapproved_records
   resources :pc_fee_rules
+  resources :fp_unapproved_records
 
   namespace :api do
     namespace :v1 do

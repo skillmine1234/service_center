@@ -163,3 +163,11 @@
         = image_tag 'pc_fee_rules.png', :size => "80x80"
       %br
         = "PC Fee Rules"
+- if @current_user.group_names.include?("flex-proxy")
+  %h1 Flex Proxy
+  .slide-container
+    .box  
+      = link_to '/fp_unapproved_records' do
+        = image_tag 'work-list.jpg', :size => "80x80"
+      %br
+        = "Approval Worklist"
