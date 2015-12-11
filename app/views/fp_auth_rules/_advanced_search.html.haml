@@ -1,0 +1,13 @@
+= form_tag '', :method => 'get', :class => 'form-horizontal', :autocomplete=>"off" do
+  .control-group
+    = label_tag "Operation Name", "Operation Name", :class => 'control-label'
+    = text_field_tag :operation_name, params[:operation_name]
+  = hidden_field_tag :advanced_search, :true
+
+  .form-actions
+    = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"
+    %input{:type => 'reset', :value=>'Reset', :class => 'btn'}
+
+:javascript
+  var in_advanced_search = true;
+

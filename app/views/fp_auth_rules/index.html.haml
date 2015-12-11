@@ -1,0 +1,39 @@
+%br
+= link_to 'New FP Authorisation Rule', new_fp_auth_rule_path
+%br
+%br
+%h1 Listing FP Authorisation Rule
+%h2.collapsible
+  Advanced Search
+  %span.caret
+.collapsible-content
+  = render :partial => 'advanced_search'
+%br
+= "Total Count: #{@fp_auth_rules_count}"
+%br
+= will_paginate @fp_auth_rules
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Username
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Operation Name
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Is Enabled?
+
+  .tbody
+    - @fp_auth_rules.each do |fp_auth_rule|
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', fp_auth_rule
+        %td{:style=>'text-align:left;'}
+          = link_to 'Edit', edit_fp_auth_rule_path(fp_auth_rule)
+        %td{:style=>'text-align:left;'}
+          = fp_auth_rule.username
+        %td{:style=>'text-align:left;'}
+          = fp_auth_rule.operation_name
+        %td{:style=>'text-align:left;'}
+          = fp_auth_rule.is_enabled

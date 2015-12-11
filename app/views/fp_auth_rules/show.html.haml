@@ -1,0 +1,69 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8;'}
+    #form-details
+      %h3 FP Authorisation Rule Details 
+      %br
+      %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
+        - can = can? :edit, @fp_auth_rule
+        %a.btn{:href => "#{!(can) ? '#' : '/fp_auth_rules/' + @fp_auth_rule.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
+        = render 'fp_operations/approve', :@record => @fp_auth_rule
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
+        - if !@fp_auth_rule.nil?
+          %tr
+            %td.label Version
+            %td.value
+              = link_to "#{audit_count(@fp_auth_rule)}", :controller => :fp_auth_rules, :action => :audit_logs, :version_id => audit_count(@fp_auth_rule), :id => @fp_auth_rule.id
+          %tr
+            %td.label Form Errors
+            %td.value
+              = ' '
+            %td#msg-error
+              = error_message_for(@fp_auth_rule, :base, :prepend_text => "")
+          %tr
+            %td.label Username
+            %td.value
+              = @fp_auth_rule.username
+            %td#msg-error
+              = error_message_for(@fp_auth_rule, :username, :prepend_text => "")
+          %tr
+            %td.label Operation Name
+            %td.value
+              = @fp_auth_rule.operation_name
+            %td#msg-error
+              = error_message_for(@fp_auth_rule, :operation_name, :prepend_text => "")
+          %tr
+            %td.label Is Enabled?
+            %td.value
+              = @fp_auth_rule.is_enabled
+            %td#msg-error
+              = error_message_for(@fp_auth_rule, :is_enabled, :prepend_text => "")
+          %tr
+            %td.label 
+            %td.value
+              = @fp_auth_rule.username
+            %td#msg-error
+              = error_message_for(@fp_auth_rule, :username, :prepend_text => "")
+          %tr
+            %td.label Created By
+            %td.value
+              = @fp_auth_rule.created_user.try(:username)
+            %td#msg-error
+              = error_message_for(@fp_auth_rule, :created_by, :prepend_text => "")
+          %tr
+            %td.label Updated By
+            %td.value
+              = @fp_auth_rule.updated_user.try(:username)
+            %td#msg-error
+              = error_message_for(@fp_auth_rule, :updated_by, :prepend_text => "")
+          %tr
+            %td.label Created At
+            %td.value
+              = @fp_auth_rule.created_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td#msg-error
+              = error_message_for(@fp_auth_rule, :created_at, :prepend_text => "")
+          %tr
+            %td.label Updated At
+            %td.value
+              = @fp_auth_rule.updated_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td#msg-error
+              = error_message_for(@fp_auth_rule, :updated_at, :prepend_text => "")

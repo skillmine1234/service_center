@@ -68,7 +68,7 @@ describe FpOperation do
       record = fp_operation.fp_unapproved_record
       # the approval process destroys the U record, for an edited record 
       fp_operation.destroy
-      PcUnapprovedRecord.find_by_id(record.id).should be_nil
+      FpUnapprovedRecord.find_by_id(record.id).should be_nil
     end
   end
 

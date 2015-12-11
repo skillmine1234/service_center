@@ -1,0 +1,29 @@
+= simple_form_for @fp_auth_rule, :html => {:class=>'form-horizontal', :autocomplete=>"off", :id => "fp_auth_rule_form"} do |f|
+  .control-group
+    = f.label ' '
+    #msg-error
+      = error_message_for(@fp_auth_rule, :base, :prepend_text => "")
+  .form-main
+    = f.hidden_field :lock_version
+    = f.hidden_field :approved_id
+    = f.hidden_field :approved_version
+    .control-group
+      = f.label :username, "*Username", :class => 'control-label'
+      = f.text_field :username, :maxlength => 50
+      #msg-error
+        = error_message_for(@fp_auth_rule, :username, :prepend_text => "")
+    .control-group
+      = f.label :operation_name, "*Operation Name", :class => 'control-label'
+      = f.select :operation_name, FpOperation.all.map {|u| [u.operation_name, u.operation_name]}, :include_blank => 'select'
+      #msg-error
+        = error_message_for(@fp_auth_rule, :operation_name, :prepend_text => "")
+    .control-group
+      = f.label :is_enabled, "Is Enabled ?", :class => 'control-label'
+      = f.check_box :is_enabled, {},"Y","N"
+      #msg-error
+        = error_message_for(@pc_app, :is_enabled, :prepend_text => "")
+
+  .form-actions
+    - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_fp_auth_rule', :value => label_name + ' Autorisation Rule'
+    = link_to :Cancel,'/fp_auth_rules', :name => 'cancel', :class=>"cancel btn"
