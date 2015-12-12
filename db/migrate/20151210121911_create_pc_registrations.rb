@@ -1,6 +1,6 @@
 class CreatePcRegistrations < ActiveRecord::Migration
   def change
-    create_table :pc_registrations do |t|
+    create_table :pc_card_registrations do |t|
       t.string :req_no, :limit => 32, :null => false, :comment =>  "the unique request number sent by the client"
       t.string :app_id, :limit => 32, :null => false, :comment => "the identifier for the client"
       t.integer :attempt_no, :null => false, :comment => "the attempt number of the request, failed requests can be retried"
@@ -27,12 +27,13 @@ class CreatePcRegistrations < ActiveRecord::Migration
       t.string :country, :limit => 255, :comment => "the country name of the customer"
       t.string :postal_code, :limit => 15, :comment => "the postal code of the city"
       t.string :proxy_card_no, :limit => 255, :comment => "the proxy no of the card issued to the customer"
-      t.integer :pc_customer_id, :comment => "the id of the row that represents the request that is related to this recrod"
+      t.integer :pc_customer_id, :comment => "the foreign key to the pc_customers table"
       t.string :rep_no, :limit => 32, :comment => "the unique response number sent back by the API"
       t.string :rep_version, :limit => 5, :comment => "the service version sent in the reply"
       t.datetime :rep_timestamp, :comment => "the SYSDATE when the reply was sent to the client"
       t.string :fault_code, :limit => 255, :comment => "the code that identifies the business failure reason/exception"
       t.string :fault_reason, :limit => 1000, :comment => "the english reason of the business failure reason/exception "
+      t.index([:req_no, :app_id, :attempt_no], :unique => true, :name => 'uk_pc_card_regs')
     end
-  end
+  end  
 end

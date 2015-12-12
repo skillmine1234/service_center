@@ -10,12 +10,13 @@ class CreatePcAuditSteps < ActiveRecord::Migration
       t.string :fault_code, :limit => 255, :comment => 'the code that identifies the exception, if an exception occured in the ESB'
       t.string :fault_reason, :limit => 1000, :comment => 'the english reason of the exception, if an exception occurred in the ESB'
       t.string :req_reference, :limit => 255, :comment => 'the reference number that was sent to the service provider'
-      t.text :req_bitstream, :comment => 'the full request payload as received from the client'
       t.datetime :req_timestamp, :comment => 'the SYSDATE when the request was sent to the service provider'
       t.string :rep_reference, :comment => 'the reference number as received from ther service provider'
-      t.text :rep_bitstream, :comment => 'the full reply payload as sent to the client'
       t.datetime :rep_timestamp, :comment => 'the SYSDATE when the reply was sent to the client'
+      t.text :req_bitstream, :comment => 'the full request payload as received from the client'
+      t.text :rep_bitstream, :comment => 'the full reply payload as sent to the client'
       t.text :fault_bitstream, :comment => 'the complete exception list/stack trace of an exception that occured in the ESB'  
+      t.index([:pc_auditable_type, :pc_auditable_id, :step_no, :attempt_no], :unique => true, :name => "uk_pc_audit_steps")
     end
   end
 end

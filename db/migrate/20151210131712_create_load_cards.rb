@@ -1,6 +1,6 @@
 class CreateLoadCards < ActiveRecord::Migration
   def change
-    create_table :load_cards do |t|
+    create_table :pc_load_cards do |t|
       t.string :req_no, :limit => 32, :null => false, :comment =>  "the unique request number sent by the client"
       t.string :app_id, :limit => 32, :null => false, :comment => "the identifier for the client"
       t.integer :attempt_no, :null => false, :comment => "the attempt number of the request, failed requests can be retried"
@@ -19,6 +19,7 @@ class CreateLoadCards < ActiveRecord::Migration
       t.string :fault_code, :limit => 255, :comment => "the code that identifies the business failure reason/exception"
       t.string :fault_reason, :limit => 1000, :comment => "the english reason of the business failure reason/exception"
       t.string :cust_uid, :limit => 255, :comment => "the unique no of the customer"
-    end
+      t.index([:req_no, :app_id, :attempt_no], :unique => true, :name => 'uk_pc_load_cards')
+    end    
   end
 end

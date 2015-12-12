@@ -16,6 +16,7 @@ class CreatePcBlockCards < ActiveRecord::Migration
       t.datetime :rep_timestamp, :comment => "the SYSDATE when the reply was sent to the client"
       t.string :fault_code, :limit => 255, :comment => "the code that identifies the business failure reason/exception"
       t.string :fault_reason, :limit => 1000, :comment => "the english reason of the business failure reason/exception"
-    end
-  end
+      t.index([:req_no, :app_id, :attempt_no], :unique => true, :name => 'uk_pc_block_cards_1')
+    end    
+  end  
 end

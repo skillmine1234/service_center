@@ -1,7 +1,7 @@
 class CreatePcCustomers < ActiveRecord::Migration
   def change
     create_table :pc_customers do |t|
-      t.string :mobile_no, :limit => 255, :comment => "the mobile no of the customer"
+      t.string :mobile_no, :null => false, :limit => 255, :comment => "the mobile no of the customer"
       t.string :title, :limit => 15, :comment => "the title of the customer"
       t.string :first_name, :limit => 255, :comment => "the first name of the customer"
       t.string :last_name, :limit => 255, :comment => "the last name of the customer"
@@ -24,9 +24,9 @@ class CreatePcCustomers < ActiveRecord::Migration
       t.string :state, :limit => 255, :comment => "the state name of the customer"
       t.string :country, :limit => 255, :comment => "the country name of the customer"
       t.string :postal_code, :limit => 15, :comment => "the postal code of the city"
-      t.string :proxy_card_no, :limit => 255, :comment => "the proxy no of the card issued to the customer"
-      t.string :card_uid, :limit => 255, :comment => "the unique id of the card "
-      t.string :card_no, :limit => 255, :comment => "the unique no of the card"
+      t.string :proxy_card_no, :null => false, :limit => 255, :comment => "the proxy no of the card issued to the customer"
+      t.string :card_uid, :null => false, :limit => 255, :comment => "the unique id of the card "
+      t.string :card_no, :null => false, :limit => 255, :comment => "the unique no of the card"
       t.string :card_type, :limit => 255, :comment => "the type of the card"
       t.string :card_name, :limit => 255, :comment => "the name of the card"
       t.string :card_desc, :limit => 255, :comment => "the description of the card"
@@ -36,8 +36,10 @@ class CreatePcCustomers < ActiveRecord::Migration
       t.integer :card_expiry_month, :comment => "the expiry month of the card"
       t.string :card_currency_code, :limit => 255, :comment => "the currency code of the card amount"
       t.decimal :available_funds, :comment => "the available funds in card"
+      t.index([:mobile_no], :unique => true, :name => 'uk_pc_card_custs_1')
+      t.index([:proxy_card_no], :unique => true, :name => 'uk_pc_card_custs_2')
+      t.index([:card_uid], :unique => true, :name => 'uk_pc_card_custs_3')
+      t.index([:card_no], :unique => true, :name => 'uk_pc_card_custs_4')
     end
-    add_index :pc_customers, [:card_uid, :card_no], :unique => true
-    add_index :pc_customers, [:mobile_no, :email_id, :doc_no, :proxy_card_no], :unique => true, :name => "pc_customers_unique_constraint"
   end
 end

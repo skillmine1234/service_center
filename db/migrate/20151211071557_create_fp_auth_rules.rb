@@ -1,9 +1,9 @@
 class CreateFpAuthRules < ActiveRecord::Migration
   def change
     create_table :fp_auth_rules do |t|
-      t.string :username, :limit => 255, :null => false
-      t.string :operation_name, :limit => 255, :null => false
-      t.string :is_enabled, :limit => 1
+      t.string :username, :limit => 255, :null => false, :comment =>  "the identity that is allowed access to the operation"
+      t.string :operation_name, :limit => 255, :null => false, :comment =>  "the operation to which access is granted"
+      t.string :is_enabled, :limit => 1, :comment =>  "the indicator to denote whether the access is enabled"
       t.integer :lock_version, :null => false
       t.string :approval_status, :limit => 1, :null => false, :default => 'U'
       t.string :last_action, :limit => 1
@@ -12,7 +12,7 @@ class CreateFpAuthRules < ActiveRecord::Migration
       t.string :created_by, :limit => 20
       t.string :updated_by, :limit => 20
       t.timestamps null: false
-    end
-    add_index :fp_auth_rules, [:username, :operation_name], :unique => true
+      t.index([:username, :operation_name, :approval_status], :unique => true, :name => 'uk_fp_auth_rules')
+    end    
   end
 end
