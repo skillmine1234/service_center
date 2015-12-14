@@ -7,7 +7,6 @@
     = f.hidden_field :lock_version
     = f.hidden_field :approved_id
     = f.hidden_field :approved_version
-    = f.hidden_field :pc_app_id
     .control-group
       = f.label :app_id, "*App ID", :class => 'control-label'
       = f.text_field :app_id, :maxlength => 20
@@ -23,11 +22,11 @@
       = f.number_field :no_of_tiers, :min => 1, :max => 3
       #msg-error
         = error_message_for(@pc_fee_rule, :no_of_tiers, :prepend_text => "")    
-    .control-group
-      = f.label :tier1_from_amt, "Tier 1 From Amount", :class => 'control-label'
-      = f.text_field :tier1_from_amt
-      #msg-error
-        = error_message_for(@pc_fee_rule, :tier1_from_amt, :prepend_text => "")
+    / .control-group
+    /   = f.label :tier1_from_amt, "Tier 1 From Amount", :class => 'control-label'
+    /   = f.text_field :tier1_from_amt
+    /   #msg-error
+    /     = error_message_for(@pc_fee_rule, :tier1_from_amt, :prepend_text => "")
     .control-group
       = f.label :tier1_to_amt, "Tier 1 To Amount", :class => 'control-label'
       = f.text_field :tier1_to_amt
@@ -58,11 +57,11 @@
       = f.text_field :tier1_max_sc_amt
       #msg-error
         = error_message_for(@pc_fee_rule, :tier1_max_sc_amt, :prepend_text => "")
-    .control-group
-      = f.label :tier2_from_amt, "Tier 2 From Amount", :class => 'control-label'
-      = f.text_field :tier2_from_amt
-      #msg-error
-        = error_message_for(@pc_fee_rule, :tier2_from_amt, :prepend_text => "")
+    / .control-group
+    /   = f.label :tier2_from_amt, "Tier 2 From Amount", :class => 'control-label'
+    /   = f.text_field :tier2_from_amt
+    /   #msg-error
+    /     = error_message_for(@pc_fee_rule, :tier2_from_amt, :prepend_text => "")
     .control-group
       = f.label :tier2_to_amt, "Tier 2 From Amount", :class => 'control-label'
       = f.text_field :tier2_to_amt
@@ -93,16 +92,16 @@
       = f.text_field :tier2_max_sc_amt
       #msg-error
         = error_message_for(@pc_fee_rule, :tier2_max_sc_amt, :prepend_text => "")
-    .control-group
-      = f.label :tier3_from_amt, "Tier 3 From Amount", :class => 'control-label'
-      = f.text_field :tier3_from_amt
-      #msg-error
-        = error_message_for(@pc_fee_rule, :tier3_from_amt, :prepend_text => "")
-    .control-group
-      = f.label :tier3_to_amt, "Tier 3 From Amount", :class => 'control-label'
-      = f.text_field :tier3_to_amt
-      #msg-error
-        = error_message_for(@pc_fee_rule, :tier3_to_amt, :prepend_text => "")
+    / .control-group
+    /   = f.label :tier3_from_amt, "Tier 3 From Amount", :class => 'control-label'
+    /   = f.text_field :tier3_from_amt
+    /   #msg-error
+    /     = error_message_for(@pc_fee_rule, :tier3_from_amt, :prepend_text => "")
+    / .control-group
+    /   = f.label :tier3_to_amt, "Tier 3 From Amount", :class => 'control-label'
+    /   = f.text_field :tier3_to_amt
+    /   #msg-error
+    /     = error_message_for(@pc_fee_rule, :tier3_to_amt, :prepend_text => "")
     .control-group
       = f.label :tier3_method, "Tier 3 Method", :class => 'control-label'
       = f.select :tier3_method, options_for_select(PcFeeRule.options_for_tier_method, @pc_fee_rule), :prompt => 'Select'

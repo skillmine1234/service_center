@@ -17,8 +17,8 @@ describe PcFeeRule do
       should validate_uniqueness_of(:app_id).scoped_to(:txn_kind, :approval_status)
     end
     
-    [:tier1_from_amt, :tier1_to_amt, :tier1_fixed_amt, :tier1_min_sc_amt, :tier1_max_sc_amt, :tier2_from_amt, :tier2_to_amt, 
-      :tier2_fixed_amt, :tier2_min_sc_amt, :tier2_max_sc_amt, :tier3_from_amt, :tier3_to_amt, :tier3_fixed_amt, :tier3_min_sc_amt, 
+    [:tier1_to_amt, :tier1_fixed_amt, :tier1_min_sc_amt, :tier1_max_sc_amt, :tier2_to_amt, 
+      :tier2_fixed_amt, :tier2_min_sc_amt, :tier2_max_sc_amt, :tier3_fixed_amt, :tier3_min_sc_amt, 
       :tier3_max_sc_amt, :tier1_pct_value, :tier2_pct_value, :tier3_pct_value, :no_of_tiers].each do |att|
       it {should validate_numericality_of(att)}
     end
@@ -73,7 +73,7 @@ describe PcFeeRule do
       pc_fee_rule.pc_unapproved_record.should_not be_nil
       record = pc_fee_rule.pc_unapproved_record
       # we are editing the U record, before it is approved
-      pc_fee_rule.tier1_from_amt = 1000
+      pc_fee_rule.tier1_to_amt = 1000
       pc_fee_rule.save
       pc_fee_rule.reload
       pc_fee_rule.pc_unapproved_record.should == record

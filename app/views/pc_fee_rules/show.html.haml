@@ -37,12 +37,12 @@
               = @pc_fee_rule.no_of_tiers
             %td#msg-error
               = error_message_for(@pc_fee_rule, :no_of_tiers, :prepend_text => "")
-          %tr
-            %td.label Tier 1 From Amount
-            %td.value
-              = number_with_precision(@pc_fee_rule.tier1_from_amt, :precision => 2) || 0
-            %td#msg-error
-              = error_message_for(@pc_fee_rule, :tier1_from_amt, :prepend_text => "")
+          / %tr
+          /   %td.label Tier 1 From Amount
+          /   %td.value
+          /     = number_with_precision(@pc_fee_rule.tier1_from_amt, :precision => 2) || 0
+          /   %td#msg-error
+          /     = error_message_for(@pc_fee_rule, :tier1_from_amt, :prepend_text => "")
           %tr
             %td.label Tier 1 To Amount
             %td.value
@@ -79,12 +79,12 @@
               = number_with_precision(@pc_fee_rule.tier1_max_sc_amt, :precision => 2) || 0
             %td#msg-error
               = error_message_for(@pc_fee_rule, :tier1_max_sc_amt, :prepend_text => "")
-          %tr
-            %td.label Tier 2 From Amount
-            %td.value
-              = number_with_precision(@pc_fee_rule.tier2_from_amt, :precision => 2) || 0
-            %td#msg-error
-              = error_message_for(@pc_fee_rule, :tier2_from_amt, :prepend_text => "")
+          / %tr
+          /   %td.label Tier 2 From Amount
+          /   %td.value
+          /     = number_with_precision(@pc_fee_rule.tier2_from_amt, :precision => 2) || 0
+          /   %td#msg-error
+          /     = error_message_for(@pc_fee_rule, :tier2_from_amt, :prepend_text => "")
           %tr
             %td.label Tier 2 To Amount
             %td.value
@@ -121,18 +121,18 @@
               = number_with_precision(@pc_fee_rule.tier2_max_sc_amt, :precision => 2) || 0
             %td#msg-error
               = error_message_for(@pc_fee_rule, :tier2_max_sc_amt, :prepend_text => "")
-          %tr
-            %td.label Tier 3 From Amount
-            %td.value
-              = number_with_precision(@pc_fee_rule.tier2_from_amt, :precision => 2) || 0
-            %td#msg-error
-              = error_message_for(@pc_fee_rule, :tier3_from_amt, :prepend_text => "")
-          %tr
-            %td.label Tier 3 To Amount
-            %td.value
-              = number_with_precision(@pc_fee_rule.tier3_to_amt, :precision => 2) || 0
-            %td#msg-error
-              = error_message_for(@pc_fee_rule, :tier3_to_amt, :prepend_text => "")
+          / %tr
+          /   %td.label Tier 3 From Amount
+          /   %td.value
+          /     = number_with_precision(@pc_fee_rule.tier2_from_amt, :precision => 2) || 0
+          /   %td#msg-error
+          /     = error_message_for(@pc_fee_rule, :tier3_from_amt, :prepend_text => "")
+          / %tr
+          /   %td.label Tier 3 To Amount
+          /   %td.value
+          /     = number_with_precision(@pc_fee_rule.tier3_to_amt, :precision => 2) || 0
+          /   %td#msg-error
+          /     = error_message_for(@pc_fee_rule, :tier3_to_amt, :prepend_text => "")
           %tr
             %td.label Tier 3 Method
             %td.value
