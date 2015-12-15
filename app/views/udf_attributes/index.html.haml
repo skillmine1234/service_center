@@ -13,6 +13,7 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
       Class Name
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Attribute Name
@@ -34,6 +35,11 @@
           = link_to 'Show', udf_attribute
         %td{:style=>'text-align:left;'}
           = link_to 'Edit', edit_udf_attribute_path(udf_attribute)
+        %td{:style=>'text-align:left;'}
+          - if udf_attribute.approval_status == 'U'
+            = link_to 'Cancel', udf_attribute, :method => :delete, :data => { :confirm => 'Are you sure?' }
+          - else
+            = ""
         %td{:style=>'text-align:left;'}
           = udf_attribute.class_name
         %td{:style=>'text-align:left;'}

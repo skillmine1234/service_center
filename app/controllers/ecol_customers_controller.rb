@@ -81,6 +81,18 @@ class EcolCustomersController < ApplicationController
     end
     redirect_to @ecol_customer
   end
+  
+  def destroy
+    ecol_customer = EcolCustomer.unscoped.find_by_id(params[:id])
+    if ecol_customer.approval_status == 'U' and (current_user == ecol_customer.created_user or (can? :approve, ecol_customer))
+      ecol_customer = ecol_customer.destroy
+      flash[:alert] = "Ecollect Customer record has been deleted!"
+      redirect_to ecol_customers_path(:approval_status => 'U')
+    else
+      flash[:alert] = "You cannot delete this record!"
+      redirect_to ecol_customers_path(:approval_status => 'U')
+    end
+  end
 
   private
 

@@ -76,6 +76,18 @@ class UdfAttributesController < ApplicationController
     end
     redirect_to @udf_attribute
   end
+  
+  def destroy
+    udf_attribute = UdfAttribute.unscoped.find_by_id(params[:id])
+    if udf_attribute.approval_status == 'U' and (current_user == udf_attribute.created_user or (can? :approve, udf_attribute))
+      udf_attribute = udf_attribute.destroy
+      flash[:alert] = "UdfAttribute record has been deleted!"
+      redirect_to udf_attributes_path(:approval_status => 'U')
+    else
+      flash[:alert] = "You cannot delete this record!"
+      redirect_to udf_attributes_path(:approval_status => 'U')
+    end
+  end
 
 private
 

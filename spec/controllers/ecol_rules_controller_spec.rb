@@ -189,4 +189,28 @@ describe EcolRulesController do
       ecol_rule.approval_status.should == 'A'
     end
   end
+  
+  describe "destroy" do
+    it "should destroy the ecol_remitter when created_user = current_user" do 
+      ecol_rule = Factory(:ecol_rule, :created_by => @user.id)
+      EcolUnapprovedRecord.count.should == 1
+      delete :destroy, {:id => ecol_rule.id}
+      EcolRule.unscoped.find_by_id(ecol_rule.id).should be_nil
+      EcolUnapprovedRecord.count.should == 0
+    end
+
+    it "should not destroy the ecol_remitter when created_user != current_user" do 
+      ecol_rule = Factory(:ecol_rule, :created_by => 5)
+      delete :destroy, {:id => ecol_rule.id}
+      flash[:alert].should  match(/You cannot delete this record!/)
+      EcolRule.unscoped.find_by_id(ecol_rule.id).should_not be_nil
+    end
+    
+    it "should not destroy the ecol_remitter when approval_status = 'A'" do 
+      ecol_remitter = Factory(:ecol_rule, :approval_status => "A")
+      delete :destroy, {:id => ecol_remitter.id}
+      flash[:alert].should  match(/You cannot delete this record!/)
+      EcolRule.unscoped.find_by_id(ecol_remitter.id).should_not be_nil
+    end
+  end
 end

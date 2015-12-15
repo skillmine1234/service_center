@@ -81,6 +81,18 @@ class EcolRulesController < ApplicationController
     end
     redirect_to @ecol_rule
   end
+  
+  def destroy
+    ecol_rule = EcolRule.unscoped.find_by_id(params[:id])
+    if ecol_rule.approval_status == 'U' and (current_user == ecol_rule.created_user or (can? :approve, ecol_rule))
+      ecol_rule = ecol_rule.destroy
+      flash[:alert] = "Ecollect Rule record has been deleted!"
+      redirect_to ecol_rules_path(:approval_status => 'U')
+    else
+      flash[:alert] = "You cannot delete this record!"
+      redirect_to ecol_rules_path(:approval_status => 'U')
+    end
+  end
 
   private
 

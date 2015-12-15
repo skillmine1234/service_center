@@ -18,6 +18,7 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
       Customer Code
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Customer Sub Code
@@ -43,6 +44,11 @@
           = link_to 'Show', ecol_remitter
         %td{:style=>'text-align:left;'}
           = link_to 'Edit', edit_ecol_remitter_path(ecol_remitter)
+        %td{:style=>'text-align:left;'}
+          - if ecol_remitter.approval_status == 'U'
+            = link_to 'Cancel', ecol_remitter, :method => :delete, :data => { :confirm => 'Are you sure?' }
+          - else
+            = ""
         %td{:style=>'text-align:left;'}
           = ecol_remitter.customer_code
         %td{:style=>'text-align:left;'}

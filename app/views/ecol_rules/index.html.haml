@@ -6,6 +6,7 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
       IFSC Code
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Pool Account No
@@ -26,6 +27,11 @@
           = link_to 'Show', ecol_rule
         %td{:style=>'text-align:left;'}
           = link_to 'Edit', edit_ecol_rule_path(ecol_rule)
+        %td{:style=>'text-align:left;'}
+          - if ecol_rule.approval_status == 'U'
+            = link_to 'Cancel', ecol_rule, :method => :delete, :data => { :confirm => 'Are you sure?' }
+          - else
+            = ""
         %td{:style=>'text-align:left;'}
           = ecol_rule.ifsc
         %td{:style=>'text-align:left;'}

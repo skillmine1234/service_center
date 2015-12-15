@@ -211,6 +211,29 @@ describe UdfAttributesController do
       udf_attribute.class_name.should == 'EcolRemitter'
       udf_attribute.approval_status.should == 'A'
     end
+  end
+  
+  describe "destroy" do
+    it "should destroy the udf_attribute when created_user = current_user" do 
+      udf_attribute = Factory(:udf_attribute, :created_by => @user.id)
+      EcolUnapprovedRecord.count.should == 1
+      delete :destroy, {:id => udf_attribute.id}
+      UdfAttribute.unscoped.find_by_id(udf_attribute.id).should be_nil
+      EcolUnapprovedRecord.count.should == 0
+    end
 
+    it "should not destroy the udf_attribute when created_user != current_user" do 
+      udf_attribute = Factory(:udf_attribute, :created_by => 5)
+      delete :destroy, {:id => udf_attribute.id}
+      flash[:alert].should  match(/You cannot delete this record!/)
+      UdfAttribute.unscoped.find_by_id(udf_attribute.id).should_not be_nil
+    end
+    
+    it "should not destroy the ecol_remitter when approval_status = 'A'" do 
+      udf_attribute = Factory(:udf_attribute, :approval_status => "A")
+      delete :destroy, {:id => udf_attribute.id}
+      flash[:alert].should  match(/You cannot delete this record!/)
+      UdfAttribute.unscoped.find_by_id(udf_attribute.id).should_not be_nil
+    end
   end
 end

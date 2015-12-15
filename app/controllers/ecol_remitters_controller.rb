@@ -80,6 +80,18 @@ class EcolRemittersController < ApplicationController
     end
     redirect_to @ecol_remitter
   end
+  
+  def destroy
+    ecol_remitter = EcolRemitter.unscoped.find_by_id(params[:id])
+    if ecol_remitter.approval_status == 'U' and (current_user == ecol_remitter.created_user or (can? :approve, ecol_remitter))
+      ecol_remitter = ecol_remitter.destroy
+      flash[:alert] = "Ecollect Remitter record has been deleted!"
+      redirect_to ecol_remitters_path(:approval_status => 'U')
+    else
+      flash[:alert] = "You cannot delete this record!"
+      redirect_to ecol_remitters_path(:approval_status => 'U')
+    end
+  end
 
   private
 

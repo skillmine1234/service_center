@@ -211,6 +211,29 @@ describe EcolRemittersController do
       ecol_remitter.remitter_code.should == 'BarFoo'
       ecol_remitter.approval_status.should == 'A'
     end
+  end
+  
+  describe "destroy" do
+    it "should destroy the ecol_remitter when created_user = current_user" do 
+      ecol_remitter = Factory(:ecol_remitter, :created_by => @user.id)
+      EcolUnapprovedRecord.count.should == 1
+      delete :destroy, {:id => ecol_remitter.id}
+      EcolRemitter.unscoped.find_by_id(ecol_remitter.id).should be_nil
+      EcolUnapprovedRecord.count.should == 0
+    end
+    
+    it "should not destroy the ecol_remitter when created_user != current_user" do 
+      ecol_remitter = Factory(:ecol_remitter, :created_by => 5)
+      delete :destroy, {:id => ecol_remitter.id}
+      flash[:alert].should  match(/You cannot delete this record!/)
+      EcolRemitter.unscoped.find_by_id(ecol_remitter.id).should_not be_nil
+    end
 
+    it "should not destroy the ecol_remitter when approval_status = 'A'" do 
+      ecol_remitter = Factory(:ecol_remitter, :approval_status => "A")
+      delete :destroy, {:id => ecol_remitter.id}
+      flash[:alert].should  match(/You cannot delete this record!/)
+      EcolRemitter.unscoped.find_by_id(ecol_remitter.id).should_not be_nil
+    end
   end
 end
