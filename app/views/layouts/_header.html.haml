@@ -4,13 +4,13 @@
   %span.caption
     .brand_name
       &nbsp;Service Center&nbsp;
-  %ul.nav
-    %li
+  %ul.nav{:style => "width: 16%;"}
+    %li{:style => "width: 33%;"}
       %a{:href => "/"}
         %i.icon-list
         Dashboard
-    %li#user.dropdown
-      = link_to content_tag(:span, content_tag(:i, '', :class=>"icon icon-white icon-user") + "#{current_user.name}"),"#"
+    %li#user.dropdown{:style => "width: 65%;"}
+      = link_to content_tag(:span, content_tag(:i, '', :class=>"icon icon-white icon-user") + "#{current_user.name}"),"#", :style=>"display: block; padding: 0 2px 0 2px; white-space: nowrap; width: 100%; overflow: hidden; text-overflow: ellipsis;"
       %ul.dropdown-menu
         %li
           = (link_to "Sign out", destroy_user_session_path, :method => :delete)
