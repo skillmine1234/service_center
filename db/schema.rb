@@ -188,7 +188,6 @@ ActiveRecord::Schema.define(version: 20151214122321) do
     t.string   "bene_name"
     t.string   "created_by",        limit: 20
     t.string   "updated_by",        limit: 20
-  end
 
   create_table "bm_apps", force: :cascade do |t|
     t.string   "app_id",           limit: 20,                              null: false
@@ -574,6 +573,7 @@ ActiveRecord::Schema.define(version: 20151214122321) do
   end
 
   add_index "ecol_customers", ["code", "approval_status"], name: "customer_index_on_status", unique: true
+  add_index "ecol_customers", ["code", "approval_status"], name: "index_ecol_customers_on_code_and_approval_status", unique: true
 
   create_table "ecol_fetch_statistics", force: :cascade do |t|
     t.datetime "last_neft_at",                 null: false
