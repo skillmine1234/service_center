@@ -10,7 +10,7 @@ class CreateLoadCards < ActiveRecord::Migration
       t.string :customer_id, :limit => 15, :comment => "the unique id of the customer that initiated the request"
       t.string :mobile_no, :limit => 255, :comment => "the mobile no of the customer that initiated the request"
       t.string :debit_acct_no, :limit => 255, :comment => "the account no of the customer that initaiated the request"
-      t.decimal :load_amount, :comment => "the amount value which will be load to the card"
+      t.number :load_amount, :comment => "the amount value which will be load to the card"
       t.string :email_id, :limit => 255, :comment => "the email id of the customer"
       t.string :password, :limit => 255, :comment => "the password of the customer"
       t.string :rep_no, :limit => 32, :comment => "the unique response number sent back by the API"
