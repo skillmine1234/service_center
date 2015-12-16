@@ -9,7 +9,7 @@ class CreatePartners < ActiveRecord::Migration
       t.string :account_ifsc, :limit => 20, :null => false
       t.integer :txn_hold_period_days, :default => 7, :null => false
       t.string :identity_user_id, :limit => 20
-      t.decimal :low_balance_alert_at
+      t.number :low_balance_alert_at
       t.string :remitter_sms_allowed, :limit => 1
       t.string :remitter_email_allowed, :limit => 1
       t.string :beneficiary_sms_allowed, :limit => 1
