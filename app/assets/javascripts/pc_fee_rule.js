@@ -66,7 +66,7 @@ $(document).ready(function() {
       $('#pc_fee_rule_tier' + i + '_max_sc_amt').prop('disabled',true);
     }
 	}
-	else if (no_of_tiers == 2){
+	else if ($("#pc_fee_rule_no_of_tiers").val() == 2){
     $('#pc_fee_rule_tier1_to_amt').prop('disabled',false);
     $('#pc_fee_rule_tier1_method').prop('disabled',false);
     $('#pc_fee_rule_tier1_fixed_amt').prop('disabled',false);
