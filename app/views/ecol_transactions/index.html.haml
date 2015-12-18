@@ -69,7 +69,7 @@
               = link_to ecol_transaction.validation_status, "#", :class => 'validation-link', :href => "#validationText", data: { validation_result: ecol_transaction.validation_result}
             - else
               = ecol_transaction.validation_status
-  .form-actions
+  .form-actions{:style=>'padding-left: 14%;'}
     = hidden_field_tag :status
     = hidden_field_tag :approval
     = hidden_field_tag :notify_status
