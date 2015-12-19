@@ -12,6 +12,7 @@ class PcFeeRule < ActiveRecord::Base
   validates :tier1_pct_value, :tier2_pct_value, :tier3_pct_value, :numericality => {:greater_than_or_equal_to => 0, :less_than_or_equal_to => 100}, :allow_blank => true
   validates :no_of_tiers, :numericality => {:greater_than_or_equal_to => 1, :less_than_or_equal_to => 3 }, :allow_blank => true
   validate :app_id_should_exist
+  validate :min_and_max_sc_amt
   
   def self.options_for_txn_kind
     [['loadCard','LC'],['payToAccount','PA'],['payToContact','PC'],['topUp','TU']]
@@ -25,6 +26,12 @@ class PcFeeRule < ActiveRecord::Base
     pc_app = PcApp.find_by(:app_id => self.app_id)
     if pc_app.nil? 
       errors.add(:app_id, "Invalid PcApp")
+    end
+  end
+  
+  def min_and_max_sc_amt
+    if (self.tier1_min_sc_amt > self.tier1_max_sc_amt) ||  (self.tier2_min_sc_amt > self.tier2_max_sc_amt) || (self.tier3_min_sc_amt > self.tier3_max_sc_amt)
+      errors[:base] << "Minimum SC Amount should be less than Maximum SC Amount"
     end
   end
 end

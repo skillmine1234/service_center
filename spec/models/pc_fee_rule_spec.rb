@@ -123,4 +123,17 @@ describe PcFeeRule do
       pc_fee_rule2.enable_approve_button?.should == true
     end
   end
+  
+  context "min_and_max_sc_amt" do
+    it "should return error when min_sc_amt > max_sc_amt" do
+      pc_fee_rule1 = Factory.build(:pc_fee_rule, :tier1_min_sc_amt => 50, :tier1_max_sc_amt => 40)
+      pc_fee_rule1.save.should == false
+      pc_fee_rule1.errors[:base].should == ["Minimum SC Amount should be less than Maximum SC Amount"]
+      pc_fee_rule2 = Factory.build(:pc_fee_rule, :tier2_min_sc_amt => 50, :tier2_max_sc_amt => 40)
+      pc_fee_rule2.save.should == false
+      pc_fee_rule2.errors[:base].should == ["Minimum SC Amount should be less than Maximum SC Amount"]
+      pc_fee_rule3 = Factory.build(:pc_fee_rule, :tier3_min_sc_amt => 50, :tier3_max_sc_amt => 40)
+      pc_fee_rule3.save.should == false
+      pc_fee_rule3.errors[:base].should == ["Minimum SC Amount should be less than Maximum SC Amount"]
+    end
 end
