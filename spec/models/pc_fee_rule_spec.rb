@@ -17,11 +17,11 @@ describe PcFeeRule do
       should validate_uniqueness_of(:app_id).scoped_to(:txn_kind, :approval_status)
     end
     
-    [:tier1_to_amt, :tier1_fixed_amt, :tier1_min_sc_amt, :tier1_max_sc_amt, :tier2_to_amt, 
-      :tier2_fixed_amt, :tier2_min_sc_amt, :tier2_max_sc_amt, :tier3_fixed_amt, :tier3_min_sc_amt, 
-      :tier3_max_sc_amt, :tier1_pct_value, :tier2_pct_value, :tier3_pct_value, :no_of_tiers].each do |att|
-      it {should validate_numericality_of(att)}
-    end
+    # [:tier1_to_amt, :tier1_fixed_amt, :tier1_min_sc_amt, :tier1_max_sc_amt, :tier2_to_amt,
+    #   :tier2_fixed_amt, :tier2_min_sc_amt, :tier2_max_sc_amt, :tier3_fixed_amt, :tier3_min_sc_amt,
+    #   :tier3_max_sc_amt, :tier1_pct_value, :tier2_pct_value, :tier3_pct_value, :no_of_tiers].each do |att|
+    #   it {should validate_numericality_of(att)}
+    # end
   end
   
   context "options_for_txn_kind" do
@@ -128,12 +128,13 @@ describe PcFeeRule do
     it "should return error when min_sc_amt > max_sc_amt" do
       pc_fee_rule1 = Factory.build(:pc_fee_rule, :tier1_min_sc_amt => 50, :tier1_max_sc_amt => 40)
       pc_fee_rule1.save.should == false
-      pc_fee_rule1.errors[:base].should == ["Minimum SC Amount should be less than Maximum SC Amount"]
+      pc_fee_rule1.errors[:base].should == ["Tier 1 Minimum SC Amount should be less than Maximum SC Amount"]
       pc_fee_rule2 = Factory.build(:pc_fee_rule, :tier2_min_sc_amt => 50, :tier2_max_sc_amt => 40)
       pc_fee_rule2.save.should == false
-      pc_fee_rule2.errors[:base].should == ["Minimum SC Amount should be less than Maximum SC Amount"]
+      pc_fee_rule2.errors[:base].should == ["Tier 2 Minimum SC Amount should be less than Maximum SC Amount"]
       pc_fee_rule3 = Factory.build(:pc_fee_rule, :tier3_min_sc_amt => 50, :tier3_max_sc_amt => 40)
       pc_fee_rule3.save.should == false
-      pc_fee_rule3.errors[:base].should == ["Minimum SC Amount should be less than Maximum SC Amount"]
+      pc_fee_rule3.errors[:base].should == ["Tier 3 Minimum SC Amount should be less than Maximum SC Amount"]
     end
+  end
 end
