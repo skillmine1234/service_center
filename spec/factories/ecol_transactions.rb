@@ -6,7 +6,7 @@ FactoryGirl.define do
     transfer_type "abc"
     transfer_unique_no "MyString"
     transfer_status "MyString"
-    transfer_date "2015-04-20"
+    transfer_timestamp "2015-04-20"
     transfer_ccy "abcde"
     transfer_amt 1
     rmtr_full_name "MyString"

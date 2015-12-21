@@ -15,7 +15,7 @@
       = @ecol_transaction.transfer_status
     %h3
       Transfer Date:
-      = @ecol_transaction.transfer_date.try(:strftime, "%d/%m/%Y") rescue ""
+      = @ecol_transaction.transfer_timestamp.utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
   .header-form-extended{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'}
     %h3
       Status:
@@ -99,10 +99,13 @@
         %td.label Transfer Date
         %td
           - if @ecol_transaction.try(:ecol_customer).try(:val_method) == 'D'
-            .span{:class =>"has-tooltip", "data-toggle" => 'tooltip',"title" => "(Expected Value: #{@ecol_transaction.expected_transfer_date rescue "-"})" , "data-placement" => 'bottom', "data-html" => true}
-              = @ecol_transaction.transfer_date.utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
+            .span{:class =>"has-tooltip", "data-toggle" => 'tooltip',"title" => "(Expected Value: #{@ecol_transaction.expected_transfer_timestamp rescue "-"})" , "data-placement" => 'bottom', "data-html" => true}
+              = @ecol_transaction.transfer_timestamp.utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
           - else
-            = @ecol_transaction.transfer_date.utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
+            = @ecol_transaction.transfer_timestamp.utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
+      %tr
+        %td.label Credit Account Number
+        %td= @ecol_transaction.credit_acct_no
       %tr
         %td.label Remitter Account Number
         %td
@@ -125,9 +128,6 @@
     - if @ecol_transaction.status == 'CREDITED' or @ecol_transaction.status == 'PENDING CREDIT' or @ecol_transaction.status == 'CREDIT FAILED'
       %h3 Credit Result
       %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:left;'}  
-        %tr
-          %td.label Credit Account No
-          %td= @ecol_transaction.credit_acct_no
         %tr
           %td.label Credit Attempt
           %td

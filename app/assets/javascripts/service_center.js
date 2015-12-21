@@ -67,8 +67,8 @@ $(document).ready(function(){
     $('select#settle_status').val('');
     $('select#transfer_type').val('');
     $('input#bene_account_no').val('');
-    $('input#from_transfer_date').val('');
-    $('input#to_transfer_date').val('');
+    $('input#from_transfer_timestamp').val('');
+    $('input#to_transfer_timestamp').val('');
     $('input#from_amount').val('');
     $('input#to_amount').val('');
   });

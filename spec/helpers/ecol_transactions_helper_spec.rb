@@ -44,11 +44,11 @@ describe EcolTransactionsHelper do
       find_ecol_transactions(val,{:bene_account_no => "0987654321"}).should == [ecol_transaction]
       find_ecol_transactions(val,{:bene_account_no => "1234567890"}).should_not == [ecol_transaction] 
 
-      ecol_transaction = [Factory(:ecol_transaction, :transfer_date => '2014-09-09', :transfer_unique_no => "xswert")]
-      ecol_transaction << Factory(:ecol_transaction, :transfer_date => '2014-10-09', :transfer_unique_no => "oyntrg")
-      ecol_transaction << Factory(:ecol_transaction, :transfer_date => '2014-11-09', :transfer_unique_no => "kucbfb")
-      find_ecol_transactions(val,{:from_transfer_date => '2014-09-01', :to_transfer_date => '2014-12-01'}).should == ecol_transaction
-      find_ecol_transactions(val,{:from_transfer_date => '2014-09-09', :to_transfer_date => '2014-09-12'}).should == [ecol_transaction[0]]
+      ecol_transaction = [Factory(:ecol_transaction, :transfer_timestamp => '2014-09-09', :transfer_unique_no => "xswert")]
+      ecol_transaction << Factory(:ecol_transaction, :transfer_timestamp => '2014-10-09', :transfer_unique_no => "oyntrg")
+      ecol_transaction << Factory(:ecol_transaction, :transfer_timestamp => '2014-11-09', :transfer_unique_no => "kucbfb")
+      find_ecol_transactions(val,{:from_date => '2014-09-01', :to_date => '2014-12-01'}).should == ecol_transaction
+      find_ecol_transactions(val,{:from_date => '2014-09-08', :to_date => '2014-09-12'}).should == [ecol_transaction[0]]
       
       ecol_transaction = [Factory(:ecol_transaction, :transfer_amt => '10000', :transfer_unique_no => "76543")]
       ecol_transaction << Factory(:ecol_transaction, :transfer_amt => '9000', :transfer_unique_no => "98657")

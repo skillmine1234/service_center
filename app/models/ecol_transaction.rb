@@ -5,7 +5,7 @@ class EcolTransaction < ActiveRecord::Base
   lazy_load :settle_result, :validation_result, :notify_result, :fault_reason
   
   validates_presence_of :status, :transfer_type, :transfer_unique_no, :transfer_status, 
-  :transfer_date, :transfer_ccy, :transfer_amt, :rmtr_account_no, :rmtr_account_ifsc,
+  :transfer_timestamp, :transfer_ccy, :transfer_amt, :rmtr_account_no, :rmtr_account_ifsc,
   :bene_account_no, :bene_account_ifsc, :received_at
   
   validates :transfer_amt, :numericality => { :greater_than => 0 }
@@ -24,7 +24,7 @@ class EcolTransaction < ActiveRecord::Base
     end
   end
 
-  def expected_transfer_date
+  def expected_transfer_timestamp
     if ecol_customer.try(:val_method) == 'D'
       unless ecol_customer.nil?
         if ecol_customer.val_txn_date == 'E'

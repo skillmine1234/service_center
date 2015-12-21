@@ -12,7 +12,7 @@ module EcolTransactionsHelper
     ecol_transactions = ecol_transactions.where("settle_status=?",params[:settle_status]) if params[:settle_status].present?
     ecol_transactions = ecol_transactions.where("transfer_type=?",params[:transfer_type]) if params[:transfer_type].present? 
     ecol_transactions = ecol_transactions.where("bene_account_no=?",params[:bene_account_no]) if params[:bene_account_no].present?
-    ecol_transactions = ecol_transactions.where("transfer_date>=? and transfer_date<=?",params[:from_transfer_date],params[:to_transfer_date]) if params[:to_transfer_date].present? and params[:from_transfer_date].present?
+    ecol_transactions = ecol_transactions.where("transfer_timestamp>=? and transfer_timestamp<=?",params[:from_date],params[:to_date]) if params[:to_date].present? and params[:from_date].present?
     ecol_transactions = ecol_transactions.where("transfer_amt>=? and transfer_amt<=?",params[:from_amount].to_f,params[:to_amount].to_f) if params[:to_amount].present? and params[:from_amount].present?
     ecol_transactions
   end

@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-  $("#from_transfer_date").datepicker(
+  $("#from_date").datepicker(
   {
     dateFormat: 'yy-mm-dd',
     changeMonth: true,
@@ -8,7 +8,7 @@ $(document).ready(function(){
     yearRange: "-10:+70"
   });
 
-  $("#to_transfer_date").datepicker(
+  $("#to_date").datepicker(
   {
     dateFormat: 'yy-mm-dd',
     changeMonth: true,
