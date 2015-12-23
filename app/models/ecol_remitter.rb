@@ -10,7 +10,17 @@ class EcolRemitter < ActiveRecord::Base
   
   belongs_to :ecol_customer
   
+  before_save :to_upcase
+  
   def udfs
     UdfAttribute.where("is_enabled=?",'Y').order("id asc")
+  end
+  
+  def to_upcase
+    unless self.frozen? 
+      self.customer_code = self.customer_code.upcase
+      self.remitter_code = self.remitter_code.upcase unless self.remitter_code.nil?
+      self.invoice_no = self.invoice_no.upcase unless self.invoice_no.nil?
+    end
   end
 end

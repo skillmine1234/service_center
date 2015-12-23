@@ -82,7 +82,7 @@ describe EcolRemitter do
       ecol_remitter.errors_on("customer_subcode_email").should == ["is invalid"]
       ecol_remitter.errors_on("rmtr_email").should == ["is invalid"]
       ecol_customer = Factory(:ecol_customer, :code => 'qwerty', :approval_status => 'A')
-      ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'qwerty', :customer_subcode_email  => "foo@ruby.com", :rmtr_email => "foo@ruby.com")
+      ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'QWERTY', :customer_subcode_email  => "foo@ruby.com", :rmtr_email => "foo@ruby.com")
       ecol_remitter.should be_valid
     end
   end
@@ -289,6 +289,16 @@ describe EcolRemitter do
       ecol_remitter2 = Factory(:ecol_remitter, :approval_status => 'U')
       ecol_remitter1.enable_approve_button?.should == false
       ecol_remitter2.enable_approve_button?.should == true
+    end
+  end
+  
+  context "to_upcase" do
+    it "should convert values to upcase before save" do
+      ecol_customer = Factory(:ecol_customer, :code => "as89nn", :approval_status => "A")
+      ecol_remitter = Factory(:ecol_remitter, :customer_code => "AS89NN", :remitter_code => "qwerty", :invoice_no => "abcdef")
+      ecol_remitter.customer_code.should == "AS89NN"
+      ecol_remitter.remitter_code.should == "QWERTY"
+      ecol_remitter.invoice_no.should == "ABCDEF"
     end
   end
 end

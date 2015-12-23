@@ -394,5 +394,15 @@ describe EcolCustomer do
       ecol_customer.errors[:base].should == ["Transaction Date, Transaction Amount and Remitter Account cannot be validated as no Token is validated"]
     end
   end
+  
+  context "to_upcase" do
+    it "should convert values to upcase before save" do
+      ecol_customer = Factory(:ecol_customer, :code => "as89nn", :token_1_starts_with => "qwerty", :token_1_contains => "asdfg", :token_1_ends_with => "uiop")
+      ecol_customer.code.should == "AS89NN"
+      ecol_customer.token_1_starts_with.should == "QWERTY"
+      ecol_customer.token_1_contains.should == "ASDFG"
+      ecol_customer.token_1_ends_with.should == "UIOP"
+    end
+  end
 
 end

@@ -28,6 +28,8 @@ class EcolCustomer < ActiveRecord::Base
   validates :rmtr_pass_txt, format: {with: /\A[a-z|A-Z|0-9|\.|\,\s]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\.|\,\s]}' }, length: {maximum: 500, minimum: 1}, :allow_blank => true
   validates :rmtr_return_txt, format: {with: /\A[a-z|A-Z|0-9|\.|\,\s]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\.|\,\s]}' }, length: {maximum: 500, minimum: 1}, :allow_blank => true
   validates :customer_id, presence: true, format: {with: /\A[1-9][0-9]+\z/, :message => 'should not start with a 0 and should contain only numbers'}, length: {maximum: 50}
+  
+  before_save :to_upcase
 
   def customer_code_format
     if !code.nil? && code.start_with?("9")
@@ -57,6 +59,21 @@ class EcolCustomer < ActiveRecord::Base
     if (self.val_token_1 == 'N' && self.val_token_2 == 'N' && self.val_token_3 == 'N' &&
        (self.val_txn_date != 'N' || self.val_txn_amt != 'N' || self.val_rem_acct != 'N'))
       errors[:base] << "Transaction Date, Transaction Amount and Remitter Account cannot be validated as no Token is validated"
+    end
+  end
+  
+  def to_upcase
+    unless self.frozen? 
+      self.code = self.code.upcase
+      self.token_1_starts_with = self.token_1_starts_with.upcase unless self.token_1_starts_with.nil?
+      self.token_1_contains = self.token_1_contains.upcase unless self.token_1_contains.nil?
+      self.token_1_ends_with = self.token_1_ends_with.upcase unless self.token_1_ends_with.nil?
+      self.token_2_starts_with = self.token_2_starts_with.upcase unless self.token_2_starts_with.nil?
+      self.token_2_contains = self.token_2_contains.upcase unless self.token_2_contains.nil?
+      self.token_2_ends_with = self.token_2_ends_with.upcase unless self.token_2_ends_with.nil?
+      self.token_3_starts_with = self.token_3_starts_with.upcase unless self.token_3_starts_with.nil?
+      self.token_3_contains = self.token_3_contains.upcase unless self.token_3_contains.nil?
+      self.token_3_ends_with = self.token_3_ends_with.upcase unless self.token_3_ends_with.nil?
     end
   end
    
