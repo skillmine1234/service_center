@@ -50,9 +50,11 @@ module EcolRemitterValidation
   end
 
   def customer_code_should_exist
-    ecol_customer = EcolCustomer.where(:code => self.customer_code)
-    if ecol_customer.empty? 
-      errors.add(:customer_code, "Invalid Customer")
+    unless self.customer_code.nil?
+      ecol_customer = EcolCustomer.where("upper(code)=?", self.customer_code.upcase)
+      if ecol_customer.empty? 
+        errors.add(:customer_code, "Invalid Customer")
+      end
     end
   end
 end

@@ -194,7 +194,7 @@ describe EcolRemittersController do
       put :approve, {:id => ecol_remitter2.id}
       EcolUnapprovedRecord.count.should == 0
       ecol_remitter1.reload
-      ecol_remitter1.remitter_code.should == 'BarFoo'
+      ecol_remitter1.remitter_code.should == 'BARFOO'
       ecol_remitter1.updated_by.should == "666"
       EcolRemitter.find_by_id(ecol_remitter2.id).should be_nil
     end
@@ -208,7 +208,7 @@ describe EcolRemittersController do
       put :approve, {:id => ecol_remitter.id}
       EcolUnapprovedRecord.count.should == 0
       ecol_remitter.reload
-      ecol_remitter.remitter_code.should == 'BarFoo'
+      ecol_remitter.remitter_code.should == 'BARFOO'
       ecol_remitter.approval_status.should == 'A'
     end
   end

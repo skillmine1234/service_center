@@ -18,7 +18,7 @@ class EcolRemitter < ActiveRecord::Base
   
   def to_upcase
     unless self.frozen? 
-      self.customer_code = self.customer_code.upcase
+      self.customer_code = self.customer_code.upcase unless self.customer_code.nil?
       self.remitter_code = self.remitter_code.upcase unless self.remitter_code.nil?
       self.invoice_no = self.invoice_no.upcase unless self.invoice_no.nil?
     end

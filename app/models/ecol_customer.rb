@@ -64,7 +64,7 @@ class EcolCustomer < ActiveRecord::Base
   
   def to_upcase
     unless self.frozen? 
-      self.code = self.code.upcase
+      self.code = self.code.upcase unless self.code.nil?
       self.token_1_starts_with = self.token_1_starts_with.upcase unless self.token_1_starts_with.nil?
       self.token_1_contains = self.token_1_contains.upcase unless self.token_1_contains.nil?
       self.token_1_ends_with = self.token_1_ends_with.upcase unless self.token_1_ends_with.nil?

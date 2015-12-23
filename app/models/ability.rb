@@ -34,6 +34,7 @@ class Ability
       can :read, model_name.constantize
       can :approve, model_name.constantize
       can :hit_api, model_name.constantize
+      can :destroy, model_name.constantize
     end
   end
 
