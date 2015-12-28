@@ -45,7 +45,7 @@ describe BmRule do
   context "ifsc format" do
     [:bene_account_ifsc, :neft_sender_ifsc].each do |att|
       it "should allow valid format" do
-        should allow_value('ABCD0QWERTY').for(att)
+        should allow_value('ABCD0123456').for(att)
       end
       
       it "should not allow invalid format" do
@@ -57,18 +57,18 @@ describe BmRule do
     #TODO: write in loop i.e. for each
     it "should not allow invalid format" do
       bm_rule1 = Factory.build(:bm_rule, :bene_account_ifsc => 'abcd0QWERTY')
-      bm_rule1.errors_on(:bene_account_ifsc).should == ["Invalid format, expected format is : {[A-Z]{4}[0][A-Z|0-9]{6}}"]
+      bm_rule1.errors_on(:bene_account_ifsc).should == ["Invalid format, expected format is : {[A-Z]{4}[0][0-9]{6}}"]
       bm_rule1 = Factory.build(:bm_rule, :bene_account_ifsc => 'abcdQWERTY')
-      bm_rule1.errors_on(:bene_account_ifsc).should == ["Invalid format, expected format is : {[A-Z]{4}[0][A-Z|0-9]{6}}"]
+      bm_rule1.errors_on(:bene_account_ifsc).should == ["Invalid format, expected format is : {[A-Z]{4}[0][0-9]{6}}"]
       bm_rule1 = Factory.build(:bm_rule, :bene_account_ifsc => 'ab0QWER')
-      bm_rule1.errors_on(:bene_account_ifsc).should == ["Invalid format, expected format is : {[A-Z]{4}[0][A-Z|0-9]{6}}"]
+      bm_rule1.errors_on(:bene_account_ifsc).should == ["Invalid format, expected format is : {[A-Z]{4}[0][0-9]{6}}"]
 
       bm_rule2 = Factory.build(:bm_rule, :neft_sender_ifsc => 'abcd0QWERTY')
-      bm_rule2.errors_on(:neft_sender_ifsc).should == ["Invalid format, expected format is : {[A-Z]{4}[0][A-Z|0-9]{6}}"]
+      bm_rule2.errors_on(:neft_sender_ifsc).should == ["Invalid format, expected format is : {[A-Z]{4}[0][0-9]{6}}"]
       bm_rule2 = Factory.build(:bm_rule, :neft_sender_ifsc => 'abcdQWERTY')
-      bm_rule2.errors_on(:neft_sender_ifsc).should == ["Invalid format, expected format is : {[A-Z]{4}[0][A-Z|0-9]{6}}"]
+      bm_rule2.errors_on(:neft_sender_ifsc).should == ["Invalid format, expected format is : {[A-Z]{4}[0][0-9]{6}}"]
       bm_rule2 = Factory.build(:bm_rule, :neft_sender_ifsc => 'ab0QWER')
-      bm_rule2.errors_on(:neft_sender_ifsc).should == ["Invalid format, expected format is : {[A-Z]{4}[0][A-Z|0-9]{6}}"]
+      bm_rule2.errors_on(:neft_sender_ifsc).should == ["Invalid format, expected format is : {[A-Z]{4}[0][0-9]{6}}"]
     end
   end
 
