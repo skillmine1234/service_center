@@ -47,6 +47,11 @@ describe BmRule do
       it "should allow valid format" do
         should allow_value('ABCD0QWERTY').for(att)
       end
+      
+      it "should not allow invalid format" do
+        should_not allow_value('ABCD2QWERTY12').for(att)
+        should_not allow_value('ABCD2#QWE12').for(att)
+      end
     end
 
     #TODO: write in loop i.e. for each
