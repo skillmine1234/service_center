@@ -42,7 +42,7 @@ unless Rails.env == 'production'
   end
 
   if BmRule.all.empty?
-    BmRule.create(:cod_acct_no => "0123456789", :customer_id => "QWEASD", :bene_acct_no => "0123456788", :bene_account_ifsc => "IFSC0123456", :neft_sender_ifsc => 'IFSC0123456', :approval_status => 'A')
+    BmRule.create(:cod_acct_no => "0123456789", :customer_id => "QWEASD", :bene_acct_no => "0123456788", :bene_account_ifsc => "IFSC0123456", :neft_sender_ifsc => 'IFSC0123456', :approval_status => 'A', :service_id => 'NETUSER')
   end
 
   if IncomingFileType.all.empty? and !ScService.all.empty?

@@ -39,7 +39,7 @@
         = error_message_for(@bm_aggregator_payment, :customer_id, :prepend_text => "")
     .control-group
       = f.label :service_id, "*Service ID", :class => 'control-label'
-      = f.text_field :service_id
+      = f.text_field :service_id, :value => BmAggregatorPayment.form_values("service_id")
       #msg-error
         = error_message_for(@bm_aggregator_payment, :service_id, :prepend_text => "")
     .control-group

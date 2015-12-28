@@ -22,6 +22,8 @@ class BmAggregatorPayment < ActiveRecord::Base
       BmRule.first.bene_account_ifsc
     when "neft_sender_ifsc"
       BmRule.first.neft_sender_ifsc
+    when "service_id"
+      BmRule.first.service_id
     end
   end
   

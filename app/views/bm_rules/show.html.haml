@@ -50,6 +50,12 @@
             %td#msg-error
               = error_message_for(@bm_rule, :neft_sender_ifsc, :prepend_text => "")
           %tr
+            %td.label Service ID
+            %td.value
+              = @bm_rule.service_id
+            %td#msg-error
+              = error_message_for(@bm_rule, :service_id, :prepend_text => "")
+          %tr
             %td.label Updated By
             %td.value
               = @bm_rule.updated_user.try(:username)
