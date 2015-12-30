@@ -32,7 +32,7 @@
             radius: 3,
             show: true,
             fill: true
-        },
+        }
     }
   });
   $.plot($("#closure_analysis"), closure_analysis_data, {

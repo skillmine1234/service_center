@@ -36,11 +36,11 @@ $(document).ready(function(){
 
   $("#from_date").datepicker({
     dateFormat: 'dd MM yy',
-    minDate: new Date(2001, 1 - 1, 1),
+    minDate: new Date(2001, 1 - 1, 1)
   });
 
   $("#to_date").datepicker({
     dateFormat: 'dd MM yy',
-    minDate: new Date(2001, 1 - 1, 1),
+    minDate: new Date(2001, 1 - 1, 1)
   });
 });
