@@ -26,7 +26,6 @@
 //= require jquery.flot.stack.js
 //= require excanvas.js
 //= require jquery.flot.time
-//= require zeroclipboard
 
 $(document).ready(function() {
 
