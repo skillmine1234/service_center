@@ -67,7 +67,6 @@ describe FpAuthRulesController do
         expect {
           post :create, {:fp_auth_rule => params}
         }.to change(FpAuthRule.unscoped, :count).by(1)
-        flash[:alert].should  match(/Authorisation Rule successfully created/)
         response.should be_redirect
       end
 
@@ -110,7 +109,7 @@ describe FpAuthRulesController do
       it "updates the requested fp_auth_rule" do
         fp_auth_rule = Factory(:fp_auth_rule, :operation_name => "App01")
         params = fp_auth_rule.attributes.slice(*fp_auth_rule.class.attribute_names)
-        params[:operation_name] = "App02"
+        params[:operation_name] = ["App02"]
         put :update, {:id => fp_auth_rule.id, :fp_auth_rule => params}
         fp_auth_rule.reload
         fp_auth_rule.operation_name.should == "App02"
@@ -119,7 +118,7 @@ describe FpAuthRulesController do
       it "assigns the requested fp_auth_rule as @fp_auth_rule" do
         fp_auth_rule = Factory(:fp_auth_rule, :operation_name => "App01")
         params = fp_auth_rule.attributes.slice(*fp_auth_rule.class.attribute_names)
-        params[:operation_name] = "App02"
+        params[:operation_name] = ["App02"]
         put :update, {:id => fp_auth_rule.to_param, :fp_auth_rule => params}
         assigns(:fp_auth_rule).should eq(fp_auth_rule)
       end
@@ -127,7 +126,7 @@ describe FpAuthRulesController do
       it "redirects to the fp_auth_rule" do
         fp_auth_rule = Factory(:fp_auth_rule, :operation_name => "App01")
         params = fp_auth_rule.attributes.slice(*fp_auth_rule.class.attribute_names)
-        params[:operation_name] = "App02"
+        params[:operation_name] = ["App02"]
         put :update, {:id => fp_auth_rule.to_param, :fp_auth_rule => params}
         response.should redirect_to(fp_auth_rule)
       end
@@ -135,12 +134,12 @@ describe FpAuthRulesController do
       it "should raise error when tried to update at same time by many" do
         fp_auth_rule = Factory(:fp_auth_rule, :operation_name => "App01")
         params = fp_auth_rule.attributes.slice(*fp_auth_rule.class.attribute_names)
-        params[:operation_name] = "App02"
+        params[:operation_name] = ["App02"]
         fp_auth_rule2 = fp_auth_rule
         put :update, {:id => fp_auth_rule.id, :fp_auth_rule => params}
         fp_auth_rule.reload
         fp_auth_rule.operation_name.should == "App02"
-        params[:operation_name] = "App03"
+        params[:operation_name] = ["App03"]
         put :update, {:id => fp_auth_rule2.id, :fp_auth_rule => params}
         fp_auth_rule.reload
         fp_auth_rule.operation_name.should == "App02"

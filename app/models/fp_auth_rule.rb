@@ -27,7 +27,7 @@ class FpAuthRule < ActiveRecord::Base
   end 
   
   def self.convert_options_to_array(options_as_string)
-    if (!options_as_string.nil?) && (options_as_string != '*')
+    if (!options_as_string.nil?)
       options_as_string.split(',')
     else 
       []
@@ -35,7 +35,7 @@ class FpAuthRule < ActiveRecord::Base
   end
   
   def presence_of_source_ips
-    if self.any_source_ip == 'N' and self.source_ips.empty? 
+    if (self.any_source_ip == 'N') && (self.source_ips.nil? or self.source_ips.empty?)
       errors.add(:source_ips, "Source IPs is mandatory")
     end
   end
@@ -54,7 +54,7 @@ class FpAuthRule < ActiveRecord::Base
   end
     
   def squish_ips
-    self.source_ips = source_ips.squeeze(' ').strip.each_line.reject{|x| x.strip == ''}.join unless source_ips.nil?
+    self.source_ips = source_ips.squeeze(' ').strip.each_line.reject{|x| x.strip == ''}.join if (!self.frozen? and !source_ips.nil?)
   end
   
 end

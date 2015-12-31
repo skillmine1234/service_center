@@ -7,20 +7,22 @@ describe FpAuthRule do
   end
   
   context "validations" do
-    [:username, :operation_name].each do |att|
-      it { should validate_presence_of(att)}
+    it do
+      fp_auth_rule = Factory(:fp_auth_rule, :operation_name => 'App10', :approval_status => 'A')
+      should validate_presence_of(:username)
+      should validate_presence_of(:operation_name)
     end
     
     it do
-      fp_auth_rule = Factory(:fp_auth_rule, :operation_name => 'App10', :approval_status => 'A')
-      should validate_uniqueness_of(:operation_name).scoped_to(:approval_status, :username)
+      fp_auth_rule = Factory(:fp_auth_rule, :operation_name => 'App10', :approval_status => 'A', :any_source_ip => 'Y')
+      should validate_uniqueness_of(:username).scoped_to(:approval_status)
     end
   end
   
   context "default_scope" do 
     it "should only return 'A' records by default" do 
       fp_auth_rule1 = Factory(:fp_auth_rule, :approval_status => 'A') 
-      fp_auth_rule2 = Factory(:fp_auth_rule, :operation_name => "qweas")
+      fp_auth_rule2 = Factory(:fp_auth_rule, :username => '12312312', :operation_name => "qweas")
       FpAuthRule.all.should == [fp_auth_rule1]
       fp_auth_rule2.approval_status = 'A'
       fp_auth_rule2.save
