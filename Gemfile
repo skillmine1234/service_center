@@ -35,7 +35,7 @@ gem 'therubyracer'
 gem "daemons"
 gem "audited-activerecord"
 gem 'httparty'
-gem 'zeroclipboard-rails'
+# gem 'zeroclipboard-rails'
 gem 'country_select', github: 'stefanpenner/country_select'
 gem 'faraday'
 # required for packaging (specifically asset precompilation during packaging)
