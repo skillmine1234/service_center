@@ -6,6 +6,7 @@ class FpOperation < ActiveRecord::Base
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
   
   validates_presence_of :operation_name
+  validates :operation_name, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}' }
   validates_uniqueness_of :operation_name, :scope => :approval_status
   
   validate :check_approval_status, :on => :create

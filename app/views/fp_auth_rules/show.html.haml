@@ -38,11 +38,17 @@
             %td#msg-error
               = error_message_for(@fp_auth_rule, :is_enabled, :prepend_text => "")
           %tr
-            %td.label 
+            %td.label Any Source IP
             %td.value
-              = @fp_auth_rule.username
+              = @fp_auth_rule.any_source_ip
             %td#msg-error
-              = error_message_for(@fp_auth_rule, :username, :prepend_text => "")
+              = error_message_for(@fp_auth_rule, :any_source_ip, :prepend_text => "")
+          %tr
+            %td.label Source IPs
+            %td.value
+              = @fp_auth_rule.source_ips
+            %td#msg-error
+              = error_message_for(@fp_auth_rule, :source_ips, :prepend_text => "")
           %tr
             %td.label Created By
             %td.value

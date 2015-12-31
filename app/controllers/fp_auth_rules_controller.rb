@@ -12,6 +12,7 @@ class FpAuthRulesController < ApplicationController
 
   def create
     @fp_auth_rule = FpAuthRule.new(params[:fp_auth_rule])
+    @fp_auth_rule.operation_name = @fp_auth_rule.convert_operation_name_to_string(params[:fp_auth_rule][:operation_name])
     if !@fp_auth_rule.valid?
       render "new"
     else
@@ -34,6 +35,7 @@ class FpAuthRulesController < ApplicationController
   def update
     @fp_auth_rule = FpAuthRule.unscoped.find_by_id(params[:id])
     @fp_auth_rule.attributes = params[:fp_auth_rule]
+    @fp_auth_rule.operation_name = @fp_auth_rule.convert_operation_name_to_string(params[:fp_auth_rule][:operation_name])
     if !@fp_auth_rule.valid?
       render "edit"
     else
@@ -85,7 +87,7 @@ class FpAuthRulesController < ApplicationController
   private
 
   def fp_auth_rule_params
-    params.require(:fp_auth_rule).permit(:username, :operation_name, :is_enabled, :lock_version, :approval_status, :last_action, :approved_version,
-                                   :approved_id, :created_by, :updated_by)
+    params.require(:fp_auth_rule).permit(:username, {:operation_name => []}, :is_enabled, :lock_version, :approval_status, :last_action, :approved_version,
+                                   :approved_id, :created_by, :updated_by, :source_ips, :any_source_ip)
   end
 end

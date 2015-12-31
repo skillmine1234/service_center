@@ -3,7 +3,7 @@
     = f.label ' '
     #msg-error
       = error_message_for(@fp_auth_rule, :base, :prepend_text => "")
-  .form-main
+  .form-main{:style => "width:100%;"}
     = f.hidden_field :lock_version
     = f.hidden_field :approved_id
     = f.hidden_field :approved_version
@@ -13,15 +13,28 @@
       #msg-error
         = error_message_for(@fp_auth_rule, :username, :prepend_text => "")
     .control-group
-      = f.label :operation_name, "*Operation Name", :class => 'control-label'
-      = f.select :operation_name, FpOperation.all.map {|u| [u.operation_name, u.operation_name]}, :include_blank => 'select'
+      = f.label :names, "*Operation Name", :class => 'control-label'
+      = select_tag :names, options_for_select(FpAuthRule.operation_names_list),{:multiple => true}
+      %input#namesMoveRight{:type => "button", :value => " >> "}
+      %input#namesMoveLeft{:type => "button", :value => " << "}
+      = f.select :operation_name, options_for_select(FpAuthRule.convert_options_to_array(@fp_auth_rule.operation_name), FpAuthRule.convert_options_to_array(@fp_auth_rule.operation_name)),{},{:multiple => true}
       #msg-error
         = error_message_for(@fp_auth_rule, :operation_name, :prepend_text => "")
     .control-group
       = f.label :is_enabled, "Is Enabled ?", :class => 'control-label'
       = f.check_box :is_enabled, {},"Y","N"
       #msg-error
-        = error_message_for(@pc_app, :is_enabled, :prepend_text => "")
+        = error_message_for(@fp_auth_rule, :is_enabled, :prepend_text => "")
+    .control-group
+      = f.label :any_source_ip, "Any Source IP", :class => 'control-label'
+      = f.check_box :any_source_ip, {},"Y","N"
+      #msg-error
+        = error_message_for(@fp_auth_rule, :any_source_ip, :prepend_text => "")
+    .control-group
+      = f.label :source_ips, "Source Ips", :class => 'control-label'
+      = f.text_area :source_ips, {:style => "width:200px; height:100px;"}
+      #msg-error
+        = error_message_for(@fp_auth_rule, :source_ips, :prepend_text => "")
 
   .form-actions
     - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
