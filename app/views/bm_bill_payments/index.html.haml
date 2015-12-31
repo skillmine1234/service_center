@@ -33,6 +33,8 @@
       Biller Account No
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Bill ID
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Bill Paid At
   .tbody
     - @bm_bill_payments.each do |bm_bill_payment|   
       %tr
@@ -58,3 +60,5 @@
           = bm_bill_payment.biller_acct_no
         %td{:style=>'text-align:left;'}
           = bm_bill_payment.bill_id
+        %td{:style=>'text-align:left;'}
+          = bm_bill_payment.billpaid_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue nil

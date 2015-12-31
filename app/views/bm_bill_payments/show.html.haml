@@ -66,14 +66,14 @@
             = "-"
       %tr
         %td.label Debit Attempted At
-        %td= @bill_payment.debit_attempt_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+        %td= @bill_payment.debit_attempt_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue nil
     %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:right;'}  
       %tr
         %td.label Debit Reply Reference
         %td= @bill_payment.debit_rep_ref
       %tr
         %td.label Debit At
-        %td= @bill_payment.debited_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+        %td= @bill_payment.debited_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue nil
     %hr{:style=>'background-color: #F1F2F8; width: 100%'}
     %h3 Reversal Result
     %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:left;'} 
@@ -89,14 +89,14 @@
             = "-"
       %tr
         %td.label Reversal Attempted At
-        %td= @bill_payment.reversal_attempt_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+        %td= @bill_payment.reversal_attempt_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue nil
     %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:right;'}  
       %tr
         %td.label Reversal Reply Reference
         %td= @bill_payment.reversal_rep_ref
       %tr
         %td.label Reversed At
-        %td= @bill_payment.reversal_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+        %td= @bill_payment.reversal_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue nil
     %hr{:style=>'background-color: #F1F2F8; width: 100%'}
     %h3 Bill Pay Result
     %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:left;'} 
@@ -112,14 +112,14 @@
             = "-"
       %tr
         %td.label Bill Pay Attempted At
-        %td= @bill_payment.billpay_attempt_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+        %td= @bill_payment.billpay_attempt_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue nil
     %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:right;'}  
       %tr
         %td.label Bill Pay Reply Reference
         %td= @bill_payment.billpay_rep_ref
       %tr
         %td.label Bill Paid At
-        %td= @bill_payment.billpaid_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+        %td= @bill_payment.billpaid_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue nil
     %hr{:style=>'background-color: #F1F2F8; width: 100%'}
     %h3 Refund Result
     %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:left;'}  
@@ -129,7 +129,7 @@
           %td= @bill_payment.refund_ref
         %tr
           %td.label Refund At
-          %td= @bill_payment.refund_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+          %td= @bill_payment.refund_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue nil
     %hr{:style=>'background-color: #F1F2F8; width: 100%'}
 #faultText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
