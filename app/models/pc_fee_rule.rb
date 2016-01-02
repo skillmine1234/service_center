@@ -15,7 +15,7 @@ class PcFeeRule < ActiveRecord::Base
   validate :min_and_max_sc_amt
   
   def self.options_for_txn_kind
-    [['loadCard','LC'],['payToAccount','PA'],['payToContact','PC'],['topUp','TU']]
+    [['loadCard','PcLoadCard'],['payToAccount','PcsPayToAccount'],['payToContact','PcsPayToContact'],['topUp','PcsTopUp']]
   end
   
   def self.options_for_tier_method

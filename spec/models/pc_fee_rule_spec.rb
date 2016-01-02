@@ -26,7 +26,7 @@ describe PcFeeRule do
   
   context "options_for_txn_kind" do
     it "should return options for txn_kind" do
-      PcFeeRule.options_for_txn_kind.should == [['loadCard','LC'],['payToAccount','PA'],['payToContact','PC'],['topUp','TU']]
+      PcFeeRule.options_for_txn_kind.should == [['loadCard','PcLoadCard'],['payToAccount','PcsPayToAccount'],['payToContact','PcsPayToContact'],['topUp','PcsTopUp']]
     end
   end
   
