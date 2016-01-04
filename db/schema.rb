@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160104160054) do
+ActiveRecord::Schema.define(version: 20160104162727) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -1134,7 +1134,7 @@ ActiveRecord::Schema.define(version: 20160104160054) do
     t.string   "updated_by",       limit: 20
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
-    t.string   "card_cust_id",     limit: 50,               null: false
+    t.string   "card_cust_id",     limit: 50, default: "",  null: false
   end
 
   add_index "pc_apps", ["app_id", "approval_status"], name: "index_pc_apps_on_app_id_and_approval_status", unique: true
@@ -1403,11 +1403,11 @@ ActiveRecord::Schema.define(version: 20160104160054) do
   add_index "pcs_audit_steps", ["pcs_auditable_type", "pcs_auditable_id", "step_no", "attempt_no"], name: "uk_pcs_audit_steps", unique: true
 
   create_table "pcs_pay_to_accounts", force: :cascade do |t|
-    t.string   "req_no",            limit: 32,   null: false
-    t.string   "app_id",            limit: 32,   null: false
-    t.integer  "attempt_no",                     null: false
-    t.string   "status_code",       limit: 50,   null: false
-    t.string   "req_version",       limit: 5,    null: false
+    t.string   "req_no",            limit: 32,                null: false
+    t.string   "app_id",            limit: 32,                null: false
+    t.integer  "attempt_no",                                  null: false
+    t.string   "status_code",       limit: 50,                null: false
+    t.string   "req_version",       limit: 5,                 null: false
     t.datetime "req_timestamp"
     t.string   "mobile_no",         limit: 255
     t.string   "encrypted_pin",     limit: 255
@@ -1428,7 +1428,7 @@ ActiveRecord::Schema.define(version: 20160104160054) do
     t.string   "txn_uid"
     t.string   "debit_fee_status",  limit: 50
     t.string   "debit_fee_result",  limit: 1000
-    t.string   "bene_name",         limit: 255,  null: false
+    t.string   "bene_name",         limit: 255,  default: "", null: false
   end
 
   add_index "pcs_pay_to_accounts", ["req_no", "app_id", "attempt_no"], name: "uk_pcs_pay_to_accounts", unique: true
