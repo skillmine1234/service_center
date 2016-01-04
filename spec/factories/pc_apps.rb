@@ -7,5 +7,6 @@ FactoryGirl.define do
     sc_gl_income "MyString"
     is_enabled "N"
     approval_status "U"
+    card_cust_id "2424"
   end
 end

@@ -26,6 +26,12 @@
             %td#msg-error
               = error_message_for(@pc_app, :app_id, :prepend_text => "")
           %tr
+            %td.label Card Customer ID
+            %td.value
+              = @pc_app.card_cust_id
+            %td#msg-error
+              = error_message_for(@pc_app, :card_cust_id, :prepend_text => "")
+          %tr
             %td.label Card Account
             %td.value
               = @pc_app.card_acct

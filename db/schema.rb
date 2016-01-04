@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160104080827) do
+ActiveRecord::Schema.define(version: 20160104143825) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -1133,6 +1133,7 @@ ActiveRecord::Schema.define(version: 20160104080827) do
     t.string   "updated_by",       limit: 20
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
+    t.string   "card_cust_id",     limit: 50,               null: false
   end
 
   add_index "pc_apps", ["app_id", "approval_status"], name: "index_pc_apps_on_app_id_and_approval_status", unique: true
