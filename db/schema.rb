@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160104143825) do
+ActiveRecord::Schema.define(version: 20160104160054) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -161,7 +161,7 @@ ActiveRecord::Schema.define(version: 20160104143825) do
     t.string   "cod_acct_no",       limit: 50,                   null: false
     t.string   "neft_sender_ifsc",                               null: false
     t.string   "bene_acct_no",      limit: 50,                   null: false
-    t.decimal  "payment_amount"
+    t.float    "payment_amount"
     t.integer  "lock_version",                                   null: false
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
@@ -234,7 +234,7 @@ ActiveRecord::Schema.define(version: 20160104143825) do
     t.string   "customer_id",         limit: 15,                 null: false
     t.string   "debit_account_no",    limit: 50,                 null: false
     t.string   "txn_kind",            limit: 50,                 null: false
-    t.decimal  "txn_amount",                                     null: false
+    t.float    "txn_amount",                                     null: false
     t.string   "biller_code",         limit: 50
     t.string   "biller_acct_no",      limit: 50
     t.string   "bill_id",             limit: 50
@@ -388,8 +388,8 @@ ActiveRecord::Schema.define(version: 20160104143825) do
     t.date     "bill_date"
     t.string   "bill_number",         limit: 50
     t.date     "due_date"
-    t.decimal  "bill_amount"
-    t.decimal  "payment_amount"
+    t.float    "bill_amount"
+    t.float    "payment_amount"
     t.string   "status_code",         limit: 50,   null: false
     t.string   "rep_version",         limit: 5
     t.string   "rep_no",              limit: 32
@@ -421,8 +421,8 @@ ActiveRecord::Schema.define(version: 20160104143825) do
     t.date     "bill_date"
     t.string   "bill_number",         limit: 50
     t.date     "due_date"
-    t.decimal  "bill_amount"
-    t.decimal  "payment_amount"
+    t.float    "bill_amount"
+    t.float    "payment_amount"
     t.string   "status_code",         limit: 50,   null: false
     t.string   "rep_version",         limit: 5
     t.string   "rep_no",              limit: 32
@@ -664,6 +664,7 @@ ActiveRecord::Schema.define(version: 20160104143825) do
   end
 
   add_index "ecol_customers", ["code", "approval_status"], name: "customer_index_on_status", unique: true
+  add_index "ecol_customers", ["code", "approval_status"], name: "index_ecol_customers_on_code_and_approval_status", unique: true
 
   create_table "ecol_fetch_statistics", force: :cascade do |t|
     t.datetime "last_neft_at",  null: false
@@ -733,10 +734,10 @@ ActiveRecord::Schema.define(version: 20160104143825) do
     t.string   "rmtr_email",              limit: 100
     t.string   "rmtr_mobile",             limit: 10
     t.string   "invoice_no",              limit: 28
-    t.decimal  "invoice_amt",                                                null: false
-    t.decimal  "invoice_amt_tol_pct"
-    t.decimal  "min_credit_amt"
-    t.decimal  "max_credit_amt"
+    t.float    "invoice_amt",                                                null: false
+    t.float    "invoice_amt_tol_pct"
+    t.float    "min_credit_amt"
+    t.float    "max_credit_amt"
     t.date     "due_date",                            default: '2015-01-01', null: false
     t.integer  "due_date_tol_days",                   default: 0
     t.string   "udf1",                    limit: 255
@@ -796,7 +797,7 @@ ActiveRecord::Schema.define(version: 20160104143825) do
     t.string   "transfer_status",       limit: 25,                 null: false
     t.datetime "transfer_timestamp",                               null: false
     t.string   "transfer_ccy",          limit: 5,                  null: false
-    t.decimal  "transfer_amt",                                     null: false
+    t.float    "transfer_amt",                                     null: false
     t.string   "rmtr_ref",              limit: 64
     t.string   "rmtr_full_name",        limit: 255,                null: false
     t.string   "rmtr_address",          limit: 255
@@ -1427,6 +1428,7 @@ ActiveRecord::Schema.define(version: 20160104143825) do
     t.string   "txn_uid"
     t.string   "debit_fee_status",  limit: 50
     t.string   "debit_fee_result",  limit: 1000
+    t.string   "bene_name",         limit: 255,  null: false
   end
 
   add_index "pcs_pay_to_accounts", ["req_no", "app_id", "attempt_no"], name: "uk_pcs_pay_to_accounts", unique: true
