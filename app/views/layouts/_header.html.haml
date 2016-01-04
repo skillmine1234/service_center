@@ -4,12 +4,12 @@
   %span.caption
     .brand_name
       &nbsp;Service Center&nbsp;
-  %ul.nav{:style => "width: 16%;"}
+  %ul.nav{:style => "width: 25%;"}
     %li{:style => "width: 33%;"}
       %a{:href => "/"}
         %i.icon-list
         Dashboard
-    %li#user.dropdown{:style => "width: 65%;"}
+    %li#user.dropdown{:style => "width: 65%; padding-left: 1%;"}
       = link_to content_tag(:span, content_tag(:i, '', :class=>"icon icon-white icon-user") + "#{current_user.username}"),"#", :style=>"display: block; padding: 0 2px 0 2px; white-space: nowrap; width: 100%; overflow: hidden; text-overflow: ellipsis;"
       %ul.dropdown-menu
         %li
