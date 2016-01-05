@@ -13,7 +13,7 @@
       #msg-error
         = error_message_for(@pc_app, :app_id, :prepend_text => "")
     .control-group
-      = f.label :card_cust_id, "*Card Customer id", :class => 'control-label'
+      = f.label :card_cust_id, "*Customer ID", :class => 'control-label'
       = f.text_field :card_cust_id, :maxlength => 20
       #msg-error
         = error_message_for(@pc_app, :card_cust_id, :prepend_text => "")    
@@ -28,7 +28,7 @@
       #msg-error
         = error_message_for(@pc_app, :sc_gl_income, :prepend_text => "")
     .control-group
-      = f.label :is_enabled, "Is Enabled ?", :class => 'control-label'
+      = f.label :is_enabled, "*Is Enabled ?", :class => 'control-label'
       = f.check_box :is_enabled, {},"Y","N"
       #msg-error
         = error_message_for(@pc_app, :is_enabled, :prepend_text => "")

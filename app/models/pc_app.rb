@@ -9,4 +9,5 @@ class PcApp < ActiveRecord::Base
   validates_uniqueness_of :app_id, :scope => :approval_status
   
   validates :card_acct, :sc_gl_income, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => "Invalid format, expected format is : {[a-z|A-Z|0-9]}" }, length: {maximum: 15, minimum: 1}
+  validates :card_cust_id, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => "Invalid format, expected format is : {[a-z|A-Z|0-9]}" }
 end
