@@ -26,6 +26,9 @@ class EcolTransactionsController < ApplicationController
     @ecol_transaction_statuses = EcolTransaction.group(:status).count(:id).keys
     @total_pending_records = EcolTransaction.where(:pending_approval => 'Y').count(:id)
     @total_records = EcolTransaction.count(:id)
+    
+    @ecol_notify_summary = EcolTransaction.group(:notify_status, :pending_approval).count(:id)
+    @ecol_notify_statuses = EcolTransaction.group(:notify_status).count(:id).keys
   end
 
   def update_multiple
