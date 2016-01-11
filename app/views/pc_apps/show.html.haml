@@ -50,6 +50,24 @@
             %td#msg-error
               = error_message_for(@pc_app, :is_enabled, :prepend_text => "")
           %tr
+            %td.label Trace ID Prefix
+            %td.value
+              = @pc_app.traceid_prefix
+            %td#msg-error
+              = error_message_for(@pc_app, :traceid_prefix, :prepend_text => "")
+          %tr
+            %td.label Source ID
+            %td.value
+              = @pc_app.source_id
+            %td#msg-error
+              = error_message_for(@pc_app, :source_id, :prepend_text => "")
+          %tr
+            %td.label Channel ID
+            %td.value
+              = @pc_app.channel_id
+            %td#msg-error
+              = error_message_for(@pc_app, :channel_id, :prepend_text => "")
+          %tr
             %td.label Created By
             %td.value
               = @pc_app.created_user.try(:username)

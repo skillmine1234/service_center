@@ -8,5 +8,8 @@ FactoryGirl.define do
     is_enabled "N"
     approval_status "U"
     card_cust_id "2424"
+    traceid_prefix 1
+    source_id "MyString"
+    channel_id "MyString"
   end
 end
