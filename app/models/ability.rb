@@ -12,6 +12,7 @@ class Ability
     user_permissions(@user.group_model_list) if @user.has_role? :user
     editor_permissions(@user.group_model_list) if @user.has_role? :editor
     supervisor_permissions(@user.group_model_list) if @user.has_role? :supervisor
+    tester_permissions(@user.group_model_list) if @user.has_role? :tester
     can :read, ActiveAdmin::Page, :name => "Dashboard"
   end
 
@@ -35,6 +36,13 @@ class Ability
       can :approve, model_name.constantize
       can :hit_api, model_name.constantize
       can :destroy, model_name.constantize
+    end
+  end
+
+  def tester_permissions(models)
+    models.each do |model_name|
+      can :read, model_name.constantize
+      can :manage, model_name.constantize
     end
   end
 
