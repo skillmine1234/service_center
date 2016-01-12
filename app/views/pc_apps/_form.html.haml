@@ -28,7 +28,7 @@
       #msg-error
         = error_message_for(@pc_app, :sc_gl_income, :prepend_text => "")
     .control-group
-      = f.label :is_enabled, "*Is Enabled ?", :class => 'control-label'
+      = f.label :is_enabled, "Is Enabled ?", :class => 'control-label'
       = f.check_box :is_enabled, {},"Y","N"
       #msg-error
         = error_message_for(@pc_app, :is_enabled, :prepend_text => "")
@@ -47,6 +47,11 @@
       = f.text_field :channel_id
       #msg-error
         = error_message_for(@pc_app, :channel_id, :prepend_text => "")
+    .control-group
+      = f.label :needs_pin, "Needs Pin ?", :class => 'control-label'
+      = f.check_box :needs_pin, {},"Y","N"
+      #msg-error
+        = error_message_for(@pc_app, :needs_pin, :prepend_text => "")
 
   .form-actions
     - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"

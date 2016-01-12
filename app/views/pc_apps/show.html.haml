@@ -68,6 +68,12 @@
             %td#msg-error
               = error_message_for(@pc_app, :channel_id, :prepend_text => "")
           %tr
+            %td.label Needs Pin
+            %td.value
+              = @pc_app.needs_pin
+            %td#msg-error
+              = error_message_for(@pc_app, :needs_pin, :prepend_text => "")
+          %tr
             %td.label Created By
             %td.value
               = @pc_app.created_user.try(:username)

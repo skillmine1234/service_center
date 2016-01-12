@@ -88,6 +88,6 @@ class PcAppsController < ApplicationController
 
   def pc_app_params
     params.require(:pc_app).permit(:app_id, :card_acct, :sc_gl_income, :card_cust_id, :is_enabled, :lock_version, :approval_status, :last_action, :approved_version,
-                                   :approved_id, :created_by, :updated_by, :traceid_prefix, :source_id, :channel_id)
+                                   :approved_id, :created_by, :updated_by, :traceid_prefix, :source_id, :channel_id, :needs_pin)
   end
 end
