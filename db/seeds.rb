@@ -18,6 +18,7 @@ AdminRole.create(:name => 'approver_admin') if AdminRole.find_by_name("approver_
 Role.create(:name => "user") if Role.find_by_name("user").nil?
 Role.create(:name => "editor") if Role.find_by_name("editor").nil?
 Role.create(:name => "supervisor") if Role.find_by_name("supervisor").nil?
+Role.create(:name => "tester") if Role.find_by_name("tester").nil?
 
 Group.create(:name => "inward-remittance") if Group.find_by_name("inward-remittance").nil?
 Group.create(:name => "e-collect") if Group.find_by_name("e-collect").nil?

@@ -99,6 +99,16 @@
         = image_tag 'udf_attribute.gif', :size => "80x80"
       %br
         = "UDF Attributes"
+    .box
+      = link_to '/qg_ecol_todays_neft_txns' do
+        = image_tag 'neft-icon.png', :size => "80x80"
+      %br
+        = "NEFT Transactions"
+    .box
+      = link_to '/qg_ecol_todays_rtgs_txns' do
+        = image_tag 'rtgs-icon.jpg', :size => "80x80"
+      %br
+        = "RTGS Transactions"
 - if @current_user.group_names.include?("bill-management")
   %h1 Bill-Management
   .slide-container
