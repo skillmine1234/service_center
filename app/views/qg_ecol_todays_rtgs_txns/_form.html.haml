@@ -6,21 +6,6 @@
 
   .form-main{:style=>"width: 100%;"}
     .control-group
-      = f.label :idfcatref, "*Idfcatref", :class => 'control-label'
-      = f.text_field :idfcatref, :maxlength => 16
-      #msg-error
-        = error_message_for(@qg_ecol_todays_rtgs_txn, :idfcatref, :prepend_text => "")
-    .control-group
-      = f.label :transfer_type, "*Transfer Type", :class => 'control-label'
-      = f.text_field :transfer_type, :maxlength => 4
-      #msg-error
-        = error_message_for(@qg_ecol_todays_rtgs_txn, :transfer_type, :prepend_text => "")
-    .control-group
-      = f.label :transfer_status, "*Transfer Status", :class => 'control-label'
-      = f.text_field :transfer_status, :maxlength => 25
-      #msg-error
-        = error_message_for(@qg_ecol_todays_rtgs_txn, :transfer_status, :prepend_text => "")
-    .control-group
       = f.label :transfer_unique_no, "*Transfer Unique No", :class => 'control-label'
       = f.text_field :transfer_unique_no, :maxlength => 64
       #msg-error
@@ -66,13 +51,8 @@
       #msg-error
         = error_message_for(@qg_ecol_todays_rtgs_txn, :transfer_amt, :prepend_text => "")
     .control-group
-      = f.label :transfer_ccy, "*Transfer CCY", :class => 'control-label'
-      = f.text_field :transfer_ccy, :maxlength => 5
-      #msg-error
-        = error_message_for(@qg_ecol_todays_rtgs_txn, :transfer_ccy, :prepend_text => "")
-    .control-group
       = f.label :transfer_date, "*Transfer Date", :class => 'control-label'
-      = f.date_select :transfer_date
+      = f.text_field :transfer_date
       #msg-error
         = error_message_for(@qg_ecol_todays_rtgs_txn, :transfer_date, :prepend_text => "")
     .control-group
