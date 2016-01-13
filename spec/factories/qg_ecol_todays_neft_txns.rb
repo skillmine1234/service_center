@@ -7,10 +7,10 @@ FactoryGirl.define do
     transfer_status "MyString"
     transfer_unique_no "MyString"
     rmtr_ref "MyString"
-    bene_account_ifsc "MyString"
+    bene_account_ifsc "ASDF0123456"
     bene_account_no "MyString"
     bene_account_type "MyString"
-    rmtr_account_ifsc "MyString"
+    rmtr_account_ifsc "ASDF0123456"
     rmtr_account_no "MyString"
     rmtr_account_type "MyString"
     transfer_amt 1

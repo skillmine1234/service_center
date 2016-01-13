@@ -1,8 +1,8 @@
 %br
-= link_to 'New QG Ecol Todays RTGS Transaction', new_qg_ecol_todays_rtgs_txn_path
+= link_to 'New RTGS Transaction', new_qg_ecol_todays_rtgs_txn_path
 %br
 %br
-%h1 Listing QG Ecol Todays RTGS Transaction
+%h1 Listing Todays RTGS Transactions
 %br
 = "Total Count: #{@qg_ecol_todays_rtgs_txns_count}"
 %br
@@ -16,12 +16,6 @@
       %th{:style=>'text-align:left; background-color: lightblue;'}
       %th{:style=>'text-align:left; background-color: lightblue;'}
       %th{:style=>'text-align:left; background-color: lightblue;'}
-      %th{:style=>'text-align:left; background-color: lightblue;'} 
-        Unique Request No.
-      %th{:style=>'text-align:left; background-color: lightblue;'}  
-        Transfer Type
-      %th{:style=>'text-align:left; background-color: lightblue;'}  
-        Transfer Status
       %th{:style=>'text-align:left; background-color: lightblue;'}  
         Transfer Unique No
       %th{:style=>'text-align:left; background-color: lightblue;'}  
@@ -46,12 +40,6 @@
           = link_to 'Edit', edit_qg_ecol_todays_rtgs_txn_path(qg_ecol_todays_rtgs_txn)
         %td{:style=>'text-align:left;'}
           = link_to 'Delete', qg_ecol_todays_rtgs_txn, :method => :delete, :data => { :confirm => 'Are you sure?' }
-        %td{:style=>'text-align:left;'}
-          = qg_ecol_todays_rtgs_txn.idfcatref
-        %td{:style=>'text-align:left;'}
-          = qg_ecol_todays_rtgs_txn.transfer_type
-        %td{:style=>'text-align:left;'}
-          = qg_ecol_todays_rtgs_txn.transfer_status
         %td{:style=>'text-align:left;'}
           = qg_ecol_todays_rtgs_txn.transfer_unique_no
         %td{:style=>'text-align:left;'}
