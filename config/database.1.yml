@@ -13,6 +13,12 @@ fcr_development:
   adapter: sqlite3
   database: db/fcr.sqlite3
   pool: 5
+  timeout: 5000
+
+fcatrt_development:
+  adapter: sqlite3
+  database: db/fcr.sqlite3
+  pool: 5
   timeout: 5000	
 
 # Warning: The database defined as "test" will be erased and
@@ -26,6 +32,11 @@ test: &test
 fcr_test:
   adapter: sqlite3
   database: db/test_fcr.sqlite3
+  pool: 5
+  timeout: 5000
+fcatrt_test:
+  adapter: sqlite3
+  database: db/test_fcatrt.sqlite3
   pool: 5
   timeout: 5000
 

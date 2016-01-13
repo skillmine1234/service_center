@@ -41,6 +41,7 @@ Spork.prefork do
     config.include Devise::TestHelpers, :type => :controller
     
     dbs = [ DatabaseCleaner[:active_record, { :connection => :fcr_test }],
+            DatabaseCleaner[:active_record, { :connection => :fcatrt_test }],
             DatabaseCleaner[:active_record, { :connection => :test }]
           ]
 
