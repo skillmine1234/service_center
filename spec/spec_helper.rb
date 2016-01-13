@@ -39,14 +39,23 @@ Spork.prefork do
     config.infer_base_class_for_anonymous_controllers = false
 
     config.include Devise::TestHelpers, :type => :controller
+    
+    dbs = [ DatabaseCleaner[:active_record, { :connection => :fcr_test }],
+            DatabaseCleaner[:active_record, { :connection => :test }]
+          ]
+
     config.before(:suite) do
       begin
-        DatabaseCleaner.strategy = :truncation
-        DatabaseCleaner.start
+        dbs.each do |db|
+          db.strategy = :truncation
+          db.start
+        end
       ensure
-        DatabaseCleaner.clean
+        dbs.each do |db|
+          db.clean
+        end
       end
-    end
+    end    
   end
 end
 Spork.each_run do

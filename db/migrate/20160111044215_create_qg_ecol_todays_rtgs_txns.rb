@@ -1,6 +1,9 @@
 class CreateQgEcolTodaysRtgsTxns < ActiveRecord::Migration
-  unless Rails.env == 'production'
-    def change
+  def up
+    unless Rails.env == 'production'
+      def self.connection
+       QgEcolTodaysRtgsTxn.connection
+      end
       create_table :qg_ecol_todays_rtgs_txns do |t|
         t.string :idfcatref, :limit => 16, :null => false
         t.string :transfer_type, :limit => 4, :null => false
@@ -23,6 +26,15 @@ class CreateQgEcolTodaysRtgsTxns < ActiveRecord::Migration
         t.index([:idfcatref], :unique => true)
         t.timestamps null: false
       end
+    end
+  end
+  
+  def down
+    unless Rails.env == 'production'
+      def self.connection
+        QgEcolTodaysRtgsTxn.connection
+      end
+      drop_table :qg_ecol_todays_rtgs_txns
     end
   end
 end

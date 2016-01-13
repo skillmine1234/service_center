@@ -19,6 +19,7 @@ test: &test
   timeout: 5000
 
 <%= bcdb.production :production, :production %>
+<%= bcdb.fcr_production :production, :fcr_production %>
 
 cucumber:
   <<: *test
