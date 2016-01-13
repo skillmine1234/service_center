@@ -49,7 +49,7 @@ describe QgEcolTodaysNeftTxnsController do
         expect {
           post :create, {:qg_ecol_todays_neft_txn => params}
         }.to change(QgEcolTodaysNeftTxn.all, :count).by(1)
-        flash[:alert].should  match(/Qg Ecol Todays NEFT Transaction successfully created/)
+        flash[:alert].should  match(/NEFT Transaction successfully created/)
         response.should be_redirect
       end
 

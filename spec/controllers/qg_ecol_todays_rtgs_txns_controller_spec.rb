@@ -49,7 +49,7 @@ describe QgEcolTodaysRtgsTxnsController do
         expect {
           post :create, {:qg_ecol_todays_rtgs_txn => params}
         }.to change(QgEcolTodaysRtgsTxn.all, :count).by(1)
-        flash[:alert].should  match(/Qg Ecol Todays RTGS Transaction successfully created/)
+        flash[:alert].should  match(/RTGS Transaction successfully created/)
         response.should be_redirect
       end
 

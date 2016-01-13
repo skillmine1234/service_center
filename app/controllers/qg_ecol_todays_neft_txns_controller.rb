@@ -3,6 +3,7 @@ class QgEcolTodaysNeftTxnsController < ApplicationController
   authorize_resource
   before_filter :authenticate_user!
   before_filter :block_inactive_user!
+  before_filter :block_screens  
   respond_to :json
   include ApplicationHelper
   include QgEcolTodaysNeftTxnsHelper
@@ -17,7 +18,7 @@ class QgEcolTodaysNeftTxnsController < ApplicationController
       render "new"
     else
       @qg_ecol_todays_neft_txn.save!
-      flash[:alert] = 'Qg Ecol Todays NEFT Transaction successfully created'
+      flash[:alert] = 'NEFT Transaction successfully created'
       redirect_to @qg_ecol_todays_neft_txn
     end
   end
@@ -33,7 +34,7 @@ class QgEcolTodaysNeftTxnsController < ApplicationController
       render "edit"
     else
       @qg_ecol_todays_neft_txn.save!
-      flash[:alert] = 'Qg Ecol Todays NEFT Transaction successfully modified'
+      flash[:alert] = 'NEFT Transaction successfully modified'
       redirect_to @qg_ecol_todays_neft_txn
     end
   end
@@ -51,7 +52,7 @@ class QgEcolTodaysNeftTxnsController < ApplicationController
   def destroy
     qg_ecol_todays_neft_txn = QgEcolTodaysNeftTxn.find(params[:id])
     qg_ecol_todays_neft_txn.destroy
-    flash[:alert] = "Todays NEFT Transaction record has been deleted!"
+    flash[:alert] = "NEFT Transaction record has been deleted!"
     redirect_to qg_ecol_todays_neft_txns_path
   end
 

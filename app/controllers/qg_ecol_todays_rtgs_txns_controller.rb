@@ -3,6 +3,7 @@ class QgEcolTodaysRtgsTxnsController < ApplicationController
   authorize_resource
   before_filter :authenticate_user!
   before_filter :block_inactive_user!
+  before_filter :block_screens
   respond_to :json
   include ApplicationHelper
   include QgEcolTodaysRtgsTxnsHelper
@@ -17,7 +18,7 @@ class QgEcolTodaysRtgsTxnsController < ApplicationController
       render "new"
     else
       @qg_ecol_todays_rtgs_txn.save!
-      flash[:alert] = 'Qg Ecol Todays RTGS Transaction successfully created'
+      flash[:alert] = 'RTGS Transaction successfully created'
       redirect_to @qg_ecol_todays_rtgs_txn
     end
   end
@@ -33,13 +34,9 @@ class QgEcolTodaysRtgsTxnsController < ApplicationController
       render "edit"
     else
       @qg_ecol_todays_rtgs_txn.save!
-      flash[:alert] = 'Qg Ecol Todays RTGS Transaction successfully modified'
+      flash[:alert] = 'RTGS Transaction successfully modified'
       redirect_to @qg_ecol_todays_rtgs_txn
     end
-    rescue ActiveRecord::StaleObjectError
-      @qg_ecol_todays_rtgs_txn.reload
-      flash[:alert] = 'Someone edited the RTGS Transaction the same time you did. Please re-apply your changes to the RTGS Transaction.'
-      render "edit"
   end
 
   def index
@@ -55,7 +52,7 @@ class QgEcolTodaysRtgsTxnsController < ApplicationController
   def destroy
     qg_ecol_todays_rtgs_txn = QgEcolTodaysRtgsTxn.find(params[:id])
     qg_ecol_todays_rtgs_txn.destroy
-    flash[:alert] = "Todays RTGS Transaction record has been deleted!"
+    flash[:alert] = "RTGS Transaction record has been deleted!"
     redirect_to qg_ecol_todays_rtgs_txns_path
   end
 
