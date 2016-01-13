@@ -49,7 +49,7 @@ class ApplicationController < ActionController::Base
   end
   
   def block_screens
-    if ENV['CONFIG_DISPLAY_TXN_SCREENS'] != 'Y'
+    if ENV['CONFIG_ENVIRONMENT'] != 'test'
       flash[:alert] = "Access denied. You are not authorized to access the requested page."
       redirect_to root_path
     end

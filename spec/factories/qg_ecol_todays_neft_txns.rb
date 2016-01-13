@@ -2,10 +2,10 @@
 
 FactoryGirl.define do
   factory :qg_ecol_todays_neft_txn do
-    ref_txn_no "MyString"
+    sequence(:transfer_unique_no) {|n| "9" + "%03i" % "#{n}" }
+    sequence(:ref_txn_no) {|n| "8" + "%03i" % "#{n}" }
     transfer_type "MyString"
     transfer_status "MyString"
-    transfer_unique_no "MyString"
     rmtr_ref "MyString"
     bene_account_ifsc "ASDF0123456"
     bene_account_no "MyString"

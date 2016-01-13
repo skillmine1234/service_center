@@ -45,8 +45,8 @@ describe QgEcolTodaysRtgsTxn do
 
   context "set_idfactno" do
     it "should set idfactno" do
-      qg_ecol_todays_rtgs_txn = Factory.build(:qg_ecol_todays_rtgs_txn)
-      qg_ecol_todays_rtgs_txn.idfcatref.should == 'MyString'
+      qg_ecol_todays_rtgs_txn = Factory.build(:qg_ecol_todays_rtgs_txn, :idfcatref => "MyString1")
+      qg_ecol_todays_rtgs_txn.idfcatref.should == 'MyString1'
       qg_ecol_todays_rtgs_txn.save
       qg_ecol_todays_rtgs_txn.idfcatref.should == qg_ecol_todays_rtgs_txn.id.to_s
     end

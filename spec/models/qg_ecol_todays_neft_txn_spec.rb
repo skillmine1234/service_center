@@ -41,8 +41,8 @@ describe QgEcolTodaysNeftTxn do
   
   context "set_ref_txn_no" do
     it "should set ref_txn_no" do
-      qg_ecol_todays_neft_txn = Factory.build(:qg_ecol_todays_neft_txn)
-      qg_ecol_todays_neft_txn.ref_txn_no.should == 'MyString'
+      qg_ecol_todays_neft_txn = Factory.build(:qg_ecol_todays_neft_txn, :ref_txn_no => "MyString1")
+      qg_ecol_todays_neft_txn.ref_txn_no.should == 'MyString1'
       qg_ecol_todays_neft_txn.save
       qg_ecol_todays_neft_txn.ref_txn_no.should == qg_ecol_todays_neft_txn.id.to_s
     end

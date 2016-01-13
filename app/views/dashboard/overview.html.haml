@@ -99,7 +99,7 @@
         = image_tag 'udf_attribute.gif', :size => "80x80"
       %br
         = "UDF Attributes"
-    - if ENV['CONFIG_DISPLAY_TXN_SCREENS'] == 'Y'
+    - if ENV['CONFIG_ENVIRONMENT'] == 'test'
       .box
         = link_to '/qg_ecol_todays_neft_txns' do
           = image_tag 'neft-icon.png', :size => "80x80"
