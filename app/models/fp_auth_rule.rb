@@ -6,7 +6,6 @@ class FpAuthRule < ActiveRecord::Base
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
   
   before_validation :squish_ips
-  serialize :operation_name
   
   validates_presence_of :operation_name, :username
   validates_uniqueness_of :username, :scope => [:approval_status]
@@ -28,8 +27,6 @@ class FpAuthRule < ActiveRecord::Base
   end 
   
   def self.convert_options_to_array(options_as_string)
-    p "*******************"
-    p options_as_string
     if (!options_as_string.nil?)
       options_as_string.split(',')
     else 
