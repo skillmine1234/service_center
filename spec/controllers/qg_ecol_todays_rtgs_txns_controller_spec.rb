@@ -71,7 +71,7 @@ describe QgEcolTodaysRtgsTxnsController do
     describe "with invalid params" do
       it "assigns a newly created but unsaved qg_ecol_todays_rtgs_txn as @qg_ecol_todays_rtgs_txn" do
         params = Factory.attributes_for(:qg_ecol_todays_rtgs_txn)
-        params[:idfcatref] = nil
+        params[:transfer_unique_no] = nil
         expect {
           post :create, {:qg_ecol_todays_rtgs_txn => params}
         }.to change(QgEcolTodaysRtgsTxn.all, :count).by(0)
@@ -81,7 +81,7 @@ describe QgEcolTodaysRtgsTxnsController do
 
       it "re-renders the 'new' template when show_errors is true" do
         params = Factory.attributes_for(:qg_ecol_todays_rtgs_txn)
-        params[:idfcatref] = nil
+        params[:transfer_unique_no] = nil
         post :create, {:qg_ecol_todays_rtgs_txn => params}
         response.should render_template("new")
       end
@@ -91,26 +91,26 @@ describe QgEcolTodaysRtgsTxnsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested qg_ecol_todays_rtgs_txn" do
-        qg_ecol_todays_rtgs_txn = Factory(:qg_ecol_todays_rtgs_txn, :transfer_type => "ABC")
+        qg_ecol_todays_rtgs_txn = Factory(:qg_ecol_todays_rtgs_txn, :rmtr_ref => "ABC")
         params = qg_ecol_todays_rtgs_txn.attributes.slice(*qg_ecol_todays_rtgs_txn.class.attribute_names)
-        params[:transfer_type] = "ABC"
+        params[:rmtr_ref] = "ABC"
         put :update, {:id => qg_ecol_todays_rtgs_txn.id, :qg_ecol_todays_rtgs_txn => params}
         qg_ecol_todays_rtgs_txn.reload
-        qg_ecol_todays_rtgs_txn.transfer_type.should == "ABC"
+        qg_ecol_todays_rtgs_txn.rmtr_ref.should == "ABC"
       end
 
       it "assigns the requested qg_ecol_todays_rtgs_txn as @qg_ecol_todays_rtgs_txn" do
-        qg_ecol_todays_rtgs_txn = Factory(:qg_ecol_todays_rtgs_txn, :transfer_type => "ABC")
+        qg_ecol_todays_rtgs_txn = Factory(:qg_ecol_todays_rtgs_txn, :rmtr_ref => "ABC")
         params = qg_ecol_todays_rtgs_txn.attributes.slice(*qg_ecol_todays_rtgs_txn.class.attribute_names)
-        params[:transfer_type] = "ABC"
+        params[:rmtr_ref] = "ABC"
         put :update, {:id => qg_ecol_todays_rtgs_txn.to_param, :qg_ecol_todays_rtgs_txn => params}
         assigns(:qg_ecol_todays_rtgs_txn).should eq(qg_ecol_todays_rtgs_txn)
       end
 
       it "redirects to the qg_ecol_todays_rtgs_txn" do
-        qg_ecol_todays_rtgs_txn = Factory(:qg_ecol_todays_rtgs_txn, :transfer_type => "ABC")
+        qg_ecol_todays_rtgs_txn = Factory(:qg_ecol_todays_rtgs_txn, :rmtr_ref => "ABC")
         params = qg_ecol_todays_rtgs_txn.attributes.slice(*qg_ecol_todays_rtgs_txn.class.attribute_names)
-        params[:transfer_type] = "ABC"
+        params[:rmtr_ref] = "ABC"
         put :update, {:id => qg_ecol_todays_rtgs_txn.to_param, :qg_ecol_todays_rtgs_txn => params}
         response.should redirect_to(qg_ecol_todays_rtgs_txn)
       end

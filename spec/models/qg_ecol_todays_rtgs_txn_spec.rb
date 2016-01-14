@@ -3,7 +3,7 @@ require 'spec_helper'
 describe QgEcolTodaysRtgsTxn do
   
   context 'validation' do
-    [:idfcatref, :transfer_type, :transfer_status, :transfer_unique_no, :rmtr_ref, :bene_account_ifsc, :bene_account_no, :rmtr_account_ifsc, :rmtr_account_no, :transfer_amt, :transfer_ccy, :transfer_date].each do |att|
+    [:transfer_unique_no, :rmtr_ref, :bene_account_ifsc, :bene_account_no, :rmtr_account_ifsc, :rmtr_account_no, :transfer_amt, :transfer_date].each do |att|
       it { should validate_presence_of(att) }
     end
     
@@ -27,28 +27,6 @@ describe QgEcolTodaysRtgsTxn do
       qg_ecol_todays_rtgs_txn.should be_valid
       qg_ecol_todays_rtgs_txn = Factory.build(:qg_ecol_todays_rtgs_txn, :transfer_amt => 199999)
       qg_ecol_todays_rtgs_txn.should_not be_valid
-    end
-  end
-    
-  context "set_default_values" do
-    it "should set default_values" do
-      qg_ecol_todays_rtgs_txn = Factory.build(:qg_ecol_todays_rtgs_txn)
-      qg_ecol_todays_rtgs_txn.transfer_type.should == 'MyString'
-      qg_ecol_todays_rtgs_txn.transfer_ccy.should == 'MyString'
-      qg_ecol_todays_rtgs_txn.transfer_status.should == 'MyString'
-      qg_ecol_todays_rtgs_txn.save
-      qg_ecol_todays_rtgs_txn.transfer_type.should == 'RTGS'
-      qg_ecol_todays_rtgs_txn.transfer_ccy.should == 'INR'
-      qg_ecol_todays_rtgs_txn.transfer_status.should == 'COM'
-    end
-  end
-
-  context "set_idfactno" do
-    it "should set idfactno" do
-      qg_ecol_todays_rtgs_txn = Factory.build(:qg_ecol_todays_rtgs_txn, :idfcatref => "MyString1")
-      qg_ecol_todays_rtgs_txn.idfcatref.should == 'MyString1'
-      qg_ecol_todays_rtgs_txn.save
-      qg_ecol_todays_rtgs_txn.idfcatref.should == qg_ecol_todays_rtgs_txn.id.to_s
     end
   end
 end
