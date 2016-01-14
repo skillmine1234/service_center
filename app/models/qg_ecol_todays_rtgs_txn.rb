@@ -8,7 +8,7 @@ class QgEcolTodaysRtgsTxn < ArFcatrt
   validates_uniqueness_of :transfer_unique_no
 
   before_save :set_default_values  
-  after_save :set_idfcatref
+  after_create :set_idfcatref
 
   def set_default_values
     self.transfer_type = 'RTGS'
@@ -18,6 +18,7 @@ class QgEcolTodaysRtgsTxn < ArFcatrt
   
   def set_idfcatref
     self.idfcatref = self.id
+    self.save
   end
 
 end

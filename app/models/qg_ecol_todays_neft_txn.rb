@@ -6,7 +6,7 @@ class QgEcolTodaysNeftTxn < ArFcr
   validates_uniqueness_of :transfer_unique_no
 
   before_save :set_default_values
-  after_save :set_ref_txn_no
+  after_create :set_ref_txn_no
 
   def set_default_values
     self.transfer_type = 'NEFT'
@@ -16,6 +16,7 @@ class QgEcolTodaysNeftTxn < ArFcr
   
   def set_ref_txn_no
     self.ref_txn_no = self.id
+    self.save
   end
 
 end
