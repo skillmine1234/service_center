@@ -3,7 +3,7 @@ require 'spec_helper'
 describe QgEcolTodaysRtgsTxn do
   
   context 'validation' do
-    [:transfer_unique_no, :rmtr_ref, :bene_account_ifsc, :bene_account_no, :rmtr_account_ifsc, :rmtr_account_no, :transfer_amt, :transfer_date].each do |att|
+    [:transfer_unique_no, :rmtr_ref, :bene_account_ifsc, :bene_account_no, :rmtr_account_ifsc, :rmtr_account_no, :transfer_amt, :transfer_date, :rmtr_full_name].each do |att|
       it { should validate_presence_of(att) }
     end
     

@@ -19,7 +19,7 @@ class QgEcolTodaysRtgsTxnsController < ApplicationController
     else
       @qg_ecol_todays_rtgs_txn.save!
       flash[:alert] = 'RTGS Transaction successfully created'
-      redirect_to @qg_ecol_todays_rtgs_txn
+      redirect_to qg_ecol_todays_rtgs_txns_path
     end
   end
 
@@ -35,7 +35,7 @@ class QgEcolTodaysRtgsTxnsController < ApplicationController
     else
       @qg_ecol_todays_rtgs_txn.save!
       flash[:alert] = 'RTGS Transaction successfully modified'
-      redirect_to @qg_ecol_todays_rtgs_txn
+      redirect_to qg_ecol_todays_rtgs_txns_path
     end
   end
 

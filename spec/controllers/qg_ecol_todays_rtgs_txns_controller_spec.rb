@@ -61,10 +61,10 @@ describe QgEcolTodaysRtgsTxnsController do
         assigns(:qg_ecol_todays_rtgs_txn).should be_persisted
       end
 
-      it "redirects to the created qg_ecol_todays_rtgs_txn" do
+      it "redirects to the qg_ecol_todays_rtgs_txns list" do
         params = Factory.attributes_for(:qg_ecol_todays_rtgs_txn)
         post :create, {:qg_ecol_todays_rtgs_txn => params}
-        response.should redirect_to(QgEcolTodaysRtgsTxn.last)
+        response.should redirect_to(qg_ecol_todays_rtgs_txns_url)
       end
     end
 
@@ -107,12 +107,12 @@ describe QgEcolTodaysRtgsTxnsController do
         assigns(:qg_ecol_todays_rtgs_txn).should eq(qg_ecol_todays_rtgs_txn)
       end
 
-      it "redirects to the qg_ecol_todays_rtgs_txn" do
+      it "redirects to the qg_ecol_todays_rtgs_txns list" do
         qg_ecol_todays_rtgs_txn = Factory(:qg_ecol_todays_rtgs_txn, :rmtr_ref => "ABC")
         params = qg_ecol_todays_rtgs_txn.attributes.slice(*qg_ecol_todays_rtgs_txn.class.attribute_names)
         params[:rmtr_ref] = "ABC"
         put :update, {:id => qg_ecol_todays_rtgs_txn.to_param, :qg_ecol_todays_rtgs_txn => params}
-        response.should redirect_to(qg_ecol_todays_rtgs_txn)
+        response.should redirect_to(qg_ecol_todays_rtgs_txns_url)
       end
     end
   end

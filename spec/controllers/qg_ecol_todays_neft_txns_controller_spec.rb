@@ -61,10 +61,10 @@ describe QgEcolTodaysNeftTxnsController do
         assigns(:qg_ecol_todays_neft_txn).should be_persisted
       end
 
-      it "redirects to the created qg_ecol_todays_neft_txn" do
+      it "redirects to the qg_ecol_todays_neft_txns list" do
         params = Factory.attributes_for(:qg_ecol_todays_neft_txn)
         post :create, {:qg_ecol_todays_neft_txn => params}
-        response.should redirect_to(QgEcolTodaysNeftTxn.last)
+        response.should redirect_to(qg_ecol_todays_neft_txns_url)
       end
     end
 
@@ -107,12 +107,12 @@ describe QgEcolTodaysNeftTxnsController do
         assigns(:qg_ecol_todays_neft_txn).should eq(qg_ecol_todays_neft_txn)
       end
 
-      it "redirects to the qg_ecol_todays_neft_txn" do
+      it "redirects to the qg_ecol_todays_neft_txn list" do
         qg_ecol_todays_neft_txn = Factory(:qg_ecol_todays_neft_txn, :rmtr_ref => "ABC")
         params = qg_ecol_todays_neft_txn.attributes.slice(*qg_ecol_todays_neft_txn.class.attribute_names)
         params[:rmtr_ref] = "ABC"
         put :update, {:id => qg_ecol_todays_neft_txn.to_param, :qg_ecol_todays_neft_txn => params}
-        response.should redirect_to(qg_ecol_todays_neft_txn)
+        response.should redirect_to(qg_ecol_todays_neft_txns_url)
       end
     end
   end

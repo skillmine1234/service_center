@@ -19,7 +19,7 @@ class QgEcolTodaysNeftTxnsController < ApplicationController
     else
       @qg_ecol_todays_neft_txn.save!
       flash[:alert] = 'NEFT Transaction successfully created'
-      redirect_to @qg_ecol_todays_neft_txn
+      redirect_to qg_ecol_todays_neft_txns_path
     end
   end
 
@@ -35,7 +35,7 @@ class QgEcolTodaysNeftTxnsController < ApplicationController
     else
       @qg_ecol_todays_neft_txn.save!
       flash[:alert] = 'NEFT Transaction successfully modified'
-      redirect_to @qg_ecol_todays_neft_txn
+      redirect_to qg_ecol_todays_neft_txns_path
     end
   end
 
