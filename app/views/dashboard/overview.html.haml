@@ -193,3 +193,17 @@
         = image_tag 'ecol_customer.gif', :size => "80x80"
       %br
         = "FP Authorisation Rules"
+- if @current_user.group_names.include?("imt")
+  %h1 IMT
+  .slide-container
+    .box  
+      = link_to '/imt_unapproved_records' do
+        = image_tag 'work-list.jpg', :size => "80x80"
+      %br
+        = "Approval Worklist"
+  .slide-container
+    .box  
+      = link_to '/imt_customers' do
+        = image_tag 'ecol_customer.gif', :size => "80x80"
+      %br
+        = "IMT Customers"

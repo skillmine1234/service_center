@@ -13,6 +13,8 @@ class Group < ActiveRecord::Base
       ['PcApp','PcFeeRule','PcUnapprovedRecord']
     when "flex-proxy"
       ['FpOperation','FpAuthRule','FpUnapprovedRecord']
+    when "imt"
+      ['ImtCustomer','ImtUnapprovedRecord']
     else
       []
     end

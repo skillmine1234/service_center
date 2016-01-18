@@ -37,6 +37,9 @@ ServiceCenter::Application.routes.draw do
   resources :fp_unapproved_records
   resources :fp_operations
   resources :fp_auth_rules
+  resources :imt_customers
+  resources :imt_unapproved_records
+  # resources :imt_transactions
 
   namespace :api do
     namespace :v1 do
@@ -60,6 +63,7 @@ ServiceCenter::Application.routes.draw do
   get '/pc_fee_rule/:id/audit_logs' => 'pc_fee_rules#audit_logs'
   get '/fp_operation/:id/audit_logs' => 'fp_operations#audit_logs'
   get '/fp_auth_rule/:id/audit_logs' => 'fp_auth_rules#audit_logs'
+  get '/imt_customer/:id/audit_logs' => 'imt_customers#audit_logs'
 
   get '/inward_remittances/:id/remitter_identities' => 'inward_remittances#remitter_identities'
   get '/inward_remittances/:id/beneficiary_identities' => 'inward_remittances#beneficiary_identities'
@@ -96,6 +100,7 @@ ServiceCenter::Application.routes.draw do
   put '/pc_fee_rule/:id/approve' => "pc_fee_rules#approve"
   put '/fp_operation/:id/approve' => "fp_operations#approve"
   put '/fp_auth_rule/:id/approve' => "fp_auth_rules#approve"
+  put '/imt_customer/:id/approve' => "imt_customers#approve"
 
   get '/ecol_transactions/:id/ecol_audit_logs/:step_name' => 'ecol_transactions#ecol_audit_logs'
   put '/ecol_transactions/:id/approve' => "ecol_transactions#approve_transaction"

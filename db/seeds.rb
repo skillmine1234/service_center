@@ -25,6 +25,7 @@ Group.create(:name => "e-collect") if Group.find_by_name("e-collect").nil?
 Group.create(:name => "bill-management") if Group.find_by_name("bill-management").nil?
 Group.create(:name => "prepaid-card") if Group.find_by_name("prepaid-card").nil?
 Group.create(:name => "flex-proxy") if Group.find_by_name("flex-proxy").nil?
+Group.create(:name => "imt") if Group.find_by_name("imt").nil?
 
 
 unless Rails.env == 'production'

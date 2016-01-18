@@ -14,6 +14,7 @@ FactoryGirl.define do
       Factory(:user_group, :user_id => user.id, :group_id => Factory(:group, :name => 'bill-management').id)
       Factory(:user_group, :user_id => user.id, :group_id => Factory(:group, :name => 'prepaid-card').id)
       Factory(:user_group, :user_id => user.id, :group_id => Factory(:group, :name => 'flex-proxy').id)
+      Factory(:user_group, :user_id => user.id, :group_id => Factory(:group, :name => 'imt').id)
     end
   end
 end
