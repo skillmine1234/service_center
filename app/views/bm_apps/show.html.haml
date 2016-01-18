@@ -32,6 +32,12 @@
             %td#msg-error
               = error_message_for(@bm_app, :channel_id, :prepend_text => "")
           %tr
+            %td.label Needs OTP
+            %td.value
+              = @bm_app.needs_otp
+            %td#msg-error
+              = error_message_for(@bm_app, :needs_otp, :prepend_text => "")
+          %tr
             %td.label Created By
             %td.value
               = @bm_app.created_user.try(:username)

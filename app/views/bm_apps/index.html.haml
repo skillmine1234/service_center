@@ -21,6 +21,8 @@
       App ID
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Channel ID
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Needs OTP
 
   .tbody
     - @bm_apps.each do |bm_app|
@@ -33,3 +35,5 @@
           = bm_app.app_id
         %td{:style=>'text-align:left;'}
           = bm_app.channel_id
+        %td{:style=>'text-align:left;'}
+          = bm_app.needs_otp

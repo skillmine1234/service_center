@@ -3,6 +3,7 @@ FactoryGirl.define do
   factory :bm_app do
     app_id 
     channel_id "1239481723"
+    needs_otp "N"
     approval_status "U"
   end
 end
