@@ -10,5 +10,6 @@ FactoryGirl.define do
     txn_mode "A"
     address_line1 "MyString"
     address_line2 "MyString"
+    is_enabled "N"
   end
 end

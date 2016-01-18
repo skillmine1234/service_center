@@ -5,6 +5,7 @@ class CreateImtCustomers < ActiveRecord::Migration
       t.string :customer_name, :limit => 255, :null => false, :comment => "the name of the customer"
       t.string :contact_person, :limit => 255, :null => false, :comment => "the name of the contact person"
       t.string :email_id, :limit => 255, :null => false, :comment => "the email id of the customer"
+      t.string :is_enabled, :limit => 1, :null => false, :comment =>  "the indicator to denote if the customer is allowed access"
       t.string :mobile_no, :limit => 255, :null => false, :comment => "the mobile no of the customer"
       t.string :account_no, :limit => 255, :null => false, :comment => "the account no of the customer"
       t.integer :expiry_period, :comment => "the number of the day in which IMT will expire"

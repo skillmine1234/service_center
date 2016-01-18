@@ -27,6 +27,8 @@
       Customer Mobile No
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Expiry Period
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Is Enabled?
 
   .tbody
     - @imt_customers.each do |imt_customer|
@@ -45,4 +47,6 @@
           = imt_customer.mobile_no
         %td{:style=>'text-align:left;'}
           = imt_customer.expiry_period
+        %td{:style=>'text-align:left;'}
+          = imt_customer.is_enabled
 

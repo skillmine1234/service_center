@@ -44,6 +44,12 @@
             %td#msg-error
               = error_message_for(@imt_customer, :email_id, :prepend_text => "")
           %tr
+            %td.label Is Enabled?
+            %td.value
+              = @pc_app.is_enabled
+            %td#msg-error
+              = error_message_for(@imt_customer, :is_enabled, :prepend_text => "")
+          %tr
             %td.label Account No
             %td.value
               = @imt_customer.account_no
