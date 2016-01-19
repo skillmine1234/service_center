@@ -40,6 +40,7 @@ ServiceCenter::Application.routes.draw do
   resources :imt_customers
   resources :imt_unapproved_records
   # resources :imt_transactions
+  resources :csv_exports
 
   namespace :api do
     namespace :v1 do
@@ -109,6 +110,8 @@ ServiceCenter::Application.routes.draw do
   get '/bm_aggregator_payment/hit_api/:id' => 'bm_aggregator_payments#hit_api', as: :hit_api
 
   get '/view_raw_content/:id' => "incoming_files#view_raw_content"
+  
+  get '/csv_export/download_csv' => 'csv_exports#download_csv'
   root :to => 'dashboard#overview'
 
   # See how all your routes lay out with "rake routes"

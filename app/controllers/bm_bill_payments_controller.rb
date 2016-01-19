@@ -17,6 +17,14 @@ class BmBillPaymentsController < ApplicationController
     bm_bill_payments = find_bm_bill_payments(bm_bill_payments,params) if params[:advanced_search].present?
     @bm_bill_payments_count = bm_bill_payments.count
     @bm_bill_payments = bm_bill_payments.paginate(:per_page => 10, :page => params[:page]) rescue []
+    
+    if params[:ExportToCSV]
+      className = 'BmBillPayment'
+      groupName = 'BillManagement'
+      csv_export = CsvExport.create(state: 'in_progress', user_id: current_user.id, request_type: className, group: groupName)
+      csv_path = csv_export.csv_path
+      ExportCsvJob.perform_later(className, csv_path, params, csv_export)
+    end
   end
 
   def summary

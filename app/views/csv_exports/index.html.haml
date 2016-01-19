@@ -1,0 +1,46 @@
+%legend
+  %br
+  %h1 My Csv Exports
+  %br
+  %table.table.table-bordered.table-striped.table-hover{:style=>'background-color: #F1F2F8;'}
+    %thead
+      %tr
+      %tr{:style=>'background-color: lightblue;'}
+        - if params[:action] == 'index'
+          %th Created By
+        %th Request Date
+        %th Request Time
+        %th Elapsed Time(H:M:S)
+        %th Execution Date
+        %th Execution Time
+        / %th Run Time(H:M:S)
+        %th Request Type
+        %th State
+        %th CSV Link
+    %tbody
+      -@csv_exports.each do |csv_export|
+        %tr
+          - if params[:action] == 'index'
+            %td= csv_export.user.name
+          %td= csv_export.created_at.strftime('%d/%m/%Y')
+          %td= csv_export.created_at.strftime('%H:%M')
+          %td= csv_export.elapsed_time
+          - if csv_export.executed_at.nil?
+            %td --
+            %td --
+            / %td --
+          - else
+            %td= csv_export.executed_at.strftime('%d/%m/%Y')
+            %td= csv_export.executed_at.strftime('%H:%M')
+            / %td= csv_export.run_time
+          %td= csv_export.request_type
+          %td= csv_export.state.humanize
+          %td
+            - case csv_export.state
+            - when 'completed'
+              = link_to 'Download', {:controller => "csv_exports", :action => "download_csv", :csv_export => csv_export.id }
+            - when 'failed'
+              ='--'
+            - else
+              Processing
+  = will_paginate @csv_exports

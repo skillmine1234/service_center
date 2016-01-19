@@ -118,6 +118,11 @@
         = image_tag 'work-list.jpg', :size => "80x80"
       %br
         = "Approval Worklist"
+    .box
+      = link_to csv_exports_path(group: "BillManagement") do
+        = image_tag 'csv_export.png', :size => "80x80"
+      %br
+        = "Csv Exports"
   .slide-container
     .box
       - if !BmRule.first.nil?
