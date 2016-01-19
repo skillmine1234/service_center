@@ -1,6 +1,6 @@
-class CreateImtTransfers < ActiveRecord::Migration
+class CreateImtInitiateTransfers < ActiveRecord::Migration
   def change
-    create_table :imt_transfers do |t|
+    create_table :imt_initiate_transfers do |t|
       t.string :req_no, :limit => 255, :null => false, :comment => "the unique reference number to be sent by the client application"
       t.integer :attempt_no, :null => false, :comment => "the attempt number of the request, failed requests can be retried"
       t.string :status_code, :limit => 25, :null => false, :comment => "the status of this request"
