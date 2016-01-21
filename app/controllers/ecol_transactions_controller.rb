@@ -27,7 +27,7 @@ class EcolTransactionsController < ApplicationController
     @total_pending_records = EcolTransaction.where(:pending_approval => 'Y').count(:id)
     @total_records = EcolTransaction.count(:id)
     
-    @ecol_notify_summary = EcolTransaction.group(:notify_status, :pending_approval).count(:id)
+    @ecol_notify_summary = EcolTransaction.where("ecol_transactions.notify_status IS NOT NULL").group(:notify_status, :pending_approval).count(:id)
     @ecol_notify_statuses = EcolTransaction.group(:notify_status).count(:id).keys
   end
 
