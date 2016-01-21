@@ -12,6 +12,7 @@ class CreateImtInitiateTransfers < ActiveRecord::Migration
       t.decimal :transfer_amount, :null => false, :comment => "the transfer amount"
       t.string :pass_code, :null => false, :limit => 5, :comment => "the passcode, this is shared with the beneficiary, and is needed for funds withdrawal from the ATM"
       t.string :rmtr_to_bene_note, :null => false, :limit => 255, :comment => "the friendly note from the remitter to the beneficiary"
+      t.date :expiry_date, :comment => "the expiry date, computed for this transfer"
       t.string :rep_no, :limit => 255, :comment => "the unique response number sent back by the API"
       t.string :rep_version, :limit => 10, :comment => "the service version sent in the reply"
       t.datetime :rep_timestamp, :comment => "the SYSDATE when the reply was sent to the client"
