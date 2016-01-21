@@ -1,0 +1,92 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8;  height:500px;'}
+    #form-details
+      %h3 IMT Transfer Details 
+      %br
+      %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px;'}
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
+        %tr
+          %td.label Status Code
+          %td.value
+            = @imt_transfer.status_code
+          %td#msg-error
+            = error_message_for(@imt_transfer, :status_code, :prepend_text => "")
+        %tr
+          %td.label Customer ID
+          %td.value
+            = @imt_transfer.customer_id
+          %td#msg-error
+            = error_message_for(@imt_transfer, :customer_id, :prepend_text => "")
+        %tr
+          %td.label Beneficiary Mobile No
+          %td.value
+            = @imt_transfer.bene_mobile_no
+          %td#msg-error
+            = error_message_for(@imt_transfer, :bene_mobile_no, :prepend_text => "")
+        %tr
+          %td.label Transfer Amount
+          %td.value
+            = @imt_transfer.transfer_amount
+          %td#msg-error
+            = error_message_for(@imt_transfer, :transfer_amount, :prepend_text => "")
+        %tr
+          %td.label Remitter To Beneficiary Note
+          %td.value
+            = @imt_transfer.rmtr_to_bene_note
+          %td#msg-error
+            = error_message_for(@imt_transfer, :rmtr_to_bene_note, :prepend_text => "")
+        %tr
+          %td.label Expiry Date
+          %td.value
+            = @imt_transfer.expiry_date
+          %td#msg-error
+            = error_message_for(@imt_transfer, :expiry_date, :prepend_text => "")
+        %tr
+          %td.label Initiated At
+          %td.value
+            = @imt_transfer.initiated_at
+          %td#msg-error
+            = error_message_for(@imt_transfer, :initiated_at, :prepend_text => "")
+        %tr
+          %td.label Initiation Ref No
+          %td.value
+            = @imt_transfer.initiation_ref_no
+          %td#msg-error
+            = error_message_for(@imt_transfer, :initiation_ref_no, :prepend_text => "")
+        %tr
+          %td.label Completed At
+          %td.value
+            = @imt_transfer.completed_at
+          %td#msg-error
+            = error_message_for(@imt_transfer, :completed_at, :prepend_text => "")
+        %tr
+          %td.label Acquiring Bank
+          %td.value
+            = @imt_transfer.acquiring_bank
+          %td#msg-error
+            = error_message_for(@imt_transfer, :acquiring_bank, :prepend_text => "")
+        %tr
+          %td.label Cancelled At
+          %td.value
+            = @imt_transfer.cancelled_at
+          %td#msg-error
+            = error_message_for(@imt_transfer, :cancelled_at, :prepend_text => "")
+        %tr
+          %td.label Cancellation Ref No
+          %td.value
+            = @imt_transfer.cancellation_ref_no
+          %td#msg-error
+            = error_message_for(@imt_transfer, :cancellation_ref_no, :prepend_text => "")
+        %tr
+          %td.label Expired At
+          %td.value
+            = @imt_transfer.expired_at
+          %td#msg-error
+            = error_message_for(@imt_transfer, :expired_at, :prepend_text => "")
+        %tr
+          %td.label Cancel Reason
+          %td.value
+            = @imt_transfer.cancel_reason
+          %td#msg-error
+            = error_message_for(@imt_transfer, :cancel_reason, :prepend_text => "")
+

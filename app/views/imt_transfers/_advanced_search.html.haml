@@ -1,0 +1,19 @@
+= form_tag '', :method => 'get', :class => 'form-horizontal', :autocomplete=>"off" do
+  .control-group
+    = label_tag "Status", nil, :class => 'control-label'
+    = select_tag :status, options_for_select([['INITIATED','INITIATED'],['COMPLETED','COMPLETED'],['CANCELLED','CANCELLED'],['EXPIRED','EXPIRED']], params[:status]),:prompt => 'ANY'
+  .control-group
+    = label_tag "Customer ID", "Customer ID", :class => 'control-label'
+    = text_field_tag :customer_id, params[:customer_id]
+  .control-group
+    = label_tag "Transfer Amount", nil, :class => 'control-label'
+    = text_field_tag :from_amount, params[:from_amount]
+    To
+    = text_field_tag :to_amount, params[:to_amount]
+  .form-actions
+    = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"
+    = button_tag "Reset", :type => 'button', :value=>'Reset', :class => 'btn', :id => 'ecol_customer_reset'
+  = hidden_field_tag :advanced_search, :true
+
+:javascript
+  var in_advanced_search = true;
