@@ -1,7 +1,7 @@
 = form_tag '', :method => 'get', :class => 'form-horizontal', :autocomplete=>"off" do
   .control-group
     = label_tag "Status", nil, :class => 'control-label'
-    = select_tag :status, options_for_select([['NEW','NEW'],['DEBITED','DEBITED'],['FAILED','FAILED'],['BILLPAID','BILLPAID'],['REVERSED','REVERSED'],['REVERSAL FAILED','REVERSAL FAILED']],params[:status]),:prompt => 'ANY'
+    = select_tag :status, options_for_select([['NEW','NEW'],['DEBITED','DEBITED'],['FAILED','FAILED'],['BILLPAID','BILLPAID'],['REVERSED','REVERSED'],['PENDING REVERSAL','PENDING REVERSAL'],['REVERSAL FAILED','REVERSAL FAILED'],['VALIDATED','VALIDATED']], params[:status]),:prompt => 'ANY'
   .control-group
     = label_tag "Request No", nil, :class => 'control-label'
     = text_field_tag :request_no, params[:request_no]
@@ -13,7 +13,7 @@
     = text_field_tag :debit_no, params[:debit_no]
   .control-group
     = label_tag "Transaction Kind", nil, :class => 'control-label'
-    = text_field_tag :txn_kind, params[:txn_kind]
+    = select_tag :txn_kind, options_for_select([['payBill','payBill'],['payToBiller','payToBiller'],['payToBillerAccount','payToBillerAccount'],['topup','topup']], params[:txn_kind]),:prompt => 'ANY'
   .control-group
     = label_tag "Transaction Amount", nil, :class => 'control-label'
     = text_field_tag :from_amount, params[:from_amount]

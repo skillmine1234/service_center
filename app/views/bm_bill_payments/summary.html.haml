@@ -19,7 +19,7 @@
         %td{:style=>'text-align:left;'}
           = link_to payment_summary_count(@bm_bill_payments_summary, [s,'Y']), bm_bill_payments_path({:status => s, :pending => 'Y', :summary => true})
         %td{:style=>'text-align:left;'}
-          = link_to payment_summary_count(@bm_bill_payments_summary, [s, 'Y']) + payment_summary_count(@bm_bill_payments_summary, [s, 'N']), bm_bill_payments_path({:status => s, :summary => true})
+          = link_to payment_summary_count(@bm_bill_payments_summary, [s, 'Y']) + payment_summary_count(@bm_bill_payments_summary, [s, 'N']) +  payment_summary_count(@bm_bill_payments_summary, [s, nil]), bm_bill_payments_path({:status => s, :summary => true})
     %tr
       %td{:style=>'text-align:left;'}
         = 'ALL'
