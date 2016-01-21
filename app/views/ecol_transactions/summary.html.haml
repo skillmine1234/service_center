@@ -19,7 +19,7 @@
         %td{:style=>'text-align:left;'}
           = link_to txn_summary_count(@ecol_transaction_summary, [s,'Y']), ecol_transactions_path({:status => s, :pending => 'Y', :summary => true})
         %td{:style=>'text-align:left;'}
-          = link_to txn_summary_count(@ecol_transaction_summary, [s, 'Y']) + txn_summary_count(@ecol_transaction_summary, [s, 'N']), ecol_transactions_path({:status => s, :summary => true})
+          = link_to txn_summary_count(@ecol_transaction_summary, [s, 'Y']) + txn_summary_count(@ecol_transaction_summary, [s, 'N']) + txn_summary_count(@ecol_transaction_summary, [s, nil]), ecol_transactions_path({:status => s, :summary => true})
     %tr
       %td{:style=>'text-align:left;'}
         = 'ALL'
@@ -48,4 +48,4 @@
         %td{:style=>'text-align:left;'}
           = link_to txn_summary_count(@ecol_notify_summary, [s,'Y']), ecol_transactions_path({:notification_status => s, :pending => 'Y', :summary => true})
         %td{:style=>'text-align:left;'}
-          = link_to txn_summary_count(@ecol_notify_summary, [s, 'Y']) + txn_summary_count(@ecol_notify_summary, [s, 'N']), ecol_transactions_path({:notification_status => s, :summary => true})
+          = link_to txn_summary_count(@ecol_notify_summary, [s, 'Y']) + txn_summary_count(@ecol_notify_summary, [s, 'N']) + txn_summary_count(@ecol_notify_summary, [s, nil]), ecol_transactions_path({:notification_status => s, :summary => true})
