@@ -39,7 +39,7 @@ ServiceCenter::Application.routes.draw do
   resources :fp_auth_rules
   resources :imt_customers
   resources :imt_unapproved_records
-  # resources :imt_transactions
+  resources :imt_transfers
   resources :csv_exports
 
   namespace :api do

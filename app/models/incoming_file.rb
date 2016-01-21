@@ -1,6 +1,5 @@
 class IncomingFile < ActiveRecord::Base  
   include Approval
-  include EcolApproval
 
   SIZE_LIMIT = 50.megabytes.to_i
   validate :validate_file_name 
@@ -22,6 +21,14 @@ class IncomingFile < ActiveRecord::Base
   belongs_to :incoming_file_type, :foreign_key => 'file_type', :primary_key => 'code'
   has_many :failed_records, -> { where status: 'FAILED' }, class_name: 'IncomingFileRecord'
   has_many :incoming_file_records
+
+  has_one :ecol_unapproved_record, :as => :ecol_approvable
+  has_one :imt_unapproved_record, :as => :imt_approvable
+  has_one :inw_unapproved_record, :as => :inw_approvable
+
+  after_create :on_create_create_unapproved_record
+  after_destroy :on_destory_remove_unapproved_records
+  after_update :on_update_remove_unapproved_records
 
   mount_uploader :file, IncomingFileUploader
 
@@ -93,5 +100,29 @@ class IncomingFile < ActiveRecord::Base
     result = {is_approved: approved, file_path: file_path}
     result
   end
+  
 
+  def on_create_create_unapproved_record
+    if approval_status == 'U'
+      EcolUnapprovedRecord.create!(:ecol_approvable => self) if self.service_name == "ECOL"
+      ImtUnapprovedRecord.create!(:imt_approvable => self) if self.service_name == "IMT"
+      InwUnapprovedRecord.create!(:inw_approvable => self) if self.service_name == "AML"
+    end
+  end
+
+  def on_destory_remove_unapproved_records
+    if approval_status == 'U'
+      ecol_unapproved_record.delete if self.service_name == "ECOL"
+      imt_unapproved_record.delete if self.service_name == "IMT"
+       inw_unapproved_record.delete if self.service_name == "AML"
+    end
+  end
+
+  def on_update_remove_unapproved_records
+    if approval_status == 'A' and approval_status_was == 'U'
+      ecol_unapproved_record.delete if self.service_name == "ECOL"
+      imt_unapproved_record.delete if self.service_name == "IMT"
+      inw_unapproved_record.delete if self.service_name == "AML"
+    end
+  end 
 end

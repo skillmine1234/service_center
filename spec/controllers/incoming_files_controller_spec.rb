@@ -14,14 +14,14 @@ describe IncomingFilesController do
   describe "GET index" do
     it "assigns all incoming_file as @incoming_files" do
       incoming_file = Factory(:incoming_file, :approval_status => 'A')
-      get :index
+      get :index, {:sc_service => incoming_file.service_name}
       assigns(:incoming_files).should eq([incoming_file])
       FileUtils.rm_f 'Test2.exe.txt'
     end
 
     it "assigns all unapproved incoming_files as @incoming_files when approval_status is passed" do
       incoming_file = Factory(:incoming_file, :approval_status => 'U')
-      get :index, :approval_status => 'U'
+      get :index, {:sc_service => incoming_file.service_name, :approval_status => 'U'}
       assigns(:incoming_files).should eq([incoming_file])
       FileUtils.rm_f 'Test2.exe.txt'
     end
@@ -124,8 +124,10 @@ describe IncomingFilesController do
       user_role = UserRole.find_by_user_id(@user.id)
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
-      incoming_file1 = Factory(:incoming_file, :approval_status => 'A')
-      incoming_file2 = Factory(:incoming_file, :approval_status => 'U', :approved_version => incoming_file1.lock_version, :approved_id => incoming_file1.id, :created_by => 666)
+      sc_service = Factory(:sc_service, :code => 'ECOL', :name => 'Ecollect')
+      inc_file_type = Factory(:incoming_file_type, :sc_service_id => sc_service.id, :code => 'RMTRS', :name => 'Remitters')
+      incoming_file1 = Factory(:incoming_file, :service_name => sc_service.code, :file_type => inc_file_type.code, :approval_status => 'A')
+      incoming_file2 = Factory(:incoming_file, :service_name => sc_service.code, :file_type => inc_file_type.code, :approval_status => 'U', :approved_version => incoming_file1.lock_version, :approved_id => incoming_file1.id, :created_by => 666)
       # the following line is required for reload to get triggered (TODO)
       incoming_file1.approval_status.should == 'A'
       EcolUnapprovedRecord.count.should == 1
@@ -142,7 +144,9 @@ describe IncomingFilesController do
       user_role = UserRole.find_by_user_id(@user.id)
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
-      incoming_file = Factory(:incoming_file, :approval_status => 'U')
+      sc_service = Factory(:sc_service, :code => 'ECOL', :name => 'Ecollect')
+      inc_file_type = Factory(:incoming_file_type, :sc_service_id => sc_service.id, :code => 'RMTRS', :name => 'Remitters')
+      incoming_file = Factory(:incoming_file, :service_name => sc_service.code, :file_type => inc_file_type.code, :approval_status => 'U')
       EcolUnapprovedRecord.count.should == 1
       put :approve, {:id => incoming_file.id}
       EcolUnapprovedRecord.count.should == 0

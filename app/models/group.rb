@@ -4,7 +4,7 @@ class Group < ActiveRecord::Base
   def model_list
     case name
     when "inward-remittance"
-      ['Partner','Bank','PurposeCode','WhitelistedIdentity','InwIdentity','InwardRemittance', 'InwRemittanceRule','InwUnapprovedRecord']
+      ['Partner','Bank','PurposeCode','WhitelistedIdentity','InwIdentity','InwardRemittance', 'InwRemittanceRule','InwUnapprovedRecord','IncomingFile']
     when "e-collect"
       ['EcolUnapprovedRecord','EcolRule','EcolCustomer','EcolRemitter','EcolTransaction','UdfAttribute','IncomingFile','EcolFetchStatistic','QgEcolTodaysNeftTxn','QgEcolTodaysRtgsTxn']
     when "bill-management"
@@ -14,7 +14,7 @@ class Group < ActiveRecord::Base
     when "flex-proxy"
       ['FpOperation','FpAuthRule','FpUnapprovedRecord']
     when "imt"
-      ['ImtCustomer','ImtUnapprovedRecord']
+      ['ImtCustomer','ImtTransfer','IncomingFile','ImtUnapprovedRecord']
     else
       []
     end

@@ -26,8 +26,8 @@ class IncomingFilesController < ApplicationController
     if params[:advanced_search].present?
       incoming_files = find_incoming_files(params).order("id desc")
     else
-      incoming_files = (params[:approval_status].present? and params[:approval_status] == 'U') ? IncomingFile.unscoped.where("approval_status =?",'U').order("id desc") : IncomingFile.order("id desc")
-    end
+      incoming_files = (params[:approval_status].present? and params[:approval_status] == 'U') ? IncomingFile.unscoped.where("approval_status=? and service_name=?",'U',params[:sc_service]).order("id desc") : IncomingFile.order("id desc").where(:service_name => params[:sc_service])
+    end 
     @files_count = incoming_files.count
     @incoming_files = incoming_files.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
@@ -57,6 +57,8 @@ class IncomingFilesController < ApplicationController
 
   def show
     @incoming_file = IncomingFile.unscoped.find_by_id(params[:id])
+    @success_count = @incoming_file.incoming_file_records.where(:status => "SUCCESS").count
+    @failure_count = @incoming_file.incoming_file_records.where(:status => "FAILED").count
   end
 
   def destroy

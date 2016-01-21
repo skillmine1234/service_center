@@ -41,6 +41,7 @@ unless Rails.env == 'production'
   if ScService.all.empty?
     ScService.create(:code => 'AML', :name => 'Anti Money Laundering')
     ScService.create(:code => 'ECOL', :name => 'Ecollect')
+    ScService.create(:code => 'IMT', :name => 'Instant Money Transfer')
   end
 
   if BmRule.all.empty?
@@ -50,9 +51,11 @@ unless Rails.env == 'production'
   if IncomingFileType.all.empty? and !ScService.all.empty?
     sc1 = ScService.find_by_code("AML")
     sc2 = ScService.find_by_code("ECOL")
+    sc3 = ScService.find_by_code("IMT")
     IncomingFileType.create(:sc_service_id => sc1.id, :code => 'SDN', :name => 'Specially Designated Individuals')
     IncomingFileType.create(:sc_service_id => sc1.id, :code => 'OFAC', :name => 'Office of Foreign Assets Control')
     IncomingFileType.create(:sc_service_id => sc2.id, :code => 'RMTRS', :name => 'Remitters')
+    IncomingFileType.create(:sc_service_id => sc3.id, :code => 'TXNS', :name => 'Transactions')
   end
   
   if FpOperation.all.empty? 

@@ -14,7 +14,7 @@ describe ImtUnapprovedRecordsController do
     it "assigns all imt_unapproved_records as @imt_unapproved_records" do
       imt_unapproved_record = Factory(:imt_unapproved_record, :imt_approvable_type => 'ImtCustomer')
       get :index
-      assigns(:records).should eq([{:record_type=>"ImtCustomer", :record_count=>1}])
+      assigns(:records).should eq([{:record_type=>"ImtCustomer", :record_count=>1}, {:record_type=>"IncomingFile", :record_count=>0}])
     end
   end
 end

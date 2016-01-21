@@ -17,4 +17,7 @@
           %td{:style=>'text-align:left;'}
             = record[:record_type]
           %td{:style=>'text-align:left;'}
-            = link_to record[:record_count], {:controller => record[:record_type].tableize, :action => :index, :approval_status => 'U'}
+            - if record[:record_type] == 'IncomingFile'
+              = link_to record[:record_count], {:controller => record[:record_type].tableize, :action => :index, :approval_status => 'U', :sc_service => 'AML'}
+            - else
+              = link_to record[:record_count], {:controller => record[:record_type].tableize, :action => :index, :approval_status => 'U'}
