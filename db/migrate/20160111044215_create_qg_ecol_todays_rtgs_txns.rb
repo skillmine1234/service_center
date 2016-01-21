@@ -5,7 +5,7 @@ class CreateQgEcolTodaysRtgsTxns < ActiveRecord::Migration
        QgEcolTodaysRtgsTxn.connection
       end
       create_table :qg_ecol_todays_rtgs_txns do |t|
-        t.string :idfcatref, :limit => 16, :null => false
+        t.string :idfcatref, :limit => 16
         t.string :transfer_type, :limit => 4, :null => false
         t.string :transfer_status, :limit => 25, :null => false
         t.string :transfer_unique_no, :limit => 64, :null => false
@@ -24,7 +24,6 @@ class CreateQgEcolTodaysRtgsTxns < ActiveRecord::Migration
         t.string :rmtr_address, :limit => 255
         t.string :bene_full_name, :limit => 255
         t.index([:idfcatref], :unique => true)
-        t.timestamps null: false
       end
     end
   end

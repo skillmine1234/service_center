@@ -5,7 +5,7 @@ class CreateQgEcolTodaysNeftTxns < ActiveRecord::Migration
        QgEcolTodaysNeftTxn.connection
       end
       create_table :qg_ecol_todays_neft_txns do |t|
-        t.string :ref_txn_no, :limit => 15, :null => false
+        t.string :ref_txn_no, :limit => 15
         t.string :transfer_type, :limit => 4, :null => false
         t.string :transfer_status, :limit => 25, :null => false
         t.string :transfer_unique_no, :limit => 64, :null => false
@@ -24,7 +24,6 @@ class CreateQgEcolTodaysNeftTxns < ActiveRecord::Migration
         t.string :rmtr_address, :limit => 255
         t.string :bene_full_name, :limit => 255
         t.index([:ref_txn_no], :unique => true)
-        t.timestamps null: false
       end
     end
   end

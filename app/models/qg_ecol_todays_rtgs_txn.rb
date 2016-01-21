@@ -7,18 +7,13 @@ class QgEcolTodaysRtgsTxn < ArFcatrt
   validates :transfer_amt, :numericality => { :greater_than_or_equal_to => 200000 }
   validates_uniqueness_of :transfer_unique_no
 
-  before_save :set_default_values  
-  after_create :set_idfcatref
+  before_save :set_default_values 
 
   def set_default_values
     self.transfer_type = 'RTGS'
     self.transfer_ccy = 'INR'
     self.transfer_status = 'COM'
-  end
-  
-  def set_idfcatref
-    self.idfcatref = self.id
-    self.save
+    self.idfcatref = self.transfer_unique_no
   end
 
 end
