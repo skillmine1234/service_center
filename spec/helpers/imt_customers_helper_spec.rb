@@ -16,4 +16,12 @@ describe ImtCustomersHelper do
       find_imt_customers({:account_no => '00000'}).should == []
     end
   end
+  
+  context "show_page_value_for_txn_mode" do
+    it "should return show page value for txn_mode" do
+      imt_customer = Factory(:imt_customer)
+      show_page_value_for_txn_mode("F").should == "File"
+      show_page_value_for_txn_mode("A").should == "Api"
+    end
+  end
 end

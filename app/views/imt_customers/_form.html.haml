@@ -43,7 +43,7 @@
       #msg-error
         = error_message_for(@imt_customer, :mobile_no, :prepend_text => "")
     .control-group
-      = f.label :expiry_period, "Expiry Period", :class => 'control-label'
+      = f.label :expiry_period, "*Expiry Period", :class => 'control-label'
       = f.text_field :expiry_period, :maxlength => 10
       #msg-error
         = error_message_for(@imt_customer, :expiry_period, :prepend_text => "")

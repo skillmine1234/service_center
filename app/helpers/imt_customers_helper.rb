@@ -6,4 +6,13 @@ module ImtCustomersHelper
     imt_customers = imt_customers.where("account_no=?",params[:account_no]) if params[:account_no].present?
     imt_customers
   end
+  
+  def show_page_value_for_txn_mode(value)
+    case value
+    when "F"
+      "File"
+    when "A"
+      "Api"
+    end
+  end
 end

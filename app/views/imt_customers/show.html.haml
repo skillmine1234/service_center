@@ -46,7 +46,7 @@
           %tr
             %td.label Is Enabled?
             %td.value
-              = @pc_app.is_enabled
+              = @imt_customer.is_enabled
             %td#msg-error
               = error_message_for(@imt_customer, :is_enabled, :prepend_text => "")
           %tr
@@ -70,7 +70,7 @@
           %tr
             %td.label Transaction Mode
             %td.value
-              = @imt_customer.txn_mode
+              = show_page_value_for_txn_mode(@imt_customer.txn_mode)
             %td#msg-error
               = error_message_for(@imt_customer, :txn_mode, :prepend_text => "")
           %tr
