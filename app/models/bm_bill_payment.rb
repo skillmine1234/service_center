@@ -8,7 +8,7 @@ class BmBillPayment < ActiveRecord::Base
                         
   def self.to_csv(csv_path, params)
     Delayed::Worker.logger.debug("called ")
-    if params[:advanced_search].present?
+    if params[:advanced_search].present? || params[:summary].present?
       requests = find_bm_bill_payments(self,params).order("id desc")
     else
       requests = all.order("id desc")

@@ -5,11 +5,11 @@
   %span.caret
 .collapsible-content
   = render :partial => 'advanced_search'
-%br
-- unless @bm_bill_payments.empty?
-  %p
-  Download
-  = link_to 'CSV', params.merge(:ExportToCSV => 'ExportToCSV')
+/ %br
+/ - unless @bm_bill_payments.empty?
+/   %p
+/   Download
+/   = link_to 'CSV', params.merge(:ExportToCSV => 'ExportToCSV')
 %br
 = "Total Count: #{@bm_bill_payments_count}"
 %br
