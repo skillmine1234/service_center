@@ -1,5 +1,5 @@
 .form-horizontal.show_form
-  .form-main-with-color{:style=>'background-color: #F1F2F8;'}
+  .form-main-with-color{:style=>'background-color: #F1F2F8; height: 800px;'}
     #form-details
       %h3 IMT Customer Details 
       %br
@@ -94,7 +94,7 @@
           %tr
             %td.label Country
             %td.value
-              = @imt_customer.country
+              = @imt_customer.country_name
             %td#msg-error
               = error_message_for(@imt_customer, :country, :prepend_text => "")
           %tr
