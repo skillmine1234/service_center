@@ -31,6 +31,20 @@ describe ImtCustomer do
     end     
   end
   
+  context "email_id format" do 
+    it "should allow valid format" do
+      should allow_value('abc@g.in').for(:email_id)
+      should allow_value('abc@gmail.com').for(:email_id)
+    end 
+    
+    it "should not allow invalid format" do
+      should_not allow_value('as@gg.c').for(:email_id)
+      should_not allow_value('@CUST01').for(:email_id)
+      should_not allow_value('CUST01/').for(:email_id)
+      should_not allow_value('CUST-01').for(:email_id)
+    end     
+  end
+  
   context "account_no format" do 
     it "should allow valid format" do
       should allow_value('987654310').for(:account_no)
@@ -54,6 +68,15 @@ describe ImtCustomer do
       should_not allow_value('CUST01/').for(:mobile_no)
       should_not allow_value('CUST-01').for(:mobile_no)
     end     
+  end
+  
+  context "country_name" do 
+    it "should return full name for the country code" do 
+      imt_customer = Factory.build(:imt_customer, :country => 'US')
+      imt_customer.country_name.should == 'United States'
+      imt_customer = Factory.build(:imt_customer, :country => nil)
+      imt_customer.country_name.should == nil
+    end
   end
   
   context "default_scope" do 

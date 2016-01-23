@@ -3,7 +3,7 @@ FactoryGirl.define do
     customer_code "1234567890"
     customer_name "MyString"
     contact_person "MyString"
-    email_id "MyString"
+    email_id "abc@gmail.com"
     account_no "0987654321"
     mobile_no "0987654321"
     expiry_period 1

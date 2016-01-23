@@ -8,7 +8,7 @@
     = f.hidden_field :approved_id
     = f.hidden_field :approved_version
     .control-group
-      = f.label :customer_code, "*Customer Code", :class => 'control-label'
+      = f.label :customer_code, "*Customer ID", :class => 'control-label'
       = f.text_field :customer_code, :maxlength => 15
       #msg-error
         = error_message_for(@imt_customer, :customer_code, :prepend_text => "")
@@ -70,12 +70,12 @@
           = error_message_for(@imt_customer, :address_line3, :prepend_text => "")
       .control-group
         = f.label :country, "Country", :class => 'control-label'
-        = f.text_field :country
+        = country_select("imt_customer", "country", selected: "#{@imt_customer.country.nil? ? 'IN' : @imt_customer.country}")
         #msg-error
           = error_message_for(@imt_customer, :country, :prepend_text => "")
 
   .form-actions
-    - (f.object.new_record? and f.object.customer_code.nil?) ? label_name = "Create" : label_name = "Update"
+    - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
     = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_customer', :value => label_name + ' Customer'
     = link_to :Cancel,'/imt_customers', :name => 'cancel', :class=>"cancel btn"
 
