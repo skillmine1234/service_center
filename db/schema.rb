@@ -1182,7 +1182,7 @@ ActiveRecord::Schema.define(version: 20160124073547) do
     t.datetime "expired_at"
     t.string   "cancel_reason"
     t.string   "initiation_bank_ref",                             null: false
-    t.string   "cancellation_bank_ref",                           null: false
+    t.string   "cancellation_bank_ref"
   end
 
   create_table "imt_unapproved_records", force: :cascade do |t|
