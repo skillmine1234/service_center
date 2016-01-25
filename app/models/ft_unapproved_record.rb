@@ -1,4 +1,4 @@
 class FtUnapprovedRecord < ActiveRecord::Base
   belongs_to :ft_approvable, :polymorphic => true, :unscoped => true
-  FT_TABLES = []
+  FT_TABLES = ['FundsTransferCustomer']
 end
