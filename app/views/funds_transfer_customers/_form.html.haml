@@ -29,7 +29,7 @@
         = error_message_for(@funds_transfer_customer, :account_no, :prepend_text => "")
     .control-group
       = f.label :account_ifsc, "*Account IFSC", :class => 'control-label'
-      = f.text_field :account_ifsc, :maxlength => 20
+      = f.text_field :account_ifsc, :maxlength => 11
       #msg-error
         = error_message_for(@funds_transfer_customer, :account_ifsc, :prepend_text => "")
     .control-group
@@ -53,11 +53,6 @@
       #msg-error
         = error_message_for(@funds_transfer_customer, :allow_imps, :prepend_text => "")
     .control-group
-      = f.label :identity_user_id, "*User Identity", :class => 'control-label'
-      = f.text_field :identity_user_id
-      #msg-error
-        = error_message_for(@funds_transfer_customer, :identity_user_id, :prepend_text => "")
-    .control-group
       = f.label :enabled, "Enabled ?", :class => 'control-label'
       = f.check_box :enabled, {},"Y","N"
       #msg-error
@@ -69,7 +64,7 @@
         = error_message_for(@funds_transfer_customer, :customer_id, :prepend_text => "")
     .control-group
       = f.label :mmid, "MMID", :class => 'control-label'
-      = f.text_field :mmid
+      = f.text_field :mmid, :maxlength => 7
       #msg-error
         = error_message_for(@funds_transfer_customer, :mmid, :prepend_text => "")
     .control-group
