@@ -15,6 +15,8 @@ class Group < ActiveRecord::Base
       ['FpOperation','FpAuthRule','FpUnapprovedRecord']
     when "imt"
       ['ImtCustomer','ImtTransfer','IncomingFile','ImtUnapprovedRecord']
+    when "funds-transfer"
+      ['FtUnapprovedRecord']
     else
       []
     end
