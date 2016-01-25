@@ -2,6 +2,7 @@
 
 FactoryGirl.define do
   factory :funds_transfer_customer do
+    name "MyString"
     account_no "1234567890"
     account_ifsc "ASDF0123456"
     low_balance_alert_at 123

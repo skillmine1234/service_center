@@ -12,9 +12,18 @@ class FundsTransferCustomer < ActiveRecord::Base
   validates :low_balance_alert_at, :numericality => { :greater_than => 0}
   validates :tech_email_id, :ops_email_id, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/, :message => 'Invalid Email ID, expected format is abc@def.com' }, :allow_blank => true
   
+  before_save :to_upcase
+  
   def country_name
     country = ISO3166::Country[self.country]
     country.translations[I18n.locale.to_s] || country.name rescue nil
+  end
+  
+  def to_upcase
+    unless self.frozen?
+      self.name = self.name.upcase unless self.name.nil?
+      self.account_no = self.account_no.upcase unless self.account_no.nil?
+    end
   end
   
 end
