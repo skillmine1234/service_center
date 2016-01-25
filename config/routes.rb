@@ -41,6 +41,7 @@ ServiceCenter::Application.routes.draw do
   resources :imt_unapproved_records
   resources :imt_transfers
   resources :csv_exports
+  resources :ft_unapproved_records
 
   namespace :api do
     namespace :v1 do

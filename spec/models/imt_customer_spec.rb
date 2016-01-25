@@ -164,4 +164,12 @@ describe ImtCustomer do
       ImtCustomer.options_for_txn_mode.should == [['File','F'],['Api','A']]
     end
   end
+  
+  context "convert_customer_name_to_upcase" do
+    it "should convert customer_name to upcase" do
+      imt_customer = Factory(:imt_customer, :customer_name => "john")
+      imt_customer.reload
+      imt_customer.customer_name.should == "JOHN"
+    end
+  end
 end

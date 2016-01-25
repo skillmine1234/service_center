@@ -227,3 +227,11 @@
         = image_tag 'ecol_transactions.jpg', :size => "80x80"
       %br
         = "IMT Transfers"
+- if @current_user.group_names.include?("funds-transfer")
+  %h1 Funds Transfer
+  .slide-container
+    .box  
+      = link_to '/ft_unapproved_records' do
+        = image_tag 'work-list.jpg', :size => "80x80"
+      %br
+        = "Approval Worklist"

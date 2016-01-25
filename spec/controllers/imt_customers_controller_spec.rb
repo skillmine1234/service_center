@@ -194,7 +194,7 @@ describe ImtCustomersController do
       put :approve, {:id => imt_customer2.id}
       ImtUnapprovedRecord.count.should == 0
       imt_customer1.reload
-      imt_customer1.customer_name.should == 'Bar Foo'
+      imt_customer1.customer_name.should == 'BAR FOO'
       imt_customer1.updated_by.should == "666"
       ImtCustomer.find_by_id(imt_customer2.id).should be_nil
     end
@@ -208,7 +208,7 @@ describe ImtCustomersController do
       put :approve, {:id => imt_customer.id}
       ImtUnapprovedRecord.count.should == 0
       imt_customer.reload
-      imt_customer.customer_name.should == 'Bar Foo'
+      imt_customer.customer_name.should == 'BAR FOO'
       imt_customer.approval_status.should == 'A'
     end
   end

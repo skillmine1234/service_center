@@ -13,11 +13,12 @@ describe ImtCustomersHelper do
       
       imt_customer = Factory(:imt_customer, :customer_name => 'SMITH', :approval_status => "A")
       find_imt_customers({:customer_name => 'smith'}).should == [imt_customer]
-      find_imt_customers({:customer_name => 'OOOO'}).should == []
       
       imt_customer = Factory(:imt_customer, :customer_name => 'MaryJohn', :approval_status => "A")
       find_imt_customers({:customer_name => 'mary'}).should == [imt_customer]
-      find_imt_customers({:customer_name => 'OOOO'}).should == []
+      
+      imt_customer = Factory(:imt_customer, :customer_name => 'Andrew', :approval_status => "A")
+      find_imt_customers({:customer_name => 'Andrew'}).should == [imt_customer]
       
       imt_customer = Factory(:imt_customer, :account_no => '1234567890', :approval_status => "A")
       find_imt_customers({:account_no => '1234567890'}).should == [imt_customer]

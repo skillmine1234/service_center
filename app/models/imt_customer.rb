@@ -11,7 +11,9 @@ class ImtCustomer < ActiveRecord::Base
   validates :account_no, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9]}' }, length: {maximum: 16}
   validates :mobile_no, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9]}'}, length: {maximum: 10, minimum: 10}
   validates :expiry_period, :numericality => { :greater_than => 0}
-  validates :email_id, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/, :message => 'Invalid Email ID' }
+  validates :email_id, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/, :message => 'Invalid Email ID, expected format is abc@def.com' }
+  
+  before_save :convert_customer_name_to_upcase
   
   def self.options_for_txn_mode
     [['File','F'],['Api','A']]
@@ -20,5 +22,9 @@ class ImtCustomer < ActiveRecord::Base
   def country_name
     country = ISO3166::Country[self.country]
     country.translations[I18n.locale.to_s] || country.name rescue nil
+  end
+  
+  def convert_customer_name_to_upcase
+    self.customer_name = self.customer_name.upcase unless self.frozen?
   end
 end
