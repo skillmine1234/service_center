@@ -33,19 +33,6 @@ describe FundsTransferCustomer do
     end    
   end
 
-  context "name format" do 
-    it "should allow valid format" do
-      should allow_value('987654310').for(:name)
-      should allow_value('qwerty').for(:name)
-    end 
-    
-    it "should not allow invalid format" do
-      should_not allow_value('@CUST01').for(:name)
-      should_not allow_value('CUST01/').for(:name)
-      should_not allow_value('CUST-01').for(:name)
-    end     
-  end
-  
   context "account_no format" do 
     it "should allow valid format" do
       should allow_value('987654310').for(:account_no)

@@ -194,7 +194,7 @@ describe FundsTransferCustomersController do
       put :approve, {:id => funds_transfer_customer2.id}
       FtUnapprovedRecord.count.should == 0
       funds_transfer_customer1.reload
-      funds_transfer_customer1.name.should == 'Bar Foo'
+      funds_transfer_customer1.name.should == 'BAR FOO'
       funds_transfer_customer1.updated_by.should == "666"
       FundsTransferCustomer.find_by_id(funds_transfer_customer2.id).should be_nil
     end
@@ -208,7 +208,7 @@ describe FundsTransferCustomersController do
       put :approve, {:id => funds_transfer_customer.id}
       FtUnapprovedRecord.count.should == 0
       funds_transfer_customer.reload
-      funds_transfer_customer.name.should == 'Bar Foo'
+      funds_transfer_customer.name.should == 'BAR FOO'
       funds_transfer_customer.approval_status.should == 'A'
     end
   end
