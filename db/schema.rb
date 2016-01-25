@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160124073547) do
+ActiveRecord::Schema.define(version: 20160125073855) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -930,6 +930,42 @@ ActiveRecord::Schema.define(version: 20160124073547) do
     t.datetime "updated_at",         null: false
   end
 
+  create_table "ft_unapproved_records", force: :cascade do |t|
+    t.integer  "ft_approvable_id"
+    t.string   "ft_approvable_type"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  create_table "funds_transfer_customers", force: :cascade do |t|
+    t.string   "name",                 limit: 20
+    t.string   "tech_email_id",        limit: 255
+    t.string   "ops_email_id",         limit: 255
+    t.string   "account_no",           limit: 20,                null: false
+    t.string   "account_ifsc",         limit: 20,                null: false
+    t.integer  "low_balance_alert_at",                           null: false
+    t.string   "identity_user_id",                               null: false
+    t.string   "allow_neft",           limit: 1,                 null: false
+    t.string   "allow_imps",           limit: 1,                 null: false
+    t.string   "enabled",              limit: 1,   default: "N", null: false
+    t.string   "customer_id",                                    null: false
+    t.string   "mmid",                 limit: 7
+    t.string   "mobile_no",            limit: 10
+    t.string   "country"
+    t.string   "address_line1"
+    t.string   "address_line2"
+    t.string   "address_line3"
+    t.integer  "lock_version",                                   null: false
+    t.string   "approval_status",      limit: 1,   default: "U", null: false
+    t.string   "last_action",          limit: 1
+    t.integer  "approved_version"
+    t.integer  "approved_id"
+    t.string   "created_by",           limit: 20
+    t.string   "updated_by",           limit: 20
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+  end
+
   create_table "groups", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -1738,6 +1774,20 @@ ActiveRecord::Schema.define(version: 20160124073547) do
     t.string   "last_action",           limit: 1,    default: "C"
     t.integer  "approved_version"
     t.integer  "approved_id"
+  end
+
+  create_table "reconciled_returns", force: :cascade do |t|
+    t.string   "txn_type",        limit: 10,   null: false
+    t.string   "return_code",     limit: 10,   null: false
+    t.date     "settlement_date",              null: false
+    t.string   "bank_ref_no",     limit: 32,   null: false
+    t.string   "reason",          limit: 1000, null: false
+    t.string   "created_by",      limit: 20
+    t.string   "updated_by",      limit: 20
+    t.integer  "lock_version",                 null: false
+    t.string   "last_action",     limit: 1
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "remittance_reviews", force: :cascade do |t|

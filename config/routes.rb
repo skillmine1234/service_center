@@ -43,6 +43,7 @@ ServiceCenter::Application.routes.draw do
   resources :csv_exports
   resources :ft_unapproved_records
   resources :funds_transfer_customers
+  resources :reconciled_returns
 
   namespace :api do
     namespace :v1 do
@@ -68,6 +69,7 @@ ServiceCenter::Application.routes.draw do
   get '/fp_auth_rule/:id/audit_logs' => 'fp_auth_rules#audit_logs'
   get '/imt_customer/:id/audit_logs' => 'imt_customers#audit_logs'
   get '/funds_transfer_customer/:id/audit_logs' => 'funds_transfer_customers#audit_logs'
+  get '/reconciled_returns/:id/audit_logs' => 'reconciled_returns#audit_logs'
 
   get '/inward_remittances/:id/remitter_identities' => 'inward_remittances#remitter_identities'
   get '/inward_remittances/:id/beneficiary_identities' => 'inward_remittances#beneficiary_identities'
