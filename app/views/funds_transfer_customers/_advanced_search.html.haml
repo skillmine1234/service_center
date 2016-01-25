@@ -1,0 +1,18 @@
+= form_tag '', :method => 'get', :class => 'form-horizontal', :autocomplete=>"off" do
+  .control-group
+    = label_tag "Tech Email ID", "Tech Email ID", :class => 'control-label'
+    = text_field_tag :tech_email_id, params[:tech_email_id]
+  .control-group
+    = label_tag "", "Mobile No", :class => 'control-label'
+    = text_field_tag :mobile_no, params[:mobile_no]
+  .control-group
+    = label_tag "Account No", "Account No", :class => 'control-label'
+    = text_field_tag :account_no, params[:account_no]
+    = hidden_field_tag :approval_status, params[:approval_status]
+  .form-actions
+    = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"
+    = button_tag "Reset", :type => 'button', :value=>'Reset', :class => 'btn', :id => 'ecol_customer_reset'
+  = hidden_field_tag :advanced_search, :true
+
+:javascript
+  var in_advanced_search = true;

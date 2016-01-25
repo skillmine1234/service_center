@@ -1,0 +1,106 @@
+= simple_form_for @funds_transfer_customer, :html => {:class=>'form-horizontal', :autocomplete=>"off", :id => "funds_transfer_customer_form"} do |f|
+  .control-group
+    = f.label ' '
+    #msg-error
+      = error_message_for(@funds_transfer_customer, :base, :prepend_text => "")
+  .form-main
+    = f.hidden_field :lock_version
+    = f.hidden_field :approved_id
+    = f.hidden_field :approved_version
+    .control-group
+      = f.label :name, "Customer Name", :class => 'control-label'
+      = f.text_field :name, :maxlength => 20
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :name, :prepend_text => "")
+    .control-group
+      = f.label :tech_email_id, "Tech Email ID", :class => 'control-label'
+      = f.text_field :tech_email_id, :maxlength => 255
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :tech_email_id, :prepend_text => "")
+    .control-group
+      = f.label :ops_email_id, "Operations Email ID", :class => 'control-label'
+      = f.text_field :ops_email_id, :maxlength => 255
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :ops_email_id, :prepend_text => "")
+    .control-group
+      = f.label :account_no, "*Account No", :class => 'control-label'
+      = f.text_field :account_no, :maxlength => 20
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :account_no, :prepend_text => "")
+    .control-group
+      = f.label :account_ifsc, "*Account IFSC", :class => 'control-label'
+      = f.text_field :account_ifsc, :maxlength => 20
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :account_ifsc, :prepend_text => "")
+    .control-group
+      = f.label :low_balance_alert_at, "*Low Balance Alert At", :class => 'control-label'
+      = f.text_field :low_balance_alert_at
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :low_balance_alert_at, :prepend_text => "")
+    .control-group
+      = f.label :identity_user_id, "*User Identity", :class => 'control-label'
+      = f.text_field :identity_user_id
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :identity_user_id, :prepend_text => "")
+    .control-group
+      = f.label :allow_neft, "NEFT Allowed ?", :class => 'control-label'
+      = f.check_box :allow_neft, {},"Y","N"
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :allow_neft, :prepend_text => "")
+    .control-group
+      = f.label :allow_imps, "IMPS Allowed ?", :class => 'control-label'
+      = f.check_box :allow_imps, {},"Y","N"
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :allow_imps, :prepend_text => "")
+    .control-group
+      = f.label :identity_user_id, "*User Identity", :class => 'control-label'
+      = f.text_field :identity_user_id
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :identity_user_id, :prepend_text => "")
+    .control-group
+      = f.label :enabled, "Enabled ?", :class => 'control-label'
+      = f.check_box :enabled, {},"Y","N"
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :enabled, :prepend_text => "")
+    .control-group
+      = f.label :customer_id, "*Customer ID", :class => 'control-label'
+      = f.text_field :customer_id
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :customer_id, :prepend_text => "")
+    .control-group
+      = f.label :mmid, "MMID", :class => 'control-label'
+      = f.text_field :mmid
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :mmid, :prepend_text => "")
+    .control-group
+      = f.label :mobile_no, "*Mobile No", :class => 'control-label'
+      = f.text_field :mobile_no, :maxlength => 10
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :mobile_no, :prepend_text => "")
+  .form-extended
+    .control-group
+      = f.label :country, "Country", :class => 'control-label'
+      = country_select("funds_transfer_customer", "country", selected: "#{@funds_transfer_customer.country.nil? ? 'IN' : @funds_transfer_customer.country}")
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :country, :prepend_text => "")
+    .control-group
+      = f.label :address_line1, "Address Line 1", :class => 'control-label'
+      = f.text_field :address_line1
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :address_line1, :prepend_text => "")
+    .control-group
+      = f.label :address_line2, "Address Line 2", :class => 'control-label'
+      = f.text_field :address_line2
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :address_line2, :prepend_text => "")
+    .control-group
+      = f.label :address_line3, "Address Line 3", :class => 'control-label'
+      = f.text_field :address_line3
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :address_line3, :prepend_text => "")
+
+  .form-actions
+    - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_customer', :value => label_name + ' Customer'
+    = link_to :Cancel,'/funds_transfer_customers', :name => 'cancel', :class=>"cancel btn"
+
