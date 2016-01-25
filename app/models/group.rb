@@ -16,7 +16,7 @@ class Group < ActiveRecord::Base
     when "imt"
       ['ImtCustomer','ImtTransfer','IncomingFile','ImtUnapprovedRecord']
     when "funds-transfer"
-      ['FundsTransferCustomer','FtUnapprovedRecord']
+      ['FundsTransferCustomer','FtUnapprovedRecord', 'ReconciledReturn']
     else
       []
     end

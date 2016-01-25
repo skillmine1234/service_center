@@ -1,0 +1,38 @@
+= simple_form_for @reconciled_return, :html => {:class=>'form-horizontal', :autocomplete=>"off", :id => "reconciled_return_form"} do |f|
+  .control-group
+    = f.label ' '
+    #msg-error
+      = error_message_for(@reconciled_return, :base, :prepend_text => "")
+  .form-main
+    = f.hidden_field :lock_version
+    .control-group
+      = f.label :txn_type, "*Txn Type", :class => 'control-label'
+      = f.text_field :txn_type, :maxlength => 10
+      #msg-error
+        = error_message_for(@reconciled_return, :txn_type, :prepend_text => "")
+    .control-group
+      = f.label :return_code, "*Return Code", :class => 'control-label'
+      = f.text_field :return_code, :maxlength => 10
+      #msg-error
+        = error_message_for(@reconciled_return, :return_code, :prepend_text => "")
+    .control-group
+      = f.label :settlement_date, "*Settlement Date", :class => 'control-label'
+      = f.text_field :settlement_date
+      #msg-error
+        = error_message_for(@reconciled_return, :settlement_date, :prepend_text => "")
+    .control-group
+      = f.label :bank_ref_no, "*Bank Ref No", :class => 'control-label'
+      = f.text_field :bank_ref_no, :maxlength => 32
+      #msg-error
+        = error_message_for(@reconciled_return, :bank_ref_no, :prepend_text => "")
+    .control-group
+      = f.label :reason, "*Reason", :class => 'control-label'
+      = f.text_area :reason
+      #msg-error
+        = error_message_for(@reconciled_return, :reason, :prepend_text => "")
+
+  .form-actions
+    - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_reconciled_return', :value => label_name + ' Reconciled Return'
+    = link_to :Cancel,'/reconciled_returns', :name => 'cancel', :class=>"cancel btn"
+

@@ -1,0 +1,41 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8; height: 900px;'}
+    #form-details
+      %h3 Reconciled Return Details 
+      %br
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
+        - if !@reconciled_return.nil?
+          %tr
+            %td.label Version
+            %td.value
+              = link_to "#{audit_count(@reconciled_return)}", :controller => :reconciled_returns, :action => :audit_logs, :version_id => audit_count(@reconciled_return), :id => @reconciled_return.id
+          %tr
+            %td.label Form Errors
+            %td.value
+              = ' '
+            %td#msg-error
+              = error_message_for(@reconciled_return, :base, :prepend_text => "")
+          %tr
+            %td.label Txn Type
+            %td.value
+              = @reconciled_return.txn_type
+            %td#msg-error
+              = error_message_for(@reconciled_return, :txn_type, :prepend_text => "")
+          %tr
+            %td.label Return Code
+            %td.value
+              = @reconciled_return.return_code
+            %td#msg-error
+              = error_message_for(@reconciled_return, :return_code, :prepend_text => "")
+          %tr
+            %td.label Settlement Date
+            %td.value
+              = @reconciled_return.settlement_date
+            %td#msg-error
+              = error_message_for(@reconciled_return, :settlement_date, :prepend_text => "")
+          %tr
+            %td.label Bank Ref No
+            %td.value
+              = @reconciled_return.bank_ref_no
+            %td#msg-error
+              = error_message_for(@reconciled_return, :bank_ref_no, :prepend_text => "")

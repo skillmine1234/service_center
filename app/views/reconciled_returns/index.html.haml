@@ -1,0 +1,42 @@
+%br
+= link_to 'New Reconciled Return', new_reconciled_return_path
+%br
+%br
+%h1 Listing Reconciled Returns
+%h2.collapsible
+  Advanced Search
+  %span.caret
+.collapsible-content
+  = render :partial => 'advanced_search'
+%br
+= "Total Count: #{@reconciled_returns_count}"
+%br
+= will_paginate @reconciled_returns
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Txn Type
+    %th{:style=>'text-align:left; background-color: lightblue;'} 
+      Return Code
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Settlement Date
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Bank Ref No
+
+  .tbody
+    - @reconciled_returns.each do |reconciled_return|
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', reconciled_return
+        %td{:style=>'text-align:left;'}
+          = reconciled_return.txn_type
+        %td{:style=>'text-align:left;'}
+          = reconciled_return.return_code
+        %td{:style=>'text-align:left;'}
+          = reconciled_return.settlement_date
+        %td{:style=>'text-align:left;'}
+          = reconciled_return.bank_ref_no
+
+
