@@ -11,5 +11,11 @@ describe ReconciledReturn do
       it { should validate_presence_of(att) }
     end
   end
+  
+  context "options_for_txn_type" do
+    it "should return options for txn_type" do
+      ReconciledReturn.options_for_txn_type.should == [['NEFT','NEFT'],['RTGS','RTGS'],['IMPS','IMPS']]
+    end
+  end
 
 end

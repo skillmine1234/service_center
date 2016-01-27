@@ -1,9 +1,13 @@
 .form-horizontal.show_form
-  .form-main-with-color{:style=>'background-color: #F1F2F8; height: 900px;'}
+  .form-main-with-color{:style=>'background-color: #F1F2F8; height: 600px;'}
     #form-details
       %h3 Reconciled Return Details 
       %br
       %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
+        - can = can? :edit, @reconciled_return
+        %a.btn{:href => "#{!(can) ? '#' : '/reconciled_returns/' + @reconciled_return.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
+        %br
+        %br
         - if !@reconciled_return.nil?
           %tr
             %td.label Version

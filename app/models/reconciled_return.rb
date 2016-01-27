@@ -12,5 +12,9 @@ class ReconciledReturn < ActiveRecord::Base
   def convert_bank_ref_no_to_upcase
     self.bank_ref_no = self.bank_ref_no.upcase unless self.frozen?
   end
+  
+  def self.options_for_txn_type
+    [['NEFT','NEFT'],['RTGS','RTGS'],['IMPS','IMPS']]
+  end
 
 end
