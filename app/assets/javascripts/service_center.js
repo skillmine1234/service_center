@@ -72,4 +72,44 @@ $(document).ready(function(){
     $('input#from_amount').val('');
     $('input#to_amount').val('');
   });
+	
+  $("#bm_app_reset").on('click', function(){
+    $('input#app_id').val('');
+		$('input#channel_id').val('');
+  });
+	
+  $("#bm_biller_reset").on('click', function(){
+    $('input#biller_code').val('');
+		$('input#biller_name').val('');
+    $('input#biller_category').val('');
+		$('input#processing_method').val('');
+		$('input#is_enabled').val('');
+  });
+	
+  $("#bm_bill_payment_reset").on('click', function(){
+    $('input#status').val('');
+		$('input#request_no').val('');
+    $('input#cust_id').val('');
+		$('input#debit_no').val('');
+		$('input#txn_kind').val('');
+		$('input#from_amount').val('');
+    $('input#to_amount').val('');
+		$('input#biller_code').val('');
+		$('input#biller_acct_no').val('');
+    $('input#bill_id').val('');
+		$('input#from_date').val('');
+		$('input#to_date').val('');
+  });
+	
+  $("#bm_aggr_reset").on('click', function(){
+    $('input#cod_acct_no').val('');
+		$('input#neft_sender_ifsc').val('');
+    $('input#bene_acct_no').val('');
+		$('input#bene_account_ifsc').val('');
+		$('input#from_amount').val('');
+    $('input#to_amount').val('');
+		$('input#from_date').val('');
+		$('input#to_date').val('');
+		$('input#status').val('');
+  });
 });
