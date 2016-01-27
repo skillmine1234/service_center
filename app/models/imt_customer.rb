@@ -8,10 +8,12 @@ class ImtCustomer < ActiveRecord::Base
   validates_presence_of :customer_code, :customer_name, :contact_person, :email_id, :account_no, :mobile_no, :txn_mode
   
   validates :customer_code, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9]}'}, length: {maximum: 15}
+  validates :customer_name, :contact_person, format: {with: /\A[a-z|A-Z|0-9|\s|\.]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\s|\.]}'}
   validates :account_no, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9]}' }, length: {maximum: 16}
   validates :mobile_no, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9]}'}, length: {maximum: 10, minimum: 10}
   validates :expiry_period, :numericality => { :greater_than => 0}
   validates :email_id, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/, :message => 'Invalid Email ID, expected format is abc@def.com' }
+  validates :address_line1, :address_line2, :address_line3, format: {with: /\A[a-z|A-Z|0-9|\s|\.|\,|\-]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\s|\.|\,|\-]}'}, :allow_blank => true
   
   before_save :convert_customer_name_to_upcase
   

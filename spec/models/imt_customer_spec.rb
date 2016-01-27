@@ -31,6 +31,35 @@ describe ImtCustomer do
     end     
   end
   
+  context "customer_name and contact_person format" do 
+    [:customer_name, :contact_person].each do |att|
+      it "should allow valid format" do
+        should allow_value('DigitalSoln.').for(att)
+        should allow_value('Digital Soln.').for(att)
+      end 
+    
+      it "should not allow invalid format" do
+        should_not allow_value('@CUST01').for(att)
+        should_not allow_value('CUST01/').for(att)
+        should_not allow_value('CUST-01').for(att)
+      end
+    end    
+  end
+  
+  context "address_line format" do 
+    [:address_line1, :address_line2, :address_line3].each do |att|
+      it "should allow valid format" do
+        should allow_value('Gandhinagar, 2nd St.').for(att)
+        should allow_value('Gandhinagar, 2nd St. - 670307').for(att)
+      end 
+    
+      it "should not allow invalid format" do
+        should_not allow_value('@CUST01').for(att)
+        should_not allow_value('CUST01/').for(att)
+      end
+    end   
+  end
+  
   context "email_id format" do 
     it "should allow valid format" do
       should allow_value('abc@g.in').for(:email_id)
