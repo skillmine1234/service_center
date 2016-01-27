@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160127115550) do
+ActiveRecord::Schema.define(version: 20160127141149) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",                  null: false
@@ -1159,7 +1159,7 @@ ActiveRecord::Schema.define(version: 20160127115550) do
   end
 
   create_table "imt_transfers", force: :cascade do |t|
-    t.string   "imt_ref_no",            limit: 25,                null: false
+    t.string   "imt_ref_no",            limit: 35
     t.string   "status_code",           limit: 25,                null: false
     t.string   "customer_id",           limit: 50,                null: false
     t.string   "bene_mobile_no",        limit: 50,                null: false
