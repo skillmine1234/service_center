@@ -13,5 +13,6 @@ FactoryGirl.define do
     allow_neft "N"
     allow_imps "N"
     enabled "N"
+    mmid "1234"
   end
 end

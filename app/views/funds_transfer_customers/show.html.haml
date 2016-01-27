@@ -20,6 +20,18 @@
             %td#msg-error
               = error_message_for(@funds_transfer_customer, :base, :prepend_text => "")
           %tr
+            %td.label Customer ID
+            %td.value
+              = @funds_transfer_customer.customer_id
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :customer_id, :prepend_text => "")
+          %tr
+            %td.label Enabled
+            %td.value
+              = @funds_transfer_customer.enabled
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :enabled, :prepend_text => "")
+          %tr
             %td.label Customer Name
             %td.value
               = @funds_transfer_customer.name
@@ -73,18 +85,6 @@
               = @funds_transfer_customer.allow_imps
             %td#msg-error
               = error_message_for(@funds_transfer_customer, :allow_imps, :prepend_text => "")
-          %tr
-            %td.label Enabled
-            %td.value
-              = @funds_transfer_customer.enabled
-            %td#msg-error
-              = error_message_for(@funds_transfer_customer, :enabled, :prepend_text => "")
-          %tr
-            %td.label Customer ID
-            %td.value
-              = @funds_transfer_customer.customer_id
-            %td#msg-error
-              = error_message_for(@funds_transfer_customer, :customer_id, :prepend_text => "")
           %tr
             %td.label MMID
             %td.value

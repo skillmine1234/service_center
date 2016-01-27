@@ -14,7 +14,9 @@ describe FundsTransferCustomer do
       it { should validate_presence_of(att) }
     end
     
-    it { should validate_numericality_of(:low_balance_alert_at) }
+    [:low_balance_alert_at, :mmid].each do |att|
+      it { should validate_numericality_of(att) }
+    end
   end
   
   context "email_id format" do 
@@ -157,6 +159,16 @@ describe FundsTransferCustomer do
       funds_transfer_customer2 = Factory(:funds_transfer_customer, :approval_status => 'U')
       funds_transfer_customer1.enable_approve_button?.should == false
       funds_transfer_customer2.enable_approve_button?.should == true
+    end
+  end
+  
+  context "validate_presence_of_mmid" do
+    it "should validate presence of mmid if neft is allowed" do
+      funds_transfer_customer = Factory.build(:funds_transfer_customer, :allow_imps => 'Y', :mmid => nil)
+      funds_transfer_customer.save.should == false
+      funds_transfer_customer.errors_on(:mmid).should == ["MMID is mandatory if IMPS is allowed"]
+      funds_transfer_customer = Factory.build(:funds_transfer_customer, :allow_imps => 'N', :mmid => nil)
+      funds_transfer_customer.save.should == true
     end
   end
 end

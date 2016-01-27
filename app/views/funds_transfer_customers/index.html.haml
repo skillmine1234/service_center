@@ -19,6 +19,8 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
+      Customer ID
+    %th{:style=>'text-align:left; background-color: lightblue;'}
       Customer Name
     %th{:style=>'text-align:left; background-color: lightblue;'} 
       Tech Email ID
@@ -26,8 +28,6 @@
       Operations Email ID
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Account no
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Customer ID
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Mobile No
 
@@ -44,6 +44,8 @@
           - else
             = ""
         %td{:style=>'text-align:left;'}
+          = funds_transfer_customer.customer_id
+        %td{:style=>'text-align:left;'}
           = funds_transfer_customer.name
         %td{:style=>'text-align:left;'}
           = funds_transfer_customer.tech_email_id
@@ -51,8 +53,6 @@
           = funds_transfer_customer.ops_email_id
         %td{:style=>'text-align:left;'}
           = funds_transfer_customer.account_no
-        %td{:style=>'text-align:left;'}
-          = funds_transfer_customer.customer_id
         %td{:style=>'text-align:left;'}
           = funds_transfer_customer.mobile_no
 

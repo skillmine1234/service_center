@@ -8,6 +8,16 @@
     = f.hidden_field :approved_id
     = f.hidden_field :approved_version
     .control-group
+      = f.label :customer_id, "*Customer ID", :class => 'control-label'
+      = f.text_field :customer_id
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :customer_id, :prepend_text => "")
+    .control-group
+      = f.label :enabled, "Enabled ?", :class => 'control-label'
+      = f.check_box :enabled, {},"Y","N"
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :enabled, :prepend_text => "")
+    .control-group
       = f.label :name, "Customer Name", :class => 'control-label'
       = f.text_field :name, :maxlength => 20
       #msg-error
@@ -53,16 +63,6 @@
       #msg-error
         = error_message_for(@funds_transfer_customer, :allow_imps, :prepend_text => "")
     .control-group
-      = f.label :enabled, "Enabled ?", :class => 'control-label'
-      = f.check_box :enabled, {},"Y","N"
-      #msg-error
-        = error_message_for(@funds_transfer_customer, :enabled, :prepend_text => "")
-    .control-group
-      = f.label :customer_id, "*Customer ID", :class => 'control-label'
-      = f.text_field :customer_id
-      #msg-error
-        = error_message_for(@funds_transfer_customer, :customer_id, :prepend_text => "")
-    .control-group
       = f.label :mmid, "MMID", :class => 'control-label'
       = f.text_field :mmid, :maxlength => 7
       #msg-error
@@ -80,17 +80,17 @@
         = error_message_for(@funds_transfer_customer, :country, :prepend_text => "")
     .control-group
       = f.label :address_line1, "Address Line 1", :class => 'control-label'
-      = f.text_field :address_line1
+      = f.text_area :address_line1, :maxlength => 255
       #msg-error
         = error_message_for(@funds_transfer_customer, :address_line1, :prepend_text => "")
     .control-group
       = f.label :address_line2, "Address Line 2", :class => 'control-label'
-      = f.text_field :address_line2
+      = f.text_area :address_line2, :maxlength => 255
       #msg-error
         = error_message_for(@funds_transfer_customer, :address_line2, :prepend_text => "")
     .control-group
       = f.label :address_line3, "Address Line 3", :class => 'control-label'
-      = f.text_field :address_line3
+      = f.text_area :address_line3, :maxlength => 255
       #msg-error
         = error_message_for(@funds_transfer_customer, :address_line3, :prepend_text => "")
 
