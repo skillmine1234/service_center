@@ -17,12 +17,12 @@ Factory.define(:bm_bill_payment) do |i|
   i.fault_code nil
   i.fault_reason nil
   i.debit_req_ref "2324"
-  i.debited_at Time.zone.now
+  i.debited_at "2015-04-20 15:12:44"
   i.billpay_req_ref "2324"
   i.billpay_attempt_no 0 
-  i.billpay_attempt_at Time.zone.now
+  i.billpay_attempt_at "2015-04-20 15:12:44"
   i.billpay_rep_ref "2345" 
-  i.billpaid_at Time.zone.now 
+  i.billpaid_at "2015-04-20 15:12:44"
   i.reversal_req_ref nil
   i.reversal_attempt_no nil
   i.reversal_attempt_at nil
@@ -31,6 +31,6 @@ Factory.define(:bm_bill_payment) do |i|
   i.refund_ref nil
   i.refund_at nil
   i.is_reconciled 'Y'
-  i.reconciled_at  Time.zone.now
+  i.reconciled_at "2015-04-20 15:12:44"
   i.pending_approval 'Y'
 end
