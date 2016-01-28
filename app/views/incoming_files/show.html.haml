@@ -20,7 +20,7 @@
         Failed
   %tbody
     %tr
-      - if @incoming_file.sc_service == 'ECOL'
+      - if @incoming_file.service_name == 'ECOL'
         %td{:style=>'text-align:left;'}
           = "Remitter"          
         %td{:style=>'text-align:left;'}
@@ -30,7 +30,7 @@
         %td{:style=>'text-align:left;'}
           = link_to @incoming_file.failed_records.count, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'FAILED')
 
-      - elsif @incoming_file.sc_service == 'IMT'
+      - elsif @incoming_file.service_name == 'IMT'
         %td{:style=>'text-align:left;'}
           = "IMT Transaction"
         %td{:style=>'text-align:left;'}
