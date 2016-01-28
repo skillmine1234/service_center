@@ -14,7 +14,7 @@ class BmBillPaymentsController < ApplicationController
 
   def index
     bm_bill_payments = BmBillPayment.order("id desc")
-    bm_bill_payments = find_bm_bill_payments(bm_bill_payments,params) if params[:advanced_search].present? || params[:summary].present?
+    bm_bill_payments = BmBillPayment.find_bm_bill_payments(bm_bill_payments,params) if params[:advanced_search].present? || params[:summary].present?
     @bm_bill_payments_count = bm_bill_payments.count
     @bm_bill_payments = bm_bill_payments.paginate(:per_page => 10, :page => params[:page]) rescue []
     
