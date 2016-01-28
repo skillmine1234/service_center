@@ -15,6 +15,8 @@
   .thead
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
+      IMT Ref No
+    %th{:style=>'text-align:left; background-color: lightblue;'}
       Status Code
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Customer ID
@@ -24,12 +26,18 @@
       Transfer Amount
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Remarks
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Initiation Bank Ref No
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Cancellation Bank Ref No
 
   .tbody
     - @imt_transfers.each do |imt_transfer|
       %tr
         %td{:style=>'text-align:left;'}
           = link_to 'Show', imt_transfer
+        %td{:style=>'text-align:left;'}
+          = imt_transfer.imt_ref_no
         %td{:style=>'text-align:left;'}
           = imt_transfer.status_code
         %td{:style=>'text-align:left;'}
@@ -40,4 +48,8 @@
           = imt_transfer.transfer_amount
         %td{:style=>'text-align:left;'}
           = imt_transfer.rmtr_to_bene_note
+        %td{:style=>'text-align:left;'}
+          = imt_transfer.initiation_bank_ref
+        %td{:style=>'text-align:left;'}
+          = imt_transfer.cancellation_bank_ref
 

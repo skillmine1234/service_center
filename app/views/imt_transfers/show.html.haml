@@ -1,10 +1,16 @@
 .form-horizontal.show_form
-  .form-main-with-color{:style=>'background-color: #F1F2F8;  height:600px;'}
+  .form-main-with-color{:style=>'background-color: #F1F2F8;  height:630px;'}
     #form-details
       %h3 IMT Transfer Details 
       %br
       %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px;'}
       %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
+        %tr
+          %td.label IMT Ref No
+          %td.value
+            = @imt_transfer.imt_ref_no
+          %td#msg-error
+            = error_message_for(@imt_transfer, :imt_ref_no, :prepend_text => "")
         %tr
           %td.label Status Code
           %td.value
