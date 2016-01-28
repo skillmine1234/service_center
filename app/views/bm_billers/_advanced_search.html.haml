@@ -17,7 +17,7 @@
     = hidden_field_tag :approval_status, params[:approval_status]
   .form-actions
     = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"
-    %input{:type => 'reset', :value=>'Reset', :class => 'btn', :id => 'bm_biller_reset'}
+    = button_tag "Reset", :type => 'button', :value=>'Reset', :class => 'btn', :id => 'bm_biller_reset'
   = hidden_field_tag :advanced_search, :true
 
 :javascript

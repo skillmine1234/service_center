@@ -38,7 +38,6 @@
     = hidden_field_tag :req_no, params[:req_no]
   .form-actions
     = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"
-    %input{:type => 'reset', :value=>'Reset', :class => 'btn', :id => 'bm_bill_payment_reset'}
-
+    = button_tag "Reset", :type => 'button', :value=>'Reset', :class => 'btn', :id => 'bm_bill_payment_reset'
 :javascript
   var in_advanced_search = true;
