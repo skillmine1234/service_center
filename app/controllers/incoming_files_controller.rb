@@ -57,7 +57,7 @@ class IncomingFilesController < ApplicationController
 
   def show
     @incoming_file = IncomingFile.unscoped.find_by_id(params[:id])
-    @success_count = @incoming_file.incoming_file_records.where(:status => "SUCCESS").count
+    @success_count = @incoming_file.incoming_file_records.where(:status => "COMPLETED").count
     @failure_count = @incoming_file.incoming_file_records.where(:status => "FAILED").count
   end
 
