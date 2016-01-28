@@ -65,8 +65,8 @@ describe BmBillPayment do
       bm_bill_payment = [Factory(:bm_bill_payment, :billpaid_at => '2015-05-25')]
       bm_bill_payment << Factory(:bm_bill_payment, :billpaid_at => '2015-05-26')
       bm_bill_payment << Factory(:bm_bill_payment, :billpaid_at => '2015-05-27')
-      BmBillPayment.find_bm_bill_payments(val,{:from_date => '2015-05-25', :to_date => nil}).should == bm_bill_payment
-      BmBillPayment.find_bm_bill_payments(val,{:from_date => nil, :to_date => '2015-03-24'}).should == []
+      BmBillPayment.find_bm_bill_payments(val,{:from_date => '2015-05-25', :to_date => ""}).should == bm_bill_payment
+      BmBillPayment.find_bm_bill_payments(val,{:from_date => "", :to_date => '2015-03-24'}).should == []
     end
   end
   
