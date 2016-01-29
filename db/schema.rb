@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160129141214) do
+ActiveRecord::Schema.define(version: 20160129143918) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",                  null: false
@@ -1207,6 +1207,7 @@ ActiveRecord::Schema.define(version: 20160129141214) do
     t.string  "msg_domain"
     t.string  "msg_model"
     t.string  "validate_all",  limit: 1,                 default: "f", null: false
+    t.string  "auto_upload",   limit: 1,                 default: "f"
   end
 
   add_index "incoming_file_types", ["code"], name: "i_incoming_file_types_code", unique: true
