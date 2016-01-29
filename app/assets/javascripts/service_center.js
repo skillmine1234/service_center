@@ -33,10 +33,13 @@ $(document).ready(function(){
   $("a.active-link").on("click", function () {
     var f_code = $(this).data('fault-code');
     var f_reason = $(this).data('fault-reason');
+    var f_subcode = $(this).data('fault-subcode');
     $(".modal-body .fault_code").text("");
     $(".modal-body .fault_code").text(f_code);
     $(".modal-body .fault_reason").text("");
     $(".modal-body .fault_reason").text(f_reason);
+    $(".modal-body .fault_subcode").text("");
+    $(".modal-body .fault_subcode").text(f_subcode);
     $('#faultText').modal();
   });
   

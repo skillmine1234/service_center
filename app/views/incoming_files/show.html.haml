@@ -22,7 +22,7 @@
     %tr
       - if @incoming_file.service_name == 'ECOL'
         %td{:style=>'text-align:left;'}
-          = "Remitter"          
+          = "Remitter"    
         %td{:style=>'text-align:left;'}
           = @incoming_file.ecol_remitters.count + @incoming_file.incoming_file_records.count
         %td{:style=>'text-align:left;'}
@@ -36,6 +36,6 @@
         %td{:style=>'text-align:left;'}
           = @incoming_file.incoming_file_records.count
         %td{:style=>'text-align:left;'}
-          = @success_count
+          = link_to @success_count, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'COMPLETED')
         %td{:style=>'text-align:left;'}
-          = @failure_count
+          = link_to @failure_count, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'FAILED')

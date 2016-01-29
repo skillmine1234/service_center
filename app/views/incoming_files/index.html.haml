@@ -36,6 +36,8 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Upload Time
     %th{:style=>'text-align:left; background-color: lightblue;'}
+      Failed Record Count
+    %th{:style=>'text-align:left; background-color: lightblue;'}
       Fault Text
   .tbody
     - @incoming_files.each do |incoming_file|
@@ -62,11 +64,13 @@
         %td{:style=>'text-align:left;'}
           = incoming_file.upload_time
         %td{:style=>'text-align:left;'}
+          = incoming_file.failed_record_count
+        %td{:style=>'text-align:left;'}
           - if incoming_file.fault_code.nil? or incoming_file.fault_reason.nil?
             .span{:class =>"has-tooltip", "data-toggle" => 'tooltip',"title" => "No Fault Text Available for this record", "data-placement" => 'bottom', "data-html" => true}
               Show Fault Text
           - else
-            = link_to "Show Fault Text", "#", :class => 'active-link', :href => "#faultText", data: { fault_reason: incoming_file.fault_reason, fault_code: incoming_file.fault_code}
+            = link_to "Show Fault Text", "#", :class => 'active-link', :href => "#faultText", data: { fault_reason: incoming_file.fault_reason, fault_code: incoming_file.fault_code, fault_subcode: incoming_file.fault_subcode}
 #faultText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
@@ -82,3 +86,7 @@
         %td.label Fault Reason:
         %td
           %label.fault_reason{:style => 'word-wrap: break-word'}
+      %tr
+        %td.label Fault Subcode:
+        %td
+          %label.fault_subcode{:style => 'word-wrap: break-word'}
