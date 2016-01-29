@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160129130738) do
+ActiveRecord::Schema.define(version: 20160129141214) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",                  null: false
@@ -1201,11 +1201,12 @@ ActiveRecord::Schema.define(version: 20160129130738) do
   add_index "incoming_file_records", ["incoming_file_id", "record_no"], name: "uk_inc_file_records", unique: true
 
   create_table "incoming_file_types", force: :cascade do |t|
-    t.integer "sc_service_id",            precision: 38, null: false
-    t.string  "code",          limit: 50,                null: false
-    t.string  "name",          limit: 50,                null: false
+    t.integer "sc_service_id",            precision: 38,               null: false
+    t.string  "code",          limit: 50,                              null: false
+    t.string  "name",          limit: 50,                              null: false
     t.string  "msg_domain"
     t.string  "msg_model"
+    t.string  "validate_all",  limit: 1,                 default: "f", null: false
   end
 
   add_index "incoming_file_types", ["code"], name: "i_incoming_file_types_code", unique: true
