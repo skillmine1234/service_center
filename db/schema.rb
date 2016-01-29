@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160129051852) do
+ActiveRecord::Schema.define(version: 20160129063626) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",                  null: false
@@ -1194,12 +1194,16 @@ ActiveRecord::Schema.define(version: 20160129051852) do
     t.string   "fault_reason",     limit: 500
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
+    t.string   "fault_subcode",    limit: 50
+    t.text     "fault_bitstream"
   end
 
   create_table "incoming_file_types", force: :cascade do |t|
     t.integer "sc_service_id",            precision: 38, null: false
     t.string  "code",          limit: 50,                null: false
     t.string  "name",          limit: 50,                null: false
+    t.string  "msg_domain"
+    t.string  "msg_model"
   end
 
   add_index "incoming_file_types", ["code"], name: "i_incoming_file_types_code", unique: true
@@ -1207,26 +1211,29 @@ ActiveRecord::Schema.define(version: 20160129051852) do
   add_index "incoming_file_types", ["sc_service_id"], name: "i_inc_fil_typ_sc_ser_id", unique: true
 
   create_table "incoming_files", force: :cascade do |t|
-    t.string   "service_name",     limit: 10
-    t.string   "file_type",        limit: 10
+    t.string   "service_name",        limit: 10
+    t.string   "file_type",           limit: 10
     t.string   "file"
-    t.string   "file_name",        limit: 50
-    t.integer  "size_in_bytes",                precision: 38
-    t.integer  "line_count",                   precision: 38
-    t.string   "status",           limit: 1
+    t.string   "file_name",           limit: 50
+    t.integer  "size_in_bytes",                   precision: 38
+    t.integer  "line_count",                      precision: 38
+    t.string   "status",              limit: 1
     t.datetime "started_at"
     t.datetime "ended_at"
-    t.string   "created_by",       limit: 20
-    t.string   "updated_by",       limit: 20
-    t.datetime "created_at",                                                null: false
-    t.datetime "updated_at",                                                null: false
-    t.string   "fault_code",       limit: 50
-    t.string   "fault_reason",     limit: 500
-    t.string   "approval_status",  limit: 1,                  default: "U", null: false
-    t.string   "last_action",      limit: 1,                  default: "C"
-    t.integer  "approved_version",             precision: 38
-    t.integer  "approved_id",                  precision: 38
-    t.integer  "lock_version",                 precision: 38
+    t.string   "created_by",          limit: 20
+    t.string   "updated_by",          limit: 20
+    t.datetime "created_at",                                                   null: false
+    t.datetime "updated_at"
+    t.string   "fault_code",          limit: 50
+    t.string   "fault_reason",        limit: 500
+    t.string   "approval_status",     limit: 1,                  default: "U", null: false
+    t.string   "last_action",         limit: 1,                  default: "C"
+    t.integer  "approved_version",                precision: 38
+    t.integer  "approved_id",                     precision: 38
+    t.integer  "lock_version",                    precision: 38
+    t.string   "broker_uuid"
+    t.integer  "failed_record_count",             precision: 38
+    t.string   "fault_subcode",       limit: 50
   end
 
   add_index "incoming_files", ["file_name", "approval_status"], name: "i_inc_fil_fil_nam_app_sta", unique: true
