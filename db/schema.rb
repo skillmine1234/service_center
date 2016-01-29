@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160127141149) do
+ActiveRecord::Schema.define(version: 20160129051852) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",                  null: false
@@ -1037,6 +1037,7 @@ ActiveRecord::Schema.define(version: 20160127141149) do
     t.text     "rep_bitstream"
     t.text     "fault_bitstream"
     t.string   "fault_subcode",      limit: 50
+    t.datetime "reconciled_at"
   end
 
   add_index "imt_audit_steps", ["imt_auditable_type", "imt_auditable_id", "step_no", "attempt_no"], name: "uk_imt_audit_steps", unique: true
@@ -1227,6 +1228,8 @@ ActiveRecord::Schema.define(version: 20160127141149) do
     t.integer  "approved_id",                  precision: 38
     t.integer  "lock_version",                 precision: 38
   end
+
+  add_index "incoming_files", ["file_name", "approval_status"], name: "i_inc_fil_fil_nam_app_sta", unique: true
 
   create_table "inw_audit_logs", force: :cascade do |t|
     t.integer "inward_remittance_id", precision: 38
