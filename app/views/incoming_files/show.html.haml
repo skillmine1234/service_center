@@ -15,6 +15,8 @@
       %th{:style=>'text-align:left;'}
         Total Records
       %th{:style=>'text-align:left;'}
+        Skipped
+      %th{:style=>'text-align:left;'}
         Success
       %th{:style=>'text-align:left;'}
         Failed
@@ -35,6 +37,8 @@
           = "IMT Transaction"
         %td{:style=>'text-align:left;'}
           = @incoming_file.incoming_file_records.count
+        %td{:style=>'text-align:left;'}
+          = link_to @skipped_count, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'SKIPPED')
         %td{:style=>'text-align:left;'}
           = link_to @success_count, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'COMPLETED')
         %td{:style=>'text-align:left;'}
