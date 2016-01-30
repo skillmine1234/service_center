@@ -8,9 +8,8 @@ describe IncomingFileType do
 
     it do
       Factory(:incoming_file_type)
-      should validate_uniqueness_of(:sc_service_id) 
-      should validate_uniqueness_of(:name) 
-      should validate_uniqueness_of(:code) 
+      should validate_uniqueness_of(:code).scoped_to(:sc_service_id)
     end
+
   end
 end
