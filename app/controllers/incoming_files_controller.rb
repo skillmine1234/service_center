@@ -36,15 +36,15 @@ class IncomingFilesController < ApplicationController
     @incoming_file = IncomingFile.unscoped.find_by_id(params[:id])
     file_extension = Rack::Mime::MIME_TYPES.invert[@incoming_file.file.content_type].split(".").last if @incoming_file.file.content_type
     if File.exists?(@incoming_file.is_approved?[:file_path])
-      if file_extension && file_extension == IncomingFile::ExtensionList[0]
+      if file_extension == IncomingFile::ExtensionList[0]
         @raw_file_content = %x(cat -nb #{@incoming_file.is_approved?[:file_path]})
         @result = {filename: @incoming_file.file_name, content: @raw_file_content}
         respond_to do |format|
           format.html
           format.json { render json: @result }
         end
-      else
-        send_file @incoming_file.is_approved?[:file_path], :disposition => 'inline'
+      # else
+      #   send_file @incoming_file.is_approved?[:file_path], :disposition => 'inline'
       end
     else
       @result = {filename: @incoming_file.file_name, content: "File not found."}
@@ -57,9 +57,9 @@ class IncomingFilesController < ApplicationController
 
   def show
     @incoming_file = IncomingFile.unscoped.find_by_id(params[:id])
-    @success_count = @incoming_file.incoming_file_records.where(:status => "COMPLETED").count
-    @failure_count = @incoming_file.incoming_file_records.where(:status => "FAILED").count
-    @skipped_count = @incoming_file.incoming_file_records.where(:status => "SKIPPED").count
+    @success_count = @incoming_file.incoming_file_records.where(:status => "COMPLETED").count(:id)
+    @failure_count = @incoming_file.incoming_file_records.where(:status => "FAILED").count(:id)
+    @skipped_count = @incoming_file.incoming_file_records.where(:status => "SKIPPED").count(:id)
   end
 
   def destroy

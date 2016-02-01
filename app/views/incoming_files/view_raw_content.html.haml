@@ -2,11 +2,11 @@
 %br
 
 File :
-= @result[:filename]
+= @result.nil? ? "Not Available" : @result[:filename]
 
 %br
 %br
 
 Content :
 %div#raw_file_content
-  = raw_file_content(@result[:content])
+  = @result.nil? ? "Not Available" : raw_file_content(@result[:content])

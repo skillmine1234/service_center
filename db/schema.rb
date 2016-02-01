@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160130131929) do
+ActiveRecord::Schema.define(version: 20160130153934) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",                  null: false
@@ -1201,8 +1201,8 @@ ActiveRecord::Schema.define(version: 20160130131929) do
   add_index "incoming_file_types", ["sc_service_id", "code"], name: "uk_in_file_types_1", unique: true
 
   create_table "incoming_files", force: :cascade do |t|
-    t.string   "service_name",        limit: 10
-    t.string   "file_type",           limit: 10
+    t.string   "service_name"
+    t.string   "file_type"
     t.string   "file"
     t.string   "file_name",           limit: 50
     t.integer  "size_in_bytes",                    precision: 38

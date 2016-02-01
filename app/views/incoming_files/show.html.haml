@@ -26,17 +26,17 @@
         %td{:style=>'text-align:left;'}
           = "Remitter"    
         %td{:style=>'text-align:left;'}
-          = @incoming_file.ecol_remitters.count + @incoming_file.incoming_file_records.count
+          = @incoming_file.ecol_remitters.count(:id) + @incoming_file.incoming_file_records.count(:id)
         %td{:style=>'text-align:left;'}
-          = link_to @incoming_file.ecol_remitters.count, ecol_remitters_path(:incoming_file_id => @incoming_file.id)
+          = link_to @incoming_file.ecol_remitters.count(:id), ecol_remitters_path(:incoming_file_id => @incoming_file.id)
         %td{:style=>'text-align:left;'}
-          = link_to @incoming_file.failed_records.count, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'FAILED')
+          = link_to @incoming_file.failed_records.count(:id), incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'FAILED')
 
-      - elsif @incoming_file.service_name == 'IMT'
+      - elsif @incoming_file.service_name == 'IMTSERVICE'
         %td{:style=>'text-align:left;'}
           = "IMT Transaction"
         %td{:style=>'text-align:left;'}
-          = @incoming_file.incoming_file_records.count
+          = @incoming_file.incoming_file_records.count(:id)
         %td{:style=>'text-align:left;'}
           = link_to @skipped_count, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'SKIPPED')
         %td{:style=>'text-align:left;'}
