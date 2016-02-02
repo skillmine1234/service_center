@@ -28,7 +28,7 @@
             .span{:class =>"has-tooltip", "data-toggle" => 'tooltip',"title" => "No Record Text Available for this record", "data-placement" => 'bottom', "data-html" => true}
               Show Record Text
           - else
-            = link_to "Show Record Text", "#", :id => 'show_record_text', :href => "#recordText", data: { record_txt: record.record_txt} 
+            = link_to "Show Record Text", "#", :class => 'show_record_text', :href => "#recordText", data: { record_txt: record.record_txt} 
         %td{:style=>'width:25%; text-align:left;'}
           = record.status
         %td{:style=>'text-align:left;'}
@@ -36,9 +36,9 @@
             .span{:class =>"has-tooltip", "data-toggle" => 'tooltip',"title" => "No Fault Text Available for this record", "data-placement" => 'bottom', "data-html" => true}
               Show Fault Text
           - else
-            = link_to "Show Fault Text", "#", :id => 'show_fault_text', :href => "#faultText", data: { fault_reason: record.fault_reason, fault_code: record.fault_code} 
+            = link_to "Show Fault Text", "#", :class => 'show_fault_text', :href => "#faultText", data: { fault_reason: record.fault_reason, fault_code: record.fault_code} 
         %td{:style=>'text-align:left;'}
-          = link_to "Show Fault Bitstream", "#", :id => 'show_fault_bitstream', :href => "#faultBitstream", data: { fault_bitstream: record.fault_bitstream}
+          = link_to "Show Fault Bitstream", "#", :class => 'show_fault_bitstream', :href => "#faultBitstream", data: { fault_bitstream: record.fault_bitstream}
 
 #recordText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
