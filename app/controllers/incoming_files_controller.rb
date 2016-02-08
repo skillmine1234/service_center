@@ -98,7 +98,8 @@ class IncomingFilesController < ApplicationController
   end
   
   def download_response_file
-    @incoming_file = IncomingFile.find(params[:id])    
+    @incoming_file = IncomingFile.find(params[:id])
+    require 'uri/open-scp'  
     send_file "scp://iibadm@#{ENV['CONFIG_URL_IIB_FILE_MGR']}#{@incoming_file.rep_file_path}/#{@incoming_file.rep_file_name}", :type=>'text/plain'
   end
 
