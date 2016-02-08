@@ -1,4 +1,5 @@
 require 'will_paginate/array'
+require 'uri/open-scp'
 
 class IncomingFilesController < ApplicationController
   authorize_resource
@@ -91,15 +92,13 @@ class IncomingFilesController < ApplicationController
   end
   
   def view_response_file
-    @incoming_file = IncomingFile.find(params[:id])    
-    require 'uri/open-scp'
+    @incoming_file = IncomingFile.find(params[:id])
     data = open("scp://iibadm@#{ENV['CONFIG_URL_IIB_FILE_MGR']}#{@incoming_file.rep_file_path}/#{@incoming_file.rep_file_name}").read
     render plain: data
   end
   
   def download_response_file
-    @incoming_file = IncomingFile.find(params[:id])
-    require 'uri/open-scp'  
+    @incoming_file = IncomingFile.find(params[:id])  
     send_file "scp://iibadm@#{ENV['CONFIG_URL_IIB_FILE_MGR']}#{@incoming_file.rep_file_path}/#{@incoming_file.rep_file_name}", :type=>'text/plain'
   end
 
