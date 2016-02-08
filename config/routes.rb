@@ -51,7 +51,11 @@ ServiceCenter::Application.routes.draw do
   resources :ft_unapproved_records
   resources :funds_transfer_customers
   resources :reconciled_returns
-  resources :outgoing_files
+  resources :outgoing_files do
+    member do
+      get 'download_response_file'
+    end
+  end
 
   namespace :api do
     namespace :v1 do

@@ -23,4 +23,9 @@ class OutgoingFilesController < ApplicationController
     data = open("scp://iibadm@#{ENV['CONFIG_URL_IIB_FILE_MGR']}#{@outgoing_file.file_path}/#{@outgoing_file.file_name}").read
     render plain: data
   end
+  
+  def download_response_file
+    @outgoing_file = OutgoingFile.find(params[:id])
+    send_file "scp://iibadm@#{ENV['CONFIG_URL_IIB_FILE_MGR']}#{@outgoing_file.file_path}/#{@outgoing_file.file_name}", :type=>'text/pdf'
+  end
 end
