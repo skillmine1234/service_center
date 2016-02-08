@@ -1,0 +1,47 @@
+%br
+%br
+%h1 Response Files
+%h2.collapsible
+  Advanced Search
+  %span.caret
+.collapsible-content
+  = render :partial => 'advanced_search'
+%br
+= "Total Count: #{@files_count}"
+%br
+= will_paginate @outgoing_files
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Service Name
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      File Type
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      File Name
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Line Count
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Started At
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Email Reference
+    
+  .tbody
+    - @outgoing_files.each do |outgoing_file|
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', outgoing_file_path(outgoing_file)
+        %td{:style=>'text-align:left;'}
+          = outgoing_file.service_code
+        %td{:style=>'text-align:left;'}
+          = outgoing_file.file_type
+        %td{:style=>'text-align:left;'}
+          = outgoing_file.file_name
+        %td{:style=>'text-align:left;'}
+          = outgoing_file.line_count
+        %td{:style=>'text-align:left;'}
+          = outgoing_file.started_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
+        %td{:style=>'text-align:left;'}
+          = outgoing_file.email_ref

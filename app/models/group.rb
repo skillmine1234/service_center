@@ -14,7 +14,7 @@ class Group < ActiveRecord::Base
     when "flex-proxy"
       ['FpOperation','FpAuthRule','FpUnapprovedRecord']
     when "imt"
-      ['ImtCustomer','ImtTransfer','IncomingFile','ImtUnapprovedRecord']
+      ['ImtCustomer','ImtTransfer','IncomingFile','ImtUnapprovedRecord','OutgoingFile']
     when "funds-transfer"
       ['FundsTransferCustomer','FtUnapprovedRecord', 'ReconciledReturn']
     else

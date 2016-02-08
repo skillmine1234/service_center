@@ -212,6 +212,11 @@
       %br
         = "File Uploads"
     .box  
+      = link_to outgoing_files_path do
+        = image_tag 'outgoing_file.png', :size => "80x80"
+      %br
+        = "Outgoing Files"
+    .box  
       = link_to '/imt_unapproved_records' do
         = image_tag 'work-list.jpg', :size => "80x80"
       %br
@@ -227,6 +232,7 @@
         = image_tag 'ecol_transactions.jpg', :size => "80x80"
       %br
         = "IMT Transfers"
+				
 - if @current_user.group_names.include?("funds-transfer")
   %h1 Funds Transfer
   .slide-container
