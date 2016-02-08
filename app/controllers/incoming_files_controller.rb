@@ -99,7 +99,7 @@ class IncomingFilesController < ApplicationController
   
   def download_response_file
     @incoming_file = IncomingFile.find(params[:id])    
-    send_file "scp://iibadm@#{ENV['CONFIG_URL_IIB_FILE_MGR']}#{@incoming_file.rep_file_path}/#{@incoming_file.rep_file_name}", :type=>'text/pdf'
+    send_file "scp://iibadm@#{ENV['CONFIG_URL_IIB_FILE_MGR']}#{@incoming_file.rep_file_path}/#{@incoming_file.rep_file_name}", :type=>'text/plain'
   end
 
   def incoming_file_params
