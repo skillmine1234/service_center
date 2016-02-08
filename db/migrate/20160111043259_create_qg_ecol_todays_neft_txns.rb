@@ -23,7 +23,6 @@ class CreateQgEcolTodaysNeftTxns < ActiveRecord::Migration
         t.string :rmtr_full_name, :limit => 255 
         t.string :rmtr_address, :limit => 255
         t.string :bene_full_name, :limit => 255
-        t.index([:ref_txn_no], :unique => true)
       end
     end
   end

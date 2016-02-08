@@ -11,6 +11,6 @@ class QgEcolTodaysNeftTxn < ArFcr
     self.transfer_type = 'NEFT'
     self.transfer_ccy = 'INR'
     self.transfer_status = '30'
-    self.ref_txn_no = self.transfer_unique_no
+    self.ref_txn_no = 1
   end
 end

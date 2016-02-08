@@ -13,7 +13,7 @@ class QgEcolTodaysRtgsTxn < ArFcatrt
     self.transfer_type = 'RTGS'
     self.transfer_ccy = 'INR'
     self.transfer_status = 'COM'
-    self.idfcatref = self.transfer_unique_no
+    self.idfcatref = 1
   end
 
 end
