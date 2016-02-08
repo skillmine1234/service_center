@@ -90,11 +90,16 @@ class IncomingFilesController < ApplicationController
     redirect_to @incoming_file
   end
   
-  def download_response_file
+  def view_response_file
     @incoming_file = IncomingFile.find(params[:id])    
     require 'uri/open-scp'
-    data = open("scp://iibadm@10.211.55.9#{@incoming_file.rep_file_path}/#{@incoming_file.rep_file_name}").read
+    data = open("scp://iibadm@#{ENV['CONFIG_URL_IIB_FILE_MGR']}#{@incoming_file.rep_file_path}/#{@incoming_file.rep_file_name}").read
     render plain: data
+  end
+  
+  def download_response_file
+    @incoming_file = IncomingFile.find(params[:id])    
+    send_file "scp://iibadm@#{ENV['CONFIG_URL_IIB_FILE_MGR']}#{@incoming_file.rep_file_path}/#{@incoming_file.rep_file_name}", :type=>'text/pdf'
   end
 
   def incoming_file_params
