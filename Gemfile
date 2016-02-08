@@ -43,6 +43,8 @@ gem "sqlite3"
 gem 'florrick', '~> 1.1'
 gem 'unscoped_associations'
 gem 'lazy_columns', :git=>'https://github.com/quantiguous/lazy_columns.git'
+gem 'seed-fu'
+gem 'net-scp'
 
 # oracle is required only in production, CI tools run against sqlite3
 group :production do

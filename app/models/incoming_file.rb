@@ -70,8 +70,12 @@ class IncomingFile < ActiveRecord::Base
   end
 
   def job_status
+    status_text(status)
+  end
+  
+  def status_text(status_code)
     list = {'N': 'Not Started', 'I': 'In Progress', 'C': 'Completed', 'F': 'Failed'}
-    list[status.to_sym]
+    return list[status_code.to_sym]
   end
 
   def upload_time

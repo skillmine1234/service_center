@@ -20,7 +20,13 @@ ServiceCenter::Application.routes.draw do
     end
   end
   resources :udf_attributes
-  resources :incoming_files
+  
+  resources :incoming_files do
+    member do
+      get 'download_response_file'
+    end    
+  end
+  
   resources :incoming_file_records
   resources :ecol_fetch_statistics
   resources :ecol_unapproved_records
@@ -118,6 +124,7 @@ ServiceCenter::Application.routes.draw do
   get '/view_raw_content/:id' => "incoming_files#view_raw_content"
   
   get '/csv_export/download_csv' => 'csv_exports#download_csv'
+    
   root :to => 'dashboard#overview'
 
   # See how all your routes lay out with "rake routes"

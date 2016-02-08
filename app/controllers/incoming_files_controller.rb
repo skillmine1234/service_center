@@ -89,6 +89,13 @@ class IncomingFilesController < ApplicationController
     end
     redirect_to @incoming_file
   end
+  
+  def download_response_file
+    @incoming_file = IncomingFile.find(params[:id])    
+    require 'uri/open-scp'
+    data = open("scp://iibadm@10.211.55.9#{@incoming_file.rep_file_path}/#{@incoming_file.rep_file_name}").read
+    render plain: data
+  end
 
   def incoming_file_params
     params.require(:incoming_file).permit(:file, :size_in_bytes, :line_count, :created_by, :updated_by, :status,

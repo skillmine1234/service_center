@@ -102,4 +102,6 @@ unless Rails.env == 'production'
     FpOperation.create(:operation_name => 'inquireInstallmentPayment', :approval_status => 'A')
     FpOperation.create(:operation_name => 'glToGlFundsXfer', :approval_status => 'A')
   end
+  
+  
 end

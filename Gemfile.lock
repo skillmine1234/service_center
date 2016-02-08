@@ -372,6 +372,9 @@ GEM
       tilt (~> 1.1)
     secure_headers (2.2.1)
       user_agent_parser
+    seed-fu (2.3.5)
+      activerecord (>= 3.1, < 4.3)
+      activesupport (>= 3.1, < 4.3)
     selenium-webdriver (2.46.2)
       childprocess (~> 0.5)
       multi_json (~> 1.0)
@@ -494,6 +497,7 @@ DEPENDENCIES
   lazy_columns!
   mime-types
   nested_form
+  net-scp
   passenger
   progress_bar (~> 1.0.0)
   rails (= 4.2.2)
@@ -509,6 +513,7 @@ DEPENDENCIES
   rufus-scheduler
   sass-rails
   secure_headers
+  seed-fu
   selenium-webdriver
   shoulda-matchers
   simple-navigation
@@ -531,3 +536,6 @@ DEPENDENCIES
   webmock
   whenever
   will_paginate
+
+BUNDLED WITH
+   1.11.2
