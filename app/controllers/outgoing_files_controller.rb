@@ -20,7 +20,7 @@ class OutgoingFilesController < ApplicationController
   def show
     @outgoing_file = OutgoingFile.find(params[:id])    
     require 'uri/open-scp'
-    data = open("scp://iibadm@#{ENV['CONFIG_URL_IIB_FILE_MGR']}#{@outgoing_file.file_path}").read
+    data = open("scp://iibadm@#{ENV['CONFIG_URL_IIB_FILE_MGR']}#{@outgoing_file.file_path}/#{@outgoing_file.file_name}").read
     render plain: data
   end
 end
