@@ -21,7 +21,7 @@
       = f.label :contact_person, "*Contact Person", :class => 'control-label'
       = f.text_field :contact_person, :maxlength => 100
       #msg-error
-        = error_message_for(@imt_customer, :customer_name, :prepend_text => "")
+        = error_message_for(@imt_customer, :contact_person, :prepend_text => "")
     .control-group
       = f.label :email_id, "*Email ID", :class => 'control-label'
       = f.text_field :email_id, :maxlength => 100
