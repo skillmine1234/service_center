@@ -1,5 +1,4 @@
 require 'will_paginate/array'
-require 'uri/open-scp'
 
 class OutgoingFilesController < ApplicationController
   authorize_resource
@@ -20,6 +19,7 @@ class OutgoingFilesController < ApplicationController
   
   def download_response_file
     @outgoing_file = OutgoingFile.find(params[:id])
+    require 'uri/open-scp'
     data = open("scp://iibadm@#{ENV['CONFIG_URL_IIB_FILE_MGR']}#{@outgoing_file.file_path}/#{@outgoing_file.file_name}").read rescue ""
     if data.empty?
       flash[:alert] = "File not found!"
