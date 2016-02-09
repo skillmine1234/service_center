@@ -32,7 +32,7 @@ OutgoingFileType.seed(:sc_service_id, :code) do |s|
   s.run_at_day = 'D'
   s.last_run_at = Time.now
   s.batch_size = 50  
-  s.write_header = "N"
+  s.write_header = "Y"
 end
 
 OutgoingFileType.seed(:sc_service_id, :code) do |s|
@@ -48,7 +48,7 @@ OutgoingFileType.seed(:sc_service_id, :code) do |s|
   s.run_at_day = 'D'
   s.last_run_at = Time.now  
   s.batch_size = 50  
-  s.write_header = "N"  
+  s.write_header = "Y"  
 end
 
 OutgoingFileType.seed(:sc_service_id, :code) do |s|
