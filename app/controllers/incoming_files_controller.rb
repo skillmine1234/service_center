@@ -92,9 +92,7 @@ class IncomingFilesController < ApplicationController
   
   def download_response_file
     require 'uri/open-scp'
-    @incoming_file = IncomingFile.find(params[:id])  
-    @incoming_file.rep_file_path = "/home/iibadm"
-    @incoming_file.rep_file_name = "ad12_rep.out"
+    @incoming_file = IncomingFile.find(params[:id]) 
     data = open("scp://iibadm@#{ENV['CONFIG_URL_IIB_FILE_MGR']}#{@incoming_file.rep_file_path}/#{@incoming_file.rep_file_name}").read rescue ""
     if data.empty?
       flash[:alert] = "File not found!"
