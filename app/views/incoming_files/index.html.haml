@@ -1,6 +1,6 @@
 %br
 
-= link_to 'New File Upload', new_incoming_file_path
+= link_to 'New File Upload', new_incoming_file_path unless params[:sc_service] == 'IMTSERVICE'
 
 %br
 %br

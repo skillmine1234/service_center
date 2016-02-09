@@ -12,7 +12,7 @@
       = f.select :service_name, ScService.all.map {|u| [u.name, u.code]}, :include_blank => 'select'
     .control-group
       = f.label :file_type,nil,:class => 'control-label'
-      = f.select :file_type, IncomingFileType.all.map {|u| [u.name, u.code]}, :include_blank => 'select'
+      = f.select :file_type, IncomingFileType.where(:auto_upload => 'N').map {|u| [u.name, u.code]}, :include_blank => 'select'
     .control-group
       = f.label :file,nil,:class => 'control-label'
       = f.file_field :file
