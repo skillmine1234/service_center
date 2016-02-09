@@ -32,9 +32,9 @@
     - @outgoing_files.each do |outgoing_file|
       %tr
         %td{:style=>'text-align:left;'}
-          = link_to 'View', outgoing_file_path(outgoing_file)
+          = link_to 'View', download_response_file_outgoing_file_path(outgoing_file, :view => true)
         %td{:style=>'text-align:left;'}
-          = link_to 'Download', download_response_file_outgoing_file_path(outgoing_file)
+          = link_to 'Download', download_response_file_outgoing_file_path(outgoing_file, :download => true)
         %td{:style=>'text-align:left;'}
           = outgoing_file.service_code
         %td{:style=>'text-align:left;'}

@@ -25,11 +25,11 @@
         = @incoming_file.status_text(@incoming_file.rep_file_status)
     %tr
       %td{:style=>'text-align:left;'}
-        = link_to 'Download', download_response_file_incoming_file_path(@incoming_file)
+        = link_to 'Download', download_response_file_incoming_file_path(@incoming_file, :download => true)
       %td{:style=>'text-align:left;'}
     %tr
       %td{:style=>'text-align:left;'}
-        = link_to 'View', view_response_file_incoming_file_path(@incoming_file)
+        = link_to 'View', download_response_file_incoming_file_path(@incoming_file, :view => true)
       %td{:style=>'text-align:left;'}
 
 %br

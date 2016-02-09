@@ -18,14 +18,16 @@ class OutgoingFilesController < ApplicationController
     @outgoing_files = outgoing_files.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
   
-  def show
-    @outgoing_file = OutgoingFile.find(params[:id])
-    data = open("scp://iibadm@#{ENV['CONFIG_URL_IIB_FILE_MGR']}#{@outgoing_file.file_path}/#{@outgoing_file.file_name}").read
-    render plain: data
-  end
-  
   def download_response_file
     @outgoing_file = OutgoingFile.find(params[:id])
-    send_file "scp://iibadm@#{ENV['CONFIG_URL_IIB_FILE_MGR']}#{@outgoing_file.file_path}/#{@outgoing_file.file_name}", :type=>'text/plain'
+    data = open("scp://iibadm@#{ENV['CONFIG_URL_IIB_FILE_MGR']}#{@outgoing_file.file_path}/#{@outgoing_file.file_name}").read rescue ""
+    if data.empty?
+      flash[:alert] = "File not found!"
+      redirect_to @outgoing_file
+    elsif params[:view].present?
+      render plain: data
+    elsif params[:download].present?
+      send_data data
+    end
   end
 end
