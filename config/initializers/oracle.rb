@@ -29,6 +29,15 @@ module ActiveRecord::ConnectionAdapters
         column_names.each { |name| column(name, 'decimal', options) }
       end        
     end
+    def decimal (*args)
+      options = args.extract_options!
+      column_names = args
+      if ActiveRecord::Base.connection.adapter_name == "OracleEnhanced"
+        column_names.each { |name| column(name, 'number', options) }
+      else
+        column_names.each { |name| column(name, 'decimal', options) }
+      end        
+    end    
   end
   class Table
     def number (*args)
@@ -40,5 +49,14 @@ module ActiveRecord::ConnectionAdapters
         column_names.each { |name| column(name, 'decimal', options) }
       end        
     end
+    def decimal (*args)
+      options = args.extract_options!
+      column_names = args
+      if ActiveRecord::Base.connection.adapter_name == "OracleEnhanced"
+        column_names.each { |name| column(name, 'number', options) }
+      else
+        column_names.each { |name| column(name, 'decimal', options) }
+      end        
+    end    
   end
 end
