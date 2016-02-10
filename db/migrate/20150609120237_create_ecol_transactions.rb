@@ -7,7 +7,7 @@ class CreateEcolTransactions < ActiveRecord::Migration
       t.string :transfer_status, :limit => 25, :null => false
       t.date :transfer_date, :null => false
       t.string :transfer_ccy, :limit => 5, :null => false
-      t.decimal :transfer_amount, :null => false
+      t.number :transfer_amount, :null => false
       t.string :rmtr_ref, :limit => 64
       t.string :rmtr_full_name, :limit => 255
       t.string :rmtr_address, :limit => 255

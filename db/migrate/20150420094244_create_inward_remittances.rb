@@ -35,7 +35,7 @@ class CreateInwardRemittances < ActiveRecord::Migration
       t.string :bene_account_ifsc
       t.string :transfer_type, :limit => 4
       t.string :transfer_ccy, :limit => 5
-      t.float :transfer_amount
+      t.number :transfer_amount
       t.string :rmtr_to_bene_note
       t.string :purpose_code, :limit => 5
       t.string :status_code, :limit => 25

@@ -9,7 +9,7 @@ class CreateImtInitiateTransfers < ActiveRecord::Migration
       t.string :app_id, :limit => 50, :null => false, :comment => "the identifier for the client"
       t.string :customer_id, :null => false, :limit => 50, :comment => "the unique no of the customer"
       t.string :bene_mobile_no, :null => false, :limit => 50, :comment => "the mobile no of the beneficiary"
-      t.decimal :transfer_amount, :null => false, :comment => "the transfer amount"
+      t.number :transfer_amount, :null => false, :comment => "the transfer amount"
       t.string :pass_code, :null => false, :limit => 5, :comment => "the passcode, this is shared with the beneficiary, and is needed for funds withdrawal from the ATM"
       t.string :rmtr_to_bene_note, :null => false, :limit => 255, :comment => "the friendly note from the remitter to the beneficiary"
       t.date :expiry_date, :comment => "the expiry date, computed for this transfer"

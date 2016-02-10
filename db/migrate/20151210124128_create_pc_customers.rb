@@ -35,7 +35,7 @@ class CreatePcCustomers < ActiveRecord::Migration
       t.integer :card_expiry_year, :comment => "the expiry year of the card"
       t.integer :card_expiry_month, :comment => "the expiry month of the card"
       t.string :card_currency_code, :limit => 255, :comment => "the currency code of the card amount"
-      t.decimal :available_funds, :comment => "the available funds in card"
+      t.number :available_funds, :comment => "the available funds in card"
       t.index([:mobile_no], :unique => true, :name => 'uk_pc_card_custs_1')
       t.index([:proxy_card_no], :unique => true, :name => 'uk_pc_card_custs_2')
       t.index([:card_uid], :unique => true, :name => 'uk_pc_card_custs_3')

@@ -11,11 +11,11 @@ class CreatePcsTopUps < ActiveRecord::Migration
       t.string :encrypted_pin, :limit => 50, :comment => "the encrypted PIN is required to process every financial transaction"
       t.string :biller_id, :limit => 50
       t.string :subscriber_id, :limit => 50
-      t.float :transfer_amount, :comment => "the transfer amount"
+      t.number :transfer_amount, :comment => "the transfer amount"
       t.string :rep_no, :limit => 255, :comment => "the unique response number sent back by the API"
       t.string :rep_version, :limit => 10, :comment => "the service version sent in the reply"
       t.datetime :rep_timestamp, :comment => "the SYSDATE when the reply was sent to the client"
-      t.float :service_charge, :comment => "the service charge applied for the transaction, exclusive of tax"
+      t.number :service_charge, :comment => "the service charge applied for the transaction, exclusive of tax"
       t.string :txn_uid, :limit => 50, :comment => "the unique id of the debit transaction which MM api returns"
       t.string :debit_ref_no, :limit => 50, :comment => "the reference number of the account debit, as seen in the account statement"
       t.string :biller_ref_no, :limit => 50, :comment => "the reference number of the bill payment, as known to the aggregator"

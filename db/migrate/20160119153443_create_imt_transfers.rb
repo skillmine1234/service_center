@@ -5,7 +5,7 @@ class CreateImtTransfers < ActiveRecord::Migration
       t.string :status_code, :limit => 25, :null => false, :comment => "the status of the transfer"
       t.string :customer_id, :null => false, :limit => 50, :comment => "the unique no of the customer"
       t.string :bene_mobile_no, :null => false, :limit => 50, :comment => "the mobile no of the beneficiary"
-      t.decimal :transfer_amount, :null => false, :comment => "the transfer amount"
+      t.number :transfer_amount, :null => false, :comment => "the transfer amount"
       t.string :rmtr_to_bene_note, :null => false, :limit => 255, :comment => "the friendly note from the remitter to the beneficiary"
       t.date :expiry_date, :comment => "the expiry date, computed for this transfer"
       t.datetime :initiated_at, :comment => "the date on which the transfer was initiated"

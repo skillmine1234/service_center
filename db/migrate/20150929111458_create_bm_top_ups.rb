@@ -10,7 +10,7 @@ class CreateBmTopUps < ActiveRecord::Migration
       t.string :debit_account_no, :limit => 50, :null => false, :comment => 'the account chosen by the customer to be debited'
       t.string :biller_code, :limit => 50, :null => false, :comment => 'the biller account registered for the customer, this identifies the biller and parameters'
       t.string :param1, :limit => 100, :null => false, :comment => 'the parameter that identifies the subscriber/consumer/mobile that is to be topped up'
-      t.decimal :topup_amount, :null => false, :comment => 'the amount to top-up'
+      t.number :topup_amount, :null => false, :comment => 'the amount to top-up'
       t.string :status_code, :limit => 50, :null => false, :comment => 'the status of this request'
       t.string :rep_version, :limit => 5, :comment => 'the service version sent in the reply'
       t.string :rep_no, :limit => 32, :comment => 'the unique number sent as part of the reply'
