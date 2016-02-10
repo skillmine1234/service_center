@@ -4,7 +4,7 @@ class CreateQgEcolTodaysRtgsTxns < ActiveRecord::Migration
       def self.connection
        QgEcolTodaysRtgsTxn.connection
       end
-      create_table :qg_ecol_todays_rtgs_txns do |t|
+      create_table :qg_ecol_todays_rtgs_txns, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
         t.string :idfcatref, :limit => 16, :null => false
         t.string :transfer_type, :limit => 4, :null => false
         t.string :transfer_status, :limit => 25, :null => false

@@ -1,6 +1,6 @@
 class RolifyCreateRoles < ActiveRecord::Migration
   def change
-    create_table(:roles) do |t|
+    create_table :roles, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :name
       t.references :resource, :polymorphic => true
 

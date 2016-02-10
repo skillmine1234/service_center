@@ -1,6 +1,6 @@
 class CreatePcFeeRules < ActiveRecord::Migration
   def change
-    create_table :pc_fee_rules do |t|
+    create_table :pc_fee_rules, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :app_id, :limit => 50, :null => false, :comment =>  "the unique id assigned to the client app"
       t.string :txn_kind, :limit => 3, :null => false, :comment =>  "the transaction for which the fee rules are configured"
       t.integer :no_of_tiers, :null => false, :comment =>  "the no of tiers (max 3)"

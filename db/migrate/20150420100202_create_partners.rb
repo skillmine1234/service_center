@@ -1,6 +1,6 @@
 class CreatePartners < ActiveRecord::Migration
   def change
-    create_table :partners do |t|
+    create_table :partners, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :code, :limit => 20, :null => false
       t.string :name, :limit => 20, :null => false
       t.string :tech_email_id

@@ -1,6 +1,6 @@
 class CreateEcolRemitters < ActiveRecord::Migration
   def change
-    create_table :ecol_remitters do |t|
+    create_table :ecol_remitters, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.integer :incoming_file_id
       t.string :customer_code, :limit => 15, :null => false
       t.string :customer_subcode, :limit => 15

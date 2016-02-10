@@ -1,6 +1,6 @@
 class CreateIncomingFileRecords < ActiveRecord::Migration
   def change
-    create_table :incoming_file_records do |t|
+    create_table :incoming_file_records, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.integer :incoming_file_id
       t.integer :record_no
       t.text :record_txt

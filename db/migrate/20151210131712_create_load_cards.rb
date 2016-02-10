@@ -1,6 +1,6 @@
 class CreateLoadCards < ActiveRecord::Migration
   def change
-    create_table :pc_load_cards do |t|
+    create_table :pc_load_cards, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :req_no, :limit => 32, :null => false, :comment =>  "the unique request number sent by the client"
       t.string :app_id, :limit => 32, :null => false, :comment => "the identifier for the client"
       t.integer :attempt_no, :null => false, :comment => "the attempt number of the request, failed requests can be retried"

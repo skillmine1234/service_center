@@ -1,6 +1,6 @@
 class CreateScServices < ActiveRecord::Migration
   def change
-    create_table :sc_services do |t|
+    create_table :sc_services, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :code, :limit => 50, :null => false
       t.string :name, :limit => 50, :null => false
     end

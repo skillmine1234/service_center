@@ -1,6 +1,6 @@
 class CreatePcApps < ActiveRecord::Migration
   def change
-    create_table :pc_apps do |t|
+    create_table :pc_apps, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :app_id, :limit => 50, :null => false, :comment =>  "the unique id assigned to a client app"
       t.string :card_acct, :limti => 20, :null => false, :comment =>  "the casa account for recording card transactions"
       t.string :sc_gl_income, :limit => 15, :null => false, :comment =>  "the gl account for recording fee income"

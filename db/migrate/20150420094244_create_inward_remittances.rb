@@ -1,6 +1,6 @@
 class CreateInwardRemittances < ActiveRecord::Migration
   def change
-    create_table :inward_remittances do |t|
+    create_table :inward_remittances, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :req_no, :null => false
       t.string :req_version, :limit => 10, :null => false
       t.datetime :req_time, :null => false

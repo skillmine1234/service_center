@@ -1,6 +1,6 @@
 class CreateEcolRules < ActiveRecord::Migration
   def change
-    create_table :ecol_rules do |t|
+    create_table :ecol_rules, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :ifsc, :limit => 11, :null => false
       t.string :cod_acct_no, :limit => 15, :null => false
       t.string :stl_gl_inward, :limit => 15, :null => false

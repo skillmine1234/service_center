@@ -1,6 +1,6 @@
 class CreateBmTopUps < ActiveRecord::Migration
   def change
-    create_table :bm_top_ups do |t|
+    create_table :bm_top_ups, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :app_id, :limit => 50, :null => false, :comment => 'the identifier for the client'
       t.string :req_no, :limit => 32, :null => false, :comment => 'the unique request number sent by the client'
       t.integer :attempt_no, :null => false, :comment => 'the attempt number of the request, failed requests can be retried'

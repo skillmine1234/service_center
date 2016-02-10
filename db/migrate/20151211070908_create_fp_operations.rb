@@ -1,6 +1,6 @@
 class CreateFpOperations < ActiveRecord::Migration
   def change
-    create_table :fp_operations do |t|
+    create_table :fp_operations, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :operation_name, :limit => 255, :null => false, :comment =>  "the operation name of the FLEXCUBE service"
       t.integer :lock_version, :null => false
       t.string :approval_status, :limit => 1, :null => false, :default => 'U'

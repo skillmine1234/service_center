@@ -1,6 +1,6 @@
 class CreateIdentities < ActiveRecord::Migration
   def change
-    create_table :identities do |t|
+    create_table :identities, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :remittance_req_no
       t.string :id_req_type, :limit => 20, :null => false
       t.integer :partner_id, :null => false

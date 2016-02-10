@@ -1,6 +1,6 @@
 class CreatePcCustomers < ActiveRecord::Migration
   def change
-    create_table :pc_customers do |t|
+    create_table :pc_customers, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :mobile_no, :null => false, :limit => 255, :comment => "the mobile no of the customer"
       t.string :title, :limit => 15, :comment => "the title of the customer"
       t.string :first_name, :limit => 255, :comment => "the first name of the customer"

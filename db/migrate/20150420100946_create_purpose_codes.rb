@@ -1,6 +1,6 @@
 class CreatePurposeCodes < ActiveRecord::Migration
   def change
-    create_table :purpose_codes do |t|
+    create_table :purpose_codes, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :code, :limit => 5
       t.string :description, :limit => 200
       t.string :is_enabled, :limit => 1
