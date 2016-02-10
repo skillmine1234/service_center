@@ -143,8 +143,9 @@ class ChangeDatatypeFromDecimalToNumber < ActiveRecord::Migration
                
     columns.each do |col|
       a = col["column"]
-      add_column col["table"].to_sym, "#{a}_copy".to_sym, :number, :null => col["nullable"], :comment => col["comment"]
+      add_column col["table"].to_sym, "#{a}_copy".to_sym, :number, :comment => col["comment"]
       db.execute("UPDATE #{col["table"]} SET #{a}_copy=#{a}")
+      change_column col["table"].to_sym, "#{a}_copy".to_sym, :null => col["nullable"]
       remove_column col["table"].to_sym, a.to_sym
       rename_column col["table"].to_sym, "#{a}_copy".to_sym, a.to_sym
     end
