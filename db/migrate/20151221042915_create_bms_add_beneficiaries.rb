@@ -1,6 +1,6 @@
 class CreateBmsAddBeneficiaries < ActiveRecord::Migration
   def change
-    create_table :bms_add_beneficiaries do |t|
+    create_table :bms_add_beneficiaries, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :req_version, :null => false, :comment => "the service version number received in the request"
       t.string :req_no, :null => false, :comment =>  "the unique request number sent by the client"
       t.integer :attempt_no, :null => false, :comment => "the attempt number of the request, failed requests can be retried"

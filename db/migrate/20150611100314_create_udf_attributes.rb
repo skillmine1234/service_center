@@ -1,6 +1,6 @@
 class CreateUdfAttributes < ActiveRecord::Migration
   def change
-    create_table :udf_attributes do |t|
+    create_table :udf_attributes, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :class_name, :limit => 100, :null => false
       t.string :attribute_name, :limit => 100, :null => false
       t.string :label_text, :limit => 100, :null => false

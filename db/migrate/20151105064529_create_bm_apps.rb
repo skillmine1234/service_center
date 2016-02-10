@@ -1,6 +1,6 @@
 class CreateBmApps < ActiveRecord::Migration
   def change
-    create_table :bm_apps do |t|
+    create_table :bm_apps, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :app_id, :limit => 20, :null => false
       t.string :channel_id, :limit => 20, :null => false
       t.integer :lock_version, :null => false

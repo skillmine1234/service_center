@@ -1,6 +1,6 @@
 class CreateBmAggregatorPayments < ActiveRecord::Migration
   def change
-    create_table :bm_aggregator_payments do |t|
+    create_table :bm_aggregator_payments, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :cod_acct_no, :limit => 50, :null => false, :comment => 'the pool account assigned to the aggregator, the balance is owed to the aggregator'
       t.string :neft_sender_ifsc, :null => false, :comment => 'the IFSC code of your bank, that should be used while remitting funds to the aggregator'
       t.string :bene_acct_no, :limit => 50, :null => false, :comment => 'the aggregators account no, funds are remitted to this account'

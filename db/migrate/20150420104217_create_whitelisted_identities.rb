@@ -1,6 +1,6 @@
 class CreateWhitelistedIdentities < ActiveRecord::Migration
   def change
-    create_table :whitelisted_identities do |t|
+    create_table :whitelisted_identities, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.integer :partner_id, :null => false
       t.string :full_name, :limit => 50
       t.string :first_name, :limit => 50

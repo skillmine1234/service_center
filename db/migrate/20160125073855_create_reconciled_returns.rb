@@ -1,6 +1,6 @@
 class CreateReconciledReturns < ActiveRecord::Migration
   def change
-    create_table :reconciled_returns do |t|
+    create_table :reconciled_returns, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :txn_type, :limit => 10, :null => false, :comment => "Transaction Type"
       t.string :return_code, :limit => 10, :null => false, :comment => "Return Code"
       t.date :settlement_date, :null => false, :comment => "Settlement Date"

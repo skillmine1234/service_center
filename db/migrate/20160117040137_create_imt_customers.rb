@@ -1,6 +1,6 @@
 class CreateImtCustomers < ActiveRecord::Migration
   def change
-    create_table :imt_customers do |t|
+    create_table :imt_customers, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :customer_code, :limit => 255, :null => false, :comment => "the unique no of the customer"
       t.string :customer_name, :limit => 255, :null => false, :comment => "the name of the customer"
       t.string :contact_person, :limit => 255, :null => false, :comment => "the name of the contact person"

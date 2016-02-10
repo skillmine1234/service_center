@@ -1,6 +1,6 @@
 class CreateRemittanceReviews < ActiveRecord::Migration
   def change
-    create_table :remittance_reviews do |t|
+    create_table :remittance_reviews, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :transaction_id, :limit => 5, :null => false
       t.string :justification_code, :limit => 5, :null => false
       t.string :justification_text, :limit => 2000

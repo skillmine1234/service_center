@@ -1,6 +1,6 @@
 class CreateEcolCustomers < ActiveRecord::Migration
   def change
-    create_table :ecol_customers do |t|
+    create_table :ecol_customers, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :code, :limit => 11, :null => false
       t.string :name, :limit => 15, :null => false
       t.string :is_enabled, :limit => 15, :default => 'TRUE', :null => false

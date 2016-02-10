@@ -1,6 +1,6 @@
 class CreateFundsTransferCustomers < ActiveRecord::Migration
   def change
-    create_table :funds_transfer_customers do |t|
+    create_table :funds_transfer_customers, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :name, :limit => 20, :comment => "Customer Name"
       t.string :tech_email_id, :limit => 255, :comment => "Tech Team E-mail ID of Customer"
       t.string :ops_email_id, :limit => 255, :comment => "OPs Team E-mail ID of Customer"

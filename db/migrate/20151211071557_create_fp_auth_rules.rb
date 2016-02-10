@@ -1,6 +1,6 @@
 class CreateFpAuthRules < ActiveRecord::Migration
   def change
-    create_table :fp_auth_rules do |t|
+    create_table :fp_auth_rules, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :username, :limit => 255, :null => false, :comment =>  "the identity that is allowed access to the operation"
       t.string :operation_name, :limit => 255, :null => false, :comment =>  "the operation to which access is granted"
       t.string :is_enabled, :limit => 1, :comment =>  "the indicator to denote whether the access is enabled"

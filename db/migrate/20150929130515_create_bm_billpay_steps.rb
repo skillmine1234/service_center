@@ -1,6 +1,6 @@
 class CreateBmBillpaySteps < ActiveRecord::Migration
   def change
-    create_table :bm_billpay_steps do |t|
+    create_table :bm_billpay_steps, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.integer :bm_bill_payment_id, :null => false, :comment => 'the foreign-key that references to bm_bill_payments'
       t.integer :step_no, :null => false, :comment => 'the step of the transaction, for which this record exists'
       t.integer :attempt_no, :null => false , :comment => 'the attempt no of the step, for which this record exists'

@@ -1,6 +1,6 @@
 class CreateImtAddBeneficiaries < ActiveRecord::Migration
   def change
-    create_table :imt_add_beneficiaries do |t|
+    create_table :imt_add_beneficiaries, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :req_no, :limit => 255, :null => false, :comment => "the unique reference number to be sent by the client application"
       t.integer :attempt_no, :null => false, :comment => "the attempt number of the request, failed requests can be retried"
       t.string :status_code, :limit => 25, :null => false, :comment => "the status of this request"

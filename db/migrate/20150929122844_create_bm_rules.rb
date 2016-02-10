@@ -1,6 +1,6 @@
 class CreateBmRules < ActiveRecord::Migration
   def change
-    create_table :bm_rules do |t|
+    create_table :bm_rules, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :cod_acct_no, :limit => 16, :null => false, :comment => 'the pool account assigned to the aggregator, the balance is owed to the aggregator'
       t.string :customer_id, :limit => 15, :null => false, :comment => 'the customer-id that owns the pool account'
       t.string :cod_gl_suspense, :limit => 16, :null => false, :comment => 'the suspense gl assigned to the aggregator, the balance is pending reconciliation'

@@ -1,6 +1,6 @@
 class CreateBmBillers < ActiveRecord::Migration
   def change
-    create_table :bm_billers do |t|
+    create_table :bm_billers, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :biller_code, :limit => 100, :null => false, :comment => 'the unique code that identifies a biller, this is unique across billers'
       t.string :biller_name, :limit => 100, :null => false, :comment => 'the name of the biller'
       t.string :biller_category, :limit => 100, :null => false, :comment => 'the category assigned to the biller'

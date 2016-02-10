@@ -6,7 +6,7 @@ class DeviseCreateAdminUsers < ActiveRecord::Migration
   end
 
   def change
-    create_table(:admin_users) do |t|
+    create_table :admin_users, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       ## Database authenticatable
       t.string :email,              :null => false, :default => ""
       t.string :encrypted_password, :null => false, :default => ""
