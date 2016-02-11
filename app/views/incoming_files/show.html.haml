@@ -54,7 +54,7 @@
         %td{:style=>'text-align:left;'}
           = "Remitter"    
         %td{:style=>'text-align:left;'}
-          = @incoming_file.ecol_remitters.count(:id) + @incoming_file.incoming_file_records.count(:id)
+          = @incoming_file.ecol_remitters.count(:id) + @incoming_file.failed_records.count(:id)
         %td{:style=>'text-align:left;'}
           = link_to @incoming_file.ecol_remitters.count(:id), ecol_remitters_path(:incoming_file_id => @incoming_file.id)
         %td{:style=>'text-align:left;'}
