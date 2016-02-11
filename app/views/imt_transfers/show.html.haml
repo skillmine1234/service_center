@@ -44,7 +44,7 @@
         %tr
           %td.label Expiry Date
           %td.value
-            = @imt_transfer.expiry_date
+            = @imt_transfer.expiry_date.try(:strftime, "%d/%m/%Y") rescue ""
           %td#msg-error
             = error_message_for(@imt_transfer, :expiry_date, :prepend_text => "")
         %tr
