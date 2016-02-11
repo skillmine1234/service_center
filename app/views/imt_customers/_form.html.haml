@@ -28,6 +28,11 @@
       #msg-error
         = error_message_for(@imt_customer, :email_id, :prepend_text => "")
     .control-group
+      = f.label :app_id, "*App ID", :class => 'control-label'
+      = f.text_field :app_id, :maxlength => 50
+      #msg-error
+        = error_message_for(@imt_customer, :app_id, :prepend_text => "")
+    .control-group
       = f.label :is_enabled, "Is Enabled ?", :class => 'control-label'
       = f.check_box :is_enabled, {},"Y","N"
       #msg-error

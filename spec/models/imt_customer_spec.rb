@@ -11,7 +11,7 @@ describe ImtCustomer do
   
   context 'validation' do
     [:customer_code, :customer_name, :contact_person, :email_id, :account_no, :mobile_no, 
-     :txn_mode, :expiry_period].each do |att|
+     :txn_mode, :expiry_period, :app_id].each do |att|
       it { should validate_presence_of(att) }
     end
     
