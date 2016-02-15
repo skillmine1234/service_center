@@ -1599,11 +1599,11 @@ ActiveRecord::Schema.define(version: 20160215121000) do
     t.string   "source_id",          limit: 50,                               null: false
     t.string   "channel_id",         limit: 20,                               null: false
     t.string   "needs_pin",          limit: 1,                  default: "f", null: false
-    t.string   "mm_host"
-    t.string   "mm_consumer_key"
-    t.string   "mm_consumer_secret"
-    t.string   "mm_card_type"
-    t.string   "mm_email_domain"
+    t.string   "mm_host",                                                     null: false
+    t.string   "mm_consumer_key",                                             null: false
+    t.string   "mm_consumer_secret",                                          null: false
+    t.string   "mm_card_type",                                                null: false
+    t.string   "mm_email_domain",                                             null: false
   end
 
   add_index "pc_apps", ["app_id", "approval_status"], name: "i_pc_app_app_id_app_sta", unique: true
