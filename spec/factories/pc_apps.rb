@@ -11,5 +11,10 @@ FactoryGirl.define do
     traceid_prefix 1
     source_id "MyString"
     channel_id "MyString"
+    mm_host "http://localhost:3000/pc_apps"
+    mm_consumer_key "MyString"
+    mm_consumer_secret "MyString"
+    mm_card_type "MyString"
+    mm_email_domain "MyString"
   end
 end

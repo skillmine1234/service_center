@@ -52,6 +52,31 @@
       = f.check_box :needs_pin, {},"Y","N"
       #msg-error
         = error_message_for(@pc_app, :needs_pin, :prepend_text => "")
+    .control-group
+      = f.label :mm_host, "*MM Host", :class => 'control-label'
+      = f.text_field :mm_host
+      #msg-error
+        = error_message_for(@pc_app, :mm_host, :prepend_text => "")
+    .control-group
+      = f.label :mm_consumer_key, "*MM Consumer Key", :class => 'control-label'
+      = f.text_field :mm_consumer_key
+      #msg-error
+        = error_message_for(@pc_app, :mm_consumer_key, :prepend_text => "")
+    .control-group
+      = f.label :mm_consumer_secret, "*MM Consumer Secret", :class => 'control-label'
+      = f.password_field :mm_consumer_secret
+      #msg-error
+        = error_message_for(@pc_app, :mm_consumer_secret, :prepend_text => "")
+    .control-group
+      = f.label :mm_card_type, "*MM Card Type", :class => 'control-label'
+      = f.text_field :mm_card_type
+      #msg-error
+        = error_message_for(@pc_app, :mm_card_type, :prepend_text => "")
+    .control-group
+      = f.label :mm_email_domain, "*MM Email Domain", :class => 'control-label'
+      = f.text_field :mm_email_domain
+      #msg-error
+        = error_message_for(@pc_app, :mm_email_domain, :prepend_text => "")
 
   .form-actions
     - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"

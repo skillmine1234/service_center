@@ -74,6 +74,30 @@
             %td#msg-error
               = error_message_for(@pc_app, :needs_pin, :prepend_text => "")
           %tr
+            %td.label MM Host
+            %td.value
+              = @pc_app.mm_host
+            %td#msg-error
+              = error_message_for(@pc_app, :mm_host, :prepend_text => "")
+          %tr
+            %td.label MM Consumer Key
+            %td.value
+              = @pc_app.mm_consumer_key
+            %td#msg-error
+              = error_message_for(@pc_app, :mm_consumer_key, :prepend_text => "")
+          %tr
+            %td.label MM Card Type
+            %td.value
+              = @pc_app.mm_card_type
+            %td#msg-error
+              = error_message_for(@pc_app, :mm_card_type, :prepend_text => "")
+          %tr
+            %td.label MM Email Domain
+            %td.value
+              = @pc_app.mm_email_domain
+            %td#msg-error
+              = error_message_for(@pc_app, :mm_email_domain, :prepend_text => "")
+          %tr
             %td.label Created By
             %td.value
               = @pc_app.created_user.try(:username)
