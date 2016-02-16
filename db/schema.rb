@@ -1500,11 +1500,9 @@ ActiveRecord::Schema.define(version: 20160216121704) do
   add_index "pc2_load_cards", ["req_no", "app_id", "attempt_no"], name: "uk_pc2_load_cards", unique: true
 
   create_table "pc2_pending_steps", force: :cascade do |t|
-    t.string   "broker_uuid",                    null: false
-    t.string   "step_name",          limit: 100, null: false
-    t.integer  "pc2_auditable_id",   limit: nil, null: false
-    t.string   "pc2_auditable_type", limit: 100, null: false
-    t.datetime "created_at",                     null: false
+    t.string   "broker_uuid",                               null: false
+    t.datetime "created_at",                                null: false
+    t.integer  "pc2_audit_step_id", limit: nil, default: 1, null: false
   end
 
   create_table "pc2_unload_cards", force: :cascade do |t|
