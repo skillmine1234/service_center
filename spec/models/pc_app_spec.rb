@@ -18,9 +18,10 @@ describe PcApp do
   end
   
   context "account no format" do 
-    [:card_acct, :sc_gl_income].each do |att|
+    [:card_acct, :sc_gl_income, :card_cust_id, :mm_consumer_key, :mm_consumer_secret, :mm_card_type].each do |att|
       it "should allow valid format" do
         should allow_value('1234567890').for(att)
+        should allow_value('Abcd1234567890').for(att)
       end
 
       it "should not allow invalid format" do
@@ -29,6 +30,30 @@ describe PcApp do
         should_not allow_value('/ab0QWER').for(att)
       end
     end 
+  end
+  
+  context "mm_host format" do
+    it "should allow valid format" do
+      should allow_value('http://localhost:3000/pc_apps').for(:mm_host)
+      should allow_value('localhost:3000').for(:mm_host)
+    end
+    
+    it "should allow invalid format" do
+      should_not allow_value('localhost').for(:mm_host)
+      should_not allow_value('@#@localhost').for(:mm_host)
+    end
+  end
+  
+  context "mm_email_domain format" do
+    it "should allow valid format" do
+      should allow_value('Domain').for(:mm_email_domain)
+      should allow_value('Domain.abc').for(:mm_email_domain)
+    end
+    
+    it "should allow invalid format" do
+      should_not allow_value('Domain 1234').for(:mm_email_domain)
+      should_not allow_value('@#@domain').for(:mm_email_domain)
+    end
   end
   
   context "default_scope" do 
