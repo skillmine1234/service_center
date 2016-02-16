@@ -38,7 +38,7 @@ describe PcApp do
       should allow_value('localhost:3000').for(:mm_host)
     end
     
-    it "should allow invalid format" do
+    it "should not allow invalid format" do
       should_not allow_value('localhost').for(:mm_host)
       should_not allow_value('@#@localhost').for(:mm_host)
     end
@@ -50,7 +50,7 @@ describe PcApp do
       should allow_value('Domain.abc').for(:mm_email_domain)
     end
     
-    it "should allow invalid format" do
+    it "should not allow invalid format" do
       should_not allow_value('Domain 1234').for(:mm_email_domain)
       should_not allow_value('@#@domain').for(:mm_email_domain)
     end
