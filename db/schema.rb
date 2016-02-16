@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160215121000) do
+ActiveRecord::Schema.define(version: 20160216085625) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",               null: false
@@ -1622,6 +1622,7 @@ ActiveRecord::Schema.define(version: 20160215121000) do
     t.text     "req_bitstream",                                 null: false
     t.text     "rep_bitstream"
     t.text     "fault_bitstream"
+    t.string   "fault_subcode",     limit: 50
   end
 
   add_index "pc_audit_logs", ["app_id", "req_no", "attempt_no"], name: "uk_pc_audit_logs_1", unique: true
@@ -1643,6 +1644,7 @@ ActiveRecord::Schema.define(version: 20160215121000) do
     t.text     "req_bitstream"
     t.text     "rep_bitstream"
     t.text     "fault_bitstream"
+    t.string   "fault_subcode",     limit: 50
   end
 
   add_index "pc_audit_steps", ["pc_auditable_type", "pc_auditable_id", "step_no", "attempt_no"], name: "uk_pc_audit_steps", unique: true
@@ -1663,6 +1665,7 @@ ActiveRecord::Schema.define(version: 20160215121000) do
     t.datetime "rep_timestamp"
     t.string   "fault_code"
     t.string   "fault_reason",  limit: 1000
+    t.string   "fault_subcode", limit: 50
   end
 
   add_index "pc_block_cards", ["req_no", "app_id", "attempt_no"], name: "uk_pc_block_cards_1", unique: true
@@ -1700,6 +1703,7 @@ ActiveRecord::Schema.define(version: 20160215121000) do
     t.datetime "rep_timestamp"
     t.string   "fault_code"
     t.string   "fault_reason",     limit: 1000
+    t.string   "fault_subcode",    limit: 50
   end
 
   add_index "pc_card_registrations", ["req_no", "app_id", "attempt_no"], name: "uk_pc_card_regs", unique: true
@@ -1797,6 +1801,7 @@ ActiveRecord::Schema.define(version: 20160215121000) do
     t.string   "fault_reason",  limit: 1000
     t.string   "cust_uid"
     t.decimal  "load_amount"
+    t.string   "fault_subcode", limit: 50
   end
 
   add_index "pc_load_cards", ["req_no", "app_id", "attempt_no"], name: "uk_pc_load_cards", unique: true
