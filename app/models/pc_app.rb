@@ -11,5 +11,5 @@ class PcApp < ActiveRecord::Base
   validates :mm_host, format: { with: URI.regexp }
   validates :card_acct, :sc_gl_income, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => "Invalid format, expected format is : {[a-z|A-Z|0-9]}" }, length: {maximum: 15, minimum: 1}
   validates :card_cust_id, :mm_consumer_key, :mm_consumer_secret, :mm_card_type, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => "Invalid format, expected format is : {[a-z|A-Z|0-9]}" }
-  validates :mm_email_domain, format: {with: /\A[a-z|A-Z]+\z/, :message => "Invalid format, expected format is : {[a-z|A-Z]}" }
+  validates :mm_email_domain, format: {with: /\A[a-z|A-Z|\.]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|\.]}' }
 end
