@@ -9,6 +9,7 @@ class ImtCustomer < ActiveRecord::Base
   
   validates :customer_code, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9]}'}, length: {maximum: 15}
   validates :customer_name, :contact_person, format: {with: /\A[a-z|A-Z|0-9|\s|\.]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\s|\.]}'}
+  validates :contact_person, format: {with: /\A[a-z|A-Z|0-9|\s]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\s]}'}
   validates :account_no, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9]}' }, length: {maximum: 16}
   validates :mobile_no, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9]}'}, length: {maximum: 10, minimum: 10}
   validates :expiry_period, :numericality => { :greater_than_or_equal_to => 1, :less_than_or_equal_to => 999, :only_integer => true}

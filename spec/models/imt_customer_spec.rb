@@ -31,19 +31,30 @@ describe ImtCustomer do
     end     
   end
   
-  context "customer_name and contact_person format" do 
-    [:customer_name, :contact_person].each do |att|
-      it "should allow valid format" do
-        should allow_value('DigitalSoln.').for(att)
-        should allow_value('Digital Soln.').for(att)
-      end 
-    
-      it "should not allow invalid format" do
-        should_not allow_value('@CUST01').for(att)
-        should_not allow_value('CUST01/').for(att)
-        should_not allow_value('CUST-01').for(att)
-      end
-    end    
+  context "customer_name format" do 
+    it "should allow valid format" do
+      should allow_value('DigitalSoln.').for(:customer_name)
+      should allow_value('Digital Soln.').for(:customer_name)
+    end 
+  
+    it "should not allow invalid format" do
+      should_not allow_value('@CUST01').for(:customer_name)
+      should_not allow_value('CUST01/').for(:customer_name)
+      should_not allow_value('CUST-01').for(:customer_name)
+    end 
+  end
+  
+  context "contact_person format" do
+    it "should allow valid format" do
+      should allow_value('John Mathew').for(:contact_person)
+      should allow_value('JohnM').for(:contact_person)
+    end 
+  
+    it "should not allow invalid format" do
+      should_not allow_value('@John01').for(:contact_person)
+      should_not allow_value('John01/').for(:contact_person)
+      should_not allow_value('John-01').for(:contact_person)
+    end  
   end
   
   context "address_line format" do 
