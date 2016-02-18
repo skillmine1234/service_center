@@ -91,4 +91,12 @@ $(document).ready(function(){
   $("#bm_aggr_reset").on('click', function(){
     $(".form-horizontal").find("input[type=text], select").val("");
   });
+	
+  $("#imt_customer_reset").on('click', function(){
+    $(".form-horizontal").find("input[type=text], select").val("");
+  });
+	
+  $("#imt_transfer_reset").on('click', function(){
+    $(".form-horizontal").find("input[type=text], select").val("");
+  });
 });
