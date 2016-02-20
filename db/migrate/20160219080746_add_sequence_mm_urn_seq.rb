@@ -1,13 +1,12 @@
-class AddSequenceYcsTxnRefSeq < ActiveRecord::Migration
+class AddSequenceMmUrnSeq < ActiveRecord::Migration
   def up
     if Rails.configuration.database_configuration[Rails.env]["adapter"] == 'oracle_enhanced'
-      execute 'create sequence ycs_txn_ref_seq minvalue 1 cache 20'
+      execute 'create sequence mm_urn_seq minvalue 1 cache 20'
     end
   end
   def down
     if Rails.configuration.database_configuration[Rails.env]["adapter"] == 'oracle_enhanced'
-      execute 'drop sequence ycs_txn_ref_seq'
+      execute 'drop sequence mm_urn_seq'
     end
-  end
+ end
 end
-  
