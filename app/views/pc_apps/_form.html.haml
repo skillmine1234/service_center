@@ -64,7 +64,7 @@
         = error_message_for(@pc_app, :mm_consumer_key, :prepend_text => "")
     .control-group
       = f.label :mm_consumer_secret, "*MM Consumer Secret", :class => 'control-label'
-      = f.password_field :mm_consumer_secret
+      = f.text_field :mm_consumer_secret
       #msg-error
         = error_message_for(@pc_app, :mm_consumer_secret, :prepend_text => "")
     .control-group
@@ -77,6 +77,21 @@
       = f.text_field :mm_email_domain
       #msg-error
         = error_message_for(@pc_app, :mm_email_domain, :prepend_text => "")
+    .control-group
+      = f.label :mm_admin_host, "*MM Admin Host", :class => 'control-label'
+      = f.text_field :mm_admin_host
+      #msg-error
+        = error_message_for(@pc_app, :mm_admin_host, :prepend_text => "")
+    .control-group
+      = f.label :mm_admin_user, "*MM Admin User", :class => 'control-label'
+      = f.text_field :mm_admin_user
+      #msg-error
+        = error_message_for(@pc_app, :mm_admin_user, :prepend_text => "")
+    .control-group
+      = f.label :mm_admin_password, "*MM Admin Password", :class => 'control-label'
+      = f.text_field :mm_admin_password
+      #msg-error
+        = error_message_for(@pc_app, :mm_admin_password, :prepend_text => "")
 
   .form-actions
     - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"

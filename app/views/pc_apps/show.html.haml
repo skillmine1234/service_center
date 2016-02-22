@@ -1,5 +1,5 @@
 .form-horizontal.show_form
-  .form-main-with-color{:style=>'background-color: #F1F2F8;'}
+  .form-main-with-color{:style=>'background-color: #F1F2F8; height:850px;'}
     #form-details
       %h3 PC App Details 
       %br
@@ -97,6 +97,24 @@
               = @pc_app.mm_email_domain
             %td#msg-error
               = error_message_for(@pc_app, :mm_email_domain, :prepend_text => "")
+          %tr
+            %td.label MM Admin Host
+            %td.value
+              = @pc_app.mm_admin_host
+            %td#msg-error
+              = error_message_for(@pc_app, :mm_admin_host, :prepend_text => "")
+          %tr
+            %td.label MM Admin User
+            %td.value
+              = @pc_app.mm_admin_user
+            %td#msg-error
+              = error_message_for(@pc_app, :mm_admin_user, :prepend_text => "")
+          %tr
+            %td.label MM Admin Password
+            %td.value
+              = @pc_app.mm_admin_password
+            %td#msg-error
+              = error_message_for(@pc_app, :mm_admin_password, :prepend_text => "")
           %tr
             %td.label Created By
             %td.value
