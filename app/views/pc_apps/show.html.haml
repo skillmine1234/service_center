@@ -86,6 +86,12 @@
             %td#msg-error
               = error_message_for(@pc_app, :mm_consumer_key, :prepend_text => "")
           %tr
+            %td.label MM Consumer Secret
+            %td.value
+              = @pc_app.mm_consumer_key
+            %td#msg-error
+              = error_message_for(@pc_app, :mm_consumer_secret, :prepend_text => "")
+          %tr
             %td.label MM Card Type
             %td.value
               = @pc_app.mm_card_type
