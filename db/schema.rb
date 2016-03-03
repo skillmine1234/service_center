@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160219105035) do
+ActiveRecord::Schema.define(version: 20160302122613) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",               null: false
@@ -1524,6 +1524,7 @@ ActiveRecord::Schema.define(version: 20160219105035) do
     t.text     "req_bitstream"
     t.text     "rep_bitstream"
     t.text     "fault_bitstream"
+    t.datetime "reconciled_at"
   end
 
   add_index "pc2_audit_steps", ["pc2_auditable_type", "pc2_auditable_id", "step_no", "attempt_no"], name: "uk_pc2_audit_steps", unique: true
@@ -1765,7 +1766,7 @@ ActiveRecord::Schema.define(version: 20160219105035) do
     t.integer "card_expiry_year",              precision: 38
     t.integer "card_expiry_month",             precision: 38
     t.string  "card_currency_code"
-    t.decimal "available_funds"
+    t.string  "app_id",             limit: 50
   end
 
   add_index "pc_customers", ["mobile_no"], name: "uk_pc_card_custs_1", unique: true
@@ -1891,6 +1892,7 @@ ActiveRecord::Schema.define(version: 20160219105035) do
     t.text     "req_bitstream",                                  null: false
     t.text     "rep_bitstream"
     t.text     "fault_bitstream"
+    t.string   "fault_subcode",      limit: 50
   end
 
   add_index "pcs_audit_logs", ["app_id", "req_no", "attempt_no"], name: "uk_pcs_audit_logs_1", unique: true
@@ -1912,6 +1914,7 @@ ActiveRecord::Schema.define(version: 20160219105035) do
     t.text     "req_bitstream"
     t.text     "rep_bitstream"
     t.text     "fault_bitstream"
+    t.string   "fault_subcode",      limit: 50
   end
 
   add_index "pcs_audit_steps", ["pcs_auditable_type", "pcs_auditable_id", "step_no", "attempt_no"], name: "uk_pcs_audit_steps", unique: true
@@ -1960,7 +1963,6 @@ ActiveRecord::Schema.define(version: 20160219105035) do
     t.string   "rep_no",            limit: 32
     t.string   "rep_version",       limit: 5
     t.string   "req_ref_no",        limit: 50
-    t.string   "txn_uid"
     t.string   "rep_ref_no",        limit: 50
     t.datetime "rep_timestamp"
     t.string   "fault_code"
