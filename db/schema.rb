@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160305134959) do
+ActiveRecord::Schema.define(version: 20160302122613) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",               null: false
@@ -1706,7 +1706,6 @@ ActiveRecord::Schema.define(version: 20160305134959) do
     t.integer "card_expiry_year",              precision: 38
     t.integer "card_expiry_month",             precision: 38
     t.string  "card_currency_code"
-    t.decimal "available_funds"
     t.string  "app_id",             limit: 50
   end
 
@@ -1885,7 +1884,6 @@ ActiveRecord::Schema.define(version: 20160305134959) do
     t.string   "rep_no",            limit: 32
     t.string   "rep_version",       limit: 5
     t.string   "req_ref_no",        limit: 50
-    t.string   "txn_uid"
     t.string   "rep_ref_no",        limit: 50
     t.datetime "rep_timestamp"
     t.string   "fault_code"
