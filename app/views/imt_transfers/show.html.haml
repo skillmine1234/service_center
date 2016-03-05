@@ -54,12 +54,6 @@
           %td#msg-error
             = error_message_for(@imt_transfer, :initiated_at, :prepend_text => "")
         %tr
-          %td.label Initiation Client Ref No
-          %td.value
-            = @imt_transfer.initiation_ref_no
-          %td#msg-error
-            = error_message_for(@imt_transfer, :initiation_ref_no, :prepend_text => "")
-        %tr
           %td.label Initiation Bank Ref No
           %td.value
             = @imt_transfer.initiation_bank_ref
@@ -83,12 +77,6 @@
             = @imt_transfer.cancelled_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
           %td#msg-error
             = error_message_for(@imt_transfer, :cancelled_at, :prepend_text => "")
-        %tr
-          %td.label Cancellation Client Ref No
-          %td.value
-            = @imt_transfer.cancellation_ref_no
-          %td#msg-error
-            = error_message_for(@imt_transfer, :cancellation_ref_no, :prepend_text => "")
         %tr
           %td.label Cancellation Bank Ref No
           %td.value
