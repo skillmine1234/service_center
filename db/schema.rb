@@ -1765,15 +1765,7 @@ ActiveRecord::Schema.define(version: 20160219105035) do
     t.integer "card_expiry_year",              precision: 38
     t.integer "card_expiry_month",             precision: 38
     t.string  "card_currency_code"
-<<<<<<< HEAD
-<<<<<<< HEAD
     t.string  "app_id",             limit: 50
-=======
-    t.decimal "available_funds"
->>>>>>> parent of 60d226d... IMT-43 Removed columns from imt_transfers
-=======
-    t.decimal "available_funds"
->>>>>>> parent of 60d226d... IMT-43 Removed columns from imt_transfers
   end
 
   add_index "pc_customers", ["mobile_no"], name: "uk_pc_card_custs_1", unique: true
