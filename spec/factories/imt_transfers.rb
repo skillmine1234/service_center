@@ -6,6 +6,7 @@ FactoryGirl.define do
     bene_mobile_no "MyString"
     transfer_amount 1000
     rmtr_to_bene_note "MyString"
+    initiation_ref_no "MyString"
     initiation_bank_ref "MyString"
   end
 end
