@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20160302122613) do
-=======
 ActiveRecord::Schema.define(version: 20160219105035) do
->>>>>>> parent of 60d226d... IMT-43 Removed columns from imt_transfers
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",               null: false
@@ -1770,7 +1766,11 @@ ActiveRecord::Schema.define(version: 20160219105035) do
     t.integer "card_expiry_month",             precision: 38
     t.string  "card_currency_code"
 <<<<<<< HEAD
+<<<<<<< HEAD
     t.string  "app_id",             limit: 50
+=======
+    t.decimal "available_funds"
+>>>>>>> parent of 60d226d... IMT-43 Removed columns from imt_transfers
 =======
     t.decimal "available_funds"
 >>>>>>> parent of 60d226d... IMT-43 Removed columns from imt_transfers
