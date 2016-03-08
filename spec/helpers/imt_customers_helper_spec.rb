@@ -3,24 +3,24 @@ require 'spec_helper'
 describe ImtCustomersHelper do
   context "find_imt_customers" do
     it "should find imt_customers" do
-      imt_customer = Factory(:imt_customer, :customer_code => '1234', :approval_status => "A")
+      imt_customer = Factory(:imt_customer, :customer_code => '1234', :approval_status => "A", :app_id => '1111')
       find_imt_customers({:customer_code => '1234'}).should == [imt_customer]
       find_imt_customers({:customer_code => '1111'}).should == []
       
-      imt_customer = Factory(:imt_customer, :customer_name => 'John', :approval_status => "A")
+      imt_customer = Factory(:imt_customer, :customer_name => 'John', :approval_status => "A", :app_id => '1112')
       find_imt_customers({:customer_name => 'JOHN'}).should == [imt_customer]
       find_imt_customers({:customer_name => 'OOOO'}).should == []
       
-      imt_customer = Factory(:imt_customer, :customer_name => 'SMITH', :approval_status => "A")
+      imt_customer = Factory(:imt_customer, :customer_name => 'SMITH', :approval_status => "A", :app_id => '1113')
       find_imt_customers({:customer_name => 'smith'}).should == [imt_customer]
       
-      imt_customer = Factory(:imt_customer, :customer_name => 'MaryJohn', :approval_status => "A")
+      imt_customer = Factory(:imt_customer, :customer_name => 'MaryJohn', :approval_status => "A", :app_id => '1114')
       find_imt_customers({:customer_name => 'mary'}).should == [imt_customer]
       
-      imt_customer = Factory(:imt_customer, :customer_name => 'Andrew', :approval_status => "A")
+      imt_customer = Factory(:imt_customer, :customer_name => 'Andrew', :approval_status => "A", :app_id => '1115')
       find_imt_customers({:customer_name => 'Andrew'}).should == [imt_customer]
       
-      imt_customer = Factory(:imt_customer, :account_no => '1234567890', :approval_status => "A")
+      imt_customer = Factory(:imt_customer, :account_no => '1234567890', :approval_status => "A", :app_id => '1116')
       find_imt_customers({:account_no => '1234567890'}).should == [imt_customer]
       find_imt_customers({:account_no => '00000'}).should == []
     end

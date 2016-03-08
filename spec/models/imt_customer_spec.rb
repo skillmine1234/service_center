@@ -16,6 +16,11 @@ describe ImtCustomer do
     end
     
     it { should validate_numericality_of(:expiry_period) }
+    
+    it do
+      imt_customer = Factory(:imt_customer, :app_id => 'App10', :approval_status => 'A')
+      should validate_uniqueness_of(:app_id).scoped_to(:approval_status)
+    end
   end
   
   context "customer_code format" do 
@@ -122,7 +127,7 @@ describe ImtCustomer do
   context "default_scope" do 
     it "should only return 'A' records by default" do 
       imt_customer1 = Factory(:imt_customer, :approval_status => 'A') 
-      imt_customer2 = Factory(:imt_customer, :customer_name => '12we')
+      imt_customer2 = Factory(:imt_customer, :customer_name => '12we', :app_id => '1111')
       ImtCustomer.all.should == [imt_customer1]
       imt_customer2.approval_status = 'A'
       imt_customer2.save

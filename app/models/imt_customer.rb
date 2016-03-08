@@ -6,6 +6,7 @@ class ImtCustomer < ActiveRecord::Base
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
   
   validates_presence_of :customer_code, :customer_name, :contact_person, :email_id, :account_no, :mobile_no, :txn_mode, :expiry_period, :app_id
+  validates_uniqueness_of :app_id, :scope => :approval_status
   
   validates :customer_code, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9]}'}, length: {maximum: 15}
   validates :customer_name, format: {with: /\A[a-z|A-Z|0-9|\s|\.]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\s|\.]}'}
