@@ -1837,6 +1837,7 @@ ActiveRecord::Schema.define(version: 20160308050601) do
     t.text     "rep_bitstream"
     t.text     "fault_bitstream"
     t.string   "fault_subcode",      limit: 50
+    t.datetime "reconciled_at"
   end
 
   add_index "pcs_audit_steps", ["pcs_auditable_type", "pcs_auditable_id", "step_no", "attempt_no"], name: "uk_pcs_audit_steps", unique: true
@@ -1920,7 +1921,6 @@ ActiveRecord::Schema.define(version: 20160308050601) do
     t.string   "rep_no"
     t.string   "rep_version",      limit: 10
     t.datetime "rep_timestamp"
-    t.string   "txn_uid"
     t.string   "debit_ref_no"
     t.string   "biller_ref_no",    limit: 50
     t.string   "debit_fee_status", limit: 50
