@@ -84,12 +84,6 @@
           %td#msg-error
             = error_message_for(@imt_transfer, :cancelled_at, :prepend_text => "")
         %tr
-          %td.label Cancellation Client Ref No
-          %td.value
-            = @imt_transfer.cancellation_ref_no
-          %td#msg-error
-            = error_message_for(@imt_transfer, :cancellation_ref_no, :prepend_text => "")
-        %tr
           %td.label Cancellation Bank Ref No
           %td.value
             = @imt_transfer.cancellation_bank_ref
