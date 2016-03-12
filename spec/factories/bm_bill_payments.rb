@@ -4,6 +4,7 @@ Factory.define(:bm_bill_payment) do |i|
   i.sequence(:app_id) { |n| "key_#{n}" }
   i.sequence(:req_no) { |n| "req_#{n}" }
   i.sequence(:attempt_no) { |n| "attempt_#{n}" }
+  i.sequence(:billpay_rep_ref) { |n| "rep_#{n}" }
   i.req_version "MyString"
   i.req_timestamp "2015-04-20 15:12:44"
   i.customer_id "1234"
@@ -21,7 +22,6 @@ Factory.define(:bm_bill_payment) do |i|
   i.billpay_req_ref "2324"
   i.billpay_attempt_no 0 
   i.billpay_attempt_at "2015-04-20 15:12:44"
-  i.billpay_rep_ref "2345" 
   i.billpaid_at "2015-04-20 15:12:44"
   i.reversal_req_ref nil
   i.reversal_attempt_no nil
