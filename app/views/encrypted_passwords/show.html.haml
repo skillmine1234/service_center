@@ -1,0 +1,34 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8;'}
+    #form-details
+      %h3 Encrypted Password Details 
+      %br
+      %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
+        = link_to 'Edit', edit_encrypted_password_path(@encrypted_password)
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
+        - if !@encrypted_password.nil?
+          %tr
+            %td.label Form Errors
+            %td.value
+              = ' '
+            %td#msg-error
+              = error_message_for(@encrypted_password, :base, :prepend_text => "")
+          %tr
+            %td.label Password
+            %td.value
+              = @encrypted_password.password
+            %td#msg-error
+              = error_message_for(@encrypted_password, :password, :prepend_text => "")
+          %tr
+            %td.label Created By
+            %td.value
+              = @encrypted_password.created_user.try(:username)
+            %td#msg-error
+              = error_message_for(@encrypted_password, :created_by, :prepend_text => "")
+      = link_to 'Back to Encrypted Passwords', encrypted_passwords_path
+      
+      
+      
+      
+           
+

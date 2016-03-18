@@ -1,0 +1,24 @@
+%br
+= link_to 'New Encrypted Password', new_encrypted_password_path
+%br
+%br
+%h1 Listing Encrypted Passwords
+
+-# = "Total Count: #{@fp_operations_count}"
+-# %br
+-# = will_paginate @fp_operations
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Show
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Edit
+
+  .tbody
+    - @encrypted_passwords.each do |encrypted_password|
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', encrypted_password
+        %td{:style=>'text-align:left;'}
+          = link_to 'Edit', edit_encrypted_password_path(encrypted_password)

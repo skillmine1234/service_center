@@ -1,5 +1,6 @@
 ServiceCenter::Application.routes.draw do
 
+  resources :encrypted_passwords
   resources :qg_ecol_todays_rtgs_txns
   resources :qg_ecol_todays_neft_txns
   devise_for :users
@@ -129,6 +130,8 @@ ServiceCenter::Application.routes.draw do
   get '/view_raw_content/:id' => "incoming_files#view_raw_content"
   
   get '/csv_export/download_csv' => 'csv_exports#download_csv'
+
+  # get '/encrypted_passwords' => 'encrypted_passwords#index'
     
   root :to => 'dashboard#overview'
 
