@@ -94,3 +94,5 @@ end
 group :test do
   gem 'webmock'
 end
+
+gem 'newrelic_rpm'
