@@ -1,0 +1,52 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8; height:850px;'}
+    #form-details
+      %h3 PC App - Encrypted Password
+      %br
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
+        - if !@pc_app.nil?
+          %tr
+            %td.label App ID
+            %td.value
+              = @pc_app.app_id
+            %td#msg-error
+              = error_message_for(@pc_app, :app_id, :prepend_text => "")
+          %tr
+            %td.label MM Host
+            %td.value
+              = @pc_app.mm_host
+            %td#msg-error
+              = error_message_for(@pc_app, :mm_host, :prepend_text => "")
+          %tr
+            %td.label MM Consumer Key
+            %td.value
+              = @pc_app.mm_consumer_key
+            %td#msg-error
+              = error_message_for(@pc_app, :mm_consumer_key, :prepend_text => "")
+          %tr
+            %td.label MM Consumer Secret
+            %td.value
+              = @pc_app.mm_consumer_key
+            %td#msg-error
+              = error_message_for(@pc_app, :mm_consumer_secret, :prepend_text => "")
+
+    = form_tag '', :method => 'get', :class => 'form-horizontal', :id=>"generate_enc_pass_form", :style => 'background: none;', :autocomplete=>"off" do
+      .control-group
+        = label_tag "Password", "Password", :class => 'control-label'
+        = text_field_tag :pass, params[:pass]
+        = hidden_field_tag :generate, params[:generate]
+
+      .form-actions{:style => 'background: none;'}
+        = submit_tag "Generate", :name => nil, :class => 'btn btn-primary', :id => "enc_pass_generate_btn"
+        = button_tag "Reset", :type => 'button', :value=>'Reset', :class => 'btn', :id => 'enc_pass_reset_btn'
+
+    %br
+    %table.table.no-border{:style=>"table-layout: fixed; width: 60%;"}
+      %tr
+        %td.label{:style=>"width:10%;"}
+          Encrypted Password
+        %td.value
+          = @encrypted_password.nil? ? "-" : @encrypted_password
+  
+    %br
+    = link_to 'Back to PC Apps', pc_apps_path

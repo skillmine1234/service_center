@@ -145,3 +145,6 @@
               = @pc_app.updated_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
             %td#msg-error
               = error_message_for(@pc_app, :updated_at, :prepend_text => "")
+
+      = link_to 'Encrypted Password', pc_apps_encrypted_pass_path(@pc_app)
+      %br

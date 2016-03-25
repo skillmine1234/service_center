@@ -84,6 +84,14 @@ class PcAppsController < ApplicationController
     redirect_to @pc_app
   end
 
+  def encrypted_pass
+    @pc_app = PcApp.unscoped.find_by_id(params[:id])
+    if params[:generate] == "true"
+      encrypted_password = EncPassGenerator.new(params[:pass], @pc_app.mm_consumer_key, @pc_app.mm_consumer_secret)
+      @encrypted_password = encrypted_password.generate_encrypted_password
+    end
+  end
+
   private
 
   def pc_app_params

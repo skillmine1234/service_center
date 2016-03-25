@@ -27,6 +27,8 @@
       SC Income Account
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Is Enabled?
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Encrypted Password
 
   .tbody
     - @pc_apps.each do |pc_app|
@@ -45,3 +47,5 @@
           = pc_app.sc_gl_income
         %td{:style=>'text-align:left;'}
           = pc_app.is_enabled
+        %td{:style=>'text-align:left;'}
+          = link_to 'Encrypted Password', pc_apps_encrypted_pass_path(pc_app)
