@@ -212,4 +212,14 @@ describe PcAppsController do
       pc_app.approval_status.should == 'A'
     end
   end
+
+  describe "GET encrypt_password" do
+    it "generates encrypted password and assigns the encrypted_password as @encrypted_password" do
+      pc_app = Factory(:pc_app, :approval_status => 'U')
+      params = {:id => pc_app.id, :pass => "passowrd_string", :generate => "true"}
+      get :encrypt_password, params
+      encrypted_password = EncPassGenerator.new(params[:pass], pc_app.mm_consumer_key, pc_app.mm_consumer_secret)
+      expect(assigns(:encrypted_password)).to_not be_nil
+    end
+  end
 end
