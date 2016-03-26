@@ -10,7 +10,7 @@ describe FundsTransferCustomer do
   end
   
   context 'validation' do
-    [:account_no, :account_ifsc, :low_balance_alert_at, :identity_user_id, :customer_id].each do |att|
+    [:account_no, :account_ifsc, :low_balance_alert_at, :identity_user_id, :customer_id, :name].each do |att|
       it { should validate_presence_of(att) }
     end
     

@@ -5,7 +5,7 @@ class FundsTransferCustomer < ActiveRecord::Base
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
   
-  validates_presence_of :account_no, :account_ifsc, :low_balance_alert_at, :identity_user_id, :customer_id
+  validates_presence_of :account_no, :account_ifsc, :low_balance_alert_at, :identity_user_id, :customer_id, :name
   validates :account_ifsc, format: {with: /\A[A-Z|a-z]{4}[0][0-9]{6}+\z/, message: "Invalid format - expected format is : {[A-Z|a-z]{4}[0][0-9]{6}}" }, length: {maximum: 11}
   validates :account_no, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}' }, length: {maximum: 20}
   validates :mobile_no, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9]}'}, length: {maximum: 10, minimum: 10}
