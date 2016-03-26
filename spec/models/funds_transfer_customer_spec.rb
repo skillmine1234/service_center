@@ -102,7 +102,7 @@ describe FundsTransferCustomer do
   context "default_scope" do 
     it "should only return 'A' records by default" do 
       funds_transfer_customer1 = Factory(:funds_transfer_customer, :approval_status => 'A') 
-      funds_transfer_customer2 = Factory(:funds_transfer_customer, :name => '12we', :customer_id => "23456789")
+      funds_transfer_customer2 = Factory(:funds_transfer_customer, :name => '12we')
       FundsTransferCustomer.all.should == [funds_transfer_customer1]
       funds_transfer_customer2.approval_status = 'A'
       funds_transfer_customer2.save
