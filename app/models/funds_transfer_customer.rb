@@ -12,6 +12,7 @@ class FundsTransferCustomer < ActiveRecord::Base
   validates :low_balance_alert_at, :numericality => { :greater_than => 0}
   validates :tech_email_id, :ops_email_id, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/, :message => 'Invalid Email ID, expected format is abc@def.com' }, :allow_blank => true
   validates_numericality_of :mmid, :allow_blank => true
+  validates_numericality_of :customer_id
   
   before_save :to_upcase
   validate :validate_presence_of_mmid

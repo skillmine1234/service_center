@@ -14,7 +14,7 @@ describe FundsTransferCustomer do
       it { should validate_presence_of(att) }
     end
     
-    [:low_balance_alert_at, :mmid].each do |att|
+    [:low_balance_alert_at, :mmid, :customer_id].each do |att|
       it { should validate_numericality_of(att) }
     end
   end
