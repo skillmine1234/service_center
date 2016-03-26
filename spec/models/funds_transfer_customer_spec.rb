@@ -81,6 +81,18 @@ describe FundsTransferCustomer do
       funds_transfer_customer.country_name.should == nil
     end
   end
+
+  context "customer name format" do
+    it "should allow valid format" do
+      should allow_value('ABCDCo').for(:name)
+      should allow_value('ABCD Co').for(:name)
+    end
+
+    it "should not allow invalid format" do
+      should_not allow_value('@AbcCo').for(:name)
+      should_not allow_value('/ab0QWER').for(:name)
+    end
+  end
   
   context "default_scope" do 
     it "should only return 'A' records by default" do 

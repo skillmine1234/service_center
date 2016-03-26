@@ -13,6 +13,7 @@ class FundsTransferCustomer < ActiveRecord::Base
   validates :tech_email_id, :ops_email_id, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/, :message => 'Invalid Email ID, expected format is abc@def.com' }, :allow_blank => true
   validates_numericality_of :mmid, :allow_blank => true
   validates_numericality_of :customer_id
+  validates :name, format: {with: /\A[a-z|A-Z|0-9\s]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9\s]}'}, length: {maximum: 20}
   
   before_save :to_upcase
   validate :validate_presence_of_mmid
