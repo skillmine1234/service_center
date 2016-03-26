@@ -14,6 +14,7 @@ class FundsTransferCustomer < ActiveRecord::Base
   validates_numericality_of :mmid, :allow_blank => true
   validates_numericality_of :customer_id
   validates :name, format: {with: /\A[a-z|A-Z|0-9\s]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9\s]}'}, length: {maximum: 20}
+  validates_uniqueness_of :customer_id, :scope => :approval_status
   
   before_save :to_upcase
   validate :validate_presence_of_mmid

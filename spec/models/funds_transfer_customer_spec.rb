@@ -17,8 +17,13 @@ describe FundsTransferCustomer do
     [:low_balance_alert_at, :mmid, :customer_id].each do |att|
       it { should validate_numericality_of(att) }
     end
+
+    it do 
+      funds_transfer_customer = Factory(:funds_transfer_customer, :approval_status => 'A')
+      should validate_uniqueness_of(:customer_id).scoped_to(:approval_status)   
+    end
   end
-  
+
   context "email_id format" do 
     [:tech_email_id, :ops_email_id].each do |att|
       it "should allow valid format" do
@@ -97,7 +102,7 @@ describe FundsTransferCustomer do
   context "default_scope" do 
     it "should only return 'A' records by default" do 
       funds_transfer_customer1 = Factory(:funds_transfer_customer, :approval_status => 'A') 
-      funds_transfer_customer2 = Factory(:funds_transfer_customer, :name => '12we')
+      funds_transfer_customer2 = Factory(:funds_transfer_customer, :name => '12we', :customer_id => "23456789")
       FundsTransferCustomer.all.should == [funds_transfer_customer1]
       funds_transfer_customer2.approval_status = 'A'
       funds_transfer_customer2.save
