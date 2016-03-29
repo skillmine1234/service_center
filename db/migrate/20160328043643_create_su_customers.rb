@@ -1,6 +1,6 @@
 class CreateSuCustomers < ActiveRecord::Migration
   def change
-    create_table :su_customers do |t|
+    create_table :su_customers, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :account_no, :limit => 20,  :comment => "the debit account no of the corporate, duplicate entries are not allowed"
       t.string :customer_id, :limit => 50, :comment =>"the customer id of the corporate, duplicate entries are not allowed"
       t.string :pool_acct_no, :limit => 20,  :comment => "the pool account no for the corporate, multiple corporates can share a pool account"
@@ -15,8 +15,7 @@ class CreateSuCustomers < ActiveRecord::Migration
       t.string :last_action, :limit => 1, :comment =>"the last action create or update that was performed on the record"   
       t.integer :approved_version,  :comment =>"the version number of the record at the time it was approved"
       t.integer :approved_id,  :comment =>"the id of the record that is being updated"
-      t.index([:customer_id, :approval_status], :unique => false, :name => "uk_su_customers_1")
-      t.index([:account_no, :approval_status], :unique => false, :name => "uk_su_customers_2")
+      t.index([:customer_id,:account_no,:approval_status], :unique => true, :name => "uk_su_customers_1")
     end
   end
 end

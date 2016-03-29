@@ -1,6 +1,6 @@
 class CreateSuAuditSteps < ActiveRecord::Migration
   def change
-    create_table :su_audit_steps do |t|
+    create_table :su_audit_steps, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :su_auditable_type, :null => false, :comment => "the id of the row that represents the request that is related to this recrod"
       t.integer :su_auditable_id, :null => false, :comment => "the id of the row that represents the request that is related to this recrod"
       t.integer :step_no, :null => false, :comment => 'the step no of the transaction'
