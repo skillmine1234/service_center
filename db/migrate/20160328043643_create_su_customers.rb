@@ -2,9 +2,9 @@ class CreateSuCustomers < ActiveRecord::Migration
   def change
     create_table :su_customers, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :account_no, :limit => 20,  :comment => "the debit account no of the corporate, duplicate entries are not allowed"
-      t.string :customer_id, :limit => 50, :comment =>"the customer id of the corporate, duplicate entries are not allowed"
-      t.string :pool_acct_no, :limit => 20,  :comment => "the pool account no for the corporate, multiple corporates can share a pool account"
-      t.string :pool_cust_id, :limit => 20,  :comment => "the customer id for the pool account"
+      t.string :customer_id, :limit => 15, :comment =>"the customer id of the corporate, duplicate entries are not allowed"
+      t.string :pool_account_no, :limit => 20,  :comment => "the pool account no for the corporate, multiple corporates can share a pool account"
+      t.string :pool_customer_id, :limit => 20,  :comment => "the customer id for the pool account"
       t.string :is_enabled, :limit => 1, :comment =>"the flag to decide if the account is enabled or not "         
       t.string :created_by, :limit => 20, :comment =>"the person who creates the record"   
       t.string :updated_by, :limit => 20, :comment =>"the person who updates the record"   
