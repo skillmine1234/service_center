@@ -8,11 +8,10 @@
       = f.hidden_field :lock_version
       = f.hidden_field :approved_id
       = f.hidden_field :approved_version
-      = f.label :service_name,nil,:class => 'control-label'
-      = f.select :service_name, ScService.all.map {|u| [u.name, u.code]}, :include_blank => 'select'
+      = f.hidden_field :service_name, :value => params[:sc_service]
     .control-group
       = f.label :file_type,nil,:class => 'control-label'
-      = f.select :file_type, IncomingFileType.where(:auto_upload => 'N').map {|u| [u.name, u.code]}, :include_blank => 'select'
+      = f.select :file_type, IncomingFileType.where(:sc_service_id => @sc_service.id, :auto_upload => 'N').map {|u| [u.name, u.code]}, :include_blank => 'select'
     .control-group
       = f.label :file,nil,:class => 'control-label'
       = f.file_field :file

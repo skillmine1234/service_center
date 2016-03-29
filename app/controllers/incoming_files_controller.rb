@@ -9,6 +9,7 @@ class IncomingFilesController < ApplicationController
 
   def new
     @incoming_file = IncomingFile.new
+    @sc_service = ScService.find_by_code(params[:sc_service])
   end
 
   def create
@@ -23,6 +24,7 @@ class IncomingFilesController < ApplicationController
   end
 
   def index
+    @sc_service = ScService.find_by_code(params[:sc_service])
     if params[:advanced_search].present?
       incoming_files = find_incoming_files(params).order("id desc")
     else

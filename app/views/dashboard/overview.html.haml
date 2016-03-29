@@ -252,3 +252,13 @@
         = image_tag 'reconciled_returns.png', :size => "80x80"
       %br
         = "Reconciled Returns"
+
+- if @current_user.group_names.include?("salary-upload")
+  %h1 Salary Upload
+  .slide-container
+    .box  
+      = link_to incoming_files_path(:sc_service => "PAYSALARY") do
+        = image_tag 'upload.png', :size => "80x80"
+      %br
+        = "File Uploads"
+

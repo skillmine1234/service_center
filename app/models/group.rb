@@ -4,19 +4,21 @@ class Group < ActiveRecord::Base
   def model_list
     case name
     when "inward-remittance"
-      ['EncryptedPassword','Partner','Bank','PurposeCode','WhitelistedIdentity','InwIdentity','InwardRemittance', 'InwRemittanceRule','InwUnapprovedRecord','IncomingFile']
+      ['Partner','Bank','PurposeCode','WhitelistedIdentity','InwIdentity','InwardRemittance', 'InwRemittanceRule','InwUnapprovedRecord','IncomingFile']
     when "e-collect"
-      ['EncryptedPassword','EcolUnapprovedRecord','EcolRule','EcolCustomer','EcolRemitter','EcolTransaction','UdfAttribute','IncomingFile','EcolFetchStatistic','QgEcolTodaysNeftTxn','QgEcolTodaysRtgsTxn']
+      ['EcolUnapprovedRecord','EcolRule','EcolCustomer','EcolRemitter','EcolTransaction','UdfAttribute','IncomingFile','EcolFetchStatistic','QgEcolTodaysNeftTxn','QgEcolTodaysRtgsTxn']
     when "bill-management"
-      ['EncryptedPassword','BmRule','BmBiller','BmBillPayment','BmAggregatorPayment','BmApp','BmUnapprovedRecord']
+      ['BmRule','BmBiller','BmBillPayment','BmAggregatorPayment','BmApp','BmUnapprovedRecord']
     when "prepaid-card"
-      ['EncryptedPassword','PcApp','PcFeeRule','PcUnapprovedRecord']
+      ['PcApp','PcFeeRule','PcUnapprovedRecord']
     when "flex-proxy"
-      ['EncryptedPassword','FpOperation','FpAuthRule','FpUnapprovedRecord']
+      ['FpOperation','FpAuthRule','FpUnapprovedRecord']
     when "imt"
-      ['EncryptedPassword','ImtCustomer','ImtTransfer','IncomingFile','ImtUnapprovedRecord','OutgoingFile']
+      ['ImtCustomer','ImtTransfer','IncomingFile','ImtUnapprovedRecord','OutgoingFile']
     when "funds-transfer"
-      ['EncryptedPassword','FundsTransferCustomer','FtUnapprovedRecord', 'ReconciledReturn']
+      ['FundsTransferCustomer','FtUnapprovedRecord', 'ReconciledReturn']
+    when "salary-upload"
+      ['IncomingFile']
     else
       []
     end
