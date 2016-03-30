@@ -1,0 +1,47 @@
+%br
+%h1 Salary Incoming Records
+%h2.collapsible
+  Advanced Search
+  %span.caret
+.collapsible-content
+  = render :partial => 'advanced_search'
+%h4
+  %br
+  &nbsp;
+  %br
+  = "Total Count: #{@record_count}"
+%br
+= will_paginate @records
+%table.table.table-bordered.table-striped.table-hover{:style => 'width:100%; border:1px'}
+  .thead
+    %tr
+      %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+      %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+        File Name
+      %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+        Corporate Account No
+      %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+        Employee Account No
+      %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+        Employee Name
+      %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+        Salary Amount
+      %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+        Audit Steps
+  .tbody
+    - @records.each do |record|
+      %tr
+        %td{:style=>'width:25%; text-align:left;'}
+          = link_to "show", record
+        %td{:style=>'width:25%; text-align:left;'}
+          = record.file_name
+        %td{:style=>'width:25%; text-align:left;'}
+          = record.corp_account_no
+        %td{:style=>'width:25%; text-align:left;'}
+          = record.emp_account_no
+        %td{:style=>'text-align:left;'}
+          = record.emp_name
+        %td{:style=>'text-align:left;'}
+          = record.salary_amount
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', {:controller => 'su_incoming_records', :action => 'audit_steps', :id => @su_record.id, :step_name => 'ALL'}

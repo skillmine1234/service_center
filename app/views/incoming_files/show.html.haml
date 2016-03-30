@@ -73,3 +73,15 @@
           = link_to @success_count, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'COMPLETED')
         %td{:style=>'text-align:left;'}
           = link_to @failure_count, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'FAILED')
+      - elsif !@incoming_file.incoming_file_type.records_table.empty?
+        - table = @incoming_file.incoming_file_type.records_table
+        %td{:style=>'text-align:left;'}
+          = @incoming_file.file_type
+        %td{:style=>'text-align:left;'}
+          = @incoming_file.incoming_file_records.count(:id)
+        %td{:style=>'text-align:left;'}
+          = link_to @skipped_count, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'SKIPPED')
+        %td{:style=>'text-align:left;'}
+          = link_to @success_count, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'COMPLETED')
+        %td{:style=>'text-align:left;'}
+          = link_to @failure_count, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'FAILED')

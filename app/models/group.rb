@@ -18,7 +18,7 @@ class Group < ActiveRecord::Base
     when "funds-transfer"
       ['FundsTransferCustomer','FtUnapprovedRecord', 'ReconciledReturn']
     when "salary-upload"
-      ['IncomingFile','SuCustomer','SuUnapprovedRecord']
+      ['IncomingFile','SuCustomer','SuUnapprovedRecord','SuIncomingRecord']
     else
       []
     end

@@ -53,6 +53,7 @@ ServiceCenter::Application.routes.draw do
   resources :reconciled_returns
   resources :su_customers
   resources :su_unapproved_records
+  resources :su_incoming_records
   resources :outgoing_files do
     member do
       get 'download_response_file'
@@ -65,6 +66,7 @@ ServiceCenter::Application.routes.draw do
     end
   end
 
+  get 'su_incoming_records/:id/audit_steps/:step_name' => 'su_incoming_records#audit_steps'
   get '/partner/:id/audit_logs' => 'partners#audit_logs'
   get '/purpose_code/:id/audit_logs' => 'purpose_codes#audit_logs'
   get '/inw_remittance_rule/:id/audit_logs' => 'inw_remittance_rules#audit_logs'
