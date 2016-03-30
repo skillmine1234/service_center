@@ -88,6 +88,7 @@ class ImtCustomersController < ApplicationController
     params.require(:imt_customer).permit(:customer_code, :customer_name, :contact_person, :email_id, :mobile_no, 
                                          :account_no, :expiry_period, :txn_mode, :address_line1, :is_enabled,
                                          :address_line2, :address_line3, :country, :lock_version, :approval_status, 
-                                         :last_action, :approved_version, :approved_id, :created_by, :updated_by, :app_id)
+                                         :last_action, :approved_version, :approved_id, :created_by, :updated_by, :app_id, 
+                                         :identity_user_id)
   end
 end

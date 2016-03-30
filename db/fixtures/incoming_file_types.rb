@@ -18,8 +18,6 @@ ScService.seed(:code) do |s|
   s.name = 'Salary Processing'
 end
 
-
-
 IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.sc_service_id = ScService.find_by(code: 'AML').id
   s.code = 'SDN'
@@ -120,19 +118,6 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.sc_service_id = ScService.find_by(code: 'SALARY').id
   s.code = 'SALARY'
   s.name = 'SALARY'
-  s.msg_domain = 'DFDL'
-  s.msg_model = '{http://www.quantiguous.com/services/file}:paySalary'
-  s.skip_first = 'Y'
-  s.auto_upload = 'Y'
-  s.validate_all = 'Y'
-  s.build_response_file = 'Y' 
-  s.db_unit_name = "pk_qg_su_file_validator.do"
-end
-
-IncomingFileType.seed(:sc_service_id, :code) do |s|
-  s.sc_service_id = ScService.find_by(code: 'PAYSALARY').id
-  s.code = 'PAYSALARY'
-  s.name = 'PAYSALARY'
   s.msg_domain = 'DFDL'
   s.msg_model = '{http://www.quantiguous.com/services/file}:paySalary'
   s.skip_first = 'Y'

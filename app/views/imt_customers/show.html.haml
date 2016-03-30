@@ -50,6 +50,12 @@
             %td#msg-error
               = error_message_for(@imt_customer, :app_id, :prepend_text => "")
           %tr
+            %td.label Identity User ID
+            %td.value
+              = @imt_customer.identity_user_id
+            %td#msg-error
+              = error_message_for(@imt_customer, :identity_user_id, :prepend_text => "")
+          %tr
             %td.label Is Enabled?
             %td.value
               = @imt_customer.is_enabled
