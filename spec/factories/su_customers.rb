@@ -6,6 +6,7 @@ FactoryGirl.define do
     sequence(:customer_id) {|n| "9" + "%03i" % "#{n}" }
     pool_account_no "MyString"
     pool_customer_id "MyString"
+    max_distance_for_name 3
     is_enabled "N"
     approval_status "U"
     last_action "C"

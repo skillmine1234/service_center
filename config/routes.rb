@@ -52,6 +52,7 @@ ServiceCenter::Application.routes.draw do
   resources :funds_transfer_customers
   resources :reconciled_returns
   resources :su_customers
+  resources :su_unapproved_records
   resources :outgoing_files do
     member do
       get 'download_response_file'

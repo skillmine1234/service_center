@@ -99,6 +99,7 @@ class SuCustomersController < ApplicationController
   def su_customer_params
     params.require(:su_customer).permit(:account_no, :customer_id, :pool_account_no, :pool_customer_id, 
                                         :is_enabled, :created_by, :updated_by, :created_at, :updated_at, 
-                                        :lock_version, :approval_status, :last_action, :approved_version, :approved_id)
+                                        :lock_version, :approval_status, :last_action, :approved_version, :approved_id, 
+                                        :max_distance_for_name)
   end
 end

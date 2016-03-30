@@ -22,6 +22,24 @@ describe SuCustomer do
       su_customer = Factory(:su_customer, :approval_status => 'A')
       should validate_uniqueness_of(:customer_id).scoped_to(:approval_status)   
     end
+
+    it "should return error when max_distance_for_name > 100" do
+      su_customer = Factory.build(:su_customer, :max_distance_for_name => 1001)
+      su_customer.should_not be_valid
+      su_customer.errors_on(:max_distance_for_name).should == ["must be less than or equal to 100"]
+    end
+
+    it "should return error when max_distance_for_name < 0" do
+      su_customer = Factory.build(:su_customer, :max_distance_for_name => -10)
+      su_customer.should_not be_valid
+      su_customer.errors_on(:max_distance_for_name).should == ["must be greater than or equal to 0"]
+    end
+
+    it "should save the record when max_distance_for_name is between 0 & 10" do
+      su_customer = Factory.build(:su_customer, :max_distance_for_name => 45)
+      su_customer.should be_valid
+      su_customer.errors_on(:max_distance_for_name).should == []
+    end
   end
   
   context "default_scope" do 

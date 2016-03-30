@@ -28,6 +28,11 @@
       #msg-error
         = error_message_for(@su_customer, :pool_customer_id, :prepend_text => "")
     .control-group
+      = f.label :max_distance_for_name, "Max Distance For Name (%)", :class => 'control-label'
+      = f.number_field :max_distance_for_name, :min => 0, :max => 100
+      #msg-error
+        = error_message_for(@su_customer, :max_distance_for_name, :prepend_text => "")
+    .control-group
       = f.label :is_enabled, "Is Enabled ?", :class => 'control-label'
       = f.check_box :is_enabled, {},"Y","N"
       #msg-error

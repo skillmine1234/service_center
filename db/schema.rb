@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160329104218) do
+ActiveRecord::Schema.define(version: 20160330092837) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -2106,20 +2106,21 @@ ActiveRecord::Schema.define(version: 20160329104218) do
   end
 
   create_table "su_customers", force: :cascade do |t|
-    t.string   "account_no",       limit: 20
-    t.string   "customer_id",      limit: 15
-    t.string   "pool_account_no",  limit: 20
-    t.string   "pool_customer_id", limit: 20
-    t.string   "is_enabled",       limit: 1
-    t.string   "created_by",       limit: 20
-    t.string   "updated_by",       limit: 20
+    t.string   "account_no",            limit: 20
+    t.string   "customer_id",           limit: 15
+    t.string   "pool_account_no",       limit: 20
+    t.string   "pool_customer_id",      limit: 20
+    t.string   "is_enabled",            limit: 1
+    t.string   "created_by",            limit: 20
+    t.string   "updated_by",            limit: 20
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "lock_version",                default: 0
-    t.string   "approval_status",  limit: 1,  default: "U"
-    t.string   "last_action",      limit: 1,  default: "C"
+    t.integer  "lock_version",                     default: 0
+    t.string   "approval_status",       limit: 1,  default: "U"
+    t.string   "last_action",           limit: 1,  default: "C"
     t.integer  "approved_version"
     t.integer  "approved_id"
+    t.decimal  "max_distance_for_name"
   end
 
   add_index "su_customers", ["customer_id", "account_no", "approval_status"], name: "uk_su_customers_1", unique: true
