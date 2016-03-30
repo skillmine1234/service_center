@@ -51,6 +51,7 @@ ServiceCenter::Application.routes.draw do
   resources :ft_unapproved_records
   resources :funds_transfer_customers
   resources :reconciled_returns
+  resources :su_customers
   resources :outgoing_files do
     member do
       get 'download_response_file'
@@ -82,6 +83,7 @@ ServiceCenter::Application.routes.draw do
   get '/imt_customer/:id/audit_logs' => 'imt_customers#audit_logs'
   get '/funds_transfer_customer/:id/audit_logs' => 'funds_transfer_customers#audit_logs'
   get '/reconciled_returns/:id/audit_logs' => 'reconciled_returns#audit_logs'
+  get '/su_customers/:id/audit_logs' => 'su_customers#audit_logs'
 
   get '/inward_remittances/:id/remitter_identities' => 'inward_remittances#remitter_identities'
   get '/inward_remittances/:id/beneficiary_identities' => 'inward_remittances#beneficiary_identities'
@@ -120,6 +122,7 @@ ServiceCenter::Application.routes.draw do
   put '/fp_auth_rule/:id/approve' => "fp_auth_rules#approve"
   put '/imt_customer/:id/approve' => "imt_customers#approve"
   put '/funds_transfer_customer/:id/approve' => "funds_transfer_customers#approve"
+  put '/su_customers/:id/approve' => "su_customers#approve"
 
   get '/ecol_transactions/:id/ecol_audit_logs/:step_name' => 'ecol_transactions#ecol_audit_logs'
   put '/ecol_transactions/:id/approve' => "ecol_transactions#approve_transaction"

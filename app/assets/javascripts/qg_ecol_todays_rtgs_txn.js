@@ -10,6 +10,4 @@ $(document).ready(function(){
   
   $('#qg_ecol_todays_rtgs_txn_transfer_date').datepicker("setDate", $('#qg_ecol_todays_rtgs_txn_transfer_date').val());
   
-  $("#qg_ecol_todays_rtgs_txn_transfer_date").prop("readOnly",true);
-  
 });

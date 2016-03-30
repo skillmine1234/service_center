@@ -605,12 +605,6 @@ ActiveRecord::Schema.define(version: 20160329104218) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
-  create_table "dummy_tables", force: :cascade do |t|
-    t.string   "ifsc",       limit: 11, null: false
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-  end
-
   create_table "ecol_audit_logs", force: :cascade do |t|
     t.integer  "ecol_transaction_id",              null: false
     t.string   "step_name",                        null: false
@@ -896,6 +890,13 @@ ActiveRecord::Schema.define(version: 20160329104218) do
     t.string   "fault_reason"
   end
 
+  create_table "encrypted_passwords", force: :cascade do |t|
+    t.integer  "created_by"
+    t.string   "password"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "fp_auth_rules", force: :cascade do |t|
     t.string   "username",         limit: 255,                null: false
     t.string   "operation_name",   limit: 4000,               null: false
@@ -975,6 +976,7 @@ ActiveRecord::Schema.define(version: 20160329104218) do
 
   add_index "funds_transfer_customers", ["account_no"], name: "index_funds_transfer_customers_on_account_no"
   add_index "funds_transfer_customers", ["customer_id", "approval_status"], name: "FT_cust_index_on_customer_id", unique: true
+  add_index "funds_transfer_customers", ["customer_id", "approval_status"], name: "uk1_funds_transfer_customers", unique: true
   add_index "funds_transfer_customers", ["mobile_no"], name: "index_funds_transfer_customers_on_mobile_no"
   add_index "funds_transfer_customers", ["name"], name: "index_funds_transfer_customers_on_name"
   add_index "funds_transfer_customers", ["tech_email_id"], name: "index_funds_transfer_customers_on_tech_email_id"
@@ -1346,7 +1348,7 @@ ActiveRecord::Schema.define(version: 20160329104218) do
     t.string   "bene_account_ifsc"
     t.string   "transfer_type",          limit: 4
     t.string   "transfer_ccy",           limit: 5
-    t.decimal  "transfer_amount"
+    t.float    "transfer_amount"
     t.string   "rmtr_to_bene_note"
     t.string   "purpose_code",           limit: 5
     t.string   "status_code",            limit: 25
@@ -1363,7 +1365,7 @@ ActiveRecord::Schema.define(version: 20160329104218) do
     t.string   "is_self_transfer",       limit: 1
     t.string   "is_same_party_transfer", limit: 1
     t.string   "req_transfer_type",      limit: 4
-    t.decimal  "bal_available"
+    t.float    "bal_available"
     t.string   "service_id"
     t.date     "reconciled_at"
     t.string   "cbs_req_ref_no"
@@ -1418,7 +1420,7 @@ ActiveRecord::Schema.define(version: 20160329104218) do
     t.string   "account_ifsc",              limit: 20
     t.integer  "txn_hold_period_days",                 default: 7,   null: false
     t.string   "identity_user_id",          limit: 20,               null: false
-    t.decimal  "low_balance_alert_at"
+    t.float    "low_balance_alert_at"
     t.string   "remitter_sms_allowed",      limit: 1
     t.string   "remitter_email_allowed",    limit: 1
     t.string   "beneficiary_sms_allowed",   limit: 1
@@ -1969,16 +1971,16 @@ ActiveRecord::Schema.define(version: 20160329104218) do
     t.string   "created_by",            limit: 20
     t.string   "updated_by",            limit: 20
     t.integer  "lock_version",                       default: 0,   null: false
-    t.decimal  "txn_limit"
+    t.float    "txn_limit"
     t.integer  "daily_txn_limit"
     t.string   "disallowed_rem_types",  limit: 30
     t.string   "disallowed_bene_types", limit: 30
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "mtd_txn_cnt_self"
-    t.decimal  "mtd_txn_limit_self"
-    t.decimal  "mtd_txn_cnt_sp"
-    t.decimal  "mtd_txn_limit_sp"
+    t.float    "mtd_txn_cnt_self"
+    t.float    "mtd_txn_limit_self"
+    t.float    "mtd_txn_cnt_sp"
+    t.float    "mtd_txn_limit_sp"
     t.string   "rbi_code",              limit: 5
     t.string   "pattern_beneficiaries", limit: 4000
     t.string   "approval_status",       limit: 1,    default: "U", null: false
@@ -2028,6 +2030,52 @@ ActiveRecord::Schema.define(version: 20160329104218) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], name: "index_roles_on_name"
+
+  create_table "salary_corporates", force: :cascade do |t|
+    t.string "customer_id",        limit: 15
+    t.string "customer_name",      limit: 100
+    t.string "account_no",         limit: 16
+    t.string "contact_person",     limit: 100
+    t.string "email_address",      limit: 100
+    t.string "customer_mobile_no", limit: 10
+  end
+
+  create_table "salary_details", force: :cascade do |t|
+    t.string   "source_account_no",          limit: 15,   null: false
+    t.string   "source_reference_no",        limit: 15,   null: false
+    t.string   "source_narration",           limit: 40,   null: false
+    t.string   "destination_account_number", limit: 15,   null: false
+    t.string   "destination_name",           limit: 35
+    t.string   "destination_reference_no",   limit: 12
+    t.decimal  "transfer_amount"
+    t.string   "destination_narration",      limit: 40
+    t.string   "bank_reference_no",          limit: 40
+    t.string   "debit_reference_no",         limit: 40
+    t.string   "credit_reference_no",        limit: 40
+    t.datetime "settled_at"
+    t.string   "settlement_account_no",      limit: 15
+    t.string   "status",                     limit: 15
+    t.string   "fault_code",                 limit: 50
+    t.string   "fault_reason",               limit: 1000
+  end
+
+  create_table "salary_payments", force: :cascade do |t|
+    t.string   "source_account_no",     limit: 15, null: false
+    t.string   "bank_pool_account_no",  limit: 25, null: false
+    t.decimal  "transfer_amount",                  null: false
+    t.datetime "debited_at"
+    t.string   "bank_reference_no",     limit: 40
+    t.string   "debit_reference_no",    limit: 40
+    t.integer  "payment_attempt_no"
+    t.string   "status",                limit: 20, null: false
+    t.datetime "reversed_at"
+    t.string   "reversal_reference_no", limit: 40
+  end
+
+  create_table "salary_rules", force: :cascade do |t|
+    t.string "bank_pool_account_no", limit: 15, null: false
+    t.string "threshold_percentage",            null: false
+  end
 
   create_table "sc_services", force: :cascade do |t|
     t.string "code", limit: 50, null: false

@@ -28,6 +28,7 @@ Group.create(:name => "prepaid-card") if Group.find_by_name("prepaid-card").nil?
 Group.create(:name => "flex-proxy") if Group.find_by_name("flex-proxy").nil?
 Group.create(:name => "imt") if Group.find_by_name("imt").nil?
 Group.create(:name => "funds-transfer") if Group.find_by_name("funds-transfer").nil?
+Group.create(:name => "salary-upload") if Group.find_by_name("salary-upload").nil?
 
 unless Rails.env == 'production'
   if InwRemittanceRule.all.empty?
