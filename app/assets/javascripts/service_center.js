@@ -99,4 +99,8 @@ $(document).ready(function(){
   $("#imt_transfer_reset").on('click', function(){
     $(".form-horizontal").find("input[type=text], select").val("");
   });
+  
+  $("#su_customer_reset").on('click', function(){
+    $(".form-horizontal").find("input[type=text], select").val("");
+  });
 });

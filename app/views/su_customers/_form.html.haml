@@ -1,0 +1,40 @@
+= simple_form_for @su_customer, :html => {:class=>'form-horizontal', :autocomplete=>"off", :id => "su_customer_form"} do |f|
+  .control-group
+    = f.label ' '
+    #msg-error
+      = error_message_for(@su_customer, :base, :prepend_text => "")
+  .form-main
+    = f.hidden_field :lock_version
+    = f.hidden_field :approved_id
+    = f.hidden_field :approved_version
+    .control-group
+      = f.label :account_no, "Account No", :class => 'control-label'
+      = f.text_field :account_no, :maxlength => 20
+      #msg-error
+        = error_message_for(@su_customer, :account_no, :prepend_text => "")
+    .control-group
+      = f.label :customer_id, "Customer ID", :class => 'control-label'
+      = f.text_field :customer_id
+      #msg-error
+        = error_message_for(@su_customer, :customer_id, :prepend_text => "")
+    .control-group
+      = f.label :pool_account_no, "Pool Account No", :class => 'control-label'
+      = f.text_field :pool_account_no, :maxlength => 20
+      #msg-error
+        = error_message_for(@su_customer, :pool_account_no, :prepend_text => "")
+    .control-group
+      = f.label :pool_customer_id, "Pool Customer ID", :class => 'control-label'
+      = f.text_field :pool_customer_id, :maxlength => 20
+      #msg-error
+        = error_message_for(@su_customer, :pool_customer_id, :prepend_text => "")
+    .control-group
+      = f.label :is_enabled, "Is Enabled ?", :class => 'control-label'
+      = f.check_box :is_enabled, {},"Y","N"
+      #msg-error
+        = error_message_for(@su_customer, :is_enabled, :prepend_text => "")
+
+  .form-actions
+    - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_su_customer', :value => label_name + ' Salary Upload Customer'
+    = link_to :Cancel,'/su_customers', :name => 'cancel', :class=>"cancel btn"
+
