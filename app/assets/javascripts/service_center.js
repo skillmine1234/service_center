@@ -103,4 +103,46 @@ $(document).ready(function(){
   $("#adv_search_reset_button").on('click', function(){
     $(".form-horizontal").find("input[type=text], select").val("");
   });
+
+  $(".val-request-link").on("click", function () {
+    var request = $(this).data('request');
+    $("div.request").text(request);
+    $('#requestText').modal();
+  });
+  
+  $(".val-reply-link").on("click", function () {
+    var reply = $(this).data('reply');
+    var response;
+    try {
+      response = jQuery.parseJSON(reply);
+    }
+    catch (e) {
+      response = '0';
+    };
+    if(typeof response =='object' && response != '0') {
+      var parsed_json = JSON.stringify(reply, null, '\t');
+      reply = parsed_json
+    }
+    $("div.reply").text(reply);
+    $('#replyText').modal();
+  });
+
+  $(".val-fault-link").on("click", function () {
+    var fault = $(this).data('fault');
+    $("div.fault").text(fault);
+    $('#faultLink').modal();
+  });
+  
+  $("a.active-link").on("click", function () {
+    var f_code = $(this).data('fault-code');
+    var f_reason = $(this).data('fault-reason');
+    var f_subcode = $(this).data('fault-subcode');  
+    $(".modal-body .fault_code").text("");
+    $(".modal-body .fault_code").text(f_code);
+    $(".modal-body .fault_reason").text("");
+    $(".modal-body .fault_reason").text(f_reason);
+    $(".modal-body .fault_subcode").text("");
+    $(".modal-body .fault_subcode").text(f_subcode);
+    $('#faultText').modal();
+  });
 });
