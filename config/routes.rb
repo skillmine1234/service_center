@@ -25,7 +25,6 @@ ServiceCenter::Application.routes.draw do
   resources :incoming_files do
     member do
       get 'download_response_file'
-      get 'approve_restart'
       get 'generate_response_file'
     end
   end
@@ -132,6 +131,8 @@ ServiceCenter::Application.routes.draw do
 
   get '/ecol_transactions/:id/ecol_audit_logs/:step_name' => 'ecol_transactions#ecol_audit_logs'
   put '/ecol_transactions/:id/approve' => "ecol_transactions#approve_transaction"
+
+  put '/incoming_files/:id/approve_restart' => "incoming_files#approve_restart"
 
   get '/bm_bill_payments/:id/audit_logs/:step_name' => 'bm_bill_payments#audit_logs'
   get '/bm_aggregator_payment/hit_api/:id' => 'bm_aggregator_payments#hit_api', as: :hit_api

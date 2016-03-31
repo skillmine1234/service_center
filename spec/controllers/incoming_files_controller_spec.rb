@@ -154,4 +154,15 @@ describe IncomingFilesController do
       incoming_file.approval_status.should == 'A'
     end
   end
+
+  describe "PUT approve_restart" do
+    it "updates the requested incoming_file" do
+      incoming_file = Factory(:incoming_file, :status => 'COMPLETED', :pending_approval => 'Y', :approval_status => 'A')
+      params = incoming_file.attributes.slice(*incoming_file.class.attribute_names)
+      put :approve_restart, :id => incoming_file.id
+      response.should be_redirect
+      incoming_file.reload
+      incoming_file.pending_approval.should == "N"
+    end
+  end
 end

@@ -118,7 +118,16 @@ class IncomingFilesController < ApplicationController
 
   def generate_response_file
     @incoming_file = IncomingFile.find(params[:id]) 
-    # TODO: call to ESB api
+    api_req_url = ENV['CONFIG_URL_GEN_RESP_FILE_URI']
+    conn = Faraday.new(:url => api_req_url, :ssl => {:verify => false}) do |c|
+      c.use Faraday::Request::UrlEncoded
+      c.use Faraday::Response::Logger
+      c.use Faraday::Adapter::NetHttp
+    end
+    response = conn.post "#{api_req_url}?incoming_file_id=#{@incoming_file.id}"
+    status_code = response.env.status
+    flash[:alert] = "Api was hit and Status code of response is #{status_code}"
+    redirect_to @incoming_file
   end
 
   def incoming_file_params
