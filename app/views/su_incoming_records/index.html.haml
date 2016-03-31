@@ -44,4 +44,4 @@
         %td{:style=>'text-align:left;'}
           = record.salary_amount
         %td{:style=>'text-align:left;'}
-          = link_to 'Show', {:controller => 'su_incoming_records', :action => 'audit_steps', :id => @su_record.id, :step_name => 'ALL'}
+          = link_to 'Show', {:controller => 'su_incoming_records', :action => 'audit_steps', :id => record.id, :step_name => 'ALL'}

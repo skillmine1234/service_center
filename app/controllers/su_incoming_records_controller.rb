@@ -24,4 +24,9 @@ class SuIncomingRecordsController < ApplicationController
     @su_record_values_count = su_record_values.count(:id)
     @su_record_values = su_record_values.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
+
+  def audit_logs
+    @record = IncomingFileRecord.find(params[:id]) rescue nil
+    @audit = @record.audits[params[:version_id].to_i] rescue nil
+  end
 end

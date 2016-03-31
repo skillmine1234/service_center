@@ -12,6 +12,11 @@ describe SuIncomingRecordsHelper do
 
   context "find_su_incoming_records" do
     it "should return records for the params that is passed" do 
+      a = Factory(:su_incoming_record, :incoming_file_record => Factory(:incoming_file_record, :should_skip => 'Y'))
+      find_su_incoming_records({:skipped_flag => "Y"},SuIncomingRecord.joins(:incoming_file_record)).should == [a]
+      find_su_incoming_records({:skipped_flag => "N"},SuIncomingRecord.joins(:incoming_file_record)).should == []
+      a = Factory(:su_incoming_record, :incoming_file_record => Factory(:incoming_file_record, :overrides => 'Y:76',:record_no => 23))
+      find_su_incoming_records({:overrided_flag => "true"},SuIncomingRecord.joins(:incoming_file_record)).should == [a]
       a = Factory(:su_incoming_record, :corp_account_no => "1234")
       find_su_incoming_records({:corp_account_no => "1234"},SuIncomingRecord).should == [a]
       find_su_incoming_records({:corp_account_no => "4321"},SuIncomingRecord).should == []
