@@ -31,13 +31,13 @@
   .tbody
     - @records.each do |record|
       %tr
-        %td{:style=>'width:25%; text-align:left;'}
+        %td{:style=>'text-align:left;'}
           = link_to "show", record
-        %td{:style=>'width:25%; text-align:left;'}
+        %td{:style=>'text-align:left;'}
           = record.file_name
-        %td{:style=>'width:25%; text-align:left;'}
+        %td{:style=>'text-align:left;'}
           = record.corp_account_no
-        %td{:style=>'width:25%; text-align:left;'}
+        %td{:style=>'text-align:left;'}
           = record.emp_account_no
         %td{:style=>'text-align:left;'}
           = record.emp_name
