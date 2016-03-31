@@ -6,6 +6,11 @@
       %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px;'}
       %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
         %tr
+          %td.label Version
+          %td.value
+            = link_to "#{audit_count(@su_record)}", :controller => :su_incoming_records, :action => :audit_logs, :version_id => audit_count(@su_record.incoming_file_record), :id => @su_record.incoming_file_record_id
+
+        %tr
           %td.label File Name 
           %td.value
             = @su_record.file_name

@@ -48,6 +48,10 @@
         Success
       %th{:style=>'text-align:left;'}
         Failed
+      %th{:style=>'text-align:left;'}
+        Skipped By User
+      %th{:style=>'text-align:left;'}
+        Overriden By User
   %tbody
     %tr
       - if @incoming_file.service_name == 'ECOL'
@@ -61,6 +65,10 @@
           = link_to @incoming_file.ecol_remitters.count(:id), ecol_remitters_path(:incoming_file_id => @incoming_file.id)
         %td{:style=>'text-align:left;'}
           = link_to @incoming_file.failed_records.count(:id), incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'FAILED')
+        %td{:style=>'text-align:left;'}
+          = '-'
+        %td{:style=>'text-align:left;'}
+          = '-'
 
       - elsif @incoming_file.service_name == 'IMTSERVICE'
         %td{:style=>'text-align:left;'}
@@ -73,6 +81,10 @@
           = link_to @success_count, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'COMPLETED')
         %td{:style=>'text-align:left;'}
           = link_to @failure_count, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'FAILED')
+        %td{:style=>'text-align:left;'}
+          = '-'
+        %td{:style=>'text-align:left;'}
+          = '-'
       - elsif !@incoming_file.incoming_file_type.records_table.empty?
         - table = @incoming_file.incoming_file_type.records_table
         %td{:style=>'text-align:left;'}
@@ -85,3 +97,7 @@
           = link_to @success_count, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'COMPLETED')
         %td{:style=>'text-align:left;'}
           = link_to @failure_count, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'FAILED')
+        %td{:style=>'text-align:left;'}
+          = link_to @failure_count, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'FAILED', :skipped_flag => 'Y')
+        %td{:style=>'text-align:left;'}
+          = link_to @failure_count, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'FAILED', :overrided_flag => 'true')

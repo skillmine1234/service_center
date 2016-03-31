@@ -67,6 +67,7 @@ ServiceCenter::Application.routes.draw do
   end
 
   get 'su_incoming_records/:id/audit_steps/:step_name' => 'su_incoming_records#audit_steps'
+  get '/su_incoming_records/:id/audit_logs' => 'su_incoming_records#audit_logs'
   get '/partner/:id/audit_logs' => 'partners#audit_logs'
   get '/purpose_code/:id/audit_logs' => 'purpose_codes#audit_logs'
   get '/inw_remittance_rule/:id/audit_logs' => 'inw_remittance_rules#audit_logs'

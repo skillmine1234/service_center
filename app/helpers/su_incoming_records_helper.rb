@@ -9,6 +9,8 @@ module SuIncomingRecordsHelper
 
   def find_su_incoming_records(params,records)
     incoming_records = records
+    incoming_records = incoming_records.where("should_skip=?",params[:skipped_flag]) if params[:skipped_flag].present?
+    incoming_records = incoming_records.where("overrides is not null") if params[:overrided_flag].present?
     incoming_records = incoming_records.where("corp_account_no=?",params[:corp_account_no]) if params[:corp_account_no].present?
     incoming_records = incoming_records.where("emp_account_no=?",params[:emp_account_no]) if params[:emp_account_no].present?
     incoming_records = incoming_records.where("emp_name=?",params[:emp_name]) if params[:emp_name].present?
