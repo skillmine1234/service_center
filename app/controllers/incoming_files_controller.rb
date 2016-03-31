@@ -60,8 +60,10 @@ class IncomingFilesController < ApplicationController
   def show
     @incoming_file = IncomingFile.unscoped.find_by_id(params[:id])
     @success_count = @incoming_file.incoming_file_records.where(:status => "COMPLETED").count(:id)
-    @failure_count = @incoming_file.incoming_file_records.where(:status => "FAILED").count(:id)
+    @failure_count = @incoming_file.incoming_file_records.where("status=? and should_skip=? and overrides is null","FAILED",'N').count(:id)
     @skipped_count = @incoming_file.incoming_file_records.where(:status => "SKIPPED").count(:id)
+    @skipped_failure_count = @incoming_file.incoming_file_records.where(:status => "FAILED", :should_skip => 'Y').count(:id)
+    @overriden_failure_count = @incoming_file.incoming_file_records.where("status=? and overrides is not null",'FAILED').count(:id)
   end
 
   def destroy

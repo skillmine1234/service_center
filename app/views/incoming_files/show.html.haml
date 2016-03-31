@@ -97,7 +97,7 @@
           = '-'
         %td{:style=>'text-align:left;'}
           = '-'
-      - elsif !@incoming_file.incoming_file_type.records_table.empty?
+    - elsif !@incoming_file.incoming_file_type.records_table.empty?
         - table = @incoming_file.incoming_file_type.records_table
         %td{:style=>'text-align:left;'}
           = @incoming_file.file_type
@@ -108,8 +108,8 @@
         %td{:style=>'text-align:left;'}
           = link_to @success_count, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'COMPLETED')
         %td{:style=>'text-align:left;'}
-          = link_to @failure_count, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'FAILED')
+          = link_to @failure_count, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'FAILED', :skipped_flag => 'N', :overrided_flag => 'false')
         %td{:style=>'text-align:left;'}
-          = link_to @failure_count, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'FAILED', :skipped_flag => 'Y')
+          = link_to @skipped_failure_count, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'FAILED', :skipped_flag => 'Y', :overrided_flag => 'false')
         %td{:style=>'text-align:left;'}
-          = link_to @failure_count, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'FAILED', :overrided_flag => 'true')
+          = link_to @overriden_failure_count, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'FAILED', :overrided_flag => 'true')

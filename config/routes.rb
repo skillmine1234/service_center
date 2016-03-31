@@ -54,7 +54,11 @@ ServiceCenter::Application.routes.draw do
   resources :reconciled_returns
   resources :su_customers
   resources :su_unapproved_records
-  resources :su_incoming_records
+  resources :su_incoming_records do 
+    collection do
+      put  'update_multiple'
+    end
+  end
   resources :outgoing_files do
     member do
       get 'download_response_file'

@@ -145,4 +145,18 @@ $(document).ready(function(){
     $(".modal-body .fault_subcode").text(f_subcode);
     $('#faultText').modal();
   });
+
+  $("#submit_skip").click(function(){
+    $('input#status').val('skip');
+    $("#update_records").submit(function(){
+      $("#submit_skip").prop('disabled', true);
+    });
+  });
+
+  $("#submit_override").click(function(){
+    $('input#status').val('override');
+    $("#update_records").submit(function(){
+      $("#submit_override").prop('disabled', true);
+    });
+  });
 });
