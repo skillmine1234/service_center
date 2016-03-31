@@ -25,6 +25,8 @@ ServiceCenter::Application.routes.draw do
   resources :incoming_files do
     member do
       get 'download_response_file'
+      get 'approve_restart'
+      get 'generate_response_file'
     end
   end
   

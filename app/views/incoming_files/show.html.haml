@@ -33,9 +33,15 @@
           = link_to 'View', download_response_file_incoming_file_path(@incoming_file, :view => true)
         %td{:style=>'text-align:left;'}
 
-%br
 %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
+  - if @incoming_file.pending_approval == 'Y' && @incoming_file.status == 'COMPLETED'
+    = link_to 'Approve Restart', approve_restart_incoming_file_path(@incoming_file), :class => "btn btn-primary"
+
+  - if @incoming_file.incoming_file_type.validate_all == 'Y'
+    = link_to 'Generate Response File', generate_response_file_incoming_file_path(@incoming_file), :class => "btn btn-primary"
+
   = render 'ecol_customers/approve', :@record => @incoming_file
+
 %table.table.table-bordered.table-striped.table-hover.align_center
   %thead
     %tr

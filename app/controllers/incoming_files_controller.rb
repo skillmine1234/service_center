@@ -106,6 +106,21 @@ class IncomingFilesController < ApplicationController
     end
   end
 
+  def approve_restart
+    @incoming_file = IncomingFile.find(params[:id]) 
+    @incoming_file.update_attribute(:pending_approval, "N")
+    redirect_to @incoming_file
+    rescue ActiveRecord::StaleObjectError
+      @incoming_file.reload
+      flash[:alert] = 'Someone edited the incoming_file the same time you did. Please re-apply your changes to the incoming_file.'
+      redirect_to @incoming_file
+  end
+
+  def generate_response_file
+    @incoming_file = IncomingFile.find(params[:id]) 
+    # TODO: call to ESB api
+  end
+
   def incoming_file_params
     params.require(:incoming_file).permit(:file, :size_in_bytes, :line_count, :created_by, :updated_by, :status,
                   :lock_version, :file_name, :file_type, :service_name)

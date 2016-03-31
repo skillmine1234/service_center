@@ -81,18 +81,6 @@ class SuCustomersController < ApplicationController
     end
     redirect_to @su_customer
   end
-  
-  def destroy
-    su_customer = SuCustomer.unscoped.find_by_id(params[:id])
-    if su_customer.approval_status == 'U' and (current_user == su_customer.created_user or (can? :approve, su_customer))
-      su_customer = su_customer.destroy
-      flash[:alert] = "Salary Upload Customer record has been deleted!"
-      redirect_to su_customers_path(:approval_status => 'U')
-    else
-      flash[:alert] = "You cannot delete this record!"
-      redirect_to su_customers_path(:approval_status => 'U')
-    end
-  end
 
   private
 

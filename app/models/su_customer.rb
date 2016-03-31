@@ -10,12 +10,5 @@ class SuCustomer < ActiveRecord::Base
   validates_numericality_of :customer_id
   validates_uniqueness_of :customer_id, :scope => :approval_status
   validates :max_distance_for_name, :numericality => {:greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }, :allow_blank => true
-
-  def to_upcase
-    unless self.frozen?
-      self.account_no = self.account_no.upcase unless self.account_no.nil?
-    end
-  end
-
   
 end
