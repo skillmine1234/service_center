@@ -109,13 +109,19 @@ class IncomingFilesController < ApplicationController
   end
 
   def approve_restart
-    @incoming_file = IncomingFile.find(params[:id]) 
-    @incoming_file.update_attribute(:pending_approval, "N")
-    redirect_to @incoming_file
+    @incoming_file = IncomingFile.find(params[:id])
+    begin
+      if @incoming_file.update_attributes(:pending_approval => "N")
+        flash[:notice] = "Incoming File is sucessfully approved"
+      else
+        flash[:notice] = @incoming_file.errors.full_messages
+      end
+      redirect_to @incoming_file
     rescue ActiveRecord::StaleObjectError
       @incoming_file.reload
       flash[:alert] = 'Someone edited the incoming_file the same time you did. Please re-apply your changes to the incoming_file.'
       redirect_to @incoming_file
+    end
   end
 
   def generate_response_file

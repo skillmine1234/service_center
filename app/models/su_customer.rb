@@ -7,8 +7,8 @@ class SuCustomer < ActiveRecord::Base
 
   validates_presence_of :account_no, :customer_id, :pool_account_no, :pool_customer_id
   validates :account_no, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}' }, length: {maximum: 20}
-  validates_numericality_of :customer_id
-  validates_uniqueness_of :customer_id, :scope => :approval_status
+  validates_numericality_of :account_no, :customer_id, :pool_account_no, :pool_customer_id
+  validates_uniqueness_of :account_no, :scope => [:customer_id, :approval_status]
   validates :max_distance_for_name, :numericality => {:greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }, :allow_blank => true
   
 end

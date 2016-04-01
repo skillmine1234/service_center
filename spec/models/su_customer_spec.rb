@@ -14,13 +14,20 @@ describe SuCustomer do
       it { should validate_presence_of(att) }
     end
     
-    [:customer_id].each do |att|
+    [:account_no, :customer_id, :pool_account_no, :pool_customer_id].each do |att|
       it { should validate_numericality_of(att) }
     end
 
     it do 
       su_customer = Factory(:su_customer, :approval_status => 'A')
-      should validate_uniqueness_of(:customer_id).scoped_to(:approval_status)   
+      should validate_uniqueness_of(:account_no).scoped_to(:customer_id, :approval_status)
+    end
+
+    it "should return error if account_no is already taken" do
+      su_customer1 = Factory(:su_customer, :customer_id => "9001", :approval_status => 'A')
+      su_customer2 = Factory.build(:su_customer, :customer_id => "9001", :approval_status => 'A')
+      su_customer2.should_not be_valid
+      su_customer2.errors_on(:account_no).should == ["has already been taken"]
     end
 
     it "should return error when max_distance_for_name > 100" do

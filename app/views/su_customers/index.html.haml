@@ -19,7 +19,6 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
-    %th{:style=>'text-align:left; background-color: lightblue;'}
       Account No
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Customer ID
@@ -37,11 +36,6 @@
           = link_to 'Show', su_customer
         %td{:style=>'text-align:left;'}
           = link_to 'Edit', edit_su_customer_path(su_customer)
-        %td{:style=>'text-align:left;'}
-          - if su_customer.approval_status == 'U'
-            = link_to 'Cancel', su_customer, :method => :delete, :data => { :confirm => 'Are you sure?' }
-          - else
-            = ""
         %td{:style=>'text-align:left;'}
           = su_customer.account_no
         %td{:style=>'text-align:left;'}
