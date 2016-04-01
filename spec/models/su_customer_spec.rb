@@ -18,6 +18,16 @@ describe SuCustomer do
       it { should validate_numericality_of(att) }
     end
 
+    it do
+      su_customer = Factory(:su_customer, :approval_status => 'A')
+
+      should validate_length_of(:customer_id).is_at_most(15)
+
+      [:account_no, :pool_account_no, :pool_customer_id].each do |att|
+        should validate_length_of(att).is_at_most(20)
+      end
+    end
+
     it do 
       su_customer = Factory(:su_customer, :approval_status => 'A')
       should validate_uniqueness_of(:account_no).scoped_to(:customer_id, :approval_status)

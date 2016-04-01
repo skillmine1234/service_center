@@ -111,7 +111,8 @@ class IncomingFilesController < ApplicationController
   def approve_restart
     @incoming_file = IncomingFile.find(params[:id])
     begin
-      if @incoming_file.update_attributes(:pending_approval => "N")
+      if @incoming_file.pending_approval == 'Y' && @incoming_file.status == 'COMPLETED'
+        @incoming_file.update_attributes(:pending_approval => "N")
         flash[:notice] = "Incoming File is sucessfully approved"
       else
         flash[:notice] = @incoming_file.errors.full_messages
