@@ -1,5 +1,5 @@
 %br
-%h1 Listing Inward Remittances
+%h1 Inward Remittances
 %h2.collapsible
   Advanced Search
   %span.caret
@@ -19,6 +19,8 @@
       Request No
     %th{:style=>'Text-align:left; background-color: lightblue;'}
       Partner
+    %th{:style=>'Text-align:left; background-color: lightblue;'}
+      Bank Ref
     %th{:style=>'Text-align:left; background-color: lightblue;'}
       Remitter Name
     %th{:style=>'text-align:left; background-color: lightblue;'}
@@ -44,6 +46,8 @@
           = inward_remittance.req_no
         %td{:style=>'text-align:left;'}
           = inward_remittance.partner_code.to_s + "-" +inward_remittance.partner.try(:name).to_s
+        %td{:style=>'text-align:left;'}
+          = inward_remittance.bank_ref
         %td{:style=>'text-align:left;'}
           = inward_remittance.rmtr_full_name
         %td{:style=>'text-align:left;'}

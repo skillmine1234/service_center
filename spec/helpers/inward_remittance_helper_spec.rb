@@ -21,9 +21,17 @@ describe InwardRemittanceHelper do
       find_inward_remittances(val,{:partner_code => 'PART'}).should == [inward_remittance]
       find_inward_remittances(val,{:partner_code => 'part'}).should == [inward_remittance]
       find_inward_remittances(val,{:partner_code => 'PARTNER2'}).should == []
+
+      inward_remittance = Factory(:inward_remittance,:bank_ref => '123444')
+      find_inward_remittances(val,{:bank_ref => '123444'}).should == [inward_remittance]
+      find_inward_remittances(val,{:bank_ref => '123443'}).should == []
       
       inward_remittance = Factory(:inward_remittance,:req_transfer_type => 'IMPS')
       find_inward_remittances(val,{:req_transfer_type => 'IMPS'}).should == [inward_remittance]
+      find_inward_remittances(val,{:req_transfer_type => 'NEFT'}).should == []
+
+      inward_remittance = Factory(:inward_remittance,:req_transfer_type => 'FT')
+      find_inward_remittances(val,{:req_transfer_type => 'FT'}).should == [inward_remittance]
       find_inward_remittances(val,{:req_transfer_type => 'NEFT'}).should == []
       
       inward_remittance = Factory(:inward_remittance,:transfer_type => 'NEFT')

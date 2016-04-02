@@ -1,26 +1,29 @@
 = form_tag '', :method => 'get', :class => 'form-horizontal', :autocomplete=>"off" do
   .control-group
-    = label_tag "Status", nil, :class => 'control-label'
+    = label_tag "Status", "Status", :class => 'control-label'
     = select_tag :status, options_for_select([['ONHOLD','ONHOLD'],['SENT_TO_BENEFICIARY','SENT_TO_BENEFICIARY'],['COMPLETED','COMPLETED'],['FAILED','FAILED']],params[:status]),:prompt => 'ANY'
   .control-group
-    = label_tag "Request No", nil, :class => 'control-label'
+    = label_tag "Request No", "Request No", :class => 'control-label'
     = text_field_tag :request_no, params[:request_no]
   .control-group
-    = label_tag "Partner Code", nil, :class => 'control-label'
+    = label_tag "Partner Code", "Partner Code", :class => 'control-label'
     = text_field_tag :partner_code, params[:partner_code]
   .control-group
-    = label_tag "Request Transfer Type", nil, :class => 'control-label'
-    = select_tag :req_transfer_type, options_for_select([['NEFT','NEFT'],['IMPS','IMPS'],['RTGS','RTGS']],params[:req_transfer_type]),:prompt => 'ANY'
+    = label_tag "Bank Ref", "Bank Ref", :class => 'control-label'
+    = text_field_tag :bank_ref, params[:bank_ref]
   .control-group
-    = label_tag "Transfer Type", nil, :class => 'control-label'
+    = label_tag "Request Transfer Type", "Request Transfer Type", :class => 'control-label'
+    = select_tag :req_transfer_type, options_for_select([['NEFT','NEFT'],['IMPS','IMPS'],['RTGS','RTGS'],['FT','FT']],params[:req_transfer_type]),:prompt => 'ANY'
+  .control-group
+    = label_tag "Transfer Type", "Transfer Type", :class => 'control-label'
     = select_tag :transfer_type, options_for_select([['NEFT','NEFT'],['IMPS','IMPS'],['RTGS','RTGS'],['FT','FT']],params[:transfer_type]),:prompt => 'ANY'
   .control-group
-    = label_tag "Transfer Amount", nil, :class => 'control-label'
+    = label_tag "Transfer Amount", "Transfer Amount", :class => 'control-label'
     = text_field_tag :from_amount, params[:from_amount]
     To
     = text_field_tag :to_amount, params[:to_amount]
   .control-group
-    = label_tag "Request Date", nil, :class => 'control-label'
+    = label_tag "Request Date", "Request Date", :class => 'control-label'
     = text_field_tag :from_date, params[:from_date]
     To
     = text_field_tag :to_date, params[:to_date]
