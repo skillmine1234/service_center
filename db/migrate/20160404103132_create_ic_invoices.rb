@@ -2,7 +2,7 @@ class CreateIcInvoices < ActiveRecord::Migration
   def change
     create_table :ic_invoices, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :corp_customer_id, :limit => 15, :null => false, :comment => "the customer id of the corporate, who approved the discounting"
-      t.string :supplier_code, :limit => 15, :null => false, :comment => "the supplier code of the supplier, who's invoice was discounted"
+      t.string :supplier_code, :limit => 15, :null => false, :comment => "the supplier code of the supplier, who''s invoice was discounted"
       t.string :invoice_no, :limit => 28, :null => false, :comment => "the invoice no"
       t.date :invoice_date, :null => false, :comment => "the invoice date"
       t.date :invoice_due_date, :null => false, :comment => "the invoice due date"
