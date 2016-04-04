@@ -25,6 +25,10 @@ describe InwardRemittanceHelper do
       inward_remittance = Factory(:inward_remittance,:bank_ref => '123444')
       find_inward_remittances(val,{:bank_ref => '123444'}).should == [inward_remittance]
       find_inward_remittances(val,{:bank_ref => '123443'}).should == []
+
+      inward_remittance = Factory(:inward_remittance, :rmtr_full_name => "AABBCC DDEE")
+      find_inward_remittances(val,{:rmtr_full_name => "AABBCC DDEE"}).should == [inward_remittance]
+      find_inward_remittances(val, {:rmtr_full_name => "AACCC DDEE"}).should == []
       
       inward_remittance = Factory(:inward_remittance,:req_transfer_type => 'IMPS')
       find_inward_remittances(val,{:req_transfer_type => 'IMPS'}).should == [inward_remittance]
