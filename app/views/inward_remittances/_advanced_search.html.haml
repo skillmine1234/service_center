@@ -9,8 +9,11 @@
     = label_tag "Partner Code", "Partner Code", :class => 'control-label'
     = text_field_tag :partner_code, params[:partner_code]
   .control-group
-    = label_tag "Bank Ref", "Bank Ref", :class => 'control-label'
+    = label_tag "Bank Reference No", "Bank Reference No", :class => 'control-label'
     = text_field_tag :bank_ref, params[:bank_ref]
+  .control-group
+    = label_tag "Remitter Name", "Remitter Name", :class => 'control-label'
+    = text_field_tag :rmtr_full_name, params[:rmtr_full_name]
   .control-group
     = label_tag "Request Transfer Type", "Request Transfer Type", :class => 'control-label'
     = select_tag :req_transfer_type, options_for_select([['NEFT','NEFT'],['IMPS','IMPS'],['RTGS','RTGS'],['FT','FT']],params[:req_transfer_type]),:prompt => 'ANY'
