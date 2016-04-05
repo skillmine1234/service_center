@@ -19,5 +19,6 @@ FactoryGirl.define do
     mm_admin_host "MyString"
     mm_admin_user "MyString"
     mm_admin_password "MyString"
+    identity_user_id "MyString"
   end
 end

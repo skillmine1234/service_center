@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160404103132) do
+ActiveRecord::Schema.define(version: 20160405100559) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -1008,6 +1008,26 @@ ActiveRecord::Schema.define(version: 20160404103132) do
   add_index "ic_customers", ["identity_user_id", "approval_status"], name: "i_ic_cust_identity_id", unique: true
   add_index "ic_customers", ["repay_account_no", "approval_status"], name: "i_ic_cust_repay_no", unique: true
 
+  create_table "ic_incoming_files", force: :cascade do |t|
+    t.integer "incoming_file_id",            null: false
+    t.string  "corp_customer_id", limit: 15
+    t.string  "pm_utr",           limit: 64
+  end
+
+  add_index "ic_incoming_files", ["incoming_file_id"], name: "ic_file_index", unique: true
+
+  create_table "ic_incoming_records", force: :cascade do |t|
+    t.integer "incoming_file_record_id",            null: false
+    t.string  "supplier_code",           limit: 15
+    t.string  "invoice_no",              limit: 28
+    t.date    "invoice_date"
+    t.date    "invoice_due_date"
+    t.decimal "invoice_amount"
+    t.string  "debit_ref_no",            limit: 64
+  end
+
+  add_index "ic_incoming_records", ["incoming_file_record_id"], name: "ic_record_index", unique: true
+
   create_table "ic_invoices", force: :cascade do |t|
     t.string  "corp_customer_id",  limit: 15,               null: false
     t.string  "supplier_code",     limit: 15,               null: false
@@ -1432,7 +1452,12 @@ ActiveRecord::Schema.define(version: 20160404103132) do
     t.string   "cbs_req_ref_no"
   end
 
+  add_index "inward_remittances", ["bank_ref"], name: "index_inward_remittances_on_bank_ref"
+  add_index "inward_remittances", ["bene_account_no"], name: "index_inward_remittances_on_bene_account_no"
   add_index "inward_remittances", ["req_no", "partner_code", "attempt_no"], name: "remittance_unique_index", unique: true
+  add_index "inward_remittances", ["req_transfer_type"], name: "index_inward_remittances_on_req_transfer_type"
+  add_index "inward_remittances", ["status_code"], name: "index_inward_remittances_on_status_code"
+  add_index "inward_remittances", ["transfer_type"], name: "index_inward_remittances_on_transfer_type"
 
   create_table "inward_remittances_locks", id: false, force: :cascade do |t|
     t.integer "inward_remittance_id"
@@ -1635,6 +1660,7 @@ ActiveRecord::Schema.define(version: 20160404103132) do
     t.string   "mm_admin_host",      limit: 255,               null: false
     t.string   "mm_admin_user",      limit: 255,               null: false
     t.string   "mm_admin_password",  limit: 255,               null: false
+    t.string   "identity_user_id",   limit: 20,                null: false
   end
 
   add_index "pc_apps", ["app_id", "approval_status"], name: "index_pc_apps_on_app_id_and_approval_status", unique: true

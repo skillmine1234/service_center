@@ -1,5 +1,5 @@
 .form-horizontal.show_form
-  .form-main-with-color{:style=>'background-color: #F1F2F8; height:850px;'}
+  .form-main-with-color{:style=>'background-color: #F1F2F8; height:950px;'}
     #form-details
       %h3 PC App Details 
       %br
@@ -67,6 +67,12 @@
               = @pc_app.channel_id
             %td#msg-error
               = error_message_for(@pc_app, :channel_id, :prepend_text => "")
+          %tr
+            %td.label Identity User ID
+            %td.value
+              = @pc_app.identity_user_id
+            %td#msg-error
+              = error_message_for(@pc_app, :identity_user_id, :prepend_text => "")
           %tr
             %td.label Needs Pin
             %td.value
