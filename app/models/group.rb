@@ -21,6 +21,8 @@ class Group < ActiveRecord::Base
       ['IncomingFile','SuCustomer','SuUnapprovedRecord','SuIncomingRecord']
     when "instant-credit"
       ['IcCustomer','IcUnapprovedRecord']
+    when "prepaid-card2"
+      ['Pc2App','Pc2UnapprovedRecord']
     else
       []
     end

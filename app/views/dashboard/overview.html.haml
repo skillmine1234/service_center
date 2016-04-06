@@ -287,3 +287,17 @@
         = image_tag 'instant_credit_customers_icon.jpg', :size => "80x80"
       %br
         = "Instant Credit Customers"
+- if @current_user.group_names.include?("prepaid-card2")
+  %h1 Prepaid Card2
+  .slide-container
+    .box  
+      = link_to '/pc2_unapproved_records' do
+        = image_tag 'work-list.jpg', :size => "80x80"
+      %br
+        = "Approval Worklist"
+  .slide-container
+    .box
+      = link_to '/pc2_apps' do
+        = image_tag 'pc_apps.png', :size => "80x80"
+      %br
+        = "PC2 Apps"
