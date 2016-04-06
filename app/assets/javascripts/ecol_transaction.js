@@ -46,15 +46,37 @@ $(document).ready(function(){
     $(".return_result").text(r_result);
     $('#returnText').modal();
   });
-  
+
   $(".val-request-link").on("click", function () {
     var request = $(this).data('request');
+    var req;
+    try {
+      req = jQuery.parseJSON(request);
+    }
+    catch (e) {
+      req = '0';
+    };
+    if(typeof req =='object' && req != '0') {
+      var parsed_json = JSON.stringify(request, null, '\t');
+      request = parsed_json
+    }
     $("div.request").text(request);
     $('#requestText').modal();
   });
-  
+
   $(".val-reply-link").on("click", function () {
     var reply = $(this).data('reply');
+    var response;
+    try {
+      response = jQuery.parseJSON(reply);
+    }
+    catch (e) {
+      response = '0';
+    };
+    if(typeof response =='object' && response != '0') {
+      var parsed_json = JSON.stringify(reply, null, '\t');
+      reply = parsed_json
+    }
     $("div.reply").text(reply);
     $('#replyText').modal();
   });

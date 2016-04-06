@@ -272,3 +272,18 @@
         = image_tag 'su_customers_icon.png', :size => "80x80"
       %br
         = "Salary Upload Customers"
+
+- if @current_user.group_names.include?("instant-credit")
+  %h1 Instant Credit
+  .slide-container
+    .box
+      = link_to '/ic_unapproved_records' do
+        = image_tag 'work-list.jpg', :size => "80x80"
+      %br
+        = "Approval Worklist"
+  .slide-container
+    .box  
+      = link_to '/ic_customers' do
+        = image_tag 'instant_credit_customers_icon.jpg', :size => "80x80"
+      %br
+        = "Instant Credit Customers"
