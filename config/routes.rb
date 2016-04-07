@@ -54,21 +54,21 @@ ServiceCenter::Application.routes.draw do
   resources :ft_unapproved_records
   resources :funds_transfer_customers
   resources :reconciled_returns
-  resources :su_customers
-  resources :su_unapproved_records
-  resources :su_incoming_records do 
-    collection do
-      put  'update_multiple'
-    end
-  end
+  # resources :su_customers
+  # resources :su_unapproved_records
+  # resources :su_incoming_records do 
+  #   collection do
+  #     put  'update_multiple'
+  #   end
+  # end
   resources :outgoing_files do
     member do
       get 'download_response_file'
     end
   end
-  resources :ic_customers
-  # resources :ic_suppliers
-  resources :ic_unapproved_records
+  # resources :ic_customers
+  # # resources :ic_suppliers
+  # resources :ic_unapproved_records
 
   namespace :api do
     namespace :v1 do
@@ -76,8 +76,8 @@ ServiceCenter::Application.routes.draw do
     end
   end
 
-  get 'su_incoming_records/:id/audit_steps/:step_name' => 'su_incoming_records#audit_steps'
-  get '/su_incoming_records/:id/audit_logs' => 'su_incoming_records#audit_logs'
+  # get 'su_incoming_records/:id/audit_steps/:step_name' => 'su_incoming_records#audit_steps'
+  # get '/su_incoming_records/:id/audit_logs' => 'su_incoming_records#audit_logs'
   get '/partner/:id/audit_logs' => 'partners#audit_logs'
   get '/purpose_code/:id/audit_logs' => 'purpose_codes#audit_logs'
   get '/inw_remittance_rule/:id/audit_logs' => 'inw_remittance_rules#audit_logs'
@@ -98,8 +98,8 @@ ServiceCenter::Application.routes.draw do
   get '/imt_customer/:id/audit_logs' => 'imt_customers#audit_logs'
   get '/funds_transfer_customer/:id/audit_logs' => 'funds_transfer_customers#audit_logs'
   get '/reconciled_returns/:id/audit_logs' => 'reconciled_returns#audit_logs'
-  get '/su_customers/:id/audit_logs' => 'su_customers#audit_logs'
-  get '/ic_customers/:id/audit_logs' => 'ic_customers#audit_logs'
+  # get '/su_customers/:id/audit_logs' => 'su_customers#audit_logs'
+  # get '/ic_customers/:id/audit_logs' => 'ic_customers#audit_logs'
 
   get '/inward_remittances/:id/remitter_identities' => 'inward_remittances#remitter_identities'
   get '/inward_remittances/:id/beneficiary_identities' => 'inward_remittances#beneficiary_identities'
@@ -139,8 +139,8 @@ ServiceCenter::Application.routes.draw do
   put '/fp_auth_rule/:id/approve' => "fp_auth_rules#approve"
   put '/imt_customer/:id/approve' => "imt_customers#approve"
   put '/funds_transfer_customer/:id/approve' => "funds_transfer_customers#approve"
-  put '/su_customers/:id/approve' => "su_customers#approve"
-  put '/ic_customers/:id/approve' => "ic_customers#approve"
+  # put '/su_customers/:id/approve' => "su_customers#approve"
+  # put '/ic_customers/:id/approve' => "ic_customers#approve"
 
   get '/ecol_transactions/:id/ecol_audit_logs/:step_name' => 'ecol_transactions#ecol_audit_logs'
   put '/ecol_transactions/:id/approve' => "ecol_transactions#approve_transaction"
