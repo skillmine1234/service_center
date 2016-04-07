@@ -17,6 +17,7 @@ FactoryGirl.define do
       Factory(:user_group, :user_id => user.id, :group_id => Factory(:group, :name => 'imt').id)
       Factory(:user_group, :user_id => user.id, :group_id => Factory(:group, :name => 'funds-transfer').id)
       Factory(:user_group, :user_id => user.id, :group_id => Factory(:group, :name => 'salary-upload').id)
+      Factory(:user_group, :user_id => user.id, :group_id => Factory(:group, :name => 'instant-credit').id)
     end
   end
 end

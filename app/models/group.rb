@@ -20,7 +20,7 @@ class Group < ActiveRecord::Base
     when "salary-upload"
       ['IncomingFile','SuCustomer','SuUnapprovedRecord','SuIncomingRecord']
     when "instant-credit"
-      ['IcCustomer','IcUnapprovedRecord']
+      ['IcCustomer','IcSupplier','IcUnapprovedRecord']
     else
       []
     end

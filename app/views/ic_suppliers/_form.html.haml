@@ -1,0 +1,44 @@
+= simple_form_for @ic_supplier, :html => {:class=>'form-horizontal', :autocomplete=>"off", :id => "ic_supplier_form"} do |f|
+  .control-group
+    = f.label ' '
+    #msg-error
+      = error_message_for(@ic_supplier, :base, :prepend_text => "")
+  .form-main
+    = f.hidden_field :lock_version
+    = f.hidden_field :approved_id
+    = f.hidden_field :approved_version
+    .control-group
+      = f.label :supplier_code, "*Supplier Code", :class => 'control-label'
+      = f.text_field :supplier_code, :maxlength => 15
+      #msg-error
+        = error_message_for(@ic_supplier, :supplier_code, :prepend_text => "")
+    .control-group
+      = f.label :supplier_name, "*Supplier Name", :class => 'control-label'
+      = f.text_field :supplier_name, :maxlength => 100
+      #msg-error
+        = error_message_for(@ic_supplier, :supplier_name, :prepend_text => "")
+    .control-group
+      = f.label :customer_id, "*Customer ID", :class => 'control-label'
+      = f.text_field :customer_id, :maxlength => 15
+      #msg-error
+        = error_message_for(@ic_supplier, :customer_id, :prepend_text => "")
+    .control-group
+      = f.label :od_account_no, "*Supplier's Over Draft Account", :class => 'control-label'
+      = f.text_field :od_account_no, :maxlength => 20
+      #msg-error
+        = error_message_for(@ic_supplier, :od_account_no, :prepend_text => "")
+    .control-group
+      = f.label :ca_account_no, "*Supplier's Current Account", :class => 'control-label'
+      = f.text_field :ca_account_no, :maxlength => 20
+      #msg-error
+        = error_message_for(@ic_supplier, :ca_account_no, :prepend_text => "")
+    .control-group
+      = f.label :is_enabled, "*Enabled ?", :class => 'control-label'
+      = f.check_box :is_enabled, {},"Y","N"
+      #msg-error
+        = error_message_for(@ic_supplier, :is_enabled, :prepend_text => "")
+  .form-actions
+    - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_ic_supplier', :value => label_name + ' Instant Credit Supplier'
+    = link_to :Cancel,'/ic_suppliers', :name => 'cancel', :class=>"cancel btn"
+

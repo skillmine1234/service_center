@@ -1,0 +1,83 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8; height: 900px;'}
+    #form-details
+      %h3 Instant Credit Supplier Details 
+      %br
+      %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
+        - can = can? :edit, @ic_supplier
+        %a.btn{:href => "#{!(can) ? '#' : '/ic_suppliers/' + @ic_supplier.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
+        = render 'approve', :@record => @ic_supplier
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
+        - if !@ic_supplier.nil?
+          %tr
+            %td.label Version
+            %td.value
+              = link_to "#{audit_count(@ic_supplier)}", :controller => :ic_suppliers, :action => :audit_logs, :version_id => audit_count(@ic_supplier), :id => @ic_supplier.id
+          %tr
+            %td.label Form Errors
+            %td.value
+              = ' '
+            %td#msg-error
+              = error_message_for(@ic_supplier, :base, :prepend_text => "")
+          %tr
+            %td.label Supplier Code
+            %td.value
+              = @ic_supplier.supplier_code
+            %td#msg-error
+              = error_message_for(@ic_supplier, :supplier_code, :prepend_text => "")
+          %tr
+            %td.label Supplier Name
+            %td.value
+              = @ic_supplier.supplier_name
+            %td#msg-error
+              = error_message_for(@ic_supplier, :supplier_name, :prepend_text => "")
+          %tr
+            %td.label Customer ID
+            %td.value
+              = @ic_supplier.customer_id
+            %td#msg-error
+              = error_message_for(@ic_supplier, :customer_id, :prepend_text => "")
+          %tr
+            %td.label 
+              = "Supplier's Over Draft Account"
+            %td.value
+              = @ic_supplier.od_account_no
+            %td#msg-error
+              = error_message_for(@ic_supplier, :od_account_no, :prepend_text => "")
+          %tr
+            %td.label 
+              = "Supplier's Current Account"
+            %td.value
+              = @ic_supplier.ca_account_no
+            %td#msg-error
+              = error_message_for(@ic_supplier, :ca_account_no, :prepend_text => "")
+          %tr
+            %td.label Enabled?
+            %td.value
+              = @ic_supplier.is_enabled
+            %td#msg-error
+              = error_message_for(@ic_supplier, :is_enabled, :prepend_text => "")
+          %tr
+            %td.label Created By
+            %td.value
+              = @ic_supplier.created_user.try(:username)
+            %td#msg-error
+              = error_message_for(@ic_supplier, :created_by, :prepend_text => "")
+          %tr
+            %td.label Updated By
+            %td.value
+              = @ic_supplier.updated_user.try(:username)
+            %td#msg-error
+              = error_message_for(@ic_supplier, :updated_by, :prepend_text => "")
+          %tr
+            %td.label Created At
+            %td.value
+              = @ic_supplier.created_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td#msg-error
+              = error_message_for(@ic_supplier, :created_at, :prepend_text => "")
+          %tr
+            %td.label Updated At
+            %td.value
+              = @ic_supplier.updated_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td#msg-error
+              = error_message_for(@ic_supplier, :updated_at, :prepend_text => "")
