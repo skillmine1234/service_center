@@ -6,7 +6,7 @@ Group.seed(:name,
   { name: "flex-proxy"},
   { name: "imt"},
   { name: "funds-transfer"},
-  # { name: "salary-upload"},
-  # { name: "instant-credit"},
+  { name: "salary-upload"},
+  { name: "instant-credit"},
   { name: "prepaid-card2"}
 )
