@@ -7,9 +7,11 @@ describe Pc2App do
   end
   
   context "validations" do
-    [:app_id, :identity_user_id].each do |att|
+    [:app_id, :identity_user_id, :customer_id].each do |att|
       it { should validate_presence_of(att)}
     end
+    
+    it { should validate_numericality_of(:customer_id)}
 
     it do
       pc2_app = Factory(:pc2_app, :app_id => 'App10', :approval_status => 'A')
