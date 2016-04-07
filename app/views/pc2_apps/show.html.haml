@@ -1,0 +1,69 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8; height:950px;'}
+    #form-details
+      %h3 PC2 App Details 
+      %br
+      %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
+        - can = can? :edit, @pc2_app
+        %a.btn{:href => "#{!(can) ? '#' : '/pc2_apps/' + @pc2_app.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
+        = render 'pc2_apps/approve', :@record => @pc2_app
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
+        - if !@pc2_app.nil?
+          %tr
+            %td.label Version
+            %td.value
+              = link_to "#{audit_count(@pc2_app)}", :controller => :pc2_apps, :action => :audit_logs, :version_id => audit_count(@pc2_app), :id => @pc2_app.id
+          %tr
+            %td.label Form Errors
+            %td.value
+              = ' '
+            %td#msg-error
+              = error_message_for(@pc2_app, :base, :prepend_text => "")
+          %tr
+            %td.label App ID
+            %td.value
+              = @pc2_app.app_id
+            %td#msg-error
+              = error_message_for(@pc2_app, :app_id, :prepend_text => "")
+          %tr
+            %td.label Customer ID
+            %td.value
+              = @pc2_app.customer_id
+            %td#msg-error
+              = error_message_for(@pc2_app, :customer_id, :prepend_text => "")
+          %tr
+            %td.label Is Enabled?
+            %td.value
+              = @pc2_app.is_enabled
+            %td#msg-error
+              = error_message_for(@pc2_app, :is_enabled, :prepend_text => "")
+          %tr
+            %td.label Identity User ID
+            %td.value
+              = @pc2_app.identity_user_id
+            %td#msg-error
+              = error_message_for(@pc2_app, :identity_user_id, :prepend_text => "")
+          %tr
+            %td.label Created By
+            %td.value
+              = @pc2_app.created_user.try(:username)
+            %td#msg-error
+              = error_message_for(@pc2_app, :created_by, :prepend_text => "")
+          %tr
+            %td.label Updated By
+            %td.value
+              = @pc2_app.updated_user.try(:username)
+            %td#msg-error
+              = error_message_for(@pc2_app, :updated_by, :prepend_text => "")
+          %tr
+            %td.label Created At
+            %td.value
+              = @pc2_app.created_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td#msg-error
+              = error_message_for(@pc2_app, :created_at, :prepend_text => "")
+          %tr
+            %td.label Updated At
+            %td.value
+              = @pc2_app.updated_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td#msg-error
+              = error_message_for(@pc2_app, :updated_at, :prepend_text => "")

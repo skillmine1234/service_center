@@ -8,6 +8,8 @@ class CreateIcIncomingRecords < ActiveRecord::Migration
       t.date :invoice_due_date, :comment => "the invoice due date"
       t.number :invoice_amount, :comment => "the invoice amount, this is also the paid amount as invoices are paid only in full"
       t.string :debit_ref_no, :limit => 64, :comment => "the reference no of the repayment (debit) as will be seen in the statement"
+      t.string :corp_customer_id, :limit => 15, :comment => "the customer id of the corporate, who is paying the supplier od"
+      t.string :pm_utr, :limit => 64, :comment => "the transaction unique ref No of NEFT done by corporate"
     end
 
     add_index :ic_incoming_records, :incoming_file_record_id, :name => "ic_record_index", :unique => true

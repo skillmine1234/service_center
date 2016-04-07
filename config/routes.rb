@@ -40,7 +40,9 @@ ServiceCenter::Application.routes.draw do
   resources :bm_aggregator_payments
   resources :bm_apps
   resources :pc_apps
+  resources :pc2_apps
   resources :pc_unapproved_records
+  resources :pc2_unapproved_records
   resources :pc_fee_rules
   resources :fp_unapproved_records
   resources :fp_operations
@@ -66,6 +68,7 @@ ServiceCenter::Application.routes.draw do
   end
   resources :ic_customers
   resources :ic_suppliers
+  resources :ic_invoices
   resources :ic_unapproved_records
 
   namespace :api do
@@ -89,6 +92,7 @@ ServiceCenter::Application.routes.draw do
   get '/bm_aggregator_payment/:id/audit_logs' => 'bm_aggregator_payments#audit_logs'
   get '/bm_app/:id/audit_logs' => 'bm_apps#audit_logs'
   get '/pc_app/:id/audit_logs' => 'pc_apps#audit_logs'
+  get '/pc2_app/:id/audit_logs' => 'pc2_apps#audit_logs'
   get '/pc_fee_rule/:id/audit_logs' => 'pc_fee_rules#audit_logs'
   get '/fp_operation/:id/audit_logs' => 'fp_operations#audit_logs'
   get '/fp_auth_rule/:id/audit_logs' => 'fp_auth_rules#audit_logs'
@@ -131,6 +135,7 @@ ServiceCenter::Application.routes.draw do
   put '/bm_aggregator_payment/:id/approve' => "bm_aggregator_payments#approve"
   put '/bm_app/:id/approve' => "bm_apps#approve"
   put '/pc_app/:id/approve' => "pc_apps#approve"
+  put '/pc2_app/:id/approve' => "pc2_apps#approve"
   put '/pc_fee_rule/:id/approve' => "pc_fee_rules#approve"
   put '/fp_operation/:id/approve' => "fp_operations#approve"
   put '/fp_auth_rule/:id/approve' => "fp_auth_rules#approve"

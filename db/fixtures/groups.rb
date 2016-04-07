@@ -7,5 +7,6 @@ Group.seed(:name,
   { name: "imt"},
   { name: "funds-transfer"},
   { name: "salary-upload"},
-  { name: "instant-credit"}
+  { name: "instant-credit"},
+  { name: "prepaid-card2"}
 )

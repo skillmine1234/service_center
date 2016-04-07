@@ -11,6 +11,8 @@ class Group < ActiveRecord::Base
       ['BmRule','BmBiller','BmBillPayment','BmAggregatorPayment','BmApp','BmUnapprovedRecord']
     when "prepaid-card"
       ['PcApp','PcFeeRule','PcUnapprovedRecord']
+    when "prepaid-card2"
+      ['Pc2App','Pc2UnapprovedRecord']
     when "flex-proxy"
       ['FpOperation','FpAuthRule','FpUnapprovedRecord']
     when "imt"
@@ -20,7 +22,7 @@ class Group < ActiveRecord::Base
     when "salary-upload"
       ['IncomingFile','SuCustomer','SuUnapprovedRecord','SuIncomingRecord']
     when "instant-credit"
-      ['IcCustomer','IcSupplier','IcUnapprovedRecord']
+      ['IcCustomer','IcSupplier','IcUnapprovedRecord','IcInvoice']
     else
       []
     end

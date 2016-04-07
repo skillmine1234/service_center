@@ -292,3 +292,23 @@
         = image_tag 'instant_credit_suppliers_icon.png', :size => "80x80"
       %br
         = "Instant Credit Suppliers"
+    .box  
+      = link_to '/ic_invoices' do
+        = image_tag 'instant_credit_invoices_icon.png', :size => "80x80"
+      %br
+        = "Instant Credit Invoices"
+
+- if @current_user.group_names.include?("prepaid-card2")
+  %h1 Prepaid Card2
+  .slide-container
+    .box  
+      = link_to '/pc2_unapproved_records' do
+        = image_tag 'work-list.jpg', :size => "80x80"
+      %br
+        = "Approval Worklist"
+  .slide-container
+    .box
+      = link_to '/pc2_apps' do
+        = image_tag 'pc_apps.png', :size => "80x80"
+      %br
+        = "PC2 Apps"
