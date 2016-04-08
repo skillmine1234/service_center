@@ -12,6 +12,9 @@ class IcCustomer < ActiveRecord::Base
   validates_numericality_of :customer_id, :app_id, :identity_user_id, :repay_account_no, :fee_income_gl, :cust_contact_mobile
 
   validates_uniqueness_of :customer_id, :scope => :approval_status
+  validates_uniqueness_of :app_id, :scope => :approval_status
+  validates_uniqueness_of :identity_user_id, :scope => :approval_status
+  validates_uniqueness_of :repay_account_no, :scope => :approval_status
 
   validates :customer_id, length: { maximum: 15 }
   [:app_id, :identity_user_id, :repay_account_no, :fee_income_gl].each do |column|

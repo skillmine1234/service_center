@@ -33,13 +33,13 @@
         = error_message_for(@ic_customer, :repay_account_no, :prepend_text => "")
 
     .control-group
-      = f.label :fee_pct, "Fee Percentage", :class => 'control-label'
+      = f.label :fee_pct, "*Fee Percentage", :class => 'control-label'
       = f.text_field :fee_pct
       #msg-error
         = error_message_for(@ic_customer, :fee_pct, :prepend_text => "")
 
     .control-group
-      = f.label :fee_income_gl, "*Fee Income Amount", :class => 'control-label'
+      = f.label :fee_income_gl, "*Fee Income Account No", :class => 'control-label'
       = f.text_field :fee_income_gl, :maxlength => 20
       #msg-error
         = error_message_for(@ic_customer, :fee_income_gl, :prepend_text => "")

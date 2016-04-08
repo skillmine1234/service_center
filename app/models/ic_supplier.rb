@@ -21,13 +21,4 @@ class IcSupplier < ActiveRecord::Base
 
   validates :supplier_code, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}' }
   validates :supplier_name, format: {with: /\A[a-z|A-Z|0-9\s]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9-.\s]}' }
-                                           
-  before_save :to_upcase
-
-  def to_upcase
-    unless self.frozen?
-      self.supplier_name = self.supplier_name.upcase unless self.supplier_name.nil?
-    end
-  end
-
 end

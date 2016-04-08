@@ -2,9 +2,9 @@
 
 FactoryGirl.define do
   factory :ic_invoice do
-    corp_customer_id "MyString"
-    supplier_code "MyString"
-    invoice_no "MyString"
+    sequence(:corp_customer_id) {|n| "#{n}" }
+    sequence(:supplier_code) {|n| "#{n}" }
+    sequence(:invoice_no) {|n| "9" + "%03i" % "#{n}" }
     invoice_date "2016-04-07"
     invoice_due_date "2016-04-07"
     invoice_amount "9.99"

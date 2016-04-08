@@ -30,20 +30,6 @@
       Fee Amount
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Discounted Amount
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Credit Extension Date
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Credit Reference No
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Incoming NEFT/RTGS UTR 
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Repaid Amount
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Repayment Date
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Repayment Reference No
-
-
   .tbody
     - @ic_invoices.each do |ic_invoice|
       %tr
@@ -65,16 +51,3 @@
           = ic_invoice.fee_amount
         %td{:style=>'text-align:left;'}
           = ic_invoice.discounted_amount
-        %td{:style=>'text-align:left;'}
-          = ic_invoice.credit_date
-        %td{:style=>'text-align:left;'}
-          = ic_invoice.credit_ref_no
-        %td{:style=>'text-align:left;'}
-          = ic_invoice.pm_utr
-        %td{:style=>'text-align:left;'}
-          = ic_invoice.repaid_amount
-        %td{:style=>'text-align:left;'}
-          = ic_invoice.repayment_date
-        %td{:style=>'text-align:left;'}
-          = ic_invoice.repayment_ref_no
-
