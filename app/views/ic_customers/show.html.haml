@@ -26,6 +26,12 @@
             %td#msg-error
               = error_message_for(@ic_customer, :customer_id, :prepend_text => "")
           %tr
+            %td.label Customer Name
+            %td.value
+              = @ic_customer.customer_name
+            %td#msg-error
+              = error_message_for(@ic_customer, :customer_name, :prepend_text => "")
+          %tr
             %td.label Application ID
             %td.value
               = @ic_customer.app_id

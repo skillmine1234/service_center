@@ -7,7 +7,7 @@ class IcCustomer < ActiveRecord::Base
 
   validates_presence_of :customer_id, :app_id, :identity_user_id, :repay_account_no, :fee_pct, 
                         :fee_income_gl, :max_overdue_pct, :cust_contact_email, :cust_contact_mobile, 
-                        :ops_email, :rm_email, :is_enabled
+                        :ops_email, :rm_email, :is_enabled, :customer_name
 
   validates_numericality_of :customer_id, :app_id, :identity_user_id, :repay_account_no, :fee_income_gl, :cust_contact_mobile
 
@@ -20,7 +20,7 @@ class IcCustomer < ActiveRecord::Base
   [:app_id, :identity_user_id, :repay_account_no, :fee_income_gl].each do |column|
     validates column, length: { maximum: 20 }
   end
-  [:cust_contact_email, :ops_email, :rm_email].each do |column|
+  [:cust_contact_email, :ops_email, :rm_email, :customer_name].each do |column|
     validates column, length: { maximum: 100 }
   end
   validates :cust_contact_mobile, length: { maximum: 10 }
