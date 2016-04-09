@@ -138,11 +138,11 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.code = 'PAYNOW'
   s.name = 'INSTANTCREDIT'
   s.msg_domain = 'DFDL'
-  s.msg_model = '{http://www.quantiguous.com/services/file}:instant_credit'
+  s.msg_model = '{http://www.quantiguous.com/services/file}:repayCredit'
   s.skip_first = 'Y'
   s.auto_upload = 'Y'
   s.validate_all = 'Y'
   s.build_response_file = 'Y' 
-  s.db_unit_name = "pk_qg_ic_file_validator.do"
+  s.db_unit_name = "pk_qg_ic_file_validator"
   s.records_table = 'ic_incoming_records'
 end

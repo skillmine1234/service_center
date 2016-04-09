@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160408121207) do
+ActiveRecord::Schema.define(version: 20160409074910) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",               null: false
@@ -1124,6 +1124,7 @@ ActiveRecord::Schema.define(version: 20160408121207) do
     t.string  "debit_ref_no",            limit: 64
     t.string  "corp_customer_id",        limit: 15
     t.string  "pm_utr",                  limit: 64
+    t.string  "file_name",               limit: 50,  null: false
   end
 
   add_index "ic_incoming_records", ["incoming_file_record_id"], name: "ic_record_index", unique: true
