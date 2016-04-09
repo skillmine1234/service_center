@@ -5,7 +5,7 @@ class IcCustomer < ActiveRecord::Base
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
 
-  validates_presence_of :customer_id, :app_id, :identity_user_id, :repay_account_no, :fee_pct, 
+  validates_presence_of :customer_id, :app_id, :repay_account_no, :fee_pct, 
                         :fee_income_gl, :max_overdue_pct, :cust_contact_email, :cust_contact_mobile, 
                         :ops_email, :rm_email, :is_enabled, :customer_name
 

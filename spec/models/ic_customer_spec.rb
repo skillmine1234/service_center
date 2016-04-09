@@ -10,9 +10,9 @@ describe IcCustomer do
   end
   
   context 'validation' do
-    [:customer_id, :app_id, :identity_user_id, :repay_account_no, :fee_pct, 
+    [:customer_id, :app_id, :repay_account_no, :fee_pct, 
      :fee_income_gl, :max_overdue_pct, :cust_contact_email, :cust_contact_mobile, 
-     :ops_email, :rm_email, :is_enabled].each do |att|
+     :ops_email, :rm_email, :is_enabled, :customer_name].each do |att|
       it { should validate_presence_of(att) }
     end
     
@@ -29,7 +29,7 @@ describe IcCustomer do
         should validate_length_of(att).is_at_most(20)
       end
 
-      [:cust_contact_email, :ops_email, :rm_email].each do |att|
+      [:cust_contact_email, :ops_email, :rm_email, :customer_name].each do |att|
         should validate_length_of(att).is_at_most(100)
       end
 
