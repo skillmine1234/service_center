@@ -276,6 +276,11 @@
 - if @current_user.group_names.include?("instant-credit")
   %h1 Instant Credit
   .slide-container
+    .box  
+      = link_to incoming_files_path(:sc_service => "INSTANTCREDIT") do
+        = image_tag 'upload.png', :size => "80x80"
+      %br
+        = "File Uploads"
     .box
       = link_to '/ic_unapproved_records' do
         = image_tag 'work-list.jpg', :size => "80x80"

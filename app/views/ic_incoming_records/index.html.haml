@@ -1,0 +1,60 @@
+%br
+%h1 Instant Credit Incoming Records
+%h2.collapsible
+  Advanced Search
+  %span.caret
+.collapsible-content
+  = render :partial => 'advanced_search'
+%h4
+  %br
+  &nbsp;
+  %br
+  = "Total Count: #{@record_count}"
+%br
+= will_paginate @records
+
+= simple_form_for :ic_incoming_record, :url => update_multiple_ic_incoming_records_path, :html => { :method => :put, :class => 'form-horizontal', :autocomplete=>"off", :id => 'update_records', :style=> 'overflow: auto;'} do |f| 
+  %table.table.table-bordered.table-striped.table-hover{:style => 'width:100%; border:1px'}
+    .thead
+      %tr
+        %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+        %th{:style=>'text-align:left; background-color: lightblue;'}
+          = check_box_tag(:select_all, value = "1", checked = false, options = {})
+        %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+          File Name
+        %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+          Supplier Code
+        %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+          Invoice No
+        %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+          Invoice Date
+        %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+          Invoice Amount
+        %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+          Debit Reference No
+        %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+          Audit Steps
+    .tbody
+      - @records.each do |record|
+        %tr
+          %td{:style=>'text-align:left;'}
+            = link_to "show", record
+          %td{:style=>'text-align:left;'}
+            - if record.incoming_file_record.try(:should_skip) != 'Y' or record.incoming_file_record.fault_code.start_with?("ns:W")
+              = check_box_tag "record_ids[]", record.id, false, class: 'txn_select'
+          %td{:style=>'text-align:left;'}
+            = record.file_name
+          %td{:style=>'text-align:left;'}
+            = record.supplier_code
+          %td{:style=>'text-align:left;'}
+            = record.invoice_no
+          %td{:style=>'text-align:left;'}
+            = record.invoice_date
+          %td{:style=>'text-align:left;'}
+            = record.debit_ref_no
+          %td{:style=>'text-align:left;'}
+            = link_to 'Show', {:controller => 'ic_incoming_records', :action => 'audit_steps', :id => record.id, :step_name => 'ALL'}
+  .form-actions{:style=>"text-align: center;"}
+    = hidden_field_tag :status
+    = f.button :submit ,:class=>"btn btn-primary ecol_transcations_btn", :id => 'submit_skip', data: {:confirm=>"Are you sure?"}, :value => "Skip Records"
+    = f.button :submit ,:class=>"btn btn-primary ecol_transcations_btn", :id => 'submit_override', data: {:confirm=>"Are you sure?"}, :value => "Override Records"

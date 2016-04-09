@@ -61,6 +61,11 @@ ServiceCenter::Application.routes.draw do
       put  'update_multiple'
     end
   end
+  resources :ic_incoming_records do 
+    collection do
+      put  'update_multiple'
+    end
+  end
   resources :outgoing_files do
     member do
       get 'download_response_file'
@@ -79,6 +84,8 @@ ServiceCenter::Application.routes.draw do
 
   get 'su_incoming_records/:id/audit_steps/:step_name' => 'su_incoming_records#audit_steps'
   get '/su_incoming_records/:id/audit_logs' => 'su_incoming_records#audit_logs'
+  get 'ic_incoming_records/:id/audit_steps/:step_name' => 'ic_incoming_records#audit_steps'
+  get '/ic_incoming_records/:id/audit_logs' => 'ic_incoming_records#audit_logs'
   get '/partner/:id/audit_logs' => 'partners#audit_logs'
   get '/purpose_code/:id/audit_logs' => 'purpose_codes#audit_logs'
   get '/inw_remittance_rule/:id/audit_logs' => 'inw_remittance_rules#audit_logs'
