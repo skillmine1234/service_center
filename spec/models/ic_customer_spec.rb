@@ -10,22 +10,19 @@ describe IcCustomer do
   end
   
   context 'validation' do
-    [:customer_id, :app_id, :repay_account_no, :fee_pct, 
+    [:customer_id, :app_id, :identity_user_id, :repay_account_no, :fee_pct, 
      :fee_income_gl, :max_overdue_pct, :cust_contact_email, :cust_contact_mobile, 
      :ops_email, :rm_email, :is_enabled, :customer_name].each do |att|
       it { should validate_presence_of(att) }
-    end
-    
-    [:customer_id, :app_id, :identity_user_id, :repay_account_no, :fee_income_gl, :cust_contact_mobile].each do |att|
-      it { should validate_numericality_of(att) }
     end
 
     it do
       ic_customer = Factory(:ic_customer, :approval_status => 'A')
 
-      should validate_length_of(:customer_id).is_at_most(15)
+      should validate_length_of(:customer_id).is_at_least(3).is_at_most(15)
+      should validate_length_of(:app_id).is_at_least(5).is_at_most(20)
 
-      [:app_id, :identity_user_id, :repay_account_no, :fee_income_gl].each do |att|
+      [:identity_user_id, :repay_account_no, :fee_income_gl].each do |att|
         should validate_length_of(att).is_at_most(20)
       end
 
@@ -47,18 +44,62 @@ describe IcCustomer do
       ic_customer2.should_not be_valid
       ic_customer2.errors_on(:customer_id).should == ["has already been taken"]
     end
+
+    it "should return error when percentages fields > 100" do
+      ic_customer1 = Factory.build(:ic_customer, :fee_pct => 100.10)
+      ic_customer1.should_not be_valid
+      ic_customer1.errors_on(:fee_pct).should == ["must be less than or equal to 100"]
+      ic_customer2 = Factory.build(:ic_customer, :max_overdue_pct => 100.10)
+      ic_customer2.should_not be_valid
+      ic_customer2.errors_on(:max_overdue_pct).should == ["must be less than or equal to 100"]
+    end
+
+    it "should return error when percentages fields < 0" do
+      ic_customer1 = Factory.build(:ic_customer, :fee_pct => -1.1)
+      ic_customer1.should_not be_valid
+      ic_customer1.errors_on(:fee_pct).should == ["must be greater than or equal to 0"]
+      ic_customer2 = Factory.build(:ic_customer, :max_overdue_pct => -1.1)
+      ic_customer2.should_not be_valid
+      ic_customer2.errors_on(:max_overdue_pct).should == ["must be greater than or equal to 0"]
+    end
+
+    it "should save the record when percentages fields is between 0 & 100" do
+      ic_customer1 = Factory.build(:ic_customer, :fee_pct => 45.55)
+      ic_customer1.should be_valid
+      ic_customer1.errors_on(:fee_pct).should == []
+      ic_customer2 = Factory.build(:ic_customer, :max_overdue_pct => 45.55)
+      ic_customer2.should be_valid
+      ic_customer2.errors_on(:max_overdue_pct).should == []
+    end
   end
 
-  context "cust_contact_mobile format" do 
+  context "numeric fields format" do
     it "should allow valid format" do
-      should allow_value('9087654321').for(:cust_contact_mobile)
-    end 
-    
+      [:customer_id, :app_id, :identity_user_id, :repay_account_no, :fee_income_gl, :cust_contact_mobile].each do |att|
+        should allow_value('0123456789').for(att)
+      end
+
+      [:identity_user_id, :app_id].each do |att|
+        should allow_value('ABC123').for(att)
+      end
+
+      [:fee_pct, :max_overdue_pct].each do |att|
+        should allow_value('88.88').for(att)
+      end
+    end
+
     it "should not allow invalid format" do
-      should_not allow_value('@CUST01').for(:cust_contact_mobile)
-      should_not allow_value('CUST01/').for(:cust_contact_mobile)
-      should_not allow_value('CUST-01').for(:cust_contact_mobile)
-    end     
+      ic_customer = Factory.build(:ic_customer, :customer_id => '@,.9023jsf', :app_id => '@acddsfdfd', 
+                                  :identity_user_id => "IUID-1", :repay_account_no => "ACC01", :fee_pct => "45.5f", 
+                                  :fee_income_gl => "400$", :max_overdue_pct => "77f", :cust_contact_mobile => "MOB99-09")
+      ic_customer.save == false
+      [:identity_user_id, :app_id].each do |att|
+        ic_customer.errors_on(att).should == ["Invalid format, expected format is : {[a-z|A-Z|0-9]}"]
+      end
+      [:customer_id, :repay_account_no, :fee_income_gl, :cust_contact_mobile].each do |att|
+        ic_customer.errors_on(att).should == ["Invalid format, expected format is : {[0-9]}"]
+      end
+    end
   end
 
   context "email_id format" do 

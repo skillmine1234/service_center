@@ -6,10 +6,7 @@ class SuCustomer < ActiveRecord::Base
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
 
   validates_presence_of :account_no, :customer_id, :pool_account_no, :pool_customer_id, :max_distance_for_name
-
-  validates :account_no, :customer_id, :pool_account_no, :pool_customer_id, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9]}' }
-  validates_numericality_of :account_no, :customer_id, :pool_account_no, :pool_customer_id
-
+  validates_numericality_of :account_no, :customer_id, :pool_account_no, :pool_customer_id, :message => 'Invalid format, expected format is : {[0-9]}'
   validates_uniqueness_of :account_no, :scope => [:customer_id, :approval_status]
 
   validates :max_distance_for_name, :numericality => {:greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }

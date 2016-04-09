@@ -13,10 +13,6 @@ describe SuCustomer do
     [:account_no, :customer_id, :pool_account_no, :pool_customer_id].each do |att|
       it { should validate_presence_of(att) }
     end
-    
-    [:account_no, :customer_id, :pool_account_no, :pool_customer_id].each do |att|
-      it { should validate_numericality_of(att) }
-    end
 
     it do
       su_customer = Factory(:su_customer, :approval_status => 'A')
@@ -52,7 +48,7 @@ describe SuCustomer do
       su_customer.errors_on(:max_distance_for_name).should == ["must be greater than or equal to 0"]
     end
 
-    it "should save the record when max_distance_for_name is between 0 & 10" do
+    it "should save the record when max_distance_for_name is between 0 & 100" do
       su_customer = Factory.build(:su_customer, :max_distance_for_name => 45)
       su_customer.should be_valid
       su_customer.errors_on(:max_distance_for_name).should == []
@@ -71,7 +67,7 @@ describe SuCustomer do
                                   :pool_account_no => "ACC01", :pool_customer_id => "CUST01")
       su_customer.save == false
       [:account_no, :customer_id, :pool_account_no, :pool_customer_id].each do |att|
-        su_customer.errors_on(att).should == ["Invalid format, expected format is : {[0-9]}", "is not a number"]
+        su_customer.errors_on(att).should == ["Invalid format, expected format is : {[0-9]}"]
       end
     end
   end

@@ -13,17 +13,12 @@ describe IcSupplier do
     [:supplier_code, :supplier_name, :customer_id, :od_account_no, :ca_account_no].each do |att|
       it { should validate_presence_of(att) }
     end
-    
-    [:customer_id, :od_account_no, :ca_account_no].each do |att|
-      it { should validate_numericality_of(att) }
-    end
 
     it do
       ic_supplier = Factory(:ic_supplier, :approval_status => 'A')
 
-      [:supplier_code, :customer_id].each do |att|
-        should validate_length_of(att).is_at_most(15)
-      end
+      should validate_length_of(:customer_id).is_at_least(3).is_at_most(15)
+      should validate_length_of(:supplier_code).is_at_most(15)
 
       [:od_account_no, :ca_account_no].each do |att|
         should validate_length_of(att).is_at_most(20)
@@ -42,6 +37,22 @@ describe IcSupplier do
       ic_supplier2 = Factory.build(:ic_supplier, :supplier_code => "9001", :customer_id => "8001", :approval_status => 'A')
       ic_supplier2.should_not be_valid
       ic_supplier2.errors_on(:supplier_code).should == ["has already been taken"]
+    end
+  end
+
+  context "numeric fields format" do
+    it "should allow valid format" do
+      [:customer_id, :od_account_no, :ca_account_no].each do |att|
+        should allow_value('0123456789').for(att)
+      end
+    end
+
+    it "should not allow invalid format" do
+      ic_supplier = Factory.build(:ic_supplier, :customer_id => '@,.9023jsf', :od_account_no => "ODACC01", :ca_account_no => "CA-ACC01")
+      ic_supplier.save == false
+      [:customer_id, :od_account_no, :ca_account_no].each do |att|
+        ic_supplier.errors_on(att).should == ["Invalid format, expected format is : {[0-9]}"]
+      end
     end
   end
 

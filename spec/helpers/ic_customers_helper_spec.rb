@@ -7,9 +7,9 @@ describe IcCustomersHelper do
       find_ic_customers({:customer_id => '1122'}).should == [ic_customer]
       find_ic_customers({:customer_id => '1123'}).should == []
       
-      ic_customer = Factory(:ic_customer, :app_id => '8888', :approval_status => "A")
-      find_ic_customers({:app_id => '8888'}).should == [ic_customer]
-      find_ic_customers({:app_id => '8887'}).should == []
+      ic_customer = Factory(:ic_customer, :app_id => '88888', :approval_status => "A")
+      find_ic_customers({:app_id => '88888'}).should == [ic_customer]
+      find_ic_customers({:app_id => '88887'}).should == []
 
       ic_customer = Factory(:ic_customer, :identity_user_id => '7777', :approval_status => "A")
       find_ic_customers({:identity_user_id => '7777'}).should == [ic_customer]
