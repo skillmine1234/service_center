@@ -10,6 +10,7 @@ class IcCustomer < ActiveRecord::Base
                         :ops_email, :rm_email, :is_enabled, :customer_name
 
   validates :identity_user_id, :app_id, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}'}
+  validates :customer_name, format: {with: /\A[a-z|A-Z|0-9\s]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9\s]}'}, length: {maximum: 20}
   validates :cust_contact_email, :ops_email, :rm_email, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/, :message => 'Invalid Email ID, expected format is abc@def.com' }
   validates :fee_pct, :max_overdue_pct, :numericality => {:greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
   validates_numericality_of :customer_id, :repay_account_no, :fee_income_gl, :cust_contact_mobile, :message => 'Invalid format, expected format is : {[0-9]}'

@@ -118,6 +118,18 @@ describe IcCustomer do
     end    
   end
 
+  context "customer_name format" do
+    it "should allow valid format" do
+      should allow_value('ABCDCo').for(:customer_name)
+      should allow_value('ABCD Co').for(:customer_name)
+    end
+
+    it "should not allow invalid format" do
+      should_not allow_value('@AbcCo').for(:customer_name)
+      should_not allow_value('/ab0QWER').for(:customer_name)
+    end
+  end
+
   
   context "default_scope" do 
     it "should only return 'A' records by default" do 
