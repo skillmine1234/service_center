@@ -87,7 +87,7 @@
         = error_message_for(@ic_customer, :is_enabled, :prepend_text => "")
 
   .form-actions
-    - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
+    - (f.object.new_record? and f.object.customer_id.nil?) ? label_name = "Create" : label_name = "Update"
     = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_ic_customer', :value => label_name + ' Instant Credit Customer'
     = link_to :Cancel,'/ic_customers', :name => 'cancel', :class=>"cancel btn"
 

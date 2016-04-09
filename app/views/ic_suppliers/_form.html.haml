@@ -38,7 +38,7 @@
       #msg-error
         = error_message_for(@ic_supplier, :is_enabled, :prepend_text => "")
   .form-actions
-    - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
+    - (f.object.new_record? and f.object.supplier_code.nil?) ? label_name = "Create" : label_name = "Update"
     = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_ic_supplier', :value => label_name + ' Instant Credit Supplier'
     = link_to :Cancel,'/ic_suppliers', :name => 'cancel', :class=>"cancel btn"
 

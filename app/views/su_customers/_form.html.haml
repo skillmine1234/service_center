@@ -39,7 +39,7 @@
         = error_message_for(@su_customer, :is_enabled, :prepend_text => "")
 
   .form-actions
-    - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
+    - (f.object.new_record? and f.object.customer_id.nil?) ? label_name = "Create" : label_name = "Update"
     = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_su_customer', :value => label_name + ' Salary Upload Customer'
     = link_to :Cancel,'/su_customers', :name => 'cancel', :class=>"cancel btn"
 
