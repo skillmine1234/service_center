@@ -27,6 +27,8 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Pool Customer ID
     %th{:style=>'text-align:left; background-color: lightblue;'}
+      Max Distance For Name %
+    %th{:style=>'text-align:left; background-color: lightblue;'}
       Is Enabled?
 
   .tbody
@@ -44,6 +46,8 @@
           = su_customer.pool_account_no
         %td{:style=>'text-align:left;'}
           = su_customer.pool_customer_id
+        %td{:style=>'text-align:left;'}
+          = su_customer.max_distance_for_name
         %td{:style=>'text-align:left;'}
           = su_customer.is_enabled
 

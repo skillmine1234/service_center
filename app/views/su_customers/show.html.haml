@@ -44,7 +44,7 @@
             %td#msg-error
               = error_message_for(@su_customer, :pool_customer_id, :prepend_text => "")
           %tr
-            %td.label Max Distance For Name
+            %td.label Max Distance For Name %
             %td.value
               = @su_customer.max_distance_for_name.nil? ? "-" : "#{@su_customer.max_distance_for_name} %"
             %td#msg-error

@@ -58,6 +58,23 @@ describe SuCustomer do
       su_customer.errors_on(:max_distance_for_name).should == []
     end
   end
+
+  context "fields format" do
+    it "should allow valid format" do
+      [:account_no, :customer_id, :pool_account_no, :pool_customer_id].each do |att|
+        should allow_value('0123456789').for(att)
+      end
+    end
+
+    it "should not allow invalid format" do
+      su_customer = Factory.build(:su_customer, :account_no => '@acddsfdfd', :customer_id => '@,.9023jsf', 
+                                  :pool_account_no => "ACC01", :pool_customer_id => "CUST01")
+      su_customer.save == false
+      [:account_no, :customer_id, :pool_account_no, :pool_customer_id].each do |att|
+        su_customer.errors_on(att).should == ["Invalid format, expected format is : {[0-9]}", "is not a number"]
+      end
+    end
+  end
   
   context "default_scope" do 
     it "should only return 'A' records by default" do 
