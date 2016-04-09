@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160406113826) do
+ActiveRecord::Schema.define(version: 20160408121207) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",               null: false
@@ -19,21 +19,21 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.integer  "author_id",     limit: nil
     t.string   "author_type"
     t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.string   "namespace"
   end
 
   add_index "active_admin_comments", ["author_type", "author_id"], name: "i_act_adm_com_aut_typ_aut_id"
   add_index "active_admin_comments", ["namespace"], name: "i_act_adm_com_nam"
-  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "i_act_adm_com_res_typ_res_id"
+  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "i_adm_not_res_typ_res_id"
 
   create_table "admin_roles", force: :cascade do |t|
     t.string   "name"
     t.integer  "resource_id",   limit: nil
     t.string   "resource_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   add_index "admin_roles", ["name", "resource_type", "resource_id"], name: "i_adm_rol_nam_res_typ_res_id"
@@ -50,8 +50,8 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                                        null: false
+    t.datetime "updated_at",                                                        null: false
     t.string   "username"
     t.string   "unique_session_id",      limit: 20
     t.boolean  "inactive",               limit: nil,                default: false
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.integer "admin_role_id", limit: nil
   end
 
-  add_index "admin_users_admin_roles", ["admin_user_id", "admin_role_id"], name: "index_on_user_roles"
+  add_index "admin_users_admin_roles", ["admin_user_id", "admin_role_id"], name: "ie5534b830edc562e2a5087642817e"
 
   create_table "api_keys", force: :cascade do |t|
     t.string   "access_token"
@@ -84,8 +84,8 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.integer  "attachable_id",   limit: nil
     t.string   "attachable_type"
     t.string   "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "attachments", ["attachable_id"], name: "i_attachments_attachable_id"
@@ -162,7 +162,6 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.string   "cod_acct_no",       limit: 50,                                  null: false
     t.string   "neft_sender_ifsc",                                              null: false
     t.string   "bene_acct_no",      limit: 50,                                  null: false
-    t.decimal  "payment_amount"
     t.integer  "lock_version",                   precision: 38,                 null: false
     t.datetime "created_at",                                                    null: false
     t.datetime "updated_at",                                                    null: false
@@ -189,6 +188,7 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.string   "bene_name"
     t.string   "created_by",        limit: 20
     t.string   "updated_by",        limit: 20
+    t.decimal  "payment_amount"
   end
 
   create_table "bm_apps", force: :cascade do |t|
@@ -236,7 +236,6 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.string   "customer_id",         limit: 15,                                null: false
     t.string   "debit_account_no",    limit: 50,                                null: false
     t.string   "txn_kind",            limit: 50,                                null: false
-    t.decimal  "txn_amount",                                                    null: false
     t.string   "biller_code",         limit: 50
     t.string   "biller_acct_no",      limit: 50
     t.string   "bill_id",             limit: 50
@@ -277,6 +276,7 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.date     "due_date"
     t.string   "bill_number",         limit: 50
     t.string   "billpay_bank_ref",    limit: 20
+    t.decimal  "txn_amount",                                                    null: false
   end
 
   add_index "bm_bill_payments", ["app_id", "req_no", "attempt_no"], name: "attepmt_index_bill_payments", unique: true
@@ -391,8 +391,6 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.date     "bill_date"
     t.string   "bill_number",         limit: 50
     t.date     "due_date"
-    t.decimal  "bill_amount"
-    t.decimal  "payment_amount"
     t.string   "status_code",         limit: 50,                  null: false
     t.string   "rep_version",         limit: 5
     t.string   "rep_no",              limit: 32
@@ -401,6 +399,8 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.string   "biller_reference_no", limit: 32
     t.string   "fault_code",          limit: 50
     t.string   "fault_reason",        limit: 1000
+    t.decimal  "payment_amount"
+    t.decimal  "bill_amount"
   end
 
   add_index "bm_pay_to_biller_accts", ["app_id", "req_no", "attempt_no"], name: "attempt_no_index_biller_acct", unique: true
@@ -424,8 +424,6 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.date     "bill_date"
     t.string   "bill_number",         limit: 50
     t.date     "due_date"
-    t.decimal  "bill_amount"
-    t.decimal  "payment_amount"
     t.string   "status_code",         limit: 50,                  null: false
     t.string   "rep_version",         limit: 5
     t.string   "rep_no",              limit: 32
@@ -434,6 +432,8 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.string   "biller_reference_no", limit: 32
     t.string   "fault_code",          limit: 50
     t.string   "fault_reason",        limit: 1000
+    t.decimal  "bill_amount"
+    t.decimal  "payment_amount"
   end
 
   add_index "bm_pay_to_billers", ["app_id", "req_no", "attempt_no"], name: "attempt_no_index_pay_billers", unique: true
@@ -599,8 +599,8 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.datetime "failed_at"
     t.string   "locked_by"
     t.string   "queue"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
@@ -624,44 +624,44 @@ ActiveRecord::Schema.define(version: 20160406113826) do
   add_index "ecol_audit_logs", ["ecol_transaction_id", "step_name", "attempt_no"], name: "uk_ecol_audit_logs", unique: true
 
   create_table "ecol_customers", force: :cascade do |t|
-    t.string   "code",                  limit: 15,                               null: false
-    t.string   "name",                  limit: 100,                              null: false
-    t.string   "is_enabled",                                       default: "Y", null: false
-    t.string   "val_method",            limit: 1,                                null: false
-    t.string   "token_1_type",          limit: 3,                  default: "f", null: false
-    t.integer  "token_1_length",                    precision: 38, default: 0,   null: false
-    t.string   "val_token_1",                                      default: "f", null: false
-    t.string   "token_2_type",          limit: 3,                  default: "f", null: false
-    t.integer  "token_2_length",                    precision: 38, default: 0,   null: false
-    t.string   "val_token_2",           limit: 1,                  default: "f", null: false
-    t.string   "token_3_type",                                     default: "f", null: false
-    t.integer  "token_3_length",                    precision: 38, default: 0,   null: false
-    t.string   "val_token_3",           limit: 1,                  default: "f", null: false
-    t.string   "val_txn_date",          limit: 1,                  default: "f", null: false
-    t.string   "val_txn_amt",           limit: 1,                  default: "f", null: false
-    t.string   "val_ben_name",          limit: 1,                  default: "f", null: false
-    t.string   "val_rem_acct",          limit: 1,                  default: "f", null: false
-    t.string   "return_if_val_reject",  limit: 1,                  default: "f", null: false
+    t.string   "code",                  limit: 15
+    t.string   "name",                  limit: 100
+    t.string   "is_enabled",                                       default: "Y"
+    t.string   "val_method",            limit: 1
+    t.string   "token_1_type",          limit: 3,                  default: "f"
+    t.integer  "token_1_length",                    precision: 38, default: 0
+    t.string   "val_token_1",                                      default: "f"
+    t.string   "token_2_type",          limit: 3,                  default: "f"
+    t.integer  "token_2_length",                    precision: 38, default: 0
+    t.string   "val_token_2",           limit: 1,                  default: "f"
+    t.string   "token_3_type",                                     default: "f"
+    t.integer  "token_3_length",                    precision: 38, default: 0
+    t.string   "val_token_3",           limit: 1,                  default: "f"
+    t.string   "val_txn_date",          limit: 1,                  default: "f"
+    t.string   "val_txn_amt",           limit: 1,                  default: "f"
+    t.string   "val_ben_name",          limit: 1,                  default: "f"
+    t.string   "val_rem_acct",          limit: 1,                  default: "f"
+    t.string   "return_if_val_reject",  limit: 1,                  default: "f"
     t.string   "file_upld_mthd",        limit: 1
-    t.string   "credit_acct_val_pass",  limit: 25,                               null: false
-    t.string   "nrtv_sufx_1",           limit: 5,                  default: "f", null: false
-    t.string   "nrtv_sufx_2",           limit: 5,                  default: "f", null: false
-    t.string   "nrtv_sufx_3",           limit: 5,                  default: "f", null: false
-    t.string   "rmtr_alert_on",         limit: 1,                  default: "f", null: false
+    t.string   "credit_acct_val_pass",  limit: 25
+    t.string   "credit_acct_val_fail",  limit: 25
+    t.string   "nrtv_sufx_1",           limit: 5,                  default: "f"
+    t.string   "nrtv_sufx_2",           limit: 5,                  default: "f"
+    t.string   "nrtv_sufx_3",           limit: 5,                  default: "f"
+    t.string   "rmtr_alert_on",         limit: 1,                  default: "f"
     t.string   "rmtr_pass_txt",         limit: 500
     t.string   "rmtr_return_txt",       limit: 500
     t.string   "created_by",            limit: 20
     t.string   "updated_by",            limit: 20
-    t.integer  "lock_version",                      precision: 38, default: 0,   null: false
-    t.datetime "created_at",                                                     null: false
-    t.datetime "updated_at",                                                     null: false
-    t.string   "approval_status",       limit: 1,                  default: "U", null: false
-    t.string   "last_action",           limit: 1,                  default: "C"
-    t.integer  "approved_version",                  precision: 38
+    t.integer  "lock_version",                      precision: 38, default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "auto_credit",           limit: 1,                  default: "Y"
     t.string   "auto_return",           limit: 1,                  default: "Y"
+    t.string   "approval_status",       limit: 1,                  default: "U"
     t.integer  "approved_id",           limit: nil
-    t.string   "val_last_token_length", limit: 1,                  default: "f"
+    t.string   "last_action",           limit: 1,                  default: "C"
+    t.integer  "approved_version",                  precision: 38
     t.string   "token_1_starts_with",   limit: 29
     t.string   "token_1_contains",      limit: 29
     t.string   "token_1_ends_with",     limit: 29
@@ -671,13 +671,13 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.string   "token_3_starts_with",   limit: 29
     t.string   "token_3_contains",      limit: 29
     t.string   "token_3_ends_with",     limit: 29
-    t.string   "credit_acct_val_fail",  limit: 25
-    t.string   "val_rmtr_name",         limit: 1,                  default: "f"
+    t.string   "val_rmtr_name",         limit: 1
+    t.string   "val_last_token_length", limit: 1
     t.string   "cust_alert_on",         limit: 1,                  default: "f", null: false
     t.string   "customer_id",           limit: 50,                 default: "0", null: false
   end
 
-  add_index "ecol_customers", ["code", "approval_status"], name: "customer_index_on_status", unique: true
+  add_index "ecol_customers", ["code", "approval_status"], name: "i_eco_cus_cod_app_sta", unique: true
 
   create_table "ecol_fetch_statistics", force: :cascade do |t|
     t.datetime "last_neft_at",              null: false
@@ -890,11 +890,14 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.string   "fault_reason"
   end
 
-  create_table "encrypted_passwords", force: :cascade do |t|
-    t.integer  "created_by", precision: 38
-    t.string   "password"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+  create_table "example", id: false, force: :cascade do |t|
+    t.integer "id",  limit: nil
+    t.integer "val", limit: 10,  precision: 10
+  end
+
+  create_table "example_01", id: false, force: :cascade do |t|
+    t.integer "id",  limit: nil
+    t.integer "val",             precision: 38
   end
 
   create_table "fp_auth_rules", force: :cascade do |t|
@@ -945,6 +948,12 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.datetime "updated_at",                     null: false
   end
 
+  create_table "funds_transfer_audit_logs", force: :cascade do |t|
+    t.integer "funds_transfer_id", limit: nil
+    t.text    "request_bitstream"
+    t.text    "reply_bitstream"
+  end
+
   create_table "funds_transfer_customers", force: :cascade do |t|
     t.string   "name",                 limit: 20
     t.string   "tech_email_id"
@@ -980,11 +989,92 @@ ActiveRecord::Schema.define(version: 20160406113826) do
   add_index "funds_transfer_customers", ["name"], name: "i_fun_tra_cus_nam"
   add_index "funds_transfer_customers", ["tech_email_id"], name: "i_fun_tra_cus_tec_ema_id"
 
+  create_table "funds_transfers", force: :cascade do |t|
+    t.string   "req_no",                                             null: false
+    t.string   "req_version",            limit: 10,                  null: false
+    t.datetime "req_timestamp",                                      null: false
+    t.string   "customer_id",            limit: 20,                  null: false
+    t.string   "debit_account_no",                                   null: false
+    t.string   "bene_code"
+    t.string   "bene_full_name"
+    t.string   "bene_address1"
+    t.string   "bene_address2"
+    t.string   "bene_address3"
+    t.string   "bene_postal_code"
+    t.string   "bene_city"
+    t.string   "bene_state"
+    t.string   "bene_country"
+    t.string   "bene_contact_email_id"
+    t.string   "bene_contact_mobile_no"
+    t.string   "bene_account_no"
+    t.string   "bene_account_ifsc"
+    t.string   "bene_account_mobile_no"
+    t.string   "bene_account_mmid"
+    t.string   "transfer_type",          limit: 4
+    t.decimal  "transfer_amount"
+    t.string   "transfer_ccy"
+    t.string   "rmtr_to_bene_note"
+    t.string   "status_code",            limit: 25
+    t.string   "bank_ref",               limit: 30
+    t.string   "rep_no"
+    t.string   "rep_version",            limit: 10
+    t.datetime "rep_timestamp"
+    t.integer  "attempt_no",                          precision: 38, null: false
+    t.string   "fault_code",             limit: 50
+    t.string   "fault_reason",           limit: 1000
+    t.string   "req_transfer_type",      limit: 4
+  end
+
+  add_index "funds_transfers", ["TRUNC(\"REQ_TIMESTAMP\")"], name: "funds_xfer_req_timestamp"
+  add_index "funds_transfers", ["req_no", "customer_id", "attempt_no"], name: "funds_xfer_unique_index", unique: true
+
   create_table "groups", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "ic_audit_logs", force: :cascade do |t|
+    t.string   "req_no",            limit: 32,                  null: false
+    t.string   "app_id",            limit: 32,                  null: false
+    t.integer  "attempt_no",                     precision: 38, null: false
+    t.string   "status_code",       limit: 25,                  null: false
+    t.string   "ic_auditable_type",                             null: false
+    t.integer  "ic_auditable_id",   limit: nil,                 null: false
+    t.string   "fault_code"
+    t.string   "fault_subcode",     limit: 50
+    t.string   "fault_reason",      limit: 1000
+    t.datetime "req_timestamp"
+    t.datetime "rep_timestamp"
+    t.text     "req_bitstream",                                 null: false
+    t.text     "rep_bitstream"
+    t.text     "fault_bitstream"
+  end
+
+  add_index "ic_audit_logs", ["app_id", "req_no", "attempt_no"], name: "uk_ic_audit_logs_1", unique: true
+  add_index "ic_audit_logs", ["ic_auditable_type", "ic_auditable_id"], name: "uk_ic_audit_logs_2", unique: true
+
+  create_table "ic_audit_steps", force: :cascade do |t|
+    t.string   "ic_auditable_type",                             null: false
+    t.integer  "ic_auditable_id",   limit: nil,                 null: false
+    t.integer  "step_no",                        precision: 38, null: false
+    t.integer  "attempt_no",                     precision: 38, null: false
+    t.string   "step_name",         limit: 100,                 null: false
+    t.string   "status_code",       limit: 25,                  null: false
+    t.string   "fault_code"
+    t.string   "fault_subcode",     limit: 50
+    t.string   "fault_reason",      limit: 1000
+    t.string   "req_reference"
+    t.datetime "req_timestamp"
+    t.string   "rep_reference"
+    t.datetime "rep_timestamp"
+    t.text     "req_bitstream"
+    t.text     "rep_bitstream"
+    t.text     "fault_bitstream"
+    t.datetime "reconciled_at"
+  end
+
+  add_index "ic_audit_steps", ["ic_auditable_type", "ic_auditable_id", "step_no", "attempt_no"], name: "uk_ic_audit_steps", unique: true
 
   create_table "ic_customers", force: :cascade do |t|
     t.string   "customer_id",         limit: 15,                               null: false
@@ -1008,6 +1098,7 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.string   "last_action",         limit: 1,                  default: "C", null: false
     t.integer  "approved_version",                precision: 38
     t.integer  "approved_id",         limit: nil
+    t.string   "customer_name",       limit: 100
   end
 
   add_index "ic_customers", ["app_id", "approval_status"], name: "i_ic_cust_app_id", unique: true
@@ -1031,6 +1122,8 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.date    "invoice_due_date"
     t.decimal "invoice_amount"
     t.string  "debit_ref_no",            limit: 64
+    t.string  "corp_customer_id",        limit: 15
+    t.string  "pm_utr",                  limit: 64
   end
 
   add_index "ic_incoming_records", ["incoming_file_record_id"], name: "ic_record_index", unique: true
@@ -1053,6 +1146,38 @@ ActiveRecord::Schema.define(version: 20160406113826) do
   end
 
   add_index "ic_invoices", ["supplier_code", "invoice_no", "corp_customer_id"], name: "i_ic_inv_supp_code", unique: true
+
+  create_table "ic_paynows", force: :cascade do |t|
+    t.string   "req_no",                                            null: false
+    t.integer  "attempt_no",                         precision: 38, null: false
+    t.string   "status_code",           limit: 50,                  null: false
+    t.string   "req_version",           limit: 20,                  null: false
+    t.datetime "req_timestamp",                                     null: false
+    t.string   "app_id",                limit: 20,                  null: false
+    t.string   "customer_id",           limit: 50,                  null: false
+    t.string   "supplier_code",         limit: 50,                  null: false
+    t.string   "invoice_no",            limit: 50,                  null: false
+    t.date     "invoice_date",                                      null: false
+    t.date     "invoice_due_date",                                  null: false
+    t.decimal  "invoice_amount",                                    null: false
+    t.decimal  "discounted_amount",                                 null: false
+    t.decimal  "fee_amount",                                        null: false
+    t.string   "rep_no"
+    t.string   "rep_version",           limit: 20
+    t.datetime "rep_timestamp"
+    t.string   "credit_reference_no"
+    t.string   "fault_code",            limit: 50
+    t.string   "fault_reason",          limit: 1000
+    t.string   "cust_email_notify_ref", limit: 50
+  end
+
+  add_index "ic_paynows", ["req_no", "app_id", "attempt_no", "customer_id"], name: "uk_ic_paynows_1", unique: true
+
+  create_table "ic_pending_steps", force: :cascade do |t|
+    t.string   "broker_uuid",                  null: false
+    t.integer  "ic_audit_step_id", limit: nil, null: false
+    t.datetime "created_at",                   null: false
+  end
 
   create_table "ic_suppliers", force: :cascade do |t|
     t.string   "supplier_code",    limit: 15,                               null: false
@@ -1077,8 +1202,8 @@ ActiveRecord::Schema.define(version: 20160406113826) do
   create_table "ic_unapproved_records", force: :cascade do |t|
     t.integer  "ic_approvable_id",   limit: nil
     t.string   "ic_approvable_type"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "imt_add_beneficiaries", force: :cascade do |t|
@@ -1147,24 +1272,29 @@ ActiveRecord::Schema.define(version: 20160406113826) do
   add_index "imt_audit_steps", ["imt_auditable_type", "imt_auditable_id", "step_no", "attempt_no"], name: "uk_imt_audit_steps", unique: true
 
   create_table "imt_cancel_transfers", force: :cascade do |t|
-    t.string   "req_no",                                                     null: false
-    t.integer  "attempt_no",                    precision: 38,               null: false
-    t.string   "status_code",      limit: 25,                                null: false
-    t.string   "req_version",      limit: 10,                                null: false
-    t.datetime "req_timestamp",                                              null: false
-    t.string   "app_id",           limit: 50,                                null: false
-    t.string   "customer_id",      limit: 50,                                null: false
-    t.string   "req_ref_no",       limit: 50,                                null: false
-    t.string   "cancel_reason",    limit: 50,                                null: false
+    t.string   "req_no",                                                        null: false
+    t.integer  "attempt_no",                       precision: 38,               null: false
+    t.string   "status_code",         limit: 25,                                null: false
+    t.string   "req_version",         limit: 10,                                null: false
+    t.datetime "req_timestamp",                                                 null: false
+    t.string   "app_id",              limit: 50,                                null: false
+    t.string   "customer_id",         limit: 50,                                null: false
+    t.string   "req_ref_no",          limit: 50,                                null: false
+    t.string   "cancel_reason",       limit: 50,                                null: false
     t.string   "rep_no"
-    t.string   "rep_version",      limit: 10
+    t.string   "rep_version",         limit: 10
     t.datetime "rep_timestamp"
     t.string   "imt_ref_no"
     t.string   "bank_ref_no"
-    t.string   "fault_code",       limit: 50
-    t.string   "fault_reason",     limit: 1000
-    t.string   "fault_subcode",    limit: 50
-    t.string   "pending_approval", limit: 1,                   default: "Y"
+    t.string   "fault_code",          limit: 50
+    t.string   "fault_reason",        limit: 1000
+    t.integer  "reversal_attempt_no",              precision: 38
+    t.string   "reversal_req_ref",    limit: 50
+    t.string   "reversal_rep_ref",    limit: 50
+    t.datetime "reversal_attempt_at"
+    t.datetime "reversal_at"
+    t.string   "fault_subcode",       limit: 50
+    t.string   "pending_approval",    limit: 1,                   default: "Y"
   end
 
   add_index "imt_cancel_transfers", ["bank_ref_no"], name: "i_imt_can_tra_ban_ref_no", unique: true
@@ -1178,7 +1308,7 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.string   "is_enabled",       limit: 1,                                null: false
     t.string   "mobile_no",                                                 null: false
     t.string   "account_no",                                                null: false
-    t.integer  "expiry_period",                precision: 38,               null: false
+    t.integer  "expiry_period",                precision: 38
     t.string   "txn_mode",         limit: 4,                                null: false
     t.string   "address_line1"
     t.string   "address_line2"
@@ -1230,10 +1360,8 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.string   "app_id",            limit: 50,                                null: false
     t.string   "customer_id",       limit: 50,                                null: false
     t.string   "bene_mobile_no",    limit: 50,                                null: false
-    t.decimal  "transfer_amount",                                             null: false
     t.string   "pass_code",         limit: 5,                                 null: false
     t.string   "rmtr_to_bene_note",                                           null: false
-    t.date     "expiry_date"
     t.string   "rep_no"
     t.string   "rep_version",       limit: 10
     t.datetime "rep_timestamp"
@@ -1241,8 +1369,10 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.string   "bank_ref_no"
     t.string   "fault_code",        limit: 50
     t.string   "fault_reason",      limit: 1000
+    t.date     "expiry_date"
     t.string   "fault_subcode",     limit: 50
     t.string   "pending_approval",  limit: 1,                   default: "Y"
+    t.decimal  "transfer_amount",                                             null: false
   end
 
   add_index "imt_initiate_transfers", ["bank_ref_no"], name: "i_imt_ini_tra_ban_ref_no", unique: true
@@ -1259,7 +1389,6 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.string   "status_code",           limit: 25, null: false
     t.string   "customer_id",           limit: 50, null: false
     t.string   "bene_mobile_no",        limit: 50, null: false
-    t.decimal  "transfer_amount",                  null: false
     t.string   "rmtr_to_bene_note",                null: false
     t.date     "expiry_date"
     t.datetime "initiated_at"
@@ -1272,6 +1401,7 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.string   "cancel_reason"
     t.string   "initiation_bank_ref",              null: false
     t.string   "cancellation_bank_ref"
+    t.decimal  "transfer_amount",                  null: false
   end
 
   add_index "imt_transfers", ["cancellation_ref_no"], name: "uk_imt_transfers_3", unique: true
@@ -1297,12 +1427,12 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.string   "fault_subcode",       limit: 50
     t.text     "fault_bitstream"
     t.string   "rep_status",          limit: 50
-    t.text     "rep_fault_code"
     t.string   "rep_fault_subcode",   limit: 50
     t.string   "rep_fault_reason",    limit: 500
     t.text     "rep_fault_bitstream"
     t.string   "should_skip",         limit: 1
     t.string   "overrides",           limit: 50
+    t.string   "rep_fault_code",      limit: 50
   end
 
   add_index "incoming_file_records", ["incoming_file_id", "record_no"], name: "uk_inc_file_records", unique: true
@@ -1313,7 +1443,7 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.string  "name",                limit: 50,                null: false
     t.string  "msg_domain"
     t.string  "msg_model"
-    t.string  "validate_all",        limit: 1,   default: "f"
+    t.string  "validate_all",        limit: 1,   default: "f", null: false
     t.string  "auto_upload",         limit: 1,   default: "f"
     t.string  "skip_first",          limit: 1,   default: "f"
     t.string  "build_response_file", limit: 1
@@ -1324,8 +1454,7 @@ ActiveRecord::Schema.define(version: 20160406113826) do
 
   add_index "incoming_file_types", ["sc_service_id", "code"], name: "uk_in_file_types_1", unique: true
 
-  create_table "incoming_files", id: false, force: :cascade do |t|
-    t.integer  "id",                  limit: nil,                               null: false
+  create_table "incoming_files", force: :cascade do |t|
     t.string   "service_name"
     t.string   "file_type"
     t.string   "file"
@@ -1351,10 +1480,13 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.string   "fault_subcode",       limit: 50
     t.string   "rep_file_name"
     t.string   "rep_file_path"
-    t.string   "rep_file_status"
-    t.string   "pending_approval"
+    t.string   "rep_file_status",     limit: 1
+    t.string   "pending_approval",    limit: 1
     t.string   "file_path"
+    t.string   "last_process_step",   limit: 1
   end
+
+  add_index "incoming_files", ["file_name", "approval_status"], name: "i_inc_fil_fil_nam_app_sta", unique: true
 
   create_table "inw_audit_logs", force: :cascade do |t|
     t.integer "inward_remittance_id", limit: nil
@@ -1374,25 +1506,23 @@ ActiveRecord::Schema.define(version: 20160406113826) do
   end
 
   create_table "inw_identities", force: :cascade do |t|
-    t.string   "id_for",                  limit: 20,  null: false
-    t.string   "id_type",                 limit: 20
-    t.string   "id_number",               limit: 50
-    t.string   "id_country"
-    t.date     "id_issue_date"
-    t.date     "id_expiry_date"
-    t.datetime "verified_at"
-    t.string   "verified_by",             limit: 20
-    t.integer  "inw_remittance_id",       limit: nil
-    t.integer  "whitelisted_identity_id", limit: nil
-    t.string   "was_auto_matched"
+    t.string  "id_for",                  limit: 20,  null: false
+    t.string  "id_type",                 limit: 20
+    t.string  "id_number",               limit: 50
+    t.string  "id_country"
+    t.date    "id_issue_date"
+    t.date    "id_expiry_date"
+    t.integer "inw_remittance_id",       limit: nil
+    t.integer "whitelisted_identity_id", limit: nil
+    t.string  "was_auto_matched"
   end
 
   create_table "inw_remittance_rules", force: :cascade do |t|
     t.string   "pattern_individuals",   limit: 4000
     t.string   "pattern_corporates",    limit: 4000
     t.string   "pattern_beneficiaries", limit: 4000
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                                      null: false
+    t.datetime "updated_at",                                                      null: false
     t.string   "created_by"
     t.string   "updated_by"
     t.integer  "lock_version",                       precision: 38, default: 0,   null: false
@@ -1451,7 +1581,6 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.string   "rep_version",            limit: 10
     t.datetime "rep_timestamp"
     t.integer  "attempt_no",                          precision: 38, null: false
-    t.datetime "updated_at"
     t.string   "beneficiary_type",       limit: 1
     t.string   "remitter_type",          limit: 1
     t.string   "fault_code",             limit: 50
@@ -1465,8 +1594,12 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.string   "cbs_req_ref_no"
   end
 
+  add_index "inward_remittances", ["bank_ref"], name: "i_inward_remittances_bank_ref"
+  add_index "inward_remittances", ["bene_account_no"], name: "i_inw_rem_ben_acc_no"
   add_index "inward_remittances", ["req_no", "partner_code", "attempt_no"], name: "remittance_unique_index", unique: true
-  add_index "inward_remittances", ["status_code", "bank_ref", "bene_account_no", "req_transfer_type", "transfer_type"], name: "idx_inrw_columns"
+  add_index "inward_remittances", ["req_transfer_type"], name: "i_inw_rem_req_tra_typ"
+  add_index "inward_remittances", ["status_code"], name: "i_inw_rem_sta_cod"
+  add_index "inward_remittances", ["transfer_type"], name: "i_inw_rem_tra_typ"
 
   create_table "inward_remittances_locks", id: false, force: :cascade do |t|
     t.integer "inward_remittance_id", limit: nil
@@ -1525,8 +1658,8 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.string   "allow_imps",                limit: 1
     t.string   "created_by",                limit: 20
     t.string   "updated_by",                limit: 20
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                                         null: false
+    t.datetime "updated_at",                                                         null: false
     t.integer  "lock_version",                          precision: 38, default: 0,   null: false
     t.string   "enabled",                   limit: 1
     t.string   "customer_id",               limit: 15
@@ -1547,15 +1680,15 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.string   "customer_id",      limit: 50,                               null: false
     t.string   "identity_user_id", limit: 20,                               null: false
     t.string   "is_enabled",       limit: 1,                                null: false
-    t.integer  "lock_version",                 precision: 38,               null: false
-    t.string   "approval_status",  limit: 1,                  default: "U", null: false
-    t.string   "last_action",      limit: 1
-    t.integer  "approved_version",             precision: 38
-    t.integer  "approved_id",      limit: nil
     t.string   "created_by",       limit: 20
     t.string   "updated_by",       limit: 20
     t.datetime "created_at",                                                null: false
     t.datetime "updated_at",                                                null: false
+    t.integer  "lock_version",                 precision: 38, default: 0,   null: false
+    t.string   "approval_status",  limit: 1,                  default: "U", null: false
+    t.string   "last_action",      limit: 1,                  default: "C", null: false
+    t.integer  "approved_version",             precision: 38
+    t.integer  "approved_id",      limit: nil
   end
 
   add_index "pc2_apps", ["app_id", "approval_status"], name: "i_pc2_app_app_id_app_sta", unique: true
@@ -1637,8 +1770,8 @@ ActiveRecord::Schema.define(version: 20160406113826) do
   create_table "pc2_unapproved_records", force: :cascade do |t|
     t.integer  "pc2_approvable_id",   limit: nil
     t.string   "pc2_approvable_type"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "pc2_unload_cards", force: :cascade do |t|
@@ -1856,23 +1989,9 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.string   "app_id",           limit: 50,                               null: false
     t.string   "txn_kind",         limit: 50,                               null: false
     t.integer  "no_of_tiers",                  precision: 38,               null: false
-    t.decimal  "tier1_to_amt",                                              null: false
     t.string   "tier1_method",     limit: 3,                                null: false
-    t.decimal  "tier1_fixed_amt",                                           null: false
-    t.decimal  "tier1_pct_value",                                           null: false
-    t.decimal  "tier1_min_sc_amt",                                          null: false
-    t.decimal  "tier1_max_sc_amt",                                          null: false
-    t.decimal  "tier2_to_amt"
     t.string   "tier2_method",     limit: 3
-    t.decimal  "tier2_fixed_amt"
-    t.decimal  "tier2_pct_value"
-    t.decimal  "tier2_min_sc_amt"
-    t.decimal  "tier2_max_sc_amt"
     t.string   "tier3_method",     limit: 3
-    t.decimal  "tier3_fixed_amt"
-    t.decimal  "tier3_pct_value"
-    t.decimal  "tier3_min_sc_amt"
-    t.decimal  "tier3_max_sc_amt"
     t.integer  "lock_version",                 precision: 38,               null: false
     t.string   "approval_status",  limit: 1,                  default: "U", null: false
     t.string   "last_action",      limit: 1
@@ -1882,6 +2001,20 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.string   "updated_by",       limit: 20
     t.datetime "created_at",                                                null: false
     t.datetime "updated_at",                                                null: false
+    t.decimal  "tier3_max_sc_amt"
+    t.decimal  "tier3_min_sc_amt"
+    t.decimal  "tier3_pct_value"
+    t.decimal  "tier3_fixed_amt"
+    t.decimal  "tier2_max_sc_amt"
+    t.decimal  "tier2_min_sc_amt"
+    t.decimal  "tier2_pct_value"
+    t.decimal  "tier2_fixed_amt"
+    t.decimal  "tier2_to_amt"
+    t.decimal  "tier1_max_sc_amt",                                          null: false
+    t.decimal  "tier1_min_sc_amt",                                          null: false
+    t.decimal  "tier1_pct_value",                                           null: false
+    t.decimal  "tier1_fixed_amt",                                           null: false
+    t.decimal  "tier1_to_amt",                                              null: false
   end
 
   add_index "pc_fee_rules", ["app_id", "txn_kind", "approval_status"], name: "uk_pc_fee_rules", unique: true
@@ -1896,7 +2029,6 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.string   "customer_id",   limit: 15
     t.string   "mobile_no"
     t.string   "debit_acct_no"
-    t.decimal  "load_amount"
     t.string   "email_id"
     t.string   "password"
     t.string   "rep_no",        limit: 32
@@ -1905,10 +2037,32 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.string   "fault_code"
     t.string   "fault_reason",  limit: 1000
     t.string   "cust_uid"
+    t.decimal  "load_amount"
     t.string   "fault_subcode", limit: 50
   end
 
   add_index "pc_load_cards", ["req_no", "app_id", "attempt_no"], name: "uk_pc_load_cards", unique: true
+
+  create_table "pc_pay_to_account", force: :cascade do |t|
+    t.string   "req_no",            limit: 32
+    t.integer  "attempt_no",                   precision: 38
+    t.string   "status_code",       limit: 15
+    t.string   "req_version",       limit: 5
+    t.datetime "req_timestamp"
+    t.string   "appid",             limit: 15
+    t.integer  "mobile_no",                    precision: 38
+    t.string   "encrypted_pin"
+    t.string   "transfer_type"
+    t.string   "bene_acct_no"
+    t.string   "bene_acct_ifsc"
+    t.string   "transfer_amount"
+    t.string   "rmtr_to_bene_note"
+    t.string   "rep_no",            limit: 32
+    t.string   "rep_version",       limit: 5
+    t.datetime "rep_timestamp"
+    t.string   "fault_code"
+    t.string   "fault_reason"
+  end
 
   create_table "pc_unapproved_records", force: :cascade do |t|
     t.integer  "pc_approvable_id",   limit: nil
@@ -1985,13 +2139,13 @@ ActiveRecord::Schema.define(version: 20160406113826) do
   add_index "pcs_audit_steps", ["pcs_auditable_type", "pcs_auditable_id", "step_no", "attempt_no"], name: "uk_pcs_audit_steps", unique: true
 
   create_table "pcs_pay_to_accounts", force: :cascade do |t|
-    t.string   "req_no",            limit: 32,                  null: false
-    t.string   "app_id",            limit: 32,                  null: false
-    t.integer  "attempt_no",                     precision: 38, null: false
+    t.string   "req_no",            limit: 32
+    t.integer  "attempt_no",                     precision: 38
     t.string   "status_code",       limit: 50,                  null: false
-    t.string   "req_version",       limit: 5,                   null: false
+    t.string   "req_version",       limit: 5
     t.datetime "req_timestamp"
-    t.string   "mobile_no"
+    t.string   "app_id",            limit: 15
+    t.integer  "mobile_no",                      precision: 38
     t.string   "encrypted_pin"
     t.string   "transfer_type"
     t.string   "bene_acct_no"
@@ -2005,14 +2159,12 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.string   "rep_transfer_type", limit: 50
     t.datetime "rep_timestamp"
     t.string   "fault_code"
-    t.string   "fault_reason",      limit: 1000
-    t.decimal  "service_charge"
+    t.string   "fault_reason"
     t.string   "debit_fee_status",  limit: 50
     t.string   "debit_fee_result",  limit: 1000
     t.string   "bene_name",                                     null: false
+    t.decimal  "service_charge"
   end
-
-  add_index "pcs_pay_to_accounts", ["req_no", "app_id", "attempt_no"], name: "uk_pcs_pay_to_accounts", unique: true
 
   create_table "pcs_pay_to_contacts", force: :cascade do |t|
     t.string   "req_no",            limit: 32,                  null: false
@@ -2029,13 +2181,13 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.string   "rep_no",            limit: 32
     t.string   "rep_version",       limit: 5
     t.string   "req_ref_no",        limit: 50
-    t.decimal  "service_charge"
     t.string   "rep_ref_no",        limit: 50
     t.datetime "rep_timestamp"
     t.string   "fault_code"
     t.string   "fault_reason",      limit: 1000
     t.string   "debit_fee_status",  limit: 50
     t.string   "debit_fee_result",  limit: 1000
+    t.decimal  "service_charge"
   end
 
   add_index "pcs_pay_to_contacts", ["req_no", "app_id", "attempt_no"], name: "uk_pcs_pay_to_contacts", unique: true
@@ -2057,24 +2209,34 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.string   "encrypted_pin",    limit: 50
     t.string   "biller_id",        limit: 50
     t.string   "subscriber_id",    limit: 50
-    t.decimal  "transfer_amount"
     t.string   "rep_no"
     t.string   "rep_version",      limit: 10
     t.datetime "rep_timestamp"
-    t.decimal  "service_charge"
     t.string   "debit_ref_no"
     t.string   "biller_ref_no",    limit: 50
     t.string   "debit_fee_status", limit: 50
     t.string   "debit_fee_result", limit: 1000
     t.string   "fault_code",       limit: 50
     t.string   "fault_reason",     limit: 1000
+    t.decimal  "service_charge"
+    t.decimal  "transfer_amount"
   end
 
   add_index "pcs_top_ups", ["req_no", "app_id", "attempt_no"], name: "uk_pcs_top_ups", unique: true
 
+  create_table "pending_funds_transfers", force: :cascade do |t|
+    t.integer  "funds_transfer_id", limit: nil, null: false
+    t.string   "broker_uuid",                   null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "pending_funds_transfers", ["broker_uuid", "created_at"], name: "pending_funds_xfer_broker_uuid"
+  add_index "pending_funds_transfers", ["funds_transfer_id"], name: "uk_pending_ft_1", unique: true
+
   create_table "pending_incoming_files", force: :cascade do |t|
-    t.string   "broker_uuid"
-    t.string   "incoming_file_id"
+    t.string   "broker_uuid",      limit: 500
+    t.integer  "incoming_file_id", limit: nil
     t.datetime "created_at"
   end
 
@@ -2098,8 +2260,8 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.integer  "daily_txn_limit",                    precision: 38
     t.string   "disallowed_rem_types",  limit: 30
     t.string   "disallowed_bene_types", limit: 30
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                                      null: false
+    t.datetime "updated_at",                                                      null: false
     t.decimal  "mtd_txn_cnt_self"
     t.decimal  "mtd_txn_limit_self"
     t.decimal  "mtd_txn_cnt_sp"
@@ -2110,6 +2272,75 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.string   "last_action",           limit: 1,                   default: "C"
     t.integer  "approved_version",                   precision: 38
     t.integer  "approved_id",           limit: nil
+  end
+
+  create_table "qg_aml_gt_sdn_hits", temporary: true, id: false, force: :cascade do |t|
+    t.integer "sdn_entry_id", limit: nil, null: false
+  end
+
+  create_table "qg_ecol_todays_neft_txns", force: :cascade do |t|
+    t.string   "ref_txn_no",         limit: 15,                null: false
+    t.string   "transfer_type",      limit: 4,                 null: false
+    t.string   "transfer_status",    limit: 25,                null: false
+    t.string   "transfer_unique_no", limit: 64,                null: false
+    t.string   "rmtr_ref",           limit: 64,                null: false
+    t.string   "bene_account_ifsc",  limit: 20,                null: false
+    t.string   "bene_account_no",    limit: 64,                null: false
+    t.string   "bene_account_type",  limit: 10
+    t.string   "rmtr_account_ifsc",  limit: 20,                null: false
+    t.string   "rmtr_account_no",    limit: 64,                null: false
+    t.string   "rmtr_account_type",  limit: 10
+    t.integer  "transfer_amt",                  precision: 38, null: false
+    t.string   "transfer_ccy",       limit: 5,                 null: false
+    t.date     "transfer_date",                                null: false
+    t.string   "rmtr_to_bene_note"
+    t.string   "rmtr_full_name"
+    t.string   "rmtr_address"
+    t.string   "bene_full_name"
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+  end
+
+  add_index "qg_ecol_todays_neft_txns", ["ref_txn_no"], name: "i92814b08e782dcbd26ffe7b28e481", unique: true
+
+  create_table "qg_ecol_todays_rtgs_txns", force: :cascade do |t|
+    t.string   "idfcatref",          limit: 16,                null: false
+    t.string   "transfer_type",      limit: 4,                 null: false
+    t.string   "transfer_status",    limit: 25,                null: false
+    t.string   "transfer_unique_no", limit: 64,                null: false
+    t.string   "rmtr_ref",           limit: 64,                null: false
+    t.string   "bene_account_ifsc",  limit: 20,                null: false
+    t.string   "bene_account_no",    limit: 64,                null: false
+    t.string   "bene_account_type",  limit: 10
+    t.string   "rmtr_account_ifsc",  limit: 20,                null: false
+    t.string   "rmtr_account_no",    limit: 64,                null: false
+    t.string   "rmtr_account_type",  limit: 10
+    t.integer  "transfer_amt",                  precision: 38, null: false
+    t.string   "transfer_ccy",       limit: 5,                 null: false
+    t.date     "transfer_date",                                null: false
+    t.string   "rmtr_to_bene_note"
+    t.string   "rmtr_full_name"
+    t.string   "rmtr_address"
+    t.string   "bene_full_name"
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+  end
+
+  add_index "qg_ecol_todays_rtgs_txns", ["idfcatref"], name: "i_qg_eco_tod_rtg_txn_idf", unique: true
+
+  create_table "qg_gt_sb_accounts", temporary: true, id: false, force: :cascade do |t|
+    t.string  "account_no",          limit: 100
+    t.string  "account_kind",        limit: 10
+    t.string  "cust_full_name",      limit: 200
+    t.string  "customer_id",         limit: 200
+    t.string  "account_status",      limit: 50
+    t.string  "cust_acct_rel",       limit: 50
+    t.string  "product_name",        limit: 200
+    t.string  "branch_id",           limit: 50
+    t.date    "acct_open_date"
+    t.decimal "acct_balance"
+    t.decimal "withdrawable_amount"
+    t.integer "cod_prod",            limit: 5,   precision: 5, null: false
   end
 
   create_table "reconciled_returns", force: :cascade do |t|
@@ -2139,65 +2370,251 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.string   "created_by",         limit: 20
     t.string   "updated_by",         limit: 20
     t.integer  "lock_version",                    precision: 38
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
   end
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
     t.integer  "resource_id",   limit: nil
     t.string   "resource_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "i_rol_nam_res_typ_res_id"
   add_index "roles", ["name"], name: "index_roles_on_name"
 
-  create_table "salary_corporates", force: :cascade do |t|
-    t.string "customer_id",        limit: 15
-    t.string "customer_name",      limit: 100
-    t.string "account_no",         limit: 16
-    t.string "contact_person",     limit: 100
-    t.string "email_address",      limit: 100
-    t.string "customer_mobile_no", limit: 10
+  create_table "sb_audit_logs", force: :cascade do |t|
+    t.string  "req_no",                                       null: false
+    t.integer "attempt_no",                    precision: 38, null: false
+    t.string  "status_code",       limit: 25,                 null: false
+    t.string  "app_id",            limit: 50,                 null: false
+    t.string  "sb_auditable_type", limit: 50,                 null: false
+    t.integer "sb_auditable_id",   limit: nil,                null: false
+    t.text    "req_bitstream",                                null: false
+    t.text    "rep_bitstream"
   end
 
-  create_table "salary_details", force: :cascade do |t|
-    t.string   "source_account_no",          limit: 15,   null: false
-    t.string   "source_reference_no",        limit: 15,   null: false
-    t.string   "source_narration",           limit: 40,   null: false
-    t.string   "destination_account_number", limit: 15,   null: false
-    t.string   "destination_name",           limit: 35
-    t.string   "destination_reference_no",   limit: 12
-    t.decimal  "transfer_amount"
-    t.string   "destination_narration",      limit: 40
-    t.string   "bank_reference_no",          limit: 40
-    t.string   "debit_reference_no",         limit: 40
-    t.string   "credit_reference_no",        limit: 40
-    t.datetime "settled_at"
-    t.string   "settlement_account_no",      limit: 15
-    t.string   "status",                     limit: 15
-    t.string   "fault_code",                 limit: 50
-    t.string   "fault_reason",               limit: 1000
+  add_index "sb_audit_logs", ["app_id", "req_no", "attempt_no"], name: "uk_sb_audit_logs2", unique: true
+  add_index "sb_audit_logs", ["sb_auditable_type", "sb_auditable_id"], name: "uk_sb_audit_logs1", unique: true
+
+  create_table "sb_checkbook_orders", force: :cascade do |t|
+    t.string   "req_no",                                          null: false
+    t.integer  "attempt_no",                       precision: 38, null: false
+    t.string   "status_code",         limit: 25,                  null: false
+    t.string   "req_version",         limit: 10,                  null: false
+    t.datetime "req_timestamp",                                   null: false
+    t.string   "app_id",              limit: 50,                  null: false
+    t.string   "req_customer_id",     limit: 50
+    t.string   "cust_identity_type",  limit: 50
+    t.string   "cust_identity_value", limit: 50
+    t.string   "device_id",           limit: 50
+    t.string   "req_account_no",      limit: 50
+    t.string   "registered_account",  limit: 4
+    t.string   "rep_no"
+    t.string   "rep_version",         limit: 10
+    t.string   "customer_id",         limit: 50
+    t.string   "account_no",          limit: 50
+    t.datetime "rep_timestamp"
+    t.string   "fault_code",          limit: 50
+    t.string   "fault_reason",        limit: 1000
   end
 
-  create_table "salary_payments", force: :cascade do |t|
-    t.string   "source_account_no",     limit: 15,                null: false
-    t.string   "bank_pool_account_no",  limit: 25,                null: false
+  add_index "sb_checkbook_orders", ["app_id", "req_no", "attempt_no"], name: "uk_sb_checkbook_orders", unique: true
+
+  create_table "sb_cust_daily_stats", force: :cascade do |t|
+    t.string   "customer_id", limit: 100, null: false
+    t.datetime "dat_log",                 null: false
+    t.integer  "ft_cnt",      limit: nil, null: false
+    t.decimal  "ft_total",                null: false
+  end
+
+  add_index "sb_cust_daily_stats", ["dat_log", "customer_id"], name: "uk_sb_cust_daily_stats", unique: true
+
+  create_table "sb_customers", id: false, force: :cascade do |t|
+    t.integer "id",             limit: nil,                null: false
+    t.string  "identity_type",  limit: 100,                null: false
+    t.string  "identity_value", limit: 100,                null: false
+    t.string  "customer_id",    limit: 100,                null: false
+    t.string  "sa_account_no",  limit: 100
+    t.integer "num_devices",                precision: 38, null: false
+    t.string  "device1_id",     limit: 100
+    t.string  "device2_id",     limit: 100
+    t.string  "device3_id",     limit: 100
+    t.string  "device4_id",     limit: 100
+    t.string  "device5_id",     limit: 100
+    t.string  "device6_id",     limit: 100
+    t.string  "device7_id",     limit: 100
+    t.string  "device8_id",     limit: 100
+    t.string  "device9_id",     limit: 100
+  end
+
+  create_table "sb_deregistrations", force: :cascade do |t|
+    t.string   "req_no",                                          null: false
+    t.integer  "attempt_no",                       precision: 38, null: false
+    t.string   "status_code",         limit: 25,                  null: false
+    t.string   "req_version",         limit: 10,                  null: false
+    t.datetime "req_timestamp",                                   null: false
+    t.string   "app_id",              limit: 50,                  null: false
+    t.string   "customer_id",         limit: 50
+    t.string   "cust_identity_type",  limit: 50
+    t.string   "cust_identity_value", limit: 50
+    t.string   "device_id",           limit: 50
+    t.string   "deregistration_type", limit: 1
+    t.string   "otp_key",             limit: 50
+    t.string   "otp_value",           limit: 50
+    t.string   "rep_no"
+    t.string   "rep_version",         limit: 10
+    t.datetime "rep_timestamp"
+    t.string   "fault_code",          limit: 50
+    t.string   "fault_reason",        limit: 1000
+  end
+
+  add_index "sb_deregistrations", ["app_id", "req_no", "attempt_no"], name: "uk_sb_deregistrations", unique: true
+
+  create_table "sb_fund_transfers", force: :cascade do |t|
+    t.string   "req_no",                                          null: false
+    t.integer  "attempt_no",                       precision: 38, null: false
+    t.string   "service_id",          limit: 50
+    t.string   "status_code",         limit: 25,                  null: false
+    t.string   "req_version",         limit: 10,                  null: false
+    t.datetime "req_timestamp",                                   null: false
+    t.string   "app_id",              limit: 50,                  null: false
+    t.string   "req_customer_id",     limit: 50
+    t.string   "cust_identity_type",  limit: 50
+    t.string   "cust_identity_value", limit: 50
+    t.string   "device_id",           limit: 50
+    t.string   "req_account_no",      limit: 50
+    t.string   "registered_account",  limit: 4
+    t.string   "bene_id",             limit: 50
+    t.string   "req_transfer_type",   limit: 4,                   null: false
+    t.string   "transfer_ccy",        limit: 5,                   null: false
     t.decimal  "transfer_amount",                                 null: false
-    t.datetime "debited_at"
-    t.string   "bank_reference_no",     limit: 40
-    t.string   "debit_reference_no",    limit: 40
-    t.integer  "payment_attempt_no",               precision: 38
-    t.string   "status",                limit: 20,                null: false
-    t.datetime "reversed_at"
-    t.string   "reversal_reference_no", limit: 40
+    t.string   "rmtr_to_bene_note"
+    t.string   "cbs_req_ref_no",      limit: 50
+    t.string   "rep_no"
+    t.string   "rep_version",         limit: 10
+    t.string   "customer_id",         limit: 50
+    t.string   "account_no",          limit: 50
+    t.string   "limit_status"
+    t.string   "limit_result"
+    t.datetime "rep_timestamp"
+    t.string   "transfer_type",       limit: 4
+    t.string   "bank_ref_no",         limit: 50
+    t.string   "bene_full_name"
+    t.string   "bene_account_no"
+    t.string   "bene_account_ifsc"
+    t.string   "fault_code",          limit: 50
+    t.string   "fault_reason",        limit: 1000
   end
 
-  create_table "salary_rules", force: :cascade do |t|
-    t.string "bank_pool_account_no", limit: 15, null: false
-    t.string "threshold_percentage",            null: false
+  add_index "sb_fund_transfers", ["app_id", "req_no", "attempt_no"], name: "uk_sb_fund_transfers", unique: true
+
+  create_table "sb_pending_fund_transfers", force: :cascade do |t|
+    t.string   "broker_uuid",                     null: false
+    t.integer  "sb_fund_transfer_id", limit: nil, null: false
+    t.datetime "created_at",                      null: false
+  end
+
+  add_index "sb_pending_fund_transfers", ["sb_fund_transfer_id"], name: "uk_pending_sb_fund_transfers", unique: true
+
+  create_table "sb_registrations", force: :cascade do |t|
+    t.string   "req_no",                                          null: false
+    t.integer  "attempt_no",                       precision: 38, null: false
+    t.string   "status_code",         limit: 25,                  null: false
+    t.string   "req_version",         limit: 10,                  null: false
+    t.datetime "req_timestamp",                                   null: false
+    t.string   "app_id",              limit: 50,                  null: false
+    t.string   "customer_id",         limit: 50
+    t.string   "cust_identity_type",  limit: 50
+    t.string   "cust_identity_value", limit: 50
+    t.string   "device_id",           limit: 50
+    t.string   "account_no",          limit: 50
+    t.string   "otp_key",             limit: 50
+    t.string   "otp_value",           limit: 50
+    t.string   "rep_no"
+    t.string   "rep_version",         limit: 10
+    t.datetime "rep_timestamp"
+    t.string   "fault_code",          limit: 50
+    t.string   "fault_reason",        limit: 1000
+  end
+
+  add_index "sb_registrations", ["app_id", "req_no", "attempt_no"], name: "uk_sb_registrations", unique: true
+
+  create_table "sb_statement_orders", force: :cascade do |t|
+    t.string   "req_no",                                          null: false
+    t.integer  "attempt_no",                       precision: 38, null: false
+    t.string   "status_code",         limit: 25,                  null: false
+    t.string   "req_version",         limit: 10,                  null: false
+    t.datetime "req_timestamp",                                   null: false
+    t.string   "app_id",              limit: 50,                  null: false
+    t.string   "req_customer_id",     limit: 50
+    t.string   "cust_identity_type",  limit: 50
+    t.string   "cust_identity_value", limit: 50
+    t.string   "device_id",           limit: 50
+    t.string   "req_account_no",      limit: 50
+    t.string   "registered_account",  limit: 4
+    t.string   "rep_no"
+    t.string   "rep_version",         limit: 10
+    t.string   "customer_id",         limit: 50
+    t.string   "account_no",          limit: 50
+    t.datetime "rep_timestamp"
+    t.string   "fault_code",          limit: 50
+    t.string   "fault_reason",        limit: 1000
+  end
+
+  add_index "sb_statement_orders", ["app_id", "req_no", "attempt_no"], name: "uk_sb_statement_orders", unique: true
+
+  create_table "sb_stop_checks", force: :cascade do |t|
+    t.string   "req_no",                                          null: false
+    t.integer  "attempt_no",                       precision: 38, null: false
+    t.string   "status_code",         limit: 25,                  null: false
+    t.string   "req_version",         limit: 10,                  null: false
+    t.datetime "req_timestamp",                                   null: false
+    t.string   "app_id",              limit: 50,                  null: false
+    t.string   "req_customer_id",     limit: 50
+    t.string   "cust_identity_type",  limit: 50
+    t.string   "cust_identity_value", limit: 50
+    t.string   "device_id",           limit: 50
+    t.string   "req_account_no",      limit: 50
+    t.string   "registered_account",  limit: 4
+    t.string   "order_type",          limit: 1
+    t.string   "from_check_no",       limit: 100
+    t.string   "to_check_no",         limit: 100
+    t.string   "rep_no"
+    t.string   "customer_id",         limit: 50
+    t.string   "account_no",          limit: 50
+    t.string   "rep_version",         limit: 10
+    t.datetime "rep_timestamp"
+    t.string   "fault_code",          limit: 50
+    t.string   "fault_reason",        limit: 1000
+  end
+
+  add_index "sb_stop_checks", ["app_id", "req_no", "attempt_no"], name: "uk_sb_stop_checks", unique: true
+
+  create_table "sb_stopcheck_orders", force: :cascade do |t|
+    t.string   "req_no",                           null: false
+    t.string   "req_version",         limit: 10,   null: false
+    t.datetime "req_timestamp",                    null: false
+    t.string   "app_id",              limit: 50,   null: false
+    t.string   "customer_id",         limit: 50
+    t.string   "cust_identity_type",  limit: 50
+    t.string   "cust_identity_value", limit: 50
+    t.string   "device_id",           limit: 50
+    t.string   "account_no",          limit: 50
+    t.string   "account_last_n",      limit: 50
+    t.string   "default_account",     limit: 1
+    t.string   "registered_account",  limit: 1
+    t.string   "order_type",          limit: 1
+    t.string   "from_check_no",       limit: 100
+    t.string   "to_check_no",         limit: 100
+    t.string   "rep_no"
+    t.string   "rep_version",         limit: 10
+    t.datetime "rep_timestamp"
+    t.string   "status_code",         limit: 25
+    t.string   "fault_code",          limit: 50
+    t.string   "fault_reason",        limit: 1000
   end
 
   create_table "sc_services", force: :cascade do |t|
@@ -2335,8 +2752,8 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                                        null: false
+    t.datetime "updated_at",                                                        null: false
     t.string   "username"
     t.boolean  "inactive",               limit: nil,                default: false
     t.string   "first_name"
@@ -2379,8 +2796,8 @@ ActiveRecord::Schema.define(version: 20160406113826) do
     t.string   "created_by",             limit: 20
     t.string   "updated_by",             limit: 20
     t.integer  "lock_version",                       precision: 38
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                                      null: false
+    t.datetime "updated_at",                                                      null: false
     t.string   "approval_status",        limit: 1,                  default: "U", null: false
     t.string   "last_action",            limit: 1,                  default: "C"
     t.integer  "approved_version",                   precision: 38
