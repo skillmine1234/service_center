@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :incoming_file_record do
-    incoming_file_id 1
-    record_no 1
+    sequence(:incoming_file_id) { |n| "{n}" }
+    sequence(:record_no) { |n| "{n}" }
     record_txt "MyText"
     status "FAILED"
     fault_code "MyString"
