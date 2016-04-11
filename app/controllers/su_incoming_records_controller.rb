@@ -8,7 +8,7 @@ class SuIncomingRecordsController < ApplicationController
   include SuIncomingRecordsHelper
 
   def index
-    records = SuIncomingRecord.joins(:incoming_file_record).where("file_name=? and status=?",params[:file_name],params[:status]).order("id desc")
+    records = SuIncomingRecord.joins(:incoming_file_record).where("su_incoming_records.file_name=? and status=?",params[:file_name],params[:status]).order("su_incoming_records.id desc")
     records = find_su_incoming_records(params,records)
     @records_count = records.count(:status)
     @records = records.paginate(:per_page => 10, :page => params[:page]) rescue []

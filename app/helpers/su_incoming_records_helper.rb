@@ -12,10 +12,10 @@ module SuIncomingRecordsHelper
     incoming_records = incoming_records.where("should_skip=?",params[:skipped_flag]) if params[:skipped_flag].present?
     incoming_records = incoming_records.where("overrides is not null") if params[:overrided_flag].present? and params[:overrided_flag] == "true"
     incoming_records = incoming_records.where("overrides is null") if params[:overrided_flag].present? and params[:overrided_flag] == "false"
-    incoming_records = incoming_records.where("corp_account_no=?",params[:corp_account_no]) if params[:corp_account_no].present?
-    incoming_records = incoming_records.where("emp_account_no=?",params[:emp_account_no]) if params[:emp_account_no].present?
-    incoming_records = incoming_records.where("emp_name=?",params[:emp_name]) if params[:emp_name].present?
-    incoming_records = incoming_records.where("salary_amount>=? and salary_amount <=?",params[:from_amount].to_f,params[:to_amount].to_f) if params[:to_amount].present? and params[:from_amount].present?
+    incoming_records = incoming_records.where("su_incoming_records.corp_account_no=?",params[:corp_account_no]) if params[:corp_account_no].present?
+    incoming_records = incoming_records.where("su_incoming_records.emp_account_no=?",params[:emp_account_no]) if params[:emp_account_no].present?
+    incoming_records = incoming_records.where("su_incoming_records.emp_name=?",params[:emp_name]) if params[:emp_name].present?
+    incoming_records = incoming_records.where("su_incoming_records.salary_amount>=? and su_incoming_records.salary_amount <=?",params[:from_amount].to_f,params[:to_amount].to_f) if params[:to_amount].present? and params[:from_amount].present?
     incoming_records
   end
 
