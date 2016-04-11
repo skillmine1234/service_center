@@ -51,6 +51,8 @@
           %td{:style=>'text-align:left;'}
             = record.invoice_date
           %td{:style=>'text-align:left;'}
+            = record.invoice_amount            
+          %td{:style=>'text-align:left;'}
             = record.debit_ref_no
           %td{:style=>'text-align:left;'}
             = link_to 'Show', {:controller => 'ic_incoming_records', :action => 'audit_steps', :id => record.id, :step_name => 'ALL'}

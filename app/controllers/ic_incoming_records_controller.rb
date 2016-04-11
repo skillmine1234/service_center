@@ -9,10 +9,8 @@ class IcIncomingRecordsController < ApplicationController
   include IcIncomingRecordsHelper
 
   def index
-    records = IcIncomingRecord.joins(:incoming_file_record).where("file_name=? and status=?",params[:file_name],params[:status]).order("id desc")
-    p records
+    records = IcIncomingRecord.joins(:incoming_file_record).where("ic_incoming_records.file_name=? and status=?",params[:file_name],params[:status]).order("ic_incoming_records.id desc")
     records = find_ic_incoming_records(params,records)
-    p records
     @records_count = records.count(:status)
     @records = records.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
