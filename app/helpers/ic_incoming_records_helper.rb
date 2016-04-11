@@ -1,12 +1,4 @@
 module IcIncomingRecordsHelper
-  def find_ic_logs(params,record)
-    if params[:step_name] != 'ALL'
-      record.ic_audit_steps.where('step_name=?',params[:step_name]).order("attempt_no desc") rescue []
-    else
-      record.ic_audit_steps.order("id desc") rescue []
-    end      
-  end
-
   def find_ic_incoming_records(params,records)
     incoming_records = records
     incoming_records = incoming_records.where("should_skip=?",params[:skipped_flag]) if params[:skipped_flag].present?

@@ -1,9 +1,9 @@
 module SuIncomingRecordsHelper
   def find_logs(params,record)
     if params[:step_name] != 'ALL'
-      record.su_audit_steps.where('step_name=?',params[:step_name]).order("attempt_no desc") rescue []
+      record.fm_audit_steps.where('step_name=?',params[:step_name]).order("attempt_no desc") rescue []
     else
-      record.su_audit_steps.order("id desc") rescue []
+      record.fm_audit_steps.order("id desc") rescue []
     end      
   end
 

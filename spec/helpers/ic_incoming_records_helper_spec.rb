@@ -1,15 +1,6 @@
 require 'spec_helper'
 
 describe IcIncomingRecordsHelper do
-  context "find_logs" do 
-    it "should return audit_steps results" do 
-      ic_incoming_record = Factory(:ic_incoming_record)
-      a = Factory(:ic_audit_step, :ic_auditable => ic_incoming_record)
-      params = {:id => ic_incoming_record.id, :step_name => "ALL"}
-      find_ic_logs(params,ic_incoming_record).should == [a]
-    end
-  end
-
   context "find_ic_incoming_records" do
     it "should return records for the params that is passed" do 
       a = Factory(:ic_incoming_record, :incoming_file_record => Factory(:incoming_file_record, :should_skip => 'Y'))

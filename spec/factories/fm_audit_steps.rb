@@ -1,7 +1,7 @@
 FactoryGirl.define do
-  factory :su_audit_step do
-    su_auditable_id 1
-    su_auditable_type "SuIncomingRecord"
+  factory :fm_audit_step do
+    auditable_id 1
+    auditable_type "SuIncomingRecord"
     step_no 1
     attempt_no 1
     status_code "NEW"

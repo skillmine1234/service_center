@@ -21,7 +21,7 @@ class IcIncomingRecordsController < ApplicationController
 
   def audit_steps
     @ic_record = IcIncomingRecord.find(params[:id])
-    ic_record_values = find_ic_logs(params, @ic_record)
+    ic_record_values = find_logs(params, @ic_record)
     @ic_record_values_count = ic_record_values.count(:id)
     @ic_record_values = ic_record_values.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
