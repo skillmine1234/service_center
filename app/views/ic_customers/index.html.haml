@@ -21,6 +21,8 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Customer ID
     %th{:style=>'text-align:left; background-color: lightblue;'}
+      Customer Name
+    %th{:style=>'text-align:left; background-color: lightblue;'}
       Application ID
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Identity User ID
@@ -52,6 +54,8 @@
           = link_to 'Edit', edit_ic_customer_path(ic_customer)
         %td{:style=>'text-align:left;'}
           = ic_customer.customer_id
+        %td{:style=>'text-align:left;'}
+          = ic_customer.customer_name
         %td{:style=>'text-align:left;'}
           = ic_customer.app_id
         %td{:style=>'text-align:left;'}
