@@ -32,6 +32,12 @@
             %td#msg-error
               = error_message_for(@su_customer, :customer_id, :prepend_text => "")
           %tr
+            %td.label Customer Name
+            %td.value
+              = @su_customer.customer_name
+            %td#msg-error
+              = error_message_for(@su_customer, :customer_name, :prepend_text => "")
+          %tr
             %td.label Pool Account No
             %td.value
               = @su_customer.pool_account_no

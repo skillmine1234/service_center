@@ -63,12 +63,27 @@ describe SuCustomer do
     end
 
     it "should not allow invalid format" do
-      su_customer = Factory.build(:su_customer, :account_no => '@acddsfdfd', :customer_id => '@,.9023jsf', 
+      su_customer = Factory.build(:su_customer, :account_no => '@acddsfdfd', :customer_id => '@,.9023jsf', :customer_name => 'ABC@DEF',
                                   :pool_account_no => "ACC01", :pool_customer_id => "CUST01")
       su_customer.save == false
       [:account_no, :customer_id, :pool_account_no, :pool_customer_id].each do |att|
         su_customer.errors_on(att).should == ["Invalid format, expected format is : {[0-9]}"]
       end
+      su_customer.errors_on(:customer_name).should == ["Invalid format, expected format is : {[a-z|A-Z|0-9|\\s|\\.|\\-]}"]
+    end
+  end
+
+  context "customer_name format" do
+    it "should allow valid format" do
+      should allow_value('ABCDCo').for(:customer_name)
+      should allow_value('ABCD Co').for(:customer_name)
+      should allow_value('ABCD.Co').for(:customer_name)
+      should allow_value('ABCD-Co').for(:customer_name)
+    end
+
+    it "should not allow invalid format" do
+      should_not allow_value('@AbcCo').for(:customer_name)
+      should_not allow_value('/ab0QWER').for(:customer_name)
     end
   end
   

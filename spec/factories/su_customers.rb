@@ -4,6 +4,7 @@ FactoryGirl.define do
   factory :su_customer do
     account_no "1234567890"
     sequence(:customer_id) {|n| "9" + "%03i" % "#{n}" }
+    customer_name "Foo"
     pool_account_no "1234567898"
     pool_customer_id "1234567899"
     max_distance_for_name 3

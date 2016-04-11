@@ -5,11 +5,12 @@ class SuCustomer < ActiveRecord::Base
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
 
-  validates_presence_of :account_no, :customer_id, :pool_account_no, :pool_customer_id, :max_distance_for_name
+  validates_presence_of :account_no, :customer_id, :customer_name, :pool_account_no, :pool_customer_id, :max_distance_for_name
   validates_numericality_of :account_no, :customer_id, :pool_account_no, :pool_customer_id, :message => 'Invalid format, expected format is : {[0-9]}'
   validates_uniqueness_of :account_no, :scope => [:customer_id, :approval_status]
 
   validates :max_distance_for_name, :numericality => {:greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+  validates :customer_name, format: {with: /\A[a-z|A-Z|0-9|\s|\.|\-]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\s|\.|\-]}'}, length: {maximum: 100}
   validates :customer_id, length: { maximum: 15 }
   [:account_no, :pool_account_no, :pool_customer_id].each do |column|
     validates column, length: { maximum: 20 }

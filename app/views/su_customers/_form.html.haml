@@ -18,6 +18,11 @@
       #msg-error
         = error_message_for(@su_customer, :customer_id, :prepend_text => "")
     .control-group
+      = f.label :customer_name, "*Customer Name", :class => 'control-label'
+      = f.text_field :customer_name, :maxlength => 100, :required => true
+      #msg-error
+        = error_message_for(@su_customer, :customer_name, :prepend_text => "")
+    .control-group
       = f.label :pool_account_no, "*Pool Account No", :class => 'control-label'
       = f.text_field :pool_account_no, :maxlength => 20, :required => true
       #msg-error
