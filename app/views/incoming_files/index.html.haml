@@ -39,6 +39,14 @@
       Failed Record Count
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Fault Text
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Record Count
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Skipped Record Count
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Completed Record Count
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Timed Out Record Count
   .tbody
     - @incoming_files.each do |incoming_file|
       %tr
@@ -74,6 +82,14 @@
               Show Fault Text
           - else
             = link_to "Show Fault Text", "#", :class => 'active-link', :href => "#faultText", data: { fault_reason: incoming_file.fault_reason, fault_code: incoming_file.fault_code, fault_subcode: incoming_file.fault_subcode}
+        %td{:style=>'text-align:left;'}
+          = incoming_file.record_count
+        %td{:style=>'text-align:left;'}
+          = incoming_file.skipped_record_count
+        %td{:style=>'text-align:left;'}
+          = incoming_file.completed_record_count
+        %td{:style=>'text-align:left;'}
+          = incoming_file.timedout_record_count
 #faultText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
