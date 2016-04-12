@@ -43,6 +43,11 @@
         = @incoming_file.line_count
     %tr
       %td{:style=>'text-align:left;'}
+        = "Pending Approval"
+      %td{:style=>'text-align:left;'}
+        = @incoming_file.pending_approval
+    %tr
+      %td{:style=>'text-align:left;'}
         = "Status"
       %td{:style=>'text-align:left;'}
         = @incoming_file.job_status
@@ -64,7 +69,11 @@
         = "Alert Count"
       %td{:style=>'text-align:left;'}
         = @incoming_file.alert_count
-
+    %tr
+      %td{:style=>'text-align:left;'}
+        = "Last Alert At"
+      %td{:style=>'text-align:left;'}
+        = @incoming_file.last_alert_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
 
 %table.table.table-bordered.table-striped.table-hover.align_center{:style=>'width:45%;float: right;'}
   %thead
@@ -204,7 +213,7 @@
         %td{:style=>'text-align:left;'}
           = @incoming_file.record_count || 0
         %td{:style=>'text-align:left;'}
-          = @incoming_file.timedout_record_count || 0
+          = @incoming_file.timedout_record_count || 0, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'TIMEDOUT')
         %td{:style=>'text-align:left;'}
           = link_to @incoming_file.skipped_record_count || 0, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'SKIPPED')
         %td{:style=>'text-align:left;'}
@@ -222,7 +231,7 @@
         %td{:style=>'text-align:left;'}
           = @incoming_file.record_count || 0
         %td{:style=>'text-align:left;'}
-          = @incoming_file.timedout_record_count || 0
+          = @incoming_file.timedout_record_count || 0, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'TIMEDOUT')
         %td{:style=>'text-align:left;'}
           = link_to @incoming_file.skipped_record_count || 0, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'SKIPPED')
         %td{:style=>'text-align:left;'}
@@ -241,13 +250,13 @@
         %td{:style=>'text-align:left;'}
           = @incoming_file.record_count || 0
         %td{:style=>'text-align:left;'}
-          = @incoming_file.timedout_record_count || 0
+          = @incoming_file.timedout_record_count || 0, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'TIMEDOUT')
         %td{:style=>'text-align:left;'}
           = link_to @incoming_file.skipped_record_count || 0, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'SKIPPED')
         %td{:style=>'text-align:left;'}
           = link_to @incoming_file.completed_record_count || 0, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'COMPLETED')
         %td{:style=>'text-align:left;'}
-          = link_to @incoming_file.failed_record_count || 0, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'FAILED', :skipped_flag => 'N', :overrided_flag => 'false')
+          = link_to @incoming_file.failed_record_count || 0, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'FAILED')
         %td{:style=>'text-align:left;'}
           = link_to @skipped_failure_count || 0, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'FAILED', :skipped_flag => 'Y', :overrided_flag => 'false')
         %td{:style=>'text-align:left;'}

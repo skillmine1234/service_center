@@ -20,13 +20,6 @@ class IcIncomingRecordsController < ApplicationController
     @ic_record = IcIncomingRecord.find_by_id(params[:id])
   end
 
-  def audit_steps
-    @ic_record = IcIncomingRecord.find(params[:id])
-    ic_record_values = find_logs(params, @ic_record)
-    @ic_record_values_count = ic_record_values.count(:id)
-    @ic_record_values = ic_record_values.paginate(:per_page => 10, :page => params[:page]) rescue []
-  end
-
   def audit_logs
     @record = IncomingFileRecord.find(params[:id]) rescue nil
     @audit = @record.audits[params[:version_id].to_i] rescue nil

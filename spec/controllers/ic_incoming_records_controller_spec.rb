@@ -28,15 +28,6 @@ describe IcIncomingRecordsController do
     end
   end
 
-  describe "GET audit_steps" do
-    it "assigns all audit_steps as @ic_record_values" do
-      ic_incoming_record = Factory(:ic_incoming_record)
-      a = Factory(:fm_audit_step, :auditable_id => ic_incoming_record.id, :auditable_type => "IcIncomingRecord")
-      get :audit_steps, :id => ic_incoming_record.id, :step_name => "ALL"
-      assigns(:ic_record_values).should eq([a])
-    end
-  end
-
   describe "GET audit_logs" do
     it "assigns the requested ic_incoming_record as @ic_incoming_record" do
       ic_incoming_record = Factory(:ic_incoming_record)

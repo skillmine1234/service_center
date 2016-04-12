@@ -32,6 +32,8 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Record Count
     %th{:style=>'text-align:left; background-color: lightblue;'}
+      Pending Approval
+    %th{:style=>'text-align:left; background-color: lightblue;'}
       Status
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Upload Started At
@@ -62,6 +64,8 @@
           = incoming_file.line_count
         %td{:style=>'text-align:left;'}
           = incoming_file.record_count
+        %td{:style=>'text-align:left;'}
+          = incoming_file.pending_approval
         %td{:style=>'text-align:left;'}
           = incoming_file.job_status
         %td{:style=>'text-align:left;'}

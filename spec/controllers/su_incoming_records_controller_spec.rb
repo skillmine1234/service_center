@@ -28,15 +28,6 @@ describe SuIncomingRecordsController do
     end
   end
 
-  describe "GET audit_steps" do
-    it "assigns all audit_steps as @su_record_values" do
-      su_incoming_record = Factory(:su_incoming_record)
-      a = Factory(:fm_audit_step, :auditable => su_incoming_record)
-      get :audit_steps, :id => su_incoming_record.id, :step_name => "ALL"
-      assigns(:su_record_values).should eq([a])
-    end
-  end
-
   describe "GET audit_logs" do
     it "assigns the requested su_incoming_record as @su_incoming_record" do
       su_incoming_record = Factory(:su_incoming_record)
