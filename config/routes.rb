@@ -25,7 +25,7 @@ ServiceCenter::Application.routes.draw do
   resources :incoming_files do
     member do
       get 'download_response_file'
-      get 'generate_response_file'
+      put 'generate_response_file'
     end
   end
   
