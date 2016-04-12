@@ -12,7 +12,6 @@ class IcCustomer < ActiveRecord::Base
   validates :identity_user_id, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}'}, :allow_blank => true
   validates :app_id, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}'}
   validates :customer_name, format: {with: /\A[a-z|A-Z|0-9|\s|\.|\-]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\s|\.|\-]}'}
-  validates :cust_contact_email, :ops_email, :rm_email, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/, :message => 'Invalid Email ID, expected format is abc@def.com' }
   validates :fee_pct, :max_overdue_pct, :numericality => {:greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
   validates :customer_id, :repay_account_no, :fee_income_gl, :cust_contact_mobile, :numericality => {:only_integer => true, :message => 'Invalid format, expected format is : {[0-9]}'}
 
@@ -31,4 +30,22 @@ class IcCustomer < ActiveRecord::Base
     validates column, length: { maximum: 100 }
   end
   validates :cust_contact_mobile, length: {maximum: 10, minimum: 10}
+
+  validate :check_email_addresses
+
+  def check_email_addresses
+    ["cust_contact_email","ops_email","rm_email"].each do |email_id|
+      invalid_ids = []
+      value = self.send(email_id)
+      unless value.nil?
+        value.split(/;\s*/).each do |email| 
+          unless email =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
+            invalid_ids << email
+          end
+        end
+      end
+      errors.add(email_id.to_sym, "is invalid, expected format is abc@def.com") unless invalid_ids.empty?
+    end
+  end
+
 end

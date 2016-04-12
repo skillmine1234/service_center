@@ -69,13 +69,13 @@
         %td{:style=>'text-align:left;'}
           = ic_customer.max_overdue_pct
         %td{:style=>'text-align:left;'}
-          = ic_customer.cust_contact_email
+          = ic_customer.cust_contact_email.split(';').first rescue nil
         %td{:style=>'text-align:left;'}
           = ic_customer.cust_contact_mobile
         %td{:style=>'text-align:left;'}
-          = ic_customer.ops_email
+          = ic_customer.ops_email.split(';').first rescue nil
         %td{:style=>'text-align:left;'}
-          = ic_customer.rm_email
+          = ic_customer.rm_email.split(';').first rescue nil
         %td{:style=>'text-align:left;'}
           = ic_customer.is_enabled
 

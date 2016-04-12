@@ -121,44 +121,15 @@ describe IcCustomer do
     end    
   end
 
-  context "emails" do
-    it "should allow multiple cust_contact_email" do
-      ic_customer1 = Factory(:ic_customer, :cust_contact_email => "abc@def.com", :approval_status => 'A')
-      ic_customer2 = Factory.build(:ic_customer, :cust_contact_email => "abc@def.com", :approval_status => 'A')
-      ic_customer2.should be_valid
-      ic_customer2.errors_on(:cust_contact_email).should == []
-      ic_customer3 = Factory.build(:ic_customer, :cust_contact_email => "abc@def.com", :approval_status => 'A')
-      ic_customer3.should be_valid
-      ic_customer3.errors_on(:cust_contact_email).should == []
-    end
-
-    it "should allow multiple ops_email" do
-      ic_customer1 = Factory(:ic_customer, :ops_email => "abc@def.com", :approval_status => 'A')
-      ic_customer2 = Factory.build(:ic_customer, :ops_email => "abc@def.com", :approval_status => 'A')
-      ic_customer2.should be_valid
-      ic_customer2.errors_on(:ops_email).should == []
-      ic_customer3 = Factory.build(:ic_customer, :ops_email => "abc@def.com", :approval_status => 'A')
-      ic_customer3.should be_valid
-      ic_customer3.errors_on(:ops_email).should == []
-    end
-
-    it "should allow multiple rm_email" do
-      ic_customer1 = Factory(:ic_customer, :rm_email => "abc@def.com", :approval_status => 'A')
-      ic_customer2 = Factory.build(:ic_customer, :rm_email => "abc@def.com", :approval_status => 'A')
-      ic_customer2.should be_valid
-      ic_customer2.errors_on(:rm_email).should == []
-      ic_customer3 = Factory.build(:ic_customer, :rm_email => "abc@def.com", :approval_status => 'A')
-      ic_customer3.should be_valid
-      ic_customer3.errors_on(:rm_email).should == []
-    end
-
-    it "should return error on multiple invalid rm_email" do
-      ic_customer1 = Factory.build(:ic_customer, :rm_email => "@CUST01", :approval_status => 'A')
-      ic_customer1.should_not be_valid
-      ic_customer1.errors_on(:rm_email).should == ["Invalid Email ID, expected format is abc@def.com"]
-      ic_customer2 = Factory.build(:ic_customer, :rm_email => "@CUST01", :approval_status => 'A')
-      ic_customer2.should_not be_valid
-      ic_customer2.errors_on(:rm_email).should == ["Invalid Email ID, expected format is abc@def.com"] 
+  context "check_email_addresses" do 
+    it "should validate email address" do 
+      ic_customer = Factory.build(:ic_customer, :cust_contact_email => "1234;esesdgs", :ops_email => "1234;esesdgs", :rm_email => "1234;esesdgs")
+      ic_customer.should_not be_valid
+      ic_customer.errors_on("cust_contact_email").should == ["is invalid, expected format is abc@def.com"]
+      ic_customer.errors_on("ops_email").should == ["is invalid, expected format is abc@def.com"]
+      ic_customer.errors_on("rm_email").should == ["is invalid, expected format is abc@def.com"]
+      ic_customer = Factory.build(:ic_customer, :cust_contact_email => "foo@ruby.com;abe@def.com", :ops_email => "foo@ruby.com;bar@ruby.com", :rm_email => "foo@ruby.com;bar@ruby.com")
+      ic_customer.should be_valid
     end
   end
 
