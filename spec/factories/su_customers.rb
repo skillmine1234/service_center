@@ -11,5 +11,7 @@ FactoryGirl.define do
     is_enabled "N"
     approval_status "U"
     last_action "C"
+    ops_email "foo@bar.com"
+    rm_email "foo@bar.com"
   end
 end
