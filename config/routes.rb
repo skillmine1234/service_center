@@ -82,6 +82,7 @@ ServiceCenter::Application.routes.draw do
     end
   end
 
+  get 'incoming_files/:id/audit_steps/:step_name' => 'incoming_files#audit_steps'
   get 'su_incoming_records/:id/audit_steps/:step_name' => 'su_incoming_records#audit_steps'
   get '/su_incoming_records/:id/audit_logs' => 'su_incoming_records#audit_logs'
   get 'ic_incoming_records/:id/audit_steps/:step_name' => 'ic_incoming_records#audit_steps'
@@ -161,6 +162,8 @@ ServiceCenter::Application.routes.draw do
   get '/bm_aggregator_payment/hit_api/:id' => 'bm_aggregator_payments#hit_api', as: :hit_api
 
   get '/view_raw_content/:id' => "incoming_files#view_raw_content"
+
+  get '/show_files/:id' => "incoming_files#show_files"
   
   get '/csv_export/download_csv' => 'csv_exports#download_csv'
 

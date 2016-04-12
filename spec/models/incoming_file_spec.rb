@@ -8,6 +8,9 @@ describe IncomingFile do
     it { should have_many(:ecol_remitters)}
     it { should belong_to(:sc_service) }
     it { should belong_to(:incoming_file_type) }
+    it { should belong_to(:su_incoming_file) }
+    it { should belong_to(:ic_incoming_file) }
+    it { should have_many(:fm_audit_steps) }
   end
 
   context 'validation' do

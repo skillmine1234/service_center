@@ -27,6 +27,15 @@ describe IncomingFilesController do
     end
   end
 
+  describe "GET audit_steps" do
+    it "assigns all audit_steps as @file_record_values" do
+      incoming_file = Factory(:incoming_file, :approval_status => 'A')
+      a = Factory(:fm_audit_step, :auditable_id => incoming_file.id, :auditable_type => "IncomingFile")
+      get :audit_steps, :id => incoming_file.id, :step_name => "ALL"
+      assigns(:file_record_values).should eq([a])
+    end
+  end
+
   describe "GET view_raw_content" do
     it "should display raw content of a file" do
       incoming_file = Factory(:incoming_file)
@@ -45,6 +54,14 @@ describe IncomingFilesController do
     it "assigns the requested incoming_file as @incoming_file" do
       incoming_file = Factory(:incoming_file)
       get :show, {:id => incoming_file.id}
+      assigns(:incoming_file).should eq(incoming_file)
+    end
+  end
+
+  describe "GET show_files" do
+    it "assigns the requested incoming_file as @incoming_file" do
+      incoming_file = Factory(:incoming_file)
+      get :show_files, {:id => incoming_file.id}
       assigns(:incoming_file).should eq(incoming_file)
     end
   end

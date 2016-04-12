@@ -1,116 +1,133 @@
-%br
-%br
-%h1 File Summary
-%br
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8;  height:630px;'}
+    #form-details
+      %h3 Incoming File
+      %br
+      %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px;'}
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
+        %tr
+          %td.label Audit Steps
+          %td.value
+            = link_to 'Show', {:controller => 'incoming_files', :action => 'audit_steps', :id => @incoming_file.id, :step_name => 'ALL'}
+        %tr
+          %td.label Service Name 
+          %td.value
+            = @incoming_file.service_name
+        %tr
+          %td.label File type 
+          %td.value
+            = @incoming_file.file_type
+        %tr
+          %td.label File Name 
+          %td.value
+            = @incoming_file.file_name
+        %tr
+          %td.label File Size
+          %td.value
+            = @incoming_file.size_in_bytes
+        %tr
+          %td.label Line Count
+          %td.value
+            = @incoming_file.line_count
+        %tr
+          %td.label Status
+          %td.value
+            = @incoming_file.job_status
+        %tr
+          %td.label Upload Started At
+          %td.value
+            = @incoming_file.started_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
+        %tr
+          %td.label Upload Time
+          %td.value
+            = @incoming_file.upload_time
+        %tr
+          %td.label Record Count
+          %td.value
+            = @incoming_file.record_count
+        %tr
+          %td.label Skipped Record Count
+          %td.value
+            = @incoming_file.skipped_record_count
+        %tr
+          %td.label Completed Record Count
+          %td.value
+            = @incoming_file.completed_record_count
+        %tr
+          %td.label Timedout Record Count
+          %td.value
+            = @incoming_file.timedout_record_count
+        %tr
+          %td.label Failed Record Count
+          %td.value
+            = @incoming_file.failed_record_count
+        %tr
+          %td.label Fault Text
+          %td.value
+            - if @incoming_file.fault_code.nil? or @incoming_file.fault_reason.nil?
+              .span{:class =>"has-tooltip", "data-toggle" => 'tooltip',"title" => "No Fault Text Available for this record", "data-placement" => 'bottom', "data-html" => true}
+                Show Fault Text
+            - else
+              = link_to "Show Fault Text", "#", :class => 'active-link', :href => "#faultText", data: { fault_reason: @incoming_file.fault_reason, fault_code: @incoming_file.fault_code, fault_subcode: @incoming_file.fault_subcode}
 
-%h1 
-  = @incoming_file.file_name
-%br
-%table.table.table-bordered.table-striped.table-hover.align_center
-  %tbody
-    %tr
-      %td{:style=>'text-align:left;'}
-        = "Response File Name"
-      %td{:style=>'text-align:left;'}
-        = @incoming_file.rep_file_name
-    %tr
-      %td{:style=>'text-align:left;'}
-        = "Response File Path"
-      %td{:style=>'text-align:left;'}
-        = @incoming_file.rep_file_path
-    %tr
-      %td{:style=>'text-align:left;'}
-        = "Response File Status"    
-      %td{:style=>'text-align:left;'}
-        = @incoming_file.status_text(@incoming_file.rep_file_status)
-    - unless ENV['CONFIG_URL_IIB_FILE_MGR'].nil? or ENV['CONFIG_URL_IIB_FILE_MGR'].empty?
+        - unless @incoming_file.su_incoming_file.nil?
+          %tr
+            %td.label Debit Amount
+            %td.value
+              = @incoming_file.su_incoming_file.try(:debit_amount)
+          %tr
+            %td.label Debit Reference No
+            %td.value
+              = @incoming_file.su_incoming_file.try(:debit_reference_no)
+          %tr
+            %td.label Debit Status
+            %td.value
+              = @incoming_file.su_incoming_file.try(:debit_status)
+          %tr
+            %td.label Debited At
+            %td.value
+              = @incoming_file.su_incoming_file.try(:debited_at)
+          %tr
+            %td.label Reversal Amount
+            %td.value
+              = @incoming_file.su_incoming_file.try(:reversal_amount)
+          %tr
+            %td.label Reversal Reference No
+            %td.value
+              = @incoming_file.su_incoming_file.try(:reversal_reference_no)
+          %tr
+            %td.label Reversal Status
+            %td.value
+              = @incoming_file.su_incoming_file.try(:reversal_status)
+          %tr
+            %td.label Reversed At
+            %td.value
+              = @incoming_file.su_incoming_file.try(:reversed_at)
+        - unless @incoming_file.ic_incoming_file.nil?
+          %tr
+            %td.label Corporate Customer Id
+            %td.value
+              = @incoming_file.ic_incoming_file.try(:corp_customer_id)
+          %tr
+            %td.label Incoming NEFT/RTGS UTR 
+            %td.value
+              = @incoming_file.ic_incoming_file.try(:pm_utr)  
+#faultText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Fault Text
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    %table.table.no-border
       %tr
-        %td{:style=>'text-align:left;'}
-          = link_to 'Download', download_response_file_incoming_file_path(@incoming_file, :download => true)
-        %td{:style=>'text-align:left;'}
+        %td.label Fault Code: 
+        %td
+          %label.fault_code{:style => 'word-wrap: break-word'}
       %tr
-        %td{:style=>'text-align:left;'}
-          = link_to 'View', download_response_file_incoming_file_path(@incoming_file, :view => true)
-        %td{:style=>'text-align:left;'}
-
-
-- if @incoming_file.pending_approval == 'Y' && @incoming_file.status == 'COMPLETED'
-  = simple_form_for @incoming_file, :url => {:action => 'approve_restart'}, :method => :put, :html=>{:id=>"approve_restart"} do |f|
-    = f.hidden_field :lock_version
-    = submit_tag "Approve Restart", :class=>"btn btn-primary"
-
-%br
-- if @incoming_file.incoming_file_type.validate_all == 'Y'
-  = link_to 'Generate Response File', generate_response_file_incoming_file_path(@incoming_file), :class => "btn btn-primary"
-
-%br
-%br
-%p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
-  = render 'ecol_customers/approve', :@record => @incoming_file
-
-%table.table.table-bordered.table-striped.table-hover.align_center
-  %thead
-    %tr
-      %th{:style=>'text-align:left;'}
-      %th{:style=>'text-align:left;'}
-        Total Records
-      %th{:style=>'text-align:left;'}
-        Skipped
-      %th{:style=>'text-align:left;'}
-        Success
-      %th{:style=>'text-align:left;'}
-        Failed
-      %th{:style=>'text-align:left;'}
-        Skipped By User
-      %th{:style=>'text-align:left;'}
-        Overriden By User
-  %tbody
-    %tr
-      - if @incoming_file.service_name == 'ECOL'
-        %td{:style=>'text-align:left;'}
-          = "Remitter"    
-        %td{:style=>'text-align:left;'}
-          = @incoming_file.ecol_remitters.count(:id) + @incoming_file.failed_records.count(:id)
-        %td{:style=>'text-align:left;'}
-          = link_to @skipped_count, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'SKIPPED')
-        %td{:style=>'text-align:left;'}
-          = link_to @incoming_file.ecol_remitters.count(:id), ecol_remitters_path(:incoming_file_id => @incoming_file.id)
-        %td{:style=>'text-align:left;'}
-          = link_to @incoming_file.failed_records.count(:id), incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'FAILED')
-        %td{:style=>'text-align:left;'}
-          = '-'
-        %td{:style=>'text-align:left;'}
-          = '-'
-
-      - elsif @incoming_file.service_name == 'IMTSERVICE'
-        %td{:style=>'text-align:left;'}
-          = "IMT Transaction"
-        %td{:style=>'text-align:left;'}
-          = @incoming_file.incoming_file_records.count(:id)
-        %td{:style=>'text-align:left;'}
-          = link_to @skipped_count, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'SKIPPED')
-        %td{:style=>'text-align:left;'}
-          = link_to @success_count, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'COMPLETED')
-        %td{:style=>'text-align:left;'}
-          = link_to @failure_count, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'FAILED')
-        %td{:style=>'text-align:left;'}
-          = '-'
-        %td{:style=>'text-align:left;'}
-          = '-'
-
-      - elsif !@incoming_file.incoming_file_type.records_table.empty?
-        - table = @incoming_file.incoming_file_type.records_table
-        %td{:style=>'text-align:left;'}
-          = @incoming_file.file_type
-        %td{:style=>'text-align:left;'}
-          = @incoming_file.incoming_file_records.count(:id)
-        %td{:style=>'text-align:left;'}
-          = link_to @skipped_count, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'SKIPPED')
-        %td{:style=>'text-align:left;'}
-          = link_to @success_count, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'COMPLETED')
-        %td{:style=>'text-align:left;'}
-          = link_to @failure_count, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'FAILED', :skipped_flag => 'N', :overrided_flag => 'false')
-        %td{:style=>'text-align:left;'}
-          = link_to @skipped_failure_count, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'FAILED', :skipped_flag => 'Y', :overrided_flag => 'false')
-        %td{:style=>'text-align:left;'}
-          = link_to @overriden_failure_count, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'FAILED', :overrided_flag => 'true')
+        %td.label Fault Reason:
+        %td
+          %label.fault_reason{:style => 'word-wrap: break-word'}
+      %tr
+        %td.label Fault Subcode:
+        %td
+          %label.fault_subcode{:style => 'word-wrap: break-word'}

@@ -6,7 +6,8 @@ class IncomingFilesController < ApplicationController
   before_filter :block_inactive_user!
   respond_to :json, :html
   include IncomingFileHelper
-
+  include SuIncomingRecordsHelper
+  
   def new
     @incoming_file = IncomingFile.new
     @sc_service = ScService.find_by_code(params[:sc_service])
@@ -21,6 +22,17 @@ class IncomingFilesController < ApplicationController
       flash[:notice] = @incoming_file.errors.full_messages
       render :new
     end
+  end
+
+  def audit_steps
+    @file_record = IncomingFile.find(params[:id])
+    file_record_values = find_logs(params, @file_record)
+    @file_record_values_count = file_record_values.count(:id)
+    @file_record_values = file_record_values.paginate(:per_page => 10, :page => params[:page]) rescue []
+  end
+
+  def show
+    @incoming_file = IncomingFile.unscoped.find_by_id(params[:id])
   end
 
   def index
@@ -57,7 +69,7 @@ class IncomingFilesController < ApplicationController
     end
   end
 
-  def show
+  def show_files
     @incoming_file = IncomingFile.unscoped.find_by_id(params[:id])
     @success_count = @incoming_file.incoming_file_records.where(:status => "COMPLETED").count(:id)
     @failure_count = @incoming_file.incoming_file_records.where("status=? and should_skip=? and overrides is null","FAILED",'N').count(:id)
