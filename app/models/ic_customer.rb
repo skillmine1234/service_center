@@ -6,14 +6,13 @@ class IcCustomer < ActiveRecord::Base
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
 
   validates_presence_of :customer_id, :app_id, :repay_account_no, :fee_pct, 
-                        :fee_income_gl, :max_overdue_pct, :cust_contact_email, :cust_contact_mobile, 
-                        :ops_email, :rm_email, :is_enabled, :customer_name
+                        :fee_income_gl, :max_overdue_pct, :is_enabled, :customer_name
 
   validates :identity_user_id, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}'}, :allow_blank => true
   validates :app_id, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}'}
   validates :customer_name, format: {with: /\A[a-z|A-Z|0-9|\s|\.|\-]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\s|\.|\-]}'}
   validates :fee_pct, :max_overdue_pct, :numericality => {:greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
-  validates :customer_id, :repay_account_no, :fee_income_gl, :cust_contact_mobile, :numericality => {:only_integer => true, :message => 'Invalid format, expected format is : {[0-9]}'}
+  validates :customer_id, :repay_account_no, :fee_income_gl, :numericality => {:only_integer => true, :message => 'Invalid format, expected format is : {[0-9]}'}
 
   validates_uniqueness_of :customer_id, :scope => :approval_status
   validates_uniqueness_of :app_id, :scope => :approval_status
@@ -29,7 +28,7 @@ class IcCustomer < ActiveRecord::Base
   [:cust_contact_email, :ops_email, :rm_email, :customer_name].each do |column|
     validates column, length: { maximum: 100 }
   end
-  validates :cust_contact_mobile, length: {maximum: 10, minimum: 10}
+  validates :cust_contact_mobile, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9]}'}, length: {maximum: 10, minimum: 10}, :allow_blank =>true
 
   validate :check_email_addresses
 
