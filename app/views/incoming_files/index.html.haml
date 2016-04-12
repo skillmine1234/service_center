@@ -20,7 +20,6 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
-    %th{:style=>'text-align:left; background-color: lightblue;'}
       Service Name
     %th{:style=>'text-align:left; background-color: lightblue;'}
       File Type
@@ -31,30 +30,20 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Line Count
     %th{:style=>'text-align:left; background-color: lightblue;'}
+      Record Count
+    %th{:style=>'text-align:left; background-color: lightblue;'}
       Status
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Upload Started At
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Upload Time
     %th{:style=>'text-align:left; background-color: lightblue;'}
-      Failed Record Count
-    %th{:style=>'text-align:left; background-color: lightblue;'}
       Fault Text
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Record Count
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Skipped Record Count
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Completed Record Count
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Timed Out Record Count
   .tbody
     - @incoming_files.each do |incoming_file|
       %tr
         %td{:style=>'text-align:left;'}
-          = link_to 'Show', :controller => "incoming_files", :action => "show", :id => incoming_file.id
-        %td{:style=>'text-align:left;'}
-          = link_to 'Summary', :controller => "incoming_files", :action => "show_files", :id => incoming_file.id
+          = link_to 'Show Summary', :controller => "incoming_files", :action => "show", :id => incoming_file.id
         %td{:style=>'text-align:left;'}
           - if incoming_file.approval_status == "U"
             = link_to 'Destroy', incoming_file, :method => :delete, :data => { :confirm => 'Are you sure?' }
@@ -72,27 +61,20 @@
         %td{:style=>'text-align:left;'}
           = incoming_file.line_count
         %td{:style=>'text-align:left;'}
+          = incoming_file.record_count
+        %td{:style=>'text-align:left;'}
           = incoming_file.job_status
         %td{:style=>'text-align:left;'}
           = incoming_file.started_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
         %td{:style=>'text-align:left;'}
           = incoming_file.upload_time
         %td{:style=>'text-align:left;'}
-          = incoming_file.failed_record_count
-        %td{:style=>'text-align:left;'}
           - if incoming_file.fault_code.nil? or incoming_file.fault_reason.nil?
             .span{:class =>"has-tooltip", "data-toggle" => 'tooltip',"title" => "No Fault Text Available for this record", "data-placement" => 'bottom', "data-html" => true}
               Show Fault Text
           - else
             = link_to "Show Fault Text", "#", :class => 'active-link', :href => "#faultText", data: { fault_reason: incoming_file.fault_reason, fault_code: incoming_file.fault_code, fault_subcode: incoming_file.fault_subcode}
-        %td{:style=>'text-align:left;'}
-          = incoming_file.record_count
-        %td{:style=>'text-align:left;'}
-          = incoming_file.skipped_record_count
-        %td{:style=>'text-align:left;'}
-          = incoming_file.completed_record_count
-        %td{:style=>'text-align:left;'}
-          = incoming_file.timedout_record_count
+
 #faultText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×

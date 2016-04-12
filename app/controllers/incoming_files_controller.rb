@@ -7,7 +7,7 @@ class IncomingFilesController < ApplicationController
   respond_to :json, :html
   include IncomingFileHelper
   include SuIncomingRecordsHelper
-  
+
   def new
     @incoming_file = IncomingFile.new
     @sc_service = ScService.find_by_code(params[:sc_service])
@@ -29,10 +29,6 @@ class IncomingFilesController < ApplicationController
     file_record_values = find_logs(params, @file_record)
     @file_record_values_count = file_record_values.count(:id)
     @file_record_values = file_record_values.paginate(:per_page => 10, :page => params[:page]) rescue []
-  end
-
-  def show
-    @incoming_file = IncomingFile.unscoped.find_by_id(params[:id])
   end
 
   def index
@@ -69,11 +65,8 @@ class IncomingFilesController < ApplicationController
     end
   end
 
-  def show_files
+  def show
     @incoming_file = IncomingFile.unscoped.find_by_id(params[:id])
-    @success_count = @incoming_file.incoming_file_records.where(:status => "COMPLETED").count(:id)
-    @failure_count = @incoming_file.incoming_file_records.where("status=? and should_skip=? and overrides is null","FAILED",'N').count(:id)
-    @skipped_count = @incoming_file.incoming_file_records.where(:status => "SKIPPED").count(:id)
     @skipped_failure_count = @incoming_file.incoming_file_records.where(:status => "FAILED", :should_skip => 'Y').count(:id)
     @overriden_failure_count = @incoming_file.incoming_file_records.where("status=? and overrides is not null",'FAILED').count(:id)
   end

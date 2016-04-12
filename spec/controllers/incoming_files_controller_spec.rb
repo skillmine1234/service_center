@@ -57,15 +57,7 @@ describe IncomingFilesController do
       assigns(:incoming_file).should eq(incoming_file)
     end
   end
-
-  describe "GET show_files" do
-    it "assigns the requested incoming_file as @incoming_file" do
-      incoming_file = Factory(:incoming_file)
-      get :show_files, {:id => incoming_file.id}
-      assigns(:incoming_file).should eq(incoming_file)
-    end
-  end
-
+  
   describe "GET new" do
     it "assigns a new incoming_file as @incoming_file" do
       get :new

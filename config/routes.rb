@@ -162,8 +162,6 @@ ServiceCenter::Application.routes.draw do
   get '/bm_aggregator_payment/hit_api/:id' => 'bm_aggregator_payments#hit_api', as: :hit_api
 
   get '/view_raw_content/:id' => "incoming_files#view_raw_content"
-
-  get '/show_files/:id' => "incoming_files#show_files"
   
   get '/csv_export/download_csv' => 'csv_exports#download_csv'
 
