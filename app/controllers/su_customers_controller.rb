@@ -88,6 +88,6 @@ class SuCustomersController < ApplicationController
     params.require(:su_customer).permit(:account_no, :customer_id, :customer_name, :pool_account_no, :pool_customer_id, 
                                         :is_enabled, :created_by, :updated_by, :created_at, :updated_at, 
                                         :lock_version, :approval_status, :last_action, :approved_version, :approved_id, 
-                                        :max_distance_for_name)
+                                        :max_distance_for_name, :ops_email, :rm_email)
   end
 end

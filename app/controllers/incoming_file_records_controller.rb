@@ -10,4 +10,11 @@ class IncomingFileRecordsController < ApplicationController
     @records_count = records.count(:id)
     @records = records.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
+
+  def audit_steps
+    @record = IcIncomingRecord.find(params[:id])
+    record_values = find_logs(params, @record)
+    @record_values_count = record_values.count(:id)
+    @record_values = record_values.paginate(:per_page => 10, :page => params[:page]) rescue []
+  end
 end
