@@ -51,7 +51,7 @@
           %td{:style=>'text-align:left;'}
             = record.salary_amount
           %td{:style=>'text-align:left;'}
-            = link_to 'Show', {:controller => 'incoming_file_records', :action => 'audit_steps', :id => record.incoming_file_id, :step_name => 'ALL'}
+            = link_to 'Show', {:controller => 'incoming_file_records', :action => 'audit_steps', :id => record.incoming_file_record_id, :step_name => 'ALL'}
   .form-actions{:style=>"text-align: center;"}
     = hidden_field_tag :status
     - if !@incoming_file.nil? and @incoming_file.try(:pending_approval) == 'Y' and @incoming_file.status == 'C'

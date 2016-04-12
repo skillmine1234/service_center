@@ -83,9 +83,8 @@ ServiceCenter::Application.routes.draw do
   end
 
   get 'incoming_files/:id/audit_steps/:step_name' => 'incoming_files#audit_steps'
-  get 'su_incoming_records/:id/audit_steps/:step_name' => 'su_incoming_records#audit_steps'
+  get 'incoming_file_records/:id/audit_steps/:step_name' => 'incoming_file_records#audit_steps'
   get '/su_incoming_records/:id/audit_logs' => 'su_incoming_records#audit_logs'
-  get 'ic_incoming_records/:id/audit_steps/:step_name' => 'ic_incoming_records#audit_steps'
   get '/ic_incoming_records/:id/audit_logs' => 'ic_incoming_records#audit_logs'
   get '/partner/:id/audit_logs' => 'partners#audit_logs'
   get '/purpose_code/:id/audit_logs' => 'purpose_codes#audit_logs'
