@@ -3,10 +3,10 @@ require 'spec_helper'
 describe SuIncomingRecordsHelper do
   context "find_logs" do 
     it "should return audit_steps results" do 
-      su_incoming_record = Factory(:su_incoming_record)
-      a = Factory(:fm_audit_step, :auditable => su_incoming_record)
-      params = {:id => su_incoming_record.id, :step_name => "ALL"}
-      find_logs(params,su_incoming_record).should == [a]
+      incoming_record = Factory(:incoming_file_record)
+      a = Factory(:fm_audit_step, :auditable => incoming_record)
+      params = {:id => incoming_record.id, :step_name => "ALL"}
+      find_logs(params,incoming_record).should == [a]
     end
   end
 
