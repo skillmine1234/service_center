@@ -145,7 +145,7 @@ class IncomingFilesController < ApplicationController
       c.use Faraday::Response::Logger
       c.use Faraday::Adapter::NetHttp
     end
-    response = conn.post "#{api_req_url}?incoming_file_id=#{@incoming_file.id}"
+    response = conn.put "#{api_req_url}?incoming_file_name=#{@incoming_file.file_name}"
     status_code = response.env.status
     flash[:alert] = "Api was hit and Status code of response is #{status_code}"
     redirect_to @incoming_file

@@ -186,12 +186,12 @@ describe IncomingFilesController do
   describe "GET generate_response_file" do
     it "should generate response file" do
       incoming_file = Factory(:incoming_file, :approval_status => 'A')
-      WebMock.stub_request(:post, "https://api.quantiguous.com/generate_response_file?incoming_file_id=1").
+      WebMock.stub_request(:put, "#{ENV['CONFIG_URL_GEN_RESP_FILE_URI']}?incoming_file_name=#{incoming_file.file_name}").
         with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Length'=>'0', 'User-Agent'=>'Faraday v0.9.2'}).
-        to_return(:status => 200, :body => "", :headers => {})
+        to_return(:status => 202, :body => "", :headers => {})
       get :generate_response_file, {:id => incoming_file.id}
-      response.body.should == '<html><body>You are being <a href="http://test.host/incoming_files/1">redirected</a>.</body></html>'
-      flash[:alert].should  match(/Api was hit and Status code of response is 200/)
+      flash[:alert].should  match(/Api was hit and Status code of response is 202/)
+      response.should be_redirect
     end
   end
 end
