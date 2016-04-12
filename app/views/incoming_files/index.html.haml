@@ -20,6 +20,7 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
       Service Name
     %th{:style=>'text-align:left; background-color: lightblue;'}
       File Type
@@ -51,7 +52,9 @@
     - @incoming_files.each do |incoming_file|
       %tr
         %td{:style=>'text-align:left;'}
-          = link_to 'Show Summary', :controller => "incoming_files", :action => "show", :id => incoming_file.id
+          = link_to 'Show', :controller => "incoming_files", :action => "show", :id => incoming_file.id
+        %td{:style=>'text-align:left;'}
+          = link_to 'Summary', :controller => "incoming_files", :action => "show_files", :id => incoming_file.id
         %td{:style=>'text-align:left;'}
           - if incoming_file.approval_status == "U"
             = link_to 'Destroy', incoming_file, :method => :delete, :data => { :confirm => 'Are you sure?' }
