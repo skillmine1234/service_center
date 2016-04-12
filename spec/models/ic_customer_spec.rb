@@ -30,7 +30,7 @@ describe IcCustomer do
         should validate_length_of(att).is_at_most(100)
       end
 
-      should validate_length_of(:cust_contact_mobile).is_at_most(10)
+      should validate_length_of(:cust_contact_mobile).is_at_least(10).is_at_most(10)
 
       should allow_value(nil).for(:identity_user_id)
     end
@@ -75,7 +75,7 @@ describe IcCustomer do
     end
   end
 
-  context "numeric fields format" do
+  context "fields format" do
     it "should allow valid format" do
       [:customer_id, :app_id, :identity_user_id, :repay_account_no, :fee_income_gl, :cust_contact_mobile].each do |att|
         should allow_value('0123456789').for(att)
@@ -91,9 +91,9 @@ describe IcCustomer do
     end
 
     it "should not allow invalid format" do
-      ic_customer = Factory.build(:ic_customer, :customer_id => '@,.9023jsf', :app_id => '@acddsfdfd', 
+      ic_customer = Factory.build(:ic_customer, :customer_id => '111.11', :app_id => '@acddsfdfd', 
                                   :identity_user_id => "IUID-1", :repay_account_no => "ACC01", :fee_pct => "45.5f", 
-                                  :fee_income_gl => "400$", :max_overdue_pct => "77f", :cust_contact_mobile => "MOB99-09")
+                                  :fee_income_gl => "400$", :max_overdue_pct => "77f", :cust_contact_mobile => "MOB99-0999", :customer_name => 'ABC@DEF')
       ic_customer.save == false
       [:identity_user_id, :app_id].each do |att|
         ic_customer.errors_on(att).should == ["Invalid format, expected format is : {[a-z|A-Z|0-9]}"]
@@ -101,6 +101,7 @@ describe IcCustomer do
       [:customer_id, :repay_account_no, :fee_income_gl, :cust_contact_mobile].each do |att|
         ic_customer.errors_on(att).should == ["Invalid format, expected format is : {[0-9]}"]
       end
+      ic_customer.errors_on(:customer_name).should == ["Invalid format, expected format is : {[a-z|A-Z|0-9|\\s|\\.|\\-]}"]
     end
   end
 
@@ -124,6 +125,8 @@ describe IcCustomer do
     it "should allow valid format" do
       should allow_value('ABCDCo').for(:customer_name)
       should allow_value('ABCD Co').for(:customer_name)
+      should allow_value('ABCD.Co').for(:customer_name)
+      should allow_value('ABCD-Co').for(:customer_name)
     end
 
     it "should not allow invalid format" do

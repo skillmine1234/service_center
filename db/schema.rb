@@ -605,12 +605,6 @@ ActiveRecord::Schema.define(version: 20160411111157) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
-  create_table "dummy_tables", force: :cascade do |t|
-    t.string   "ifsc",       limit: 11, null: false
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-  end
-
   create_table "ecol_audit_logs", force: :cascade do |t|
     t.integer  "ecol_transaction_id",              null: false
     t.string   "step_name",                        null: false
@@ -1399,8 +1393,8 @@ ActiveRecord::Schema.define(version: 20160411111157) do
     t.text     "rep_fault_bitstream"
     t.string   "should_skip",         limit: 1
     t.string   "overrides",           limit: 50
-    t.string   "rep_fault_code",      limit: 50
     t.integer  "attempt_no"
+    t.string   "rep_fault_code",      limit: 50
   end
 
   add_index "incoming_file_records", ["incoming_file_id", "record_no"], name: "uk_inc_file_records", unique: true
@@ -1423,39 +1417,39 @@ ActiveRecord::Schema.define(version: 20160411111157) do
   add_index "incoming_file_types", ["sc_service_id", "code"], name: "UK_IN_FILE_TYPES_1", unique: true
 
   create_table "incoming_files", force: :cascade do |t|
-    t.string   "service_name",            limit: 10
-    t.string   "file_type",               limit: 10
+    t.string   "service_name",           limit: 10
+    t.string   "file_type",              limit: 10
     t.string   "file"
-    t.string   "file_name",               limit: 50
+    t.string   "file_name",              limit: 50
     t.integer  "size_in_bytes"
     t.integer  "line_count"
-    t.string   "status",                  limit: 1
+    t.string   "status",                 limit: 1
     t.date     "started_at"
     t.date     "ended_at"
-    t.string   "created_by",              limit: 20
-    t.string   "updated_by",              limit: 20
-    t.datetime "created_at",                                         null: false
+    t.string   "created_by",             limit: 20
+    t.string   "updated_by",             limit: 20
+    t.datetime "created_at",                                        null: false
     t.datetime "updated_at"
-    t.string   "fault_code",              limit: 50
-    t.string   "fault_reason",            limit: 1000
-    t.string   "approval_status",         limit: 1,    default: "U", null: false
-    t.string   "last_action",             limit: 1,    default: "C"
+    t.string   "fault_code",             limit: 50
+    t.string   "fault_reason",           limit: 1000
+    t.string   "approval_status",        limit: 1,    default: "U", null: false
+    t.string   "last_action",            limit: 1,    default: "C"
     t.integer  "approved_version"
     t.integer  "approved_id"
     t.integer  "lock_version"
-    t.string   "broker_uuid",             limit: 255
+    t.string   "broker_uuid",            limit: 255
     t.integer  "failed_record_count"
-    t.string   "fault_subcode",           limit: 50
+    t.string   "fault_subcode",          limit: 50
     t.string   "rep_file_name"
     t.string   "rep_file_path"
-    t.string   "rep_file_status",         limit: 1
-    t.string   "pending_approval",        limit: 1
+    t.string   "rep_file_status",        limit: 1
+    t.string   "pending_approval",       limit: 1
     t.string   "file_path"
-    t.string   "last_process_step",       limit: 1
+    t.string   "last_process_step",      limit: 1
     t.integer  "record_count"
     t.integer  "skipped_record_count"
     t.integer  "completed_record_count"
-    t.integer  "timedout_record_counter"
+    t.integer  "timedout_record_count"
   end
 
   add_index "incoming_files", ["file_name", "approval_status"], name: "index_incoming_files_on_file_name_and_approval_status", unique: true
@@ -2318,6 +2312,18 @@ ActiveRecord::Schema.define(version: 20160411111157) do
   end
 
   add_index "su_customers", ["customer_id", "account_no", "approval_status"], name: "uk_su_customers_1", unique: true
+
+  create_table "su_incoming_files", force: :cascade do |t|
+    t.string   "file_name",             limit: 50
+    t.decimal  "debit_amount"
+    t.string   "debit_reference_no",    limit: 64
+    t.string   "debit_status",          limit: 20
+    t.datetime "debited_at"
+    t.decimal  "reversal_amount"
+    t.string   "reversal_reference_no", limit: 64
+    t.string   "reversal_status",       limit: 20
+    t.datetime "reversed_at"
+  end
 
   create_table "su_incoming_records", force: :cascade do |t|
     t.integer "incoming_file_record_id"
