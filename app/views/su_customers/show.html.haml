@@ -56,6 +56,18 @@
             %td#msg-error
               = error_message_for(@su_customer, :max_distance_for_name, :prepend_text => "")
           %tr
+            %td.label Operations Email
+            %td.value
+              = @su_customer.ops_email
+            %td#msg-error
+              = error_message_for(@su_customer, :ops_email, :prepend_text => "")
+          %tr
+            %td.label Relationship Manager Email
+            %td.value
+              = @su_customer.rm_email
+            %td#msg-error
+              = error_message_for(@su_customer, :rm_email, :prepend_text => "")
+          %tr
             %td.label Is Enabled?
             %td.value
               = @su_customer.is_enabled
