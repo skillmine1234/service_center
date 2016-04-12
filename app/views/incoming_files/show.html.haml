@@ -213,7 +213,7 @@
         %td{:style=>'text-align:left;'}
           = @incoming_file.record_count || 0
         %td{:style=>'text-align:left;'}
-          = @incoming_file.timedout_record_count || 0, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'TIMEDOUT')
+          = link_to @incoming_file.timedout_record_count || 0, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'TIMED OUT')
         %td{:style=>'text-align:left;'}
           = link_to @incoming_file.skipped_record_count || 0, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'SKIPPED')
         %td{:style=>'text-align:left;'}
@@ -231,7 +231,7 @@
         %td{:style=>'text-align:left;'}
           = @incoming_file.record_count || 0
         %td{:style=>'text-align:left;'}
-          = @incoming_file.timedout_record_count || 0, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'TIMEDOUT')
+          = link_to @incoming_file.timedout_record_count || 0, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'TIMED OUT')
         %td{:style=>'text-align:left;'}
           = link_to @incoming_file.skipped_record_count || 0, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'SKIPPED')
         %td{:style=>'text-align:left;'}
@@ -250,7 +250,7 @@
         %td{:style=>'text-align:left;'}
           = @incoming_file.record_count || 0
         %td{:style=>'text-align:left;'}
-          = @incoming_file.timedout_record_count || 0, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'TIMEDOUT')
+          = link_to @incoming_file.timedout_record_count || 0, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'TIMED OUT')
         %td{:style=>'text-align:left;'}
           = link_to @incoming_file.skipped_record_count || 0, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'SKIPPED')
         %td{:style=>'text-align:left;'}
