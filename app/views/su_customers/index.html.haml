@@ -31,6 +31,10 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Max Distance For Name %
     %th{:style=>'text-align:left; background-color: lightblue;'}
+      Operations Email
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Relationship Manager Email
+    %th{:style=>'text-align:left; background-color: lightblue;'}
       Is Enabled?
 
   .tbody
@@ -52,6 +56,10 @@
           = su_customer.pool_customer_id
         %td{:style=>'text-align:left;'}
           = su_customer.max_distance_for_name
+        %td{:style=>'text-align:left;'}
+          = su_customer.ops_email.split(';').first rescue nil
+        %td{:style=>'text-align:left;'}
+          = su_customer.rm_email.split(';').first rescue nil
         %td{:style=>'text-align:left;'}
           = su_customer.is_enabled
 

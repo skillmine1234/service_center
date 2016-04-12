@@ -10,7 +10,7 @@ describe SuCustomer do
   end
   
   context 'validation' do
-    [:account_no, :customer_id, :pool_account_no, :pool_customer_id].each do |att|
+    [:account_no, :customer_id, :pool_account_no, :pool_customer_id, :ops_email, :rm_email].each do |att|
       it { should validate_presence_of(att) }
     end
 
@@ -21,6 +21,10 @@ describe SuCustomer do
 
       [:account_no, :pool_account_no, :pool_customer_id].each do |att|
         should validate_length_of(att).is_at_most(20)
+      end
+
+      [:ops_email, :rm_email].each do |att|
+        should validate_length_of(att).is_at_most(100)
       end
     end
 
@@ -70,6 +74,33 @@ describe SuCustomer do
         su_customer.errors_on(att).should == ["Invalid format, expected format is : {[0-9]}"]
       end
       su_customer.errors_on(:customer_name).should == ["Invalid format, expected format is : {[a-z|A-Z|0-9|\\s|\\.|\\-]}"]
+    end
+  end
+
+  context "email_id format" do 
+    [:ops_email, :rm_email].each do |att|
+      it "should allow valid format" do
+        should allow_value('abc@g.in').for(att)
+        should allow_value('abc@gmail.com').for(att)
+      end
+    
+      it "should not allow invalid format" do
+        should_not allow_value('as@gg.c').for(att)
+        should_not allow_value('@CUST01').for(att)
+        should_not allow_value('CUST01/').for(att)
+        should_not allow_value('CUST-01').for(att)
+      end
+    end    
+  end
+
+  context "check_email_addresses" do 
+    it "should validate email address" do 
+      su_customer = Factory.build(:su_customer, :ops_email => "1234;esesdgs", :rm_email => "1234;esesdgs")
+      su_customer.should_not be_valid
+      su_customer.errors_on("ops_email").should == ["is invalid, expected format is abc@def.com"]
+      su_customer.errors_on("rm_email").should == ["is invalid, expected format is abc@def.com"]
+      su_customer = Factory.build(:su_customer, :ops_email => "foo@ruby.com;bar@ruby.com", :rm_email => "foo@ruby.com;bar@ruby.com")
+      su_customer.should be_valid
     end
   end
 
