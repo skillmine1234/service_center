@@ -18,12 +18,11 @@ describe IcCustomer do
     it do
       ic_customer = Factory(:ic_customer, :approval_status => 'A')
 
-      should validate_length_of(:customer_id).is_at_least(3).is_at_most(15)
       should validate_length_of(:app_id).is_at_least(5).is_at_most(20)
-
-      [:identity_user_id, :repay_account_no, :fee_income_gl].each do |att|
-        should validate_length_of(att).is_at_most(20)
-      end
+      should validate_length_of(:customer_id).is_at_least(3).is_at_most(15)
+      should validate_length_of(:repay_account_no).is_at_least(10).is_at_most(20)
+      should validate_length_of(:fee_income_gl).is_at_least(3).is_at_most(20)
+      should validate_length_of(:identity_user_id).is_at_most(20)
 
       [:cust_contact_email, :ops_email, :rm_email, :customer_name].each do |att|
         should validate_length_of(att).is_at_most(100)
@@ -92,8 +91,8 @@ describe IcCustomer do
 
     it "should not allow invalid format" do
       ic_customer = Factory.build(:ic_customer, :customer_id => '111.11', :app_id => '@acddsfdfd', 
-                                  :identity_user_id => "IUID-1", :repay_account_no => "ACC01", :fee_pct => "45.5f", 
-                                  :fee_income_gl => "400$", :max_overdue_pct => "77f", :cust_contact_mobile => "MOB99-0999", :customer_name => 'ABC@DEF')
+                                  :identity_user_id => "IUID-1", :repay_account_no => "ACC1234567", :fee_pct => "45.5f", 
+                                  :fee_income_gl => "400000000$", :max_overdue_pct => "77f", :cust_contact_mobile => "MOB99-0999", :customer_name => 'ABC@DEF')
       ic_customer.save == false
       [:identity_user_id, :app_id].each do |att|
         ic_customer.errors_on(att).should == ["Invalid format, expected format is : {[a-z|A-Z|0-9]}"]

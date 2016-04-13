@@ -21,10 +21,10 @@ class IcCustomer < ActiveRecord::Base
 
   validates :app_id, length: { minimum: 5, maximum: 20 }
   validates :customer_id, length: { minimum: 3, maximum: 15 }
+  validates :repay_account_no, length: { minimum: 10, maximum: 20 }
+  validates :fee_income_gl, length: { minimum: 3, maximum: 20 }
+  validates :identity_user_id, length: { maximum: 20 }
 
-  [:identity_user_id, :repay_account_no, :fee_income_gl].each do |column|
-    validates column, length: { maximum: 20 }
-  end
   [:cust_contact_email, :ops_email, :rm_email, :customer_name].each do |column|
     validates column, length: { maximum: 100 }, :allow_blank =>true
   end

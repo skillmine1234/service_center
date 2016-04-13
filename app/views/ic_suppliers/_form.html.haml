@@ -33,7 +33,7 @@
       #msg-error
         = error_message_for(@ic_supplier, :ca_account_no, :prepend_text => "")
     .control-group
-      = f.label :is_enabled, "*Enabled ?", :class => 'control-label'
+      = f.label :is_enabled, "Enabled ?", :class => 'control-label'
       = f.check_box :is_enabled, {},"Y","N"
       #msg-error
         = error_message_for(@ic_supplier, :is_enabled, :prepend_text => "")

@@ -15,9 +15,9 @@ describe IcCustomersHelper do
       find_ic_customers({:identity_user_id => '7777'}).should == [ic_customer]
       find_ic_customers({:identity_user_id => '7776'}).should == []
       
-      ic_customer = Factory(:ic_customer, :repay_account_no => '6666', :approval_status => "A")
-      find_ic_customers({:repay_account_no => '6666'}).should == [ic_customer]
-      find_ic_customers({:repay_account_no => '6665'}).should == []
+      ic_customer = Factory(:ic_customer, :repay_account_no => '6666666666', :approval_status => "A")
+      find_ic_customers({:repay_account_no => '6666666666'}).should == [ic_customer]
+      find_ic_customers({:repay_account_no => '6666666665'}).should == []
 
       ic_customer = Factory(:ic_customer, :fee_pct => '8.88', :approval_status => "A")
       find_ic_customers({:fee_pct => '8.88'}).should == [ic_customer]
