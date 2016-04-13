@@ -67,7 +67,6 @@ class IncomingFilesController < ApplicationController
 
   def show
     @incoming_file = IncomingFile.unscoped.find_by_id(params[:id])
-    @skipped_failure_count = @incoming_file.incoming_file_records.where(:status => "FAILED", :should_skip => 'Y').count(:id)
     @overriden_failure_count = @incoming_file.incoming_file_records.where("status=? and overrides is not null",'FAILED').count(:id)
   end
 
@@ -115,7 +114,7 @@ class IncomingFilesController < ApplicationController
 
   def override_records
     if params[:record_ids]
-      @incoming_file = IncomingFile.find_by_file_name(params[:file]) rescue nil 
+      @incoming_file = IncomingFile.find_by_file_name(params[:file])
       uri = "/fm/incoming_files/override"
       api_faraday_call(:post, uri ,@incoming_file.file_name, params[:record_ids])    
     else
