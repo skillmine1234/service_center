@@ -25,7 +25,7 @@ describe IncomingFileRecordsController do
     it "assigns all audit_steps as @ic_record_values" do
       incoming_record = Factory(:incoming_file_record)
       a = Factory(:fm_audit_step, :auditable_id => incoming_record.id, :auditable_type => "IncomingFileRecord")
-      get :audit_steps, :id => incoming_file_record.id, :step_name => "ALL"
+      get :audit_steps, :id => incoming_record.id, :step_name => "ALL"
       assigns(:record_values).should eq([a])
     end
   end

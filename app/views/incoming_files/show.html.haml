@@ -173,7 +173,7 @@
           = link_to 'View', download_response_file_incoming_file_path(@incoming_file, :view => true)
         %td{:style=>'text-align:left;'}
 
-- if @incoming_file.pending_approval == 'Y' && @incoming_file.status == 'C'
+- if @incoming_file.pending_approval == 'Y'
   = simple_form_for @incoming_file, :url => {:action => 'approve_restart'}, :method => :put, :html=>{:id=>"approve_restart"} do |f|
     = f.hidden_field :lock_version
     = submit_tag "Approve Restart", :class=>"btn btn-primary"
@@ -184,8 +184,9 @@
 
 %br
 %br
-%p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
-  = render 'ecol_customers/approve', :@record => @incoming_file
+- unless @incoming_file.sc_service.has_auto_upload?
+  %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
+    = render 'ecol_customers/approve', :@record => @incoming_file
 
 %table.table.table-bordered.table-striped.table-hover.align_center
   %thead

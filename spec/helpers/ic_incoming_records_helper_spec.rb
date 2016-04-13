@@ -25,9 +25,9 @@ describe IcIncomingRecordsHelper do
       find_ic_incoming_records({:from_amount => 50, :to_amount => 200},IcIncomingRecord.joins(:incoming_file_record)).should == [ic_incoming_record]
       find_ic_incoming_records({:from_amount => 150, :to_amount => 200},IcIncomingRecord.joins(:incoming_file_record)).should == []
 
-      ic_incoming_record = Factory(:ic_incoming_record, :invoice_date => Date.new(2016,4,15))
-      find_ic_incoming_records({:from_date => "14-4-2016", :to_date => "16-4-2016"},IcIncomingRecord.joins(:incoming_file_record)).should == [ic_incoming_record]
-      find_ic_incoming_records({:from_date => "13-4-2016", :to_date => "14-4-2016"},IcIncomingRecord.joins(:incoming_file_record)).should == []    
+      ic_incoming_record = Factory(:ic_incoming_record, :invoice_date => Date.new(2016,3,15))
+      find_ic_incoming_records({:from_date => "14-3-2016", :to_date => "16-3-2016"},IcIncomingRecord.joins(:incoming_file_record)).should == [ic_incoming_record]
+      find_ic_incoming_records({:from_date => "13-3-2016", :to_date => "14-3-2016"},IcIncomingRecord.joins(:incoming_file_record)).should == []    
     end
   end
 end

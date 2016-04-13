@@ -4,7 +4,7 @@ describe SuIncomingRecordsHelper do
   context "find_logs" do 
     it "should return audit_steps results" do 
       incoming_record = Factory(:incoming_file_record)
-      a = Factory(:fm_audit_step, :auditable => incoming_record)
+      a = Factory(:fm_audit_step, :auditable_id => incoming_record.id, :auditable_type => "IncomingFileRecord")
       params = {:id => incoming_record.id, :step_name => "ALL"}
       find_logs(params,incoming_record).should == [a]
     end

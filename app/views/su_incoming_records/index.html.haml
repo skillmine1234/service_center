@@ -54,6 +54,6 @@
             = link_to 'Show', {:controller => 'incoming_file_records', :action => 'audit_steps', :id => record.incoming_file_record_id, :step_name => 'ALL'}
   .form-actions{:style=>"text-align: center;"}
     = hidden_field_tag :status
-    - if !@incoming_file.nil? and @incoming_file.try(:pending_approval) == 'Y' and @incoming_file.status == 'C'
+    - if !@incoming_file.nil? and @incoming_file.try(:pending_approval) == 'Y'
       = f.button :submit ,:class=>"btn btn-primary ecol_transcations_btn", :id => 'submit_skip', data: {:confirm=>"Are you sure?"}, :value => "Skip Records"
       = f.button :submit ,:class=>"btn btn-primary ecol_transcations_btn", :id => 'submit_override', data: {:confirm=>"Are you sure?"}, :value => "Override Records"
