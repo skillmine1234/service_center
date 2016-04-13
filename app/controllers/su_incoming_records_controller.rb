@@ -23,18 +23,4 @@ class SuIncomingRecordsController < ApplicationController
     @record = IncomingFileRecord.find(params[:id]) rescue nil
     @audit = @record.audits[params[:version_id].to_i] rescue nil
   end
-
-  def update_multiple
-    if params[:record_ids]
-      @records = SuIncomingRecord.find(params[:record_ids])
-      result = check_records(@records,params)
-      if result.empty?
-        @records = override_records(@records,params)
-        flash[:notice] = "Updated records!"
-      end
-    else
-      flash[:notice] = "You haven't selected any records!"
-    end    
-    redirect_to :back
-  end
 end

@@ -113,6 +113,16 @@ class IncomingFilesController < ApplicationController
     end
   end
 
+  def override_records
+    if params[:record_ids]
+      @incoming_file = IncomingFile.find_by_file_name(params[:file]) rescue nil 
+      uri = "/fm/incoming_files/override"
+      api_faraday_call(:post, uri ,@incoming_file.file_name, params[:record_ids])    
+    else
+      flash[:notice] = "You haven't selected any records!"
+    end    
+  end
+
   def skip_all_records
     @incoming_file = IncomingFile.find(params[:id]) 
     uri = "/fm/incoming_files/skip_all_failed_records"
@@ -137,11 +147,7 @@ class IncomingFilesController < ApplicationController
       c.use Faraday::Response::Logger
       c.use Faraday::Adapter::NetHttp
     end
-    if method == :put
-      response = conn.put uri do |req|
-        req.params['fileName'] = fileName
-      end
-    end
+    response = faraday_method(conn,uri,method,fileName,reqBody)
     status_code = response.status
     status_line = response.body if response.headers['Content-Type'] == 'text/plain'
     status_line = "#{ENV['CONFIG_URL_IIB_FILE_MGR']}#{uri}" if status_code == 404
@@ -149,7 +155,21 @@ class IncomingFilesController < ApplicationController
     Rails.logger.error "Unexpected reply from #{ENV['CONFIG_URL_IIB_FILE_MGR']}#{uri}, received reply: #{response.body}" if status_code > 299
 
     flash[:alert] = "Status code: #{status_code} <br> Message: #{status_line}".html_safe
-    redirect_to @incoming_file
+    redirect_to :back
+  end
+
+  def faraday_method(conn, uri, method,fileName,reqBody)
+    if method == :put
+      conn.put uri do |req|
+        req.params['fileName'] = fileName
+      end
+    elsif method == :post
+      conn.post uri do |req|
+        req.params['fileName'] = fileName
+        req.headers['Content-Type'] = 'application/text'
+        req.body = reqBody.join(',')
+      end
+    end
   end
 
   def incoming_file_params

@@ -58,16 +58,8 @@ ServiceCenter::Application.routes.draw do
   resources :reconciled_returns
   resources :su_customers
   resources :su_unapproved_records
-  resources :su_incoming_records do 
-    collection do
-      put  'update_multiple'
-    end
-  end
-  resources :ic_incoming_records do 
-    collection do
-      put  'update_multiple'
-    end
-  end
+  resources :su_incoming_records
+  resources :ic_incoming_records
   resources :outgoing_files do
     member do
       get 'download_response_file'
@@ -84,6 +76,7 @@ ServiceCenter::Application.routes.draw do
     end
   end
 
+  get 'override_records' => 'incoming_files#override_records'
   get 'incoming_files/:id/audit_steps/:step_name' => 'incoming_files#audit_steps'
   get 'incoming_file_records/:id/audit_steps/:step_name' => 'incoming_file_records#audit_steps'
   get '/su_incoming_records/:id/audit_logs' => 'su_incoming_records#audit_logs'

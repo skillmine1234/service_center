@@ -31,20 +31,4 @@ describe SuIncomingRecordsHelper do
       find_su_incoming_records({:from_amount => 500, :to_amount => 1000},SuIncomingRecord).should == []
     end
   end
-
-  context "check_records" do
-    it "should return the records that satisfy the conditions" do
-      record = Factory(:su_incoming_record, :incoming_file_record => Factory(:incoming_file_record, :status => "FAILED", :should_skip => 'Y', :overrides => nil))
-      check_records([record],{:status => 'override'}).should == [record]
-    end
-  end
-
-  context "override_records" do
-    it "should return the records that satisfy the conditions" do
-      record = Factory(:su_incoming_record, :incoming_file_record => Factory(:incoming_file_record, :status => "FAILED", :should_skip => 'N', :overrides => nil, :fault_code => 'ns:W123'))
-      override_records([record],{:status => 'override'})
-      record.incoming_file_record.reload
-      record.incoming_file_record.overrides.should == 'ns:W123'
-    end
-  end
 end

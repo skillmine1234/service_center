@@ -39,15 +39,4 @@ describe SuIncomingRecordsController do
       assigns(:audit).should eq(nil)
     end
   end
-
-  describe "PUT update_multiple" do
-    it "updates the requested records as skipped" do
-      record = Factory(:su_incoming_record, :incoming_file_record => Factory(:incoming_file_record, :status => "FAILED", :should_skip => 'N', :overrides => nil, :fault_code => "ns:W343"))
-      params = record.attributes.slice(*record.class.attribute_names)
-      put :update_multiple, {:record_ids => [record.id], :status => 'override'}
-      response.should be_redirect
-      record.incoming_file_record.reload
-      record.incoming_file_record.overrides.should == record.incoming_file_record.fault_code
-    end
-  end
 end

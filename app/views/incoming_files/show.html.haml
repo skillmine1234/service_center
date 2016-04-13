@@ -181,11 +181,6 @@
           = link_to 'View', download_response_file_incoming_file_path(@incoming_file, :view => true)
         %td{:style=>'text-align:left;'}
 
-- if @incoming_file.pending_approval == 'Y'
-  = simple_form_for @incoming_file, :url => {:action => 'approve_restart'}, :method => :put, :html=>{:id=>"approve_restart"} do |f|
-    = f.hidden_field :lock_version
-    = submit_tag "Approve Restart", :class=>"btn btn-primary"
-
 %br
 %br
 - unless @incoming_file.sc_service.has_auto_upload?
@@ -207,8 +202,6 @@
       %th{:style=>'text-align:left;'}
         Failed
       %th{:style=>'text-align:left;'}
-        Skipped By User
-      %th{:style=>'text-align:left;'}
         Overriden By User
   %tbody
     %tr
@@ -227,8 +220,6 @@
           = link_to @incoming_file.failed_record_count || 0, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'FAILED')
         %td{:style=>'text-align:left;'}
           = '-'
-        %td{:style=>'text-align:left;'}
-          = '-'
 
       - elsif @incoming_file.service_name == 'IMTSERVICE'
         %td{:style=>'text-align:left;'}
@@ -243,8 +234,6 @@
           = link_to @incoming_file.completed_record_count || 0, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'COMPLETED')
         %td{:style=>'text-align:left;'}
           = link_to @incoming_file.failed_record_count || 0, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'FAILED')
-        %td{:style=>'text-align:left;'}
-          = '-'
         %td{:style=>'text-align:left;'}
           = '-'
 
@@ -262,8 +251,6 @@
           = link_to @incoming_file.completed_record_count || 0, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'COMPLETED')
         %td{:style=>'text-align:left;'}
           = link_to @incoming_file.failed_record_count || 0, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'FAILED')
-        %td{:style=>'text-align:left;'}
-          = link_to @skipped_failure_count || 0, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'FAILED', :skipped_flag => 'Y', :overrided_flag => 'false')
         %td{:style=>'text-align:left;'}
           = link_to @overriden_failure_count || 0, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'FAILED', :overrided_flag => 'true')
 #faultText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}

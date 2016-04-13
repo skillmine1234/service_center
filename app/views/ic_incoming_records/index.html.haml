@@ -13,7 +13,7 @@
 %br
 = will_paginate @records
 
-= simple_form_for :ic_incoming_record, :url => update_multiple_ic_incoming_records_path, :html => { :method => :put, :class => 'form-horizontal', :autocomplete=>"off", :id => 'update_records', :style=> 'overflow: auto;'} do |f| 
+= simple_form_for :ic_incoming_record, :url => override_records_path, :html => { :method => :get, :class => 'form-horizontal', :autocomplete=>"off", :id => 'update_records', :style=> 'overflow: auto;'} do |f| 
   %table.table.table-bordered.table-striped.table-hover{:style => 'width:100%; border:1px'}
     .thead
       %tr
@@ -40,7 +40,7 @@
           %td{:style=>'text-align:left;'}
             = link_to "show", record
           %td{:style=>'text-align:left;'}
-            - if record.incoming_file_record.try(:should_skip) != 'Y' and record.incoming_file_record.fault_code.start_with?("ns:W")
+            - if record.incoming_file_record.fault_code.start_with?("ns:W")
               = check_box_tag "record_ids[]", record.id, false, class: 'txn_select'
           %td{:style=>'text-align:left;'}
             = record.file_name
