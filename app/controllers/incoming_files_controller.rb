@@ -115,43 +115,41 @@ class IncomingFilesController < ApplicationController
 
   def skip_all_records
     @incoming_file = IncomingFile.find(params[:id]) 
-    api_req_url = ENV['CONFIG_URL_IIB_FILE_MGR']
-    full_url = "#{api_req_url}/fm/incoming_files/skip_all_failed_records?fileName=#{@incoming_file.file_name}"
-    api_faraday_call(api_req_url,full_url)  
+    uri = "/fm/incoming_files/skip_all_failed_records"
+    api_faraday_call(:put, uri, @incoming_file.file_name, nil)  
   end
 
   def approve_restart
     @incoming_file = IncomingFile.find(params[:id]) 
-    api_req_url = ENV['CONFIG_URL_IIB_FILE_MGR']
-    full_url = "#{api_req_url}/fm/incoming_files/retry?fileName=#{@incoming_file.file_name}"
-    api_faraday_call(api_req_url,full_url)  
+    uri = "/fm/incoming_files/retry"
+    api_faraday_call(:put, uri, @incoming_file.file_name, nil)  
   end
 
   def generate_response_file
     @incoming_file = IncomingFile.find(params[:id]) 
-    api_req_url = ENV['CONFIG_URL_IIB_FILE_MGR']
-    full_url = "#{api_req_url}/fm/incoming_files/responseFile?fileName=#{@incoming_file.file_name}"
-    api_faraday_call(api_req_url,full_url)    
+    uri = "/fm/incoming_files/enqueue_response_file"
+    api_faraday_call(:put, uri, @incoming_file.file_name, nil)
   end
 
-  def api_faraday_call(api_req_url,full_url)
-    conn = Faraday.new(:url => api_req_url, :ssl => {:verify => false}) do |c|
+  def api_faraday_call(method, uri, fileName, reqBody)
+    conn = Faraday.new(:url => ENV['CONFIG_URL_IIB_FILE_MGR'], :ssl => {:verify => false}) do |c|
       c.use Faraday::Request::UrlEncoded
       c.use Faraday::Response::Logger
       c.use Faraday::Adapter::NetHttp
     end
-    response = conn.put full_url
+    if method == :put
+      response = conn.put uri do |req|
+        req.params['fileName'] = fileName
+      end
+    end
     status_code = response.status
     status_line = response.body if response.headers['Content-Type'] == 'text/plain'
-    if status_code == 401
-      flash[:alert] = "Status code: #{status_code} <br> Message: Authorization required".html_safe
-    else
-      Rails.logger.error "Unexpected reply #{api_req_url}, received reply: #{response.body}"
-      flash[:alert] = "Status code: #{status_code} <br> Message: #{status_line}".html_safe
-    end
+    status_line = "#{ENV['CONFIG_URL_IIB_FILE_MGR']}#{uri}" if status_code == 404
+        
+    Rails.logger.error "Unexpected reply from #{ENV['CONFIG_URL_IIB_FILE_MGR']}#{uri}, received reply: #{response.body}" if status_code > 299
+
+    flash[:alert] = "Status code: #{status_code} <br> Message: #{status_line}".html_safe
     redirect_to @incoming_file
-  rescue 
-    flash[:alert] = "Unable to connect to the server at #{api_req_url}"
   end
 
   def incoming_file_params
