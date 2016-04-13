@@ -10,7 +10,7 @@ describe IcSupplier do
   end
   
   context 'validation' do
-    [:supplier_code, :supplier_name, :customer_id, :od_account_no, :ca_account_no].each do |att|
+    [:supplier_code, :supplier_name, :customer_id, :od_account_no, :ca_account_no, :is_enabled].each do |att|
       it { should validate_presence_of(att) }
     end
 
@@ -48,11 +48,13 @@ describe IcSupplier do
     end
 
     it "should not allow invalid format" do
-      ic_supplier = Factory.build(:ic_supplier, :customer_id => '@,.9023jsf', :od_account_no => "ODACC01", :ca_account_no => "CA-ACC01")
+      ic_supplier = Factory.build(:ic_supplier, :customer_id => '@,.9023jsf', :od_account_no => "ODACC01", :ca_account_no => "CA-ACC01", :supplier_code => "SUPL-001", :supplier_name => 'ABC@DEF')
       ic_supplier.save == false
       [:customer_id, :od_account_no, :ca_account_no].each do |att|
         ic_supplier.errors_on(att).should == ["Invalid format, expected format is : {[0-9]}"]
       end
+      ic_supplier.errors_on(:supplier_code).should == ["Invalid format, expected format is : {[a-z|A-Z|0-9]}"]
+      ic_supplier.errors_on(:supplier_name).should == ["Invalid format, expected format is : {[a-z|A-Z|0-9|\\s|\\.|\\-]}"]
     end
   end
 
@@ -68,6 +70,20 @@ describe IcSupplier do
       should_not allow_value('CUST01/').for(:supplier_code)
       should_not allow_value('CUST-01').for(:supplier_code)
     end     
+  end
+
+  context "supplier_name format" do
+    it "should allow valid format" do
+      should allow_value('ABCDCo').for(:supplier_name)
+      should allow_value('ABCD Co').for(:supplier_name)
+      should allow_value('ABCD.Co').for(:supplier_name)
+      should allow_value('ABCD-Co').for(:supplier_name)
+    end
+
+    it "should not allow invalid format" do
+      should_not allow_value('@AbcCo').for(:supplier_name)
+      should_not allow_value('/ab0QWER').for(:supplier_name)
+    end
   end
 
   
