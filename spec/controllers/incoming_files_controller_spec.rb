@@ -164,25 +164,38 @@ describe IncomingFilesController do
     end
   end
 
-  describe "PUT approve_restart" do
+  describe "GET approve_restart" do
     it "updates the requested incoming_file" do
-      incoming_file = Factory(:incoming_file, :status => 'COMPLETED', :pending_approval => 'Y', :approval_status => 'A')
-      params = incoming_file.attributes.slice(*incoming_file.class.attribute_names)
-      put :approve_restart, :id => incoming_file.id
+      incoming_file = Factory(:incoming_file, :approval_status => 'A')
+      WebMock.stub_request(:put, "#{ENV['CONFIG_URL_FILE_RETRY_URI']}/fm/incoming_files/retry?fileName=#{incoming_file.file_name}").
+        with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Length'=>'0', 'User-Agent'=>'Faraday v0.9.2'}).
+        to_return(:status => 202, :body => "", :headers => {})
+      get :approve_restart, {:id => incoming_file.id}
+      flash[:alert].should == "Status code: 202 <br> Error Message: "
       response.should be_redirect
-      incoming_file.reload
-      incoming_file.pending_approval.should == "N"
+    end
+  end
+
+  describe "GET skip_all_records" do
+    it "updates the requested incoming_file" do
+      incoming_file = Factory(:incoming_file, :approval_status => 'A')
+      WebMock.stub_request(:put, "#{ENV['CONFIG_URL_FILE_SKIP_URI']}/fm/incoming_files/skip_all_failed_records?fileName=#{incoming_file.file_name}").
+        with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Length'=>'0', 'User-Agent'=>'Faraday v0.9.2'}).
+        to_return(:status => 202, :body => "", :headers => {})
+      get :skip_all_records, {:id => incoming_file.id}
+      flash[:alert].should == "Status code: 202 <br> Error Message: "
+      response.should be_redirect
     end
   end
 
   describe "GET generate_response_file" do
     it "should generate response file" do
       incoming_file = Factory(:incoming_file, :approval_status => 'A')
-      WebMock.stub_request(:put, "#{ENV['CONFIG_URL_GEN_RESP_FILE_URI']}?incoming_file_name=#{incoming_file.file_name}").
+      WebMock.stub_request(:put, "#{ENV['CONFIG_URL_GEN_RESP_FILE_URI']}/fm/incoming_files/responseFile?fileName=#{incoming_file.file_name}").
         with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Length'=>'0', 'User-Agent'=>'Faraday v0.9.2'}).
         to_return(:status => 202, :body => "", :headers => {})
       get :generate_response_file, {:id => incoming_file.id}
-      flash[:alert].should  match(/Api was hit and Status code of response is 202/)
+      flash[:alert].should == "Status code: 202 <br> Error Message: "
       response.should be_redirect
     end
   end
