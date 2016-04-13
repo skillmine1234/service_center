@@ -102,7 +102,7 @@ class IncomingFilesController < ApplicationController
   def download_response_file
     require 'uri/open-scp'
     @incoming_file = IncomingFile.find(params[:id]) 
-    data = open("scp://iibadm@#{ENV['CONFIG_URL_IIB_FILE_MGR']}#{@incoming_file.rep_file_path}/#{@incoming_file.rep_file_name}").read rescue ""
+    data = open("scp://iibadm@#{ENV['CONFIG_SCP_IIB_FILE_MGR']}#{@incoming_file.rep_file_path}/#{@incoming_file.rep_file_name}").read rescue ""
     if data.empty?
       flash[:alert] = "File not found!"
       redirect_to @incoming_file
@@ -115,21 +115,21 @@ class IncomingFilesController < ApplicationController
 
   def skip_all_records
     @incoming_file = IncomingFile.find(params[:id]) 
-    api_req_url = ENV['CONFIG_URL_FILE_SKIP_URI']
+    api_req_url = ENV['CONFIG_URL_IIB_FILE_MGR']
     full_url = "#{api_req_url}/fm/incoming_files/skip_all_failed_records?fileName=#{@incoming_file.file_name}"
     api_faraday_call(api_req_url,full_url)  
   end
 
   def approve_restart
     @incoming_file = IncomingFile.find(params[:id]) 
-    api_req_url = ENV['CONFIG_URL_FILE_RETRY_URI']
+    api_req_url = ENV['CONFIG_URL_IIB_FILE_MGR']
     full_url = "#{api_req_url}/fm/incoming_files/retry?fileName=#{@incoming_file.file_name}"
     api_faraday_call(api_req_url,full_url)  
   end
 
   def generate_response_file
     @incoming_file = IncomingFile.find(params[:id]) 
-    api_req_url = ENV['CONFIG_URL_GEN_RESP_FILE_URI']
+    api_req_url = ENV['CONFIG_URL_IIB_FILE_MGR']
     full_url = "#{api_req_url}/fm/incoming_files/responseFile?fileName=#{@incoming_file.file_name}"
     api_faraday_call(api_req_url,full_url)    
   end
@@ -142,13 +142,16 @@ class IncomingFilesController < ApplicationController
     end
     response = conn.put full_url
     status_code = response.status
-    status_line = response.body
+    status_line = response.body if response.headers['Content-Type'] == 'text/plain'
     if status_code == 401
-      flash[:alert] = "Status code: #{status_code} <br> Error Message: Authorization required".html_safe
+      flash[:alert] = "Status code: #{status_code} <br> Message: Authorization required".html_safe
     else
-      flash[:alert] = "Status code: #{status_code} <br> Error Message: #{status_line}".html_safe
+      Rails.logger.error "Unexpected reply #{api_req_url}, received reply: #{response.body}"
+      flash[:alert] = "Status code: #{status_code} <br> Message: #{status_line}".html_safe
     end
     redirect_to @incoming_file
+  rescue 
+    flash[:alert] = "Unable to connect to the server at #{api_req_url}"
   end
 
   def incoming_file_params

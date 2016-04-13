@@ -171,7 +171,7 @@
         - if @incoming_file.incoming_file_type.validate_all == 'Y'
           = link_to 'Generate Response File', generate_response_file_incoming_file_path(@incoming_file), :class => "btn btn-primary"
 
-    - unless ENV['CONFIG_URL_IIB_FILE_MGR'].nil? or ENV['CONFIG_URL_IIB_FILE_MGR'].empty?
+    - unless ENV['CONFIG_SCP_IIB_FILE_MGR'].nil? or ENV['CONFIG_SCP_IIB_FILE_MGR'].empty?
       %tr
         %td{:style=>'text-align:left;'}
           = link_to 'Download', download_response_file_incoming_file_path(@incoming_file, :download => true)
