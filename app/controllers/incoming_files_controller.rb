@@ -121,24 +121,28 @@ class IncomingFilesController < ApplicationController
     else
       flash[:notice] = "You haven't selected any records!"
     end    
+    redirect_to :back
   end
 
   def skip_all_records
     @incoming_file = IncomingFile.find(params[:id]) 
     uri = "/fm/incoming_files/skip_all_failed_records"
     api_faraday_call(:put, uri, @incoming_file.file_name, nil)  
+    redirect_to @incoming_file
   end
 
   def approve_restart
     @incoming_file = IncomingFile.find(params[:id]) 
     uri = "/fm/incoming_files/retry"
     api_faraday_call(:put, uri, @incoming_file.file_name, nil)  
+    redirect_to @incoming_file
   end
 
   def generate_response_file
     @incoming_file = IncomingFile.find(params[:id]) 
     uri = "/fm/incoming_files/enqueue_response_file"
     api_faraday_call(:put, uri, @incoming_file.file_name, nil)
+    redirect_to @incoming_file
   end
 
   def api_faraday_call(method, uri, fileName, reqBody)
@@ -155,7 +159,6 @@ class IncomingFilesController < ApplicationController
     Rails.logger.error "Unexpected reply from #{ENV['CONFIG_URL_IIB_FILE_MGR']}#{uri}, received reply: #{response.body}" if status_code > 299
 
     flash[:alert] = "Status code: #{status_code} <br> Message: #{status_line}".html_safe
-    redirect_to :back
   end
 
   def faraday_method(conn, uri, method,fileName,reqBody)
