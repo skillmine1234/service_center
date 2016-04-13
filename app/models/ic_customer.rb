@@ -26,7 +26,7 @@ class IcCustomer < ActiveRecord::Base
     validates column, length: { maximum: 20 }
   end
   [:cust_contact_email, :ops_email, :rm_email, :customer_name].each do |column|
-    validates column, length: { maximum: 100 }
+    validates column, length: { maximum: 100 }, :allow_blank =>true
   end
   validates :cust_contact_mobile, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9]}'}, length: {maximum: 10, minimum: 10}, :allow_blank =>true
 

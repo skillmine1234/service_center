@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160412130837) do
+ActiveRecord::Schema.define(version: 20160413070502) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -1049,10 +1049,10 @@ ActiveRecord::Schema.define(version: 20160412130837) do
     t.decimal  "fee_pct",                         precision: 5, scale: 2,               null: false
     t.string   "fee_income_gl",       limit: 20,                                        null: false
     t.decimal  "max_overdue_pct",                 precision: 5, scale: 2,               null: false
-    t.string   "cust_contact_email",  limit: 100,                                       null: false
-    t.string   "cust_contact_mobile", limit: 10,                                        null: false
-    t.string   "ops_email",           limit: 100,                                       null: false
-    t.string   "rm_email",            limit: 100,                                       null: false
+    t.string   "cust_contact_email",  limit: 100
+    t.string   "cust_contact_mobile", limit: 10
+    t.string   "ops_email",           limit: 100
+    t.string   "rm_email",            limit: 100
     t.string   "is_enabled",          limit: 1,                                         null: false
     t.string   "created_by",          limit: 20
     t.string   "updated_by",          limit: 20
@@ -1072,12 +1072,12 @@ ActiveRecord::Schema.define(version: 20160412130837) do
   add_index "ic_customers", ["repay_account_no", "approval_status"], name: "i_ic_cust_repay_no", unique: true
 
   create_table "ic_incoming_files", force: :cascade do |t|
-    t.integer "incoming_file_id",            null: false
-    t.string  "corp_customer_id", limit: 15
-    t.string  "pm_utr",           limit: 64
+    t.string "file_name",        limit: 50
+    t.string "corp_customer_id", limit: 15
+    t.string "pm_utr",           limit: 64
   end
 
-  add_index "ic_incoming_files", ["incoming_file_id"], name: "ic_file_index", unique: true
+  add_index "ic_incoming_files", ["file_name"], name: "ic_file_index", unique: true
 
   create_table "ic_incoming_records", force: :cascade do |t|
     t.integer "incoming_file_record_id",            null: false
@@ -1456,6 +1456,7 @@ ActiveRecord::Schema.define(version: 20160412130837) do
   end
 
   add_index "incoming_files", ["file_name", "approval_status"], name: "index_incoming_files_on_file_name_and_approval_status", unique: true
+  add_index "incoming_files", ["service_name", "status", "pending_approval"], name: "in_incoming_files_2"
 
   create_table "inw_audit_logs", force: :cascade do |t|
     t.integer "inward_remittance_id"
@@ -2312,8 +2313,8 @@ ActiveRecord::Schema.define(version: 20160412130837) do
     t.integer  "approved_id"
     t.decimal  "max_distance_for_name"
     t.string   "customer_name",         limit: 100
-    t.string   "ops_email",             limit: 100,               null: false
-    t.string   "rm_email",              limit: 100,               null: false
+    t.string   "ops_email",             limit: 100
+    t.string   "rm_email",              limit: 100
   end
 
   add_index "su_customers", ["customer_id", "account_no", "approval_status"], name: "uk_su_customers_1", unique: true

@@ -10,7 +10,7 @@ describe SuCustomer do
   end
   
   context 'validation' do
-    [:account_no, :customer_id, :pool_account_no, :pool_customer_id, :ops_email, :rm_email].each do |att|
+    [:account_no, :customer_id, :pool_account_no, :pool_customer_id].each do |att|
       it { should validate_presence_of(att) }
     end
 
@@ -82,6 +82,7 @@ describe SuCustomer do
       it "should allow valid format" do
         should allow_value('abc@g.in').for(att)
         should allow_value('abc@gmail.com').for(att)
+        should allow_value("", nil).for(att)
       end
     
       it "should not allow invalid format" do
@@ -91,6 +92,13 @@ describe SuCustomer do
         should_not allow_value('CUST-01').for(att)
       end
     end    
+  end
+
+  context "nil email ids" do 
+    it "should allow nil for email ids" do
+      su_customer = Factory(:su_customer, :ops_email => "", :rm_email => nil)
+      su_customer.should be_valid
+    end
   end
 
   context "check_email_addresses" do 
