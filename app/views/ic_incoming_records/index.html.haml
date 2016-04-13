@@ -57,5 +57,6 @@
           %td{:style=>'text-align:left;'}
             = link_to 'Show', {:controller => 'incoming_file_records', :action => 'audit_steps', :id => record.incoming_file_record_id, :step_name => 'ALL'}
   .form-actions{:style=>"text-align: center;"}
+    = hidden_field_tag :file, params[:file_name]
     - if !@incoming_file.nil? and @incoming_file.try(:pending_approval) == 'Y'
       = f.button :submit ,:class=>"btn btn-primary ecol_transcations_btn", :id => 'submit_override', data: {:confirm=>"Are you sure?"}, :value => "Override Records"
