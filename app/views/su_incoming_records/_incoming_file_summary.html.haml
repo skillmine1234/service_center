@@ -1,0 +1,40 @@
+%tr
+  %td{:style=>'text-align:left;'}
+    = "Debit Amount"
+  %td{:style=>'text-align:left;'}
+    = @incoming_file.su_incoming_file.try(:debit_amount)
+%tr
+  %td{:style=>'text-align:left;'}
+    = "Debit Reference No"
+  %td{:style=>'text-align:left;'}
+    = @incoming_file.su_incoming_file.try(:debit_reference_no)
+%tr
+  %td{:style=>'text-align:left;'}
+    = "Debit Status"
+  %td{:style=>'text-align:left;'}
+    = @incoming_file.su_incoming_file.try(:debit_status)
+%tr
+  %td{:style=>'text-align:left;'}
+    = "Debited At"
+  %td{:style=>'text-align:left;'}
+    = @incoming_file.su_incoming_file.try(:debited_at)
+%tr
+  %td{:style=>'text-align:left;'}
+    = "Reversal Amount"
+  %td{:style=>'text-align:left;'}
+    = @incoming_file.su_incoming_file.try(:reversal_amount)
+%tr
+  %td{:style=>'text-align:left;'}
+    = "Reversal Reference No"
+  %td{:style=>'text-align:left;'}
+    = @incoming_file.su_incoming_file.try(:reversal_reference_no)
+%tr
+  %td{:style=>'text-align:left;'}
+    = "Reversal Status"
+  %td{:style=>'text-align:left;'}
+    = @incoming_file.su_incoming_file.try(:reversal_status)
+%tr
+  %td{:style=>'text-align:left;'}
+    = "Reversed At"
+  %td{:style=>'text-align:left;'}
+    = @incoming_file.su_incoming_file.try(:reversed_at)
