@@ -39,7 +39,7 @@
             = link_to "show", record
           %td{:style=>'text-align:left;'}
             - if record.incoming_file_record.fault_code.start_with?("ns:W")
-              = check_box_tag "record_ids[]", record.id, false, class: 'txn_select'
+              = check_box_tag "record_ids[]", record.incoming_file_record_id, false, class: 'txn_select'
           %td{:style=>'text-align:left;'}
             = record.file_name
           %td{:style=>'text-align:left;'}
