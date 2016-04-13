@@ -40,7 +40,7 @@
           %td{:style=>'text-align:left;'}
             = link_to "show", record
           %td{:style=>'text-align:left;'}
-            - if record.incoming_file_record.try(:should_skip) != 'Y' or record.incoming_file_record.fault_code.start_with?("ns:W")
+            - if record.incoming_file_record.try(:should_skip) != 'Y' and record.incoming_file_record.fault_code.start_with?("ns:W")
               = check_box_tag "record_ids[]", record.id, false, class: 'txn_select'
           %td{:style=>'text-align:left;'}
             = record.file_name
@@ -57,7 +57,5 @@
           %td{:style=>'text-align:left;'}
             = link_to 'Show', {:controller => 'incoming_file_records', :action => 'audit_steps', :id => record.incoming_file_record_id, :step_name => 'ALL'}
   .form-actions{:style=>"text-align: center;"}
-    = hidden_field_tag :status
     - if !@incoming_file.nil? and @incoming_file.try(:pending_approval) == 'Y'
-      = f.button :submit ,:class=>"btn btn-primary ecol_transcations_btn", :id => 'submit_skip', data: {:confirm=>"Are you sure?"}, :value => "Skip Records"
       = f.button :submit ,:class=>"btn btn-primary ecol_transcations_btn", :id => 'submit_override', data: {:confirm=>"Are you sure?"}, :value => "Override Records"
