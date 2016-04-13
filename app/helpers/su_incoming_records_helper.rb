@@ -20,17 +20,7 @@ module SuIncomingRecordsHelper
   end
 
   def check_records(records,params)
-    if params[:status] == "skip"
-      records.select{|record| record.incoming_file_record.should_skip == 'Y' or record.incoming_file_record.status != 'FAILED'}
-    else
-      records.select{|record| record.incoming_file_record.should_skip == 'Y' or record.incoming_file_record.status != 'FAILED' or !record.incoming_file_record.fault_code.start_with?("ns:W")}      
-    end
-  end
-
-  def skip_records(records,params)
-    records.each do |record|
-      record.incoming_file_record.update_attributes(:should_skip => "Y")
-    end
+    records.select{|record| record.incoming_file_record.should_skip == 'Y' or record.incoming_file_record.status != 'FAILED' or !record.incoming_file_record.fault_code.start_with?("ns:W")}      
   end
 
   def override_records(records,params)

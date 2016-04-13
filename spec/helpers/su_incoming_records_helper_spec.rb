@@ -35,21 +35,7 @@ describe SuIncomingRecordsHelper do
   context "check_records" do
     it "should return the records that satisfy the conditions" do
       record = Factory(:su_incoming_record, :incoming_file_record => Factory(:incoming_file_record, :status => "FAILED", :should_skip => 'Y', :overrides => nil))
-      check_records([record],{:status => 'skip'}).should == [record]
-    end
-
-    it "should return the records that satisfy the conditions" do
-      record = Factory(:su_incoming_record, :incoming_file_record => Factory(:incoming_file_record, :status => "FAILED", :should_skip => 'Y', :overrides => nil))
       check_records([record],{:status => 'override'}).should == [record]
-    end
-  end
-
-  context "skip_records" do
-    it "should return the records that satisfy the conditions" do
-      record = Factory(:su_incoming_record, :incoming_file_record => Factory(:incoming_file_record, :status => "FAILED", :should_skip => 'N', :overrides => nil))
-      skip_records([record],{:status => 'skip'})
-      record.incoming_file_record.reload
-      record.incoming_file_record.should_skip.should == 'Y'
     end
   end
 

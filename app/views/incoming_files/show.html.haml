@@ -2,7 +2,6 @@
 %br
 %h1 File Summary
 %br
-
 %br
 %table.table.table-bordered.table-striped.table-hover.align_center{:style=>'width:45%;float: left; margin-right: 2%;'}
   %thead
@@ -44,8 +43,13 @@
     %tr
       %td{:style=>'text-align:left;'}
         = "Pending Approval"
-      %td{:style=>'text-align:left;'}
+      %td{:style=>'text-align:left;font-weight: bold;'}
         = @incoming_file.pending_approval
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        / # - if @incoming_file.pending_approval == 'Y'
+        = link_to 'Skip All Records', skip_all_records_incoming_file_path(@incoming_file), :class => "btn btn-primary"
+        = link_to 'Retry File', approve_restart_incoming_file_path(@incoming_file), :class => "btn btn-primary"
+
     %tr
       %td{:style=>'text-align:left;'}
         = "Status"
@@ -163,6 +167,10 @@
         = "Response File Status"    
       %td{:style=>'text-align:left;'}
         = @incoming_file.status_text(@incoming_file.rep_file_status)
+        &nbsp;
+        - if @incoming_file.incoming_file_type.validate_all == 'Y'
+          = link_to 'Generate Response File', generate_response_file_incoming_file_path(@incoming_file), :class => "btn btn-primary"
+
     - unless ENV['CONFIG_URL_IIB_FILE_MGR'].nil? or ENV['CONFIG_URL_IIB_FILE_MGR'].empty?
       %tr
         %td{:style=>'text-align:left;'}
@@ -177,10 +185,6 @@
   = simple_form_for @incoming_file, :url => {:action => 'approve_restart'}, :method => :put, :html=>{:id=>"approve_restart"} do |f|
     = f.hidden_field :lock_version
     = submit_tag "Approve Restart", :class=>"btn btn-primary"
-
-%br
-- if @incoming_file.incoming_file_type.validate_all == 'Y'
-  = link_to 'Generate Response File', generate_response_file_incoming_file_path(@incoming_file), :class => "btn btn-primary"
 
 %br
 %br

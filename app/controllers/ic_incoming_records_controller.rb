@@ -30,10 +30,8 @@ class IcIncomingRecordsController < ApplicationController
       @records = IcIncomingRecord.find(params[:record_ids])
       result = check_records(@records,params)
       if result.empty?
-        @records = params[:status] == 'skip' ? skip_records(@records,params) : override_records(@records,params)
+        @records = override_records(@records,params)
         flash[:notice] = "Updated records!"
-      else
-        flash[:notice] = "Please select only records which can be " + params[:status]
       end
     else
       flash[:notice] = "You haven't selected any records!"

@@ -113,34 +113,41 @@ class IncomingFilesController < ApplicationController
     end
   end
 
+  def skip_all_records
+    @incoming_file = IncomingFile.find(params[:id]) 
+    api_req_url = ENV['CONFIG_URL_FILE_SKIP_URI']
+    full_url = "#{api_req_url}/fm/incoming_files/skip_all_failed_records?fileName=#{@incoming_file.file_name}"
+    api_faraday_call(api_req_url,full_url)  
+  end
+
   def approve_restart
-    @incoming_file = IncomingFile.find(params[:id])
-    begin
-      if @incoming_file.pending_approval == 'Y' && @incoming_file.status == 'COMPLETED'
-        @incoming_file.update_attributes(:pending_approval => "N")
-        flash[:notice] = "Incoming File is sucessfully approved"
-      else
-        flash[:notice] = @incoming_file.errors.full_messages
-      end
-      redirect_to @incoming_file
-    rescue ActiveRecord::StaleObjectError
-      @incoming_file.reload
-      flash[:alert] = 'Someone edited the incoming_file the same time you did. Please re-apply your changes to the incoming_file.'
-      redirect_to @incoming_file
-    end
+    @incoming_file = IncomingFile.find(params[:id]) 
+    api_req_url = ENV['CONFIG_URL_FILE_RETRY_URI']
+    full_url = "#{api_req_url}/fm/incoming_files/retry?fileName=#{@incoming_file.file_name}"
+    api_faraday_call(api_req_url,full_url)  
   end
 
   def generate_response_file
     @incoming_file = IncomingFile.find(params[:id]) 
     api_req_url = ENV['CONFIG_URL_GEN_RESP_FILE_URI']
+    full_url = "#{api_req_url}/fm/incoming_files/responseFile?fileName=#{@incoming_file.file_name}"
+    api_faraday_call(api_req_url,full_url)    
+  end
+
+  def api_faraday_call(api_req_url,full_url)
     conn = Faraday.new(:url => api_req_url, :ssl => {:verify => false}) do |c|
       c.use Faraday::Request::UrlEncoded
       c.use Faraday::Response::Logger
       c.use Faraday::Adapter::NetHttp
     end
-    response = conn.put "#{api_req_url}?incoming_file_name=#{@incoming_file.file_name}"
-    status_code = response.env.status
-    flash[:alert] = "Api was hit and Status code of response is #{status_code}"
+    response = conn.put full_url
+    status_code = response.status
+    status_line = response.body
+    if status_code == 401
+      flash[:alert] = "Status code: #{status_code} <br> Error Message: Authorization required".html_safe
+    else
+      flash[:alert] = "Status code: #{status_code} <br> Error Message: #{status_line}".html_safe
+    end
     redirect_to @incoming_file
   end
 
