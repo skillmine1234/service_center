@@ -31,6 +31,14 @@
         %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
           Salary Amount
         %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+          Attempt No
+        %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+          Status
+        %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+          Overrides
+        %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+          Fault Text
+        %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
           Audit Steps
     .tbody
       - @records.each do |record|
@@ -38,7 +46,7 @@
           %td{:style=>'text-align:left;'}
             = link_to "show", record
           %td{:style=>'text-align:left;'}
-            - if record.incoming_file_record.fault_code.start_with?("ns:W")
+            - if record.incoming_file_record.fault_code.start_with?("ns:W") and record.incoming_file_record.overrides != record.incoming_file_record.fault_code
               = check_box_tag "record_ids[]", record.incoming_file_record_id, false, class: 'txn_select'
           %td{:style=>'text-align:left;'}
             = record.file_name
@@ -51,8 +59,35 @@
           %td{:style=>'text-align:left;'}
             = record.salary_amount
           %td{:style=>'text-align:left;'}
+            = record.incoming_file_record.attempt_no
+          %td{:style=>'text-align:left;'}
+            = record.incoming_file_record.status
+          %td{:style=>'text-align:left;'}
+            = record.incoming_file_record.overrides
+          %td{:style=>'text-align:left;'}
+            = link_to "Show Fault Text", "#", :class => 'active-link', :href => "#faultText", data: { fault_reason: record.incoming_file_record.fault_reason, fault_code: record.incoming_file_record.fault_code, fault_subcode: record.incoming_file_record.fault_subcode}
+          %td{:style=>'text-align:left;'}
             = link_to 'Show', {:controller => 'incoming_file_records', :action => 'audit_steps', :id => record.incoming_file_record_id, :step_name => 'ALL'}
   .form-actions{:style=>"text-align: center;"}
     = hidden_field_tag :file, params[:file_name]
     - if !@incoming_file.nil? and @incoming_file.try(:pending_approval) == 'Y'
       = f.button :submit ,:class=>"btn btn-primary ecol_transcations_btn", :id => 'submit_override', data: {:confirm=>"Are you sure?"}, :value => "Override Records"
+#faultText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Fault Text
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    %table.table.no-border
+      %tr
+        %td.label Fault Code: 
+        %td
+          %label.fault_code{:style => 'word-wrap: break-word'}
+      %tr
+        %td.label Fault Reason:
+        %td
+          %label.fault_reason{:style => 'word-wrap: break-word'}
+      %tr
+        %td.label Fault Subcode:
+        %td
+          %label.fault_subcode{:style => 'word-wrap: break-word'}
