@@ -48,7 +48,7 @@
           %td{:style=>'text-align:left;'}
             = link_to "show", record
           %td{:style=>'text-align:left;'}
-            - if record.incoming_file_record.fault_code.start_with?("ns:W") and record.incoming_file_record.overrides != record.incoming_file_record.fault_code
+            - if !record.incoming_file_record.fault_code.nil? and record.incoming_file_record.fault_code.start_with?("ns:W") and record.incoming_file_record.overrides != record.incoming_file_record.fault_code
               = check_box_tag "record_ids[]", record.incoming_file_record_id, false, class: 'txn_select'
           %td{:style=>'text-align:left;'}
             = record.file_name
