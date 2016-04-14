@@ -108,7 +108,7 @@ class IncomingFilesController < ApplicationController
     elsif params[:view].present?
       render plain: data
     elsif params[:download].present?
-      send_data data
+      send_data data, :filename => @incoming_file.rep_file_name
     end
   end
 
