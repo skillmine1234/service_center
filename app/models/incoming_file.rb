@@ -12,7 +12,7 @@ class IncomingFile < ActiveRecord::Base
 
   ExtensionList = %w(txt)
 
-  before_create :update_size_and_file_name
+  before_create :update_fields
 
   belongs_to :created_user, :class_name => 'User', :foreign_key => 'created_by'
   belongs_to :updated_user, :class_name => 'User', :foreign_key => 'updated_by'
@@ -24,7 +24,7 @@ class IncomingFile < ActiveRecord::Base
   belongs_to :su_incoming_file, :foreign_key => "file_name", :primary_key => "file_name"
   belongs_to :ic_incoming_file, :foreign_key => "file_name", :primary_key => "file_name"
   has_many :fm_audit_steps, :as => :auditable
-  
+
   has_one :ecol_unapproved_record, :as => :ecol_approvable
   has_one :imt_unapproved_record, :as => :imt_approvable
   has_one :inw_unapproved_record, :as => :inw_approvable
@@ -66,10 +66,18 @@ class IncomingFile < ActiveRecord::Base
     end
   end
 
-  def update_size_and_file_name
+  def update_fields
     self.size_in_bytes = self.file.file.try(:size).to_s
     self.line_count =  %x{wc -l "#{self.file.path}"}.split.first.to_i
     self.file_name = self.file.filename if file_name.nil?
+    self.failed_record_count = 0
+    self.record_count = 0
+    self.skipped_record_count = 0
+    self.completed_record_count = 0
+    self.timedout_record_count = 0
+    self.alert_count = 0
+    self.pending_approval = 'N'
+    self.file_path = self.file.path
   end
 
   def job_status
