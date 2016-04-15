@@ -46,9 +46,12 @@
       %td{:style=>'text-align:left;font-weight: bold;'}
         = @incoming_file.pending_approval
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        / # - if @incoming_file.pending_approval == 'Y'
-        = link_to 'Skip All Records', skip_all_records_incoming_file_path(@incoming_file), :class => "btn btn-primary"
-        = link_to 'Retry File', approve_restart_incoming_file_path(@incoming_file), :class => "btn btn-primary"
+        - if @incoming_file.pending_approval == 'Y'
+          - can = !@current_user.has_role?('supervisor')
+          = simple_form_for :ic_incoming_record, :url => skip_all_records_incoming_file_path(@incoming_file), :html => { :method => :get, :id => 'skip_records', :style=> 'overflow: auto;display:inline-block;'} do |f| 
+            = button_tag "Skip All Records", :id => 'submit_skip', :role => "button", :class => "btn btn-primary", :disabled => can
+          = simple_form_for :ic_incoming_record, :url => approve_restart_incoming_file_path(@incoming_file), :html => { :method => :get, :id => 'restart_records', :style=> 'overflow:  auto;display:inline-block;'} do |f| 
+            = button_tag "Retry", :id => 'submit_restart', :role => "button", :class => "btn btn-primary", :disabled => can
 
     %tr
       %td{:style=>'text-align:left;'}
@@ -91,7 +94,8 @@
         = "Audit Steps"
       %td{:style=>'text-align:left;'}
         = link_to 'Show', {:controller => 'incoming_files', :action => 'audit_steps', :id => @incoming_file.id, :step_name => 'ALL'}
-      = render "#{@incoming_file.incoming_file_type.records_table}/incoming_file_summary"
+      - if !@incoming_file.incoming_file_type.records_table.nil?
+        = render "#{@incoming_file.incoming_file_type.records_table}/incoming_file_summary"
 
 %table.table.table-bordered.table-striped.table-hover.align_center
   %thead
