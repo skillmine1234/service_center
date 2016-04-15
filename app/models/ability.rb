@@ -37,6 +37,9 @@ class Ability
       can :hit_api, model_name.constantize
       can :destroy, model_name.constantize
       can :download_response_file, model_name.constantize
+      can :skip_all_records, model_name.constantize
+      can :approve_restart, model_name.constantize
+      can :generate_response_file, model_name.constantize
     end
   end
 
