@@ -106,31 +106,17 @@ $(document).ready(function(){
 
   $(".val-request-link").on("click", function () {
     var request = $(this).data('request');
-    $("div.request").text(request);
-    $('#requestText').modal();
+    display_beautified_data(request, "div.request", "#requestText");
   });
-  
+
   $(".val-reply-link").on("click", function () {
     var reply = $(this).data('reply');
-    var response;
-    try {
-      response = jQuery.parseJSON(reply);
-    }
-    catch (e) {
-      response = '0';
-    };
-    if(typeof response =='object' && response != '0') {
-      var parsed_json = JSON.stringify(reply, null, '\t');
-      reply = parsed_json
-    }
-    $("div.reply").text(reply);
-    $('#replyText').modal();
+    display_beautified_data(reply, "div.reply", "#replyText");
   });
 
   $(".val-fault-link").on("click", function () {
     var fault = $(this).data('fault');
-    $("div.fault").text(fault);
-    $('#faultLink').modal();
+    display_beautified_data(fault, "div.fault", "#faultLink");
   });
   
   $("a.active-link").on("click", function () {
@@ -164,3 +150,39 @@ $(document).ready(function(){
     });
   });
 });
+
+function beautify_xml(xml_string) {
+  var beautified_xml_req, result;
+  try {
+    beautified_xml_req = vkbeautify.xml(xml_string);
+  }
+  catch (e) {
+    beautified_xml_req = 'xml_parse_err';
+  }
+  return beautified_xml_req;
+}
+
+function beautify_json(json_string) {
+  var beautified_json_req, result;
+  try {
+    beautified_json_req = vkbeautify.json(json_string);
+  }
+  catch (e) {
+    beautified_json_req = 'json_parse_err';
+  }
+  return beautified_json_req;
+}
+
+function display_beautified_data(string, html_ele, modal){
+  var xml_result = beautify_xml(string);
+  if (xml_result != 'xml_parse_err') {
+    $(html_ele).text(xml_result);  
+  }
+  else {
+    var json_result = beautify_json(string);
+    if (json_result != 'json_parse_err') {
+      $(html_ele).text(json_result);  
+    }
+  }
+  $(modal).modal();
+}

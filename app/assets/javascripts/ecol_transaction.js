@@ -31,60 +31,17 @@ $(document).ready(function(){
   
   $(".settle-link").on("click", function () {
     var s_result = $(this).data('settle-result');
-    $(".settle_result").text(s_result);
-    $('#settleText').modal();
+    display_beautified_data(s_result, ".settle_result", "#settleText");
   });
-  
+
   $(".validation-link").on("click", function () {
     var v_result = $(this).data('validation-result');
-    $(".validation_result").text(v_result);
-    $('#validationText').modal();
+    display_beautified_data(v_result, ".validation_result", "#validationText");
   });
   
   $(".return-link").on("click", function () {
     var r_result = $(this).data('return-result');
-    $(".return_result").text(r_result);
-    $('#returnText').modal();
-  });
-
-  $(".val-request-link").on("click", function () {
-    var request = $(this).data('request');
-    var req;
-    try {
-      req = jQuery.parseJSON(request);
-    }
-    catch (e) {
-      req = '0';
-    };
-    if(typeof req =='object' && req != '0') {
-      var parsed_json = JSON.stringify(request, null, '\t');
-      request = parsed_json
-    }
-    $("div.request").text(request);
-    $('#requestText').modal();
-  });
-
-  $(".val-reply-link").on("click", function () {
-    var reply = $(this).data('reply');
-    var response;
-    try {
-      response = jQuery.parseJSON(reply);
-    }
-    catch (e) {
-      response = '0';
-    };
-    if(typeof response =='object' && response != '0') {
-      var parsed_json = JSON.stringify(reply, null, '\t');
-      reply = parsed_json
-    }
-    $("div.reply").text(reply);
-    $('#replyText').modal();
-  });
-
-  $(".val-fault-link").on("click", function () {
-    var fault = $(this).data('fault');
-    $("div.fault").text(fault);
-    $('#faultLink').modal();
+    display_beautified_data(r_result, ".return_result", "#returnText");
   });
 
   $(".settle-result").on("click", function () {
