@@ -11,10 +11,7 @@ class IcSupplier < ActiveRecord::Base
   validates_numericality_of :customer_id, :od_account_no, :ca_account_no, :message => 'Invalid format, expected format is : {[0-9]}'
   validates_uniqueness_of :supplier_code, :scope => [:customer_id, :approval_status]
 
-  validates :customer_id, length: { minimum: 3, maximum: 15 }
-  validates :supplier_code, length: { maximum: 15 }
-  [:od_account_no, :ca_account_no].each do |column|
-    validates column, length: { maximum: 20 }
-  end
+  validates :customer_id, :supplier_code, length: { minimum: 3, maximum: 10 }
+  validates :od_account_no, :ca_account_no, length: { minimum: 10, maximum: 20 }
   validates :supplier_name, length: { maximum: 100 }
 end

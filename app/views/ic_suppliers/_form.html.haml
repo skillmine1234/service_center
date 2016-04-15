@@ -9,7 +9,7 @@
     = f.hidden_field :approved_version
     .control-group
       = f.label :supplier_code, "*Supplier Code", :class => 'control-label'
-      = f.text_field :supplier_code, :maxlength => 15, :required => true
+      = f.text_field :supplier_code, :minlength => 3, :maxlength => 10, :required => true
       #msg-error
         = error_message_for(@ic_supplier, :supplier_code, :prepend_text => "")
     .control-group
@@ -19,22 +19,25 @@
         = error_message_for(@ic_supplier, :supplier_name, :prepend_text => "")
     .control-group
       = f.label :customer_id, "*Customer ID", :class => 'control-label'
-      = f.text_field :customer_id, :minlength => 3, :maxlength => 15, :required => true
+      = f.text_field :customer_id, :minlength => 3, :maxlength => 10, :required => true
       #msg-error
         = error_message_for(@ic_supplier, :customer_id, :prepend_text => "")
     .control-group
       = f.label :od_account_no, "*Supplier's Over Draft Account", :class => 'control-label'
-      = f.text_field :od_account_no, :maxlength => 20, :required => true
+      = f.text_field :od_account_no, :minlength => 10, :maxlength => 20, :required => true
       #msg-error
         = error_message_for(@ic_supplier, :od_account_no, :prepend_text => "")
     .control-group
       = f.label :ca_account_no, "*Supplier's Current Account", :class => 'control-label'
-      = f.text_field :ca_account_no, :maxlength => 20, :required => true
+      = f.text_field :ca_account_no, :minlength => 10, :maxlength => 20, :required => true
       #msg-error
         = error_message_for(@ic_supplier, :ca_account_no, :prepend_text => "")
     .control-group
-      = f.label :is_enabled, "Enabled ?", :class => 'control-label'
-      = f.check_box :is_enabled, {},"Y","N"
+      = f.label :is_enabled, "Enabled?", :class => 'control-label'
+      - if f.object.is_enabled.nil?
+        = f.check_box :is_enabled, {:checked => "checked"},"Y","N"
+      -else
+        = f.check_box :is_enabled, {},"Y","N"
       #msg-error
         = error_message_for(@ic_supplier, :is_enabled, :prepend_text => "")
   .form-actions

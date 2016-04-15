@@ -17,11 +17,11 @@ describe IcSupplier do
     it do
       ic_supplier = Factory(:ic_supplier, :approval_status => 'A')
 
-      should validate_length_of(:customer_id).is_at_least(3).is_at_most(15)
-      should validate_length_of(:supplier_code).is_at_most(15)
+      should validate_length_of(:customer_id).is_at_least(3).is_at_most(10)
+      should validate_length_of(:supplier_code).is_at_least(3).is_at_most(10)
 
       [:od_account_no, :ca_account_no].each do |att|
-        should validate_length_of(att).is_at_most(20)
+        should validate_length_of(att).is_at_least(10).is_at_most(20)
       end
 
       should validate_length_of(:supplier_name).is_at_most(100)
@@ -48,7 +48,7 @@ describe IcSupplier do
     end
 
     it "should not allow invalid format" do
-      ic_supplier = Factory.build(:ic_supplier, :customer_id => '@,.9023jsf', :od_account_no => "ODACC01", :ca_account_no => "CA-ACC01", :supplier_code => "SUPL-001", :supplier_name => 'ABC@DEF')
+      ic_supplier = Factory.build(:ic_supplier, :customer_id => '@,.9023jsf', :od_account_no => "ODACC-0001", :ca_account_no => "CA-ACC0001", :supplier_code => "SUPL-001@2", :supplier_name => 'ABC@DEF')
       ic_supplier.save == false
       [:customer_id, :od_account_no, :ca_account_no].each do |att|
         ic_supplier.errors_on(att).should == ["Invalid format, expected format is : {[0-9]}"]

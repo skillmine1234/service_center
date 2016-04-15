@@ -1567,12 +1567,8 @@ ActiveRecord::Schema.define(version: 20160413070502) do
     t.string   "cbs_req_ref_no"
   end
 
-  add_index "inward_remittances", ["bank_ref"], name: "index_inward_remittances_on_bank_ref"
-  add_index "inward_remittances", ["bene_account_no"], name: "index_inward_remittances_on_bene_account_no"
   add_index "inward_remittances", ["req_no", "partner_code", "attempt_no"], name: "remittance_unique_index", unique: true
-  add_index "inward_remittances", ["req_transfer_type"], name: "index_inward_remittances_on_req_transfer_type"
-  add_index "inward_remittances", ["status_code"], name: "index_inward_remittances_on_status_code"
-  add_index "inward_remittances", ["transfer_type"], name: "index_inward_remittances_on_transfer_type"
+  add_index "inward_remittances", ["status_code", "bank_ref", "bene_account_no", "req_transfer_type", "transfer_type"], name: "idx_inrw_columns"
 
   create_table "inward_remittances_locks", id: false, force: :cascade do |t|
     t.integer "inward_remittance_id"

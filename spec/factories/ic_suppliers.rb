@@ -5,8 +5,8 @@ FactoryGirl.define do
     sequence(:supplier_code) {|n| "9" + "%03i" % "#{n}" }
     sequence(:customer_id) {|n| "8" + "%03i" % "#{n}" }
     supplier_name "MyString"
-    od_account_no "12345"
-    ca_account_no "23456"
+    od_account_no "1234567890"
+    ca_account_no "2345678901"
     is_enabled "N"
     approval_status "U"
     last_action "C"
