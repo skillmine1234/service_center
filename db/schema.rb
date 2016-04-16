@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160413070502) do
+ActiveRecord::Schema.define(version: 20160416035232) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -1392,7 +1392,6 @@ ActiveRecord::Schema.define(version: 20160413070502) do
     t.string   "rep_fault_subcode",   limit: 50
     t.string   "rep_fault_reason",    limit: 500
     t.text     "rep_fault_bitstream"
-    t.string   "should_skip",         limit: 1
     t.string   "overrides",           limit: 50
     t.integer  "attempt_no"
     t.string   "rep_fault_code",      limit: 50
@@ -1453,6 +1452,7 @@ ActiveRecord::Schema.define(version: 20160413070502) do
     t.integer  "timedout_record_count"
     t.integer  "alert_count"
     t.datetime "last_alert_at"
+    t.integer  "bad_record_count"
   end
 
   add_index "incoming_files", ["file_name", "approval_status"], name: "index_incoming_files_on_file_name_and_approval_status", unique: true
@@ -1567,8 +1567,12 @@ ActiveRecord::Schema.define(version: 20160413070502) do
     t.string   "cbs_req_ref_no"
   end
 
+  add_index "inward_remittances", ["bank_ref"], name: "index_inward_remittances_on_bank_ref"
+  add_index "inward_remittances", ["bene_account_no"], name: "index_inward_remittances_on_bene_account_no"
   add_index "inward_remittances", ["req_no", "partner_code", "attempt_no"], name: "remittance_unique_index", unique: true
-  add_index "inward_remittances", ["status_code", "bank_ref", "bene_account_no", "req_transfer_type", "transfer_type"], name: "idx_inrw_columns"
+  add_index "inward_remittances", ["req_transfer_type"], name: "index_inward_remittances_on_req_transfer_type"
+  add_index "inward_remittances", ["status_code"], name: "index_inward_remittances_on_status_code"
+  add_index "inward_remittances", ["transfer_type"], name: "index_inward_remittances_on_transfer_type"
 
   create_table "inward_remittances_locks", id: false, force: :cascade do |t|
     t.integer "inward_remittance_id"
@@ -2271,26 +2275,6 @@ ActiveRecord::Schema.define(version: 20160413070502) do
 
   add_index "sc_services", ["code"], name: "index_sc_services_on_code", unique: true
   add_index "sc_services", ["name"], name: "index_sc_services_on_name", unique: true
-
-  create_table "su_audit_steps", force: :cascade do |t|
-    t.string   "su_auditable_type",              null: false
-    t.integer  "su_auditable_id",                null: false
-    t.integer  "step_no",                        null: false
-    t.integer  "attempt_no",                     null: false
-    t.string   "step_name",         limit: 100,  null: false
-    t.string   "status_code",       limit: 25
-    t.string   "fault_code",        limit: 50
-    t.string   "fault_subcode",     limit: 50
-    t.string   "fault_reason",      limit: 1000
-    t.string   "req_reference",     limit: 255
-    t.datetime "req_timestamp"
-    t.string   "rep_reference"
-    t.datetime "rep_timestamp"
-    t.datetime "reconciled_at"
-    t.text     "req_bitstream"
-    t.text     "rep_bitstream"
-    t.text     "fault_bitstream"
-  end
 
   create_table "su_customers", force: :cascade do |t|
     t.string   "account_no",            limit: 20
