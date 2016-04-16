@@ -17,4 +17,8 @@ module SuIncomingRecordsHelper
     incoming_records = incoming_records.where("su_incoming_records.salary_amount>=? and su_incoming_records.salary_amount <=?",params[:from_amount].to_f,params[:to_amount].to_f) if params[:to_amount].present? and params[:from_amount].present?
     incoming_records
   end
+
+  def can_override?(record)
+    !record.incoming_file_record.fault_code.nil? and record.incoming_file_record.fault_code.start_with?("ns:W") and record.incoming_file_record.overrides != record.incoming_file_record.fault_code
+  end
 end

@@ -28,4 +28,16 @@ describe SuIncomingRecordsHelper do
       find_su_incoming_records({:from_amount => 500, :to_amount => 1000},SuIncomingRecord).should == []
     end
   end
+
+  context "can_override" do 
+    it "should return true if the record is overridable" do 
+      a = Factory(:su_incoming_record, :incoming_file_record_id => Factory(:incoming_file_record, :fault_code => "ns:W").id)
+      can_override?(a).should == true
+    end
+
+    it "should return true if the record is overridable" do 
+      a = Factory(:su_incoming_record, :incoming_file_record_id => Factory(:incoming_file_record, :fault_code => "ns:E").id)
+      can_override?(a).should == false
+    end
+  end
 end
