@@ -3,9 +3,6 @@ require 'spec_helper'
 describe IcIncomingRecordsHelper do
   context "find_ic_incoming_records" do
     it "should return records for the params that is passed" do 
-      a = Factory(:ic_incoming_record, :incoming_file_record => Factory(:incoming_file_record, :should_skip => 'Y'))
-      find_ic_incoming_records({:skipped_flag => "Y"},IcIncomingRecord.joins(:incoming_file_record)).should == [a]
-      find_ic_incoming_records({:skipped_flag => "N"},IcIncomingRecord.joins(:incoming_file_record)).should == []
       a = Factory(:ic_incoming_record, :incoming_file_record => Factory(:incoming_file_record, :overrides => 'Y:76',:record_no => 23))
       find_ic_incoming_records({:overrided_flag => "true"},IcIncomingRecord.joins(:incoming_file_record)).should == [a]
       

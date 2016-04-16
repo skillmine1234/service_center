@@ -1,7 +1,6 @@
 module IcIncomingRecordsHelper
   def find_ic_incoming_records(params,records)
     incoming_records = records
-    incoming_records = incoming_records.where("should_skip=?",params[:skipped_flag]) if params[:skipped_flag].present?
     incoming_records = incoming_records.where("overrides is not null") if params[:overrided_flag].present? and params[:overrided_flag] == "true"
     incoming_records = incoming_records.where("overrides is null") if params[:overrided_flag].present? and params[:overrided_flag] == "false"
     incoming_records = incoming_records.where("ic_incoming_records.supplier_code=?",params[:supplier_code]) if params[:supplier_code].present?
