@@ -1,6 +1,8 @@
 class IncomingFile < ActiveRecord::Base  
   include Approval
 
+  lazy_load :fault_bitstream
+
   SIZE_LIMIT = 50.megabytes.to_i
   validate :validate_file_name 
   validate :validate_unique_file

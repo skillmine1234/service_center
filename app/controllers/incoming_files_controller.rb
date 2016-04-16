@@ -15,9 +15,10 @@ class IncomingFilesController < ApplicationController
 
   def create
     @incoming_file = IncomingFile.new(params[:incoming_file])
+    @sc_service = ScService.find_by_code(params[:sc_service])
     if @incoming_file.save
       flash[:alert] = "File is successfully uploaded and is pending for approval"
-      redirect_to incoming_files_path
+      redirect_to incoming_files_path(:sc_service => params[:sc_service])
     else
       flash[:notice] = @incoming_file.errors.full_messages
       render :new

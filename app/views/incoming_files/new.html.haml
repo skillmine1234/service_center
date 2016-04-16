@@ -17,6 +17,7 @@
       = f.file_field :file
       = f.hidden_field :created_by, :value => current_user.id
       = f.hidden_field :status, :value => 'N'
+      = hidden_field_tag :sc_service, params[:sc_service]
   .form-actions
     = f.button "submit", :class=>"btn btn-primary", :id => 'submit_file'
     = link_to :Cancel,'/incoming_files', :name => 'cancel', :class=>"cancel btn"
