@@ -39,4 +39,12 @@ describe IcIncomingRecordsController do
       assigns(:audit).should eq(nil)
     end
   end
+
+  describe "GET incoming_file_summary" do
+    it "assigns one ic_incoming_file as @summary" do
+      ic_incoming_file = Factory(:ic_incoming_file)
+      get :incoming_file_summary, :file_name => ic_incoming_file.file_name
+      assigns(:summary).should eq(ic_incoming_file)
+    end
+  end
 end

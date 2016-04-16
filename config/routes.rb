@@ -76,6 +76,8 @@ ServiceCenter::Application.routes.draw do
     end
   end
 
+  get 'su_incoming_file_summary' => 'su_incoming_records#incoming_file_summary'
+  get 'ic_incoming_file_summary' => 'ic_incoming_records#incoming_file_summary'
   get 'override_records' => 'incoming_files#override_records'
   get 'incoming_files/:id/audit_steps/:step_name' => 'incoming_files#audit_steps'
   get 'incoming_file_records/:id/audit_steps/:step_name' => 'incoming_file_records#audit_steps'

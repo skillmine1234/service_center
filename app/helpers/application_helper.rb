@@ -36,4 +36,8 @@ module ApplicationHelper
     count = resource.audits.count
     count > 0 ? count - 1 : 0
   end 
+
+  def has_route? options
+    Rails.application.routes.routes.map{|route| route.defaults}.include?(options)
+  end
 end

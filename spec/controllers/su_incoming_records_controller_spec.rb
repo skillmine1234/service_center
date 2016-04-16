@@ -39,4 +39,12 @@ describe SuIncomingRecordsController do
       assigns(:audit).should eq(nil)
     end
   end
+
+  describe "GET incoming_file_summary" do
+    it "assigns one su_incoming_file as @summary" do
+      su_incoming_file = Factory(:su_incoming_file)
+      get :incoming_file_summary, :file_name => su_incoming_file.file_name
+      assigns(:summary).should eq(su_incoming_file)
+    end
+  end
 end

@@ -23,4 +23,8 @@ class SuIncomingRecordsController < ApplicationController
     @record = IncomingFileRecord.find(params[:id]) rescue nil
     @audit = @record.audits[params[:version_id].to_i] rescue nil
   end
+
+  def incoming_file_summary
+    @summary = SuIncomingFile.find_by_file_name(params[:file_name])
+  end
 end

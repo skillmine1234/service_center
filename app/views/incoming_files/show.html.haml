@@ -53,6 +53,13 @@
           = simple_form_for :ic_incoming_record, :url => approve_restart_incoming_file_path(@incoming_file), :html => { :method => :get, :id => 'restart_records', :style=> 'overflow:  auto;display:inline-block;'} do |f| 
             = button_tag "Retry", :id => 'submit_restart', :role => "button", :class => "btn btn-primary", :disabled => can
 
+%table.table.table-bordered.table-striped.table-hover.align_center{:style=>'width:45%;float: right;'}
+  %thead
+    %tr 
+      %th{:style=>'text-align:left;'}
+        = "Status"
+      %th
+  %tbody
     %tr
       %td{:style=>'text-align:left;'}
         = "Status"
@@ -81,21 +88,17 @@
         = "Last Alert At"
       %td{:style=>'text-align:left;'}
         = @incoming_file.last_alert_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
-
-%table.table.table-bordered.table-striped.table-hover.align_center{:style=>'width:45%;float: right;'}
-  %thead
-    %tr 
-      %th{:style=>'text-align:left;'}
-        = "Other Details"
-      %th
-  %tbody
     %tr
       %td{:style=>'text-align:left;'}
         = "Audit Steps"
       %td{:style=>'text-align:left;'}
         = link_to 'Show', {:controller => 'incoming_files', :action => 'audit_steps', :id => @incoming_file.id, :step_name => 'ALL'}
-      - if !@incoming_file.incoming_file_type.records_table.nil?
-        = render "#{@incoming_file.incoming_file_type.records_table}/incoming_file_summary"
+      - if !@incoming_file.incoming_file_type.records_table.nil? and has_route?({:controller => @incoming_file.incoming_file_type.records_table, :action => 'incoming_file_summary'})
+        %tr
+          %td{:style=>'text-align:left;'}
+            = 'Other Details'
+          %td{:style=>'text-align:left;'}
+            = link_to 'Show', {:controller => @incoming_file.incoming_file_type.records_table, :action => 'incoming_file_summary', :file_name => @incoming_file.file_name}
 
 %table.table.table-bordered.table-striped.table-hover.align_center
   %thead
