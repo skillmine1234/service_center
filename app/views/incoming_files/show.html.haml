@@ -49,7 +49,7 @@
         - if @incoming_file.pending_approval == 'Y'
           - can = !@current_user.has_role?('supervisor')
           = simple_form_for :ic_incoming_record, :url => skip_all_records_incoming_file_path(@incoming_file), :html => { :method => :get, :id => 'skip_records', :style=> 'overflow: auto;display:inline-block;'} do |f| 
-            = button_tag "Skip All Records", :id => 'submit_skip', :role => "button", :class => "btn btn-primary", :disabled => can
+            = button_tag "Skip and Retry", :id => 'submit_skip', :role => "button", :class => "btn btn-primary", :disabled => can
           = simple_form_for :ic_incoming_record, :url => approve_restart_incoming_file_path(@incoming_file), :html => { :method => :get, :id => 'restart_records', :style=> 'overflow:  auto;display:inline-block;'} do |f| 
             = button_tag "Retry", :id => 'submit_restart', :role => "button", :class => "btn btn-primary", :disabled => can
 
