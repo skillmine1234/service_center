@@ -16,7 +16,7 @@
 
     .control-group
       = f.label :customer_name, "*Customer Name", :class => 'control-label'
-      = f.text_field :customer_name, :maxlength => 100, :required => true
+      = f.text_field :customer_name, :maxlength => 100, :required => true, :style => "width: 400px;"
       #msg-error
         = error_message_for(@ic_customer, :customer_name, :prepend_text => "")
 
@@ -58,7 +58,7 @@
 
     .control-group
       = f.label :cust_contact_email, "Customer Email", :class => 'control-label'
-      = f.text_field :cust_contact_email, :maxlength => 100, :placeholder => "Enter Email IDs separated by ';'"
+      = f.text_field :cust_contact_email, :maxlength => 100, :placeholder => "Enter Email IDs separated by ';'", :style => "width: 400px;"
       #msg-error
         = error_message_for(@ic_customer, :cust_contact_email, :prepend_text => "")
 
@@ -70,13 +70,13 @@
 
     .control-group
       = f.label :ops_email, "Operations Email", :class => 'control-label'
-      = f.text_field :ops_email, :maxlength => 100, :placeholder => "Enter Email IDs separated by ';'"
+      = f.text_field :ops_email, :maxlength => 100, :placeholder => "Enter Email IDs separated by ';'", :style => "width: 400px;"
       #msg-error
         = error_message_for(@ic_customer, :ops_email, :prepend_text => "")
 
     .control-group
       = f.label :rm_email, "Relationship Manager Email", :class => 'control-label'
-      = f.text_field :rm_email, :maxlength => 100, :placeholder => "Enter Email IDs separated by ';'"
+      = f.text_field :rm_email, :maxlength => 100, :placeholder => "Enter Email IDs separated by ';'", :style => "width: 400px;"
       #msg-error
         = error_message_for(@ic_customer, :rm_email, :prepend_text => "")
 
