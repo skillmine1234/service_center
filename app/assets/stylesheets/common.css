@@ -134,3 +134,8 @@ a:hover {
 .customMessage{
   color:blue;
 }
+
+.request, .reply {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
