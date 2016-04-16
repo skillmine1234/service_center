@@ -151,6 +151,7 @@ $(document).ready(function(){
   });
 });
 
+
 function beautify_xml(xml_string) {
   var beautified_xml_req, result;
   try {
