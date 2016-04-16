@@ -30,6 +30,8 @@ class IncomingFile < ActiveRecord::Base
   has_one :ecol_unapproved_record, :as => :ecol_approvable
   has_one :imt_unapproved_record, :as => :imt_approvable
   has_one :inw_unapproved_record, :as => :inw_approvable
+  has_one :su_unapproved_record, :as => :su_approvable
+  has_one :ic_unapproved_record, :as => :ic_approvable
 
   after_create :on_create_create_unapproved_record
   after_destroy :on_destory_remove_unapproved_records
@@ -124,6 +126,8 @@ class IncomingFile < ActiveRecord::Base
       EcolUnapprovedRecord.create!(:ecol_approvable => self) if self.service_name == "ECOL"
       ImtUnapprovedRecord.create!(:imt_approvable => self) if self.service_name == "IMT"
       InwUnapprovedRecord.create!(:inw_approvable => self) if self.service_name == "AML"
+      SuUnapprovedRecord.create!(:su_approvable => self) if self.service_name == "SALARY"
+      IcUnapprovedRecord.create!(:ic_approvable => self) if self.service_name == "INSTANTCREDIT"
     end
   end
 
@@ -131,7 +135,9 @@ class IncomingFile < ActiveRecord::Base
     if approval_status == 'U'
       ecol_unapproved_record.delete if self.service_name == "ECOL"
       imt_unapproved_record.delete if self.service_name == "IMT"
-       inw_unapproved_record.delete if self.service_name == "AML"
+      inw_unapproved_record.delete if self.service_name == "AML"
+      su_unapproved_record.delete if self.service_name == "SALARY"
+      ic_unapproved_record.delete if self.service_name == "INSTANTCREDIT"
     end
   end
 
@@ -140,6 +146,8 @@ class IncomingFile < ActiveRecord::Base
       ecol_unapproved_record.delete if self.service_name == "ECOL"
       imt_unapproved_record.delete if self.service_name == "IMT"
       inw_unapproved_record.delete if self.service_name == "AML"
+      su_unapproved_record.delete if self.service_name == "SALARY"
+      ic_unapproved_record.delete if self.service_name == "INSTANTCREDIT"
     end
   end 
 end

@@ -9,7 +9,7 @@ class IcUnapprovedRecordsController < ApplicationController
   include IcUnapprovedRecordsHelper
 
   def index
-    records = filter_records(IcUnapprovedRecord)
+    records = filter_records(IcUnapprovedRecord,params)
     @records = records.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
 end

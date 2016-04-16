@@ -14,7 +14,7 @@ describe SuUnapprovedRecordsController do
     it "assigns all su_unapproved_records as @su_unapproved_records" do
       su_unapproved_record = Factory(:su_unapproved_record, :su_approvable_type => 'SuCustomer')
       get :index
-      assigns(:records).should eq([{:record_type=>"SuCustomer", :record_count=>1}])
+      assigns(:records).should eq([{:record_type=>"SuCustomer", :record_count=>1}, {:record_type=>"IncomingFile", :record_count=>0}])
     end
   end
 end
