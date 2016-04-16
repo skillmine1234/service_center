@@ -28,6 +28,7 @@ $(document).ready(function(){
     $(".credit_result").text(c_result);
     $('#creditText').modal();
   });
+
   
   $(".settle-link").on("click", function () {
     var s_result = $(this).data('settle-result');
@@ -43,6 +44,7 @@ $(document).ready(function(){
     var r_result = $(this).data('return-result');
     display_beautified_data(r_result, ".return_result", "#returnText");
   });
+  
 
   $(".settle-result").on("click", function () {
     $('#settleResult').modal();

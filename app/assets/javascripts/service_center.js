@@ -29,19 +29,6 @@ $(document).ready(function(){
   $("a.result-link").on("click", function () {
     $('#resultText').modal();
   });
-
-  $("a.active-link").on("click", function () {
-    var f_code = $(this).data('fault-code');
-    var f_reason = $(this).data('fault-reason');
-    var f_subcode = $(this).data('fault-subcode');
-    $(".modal-body .fault_code").text("");
-    $(".modal-body .fault_code").text(f_code);
-    $(".modal-body .fault_reason").text("");
-    $(".modal-body .fault_reason").text(f_reason);
-    $(".modal-body .fault_subcode").text("");
-    $(".modal-body .fault_subcode").text(f_subcode);
-    $('#faultText').modal();
-  });
   
   $("#aml_reset").on('click', function(){
     $('input#search_params_firstName').val('');
@@ -176,6 +163,7 @@ function beautify_json(json_string) {
 
 function display_beautified_data(string, html_ele, modal){
   var xml_result = beautify_xml(string);
+  $(html_ele).text("");
   if (xml_result != 'xml_parse_err') {
     $(html_ele).text(xml_result);  
   }
