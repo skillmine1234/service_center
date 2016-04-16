@@ -1,8 +1,5 @@
 build_dependencies:
-  - freetds-devel
-  - libaio
 dependencies:
-  - libaio
 targets:
   centos-6:
 env:
