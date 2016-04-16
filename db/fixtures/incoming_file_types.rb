@@ -129,7 +129,7 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.auto_upload = 'Y'
   s.validate_all = 'Y'
   s.build_response_file = 'Y' 
-  s.db_unit_name = "pk_qg_su_file_validator"
+  s.db_unit_name = "pk_qg_su_file_manager"
   s.records_table = 'su_incoming_records'
 end
 
