@@ -32,6 +32,11 @@
         = @incoming_file.upload_time
     %tr
       %td{:style=>'text-align:left;'}
+        = "File Path"
+      %td{:style=>'text-align:left;'}
+        = @incoming_file.file_path
+    %tr
+      %td{:style=>'text-align:left;'}
         = "File Size"
       %td{:style=>'text-align:left;'}
         = @incoming_file.size_in_bytes

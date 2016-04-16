@@ -16,6 +16,8 @@ class IncomingFile < ActiveRecord::Base
 
   before_create :update_fields
 
+  after_save :update_file_path
+
   belongs_to :created_user, :class_name => 'User', :foreign_key => 'created_by'
   belongs_to :updated_user, :class_name => 'User', :foreign_key => 'updated_by'
   has_many :ecol_remitters, :autosave => true
@@ -79,6 +81,9 @@ class IncomingFile < ActiveRecord::Base
     self.timedout_record_count = 0
     self.alert_count = 0
     self.pending_approval = 'N'
+  end
+
+  def update_file_path
     self.file_path = self.file.path
   end
 
