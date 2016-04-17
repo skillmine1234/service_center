@@ -81,7 +81,7 @@ class IncomingFile < ActiveRecord::Base
     self.timedout_record_count = 0
     self.alert_count = 0
     self.pending_approval = 'N'
-    self.file_path = self.approval_status == 'A' ? "#{ENV['CONFIG_APPROVED_FILE_UPLOAD_PATH']}/#{self.file_name}" : "#{ENV['CONFIG_FILE_UPLOAD_PATH']}/#{self.file_name}"
+    self.file_path = self.approval_status == 'A' ? "#{ENV['CONFIG_APPROVED_FILE_UPLOAD_PATH']}" : "#{ENV['CONFIG_FILE_UPLOAD_PATH']}"
   end
 
   def job_status
