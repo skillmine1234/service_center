@@ -14,7 +14,7 @@ class IncomingFile < ActiveRecord::Base
 
   ExtensionList = %w(txt)
 
-  before_create :update_fields
+  before_save :update_fields
 
   belongs_to :created_user, :class_name => 'User', :foreign_key => 'created_by'
   belongs_to :updated_user, :class_name => 'User', :foreign_key => 'updated_by'
