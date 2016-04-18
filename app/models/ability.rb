@@ -22,6 +22,8 @@ class Ability
       can :override_records, model_name.constantize
       can :audit_steps, model_name.constantize
       can :incoming_file_summary, model_name.constantize
+      can :download_response_file, model_name.constantize
+      can :view_raw_content, model_name.constantize
     end
   end
 
@@ -42,9 +44,10 @@ class Ability
       can :download_response_file, model_name.constantize
       can :skip_all_records, model_name.constantize
       can :approve_restart, model_name.constantize
-      can :generate_response_file, model_name.constantize
       can :audit_steps, model_name.constantize
       can :incoming_file_summary, model_name.constantize
+      can :download_response_file, model_name.constantize
+      can :view_raw_content, model_name.constantize
     end
   end
 
