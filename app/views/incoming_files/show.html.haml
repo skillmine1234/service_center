@@ -59,7 +59,7 @@
           - elsif @incoming_file.last_process_step == 'B'
             = render :partial => "skip_all", :locals => {:can => can}
             = render :partial => "restart", :locals => {:can => can}
-          - elsif @incoming_file.last_process_step == 'B'
+          - elsif @incoming_file.last_process_step == 'R'
             = render :partial => "restart", :locals => {:can => can}
 %table.table.table-bordered.table-striped.table-hover.align_center{:style=>'width:45%;float: right;'}
   %thead
