@@ -14,7 +14,9 @@ class IncomingFile < ActiveRecord::Base
 
   ExtensionList = %w(txt)
 
-  before_save :update_fields
+  before_create :update_fields
+
+  before_save :update_file_path
 
   belongs_to :created_user, :class_name => 'User', :foreign_key => 'created_by'
   belongs_to :updated_user, :class_name => 'User', :foreign_key => 'updated_by'
@@ -81,9 +83,12 @@ class IncomingFile < ActiveRecord::Base
     self.timedout_record_count = 0
     self.alert_count = 0
     self.pending_approval = 'N'
-    self.file_path = self.approval_status == 'A' ? "#{ENV['CONFIG_APPROVED_FILE_UPLOAD_PATH']}" : "#{ENV['CONFIG_FILE_UPLOAD_PATH']}"
   end
 
+  def update_file_path
+    self.file_path = self.approval_status == 'A' ? "#{ENV['CONFIG_APPROVED_FILE_UPLOAD_PATH']}" : "#{ENV['CONFIG_FILE_UPLOAD_PATH']}"
+  end
+  
   def job_status
     status_text(status)
   end
