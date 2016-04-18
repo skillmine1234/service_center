@@ -8,7 +8,7 @@ class AddNewColumnsToFundsTransferCustomers < ActiveRecord::Migration
       add_index :funds_transfer_customers, [:app_id,:approval_status], :unique => true, :name => "FT_cust_index_on_app_id"
       change_column :funds_transfer_customers, :app_id, :string, :limit => 20, :null => false, :comment => "the unique id assigned to a client app"    
     else
-      change_column :funds_transfer_customers, :app_id, :string, :limit => 20, :null => false, :comment => "the unique id assigned to a client app"    
+      add_column :funds_transfer_customers, :app_id, :string, :limit => 20, :null => false, :comment => "the unique id assigned to a client app"    
       add_index :funds_transfer_customers, [:app_id,:approval_status], :unique => true, :name => "FT_cust_index_on_app_id"
     end
     change_column :funds_transfer_customers, :customer_id, :string, :null => true, :comment => "the ID of the customer"
