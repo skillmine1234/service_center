@@ -139,6 +139,12 @@ $(document).ready(function(){
       $("#submit_restart").prop('disabled', true);
     });
   });
+
+  $("#submit_reject").click(function(){
+    $("#reject_records").submit(function(){
+      $("#submit_reject").prop('disabled', true);
+    });
+  });
 });
 
 

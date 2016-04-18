@@ -44,6 +44,7 @@ class Ability
       can :download_response_file, model_name.constantize
       can :skip_all_records, model_name.constantize
       can :approve_restart, model_name.constantize
+      can :reject, model_name.constantize
       can :audit_steps, model_name.constantize
       can :incoming_file_summary, model_name.constantize
       can :download_response_file, model_name.constantize

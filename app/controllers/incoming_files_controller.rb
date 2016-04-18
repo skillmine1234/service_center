@@ -138,6 +138,13 @@ class IncomingFilesController < ApplicationController
     redirect_to @incoming_file
   end
 
+  def reject
+    @incoming_file = IncomingFile.find(params[:id]) 
+    uri = "/fm/incoming_files/reject"
+    api_faraday_call(:put, uri, @incoming_file.file_name, nil)  
+    redirect_to @incoming_file
+  end
+
   def generate_response_file
     @incoming_file = IncomingFile.find(params[:id]) 
     uri = "/fm/incoming_files/enqueue_response_file"

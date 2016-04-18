@@ -191,4 +191,16 @@ describe IncomingFilesController do
       response.should be_redirect
     end
   end
+
+  describe "GET reject_records" do
+    it "updates the requested incoming_file" do
+      incoming_file = Factory(:incoming_file, :approval_status => 'A')
+      WebMock.stub_request(:put, "#{ENV['CONFIG_URL_IIB_FILE_MGR']}/fm/incoming_files/reject?fileName=#{incoming_file.file_name}").
+        with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Length'=>'0', 'User-Agent'=>'Faraday v0.9.2'}).
+        to_return(:status => 202, :body => "", :headers => {})
+      get :reject, {:id => incoming_file.id}
+      flash[:alert].should == "Status code: 202 <br> Message: "
+      response.should be_redirect
+    end
+  end
 end
