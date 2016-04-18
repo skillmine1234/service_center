@@ -26,7 +26,7 @@ class IncomingFilesController < ApplicationController
   end
 
   def audit_steps
-    @file_record = IncomingFile.find(params[:id])
+    @file_record = IncomingFile.unscoped.find(params[:id])
     file_record_values = find_logs(params, @file_record)
     @file_record_values_count = file_record_values.count(:id)
     @file_record_values = file_record_values.paginate(:per_page => 10, :page => params[:page]) rescue []

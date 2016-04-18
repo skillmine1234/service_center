@@ -136,7 +136,7 @@ end
 IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.sc_service_id = ScService.find_by(code: 'INSTANTCREDIT').id
   s.code = 'PAYNOW'
-  s.name = 'INSTANTCREDIT'
+  s.name = 'REPAYMENT'
   s.msg_domain = 'DFDL'
   s.msg_model = '{http://www.quantiguous.com/services/file}:repayCredit'
   s.skip_first = 'Y'

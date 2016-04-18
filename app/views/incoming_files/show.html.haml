@@ -75,9 +75,11 @@
           = link_to "Show Fault Text", "#", :class => 'active-link', :href => "#faultText", data: { fault_reason: @incoming_file.fault_reason, fault_code: @incoming_file.fault_code, fault_subcode: @incoming_file.fault_subcode}
     %tr
       %td{:style=>'text-align:left;'}
-        = "Last Step"
+        = "Last Process Step"
       %td{:style=>'text-align:left;'}
         = @incoming_file.last_process_step
+        - if @incoming_file.pending_approval == 'Y' and (@incoming_file.last_process_step.nil? or @incoming_file.last_process_step == 'R')
+          = link_to "Show Fault Text", "#", :class => 'active-link', :href => "#faultText", data: { fault_reason: @incoming_file.fault_reason, fault_code: @incoming_file.fault_code, fault_subcode: @incoming_file.fault_subcode}
     %tr
       %td{:style=>'text-align:left;'}
         = "Broker UUID"

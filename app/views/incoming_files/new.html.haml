@@ -20,4 +20,4 @@
       = hidden_field_tag :sc_service, params[:sc_service]
   .form-actions
     = f.button "submit", :class=>"btn btn-primary", :id => 'submit_file'
-    = link_to :Cancel,'/incoming_files', :name => 'cancel', :class=>"cancel btn"
+    = link_to :Cancel,'/incoming_files?sc_service=' + params[:sc_service], :name => 'cancel', :class=>"cancel btn"
