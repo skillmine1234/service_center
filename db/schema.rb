@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160416102057) do
+ActiveRecord::Schema.define(version: 20160418095520) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -960,38 +960,29 @@ ActiveRecord::Schema.define(version: 20160416102057) do
 
   create_table "funds_transfer_customers", force: :cascade do |t|
     t.string   "name",                 limit: 20
-    t.string   "tech_email_id",        limit: 255
-    t.string   "ops_email_id",         limit: 255
-    t.string   "account_no",           limit: 20,                null: false
-    t.string   "account_ifsc",         limit: 20,                null: false
-    t.integer  "low_balance_alert_at",                           null: false
-    t.string   "identity_user_id",                               null: false
-    t.string   "allow_neft",           limit: 1,                 null: false
-    t.string   "allow_imps",           limit: 1,                 null: false
-    t.string   "enabled",              limit: 1,   default: "N", null: false
-    t.string   "customer_id",                                    null: false
-    t.string   "mmid",                 limit: 7
-    t.string   "mobile_no",            limit: 10
-    t.string   "country"
-    t.string   "address_line1"
-    t.string   "address_line2"
-    t.string   "address_line3"
-    t.integer  "lock_version",                                   null: false
-    t.string   "approval_status",      limit: 1,   default: "U", null: false
+    t.integer  "low_balance_alert_at",                          null: false
+    t.string   "identity_user_id",                              null: false
+    t.string   "allow_neft",           limit: 1,                null: false
+    t.string   "allow_imps",           limit: 1,                null: false
+    t.string   "enabled",              limit: 1,  default: "N", null: false
+    t.string   "customer_id"
+    t.integer  "lock_version",                                  null: false
+    t.string   "approval_status",      limit: 1,  default: "U", null: false
     t.string   "last_action",          limit: 1
     t.integer  "approved_version"
     t.integer  "approved_id"
     t.string   "created_by",           limit: 20
     t.string   "updated_by",           limit: 20
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+    t.string   "is_retail",            limit: 1
+    t.string   "allow_rtgs",           limit: 1
+    t.string   "app_id",               limit: 20,               null: false
   end
 
-  add_index "funds_transfer_customers", ["account_no"], name: "index_funds_transfer_customers_on_account_no"
+  add_index "funds_transfer_customers", ["app_id", "approval_status"], name: "FT_cust_index_on_app_id", unique: true
   add_index "funds_transfer_customers", ["customer_id", "approval_status"], name: "FT_cust_index_on_customer_id", unique: true
-  add_index "funds_transfer_customers", ["mobile_no"], name: "index_funds_transfer_customers_on_mobile_no"
   add_index "funds_transfer_customers", ["name"], name: "index_funds_transfer_customers_on_name"
-  add_index "funds_transfer_customers", ["tech_email_id"], name: "index_funds_transfer_customers_on_tech_email_id"
 
   create_table "groups", force: :cascade do |t|
     t.string   "name"

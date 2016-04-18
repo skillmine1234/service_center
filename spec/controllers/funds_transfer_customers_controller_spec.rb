@@ -88,7 +88,7 @@ describe FundsTransferCustomersController do
     describe "with invalid params" do
       it "assigns a newly created but unsaved funds_transfer_customer as @funds_transfer_customer" do
         params = Factory.attributes_for(:funds_transfer_customer)
-        params[:account_no] = nil
+        params[:app_id] = nil
         expect {
           post :create, {:funds_transfer_customer => params}
         }.to change(FundsTransferCustomer, :count).by(0)
@@ -98,7 +98,7 @@ describe FundsTransferCustomersController do
 
       it "re-renders the 'new' template when show_errors is true" do
         params = Factory.attributes_for(:funds_transfer_customer)
-        params[:account_no] = nil
+        params[:app_id] = nil
         post :create, {:funds_transfer_customer => params}
         response.should render_template("new")
       end
@@ -162,7 +162,7 @@ describe FundsTransferCustomersController do
       it "re-renders the 'edit' template when show_errors is true" do
         funds_transfer_customer = Factory(:funds_transfer_customer)
         params = funds_transfer_customer.attributes.slice(*funds_transfer_customer.class.attribute_names)
-        params[:account_no] = nil
+        params[:app_id] = nil
         put :update, {:id => funds_transfer_customer.id, :funds_transfer_customer => params, :show_errors => "true"}
         response.should render_template("edit")
       end

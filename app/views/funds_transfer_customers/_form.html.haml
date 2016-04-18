@@ -8,7 +8,17 @@
     = f.hidden_field :approved_id
     = f.hidden_field :approved_version
     .control-group
-      = f.label :customer_id, "*Customer ID", :class => 'control-label'
+      = f.label :app_id, "*App ID", :class => 'control-label'
+      = f.text_field :app_id
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :app_id, :prepend_text => "")
+    .control-group
+      = f.label :is_retail, "Retail ?", :class => 'control-label'
+      = f.check_box :is_retail, {},"Y","N"
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :is_retail, :prepend_text => "")
+    .control-group
+      = f.label :customer_id, "Customer ID", :class => 'control-label'
       = f.text_field :customer_id
       #msg-error
         = error_message_for(@funds_transfer_customer, :customer_id, :prepend_text => "")
@@ -22,26 +32,6 @@
       = f.text_field :name, :maxlength => 20
       #msg-error
         = error_message_for(@funds_transfer_customer, :name, :prepend_text => "")
-    .control-group
-      = f.label :tech_email_id, "Tech Email ID", :class => 'control-label'
-      = f.text_field :tech_email_id, :maxlength => 255
-      #msg-error
-        = error_message_for(@funds_transfer_customer, :tech_email_id, :prepend_text => "")
-    .control-group
-      = f.label :ops_email_id, "Operations Email ID", :class => 'control-label'
-      = f.text_field :ops_email_id, :maxlength => 255
-      #msg-error
-        = error_message_for(@funds_transfer_customer, :ops_email_id, :prepend_text => "")
-    .control-group
-      = f.label :account_no, "*Account No", :class => 'control-label'
-      = f.text_field :account_no, :maxlength => 20
-      #msg-error
-        = error_message_for(@funds_transfer_customer, :account_no, :prepend_text => "")
-    .control-group
-      = f.label :account_ifsc, "*Account IFSC", :class => 'control-label'
-      = f.text_field :account_ifsc, :maxlength => 11
-      #msg-error
-        = error_message_for(@funds_transfer_customer, :account_ifsc, :prepend_text => "")
     .control-group
       = f.label :low_balance_alert_at, "*Low Balance Alert At", :class => 'control-label'
       = f.text_field :low_balance_alert_at
@@ -63,36 +53,10 @@
       #msg-error
         = error_message_for(@funds_transfer_customer, :allow_imps, :prepend_text => "")
     .control-group
-      = f.label :mmid, "MMID", :class => 'control-label'
-      = f.text_field :mmid, :maxlength => 7
+      = f.label :allow_rtgs, "RTGS Allowed ?", :class => 'control-label'
+      = f.check_box :allow_rtgs, {},"Y","N"
       #msg-error
-        = error_message_for(@funds_transfer_customer, :mmid, :prepend_text => "")
-    .control-group
-      = f.label :mobile_no, "*Mobile No", :class => 'control-label'
-      = f.text_field :mobile_no, :maxlength => 10
-      #msg-error
-        = error_message_for(@funds_transfer_customer, :mobile_no, :prepend_text => "")
-  .form-extended
-    .control-group
-      = f.label :country, "Country", :class => 'control-label'
-      = country_select("funds_transfer_customer", "country", selected: "#{@funds_transfer_customer.country.nil? ? 'IN' : @funds_transfer_customer.country}")
-      #msg-error
-        = error_message_for(@funds_transfer_customer, :country, :prepend_text => "")
-    .control-group
-      = f.label :address_line1, "Address Line 1", :class => 'control-label'
-      = f.text_area :address_line1, :maxlength => 255
-      #msg-error
-        = error_message_for(@funds_transfer_customer, :address_line1, :prepend_text => "")
-    .control-group
-      = f.label :address_line2, "Address Line 2", :class => 'control-label'
-      = f.text_area :address_line2, :maxlength => 255
-      #msg-error
-        = error_message_for(@funds_transfer_customer, :address_line2, :prepend_text => "")
-    .control-group
-      = f.label :address_line3, "Address Line 3", :class => 'control-label'
-      = f.text_area :address_line3, :maxlength => 255
-      #msg-error
-        = error_message_for(@funds_transfer_customer, :address_line3, :prepend_text => "")
+        = error_message_for(@funds_transfer_customer, :allow_rtgs, :prepend_text => "")
 
   .form-actions
     - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"

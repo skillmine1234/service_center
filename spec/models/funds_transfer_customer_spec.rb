@@ -10,80 +10,32 @@ describe FundsTransferCustomer do
   end
   
   context 'validation' do
-    [:account_no, :account_ifsc, :low_balance_alert_at, :identity_user_id, :customer_id, :name].each do |att|
+    [:low_balance_alert_at, :identity_user_id, :name, :app_id].each do |att|
       it { should validate_presence_of(att) }
     end
     
-    [:low_balance_alert_at, :mmid, :customer_id].each do |att|
+    [:customer_id].each do |att|
       it { should validate_numericality_of(att) }
     end
 
     it do 
       funds_transfer_customer = Factory(:funds_transfer_customer, :approval_status => 'A')
-      should validate_uniqueness_of(:customer_id).scoped_to(:approval_status)   
+      should validate_uniqueness_of(:customer_id).scoped_to(:approval_status) 
+      should validate_uniqueness_of(:app_id).scoped_to(:approval_status)   
     end
-  end
 
-  context "email_id format" do 
-    [:tech_email_id, :ops_email_id].each do |att|
-      it "should allow valid format" do
-        should allow_value('abc@g.in').for(att)
-        should allow_value('abc@gmail.com').for(att)
+    context "customer_id" do 
+      it "should be mandatory if is_retail is 'N'" do 
+        funds_transfer_customer = Factory.build(:funds_transfer_customer, :is_retail => 'N', :customer_id => nil)
+        funds_transfer_customer.should_not be_valid
+        funds_transfer_customer.errors_on(:customer_id).should == ["is mandatory for Retail"]
       end
-    
-      it "should not allow invalid format" do
-        should_not allow_value('as@gg.c').for(att)
-        should_not allow_value('@CUST01').for(att)
-        should_not allow_value('CUST01/').for(att)
-        should_not allow_value('CUST-01').for(att)
-      end
-    end    
-  end
 
-  context "account_no format" do 
-    it "should allow valid format" do
-      should allow_value('987654310').for(:account_no)
-      should allow_value('8888000').for(:account_no)
-    end 
-    
-    it "should not allow invalid format" do
-      should_not allow_value('@CUST01').for(:account_no)
-      should_not allow_value('CUST01/').for(:account_no)
-      should_not allow_value('CUST-01').for(:account_no)
-    end     
-  end
-  
-  context "account_ifsc format" do 
-    it "should allow valid format" do
-      should allow_value('ASDE0123456').for(:account_ifsc)
-      should allow_value('QQWE0987898').for(:account_ifsc)
-    end 
-    
-    it "should not allow invalid format" do
-      should_not allow_value('1234567890').for(:account_ifsc)
-      should_not allow_value('ASD123456').for(:account_ifsc)
-      should_not allow_value('CUST-01!').for(:account_ifsc)
-    end     
-  end
-  
-  context "mobile_no format" do 
-    it "should allow valid format" do
-      should allow_value('9087654321').for(:mobile_no)
-    end 
-    
-    it "should not allow invalid format" do
-      should_not allow_value('@CUST01').for(:mobile_no)
-      should_not allow_value('CUST01/').for(:mobile_no)
-      should_not allow_value('CUST-01').for(:mobile_no)
-    end     
-  end
-  
-  context "country_name" do 
-    it "should return full name for the country code" do 
-      funds_transfer_customer = Factory.build(:funds_transfer_customer, :country => 'US')
-      funds_transfer_customer.country_name.should == 'United States'
-      funds_transfer_customer = Factory.build(:funds_transfer_customer, :country => nil)
-      funds_transfer_customer.country_name.should == nil
+      it "should not be mandatory if is_retail is 'Y'" do 
+        funds_transfer_customer = Factory.build(:funds_transfer_customer, :is_retail => 'Y', :customer_id => nil)
+        funds_transfer_customer.should be_valid
+        funds_transfer_customer.errors_on(:customer_id).should == []
+      end
     end
   end
 
@@ -176,16 +128,6 @@ describe FundsTransferCustomer do
       funds_transfer_customer2 = Factory(:funds_transfer_customer, :approval_status => 'U')
       funds_transfer_customer1.enable_approve_button?.should == false
       funds_transfer_customer2.enable_approve_button?.should == true
-    end
-  end
-  
-  context "validate_presence_of_mmid" do
-    it "should validate presence of mmid if neft is allowed" do
-      funds_transfer_customer = Factory.build(:funds_transfer_customer, :allow_imps => 'Y', :mmid => nil)
-      funds_transfer_customer.save.should == false
-      funds_transfer_customer.errors_on(:mmid).should == ["MMID is mandatory if IMPS is allowed"]
-      funds_transfer_customer = Factory.build(:funds_transfer_customer, :allow_imps => 'N', :mmid => nil)
-      funds_transfer_customer.save.should == true
     end
   end
 end

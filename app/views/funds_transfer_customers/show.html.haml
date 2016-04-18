@@ -20,6 +20,12 @@
             %td#msg-error
               = error_message_for(@funds_transfer_customer, :base, :prepend_text => "")
           %tr
+            %td.label App ID
+            %td.value
+              = @funds_transfer_customer.app_id
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :app_id, :prepend_text => "")
+          %tr
             %td.label Customer ID
             %td.value
               = @funds_transfer_customer.customer_id
@@ -38,30 +44,6 @@
             %td#msg-error
               = error_message_for(@funds_transfer_customer, :name, :prepend_text => "")
           %tr
-            %td.label Tech Email ID
-            %td.value
-              = @funds_transfer_customer.tech_email_id
-            %td#msg-error
-              = error_message_for(@funds_transfer_customer, :tech_email_id, :prepend_text => "")
-          %tr
-            %td.label Operations Email ID
-            %td.value
-              = @funds_transfer_customer.ops_email_id
-            %td#msg-error
-              = error_message_for(@funds_transfer_customer, :ops_email_id, :prepend_text => "")
-          %tr
-            %td.label Account No
-            %td.value
-              = @funds_transfer_customer.account_no
-            %td#msg-error
-              = error_message_for(@funds_transfer_customer, :account_no, :prepend_text => "")
-          %tr
-            %td.label Account IFSC
-            %td.value
-              = @funds_transfer_customer.account_ifsc
-            %td#msg-error
-              = error_message_for(@funds_transfer_customer, :account_ifsc, :prepend_text => "")
-          %tr
             %td.label Low Balance Alert At
             %td.value
               = @funds_transfer_customer.low_balance_alert_at
@@ -73,6 +55,12 @@
               = @funds_transfer_customer.identity_user_id
             %td#msg-error
               = error_message_for(@funds_transfer_customer, :identity_user_id, :prepend_text => "")
+          %tr
+            %td.label Retail
+            %td.value
+              = @funds_transfer_customer.is_retail
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :is_retail, :prepend_text => "")
           %tr
             %td.label NEFT Allowed
             %td.value
@@ -86,41 +74,11 @@
             %td#msg-error
               = error_message_for(@funds_transfer_customer, :allow_imps, :prepend_text => "")
           %tr
-            %td.label MMID
+            %td.label RTGS Allowed
             %td.value
-              = @funds_transfer_customer.mmid
+              = @funds_transfer_customer.allow_rtgs
             %td#msg-error
-              = error_message_for(@funds_transfer_customer, :mmid, :prepend_text => "")
-          %tr
-            %td.label Mobile No
-            %td.value
-              = @funds_transfer_customer.mobile_no
-            %td#msg-error
-              = error_message_for(@funds_transfer_customer, :mobile_no, :prepend_text => "")
-          %tr
-            %td.label Country
-            %td.value
-              = @funds_transfer_customer.country_name
-            %td#msg-error
-              = error_message_for(@funds_transfer_customer, :country, :prepend_text => "")
-          %tr
-            %td.label Address Line 1
-            %td.value
-              = @funds_transfer_customer.address_line1
-            %td#msg-error
-              = error_message_for(@funds_transfer_customer, :address_line1, :prepend_text => "")
-          %tr
-            %td.label Address Line 2
-            %td.value
-              = @funds_transfer_customer.address_line2
-            %td#msg-error
-              = error_message_for(@funds_transfer_customer, :address_line2, :prepend_text => "")
-          %tr
-            %td.label Address Line 3
-            %td.value
-              = @funds_transfer_customer.address_line3
-            %td#msg-error
-              = error_message_for(@funds_transfer_customer, :address_line3, :prepend_text => "")
+              = error_message_for(@funds_transfer_customer, :allow_rtgs, :prepend_text => "")
           %tr
             %td.label Created By
             %td.value

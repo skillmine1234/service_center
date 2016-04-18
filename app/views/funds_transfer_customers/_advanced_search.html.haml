@@ -3,14 +3,8 @@
     = label_tag "Customer Name", "Customer Name", :class => 'control-label'
     = text_field_tag :name, params[:name]
   .control-group
-    = label_tag "Tech Email ID", "Tech Email ID", :class => 'control-label'
-    = text_field_tag :tech_email_id, params[:tech_email_id]
-  .control-group
-    = label_tag "", "Mobile No", :class => 'control-label'
-    = text_field_tag :mobile_no, params[:mobile_no]
-  .control-group
-    = label_tag "Account No", "Account No", :class => 'control-label'
-    = text_field_tag :account_no, params[:account_no]
+    = label_tag "App ID", "App ID", :class => 'control-label'
+    = text_field_tag :app_id, params[:app_id]
     = hidden_field_tag :approval_status, params[:approval_status]
   .form-actions
     = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"
