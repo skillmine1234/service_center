@@ -62,6 +62,8 @@ describe IncomingFile do
 
   context "Job Status" do 
     it "should return values according to the status" do
+      file = Factory.build(:incoming_file, :status => 'N', :pending_approval => 'Y')
+      file.job_status.should == 'Pending Approval'
       file = Factory.build(:incoming_file, :status => 'N')
       file.job_status.should == 'Not Started'
       file = Factory.build(:incoming_file, :status => 'I')

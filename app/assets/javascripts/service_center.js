@@ -109,13 +109,16 @@ $(document).ready(function(){
   $("a.active-link").on("click", function () {
     var f_code = $(this).data('fault-code');
     var f_reason = $(this).data('fault-reason');
-    var f_subcode = $(this).data('fault-subcode');  
+    var f_subcode = $(this).data('fault-subcode'); 
+    var f_bitstream = $(this).data('fault-bitstream');  
     $(".modal-body .fault_code").text("");
     $(".modal-body .fault_code").text(f_code);
     $(".modal-body .fault_reason").text("");
     $(".modal-body .fault_reason").text(f_reason);
     $(".modal-body .fault_subcode").text("");
     $(".modal-body .fault_subcode").text(f_subcode);
+    $(".modal-body .fault_bitstream").text("");
+    $(".modal-body .fault_bitstream").text(f_bitstream);
     $('#faultText').modal();
   });
 
@@ -134,6 +137,12 @@ $(document).ready(function(){
   $("#submit_restart").click(function(){
     $("#restart_records").submit(function(){
       $("#submit_restart").prop('disabled', true);
+    });
+  });
+
+  $("#submit_reject").click(function(){
+    $("#reject_records").submit(function(){
+      $("#submit_reject").prop('disabled', true);
     });
   });
 });
