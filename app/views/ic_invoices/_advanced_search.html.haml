@@ -14,6 +14,11 @@
     To
     = text_field_tag :to_date, params[:to_date]
   .control-group
+    = label_tag "Invoice Due Date", nil, :class => 'control-label'    
+    = text_field_tag :invoice_from_due_date, params[:invoice_from_due_date]
+    To
+    = text_field_tag :invoice_to_due_date, params[:invoice_to_due_date]
+  .control-group
     = label_tag "Invoice Amount", nil, :class => 'control-label' 
     = text_field_tag :from_amount, params[:from_amount]
     To
@@ -24,6 +29,16 @@
   .control-group
     = label_tag "Repayment Reference No", nil, :class => 'control-label'
     = text_field_tag :repayment_ref_no, params[:repayment_ref_no]
+  .control-group
+    = label_tag "Repaid Amount", nil, :class => 'control-label'
+    = text_field_tag :repaid_from_amount, params[:repaid_from_amount]   
+    To
+    = text_field_tag :repaid_to_amount, params[:repaid_to_amount]
+  .control-group
+    = label_tag "Repayment Date", nil, :class => 'control-label'
+    = text_field_tag :repayment_from_date, params[:repayment_from_date]
+    To
+    = text_field_tag :repayment_to_date, params[:repayment_to_date]
   .form-actions
     = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"
     = button_tag "Reset", :type => 'button', :value=>'Reset', :class => 'btn', :id => 'adv_search_reset_button'

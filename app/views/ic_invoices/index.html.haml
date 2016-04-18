@@ -27,9 +27,13 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Invoice Amount
     %th{:style=>'text-align:left; background-color: lightblue;'}
-      Fee Amount
+      Credit Reference No
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Discounted Amount
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Repaid Amount
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Repayment Date
   .tbody
     - @ic_invoices.each do |ic_invoice|
       %tr
@@ -48,6 +52,13 @@
         %td{:style=>'text-align:left;'}
           = ic_invoice.invoice_amount
         %td{:style=>'text-align:left;'}
-          = ic_invoice.fee_amount
+          = ic_invoice.credit_ref_no
         %td{:style=>'text-align:left;'}
           = ic_invoice.discounted_amount
+        %td{:style=>'text-align:left;'}
+          = ic_invoice.repaid_amount
+        %td{:style=>'text-align:left;'}
+          - if ic_invoice.repayment_date.nil?
+            = "-"
+          - else
+            = ic_invoice.repayment_date.try(:strftime, "%d/%m/%Y") rescue ""

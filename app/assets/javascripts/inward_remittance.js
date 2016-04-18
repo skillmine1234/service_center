@@ -34,7 +34,7 @@ $(document).ready(function(){
   var clip2 = new ZeroClipboard($("#d_clip_button2"));
   var clip3 = new ZeroClipboard($("#d_clip_button3"));
 
-  $("#from_date").datepicker({
+  $("#from_date, #invoice_from_due_date, #invoice_to_due_date, #repayment_from_date, #repayment_to_date").datepicker({
     dateFormat: 'dd MM yy',
     minDate: new Date(2001, 1 - 1, 1)
   });

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160416035232) do
+ActiveRecord::Schema.define(version: 20160416102057) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -1453,6 +1453,7 @@ ActiveRecord::Schema.define(version: 20160416035232) do
     t.integer  "alert_count"
     t.datetime "last_alert_at"
     t.integer  "bad_record_count"
+    t.text     "fault_bitstream"
   end
 
   add_index "incoming_files", ["file_name", "approval_status"], name: "index_incoming_files_on_file_name_and_approval_status", unique: true
