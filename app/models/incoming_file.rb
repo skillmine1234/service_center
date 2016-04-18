@@ -88,9 +88,9 @@ class IncomingFile < ActiveRecord::Base
   def update_file_path
     self.file_path = self.approval_status == 'A' ? "#{ENV['CONFIG_APPROVED_FILE_UPLOAD_PATH']}" : "#{ENV['CONFIG_FILE_UPLOAD_PATH']}"
   end
-  
+
   def job_status
-    status_text(status)
+    pending_approval == 'Y' ? "Pending Approval" : status_text(status)
   end
   
   def status_text(status_code)
