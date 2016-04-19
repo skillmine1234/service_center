@@ -40,4 +40,9 @@ module ApplicationHelper
   def has_route? options
     Rails.application.routes.routes.map{|route| route.defaults}.include?(options)
   end
+
+  def valid_date(date)
+    d = Date.strptime(date, '%d-%m-%Y') rescue false
+    d != false ? true : false
+  end
 end
