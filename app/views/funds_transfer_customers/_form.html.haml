@@ -19,7 +19,10 @@
         = error_message_for(@funds_transfer_customer, :is_retail, :prepend_text => "")
     .control-group
       = f.label :customer_id, "Customer ID", :class => 'control-label'
-      = f.text_field :customer_id
+      - if f.object.is_retail == 'Y'
+        = f.text_field :customer_id, :disabled => true
+      - else
+        = f.text_field :customer_id
       #msg-error
         = error_message_for(@funds_transfer_customer, :customer_id, :prepend_text => "")
     .control-group
