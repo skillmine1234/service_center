@@ -8,7 +8,9 @@ module IncomingFileHelper
 
   def move_incoming_file(incoming_file)
     sf = CarrierWave::SanitizedFile.new incoming_file.file
-    sf.move_to(Rails.root.join(ENV['CONFIG_APPROVED_FILE_UPLOAD_PATH'],incoming_file.file_name), 0666)
+    sc_service = incoming_file.sc_service.code.downcase
+    file_type = incoming_file.incoming_file_type.code.downcase
+    sf.move_to(Rails.root.join(ENV['CONFIG_APPROVED_FILE_UPLOAD_PATH'],sc_service,file_type,incoming_file.file_name), 0666)
   end
 
   def raw_file_content(file_content_str)

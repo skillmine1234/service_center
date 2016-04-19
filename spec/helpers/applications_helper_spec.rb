@@ -7,4 +7,14 @@ describe ApplicationHelper do
       helper.has_route?(options).should == true
     end
   end
+
+  context "valid_date" do
+    it "should return true if date is valid" do 
+      helper.valid_date('12-2-2016').should == true
+    end
+
+    it "should return false if date is invalid" do 
+      helper.valid_date('12-22016').should == false
+    end
+  end
 end
