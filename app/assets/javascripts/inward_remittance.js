@@ -15,32 +15,8 @@ $(document).ready(function(){
     $('#verifyIdentity').modal();
   });
 
-  $("#search_params_idIssueDate").datepicker(
-  {
-    dateFormat: 'yy-mm-dd',
-    changeMonth: true,
-    changeYear: true,
-    yearRange: "-70:+10"
-  });
-
-  $("#search_params_idExpiryDate").datepicker(
-  {
-    dateFormat: 'yy-mm-dd',
-    changeMonth: true,
-    changeYear: true,
-    yearRange: "-70:+10"
-  });
   var clip1 = new ZeroClipboard($("#d_clip_button1"));
   var clip2 = new ZeroClipboard($("#d_clip_button2"));
   var clip3 = new ZeroClipboard($("#d_clip_button3"));
 
-  $("#from_date, #invoice_from_due_date, #invoice_to_due_date, #repayment_from_date, #repayment_to_date").datepicker({
-    dateFormat: 'dd MM yy',
-    minDate: new Date(2001, 1 - 1, 1)
-  });
-
-  $("#to_date").datepicker({
-    dateFormat: 'dd MM yy',
-    minDate: new Date(2001, 1 - 1, 1)
-  });
 });
