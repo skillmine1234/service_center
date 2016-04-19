@@ -7,7 +7,7 @@ FactoryGirl.define do
     sequence(:invoice_no) {|n| "9" + "%03i" % "#{n}" }
     invoice_date "2016-04-07"
     invoice_due_date "2016-04-07"
-    invoice_amount "9.99"
+    invoice_amount "99999.99"
     fee_amount "9.99"
     discounted_amount "9.99"
     credit_date "2016-04-07"

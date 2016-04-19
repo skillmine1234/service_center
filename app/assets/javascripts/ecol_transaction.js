@@ -1,20 +1,4 @@
 $(document).ready(function(){
-
-  $("#from_date").datepicker(
-  {
-    dateFormat: 'yy-mm-dd',
-    changeMonth: true,
-    changeYear: true,
-    yearRange: "-10:+70"
-  });
-
-  $("#to_date").datepicker(
-  {
-    dateFormat: 'yy-mm-dd',
-    changeMonth: true,
-    changeYear: true,
-    yearRange: "-10:+70"
-  });
   
   $("input#select_all").on("change",function(){
     $('.txn_select').prop("checked", $(this).prop("checked"));

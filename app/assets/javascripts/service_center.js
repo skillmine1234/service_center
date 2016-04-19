@@ -145,6 +145,14 @@ $(document).ready(function(){
       $("#submit_reject").prop('disabled', true);
     });
   });
+
+  $("#from_date, #to_date, #search_params_idIssueDate, #search_params_idExpiryDate, #invoice_from_due_date, #invoice_to_due_date, #repayment_from_date, #repayment_to_date").datepicker({
+    dateFormat: 'yy-mm-dd',
+    changeMonth: true,
+    changeYear: true,
+    yearRange: "-10:+70"
+  });
+
 });
 
 
