@@ -103,7 +103,7 @@ class IncomingFilesController < ApplicationController
     require 'uri/open-scp'
     @incoming_file = IncomingFile.find(params[:id]) 
     data = open("scp://iibadm@#{ENV['CONFIG_SCP_IIB_FILE_MGR']}#{@incoming_file.rep_file_path}/#{@incoming_file.rep_file_name}").read rescue ""
-    if data.empty?
+    if data.to_s.empty?
       flash[:alert] = "File not found!"
       redirect_to @incoming_file
     elsif params[:view].present?
