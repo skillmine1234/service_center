@@ -135,7 +135,7 @@ a:hover {
   color:blue;
 }
 
-.request, .reply, .record_txt {
+.request, .reply, #record_txt {
   word-wrap: break-word;
   white-space: pre-wrap;
 }
