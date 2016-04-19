@@ -102,7 +102,8 @@ class IncomingFilesController < ApplicationController
   def download_response_file
     require 'uri/open-scp'
     @incoming_file = IncomingFile.find(params[:id]) 
-    data = open("scp://iibadm@#{ENV['CONFIG_SCP_IIB_FILE_MGR']}#{@incoming_file.rep_file_path}/#{@incoming_file.rep_file_name}").read rescue ""
+    cmd = "scp://iibadm@#{ENV['CONFIG_SCP_IIB_FILE_MGR']}" unless ENV['CONFIG_SCP_IIB_FILE_MGR'] = '127.0.0.1'
+    data = open("#{cmd}#{@incoming_file.rep_file_path}/#{@incoming_file.rep_file_name}").read rescue ""
     if data.to_s.empty?
       flash[:alert] = "File not found!"
       redirect_to @incoming_file
