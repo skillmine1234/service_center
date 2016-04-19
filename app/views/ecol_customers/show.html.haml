@@ -283,7 +283,7 @@
           %tr
             %td.label Updated At
             %td.value
-              = @ecol_customer.updated_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
+              = @ecol_customer.try(:updated_at).try(:utc).try(:strftime, "%d/%m/%Y %I:%M%p")
             %td#msg-error
               = error_message_for(@ecol_customer, :updated_at, :prepend_text => "")
       = link_to 'Back to Customers', ecol_customers_path
