@@ -277,7 +277,7 @@
           %tr
             %td.label Created At
             %td.value
-              = @ecol_customer.created_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
+              = @ecol_customer.try(:created_at).try(:utc).try(:strftime, "%d/%m/%Y %I:%M%p")
             %td#msg-error
               = error_message_for(@ecol_customer, :created_at, :prepend_text => "")
           %tr
