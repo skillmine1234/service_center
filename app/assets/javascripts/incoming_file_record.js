@@ -1,9 +1,7 @@
 $(document).ready(function(){
   $(".show_record_text").on("click", function () {
     var record_txt = $(this).attr('data-record-txt');
-    $("#record_txt").text("");
-    $("#record_txt").text(record_txt);
-    $('#recordText').modal();
+    display_beautified_data(record_txt, "#record_txt", "#recordText");
   });
 
   $(".show_fault_text").on("click", function () {
@@ -18,8 +16,6 @@ $(document).ready(function(){
 
   $(".show_fault_bitstream").on("click", function () {
     var fault_bitstream = $(this).attr('data-fault-bitstream');
-    $("#fault_bitstream").text("");
-    $("#fault_bitstream").text(fault_bitstream);
-    $('#faultBitstream').modal();
+    display_beautified_data(fault_bitstream, "#fault_bitstream", "#faultBitstream");
   });
 });
