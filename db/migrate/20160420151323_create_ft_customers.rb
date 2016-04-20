@@ -21,6 +21,7 @@ class CreateFtCustomers < ActiveRecord::Migration
       t.integer :approved_version, :comment => "the version number of the record, at the time it was approved"
       t.integer :approved_id, :comment => "the id of the record that is being updated"
     end
-    add_index :ft_customers, [:app_id, :customer_id, :approval_status], :name => "FT_cust_index_on_app_id"
+    add_index :ft_customers, :name, :name => "in_ft_customers_1"
+    add_index :ft_customers, [:app_id, :customer_id, :approval_status], :unique => true, :name => "in_ft_customers_2"
   end
 end
