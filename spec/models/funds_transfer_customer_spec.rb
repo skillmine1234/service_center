@@ -20,8 +20,25 @@ describe FundsTransferCustomer do
 
     it do 
       funds_transfer_customer = Factory(:funds_transfer_customer, :approval_status => 'A')
-      should validate_uniqueness_of(:customer_id).scoped_to(:approval_status) 
-      should validate_uniqueness_of(:app_id).scoped_to(:approval_status)   
+      should validate_uniqueness_of(:app_id).scoped_to(:customer_id,:approval_status)  
+
+      should validate_length_of(:app_id).is_at_least(5).is_at_most(20)
+      should validate_length_of(:customer_id).is_at_least(3).is_at_most(15)
+      should validate_length_of(:name).is_at_most(100)
+      should validate_length_of(:identity_user_id).is_at_most(20) 
+    end
+
+    it "should not allow invalid format" do
+      ft_customer = Factory.build(:funds_transfer_customer, :customer_id => '111.11', :app_id => '@acddsfdfd', 
+                                  :identity_user_id => "IUID-1", :name => 'ABC@DEF')
+      ft_customer.save == false
+      [:identity_user_id, :app_id].each do |att|
+        ft_customer.errors_on(att).should == ["Invalid format, expected format is : {[a-z|A-Z|0-9]}"]
+      end
+      [:customer_id].each do |att|
+        ft_customer.errors_on(att).should == ["Invalid format, expected format is : {[0-9]}"]
+      end
+      ft_customer.errors_on(:name).should == ["Invalid format, expected format is : {[a-z|A-Z|0-9|\\s|\\.|\\-]}"]
     end
 
     context "customer_id" do 

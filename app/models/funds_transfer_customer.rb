@@ -1,6 +1,8 @@
 class FundsTransferCustomer < ActiveRecord::Base
   include Approval
   include FtApproval
+
+  self.table_name = "ft_customers"
   
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
@@ -8,11 +10,18 @@ class FundsTransferCustomer < ActiveRecord::Base
   validates_presence_of :low_balance_alert_at, :identity_user_id, :name, :app_id
   validates :low_balance_alert_at, :numericality => { :greater_than => 0}
   validates_numericality_of :customer_id, :allow_blank => true
-  validates :name, format: {with: /\A[a-z|A-Z|0-9\s]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9\s]}'}, length: {maximum: 20}
-  validates_uniqueness_of :customer_id, :scope => :approval_status
-  validates_uniqueness_of :app_id, :scope => :approval_status
+  validates :identity_user_id, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}'}, :allow_blank => true
+  validates :app_id, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}'}
+  validates :name, format: {with: /\A[a-z|A-Z|0-9|\s|\.|\-]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\s|\.|\-]}'}
+  validates :customer_id, :numericality => {:only_integer => true, :message => 'Invalid format, expected format is : {[0-9]}', :allow_blank => true}
+  validates_uniqueness_of :app_id, :scope => [:customer_id,:approval_status]
   validate :validate_customer_id
   
+  validates :app_id, length: { minimum: 5, maximum: 20 }
+  validates :customer_id, length: { minimum: 3, maximum: 15 }, :allow_blank =>true
+  validates :name, length: {maximum: 100 }
+  validates :identity_user_id, length: { maximum: 20 }
+
   before_save :to_upcase
 
   def to_upcase

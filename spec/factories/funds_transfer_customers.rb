@@ -2,10 +2,10 @@
 
 FactoryGirl.define do
   factory :funds_transfer_customer do
-    sequence(:app_id) {|n| "#{n}"} 
+    sequence(:app_id) {|n| "abcd#{n}"} 
     name "MyString"
     low_balance_alert_at 123
-    identity_user_id "1"
+    identity_user_id "12345"
     sequence(:customer_id) {|n| "9" + "%03i" % "#{n}" }
     approval_status "U"
     allow_neft "N"

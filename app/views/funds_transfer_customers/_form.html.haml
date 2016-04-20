@@ -9,7 +9,7 @@
     = f.hidden_field :approved_version
     .control-group
       = f.label :app_id, "*App ID", :class => 'control-label'
-      = f.text_field :app_id
+      = f.text_field :app_id, :maxlength => 20
       #msg-error
         = error_message_for(@funds_transfer_customer, :app_id, :prepend_text => "")
     .control-group
@@ -20,9 +20,9 @@
     .control-group
       = f.label :customer_id, "Customer ID", :class => 'control-label'
       - if f.object.is_retail == 'Y'
-        = f.text_field :customer_id, :disabled => true
+        = f.text_field :customer_id, :disabled => true, :maxlength => 10
       - else
-        = f.text_field :customer_id
+        = f.text_field :customer_id, :maxlength => 10
       #msg-error
         = error_message_for(@funds_transfer_customer, :customer_id, :prepend_text => "")
     .control-group
@@ -31,8 +31,8 @@
       #msg-error
         = error_message_for(@funds_transfer_customer, :enabled, :prepend_text => "")
     .control-group
-      = f.label :name, "Customer Name", :class => 'control-label'
-      = f.text_field :name, :maxlength => 20
+      = f.label :name, "*Name", :class => 'control-label'
+      = f.text_field :name, :maxlength => 100, :style => "width: 400px;"
       #msg-error
         = error_message_for(@funds_transfer_customer, :name, :prepend_text => "")
     .control-group
@@ -42,7 +42,7 @@
         = error_message_for(@funds_transfer_customer, :low_balance_alert_at, :prepend_text => "")
     .control-group
       = f.label :identity_user_id, "*User Identity", :class => 'control-label'
-      = f.text_field :identity_user_id
+      = f.text_field :identity_user_id, :maxlength => 20
       #msg-error
         = error_message_for(@funds_transfer_customer, :identity_user_id, :prepend_text => "")
     .control-group
