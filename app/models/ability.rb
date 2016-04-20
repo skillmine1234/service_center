@@ -19,7 +19,6 @@ class Ability
   def user_permissions(models)
     models.each do |model_name|
       can :read, model_name.constantize
-      can :override_records, model_name.constantize
       can :audit_steps, model_name.constantize
       can :incoming_file_summary, model_name.constantize
       can :download_response_file, model_name.constantize
@@ -36,7 +35,7 @@ class Ability
       cannot :skip_all_records, model_name.constantize
       cannot :approve_restart, model_name.constantize
       cannot :reject, model_name.constantize
-      cannot :override_records, model_name.constantize
+      can :override_records, model_name.constantize
     end
   end
 
