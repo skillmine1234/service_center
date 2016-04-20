@@ -52,15 +52,14 @@
         = @incoming_file.pending_approval
         &nbsp;&nbsp;
         - if @incoming_file.pending_approval == 'Y'
-          - can = !@current_user.has_role?('supervisor')
           - if @incoming_file.last_process_step.nil?
-            = render :partial => "restart", :locals => {:can => can}
-            = render :partial => "reject", :locals => {:can => can}
+            = render :partial => "restart"
+            = render :partial => "reject"
           - elsif @incoming_file.last_process_step == 'B'
-            = render :partial => "skip_all", :locals => {:can => can}
-            = render :partial => "restart", :locals => {:can => can}
+            = render :partial => "skip_all"
+            = render :partial => "restart"
           - elsif @incoming_file.last_process_step == 'R'
-            = render :partial => "restart", :locals => {:can => can}
+            = render :partial => "restart"
 %table.table.table-bordered.table-striped.table-hover.align_center{:style=>'width:45%;float: right;'}
   %thead
     %tr 
@@ -135,7 +134,9 @@
         = @incoming_file.status_text(@incoming_file.rep_file_status)
         &nbsp;
         - if @incoming_file.incoming_file_type.validate_all == 'Y'
-          = link_to 'Generate Response File', generate_response_file_incoming_file_path(@incoming_file), :class => "btn btn-primary"
+          - can = !(can? :generate_response_file, IncomingFile)
+          = simple_form_for :incoming_file, :url => generate_response_file_incoming_file_path(@incoming_file), :html => { :method => :get, :id => 'generate_records', :style=> 'overflow:  auto;display:inline-block;'} do |f| 
+            = button_tag "Generate Response File", :id => 'submit_generate', :role => "button", :class => "btn btn-primary", :disabled => can
 
     - unless ENV['CONFIG_SCP_IIB_FILE_MGR'].nil? or ENV['CONFIG_SCP_IIB_FILE_MGR'].empty?
       %tr
