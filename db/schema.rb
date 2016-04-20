@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160418095520) do
+ActiveRecord::Schema.define(version: 20160420071547) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -951,38 +951,38 @@ ActiveRecord::Schema.define(version: 20160418095520) do
     t.datetime "updated_at",         null: false
   end
 
+  create_table "ft_customers", force: :cascade do |t|
+    t.string   "name",                 limit: 100
+    t.integer  "low_balance_alert_at",                           null: false
+    t.string   "identity_user_id",     limit: 20,                null: false
+    t.string   "allow_neft",           limit: 1,                 null: false
+    t.string   "allow_imps",           limit: 1,                 null: false
+    t.string   "enabled",              limit: 1,   default: "N", null: false
+    t.string   "customer_id",          limit: 15
+    t.integer  "lock_version",                                   null: false
+    t.string   "approval_status",      limit: 1,   default: "U", null: false
+    t.string   "last_action",          limit: 1
+    t.integer  "approved_version"
+    t.integer  "approved_id"
+    t.string   "created_by",           limit: 20
+    t.string   "updated_by",           limit: 20
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.string   "is_retail",            limit: 1
+    t.string   "allow_rtgs",           limit: 1
+    t.string   "app_id",               limit: 20,                null: false
+  end
+
+  add_index "ft_customers", ["app_id", "approval_status"], name: "FT_cust_index_on_app_id", unique: true
+  add_index "ft_customers", ["customer_id", "approval_status"], name: "FT_cust_index_on_customer_id", unique: true
+  add_index "ft_customers", ["name"], name: "index_ft_customers_on_name"
+
   create_table "ft_unapproved_records", force: :cascade do |t|
     t.integer  "ft_approvable_id"
     t.string   "ft_approvable_type"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end
-
-  create_table "funds_transfer_customers", force: :cascade do |t|
-    t.string   "name",                 limit: 20
-    t.integer  "low_balance_alert_at",                          null: false
-    t.string   "identity_user_id",                              null: false
-    t.string   "allow_neft",           limit: 1,                null: false
-    t.string   "allow_imps",           limit: 1,                null: false
-    t.string   "enabled",              limit: 1,  default: "N", null: false
-    t.string   "customer_id"
-    t.integer  "lock_version",                                  null: false
-    t.string   "approval_status",      limit: 1,  default: "U", null: false
-    t.string   "last_action",          limit: 1
-    t.integer  "approved_version"
-    t.integer  "approved_id"
-    t.string   "created_by",           limit: 20
-    t.string   "updated_by",           limit: 20
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
-    t.string   "is_retail",            limit: 1
-    t.string   "allow_rtgs",           limit: 1
-    t.string   "app_id",               limit: 20,               null: false
-  end
-
-  add_index "funds_transfer_customers", ["app_id", "approval_status"], name: "FT_cust_index_on_app_id", unique: true
-  add_index "funds_transfer_customers", ["customer_id", "approval_status"], name: "FT_cust_index_on_customer_id", unique: true
-  add_index "funds_transfer_customers", ["name"], name: "index_funds_transfer_customers_on_name"
 
   create_table "groups", force: :cascade do |t|
     t.string   "name"
