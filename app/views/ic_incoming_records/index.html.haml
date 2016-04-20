@@ -75,7 +75,7 @@
   .form-actions{:style=>"text-align: center;"}
     = hidden_field_tag :file, params[:file_name]
     - if !@incoming_file.nil? and @incoming_file.try(:pending_approval) == 'Y'
-      - can = !@current_user.has_role?('user')
+      - can = !@current_user.has_role?('editor')
       = button_tag "Override Records", :id => 'submit_override', :role => "button", :class => "btn btn-primary", :disabled => can
 
 #faultText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
