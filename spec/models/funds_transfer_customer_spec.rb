@@ -13,10 +13,6 @@ describe FundsTransferCustomer do
     [:low_balance_alert_at, :identity_user_id, :name, :app_id].each do |att|
       it { should validate_presence_of(att) }
     end
-    
-    [:customer_id].each do |att|
-      it { should validate_numericality_of(att) }
-    end
 
     it do 
       funds_transfer_customer = Factory(:funds_transfer_customer, :approval_status => 'A')
@@ -45,7 +41,7 @@ describe FundsTransferCustomer do
       it "should be mandatory if is_retail is 'N'" do 
         funds_transfer_customer = Factory.build(:funds_transfer_customer, :is_retail => 'N', :customer_id => nil)
         funds_transfer_customer.should_not be_valid
-        funds_transfer_customer.errors_on(:customer_id).should == ["is mandatory for Retail"]
+        funds_transfer_customer.errors_on(:customer_id).should == ["is mandatory for corporate"]
       end
 
       it "should not be mandatory if is_retail is 'Y'" do 
