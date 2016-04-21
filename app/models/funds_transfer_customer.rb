@@ -9,7 +9,6 @@ class FundsTransferCustomer < ActiveRecord::Base
   
   validates_presence_of :low_balance_alert_at, :identity_user_id, :name, :app_id
   validates :low_balance_alert_at, :numericality => { :greater_than => 0}
-  validates_numericality_of :customer_id, :allow_blank => true
   validates :identity_user_id, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}'}, :allow_blank => true
   validates :app_id, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}'}
   validates :name, format: {with: /\A[a-z|A-Z|0-9|\s|\.|\-]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\s|\.|\-]}'}
@@ -31,6 +30,6 @@ class FundsTransferCustomer < ActiveRecord::Base
   end
 
   def validate_customer_id
-    errors.add(:customer_id,"is mandatory for Retail") if is_retail == 'N' and customer_id.to_s.empty?
+    errors.add(:customer_id,"is mandatory for corporate") if is_retail == 'N' and customer_id.to_s.empty?
   end
 end

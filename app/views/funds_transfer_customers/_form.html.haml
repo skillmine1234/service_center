@@ -18,7 +18,7 @@
       #msg-error
         = error_message_for(@funds_transfer_customer, :is_retail, :prepend_text => "")
     .control-group
-      = f.label :customer_id, "Customer ID", :class => 'control-label'
+      = f.label :customer_id, "*Customer ID", :class => 'control-label'
       - if f.object.is_retail == 'Y'
         = f.text_field :customer_id, :disabled => true, :maxlength => 10
       - else
