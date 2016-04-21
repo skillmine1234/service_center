@@ -133,7 +133,7 @@
       %td{:style=>'text-align:left;'}
         = @incoming_file.status_text(@incoming_file.rep_file_status)
         &nbsp;
-        - if @incoming_file.incoming_file_type.validate_all == 'Y'
+        - if @incoming_file.incoming_file_type.validate_all == 'Y' and @incoming_file.status == 'C'
           - can = !(can? :generate_response_file, IncomingFile)
           = simple_form_for :incoming_file, :url => generate_response_file_incoming_file_path(@incoming_file), :html => { :method => :get, :id => 'generate_records', :style=> 'overflow:  auto;display:inline-block;'} do |f| 
             = button_tag "Generate Response File", :id => 'submit_generate', :role => "button", :class => "btn btn-primary", :disabled => can
