@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160420151323) do
+ActiveRecord::Schema.define(version: 20160421092200) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -951,6 +951,27 @@ ActiveRecord::Schema.define(version: 20160420151323) do
     t.datetime "updated_at",         null: false
   end
 
+  create_table "ft_audit_steps", force: :cascade do |t|
+    t.string   "ft_auditable_type",              null: false
+    t.integer  "ft_auditable_id",                null: false
+    t.integer  "step_no",                        null: false
+    t.integer  "attempt_no",                     null: false
+    t.string   "step_name",         limit: 100,  null: false
+    t.string   "status_code",       limit: 25,   null: false
+    t.string   "fault_code",        limit: 255
+    t.string   "fault_subcode",     limit: 50
+    t.string   "fault_reason",      limit: 1000
+    t.string   "req_reference",     limit: 255
+    t.datetime "req_timestamp"
+    t.string   "rep_reference"
+    t.datetime "rep_timestamp"
+    t.text     "req_bitstream"
+    t.text     "rep_bitstream"
+    t.text     "fault_bitstream"
+  end
+
+  add_index "ft_audit_steps", ["ft_auditable_type", "ft_auditable_id", "step_no", "attempt_no"], name: "uk_ft_audit_steps", unique: true
+
   create_table "ft_customers", force: :cascade do |t|
     t.string   "app_id",               limit: 20,                null: false
     t.string   "name",                 limit: 100,               null: false
@@ -1063,12 +1084,12 @@ ActiveRecord::Schema.define(version: 20160420151323) do
   add_index "ic_customers", ["repay_account_no", "approval_status"], name: "i_ic_cust_repay_no", unique: true
 
   create_table "ic_incoming_files", force: :cascade do |t|
-    t.string "file_name",        limit: 50
-    t.string "corp_customer_id", limit: 15
-    t.string "pm_utr",           limit: 64
+    t.integer "incoming_file_id",            null: false
+    t.string  "corp_customer_id", limit: 15
+    t.string  "pm_utr",           limit: 64
   end
 
-  add_index "ic_incoming_files", ["file_name"], name: "ic_file_index", unique: true
+  add_index "ic_incoming_files", ["incoming_file_id"], name: "ic_file_index", unique: true
 
   create_table "ic_incoming_records", force: :cascade do |t|
     t.integer "incoming_file_record_id",            null: false
@@ -1078,8 +1099,6 @@ ActiveRecord::Schema.define(version: 20160420151323) do
     t.date    "invoice_due_date"
     t.decimal "invoice_amount"
     t.string  "debit_ref_no",            limit: 64
-    t.string  "corp_customer_id",        limit: 15
-    t.string  "pm_utr",                  limit: 64
     t.string  "file_name",               limit: 50, null: false
   end
 
@@ -1645,15 +1664,15 @@ ActiveRecord::Schema.define(version: 20160420151323) do
     t.string   "customer_id",      limit: 50,               null: false
     t.string   "identity_user_id", limit: 20,               null: false
     t.string   "is_enabled",       limit: 1,                null: false
+    t.integer  "lock_version",                              null: false
+    t.string   "approval_status",  limit: 1,  default: "U", null: false
+    t.string   "last_action",      limit: 1
+    t.integer  "approved_version"
+    t.integer  "approved_id"
     t.string   "created_by",       limit: 20
     t.string   "updated_by",       limit: 20
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
-    t.integer  "lock_version",                default: 0,   null: false
-    t.string   "approval_status",  limit: 1,  default: "U", null: false
-    t.string   "last_action",      limit: 1,  default: "C", null: false
-    t.integer  "approved_version"
-    t.integer  "approved_id"
   end
 
   add_index "pc2_apps", ["app_id", "approval_status"], name: "index_pc2_apps_on_app_id_and_approval_status", unique: true
@@ -1735,8 +1754,8 @@ ActiveRecord::Schema.define(version: 20160420151323) do
   create_table "pc2_unapproved_records", force: :cascade do |t|
     t.integer  "pc2_approvable_id"
     t.string   "pc2_approvable_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   create_table "pc2_unload_cards", force: :cascade do |t|
