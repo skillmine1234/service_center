@@ -163,6 +163,8 @@ class IncomingFilesController < ApplicationController
     status_code = response.status
     status_line = response.body if response.headers['Content-Type'] == 'text/plain'
     status_line = "#{ENV['CONFIG_URL_IIB_FILE_MGR']}#{uri}" if status_code == 404
+    status_line = "Accepted" if status_code == 202
+    status_line = "Completed" if status_code == 200
         
     Rails.logger.error "Unexpected reply from #{ENV['CONFIG_URL_IIB_FILE_MGR']}#{uri}, received reply: #{response.body}" if status_code > 299
 

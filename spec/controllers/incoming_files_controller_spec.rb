@@ -154,7 +154,7 @@ describe IncomingFilesController do
         with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Length'=>'0', 'User-Agent'=>'Faraday v0.9.2'}).
         to_return(:status => 202, :body => "", :headers => {})
       get :approve_restart, {:id => incoming_file.id}
-      flash[:alert].should == "Status code: 202 <br> Message: "
+      flash[:alert].should == "Status code: 202 <br> Message: Accepted"
       response.should be_redirect
     end
   end
@@ -169,7 +169,7 @@ describe IncomingFilesController do
         with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Length'=>'0', 'User-Agent'=>'Faraday v0.9.2'}).
         to_return(:status => 202, :body => "", :headers => {})
       get :skip_all_records, {:id => incoming_file.id}
-      flash[:alert].should == "Status code: 202 <br> Message: "
+      flash[:alert].should == "Status code: 202 <br> Message: Accepted"
       response.should be_redirect
     end
   end
@@ -184,7 +184,7 @@ describe IncomingFilesController do
         with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Length'=>'0', 'User-Agent'=>'Faraday v0.9.2'}).
         to_return(:status => 202, :body => "", :headers => {})
       get :generate_response_file, {:id => incoming_file.id}
-      flash[:alert].should == "Status code: 202 <br> Message: "
+      flash[:alert].should == "Status code: 202 <br> Message: Accepted"
       response.should be_redirect
     end
   end
@@ -199,7 +199,7 @@ describe IncomingFilesController do
         with(:body => "1,2", :headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'application/text', 'User-Agent'=>'Faraday v0.9.2'}).
         to_return(:status => 202, :body => "", :headers => {})
       get :override_records, {:file => incoming_file.file_name, :record_ids => [1,2]}
-      flash[:alert].should == "Status code: 202 <br> Message: "
+      flash[:alert].should == "Status code: 202 <br> Message: Accepted"
       response.should be_redirect
     end
   end
@@ -214,7 +214,7 @@ describe IncomingFilesController do
         with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Length'=>'0', 'User-Agent'=>'Faraday v0.9.2'}).
         to_return(:status => 202, :body => "", :headers => {})
       get :reject, {:id => incoming_file.id}
-      flash[:alert].should == "Status code: 202 <br> Message: "
+      flash[:alert].should == "Status code: 202 <br> Message: Accepted"
       response.should be_redirect
     end
   end
