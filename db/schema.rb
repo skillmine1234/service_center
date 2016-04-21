@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160420071547) do
+ActiveRecord::Schema.define(version: 20160421060608) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -952,30 +952,30 @@ ActiveRecord::Schema.define(version: 20160420071547) do
   end
 
   create_table "ft_customers", force: :cascade do |t|
-    t.string   "name",                 limit: 100
+    t.string   "app_id",               limit: 20,                null: false
+    t.string   "name",                 limit: 100,               null: false
     t.integer  "low_balance_alert_at",                           null: false
-    t.string   "identity_user_id",     limit: 20,                null: false
+    t.string   "identity_user_id",                               null: false
     t.string   "allow_neft",           limit: 1,                 null: false
     t.string   "allow_imps",           limit: 1,                 null: false
+    t.string   "allow_rtgs",           limit: 1
+    t.string   "string",               limit: 15
     t.string   "enabled",              limit: 1,   default: "N", null: false
+    t.string   "is_retail",            limit: 1
     t.string   "customer_id",          limit: 15
-    t.integer  "lock_version",                                   null: false
-    t.string   "approval_status",      limit: 1,   default: "U", null: false
-    t.string   "last_action",          limit: 1
-    t.integer  "approved_version"
-    t.integer  "approved_id"
     t.string   "created_by",           limit: 20
     t.string   "updated_by",           limit: 20
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
-    t.string   "is_retail",            limit: 1
-    t.string   "allow_rtgs",           limit: 1
-    t.string   "app_id",               limit: 20,                null: false
+    t.integer  "lock_version",                     default: 0,   null: false
+    t.string   "approval_status",      limit: 1,   default: "U", null: false
+    t.string   "last_action",          limit: 1,   default: "C", null: false
+    t.integer  "approved_version"
+    t.integer  "approved_id"
   end
 
-  add_index "ft_customers", ["app_id", "approval_status"], name: "FT_cust_index_on_app_id", unique: true
-  add_index "ft_customers", ["customer_id", "approval_status"], name: "FT_cust_index_on_customer_id", unique: true
-  add_index "ft_customers", ["name"], name: "index_ft_customers_on_name"
+  add_index "ft_customers", ["app_id", "customer_id", "approval_status"], name: "in_ft_customers_2", unique: true
+  add_index "ft_customers", ["name"], name: "in_ft_customers_1"
 
   create_table "ft_unapproved_records", force: :cascade do |t|
     t.integer  "ft_approvable_id"
@@ -1055,6 +1055,7 @@ ActiveRecord::Schema.define(version: 20160420071547) do
     t.integer  "approved_version"
     t.integer  "approved_id"
     t.string   "customer_name",       limit: 100
+    t.string   "allowed_folder",      limit: 500
   end
 
   add_index "ic_customers", ["app_id", "approval_status"], name: "i_ic_cust_app_id", unique: true
@@ -2287,6 +2288,7 @@ ActiveRecord::Schema.define(version: 20160420071547) do
     t.string   "customer_name",         limit: 100
     t.string   "ops_email",             limit: 100
     t.string   "rm_email",              limit: 100
+    t.string   "allowed_folder",        limit: 500
   end
 
   add_index "su_customers", ["customer_id", "account_no", "approval_status"], name: "uk_su_customers_1", unique: true
