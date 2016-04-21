@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160421060608) do
+ActiveRecord::Schema.define(version: 20160420151323) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -1055,7 +1055,6 @@ ActiveRecord::Schema.define(version: 20160421060608) do
     t.integer  "approved_version"
     t.integer  "approved_id"
     t.string   "customer_name",       limit: 100
-    t.string   "allowed_folder",      limit: 500
   end
 
   add_index "ic_customers", ["app_id", "approval_status"], name: "i_ic_cust_app_id", unique: true
@@ -2288,7 +2287,6 @@ ActiveRecord::Schema.define(version: 20160421060608) do
     t.string   "customer_name",         limit: 100
     t.string   "ops_email",             limit: 100
     t.string   "rm_email",              limit: 100
-    t.string   "allowed_folder",        limit: 500
   end
 
   add_index "su_customers", ["customer_id", "account_no", "approval_status"], name: "uk_su_customers_1", unique: true
