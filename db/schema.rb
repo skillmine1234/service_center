@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160421092200) do
+ActiveRecord::Schema.define(version: 20160422064513) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -910,6 +910,8 @@ ActiveRecord::Schema.define(version: 20160421092200) do
     t.text     "fault_bitstream"
   end
 
+  add_index "fm_audit_steps", ["auditable_type", "auditable_id", "step_no", "attempt_no"], name: "uk_fm_audit_steps", unique: true
+
   create_table "fp_auth_rules", force: :cascade do |t|
     t.string   "username",         limit: 255,                null: false
     t.string   "operation_name",   limit: 4000,               null: false
@@ -1084,12 +1086,12 @@ ActiveRecord::Schema.define(version: 20160421092200) do
   add_index "ic_customers", ["repay_account_no", "approval_status"], name: "i_ic_cust_repay_no", unique: true
 
   create_table "ic_incoming_files", force: :cascade do |t|
-    t.integer "incoming_file_id",            null: false
-    t.string  "corp_customer_id", limit: 15
-    t.string  "pm_utr",           limit: 64
+    t.string "file_name",        limit: 50
+    t.string "corp_customer_id", limit: 15
+    t.string "pm_utr",           limit: 64
   end
 
-  add_index "ic_incoming_files", ["incoming_file_id"], name: "ic_file_index", unique: true
+  add_index "ic_incoming_files", ["file_name"], name: "ic_file_index", unique: true
 
   create_table "ic_incoming_records", force: :cascade do |t|
     t.integer "incoming_file_record_id",            null: false
@@ -1099,6 +1101,8 @@ ActiveRecord::Schema.define(version: 20160421092200) do
     t.date    "invoice_due_date"
     t.decimal "invoice_amount"
     t.string  "debit_ref_no",            limit: 64
+    t.string  "corp_customer_id",        limit: 15
+    t.string  "pm_utr",                  limit: 64
     t.string  "file_name",               limit: 50, null: false
   end
 
@@ -1664,15 +1668,15 @@ ActiveRecord::Schema.define(version: 20160421092200) do
     t.string   "customer_id",      limit: 50,               null: false
     t.string   "identity_user_id", limit: 20,               null: false
     t.string   "is_enabled",       limit: 1,                null: false
-    t.integer  "lock_version",                              null: false
-    t.string   "approval_status",  limit: 1,  default: "U", null: false
-    t.string   "last_action",      limit: 1
-    t.integer  "approved_version"
-    t.integer  "approved_id"
     t.string   "created_by",       limit: 20
     t.string   "updated_by",       limit: 20
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
+    t.integer  "lock_version",                default: 0,   null: false
+    t.string   "approval_status",  limit: 1,  default: "U", null: false
+    t.string   "last_action",      limit: 1,  default: "C", null: false
+    t.integer  "approved_version"
+    t.integer  "approved_id"
   end
 
   add_index "pc2_apps", ["app_id", "approval_status"], name: "index_pc2_apps_on_app_id_and_approval_status", unique: true
@@ -1754,8 +1758,8 @@ ActiveRecord::Schema.define(version: 20160421092200) do
   create_table "pc2_unapproved_records", force: :cascade do |t|
     t.integer  "pc2_approvable_id"
     t.string   "pc2_approvable_type"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "pc2_unload_cards", force: :cascade do |t|
