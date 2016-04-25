@@ -22,14 +22,14 @@ describe ScService do
       sc_service = Factory(:sc_service)
       incoming_file_record1 = Factory(:incoming_file_type, :sc_service_id => sc_service.id, :auto_upload => 'Y')
       incoming_file_record2 = Factory(:incoming_file_type, :sc_service_id => sc_service.id, :auto_upload => 'N')
-      sc_service.has_auto_upload?.should == true
+      sc_service.has_auto_upload?.should == false
     end
 
     it "should return false if all the incoming_file_types have auto_upload as 'N" do 
       sc_service = Factory(:sc_service)
-      incoming_file_record1 = Factory(:incoming_file_type, :sc_service_id => sc_service.id, :auto_upload => 'N')
-      incoming_file_record2 = Factory(:incoming_file_type, :sc_service_id => sc_service.id, :auto_upload => 'N')
-      sc_service.has_auto_upload?.should == false
+      incoming_file_record1 = Factory(:incoming_file_type, :sc_service_id => sc_service.id, :auto_upload => 'Y')
+      incoming_file_record2 = Factory(:incoming_file_type, :sc_service_id => sc_service.id, :auto_upload => 'Y')
+      sc_service.has_auto_upload?.should == true
     end
   end
 end

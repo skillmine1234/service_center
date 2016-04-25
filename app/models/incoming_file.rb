@@ -129,7 +129,7 @@ class IncomingFile < ActiveRecord::Base
   def on_create_create_unapproved_record
     if approval_status == 'U'
       EcolUnapprovedRecord.create!(:ecol_approvable => self) if self.service_name == "ECOL"
-      ImtUnapprovedRecord.create!(:imt_approvable => self) if self.service_name == "IMT"
+      ImtUnapprovedRecord.create!(:imt_approvable => self) if self.service_name == "IMTSERVICE"
       InwUnapprovedRecord.create!(:inw_approvable => self) if self.service_name == "AML"
       SuUnapprovedRecord.create!(:su_approvable => self) if self.service_name == "SALARY"
       IcUnapprovedRecord.create!(:ic_approvable => self) if self.service_name == "INSTANTCREDIT"
@@ -139,7 +139,7 @@ class IncomingFile < ActiveRecord::Base
   def on_destory_remove_unapproved_records
     if approval_status == 'U'
       ecol_unapproved_record.delete if self.service_name == "ECOL"
-      imt_unapproved_record.delete if self.service_name == "IMT"
+      imt_unapproved_record.delete if self.service_name == "IMTSERVICE"
       inw_unapproved_record.delete if self.service_name == "AML"
       su_unapproved_record.delete if self.service_name == "SALARY"
       ic_unapproved_record.delete if self.service_name == "INSTANTCREDIT"
@@ -149,7 +149,7 @@ class IncomingFile < ActiveRecord::Base
   def on_update_remove_unapproved_records
     if approval_status == 'A' and approval_status_was == 'U'
       ecol_unapproved_record.delete if self.service_name == "ECOL"
-      imt_unapproved_record.delete if self.service_name == "IMT"
+      imt_unapproved_record.delete if self.service_name == "IMTSERVICE"
       inw_unapproved_record.delete if self.service_name == "AML"
       su_unapproved_record.delete if self.service_name == "SALARY"
       ic_unapproved_record.delete if self.service_name == "INSTANTCREDIT"

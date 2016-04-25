@@ -5,7 +5,7 @@ class ScService < ActiveRecord::Base
   has_many :incoming_file_types
 
   def has_auto_upload?
-    auto_uploads = incoming_file_types.where("auto_upload=?",'Y')
-    auto_uploads.empty? ? false : true
+    auto_uploads = incoming_file_types.where("auto_upload=?",'N')
+    auto_uploads.empty? ? true : false
   end
 end
