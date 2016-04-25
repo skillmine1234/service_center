@@ -160,7 +160,7 @@ ServiceCenter::Application.routes.draw do
   
   get '/csv_export/download_csv' => 'csv_exports#download_csv'
 
-  # get '/encrypted_passwords' => 'encrypted_passwords#index'
+  get '/pc_apps/:id/encrypt_password' => 'pc_apps#encrypt_password', as: :pc_apps_encrypt_password
     
   root :to => 'dashboard#overview'
 
