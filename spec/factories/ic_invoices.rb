@@ -16,5 +16,6 @@ FactoryGirl.define do
     repaid_amount "9.99"
     repayment_date "2016-04-07"
     repayment_ref_no "MyString"
+    approval_status "A"
   end
 end
