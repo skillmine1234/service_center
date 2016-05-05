@@ -20,6 +20,8 @@
       NEFT Sender IFSC
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Customer ID
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Return Account No
   .tbody
     - @ecol_rules.each do |ecol_rule|
       %tr
@@ -40,3 +42,5 @@
           = ecol_rule.neft_sender_ifsc
         %td{:style=>'text-align:left;'}
           = ecol_rule.customer_id
+        %td{:style=>'text-align:left;'}
+          = ecol_rule.return_account_no

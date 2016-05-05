@@ -70,12 +70,6 @@
             %td#msg-error
               = error_message_for(@qg_ecol_todays_neft_txn, :transfer_amt, :prepend_text => "")
           %tr
-            %td.label Transfer Amount
-            %td.value
-              = @qg_ecol_todays_neft_txn.transfer_amt
-            %td#msg-error
-              = error_message_for(@qg_ecol_todays_neft_txn, :transfer_amt, :prepend_text => "")
-          %tr
             %td.label Transfer Date
             %td.value
               = @qg_ecol_todays_neft_txn.transfer_date.try(:strftime, "%d/%m/%Y %I:%M%p")

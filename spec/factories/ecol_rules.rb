@@ -9,5 +9,6 @@ FactoryGirl.define do
     last_action 'C'
     neft_sender_ifsc 'ASDF0123456'
     customer_id 'KFCJSDH'
+    return_account_no '2345678901'
   end
 end

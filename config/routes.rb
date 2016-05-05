@@ -3,6 +3,7 @@ ServiceCenter::Application.routes.draw do
   resources :encrypted_passwords
   resources :qg_ecol_todays_rtgs_txns
   resources :qg_ecol_todays_neft_txns
+  resources :qg_ecol_todays_imps_txns
   devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
 

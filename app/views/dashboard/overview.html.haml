@@ -56,7 +56,7 @@
         = "Whitelisted Identities"
 - if @current_user.group_names.include?("e-collect")
   %h1 E-Collect
-  .slide-container
+  .slide-container{:style=>"vertical-align: top;"}
     .box  
       = link_to incoming_files_path(:sc_service => "ECOL") do
         = image_tag 'upload.png', :size => "80x80"
@@ -67,7 +67,7 @@
         = image_tag 'work-list.jpg', :size => "80x80"
       %br
         = "Approval Worklist"
-  .slide-container
+  .slide-container{:style=>"height: auto;"}
     .box
       - if !EcolRule.first.nil?
         = link_to edit_ecol_rule_path(EcolRule.first) do
@@ -115,6 +115,11 @@
           = image_tag 'rtgs-icon.jpg', :size => "80x80"
         %br
           = "RTGS Transactions"
+      .box
+        = link_to '/qg_ecol_todays_imps_txns' do
+          = image_tag 'imps-icon.jpg', :size => "80x60"
+        %br
+          = "IMPS Transactions"
 - if @current_user.group_names.include?("bill-management")
   %h1 Bill-Management
   .slide-container

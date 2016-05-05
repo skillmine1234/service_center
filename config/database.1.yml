@@ -21,6 +21,12 @@ fcatrt_development:
   pool: 5
   timeout: 5000	
 
+atom_development:
+  adapter: sqlite3
+  database: db/atom.sqlite3
+  pool: 5
+  timeout: 5000
+
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
@@ -37,6 +43,11 @@ fcr_test:
 fcatrt_test:
   adapter: sqlite3
   database: db/test_fcatrt.sqlite3
+  pool: 5
+  timeout: 5000
+atom_test:
+  adapter: sqlite3
+  database: db/atom_test.sqlite3
   pool: 5
   timeout: 5000
 

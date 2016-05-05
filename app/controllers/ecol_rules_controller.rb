@@ -99,6 +99,6 @@ class EcolRulesController < ApplicationController
   def ecol_rule_params
     params.require(:ecol_rule).permit(:ifsc, :cod_acct_no, :stl_gl_inward, :lock_version,
                                       :approval_status, :approved_version, :approved_id, :neft_sender_ifsc,
-                                      :customer_id)
+                                      :customer_id, :return_account_no)
   end
 end

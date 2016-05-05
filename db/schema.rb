@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160503105157) do
+ActiveRecord::Schema.define(version: 20160505065859) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -787,20 +787,21 @@ ActiveRecord::Schema.define(version: 20160503105157) do
   add_index "ecol_remitters", ["customer_code", "customer_subcode", "remitter_code", "invoice_no", "approval_status"], name: "remitter_index_on_status", unique: true
 
   create_table "ecol_rules", force: :cascade do |t|
-    t.string   "ifsc",             limit: 11,               null: false
-    t.string   "cod_acct_no",      limit: 15,               null: false
-    t.string   "stl_gl_inward",    limit: 15,               null: false
-    t.string   "created_by",       limit: 20
-    t.string   "updated_by",       limit: 20
-    t.integer  "lock_version",                default: 0,   null: false
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
-    t.string   "approval_status",  limit: 1,  default: "U", null: false
-    t.string   "last_action",      limit: 1,  default: "C"
+    t.string   "ifsc",              limit: 11,               null: false
+    t.string   "cod_acct_no",       limit: 15,               null: false
+    t.string   "stl_gl_inward",     limit: 15,               null: false
+    t.string   "created_by",        limit: 20
+    t.string   "updated_by",        limit: 20
+    t.integer  "lock_version",                 default: 0,   null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.string   "approval_status",   limit: 1,  default: "U", null: false
+    t.string   "last_action",       limit: 1,  default: "C"
     t.integer  "approved_version"
     t.integer  "approved_id"
-    t.string   "neft_sender_ifsc", limit: 11,               null: false
-    t.string   "customer_id",      limit: 50,               null: false
+    t.string   "neft_sender_ifsc",  limit: 11,               null: false
+    t.string   "customer_id",       limit: 50,               null: false
+    t.string   "return_account_no", limit: 20
   end
 
   create_table "ecol_transactions", force: :cascade do |t|
