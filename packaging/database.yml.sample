@@ -21,6 +21,7 @@ test: &test
 <%= bcdb.production :production, :production %>
 <%= bcdb.fcr_production :production, :fcr_production %>
 <%= bcdb.fcatrt_production :production, :fcatrt_production %>
+<%= bcdb.atom_production :production, :atom_production %>
 
 cucumber:
   <<: *test
