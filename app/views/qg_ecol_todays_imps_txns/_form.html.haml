@@ -92,7 +92,7 @@
         = error_message_for(@qg_ecol_todays_imps_txn, :bene_full_name, :prepend_text => "")
     .control-group
       = f.label :status, "*Status", :class => 'control-label'
-      = f.select :status, [['S','S'],['C','C']], {}
+      = f.select :status, [['S','S'],['F','F']], {}
       #msg-error
       = error_message_for(@qg_ecol_todays_imps_txn, :status, :prepend_text => "")
     .control-group
