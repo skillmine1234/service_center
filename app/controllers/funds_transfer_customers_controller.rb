@@ -99,6 +99,6 @@ class FundsTransferCustomersController < ApplicationController
   def funds_transfer_customer_params
     params.require(:funds_transfer_customer).permit(:app_id, :name, :low_balance_alert_at, :identity_user_id, :allow_neft, :allow_imps, 
                                                     :enabled, :customer_id, :lock_version, :approval_status, :allow_rtgs, :is_retail,
-                                                    :last_action, :approved_version, :approved_id, :created_by, :updated_by)
+                                                    :last_action, :approved_version, :approved_id, :created_by, :updated_by, :needs_purpose_code)
   end
 end
