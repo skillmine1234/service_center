@@ -6,6 +6,7 @@
     = label_tag "File Name", "File Name", :class => 'control-label'
     = text_field_tag :file_name, params[:file_name]
   = hidden_field_tag :advanced_search, :true
+  = hidden_field_tag :sc_service, params[:sc_service]
   .form-actions
     = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"
     %input{:type => 'reset', :value=>'Reset', :class => 'btn'}
