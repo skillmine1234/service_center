@@ -91,6 +91,10 @@ $(document).ready(function(){
     $(".form-horizontal").find("input[type=text], select").val("");
   });
 
+  $(".reset-btn").on('click', function(){
+    $(".form-horizontal").find("input[type=text], select").val("");
+  });
+
   $(".val-request-link").on("click", function () {
     var request = $(this).data('request');
     display_beautified_data(request, "div.request", "#requestText");
