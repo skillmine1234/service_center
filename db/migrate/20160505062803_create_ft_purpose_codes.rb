@@ -1,6 +1,6 @@
 class CreateFtPurposeCodes < ActiveRecord::Migration
   def change
-    create_table :ft_purpose_codes do |t|
+    create_table :ft_purpose_codes, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :code, :limit => 20, :null => false, :comment => "the purpose code"
       t.string :description, :limit => 100, :comment => "the description for this purpose code"
       t.string :is_enabled, :limit => 1, :comment => "the flag which indicates if this purpose code is enabled or not"
