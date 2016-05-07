@@ -76,7 +76,7 @@
       #msg-error
         = error_message_for(@qg_ecol_todays_imps_txn, :rmtr_to_bene_note, :prepend_text => "")
     .control-group
-      = f.label :rmtr_full_name, "*Remitter Full Name", :class => 'control-label'
+      = f.label :rmtr_full_name, "Remitter Full Name", :class => 'control-label'
       = f.text_field :rmtr_full_name, :maxlength => 255
       #msg-error
         = error_message_for(@qg_ecol_todays_imps_txn, :rmtr_full_name, :prepend_text => "")
