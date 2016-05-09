@@ -80,6 +80,12 @@
             %td#msg-error
               = error_message_for(@funds_transfer_customer, :allow_rtgs, :prepend_text => "")
           %tr
+            %td.label Needs Purpose Code
+            %td.value
+              = @funds_transfer_customer.needs_purpose_code
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :needs_purpose_code, :prepend_text => "")
+          %tr
             %td.label Created By
             %td.value
               = @funds_transfer_customer.created_user.try(:username)

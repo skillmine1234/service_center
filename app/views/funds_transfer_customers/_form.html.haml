@@ -60,6 +60,11 @@
       = f.check_box :allow_rtgs, {},"Y","N"
       #msg-error
         = error_message_for(@funds_transfer_customer, :allow_rtgs, :prepend_text => "")
+    .control-group
+      = f.label :needs_purpose_code, "Needs Purpose Code ?", :class => 'control-label'
+      = f.check_box :needs_purpose_code, {},"Y","N"
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :needs_purpose_code, :prepend_text => "")
 
   .form-actions
     - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
