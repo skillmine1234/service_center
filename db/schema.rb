@@ -996,10 +996,29 @@ ActiveRecord::Schema.define(version: 20160505065859) do
     t.string   "last_action",          limit: 1,   default: "C", null: false
     t.integer  "approved_version"
     t.integer  "approved_id"
+    t.string   "needs_purpose_code",   limit: 1
   end
 
   add_index "ft_customers", ["app_id", "customer_id", "approval_status"], name: "in_ft_customers_2", unique: true
   add_index "ft_customers", ["name"], name: "in_ft_customers_1"
+
+  create_table "ft_purpose_codes", force: :cascade do |t|
+    t.string   "code",                       limit: 20,                null: false
+    t.string   "description",                limit: 100
+    t.string   "is_enabled",                 limit: 1
+    t.string   "allow_only_registered_bene", limit: 1
+    t.string   "created_by",                 limit: 20
+    t.string   "updated_by",                 limit: 20
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
+    t.integer  "lock_version",                           default: 0,   null: false
+    t.string   "approval_status",            limit: 1,   default: "U", null: false
+    t.string   "last_action",                limit: 1,   default: "C", null: false
+    t.integer  "approved_version"
+    t.integer  "approved_id"
+  end
+
+  add_index "ft_purpose_codes", ["code", "approval_status"], name: "uk_ft_purpose_codes", unique: true
 
   create_table "ft_unapproved_records", force: :cascade do |t|
     t.integer  "ft_approvable_id"

@@ -18,7 +18,7 @@ class Group < ActiveRecord::Base
     when "imt"
       ['ImtCustomer','ImtTransfer','IncomingFile','ImtUnapprovedRecord','OutgoingFile']
     when "funds-transfer"
-      ['FundsTransferCustomer','FtUnapprovedRecord', 'ReconciledReturn']
+      ['FundsTransferCustomer','FtUnapprovedRecord', 'ReconciledReturn', 'FtPurposeCode']
     when "salary-upload"
       ['IncomingFile','SuCustomer','SuUnapprovedRecord','SuIncomingRecord','FmAuditStep','SuIncomingFile']
     when "instant-credit"
