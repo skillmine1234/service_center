@@ -7,6 +7,7 @@ class FtPurposeCode < ActiveRecord::Base
 
   validates_presence_of :code, :description, :is_enabled
   validates :code, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}'}, length: {minimum: 2, maximum: 6}
+  validates :description, format: {with: /\A[a-z|A-Z|0-9|\s|\.|\-]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\s|\.|\-]}'}
 
   validates_uniqueness_of :code, :scope => :approval_status
 end

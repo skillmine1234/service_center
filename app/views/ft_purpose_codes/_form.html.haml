@@ -3,7 +3,7 @@
     = f.label ' '
     #msg-error
       = error_message_for(@ft_purpose_code, :base, :prepend_text => "")
-  .form-main
+  .form-main{:style=>"width: 100%;"}
     = f.hidden_field :lock_version
     = f.hidden_field :approved_id
     = f.hidden_field :approved_version

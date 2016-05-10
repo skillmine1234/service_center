@@ -49,6 +49,21 @@ describe FtPurposeCode do
         end
       end
     end
+
+    context "description format" do
+      it "should allow valid format" do
+        should allow_value('Abc def. Geh-ijk.').for(:description)
+      end
+
+      it "should not allow invalid format" do
+        should_not allow_value('@AbcCo').for(:description)
+        should_not allow_value('/ab0QWER').for(:description)
+
+        ft_purpose_code = Factory.build(:ft_purpose_code, :description => 'ABC@DEF')
+        ft_purpose_code.save == false
+        ft_purpose_code.errors_on(:description).should == ["Invalid format, expected format is : {[a-z|A-Z|0-9|\\s|\\.|\\-]}"]
+      end
+    end
   end
   
   context "default_scope" do 
