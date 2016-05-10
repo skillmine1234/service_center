@@ -67,7 +67,7 @@
         = error_message_for(@funds_transfer_customer, :needs_purpose_code, :prepend_text => "")
 
   .form-actions
-    - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
-    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_customer', :value => label_name + ' Customer'
+    - (f.object.new_record? and f.object.app_id.nil?) ? label_name = "Create" : label_name = "Update"
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_customer', :value => label_name + ' Funds Transfer Customer'
     = link_to :Cancel,'/funds_transfer_customers', :name => 'cancel', :class=>"cancel btn"
 
