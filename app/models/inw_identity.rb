@@ -3,6 +3,8 @@ class InwIdentity < ActiveRecord::Base
   #                 :inw_remittance_id
 
   belongs_to :inward_remittance, :foreign_key => 'inw_remittance_id'
+
+  validates :id_type, length: { maximum: 30 }
   
   def whitelisted_identity
     WhitelistedIdentity.where("id_type=? and id_number=? and id_country=? and id_issue_date=? and id_expiry_date=? and is_verified=?", id_type,id_number,id_country,id_issue_date,id_expiry_date,'Y').first rescue nil

@@ -5,6 +5,10 @@ describe InwIdentity do
     it { should belong_to(:inward_remittance) }
   end
 
+  context 'validation' do
+    it { should validate_length_of(:id_type).is_at_most(30) }
+  end
+
   context "whitelisted_identity" do 
     it "should return whitelisted_identity if present" do 
       whitelisted_identity = Factory(:whitelisted_identity, :approval_status => 'A')

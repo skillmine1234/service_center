@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160505065859) do
+ActiveRecord::Schema.define(version: 20160511140157) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -1534,7 +1534,7 @@ ActiveRecord::Schema.define(version: 20160505065859) do
 
   create_table "inw_identities", force: :cascade do |t|
     t.string  "id_for",                  limit: 20, null: false
-    t.string  "id_type",                 limit: 20
+    t.string  "id_type",                 limit: 30
     t.string  "id_number",               limit: 50
     t.string  "id_country"
     t.date    "id_issue_date"
