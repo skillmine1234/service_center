@@ -30,6 +30,8 @@
       IMPS Allowed
     %th{:style=>'text-align:left; background-color: lightblue;'}
       RTGS Allowed
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Needs Purpose Code
   .tbody
     - @funds_transfer_customers.each do |funds_transfer_customer|
       %tr
@@ -54,3 +56,5 @@
           = funds_transfer_customer.allow_imps
         %td{:style=>'text-align:left;'}
           = funds_transfer_customer.allow_rtgs
+        %td{:style=>'text-align:left;'}
+          = funds_transfer_customer.needs_purpose_code
