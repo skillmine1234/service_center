@@ -77,5 +77,5 @@
         = error_message_for(@qg_ecol_todays_neft_txn, :bene_full_name, :prepend_text => "")
   .form-actions
     - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
-    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_todays_neft_txn', :value => label_name + ' NEFT Trascation'
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_todays_neft_txn', :value => label_name + ' NEFT Transaction'
     = link_to :Cancel,'/qg_ecol_todays_neft_txns', :name => 'cancel', :class=>"cancel btn"

@@ -78,5 +78,5 @@
 
   .form-actions
     - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
-    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_todays_rtgs_txn', :value => label_name + ' RTGS Trascation'
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_todays_rtgs_txn', :value => label_name + ' RTGS Transaction'
     = link_to :Cancel,'/qg_ecol_todays_rtgs_txns', :name => 'cancel', :class=>"cancel btn"
