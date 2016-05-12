@@ -7,6 +7,16 @@ describe InwIdentity do
 
   context 'validation' do
     it { should validate_length_of(:id_type).is_at_most(30) }
+
+    it "should validate the length of the id_type" do
+      inw_identity = Factory(:inw_identity, :id_type => "Marraige Certificate")
+      inw_identity.should be_valid
+      inw_identity.errors_on(:id_type).should == []
+
+      inw_identity = Factory.build(:inw_identity, :id_type => "Posted Mail with name of applicant")
+      inw_identity.should_not be_valid
+      inw_identity.errors_on(:id_type).should == ["is too long (maximum is 30 characters)"]
+    end
   end
 
   context "whitelisted_identity" do 
