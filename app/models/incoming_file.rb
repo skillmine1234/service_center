@@ -99,7 +99,7 @@ class IncomingFile < ActiveRecord::Base
   end
 
   def upload_time
-    (ended_at - started_at).round(2) rescue '-'
+    (ended_at - started_at).round(2).to_s + ' Secs' rescue '-'
   end
 
   def self.create_incoming_file
