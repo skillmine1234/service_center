@@ -102,6 +102,10 @@ class IncomingFile < ActiveRecord::Base
     (ended_at - started_at).round(2).to_s + ' Secs' rescue '-'
   end
 
+  def auto_upload?
+    incoming_file_type.auto_upload == 'Y'
+  end
+
   def self.create_incoming_file
     Dir.foreach(ENV['CONFIG_AUTO_FILE_UPLOAD_PATH']) do |fname|
       next if fname == '.' or fname == '..' or fname == '.DS_Store'

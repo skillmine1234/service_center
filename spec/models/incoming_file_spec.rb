@@ -91,7 +91,19 @@ describe IncomingFile do
       incoming_file2.save
       IncomingFile.all.should == [incoming_file1,incoming_file2]
     end
-  end    
+  end  
+
+  context "auto_upload?" do 
+    it "should return true if the incoming file type auto_upload is 'Y'" do 
+      incoming_file = Factory(:incoming_file, :file_type => Factory(:incoming_file_type, :auto_upload => 'Y').code)
+      incoming_file.auto_upload?.should == true
+    end
+
+    it "should return false if the incoming file type auto_upload is 'N'" do 
+      incoming_file = Factory(:incoming_file, :file_type => Factory(:incoming_file_type, :auto_upload => 'N').code)
+      incoming_file.auto_upload?.should == false
+    end
+  end  
 
   context "ecol_unapproved_records" do 
     it "oncreate: should create ecol_unapproved_record if the approval_status is 'U'" do
