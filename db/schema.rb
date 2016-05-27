@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160511140157) do
+ActiveRecord::Schema.define(version: 20160527114255) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -2050,25 +2050,28 @@ ActiveRecord::Schema.define(version: 20160511140157) do
   add_index "pc_fee_rules", ["app_id", "txn_kind", "approval_status"], name: "uk_pc_fee_rules", unique: true
 
   create_table "pc_load_cards", force: :cascade do |t|
-    t.string   "req_no",        limit: 32,   null: false
-    t.string   "app_id",        limit: 32,   null: false
-    t.integer  "attempt_no",                 null: false
-    t.string   "status_code",   limit: 25,   null: false
-    t.string   "req_version",   limit: 5,    null: false
+    t.string   "req_no",           limit: 32,   null: false
+    t.string   "app_id",           limit: 32,   null: false
+    t.integer  "attempt_no",                    null: false
+    t.string   "status_code",      limit: 25,   null: false
+    t.string   "req_version",      limit: 5,    null: false
     t.datetime "req_timestamp"
-    t.string   "customer_id",   limit: 15
-    t.string   "mobile_no",     limit: 255
-    t.string   "debit_acct_no", limit: 255
-    t.string   "email_id",      limit: 255
-    t.string   "password",      limit: 255
-    t.string   "rep_no",        limit: 32
-    t.string   "rep_version",   limit: 5
+    t.string   "customer_id",      limit: 15
+    t.string   "mobile_no",        limit: 255
+    t.string   "debit_acct_no",    limit: 255
+    t.string   "email_id",         limit: 255
+    t.string   "password",         limit: 255
+    t.string   "rep_no",           limit: 32
+    t.string   "rep_version",      limit: 5
     t.datetime "rep_timestamp"
-    t.string   "fault_code",    limit: 255
-    t.string   "fault_reason",  limit: 1000
-    t.string   "cust_uid",      limit: 255
+    t.string   "fault_code",       limit: 255
+    t.string   "fault_reason",     limit: 1000
+    t.string   "cust_uid",         limit: 255
     t.decimal  "load_amount"
-    t.string   "fault_subcode", limit: 50
+    t.string   "fault_subcode",    limit: 50
+    t.decimal  "service_charge"
+    t.string   "debit_fee_status", limit: 50
+    t.string   "debit_fee_result", limit: 1000
   end
 
   add_index "pc_load_cards", ["req_no", "app_id", "attempt_no"], name: "uk_pc_load_cards", unique: true
@@ -2486,7 +2489,7 @@ ActiveRecord::Schema.define(version: 20160511140157) do
     t.string   "full_name",              limit: 50
     t.string   "first_name",             limit: 50
     t.string   "last_name",              limit: 50
-    t.string   "id_type",                limit: 20
+    t.string   "id_type",                limit: 30
     t.string   "id_number",              limit: 50
     t.string   "id_country"
     t.date     "id_issue_date"
