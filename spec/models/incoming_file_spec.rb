@@ -21,7 +21,7 @@ describe IncomingFile do
       file = File.open('Test2.exe', "w")
       incoming_file = Factory.build(:incoming_file,:file => ActionDispatch::Http::UploadedFile.new(:tempfile => file, :filename => File.basename(file)))
       incoming_file.save.should be_false
-      incoming_file.errors.messages.should == {:file=>["You are not allowed to upload \"exe\" files, allowed types: txt", "can't be blank"]}
+      incoming_file.errors.messages.should == {:file=>["You are not allowed to upload \"exe\" files, allowed types: txt, csv", "can't be blank"]}
       incoming_file.errors.messages.should_not be_blank
       FileUtils.rm_f 'Test2.exe'
     end
@@ -41,6 +41,14 @@ describe IncomingFile do
       incoming_file.save.should be_true
       incoming_file.errors.messages.should be_empty
       FileUtils.rm_f 'Test2.txt'
+    end
+
+    it "should not throw error if file has correct extension" do
+      file = File.open('Test2.csv', "w")
+      incoming_file = Factory.build(:incoming_file, :file => ActionDispatch::Http::UploadedFile.new(:tempfile => file, :filename => File.basename(file)))
+      incoming_file.save.should be_true
+      incoming_file.errors.messages.should be_empty
+      FileUtils.rm_f 'Test2.csv'
     end
 
     it "should not allow same file to be uploaded again" do 

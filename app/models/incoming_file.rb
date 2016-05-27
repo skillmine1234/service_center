@@ -10,9 +10,9 @@ class IncomingFile < ActiveRecord::Base
 
   validates_presence_of :service_name, :file_type
 
-  BlackList = %w(exe vbs rb sh jar html msi bat com bin vb doc docx xlsx csv jpeg gif pdf png zip jpg)
+  BlackList = %w(exe vbs rb sh jar html msi bat com bin vb doc docx xlsx jpeg gif pdf png zip jpg)
 
-  ExtensionList = %w(txt)
+  ExtensionList = %w(txt csv)
 
   before_create :update_fields
 
