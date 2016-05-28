@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160527114255) do
+ActiveRecord::Schema.define(version: 20160528041012) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -1197,9 +1197,10 @@ ActiveRecord::Schema.define(version: 20160527114255) do
     t.string   "last_action",      limit: 1,   default: "C", null: false
     t.integer  "approved_version"
     t.integer  "approved_id"
+    t.string   "corp_customer_id", limit: 15,                null: false
   end
 
-  add_index "ic_suppliers", ["supplier_code", "customer_id", "approval_status"], name: "i_ic_supp_code", unique: true
+  add_index "ic_suppliers", ["supplier_code", "customer_id", "corp_customer_id", "approval_status"], name: "ic_suppliers_01", unique: true
 
   create_table "ic_unapproved_records", force: :cascade do |t|
     t.integer  "ic_approvable_id"
