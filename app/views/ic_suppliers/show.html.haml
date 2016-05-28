@@ -38,6 +38,12 @@
             %td#msg-error
               = error_message_for(@ic_supplier, :customer_id, :prepend_text => "")
           %tr
+            %td.label Corporate Customer ID
+            %td.value
+              = @ic_supplier.corp_customer_id
+            %td#msg-error
+              = error_message_for(@ic_supplier, :corp_customer_id, :prepend_text => "")
+          %tr
             %td.label 
               = "Supplier's Over Draft Account"
             %td.value

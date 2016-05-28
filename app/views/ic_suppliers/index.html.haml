@@ -25,6 +25,8 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Customer ID
     %th{:style=>'text-align:left; background-color: lightblue;'}
+      Corporate Customer ID
+    %th{:style=>'text-align:left; background-color: lightblue;'}
       = "Supplier's Over Draft Account"
     %th{:style=>'text-align:left; background-color: lightblue;'}
       = "Supplier's Current Account"
@@ -44,6 +46,8 @@
           = ic_supplier.supplier_name
         %td{:style=>'text-align:left;'}
           = ic_supplier.customer_id
+        %td{:style=>'text-align:left;'}
+          = ic_supplier.corp_customer_id
         %td{:style=>'text-align:left;'}
           = ic_supplier.od_account_no
         %td{:style=>'text-align:left;'}

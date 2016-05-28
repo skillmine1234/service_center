@@ -10,7 +10,7 @@ describe IcSupplier do
   end
   
   context 'validation' do
-    [:supplier_code, :supplier_name, :customer_id, :od_account_no, :ca_account_no, :is_enabled].each do |att|
+    [:supplier_code, :supplier_name, :customer_id, :corp_customer_id, :od_account_no, :ca_account_no, :is_enabled].each do |att|
       it { should validate_presence_of(att) }
     end
 
@@ -18,6 +18,7 @@ describe IcSupplier do
       ic_supplier = Factory(:ic_supplier, :approval_status => 'A')
 
       should validate_length_of(:customer_id).is_at_least(3).is_at_most(10)
+      should validate_length_of(:corp_customer_id).is_at_least(3).is_at_most(10)
       should validate_length_of(:supplier_code).is_at_least(3).is_at_most(10)
 
       [:od_account_no, :ca_account_no].each do |att|
@@ -37,6 +38,15 @@ describe IcSupplier do
       ic_supplier2 = Factory.build(:ic_supplier, :supplier_code => "9001", :customer_id => "8001", :approval_status => 'A')
       ic_supplier2.should_not be_valid
       ic_supplier2.errors_on(:supplier_code).should == ["has already been taken"]
+    end
+
+    it "should return error if corp_customer_id not present in customer_id" do
+      ic_supplier1 = Factory.build(:ic_supplier, :corp_customer_id => "1234",:supplier_code => "9001", :customer_id => "8001", :approval_status => 'A')
+      ic_supplier1.should_not be_valid
+      ic_supplier1.errors_on(:corp_customer_id).should == ["is not present in customers"]
+      Factory(:ic_customer, :customer_id => "1234", :approval_status => 'A')
+      p ic_supplier1
+      ic_supplier1.should be_valid
     end
   end
 

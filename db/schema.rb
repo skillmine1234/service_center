@@ -866,6 +866,7 @@ ActiveRecord::Schema.define(version: 20160528041012) do
     t.string   "return_req_ref",        limit: 64
     t.string   "settle_req_ref",        limit: 64
     t.string   "credit_req_ref",        limit: 64
+    t.string   "validation_ref",        limit: 50
   end
 
   add_index "ecol_transactions", ["transfer_type", "transfer_unique_no"], name: "ecol_transaction_unique_index", unique: true

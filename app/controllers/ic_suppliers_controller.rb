@@ -87,6 +87,6 @@ class IcSuppliersController < ApplicationController
   def ic_supplier_params
     params.require(:ic_supplier).permit(:supplier_code, :supplier_name, :customer_id, :od_account_no, :ca_account_no, :is_enabled, 
                                         :created_by, :updated_by, :created_at, :updated_at, :lock_version, 
-                                        :approval_status, :last_action, :approved_version, :approved_id)
+                                        :approval_status, :last_action, :approved_version, :approved_id, :corp_customer_id)
   end
 end
