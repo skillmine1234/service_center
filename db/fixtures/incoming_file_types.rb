@@ -23,6 +23,11 @@ ScService.seed(:code) do |s|
   s.name = 'Instant Credit'
 end
 
+ScService.seed(:code) do |s|
+  s.code = 'FUNDSTRANSFER'
+  s.name = 'Funds Transfer'
+end
+
 IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.sc_service_id = ScService.find_by(code: 'AML').id
   s.code = 'SDN'
@@ -52,11 +57,13 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.code = 'RMTRS'
   s.name = 'Remitters'
   s.msg_domain = 'DFDL'
-  s.msg_model = 'eCollect'
+  s.msg_model = '{http://www.quantiguous.com/services/file}:eCollect'
   s.skip_first = 'Y'
-  s.auto_upload = 'N'
-  s.validate_all = 'N'
+  s.auto_upload = 'Y'
+  s.validate_all = 'Y'
   s.build_response_file = 'N'
+  s.db_unit_name = "pk_qg_ecol_file_manager"
+  s.records_table = 'ecol_incoming_records'  
 end
 
 IncomingFileType.seed(:sc_service_id, :code) do |s|
@@ -145,4 +152,19 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.build_response_file = 'Y' 
   s.db_unit_name = "pk_qg_ic_file_manager"
   s.records_table = 'ic_incoming_records'
+end
+  
+IncomingFileType.seed(:sc_service_id, :code) do |s|
+  s.sc_service_id = ScService.find_by(code: 'FUNDSTRANSFER').id
+  s.code = 'FUNDSTRANSFER'
+  s.name = 'FUNDSTRANSFER'
+  s.msg_domain = 'DFDL'
+  s.msg_model = '{http://www.quantiguous.com/services/file}:fundsTransfer'
+  s.skip_first = 'Y'
+  s.auto_upload = 'Y'
+  s.validate_all = 'Y'
+  s.build_response_file = 'Y' 
+  s.db_unit_name = "pk_qg_ft_file_manager"
+  s.records_table = 'ft_incoming_records'  
+
 end
