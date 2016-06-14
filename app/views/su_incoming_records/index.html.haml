@@ -48,8 +48,8 @@
           %td{:style=>'text-align:left;'}
             = link_to "show", record
           %td{:style=>'text-align:left;'}
-            - if can_override?(record)
-              = check_box_tag "record_ids[]", record.incoming_file_record_id, false, class: 'txn_select'
+            -# - if can_override?(record)
+            = check_box_tag "record_ids[]", record.incoming_file_record_id, false, class: 'txn_select'
           %td{:style=>'text-align:left;'}
             = record.file_name
           %td{:style=>'text-align:left;'}
@@ -74,9 +74,19 @@
             = link_to 'Show', {:controller => 'incoming_file_records', :action => 'audit_steps', :id => record.incoming_file_record_id, :step_name => 'ALL'}
   .form-actions{:style=>"text-align: center;"}
     = hidden_field_tag :file, params[:file_name]
+    = hidden_field_tag :file_id, @incoming_file.id
     - if !@incoming_file.nil? and @incoming_file.try(:pending_approval) == 'Y'
       - can = !(can? :override_records, IncomingFile)
-      = button_tag "Override Records", :id => 'submit_override', :role => "button", :class => "btn btn-primary", :disabled => can
+      = button_tag "Override", :id => 'submit_override', :role => "button", :class => "btn btn-primary", :disabled => can
+
+      - can = !(can? :skip_records, IncomingFile)
+      = button_tag "Skip", :id => 'submit_skip', :role => "button", :class => "btn btn-primary", :disabled => can
+
+      - can = !(can? :approve_restart, IncomingFile)
+      = button_tag "Retry", :id => 'submit_restart', :role => "button", :class => "btn btn-primary", :disabled => can
+
+      - can = !(can? :reset, IncomingFile)
+      = button_tag "Reset", :id => 'submit_reset', :role => "button", :class => "btn btn-primary", :disabled => can
       
 #faultText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header

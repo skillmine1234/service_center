@@ -132,21 +132,39 @@ $(document).ready(function(){
     });
   });
 
-  $("#submit_skip").click(function(){
-    $("#skip_records").submit(function(){
+  $("#submit_skip").click(function(e){
+    var file_id = $('#file_id').val();    
+    $('#update_records').attr("action", "/incoming_files/"+file_id+"/skip_records");
+    $("#update_records").submit(function(){
       $("#submit_skip").prop('disabled', true);
     });
   });
 
   $("#submit_restart").click(function(){
-    $("#restart_records").submit(function(){
+    var file_id = $('#file_id').val();    
+    $('#update_records').attr("action", "/incoming_files/"+file_id+"/approve_restart");
+    $("#update_records").submit(function(){
       $("#submit_restart").prop('disabled', true);
+    });
+  });
+
+  $("#submit_reset").click(function(){
+    var file_id = $('#file_id').val();    
+    $('#update_records').attr("action", "/incoming_files/"+file_id+"/reset");
+    $("#update_records").submit(function(){
+      $("#submit_reset").prop('disabled', true);
     });
   });
 
   $("#submit_reject").click(function(){
     $("#reject_records").submit(function(){
       $("#submit_reject").prop('disabled', true);
+    });
+  });
+
+  $("#submit_process_file").click(function(){
+    $("#process_file").submit(function(){
+      $("#submit_process_file").prop('disabled', true);
     });
   });
 

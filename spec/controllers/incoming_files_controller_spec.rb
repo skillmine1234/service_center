@@ -144,51 +144,6 @@ describe IncomingFilesController do
     end
   end
 
-  describe "GET approve_restart" do
-    it "updates the requested incoming_file" do
-      user_role = UserRole.find_by_user_id(@user.id)
-      user_role.delete
-      Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
-      incoming_file = Factory(:incoming_file, :approval_status => 'A')
-      WebMock.stub_request(:put, "#{ENV['CONFIG_URL_IIB_FILE_MGR']}/fm/incoming_files/retry?fileName=#{incoming_file.file_name}").
-        with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Length'=>'0', 'User-Agent'=>'Faraday v0.9.2'}).
-        to_return(:status => 202, :body => "", :headers => {})
-      get :approve_restart, {:id => incoming_file.id}
-      flash[:alert].should == "Status code: 202 <br> Message: Accepted"
-      response.should be_redirect
-    end
-  end
-
-  describe "GET skip_all_records" do
-    it "updates the requested incoming_file" do
-      user_role = UserRole.find_by_user_id(@user.id)
-      user_role.delete
-      Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
-      incoming_file = Factory(:incoming_file, :approval_status => 'A')
-      WebMock.stub_request(:put, "#{ENV['CONFIG_URL_IIB_FILE_MGR']}/fm/incoming_files/skip_all_failed_records?fileName=#{incoming_file.file_name}").
-        with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Length'=>'0', 'User-Agent'=>'Faraday v0.9.2'}).
-        to_return(:status => 202, :body => "", :headers => {})
-      get :skip_all_records, {:id => incoming_file.id}
-      flash[:alert].should == "Status code: 202 <br> Message: Accepted"
-      response.should be_redirect
-    end
-  end
-
-  describe "GET generate_response_file" do
-    it "should generate response file" do
-      user_role = UserRole.find_by_user_id(@user.id)
-      user_role.delete
-      Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
-      incoming_file = Factory(:incoming_file, :approval_status => 'A')
-      WebMock.stub_request(:put, "#{ENV['CONFIG_URL_IIB_FILE_MGR']}/fm/incoming_files/enqueue_response_file?fileName=#{incoming_file.file_name}").
-        with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Length'=>'0', 'User-Agent'=>'Faraday v0.9.2'}).
-        to_return(:status => 202, :body => "", :headers => {})
-      get :generate_response_file, {:id => incoming_file.id}
-      flash[:alert].should == "Status code: 202 <br> Message: Accepted"
-      response.should be_redirect
-    end
-  end
-
   describe "GET override_records" do
     it "updates the requested incoming_file" do
       user_role = UserRole.find_by_user_id(@user.id)
@@ -204,6 +159,36 @@ describe IncomingFilesController do
     end
   end
 
+  describe "GET skip_records" do
+    it "updates the requested incoming_file" do
+      user_role = UserRole.find_by_user_id(@user.id)
+      user_role.delete
+      Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'editor').id)
+      incoming_file = Factory(:incoming_file, :approval_status => 'A')
+      WebMock.stub_request(:post, "#{ENV['CONFIG_URL_IIB_FILE_MGR']}/fm/incoming_files/skip_failed_records?fileName=#{incoming_file.file_name}").
+        with(:body => "1,2", :headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Length'=>'0', 'User-Agent'=>'Faraday v0.9.2'}).
+        to_return(:status => 202, :body => "", :headers => {})
+      get :skip_records, {:id => incoming_file.id}
+      flash[:alert].should == nil
+      response.should be_redirect
+    end
+  end
+
+  describe "GET approve_restart" do
+    it "updates the requested incoming_file" do
+      user_role = UserRole.find_by_user_id(@user.id)
+      user_role.delete
+      Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'editor').id)
+      incoming_file = Factory(:incoming_file, :approval_status => 'A')
+      WebMock.stub_request(:post, "#{ENV['CONFIG_URL_IIB_FILE_MGR']}/fm/incoming_files/retry_failed_records?fileName=#{incoming_file.file_name}").
+        with(:body => "1,2", :headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Length'=>'0', 'User-Agent'=>'Faraday v0.9.2'}).
+        to_return(:status => 202, :body => "", :headers => {})
+      get :approve_restart, {:id => incoming_file.id}
+      flash[:alert].should == nil
+      response.should be_redirect
+    end
+  end
+
   describe "GET reject_records" do
     it "updates the requested incoming_file" do
       user_role = UserRole.find_by_user_id(@user.id)
@@ -214,6 +199,51 @@ describe IncomingFilesController do
         with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Length'=>'0', 'User-Agent'=>'Faraday v0.9.2'}).
         to_return(:status => 202, :body => "", :headers => {})
       get :reject, {:id => incoming_file.id}
+      flash[:alert].should == "Status code: 202 <br> Message: Accepted"
+      response.should be_redirect
+    end
+  end
+
+  describe "GET process_file" do
+    it "updates the requested incoming_file" do
+      user_role = UserRole.find_by_user_id(@user.id)
+      user_role.delete
+      Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
+      incoming_file = Factory(:incoming_file, :approval_status => 'A')
+      WebMock.stub_request(:put, "#{ENV['CONFIG_URL_IIB_FILE_MGR']}/fm/incoming_files/retry_file?fileName=#{incoming_file.file_name}").
+        with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Length'=>'0', 'User-Agent'=>'Faraday v0.9.2'}).
+        to_return(:status => 202, :body => "", :headers => {})
+      get :process_file, {:id => incoming_file.id}
+      flash[:alert].should == "Status code: 202 <br> Message: Accepted"
+      response.should be_redirect
+    end
+  end
+
+  describe "GET reset" do
+    it "updates the requested incoming_file" do
+      user_role = UserRole.find_by_user_id(@user.id)
+      user_role.delete
+      Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
+      incoming_file = Factory(:incoming_file, :approval_status => 'A')
+      WebMock.stub_request(:post, "#{ENV['CONFIG_URL_IIB_FILE_MGR']}/fm/incoming_files/reset_records?fileName=#{incoming_file.file_name}").
+        with(:body => "1,2", :headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Length'=>'0', 'User-Agent'=>'Faraday v0.9.2'}).
+        to_return(:status => 202, :body => "", :headers => {})
+      get :reset, {:id => incoming_file.id}
+      flash[:alert].should == nil
+      response.should be_redirect
+    end
+  end
+
+  describe "GET generate_response_file" do
+    it "should generate response file" do
+      user_role = UserRole.find_by_user_id(@user.id)
+      user_role.delete
+      Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
+      incoming_file = Factory(:incoming_file, :approval_status => 'A')
+      WebMock.stub_request(:put, "#{ENV['CONFIG_URL_IIB_FILE_MGR']}/fm/incoming_files/enqueue_response_file?fileName=#{incoming_file.file_name}").
+        with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Length'=>'0', 'User-Agent'=>'Faraday v0.9.2'}).
+        to_return(:status => 202, :body => "", :headers => {})
+      get :generate_response_file, {:id => incoming_file.id}
       flash[:alert].should == "Status code: 202 <br> Message: Accepted"
       response.should be_redirect
     end

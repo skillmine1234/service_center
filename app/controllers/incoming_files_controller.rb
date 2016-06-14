@@ -125,18 +125,26 @@ class IncomingFilesController < ApplicationController
     redirect_to :back
   end
 
-  def skip_all_records
-    @incoming_file = IncomingFile.find(params[:id]) 
-    uri = "/fm/incoming_files/skip_all_failed_records"
-    api_faraday_call(:put, uri, @incoming_file.file_name, nil)  
-    redirect_to @incoming_file
+  def skip_records
+    if params[:record_ids]
+      @incoming_file = IncomingFile.find_by_file_name(params[:file])
+      uri = "/fm/incoming_files/skip_failed_records"
+      api_faraday_call(:post, uri ,@incoming_file.file_name, params[:record_ids])
+    else
+      flash[:notice] = "You haven't selected any records!"
+    end    
+    redirect_to :back
   end
 
   def approve_restart
-    @incoming_file = IncomingFile.find(params[:id]) 
-    uri = "/fm/incoming_files/retry"
-    api_faraday_call(:put, uri, @incoming_file.file_name, nil)  
-    redirect_to @incoming_file
+    if params[:record_ids]
+      @incoming_file = IncomingFile.find_by_file_name(params[:file])
+      uri = "/fm/incoming_files/retry_failed_records"
+      api_faraday_call(:post, uri ,@incoming_file.file_name, params[:record_ids])
+    else
+      flash[:notice] = "You haven't selected any records!"
+    end    
+    redirect_to :back
   end
 
   def reject
@@ -144,6 +152,24 @@ class IncomingFilesController < ApplicationController
     uri = "/fm/incoming_files/reject"
     api_faraday_call(:put, uri, @incoming_file.file_name, nil)  
     redirect_to @incoming_file
+  end
+
+  def process_file
+    @incoming_file = IncomingFile.find(params[:id]) 
+    uri = "/fm/incoming_files/retry_file"
+    api_faraday_call(:put, uri, @incoming_file.file_name, nil)
+    redirect_to @incoming_file
+  end
+
+  def reset
+    if params[:record_ids]
+      @incoming_file = IncomingFile.find_by_file_name(params[:file])
+      uri = "/fm/incoming_files/reset_records"
+      api_faraday_call(:post, uri ,@incoming_file.file_name, params[:record_ids])
+    else
+      flash[:notice] = "You haven't selected any records!"
+    end    
+    redirect_to :back
   end
 
   def generate_response_file

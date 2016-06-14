@@ -53,13 +53,15 @@
         &nbsp;&nbsp;
         - if @incoming_file.pending_approval == 'Y'
           - if @incoming_file.last_process_step.nil?
-            = render :partial => "restart"
+            = render :partial => "process_file"
+            = render :partial => "reset"
             = render :partial => "reject"
           - elsif @incoming_file.last_process_step == 'B'
-            = render :partial => "skip_all"
-            = render :partial => "restart"
+            = render :partial => "process_file"
+            = render :partial => "reset"
           - elsif @incoming_file.last_process_step == 'R'
-            = render :partial => "restart"
+            = render :partial => "process_file"
+            = render :partial => "reset"
 %table.table.table-bordered.table-striped.table-hover.align_center{:style=>'width:45%;float: right;'}
   %thead
     %tr 

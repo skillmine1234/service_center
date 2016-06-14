@@ -1,0 +1,5 @@
+- can = (can? :reset, IncomingFile)
+- if can == true
+  %span{:style=>"vertical-align: 48%;"}
+    = "|"
+    = link_to "Reset", su_incoming_records_path(:file_name => @incoming_file.file_name, :status => 'FAILED')

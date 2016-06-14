@@ -1,3 +1,0 @@
-- can = !(can? :skip_all_records, IncomingFile)
-= simple_form_for :ic_incoming_record, :url => skip_all_records_incoming_file_path(@incoming_file), :html => { :method => :get, :id => 'skip_records', :style=> 'overflow: auto;display:inline-block;'} do |f| 
-  = button_tag "Skip and Retry", :id => 'submit_skip', :role => "button", :class => "btn btn-primary", :disabled => can

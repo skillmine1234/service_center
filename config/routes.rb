@@ -28,8 +28,10 @@ ServiceCenter::Application.routes.draw do
       get 'download_response_file'
       get 'generate_response_file'
       get 'approve_restart'
-      get 'skip_all_records'
+      get 'skip_records'
       get 'reject'
+      get 'process_file'
+      get 'reset'
     end
   end
   

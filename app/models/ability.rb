@@ -32,10 +32,12 @@ class Ability
       can :manage, model_name.constantize
       cannot :approve, model_name.constantize
       cannot :generate_response_file, model_name.constantize
-      cannot :skip_all_records, model_name.constantize
-      cannot :approve_restart, model_name.constantize
+      can :skip_records, model_name.constantize
+      can :approve_restart, model_name.constantize
       cannot :reject, model_name.constantize
       can :override_records, model_name.constantize
+      cannot :process_file, model_name.constantize
+      cannot :reset, model_name.constantize
     end
   end
 
@@ -48,9 +50,11 @@ class Ability
       can :generate_response_file, model_name.constantize
       can :download_response_file, model_name.constantize
       can :view_raw_content, model_name.constantize
-      can :skip_all_records, model_name.constantize
-      can :approve_restart, model_name.constantize
+      cannot :skip_records, model_name.constantize
+      cannot :approve_restart, model_name.constantize
       can :reject, model_name.constantize
+      can :process_file, model_name.constantize
+      can :reset, model_name.constantize
       cannot :override_records, model_name.constantize
       can :audit_steps, model_name.constantize
       can :incoming_file_summary, model_name.constantize

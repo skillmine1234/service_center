@@ -76,7 +76,16 @@
     = hidden_field_tag :file, params[:file_name]
     - if !@incoming_file.nil? and @incoming_file.try(:pending_approval) == 'Y'
       - can = !(can? :override_records, IncomingFile)
-      = button_tag "Override Records", :id => 'submit_override', :role => "button", :class => "btn btn-primary", :disabled => can
+      = button_tag "Override", :id => 'submit_override', :role => "button", :class => "btn btn-primary", :disabled => can
+
+      - can = !(can? :skip_records, IncomingFile)
+      = button_tag "Skip", :id => 'submit_skip', :role => "button", :class => "btn btn-primary", :disabled => can
+
+      - can = !(can? :approve_restart, IncomingFile)
+      = button_tag "Retry", :id => 'submit_restart', :role => "button", :class => "btn btn-primary", :disabled => can
+
+      - can = !(can? :reset, IncomingFile)
+      = button_tag "Reset", :id => 'submit_reset', :role => "button", :class => "btn btn-primary", :disabled => can
 
 #faultText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
