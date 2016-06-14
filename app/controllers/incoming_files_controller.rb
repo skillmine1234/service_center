@@ -114,36 +114,30 @@ class IncomingFilesController < ApplicationController
     end
   end
 
-  def override_records
+  def call_api(params, uri)
     if params[:record_ids]
       @incoming_file = IncomingFile.find_by_file_name(params[:file])
-      uri = "/fm/incoming_files/override"
       api_faraday_call(:post, uri ,@incoming_file.file_name, params[:record_ids])    
     else
       flash[:notice] = "You haven't selected any records!"
-    end    
+    end
+  end
+
+  def override_records
+    uri = "/fm/incoming_files/override"
+    call_api(params, uri)
     redirect_to :back
   end
 
   def skip_records
-    if params[:record_ids]
-      @incoming_file = IncomingFile.find_by_file_name(params[:file])
-      uri = "/fm/incoming_files/skip_failed_records"
-      api_faraday_call(:post, uri ,@incoming_file.file_name, params[:record_ids])
-    else
-      flash[:notice] = "You haven't selected any records!"
-    end    
+    uri = "/fm/incoming_files/skip_failed_records"
+    call_api(params, uri)
     redirect_to :back
   end
 
   def approve_restart
-    if params[:record_ids]
-      @incoming_file = IncomingFile.find_by_file_name(params[:file])
-      uri = "/fm/incoming_files/retry_failed_records"
-      api_faraday_call(:post, uri ,@incoming_file.file_name, params[:record_ids])
-    else
-      flash[:notice] = "You haven't selected any records!"
-    end    
+    uri = "/fm/incoming_files/retry_failed_records"
+    call_api(params, uri)
     redirect_to :back
   end
 
@@ -162,13 +156,8 @@ class IncomingFilesController < ApplicationController
   end
 
   def reset
-    if params[:record_ids]
-      @incoming_file = IncomingFile.find_by_file_name(params[:file])
-      uri = "/fm/incoming_files/reset_records"
-      api_faraday_call(:post, uri ,@incoming_file.file_name, params[:record_ids])
-    else
-      flash[:notice] = "You haven't selected any records!"
-    end    
+    uri = "/fm/incoming_files/reset_records"
+    call_api(params, uri)
     redirect_to :back
   end
 

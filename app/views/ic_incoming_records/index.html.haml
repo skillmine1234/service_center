@@ -48,8 +48,8 @@
           %td{:style=>'text-align:left;'}
             = link_to "show", record
           %td{:style=>'text-align:left;'}
-            - if can_override?(record)
-              = check_box_tag "record_ids[]", record.incoming_file_record_id, false, class: 'txn_select'
+            -# - if can_override?(record)
+            = check_box_tag "record_ids[]", record.incoming_file_record_id, false, class: 'txn_select'
           %td{:style=>'text-align:left;'}
             = record.file_name
           %td{:style=>'text-align:left;'}
@@ -69,7 +69,11 @@
           %td{:style=>'text-align:left;'}
             = record.incoming_file_record.overrides
           %td{:style=>'text-align:left;'}
-            = link_to "Show Fault Text", "#", :class => 'active-link', :href => "#faultText", data: { fault_reason: record.incoming_file_record.fault_reason, fault_code: record.incoming_file_record.fault_code, fault_subcode: record.incoming_file_record.fault_subcode}
+            - if record.incoming_file_record.fault_code.nil?
+              - link_text = "Show Fault Text"
+            - else 
+              - link_text = record.incoming_file_record.fault_code
+            = link_to link_text, "#", :class => 'active-link', :href => "#faultText", data: { fault_reason: record.incoming_file_record.fault_reason, fault_code: record.incoming_file_record.fault_code, fault_subcode: record.incoming_file_record.fault_subcode}
           %td{:style=>'text-align:left;'}
             = link_to 'Show', {:controller => 'incoming_file_records', :action => 'audit_steps', :id => record.incoming_file_record_id, :step_name => 'ALL'}
   .form-actions{:style=>"text-align: center;"}
