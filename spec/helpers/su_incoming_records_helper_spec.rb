@@ -29,15 +29,15 @@ describe SuIncomingRecordsHelper do
     end
   end
 
-  context "can_override" do 
-    it "should return true if the record is overridable" do 
+  context "can_select" do 
+    it "should return true if the fault_code present" do 
       a = Factory(:su_incoming_record, :incoming_file_record_id => Factory(:incoming_file_record, :fault_code => "ns:W").id)
-      can_override?(a).should == true
+      can_select?(a).should == true
     end
 
-    it "should return true if the record is overridable" do 
-      a = Factory(:su_incoming_record, :incoming_file_record_id => Factory(:incoming_file_record, :fault_code => "ns:E").id)
-      can_override?(a).should == false
+    it "should return false if the fault_code is null" do 
+      a = Factory(:su_incoming_record, :incoming_file_record_id => Factory(:incoming_file_record, :fault_code => nil).id)
+      can_select?(a).should == false
     end
   end
 end

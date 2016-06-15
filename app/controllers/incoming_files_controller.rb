@@ -68,7 +68,6 @@ class IncomingFilesController < ApplicationController
 
   def show
     @incoming_file = IncomingFile.unscoped.find_by_id(params[:id])
-    @overriden_failure_count = @incoming_file.incoming_file_records.where("status=? and overrides is not null",'FAILED').count(:id)
   end
 
   def destroy

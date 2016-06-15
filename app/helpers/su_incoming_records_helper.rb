@@ -18,7 +18,7 @@ module SuIncomingRecordsHelper
     incoming_records
   end
 
-  def can_override?(record)
-    !record.incoming_file_record.fault_code.nil? and record.incoming_file_record.fault_code.start_with?("ns:W") and record.incoming_file_record.overrides != record.incoming_file_record.fault_code
+  def can_select?(record)
+    !record.incoming_file_record.fault_code.nil?
   end
 end

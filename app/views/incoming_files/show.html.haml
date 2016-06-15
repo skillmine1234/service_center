@@ -228,7 +228,7 @@
         %td{:style=>'text-align:center; border-left: 3px solid #ffffff;'}
           = link_to @incoming_file.skipped_record_count || 0, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'SKIPPED')
         %td{:style=>'text-align:center;'}
-          = link_to @overriden_failure_count || 0, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'FAILED', :overrided_flag => 'true')
+          = link_to @incoming_file.overriden_record_count || 0, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'OVERRIDEN', :overrided_flag => 'true')
         %td{:style=>'text-align:center; border-right: 3px solid #ffffff;'}
           = link_to @incoming_file.pending_retry_record_count || 0, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'PENDING RETRY')
 

@@ -5,10 +5,12 @@ class Ability
     # The order of the below methods are much important
     @user = user_obj
     @user ||= User.new # guest @user (not logged in)
+
     super_admin_permissions if @user.has_role? :super_admin
     admin_permissions if @user.has_role? :admin
-    user_admin_permissions if @user.has_role? :user_admin
+    user_admin_permission if @user.has_role? :user_admin
     approver_admin_permissions if @user.has_role? :approver_admin
+
     user_permissions(@user.group_model_list) if @user.has_role? :user
     editor_permissions(@user.group_model_list) if @user.has_role? :editor
     supervisor_permissions(@user.group_model_list) if @user.has_role? :supervisor
@@ -32,10 +34,10 @@ class Ability
       can :manage, model_name.constantize
       cannot :approve, model_name.constantize
       cannot :generate_response_file, model_name.constantize
-      can :skip_records, model_name.constantize
-      can :approve_restart, model_name.constantize
       cannot :reject, model_name.constantize
       can :override_records, model_name.constantize
+      can :skip_records, model_name.constantize
+      can :approve_restart, model_name.constantize
       cannot :process_file, model_name.constantize
       cannot :reset, model_name.constantize
     end
@@ -50,14 +52,14 @@ class Ability
       can :generate_response_file, model_name.constantize
       can :download_response_file, model_name.constantize
       can :view_raw_content, model_name.constantize
-      cannot :skip_records, model_name.constantize
-      cannot :approve_restart, model_name.constantize
-      can :reject, model_name.constantize
-      can :process_file, model_name.constantize
-      can :reset, model_name.constantize
-      cannot :override_records, model_name.constantize
       can :audit_steps, model_name.constantize
       can :incoming_file_summary, model_name.constantize
+      can :reject, model_name.constantize
+      cannot :override_records, model_name.constantize
+      cannot :skip_records, model_name.constantize
+      cannot :approve_restart, model_name.constantize
+      can :process_file, model_name.constantize
+      can :reset, model_name.constantize
     end
   end
 
