@@ -5,12 +5,10 @@ class Ability
     # The order of the below methods are much important
     @user = user_obj
     @user ||= User.new # guest @user (not logged in)
-
     super_admin_permissions if @user.has_role? :super_admin
     admin_permissions if @user.has_role? :admin
-    user_admin_permission if @user.has_role? :user_admin
+    user_admin_permissions if @user.has_role? :user_admin
     approver_admin_permissions if @user.has_role? :approver_admin
-
     user_permissions(@user.group_model_list) if @user.has_role? :user
     editor_permissions(@user.group_model_list) if @user.has_role? :editor
     supervisor_permissions(@user.group_model_list) if @user.has_role? :supervisor
