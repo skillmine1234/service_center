@@ -18,4 +18,14 @@ $(document).ready(function(){
     var fault_bitstream = $(this).attr('data-fault-bitstream');
     display_beautified_data(fault_bitstream, "#fault_bitstream", "#faultBitstream");
   });
+
+  $(".show_status").on("click", function () {
+    var status_subcode = $(this).attr('data-status-subcode');
+    var status_code = $(this).attr('data-status-code');
+    $(".modal-body .status_code").text("");
+    $(".modal-body .status_code").text(status_code);
+    $(".modal-body .status_subcode").text("");
+    $(".modal-body .status_subcode").text(status_subcode);
+    $('#status').modal();
+  });
 });
