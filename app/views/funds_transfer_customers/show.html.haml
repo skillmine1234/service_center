@@ -44,6 +44,12 @@
             %td#msg-error
               = error_message_for(@funds_transfer_customer, :name, :prepend_text => "")
           %tr
+            %td.label Beneficiary Name to be verified ?
+            %td.value
+              = @funds_transfer_customer.reply_with_bene_name
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :reply_with_bene_name, :prepend_text => "")
+          %tr
             %td.label Low Balance Alert At
             %td.value
               = @funds_transfer_customer.low_balance_alert_at

@@ -36,6 +36,11 @@
       #msg-error
         = error_message_for(@funds_transfer_customer, :name, :prepend_text => "")
     .control-group
+      = f.label :reply_with_bene_name, "Beneficiary Name to be verified ?", :class => 'control-label'
+      = f.check_box :reply_with_bene_name, {},"Y","N"
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :reply_with_bene_name, :prepend_text => "")
+    .control-group
       = f.label :low_balance_alert_at, "*Low Balance Alert At", :class => 'control-label'
       = f.text_field :low_balance_alert_at
       #msg-error
