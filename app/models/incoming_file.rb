@@ -27,6 +27,7 @@ class IncomingFile < ActiveRecord::Base
   has_many :incoming_file_records
   belongs_to :su_incoming_file, :foreign_key => "file_name", :primary_key => "file_name"
   belongs_to :ic_incoming_file, :foreign_key => "file_name", :primary_key => "file_name"
+  belongs_to :ft_incoming_file, :foreign_key => "file_name", :primary_key => "file_name"
   has_many :fm_audit_steps, :as => :auditable
 
   has_one :ecol_unapproved_record, :as => :ecol_approvable
@@ -34,6 +35,7 @@ class IncomingFile < ActiveRecord::Base
   has_one :inw_unapproved_record, :as => :inw_approvable
   has_one :su_unapproved_record, :as => :su_approvable
   has_one :ic_unapproved_record, :as => :ic_approvable
+  has_one :ft_unapproved_record, :as => :ft_approvable
 
   after_create :on_create_create_unapproved_record
   after_destroy :on_destory_remove_unapproved_records
