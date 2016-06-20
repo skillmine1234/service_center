@@ -137,6 +137,7 @@ class IncomingFile < ActiveRecord::Base
       InwUnapprovedRecord.create!(:inw_approvable => self) if self.service_name == "AML"
       SuUnapprovedRecord.create!(:su_approvable => self) if self.service_name == "SALARY"
       IcUnapprovedRecord.create!(:ic_approvable => self) if self.service_name == "INSTANTCREDIT"
+      FtUnapprovedRecord.create!(:ft_approvable => self) if self.service_name == "FUNDSTRANSFER"
     end
   end
 
@@ -147,6 +148,7 @@ class IncomingFile < ActiveRecord::Base
       inw_unapproved_record.delete if self.service_name == "AML"
       su_unapproved_record.delete if self.service_name == "SALARY"
       ic_unapproved_record.delete if self.service_name == "INSTANTCREDIT"
+      ft_unapproved_record.delete if self.service_name == "FUNDSTRANSFER"
     end
   end
 
@@ -157,6 +159,7 @@ class IncomingFile < ActiveRecord::Base
       inw_unapproved_record.delete if self.service_name == "AML"
       su_unapproved_record.delete if self.service_name == "SALARY"
       ic_unapproved_record.delete if self.service_name == "INSTANTCREDIT"
+      ft_unapproved_record.delete if self.service_name == "FUNDSTRANSFER"
     end
   end 
 end
