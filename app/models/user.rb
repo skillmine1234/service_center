@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :user_groups, -> {where disabled: false}
   has_many :groups, :through => :user_groups
 
-  devise :session_limitable
+  devise :session_limitable, :timeoutable
 
   Roles = %w{user supervisor editor}
 
