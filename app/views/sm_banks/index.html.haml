@@ -1,0 +1,57 @@
+%br
+= link_to 'New SM Bank', new_sm_bank_path
+%br
+%br
+%h1 Listing SM Banks
+%h2.collapsible
+  Advanced Search
+  %span.caret
+.collapsible-content
+  = render :partial => 'advanced_search'
+%br
+= "Total Count: #{@sm_banks_count}"
+%br
+= will_paginate @sm_banks
+%br
+
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Code
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Name
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Bank Code
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Low Balance Alert At
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Identity User ID
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      NEFT Allowed?
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      IMPS Allowed?
+
+  .tbody
+    - @sm_banks.each do |sm_bank|
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', sm_bank
+        %td{:style=>'text-align:left;'}
+          = link_to 'Edit', edit_sm_bank_path(sm_bank)
+        %td{:style=>'text-align:left;'}
+          = sm_bank.code
+        %td{:style=>'text-align:left;'}
+          = sm_bank.name
+        %td{:style=>'text-align:left;'}
+          = sm_bank.bank_code
+        %td{:style=>'text-align:left;'}
+          = sm_bank.low_balance_alert_at
+        %td{:style=>'text-align:left;'}
+          = sm_bank.identity_user_id
+        %td{:style=>'text-align:left;'}
+          = sm_bank.neft_allowed
+        %td{:style=>'text-align:left;'}
+          = sm_bank.imps_allowed
+

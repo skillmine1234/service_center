@@ -75,6 +75,9 @@ ServiceCenter::Application.routes.draw do
   resources :ic_suppliers
   resources :ic_invoices
   resources :ic_unapproved_records
+  
+  resources :sm_banks
+  resources :sm_unapproved_records
 
   namespace :api do
     namespace :v1 do
@@ -115,6 +118,7 @@ ServiceCenter::Application.routes.draw do
   get '/su_customers/:id/audit_logs' => 'su_customers#audit_logs'
   get '/ic_customers/:id/audit_logs' => 'ic_customers#audit_logs'
   get '/ic_suppliers/:id/audit_logs' => 'ic_suppliers#audit_logs'
+  get '/sm_banks/:id/audit_logs' => 'sm_banks#audit_logs'
 
   get '/inward_remittances/:id/remitter_identities' => 'inward_remittances#remitter_identities'
   get '/inward_remittances/:id/beneficiary_identities' => 'inward_remittances#beneficiary_identities'
@@ -158,6 +162,7 @@ ServiceCenter::Application.routes.draw do
   put '/su_customers/:id/approve' => "su_customers#approve"
   put '/ic_customers/:id/approve' => "ic_customers#approve"
   put '/ic_suppliers/:id/approve' => "ic_suppliers#approve"
+  put '/sm_banks/:id/approve' => "sm_banks#approve"
 
   get '/ecol_transactions/:id/ecol_audit_logs/:step_name' => 'ecol_transactions#ecol_audit_logs'
   put '/ecol_transactions/:id/approve' => "ecol_transactions#approve_transaction"

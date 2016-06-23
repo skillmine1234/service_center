@@ -332,3 +332,18 @@
         = image_tag 'pc_apps.png', :size => "80x80"
       %br
         = "PC2 Apps"
+
+- if @current_user.group_names.include?("smb")
+  %h1 SMB
+  .slide-container
+    .box  
+      = link_to '/sm_unapproved_records' do
+        = image_tag 'work-list.jpg', :size => "80x80"
+      %br
+        = "Approval Worklist"
+  .slide-container
+    .box{:style=>"margin-top: 2.2%;"}
+      = link_to '/sm_banks' do
+        = image_tag 'sm_banks.jpg', :size => "102x70", :style=>"padding-bottom: 4%;"
+      %br
+        = "SM Banks"

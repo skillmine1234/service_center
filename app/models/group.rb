@@ -23,6 +23,8 @@ class Group < ActiveRecord::Base
       ['IncomingFile','SuCustomer','SuUnapprovedRecord','SuIncomingRecord','FmAuditStep','SuIncomingFile']
     when "instant-credit"
       ['IncomingFile','IcIncomingRecord','IncomingFileRecord','IcCustomer','IcSupplier','IcUnapprovedRecord','IcInvoice','FmAuditStep','IcIncomingFile']
+    when "smb"
+      ['SmUnapprovedRecord','SmBank']
     else
       []
     end
