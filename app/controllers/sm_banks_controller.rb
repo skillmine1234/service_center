@@ -17,7 +17,7 @@ class SmBanksController < ApplicationController
     else
       @sm_bank.created_by = current_user.id
       @sm_bank.save!
-      flash[:alert] = "SM Bank successfully #{@sm_bank.approved_id.nil? ? 'created' : 'updated'} and is pending for approval"
+      flash[:alert] = "Bank successfully #{@sm_bank.approved_id.nil? ? 'created' : 'updated'} and is pending for approval"
       redirect_to @sm_bank
     end
   end 
@@ -39,12 +39,12 @@ class SmBanksController < ApplicationController
     else
       @sm_bank.updated_by = current_user.id
       @sm_bank.save!
-      flash[:alert] = 'SM Bank successfully modified and is pending for approval'
+      flash[:alert] = 'Bank successfully modified and is pending for approval'
       redirect_to @sm_bank
     end
     rescue ActiveRecord::StaleObjectError
       @sm_bank.reload
-      flash[:alert] = 'Someone edited the SM Bank the same time you did. Please re-apply your changes to the SM Bank'
+      flash[:alert] = 'Someone edited the Bank the same time you did. Please re-apply your changes to the Bank'
       render "edit"
   end 
 
@@ -72,7 +72,7 @@ class SmBanksController < ApplicationController
     SmBank.transaction do
       approval = @sm_bank.approve
       if @sm_bank.save and approval.empty?
-        flash[:alert] = "SM Bank record was approved successfully"
+        flash[:alert] = "Bank record was approved successfully"
       else
         msg = approval.empty? ? @sm_bank.errors.full_messages : @sm_bank.errors.full_messages << approval
         flash[:alert] = msg

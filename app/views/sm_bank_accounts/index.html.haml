@@ -1,17 +1,17 @@
 %br
-= link_to 'New Bank', new_sm_bank_path
+= link_to 'New Bank Account', new_sm_bank_account_path
 %br
 %br
-%h1 Listing Banks
+%h1 Listing Bank Accounts
 %h2.collapsible
   Advanced Search
   %span.caret
 .collapsible-content
   = render :partial => 'advanced_search'
 %br
-= "Total Count: #{@sm_banks_count}"
+= "Total Count: #{@sm_bank_accounts_count}"
 %br
-= will_paginate @sm_banks
+= will_paginate @sm_bank_accounts
 %br
 
 %table.table.table-bordered.table-striped.table-hover
@@ -19,39 +19,31 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
-      Code
+      Sub Member Code
     %th{:style=>'text-align:left; background-color: lightblue;'}
-      Name
+      Customer ID
     %th{:style=>'text-align:left; background-color: lightblue;'}
-      Bank Code
+      Account No
     %th{:style=>'text-align:left; background-color: lightblue;'}
-      Low Balance Alert At
+      MMID
     %th{:style=>'text-align:left; background-color: lightblue;'}
-      Identity User ID
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      NEFT Allowed?
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      IMPS Allowed?
+      Mobile No
 
   .tbody
-    - @sm_banks.each do |sm_bank|
+    - @sm_bank_accounts.each do |sm_bank_account|
       %tr
         %td{:style=>'text-align:left;'}
-          = link_to 'Show', sm_bank
+          = link_to 'Show', sm_bank_account
         %td{:style=>'text-align:left;'}
-          = link_to 'Edit', edit_sm_bank_path(sm_bank)
+          = link_to 'Edit', edit_sm_bank_account_path(sm_bank_account)
         %td{:style=>'text-align:left;'}
-          = sm_bank.code
+          = sm_bank_account.sm_code
         %td{:style=>'text-align:left;'}
-          = sm_bank.name
+          = sm_bank_account.customer_id
         %td{:style=>'text-align:left;'}
-          = sm_bank.bank_code
+          = sm_bank_account.account_no
         %td{:style=>'text-align:left;'}
-          = sm_bank.low_balance_alert_at
+          = sm_bank_account.mmid
         %td{:style=>'text-align:left;'}
-          = sm_bank.identity_user_id
-        %td{:style=>'text-align:left;'}
-          = sm_bank.neft_allowed
-        %td{:style=>'text-align:left;'}
-          = sm_bank.imps_allowed
+          = sm_bank_account.mobile_no
 

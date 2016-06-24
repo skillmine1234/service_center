@@ -13,7 +13,7 @@ describe Group do
       group.model_list.should == ['IncomingFile','IcIncomingRecord','IncomingFileRecord','IcCustomer','IcSupplier','IcUnapprovedRecord','IcInvoice','FmAuditStep','IcIncomingFile']
 
       group = Factory(:group,:name => 'smb')
-      group.model_list.should == ['SmUnapprovedRecord','SmBank']
+      group.model_list.should == ['SmUnapprovedRecord','SmBank','SmBankAccount']
     end
   end
 end

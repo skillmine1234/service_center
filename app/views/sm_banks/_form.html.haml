@@ -44,6 +44,6 @@
         = error_message_for(@sm_bank, :imps_allowed, :prepend_text => "")
   .form-actions
     - (f.object.new_record? and f.object.code.nil?) ? label_name = "Create" : label_name = "Update"
-    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_sm_bank', :value => label_name + ' SM Bank'
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_sm_bank', :value => label_name + ' Bank'
     = link_to :Cancel,'/sm_banks', :name => 'cancel', :class=>"cancel btn"
 

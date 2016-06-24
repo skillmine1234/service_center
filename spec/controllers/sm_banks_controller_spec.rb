@@ -67,7 +67,7 @@ describe SmBanksController do
         expect {
           post :create, {:sm_bank => params}
         }.to change(SmBank.unscoped, :count).by(1)
-        flash[:alert].should  match(/SM Bank successfully created and is pending for approval/)
+        flash[:alert].should  match(/Bank successfully created and is pending for approval/)
         response.should be_redirect
       end
 
@@ -144,7 +144,7 @@ describe SmBanksController do
         put :update, {:id => sm_bank2.id, :sm_bank => params}
         sm_bank.reload
         sm_bank.name.should == "abcd efgh"
-        flash[:alert].should  match(/Someone edited the SM Bank the same time you did. Please re-apply your changes to the SM Bank/)
+        flash[:alert].should  match(/Someone edited the Bank the same time you did. Please re-apply your changes to the Bank/)
       end
     end
 

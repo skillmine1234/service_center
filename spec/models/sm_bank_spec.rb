@@ -69,6 +69,17 @@ describe SmBank do
       sm_bank.errors_on(:bank_code).should ==  ["invalid format - expected format is : {[A-Z|a-z]{4}[0][A-Za-z0-9]{6}}"]
     end
   end
+
+  context "to_downcase" do 
+    it "should convert the code, name, bank_code to lower case" do 
+      sm_bank = Factory.build(:sm_bank, :code => "BANK123", :name => "ABC BANK", :bank_code => "AABB0123456")
+      sm_bank.to_downcase
+      sm_bank.code.should == "bank123"
+      sm_bank.name.should == "abc bank"
+      sm_bank.bank_code.should == "aabb0123456"
+      sm_bank.save.should be_true
+    end
+  end
   
   context "default_scope" do 
     it "should only return 'A' records by default" do 
