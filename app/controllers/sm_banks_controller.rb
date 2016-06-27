@@ -85,7 +85,7 @@ class SmBanksController < ApplicationController
   private
 
   def sm_bank_params
-    params.require(:sm_bank).permit(:code, :name, :bank_code, :low_balance_alert_at, :identity_user_id, :neft_allowed, :imps_allowed, 
+    params.require(:sm_bank).permit(:code, :name, :bank_code, :low_balance_alert_at, :identity_user_id, :neft_allowed, :imps_allowed, :is_enabled,  
                                     :created_by, :updated_by, :created_at, :updated_at, 
                                     :lock_version, :approval_status, :last_action, :approved_version, :approved_id)
   end

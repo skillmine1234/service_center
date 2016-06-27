@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160615111604) do
+ActiveRecord::Schema.define(version: 20160627120337) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -2388,6 +2388,145 @@ ActiveRecord::Schema.define(version: 20160615111604) do
 
   add_index "sc_services", ["code"], name: "index_sc_services_on_code", unique: true
   add_index "sc_services", ["name"], name: "index_sc_services_on_name", unique: true
+
+  create_table "sm_audit_logs", force: :cascade do |t|
+    t.string   "req_no",            limit: 32,   null: false
+    t.string   "app_id",            limit: 32,   null: false
+    t.integer  "attempt_no",                     null: false
+    t.string   "status_code",       limit: 25,   null: false
+    t.string   "sm_auditable_type", limit: 255,  null: false
+    t.integer  "sm_auditable_id",                null: false
+    t.string   "fault_code",        limit: 255
+    t.string   "fault_subcode",     limit: 50
+    t.string   "fault_reason",      limit: 1000
+    t.datetime "req_timestamp"
+    t.datetime "rep_timestamp"
+    t.text     "req_bitstream",                  null: false
+    t.text     "rep_bitstream"
+    t.text     "fault_bitstream"
+  end
+
+  add_index "sm_audit_logs", ["app_id", "req_no", "attempt_no"], name: "uk_sm_audit_logs_1", unique: true
+  add_index "sm_audit_logs", ["sm_auditable_type", "sm_auditable_id"], name: "uk_sm_audit_logs_2", unique: true
+
+  create_table "sm_audit_steps", force: :cascade do |t|
+    t.string   "sm_auditable_type",              null: false
+    t.integer  "sm_auditable_id",                null: false
+    t.integer  "step_no",                        null: false
+    t.integer  "attempt_no",                     null: false
+    t.string   "step_name",         limit: 100,  null: false
+    t.string   "status_code",       limit: 25,   null: false
+    t.string   "fault_code",        limit: 255
+    t.string   "fault_subcode",     limit: 50
+    t.string   "fault_reason",      limit: 1000
+    t.string   "req_reference",     limit: 255
+    t.datetime "req_timestamp"
+    t.string   "rep_reference"
+    t.datetime "rep_timestamp"
+    t.text     "req_bitstream"
+    t.text     "rep_bitstream"
+    t.text     "fault_bitstream"
+  end
+
+  add_index "sm_audit_steps", ["sm_auditable_type", "sm_auditable_id", "step_no", "attempt_no"], name: "uk_sm_audit_steps", unique: true
+
+  create_table "sm_bank_accounts", force: :cascade do |t|
+    t.string   "sm_code",          limit: 20,               null: false
+    t.string   "customer_id",      limit: 15,               null: false
+    t.string   "account_no",       limit: 20,               null: false
+    t.string   "mmid",             limit: 7,                null: false
+    t.string   "mobile_no",        limit: 10,               null: false
+    t.string   "created_by",       limit: 20
+    t.string   "updated_by",       limit: 20
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.integer  "lock_version",                default: 0,   null: false
+    t.string   "approval_status",  limit: 1,  default: "U", null: false
+    t.string   "last_action",      limit: 1,  default: "C", null: false
+    t.integer  "approved_version"
+    t.integer  "approved_id"
+  end
+
+  add_index "sm_bank_accounts", ["sm_code", "customer_id", "account_no", "approval_status"], name: "sm_bank_accounts_01", unique: true
+
+  create_table "sm_banks", force: :cascade do |t|
+    t.string   "code",                 limit: 20,                null: false
+    t.string   "name",                 limit: 100,               null: false
+    t.string   "bank_code",            limit: 20,                null: false
+    t.decimal  "low_balance_alert_at",                           null: false
+    t.string   "identity_user_id",     limit: 20,                null: false
+    t.string   "neft_allowed",         limit: 1,                 null: false
+    t.string   "imps_allowed",         limit: 1,                 null: false
+    t.string   "created_by",           limit: 20
+    t.string   "updated_by",           limit: 20
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.integer  "lock_version",                     default: 0,   null: false
+    t.string   "approval_status",      limit: 1,   default: "U", null: false
+    t.string   "last_action",          limit: 1,   default: "C", null: false
+    t.integer  "approved_version"
+    t.integer  "approved_id"
+    t.string   "is_enabled",           limit: 1,   default: "Y", null: false
+  end
+
+  add_index "sm_banks", ["code", "approval_status"], name: "sm_banks_01", unique: true
+  add_index "sm_banks", ["name", "bank_code"], name: "sm_banks_02"
+
+  create_table "sm_payments", force: :cascade do |t|
+    t.string   "req_no",            limit: 20
+    t.string   "req_version",       limit: 10
+    t.datetime "req_timestamp"
+    t.string   "partner_code",      limit: 20
+    t.string   "customer_id",       limit: 15
+    t.string   "debit_account_no",  limit: 20
+    t.string   "rmtr_account_no",   limit: 20
+    t.string   "rmtr_account_ifsc", limit: 50
+    t.string   "rmtr_full_name",    limit: 100
+    t.string   "rmtr_address1"
+    t.string   "rmtr_address2"
+    t.string   "rmtr_address3"
+    t.string   "rmtr_postal_code",  limit: 10
+    t.string   "rmtr_city",         limit: 100
+    t.string   "rmtr_state",        limit: 100
+    t.string   "rmtr_country",      limit: 100
+    t.string   "rmtr_mobile_no",    limit: 10
+    t.string   "rmtr_email_id",     limit: 100
+    t.string   "bene_full_name",    limit: 100
+    t.string   "bene_address1"
+    t.string   "bene_address2"
+    t.string   "bene_address3"
+    t.string   "bene_postal_code",  limit: 100
+    t.string   "bene_city",         limit: 100
+    t.string   "bene_state",        limit: 100
+    t.string   "bene_country",      limit: 100
+    t.string   "bene_mobile_no",    limit: 10
+    t.string   "bene_email_id",     limit: 100
+    t.string   "bene_account_no",   limit: 20
+    t.string   "bene_account_ifsc", limit: 50
+    t.string   "req_transfer_type", limit: 4
+    t.string   "transfer_ccy",      limit: 5
+    t.decimal  "transfer_amount"
+    t.string   "rmtr_to_bene_note", limit: 255
+    t.string   "rep_version",       limit: 20
+    t.string   "rep_no",            limit: 10
+    t.integer  "attempt_no"
+    t.string   "transfer_type",     limit: 4
+    t.string   "status_code",       limit: 50
+    t.string   "bank_ref_no",       limit: 50
+    t.string   "fault_code",        limit: 50
+    t.string   "fault_subcode",     limit: 50
+    t.string   "fault_reason",      limit: 1000
+    t.datetime "rep_timestamp"
+  end
+
+  add_index "sm_payments", ["req_no", "attempt_no"], name: "sm_payments_01", unique: true
+
+  create_table "sm_unapproved_records", force: :cascade do |t|
+    t.integer  "sm_approvable_id"
+    t.string   "sm_approvable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "su_customers", force: :cascade do |t|
     t.string   "account_no",            limit: 20

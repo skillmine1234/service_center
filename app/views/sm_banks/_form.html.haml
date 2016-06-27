@@ -8,6 +8,14 @@
     = f.hidden_field :approved_id
     = f.hidden_field :approved_version
     .control-group
+      = f.label :is_enabled, "Enabled?", :class => 'control-label'
+      - if f.object.is_enabled.nil?
+        = f.check_box :is_enabled, {:checked => "checked"},"Y","N"
+      - else 
+        = f.check_box :is_enabled, {},"Y","N"
+      #msg-error
+        = error_message_for(@sm_bank, :is_enabled, :prepend_text => "")
+    .control-group
       = f.label :code, "*Code", :class => 'control-label'
       = f.text_field :code, :maxlength => 20, :required => true
       #msg-error
@@ -19,12 +27,12 @@
         = error_message_for(@sm_bank, :name, :prepend_text => "")
     .control-group
       = f.label :bank_code, "*Bank Code", :class => 'control-label'
-      = f.text_field :bank_code, :maxlength => 20, :required => true
+      = f.text_field :bank_code, :maxlength => 11, :required => true
       #msg-error
         = error_message_for(@sm_bank, :bank_code, :prepend_text => "")
     .control-group
-      = f.label :low_balance_alert_at, "*Low Balance Alert At", :class => 'control-label'
-      = f.text_field :low_balance_alert_at, :required => true
+      = f.label :low_balance_alert_at, "Low Balance Alert At", :class => 'control-label'
+      = f.text_field :low_balance_alert_at
       #msg-error
         = error_message_for(@sm_bank, :low_balance_alert_at, :prepend_text => "")
     .control-group
@@ -34,7 +42,10 @@
         = error_message_for(@sm_bank, :identity_user_id, :prepend_text => "")
     .control-group
       = f.label :neft_allowed, "NEFT Allowed?", :class => 'control-label'
-      = f.check_box :neft_allowed, {},"Y","N"
+      - if f.object.neft_allowed.nil?
+        = f.check_box :neft_allowed, {:checked => "checked"},"Y","N"
+      - else 
+        = f.check_box :neft_allowed, {},"Y","N"
       #msg-error
         = error_message_for(@sm_bank, :neft_allowed, :prepend_text => "")
     .control-group

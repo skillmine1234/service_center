@@ -10,7 +10,7 @@ describe SmBank do
   end
   
   context 'validation' do
-    [:code, :name, :bank_code, :low_balance_alert_at, :identity_user_id, :neft_allowed, :imps_allowed].each do |att|
+    [:code, :name, :bank_code, :identity_user_id, :neft_allowed, :imps_allowed, :is_enabled].each do |att|
       it { should validate_presence_of(att) }
     end
 
@@ -38,10 +38,22 @@ describe SmBank do
       sm_bank2.errors_on(:code).should == ["has already been taken"]
     end
 
+    context "low_balance_alert_at" do 
+      it "should accept following values" do
+        should allow_value(0).for(:low_balance_alert_at)
+        should allow_value('9e20'.to_f).for(:low_balance_alert_at)
+      end
+
+      it "should not accept following values" do
+        should_not allow_value(-1).for(:low_balance_alert_at)
+        should_not allow_value('9e21'.to_f).for(:low_balance_alert_at)
+      end
+    end
+  
     it "should return error when low_balance_alert_at < 0" do
       sm_bank = Factory.build(:sm_bank, :low_balance_alert_at => -10)
       sm_bank.should_not be_valid
-      sm_bank.errors_on(:low_balance_alert_at).should == ["must be greater than 0"]
+      sm_bank.errors_on(:low_balance_alert_at).should == ["must be greater than or equal to 0"]
     end
   end
 
@@ -55,17 +67,19 @@ describe SmBank do
 
       should allow_value('ABCDCo').for(:name)
       should allow_value('ABCD Co').for(:name)
+      should allow_value('ABCD.Co').for(:name)
+      should allow_value('ABCD-Co').for(:name)
 
       should allow_value('ABCD0123456').for(:bank_code)
     end
 
     it "should not allow invalid format" do
-      sm_bank = Factory.build(:sm_bank, :code => "BANK-01", :name => "abcd-QWER", :bank_code => "@Bank01", :identity_user_id => "IUID-1")
+      sm_bank = Factory.build(:sm_bank, :code => "BANK-01", :name => "abcd@QWER", :bank_code => "@Bank01", :identity_user_id => "IUID-1")
       sm_bank.save.should be_false
       [:code, :identity_user_id].each do |att|
         sm_bank.errors_on(att).should == ["Invalid format, expected format is : {[a-z|A-Z|0-9]}"]
       end
-      sm_bank.errors_on(:name).should ==  ["Invalid format, expected format is : {[a-z|A-Z|0-9\\s]}"]
+      sm_bank.errors_on(:name).should ==  ["Invalid format, expected format is : {[a-z|A-Z|0-9|\\s|\\.|\\-]}"]
       sm_bank.errors_on(:bank_code).should ==  ["invalid format - expected format is : {[A-Z|a-z]{4}[0][A-Za-z0-9]{6}}"]
     end
   end
@@ -77,6 +91,15 @@ describe SmBank do
       sm_bank.code.should == "bank123"
       sm_bank.name.should == "abc bank"
       sm_bank.bank_code.should == "aabb0123456"
+      sm_bank.save.should be_true
+    end
+  end
+
+  context "set_low_balance_alert_at_if_nil" do 
+    it "should set low_balance_alert_at to 0, if it is nil" do 
+      sm_bank = Factory.build(:sm_bank, :code => "BANK123", :name => "ABB BANK", :bank_code => "AAAB0123456", :low_balance_alert_at => nil)
+      sm_bank.set_low_balance_alert_at_if_nil
+      sm_bank.low_balance_alert_at.should == 0
       sm_bank.save.should be_true
     end
   end

@@ -3,6 +3,9 @@
     = label_tag "Code", "Code", :class => 'control-label'
     = text_field_tag :code, params[:code]
   .control-group
+    = label_tag "Enabled?", "Enabled?", :class => 'control-label'
+    = select_tag :is_enabled, options_for_select([['Yes','Y'],['No','N']],params[:is_enabled]),:prompt => "ANY"
+  .control-group
     = label_tag "Name", "Name", :class => 'control-label'
     = text_field_tag :name, params[:name]
   .control-group

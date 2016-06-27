@@ -19,6 +19,8 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
+      Enabled?
+    %th{:style=>'text-align:left; background-color: lightblue;'}
       Code
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Name
@@ -41,8 +43,10 @@
         %td{:style=>'text-align:left;'}
           = link_to 'Edit', edit_sm_bank_path(sm_bank)
         %td{:style=>'text-align:left;'}
-          = sm_bank.code
+          = sm_bank.is_enabled
         %td{:style=>'text-align:left;'}
+          = sm_bank.code
+        %td{:style=>'text-align:left; word-break: break-word; width: 20%;'}
           = sm_bank.name
         %td{:style=>'text-align:left;'}
           = sm_bank.bank_code
