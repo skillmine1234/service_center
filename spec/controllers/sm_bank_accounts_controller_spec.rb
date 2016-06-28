@@ -67,7 +67,7 @@ describe SmBankAccountsController do
         expect {
           post :create, {:sm_bank_account => params}
         }.to change(SmBankAccount.unscoped, :count).by(1)
-        flash[:alert].should  match(/SM Bank Account successfully created and is pending for approval/)
+        flash[:alert].should  match(/Bank Account successfully created and is pending for approval/)
         response.should be_redirect
       end
 
@@ -144,7 +144,7 @@ describe SmBankAccountsController do
         put :update, {:id => sm_bank_account2.id, :sm_bank_account => params}
         sm_bank_account.reload
         sm_bank_account.mobile_no.should == "1234568888"
-        flash[:alert].should  match(/Someone edited the SM Bank Account the same time you did. Please re-apply your changes to the SM Bank Account/)
+        flash[:alert].should  match(/Someone edited the Bank Account the same time you did. Please re-apply your changes to the Bank Account/)
       end
     end
 

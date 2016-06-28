@@ -5,7 +5,7 @@ class SmBankAccount < ActiveRecord::Base
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
 
-  validates_presence_of :sm_code, :customer_id, :account_no, :mmid, :mobile_no
+  validates_presence_of :sm_code, :customer_id, :account_no, :mmid, :mobile_no, :is_enabled
 
   validates :sm_code, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}' }, length: { maximum: 20 }
   validates :customer_id, numericality: { only_integer: true }, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9]}'},length: { minimum: 3, maximum: 15 }

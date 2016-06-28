@@ -10,7 +10,7 @@ describe SmBankAccount do
   end
   
   context 'validation' do
-    [:sm_code, :customer_id, :account_no, :mmid, :mobile_no].each do |att|
+    [:sm_code, :customer_id, :account_no, :mmid, :mobile_no, :is_enabled].each do |att|
       it { should validate_presence_of(att) }
     end
 

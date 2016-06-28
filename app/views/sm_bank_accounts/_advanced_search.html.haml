@@ -3,6 +3,9 @@
     = label_tag "Sub Member Code", "Sub Member Code", :class => 'control-label'
     = text_field_tag :sm_code, params[:sm_code]
   .control-group
+    = label_tag "Enabled?", "Enabled?", :class => 'control-label'
+    = select_tag :is_enabled, options_for_select([['Yes','Y'],['No','N']],params[:is_enabled]),:prompt => "ANY"
+  .control-group
     = label_tag "Customer ID", "Customer ID", :class => 'control-label'
     = text_field_tag :customer_id, params[:customer_id]
   .control-group

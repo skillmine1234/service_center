@@ -13,5 +13,6 @@ FactoryGirl.define do
     approval_status "U"
     last_action "C"
     approved_version 1
+    is_enabled "Y"
   end
 end

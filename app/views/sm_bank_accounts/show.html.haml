@@ -20,6 +20,12 @@
             %td#msg-error
               = error_message_for(@sm_bank_account, :base, :prepend_text => "")
           %tr
+            %td.label Enabled?
+            %td.value
+              = @sm_bank_account.is_enabled
+            %td#msg-error
+              = error_message_for(@sm_bank_account, :is_enabled, :prepend_text => "")
+          %tr
             %td.label Sub Member Code
             %td.value
               = @sm_bank_account.sm_code

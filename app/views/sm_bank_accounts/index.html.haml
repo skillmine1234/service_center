@@ -19,6 +19,8 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
+      Enabled?
+    %th{:style=>'text-align:left; background-color: lightblue;'}
       Sub Member Code
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Customer ID
@@ -36,6 +38,8 @@
           = link_to 'Show', sm_bank_account
         %td{:style=>'text-align:left;'}
           = link_to 'Edit', edit_sm_bank_account_path(sm_bank_account)
+        %td{:style=>'text-align:left;'}
+          = sm_bank_account.is_enabled
         %td{:style=>'text-align:left;'}
           = sm_bank_account.sm_code
         %td{:style=>'text-align:left;'}
