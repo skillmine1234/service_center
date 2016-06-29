@@ -5,7 +5,7 @@ FactoryGirl.define do
     sequence(:code) {|n| "%04i" % "#{n}"}
     name "Foo"
     bank_code "abcd0123456"
-    low_balance_alert_at "9.99"
+    low_balance_alert_at 0
     identity_user_id "MyString"
     neft_allowed "N"
     imps_allowed "Y"

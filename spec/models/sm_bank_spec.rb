@@ -94,15 +94,6 @@ describe SmBank do
       sm_bank.save.should be_true
     end
   end
-
-  context "set_low_balance_alert_at_if_nil" do 
-    it "should set low_balance_alert_at to 0, if it is nil" do 
-      sm_bank = Factory.build(:sm_bank, :code => "BANK123", :name => "ABB BANK", :bank_code => "AAAB0123456", :low_balance_alert_at => nil)
-      sm_bank.set_low_balance_alert_at_if_nil
-      sm_bank.low_balance_alert_at.should == 0
-      sm_bank.save.should be_true
-    end
-  end
   
   context "default_scope" do 
     it "should only return 'A' records by default" do 

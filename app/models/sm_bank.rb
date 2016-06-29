@@ -15,19 +15,13 @@ class SmBank < ActiveRecord::Base
 
   validates_uniqueness_of :code, :scope => :approval_status
 
-  before_save :to_downcase, :set_low_balance_alert_at_if_nil
+  before_save :to_downcase
 
   def to_downcase
     unless self.frozen?
       self.code = self.code.downcase unless self.code.nil?
       self.name = self.name.downcase unless self.name.nil?
       self.bank_code = self.bank_code.downcase unless self.bank_code.nil?
-    end
-  end
-
-  def set_low_balance_alert_at_if_nil
-    unless self.frozen?
-      self.low_balance_alert_at = 0 if self.low_balance_alert_at.nil?
     end
   end
 end
