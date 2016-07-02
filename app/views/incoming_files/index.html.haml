@@ -29,10 +29,11 @@
       File Size
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Line Count
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Record Count
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Pending Approval
+    - if params[:sc_service] != 'ECOL'
+      %th{:style=>'text-align:left; background-color: lightblue;'}
+        Record Count
+      %th{:style=>'text-align:left; background-color: lightblue;'}
+        Pending Approval
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Status
     %th{:style=>'text-align:left; background-color: lightblue;'}
@@ -62,10 +63,11 @@
           = incoming_file.size_in_bytes
         %td{:style=>'text-align:left;'}
           = incoming_file.line_count
-        %td{:style=>'text-align:left;'}
-          = incoming_file.record_count
-        %td{:style=>'text-align:left;font-weight: bold;'}
-          = incoming_file.pending_approval
+        - if params[:sc_service] != 'ECOL'
+          %td{:style=>'text-align:left;'}
+            = incoming_file.record_count
+          %td{:style=>'text-align:left;font-weight: bold;'}
+            = incoming_file.pending_approval
         %td{:style=>'text-align:left;'}
           = incoming_file.job_status
         %td{:style=>'text-align:left;'}

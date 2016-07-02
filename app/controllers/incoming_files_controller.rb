@@ -68,6 +68,7 @@ class IncomingFilesController < ApplicationController
 
   def show
     @incoming_file = IncomingFile.unscoped.find_by_id(params[:id])
+    @skipped_count = @incoming_file.incoming_file_records.where(:status => "SKIPPED").count(:id)
   end
 
   def destroy
