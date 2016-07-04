@@ -21,12 +21,13 @@ describe SmBanksHelper do
       find_sm_banks({:name => 'abcd co.'}).should == []
       find_sm_banks({:name => 'abcdco.'}).should == []
 
-      sm_bank4 = Factory(:sm_bank, :bank_code => 'ABCD0123458', :approval_status => "A")
-      find_sm_banks({:bank_code => 'ABCD0123458'}).should == [sm_bank4]
-      find_sm_banks({:bank_code => 'abcd0123458'}).should == [sm_bank4]
-      find_sm_banks({:bank_code => 'abcd 0123458'}).should == []
-      find_sm_banks({:bank_code => 'abcd'}).should == []
-      find_sm_banks({:bank_code => 'abcd01'}).should == []
+      sm_bank4 = Factory(:sm_bank, :bank_code => 'AABB0CCC458', :approval_status => "A")
+      find_sm_banks({:bank_code => 'AABB0CCC458'}).should == [sm_bank4]
+      find_sm_banks({:bank_code => 'aabb0ccc458'}).should == []
+      find_sm_banks({:bank_code => 'AABC0CCC458'}).should == []
+      find_sm_banks({:bank_code => 'AABC0CCC459'}).should == []
+      find_sm_banks({:bank_code => 'AABC 0CCC459'}).should == []
+      find_sm_banks({:bank_code => 'AABC0CCC45'}).should == []
     end
   end  
 end

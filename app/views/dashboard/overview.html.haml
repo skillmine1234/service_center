@@ -334,7 +334,7 @@
         = "PC2 Apps"
 
 - if @current_user.group_names.include?("smb")
-  %h1 SMB
+  %h1 Sub Member Bank
   .slide-container
     .box  
       = link_to '/sm_unapproved_records' do
@@ -346,9 +346,9 @@
       = link_to '/sm_banks' do
         = image_tag 'sm_banks.jpg', :size => "102x70", :style=>"padding-bottom: 4%;"
       %br
-        = "Banks"
+        = "Sub Member Banks"
     .box
       = link_to '/sm_bank_accounts' do
         = image_tag 'sm_bank_accounts.jpg', :size => "90x90"
       %br
-        = "Bank Accounts"
+        = "Sub Member Bank Accounts"

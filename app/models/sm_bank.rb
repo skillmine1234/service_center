@@ -5,11 +5,13 @@ class SmBank < ActiveRecord::Base
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
 
+  has_many :sm_bank_accounts, :primary_key => 'bank_code', :foreign_key => 'sm_code', :class_name => 'SmBankAccount'
+
   validates_presence_of :code, :name, :bank_code, :identity_user_id, :neft_allowed, :imps_allowed, :is_enabled
 
   validates :code, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}' }, length: {maximum: 20}
   validates :name, format: {with: /\A[a-z|A-Z|0-9|\s|\.|\-]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\s|\.|\-]}' }, length: {maximum: 100}
-  validates :bank_code, format: {with: /\A[A-Z|a-z]{4}[0][A-Za-z0-9]{6}+\z/, message: "invalid format - expected format is : {[A-Z|a-z]{4}[0][A-Za-z0-9]{6}}" }
+  validates :bank_code, format: {with: /\A[A-Z]{4}[0][A-Z]{3}[0-9]{3}+\z/, message: "invalid format - expected format is : {[A-Z]{4}[0][A-Z]{3}[0-9]{3}}" }
   validates :low_balance_alert_at, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => '9e20'.to_f }
   validates :identity_user_id, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}'}, length: {maximum: 20}
 
@@ -21,7 +23,6 @@ class SmBank < ActiveRecord::Base
     unless self.frozen?
       self.code = self.code.downcase unless self.code.nil?
       self.name = self.name.downcase unless self.name.nil?
-      self.bank_code = self.bank_code.downcase unless self.bank_code.nil?
     end
   end
 end

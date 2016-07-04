@@ -150,19 +150,19 @@ describe SmBankAccountsController do
 
     describe "with invalid params" do
       it "assigns the sm_bank_account as @sm_bank_account" do
-        sm_bank_account = Factory(:sm_bank_account, :mobile_no => "1234568888")
+        sm_bank_account = Factory(:sm_bank_account, :account_no => "61112223333")
         params = sm_bank_account.attributes.slice(*sm_bank_account.class.attribute_names)
-        params[:mobile_no] = nil
+        params[:account_no] = nil
         put :update, {:id => sm_bank_account.to_param, :sm_bank_account => params}
         assigns(:sm_bank_account).should eq(sm_bank_account)
         sm_bank_account.reload
-        params[:mobile_no] = nil
+        params[:account_no] = nil
       end
 
       it "re-renders the 'edit' template when show_errors is true" do
         sm_bank_account = Factory(:sm_bank_account)
         params = sm_bank_account.attributes.slice(*sm_bank_account.class.attribute_names)
-        params[:mobile_no] = nil
+        params[:account_no] = nil
         put :update, {:id => sm_bank_account.id, :sm_bank_account => params, :show_errors => "true"}
         response.should render_template("edit")
       end

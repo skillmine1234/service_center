@@ -5,6 +5,7 @@ describe SmBank do
     it { should belong_to(:created_user) }
     it { should belong_to(:updated_user) }
     it { should have_one(:sm_unapproved_record) }
+    it { should have_many(:sm_bank_accounts) }
     it { should belong_to(:unapproved_record) }
     it { should belong_to(:approved_record) }
   end
@@ -70,7 +71,7 @@ describe SmBank do
       should allow_value('ABCD.Co').for(:name)
       should allow_value('ABCD-Co').for(:name)
 
-      should allow_value('ABCD0123456').for(:bank_code)
+      should allow_value('ABCD0EFG123').for(:bank_code)
     end
 
     it "should not allow invalid format" do
@@ -80,17 +81,18 @@ describe SmBank do
         sm_bank.errors_on(att).should == ["Invalid format, expected format is : {[a-z|A-Z|0-9]}"]
       end
       sm_bank.errors_on(:name).should ==  ["Invalid format, expected format is : {[a-z|A-Z|0-9|\\s|\\.|\\-]}"]
-      sm_bank.errors_on(:bank_code).should ==  ["invalid format - expected format is : {[A-Z|a-z]{4}[0][A-Za-z0-9]{6}}"]
+      sm_bank.errors_on(:bank_code).should ==  ["invalid format - expected format is : {[A-Z]{4}[0][A-Z]{3}[0-9]{3}}"]
+
+      should_not allow_value('ABCD0123456').for(:bank_code)
     end
   end
 
   context "to_downcase" do 
-    it "should convert the code, name, bank_code to lower case" do 
-      sm_bank = Factory.build(:sm_bank, :code => "BANK123", :name => "ABC BANK", :bank_code => "AABB0123456")
+    it "should convert the code, name to lower case" do 
+      sm_bank = Factory.build(:sm_bank, :code => "BANK123", :name => "ABC BANK")
       sm_bank.to_downcase
       sm_bank.code.should == "bank123"
       sm_bank.name.should == "abc bank"
-      sm_bank.bank_code.should == "aabb0123456"
       sm_bank.save.should be_true
     end
   end

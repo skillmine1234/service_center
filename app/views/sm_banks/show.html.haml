@@ -1,7 +1,7 @@
 .form-horizontal.show_form
   .form-main-with-color{:style=>'background-color: #F1F2F8; height: 900px;'}
     #form-details
-      %h3 Bank Details 
+      %h3 Sub Member Bank Details 
       %br
       %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
         - can = can? :edit, @sm_bank
@@ -26,7 +26,7 @@
             %td#msg-error
               = error_message_for(@sm_bank, :is_enabled, :prepend_text => "")
           %tr
-            %td.label Code
+            %td.label SMB Code
             %td.value
               = @sm_bank.code
             %td#msg-error
@@ -38,7 +38,7 @@
             %td#msg-error
               = error_message_for(@sm_bank, :name, :prepend_text => "")
           %tr
-            %td.label Bank Code
+            %td.label SMB IFSC Code
             %td.value
               = @sm_bank.bank_code
             %td#msg-error

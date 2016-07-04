@@ -17,7 +17,7 @@
         = error_message_for(@sm_bank, :is_enabled, :prepend_text => "")
     .control-group
       = f.label :sm_code, "*Sub Member Code", :class => 'control-label'
-      = f.text_field :sm_code, :maxlength => 20, :required => true
+      = f.text_field :sm_code, :maxlength => 11, :required => true
       #msg-error
         = error_message_for(@sm_bank_account, :sm_code, :prepend_text => "")
     .control-group
@@ -31,18 +31,18 @@
       #msg-error
         = error_message_for(@sm_bank_account, :account_no, :prepend_text => "")
     .control-group
-      = f.label :mmid, "*MMID", :class => 'control-label'
-      = f.text_field :mmid, :minlength => 7, :maxlength => 7, :required => true
+      = f.label :mmid, "MMID", :class => 'control-label'
+      = f.text_field :mmid, :minlength => 7, :maxlength => 7
       #msg-error
         = error_message_for(@sm_bank_account, :mmid, :prepend_text => "")
     .control-group
-      = f.label :mobile_no, "*Mobile No", :class => 'control-label'
-      = f.text_field :mobile_no, :minlength => 10, :maxlength => 10, :required => true
+      = f.label :mobile_no, "Mobile No", :class => 'control-label'
+      = f.text_field :mobile_no, :minlength => 10, :maxlength => 10
       #msg-error
         = error_message_for(@sm_bank_account, :mobile_no, :prepend_text => "")
     
   .form-actions
     - (f.object.new_record? and f.object.sm_code.nil?) ? label_name = "Create" : label_name = "Update"
-    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_sm_bank_account', :value => label_name + ' Bank Account'
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_sm_bank_account', :value => label_name + ' Sub Member Bank Account'
     = link_to :Cancel,'/sm_bank_accounts', :name => 'cancel', :class=>"cancel btn"
 

@@ -5,12 +5,13 @@ describe SmBankAccount do
     it { should belong_to(:created_user) }
     it { should belong_to(:updated_user) }
     it { should have_one(:sm_unapproved_record) }
+    it { should belong_to(:sm_bank) }
     it { should belong_to(:unapproved_record) }
     it { should belong_to(:approved_record) }
   end
   
   context 'validation' do
-    [:sm_code, :customer_id, :account_no, :mmid, :mobile_no, :is_enabled].each do |att|
+    [:sm_code, :customer_id, :account_no, :is_enabled].each do |att|
       it { should validate_presence_of(att) }
     end
 
@@ -25,13 +26,9 @@ describe SmBankAccount do
       should validate_length_of(:mobile_no).is_at_least(10).is_at_most(10)
     end
 
-    [:customer_id, :mmid, :mobile_no].each do |att|
-      it { should validate_numericality_of(att) }
-    end
-
     it "should return error if sm_code is already taken" do
-      sm_bank_account1 = Factory(:sm_bank_account, :sm_code => "0999", :customer_id => "9999", :account_no => "6099999901", :approval_status => 'A')
-      sm_bank_account2 = Factory.build(:sm_bank_account, :sm_code => "0999", :customer_id => "9999", :account_no => "6099999901", :approval_status => 'A')
+      sm_bank_account1 = Factory(:sm_bank_account, :sm_code => "AAAB0XYZ123", :customer_id => "9999", :account_no => "6099999901", :approval_status => 'A')
+      sm_bank_account2 = Factory.build(:sm_bank_account, :sm_code => "AAAB0XYZ123", :customer_id => "9999", :account_no => "6099999901", :approval_status => 'A')
       sm_bank_account2.should_not be_valid
       sm_bank_account2.errors_on(:sm_code).should == ["has already been taken"]
     end
@@ -39,46 +36,36 @@ describe SmBankAccount do
 
   context "fields format" do
     it "should allow valid format" do
-      [:sm_code, :account_no].each do |att|
-        should allow_value('9876').for(att)
-        should allow_value('ABCD90').for(att)
-        should allow_value('abcd1234E').for(att)
-      end
+      should allow_value('ABCD0EFG123').for(:sm_code)
+
+      should allow_value('9876').for(:account_no)
+      should allow_value('0123456789').for(:account_no)
 
       should allow_value('123').for(:customer_id)
       should allow_value('123456789098765').for(:customer_id)
 
       should allow_value('1234567').for(:mmid)
+      should allow_value(nil).for(:mmid)
 
       should allow_value('9087654321').for(:mobile_no)
+      should allow_value(nil).for(:mobile_no)
     end
 
     it "should not allow invalid format" do
       sm_bank_account = Factory.build(:sm_bank_account, :sm_code => "BANK_ACC_01", :customer_id => "CUST01", :account_no => "ACC-01", :mmid => "MMID-01", :mobile_no => "+918888665")
       sm_bank_account.save.should be_false
-      [:sm_code, :account_no].each do |att|
-        sm_bank_account.errors_on(att).should == ["Invalid format, expected format is : {[a-z|A-Z|0-9]}"]
-      end
-      sm_bank_account.errors_on(:customer_id).should == ["is not a number", "Invalid format, expected format is : {[0-9]}"]
-      sm_bank_account.errors_on(:mmid).should == ["is not a number"]
-      sm_bank_account.errors_on(:mobile_no).should == ["Invalid format, expected format is : {[0-9]}"]
-    end
-  end
-
-  context "to_downcase" do 
-    it "should convert the sm_code, account_no to lower case" do 
-      sm_bank_account = Factory.build(:sm_bank_account, :sm_code => "BANKACCCODE01", :account_no => "BANKACC01")
-      sm_bank_account.to_downcase
-      sm_bank_account.sm_code.should == "bankacccode01"
-      sm_bank_account.account_no.should == "bankacc01"
-      sm_bank_account.save.should be_true
+      sm_bank_account.errors_on(:account_no).should == ["Invalid format, expected format is : {[0-9]}"]
+      sm_bank_account.errors_on(:sm_code).should == ["invalid format - expected format is : {[A-Z]{4}[0][A-Z]{3}[0-9]{3}}"]
+      sm_bank_account.errors_on(:customer_id).should == ["Invalid format, expected format is : {[0-9]}"]
+      sm_bank_account.errors_on(:mmid).should == ["Invalid format, expected format is : {[0-9]{7}}"]
+      sm_bank_account.errors_on(:mobile_no).should == ["Invalid format, expected format is : {[0-9]{10}}"]
     end
   end
   
   context "default_scope" do 
     it "should only return 'A' records by default" do 
       sm_bank_account1 = Factory(:sm_bank_account, :approval_status => 'A') 
-      sm_bank_account2 = Factory(:sm_bank_account, :sm_code => '1234567891')
+      sm_bank_account2 = Factory(:sm_bank_account, :sm_code => 'AABB0CCC222')
       SmBankAccount.all.should == [sm_bank_account1]
       sm_bank_account2.approval_status = 'A'
       sm_bank_account2.save
