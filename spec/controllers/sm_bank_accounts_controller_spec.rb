@@ -12,13 +12,15 @@ describe SmBankAccountsController do
 
   describe "GET index" do
     it "assigns all sm_bank_accounts as @sm_bank_accounts" do
-      sm_bank_account = Factory(:sm_bank_account, :approval_status => 'A')
+      sm_bank = Factory(:sm_bank, :bank_code => "AAAA0CCC111", :approval_status => 'A')
+      sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.bank_code, :approval_status => 'A')
       get :index
       assigns(:sm_bank_accounts).should eq([sm_bank_account])
     end
 
     it "assigns all unapproved sm_bank_accounts as @sm_bank_accounts when approval_status is passed" do
-      sm_bank_account = Factory(:sm_bank_account, :approval_status => 'U')
+      sm_bank = Factory(:sm_bank, :bank_code => "AAAA0CCC112", :approval_status => 'A')
+      sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.bank_code, :approval_status => 'U')
       get :index, :approval_status => 'U'
       assigns(:sm_bank_accounts).should eq([sm_bank_account])
     end
@@ -26,7 +28,8 @@ describe SmBankAccountsController do
 
   describe "GET show" do
     it "assigns the requested sm_bank_account as @sm_bank_account" do
-      sm_bank_account = Factory(:sm_bank_account)
+      sm_bank = Factory(:sm_bank, :bank_code => "AAAA0CCC113", :approval_status => 'A')
+      sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.bank_code)
       get :show, {:id => sm_bank_account.id}
       assigns(:sm_bank_account).should eq(sm_bank_account)
     end
@@ -41,19 +44,22 @@ describe SmBankAccountsController do
 
   describe "GET edit" do
     it "assigns the requested sm_bank_account with status 'U' as @sm_bank_account" do
-      sm_bank_account = Factory(:sm_bank_account, :approval_status => 'U')
+      sm_bank = Factory(:sm_bank, :bank_code => "AAAA0CCC114", :approval_status => 'A')
+      sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.bank_code, :approval_status => 'U')
       get :edit, {:id => sm_bank_account.id}
       assigns(:sm_bank_account).should eq(sm_bank_account)
     end
 
     it "assigns the requested sm_bank_account with status 'A' as @sm_bank_account" do
-      sm_bank_account = Factory(:sm_bank_account,:approval_status => 'A')
+      sm_bank = Factory(:sm_bank, :bank_code => "AAAA0CCC115", :approval_status => 'A')
+      sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.bank_code, :approval_status => 'A')
       get :edit, {:id => sm_bank_account.id}
       assigns(:sm_bank_account).should eq(sm_bank_account)
     end
 
     it "assigns the new sm_bank_account with requested sm_bank_account params when status 'A' as @sm_bank_account" do
-      sm_bank_account = Factory(:sm_bank_account,:approval_status => 'A')
+      sm_bank = Factory(:sm_bank, :bank_code => "AAAA0CCC116", :approval_status => 'A')
+      sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.bank_code, :approval_status => 'A')
       params = (sm_bank_account.attributes).merge({:approved_id => sm_bank_account.id,:approved_version => sm_bank_account.lock_version})
       get :edit, {:id => sm_bank_account.id}
       assigns(:sm_bank_account).should eq(SmBankAccount.new(params))
@@ -63,7 +69,8 @@ describe SmBankAccountsController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new sm_bank_account" do
-        params = Factory.attributes_for(:sm_bank_account)
+        sm_bank = Factory(:sm_bank, :bank_code => "AAAA0CCC126", :approval_status => 'A')
+        params = Factory.attributes_for(:sm_bank_account, :sm_code => sm_bank.bank_code)
         expect {
           post :create, {:sm_bank_account => params}
         }.to change(SmBankAccount.unscoped, :count).by(1)
@@ -72,14 +79,16 @@ describe SmBankAccountsController do
       end
 
       it "assigns a newly created sm_bank_account as @sm_bank_account" do
-        params = Factory.attributes_for(:sm_bank_account)
+        sm_bank = Factory(:sm_bank, :bank_code => "AAAA0CCC127", :approval_status => 'A')
+        params = Factory.attributes_for(:sm_bank_account, :sm_code => sm_bank.bank_code)
         post :create, {:sm_bank_account => params}
         assigns(:sm_bank_account).should be_a(SmBankAccount)
         assigns(:sm_bank_account).should be_persisted
       end
 
       it "redirects to the created sm_bank_account" do
-        params = Factory.attributes_for(:sm_bank_account)
+        sm_bank = Factory(:sm_bank, :bank_code => "AAAA0CCC128", :approval_status => 'A')
+        params = Factory.attributes_for(:sm_bank_account, :sm_code => sm_bank.bank_code)
         post :create, {:sm_bank_account => params}
         response.should redirect_to(SmBankAccount.unscoped.last)
       end
@@ -87,7 +96,8 @@ describe SmBankAccountsController do
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved sm_bank_account as @sm_bank_account" do
-        params = Factory.attributes_for(:sm_bank_account)
+        sm_bank = Factory(:sm_bank, :bank_code => "AAAA0CCC129", :approval_status => 'A')
+        params = Factory.attributes_for(:sm_bank_account, :sm_code => sm_bank.bank_code)
         params[:sm_code] = nil
         expect {
           post :create, {:sm_bank_account => params}
@@ -97,7 +107,8 @@ describe SmBankAccountsController do
       end
 
       it "re-renders the 'new' template when show_errors is true" do
-        params = Factory.attributes_for(:sm_bank_account)
+        sm_bank = Factory(:sm_bank, :bank_code => "AAAA0CCC130", :approval_status => 'A')
+        params = Factory.attributes_for(:sm_bank_account, :sm_code => sm_bank.bank_code)
         params[:sm_code] = nil
         post :create, {:sm_bank_account => params}
         response.should render_template("new")
@@ -108,7 +119,8 @@ describe SmBankAccountsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested sm_bank_account" do
-        sm_bank_account = Factory(:sm_bank_account, :mobile_no => "1234567888")
+        sm_bank = Factory(:sm_bank, :bank_code => "AAAA0CCC117", :approval_status => 'A')
+        sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.bank_code, :mobile_no => "1234567888")
         params = sm_bank_account.attributes.slice(*sm_bank_account.class.attribute_names)
         params[:mobile_no] = "1234568888"
         put :update, {:id => sm_bank_account.id, :sm_bank_account => params}
@@ -117,7 +129,8 @@ describe SmBankAccountsController do
       end
 
       it "assigns the requested sm_bank_account as @sm_bank_account" do
-        sm_bank_account = Factory(:sm_bank_account, :mobile_no => "1234567888")
+        sm_bank = Factory(:sm_bank, :bank_code => "AAAA0CCC118", :approval_status => 'A')
+        sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.bank_code, :mobile_no => "1234567888")
         params = sm_bank_account.attributes.slice(*sm_bank_account.class.attribute_names)
         params[:mobile_no] = "1234568888"
         put :update, {:id => sm_bank_account.to_param, :sm_bank_account => params}
@@ -125,7 +138,8 @@ describe SmBankAccountsController do
       end
 
       it "redirects to the sm_bank_account" do
-        sm_bank_account = Factory(:sm_bank_account, :mobile_no => "1234568888")
+        sm_bank = Factory(:sm_bank, :bank_code => "AAAA0CCC119", :approval_status => 'A')
+        sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.bank_code, :mobile_no => "1234568888")
         params = sm_bank_account.attributes.slice(*sm_bank_account.class.attribute_names)
         params[:mobile_no] = "1234568888"
         put :update, {:id => sm_bank_account.to_param, :sm_bank_account => params}
@@ -133,7 +147,8 @@ describe SmBankAccountsController do
       end
 
       it "should raise error when tried to update at same time by many" do
-        sm_bank_account = Factory(:sm_bank_account, :mobile_no => "1234568888")
+        sm_bank = Factory(:sm_bank, :bank_code => "AAAA0CCC120", :approval_status => 'A')
+        sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.bank_code, :mobile_no => "1234568888")
         params = sm_bank_account.attributes.slice(*sm_bank_account.class.attribute_names)
         params[:mobile_no] = "1234568888"
         sm_bank_account2 = sm_bank_account
@@ -150,7 +165,8 @@ describe SmBankAccountsController do
 
     describe "with invalid params" do
       it "assigns the sm_bank_account as @sm_bank_account" do
-        sm_bank_account = Factory(:sm_bank_account, :account_no => "61112223333")
+        sm_bank = Factory(:sm_bank, :bank_code => "AAAA0CCC121", :approval_status => 'A')
+        sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.bank_code, :account_no => "61112223333")
         params = sm_bank_account.attributes.slice(*sm_bank_account.class.attribute_names)
         params[:account_no] = nil
         put :update, {:id => sm_bank_account.to_param, :sm_bank_account => params}
@@ -160,7 +176,8 @@ describe SmBankAccountsController do
       end
 
       it "re-renders the 'edit' template when show_errors is true" do
-        sm_bank_account = Factory(:sm_bank_account)
+        sm_bank = Factory(:sm_bank, :bank_code => "AAAA0CCC122", :approval_status => 'A')
+        sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.bank_code)
         params = sm_bank_account.attributes.slice(*sm_bank_account.class.attribute_names)
         params[:account_no] = nil
         put :update, {:id => sm_bank_account.id, :sm_bank_account => params, :show_errors => "true"}
@@ -171,7 +188,8 @@ describe SmBankAccountsController do
  
   describe "GET audit_logs" do
     it "assigns the requested sm_bank_account as @sm_bank_account" do
-      sm_bank_account = Factory(:sm_bank_account)
+      sm_bank = Factory(:sm_bank, :bank_code => "AAAA0CCC123", :approval_status => 'A')
+      sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.bank_code)
       get :audit_logs, {:id => sm_bank_account.id, :version_id => 0}
       assigns(:sm_bank_account).should eq(sm_bank_account)
       assigns(:audit).should eq(sm_bank_account.audits.first)
@@ -186,8 +204,9 @@ describe SmBankAccountsController do
       user_role = UserRole.find_by_user_id(@user.id)
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
-      sm_bank_account1 = Factory(:sm_bank_account, :approval_status => 'A')
-      sm_bank_account2 = Factory(:sm_bank_account, :approval_status => 'U', :mobile_no => "1234568888", :approved_version => sm_bank_account1.lock_version, :approved_id => sm_bank_account1.id, :created_by => 666)
+      sm_bank = Factory(:sm_bank, :bank_code => "AAAA0CCC124", :approval_status => 'A')
+      sm_bank_account1 = Factory(:sm_bank_account, :sm_code => sm_bank.bank_code, :approval_status => 'A')
+      sm_bank_account2 = Factory(:sm_bank_account, :sm_code => sm_bank.bank_code, :approval_status => 'U', :mobile_no => "1234568888", :approved_version => sm_bank_account1.lock_version, :approved_id => sm_bank_account1.id, :created_by => 666)
       # the following line is required for reload to get triggered (TODO)
       sm_bank_account1.approval_status.should == 'A'
       SmUnapprovedRecord.count.should == 1
@@ -203,7 +222,8 @@ describe SmBankAccountsController do
       user_role = UserRole.find_by_user_id(@user.id)
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
-      sm_bank_account = Factory(:sm_bank_account, :mobile_no => '1234568888', :approval_status => 'U')
+      sm_bank = Factory(:sm_bank, :bank_code => "AAAA0CCC125", :approval_status => 'A')
+      sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.bank_code, :mobile_no => '1234568888', :approval_status => 'U')
       SmUnapprovedRecord.count.should == 1
       put :approve, {:id => sm_bank_account.id}
       SmUnapprovedRecord.count.should == 0
