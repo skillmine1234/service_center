@@ -16,8 +16,8 @@ describe SmBankAccount do
     end
 
     it do 
-      sm_bank = Factory(:sm_bank, :bank_code => "AAAB0XYZ444", :approval_status => 'A')
-      sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.bank_code, :approval_status => 'A')
+      sm_bank = Factory(:sm_bank, :code => "AAA1201", :approval_status => 'A')
+      sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.code, :approval_status => 'A')
       should validate_uniqueness_of(:sm_code).scoped_to(:customer_id, :account_no, :approval_status)
 
       should validate_length_of(:sm_code).is_at_most(20) 
@@ -28,18 +28,18 @@ describe SmBankAccount do
     end
 
     it "should return error if sm_code is already taken" do
-      sm_bank = Factory(:sm_bank, :bank_code => "AAAB0XYZ123", :approval_status => 'A')
-      sm_bank_account1 = Factory(:sm_bank_account, :sm_code => sm_bank.bank_code, :customer_id => "9999", :account_no => "6099999901", :approval_status => 'A')
-      sm_bank_account2 = Factory.build(:sm_bank_account, :sm_code => sm_bank.bank_code, :customer_id => "9999", :account_no => "6099999901", :approval_status => 'A')
+      sm_bank = Factory(:sm_bank, :code => "AAA1202", :approval_status => 'A')
+      sm_bank_account1 = Factory(:sm_bank_account, :sm_code => sm_bank.code, :customer_id => "9999", :account_no => "6099999901", :approval_status => 'A')
+      sm_bank_account2 = Factory.build(:sm_bank_account, :sm_code => sm_bank.code, :customer_id => "9999", :account_no => "6099999901", :approval_status => 'A')
       sm_bank_account2.should_not be_valid
       sm_bank_account2.errors_on(:sm_code).should == ["has already been taken"]
     end
 
-    it "should return error if sm_code not present in banks" do
-      sm_bank_account1 = Factory.build(:sm_bank_account, :sm_code => "ABAB0XYZ124", :approval_status => 'A')
+    it "should return error if sm_code not present in bank" do
+      sm_bank_account1 = Factory.build(:sm_bank_account, :sm_code => "AAA1203", :approval_status => 'A')
       sm_bank_account1.should_not be_valid
       sm_bank_account1.errors_on(:sm_code).should == ["is not present in bank"]
-      sm_bank = Factory(:sm_bank, :bank_code => "ABAB0XYZ124", :approval_status => 'A')
+      sm_bank = Factory(:sm_bank, :code => "AAA1203", :approval_status => 'A')
       sm_bank_account1.sm_bank = sm_bank
       sm_bank_account1.should be_valid
     end
@@ -47,10 +47,10 @@ describe SmBankAccount do
 
   context "fields format" do
     it "should allow valid format" do
-      sm_bank = Factory(:sm_bank, :bank_code => "ABCD0EFG123", :approval_status => 'A')
-      sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.bank_code, :approval_status => 'A')
+      sm_bank = Factory(:sm_bank, :code => "AAA1204", :approval_status => 'A')
+      sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.code, :approval_status => 'A')
 
-      should allow_value('ABCD0EFG123').for(:sm_code)
+      should allow_value(sm_bank.code).for(:sm_code)
 
       should allow_value('9876').for(:account_no)
       should allow_value('0123456789').for(:account_no)
@@ -66,8 +66,8 @@ describe SmBankAccount do
     end
 
     it "should not allow invalid format" do
-      sm_bank = Factory(:sm_bank, :bank_code => "ABCD0EFG222", :approval_status => 'A')
-      sm_bank_account = Factory.build(:sm_bank_account, :sm_code => sm_bank.bank_code, :customer_id => "CUST01", :account_no => "ACC-01", :mmid => "MMID-01", :mobile_no => "+918888665")
+      sm_bank = Factory(:sm_bank, :code => "AAA1205", :approval_status => 'A')
+      sm_bank_account = Factory.build(:sm_bank_account, :sm_code => sm_bank.code, :customer_id => "CUST01", :account_no => "ACC-01", :mmid => "MMID-01", :mobile_no => "+918888665")
       sm_bank_account.save.should be_false
       sm_bank_account.errors_on(:account_no).should == ["Invalid format, expected format is : {[0-9]}"]
       sm_bank_account.errors_on(:customer_id).should == ["Invalid format, expected format is : {[0-9]}"]
@@ -75,12 +75,23 @@ describe SmBankAccount do
       sm_bank_account.errors_on(:mobile_no).should == ["Invalid format, expected format is : {[0-9]{10}}"]
     end
   end
+
+  context "to_downcase" do    
+    it "should convert the sm_code, account_no to lower case" do
+      sm_bank = Factory(:sm_bank, :code => "AAA1205", :approval_status => 'A') 
+      sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.code)
+      sm_bank_account.to_downcase   
+      sm_bank_account.sm_code.should == "aaa1205"   
+      sm_bank_account.save.should be_true   
+    end
+  end
+
   
   context "default_scope" do 
     it "should only return 'A' records by default" do 
-      sm_bank = Factory(:sm_bank, :bank_code => "AABB0CCC222", :approval_status => 'A')
-      sm_bank_account1 = Factory(:sm_bank_account, :sm_code => sm_bank.bank_code, :approval_status => 'A') 
-      sm_bank_account2 = Factory(:sm_bank_account, :sm_code => sm_bank.bank_code)
+      sm_bank = Factory(:sm_bank, :code => "AAA1206", :approval_status => 'A')
+      sm_bank_account1 = Factory(:sm_bank_account, :sm_code => sm_bank.code, :approval_status => 'A') 
+      sm_bank_account2 = Factory(:sm_bank_account, :sm_code => sm_bank.code)
       SmBankAccount.all.should == [sm_bank_account1]
       sm_bank_account2.approval_status = 'A'
       sm_bank_account2.save
@@ -90,21 +101,21 @@ describe SmBankAccount do
 
   context "sm_unapproved_records" do 
     it "oncreate: should create sm_unapproved_record if the approval_status is 'U'" do
-      sm_bank = Factory(:sm_bank, :bank_code => "AABB0CCC333", :approval_status => 'A')
-      sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.bank_code)
+      sm_bank = Factory(:sm_bank, :code => "AAA1207", :approval_status => 'A')
+      sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.code)
       sm_bank_account.reload
       sm_bank_account.sm_unapproved_record.should_not be_nil
     end
 
     it "oncreate: should not create sm_unapproved_record if the approval_status is 'A'" do
-      sm_bank = Factory(:sm_bank, :bank_code => "AABB0CCC444", :approval_status => 'A')
-      sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.bank_code, :approval_status => 'A')
+      sm_bank = Factory(:sm_bank, :code => "AAA1208", :approval_status => 'A')
+      sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.code, :approval_status => 'A')
       sm_bank_account.sm_unapproved_record.should be_nil
     end
 
     it "onupdate: should not remove sm_unapproved_record if approval_status did not change from U to A" do
-      sm_bank = Factory(:sm_bank, :bank_code => "AABB0CCC555", :approval_status => 'A')
-      sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.bank_code)
+      sm_bank = Factory(:sm_bank, :code => "AAA1209", :approval_status => 'A')
+      sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.code)
       sm_bank_account.reload
       sm_bank_account.sm_unapproved_record.should_not be_nil
       record = sm_bank_account.sm_unapproved_record
@@ -116,8 +127,8 @@ describe SmBankAccount do
     end
     
     it "onupdate: should remove sm_unapproved_record if the approval_status changed from 'U' to 'A' (approval)" do
-      sm_bank = Factory(:sm_bank, :bank_code => "AABB0CCC666", :approval_status => 'A')
-      sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.bank_code)
+      sm_bank = Factory(:sm_bank, :code => "AAA1210", :approval_status => 'A')
+      sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.code)
       sm_bank_account.reload
       sm_bank_account.sm_unapproved_record.should_not be_nil
       # the approval process changes the approval_status from U to A for a newly edited record
@@ -128,8 +139,8 @@ describe SmBankAccount do
     end
     
     it "ondestroy: should remove sm_unapproved_record if the record with approval_status 'U' was destroyed (approval) " do
-      sm_bank = Factory(:sm_bank, :bank_code => "AABB0CCC777", :approval_status => 'A')
-      sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.bank_code)
+      sm_bank = Factory(:sm_bank, :code => "AAA1211", :approval_status => 'A')
+      sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.code)
       sm_bank_account.reload
       sm_bank_account.sm_unapproved_record.should_not be_nil
       record = sm_bank_account.sm_unapproved_record
@@ -141,25 +152,25 @@ describe SmBankAccount do
 
   context "approve" do 
     it "should approve unapproved_record" do 
-      sm_bank = Factory(:sm_bank, :bank_code => "AABB0CCC888", :approval_status => 'A')
-      sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.bank_code, :approval_status => 'U')
+      sm_bank = Factory(:sm_bank, :code => "AAA1212", :approval_status => 'A')
+      sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.code, :approval_status => 'U')
       sm_bank_account.approve.should == ""
       sm_bank_account.approval_status.should == 'A'
     end
 
     it "should return error when trying to approve unmatched version" do 
-      sm_bank = Factory(:sm_bank, :bank_code => "AABB0CCC999", :approval_status => 'A')
-      sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.bank_code, :approval_status => 'A')
-      sm_bank_account1 = Factory(:sm_bank_account, :sm_code => sm_bank.bank_code, :approval_status => 'U', :approved_id => sm_bank_account.id, :approved_version => 6)
+      sm_bank = Factory(:sm_bank, :code => "AAA1213", :approval_status => 'A')
+      sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.code, :approval_status => 'A')
+      sm_bank_account1 = Factory(:sm_bank_account, :sm_code => sm_bank.code, :approval_status => 'U', :approved_id => sm_bank_account.id, :approved_version => 6)
       sm_bank_account1.approve.should == "The record version is different from that of the approved version" 
     end
   end
 
   context "enable_approve_button?" do 
     it "should return true if approval_status is 'U' else false" do 
-      sm_bank = Factory(:sm_bank, :bank_code => "AABB0CCC100", :approval_status => 'A')
-      sm_bank_account1 = Factory(:sm_bank_account, :sm_code => sm_bank.bank_code, :approval_status => 'A')
-      sm_bank_account2 = Factory(:sm_bank_account, :sm_code => sm_bank.bank_code, :approval_status => 'U')
+      sm_bank = Factory(:sm_bank, :code => "AAA1214", :approval_status => 'A')
+      sm_bank_account1 = Factory(:sm_bank_account, :sm_code => sm_bank.code, :approval_status => 'A')
+      sm_bank_account2 = Factory(:sm_bank_account, :sm_code => sm_bank.code, :approval_status => 'U')
       sm_bank_account1.enable_approve_button?.should == false
       sm_bank_account2.enable_approve_button?.should == true
     end

@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :sm_bank_account do
-    sequence(:sm_code) {|n| "ABCD"+ "0EFG" "%03i" % "#{n}"}
+    sequence(:sm_code) {|n| "AB"+ "%03i" % "#{n}"}
     sequence(:customer_id) {|n| "9" + "%03i" % "#{n}" }
     sequence(:account_no) {|n| "6" + "%09i" % "#{n}" }
     mmid 1234534

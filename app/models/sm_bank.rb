@@ -5,7 +5,7 @@ class SmBank < ActiveRecord::Base
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
 
-  has_many :sm_bank_accounts, :primary_key => 'bank_code', :foreign_key => 'sm_code', :class_name => 'SmBankAccount'
+  has_many :sm_bank_accounts, :primary_key => 'code', :foreign_key => 'sm_code', :class_name => 'SmBankAccount'
 
   validates_presence_of :code, :name, :bank_code, :identity_user_id, :neft_allowed, :imps_allowed, :is_enabled
 
