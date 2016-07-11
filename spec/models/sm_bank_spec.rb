@@ -96,6 +96,18 @@ describe SmBank do
       sm_bank.save.should be_true
     end
   end
+
+  context "imps_allowed?" do 
+    it "should return true if imps_allowed is 'Y'" do 
+      sm_bank = Factory.build(:sm_bank, :imps_allowed => "Y", :approval_status => 'A')
+      sm_bank.imps_allowed?.should == true
+    end
+
+    it "should return false if imps_allowed is 'N'" do 
+      sm_bank = Factory.build(:sm_bank, :imps_allowed => "N", :approval_status => 'A')
+      sm_bank.imps_allowed?.should == false
+    end
+  end
   
   context "default_scope" do 
     it "should only return 'A' records by default" do 

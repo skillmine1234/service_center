@@ -23,8 +23,38 @@ describe SmBankAccount do
       should validate_length_of(:sm_code).is_at_most(20) 
       should validate_length_of(:customer_id).is_at_least(3).is_at_most(15)
       should validate_length_of(:account_no).is_at_least(1).is_at_most(15)
-      should validate_length_of(:mmid).is_at_least(7).is_at_most(7)
-      should validate_length_of(:mobile_no).is_at_least(10).is_at_most(10)
+    end
+
+    it "should return presence validation error on mmid and mobile_no if is_mmid_and_mobile_no_mandatory? is true" do
+      sm_bank = Factory(:sm_bank, :code => "AAA1215", :imps_allowed => "Y", :approval_status => 'A')
+      sm_bank_account = Factory.build(:sm_bank_account, :sm_code => sm_bank.code, :mmid => nil, :mobile_no => nil)
+      sm_bank_account.should_not be_valid
+      sm_bank_account.errors_on(:mmid).should == ["can't be blank", "Invalid format, expected format is : {[0-9]{7}}", "is too short (minimum is 7 characters)"]
+      sm_bank_account.errors_on(:mobile_no).should == ["can't be blank", "Invalid format, expected format is : {[0-9]{10}}", "is too short (minimum is 10 characters)"]
+    end
+
+    it "should not return presence validation error on mmid and mobile_no if is_mmid_and_mobile_no_mandatory? is false" do
+      sm_bank = Factory(:sm_bank, :code => "AAA1216", :imps_allowed => "N", :approval_status => 'A')
+      sm_bank_account = Factory.build(:sm_bank_account, :sm_code => sm_bank.code, :mmid => nil, :mobile_no => nil)
+      sm_bank_account.should be_valid
+      sm_bank_account.errors_on(:mmid).should == []
+      sm_bank_account.errors_on(:mobile_no).should == []
+    end
+
+    it "should not return presence validation error on mmid and mobile_no if is_mmid_and_mobile_no_mandatory? is true and mmid and mobile_no not nil" do
+      sm_bank = Factory(:sm_bank, :code => "AAA1217", :imps_allowed => "Y", :approval_status => 'A')
+      sm_bank_account = Factory.build(:sm_bank_account, :sm_code => sm_bank.code, :mmid => "1112223", :mobile_no => "8765432100")
+      sm_bank_account.should be_valid
+      sm_bank_account.errors_on(:mmid).should == []
+      sm_bank_account.errors_on(:mobile_no).should == []
+    end
+
+    it "should validate length of mmid and mobile_no" do
+      sm_bank = Factory(:sm_bank, :code => "AAA1217", :imps_allowed => "Y", :approval_status => 'A')
+      sm_bank_account = Factory.build(:sm_bank_account, :sm_code => sm_bank.code, :mmid => "111222", :mobile_no => "876543210")
+      sm_bank_account.should_not be_valid
+      sm_bank_account.errors_on(:mmid).should == ["Invalid format, expected format is : {[0-9]{7}}", "is too short (minimum is 7 characters)"]
+      sm_bank_account.errors_on(:mobile_no).should == ["Invalid format, expected format is : {[0-9]{10}}", "is too short (minimum is 10 characters)"]
     end
 
     it "should return error if sm_code is already taken" do
@@ -66,7 +96,7 @@ describe SmBankAccount do
     end
 
     it "should not allow invalid format" do
-      sm_bank = Factory(:sm_bank, :code => "AAA1205", :approval_status => 'A')
+      sm_bank = Factory(:sm_bank, :code => "AAA1205", :imps_allowed => "Y", :approval_status => 'A')
       sm_bank_account = Factory.build(:sm_bank_account, :sm_code => sm_bank.code, :customer_id => "CUST01", :account_no => "ACC-01", :mmid => "MMID-01", :mobile_no => "+918888665")
       sm_bank_account.save.should be_false
       sm_bank_account.errors_on(:account_no).should == ["Invalid format, expected format is : {[0-9]}"]
@@ -75,17 +105,6 @@ describe SmBankAccount do
       sm_bank_account.errors_on(:mobile_no).should == ["Invalid format, expected format is : {[0-9]{10}}"]
     end
   end
-
-  context "to_downcase" do    
-    it "should convert the sm_code, account_no to lower case" do
-      sm_bank = Factory(:sm_bank, :code => "AAA1205", :approval_status => 'A') 
-      sm_bank_account = Factory(:sm_bank_account, :sm_code => sm_bank.code)
-      sm_bank_account.to_downcase   
-      sm_bank_account.sm_code.should == "aaa1205"   
-      sm_bank_account.save.should be_true   
-    end
-  end
-
   
   context "default_scope" do 
     it "should only return 'A' records by default" do 

@@ -25,4 +25,9 @@ class SmBank < ActiveRecord::Base
       self.name = self.name.downcase unless self.name.nil?
     end
   end
+
+  def imps_allowed?
+    imps_allowed == "Y" ? true : false
+  end
+
 end

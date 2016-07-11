@@ -8,7 +8,7 @@ FactoryGirl.define do
     low_balance_alert_at 0
     identity_user_id "MyString"
     neft_allowed "N"
-    imps_allowed "Y"
+    imps_allowed "N"
     created_by {Factory(:user).id}
     updated_by {Factory(:user).id}
     lock_version 1
