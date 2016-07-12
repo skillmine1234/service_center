@@ -26,6 +26,6 @@ class SmBankAccount < ActiveRecord::Base
   end
 
   def is_mmid_and_mobile_no_mandatory?
-    sm_bank.imps_allowed? ? true : false if !sm_bank.nil?
+    (sm_bank.imps_allowed? ? true : false) if !sm_bank.nil?
   end
 end
