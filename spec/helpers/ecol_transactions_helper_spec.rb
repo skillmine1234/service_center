@@ -39,6 +39,10 @@ describe EcolTransactionsHelper do
       ecol_transaction = Factory(:ecol_transaction, :transfer_type => "ASD", :transfer_unique_no => "fvsdfaw")
       find_ecol_transactions(val,{:transfer_type => "ASD"}).should == [ecol_transaction]
       find_ecol_transactions(val,{:transfer_type => "AAA"}).should_not == [ecol_transaction] 
+
+      ecol_transaction = Factory(:ecol_transaction, :transfer_type => "IMPS", :transfer_unique_no => "fvsdfax")
+      find_ecol_transactions(val,{:transfer_type => "IMPS"}).should == [ecol_transaction]
+      find_ecol_transactions(val,{:transfer_type => "NEFT"}).should_not == [ecol_transaction] 
       
       ecol_transaction = Factory(:ecol_transaction, :bene_account_no => "0987654321", :transfer_unique_no => "56789")
       find_ecol_transactions(val,{:bene_account_no => "0987654321"}).should == [ecol_transaction]
