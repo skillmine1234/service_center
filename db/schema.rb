@@ -280,7 +280,6 @@ ActiveRecord::Schema.define(version: 20160629145029) do
   end
 
   add_index "bm_bill_payments", ["app_id", "req_no", "attempt_no"], name: "attepmt_index_bill_payments", unique: true
-  add_index "bm_bill_payments", ["billpay_rep_ref"], name: "uk_billpay_rep_ref", unique: true
 
   create_table "bm_billers", force: :cascade do |t|
     t.string   "biller_code",       limit: 100,                              null: false
