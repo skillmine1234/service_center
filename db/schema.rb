@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160629145029) do
+ActiveRecord::Schema.define(version: 20160719054731) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",               null: false
@@ -2806,6 +2806,7 @@ ActiveRecord::Schema.define(version: 20160629145029) do
     t.string   "is_enabled",       limit: 1,                  default: "Y", null: false
   end
 
+  add_index "sm_bank_accounts", ["account_no", "approval_status"], name: "sm_bank_accounts_02", unique: true
   add_index "sm_bank_accounts", ["sm_code", "customer_id", "account_no", "approval_status"], name: "sm_bank_accounts_01", unique: true
 
   create_table "sm_banks", force: :cascade do |t|

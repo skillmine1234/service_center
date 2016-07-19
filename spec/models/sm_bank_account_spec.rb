@@ -65,6 +65,44 @@ describe SmBankAccount do
       sm_bank_account2.errors_on(:sm_code).should == ["has already been taken"]
     end
 
+    it "should return error if customer_id is already present in the selected bank" do
+      sm_bank = Factory(:sm_bank, :code => "AAA1218", :approval_status => 'A')
+      sm_bank_account1 = Factory.build(:sm_bank_account, :sm_code => sm_bank.code, :customer_id => "978740", :account_no => "001687700000012", :approval_status => 'A')
+      sm_bank_account1.should be_valid
+      sm_bank_account1.save.should be_true
+
+      sm_bank_account2 = Factory.build(:sm_bank_account, :sm_code => sm_bank.code, :customer_id => "978740", :account_no => "001687700000013", :approval_status => 'A')
+      sm_bank_account2.should_not be_valid
+      sm_bank_account2.save.should_not be_true
+      sm_bank_account2.errors_on(:customer_id).should == ["already exists in the selected bank"]
+    end
+
+    it "should return error if account_no is already taken" do
+      sm_bank1 = Factory(:sm_bank, :code => "AAA1219", :approval_status => 'A')
+      sm_bank_account1 = Factory.build(:sm_bank_account, :sm_code => sm_bank1.code, :customer_id => "978741", :account_no => "001687700000014", :approval_status => 'A')
+      sm_bank_account1.should be_valid
+      sm_bank_account1.save.should be_true
+
+      sm_bank2 = Factory(:sm_bank, :code => "AAA1220", :approval_status => 'A')
+      sm_bank_account2 = Factory.build(:sm_bank_account, :sm_code => sm_bank2.code, :customer_id => "978742", :account_no => "001687700000014", :approval_status => 'A')
+      sm_bank_account2.should_not be_valid
+      sm_bank_account2.save.should_not be_true
+      sm_bank_account2.errors_on(:account_no).should == ["has already been taken"]
+    end
+
+    it "should return error if customer_id, account_no is already taken" do
+      sm_bank1 = Factory(:sm_bank, :code => "AAA1221", :approval_status => 'A')
+      sm_bank_account1 = Factory.build(:sm_bank_account, :sm_code => sm_bank1.code, :customer_id => "978743", :account_no => "001687700000015", :approval_status => 'A')
+      sm_bank_account1.should be_valid
+      sm_bank_account1.save.should be_true
+
+      sm_bank2 = Factory(:sm_bank, :code => "AAA1222", :approval_status => 'A')
+      sm_bank_account2 = Factory.build(:sm_bank_account, :sm_code => sm_bank2.code, :customer_id => "978743", :account_no => "001687700000015", :approval_status => 'A')
+      sm_bank_account2.should_not be_valid
+      sm_bank_account2.save.should_not be_true
+      sm_bank_account2.errors_on(:account_no).should == ["has already been taken"]
+    end
+
     it "should return error if sm_code not present in bank" do
       sm_bank_account1 = Factory.build(:sm_bank_account, :sm_code => "AAA1203", :approval_status => 'A')
       sm_bank_account1.should_not be_valid

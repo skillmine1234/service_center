@@ -6,7 +6,7 @@ FactoryGirl.define do
     sequence(:customer_id) {|n| "9" + "%03i" % "#{n}" }
     sequence(:account_no) {|n| "6" + "%09i" % "#{n}" }
     mmid "1234534"
-    mobile_no" 1234567899"
+    mobile_no "1234567899"
     created_by {Factory(:user).id}
     updated_by {Factory(:user).id}
     lock_version 1

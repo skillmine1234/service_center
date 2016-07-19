@@ -17,9 +17,19 @@ class SmBankAccount < ActiveRecord::Base
   validates :mobile_no, presence: true, format: {with: /\A[0-9]{10}+\z/, :message => 'Invalid format, expected format is : {[0-9]{10}}'}, length: {maximum: 10, minimum: 10}, if: :is_mmid_and_mobile_no_mandatory?
   
   validates_uniqueness_of :sm_code, :scope => [:customer_id, :account_no, :approval_status]
+  validates_uniqueness_of :account_no, :scope => [:approval_status]
 
+  validate :validate_customer_id
   validate :validate_sm_code
   validate :is_mmid_and_mobile_no_mandatory?
+
+  def validate_customer_id
+    if !sm_bank.nil?
+      found_customers = sm_bank.sm_bank_accounts.select {|sm_bank_account| sm_bank_account.customer_id == customer_id}
+      found_customers.delete(self)
+      errors.add(:customer_id, "already exists in the selected bank") if !found_customers.empty?
+    end
+  end
 
   def validate_sm_code
     errors.add(:sm_code, "is not present in bank") if self.sm_bank.nil?
