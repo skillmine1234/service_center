@@ -24,9 +24,48 @@ describe EcolRemitter do
       it { should_not allow_value(1.234).for(att) }
     end
 
-    it do 
+    it "should validate_uniqueness_of customer_code" do 
       ecol_remitter = Factory(:ecol_remitter, :approval_status => 'A')
       should validate_uniqueness_of(:customer_code).scoped_to(:remitter_code, :customer_subcode, :invoice_no, :approval_status)
+    end
+
+    it "should validate_uniqueness_of customer_code if customer_subcode is nil" do 
+      ecol_remitter = Factory(:ecol_remitter, :customer_subcode => nil, :customer_subcode_email => nil, :customer_subcode_mobile => nil, :approval_status => 'A')
+      should validate_uniqueness_of(:customer_code).scoped_to(:remitter_code, :invoice_no, :approval_status)
+    end
+
+    it "should validate_uniqueness_of customer_code if invoice_no is nil" do 
+      ecol_remitter = Factory(:ecol_remitter, :invoice_no => nil, :approval_status => 'A')
+      should validate_uniqueness_of(:customer_code).scoped_to(:remitter_code, :customer_subcode, :approval_status)
+    end
+
+    it "should validate_uniqueness_of customer_code if customer_subcode and invoice_no is nil" do 
+      ecol_remitter = Factory(:ecol_remitter, :customer_subcode => nil, :customer_subcode_email => nil, :customer_subcode_mobile => nil, :invoice_no => nil, :approval_status => 'A')
+      should validate_uniqueness_of(:customer_code).scoped_to(:remitter_code, :approval_status)
+    end
+
+    it "should return error if customer_subcode is nil and customer_code is already taken" do
+      ecol_customer = Factory(:ecol_customer, :code => '9411', :approval_status => 'A')
+      ecol_remitter1 = Factory(:ecol_remitter, :customer_code => ecol_customer.code, :customer_subcode => nil, :customer_subcode_email => nil, :customer_subcode_mobile => nil, :approval_status => 'A')
+      ecol_remitter2 = Factory(:ecol_remitter, :customer_code => ecol_customer.code, :customer_subcode => nil, :customer_subcode_email => nil, :customer_subcode_mobile => nil, :approval_status => 'A')
+      ecol_remitter2.should_not be_valid
+      ecol_remitter2.errors_on(:customer_code).should == ["has already been taken"]
+    end
+
+    it "should return error if invoice_no is nil and customer_code is already taken" do
+      ecol_customer = Factory(:ecol_customer, :code => '9412', :approval_status => 'A')
+      ecol_remitter1 = Factory(:ecol_remitter, :customer_code => ecol_customer.code, :invoice_no => nil, :approval_status => 'A')
+      ecol_remitter2 = Factory(:ecol_remitter, :customer_code => ecol_customer.code, :invoice_no => nil, :approval_status => 'A')
+      ecol_remitter2.should_not be_valid
+      ecol_remitter2.errors_on(:customer_code).should == ["has already been taken"]
+    end
+
+    it "should return error if customer_subcode and invoice_no is nil and customer_code is already taken" do
+      ecol_customer = Factory(:ecol_customer, :code => '9413', :approval_status => 'A')
+      ecol_remitter1 = Factory(:ecol_remitter, :customer_code => ecol_customer.code, :customer_subcode => nil, :customer_subcode_email => nil, :customer_subcode_mobile => nil, :invoice_no => nil, :approval_status => 'A')
+      ecol_remitter2 = Factory(:ecol_remitter, :customer_code => ecol_customer.code, :customer_subcode => nil, :customer_subcode_email => nil, :customer_subcode_mobile => nil, :invoice_no => nil, :approval_status => 'A')
+      ecol_remitter2.should_not be_valid
+      ecol_remitter2.errors_on(:customer_code).should == ["has already been taken"]
     end
     
     it do 
@@ -299,6 +338,30 @@ describe EcolRemitter do
       ecol_remitter.customer_code.should == "AS89NN"
       ecol_remitter.remitter_code.should == "QWERTY"
       ecol_remitter.invoice_no.should == "ABCDEF"
+    end
+  end
+
+  context "customer_subcode_empty?" do
+    it "should return true if customer_subcode is empty" do
+      ecol_remitter = Factory(:ecol_remitter, :customer_subcode => "", :customer_subcode_email => nil, :customer_subcode_mobile => nil, :approval_status => 'A')
+      ecol_remitter.customer_subcode_empty?.should == true
+    end
+
+    it "should return false if customer_subcode is not empty" do
+      ecol_remitter = Factory(:ecol_remitter, :customer_subcode => "SUBCODE01", :approval_status => 'A')
+      ecol_remitter.customer_subcode_empty?.should == false
+    end
+  end
+
+  context "invoice_no_empty?" do
+    it "should return true if invoice_no is empty" do
+      ecol_remitter = Factory(:ecol_remitter, :invoice_no => "", :approval_status => 'A')
+      ecol_remitter.invoice_no_empty?.should == true
+    end
+
+    it "should return false if invoice_no is not empty" do
+      ecol_remitter = Factory(:ecol_remitter, :invoice_no => "1122", :approval_status => 'A')
+      ecol_remitter.invoice_no_empty?.should == false
     end
   end
 end
