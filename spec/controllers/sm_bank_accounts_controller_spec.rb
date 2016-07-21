@@ -211,10 +211,10 @@ describe SmBankAccountsController do
       sm_bank_account1.approval_status.should == 'A'
       SmUnapprovedRecord.count.should == 1
       put :approve, {:id => sm_bank_account2.id}
-      SmUnapprovedRecord.count.should == 1
+      SmUnapprovedRecord.count.should == 0
       sm_bank_account1.reload
-      sm_bank_account1.mobile_no.should == '1234567899'
-      sm_bank_account1.updated_by.should == "5"
+      sm_bank_account1.mobile_no.should == '1234568888'
+      sm_bank_account1.updated_by.should == "666"
       SmUnapprovedRecord.find_by_id(sm_bank_account2.id).should be_nil
     end
 

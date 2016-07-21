@@ -25,8 +25,10 @@ class SmBankAccount < ActiveRecord::Base
 
   def validate_customer_id
     sm_bank_accounts = SmBankAccount.where("customer_id = ?", customer_id)
-    matching_sm_bank_accounts = sm_bank_accounts.select{|sm_bank_account| sm_bank_account.sm_code == sm_code} if !sm_bank_accounts.empty?
-    errors.add(:customer_id, "already exists") if !matching_sm_bank_accounts.nil?
+    if !sm_bank_accounts.empty?
+      matching_sm_bank_accounts = sm_bank_accounts.select{|sm_bank_account| sm_bank_account.sm_code == sm_code}
+      errors.add(:customer_id, "already exists with different sub member bank") if matching_sm_bank_accounts.empty?
+    end
   end
 
   def validate_sm_code
