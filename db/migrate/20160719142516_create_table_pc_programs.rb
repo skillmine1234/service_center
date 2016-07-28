@@ -1,6 +1,7 @@
 class CreateTablePcPrograms < ActiveRecord::Migration
   def change
     create_table :pc_programs, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
+      t.string :code, :null => false, :limit => 15, :comment => "the code that identifies the program"
       t.string :mm_host, :null => false, :limit => 255, :comment => "the MatchMove host URI"
       t.string :mm_consumer_key, :null => false, :limit => 255, :comment => "the oauth consumer key shared by MatchMove"
       t.string :mm_consumer_secret, :null => false, :limit => 255, :comment => "the oauth consumer secret shared by MatchMove"
@@ -20,5 +21,6 @@ class CreateTablePcPrograms < ActiveRecord::Migration
       t.integer :approved_version, :comment => "the version number of the record, at the time it was approved"
       t.integer :approved_id, :comment => "the id of the record that is being updated"
     end
+    add_index :pc_programs, [:code, :approval_status], :unique => true, :name => "pc_programs_01"
   end
 end

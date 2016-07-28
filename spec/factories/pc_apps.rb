@@ -2,6 +2,7 @@
 
 FactoryGirl.define do
   factory :pc_app do
+    pc_program_id {Factory(:pc_program, :approval_status => 'A').id}
     sequence(:app_id) {|n| "9" + "%03i" % "#{n}" }
     card_acct "MyString"
     sc_gl_income "MyString"
@@ -11,14 +12,6 @@ FactoryGirl.define do
     traceid_prefix 1
     source_id "MyString"
     channel_id "MyString"
-    mm_host "http://localhost:3000/pc_apps"
-    mm_consumer_key "MyString"
-    mm_consumer_secret "MyString"
-    mm_card_type "MyString"
-    mm_email_domain "MyString"
-    mm_admin_host "MyString"
-    mm_admin_user "MyString"
-    mm_admin_password "MyString"
     identity_user_id "MyString"
   end
 end
