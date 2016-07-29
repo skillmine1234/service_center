@@ -24,10 +24,10 @@ class SmBankAccount < ActiveRecord::Base
   validate :is_mmid_and_mobile_no_mandatory?
 
   def validate_customer_id
-    if !sm_bank.nil?
-      found_customers = sm_bank.sm_bank_accounts.select {|sm_bank_account| sm_bank_account.customer_id == customer_id}
-      found_customers.delete(self)
-      errors.add(:customer_id, "already exists in the selected bank") if !found_customers.empty?
+    sm_bank_accounts = SmBankAccount.where("customer_id = ?", customer_id)
+    if !sm_bank_accounts.empty?
+      matching_sm_bank_accounts = sm_bank_accounts.select{|sm_bank_account| sm_bank_account.sm_code == sm_code}
+      errors.add(:customer_id, "already exists with different sub member bank") if matching_sm_bank_accounts.empty?
     end
   end
 

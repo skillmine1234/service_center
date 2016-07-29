@@ -1,0 +1,105 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8; height:950px;'}
+    #form-details
+      %h3 PC Program Details 
+      %br
+      %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
+        - can = can? :edit, @pc_program
+        %a.btn{:href => "#{!(can) ? '#' : '/pc_programs/' + @pc_program.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
+        = render 'pc_programs/approve', :@record => @pc_program
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
+        - if !@pc_program.nil?
+          %tr
+            %td.label Version
+            %td.value
+              = link_to "#{audit_count(@pc_program)}", :controller => :pc_programs, :action => :audit_logs, :version_id => audit_count(@pc_program), :id => @pc_program.id
+          %tr
+            %td.label Form Errors
+            %td.value
+              = ' '
+            %td#msg-error
+              = error_message_for(@pc_program, :base, :prepend_text => "")
+          %tr
+            %td.label Is Enabled?
+            %td.value
+              = @pc_program.is_enabled
+            %td#msg-error
+              = error_message_for(@pc_program, :is_enabled, :prepend_text => "")
+          %tr
+            %td.label Code
+            %td.value
+              = @pc_program.code
+            %td#msg-error
+              = error_message_for(@pc_program, :code, :prepend_text => "")
+          %tr
+            %td.label MM Host
+            %td.value
+              = @pc_program.mm_host
+            %td#msg-error
+              = error_message_for(@pc_program, :mm_host, :prepend_text => "")
+          %tr
+            %td.label MM Consumer Key
+            %td.value
+              = @pc_program.mm_consumer_key
+            %td#msg-error
+              = error_message_for(@pc_program, :mm_consumer_key, :prepend_text => "")
+          %tr
+            %td.label MM Consumer Secret
+            %td.value
+              = @pc_program.mm_consumer_secret
+            %td#msg-error
+              = error_message_for(@pc_program, :mm_consumer_secret, :prepend_text => "")
+          %tr
+            %td.label MM Card Type
+            %td.value
+              = @pc_program.mm_card_type
+            %td#msg-error
+              = error_message_for(@pc_program, :mm_card_type, :prepend_text => "")
+          %tr
+            %td.label MM Email Domain
+            %td.value
+              = @pc_program.mm_email_domain
+            %td#msg-error
+              = error_message_for(@pc_program, :mm_email_domain, :prepend_text => "")
+          %tr
+            %td.label MM Admin Host
+            %td.value
+              = @pc_program.mm_admin_host
+            %td#msg-error
+              = error_message_for(@pc_program, :mm_admin_host, :prepend_text => "")
+          %tr
+            %td.label MM Admin User
+            %td.value
+              = @pc_program.mm_admin_user
+            %td#msg-error
+              = error_message_for(@pc_program, :mm_admin_user, :prepend_text => "")
+          %tr
+            %td.label MM Admin Password
+            %td.value
+              = @pc_program.mm_admin_password
+            %td#msg-error
+              = error_message_for(@pc_program, :mm_admin_password, :prepend_text => "")
+          %tr
+            %td.label Created By
+            %td.value
+              = @pc_program.created_user.try(:username)
+            %td#msg-error
+              = error_message_for(@pc_program, :created_by, :prepend_text => "")
+          %tr
+            %td.label Updated By
+            %td.value
+              = @pc_program.updated_user.try(:username)
+            %td#msg-error
+              = error_message_for(@pc_program, :updated_by, :prepend_text => "")
+          %tr
+            %td.label Created At
+            %td.value
+              = @pc_program.created_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td#msg-error
+              = error_message_for(@pc_program, :created_at, :prepend_text => "")
+          %tr
+            %td.label Updated At
+            %td.value
+              = @pc_program.updated_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td#msg-error
+              = error_message_for(@pc_program, :updated_at, :prepend_text => "")

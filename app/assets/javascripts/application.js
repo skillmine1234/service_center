@@ -30,14 +30,6 @@
 
 $(document).ready(function() {
 
-if (self == top) {
-  var theBody = document.getElementsByTagName('body')[0]
-  theBody.style.display = "block"
-} 
-else {
-  top.location = self.location
-}
-
 server_date = $('#clock').text();
 $('#clock').hide();
 var montharray=new Array("January","February","March","April","May","June","July","August","September","October","November","December")

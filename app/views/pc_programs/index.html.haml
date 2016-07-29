@@ -1,55 +1,51 @@
 %br
-= link_to 'New PC App', new_pc_app_path
+= link_to 'New PC Program', new_pc_program_path
 %br
 %br
-%h1 Listing PC Apps
+%h1 Listing PC Programs
 %h2.collapsible
   Advanced Search
   %span.caret
 .collapsible-content
   = render :partial => 'advanced_search'
 %br
-= "Total Count: #{@pc_apps_count}"
+= "Total Count: #{@pc_programs_count}"
 %br
-= will_paginate @pc_apps
+= will_paginate @pc_programs
 %br
 %table.table.table-bordered.table-striped.table-hover
   .thead
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
-      PC Program
+      Code
     %th{:style=>'text-align:left; background-color: lightblue;'}
-      App ID
+      MM Host
     %th{:style=>'text-align:left; background-color: lightblue;'}
-      Card Customer ID
+      MM Card Type
     %th{:style=>'text-align:left; background-color: lightblue;'}
-      Card Account
+      MM Email Domain
     %th{:style=>'text-align:left; background-color: lightblue;'}
-      SC Income Account
+      MM Admin Host
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Is Enabled?
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Encrypt Password
 
   .tbody
-    - @pc_apps.each do |pc_app|
+    - @pc_programs.each do |pc_program|
       %tr
         %td{:style=>'text-align:left;'}
-          = link_to 'Show', pc_app
+          = link_to 'Show', pc_program
         %td{:style=>'text-align:left;'}
-          = link_to 'Edit', edit_pc_app_path(pc_app)
+          = link_to 'Edit', edit_pc_program_path(pc_program)
         %td{:style=>'text-align:left;'}
-          = pc_app.pc_program.code
+          = pc_program.code
         %td{:style=>'text-align:left;'}
-          = pc_app.app_id
+          = pc_program.mm_host
         %td{:style=>'text-align:left;'}
-          = pc_app.card_cust_id
+          = pc_program.mm_card_type
         %td{:style=>'text-align:left;'}
-          = pc_app.card_acct
+          = pc_program.mm_email_domain
         %td{:style=>'text-align:left;'}
-          = pc_app.sc_gl_income
+          = pc_program.mm_admin_host
         %td{:style=>'text-align:left;'}
-          = pc_app.is_enabled
-        %td{:style=>'text-align:left;'}
-          = link_to 'Encrypt Password', pc_apps_encrypt_password_path(pc_app)
+          = pc_program.is_enabled

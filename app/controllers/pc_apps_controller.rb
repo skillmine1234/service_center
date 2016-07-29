@@ -87,7 +87,7 @@ class PcAppsController < ApplicationController
   def encrypt_password
     @pc_app = PcApp.unscoped.find_by_id(params[:id])
     if params[:generate] == "true"
-      encrypted_password = EncPassGenerator.new(params[:pass], @pc_app.mm_consumer_key, @pc_app.mm_consumer_secret)
+      encrypted_password = EncPassGenerator.new(params[:pass], @pc_app.pc_program.mm_consumer_key, @pc_app.pc_program.mm_consumer_secret)
       @encrypted_password = encrypted_password.generate_encrypted_password
     end
   end
@@ -95,8 +95,7 @@ class PcAppsController < ApplicationController
   private
 
   def pc_app_params
-    params.require(:pc_app).permit(:app_id, :card_acct, :sc_gl_income, :card_cust_id, :is_enabled, :lock_version, :approval_status, :last_action, :approved_version,
-                                   :approved_id, :created_by, :updated_by, :traceid_prefix, :source_id, :channel_id, :needs_pin, :mm_host, :mm_consumer_key, 
-                                   :mm_consumer_secret, :mm_card_type, :mm_email_domain, :mm_admin_host, :mm_admin_user, :mm_admin_password, :identity_user_id)
+    params.require(:pc_app).permit(:app_id, :pc_program_id, :card_acct, :sc_gl_income, :card_cust_id, :is_enabled, :lock_version, :approval_status, :last_action, :approved_version,
+                                   :approved_id, :created_by, :updated_by, :traceid_prefix, :source_id, :channel_id, :needs_pin, :identity_user_id)
   end
 end

@@ -20,6 +20,12 @@
             %td#msg-error
               = error_message_for(@pc_app, :base, :prepend_text => "")
           %tr
+            %td.label PC Program
+            %td.value
+              = @pc_app.pc_program.code
+            %td#msg-error
+              = error_message_for(@pc_app, :pc_program_id, :prepend_text => "")
+          %tr
             %td.label App ID
             %td.value
               = @pc_app.app_id
@@ -79,54 +85,6 @@
               = @pc_app.needs_pin
             %td#msg-error
               = error_message_for(@pc_app, :needs_pin, :prepend_text => "")
-          %tr
-            %td.label MM Host
-            %td.value
-              = @pc_app.mm_host
-            %td#msg-error
-              = error_message_for(@pc_app, :mm_host, :prepend_text => "")
-          %tr
-            %td.label MM Consumer Key
-            %td.value
-              = @pc_app.mm_consumer_key
-            %td#msg-error
-              = error_message_for(@pc_app, :mm_consumer_key, :prepend_text => "")
-          %tr
-            %td.label MM Consumer Secret
-            %td.value
-              = @pc_app.mm_consumer_secret
-            %td#msg-error
-              = error_message_for(@pc_app, :mm_consumer_secret, :prepend_text => "")
-          %tr
-            %td.label MM Card Type
-            %td.value
-              = @pc_app.mm_card_type
-            %td#msg-error
-              = error_message_for(@pc_app, :mm_card_type, :prepend_text => "")
-          %tr
-            %td.label MM Email Domain
-            %td.value
-              = @pc_app.mm_email_domain
-            %td#msg-error
-              = error_message_for(@pc_app, :mm_email_domain, :prepend_text => "")
-          %tr
-            %td.label MM Admin Host
-            %td.value
-              = @pc_app.mm_admin_host
-            %td#msg-error
-              = error_message_for(@pc_app, :mm_admin_host, :prepend_text => "")
-          %tr
-            %td.label MM Admin User
-            %td.value
-              = @pc_app.mm_admin_user
-            %td#msg-error
-              = error_message_for(@pc_app, :mm_admin_user, :prepend_text => "")
-          %tr
-            %td.label MM Admin Password
-            %td.value
-              = @pc_app.mm_admin_password
-            %td#msg-error
-              = error_message_for(@pc_app, :mm_admin_password, :prepend_text => "")
           %tr
             %td.label Created By
             %td.value
