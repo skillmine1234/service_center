@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160727111643) do
+ActiveRecord::Schema.define(version: 20160728142635) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -1048,6 +1048,7 @@ ActiveRecord::Schema.define(version: 20160727111643) do
     t.string  "txn_status_subcode",      limit: 50
     t.string  "bank_ref_no",             limit: 50
     t.string  "bene_ref_no",             limit: 50
+    t.string  "name_with_bene_bank",     limit: 255
   end
 
   add_index "ft_incoming_records", ["incoming_file_record_id"], name: "ft_incoming_records_01", unique: true
