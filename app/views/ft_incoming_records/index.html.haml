@@ -71,7 +71,7 @@
           %td{:style=>'text-align:left;'}
             = record.incoming_file_record.status
           %td{:style=>'text-align:left;'}
-            = record.incoming_file_record.transfer_amount
+            = record.transfer_amount
           %td{:style=>'text-align:left;'}
             - if record.incoming_file_record.fault_code.nil?
               - link_text = "Show Fault Text"
