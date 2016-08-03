@@ -71,7 +71,9 @@ describe SmBank do
       should allow_value('ABCD.Co').for(:name)
       should allow_value('ABCD-Co').for(:name)
 
+      should allow_value('ABCD0EFGABC').for(:bank_code)
       should allow_value('ABCD0EFG123').for(:bank_code)
+      should allow_value('ABCD0EFG1BC').for(:bank_code)
     end
 
     it "should not allow invalid format" do
@@ -81,9 +83,9 @@ describe SmBank do
         sm_bank.errors_on(att).should == ["Invalid format, expected format is : {[a-z|A-Z|0-9]}"]
       end
       sm_bank.errors_on(:name).should ==  ["Invalid format, expected format is : {[a-z|A-Z|0-9|\\s|\\.|\\-]}"]
-      sm_bank.errors_on(:bank_code).should ==  ["invalid format - expected format is : {[A-Z]{4}[0][A-Z]{3}[0-9]{3}}"]
+      sm_bank.errors_on(:bank_code).should ==  ["invalid format - expected format is : {[A-Z]{4}[0][A-Z]{3}[A-Z|0-9]{3}}"]
 
-      should_not allow_value('ABCD0123456').for(:bank_code)
+      should_not allow_value('AB1D0EFG123').for(:bank_code)
     end
   end
 
