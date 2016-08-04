@@ -32,7 +32,7 @@
         %td{:style=>'text-align:left;'}
           = link_to 'Edit', edit_pc_fee_rule_path(pc_fee_rule)
         %td{:style=>'text-align:left;'}
-          = pc_fee_rule.pc_program.code
+          = pc_fee_rule.try(:pc_program).try(:code) || '-'
         %td{:style=>'text-align:left;'}
           = pc_fee_rule.txn_kind
         %td{:style=>'text-align:left;'}

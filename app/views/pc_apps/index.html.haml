@@ -40,7 +40,7 @@
         %td{:style=>'text-align:left;'}
           = link_to 'Edit', edit_pc_app_path(pc_app)
         %td{:style=>'text-align:left;'}
-          = pc_app.pc_program.code
+          = pc_app.try(:pc_program).try(:code) || '-'
         %td{:style=>'text-align:left;'}
           = pc_app.app_id
         %td{:style=>'text-align:left;'}
