@@ -15,7 +15,7 @@ class PcProgram < ActiveRecord::Base
   validates_uniqueness_of :code, :scope => :approval_status
 
   def self.options_for_pc_programs
-    PcProgram.all.collect { |pc_program| [pc_program.code, pc_program.id] }
+    PcProgram.all.collect { |pc_program| [pc_program.code, pc_program.code] }
   end
 
   before_save :to_downcase

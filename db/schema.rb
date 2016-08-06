@@ -1885,26 +1885,34 @@ ActiveRecord::Schema.define(version: 20160728142635) do
   add_index "pc2_unload_cards", ["req_no", "app_id", "attempt_no"], name: "uk_pc2_unload_cards", unique: true
 
   create_table "pc_apps", force: :cascade do |t|
-    t.string   "app_id",           limit: 50,               null: false
-    t.string   "card_acct",                                 null: false
-    t.string   "sc_gl_income",     limit: 15,               null: false
-    t.string   "is_enabled",       limit: 1,                null: false
-    t.integer  "lock_version",                              null: false
-    t.string   "approval_status",  limit: 1,  default: "U", null: false
-    t.string   "last_action",      limit: 1
+    t.string   "app_id",             limit: 50,                null: false
+    t.string   "card_acct",                                    null: false
+    t.string   "sc_gl_income",       limit: 15,                null: false
+    t.string   "is_enabled",         limit: 1,                 null: false
+    t.integer  "lock_version",                                 null: false
+    t.string   "approval_status",    limit: 1,   default: "U", null: false
+    t.string   "last_action",        limit: 1
     t.integer  "approved_version"
     t.integer  "approved_id"
-    t.string   "created_by",       limit: 20
-    t.string   "updated_by",       limit: 20
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
-    t.string   "card_cust_id",                              null: false
-    t.integer  "traceid_prefix",                            null: false
-    t.string   "source_id",        limit: 50,               null: false
-    t.string   "channel_id",       limit: 20,               null: false
-    t.string   "needs_pin",        limit: 1,  default: "N", null: false
-    t.string   "identity_user_id", limit: 20,               null: false
-    t.integer  "pc_program_id",                             null: false
+    t.string   "created_by",         limit: 20
+    t.string   "updated_by",         limit: 20
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+    t.string   "card_cust_id",                                 null: false
+    t.integer  "traceid_prefix",                               null: false
+    t.string   "source_id",          limit: 50,                null: false
+    t.string   "channel_id",         limit: 20,                null: false
+    t.string   "needs_pin",          limit: 1,   default: "N", null: false
+    t.string   "mm_host",            limit: 255,               null: false
+    t.string   "mm_consumer_key",    limit: 255,               null: false
+    t.string   "mm_consumer_secret", limit: 255,               null: false
+    t.string   "mm_card_type",       limit: 255,               null: false
+    t.string   "mm_email_domain",    limit: 255,               null: false
+    t.string   "mm_admin_host",      limit: 255,               null: false
+    t.string   "mm_admin_user",      limit: 255,               null: false
+    t.string   "mm_admin_password",  limit: 255,               null: false
+    t.string   "identity_user_id",   limit: 20,                null: false
+    t.string   "program_code",       limit: 15,                null: false
   end
 
   add_index "pc_apps", ["app_id", "approval_status"], name: "index_pc_apps_on_app_id_and_approval_status", unique: true
@@ -2063,6 +2071,7 @@ ActiveRecord::Schema.define(version: 20160728142635) do
   add_index "pc_customers", ["mobile_no"], name: "uk_pc_card_custs_1", unique: true
 
   create_table "pc_fee_rules", force: :cascade do |t|
+    t.string   "app_id",           limit: 50,               null: false
     t.string   "txn_kind",         limit: 50,               null: false
     t.integer  "no_of_tiers",                               null: false
     t.string   "tier1_method",     limit: 3,                null: false
@@ -2091,10 +2100,9 @@ ActiveRecord::Schema.define(version: 20160728142635) do
     t.decimal  "tier1_pct_value",                           null: false
     t.decimal  "tier1_fixed_amt",                           null: false
     t.decimal  "tier1_to_amt",                              null: false
-    t.integer  "pc_program_id",                             null: false
   end
 
-  add_index "pc_fee_rules", ["txn_kind", "approval_status"], name: "uk_pc_fee_rules", unique: true
+  add_index "pc_fee_rules", ["app_id", "txn_kind", "approval_status"], name: "uk_pc_fee_rules", unique: true
 
   create_table "pc_load_cards", force: :cascade do |t|
     t.string   "req_no",           limit: 32,   null: false

@@ -158,7 +158,7 @@ describe PcProgram do
       pc_program2 = Factory(:pc_program, :code => "9968", :approval_status => 'A')
       pc_program3 = Factory(:pc_program, :code => "9969", :approval_status => 'A')
       pc_program4 = Factory(:pc_program, :code => "9970")
-      expect(PcProgram.options_for_pc_programs).to eq([["9967", 1], ["9968", 2], ["9969", 3]])
+      expect(PcProgram.options_for_pc_programs).to eq([["9967", "9967"], ["9968", "9968"], ["9969", "9969"]])
     end
   end
 end

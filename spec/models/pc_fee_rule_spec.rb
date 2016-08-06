@@ -4,17 +4,17 @@ describe PcFeeRule do
   context "association" do
     it { should belong_to(:created_user) }
     it { should belong_to(:updated_user) }
-    it { should belong_to(:pc_program) }
+    it { should belong_to(:pc_app) }
   end
   
   context "validation" do
-    [:pc_program_id, :txn_kind, :no_of_tiers].each do |att|
+    [:app_id, :txn_kind, :no_of_tiers].each do |att|
       it { should validate_presence_of(att) }
     end
     
     it do 
       pc_fee_rule = Factory(:pc_fee_rule, :approval_status => 'A')
-      should validate_uniqueness_of(:pc_program_id).scoped_to(:txn_kind, :approval_status)
+      should validate_uniqueness_of(:app_id).scoped_to(:txn_kind, :approval_status)
     end
     
     # [:tier1_to_amt, :tier1_fixed_amt, :tier1_min_sc_amt, :tier1_max_sc_amt, :tier2_to_amt,
@@ -36,10 +36,18 @@ describe PcFeeRule do
     end
   end
   
+  context "app_id_should_exist" do
+    it "should check existence of app_id" do
+      pc_fee_rule = Factory.build(:pc_fee_rule, :app_id => "1234")
+      pc_fee_rule.save.should == false
+      pc_fee_rule.errors_on(:app_id).should == ["Invalid PcApp"]
+    end
+  end
+  
   context "default_scope" do 
     it "should only return 'A' records by default" do 
       pc_fee_rule1 = Factory(:pc_fee_rule, :approval_status => 'A') 
-      pc_fee_rule2 = Factory(:pc_fee_rule, :txn_kind => 'AC')
+      pc_fee_rule2 = Factory(:pc_fee_rule)
       PcFeeRule.all.should == [pc_fee_rule1]
       pc_fee_rule2.approval_status = 'A'
       pc_fee_rule2.save

@@ -8,7 +8,7 @@ describe PcApp do
   end
   
   context "validations" do
-    [:pc_program_id, :card_acct, :sc_gl_income, :card_cust_id, :traceid_prefix, :source_id, :channel_id].each do |att|
+    [:program_code, :card_acct, :sc_gl_income, :card_cust_id, :traceid_prefix, :source_id, :channel_id].each do |att|
       it { should validate_presence_of(att)}
     end
     

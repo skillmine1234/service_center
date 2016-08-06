@@ -20,11 +20,11 @@
             %td#msg-error
               = error_message_for(@pc_fee_rule, :base, :prepend_text => "")
           %tr
-            %td.label PC Program
+            %td.label App ID
             %td.value
-              = @pc_fee_rule.pc_program.code
+              = @pc_fee_rule.app_id
             %td#msg-error
-              = error_message_for(@pc_fee_rule, :pc_program_id, :prepend_text => "")
+              = error_message_for(@pc_fee_rule, :app_id, :prepend_text => "")
           %tr
             %td.label Transaction Kind
             %td.value
@@ -178,12 +178,12 @@
           %tr
             %td.label Created At
             %td.value
-              = @pc_fee_rule.created_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
+              = @pc_fee_rule.created_at.try(:strftime, "%d/%m/%Y %I:%M%p")
             %td#msg-error
               = error_message_for(@pc_fee_rule, :created_at, :prepend_text => "")
           %tr
             %td.label Updated At
             %td.value
-              = @pc_fee_rule.updated_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
+              = @pc_fee_rule.updated_at.try(:strftime, "%d/%m/%Y %I:%M%p")
             %td#msg-error
               = error_message_for(@pc_fee_rule, :updated_at, :prepend_text => "")
