@@ -13,13 +13,5 @@ FactoryGirl.define do
     source_id "MyString"
     channel_id "MyString"
     identity_user_id "MyString"
-    mm_host "http://localhost:3000/pc_programs"
-    mm_consumer_key "MyString"
-    mm_consumer_secret "MyString"
-    mm_card_type "MyString"
-    mm_email_domain "MyString"
-    mm_admin_host "MyString"
-    mm_admin_user "MyString"
-    mm_admin_password "MyString"
   end
 end

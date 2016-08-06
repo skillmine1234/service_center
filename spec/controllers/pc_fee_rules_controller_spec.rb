@@ -88,7 +88,7 @@ describe PcFeeRulesController do
     describe "with invalid params" do
       it "assigns a newly created but unsaved pc_fee_rule as @pc_fee_rule" do
         params = Factory.attributes_for(:pc_fee_rule)
-        params[:app_id] = nil
+        params[:program_code] = nil
         expect {
           post :create, {:pc_fee_rule => params}
         }.to change(PcFeeRule, :count).by(0)
@@ -98,7 +98,7 @@ describe PcFeeRulesController do
 
       it "re-renders the 'new' template when show_errors is true" do
         params = Factory.attributes_for(:pc_fee_rule)
-        params[:app_id] = nil
+        params[:program_code] = nil
         post :create, {:pc_fee_rule => params}
         response.should render_template("new")
       end
@@ -133,7 +133,7 @@ describe PcFeeRulesController do
       end
 
       it "should raise error when tried to update at same time by many" do
-        pc_app = Factory(:pc_app)
+        pc_program = Factory(:pc_program)
         pc_fee_rule = Factory(:pc_fee_rule)
         params = pc_fee_rule.attributes.slice(*pc_fee_rule.class.attribute_names)
         params[:tier1_to_amt] = 1000
@@ -153,17 +153,17 @@ describe PcFeeRulesController do
       it "assigns the pc_fee_rule as @pc_fee_rule" do
         pc_fee_rule = Factory(:pc_fee_rule)
         params = pc_fee_rule.attributes.slice(*pc_fee_rule.class.attribute_names)
-        params[:app_id] = nil
+        params[:program_code] = nil
         put :update, {:id => pc_fee_rule.to_param, :pc_fee_rule => params}
         assigns(:pc_fee_rule).should eq(pc_fee_rule)
         pc_fee_rule.reload
-        params[:app_id] = nil
+        params[:program_code] = nil
       end
 
       it "re-renders the 'edit' template when show_errors is true" do
         pc_fee_rule = Factory(:pc_fee_rule)
         params = pc_fee_rule.attributes.slice(*pc_fee_rule.class.attribute_names)
-        params[:app_id] = nil
+        params[:program_code] = nil
         put :update, {:id => pc_fee_rule.id, :pc_fee_rule => params, :show_errors => "true"}
         response.should render_template("edit")
       end

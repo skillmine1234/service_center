@@ -87,7 +87,7 @@ class PcFeeRulesController < ApplicationController
   private
 
   def pc_fee_rule_params
-    params.require(:pc_fee_rule).permit(:app_id, :txn_kind, :no_of_tiers, :tier1_to_amt, :tier1_method, 
+    params.require(:pc_fee_rule).permit(:program_code, :txn_kind, :no_of_tiers, :tier1_to_amt, :tier1_method, 
                                         :tier1_fixed_amt, :tier1_pct_value, :tier1_min_sc_amt, :tier1_max_sc_amt,
                                         :tier2_to_amt, :tier2_method, :tier2_fixed_amt, :tier2_pct_value, :tier2_min_sc_amt, :tier2_max_sc_amt,
                                         :tier3_method, :tier3_fixed_amt, :tier3_pct_value, :tier3_min_sc_amt, :tier3_max_sc_amt,  

@@ -20,11 +20,11 @@
             %td#msg-error
               = error_message_for(@pc_fee_rule, :base, :prepend_text => "")
           %tr
-            %td.label App ID
+            %td.label PC Program
             %td.value
-              = @pc_fee_rule.app_id
+              = @pc_fee_rule.pc_program.code
             %td#msg-error
-              = error_message_for(@pc_fee_rule, :app_id, :prepend_text => "")
+              = error_message_for(@pc_fee_rule, :pc_program_id, :prepend_text => "")
           %tr
             %td.label Transaction Kind
             %td.value
