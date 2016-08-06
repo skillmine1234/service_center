@@ -36,7 +36,7 @@ class CreateTablePcPrograms < ActiveRecord::Migration
                         :mm_admin_user => app.mm_admin_user, :mm_admin_password => app.mm_admin_password,
                         :is_enabled => 'Y', :approval_status => 'A')
       end
-      app.program_code = 'P' + app.app_id.to_s
+      app.program_code = 'p' + app.app_id.to_s
       app.save(:validate => false)
     end
   end

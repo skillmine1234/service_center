@@ -5,7 +5,7 @@ class AddProgramCodeTpPcFeeRules < ActiveRecord::Migration
     change_column :pc_fee_rules, :program_code, :string, :limit => 15, :null => false, :comment => "the code that identifies the program"
 
     PcFeeRule.unscoped.find_each(batch_size: 100) do |fee|
-      fee.program_code = 'P' + fee.app_id.to_s
+      fee.program_code = 'p' + fee.app_id.to_s
       fee.save(:validate => false)
     end
   end
