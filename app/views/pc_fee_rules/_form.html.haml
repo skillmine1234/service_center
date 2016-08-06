@@ -11,7 +11,7 @@
       = f.label :pc_program_id, "*PC Program", :class => 'control-label'
       = f.select(:pc_program_id, PcProgram.options_for_pc_programs, :prompt => 'Select')
       #msg-error
-        = error_message_for(@pc_fee_rule, :pc_program_id, :prepend_text => "")
+        = error_message_for(@pc_fee_rule, :program_code, :prepend_text => "")
     .control-group
       = f.label :txn_kind, "*Transaction Kind", :class => 'control-label'
       = f.select :txn_kind, options_for_select(PcFeeRule.options_for_txn_kind, @pc_fee_rule.txn_kind), :prompt => 'Select'

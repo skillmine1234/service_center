@@ -11,7 +11,7 @@
       = f.label :pc_program_id, "*PC Program", :class => 'control-label'
       = f.select(:pc_program_id, PcProgram.options_for_pc_programs, :prompt => 'Select')
       #msg-error
-        = error_message_for(@pc_app, :pc_program_id, :prepend_text => "")
+        = error_message_for(@pc_app, :program_code, :prepend_text => "")
     .control-group
       = f.label :app_id, "*App ID", :class => 'control-label'
       = f.text_field :app_id, :maxlength => 20
