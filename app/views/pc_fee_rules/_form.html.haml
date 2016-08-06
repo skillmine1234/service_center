@@ -8,8 +8,8 @@
     = f.hidden_field :approved_id
     = f.hidden_field :approved_version
     .control-group
-      = f.label :pc_program_id, "*PC Program", :class => 'control-label'
-      = f.select(:pc_program_id, PcProgram.options_for_pc_programs, :prompt => 'Select')
+      = f.label :program_code, "*PC Program", :class => 'control-label'
+      = f.select(:program_code, PcProgram.options_for_pc_programs, :prompt => 'Select')
       #msg-error
         = error_message_for(@pc_fee_rule, :program_code, :prepend_text => "")
     .control-group
