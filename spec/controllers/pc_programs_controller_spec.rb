@@ -187,14 +187,14 @@ describe PcProgramsController do
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
       pc_program1 = Factory(:pc_program, :mm_host => "http://localhost:3001/pc_programs", :approval_status => 'A')
-      pc_program2 = Factory(:pc_program, :mm_host => "http://localhost:3001/pc_programs", :approval_status => 'U', :mm_admin_host => '111.111.111.111', :approved_version => pc_program1.lock_version, :approved_id => pc_program1.id, :created_by => 666)
+      pc_program2 = Factory(:pc_program, :mm_host => "http://localhost:3001/pc_programs", :approval_status => 'U' , :approved_version => pc_program1.lock_version, :approved_id => pc_program1.id, :created_by => 666, :mm_admin_host => "http://localhost:3000/pc_programs")
       # the following line is required for reload to get triggered (TODO)
       pc_program1.approval_status.should == 'A'
       PcUnapprovedRecord.count.should == 1
       put :approve, {:id => pc_program2.id}
       PcUnapprovedRecord.count.should == 0
       pc_program1.reload
-      pc_program1.mm_admin_host.should == '111.111.111.111'
+      pc_program1.mm_admin_host.should == "http://localhost:3000/pc_programs"
       pc_program1.updated_by.should == "666"
       PcProgram.find_by_id(pc_program2.id).should be_nil
     end
@@ -203,12 +203,12 @@ describe PcProgramsController do
       user_role = UserRole.find_by_user_id(@user.id)
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
-      pc_program = Factory(:pc_program, :mm_host => "http://localhost:3001/pc_programs", :approval_status => 'U', :mm_admin_host => '111.111.111.111')
+      pc_program = Factory(:pc_program, :mm_host => "http://localhost:3001/pc_programs", :approval_status => 'U', :mm_admin_host => "http://localhost:3000/pc_programs")
       PcUnapprovedRecord.count.should == 1
       put :approve, {:id => pc_program.id}
       PcUnapprovedRecord.count.should == 0
       pc_program.reload
-      pc_program.mm_admin_host.should == '111.111.111.111'
+      pc_program.mm_admin_host.should == "http://localhost:3000/pc_programs"
       pc_program.approval_status.should == 'A'
     end
   end

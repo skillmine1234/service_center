@@ -17,47 +17,47 @@
         = error_message_for(@pc_program, :is_enabled, :prepend_text => "")
     .control-group
       = f.label :code, "*Code", :class => 'control-label'
-      = f.text_field :code, :required => true
+      = f.text_field :code, :required => true, :maxlength => 15
       #msg-error
         = error_message_for(@pc_program, :code, :prepend_text => "")
     .control-group
       = f.label :mm_host, "*MM Host", :class => 'control-label'
-      = f.text_field :mm_host, :required => true
+      = f.text_field :mm_host, :required => true, :maxlength => 255
       #msg-error
         = error_message_for(@pc_program, :mm_host, :prepend_text => "")
     .control-group
       = f.label :mm_consumer_key, "*MM Consumer Key", :class => 'control-label'
-      = f.text_field :mm_consumer_key, :required => true
+      = f.text_field :mm_consumer_key, :required => true, :maxlength => 255
       #msg-error
         = error_message_for(@pc_program, :mm_consumer_key, :prepend_text => "")
     .control-group
       = f.label :mm_consumer_secret, "*MM Consumer Secret", :class => 'control-label'
-      = f.text_field :mm_consumer_secret, :required => true
+      = f.text_field :mm_consumer_secret, :required => true, :maxlength => 255
       #msg-error
         = error_message_for(@pc_program, :mm_consumer_secret, :prepend_text => "")
     .control-group
       = f.label :mm_card_type, "*MM Card Type", :class => 'control-label'
-      = f.text_field :mm_card_type, :required => true
+      = f.text_field :mm_card_type, :required => true, :maxlength => 255
       #msg-error
         = error_message_for(@pc_program, :mm_card_type, :prepend_text => "")
     .control-group
       = f.label :mm_email_domain, "*MM Email Domain", :class => 'control-label'
-      = f.text_field :mm_email_domain, :required => true
+      = f.text_field :mm_email_domain, :required => true, :maxlength => 255
       #msg-error
         = error_message_for(@pc_program, :mm_email_domain, :prepend_text => "")
     .control-group
       = f.label :mm_admin_host, "*MM Admin Host", :class => 'control-label'
-      = f.text_field :mm_admin_host, :required => true
+      = f.text_field :mm_admin_host, :required => true, :maxlength => 255
       #msg-error
         = error_message_for(@pc_program, :mm_admin_host, :prepend_text => "")
     .control-group
       = f.label :mm_admin_user, "*MM Admin User", :class => 'control-label'
-      = f.text_field :mm_admin_user, :required => true
+      = f.text_field :mm_admin_user, :required => true, :maxlength => 255
       #msg-error
         = error_message_for(@pc_program, :mm_admin_user, :prepend_text => "")
     .control-group
       = f.label :mm_admin_password, "*MM Admin Password", :class => 'control-label'
-      = f.password_field :mm_admin_password, :required => true,:value => f.object.mm_admin_password
+      = f.password_field :mm_admin_password, :required => true,:value => f.object.mm_admin_password, :maxlength => 255
       #msg-error
         = error_message_for(@pc_program, :mm_admin_password, :prepend_text => "")
 

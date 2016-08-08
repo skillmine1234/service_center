@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160806064313) do
+ActiveRecord::Schema.define(version: 20160808113323) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -2094,6 +2094,7 @@ ActiveRecord::Schema.define(version: 20160806064313) do
     t.string   "program_code",     limit: 15,               null: false
   end
 
+  add_index "pc_fee_rules", ["program_code", "txn_kind", "approval_status"], name: "pc_fee_rules_01", unique: true
   add_index "pc_fee_rules", ["txn_kind", "approval_status"], name: "uk_pc_fee_rules", unique: true
 
   create_table "pc_load_cards", force: :cascade do |t|

@@ -8,7 +8,7 @@ class PcProgram < ActiveRecord::Base
   validates_presence_of :code, :mm_host, :mm_consumer_key, :mm_consumer_secret, :mm_card_type, :mm_email_domain, :mm_admin_host, :mm_admin_user, :mm_admin_password
   
   validates :code, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}' }, length: {maximum: 15}
-  validates :mm_host, format: { with: URI.regexp }
+  validates :mm_host, :mm_admin_host , format: { with: URI.regexp , :message => 'Please enter a valid host, Eg: http://example.com'}
   validates :mm_consumer_key, :mm_consumer_secret, :mm_card_type, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => "Invalid format, expected format is : {[a-z|A-Z|0-9]}" }
   validates :mm_email_domain, format: {with: /\A[a-z|A-Z|\.]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|\.]}' }
 

@@ -8,7 +8,7 @@ FactoryGirl.define do
     mm_consumer_secret "MyString"
     mm_card_type "MyString"
     mm_email_domain "MyString"
-    mm_admin_host "MyString"
+    mm_admin_host "http://localhost:3000/pc_programs"
     mm_admin_user "MyString"
     mm_admin_password "MyString"
     is_enabled "Y"

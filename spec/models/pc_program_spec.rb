@@ -39,15 +39,17 @@ describe PcProgram do
     end 
   end
   
-  context "mm_host format" do
-    it "should allow valid format" do
-      should allow_value('http://localhost:3000/pc_programs').for(:mm_host)
-      should allow_value('localhost:3000').for(:mm_host)
-    end
+  context "mm_host , mm_admin_host format" do
+    [:mm_host, :mm_admin_host].each do |att|
+      it "should allow valid format" do
+        should allow_value('http://localhost:3000/pc_programs').for(att)
+        should allow_value('localhost:3000').for(att)
+      end
     
-    it "should not allow invalid format" do
-      should_not allow_value('localhost').for(:mm_host)
-      should_not allow_value('@#@localhost').for(:mm_host)
+      it "should not allow invalid format" do
+        should_not allow_value('localhost').for(att)
+        should_not allow_value('@#@localhost').for(att)
+      end
     end
   end
   
