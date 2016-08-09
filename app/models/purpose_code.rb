@@ -16,11 +16,12 @@ class PurposeCode < ActiveRecord::Base
   validates :mtd_txn_limit_sp, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => '9e20'.to_f, :allow_nil => true }
   validate :check_values
 
-  validates_format_of :pattern_beneficiaries, :with => /\A\w[\w\-\(\)\s\r\n]*\z/, :allow_blank => true
+  validates_format_of :pattern_beneficiaries, :pattern_remitters, :with => /\A\w[\w\-\(\)\s\r\n]*\z/, :allow_blank => true
   before_validation :squish_patterns
 
   def squish_patterns
     self.pattern_beneficiaries = pattern_beneficiaries.squeeze(' ').strip.each_line.reject{|x| x.strip == ''}.join unless pattern_beneficiaries.nil?
+    self.pattern_remitters = pattern_remitters.squeeze(' ').strip.each_line.reject{|x| x.strip == ''}.join unless pattern_remitters.nil?
   end
 
   def check_values

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160808113323) do
+ActiveRecord::Schema.define(version: 20160809120529) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -2362,6 +2362,7 @@ ActiveRecord::Schema.define(version: 20160808113323) do
     t.string   "last_action",           limit: 1,    default: "C"
     t.integer  "approved_version"
     t.integer  "approved_id"
+    t.string   "pattern_remitters",     limit: 4000
   end
 
   create_table "reconciled_returns", force: :cascade do |t|

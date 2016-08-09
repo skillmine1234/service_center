@@ -91,3 +91,9 @@
               = @purpose_code.pattern_beneficiaries
             %td#msg-error
               = error_message_for(@purpose_code, :pattern_beneficiaries, :prepend_text => "")
+          %tr
+            %td.label Required Names In Remitters
+            %td.value
+              = @purpose_code.pattern_remitters
+            %td#msg-error
+              = error_message_for(@purpose_code, :pattern_remitters, :prepend_text => "")

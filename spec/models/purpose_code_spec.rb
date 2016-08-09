@@ -107,15 +107,17 @@ describe PurposeCode do
     end
 
     context "validate_keywords" do 
-      it "should validate keywords" do 
-        purpose_code = Factory.build(:purpose_code, :pattern_beneficiaries => "1234 ese@sdgs")
+      it "should validate keywords in beneficiaries and remitters" do 
+        purpose_code = Factory.build(:purpose_code, :pattern_beneficiaries => "1234 ese@sdgs", :pattern_remitters => "1234 ese@sdgs")
         purpose_code.should_not be_valid
         purpose_code.errors_on("pattern_beneficiaries").should == ["is invalid"]
-        purpose_code = Factory.build(:purpose_code, :pattern_beneficiaries => "1234 esesdgs")
+        purpose_code.errors_on("pattern_remitters").should == ["is invalid"]
+        purpose_code = Factory.build(:purpose_code, :pattern_beneficiaries => "1234 esesdgs", :pattern_remitters => "1234 esesdgs")
         purpose_code.should be_valid
-        purpose_code = Factory.build(:purpose_code, :pattern_beneficiaries => "  ")
+        purpose_code = Factory.build(:purpose_code, :pattern_beneficiaries => "  ", :pattern_remitters => "  ")
         purpose_code.should be_valid
         purpose_code.pattern_beneficiaries.should == ""
+        purpose_code.pattern_remitters.should == ""
       end
     end
   end
