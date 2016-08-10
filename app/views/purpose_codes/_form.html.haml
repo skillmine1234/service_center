@@ -72,10 +72,10 @@
       #msg-error
         = error_message_for(@purpose_code, :pattern_beneficiaries, :prepend_text => "")
     .control-group
-      = f.label :pattern_remitters, "Required Names In Remitters", :class => 'control-label'
-      = f.text_area :pattern_remitters, :style => 'height:150px', :placeholder => "Enter the keywords one below the other"
+      = f.label :pattern_allowed_benes, "Allowed Names In Beneficiaries", :class => 'control-label'
+      = f.text_area :pattern_allowed_benes, :style => 'height:150px', :placeholder => "Enter the keywords one below the other"
       #msg-error
-        = error_message_for(@purpose_code, :pattern_remitters, :prepend_text => "")
+        = error_message_for(@purpose_code, :pattern_allowed_benes, :prepend_text => "")
   .form-actions
     = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_purpose_code'
     = link_to :Cancel,'/purpose_codes', :name => 'cancel', :class=>"cancel btn"
