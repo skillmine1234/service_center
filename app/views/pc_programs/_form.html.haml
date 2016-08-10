@@ -57,7 +57,7 @@
         = error_message_for(@pc_program, :mm_admin_user, :prepend_text => "")
     .control-group
       = f.label :mm_admin_password, "*MM Admin Password", :class => 'control-label'
-      = f.password_field :mm_admin_password, :required => true,:value => f.object.mm_admin_password, :maxlength => 255
+      = f.password_field :mm_admin_password, :required => true, :maxlength => 255
       #msg-error
         = error_message_for(@pc_program, :mm_admin_password, :prepend_text => "")
 

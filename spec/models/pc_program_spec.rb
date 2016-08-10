@@ -85,6 +85,15 @@ describe PcProgram do
     end
   end  
 
+  context "encrypt_password" do 
+    it "should convert the encrypt the mm_admin_password" do 
+      pc_program = Factory.build(:pc_program, :code => "BANK123", :mm_admin_password => 'password')
+      pc_program.save.should be_true
+      pc_program.reload
+      pc_program.mm_admin_password.should_not == "password"
+    end
+  end  
+
   context "pc_unapproved_records" do 
     it "oncreate: should create pc_unapproved_record if the approval_status is 'U'" do
       pc_program = Factory(:pc_program)

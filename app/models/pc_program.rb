@@ -20,6 +20,14 @@ class PcProgram < ActiveRecord::Base
 
   before_save :to_downcase
 
+  before_save :encrypt_password
+
+  def encrypt_password
+    unless self.frozen?
+      self.mm_admin_password = EncPassGenerator.new(self.mm_admin_password, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']).generate_encrypted_password unless self.mm_admin_password.to_s.empty?
+    end
+  end
+
   def to_downcase
     unless self.frozen?
       self.code = self.code.downcase unless self.code.nil?
