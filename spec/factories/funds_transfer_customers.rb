@@ -11,5 +11,6 @@ FactoryGirl.define do
     allow_neft "N"
     allow_imps "N"
     enabled "N"
+    allow_all_accounts "Y"
   end
 end
