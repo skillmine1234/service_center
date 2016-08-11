@@ -64,6 +64,6 @@
         = error_message_for(@pc_app, :needs_pin, :prepend_text => "")
 
   .form-actions
-    - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
+    - (f.object.new_record? and f.object.app_id.nil?) ? label_name = "Create" : label_name = "Update"
     = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_pc_app', :value => label_name + ' PC App'
     = link_to :Cancel,'/pc_apps', :name => 'cancel', :class=>"cancel btn"

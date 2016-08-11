@@ -62,6 +62,6 @@
         = error_message_for(@pc_program, :mm_admin_password, :prepend_text => "")
 
   .form-actions
-    - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
+    - (f.object.new_record? and f.object.code.nil?) ? label_name = "Create" : label_name = "Update"
     = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_pc_program', :value => label_name + ' PC Program'
     = link_to :Cancel,'/pc_programs', :name => 'cancel', :class=>"cancel btn"
