@@ -97,4 +97,64 @@ $(document).ready(function() {
       $('#pc_fee_rule_tier' + i + '_max_sc_amt').prop('disabled',false);
     }
 	}
+
+  $("#pc_fee_rule_tier1_method").on("change",function()
+    {
+      if ($("#pc_fee_rule_tier1_method").val() == 'F')
+      {
+        $("#pc_fee_rule_tier1_pct_value").val('0');
+        $("#pc_fee_rule_tier1_pct_value").prop('readOnly',true);
+        $("#pc_fee_rule_tier1_fixed_amt").prop('readOnly',false);
+      }
+      else if ($("#pc_fee_rule_tier1_method").val() == 'P')
+      {
+        $('#pc_fee_rule_tier1_fixed_amt').val('0');
+        $("#pc_fee_rule_tier1_fixed_amt").prop('readOnly',true);
+        $("#pc_fee_rule_tier1_pct_value").prop('readOnly',false);
+      }
+      else{
+        $("#pc_fee_rule_tier1_pct_value").prop('readOnly',false);
+        $("#pc_fee_rule_tier1_fixed_amt").prop('readOnly',false);
+      }
+    });
+
+  $("#pc_fee_rule_tier2_method").on("change",function()
+    {
+      if ($("#pc_fee_rule_tier2_method").val() == 'F')
+      {
+        $("#pc_fee_rule_tier2_pct_value").val('0');
+        $("#pc_fee_rule_tier2_pct_value").prop('disabled',true);
+        $("#pc_fee_rule_tier2_fixed_amt").prop('disabled',false);
+      }
+      else if ($("#pc_fee_rule_tier2_method").val() == 'P')
+      {
+        $('#pc_fee_rule_tier2_fixed_amt').val('0');
+        $("#pc_fee_rule_tier2_fixed_amt").prop('disabled',true);
+        $("#pc_fee_rule_tier2_pct_value").prop('disabled',false);
+      }
+      else{
+        $("#pc_fee_rule_tier2_pct_value").prop('disabled',false);
+        $("#pc_fee_rule_tier2_fixed_amt").prop('disabled',false);
+      }
+    });
+
+  $("#pc_fee_rule_tier3_method").on("change",function()
+    {
+      if ($("#pc_fee_rule_tier3_method").val() == 'F')
+      {
+        $("#pc_fee_rule_tier3_pct_value").val('0');
+        $("#pc_fee_rule_tier3_pct_value").prop('disabled',true);
+        $("#pc_fee_rule_tier3_fixed_amt").prop('disabled',false);
+      }
+      else if ($("#pc_fee_rule_tier3_method").val() == 'P')
+      {
+        $('#pc_fee_rule_tier3_fixed_amt').val('0');
+        $("#pc_fee_rule_tier3_fixed_amt").prop('disabled',true);
+        $("#pc_fee_rule_tier3_pct_value").prop('disabled',false);
+      }
+      else{
+        $("#pc_fee_rule_tier3_pct_value").prop('disabled',false);
+        $("#pc_fee_rule_tier3_fixed_amt").prop('disabled',false);
+      }
+    });
 });

@@ -34,17 +34,23 @@
         = error_message_for(@pc_fee_rule, :tier1_to_amt, :prepend_text => "")
     .control-group
       = f.label :tier1_method, "Tier 1 Method", :class => 'control-label'
-      = f.select :tier1_method, options_for_select(PcFeeRule.options_for_tier_method, @pc_fee_rule), :prompt => 'Select'
+      = f.select :tier1_method, options_for_select(PcFeeRule.options_for_tier_method, @pc_fee_rule.tier1_method), :prompt => 'Select'
       #msg-error
         = error_message_for(@pc_fee_rule, :tier1_method, :prepend_text => "")
     .control-group
       = f.label :tier1_fixed_amt, "Tier 1 Fixed Amount", :class => 'control-label'
-      = f.text_field :tier1_fixed_amt
+      - if f.object.tier1_method == 'F'
+        = f.text_field :tier1_fixed_amt
+      - else
+        = f.text_field :tier1_fixed_amt, :readonly => true
       #msg-error
         = error_message_for(@pc_fee_rule, :tier1_fixed_amt, :prepend_text => "")
     .control-group
       = f.label :tier1_pct_value, "Tier 1 Percentage Value", :class => 'control-label'
-      = f.text_field :tier1_pct_value
+      - if f.object.tier1_method == 'P'
+        = f.text_field :tier1_pct_value
+      - else 
+        = f.text_field :tier1_pct_value, :readonly => true
       #msg-error
         = error_message_for(@pc_fee_rule, :tier1_pct_value, :prepend_text => "")
     .control-group
@@ -69,17 +75,23 @@
         = error_message_for(@pc_fee_rule, :tier2_to_amt, :prepend_text => "")
     .control-group
       = f.label :tier2_method, "Tier 2 Method", :class => 'control-label'
-      = f.select :tier2_method, options_for_select(PcFeeRule.options_for_tier_method, @pc_fee_rule), :prompt => 'Select'
+      = f.select :tier2_method, options_for_select(PcFeeRule.options_for_tier_method, @pc_fee_rule.tier2_method), :prompt => 'Select'
       #msg-error
         = error_message_for(@pc_fee_rule, :tier2_method, :prepend_text => "")
     .control-group
       = f.label :tier2_fixed_amt, "Tier 2 Fixed Amount", :class => 'control-label'
-      = f.text_field :tier2_fixed_amt
+      - if f.object.tier2_method == 'F'
+        = f.text_field :tier2_fixed_amt
+      - else
+        = f.text_field :tier2_fixed_amt, :readonly => true
       #msg-error
         = error_message_for(@pc_fee_rule, :tier2_fixed_amt, :prepend_text => "")
     .control-group
       = f.label :tier2_pct_value, "Tier 2 Percentage Value", :class => 'control-label'
-      = f.text_field :tier2_pct_value
+      - if f.object.tier2_method == 'P'
+        = f.text_field :tier2_pct_value
+      - else
+        = f.text_field :tier2_pct_value, :readonly => true
       #msg-error
         = error_message_for(@pc_fee_rule, :tier2_pct_value, :prepend_text => "")
     .control-group
@@ -104,17 +116,23 @@
     /     = error_message_for(@pc_fee_rule, :tier3_to_amt, :prepend_text => "")
     .control-group
       = f.label :tier3_method, "Tier 3 Method", :class => 'control-label'
-      = f.select :tier3_method, options_for_select(PcFeeRule.options_for_tier_method, @pc_fee_rule), :prompt => 'Select'
+      = f.select :tier3_method, options_for_select(PcFeeRule.options_for_tier_method, @pc_fee_rule.tier3_method), :prompt => 'Select'
       #msg-error
         = error_message_for(@pc_fee_rule, :tier3_method, :prepend_text => "")
     .control-group
       = f.label :tier3_fixed_amt, "Tier 3 Fixed Amount", :class => 'control-label'
-      = f.text_field :tier3_fixed_amt
+      - if f.object.tier3_method == 'F'
+        = f.text_field :tier3_fixed_amt
+      - else
+        = f.text_field :tier3_fixed_amt, :readonly => true
       #msg-error
         = error_message_for(@pc_fee_rule, :tier3_fixed_amt, :prepend_text => "")
     .control-group
       = f.label :tier3_pct_value, "Tier 3 Percentage Value", :class => 'control-label'
-      = f.text_field :tier3_pct_value
+      - if f.object.tier3_method == 'P'
+        = f.text_field :tier3_pct_value
+      - else
+        = f.text_field :tier3_pct_value, :readonly => true
       #msg-error
         = error_message_for(@pc_fee_rule, :tier3_pct_value, :prepend_text => "")
     .control-group
