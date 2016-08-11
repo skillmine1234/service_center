@@ -7,7 +7,7 @@ class FundsTransferCustomer < ActiveRecord::Base
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
   
-  validates_presence_of :low_balance_alert_at, :identity_user_id, :name, :app_id
+  validates_presence_of :low_balance_alert_at, :identity_user_id, :name, :app_id, :allow_all_accounts
   validates :low_balance_alert_at, :numericality => { :greater_than => 0}
   validates :identity_user_id, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}'}, :allow_blank => true
   validates :app_id, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}'}

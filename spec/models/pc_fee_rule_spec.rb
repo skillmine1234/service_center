@@ -129,4 +129,12 @@ describe PcFeeRule do
       pc_fee_rule3.errors[:base].should == ["Tier 3 Minimum SC Amount should be less than Maximum SC Amount"]
     end
   end
+
+  context "validate_to_amount" do
+    it "should return error if tier2_to_amt < tier1_to_amt" do
+      pc_fee_rule1 = Factory.build(:pc_fee_rule,:tier1_to_amt => 100, :tier2_to_amt => 90)
+      pc_fee_rule1.save.should === false
+      pc_fee_rule1.errors[:base].should == ["Tier 2 To Amount should be greater than Tier 1 To Amount"]
+    end
+  end
 end

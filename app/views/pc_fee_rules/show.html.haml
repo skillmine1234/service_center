@@ -160,7 +160,7 @@
           %tr
             %td.label Tier 3 Max. SC Amount
             %td.value
-              = number_with_precision(@pc_fee_rule.tier1_max_sc_amt, :precision => 2) || 0
+              = number_with_precision(@pc_fee_rule.tier3_max_sc_amt, :precision => 2) || 0
             %td#msg-error
               = error_message_for(@pc_fee_rule, :tier3_max_sc_amt, :prepend_text => "")
           %tr

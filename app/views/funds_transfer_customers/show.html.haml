@@ -92,6 +92,13 @@
             %td#msg-error
               = error_message_for(@funds_transfer_customer, :needs_purpose_code, :prepend_text => "")
           %tr
+            %td.label Allow All Accounts
+            %td.value
+              = @funds_transfer_customer.allow_all_accounts
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :allow_all_accounts, :prepend_text => "")
+
+          %tr
             %td.label Created By
             %td.value
               = @funds_transfer_customer.created_user.try(:username)

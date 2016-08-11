@@ -15,12 +15,15 @@ class PurposeCode < ActiveRecord::Base
   validates :mtd_txn_cnt_sp, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => '9e20'.to_f, :allow_nil => true }
   validates :mtd_txn_limit_sp, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => '9e20'.to_f, :allow_nil => true }
   validate :check_values
+  validate :check_patterns
 
-  validates_format_of :pattern_beneficiaries, :with => /\A\w[\w\-\(\)\s\r\n]*\z/, :allow_blank => true
+  validates_format_of :pattern_beneficiaries, :pattern_allowed_benes, :with => /\A\w[\w\-\(\)\s\r\n]*\z/, :allow_blank => true
   before_validation :squish_patterns
+
 
   def squish_patterns
     self.pattern_beneficiaries = pattern_beneficiaries.squeeze(' ').strip.each_line.reject{|x| x.strip == ''}.join unless pattern_beneficiaries.nil?
+    self.pattern_allowed_benes = pattern_allowed_benes.squeeze(' ').strip.each_line.reject{|x| x.strip == ''}.join unless pattern_allowed_benes.nil?
   end
 
   def check_values
@@ -28,6 +31,10 @@ class PurposeCode < ActiveRecord::Base
       errors.add(:mtd_txn_limit_self,"is less than transaction limit") unless mtd_txn_limit_self >= txn_limit.to_f
       errors.add(:mtd_txn_limit_sp,"is less than transaction limit") unless mtd_txn_limit_sp >= txn_limit.to_f
     end
+  end
+
+  def check_patterns
+    errors.add(:base,"Please enter either required names or allowed names in beneficiaries") if (!pattern_beneficiaries.to_s.empty? and !pattern_allowed_benes.to_s.empty?)
   end
 
   def self.options_for_bene_and_rem_types

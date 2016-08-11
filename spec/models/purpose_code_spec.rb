@@ -106,8 +106,18 @@ describe PurposeCode do
       end
     end
 
+    context "check_patterns" do 
+      it "should return error if both pattern_beneficiaries and pattern_allowed_benes are present" do 
+        purpose_code = Factory.build(:purpose_code, :pattern_beneficiaries => "1234", :pattern_allowed_benes => "2323")
+        purpose_code.should_not be_valid
+        purpose_code.errors_on("base").should == ["Please enter either required names or allowed names in beneficiaries"]
+        purpose_code = Factory.build(:purpose_code, :pattern_beneficiaries => "1234")
+        purpose_code.should be_valid
+      end
+    end
+
     context "validate_keywords" do 
-      it "should validate keywords" do 
+      it "should validate keywords in required beneficiaries" do 
         purpose_code = Factory.build(:purpose_code, :pattern_beneficiaries => "1234 ese@sdgs")
         purpose_code.should_not be_valid
         purpose_code.errors_on("pattern_beneficiaries").should == ["is invalid"]
@@ -116,6 +126,17 @@ describe PurposeCode do
         purpose_code = Factory.build(:purpose_code, :pattern_beneficiaries => "  ")
         purpose_code.should be_valid
         purpose_code.pattern_beneficiaries.should == ""
+      end
+
+      it "should validate keywords in allowed beneficiaries" do 
+        purpose_code = Factory.build(:purpose_code, :pattern_allowed_benes => "1234 ese@sdgs")
+        purpose_code.should_not be_valid
+        purpose_code.errors_on("pattern_allowed_benes").should == ["is invalid"]
+        purpose_code = Factory.build(:purpose_code, :pattern_allowed_benes => "1234 esesdgs")
+        purpose_code.should be_valid
+        purpose_code = Factory.build(:purpose_code, :pattern_allowed_benes => "  ")
+        purpose_code.should be_valid
+        purpose_code.pattern_allowed_benes.should == ""
       end
     end
   end

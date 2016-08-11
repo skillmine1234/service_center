@@ -61,6 +61,7 @@ ServiceCenter::Application.routes.draw do
   resources :ft_unapproved_records
   resources :funds_transfer_customers
   resources :ft_purpose_codes
+  resources :ft_customer_accounts
   resources :reconciled_returns
   resources :su_customers
   resources :su_unapproved_records
@@ -117,6 +118,7 @@ ServiceCenter::Application.routes.draw do
   get '/imt_customer/:id/audit_logs' => 'imt_customers#audit_logs'
   get '/funds_transfer_customer/:id/audit_logs' => 'funds_transfer_customers#audit_logs'
   get '/ft_purpose_code/:id/audit_logs' => 'ft_purpose_codes#audit_logs'
+  get '/ft_customer_account/:id/audit_logs' => 'ft_customer_accounts#audit_logs'
   get '/reconciled_returns/:id/audit_logs' => 'reconciled_returns#audit_logs'
   get '/su_customers/:id/audit_logs' => 'su_customers#audit_logs'
   get '/ic_customers/:id/audit_logs' => 'ic_customers#audit_logs'
@@ -164,6 +166,7 @@ ServiceCenter::Application.routes.draw do
   put '/imt_customer/:id/approve' => "imt_customers#approve"
   put '/funds_transfer_customer/:id/approve' => "funds_transfer_customers#approve"
   put '/ft_purpose_code/:id/approve' => "ft_purpose_codes#approve"
+  put '/ft_customer_account/:id/approve' => "ft_customer_accounts#approve"
   put '/su_customers/:id/approve' => "su_customers#approve"
   put '/ic_customers/:id/approve' => "ic_customers#approve"
   put '/ic_suppliers/:id/approve' => "ic_suppliers#approve"

@@ -129,6 +129,6 @@
         = error_message_for(@pc_fee_rule, :tier3_max_sc_amt, :prepend_text => "")
 
   .form-actions
-    - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
+    - (f.object.new_record? and f.object.program_code.nil?) ? label_name = "Create" : label_name = "Update"
     = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_pc_fee_rule', :value => label_name + ' PC Fee Rule'
     = link_to :Cancel,'/pc_fee_rules', :name => 'cancel', :class=>"cancel btn"

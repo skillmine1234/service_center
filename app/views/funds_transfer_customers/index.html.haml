@@ -32,6 +32,8 @@
       RTGS Allowed
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Needs Purpose Code
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Allow All Accounts
   .tbody
     - @funds_transfer_customers.each do |funds_transfer_customer|
       %tr
@@ -58,3 +60,5 @@
           = funds_transfer_customer.allow_rtgs
         %td{:style=>'text-align:left;'}
           = funds_transfer_customer.needs_purpose_code
+        %td{:style=>'text-align:left;'}
+          = funds_transfer_customer.allow_all_accounts

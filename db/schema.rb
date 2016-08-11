@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160806064313) do
+ActiveRecord::Schema.define(version: 20160810115855) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -891,7 +891,7 @@ ActiveRecord::Schema.define(version: 20160806064313) do
     t.string   "string"
     t.string   "fault_reason"
   end
-
+  
   create_table "fm_audit_steps", force: :cascade do |t|
     t.string   "auditable_type",               null: false
     t.integer  "auditable_id",                 null: false
@@ -976,6 +976,23 @@ ActiveRecord::Schema.define(version: 20160806064313) do
 
   add_index "ft_audit_steps", ["ft_auditable_type", "ft_auditable_id", "step_no", "attempt_no"], name: "uk_ft_audit_steps", unique: true
 
+  create_table "ft_cust_accounts", force: :cascade do |t|
+    t.string   "customer_id",      limit: 15,               null: false
+    t.string   "account_no",       limit: 20,               null: false
+    t.string   "is_enabled",       limit: 1,                null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.string   "created_by",       limit: 20
+    t.string   "updated_by",       limit: 20
+    t.integer  "lock_version",                default: 0,   null: false
+    t.string   "approval_status",  limit: 1,  default: "U", null: false
+    t.string   "last_action",      limit: 1,  default: "C", null: false
+    t.integer  "approved_version"
+    t.integer  "approved_id"
+  end
+
+  add_index "ft_cust_accounts", ["customer_id", "account_no", "approval_status"], name: "ft_cust_accounts_01", unique: true
+
   create_table "ft_customers", force: :cascade do |t|
     t.string   "app_id",               limit: 20,                null: false
     t.string   "name",                 limit: 100,               null: false
@@ -999,6 +1016,7 @@ ActiveRecord::Schema.define(version: 20160806064313) do
     t.integer  "approved_id"
     t.string   "needs_purpose_code",   limit: 1
     t.string   "reply_with_bene_name", limit: 1,   default: "N"
+    t.string   "allow_all_accounts",   limit: 1,   default: "Y", null: false
   end
 
   add_index "ft_customers", ["app_id", "customer_id", "approval_status"], name: "in_ft_customers_2", unique: true
@@ -2094,6 +2112,7 @@ ActiveRecord::Schema.define(version: 20160806064313) do
     t.string   "program_code",     limit: 15,               null: false
   end
 
+  add_index "pc_fee_rules", ["program_code", "txn_kind", "approval_status"], name: "pc_fee_rules_01", unique: true
   add_index "pc_fee_rules", ["txn_kind", "approval_status"], name: "uk_pc_fee_rules", unique: true
 
   create_table "pc_load_cards", force: :cascade do |t|
@@ -2361,6 +2380,7 @@ ActiveRecord::Schema.define(version: 20160806064313) do
     t.string   "last_action",           limit: 1,    default: "C"
     t.integer  "approved_version"
     t.integer  "approved_id"
+    t.string   "pattern_allowed_benes", limit: 4000
   end
 
   create_table "reconciled_returns", force: :cascade do |t|

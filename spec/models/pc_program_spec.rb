@@ -39,15 +39,17 @@ describe PcProgram do
     end 
   end
   
-  context "mm_host format" do
-    it "should allow valid format" do
-      should allow_value('http://localhost:3000/pc_programs').for(:mm_host)
-      should allow_value('localhost:3000').for(:mm_host)
-    end
+  context "mm_host , mm_admin_host format" do
+    [:mm_host, :mm_admin_host].each do |att|
+      it "should allow valid format" do
+        should allow_value('http://localhost:3000/pc_programs').for(att)
+        should allow_value('localhost:3000').for(att)
+      end
     
-    it "should not allow invalid format" do
-      should_not allow_value('localhost').for(:mm_host)
-      should_not allow_value('@#@localhost').for(:mm_host)
+      it "should not allow invalid format" do
+        should_not allow_value('localhost').for(att)
+        should_not allow_value('@#@localhost').for(att)
+      end
     end
   end
   
@@ -80,6 +82,22 @@ describe PcProgram do
       pc_program.to_downcase
       pc_program.code.should == "bank123"
       pc_program.save.should be_true
+    end
+  end  
+
+  context "encrypt_password" do 
+    it "should convert the encrypt the mm_admin_password for unapproved record" do 
+      pc_program = Factory.build(:pc_program, :code => "BANK123", :mm_admin_password => 'password')
+      pc_program.save.should be_true
+      pc_program.reload
+      pc_program.mm_admin_password.should_not == "password"
+    end
+
+    it "should not convert the encrypt the mm_admin_password for approved record" do 
+      pc_program = Factory.build(:pc_program, :code => "BANK123", :mm_admin_password => 'password', :approval_status => 'A')
+      pc_program.save.should be_true
+      pc_program.reload
+      pc_program.mm_admin_password.should == "password"
     end
   end  
 
@@ -132,8 +150,10 @@ describe PcProgram do
   context "approve" do 
     it "should approve unapproved_record" do 
       pc_program = Factory(:pc_program, :approval_status => 'U')
+      password = pc_program.mm_admin_password
       pc_program.approve.should == ""
       pc_program.approval_status.should == 'A'
+      pc_program.mm_admin_password.should == password
     end
 
     it "should return error when trying to approve unmatched version" do 

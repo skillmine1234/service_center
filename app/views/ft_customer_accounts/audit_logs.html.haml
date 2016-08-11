@@ -4,7 +4,7 @@
       = form_for "audit_logs", :url => "", :method => :get do |f|
         %h3{:style => 'display:inline;'} 
           = "Values at version" 
-          = select_tag :version_id, options_for_select(version_ids(@pc_program),params[:version_id]), :prompt => 'Select'
+          = select_tag :version_id, options_for_select(version_ids(@ft_customer_account),params[:version_id]), :prompt => 'Select'
           = submit_tag "Show", :name => nil, :class => "btn btn-primary"
       %br
       - unless @audit.nil?
@@ -19,7 +19,7 @@
             %td.value
               = " " 
             %td.value
-              = @audit.user.try(:username)
+              = @audit.user.username
           %tr
             %td.label 
               = "Action"

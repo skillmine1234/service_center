@@ -12,6 +12,7 @@ class PcFeeRule < ActiveRecord::Base
   validates :tier1_pct_value, :tier2_pct_value, :tier3_pct_value, :numericality => {:greater_than_or_equal_to => 0, :less_than_or_equal_to => 100}, :allow_blank => true
   validates :no_of_tiers, :numericality => {:greater_than_or_equal_to => 1, :less_than_or_equal_to => 3 }
   validate :min_and_max_sc_amt
+  validate :validate_to_amount
 
   def self.options_for_txn_kind
     [['loadCard','PcLoadCard'],['payToAccount','PcsPayToAccount'],['payToContact','PcsPayToContact'],['topUp','PcsTopUp']]
@@ -30,6 +31,12 @@ class PcFeeRule < ActiveRecord::Base
     end
     unless (self.tier3_min_sc_amt.nil? and self.tier3_max_sc_amt.nil?)
       errors[:base] << "Tier 3 Minimum SC Amount should be less than Maximum SC Amount" if (self.tier3_min_sc_amt > self.tier3_max_sc_amt)
+    end
+  end
+
+  def validate_to_amount
+    if !self.tier2_to_amt.nil? and !self.tier1_to_amt.nil?
+      errors[:base] << "Tier 2 To Amount should be greater than Tier 1 To Amount" if (self.tier2_to_amt <= self.tier1_to_amt)
     end
   end
 end

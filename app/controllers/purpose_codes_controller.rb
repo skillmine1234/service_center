@@ -94,7 +94,7 @@ class PurposeCodesController < ApplicationController
     params.require(:purpose_code).permit(:code, :created_by, :daily_txn_limit, :description, {:disallowed_bene_types => []}, 
                                          {:disallowed_rem_types => []}, :is_enabled, :lock_version, :txn_limit, :updated_by,
                                          :mtd_txn_cnt_self, :mtd_txn_limit_self, :mtd_txn_cnt_sp, :mtd_txn_limit_sp, :rbi_code,
-                                         :pattern_beneficiaries, :approved_id, :approved_version)
+                                         :pattern_beneficiaries, :pattern_allowed_benes, :approved_id, :approved_version)
   end
   
 end
