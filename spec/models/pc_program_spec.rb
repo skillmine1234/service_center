@@ -86,11 +86,18 @@ describe PcProgram do
   end  
 
   context "encrypt_password" do 
-    it "should convert the encrypt the mm_admin_password" do 
+    it "should convert the encrypt the mm_admin_password for unapproved record" do 
       pc_program = Factory.build(:pc_program, :code => "BANK123", :mm_admin_password => 'password')
       pc_program.save.should be_true
       pc_program.reload
       pc_program.mm_admin_password.should_not == "password"
+    end
+
+    it "should not convert the encrypt the mm_admin_password for approved record" do 
+      pc_program = Factory.build(:pc_program, :code => "BANK123", :mm_admin_password => 'password', :approval_status => 'A')
+      pc_program.save.should be_true
+      pc_program.reload
+      pc_program.mm_admin_password.should == "password"
     end
   end  
 
@@ -143,8 +150,10 @@ describe PcProgram do
   context "approve" do 
     it "should approve unapproved_record" do 
       pc_program = Factory(:pc_program, :approval_status => 'U')
+      password = pc_program.mm_admin_password
       pc_program.approve.should == ""
       pc_program.approval_status.should == 'A'
+      pc_program.mm_admin_password.should == password
     end
 
     it "should return error when trying to approve unmatched version" do 

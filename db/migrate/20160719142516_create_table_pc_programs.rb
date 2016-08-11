@@ -30,11 +30,12 @@ class CreateTablePcPrograms < ActiveRecord::Migration
     PcApp.unscoped.find_each(batch_size: 100) do |app|
       pc = PcProgram.unscoped.find_by_code('p' + app.app_id)
       if pc.nil?
-        PcProgram.create(:code => 'p' + app.app_id, :mm_host => app.mm_host, :mm_consumer_key => app.mm_consumer_key,
+        p = PcProgram.create(:code => 'p' + app.app_id, :mm_host => app.mm_host, :mm_consumer_key => app.mm_consumer_key,
                         :mm_consumer_secret => app.mm_consumer_secret, :mm_card_type => app.mm_card_type,
                         :mm_email_domain => app.mm_email_domain, :mm_admin_host => app.mm_admin_host,
                         :mm_admin_user => app.mm_admin_user, :mm_admin_password => app.mm_admin_password,
-                        :is_enabled => 'Y', :approval_status => 'A')
+                        :is_enabled => 'Y')
+        p.update_attribute(:approval_status,'A')
       end
       app.program_code = 'p' + app.app_id.to_s
       app.save(:validate => false)

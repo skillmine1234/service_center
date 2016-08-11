@@ -19,7 +19,7 @@
             %td.value
               = " " 
             %td.value
-              = @audit.user.username
+              = @audit.user.try(:username)
           %tr
             %td.label 
               = "Action"

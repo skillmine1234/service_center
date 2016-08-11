@@ -24,7 +24,9 @@ class PcProgram < ActiveRecord::Base
 
   def encrypt_password
     unless self.frozen?
-      self.mm_admin_password = EncPassGenerator.new(self.mm_admin_password, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']).generate_encrypted_password unless self.mm_admin_password.to_s.empty?
+      if approval_status == 'U'
+        self.mm_admin_password = EncPassGenerator.new(self.mm_admin_password, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']).generate_encrypted_password unless self.mm_admin_password.to_s.empty?
+      end
     end
   end
 
