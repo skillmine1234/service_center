@@ -22,8 +22,10 @@ class PurposeCode < ActiveRecord::Base
 
 
   def squish_patterns
-    self.pattern_beneficiaries = pattern_beneficiaries.squeeze(' ').strip.each_line.reject{|x| x.strip == ''}.join unless pattern_beneficiaries.nil?
-    self.pattern_allowed_benes = pattern_allowed_benes.squeeze(' ').strip.each_line.reject{|x| x.strip == ''}.join unless pattern_allowed_benes.nil?
+    unless self.frozen?
+      self.pattern_beneficiaries = pattern_beneficiaries.squeeze(' ').strip.each_line.reject{|x| x.strip == ''}.join unless pattern_beneficiaries.nil?
+      self.pattern_allowed_benes = pattern_allowed_benes.squeeze(' ').strip.each_line.reject{|x| x.strip == ''}.join unless pattern_allowed_benes.nil?
+    end
   end
 
   def check_values
