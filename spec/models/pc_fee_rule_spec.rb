@@ -8,7 +8,7 @@ describe PcFeeRule do
   end
   
   context "validation" do
-    [:program_code, :txn_kind, :no_of_tiers].each do |att|
+    [:program_code, :txn_kind, :no_of_tiers, :tier1_to_amt, :tier1_max_sc_amt].each do |att|
       it { should validate_presence_of(att) }
     end
     
