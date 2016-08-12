@@ -6,6 +6,8 @@ class FundsTransferCustomer < ActiveRecord::Base
   
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
+
+  has_many :ft_customer_accounts, :primary_key => 'customer_id', :foreign_key => 'customer_id', :class_name => 'FtCustomerAccount'
   
   validates_presence_of :low_balance_alert_at, :identity_user_id, :name, :app_id, :allow_all_accounts
   validates :low_balance_alert_at, :numericality => { :greater_than => 0}
@@ -17,7 +19,7 @@ class FundsTransferCustomer < ActiveRecord::Base
   validate :validate_customer_id
   
   validates :app_id, length: { minimum: 5, maximum: 20 }
-  validates :customer_id, length: { minimum: 3, maximum: 15 }, :allow_blank =>true
+  validates :customer_id, length: { minimum: 5, maximum: 10 }, :allow_blank =>true
   validates :name, length: {maximum: 100 }
   validates :identity_user_id, length: { maximum: 20 }
 

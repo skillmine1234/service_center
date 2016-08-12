@@ -891,7 +891,7 @@ ActiveRecord::Schema.define(version: 20160810115855) do
     t.string   "string"
     t.string   "fault_reason"
   end
-  
+
   create_table "fm_audit_steps", force: :cascade do |t|
     t.string   "auditable_type",               null: false
     t.integer  "auditable_id",                 null: false
@@ -2040,42 +2040,49 @@ ActiveRecord::Schema.define(version: 20160810115855) do
 
   add_index "pc_card_registrations", ["req_no", "app_id", "attempt_no"], name: "uk_pc_card_regs", unique: true
 
+  create_table "pc_customer_credentials", force: :cascade do |t|
+    t.string "username", null: false
+    t.string "password", null: false
+  end
+
   create_table "pc_customers", force: :cascade do |t|
-    t.string  "mobile_no",          limit: 255, null: false
-    t.string  "title",              limit: 15
-    t.string  "first_name",         limit: 255
-    t.string  "last_name",          limit: 255
-    t.string  "pref_name",          limit: 255
-    t.string  "email_id",           limit: 255
-    t.string  "password",           limit: 255
-    t.string  "cust_status",        limit: 255
-    t.string  "cust_uid",           limit: 255
-    t.date    "birth_date"
-    t.string  "nationality",        limit: 255
-    t.integer "country_code"
-    t.date    "reg_date"
-    t.string  "gender",             limit: 255
-    t.string  "doc_type",           limit: 255
-    t.string  "doc_no",             limit: 255
-    t.string  "country_of_issue",   limit: 255
-    t.string  "address_line1",      limit: 255
-    t.string  "address_line2",      limit: 255
-    t.string  "city",               limit: 255
-    t.string  "state",              limit: 255
-    t.string  "country",            limit: 255
-    t.string  "postal_code",        limit: 15
-    t.string  "proxy_card_no",      limit: 255
-    t.string  "card_uid",           limit: 255
-    t.string  "card_no",            limit: 255
-    t.string  "card_type",          limit: 255
-    t.string  "card_name",          limit: 255
-    t.string  "card_desc",          limit: 255
-    t.string  "card_status",        limit: 255
-    t.date    "card_issue_date"
-    t.integer "card_expiry_year"
-    t.integer "card_expiry_month"
-    t.string  "card_currency_code", limit: 255
-    t.string  "app_id",             limit: 50
+    t.string   "mobile_no",          limit: 255, null: false
+    t.string   "title",              limit: 15
+    t.string   "first_name",         limit: 255
+    t.string   "last_name",          limit: 255
+    t.string   "pref_name",          limit: 255
+    t.string   "email_id",           limit: 255
+    t.string   "password",           limit: 255
+    t.string   "cust_status",        limit: 255
+    t.string   "cust_uid",           limit: 255
+    t.date     "birth_date"
+    t.string   "nationality",        limit: 255
+    t.integer  "country_code"
+    t.date     "reg_date"
+    t.string   "gender",             limit: 255
+    t.string   "doc_type",           limit: 255
+    t.string   "doc_no",             limit: 255
+    t.string   "country_of_issue",   limit: 255
+    t.string   "address_line1",      limit: 255
+    t.string   "address_line2",      limit: 255
+    t.string   "city",               limit: 255
+    t.string   "state",              limit: 255
+    t.string   "country",            limit: 255
+    t.string   "postal_code",        limit: 15
+    t.string   "proxy_card_no",      limit: 255
+    t.string   "card_uid",           limit: 255
+    t.string   "card_no",            limit: 255
+    t.string   "card_type",          limit: 255
+    t.string   "card_name",          limit: 255
+    t.string   "card_desc",          limit: 255
+    t.string   "card_status",        limit: 255
+    t.date     "card_issue_date"
+    t.integer  "card_expiry_year"
+    t.integer  "card_expiry_month"
+    t.string   "card_currency_code", limit: 255
+    t.string   "app_id",             limit: 50
+    t.string   "activation_code",    limit: 255
+    t.datetime "activated_at"
   end
 
   add_index "pc_customers", ["mobile_no"], name: "uk_pc_card_custs_1", unique: true

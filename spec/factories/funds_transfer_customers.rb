@@ -6,7 +6,7 @@ FactoryGirl.define do
     name "MyString"
     low_balance_alert_at 123
     identity_user_id "12345"
-    sequence(:customer_id) {|n| "9" + "%03i" % "#{n}" }
+    sequence(:customer_id) {|n| "9" + "%05i" % "#{n}" }
     approval_status "U"
     allow_neft "N"
     allow_imps "N"

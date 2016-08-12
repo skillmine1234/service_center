@@ -110,47 +110,47 @@ describe FtCustomerAccountsController do
       it "updates the requested ft_customer_account" do
         ft_customer_account = Factory(:ft_customer_account, :account_no => "012323")
         params = ft_customer_account.attributes.slice(*ft_customer_account.class.attribute_names)
-        params[:account_no] = "1234"
+        params[:account_no] = "12345"
         put :update, {:id => ft_customer_account.id, :ft_customer_account => params}
         ft_customer_account.reload
-        ft_customer_account.account_no.should == "1234"
+        ft_customer_account.account_no.should == "12345"
       end
 
       it "assigns the requested ft_customer_account as @ft_customer_account" do
-        ft_customer_account = Factory(:ft_customer_account, :account_no => "123")
+        ft_customer_account = Factory(:ft_customer_account, :account_no => "12345")
         params = ft_customer_account.attributes.slice(*ft_customer_account.class.attribute_names)
-        params[:account_no] = "1234"
+        params[:account_no] = "123456"
         put :update, {:id => ft_customer_account.to_param, :ft_customer_account => params}
         assigns(:ft_customer_account).should eq(ft_customer_account)
       end
 
       it "redirects to the ft_customer_account" do
-        ft_customer_account = Factory(:ft_customer_account, :account_no => "123")
+        ft_customer_account = Factory(:ft_customer_account, :account_no => "12345")
         params = ft_customer_account.attributes.slice(*ft_customer_account.class.attribute_names)
-        params[:account_no] = "1234"
+        params[:account_no] = "12345"
         put :update, {:id => ft_customer_account.to_param, :ft_customer_account => params}
         response.should redirect_to(ft_customer_account)
       end
 
       it "should raise error when tried to update at same time by many" do
-        ft_customer_account = Factory(:ft_customer_account, :account_no => "123")
+        ft_customer_account = Factory(:ft_customer_account, :account_no => "12345")
         params = ft_customer_account.attributes.slice(*ft_customer_account.class.attribute_names)
-        params[:account_no] = "1234"
+        params[:account_no] = "123456"
         ft_customer_account2 = ft_customer_account
         put :update, {:id => ft_customer_account.id, :ft_customer_account => params}
         ft_customer_account.reload
-        ft_customer_account.account_no.should == "1234"
-        params[:account_no] = "12345"
+        ft_customer_account.account_no.should == "123456"
+        params[:account_no] = "1234567"
         put :update, {:id => ft_customer_account2.id, :ft_customer_account => params}
         ft_customer_account.reload
-        ft_customer_account.account_no.should == "1234"
+        ft_customer_account.account_no.should == "123456"
         flash[:alert].should  match(/Someone edited the Customer Account the same time you did. Please re-apply your changes to the Customer/)
       end
     end
 
     describe "with invalid params" do
       it "assigns the ft_customer_account as @ft_customer_account" do
-        ft_customer_account = Factory(:ft_customer_account, :account_no => "123")
+        ft_customer_account = Factory(:ft_customer_account, :account_no => "12345")
         params = ft_customer_account.attributes.slice(*ft_customer_account.class.attribute_names)
         params[:account_no] = nil
         put :update, {:id => ft_customer_account.to_param, :ft_customer_account => params}
@@ -187,14 +187,14 @@ describe FtCustomerAccountsController do
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
       ft_customer_account1 = Factory(:ft_customer_account, :approval_status => 'A')
-      ft_customer_account2 = Factory(:ft_customer_account, :approval_status => 'U', :account_no => '1234', :approved_version => ft_customer_account1.lock_version, :approved_id => ft_customer_account1.id, :created_by => 666)
+      ft_customer_account2 = Factory(:ft_customer_account, :approval_status => 'U', :account_no => '12345', :approved_version => ft_customer_account1.lock_version, :approved_id => ft_customer_account1.id, :created_by => 666)
       # the following line is required for reload to get triggered (TODO)
       ft_customer_account1.approval_status.should == 'A'
       FtUnapprovedRecord.count.should == 1
       put :approve, {:id => ft_customer_account2.id}
       FtUnapprovedRecord.count.should == 0
       ft_customer_account1.reload
-      ft_customer_account1.account_no.should == '1234'
+      ft_customer_account1.account_no.should == '12345'
       ft_customer_account1.updated_by.should == "666"
       FtCustomerAccount.find_by_id(ft_customer_account2.id).should be_nil
     end
@@ -203,12 +203,12 @@ describe FtCustomerAccountsController do
       user_role = UserRole.find_by_user_id(@user.id)
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
-      ft_customer_account = Factory(:ft_customer_account, :account_no => '1234', :approval_status => 'U')
+      ft_customer_account = Factory(:ft_customer_account, :account_no => '12345', :approval_status => 'U')
       FtUnapprovedRecord.count.should == 1
       put :approve, {:id => ft_customer_account.id}
       FtUnapprovedRecord.count.should == 0
       ft_customer_account.reload
-      ft_customer_account.account_no.should == '1234'
+      ft_customer_account.account_no.should == '12345'
       ft_customer_account.approval_status.should == 'A'
     end
   end

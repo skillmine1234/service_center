@@ -17,12 +17,12 @@
         = error_message_for(@ft_purpose_code, :is_enabled, :prepend_text => "")
     .control-group
       = f.label :customer_id, "*Customer ID", :class => 'control-label'
-      = f.text_field :customer_id, :maxlength => 15
+      = f.select(:customer_id, ft_customers_for_select, :prompt => 'Select')
       #msg-error
         = error_message_for(@ft_customer_account, :customer_id, :prepend_text => "")
     .control-group
       = f.label :account_no, "*Account No", :class => 'control-label'
-      = f.text_field :account_no, :maxlength => 20
+      = f.text_field :account_no, :maxlength => 15
       #msg-error
         = error_message_for(@ft_customer_account, :account_no, :prepend_text => "")
 

@@ -7,6 +7,7 @@ describe FtCustomerAccount do
     it { should have_one(:ft_unapproved_record) }
     it { should belong_to(:unapproved_record) }
     it { should belong_to(:approved_record) }
+    it { should belong_to(:funds_transfer_customer) }
   end
   
   context 'validation' do
@@ -18,8 +19,8 @@ describe FtCustomerAccount do
       ft_customer_account = Factory(:ft_customer_account, :approval_status => 'A')
       should validate_uniqueness_of(:customer_id).scoped_to(:account_no,:approval_status)  
 
-      should validate_length_of(:account_no).is_at_most(20)
-      should validate_length_of(:customer_id).is_at_least(3).is_at_most(15)
+      should validate_length_of(:account_no).is_at_least(5).is_at_most(15)
+      should validate_length_of(:customer_id).is_at_least(5).is_at_most(10)
     end
 
     it "should not allow invalid format" do
@@ -59,7 +60,7 @@ describe FtCustomerAccount do
       ft_customer_account.ft_unapproved_record.should_not be_nil
       record = ft_customer_account.ft_unapproved_record
       # we are editing the U record, before it is approved
-      ft_customer_account.account_no = "1234"
+      ft_customer_account.account_no = "12345"
       ft_customer_account.save
       ft_customer_account.reload
       ft_customer_account.ft_unapproved_record.should == record
