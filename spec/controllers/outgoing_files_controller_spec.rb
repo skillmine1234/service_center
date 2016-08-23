@@ -13,7 +13,7 @@ describe OutgoingFilesController do
   describe "GET index" do
     it "assigns all outgoing_file as @outgoing_files" do
       outgoing_file = Factory(:outgoing_file)
-      get :index
+      get :index, {:sc_service => outgoing_file.service_code}
       assigns(:outgoing_files).should eq([outgoing_file])
       assigns(:files_count).should eq(1)
     end

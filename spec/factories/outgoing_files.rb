@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :outgoing_file do
-    service_code {Factory(:sc_service).code}
+    service_code "IMTSERVICE"
     file_type "abcd"
     file_path "/somewhere"
     file_name "Something.txt"

@@ -3,6 +3,7 @@ class ScService < ActiveRecord::Base
   validates_uniqueness_of :code,:name
 
   has_many :incoming_file_types
+  has_many :outgoing_file_types
 
   def has_auto_upload?
     auto_uploads = incoming_file_types.where("auto_upload=?",'N')

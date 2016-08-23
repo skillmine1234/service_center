@@ -63,6 +63,11 @@
       %br
         = "File Uploads"
     .box  
+      = link_to outgoing_files_path(:sc_service => "ECOL") do
+        = image_tag 'outgoing_file.png', :size => "80x80"
+      %br
+        = "Outgoing Files"
+    .box  
       = link_to '/ecol_unapproved_records' do
         = image_tag 'work-list.jpg', :size => "80x80"
       %br
@@ -222,7 +227,7 @@
       %br
         = "File Uploads"
     .box  
-      = link_to outgoing_files_path do
+      = link_to outgoing_files_path(:sc_service => "IMTSERVICE") do
         = image_tag 'outgoing_file.png', :size => "80x80"
       %br
         = "Outgoing Files"

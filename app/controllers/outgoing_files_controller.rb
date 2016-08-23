@@ -8,10 +8,11 @@ class OutgoingFilesController < ApplicationController
   include OutgoingFilesHelper
   
   def index
+    @sc_service = ScService.find_by_code(params[:sc_service])
     if params[:advanced_search].present?
       outgoing_files = find_outgoing_files(params).order("id desc")
     else
-      outgoing_files = OutgoingFile.order("id desc")
+      outgoing_files = OutgoingFile.where("service_code=?",params[:sc_service]).order("id desc")
     end 
     @files_count = outgoing_files.count
     @outgoing_files = outgoing_files.paginate(:per_page => 10, :page => params[:page]) rescue []
