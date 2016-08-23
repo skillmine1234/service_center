@@ -34,6 +34,8 @@
       Credit Account No (Validation Passed)
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Credit Account No (Validation Failed)
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Debit Account No (Validation Failed)
 
   .tbody
     - @ecol_customers.each do |ecol_customer|
@@ -63,4 +65,5 @@
           = ecol_customer.credit_acct_val_pass
         %td{:style=>'text-align:left;'}
           = ecol_customer.credit_acct_val_fail
-
+        %td{:style=>'text-align:left;'}
+          = ecol_customer.debit_acct_val_fail

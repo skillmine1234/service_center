@@ -102,6 +102,7 @@ class EcolCustomersController < ApplicationController
   :val_rem_acct, :return_if_val_reject, :file_upld_mthd, :credit_acct_val_pass, :credit_acct_val_fail, :nrtv_sufx_1, :nrtv_sufx_2, :nrtv_sufx_3, :rmtr_alert_on,
   :rmtr_pass_txt, :rmtr_return_txt, :created_by, :updated_by, :lock_version, :auto_credit, :auto_return, :approved_id, :approved_version, :val_rmtr_name, 
   :val_last_token_length, :token_1_starts_with, :token_1_contains, :token_1_ends_with, :token_2_starts_with, :token_2_contains, 
-  :token_2_ends_with, :token_3_starts_with, :token_3_contains, :token_3_ends_with, :customer_id, :cust_alert_on)
+  :token_2_ends_with, :token_3_starts_with, :token_3_contains, :token_3_ends_with, :customer_id, :cust_alert_on,
+  :skip_credit, :debit_acct_val_fail)
   end
 end

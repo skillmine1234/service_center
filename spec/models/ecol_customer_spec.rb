@@ -30,7 +30,8 @@ describe EcolCustomer do
       
       should validate_length_of(:credit_acct_val_pass).is_at_least(10).is_at_most(25)
       should validate_length_of(:credit_acct_val_fail).is_at_least(10).is_at_most(25)
-      
+      should validate_length_of(:debit_acct_val_fail).is_at_least(15).is_at_most(15)
+
       [:rmtr_pass_txt, :rmtr_return_txt].each do |att|
         should validate_length_of(att).is_at_most(500)
       end
@@ -105,9 +106,9 @@ describe EcolCustomer do
   end
   
   context "account no format" do 
-    [:credit_acct_val_pass, :credit_acct_val_pass].each do |att|
+    [:credit_acct_val_pass, :credit_acct_val_fail, :debit_acct_val_fail].each do |att|
       it "should allow valid format" do
-        should allow_value('1234567890').for(att)
+        should allow_value('123456789009876').for(att)
       end
 
       it "should not allow invalid format" do

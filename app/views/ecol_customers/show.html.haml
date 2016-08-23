@@ -185,11 +185,23 @@
             %td#msg-error
               = error_message_for(@ecol_customer, :val_rem_acct, :prepend_text => "")
           %tr
+            %td.label Skip Credit
+            %td.value
+              = @ecol_customer.skip_credit
+            %td#msg-error
+              = error_message_for(@ecol_customer, :skip_credit, :prepend_text => "")
+          %tr
             %td.label Return If Validation Fails
             %td.value
               = @ecol_customer.return_if_val_reject
             %td#msg-error
               = error_message_for(@ecol_customer, :return_if_val_reject, :prepend_text => "")
+          %tr
+            %td.label Debit Account No (Validation Fail)
+            %td.value
+              = @ecol_customer.debit_acct_val_fail
+            %td#msg-error
+              = error_message_for(@ecol_customer, :debit_acct_val_fail, :prepend_text => "")
           %tr
             %td.label Customer Alert On
             %td.value

@@ -146,7 +146,7 @@ $(document).ready(function(){
 			}
 		}
   } 
-  
+
   $("#ecol_customer_token_1_type").on("change",function(){
     var token_1_type =  $(this).val();
     if (token_1_type === 'N'){
@@ -407,18 +407,24 @@ $(document).ready(function(){
   if ($('#ecol_customer_return_if_val_reject').attr('checked')) {
     $("#ecol_customer_credit_acct_val_fail").val('');
     $("#ecol_customer_credit_acct_val_fail").prop("disabled",true);
+    $("#ecol_customer_debit_acct_val_fail").prop("disabled",false);
   }
   else {
-    $("#ecol_customer_credit_acct_val_fail").prop("disabled",false);
+    $("#ecol_customer_debit_acct_val_fail").prop("disabled",false);
+    $("#ecol_customer_debit_acct_val_fail").val('');
+    $("#ecol_customer_debit_acct_val_fail").prop("disabled",true);
   }
   
   $("#ecol_customer_return_if_val_reject").on("click",function(){
     if ($(this).attr('checked')) {
       $("#ecol_customer_credit_acct_val_fail").val('');
       $("#ecol_customer_credit_acct_val_fail").prop("disabled",true);
+      $("#ecol_customer_debit_acct_val_fail").prop("disabled",false);
     }
     else {
       $("#ecol_customer_credit_acct_val_fail").prop("disabled",false);
+      $("#ecol_customer_debit_acct_val_fail").val('');
+      $("#ecol_customer_debit_acct_val_fail").prop("disabled",true);
     }
   });
 });
