@@ -105,6 +105,16 @@ $(document).ready(function(){
     display_beautified_data(reply, "div.reply", "#replyText");
   });
 
+  $(".val-req-header-link").on("click", function () {
+    var request = $(this).data('request');
+    display_beautified_data(request, "div.request_header", "#requestHeader");
+  });
+
+  $(".val-rep-header-link").on("click", function () {
+    var reply = $(this).data('reply');
+    display_beautified_data(reply, "div.reply_header", "#replyHeader");
+  });
+
   $(".val-fault-link").on("click", function () {
     var fault = $(this).data('fault');
     display_beautified_data(fault, "div.fault", "#faultLink");
