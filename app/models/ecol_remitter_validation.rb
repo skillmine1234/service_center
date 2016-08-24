@@ -19,7 +19,10 @@ module EcolRemitterValidation
     validates :due_date_tol_days, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 28, :allow_nil => true }
     validates :due_date, presence: true
   
-    validates_uniqueness_of :customer_code, :scope => [:remitter_code, :customer_subcode, :invoice_no,:approval_status]
+    validates_uniqueness_of :customer_code, :scope => [:remitter_code, :invoice_no,:approval_status], if: Proc.new { |c| c.customer_subcode.to_s.empty? and !c.invoice_no.to_s.empty?}
+    validates_uniqueness_of :customer_code, :scope => [:remitter_code, :customer_subcode,:approval_status], if: Proc.new { |c| !c.customer_subcode.to_s.empty? and c.invoice_no.to_s.empty?}
+    validates_uniqueness_of :customer_code, :scope => [:remitter_code,:approval_status], if: Proc.new { |c| c.customer_subcode.to_s.empty? and c.invoice_no.to_s.empty?}
+    validates_uniqueness_of :customer_code, :scope => [:remitter_code, :customer_subcode, :invoice_no,:approval_status], if: Proc.new { |c| !c.customer_subcode.to_s.empty? and !c.invoice_no.to_s.empty?}
 
     validate :value_types
     validate :mandatory_value

@@ -24,11 +24,28 @@ describe EcolRemitter do
       it { should_not allow_value(1.234).for(att) }
     end
 
-    it do 
-      ecol_remitter = Factory(:ecol_remitter, :approval_status => 'A')
-      should validate_uniqueness_of(:customer_code).scoped_to(:remitter_code, :customer_subcode, :invoice_no, :approval_status)
-    end
+    context "uniqueness" do
+      it do 
+        ecol_remitter = Factory(:ecol_remitter, :approval_status => 'A', :customer_subcode => "", :customer_subcode_email => "", :customer_subcode_mobile => "")
+        should validate_uniqueness_of(:customer_code).scoped_to(:remitter_code, :invoice_no, :approval_status)
+      end
     
+      it do 
+        ecol_remitter = Factory(:ecol_remitter, :approval_status => 'A', :invoice_no => "")
+        should validate_uniqueness_of(:customer_code).scoped_to(:remitter_code, :customer_subcode, :approval_status)
+      end
+
+      it do 
+        ecol_remitter = Factory(:ecol_remitter, :approval_status => 'A', :customer_subcode => "", :customer_subcode_email => "", :customer_subcode_mobile => "", :invoice_no => "")
+        should validate_uniqueness_of(:customer_code).scoped_to(:remitter_code, :approval_status)
+      end
+
+      it do 
+        ecol_remitter = Factory(:ecol_remitter, :approval_status => 'A')
+        should validate_uniqueness_of(:customer_code).scoped_to(:remitter_code, :customer_subcode, :invoice_no, :approval_status)
+      end
+    end
+
     it do 
       ecol_remitter = Factory(:ecol_remitter, :credit_acct_no => '1234567890')
       should validate_length_of(:credit_acct_no).is_at_least(10).is_at_most(25)
