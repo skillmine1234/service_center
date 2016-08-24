@@ -108,49 +108,49 @@ describe EcolCustomersController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested ecol_customer" do
-        ecol_customer = Factory(:ecol_customer, :code => "CUST01")
+        ecol_customer = Factory(:ecol_customer, :code => "CUSTOM01")
         params = ecol_customer.attributes.slice(*ecol_customer.class.attribute_names)
-        params[:code] = "CUST02"
+        params[:code] = "CUSTOM02"
         put :update, {:id => ecol_customer.id, :ecol_customer => params}
         ecol_customer.reload
-        ecol_customer.code.should == "CUST02"
+        ecol_customer.code.should == "CUSTOM02"
       end
 
       it "assigns the requested ecol_customer as @ecol_customer" do
-        ecol_customer = Factory(:ecol_customer, :code => "CUST01")
+        ecol_customer = Factory(:ecol_customer, :code => "CUSTOM01")
         params = ecol_customer.attributes.slice(*ecol_customer.class.attribute_names)
-        params[:code] = "CUST02"
+        params[:code] = "CUSTOM02"
         put :update, {:id => ecol_customer.to_param, :ecol_customer => params}
         assigns(:ecol_customer).should eq(ecol_customer)
       end
 
       it "redirects to the ecol_customer" do
-        ecol_customer = Factory(:ecol_customer, :code => "CUST01")
+        ecol_customer = Factory(:ecol_customer, :code => "CUSTOM01")
         params = ecol_customer.attributes.slice(*ecol_customer.class.attribute_names)
-        params[:code] = "CUST02"
+        params[:code] = "CUSTOM02"
         put :update, {:id => ecol_customer.to_param, :ecol_customer => params}
         response.should redirect_to(ecol_customer)
       end
 
       it "should raise error when tried to update at same time by many" do
-        ecol_customer = Factory(:ecol_customer, :code => "CUST01")
+        ecol_customer = Factory(:ecol_customer, :code => "CUSTOM01")
         params = ecol_customer.attributes.slice(*ecol_customer.class.attribute_names)
-        params[:code] = "CUST02"
+        params[:code] = "CUSTOM02"
         ecol_customer2 = ecol_customer
         put :update, {:id => ecol_customer.id, :ecol_customer => params}
         ecol_customer.reload
-        ecol_customer.code.should == "CUST02"
-        params[:code] = "CUST03"
+        ecol_customer.code.should == "CUSTOM02"
+        params[:code] = "CUSTOM03"
         put :update, {:id => ecol_customer2.id, :ecol_customer => params}
         ecol_customer.reload
-        ecol_customer.code.should == "CUST02"
+        ecol_customer.code.should == "CUSTOM02"
         flash[:alert].should  match(/Someone edited the customer the same time you did. Please re-apply your changes to the customer/)
       end
     end
 
     describe "with invalid params" do
       it "assigns the ecol_customer as @ecol_customer" do
-        ecol_customer = Factory(:ecol_customer, :code => "CUST01")
+        ecol_customer = Factory(:ecol_customer, :code => "CUSTOM01")
         params = ecol_customer.attributes.slice(*ecol_customer.class.attribute_names)
         params[:code] = nil
         put :update, {:id => ecol_customer.to_param, :ecol_customer => params}
@@ -186,8 +186,8 @@ describe EcolCustomersController do
       user_role = UserRole.find_by_user_id(@user.id)
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
-      ecol_customer1 = Factory(:ecol_customer, :code => "CUST01", :approval_status => 'A')
-      ecol_customer2 = Factory(:ecol_customer, :code => "CUST01", :approval_status => 'U', :name => 'Foobar', :approved_version => ecol_customer1.lock_version, :approved_id => ecol_customer1.id, :created_by => 666)
+      ecol_customer1 = Factory(:ecol_customer, :code => "CUSTOM01", :approval_status => 'A')
+      ecol_customer2 = Factory(:ecol_customer, :code => "CUSTOM01", :approval_status => 'U', :name => 'Foobar', :approved_version => ecol_customer1.lock_version, :approved_id => ecol_customer1.id, :created_by => 666)
       # the following line is required for reload to get triggered (TODO)
       ecol_customer1.approval_status.should == 'A'
       EcolUnapprovedRecord.count.should == 1
@@ -203,7 +203,7 @@ describe EcolCustomersController do
       user_role = UserRole.find_by_user_id(@user.id)
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
-      ecol_customer = Factory(:ecol_customer, :code => "CUST01", :approval_status => 'U', :name => 'Foobar')
+      ecol_customer = Factory(:ecol_customer, :code => "CUSTOM01", :approval_status => 'U', :name => 'Foobar')
       EcolUnapprovedRecord.count.should == 1
       put :approve, {:id => ecol_customer.id}
       EcolUnapprovedRecord.count.should == 0

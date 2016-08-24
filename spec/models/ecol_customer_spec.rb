@@ -83,7 +83,7 @@ describe EcolCustomer do
   context "code format" do 
     it "should allow valid format" do
       should allow_value('9876').for(:code)
-      should allow_value('ABCD90').for(:code)
+      should allow_value('ABCD9000').for(:code)
     end 
     
     it "should not allow invalid format" do
@@ -277,15 +277,15 @@ describe EcolCustomer do
       ecol_customer = Factory.build(:ecol_customer, :code => '9876')
       ecol_customer.save.should == true
       
-      ecol_customer = Factory.build(:ecol_customer, :code => '876098')
+      ecol_customer = Factory.build(:ecol_customer, :code => '87609889')
       ecol_customer.save.should == true
       
-      ecol_customer = Factory.build(:ecol_customer, :code => 'abcdef')
+      ecol_customer = Factory.build(:ecol_customer, :code => 'abcdefhj')
       ecol_customer.save.should == true
       
       ecol_customer = Factory.build(:ecol_customer, :code => '98760988767')
       ecol_customer.save.should == false
-      ecol_customer.errors_on(:code).should == ["the code can be either a 4 digit number starting with 9, or a 6 character alpha-numeric code, that does not start with 9"]
+      ecol_customer.errors_on(:code).should == ["the code can be either a 4 digit number starting with 9, or a 8 character alpha-numeric code, that does not start with 9"]
     end
   end
 
@@ -398,8 +398,8 @@ describe EcolCustomer do
   
   context "to_upcase" do
     it "should convert values to upcase before save" do
-      ecol_customer = Factory(:ecol_customer, :code => "as89nn", :token_1_starts_with => "qwerty", :token_1_contains => "asdfg", :token_1_ends_with => "uiop")
-      ecol_customer.code.should == "AS89NN"
+      ecol_customer = Factory(:ecol_customer, :code => "as89nnmm", :token_1_starts_with => "qwerty", :token_1_contains => "asdfg", :token_1_ends_with => "uiop")
+      ecol_customer.code.should == "AS89NNMM"
       ecol_customer.token_1_starts_with.should == "QWERTY"
       ecol_customer.token_1_contains.should == "ASDFG"
       ecol_customer.token_1_ends_with.should == "UIOP"

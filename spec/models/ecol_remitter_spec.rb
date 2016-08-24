@@ -81,8 +81,8 @@ describe EcolRemitter do
       ecol_remitter.should_not be_valid
       ecol_remitter.errors_on("customer_subcode_email").should == ["is invalid"]
       ecol_remitter.errors_on("rmtr_email").should == ["is invalid"]
-      ecol_customer = Factory(:ecol_customer, :code => 'qwerty', :approval_status => 'A')
-      ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'QWERTY', :customer_subcode_email  => "foo@ruby.com", :rmtr_email => "foo@ruby.com")
+      ecol_customer = Factory(:ecol_customer, :code => 'qwerty10', :approval_status => 'A')
+      ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'QWERTY10', :customer_subcode_email  => "foo@ruby.com", :rmtr_email => "foo@ruby.com")
       ecol_remitter.should be_valid
     end
   end
@@ -134,8 +134,8 @@ describe EcolRemitter do
   context "length" do
     it "should validate the length of the input if length constraint is present" do 
       udf_attribute = Factory(:udf_attribute, :attribute_name => 'udf4', :label_text => 'Udf4', :control_type => 'TextBox', :data_type => 'String', :length => 3, :is_enabled => 'Y',:approval_status => 'A')
-      ecol_customer = Factory(:ecol_customer, :code => 'qwerty')
-      ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'qwerty', :udf4 => '1234')
+      ecol_customer = Factory(:ecol_customer, :code => 'qwerty10')
+      ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'qwerty10', :udf4 => '1234')
       ecol_remitter.should_not be_valid
       ecol_remitter.errors_on(:udf4).should == ["should be of 3 characters"]
       ecol_remitter = Factory.build(:ecol_remitter, :udf4 => ' ')
@@ -146,8 +146,8 @@ describe EcolRemitter do
   context "minimum length" do
     it "should validate the length of the input if minimum length constraint is present" do
       udf_attribute = Factory(:udf_attribute, :attribute_name => 'udf4', :label_text => 'Udf4', :control_type => 'TextBox', :data_type => 'String', :min_length => 3, :is_enabled => 'Y',:approval_status => 'A')
-      ecol_customer = Factory(:ecol_customer, :code => 'qwerty')
-      ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'qwerty', :udf4 => '12')
+      ecol_customer = Factory(:ecol_customer, :code => 'qwerty10')
+      ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'qwerty10', :udf4 => '12')
       ecol_remitter.should_not be_valid
       ecol_remitter.errors_on(:udf4).should == ["is too short (minimum is 3 characters)"]
       ecol_remitter = Factory.build(:ecol_remitter, :udf4 => ' ')
@@ -158,8 +158,8 @@ describe EcolRemitter do
   context "maximum length" do
     it "should validate the length of the input if maximum length constraint is present" do
       udf_attribute = Factory(:udf_attribute, :attribute_name => 'udf4', :label_text => 'Udf4', :control_type => 'TextBox', :data_type => 'String', :max_length => 3, :is_enabled => 'Y',:approval_status => 'A')
-      ecol_customer = Factory(:ecol_customer, :code => 'qwerty')
-      ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'qwerty', :udf4 => '12678')
+      ecol_customer = Factory(:ecol_customer, :code => 'qwerty10')
+      ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'qwerty10', :udf4 => '12678')
       ecol_remitter.should_not be_valid
       ecol_remitter.errors_on(:udf4).should == ["is too long (maximum is 3 characters)"]
       ecol_remitter = Factory.build(:ecol_remitter, :udf4 => ' ')
@@ -170,8 +170,8 @@ describe EcolRemitter do
   context "minimum value" do
     it "should validate the value of the input if minimum value constraint is present" do
       udf_attribute = Factory(:udf_attribute, :attribute_name => 'udf4', :label_text => 'Udf4', :control_type => 'TextBox', :data_type => 'Numeric', :min_value => 30, :is_enabled => 'Y',:approval_status => 'A')
-      ecol_customer = Factory(:ecol_customer, :code => 'qwerty')
-      ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'qwerty', :udf4 => "20")
+      ecol_customer = Factory(:ecol_customer, :code => 'qwerty10')
+      ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'qwerty10', :udf4 => "20")
       ecol_remitter.should_not be_valid
       ecol_remitter.errors_on(:udf4).should == ["is less than 30"]
       ecol_remitter = Factory.build(:ecol_remitter, :udf4 => " ")
@@ -182,8 +182,8 @@ describe EcolRemitter do
   context "maximum value" do
     it "should validate the value of the input if maximum value constraint is present" do
       udf_attribute = Factory(:udf_attribute, :attribute_name => 'udf4', :label_text => 'Udf4', :control_type => 'TextBox', :data_type => 'Numeric', :max_value => 30, :is_enabled => 'Y',:approval_status => 'A')
-      ecol_customer = Factory(:ecol_customer, :code => 'qwerty')
-      ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'qwerty', :udf4 => "12678")
+      ecol_customer = Factory(:ecol_customer, :code => 'qwerty10')
+      ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'qwerty10', :udf4 => "12678")
       ecol_remitter.should_not be_valid
       ecol_remitter.errors_on(:udf4).should == ["is more than 30"]
       ecol_remitter = Factory.build(:ecol_remitter, :udf4 => " ")
@@ -194,8 +194,8 @@ describe EcolRemitter do
   context "mandatory" do
     it "should validate the value of the input if maximum value constraint is present" do
       udf_attribute = Factory(:udf_attribute, :attribute_name => 'udf4', :label_text => 'Udf4', :control_type => 'TextBox', :data_type => 'Numeric', :is_mandatory => 'Y', :is_enabled => 'Y',:approval_status => 'A')
-      ecol_customer = Factory(:ecol_customer, :code => 'qwerty')
-      ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'qwerty', :udf4 => nil)
+      ecol_customer = Factory(:ecol_customer, :code => 'qwerty10')
+      ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'qwerty10', :udf4 => nil)
       ecol_remitter.should_not be_valid
       ecol_remitter.errors_on(:udf4).should == ["is required"]
     end
@@ -203,10 +203,10 @@ describe EcolRemitter do
   
   context "customer_code_should_exist" do
     it "should check if the customer code exists" do
-      ecol_customer = Factory(:ecol_customer, :code => 'CUST00')
-      ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'CUST00')
+      ecol_customer = Factory(:ecol_customer, :code => 'CUST0009')
+      ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'CUST0000')
       ecol_remitter.save == true
-      ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'CUST99')
+      ecol_remitter = Factory.build(:ecol_remitter, :customer_code => 'CUST9999')
       ecol_remitter.save == false
       ecol_remitter.errors_on(:customer_code) == ["Invalid Customer"]
     end
@@ -294,10 +294,10 @@ describe EcolRemitter do
   
   context "to_upcase" do
     it "should convert values to upcase before save" do
-      ecol_customer = Factory(:ecol_customer, :code => "as89nn", :approval_status => "A")
-      ecol_remitter = Factory(:ecol_remitter, :customer_code => "AS89NN", :remitter_code => "qwerty", :invoice_no => "abcdef")
-      ecol_remitter.customer_code.should == "AS89NN"
-      ecol_remitter.remitter_code.should == "QWERTY"
+      ecol_customer = Factory(:ecol_customer, :code => "as89nnmm", :approval_status => "A")
+      ecol_remitter = Factory(:ecol_remitter, :customer_code => "AS89NNMM", :remitter_code => "qwerty10", :invoice_no => "abcdef")
+      ecol_remitter.customer_code.should == "AS89NNMM"
+      ecol_remitter.remitter_code.should == "QWERTY10"
       ecol_remitter.invoice_no.should == "ABCDEF"
     end
   end
