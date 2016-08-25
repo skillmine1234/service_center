@@ -12,7 +12,7 @@ describe EcolCustomer do
     [:code, :name, :is_enabled, :val_method, :token_1_type, :token_1_length, :val_token_1, :token_2_type, :token_2_length, 
       :val_token_2, :token_3_type, :token_3_length, :val_token_3, :val_txn_date, :val_txn_amt, :val_ben_name, :val_rem_acct, 
       :return_if_val_reject, :nrtv_sufx_1, :nrtv_sufx_2, :nrtv_sufx_3, :rmtr_alert_on, :credit_acct_val_pass,
-      :customer_id].each do |att|
+      :customer_id, :app_code].each do |att|
       it { should validate_presence_of(att) }
     end 
        
@@ -24,7 +24,8 @@ describe EcolCustomer do
     it do
       ecol_customer = Factory(:ecol_customer)
       should validate_length_of(:code).is_at_least(1).is_at_most(15)
-      
+      should validate_length_of(:code).is_at_most(15)
+
       should validate_length_of(:name).is_at_least(5).is_at_most(50)
       should validate_length_of(:customer_id).is_at_most(50)
       
@@ -81,16 +82,18 @@ describe EcolCustomer do
   end
   
   context "code format" do 
-    it "should allow valid format" do
-      should allow_value('9876').for(:code)
-      should allow_value('ABCD9000').for(:code)
-    end 
+    [:code, :app_code].each do |att|
+      it "should allow valid format" do
+        should allow_value('9876').for(att)
+        should allow_value('ABCD9000').for(att)
+      end 
     
-    it "should not allow invalid format" do
-      should_not allow_value('@CUST01').for(:code)
-      should_not allow_value('CUST01/').for(:code)
-      should_not allow_value('CUST-01').for(:code)
-    end     
+      it "should not allow invalid format" do
+        should_not allow_value('@CUST01').for(att)
+        should_not allow_value('CUST01/').for(att)
+        should_not allow_value('CUST-01').for(att)
+      end     
+    end
   end
   
   context "customer name format" do 

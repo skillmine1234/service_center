@@ -32,5 +32,6 @@ FactoryGirl.define do
     approval_status 'U'
     last_action 'C'
     customer_id 1234
+    app_code "1234"
   end
 end

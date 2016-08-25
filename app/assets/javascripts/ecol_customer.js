@@ -427,4 +427,8 @@ $(document).ready(function(){
       $("#ecol_customer_debit_acct_val_fail").prop("disabled",true);
     }
   });
+
+  $("#ecol_customer_code").on("change",function(){
+    $("#ecol_customer_app_code").val($(this).val());
+  });
 });
