@@ -280,6 +280,12 @@ describe EcolCustomer do
       ecol_customer = Factory.build(:ecol_customer, :code => '9876')
       ecol_customer.save.should == true
       
+      ecol_customer = Factory.build(:ecol_customer, :code => '87609')
+      ecol_customer.save.should == false
+
+      ecol_customer = Factory.build(:ecol_customer, :code => '876098')
+      ecol_customer.save.should == true
+
       ecol_customer = Factory.build(:ecol_customer, :code => '87609889')
       ecol_customer.save.should == true
       
@@ -288,7 +294,7 @@ describe EcolCustomer do
       
       ecol_customer = Factory.build(:ecol_customer, :code => '98760988767')
       ecol_customer.save.should == false
-      ecol_customer.errors_on(:code).should == ["the code can be either a 4 digit number starting with 9, or a 8 character alpha-numeric code, that does not start with 9"]
+      ecol_customer.errors_on(:code).should == ["the code can be either a 4 digit number starting with 9, or a 6 character alpha-numeric code, that does not start with 9, or a 8 character alpha-numeric code, that does not start with 9"]
     end
   end
 
