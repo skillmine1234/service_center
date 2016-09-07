@@ -18,16 +18,17 @@ describe EcolCustomer do
        
     it do 
       ecol_customer = Factory(:ecol_customer, :approval_status => 'A')
-      should validate_uniqueness_of(:code).scoped_to(:approval_status)   
+      should validate_uniqueness_of(:code).scoped_to(:approval_status)
+      should validate_uniqueness_of(:identity_user_id).scoped_to(:approval_status)   
     end
     
     it do
       ecol_customer = Factory(:ecol_customer)
       should validate_length_of(:code).is_at_least(1).is_at_most(15)
-      should validate_length_of(:code).is_at_most(15)
 
       should validate_length_of(:name).is_at_least(5).is_at_most(50)
       should validate_length_of(:customer_id).is_at_most(50)
+      should validate_length_of(:identity_user_id).is_at_most(20)
       
       should validate_length_of(:credit_acct_val_pass).is_at_least(10).is_at_most(25)
       should validate_length_of(:credit_acct_val_fail).is_at_least(10).is_at_most(25)
@@ -36,6 +37,8 @@ describe EcolCustomer do
       [:rmtr_pass_txt, :rmtr_return_txt].each do |att|
         should validate_length_of(att).is_at_most(500)
       end
+
+      should allow_value(nil).for(:identity_user_id)
     end
     
     it do
@@ -81,8 +84,8 @@ describe EcolCustomer do
     end
   end
   
-  context "code format" do 
-    [:code, :app_code].each do |att|
+  context "fields format" do 
+    [:code, :app_code, :identity_user_id].each do |att|
       it "should allow valid format" do
         should allow_value('9876').for(att)
         should allow_value('ABCD9000').for(att)

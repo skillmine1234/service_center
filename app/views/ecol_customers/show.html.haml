@@ -32,6 +32,12 @@
             %td#msg-error
               = error_message_for(@ecol_customer, :app_code, :prepend_text => "")
           %tr
+            %td.label Identity User ID
+            %td.value
+              = @ecol_customer.identity_user_id
+            %td#msg-error
+              = error_message_for(@ecol_customer, :identity_user_id, :prepend_text => "")
+          %tr
             %td.label Customer Name
             %td.value
               = @ecol_customer.name

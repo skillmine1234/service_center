@@ -33,5 +33,6 @@ FactoryGirl.define do
     last_action 'C'
     customer_id 1234
     app_code "1234"
+    sequence(:identity_user_id) {|n| "7" + "%03i" % "#{n}" }
   end
 end

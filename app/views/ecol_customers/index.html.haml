@@ -22,6 +22,8 @@
       Customer Name
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Enabled?
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Identity User ID
     %th{:style=>'text-align:left; background-color: lightblue;'} 
       Validation Method
     %th{:style=>'text-align:left; background-color: lightblue;'}
@@ -53,6 +55,8 @@
           = ecol_customer.name
         %td{:style=>'text-align:left;'}
           = ecol_customer.is_enabled
+        %td{:style=>'text-align:left;'}
+          = ecol_customer.identity_user_id
         %td{:style=>'text-align:left;'}
           = ecol_customer.val_method
         %td{:style=>'text-align:left;'}
