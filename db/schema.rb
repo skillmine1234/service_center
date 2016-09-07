@@ -2654,14 +2654,6 @@ ActiveRecord::Schema.define(version: 20160906100408) do
     t.integer "sdn_entry_id", limit: nil, null: false
   end
 
-  create_table "qg_bl_data_mapper", id: false, force: :cascade do |t|
-    t.string "tag_name", limit: 100
-    t.string "src_val",  limit: 100
-    t.string "dest_val", limit: 10
-  end
-
-  add_index "qg_bl_data_mapper", ["tag_name", "src_val"], name: "uk_qg_bl_data_mapper", unique: true
-
   create_table "qg_ecol_todays_neft_txns", force: :cascade do |t|
     t.string   "ref_txn_no",         limit: 15,                null: false
     t.string   "transfer_type",      limit: 4,                 null: false
@@ -3205,14 +3197,6 @@ ActiveRecord::Schema.define(version: 20160906100408) do
     t.string   "su_approvable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "tests", force: :cascade do |t|
-    t.decimal "decimal_amount", null: false
-    t.decimal "char_amount",    null: false
-    t.decimal "float_amount",   null: false
-    t.decimal "int_amount",     null: false
-    t.string  "insert_type",    null: false
   end
 
   create_table "udf_attributes", force: :cascade do |t|
