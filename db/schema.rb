@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160822110900) do
+ActiveRecord::Schema.define(version: 20160906100408) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",               null: false
@@ -655,7 +655,7 @@ ActiveRecord::Schema.define(version: 20160822110900) do
     t.text     "req_header"
     t.text     "rep_header"
     t.string   "req_uri",             limit: 500
-    t.string   "req_url",             limit: 500
+    t.string   "remote_host",         limit: 500
   end
 
   add_index "ecol_audit_logs", ["ecol_transaction_id", "step_name", "attempt_no"], name: "uk_ecol_audit_logs", unique: true
@@ -714,6 +714,8 @@ ActiveRecord::Schema.define(version: 20160822110900) do
     t.string   "customer_id",           limit: 50,                 default: "0", null: false
     t.string   "skip_credit",           limit: 1,                  default: "f"
     t.string   "debit_acct_val_fail",   limit: 25
+    t.string   "app_code",              limit: 15,                               null: false
+    t.string   "identity_user_id"
   end
 
   add_index "ecol_customers", ["code", "approval_status"], name: "i_eco_cus_cod_app_sta", unique: true
