@@ -20,7 +20,7 @@
         %th{:style=>'text-align:left; background-color: lightblue;'}
           Request URI
         %th{:style=>'text-align:left; background-color: lightblue;'}
-          Request URL
+          Remote Host
         %th{:style=>'text-align:left; background-color: lightblue;'}
           Requested At
         %th{:style=>'text-align:left; background-color: lightblue;'}
@@ -49,7 +49,7 @@
             %td{:style=>'text-align:left;'}
               = value.req_uri   
             %td{:style=>'text-align:left;'}
-              = value.req_url   
+              = value.remote_host   
             %td{:style=>'text-align:left;'}
               = value.req_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
             %td{:style=>'text-align:left;'}
