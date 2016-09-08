@@ -12,7 +12,6 @@ class EcolCustomer < ActiveRecord::Base
   :return_if_val_reject, :nrtv_sufx_1, :nrtv_sufx_2, :nrtv_sufx_3, :rmtr_alert_on, :credit_acct_val_pass, :app_code
   
   validates_uniqueness_of :code, :scope => :approval_status
-  validates_uniqueness_of :identity_user_id, :scope => :approval_status
   
   validates :token_1_length, :token_2_length, :token_3_length, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 29}
   validates :identity_user_id, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}'}, length: { maximum: 20 }, :allow_blank => true
