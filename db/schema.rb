@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160906100408) do
+ActiveRecord::Schema.define(version: 20160908104034) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",               null: false
@@ -712,8 +712,7 @@ ActiveRecord::Schema.define(version: 20160906100408) do
     t.string   "val_last_token_length", limit: 1
     t.string   "cust_alert_on",         limit: 1,                  default: "f", null: false
     t.string   "customer_id",           limit: 50,                 default: "0", null: false
-    t.string   "skip_credit",           limit: 1,                  default: "f"
-    t.string   "debit_acct_val_fail",   limit: 25
+    t.string   "pool_acct_no",          limit: 25
     t.string   "app_code",              limit: 15,                               null: false
     t.string   "identity_user_id"
   end
