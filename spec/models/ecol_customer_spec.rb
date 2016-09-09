@@ -19,7 +19,6 @@ describe EcolCustomer do
     it do 
       ecol_customer = Factory(:ecol_customer, :approval_status => 'A')
       should validate_uniqueness_of(:code).scoped_to(:approval_status)
-      should validate_uniqueness_of(:identity_user_id).scoped_to(:approval_status)   
     end
     
     it do
