@@ -712,9 +712,9 @@ ActiveRecord::Schema.define(version: 20160908104034) do
     t.string   "val_last_token_length", limit: 1
     t.string   "cust_alert_on",         limit: 1,                  default: "f", null: false
     t.string   "customer_id",           limit: 50,                 default: "0", null: false
-    t.string   "pool_acct_no",          limit: 25
     t.string   "app_code",              limit: 15,                               null: false
     t.string   "identity_user_id"
+    t.string   "pool_acct_no",          limit: 20
   end
 
   add_index "ecol_customers", ["code", "approval_status"], name: "i_eco_cus_cod_app_sta", unique: true
