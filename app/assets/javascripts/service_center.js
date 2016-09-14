@@ -136,6 +136,16 @@ $(document).ready(function(){
     $('#faultText').modal();
   });
 
+  $("a.val-url-link").on("click", function () {
+    var host = $(this).data('host');
+    var uri = $(this).data('uri'); 
+    $(".modal-body .remote_host").text("");
+    $(".modal-body .remote_host").text(host);
+    $(".modal-body .req_uri").text("");
+    $(".modal-body .req_uri").text(uri);
+    $('#urlText').modal();
+  });
+
   $("#submit_override").click(function(){
     $("#update_records").submit(function(){
       $("#submit_override").prop('disabled', true);

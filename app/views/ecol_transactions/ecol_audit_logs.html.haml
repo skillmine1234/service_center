@@ -18,9 +18,7 @@
         %th{:style=>'text-align:left; background-color: lightblue;'}
           Request Header
         %th{:style=>'text-align:left; background-color: lightblue;'}
-          Request URI
-        %th{:style=>'text-align:left; background-color: lightblue;'}
-          Remote Host
+          URL
         %th{:style=>'text-align:left; background-color: lightblue;'}
           Requested At
         %th{:style=>'text-align:left; background-color: lightblue;'}
@@ -47,9 +45,7 @@
             %td{:style=>'text-align:left;'}
               = link_to "Show Request Header", "#", :class => 'val-req-header-link', :href => "#requestHeader", data: { request: value.req_header }
             %td{:style=>'text-align:left;'}
-              = value.req_uri   
-            %td{:style=>'text-align:left;'}
-              = value.remote_host   
+              = link_to "Show URL", "#", :class => 'val-url-link', :href => "#urlText", data: { host: value.remote_host, uri: value.req_uri }
             %td{:style=>'text-align:left;'}
               = value.req_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
             %td{:style=>'text-align:left;'}
@@ -138,3 +134,18 @@
         %td.label Fault Reason:
         %td
           %label.fault_reason{:style => 'word-wrap: break-word'}
+#urlText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 URL
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    %table.table.no-border
+      %tr
+        %td.label Remote Host: 
+        %td
+          %label.remote_host{:style => 'word-wrap: break-word'}
+      %tr
+        %td.label Request URI:
+        %td
+          %label.req_uri{:style => 'word-wrap: break-word'}
