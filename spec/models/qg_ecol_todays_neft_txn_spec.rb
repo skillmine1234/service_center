@@ -10,12 +10,24 @@ describe QgEcolTodaysNeftTxn do
     it "should validate IFSC format" do
       qg_ecol_todays_neft_txn = Factory.build(:qg_ecol_todays_neft_txn, :bene_account_ifsc => "ABCD0123456", :rmtr_account_ifsc => "QWER0123456")
       qg_ecol_todays_neft_txn.should be_valid
+
       qg_ecol_todays_neft_txn = Factory.build(:qg_ecol_todays_neft_txn, :bene_account_ifsc => "abcd0QWERTY", :rmtr_account_ifsc => "abcd0QWERTY")
+      qg_ecol_todays_neft_txn.should be_valid
+
+      qg_ecol_todays_neft_txn = Factory.build(:qg_ecol_todays_neft_txn, :bene_account_ifsc => "abcd0QWE123", :rmtr_account_ifsc => "abcd0QWE456")
+      qg_ecol_todays_neft_txn.should be_valid
+
+      qg_ecol_todays_neft_txn = Factory.build(:qg_ecol_todays_neft_txn, :bene_account_ifsc => "abcd11234bh", :rmtr_account_ifsc => "abcd11234ch")
       qg_ecol_todays_neft_txn.should_not be_valid
+      qg_ecol_todays_neft_txn.errors_on(:bene_account_ifsc).should == ["invalid format - expected format is : {[A-Z|a-z]{4}[0][A-Za-z0-9]{6}}"]
+      qg_ecol_todays_neft_txn.errors_on(:rmtr_account_ifsc).should == ["invalid format - expected format is : {[A-Z|a-z]{4}[0][A-Za-z0-9]{6}}"]
+
       qg_ecol_todays_neft_txn = Factory.build(:qg_ecol_todays_neft_txn, :bene_account_ifsc => "abcdQWERTY", :rmtr_account_ifsc => "abcdQWERTY")
       qg_ecol_todays_neft_txn.should_not be_valid
+
       qg_ecol_todays_neft_txn = Factory.build(:qg_ecol_todays_neft_txn, :bene_account_ifsc => "ab0QWER", :rmtr_account_ifsc => "ab0QWER")
       qg_ecol_todays_neft_txn.should_not be_valid
+
       qg_ecol_todays_neft_txn = Factory.build(:qg_ecol_todays_neft_txn, :bene_account_ifsc => "ab@#0QWER", :rmtr_account_ifsc => "ab@#0QWER")
       qg_ecol_todays_neft_txn.should_not be_valid
     end

@@ -12,7 +12,15 @@ describe QgEcolTodaysImpsTxn do
       qg_ecol_todays_imps_txn.should be_valid
 
       qg_ecol_todays_imps_txn = Factory.build(:qg_ecol_todays_imps_txn, :bene_account_ifsc => "abcd0QWERTY", :rmtr_account_ifsc => "abcd0QWERTY")
+      qg_ecol_todays_imps_txn.should be_valid
+
+      qg_ecol_todays_imps_txn = Factory.build(:qg_ecol_todays_imps_txn, :bene_account_ifsc => "abcd0QWE123", :rmtr_account_ifsc => "abcd0QWE456")
+      qg_ecol_todays_imps_txn.should be_valid
+
+      qg_ecol_todays_imps_txn = Factory.build(:qg_ecol_todays_imps_txn, :bene_account_ifsc => "abcd11234bh", :rmtr_account_ifsc => "abcd11234ch")
       qg_ecol_todays_imps_txn.should_not be_valid
+      qg_ecol_todays_imps_txn.errors_on(:bene_account_ifsc).should == ["invalid format - expected format is : {[A-Z|a-z]{4}[0][A-Za-z0-9]{6}}"]
+      qg_ecol_todays_imps_txn.errors_on(:rmtr_account_ifsc).should == ["invalid format - expected format is : {[A-Z|a-z]{4}[0][A-Za-z0-9]{6}}"]
 
       qg_ecol_todays_imps_txn = Factory.build(:qg_ecol_todays_imps_txn, :bene_account_ifsc => "abcdQWERTY", :rmtr_account_ifsc => "abcdQWERTY")
       qg_ecol_todays_imps_txn.should_not be_valid
