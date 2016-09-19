@@ -7,7 +7,6 @@ FactoryGirl.define do
     reason "MyString"
     created_by "MyString"
     updated_by "MyString"
-    lock_version 1
     last_action 1
   end
 end

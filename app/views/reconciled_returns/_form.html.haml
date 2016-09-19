@@ -4,7 +4,6 @@
     #msg-error
       = error_message_for(@reconciled_return, :base, :prepend_text => "")
   .form-main
-    = f.hidden_field :lock_version
     .control-group
       = f.label :txn_type, "*Txn Type", :class => 'control-label'
       = f.select :txn_type, options_for_select(ReconciledReturn.options_for_txn_type, @reconciled_return.txn_type), :prompt => 'SELECT'

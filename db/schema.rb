@@ -2719,15 +2719,20 @@ ActiveRecord::Schema.define(version: 20160908104034) do
   end
 
   create_table "reconciled_returns", force: :cascade do |t|
-    t.string   "txn_type",        limit: 10
-    t.string   "bank_ref_no",     limit: 32
-    t.date     "settlement_date"
-    t.string   "reason",          limit: 1000
-    t.string   "return_code",     limit: 10
-    t.datetime "created_at"
+    t.string   "txn_type",        limit: 10,   null: false
+    t.string   "return_code",     limit: 10,   null: false
+    t.date     "settlement_date",              null: false
+    t.string   "bank_ref_no",     limit: 32,   null: false
+    t.string   "reason",          limit: 1000, null: false
+    t.string   "created_by",      limit: 20
+    t.string   "updated_by",      limit: 20
+    t.string   "last_action",     limit: 1
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
-  add_index "reconciled_returns", ["bank_ref_no", "txn_type"], name: "reconciled_returns_unq", unique: true
+  add_index "reconciled_returns", ["bank_ref_no", "txn_type"], name: "reconciled_returns_01", unique: true
+  add_index "reconciled_returns", ["bank_ref_no"], name: "index_reconciled_returns_on_bank_ref_no"
 
   create_table "remittance_reviews", force: :cascade do |t|
     t.string   "transaction_id",     limit: 5,                   null: false

@@ -6,6 +6,7 @@ class ReconciledReturn < ActiveRecord::Base
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
 
   validates_presence_of :txn_type, :return_code, :settlement_date, :bank_ref_no, :reason
+  validates_uniqueness_of :bank_ref_no, :scope => [:txn_type]
 
   before_save :convert_bank_ref_no_to_upcase
   

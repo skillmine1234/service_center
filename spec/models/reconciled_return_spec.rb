@@ -10,6 +10,11 @@ describe ReconciledReturn do
     [:txn_type, :return_code, :settlement_date, :bank_ref_no, :reason].each do |att|
       it { should validate_presence_of(att) }
     end
+
+    it { 
+      Factory(:reconciled_return)
+      should validate_uniqueness_of(:bank_ref_no).scoped_to(:txn_type)
+    }
   end
   
   context "options_for_txn_type" do
