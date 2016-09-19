@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160908104034) do
+ActiveRecord::Schema.define(version: 20160912121314) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",               null: false
@@ -2351,6 +2351,31 @@ ActiveRecord::Schema.define(version: 20160908104034) do
   end
 
   add_index "pc_fee_rules", ["program_code", "txn_kind", "approval_status"], name: "pc_fee_rules_01", unique: true
+
+  create_table "pc_incoming_files", force: :cascade do |t|
+    t.string "file_name", limit: 50
+  end
+
+  add_index "pc_incoming_files", ["file_name"], name: ":pc_incoming_files_01", unique: true
+
+  create_table "pc_incoming_records", force: :cascade do |t|
+    t.integer "incoming_file_record_id", limit: nil
+    t.string  "file_name",               limit: 50
+    t.string  "program_code",            limit: 20
+    t.string  "mobile_no",               limit: 20
+    t.string  "is_credit",               limit: 20
+    t.string  "is_debit",                limit: 20
+    t.decimal "transfer_amount"
+    t.string  "req_reference_no",        limit: 100
+    t.string  "status_code",             limit: 10
+    t.string  "rep_reference_no",        limit: 100
+    t.string  "rep_text",                limit: 100
+    t.string  "fault_code"
+    t.string  "fault_subcode",           limit: 50
+    t.string  "fault_reason",            limit: 1000
+  end
+
+  add_index "pc_incoming_records", ["incoming_file_record_id"], name: ":pc_incoming_records", unique: true
 
   create_table "pc_load_cards", force: :cascade do |t|
     t.string   "req_no",           limit: 32,                  null: false

@@ -28,6 +28,11 @@ ScService.seed(:code) do |s|
   s.name = 'Funds Transfer'
 end
 
+ScService.seed(:code) do |s|
+  s.code = 'PPC'
+  s.name = 'Prepaid Cards'
+end
+
 IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.sc_service_id = ScService.find_by(code: 'AML').id
   s.code = 'SDN'
@@ -164,5 +169,20 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.build_response_file = 'Y' 
   s.db_unit_name = "pk_qg_ft_file_manager"
   s.records_table = 'ft_incoming_records'  
+
+end
+
+IncomingFileType.seed(:sc_service_id, :code) do |s|
+  s.sc_service_id = ScService.find_by(code: 'PPC').id
+  s.code = 'MMCD'
+  s.name = 'MMCD'
+  s.msg_domain = 'DFDL'
+  s.msg_model = '{http://www.quantiguous.com/services/file}:mmCrDr'
+  s.skip_first = 'Y'
+  s.auto_upload = 'Y'
+  s.validate_all = 'Y'
+  s.build_response_file = 'Y' 
+  s.db_unit_name = "pk_qg_pc_mm_cd_file_manager"
+  s.records_table = 'pc_mm_cd_incoming_records'  
 
 end
