@@ -10,10 +10,10 @@
     = select_tag :status, options_for_select([['NEW','NEW'],['PENDING VALIDATION','PENDING VALIDATION'],['VALIDATION FAILED','VALIDATION FAILED'],['PENDING CREDIT','PENDING CREDIT'],['PENDING RETURN','PENDING RETURN'],['CREDITED','CREDITED'],['RETURNED','RETURNED'],['CREDIT FAILED','CREDIT FAILED'],['RETURN FAILED','RETURN FAILED']],params[:status]),:prompt => 'ANY'
   .control-group
     = label_tag "Notification Status", nil , :class => 'control-label'
-    = select_tag :notification_status, options_for_select([['PENDING NOTIFICATION','PENDING NOTIFICATION'],['NOTIFICATION FAILED','NOTIFICATION FAILED'],['NOTIFIED: OK','NOTIFIED: OK'],['NOTIFIED: REJECT','NOTIFIED: REJECT']],params[:notification_status]),:prompt => 'ANY'
+    = select_tag :notification_status, options_for_select([['PENDING NOTIFICATION','PENDING NOTIFICATION'],['NOTIFICATION FAILED','NOTIFICATION FAILED'],['NOTIFIED: OK','NOTIFIED: OK'],['NOTIFIED: REJECTED','NOTIFIED: REJECTED']],params[:notification_status]),:prompt => 'ANY'
   .control-group
     = label_tag "Validation Status", nil , :class => 'control-label'
-    = select_tag :validation_status, options_for_select([['PENDING VALIDATION','PENDING VALIDATION'],['VALIDATION FAILED','VALIDATION FAILED'],['VALIDATION: OK','VALIDATION: OK'],['VALIDATION: REJECT','VALIDATION: REJECT']],params[:validation_status]),:prompt => 'ANY'
+    = select_tag :validation_status, options_for_select([['PENDING VALIDATION','PENDING VALIDATION'],['VALIDATION FAILED','VALIDATION FAILED'],['VALIDATED: OK','VALIDATED: OK'],['VALIDATED: REJECTED','VALIDATED: REJECTED']],params[:validation_status]),:prompt => 'ANY'
   .control-group
     = label_tag "Settlement Status", nil , :class => 'control-label'
     = select_tag :settle_status, options_for_select([['PENDING SETTLEMENT','PENDING SETTLEMENT'],['SETTLEMENT FAILED','SETTLEMENT FAILED'],['SETTLED','SETTLED']],params[:settle_status]),:prompt => 'ANY'
