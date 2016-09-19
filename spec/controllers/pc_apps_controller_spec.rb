@@ -187,14 +187,14 @@ describe PcAppsController do
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
       pc_app1 = Factory(:pc_app, :app_id => "App01", :approval_status => 'A')
-      pc_app2 = Factory(:pc_app, :app_id => "App01", :approval_status => 'U', :card_acct => 'Foobar', :approved_version => pc_app1.lock_version, :approved_id => pc_app1.id, :created_by => 666)
+      pc_app2 = Factory(:pc_app, :app_id => "App01", :approval_status => 'U', :identity_user_id => 'Foobar', :approved_version => pc_app1.lock_version, :approved_id => pc_app1.id, :created_by => 666)
       # the following line is required for reload to get triggered (TODO)
       pc_app1.approval_status.should == 'A'
       PcUnapprovedRecord.count.should == 1
       put :approve, {:id => pc_app2.id}
       PcUnapprovedRecord.count.should == 0
       pc_app1.reload
-      pc_app1.card_acct.should == 'Foobar'
+      pc_app1.identity_user_id.should == 'Foobar'
       pc_app1.updated_by.should == "666"
       PcApp.find_by_id(pc_app2.id).should be_nil
     end
@@ -203,24 +203,13 @@ describe PcAppsController do
       user_role = UserRole.find_by_user_id(@user.id)
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
-      pc_app = Factory(:pc_app, :app_id => "App01", :approval_status => 'U', :card_acct => 'Foobar')
+      pc_app = Factory(:pc_app, :app_id => "App01", :approval_status => 'U', :identity_user_id => 'Foobar')
       PcUnapprovedRecord.count.should == 1
       put :approve, {:id => pc_app.id}
       PcUnapprovedRecord.count.should == 0
       pc_app.reload
-      pc_app.card_acct.should == 'Foobar'
+      pc_app.identity_user_id.should == 'Foobar'
       pc_app.approval_status.should == 'A'
-    end
-  end
-
-  describe "GET encrypt_password" do
-    it "generates encrypted password and assigns the encrypted_password as @encrypted_password" do
-      pc_program = Factory(:pc_program, :approval_status => 'A')
-      pc_app = Factory(:pc_app, :program_code => pc_program.code, :approval_status => 'U')
-      params = {:id => pc_app.id, :pass => "passowrd_string", :generate => "true"}
-      get :encrypt_password, params
-      encrypted_password = EncPassGenerator.new(params[:pass], pc_app.pc_program.mm_consumer_key, pc_app.pc_program.mm_consumer_secret)
-      expect(assigns(:encrypted_password)).to_not be_nil
     end
   end
 end

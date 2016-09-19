@@ -8,7 +8,7 @@ describe PcApp do
   end
   
   context "validations" do
-    [:program_code, :card_acct, :sc_gl_income, :card_cust_id, :traceid_prefix, :source_id, :channel_id].each do |att|
+    [:program_code].each do |att|
       it { should validate_presence_of(att)}
     end
     
@@ -16,21 +16,6 @@ describe PcApp do
       pc_app = Factory(:pc_app, :app_id => 'App10', :approval_status => 'A')
       should validate_uniqueness_of(:app_id).scoped_to(:approval_status)
     end
-  end
-  
-  context "account no format" do 
-    [:card_acct, :sc_gl_income, :card_cust_id].each do |att|
-      it "should allow valid format" do
-        should allow_value('1234567890').for(att)
-        should allow_value('Abcd1234567890').for(att)
-      end
-
-      it "should not allow invalid format" do
-        should_not allow_value('Absdjhsd&&').for(att)
-        should_not allow_value('@AbcCo').for(att)
-        should_not allow_value('/ab0QWER').for(att)
-      end
-    end 
   end
   
   context "default_scope" do 
@@ -62,7 +47,7 @@ describe PcApp do
       pc_app.pc_unapproved_record.should_not be_nil
       record = pc_app.pc_unapproved_record
       # we are editing the U record, before it is approved
-      pc_app.card_acct = 'Fooo'
+      pc_app.app_id = 'App11'
       pc_app.save
       pc_app.reload
       pc_app.pc_unapproved_record.should == record
