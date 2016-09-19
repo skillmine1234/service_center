@@ -16,7 +16,7 @@ class CreatePcIncomingRecords < ActiveRecord::Migration
           t.string :fault_subcode, :limit => 50, :comment => "the error code that the third party will return"
           t.string :fault_reason, :limit => 1000, :comment => "the english reason of the exception, if an exception occurred in the ESB"
 
-          t.index([:incoming_file_record_id], :unique => true, :name => ':pc_incoming_records')      
+          t.index([:incoming_file_record_id], :unique => true, :name => 'pc_incoming_records_01')      
     end
   end
 end
