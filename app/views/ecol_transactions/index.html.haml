@@ -21,6 +21,8 @@
       %th{:style=>'text-align:left; background-color: lightblue;'}
         Beneficiary Account Number
       %th{:style=>'text-align:left; background-color: lightblue;'}
+        Beneficiary IFSC
+      %th{:style=>'text-align:left; background-color: lightblue;'}
         Beneficiary Name
       %th{:style=>'Text-align:left; background-color: lightblue;'}
         Remitter Name
@@ -47,6 +49,8 @@
               = check_box_tag "ecol_transaction_ids[]", ecol_transaction.id, false, class: 'txn_select'
           %td{:style=>'text-align:left;'}
             = ecol_transaction.bene_account_no
+          %th{:style=>'text-align:left; background-color: lightblue;'}
+            = ecol_transaction.bene_account_ifsc
           %td{:style=>'text-align:left;'}
             = ecol_transaction.bene_full_name
           %td{:style=>'text-align:left;'}
