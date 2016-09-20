@@ -47,6 +47,7 @@ ServiceCenter::Application.routes.draw do
   resources :bm_apps
   resources :pc_apps
   resources :pc_programs
+  resources :pc_products
   resources :pc2_apps
   resources :pc_unapproved_records
   resources :pc2_unapproved_records
@@ -111,6 +112,7 @@ ServiceCenter::Application.routes.draw do
   get '/bm_app/:id/audit_logs' => 'bm_apps#audit_logs'
   get '/pc_app/:id/audit_logs' => 'pc_apps#audit_logs'
   get '/pc_program/:id/audit_logs' => 'pc_programs#audit_logs'
+  get '/pc_product/:id/audit_logs' => 'pc_products#audit_logs'
   get '/pc2_app/:id/audit_logs' => 'pc2_apps#audit_logs'
   get '/pc_fee_rule/:id/audit_logs' => 'pc_fee_rules#audit_logs'
   get '/fp_operation/:id/audit_logs' => 'fp_operations#audit_logs'
@@ -159,6 +161,7 @@ ServiceCenter::Application.routes.draw do
   put '/bm_app/:id/approve' => "bm_apps#approve"
   put '/pc_app/:id/approve' => "pc_apps#approve"
   put '/pc_program/:id/approve' => "pc_programs#approve"
+  put '/pc_product/:id/approve' => "pc_products#approve"
   put '/pc2_app/:id/approve' => "pc2_apps#approve"
   put '/pc_fee_rule/:id/approve' => "pc_fee_rules#approve"
   put '/fp_operation/:id/approve' => "fp_operations#approve"

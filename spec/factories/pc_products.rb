@@ -3,12 +3,12 @@
 FactoryGirl.define do
   factory :pc_product do
     sequence(:code) {|n| "%04i" % "#{n}"}
-    mm_host "http://localhost:3000/pc_programs"
+    mm_host "http://localhost:3000/pc_products"
     mm_consumer_key "MyString"
     mm_consumer_secret "MyString"
     mm_card_type "MyString"
     mm_email_domain "MyString"
-    mm_admin_host "http://localhost:3000/pc_programs"
+    mm_admin_host "http://localhost:3000/pc_products"
     mm_admin_user "MyString"
     mm_admin_password "MyString"
     is_enabled "Y"
@@ -17,7 +17,7 @@ FactoryGirl.define do
     lock_version 0
     approval_status "U"
     last_action "MyString"
-    card_acct "MyString"
+    card_acct "MyString12"
     sc_gl_income "MyString"
     cust_care_no "180012345678"
     rkb_user "user1"

@@ -20,14 +20,6 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Code
     %th{:style=>'text-align:left; background-color: lightblue;'}
-      MM Host
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      MM Card Type
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      MM Email Domain
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      MM Admin Host
-    %th{:style=>'text-align:left; background-color: lightblue;'}
       Is Enabled?
 
   .tbody
@@ -39,13 +31,5 @@
           = link_to 'Edit', edit_pc_program_path(pc_program)
         %td{:style=>'text-align:left;'}
           = pc_program.code
-        %td{:style=>'text-align:left;'}
-          = pc_program.mm_host
-        %td{:style=>'text-align:left;'}
-          = pc_program.mm_card_type
-        %td{:style=>'text-align:left;'}
-          = pc_program.mm_email_domain
-        %td{:style=>'text-align:left;'}
-          = pc_program.mm_admin_host
         %td{:style=>'text-align:left;'}
           = pc_program.is_enabled

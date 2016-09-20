@@ -1,44 +1,51 @@
 %br
-= link_to 'New PC App', new_pc_app_path
+= link_to 'New PC Product', new_pc_product_path
 %br
 %br
-%h1 Listing PC Apps
+%h1 Listing PC Products
 %h2.collapsible
   Advanced Search
   %span.caret
 .collapsible-content
   = render :partial => 'advanced_search'
 %br
-= "Total Count: #{@pc_apps_count}"
+= "Total Count: #{@pc_products_count}"
 %br
-= will_paginate @pc_apps
+= will_paginate @pc_products
 %br
-
 %table.table.table-bordered.table-striped.table-hover
   .thead
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
-      PC Program
+      Code
     %th{:style=>'text-align:left; background-color: lightblue;'}
-      App ID
+      MM Host
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      MM Card Type
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      MM Email Domain
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      MM Admin Host
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Is Enabled?
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Encrypt Password
 
   .tbody
-    - @pc_apps.each do |pc_app|
+    - @pc_products.each do |pc_product|
       %tr
         %td{:style=>'text-align:left;'}
-          = link_to 'Show', pc_app
+          = link_to 'Show', pc_product
         %td{:style=>'text-align:left;'}
-          = link_to 'Edit', edit_pc_app_path(pc_app)
+          = link_to 'Edit', edit_pc_product_path(pc_product)
         %td{:style=>'text-align:left;'}
-          = pc_app.try(:pc_program).try(:code) || '-'
+          = pc_product.code
         %td{:style=>'text-align:left;'}
-          = pc_app.app_id
+          = pc_product.mm_host
         %td{:style=>'text-align:left;'}
-          = pc_app.is_enabled
+          = pc_product.mm_card_type
         %td{:style=>'text-align:left;'}
-          = link_to 'Encrypt Password', pc_apps_encrypt_password_path(pc_app)
+          = pc_product.mm_email_domain
+        %td{:style=>'text-align:left;'}
+          = pc_product.mm_admin_host
+        %td{:style=>'text-align:left;'}
+          = pc_product.is_enabled

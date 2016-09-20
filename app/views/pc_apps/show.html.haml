@@ -22,7 +22,7 @@
           %tr
             %td.label PC Program
             %td.value
-              = @pc_app.pc_program.code
+              = @pc_app.try(:pc_program).try(:code) || '-'
             %td#msg-error
               = error_message_for(@pc_app, :pc_program_id, :prepend_text => "")
           %tr
@@ -32,47 +32,11 @@
             %td#msg-error
               = error_message_for(@pc_app, :app_id, :prepend_text => "")
           %tr
-            %td.label Card Customer ID
-            %td.value
-              = @pc_app.card_cust_id
-            %td#msg-error
-              = error_message_for(@pc_app, :card_cust_id, :prepend_text => "")
-          %tr
-            %td.label Card Account
-            %td.value
-              = @pc_app.card_acct
-            %td#msg-error
-              = error_message_for(@pc_app, :card_acct, :prepend_text => "")
-          %tr
-            %td.label SC Income Account
-            %td.value
-              = @pc_app.sc_gl_income
-            %td#msg-error
-              = error_message_for(@pc_app, :sc_gl_income, :prepend_text => "")
-          %tr
             %td.label Is Enabled?
             %td.value
               = @pc_app.is_enabled
             %td#msg-error
               = error_message_for(@pc_app, :is_enabled, :prepend_text => "")
-          %tr
-            %td.label Trace ID Prefix
-            %td.value
-              = @pc_app.traceid_prefix
-            %td#msg-error
-              = error_message_for(@pc_app, :traceid_prefix, :prepend_text => "")
-          %tr
-            %td.label Source ID
-            %td.value
-              = @pc_app.source_id
-            %td#msg-error
-              = error_message_for(@pc_app, :source_id, :prepend_text => "")
-          %tr
-            %td.label Channel ID
-            %td.value
-              = @pc_app.channel_id
-            %td#msg-error
-              = error_message_for(@pc_app, :channel_id, :prepend_text => "")
           %tr
             %td.label Identity User ID
             %td.value

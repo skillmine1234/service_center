@@ -87,7 +87,7 @@ class PcProgramsController < ApplicationController
   private
 
   def pc_program_params
-    params.require(:pc_program).permit(:code, :is_enabled, :mm_host, :mm_consumer_key, :mm_consumer_secret, :mm_card_type, :mm_email_domain, :mm_admin_host, :mm_admin_user, :mm_admin_password, 
-                                       :created_by, :updated_by, :lock_version, :approval_status, :last_action, :approved_version, :approved_id)
+    params.require(:pc_program).permit(:code, :is_enabled, :created_by, :updated_by, :lock_version, 
+      :approval_status, :last_action, :approved_version, :approved_id)
   end
 end

@@ -7,9 +7,27 @@ describe PcProduct do
   end
   
   context "validations" do
-    [:code, :mm_host, :mm_consumer_key, :mm_consumer_secret, :mm_card_type, :mm_email_domain, :mm_admin_host, :mm_admin_user, :mm_admin_password].each do |att|
+    [:code, :mm_host, :mm_consumer_key, :mm_consumer_secret, :mm_card_type, :mm_email_domain, :mm_admin_host, :mm_admin_user, :mm_admin_password,
+     :card_acct, :sc_gl_income, :cust_care_no, :rkb_user, :rkb_password, :rkb_bcagent, :rkb_channel_partner].each do |att|
       it { should validate_presence_of(att)}
     end
+  end
+
+  it do
+    pc_product = Factory(:pc_product) 
+    should validate_length_of(:code).is_at_least(1).is_at_most(6)
+
+    should validate_length_of(:mm_card_type).is_at_most(50)
+    should validate_length_of(:mm_admin_user).is_at_most(50)
+    should validate_length_of(:mm_admin_password).is_at_most(50)
+    
+    should validate_length_of(:card_acct).is_at_least(10).is_at_most(20)
+    should validate_length_of(:sc_gl_income).is_at_least(3).is_at_most(15)
+
+    should validate_length_of(:rkb_user).is_at_most(30)
+    should validate_length_of(:rkb_password).is_at_most(40)
+    should validate_length_of(:rkb_bcagent).is_at_most(50)
+    should validate_length_of(:rkb_channel_partner).is_at_most(3)
   end
 
   it do 
@@ -23,9 +41,23 @@ describe PcProduct do
     pc_product2.should_not be_valid
     pc_product2.errors_on(:code).should == ["has already been taken"]
   end
+
+  context "code format" do
+    [:code].each do |att|
+      it "should allow valid format" do
+        should allow_value('123456').for(att)
+        should allow_value('Abc123').for(att)
+      end
+    
+      it "should not allow invalid format" do
+        should_not allow_value('@AbcCo').for(att)
+        should_not allow_value('/ab0QWER').for(att)
+      end
+    end
+  end
   
-  context "mm_consumer_key, mm_consumer_secret, mm_card_type format" do 
-    [:code, :mm_consumer_key, :mm_consumer_secret, :mm_card_type].each do |att|
+  context "mm_consumer_key, mm_consumer_secret, mm_card_type, card_acct, sc_gl_income format" do 
+    [:mm_consumer_key, :mm_consumer_secret, :mm_card_type, :card_acct, :sc_gl_income].each do |att|
       it "should allow valid format" do
         should allow_value('1234567890').for(att)
         should allow_value('Abcd1234567890').for(att)
@@ -38,8 +70,23 @@ describe PcProduct do
       end
     end 
   end
+
+  context "rkb_user, rkb_password, rkb_bcagent, rkb_channel_partner format" do 
+    [:rkb_user, :rkb_password, :rkb_bcagent, :rkb_channel_partner].each do |att|
+      it "should allow valid format" do
+        should allow_value('123').for(att)
+        should allow_value('Ab1').for(att)
+      end
+
+      it "should not allow invalid format" do
+        should_not allow_value('Absdjhsd&&').for(att)
+        should_not allow_value('@AbcCo').for(att)
+        should_not allow_value('/ab0QWER').for(att)
+      end
+    end 
+  end
   
-  context "mm_host , mm_admin_host format" do
+  context "mm_host, mm_admin_host format" do
     [:mm_host, :mm_admin_host].each do |att|
       it "should allow valid format" do
         should allow_value('http://localhost:3000/pc_products').for(att)
@@ -64,6 +111,35 @@ describe PcProduct do
       should_not allow_value('@#@domain').for(:mm_email_domain)
     end
   end
+
+  context "display_name format" do
+    it "should allow valid format" do
+      should allow_value('ABCDCo').for(:display_name)
+      should allow_value('ABCD Co').for(:display_name)
+      should allow_value('ABCD.Co').for(:display_name)
+      should allow_value('ABCD-Co').for(:display_name)
+    end
+
+    it "should not allow invalid format" do
+      should_not allow_value('@AbcCo').for(:display_name)
+      should_not allow_value('/ab0QWER').for(:display_name)
+    end
+  end
+
+  context "cust_care_no format" do
+    it "should allow valid format" do
+      should allow_value('180012345678').for(:cust_care_no)
+      should allow_value('1800').for(:cust_care_no)
+      should allow_value('1800123456789012').for(:cust_care_no)
+    end
+
+    it "should not allow invalid format" do
+      should_not allow_value('+912212345678').for(:cust_care_no)
+      should_not allow_value('+91 2212345678').for(:cust_care_no)
+      should_not allow_value('+91-22-12345678').for(:cust_care_no)
+      should_not allow_value('@180012345678').for(:cust_care_no)
+    end
+  end
   
   context "default_scope" do 
     it "should only return 'A' records by default" do 
@@ -78,23 +154,23 @@ describe PcProduct do
 
   context "to_downcase" do 
     it "should convert the code to lower case" do 
-      pc_product = Factory.build(:pc_product, :code => "BANK123")
+      pc_product = Factory.build(:pc_product, :code => "BANK12")
       pc_product.to_downcase
-      pc_product.code.should == "bank123"
+      pc_product.code.should == "bank12"
       pc_product.save.should be_true
     end
   end  
 
   context "encrypt_password" do 
     it "should convert the encrypt the mm_admin_password for unapproved record" do 
-      pc_product = Factory.build(:pc_product, :code => "BANK123", :mm_admin_password => 'password')
+      pc_product = Factory.build(:pc_product, :code => "BANK12", :mm_admin_password => 'password')
       pc_product.save.should be_true
       pc_product.reload
       pc_product.mm_admin_password.should_not == "password"
     end
 
     it "should not convert the encrypt the mm_admin_password for approved record" do 
-      pc_product = Factory.build(:pc_product, :code => "BANK123", :mm_admin_password => 'password', :approval_status => 'A')
+      pc_product = Factory.build(:pc_product, :code => "BANK12", :mm_admin_password => 'password', :approval_status => 'A')
       pc_product.save.should be_true
       pc_product.reload
       pc_product.mm_admin_password.should == "password"
@@ -178,7 +254,7 @@ describe PcProduct do
       pc_program2 = Factory(:pc_program, :code => "9968", :approval_status => 'A')
       pc_program3 = Factory(:pc_program, :code => "9969", :approval_status => 'A')
       pc_program4 = Factory(:pc_program, :code => "9970")
-      expect(PcProduct.options_for_pc_programs).to eq([["9967", "9967"], ["9968", "9968"], ["9969", "9969"], ["9970", "9970"]])
+      expect(PcProduct.options_for_pc_programs).to eq([["9967", "9967"], ["9968", "9968"], ["9969", "9969"]])
     end
   end
 end
