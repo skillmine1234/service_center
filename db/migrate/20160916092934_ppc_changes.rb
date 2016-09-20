@@ -82,7 +82,7 @@ class PpcChanges < ActiveRecord::Migration
     change_column :pc_products, :card_cust_id, :string, :null => false, :comment =>  'the customer id of the card'
     change_column :pc_products, :cust_care_no, :string, :null => false, :limit => 16, :comment => 'the customer care no, displayed to customers'
     change_column :pc_products, :rkb_user, :string, :limit => 30, :null => false, :comment => 'the user name to authenticate with rkb'
-    change_column :pc_products, :rkb_password, :string, :limit => 40, :null => false, :comment => 'the password to authenticate with rkb'
+    change_column :pc_products, :rkb_password, :string, :null => false, :comment => 'the password to authenticate with rkb'
     change_column :pc_products, :rkb_bcagent, :string, :limit => 50, :null => false, :comment => 'the bcagent issued by rkb, used for authentication'
     change_column :pc_products, :rkb_channel_partner, :string, :null => false, :limit => 3, :comment => 'the channel partner issued by rkb, used for authentication'
     change_column :pc_products, :program_code, :string, :limit => 15, :null => false, :comment => 'the code of the pc program'
