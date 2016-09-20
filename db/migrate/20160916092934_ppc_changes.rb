@@ -51,7 +51,7 @@ class PpcChanges < ActiveRecord::Migration
       if pc.nil?
         p = PcProgram.create(:code => app.program_code, :is_enabled => 'Y')
         p.update_attribute(:approval_status,'A')
-        PcProgramsPcProduct.create(:program_code => app.program_code, :product_code => app.program_code)
+        PcProgramsPcProduct.create(:pc_program_code => app.program_code, :pc_product_code => app.program_code)
       end
     end
 
