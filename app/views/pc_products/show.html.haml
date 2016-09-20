@@ -86,7 +86,13 @@
             %td#msg-error
               = error_message_for(@pc_product, :mm_admin_password, :prepend_text => "")
           %tr
-            %td.label Card Account
+            %td.label MM SOR Account Customer ID
+            %td.value
+              = @pc_product.card_cust_id
+            %td#msg-error
+              = error_message_for(@pc_product, :card_cust_id, :prepend_text => "")
+          %tr
+            %td.label MM SOR Account
             %td.value
               = @pc_product.card_acct
             %td#msg-error

@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :pc_fee_rule do
-    program_code {Factory(:pc_program, :approval_status => 'A').code}
+    product_code {Factory(:pc_product, :approval_status => 'A').code}
     txn_kind "LC"
     no_of_tiers 1
     tier1_to_amt 1000

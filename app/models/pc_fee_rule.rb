@@ -4,10 +4,10 @@ class PcFeeRule < ActiveRecord::Base
   
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
-  belongs_to :pc_program, :foreign_key => 'program_code', :primary_key => 'code',:class_name => 'PcProgram'
+  belongs_to :pc_product, :foreign_key => 'product_code', :primary_key => 'code',:class_name => 'PcProduct'
   
-  validates_presence_of :program_code, :txn_kind, :no_of_tiers, :tier1_to_amt, :tier1_max_sc_amt
-  validates_uniqueness_of :program_code, :scope => [:txn_kind, :approval_status]
+  validates_presence_of :product_code, :txn_kind, :no_of_tiers, :tier1_to_amt, :tier1_max_sc_amt
+  validates_uniqueness_of :product_code, :scope => [:txn_kind, :approval_status]
   validates :tier1_to_amt, :tier1_fixed_amt, :tier1_min_sc_amt, :tier2_to_amt, :tier2_fixed_amt, :tier2_min_sc_amt, :tier2_max_sc_amt, :tier3_fixed_amt, :tier3_min_sc_amt, :tier3_max_sc_amt, :numericality => {:greater_than_or_equal_to => 0, :less_than_or_equal_to => 9999999999}, :allow_nil => true
   validates :tier1_max_sc_amt, :numericality => {:greater_than_or_equal_to => 0, :less_than_or_equal_to => 9999999999}
   validates :tier1_pct_value, :tier2_pct_value, :tier3_pct_value, :numericality => {:greater_than_or_equal_to => 0, :less_than_or_equal_to => 100}, :allow_blank => true

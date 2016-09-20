@@ -22,10 +22,10 @@ describe PcProduct do
     should validate_length_of(:mm_admin_password).is_at_most(50)
     
     should validate_length_of(:card_acct).is_at_least(10).is_at_most(20)
+    should validate_length_of(:card_cust_id).is_at_least(3).is_at_most(10)
     should validate_length_of(:sc_gl_income).is_at_least(3).is_at_most(15)
 
     should validate_length_of(:rkb_user).is_at_most(30)
-    # should validate_length_of(:rkb_password).is_at_most(40)
     should validate_length_of(:rkb_bcagent).is_at_most(50)
     should validate_length_of(:rkb_channel_partner).is_at_most(3)
   end
@@ -56,7 +56,7 @@ describe PcProduct do
     end
   end
   
-  context "mm_consumer_key, mm_consumer_secret, mm_card_type, card_acct, sc_gl_income format" do 
+  context "mm_consumer_key, mm_consumer_secret, mm_card_type, card_acct, sc_gl_income format, card_cust_id" do 
     [:mm_consumer_key, :mm_consumer_secret, :mm_card_type, :card_acct, :sc_gl_income].each do |att|
       it "should allow valid format" do
         should allow_value('1234567890').for(att)
@@ -250,13 +250,13 @@ describe PcProduct do
     end
   end
 
-  context "options_for_pc_programs" do
-    it "should return all approved pc_programs records" do
-      pc_program1 = Factory(:pc_program, :code => "9967", :approval_status => 'A')
-      pc_program2 = Factory(:pc_program, :code => "9968", :approval_status => 'A')
-      pc_program3 = Factory(:pc_program, :code => "9969", :approval_status => 'A')
-      pc_program4 = Factory(:pc_program, :code => "9970")
-      expect(PcProduct.options_for_pc_programs).to eq([["9967", "9967"], ["9968", "9968"], ["9969", "9969"]])
+  context "options_for_pc_products" do
+    it "should return all approved pc_products records" do
+      pc_program1 = Factory(:pc_product, :code => "9967", :approval_status => 'A')
+      pc_program2 = Factory(:pc_product, :code => "9968", :approval_status => 'A')
+      pc_program3 = Factory(:pc_product, :code => "9969", :approval_status => 'A')
+      pc_program4 = Factory(:pc_product, :code => "9970")
+      expect(PcProduct.options_for_pc_products).to eq([["9967", "9967"], ["9968", "9968"], ["9969", "9969"]])
     end
   end
 end

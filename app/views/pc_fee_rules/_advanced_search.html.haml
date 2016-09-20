@@ -1,7 +1,7 @@
 = form_tag '', :method => 'get', :class => 'form-horizontal', :autocomplete=>"off" do
   .control-group
-    = label_tag "Program", "Program", :class => 'control-label'
-    = text_field_tag :program_code, params[:program_code]
+    = label_tag "Product", "Product", :class => 'control-label'
+    = text_field_tag :product_code, params[:product_code]
   = hidden_field_tag :advanced_search, :true
 
   .form-actions

@@ -83,14 +83,23 @@ class PcProductsController < ApplicationController
     end
     redirect_to @pc_product
   end
+  
+  def encrypt_password
+    @pc_product = PcProduct.unscoped.find_by_id(params[:id])
+    if params[:generate] == "true"
+      encrypted_password = EncPassGenerator.new(params[:pass], @pc_product.mm_consumer_key, @pc_product.mm_consumer_secret)
+      @encrypted_password = encrypted_password.generate_encrypted_password
+    end
+  end
 
   private
 
   def pc_product_params
     params.require(:pc_product).permit(:code, :mm_host, :mm_consumer_key, :mm_consumer_secret, :mm_card_type, 
       :mm_email_domain, :mm_admin_host, :mm_admin_user, :mm_admin_password, 
-      :is_enabled, :created_by, :updated_by, :lock_version, 
+      :is_enabled, :created_by, :updated_by, :lock_version,
       :approval_status, :last_action, :approved_version, :approved_id, :card_acct, :sc_gl_income, :display_name, 
-      :cust_care_no, :rkb_user, :rkb_password, :rkb_bcagent, :rkb_channel_partner)
+      :cust_care_no, :rkb_user, :rkb_password, :rkb_bcagent, :rkb_channel_partner, :program_code,
+      :card_cust_id)
   end
 end

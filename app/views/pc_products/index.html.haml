@@ -29,6 +29,8 @@
       MM Admin Host
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Is Enabled?
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Encrypt Password
 
   .tbody
     - @pc_products.each do |pc_product|
@@ -49,3 +51,5 @@
           = pc_product.mm_admin_host
         %td{:style=>'text-align:left;'}
           = pc_product.is_enabled
+        %td{:style=>'text-align:left;'}
+          = link_to 'Encrypt Password', pc_products_encrypt_password_path(pc_product)

@@ -24,8 +24,6 @@
       App ID
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Is Enabled?
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Encrypt Password
 
   .tbody
     - @pc_apps.each do |pc_app|
@@ -40,5 +38,3 @@
           = pc_app.app_id
         %td{:style=>'text-align:left;'}
           = pc_app.is_enabled
-        %td{:style=>'text-align:left;'}
-          = link_to 'Encrypt Password', pc_apps_encrypt_password_path(pc_app)

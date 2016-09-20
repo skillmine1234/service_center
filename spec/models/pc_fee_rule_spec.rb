@@ -4,17 +4,17 @@ describe PcFeeRule do
   context "association" do
     it { should belong_to(:created_user) }
     it { should belong_to(:updated_user) }
-    it { should belong_to(:pc_program) }
+    it { should belong_to(:pc_product) }
   end
   
   context "validation" do
-    [:program_code, :txn_kind, :no_of_tiers, :tier1_to_amt, :tier1_max_sc_amt].each do |att|
+    [:product_code, :txn_kind, :no_of_tiers, :tier1_to_amt, :tier1_max_sc_amt].each do |att|
       it { should validate_presence_of(att) }
     end
     
     it do 
       pc_fee_rule = Factory(:pc_fee_rule, :approval_status => 'A')
-      should validate_uniqueness_of(:program_code).scoped_to(:txn_kind, :approval_status)
+      should validate_uniqueness_of(:product_code).scoped_to(:txn_kind, :approval_status)
     end
     
     # [:tier1_to_amt, :tier1_fixed_amt, :tier1_min_sc_amt, :tier1_max_sc_amt, :tier2_to_amt,

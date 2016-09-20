@@ -17,6 +17,7 @@ FactoryGirl.define do
     lock_version 0
     approval_status "U"
     last_action "MyString"
+    card_cust_id "12345"
     card_acct "MyString12"
     sc_gl_income "MyString"
     cust_care_no "180012345678"
@@ -24,5 +25,6 @@ FactoryGirl.define do
     rkb_password "password1"
     rkb_bcagent "agent1"
     rkb_channel_partner "cp1"
+    program_code { Factory(:pc_program, :approval_status => 'A').code }
   end
 end

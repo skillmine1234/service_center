@@ -88,7 +88,7 @@ describe PcFeeRulesController do
     describe "with invalid params" do
       it "assigns a newly created but unsaved pc_fee_rule as @pc_fee_rule" do
         params = Factory.attributes_for(:pc_fee_rule)
-        params[:program_code] = nil
+        params[:product_code] = nil
         expect {
           post :create, {:pc_fee_rule => params}
         }.to change(PcFeeRule, :count).by(0)
@@ -98,7 +98,7 @@ describe PcFeeRulesController do
 
       it "re-renders the 'new' template when show_errors is true" do
         params = Factory.attributes_for(:pc_fee_rule)
-        params[:program_code] = nil
+        params[:product_code] = nil
         post :create, {:pc_fee_rule => params}
         response.should render_template("new")
       end
@@ -153,17 +153,17 @@ describe PcFeeRulesController do
       it "assigns the pc_fee_rule as @pc_fee_rule" do
         pc_fee_rule = Factory(:pc_fee_rule)
         params = pc_fee_rule.attributes.slice(*pc_fee_rule.class.attribute_names)
-        params[:program_code] = nil
+        params[:product_code] = nil
         put :update, {:id => pc_fee_rule.to_param, :pc_fee_rule => params}
         assigns(:pc_fee_rule).should eq(pc_fee_rule)
         pc_fee_rule.reload
-        params[:program_code] = nil
+        params[:product_code] = nil
       end
 
       it "re-renders the 'edit' template when show_errors is true" do
         pc_fee_rule = Factory(:pc_fee_rule)
         params = pc_fee_rule.attributes.slice(*pc_fee_rule.class.attribute_names)
-        params[:program_code] = nil
+        params[:product_code] = nil
         put :update, {:id => pc_fee_rule.id, :pc_fee_rule => params, :show_errors => "true"}
         response.should render_template("edit")
       end
@@ -186,11 +186,14 @@ describe PcFeeRulesController do
     it "(edit) unapproved record can be approved and old approved record will be updated" do
       user_role = UserRole.find_by_user_id(@user.id)
       user_role.delete
+      p PcUnapprovedRecord.all
+      p PcUnapprovedRecord.count
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
       pc_fee_rule1 = Factory(:pc_fee_rule, :approval_status => 'A')
       pc_fee_rule2 = Factory(:pc_fee_rule, :approval_status => 'U', :tier1_to_amt => 10000, :approved_version => pc_fee_rule1.lock_version, :approved_id => pc_fee_rule1.id, :created_by => 666)
       # the following line is required for reload to get triggered (TODO)
       pc_fee_rule1.approval_status.should == 'A'
+      p PcUnapprovedRecord.all
       PcUnapprovedRecord.count.should == 1
       put :approve, {:id => pc_fee_rule2.id}
       PcUnapprovedRecord.count.should == 0

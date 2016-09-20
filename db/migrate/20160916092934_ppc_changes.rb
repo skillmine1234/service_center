@@ -18,6 +18,8 @@ class PpcChanges < ActiveRecord::Migration
 
     add_index :pc_programs, [:code, :approval_status], :unique => true, :name => "pc_programs_02"
 
+    rename_column :pc_fee_rules, :program_code, :product_code
+
     add_column :pc_products, :card_acct, :string, :limit => 20, :comment =>  "the casa account for recording card transactions"
     add_column :pc_products, :sc_gl_income, :string, :limit => 15, :comment =>  "the gl account for recording fee income"
     add_column :pc_products, :card_cust_id, :string, :comment =>  'the customer id of the card'
@@ -32,6 +34,9 @@ class PpcChanges < ActiveRecord::Migration
     add_column :pc_customers, :program_code, :string, :limit => 15, :comment => 'the code of the program'
     add_column :pc_customers, :product_code, :string, :limit => 15, :comment => 'the code of the product'
 
+    add_column :pc_card_registrations, :program_code, :string, :limit => 15, :comment => 'the code of the program'
+    add_column :pc_card_registrations, :product_code, :string, :limit => 15, :comment => 'the code of the product'
+
     PcApp.unscoped.find_each(batch_size: 100) do |app_record|
       if app_record.approval_status == 'U' 
         app_record.approved_record.nil? ? app = app_record : app = app_record.approved_record
@@ -42,7 +47,7 @@ class PpcChanges < ActiveRecord::Migration
       products = PcProduct.unscoped.where("code=?",app.program_code)
       unless products.empty?
         products.update_all(:card_acct => app.card_acct, :sc_gl_income => app.sc_gl_income, :card_cust_id => app.card_cust_id,
-                            :cust_care_no => '1234', :rkb_user => 'user', :rkb_password => 'password',
+                            :cust_care_no => '1234', :rkb_user => 'user', :rkb_password => EncPassGenerator.new('password', ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']).generate_encrypted_password,
                             :rkb_bcagent => 'agent', :rkb_channel_partner => '123') 
       end
       pc = PcProgram.unscoped.find_by_code(app.program_code)
@@ -52,21 +57,24 @@ class PpcChanges < ActiveRecord::Migration
       end
     end
 
-    products = PcProduct.unscoped.where("card_acct is null")
-    unless products.empty?
-      products.update_all(:card_acct => '1234', :sc_gl_income => '1234', :card_cust_id => '1234',
-                          :cust_care_no => '1234', :rkb_user => 'user', :rkb_password => 'password',
-                          :rkb_bcagent => 'agent', :rkb_channel_partner => '123') 
-    end
+    products = PcProduct.unscoped.where("card_acct is null").delete_all
 
     PcProduct.unscoped.find_each(batch_size: 100) do |p|
       p.update_attribute(:program_code, p.code)
     end
 
     PcCustomer.find_each(batch_size: 100) do |cust|
-      cust.program_code = cust.app.program_code
-      cust.product_code = cust.app.pc_program.pc_products.first.code
+      cust.program_code = cust.app.try(:program_code)
+      cust.product_code = cust.app.try(:program_code)
       cust.save(:validate => false)
+    end
+
+    PcCustomer.where("program_code is null").delete_all
+
+    PcCardRegistration.find_each(batch_size: 100) do |card|
+      card.program_code = card.app.try(:program_code)
+      card.product_code = card.app.try(:program_code)
+      card.save(:validate => false)
     end
 
     change_column :pc_products, :card_acct, :string, :limit => 20, :null => false, :comment =>  "the casa account for recording card transactions"
@@ -83,7 +91,8 @@ class PpcChanges < ActiveRecord::Migration
     change_column :pc_customers, :product_code, :string, :limit => 15, :null => false, :comment => 'the code of the product'
 
     remove_index :pc_customers, :name => 'uk_pc_card_custs_1'
-    add_index :pc_customers, [:mobile_no, :program_code], :name => 'pc_customers_01'
+    add_index :pc_customers, [:mobile_no, :program_code], :name => 'pc_customers_01', unique: true
+    add_index :pc_customers, [:email_id, :program_code], :name => 'pc_customers_02', unique: true
 
     remove_column :pc_apps, :card_acct
     remove_column :pc_apps, :sc_gl_income
@@ -117,6 +126,8 @@ class PpcChanges < ActiveRecord::Migration
     change_column :pc_apps, :source_id, :string, :limit => 50, :null => false, :comment => 'the source id'
     change_column :pc_apps, :channel_id, :string, :limit => 20, :null => false, :comment => 'the channel id'
 
+    rename_column :pc_fee_rules, :product_code, :program_code
+
     remove_column :pc_products, :card_acct
     remove_column :pc_products, :sc_gl_income
     remove_column :pc_products, :card_cust_id
@@ -129,11 +140,13 @@ class PpcChanges < ActiveRecord::Migration
     remove_column :pc_products, :program_code
     remove_column :pc_customers, :program_code
     remove_column :pc_customers, :product_code
+    remove_column :pc_card_registrations, :program_code
+    remove_column :pc_card_registrations, :product_code
 
     remove_index :pc_customers, :name => 'pc_customers_01'
-    add_index :pc_customers, [:mobile_no], :name => 'uk_pc_card_custs_1'
+    remove_index :pc_customers, :name => 'pc_customers_02'
+    add_index :pc_customers, [:mobile_no], :name => 'uk_pc_card_custs_1', :unique => true
 
-    drop_table :pc_programs_pc_products
     drop_table :pc_programs
     rename_table :pc_products, :pc_programs
   end

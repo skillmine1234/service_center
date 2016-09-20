@@ -8,10 +8,10 @@
     = f.hidden_field :approved_id
     = f.hidden_field :approved_version
     .control-group
-      = f.label :program_code, "*PC Program", :class => 'control-label'
-      = f.select(:program_code, PcProgram.options_for_pc_programs, :prompt => 'Select')
+      = f.label :product_code, "*PC Product", :class => 'control-label'
+      = f.select(:product_code, PcProduct.options_for_pc_products, :prompt => 'Select')
       #msg-error
-        = error_message_for(@pc_fee_rule, :program_code, :prepend_text => "")
+        = error_message_for(@pc_fee_rule, :product_code, :prepend_text => "")
     .control-group
       = f.label :txn_kind, "*Transaction Kind", :class => 'control-label'
       = f.select :txn_kind, options_for_select(PcFeeRule.options_for_txn_kind, @pc_fee_rule.txn_kind), :prompt => 'Select'
@@ -147,6 +147,6 @@
         = error_message_for(@pc_fee_rule, :tier3_max_sc_amt, :prepend_text => "")
 
   .form-actions
-    - (f.object.new_record? and f.object.program_code.nil?) ? label_name = "Create" : label_name = "Update"
+    - (f.object.new_record? and f.object.product_code.nil?) ? label_name = "Create" : label_name = "Update"
     = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_pc_fee_rule', :value => label_name + ' PC Fee Rule'
     = link_to :Cancel,'/pc_fee_rules', :name => 'cancel', :class=>"cancel btn"

@@ -18,7 +18,7 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
-      PC Program
+      PC Product
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Transaction Kind
     %th{:style=>'text-align:left; background-color: lightblue;'}
@@ -32,7 +32,7 @@
         %td{:style=>'text-align:left;'}
           = link_to 'Edit', edit_pc_fee_rule_path(pc_fee_rule)
         %td{:style=>'text-align:left;'}
-          = pc_fee_rule.try(:pc_program).try(:code) || '-'
+          = pc_fee_rule.try(:pc_product).try(:code) || '-'
         %td{:style=>'text-align:left;'}
           = pc_fee_rule.txn_kind
         %td{:style=>'text-align:left;'}
