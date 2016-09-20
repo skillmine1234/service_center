@@ -10,7 +10,7 @@ class Group < ActiveRecord::Base
     when "bill-management"
       ['BmRule','BmBiller','BmBillPayment','BmAggregatorPayment','BmApp','BmUnapprovedRecord']
     when "prepaid-card"
-      ['PcApp','PcProgram','PcProduct','PcFeeRule','PcUnapprovedRecord']
+      ['PcApp','PcProgram', 'PcProduct', 'PcFeeRule','PcUnapprovedRecord','PcMmCdIncomingRecord','IncomingFile','IncomingFileRecord','PcMmCdIncomingFile']
     when "prepaid-card2"
       ['Pc2App','Pc2UnapprovedRecord']
     when "flex-proxy"

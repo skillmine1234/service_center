@@ -1,0 +1,71 @@
+.show_ticket      
+  .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; height: 100px; display: inline-block;'}
+    %h3
+      Request Reference No:
+      = @pc_record.req_reference_no
+    %h3
+      App Id:
+      = @pc_record.app_id
+    %h3
+      Version:
+      = link_to "#{audit_count(@pc_record.incoming_file_record)}", :controller => :pc_mm_cd_incoming_records, :action => :audit_logs, :version_id => audit_count(@pc_record.incoming_file_record), :id => @pc_record.incoming_file_record_id
+
+  .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; height: 100px; display: inline-block;'}
+    %h3
+      Response Reference No:
+      = @pc_record.rep_reference_no
+    %h3
+      Response Text:
+      - if @pc_record.rep_text.nil?
+        .span{:class =>"has-tooltip", "data-toggle" => 'tooltip',"title" => "No Response Text Available for this record", "data-placement" => 'bottom', "data-html" => true}
+          Show Response Text
+      - else
+        = link_to "Show Response Text", "#", :class => 'show_response_text', :href => "#responseText", data: { rep_text: @pc_record.rep_text} 
+    %h3
+      Record Text:
+      - if @pc_record.incoming_file_record.record_txt.nil?
+        .span{:class =>"has-tooltip", "data-toggle" => 'tooltip',"title" => "No Record Text Available for this record", "data-placement" => 'bottom', "data-html" => true}
+          Show Record Text
+      - else
+        = link_to "Show Record Text", "#", :class => 'show_record_text', :href => "#recordText", data: { record_txt: @pc_record.incoming_file_record.record_txt} 
+  .header-form-main{:style=>'background-color: #F1F2F8; width: 100%; height: 500px; display: inline-block;'}
+    #ticket-details
+      %h3
+        Transfer Details:
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
+        %tr
+          %td.label Mobile No
+          %td.value
+            = @pc_record.mobile_no
+        %tr
+          %td.label Transfer Amount
+          %td.value
+            = @pc_record.transfer_amount
+        %tr
+          %td.label Credit or Debit Flag
+          %td.value
+            = @pc_record.crdr
+        
+#recordText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Record Text
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    .demo-area
+      %button#d_clip_button1.my_clip_button1{"data-clipboard-target" => "record_txt"}
+        %b Copy To Clipboard...
+    %pre#record_txt{:style => 'word-wrap: break-word'}
+      .reply{:style => 'word-wrap: break-word'}
+
+#responseText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Response Text
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    .demo-area
+      %button#d_clip_button2.my_clip_button2{"data-clipboard-target" => "rep_text"}
+        %b Copy To Clipboard...
+    %pre#rep_text{:style => 'word-wrap: break-word'}
+      .response{:style => 'word-wrap: break-word'}

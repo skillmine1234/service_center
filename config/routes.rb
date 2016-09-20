@@ -69,6 +69,7 @@ ServiceCenter::Application.routes.draw do
   resources :su_incoming_records
   resources :ic_incoming_records
   resources :ft_incoming_records
+  resources :pc_mm_cd_incoming_records
   resources :outgoing_files do
     member do
       get 'download_response_file'
@@ -92,12 +93,14 @@ ServiceCenter::Application.routes.draw do
   get 'su_incoming_file_summary' => 'su_incoming_records#incoming_file_summary'
   get 'ic_incoming_file_summary' => 'ic_incoming_records#incoming_file_summary'
   get 'ft_incoming_file_summary' => 'ft_incoming_records#incoming_file_summary'
+  get 'pc_mm_cd_incoming_file_summary' => 'pc_mm_cd_incoming_records#incoming_file_summary'
   get 'override_records' => 'incoming_files#override_records'
   get 'incoming_files/:id/audit_steps/:step_name' => 'incoming_files#audit_steps'
   get 'incoming_file_records/:id/audit_steps/:step_name' => 'incoming_file_records#audit_steps'
   get '/su_incoming_records/:id/audit_logs' => 'su_incoming_records#audit_logs'
   get '/ic_incoming_records/:id/audit_logs' => 'ic_incoming_records#audit_logs'
   get '/ft_incoming_records/:id/audit_logs' => 'ft_incoming_records#audit_logs'
+  get '/pc_mm_cd_incoming_records/:id/audit_logs' => 'pc_mm_cd_incoming_records#audit_logs'
   get '/partner/:id/audit_logs' => 'partners#audit_logs'
   get '/purpose_code/:id/audit_logs' => 'purpose_codes#audit_logs'
   get '/inw_remittance_rule/:id/audit_logs' => 'inw_remittance_rules#audit_logs'

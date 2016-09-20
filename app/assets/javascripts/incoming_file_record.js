@@ -4,6 +4,11 @@ $(document).ready(function(){
     display_beautified_data(record_txt, "#record_txt", "#recordText");
   });
 
+  $(".show_response_text").on("click", function () {
+    var rep_text = $(this).attr('data-rep-text');
+    display_beautified_data(rep_text, "#rep_text", "#responseText");
+  });
+
   $(".show_fault_text").on("click", function () {
     var fault_reason = $(this).attr('data-fault-reason');
     var fault_code = $(this).attr('data-fault-code');
