@@ -87,7 +87,7 @@
         = error_message_for(@pc_app, :rkb_user, :prepend_text => "")
     .control-group
       = f.label :rkb_password, "*RKB Password", :class => 'control-label'
-      = f.text_field :rkb_password, :maxlength => 40
+      = f.password_field :rkb_password, :maxlength => 40
       #msg-error
         = error_message_for(@pc_app, :rkb_password, :prepend_text => "")
     .control-group
@@ -105,4 +105,3 @@
     - (f.object.new_record? and f.object.code.nil?) ? label_name = "Create" : label_name = "Update"
     = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_pc_product', :value => label_name + ' PC Program'
     = link_to :Cancel,'/pc_products', :name => 'cancel', :class=>"cancel btn"
-151.101.100.133

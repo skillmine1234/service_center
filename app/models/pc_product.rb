@@ -15,14 +15,14 @@ class PcProduct < ActiveRecord::Base
   validates :card_acct, :sc_gl_income, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => "Invalid format, expected format is : {[a-z|A-Z|0-9]}" }
   validates :display_name, format: {with: /\A[a-z|A-Z|0-9|\s|\.|\-]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\s|\.|\-]}' }, length: { minimum: 1 }, allow_blank: true
   validates :cust_care_no, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9|]}' }, length: { minimum: 4,  maximum: 16 }
-  validates :rkb_user, :rkb_password, :rkb_bcagent, :rkb_channel_partner, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => "Invalid format, expected format is : {[a-z|A-Z|0-9]}" }
+  validates :rkb_user, :rkb_bcagent, :rkb_channel_partner, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => "Invalid format, expected format is : {[a-z|A-Z|0-9]}" }
 
   validates :mm_card_type, :mm_admin_user, :mm_admin_password, length: { maximum: 50 }
   validates :card_acct, length: { minimum: 10, maximum: 20 }
   validates :sc_gl_income, length: { minimum: 3, maximum: 15 }
 
   validates :rkb_user, length: { maximum: 30 }
-  validates :rkb_password, length: { maximum: 40 }
+  # validates :rkb_password, length: { maximum: 40 }
   validates :rkb_bcagent, length: { maximum: 50 }
   validates :rkb_channel_partner, length: { maximum: 3 }
 
@@ -40,6 +40,7 @@ class PcProduct < ActiveRecord::Base
     unless self.frozen?
       if approval_status == 'U'
         self.mm_admin_password = EncPassGenerator.new(self.mm_admin_password, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']).generate_encrypted_password unless self.mm_admin_password.to_s.empty?
+        self.rkb_password = EncPassGenerator.new(self.rkb_password, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']).generate_encrypted_password unless self.rkb_password.to_s.empty?
       end
     end
   end

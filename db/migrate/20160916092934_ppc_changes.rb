@@ -19,11 +19,11 @@ class PpcChanges < ActiveRecord::Migration
     add_index :pc_programs, [:code, :approval_status], :unique => true, :name => "pc_programs_02"
 
     create_table :pc_programs_pc_products, {:id => false, :sequence_start_value => '1 cache 20 order increment by 1'}  do |t|
-      t.string :program_code, :null => false, :limit => 15, :comment => "the code that identifies the program"
-      t.string :product_code, :null => false, :limit => 15, :comment => "the code that identifies the product"
+      t.string :pc_program_code, :null => false, :limit => 15, :comment => "the code that identifies the program"
+      t.string :pc_product_code, :null => false, :limit => 15, :comment => "the code that identifies the product"
     end
 
-    add_index :pc_programs_pc_products, :product_code, :unique => true, :name => "pc_programs_products_01"
+    add_index :pc_programs_pc_products, :pc_product_code, :unique => true, :name => "pc_programs_products_01"
 
     add_column :pc_products, :card_acct, :string, :limit => 20, :comment =>  "the casa account for recording card transactions"
     add_column :pc_products, :sc_gl_income, :string, :limit => 15, :comment =>  "the gl account for recording fee income"

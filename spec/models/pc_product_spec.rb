@@ -25,7 +25,7 @@ describe PcProduct do
     should validate_length_of(:sc_gl_income).is_at_least(3).is_at_most(15)
 
     should validate_length_of(:rkb_user).is_at_most(30)
-    should validate_length_of(:rkb_password).is_at_most(40)
+    # should validate_length_of(:rkb_password).is_at_most(40)
     should validate_length_of(:rkb_bcagent).is_at_most(50)
     should validate_length_of(:rkb_channel_partner).is_at_most(3)
   end
@@ -72,7 +72,7 @@ describe PcProduct do
   end
 
   context "rkb_user, rkb_password, rkb_bcagent, rkb_channel_partner format" do 
-    [:rkb_user, :rkb_password, :rkb_bcagent, :rkb_channel_partner].each do |att|
+    [:rkb_user, :rkb_bcagent, :rkb_channel_partner].each do |att|
       it "should allow valid format" do
         should allow_value('123').for(att)
         should allow_value('Ab1').for(att)
@@ -147,7 +147,7 @@ describe PcProduct do
       pc_product2 = Factory(:pc_product)
       PcProduct.all.should == [pc_product1]
       pc_product2.approval_status = 'A'
-      pc_product2.save
+      pc_product2.save!
       PcProduct.all.should == [pc_product1,pc_product2]
     end
   end  
@@ -163,17 +163,19 @@ describe PcProduct do
 
   context "encrypt_password" do 
     it "should convert the encrypt the mm_admin_password for unapproved record" do 
-      pc_product = Factory.build(:pc_product, :code => "BANK12", :mm_admin_password => 'password')
+      pc_product = Factory.build(:pc_product, :code => "BANK12", :mm_admin_password => 'password', :rkb_password => 'password')
       pc_product.save.should be_true
       pc_product.reload
       pc_product.mm_admin_password.should_not == "password"
+      pc_product.rkb_password.should_not == "password"
     end
 
     it "should not convert the encrypt the mm_admin_password for approved record" do 
-      pc_product = Factory.build(:pc_product, :code => "BANK12", :mm_admin_password => 'password', :approval_status => 'A')
+      pc_product = Factory.build(:pc_product, :code => "BANK12", :mm_admin_password => 'password', :rkb_password => 'password', :approval_status => 'A')
       pc_product.save.should be_true
       pc_product.reload
       pc_product.mm_admin_password.should == "password"
+      pc_product.rkb_password.should == "password"
     end
   end  
 
