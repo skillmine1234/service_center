@@ -17,12 +17,12 @@
         = error_message_for(@pc_product, :is_enabled, :prepend_text => "")
     .control-group
       = f.label :code, "*Code", :class => 'control-label'
-      = f.text_field :code, :required => true, :maxlength => 15
+      = f.text_field :code, :required => true, :maxlength => 6
       #msg-error
         = error_message_for(@pc_product, :code, :prepend_text => "")
     .control-group
-      = f.label :display_name, "Display Name", :class => 'control-label'
-      = f.text_field :display_name, :maxlength => 15
+      = f.label :display_name, "Product Name", :class => 'control-label'
+      = f.text_field :display_name, :maxlength => 255
       #msg-error
         = error_message_for(@pc_app, :display_name, :prepend_text => "")
     .control-group
@@ -97,7 +97,7 @@
         = error_message_for(@pc_app, :rkb_bcagent, :prepend_text => "")
     .control-group
       = f.label :rkb_channel_partner, "*RKB Channel Partner ID", :class => 'control-label'
-      = f.text_field :rkb_channel_partner, :maxlength => 50
+      = f.text_field :rkb_channel_partner, :maxlength => 3
       #msg-error
         = error_message_for(@pc_app, :rkb_channel_partner, :prepend_text => "")
 

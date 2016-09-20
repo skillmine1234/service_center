@@ -3,9 +3,9 @@
 FactoryGirl.define do
   factory :pc_app do
     program_code {Factory(:pc_program, :approval_status => 'A').code}
-    sequence(:app_id) {|n| "9" + "%03i" % "#{n}" }
+    sequence(:app_id) {|n| "90" + "%03i" % "#{n}" }
     is_enabled "N"
     approval_status "U"
-    identity_user_id "MyString"
+    identity_user_id "1234"
   end
 end

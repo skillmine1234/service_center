@@ -16,6 +16,43 @@ describe PcApp do
       pc_app = Factory(:pc_app, :app_id => 'App10', :approval_status => 'A')
       should validate_uniqueness_of(:app_id).scoped_to(:approval_status)
     end
+
+    it do
+      pc_product = Factory(:pc_app) 
+      should validate_length_of(:app_id).is_at_least(5).is_at_most(20)
+      should validate_length_of(:identity_user_id).is_at_least(1).is_at_most(20)
+    end
+  end
+
+
+  context "app_id format" do 
+    [:app_id].each do |att|
+      it "should allow valid format" do
+        should allow_value('1234567890').for(att)
+        should allow_value('Abcd1234567890').for(att)
+      end
+
+      it "should not allow invalid format" do
+        should_not allow_value('Absdjhsd&&').for(att)
+        should_not allow_value('@AbcCo').for(att)
+        should_not allow_value('/ab0QWER').for(att)
+      end
+    end 
+  end
+
+  context "identity_user_id format" do 
+    [:identity_user_id].each do |att|
+      it "should allow valid format" do
+        should allow_value('1234567890').for(att)
+      end
+
+      it "should not allow invalid format" do
+        should_not allow_value('Abcd1234567890').for(att)
+        should_not allow_value('Absdjhsd&&').for(att)
+        should_not allow_value('@AbcCo').for(att)
+        should_not allow_value('/ab0QWER').for(att)
+      end
+    end 
   end
   
   context "default_scope" do 

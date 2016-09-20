@@ -27,7 +27,7 @@
         = error_message_for(@pc_app, :is_enabled, :prepend_text => "")
     .control-group
       = f.label :identity_user_id, "*Identity User ID", :class => 'control-label'
-      = f.text_field :identity_user_id
+      = f.text_field :identity_user_id, :maxlength => 20
       #msg-error
         = error_message_for(@pc_app, :identity_user_id, :prepend_text => "")
     .control-group

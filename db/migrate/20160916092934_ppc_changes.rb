@@ -30,7 +30,7 @@ class PpcChanges < ActiveRecord::Migration
     add_column :pc_products, :display_name, :string, :comment => 'the product name, displayed to customers'
     add_column :pc_products, :cust_care_no, :string, :limit => 16, :comment => 'the customer care no, displayed to customers'
     add_column :pc_products, :rkb_user, :string, :limit => 30, :comment => 'the user name to authenticate with rkb'
-    add_column :pc_products, :rkb_password, :string, :limit => 40, :comment => 'the password to authenticate with rkb'
+    add_column :pc_products, :rkb_password, :string, :comment => 'the password to authenticate with rkb'
     add_column :pc_products, :rkb_bcagent, :string, :limit => 50, :comment => 'the bcagent issued by rkb, used for authentication'
     add_column :pc_products, :rkb_channel_partner, :string, :limit => 3, :comment => 'the channel partner issued by rkb, used for authentication'
 

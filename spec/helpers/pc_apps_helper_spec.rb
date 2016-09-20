@@ -9,8 +9,8 @@ describe PcAppsHelper do
       find_pc_apps({:program_code => 'PCapp1'}).should == [pc_app]
       find_pc_apps({:program_code => 'pcapp2'}).should == []
 
-      pc_app = Factory(:pc_app, :app_id => '1234', :approval_status => 'A')
-      find_pc_apps({:app_id => '1234'}).should == [pc_app]
+      pc_app = Factory(:pc_app, :app_id => '12345', :approval_status => 'A')
+      find_pc_apps({:app_id => '12345'}).should == [pc_app]
       find_pc_apps({:app_id => '1111'}).should == []
     end
   end
