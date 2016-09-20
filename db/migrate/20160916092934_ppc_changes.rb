@@ -18,21 +18,19 @@ class PpcChanges < ActiveRecord::Migration
 
     add_index :pc_programs, [:code, :approval_status], :unique => true, :name => "pc_programs_02"
 
-    create_table :pc_programs_pc_products, {:id => false, :sequence_start_value => '1 cache 20 order increment by 1'}  do |t|
-      t.string :pc_program_code, :null => false, :limit => 15, :comment => "the code that identifies the program"
-      t.string :pc_product_code, :null => false, :limit => 15, :comment => "the code that identifies the product"
-    end
-
-    add_index :pc_programs_pc_products, :pc_product_code, :unique => true, :name => "pc_programs_products_01"
-
     add_column :pc_products, :card_acct, :string, :limit => 20, :comment =>  "the casa account for recording card transactions"
     add_column :pc_products, :sc_gl_income, :string, :limit => 15, :comment =>  "the gl account for recording fee income"
+    add_column :pc_products, :card_cust_id, :string, :comment =>  'the customer id of the card'
     add_column :pc_products, :display_name, :string, :comment => 'the product name, displayed to customers'
     add_column :pc_products, :cust_care_no, :string, :limit => 16, :comment => 'the customer care no, displayed to customers'
     add_column :pc_products, :rkb_user, :string, :limit => 30, :comment => 'the user name to authenticate with rkb'
     add_column :pc_products, :rkb_password, :string, :comment => 'the password to authenticate with rkb'
     add_column :pc_products, :rkb_bcagent, :string, :limit => 50, :comment => 'the bcagent issued by rkb, used for authentication'
     add_column :pc_products, :rkb_channel_partner, :string, :limit => 3, :comment => 'the channel partner issued by rkb, used for authentication'
+    add_column :pc_products, :program_code, :string, :limit => 15, :comment => 'the code of the pc program'
+
+    add_column :pc_customers, :program_code, :string, :limit => 15, :comment => 'the code of the program'
+    add_column :pc_customers, :product_code, :string, :limit => 15, :comment => 'the code of the product'
 
     PcApp.unscoped.find_each(batch_size: 100) do |app_record|
       if app_record.approval_status == 'U' 
@@ -43,7 +41,7 @@ class PpcChanges < ActiveRecord::Migration
         
       products = PcProduct.unscoped.where("code=?",app.program_code)
       unless products.empty?
-        products.update_all(:card_acct => app.card_acct, :sc_gl_income => app.sc_gl_income,
+        products.update_all(:card_acct => app.card_acct, :sc_gl_income => app.sc_gl_income, :card_cust_id => app.card_cust_id,
                             :cust_care_no => '1234', :rkb_user => 'user', :rkb_password => 'password',
                             :rkb_bcagent => 'agent', :rkb_channel_partner => '123') 
       end
@@ -51,24 +49,41 @@ class PpcChanges < ActiveRecord::Migration
       if pc.nil?
         p = PcProgram.create(:code => app.program_code, :is_enabled => 'Y')
         p.update_attribute(:approval_status,'A')
-        PcProgramsPcProduct.create(:pc_program_code => app.program_code, :pc_product_code => app.program_code)
       end
     end
 
     products = PcProduct.unscoped.where("card_acct is null")
     unless products.empty?
-      products.update_all(:card_acct => '1234', :sc_gl_income => '1234',
+      products.update_all(:card_acct => '1234', :sc_gl_income => '1234', :card_cust_id => '1234',
                           :cust_care_no => '1234', :rkb_user => 'user', :rkb_password => 'password',
                           :rkb_bcagent => 'agent', :rkb_channel_partner => '123') 
     end
 
+    PcProduct.unscoped.find_each(batch_size: 100) do |p|
+      p.update_attribute(:program_code, p.code)
+    end
+
+    PcCustomer.find_each(batch_size: 100) do |cust|
+      cust.program_code = cust.app.program_code
+      cust.product_code = cust.app.pc_program.pc_products.first.code
+      cust.save(:validate => false)
+    end
+
     change_column :pc_products, :card_acct, :string, :limit => 20, :null => false, :comment =>  "the casa account for recording card transactions"
     change_column :pc_products, :sc_gl_income, :string, :limit => 15, :null => false, :comment =>  "the gl account for recording fee income"
+    change_column :pc_products, :card_cust_id, :string, :null => false, :comment =>  'the customer id of the card'
     change_column :pc_products, :cust_care_no, :string, :null => false, :limit => 16, :comment => 'the customer care no, displayed to customers'
     change_column :pc_products, :rkb_user, :string, :limit => 30, :null => false, :comment => 'the user name to authenticate with rkb'
     change_column :pc_products, :rkb_password, :string, :limit => 40, :null => false, :comment => 'the password to authenticate with rkb'
     change_column :pc_products, :rkb_bcagent, :string, :limit => 50, :null => false, :comment => 'the bcagent issued by rkb, used for authentication'
     change_column :pc_products, :rkb_channel_partner, :string, :null => false, :limit => 3, :comment => 'the channel partner issued by rkb, used for authentication'
+    change_column :pc_products, :program_code, :string, :limit => 15, :null => false, :comment => 'the code of the pc program'
+
+    change_column :pc_customers, :program_code, :string, :limit => 15, :null => false, :comment => 'the code of the program'
+    change_column :pc_customers, :product_code, :string, :limit => 15, :null => false, :comment => 'the code of the product'
+
+    remove_index :pc_customers, :name => 'uk_pc_card_custs_1'
+    add_index :pc_customers, [:mobile_no, :program_code], :name => 'pc_customers_01'
 
     remove_column :pc_apps, :card_acct
     remove_column :pc_apps, :sc_gl_income
@@ -90,7 +105,7 @@ class PpcChanges < ActiveRecord::Migration
       apps = PcApp.unscoped.where("program_code=?",p.code)
       unless apps.empty?
         apps.update_all(:card_acct => p.card_acct, :sc_gl_income => p.sc_gl_income,
-                        :card_cust_id => '1234', :traceid_prefix => 1234, :source_id => '1234',
+                        :card_cust_id => p.card_cust_id, :traceid_prefix => 1234, :source_id => '1234',
                         :channel_id => '1234') 
       end
     end
@@ -104,12 +119,19 @@ class PpcChanges < ActiveRecord::Migration
 
     remove_column :pc_products, :card_acct
     remove_column :pc_products, :sc_gl_income
+    remove_column :pc_products, :card_cust_id
     remove_column :pc_products, :display_name
     remove_column :pc_products, :cust_care_no
     remove_column :pc_products, :rkb_user
     remove_column :pc_products, :rkb_password
     remove_column :pc_products, :rkb_bcagent
     remove_column :pc_products, :rkb_channel_partner
+    remove_column :pc_products, :program_code
+    remove_column :pc_customers, :program_code
+    remove_column :pc_customers, :product_code
+
+    remove_index :pc_customers, :name => 'pc_customers_01'
+    add_index :pc_customers, [:mobile_no], :name => 'uk_pc_card_custs_1'
 
     drop_table :pc_programs_pc_products
     drop_table :pc_programs

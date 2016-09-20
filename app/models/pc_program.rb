@@ -4,6 +4,7 @@ class PcProgram < ActiveRecord::Base
   
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
+  has_many :pc_products, :foreign_key => 'program_code', :primary_key => 'code', :class_name => 'PcProduct'
 
   validates_presence_of :code
   validates :code, format: {with: /\A[a-z|A-Z|0-9|\-\_]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\-\_]}' }, length: {maximum: 6}
