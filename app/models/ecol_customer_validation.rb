@@ -98,7 +98,7 @@ module EcolCustomerValidation
   end
 
   def validate_app_code
-    if (self.val_method == "W" and self.app_code.nil?)
+    if (self.val_method == "W" and self.app_code.blank?)
       errors[:app_code] << "Can't be blank if Validation Method is Web Service"
     end
   end
