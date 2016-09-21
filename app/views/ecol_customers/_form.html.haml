@@ -18,11 +18,6 @@
       #msg-error
         = error_message_for(@ecol_customer, :name, :prepend_text => "")
     .control-group
-      = f.label :app_code, "*Application Code", :class => 'control-label'
-      = f.text_field :app_code, :maxlength => 15
-      #msg-error
-        = error_message_for(@ecol_customer, :app_code, :prepend_text => "")
-    .control-group
       = f.label :identity_user_id, "Identity User ID", :class => 'control-label'
       = f.text_field :identity_user_id, :maxlength => 20
       #msg-error
@@ -35,6 +30,11 @@
       = f.select :val_method, options_for_select(EcolCustomer.options_for_val_method, @ecol_customer.val_method),:prompt => 'SELECT'
       #msg-error
         = error_message_for(@ecol_customer, :val_method, :prepend_text => "")
+    .control-group
+      = f.label :app_code, "Application Code", :class => 'control-label'
+      = f.text_field :app_code, :maxlength => 15
+      #msg-error
+        = error_message_for(@ecol_customer, :app_code, :prepend_text => "")
     .control-group
       = f.label :token_1_type, "*Account Token 1", :class => 'control-label'
       = f.select :token_1_type, options_for_select(EcolCustomer.options_for_acct_tokens, @ecol_customer.token_1_type),:prompt => 'SELECT'

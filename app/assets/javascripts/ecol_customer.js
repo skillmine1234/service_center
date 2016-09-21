@@ -27,10 +27,12 @@ $(document).ready(function(){
       $('#ecol_customer_file_upld_mthd').prop('disabled',true);
 			$("#ecol_customer_credit_acct_val_fail").val('');
 			$('#ecol_customer_credit_acct_val_fail').prop('disabled',true);
+      $('#ecol_customer_app_code').prop('disabled',true);
     }
     else if (val_method === 'W'){
       $('#ecol_customer_file_upld_mthd').val('N');
       $("#ecol_customer_file_upld_mthd").prop('disabled',true);
+      $('#ecol_customer_app_code').prop('disabled',false);
       $('#ecol_customer_val_txn_date').prop('disabled',false);
       $('#ecol_customer_val_txn_amt').prop('disabled',false);
       $('#ecol_customer_val_ben_name').prop('disabled',false);
@@ -62,6 +64,7 @@ $(document).ready(function(){
       $('#ecol_customer_val_last_token_length').prop('disabled',false);
       $('#ecol_customer_return_if_val_reject').prop('disabled',false);
       $('#ecol_customer_file_upld_mthd').prop('disabled',false);
+      $('#ecol_customer_app_code').prop('disabled',true);
 			if ($("#ecol_customer_return_if_val_reject").attr('checked')) {
 				$('#ecol_customer_credit_acct_val_fail').prop('disabled',true);
 			}
@@ -103,10 +106,12 @@ $(document).ready(function(){
     $('#ecol_customer_file_upld_mthd').prop('disabled',true);
 		$("#ecol_customer_credit_acct_val_fail").val('');
 		$('#ecol_customer_credit_acct_val_fail').prop('disabled',true);
+    $('#ecol_customer_app_code').prop('disabled',true);
   }
   else if ($('#ecol_customer_val_method').val() === 'W'){
     $('#ecol_customer_file_upld_mthd').val('N');
     $("#ecol_customer_file_upld_mthd").prop('disabled',true);
+    $('#ecol_customer_app_code').prop('disabled',false);
     $('#ecol_customer_val_txn_date').prop('disabled',false);
     $('#ecol_customer_val_txn_amt').prop('disabled',false);
     $('#ecol_customer_val_ben_name').prop('disabled',false);
@@ -127,6 +132,7 @@ $(document).ready(function(){
 		}
   }
   else{
+    $('#ecol_customer_app_code').prop('disabled',true);
     $('#ecol_customer_val_txn_date').prop('disabled',false);
     $('#ecol_customer_val_txn_amt').prop('disabled',false);
     $('#ecol_customer_val_ben_name').prop('disabled',false);
@@ -427,9 +433,5 @@ $(document).ready(function(){
       $("#ecol_customer_debit_acct_val_fail").val('');
       $("#ecol_customer_debit_acct_val_fail").prop("disabled",true);
     }
-  });
-
-  $("#ecol_customer_code").on("change",function(){
-    $("#ecol_customer_app_code").val($(this).val());
   });
 });

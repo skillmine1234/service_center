@@ -15,7 +15,8 @@ module EcolCustomerValidation
     :validate_account_token_length,
     :value_of_validation_fields,
     :presence_of_credit_acct_no_val_fail,
-    :value_of_ntrv_sufx_if_val_method_is_N
+    :value_of_ntrv_sufx_if_val_method_is_N,
+    :validate_app_code
   end
   
   def val_tokens_should_be_N_if_val_method_is_N
@@ -93,6 +94,12 @@ module EcolCustomerValidation
   def value_of_ntrv_sufx_if_val_method_is_N
     if self.val_method == 'N' and ((self.nrtv_sufx_1 == 'RN' or self.nrtv_sufx_1 == 'UDF1' or self.nrtv_sufx_1 == 'UDF2') or (self.nrtv_sufx_2 == 'RN' or self.nrtv_sufx_2 == 'UDF1' or self.nrtv_sufx_2 == 'UDF2') or (self.nrtv_sufx_3 == 'RN' or self.nrtv_sufx_3 == 'UDF1' or self.nrtv_sufx_3 == 'UDF2'))
       errors[:base] << "If Validation Method is None, then Narrative Suffixes cannot be 'Remitter Name', 'User Defined Field 1' or 'User Defined Field 2'"
+    end
+  end
+
+  def validate_app_code
+    if (self.val_method == "W" and self.app_code.nil?)
+      errors[:app_code] << "Can't be blank if Validation Method is Web Service"
     end
   end
 end
