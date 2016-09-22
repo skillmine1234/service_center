@@ -37,6 +37,8 @@ class PpcChanges < ActiveRecord::Migration
     add_column :pc_card_registrations, :program_code, :string, :limit => 15, :comment => 'the code of the program'
     add_column :pc_card_registrations, :product_code, :string, :limit => 15, :comment => 'the code of the product'
 
+    add_column :pc_customer_credentials, :program_code, :string, :limit => 15, :comment => 'the code of the program'
+
     PcApp.unscoped.find_each(batch_size: 100) do |app_record|
       if app_record.approval_status == 'U' 
         app_record.approved_record.nil? ? app = app_record : app = app_record.approved_record
@@ -67,6 +69,12 @@ class PpcChanges < ActiveRecord::Migration
       cust.program_code = cust.app.try(:program_code)
       cust.product_code = cust.app.try(:program_code)
       cust.save(:validate => false)
+      if cust.pc_customer_credential.nil?      
+        PcCustomerCredential.create(:username => cust.email_id, :password => cust.password, :program_code => cust.program_code) unless cust.password.nil?
+      else
+        cred = cust.pc_customer_credential
+        cred.update_attribute(:program_code, cust.program_code)
+      end
     end
 
     PcCustomer.where("program_code is null").delete_all
@@ -90,9 +98,13 @@ class PpcChanges < ActiveRecord::Migration
     change_column :pc_customers, :program_code, :string, :limit => 15, :null => false, :comment => 'the code of the program'
     change_column :pc_customers, :product_code, :string, :limit => 15, :null => false, :comment => 'the code of the product'
 
+    change_column :pc_customer_credentials, :program_code, :string, :limit => 15, :null => false, :comment => 'the code of the program'
+
     remove_index :pc_customers, :name => 'uk_pc_card_custs_1'
     add_index :pc_customers, [:mobile_no, :program_code], :name => 'pc_customers_01', unique: true
     add_index :pc_customers, [:email_id, :program_code], :name => 'pc_customers_02', unique: true
+
+    add_index :pc_customer_credentials, [:username, :program_code], :name => 'pc_credentials_01', unique: true
 
     remove_column :pc_apps, :card_acct
     remove_column :pc_apps, :sc_gl_income
@@ -142,10 +154,13 @@ class PpcChanges < ActiveRecord::Migration
     remove_column :pc_customers, :product_code
     remove_column :pc_card_registrations, :program_code
     remove_column :pc_card_registrations, :product_code
+    remove_column :pc_customer_credentials, :program_code
 
     remove_index :pc_customers, :name => 'pc_customers_01'
     remove_index :pc_customers, :name => 'pc_customers_02'
     add_index :pc_customers, [:mobile_no], :name => 'uk_pc_card_custs_1', :unique => true
+
+    remove_index :pc_customer_credentials, :name => 'pc_credentials_01'
 
     drop_table :pc_programs
     rename_table :pc_products, :pc_programs
