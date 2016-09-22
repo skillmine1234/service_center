@@ -28,6 +28,7 @@ class IncomingFile < ActiveRecord::Base
   belongs_to :su_incoming_file, :foreign_key => "file_name", :primary_key => "file_name"
   belongs_to :ic_incoming_file, :foreign_key => "file_name", :primary_key => "file_name"
   belongs_to :ft_incoming_file, :foreign_key => "file_name", :primary_key => "file_name"
+  belongs_to :pc_mm_cd_incoming_file, :foreign_key => "file_name", :primary_key => "file_name"
   has_many :fm_audit_steps, :as => :auditable
 
   has_one :ecol_unapproved_record, :as => :ecol_approvable
@@ -36,6 +37,7 @@ class IncomingFile < ActiveRecord::Base
   has_one :su_unapproved_record, :as => :su_approvable
   has_one :ic_unapproved_record, :as => :ic_approvable
   has_one :ft_unapproved_record, :as => :ft_approvable
+  has_one :pc_unapproved_record, :as => :pc_approvable
 
   after_create :on_create_create_unapproved_record
   after_destroy :on_destory_remove_unapproved_records
@@ -140,6 +142,7 @@ class IncomingFile < ActiveRecord::Base
       SuUnapprovedRecord.create!(:su_approvable => self) if self.service_name == "SALARY"
       IcUnapprovedRecord.create!(:ic_approvable => self) if self.service_name == "INSTANTCREDIT"
       FtUnapprovedRecord.create!(:ft_approvable => self) if self.service_name == "FUNDSTRANSFER"
+      PcUnapprovedRecord.create!(:pc_approvable => self) if self.service_name == "PPC"
     end
   end
 
@@ -151,6 +154,7 @@ class IncomingFile < ActiveRecord::Base
       su_unapproved_record.delete if self.service_name == "SALARY"
       ic_unapproved_record.delete if self.service_name == "INSTANTCREDIT"
       ft_unapproved_record.delete if self.service_name == "FUNDSTRANSFER"
+      pc_unapproved_record.delete if self.service_name == "PPC"
     end
   end
 
@@ -162,6 +166,7 @@ class IncomingFile < ActiveRecord::Base
       su_unapproved_record.delete if self.service_name == "SALARY"
       ic_unapproved_record.delete if self.service_name == "INSTANTCREDIT"
       ft_unapproved_record.delete if self.service_name == "FUNDSTRANSFER"
+      pc_unapproved_record.delete if self.service_name == "PPC"
     end
   end 
 end

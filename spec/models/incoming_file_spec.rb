@@ -11,6 +11,7 @@ describe IncomingFile do
     it { should belong_to(:su_incoming_file) }
     it { should belong_to(:ic_incoming_file) }
     it { should belong_to(:ft_incoming_file) }
+    it { should belong_to(:pc_mm_cd_incoming_file) }
     it { should have_many(:fm_audit_steps) }
   end
 
