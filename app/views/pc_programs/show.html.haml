@@ -32,6 +32,11 @@
             %td#msg-error
               = error_message_for(@pc_program, :code, :prepend_text => "")
           %tr
+            %td.label Products
+            %td.value
+              = link_to 'Show Products', {:controller => 'pc_products', :action => 'index', :program_code => @pc_program.code}
+            %td#msg-error
+          %tr
             %td.label Created By
             %td.value
               = @pc_program.created_user.try(:username)

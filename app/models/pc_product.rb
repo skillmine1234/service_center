@@ -11,6 +11,7 @@ class PcProduct < ActiveRecord::Base
                         :program_code, :card_cust_id
   
   validates :code, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}' }, length: { minimum: 1,  maximum: 6 }
+  validates :program_code, format: {with: /\A[a-z|A-Z|0-9|\-\_]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\-\_]}' }, length: {maximum: 6}
   validates :mm_host, :mm_admin_host , format: { with: URI.regexp , :message => 'Please enter a valid host, Eg: http://example.com'}
   validates :mm_consumer_key, :mm_consumer_secret, :mm_card_type, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => "Invalid format, expected format is : {[a-z|A-Z|0-9]}" }
   validates :mm_email_domain, format: {with: /\A[a-z|A-Z|\.]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|\.]}' }

@@ -21,6 +21,8 @@
       Code
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Is Enabled?
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Products
 
   .tbody
     - @pc_programs.each do |pc_program|
@@ -33,3 +35,5 @@
           = pc_program.code
         %td{:style=>'text-align:left;'}
           = pc_program.is_enabled
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show Products', {:controller => 'pc_products', :action => 'index', :program_code => pc_program.code}

@@ -11,7 +11,7 @@
         - if !@pc_product.nil?
           %tr
             %td.label Version
-            %td.value
+            %td.value{:style=>'width: 50%; '}
               = link_to "#{audit_count(@pc_product)}", :controller => :pc_products, :action => :audit_logs, :version_id => audit_count(@pc_product), :id => @pc_product.id
           %tr
             %td.label Form Errors
@@ -31,6 +31,12 @@
               = @pc_product.code
             %td#msg-error
               = error_message_for(@pc_product, :code, :prepend_text => "")
+          %tr
+            %td.label Program Code
+            %td.value
+              = link_to @pc_product.program_code, @pc_product.pc_program
+            %td#msg-error
+              = error_message_for(@pc_product, :program_code, :prepend_text => "")
           %tr
             %td.label Product Name
             %td.value

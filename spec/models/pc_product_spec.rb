@@ -16,7 +16,8 @@ describe PcProduct do
   it do
     pc_product = Factory(:pc_product) 
     should validate_length_of(:code).is_at_least(1).is_at_most(6)
-
+    should validate_length_of(:program_code).is_at_most(6)
+    
     should validate_length_of(:mm_card_type).is_at_most(50)
     should validate_length_of(:mm_admin_user).is_at_most(50)
     should validate_length_of(:mm_admin_password).is_at_most(50)
@@ -56,6 +57,24 @@ describe PcProduct do
     end
   end
   
+  context "program code format" do 
+    [:program_code].each do |att|
+      it "should allow valid format" do
+        should allow_value('123456').for(att)
+        should allow_value('Abc123').for(att)
+        should allow_value('Abc-23').for(att)
+        should allow_value('Abc_23').for(att)
+      end
+
+      it "should not allow invalid format" do
+        should_not allow_value('Abcd1234567890').for(att)
+        should_not allow_value('Absdjhsd&&').for(att)
+        should_not allow_value('@AbcCo').for(att)
+        should_not allow_value('/ab0QWER').for(att)
+      end
+    end 
+  end
+
   context "mm_consumer_key, mm_consumer_secret, mm_card_type, card_acct, sc_gl_income format, card_cust_id" do 
     [:mm_consumer_key, :mm_consumer_secret, :mm_card_type, :card_acct, :sc_gl_income].each do |att|
       it "should allow valid format" do

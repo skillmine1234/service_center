@@ -29,6 +29,8 @@ describe PcProgram do
       it "should allow valid format" do
         should allow_value('123456').for(att)
         should allow_value('Abc123').for(att)
+        should allow_value('Abc-23').for(att)
+        should allow_value('Abc_23').for(att)
       end
 
       it "should not allow invalid format" do

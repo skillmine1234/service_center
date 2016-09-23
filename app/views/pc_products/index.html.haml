@@ -20,6 +20,8 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Code
     %th{:style=>'text-align:left; background-color: lightblue;'}
+      Program Code
+    %th{:style=>'text-align:left; background-color: lightblue;'}
       MM Host
     %th{:style=>'text-align:left; background-color: lightblue;'}
       MM Card Type
@@ -41,6 +43,8 @@
           = link_to 'Edit', edit_pc_product_path(pc_product)
         %td{:style=>'text-align:left;'}
           = pc_product.code
+        %td{:style=>'text-align:left;'}
+          = pc_product.program_code
         %td{:style=>'text-align:left;'}
           = pc_product.mm_host
         %td{:style=>'text-align:left;'}

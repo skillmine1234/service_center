@@ -59,6 +59,7 @@ class PcProductsController < ApplicationController
       pc_products = find_pc_products(params).order("id desc")
     else
       pc_products = (params[:approval_status].present? and params[:approval_status] == 'U') ? PcProduct.unscoped.where("approval_status =?",'U').order("id desc") : PcProduct.order("id desc")
+      pc_products = pc_products.where("program_code=?",params[:program_code]) if params[:program_code].present?
     end
     @pc_products_count = pc_products.count
     @pc_products = pc_products.paginate(:per_page => 10, :page => params[:page]) rescue []
