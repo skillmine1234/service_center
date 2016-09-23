@@ -87,7 +87,8 @@ class PpcChanges < ActiveRecord::Migration
 
     PcCustomerCredential.find_each(batch_size: 100) do |cred|
       if cred.program_code.nil?
-        cred.pc_card_registration.nil? ? cred.update_attribute(:program_code,'0') : cred.update_attribute(:program_code,cred.pc_card_registration.program_code)
+        cred.update_attribute(:program_code, cred.pc_customer.program_code) unless cred.pc_customer.nil?
+        cred.pc_card_registration.nil? ? cred.update_attribute(:program_code,'0') : cred.update_attribute(:program_code,cred.pc_card_registration.app.try(:program_code))
       end
     end
 
