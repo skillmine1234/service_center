@@ -77,12 +77,18 @@ class PpcChanges < ActiveRecord::Migration
       end
     end
 
-    PcCustomer.where("program_code is null").delete_all
+    PcCustomer.where("program_code is null").update_all(:program_code => "0")
 
     PcCardRegistration.find_each(batch_size: 100) do |card|
       card.program_code = card.app.try(:program_code)
       card.product_code = card.app.try(:program_code)
       card.save(:validate => false)
+    end
+
+    PcCustomerCredential.find_each(batch_size: 100) do |cred|
+      if cred.program_code.nil?
+        cred.pc_card_registration.nil? ? cred.update_attribute(:program_code,'0') : cred.update_attribute(:program_code,cred.pc_card_registration.program_code) 
+      end
     end
 
     change_column :pc_products, :card_acct, :string, :limit => 20, :null => false, :comment =>  "the casa account for recording card transactions"
@@ -140,6 +146,12 @@ class PpcChanges < ActiveRecord::Migration
 
     rename_column :pc_fee_rules, :product_code, :program_code
 
+    remove_index :pc_customers, :name => 'pc_customers_01'
+    remove_index :pc_customers, :name => 'pc_customers_02'
+    add_index :pc_customers, [:mobile_no], :name => 'uk_pc_card_custs_1', :unique => true
+
+    remove_index :pc_customer_credentials, :name => 'pc_credentials_01'
+
     remove_column :pc_products, :card_acct
     remove_column :pc_products, :sc_gl_income
     remove_column :pc_products, :card_cust_id
@@ -155,12 +167,6 @@ class PpcChanges < ActiveRecord::Migration
     remove_column :pc_card_registrations, :program_code
     remove_column :pc_card_registrations, :product_code
     remove_column :pc_customer_credentials, :program_code
-
-    remove_index :pc_customers, :name => 'pc_customers_01'
-    remove_index :pc_customers, :name => 'pc_customers_02'
-    add_index :pc_customers, [:mobile_no], :name => 'uk_pc_card_custs_1', :unique => true
-
-    remove_index :pc_customer_credentials, :name => 'pc_credentials_01'
 
     drop_table :pc_programs
     rename_table :pc_products, :pc_programs
