@@ -19,11 +19,29 @@ describe PcApp do
 
     it do
       pc_product = Factory(:pc_app) 
+      should validate_length_of(:program_code).is_at_most(6)
       should validate_length_of(:app_id).is_at_least(5).is_at_most(20)
       should validate_length_of(:identity_user_id).is_at_least(1).is_at_most(20)
     end
   end
 
+  context "program code format" do 
+    [:program_code].each do |att|
+      it "should allow valid format" do
+        should allow_value('123456').for(att)
+        should allow_value('Abc123').for(att)
+        should allow_value('Abc-23').for(att)
+        should allow_value('Abc_23').for(att)
+      end
+
+      it "should not allow invalid format" do
+        should_not allow_value('Abcd1234567890').for(att)
+        should_not allow_value('Absdjhsd&&').for(att)
+        should_not allow_value('@AbcCo').for(att)
+        should_not allow_value('/ab0QWER').for(att)
+      end
+    end 
+  end
 
   context "app_id format" do 
     [:app_id].each do |att|

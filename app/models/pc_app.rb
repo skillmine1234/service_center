@@ -10,4 +10,5 @@ class PcApp < ActiveRecord::Base
   validates_uniqueness_of :app_id, :scope => :approval_status
   validates :app_id, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => "Invalid format, expected format is : {[a-z|A-Z|0-9]}" }, length: { minimum: 5,  maximum: 20 }
   validates :identity_user_id, format: {with: /\A[0-9]+\z/, :message => "Invalid format, expected format is : {[0-9]}" }, length: { minimum: 1,  maximum: 20 }
+  validates :program_code, format: {with: /\A[a-z|A-Z|0-9|\-\_]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\-\_]}' }, length: {maximum: 6}
 end
