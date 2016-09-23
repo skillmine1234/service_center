@@ -86,7 +86,7 @@
       #msg-error
         = error_message_for(@pc_product, :sc_gl_income, :prepend_text => "")
     .control-group
-      = f.label :cust_care_no, "Product Call Centre Number", :class => 'control-label'
+      = f.label :cust_care_no, "*Product Call Centre Number", :class => 'control-label'
       = f.text_field :cust_care_no, :maxlength => 16
       #msg-error
         = error_message_for(@pc_product, :cust_care_no, :prepend_text => "")
@@ -113,5 +113,5 @@
 
   .form-actions
     - (f.object.new_record? and f.object.code.nil?) ? label_name = "Create" : label_name = "Update"
-    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_pc_product', :value => label_name + ' PC Program'
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_pc_product', :value => label_name + ' Product'
     = link_to :Cancel,'/pc_products', :name => 'cancel', :class=>"cancel btn"
