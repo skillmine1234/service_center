@@ -46,7 +46,7 @@ class PpcChanges < ActiveRecord::Migration
         app = app_record
       end
         
-      products = PcProduct.unscoped.where("program_code=?",app.program_code)
+      products = PcProduct.unscoped.where("code=?",app.program_code)
       unless products.empty?
         products.update_all(:card_acct => app.card_acct, :sc_gl_income => app.sc_gl_income, :card_cust_id => app.card_cust_id,
                             :cust_care_no => '1234', :rkb_user => 'user', :rkb_password => EncPassGenerator.new('password', ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']).generate_encrypted_password,
