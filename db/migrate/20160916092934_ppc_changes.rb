@@ -89,6 +89,7 @@ class PpcChanges < ActiveRecord::Migration
       if cred.program_code.nil?
         cred.update_attribute(:program_code, cred.pc_customer.program_code) unless cred.pc_customer.nil?
         cred.pc_card_registration.nil? ? cred.update_attribute(:program_code,'0') : cred.update_attribute(:program_code,cred.pc_card_registration.app.try(:program_code))
+        cred.update_attribute(:program_code,'0') if cred.program_code.nil?
       end
     end
 
