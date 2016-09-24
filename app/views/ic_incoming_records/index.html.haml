@@ -41,6 +41,8 @@
         %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
           Fault Text
         %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+          Fault Bitstream
+        %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
           Audit Steps
     .tbody
       - @records.each do |record|
@@ -75,6 +77,8 @@
               - link_text = record.incoming_file_record.fault_code
             = link_to link_text, "#", :class => 'active-link', :href => "#faultText", data: { fault_reason: record.incoming_file_record.fault_reason, fault_code: record.incoming_file_record.fault_code, fault_subcode: record.incoming_file_record.fault_subcode}
           %td{:style=>'text-align:left;'}
+            = link_to "Show Fault Bitstream", "#", :class => 'show_fault_bitstream', :href => "#faultBitstream", data: { fault_bitstream: record.incoming_file_record.fault_bitstream}
+          %td{:style=>'text-align:left;'}
             = link_to 'Show', {:controller => 'incoming_file_records', :action => 'audit_steps', :id => record.incoming_file_record_id, :step_name => 'ALL'}
   .form-actions{:style=>"text-align: center;"}
     = hidden_field_tag :file, params[:file_name]
@@ -104,3 +108,14 @@
         %td.label Fault Subcode:
         %td
           %label.fault_subcode{:style => 'word-wrap: break-word'}
+#faultBitstream.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Fault Bitstream
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    .demo-area
+      %button#d_clip_button2.my_clip_button2{"data-clipboard-target" => "fault_bitstream"}
+        %b Copy To Clipboard...
+    %pre#fault_bitstream{:style => 'word-wrap: break-word'}
+      .reply{:style => 'word-wrap: break-word'}
