@@ -43,6 +43,10 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.auto_upload = 'Y'
   s.validate_all = 'N'
   s.build_response_file = 'N'
+  s.can_override = 'N'
+  s.can_skip = 'Y'
+  s.can_retry = 'N'
+  s.build_nack_file = 'N'
 end
 
 IncomingFileType.seed(:sc_service_id, :code) do |s|
@@ -55,6 +59,10 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.auto_upload = 'Y'
   s.validate_all = 'N'
   s.build_response_file = 'N'
+  s.can_override = 'N'
+  s.can_skip = 'Y'
+  s.can_retry = 'N'
+  s.build_nack_file = 'N'
 end
 
 IncomingFileType.seed(:sc_service_id, :code) do |s|
@@ -67,6 +75,10 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.auto_upload = 'N'
   s.validate_all = 'N'
   s.build_response_file = 'N'
+  s.can_override = 'N'
+  s.can_skip = 'Y'
+  s.can_retry = 'N'
+  s.build_nack_file = 'N'
 end
 
 IncomingFileType.seed(:sc_service_id, :code) do |s|
@@ -79,6 +91,10 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.auto_upload = 'Y'
   s.validate_all = 'N'
   s.build_response_file = 'Y'
+  s.can_override = 'N'
+  s.can_skip = 'Y'
+  s.can_retry = 'N'
+  s.build_nack_file = 'N'
 end
 
 IncomingFileType.seed(:sc_service_id, :code) do |s|
@@ -91,6 +107,10 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.auto_upload = 'Y'
   s.validate_all = 'N'
   s.build_response_file = 'Y'  
+  s.can_override = 'N'
+  s.can_skip = 'Y'
+  s.can_retry = 'N'
+  s.build_nack_file = 'N'
 end
 
 IncomingFileType.seed(:sc_service_id, :code) do |s|
@@ -103,6 +123,10 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.auto_upload = 'Y'
   s.validate_all = 'N'
   s.build_response_file = 'Y'  
+  s.can_override = 'N'
+  s.can_skip = 'Y'
+  s.can_retry = 'N'
+  s.build_nack_file = 'N'
 end
 
 IncomingFileType.seed(:sc_service_id, :code) do |s|
@@ -115,6 +139,10 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.auto_upload = 'Y'
   s.validate_all = 'N'
   s.build_response_file = 'Y'  
+  s.can_override = 'N'
+  s.can_skip = 'Y'
+  s.can_retry = 'N'
+  s.build_nack_file = 'N'
 end
 
 IncomingFileType.seed(:sc_service_id, :code) do |s|
@@ -127,6 +155,10 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.auto_upload = 'Y'
   s.validate_all = 'N'
   s.build_response_file = 'N' 
+  s.can_override = 'N'
+  s.can_skip = 'Y'
+  s.can_retry = 'N'
+  s.build_nack_file = 'N'
 end
 
 IncomingFileType.seed(:sc_service_id, :code) do |s|
@@ -141,6 +173,10 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.build_response_file = 'Y' 
   s.db_unit_name = "pk_qg_su_file_manager"
   s.records_table = 'su_incoming_records'
+  s.can_override = 'Y'
+  s.can_skip = 'Y'
+  s.can_retry = 'Y'
+  s.build_nack_file = 'N'
 end
 
 IncomingFileType.seed(:sc_service_id, :code) do |s|
@@ -155,6 +191,10 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.build_response_file = 'Y' 
   s.db_unit_name = "pk_qg_ic_file_manager"
   s.records_table = 'ic_incoming_records'
+  s.can_override = 'N'
+  s.can_skip = 'Y'
+  s.can_retry = 'Y'
+  s.build_nack_file = 'N'
 end
   
 IncomingFileType.seed(:sc_service_id, :code) do |s|
@@ -169,7 +209,10 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.build_response_file = 'Y' 
   s.db_unit_name = "pk_qg_ft_file_manager"
   s.records_table = 'ft_incoming_records'  
-
+  s.can_override = 'N'
+  s.can_skip = 'Y'
+  s.can_retry = 'Y'
+  s.build_nack_file = 'N'
 end
 
 IncomingFileType.seed(:sc_service_id, :code) do |s|
@@ -179,10 +222,13 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.msg_domain = 'DFDL'
   s.msg_model = '{http://www.quantiguous.com/services/file}:mmCrDr'
   s.skip_first = 'Y'
-  s.auto_upload = 'Y'
+  s.auto_upload = 'N'
   s.validate_all = 'Y'
   s.build_response_file = 'Y' 
   s.db_unit_name = "pk_qg_pc_mm_cd_file_manager"
   s.records_table = 'pc_mm_cd_incoming_records'  
-
+  s.can_override = 'N'
+  s.can_skip = 'Y'
+  s.can_retry = 'N'
+  s.build_nack_file = 'N'
 end
