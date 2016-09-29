@@ -33,6 +33,11 @@ ScService.seed(:code) do |s|
   s.name = 'Prepaid Cards'
 end
 
+ScService.seed(:code) do |s|
+  s.code = 'CNB'
+  s.name = 'CNB'
+end
+
 IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.sc_service_id = ScService.find_by(code: 'AML').id
   s.code = 'SDN'
@@ -243,4 +248,22 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.can_retry = 'N'
   s.build_nack_file = 'N'
   s.skip_last = 'N'
+end
+
+IncomingFileType.seed(:sc_service_id, :code) do |s|
+  s.sc_service_id = ScService.find_by(code: 'CNB').id
+  s.code = 'CNB'
+  s.name = 'CNB'
+  s.msg_domain = 'DFDL'
+  s.msg_model = '{http://www.quantiguous.com/services/file}:ePAY'
+  s.skip_first = 'Y'
+  s.auto_upload = 'Y'
+  s.validate_all = 'Y'
+  s.build_response_file = 'N'
+  s.db_unit_name = "pk_qg_cn_file_manager"
+  s.records_table = 'cn_incoming_records'
+  s.can_override = 'N'
+  s.can_skip = 'Y'
+  s.can_retry = 'N'
+  s.build_nack_file = 'Y'
 end
