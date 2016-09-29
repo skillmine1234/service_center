@@ -11,7 +11,7 @@ class CreateCnIncomingRecords < ActiveRecord::Migration
       t.string  :rmtr_address3, :comment => "the address line 3 of the remitter"
       t.string  :rmtr_address4, :comment => "the address line 4 of the remitter"
       t.string  :bene_ifsc_code, :limit => 50, :comment => "the IFSC code of the beneficiary"
-      t.string  :bene_account_no, :limit => 20, :comment => "the account number of the beneficiary where money is to be credited"
+      t.string  :bene_account_no, :limit => 34, :comment => "the account number of the beneficiary where money is to be credited"
       t.string  :bene_name, :comment => "the name as it appears in the beneficiary bank books"
       t.string  :bene_add_line1, :comment => "the address line 1 of the beneficiary"
       t.string  :bene_add_line2, :comment => "the address line 2 of the beneficiary"
