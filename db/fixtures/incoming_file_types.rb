@@ -33,6 +33,11 @@ ScService.seed(:code) do |s|
   s.name = 'Prepaid Cards'
 end
 
+ScService.seed(:code) do |s|
+  s.code = 'CNB'
+  s.name = 'CNB'
+end
+
 IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.sc_service_id = ScService.find_by(code: 'AML').id
   s.code = 'SDN'
