@@ -29,6 +29,7 @@ class IncomingFile < ActiveRecord::Base
   belongs_to :ic_incoming_file, :foreign_key => "file_name", :primary_key => "file_name"
   belongs_to :ft_incoming_file, :foreign_key => "file_name", :primary_key => "file_name"
   belongs_to :pc_mm_cd_incoming_file, :foreign_key => "file_name", :primary_key => "file_name"
+  belongs_to :cn_incoming_file, :foreign_key => "file_name", :primary_key => "file_name"
   has_many :fm_audit_steps, :as => :auditable
 
   has_one :ecol_unapproved_record, :as => :ecol_approvable
@@ -38,6 +39,7 @@ class IncomingFile < ActiveRecord::Base
   has_one :ic_unapproved_record, :as => :ic_approvable
   has_one :ft_unapproved_record, :as => :ft_approvable
   has_one :pc_unapproved_record, :as => :pc_approvable
+  has_one :cn_unapproved_record, :as => :cn_approvable
 
   after_create :on_create_create_unapproved_record
   after_destroy :on_destory_remove_unapproved_records
@@ -143,6 +145,7 @@ class IncomingFile < ActiveRecord::Base
       IcUnapprovedRecord.create!(:ic_approvable => self) if self.service_name == "INSTANTCREDIT"
       FtUnapprovedRecord.create!(:ft_approvable => self) if self.service_name == "FUNDSTRANSFER"
       PcUnapprovedRecord.create!(:pc_approvable => self) if self.service_name == "PPC"
+      CnUnapprovedRecord.create!(:cn_approvable => self) if self.service_name == "CNB"
     end
   end
 
@@ -155,6 +158,7 @@ class IncomingFile < ActiveRecord::Base
       ic_unapproved_record.delete if self.service_name == "INSTANTCREDIT"
       ft_unapproved_record.delete if self.service_name == "FUNDSTRANSFER"
       pc_unapproved_record.delete if self.service_name == "PPC"
+      cn_unapproved_record.delete if self.service_name == "CNB"
     end
   end
 
@@ -167,6 +171,7 @@ class IncomingFile < ActiveRecord::Base
       ic_unapproved_record.delete if self.service_name == "INSTANTCREDIT"
       ft_unapproved_record.delete if self.service_name == "FUNDSTRANSFER"
       pc_unapproved_record.delete if self.service_name == "PPC"
+      cn_unapproved_record.delete if self.service_name == "CNB"
     end
   end 
 end

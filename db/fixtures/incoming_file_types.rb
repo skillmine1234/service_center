@@ -35,7 +35,7 @@ end
 
 ScService.seed(:code) do |s|
   s.code = 'CNB'
-  s.name = 'CNB'
+  s.name = 'Corporate Net Banking'
 end
 
 IncomingFileType.seed(:sc_service_id, :code) do |s|
@@ -257,7 +257,7 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.msg_domain = 'DFDL'
   s.msg_model = '{http://www.quantiguous.com/services/file}:ePAY'
   s.skip_first = 'Y'
-  s.auto_upload = 'Y'
+  s.auto_upload = 'N'
   s.validate_all = 'Y'
   s.build_response_file = 'N'
   s.db_unit_name = "pk_qg_cn_file_manager"

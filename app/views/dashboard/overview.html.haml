@@ -377,3 +377,16 @@
         = image_tag 'sm_bank_accounts.jpg', :size => "90x90"
       %br
         = "Sub Member Bank Accounts"
+- if @current_user.group_names.include?("cnb")
+  %h1 Corporate Net Banking
+  .slide-container
+    .box  
+      = link_to incoming_files_path(:sc_service => "CNB") do
+        = image_tag 'upload.png', :size => "80x80"
+      %br
+        = "File Uploads"
+    .box  
+      = link_to '/cn_unapproved_records' do
+        = image_tag 'work-list.jpg', :size => "80x80"
+      %br
+        = "Approval Worklist"

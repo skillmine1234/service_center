@@ -9,5 +9,6 @@ Group.seed(:name,
   { name: "salary-upload"},
   { name: "instant-credit"},
   { name: "prepaid-card2"},
-  { name: "smb"}
+  { name: "smb"},
+  { name: "cnb"}
 )

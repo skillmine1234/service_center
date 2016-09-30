@@ -14,6 +14,9 @@ describe Group do
 
       group = Factory(:group,:name => 'smb')
       group.model_list.should == ['SmUnapprovedRecord','SmBank','SmBankAccount']
+
+      group = Factory(:group,:name => 'cnb')
+      group.model_list.should == ['CnUnapprovedRecord','IncomingFile','IncomingFileRecord','CnIncomingFile','CnIncomingRecord']
     end
   end
 end

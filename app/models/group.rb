@@ -25,6 +25,8 @@ class Group < ActiveRecord::Base
       ['IncomingFile','IcIncomingRecord','IncomingFileRecord','IcCustomer','IcSupplier','IcUnapprovedRecord','IcInvoice','FmAuditStep','IcIncomingFile']
     when "smb"
       ['SmUnapprovedRecord','SmBank','SmBankAccount']
+    when "cnb"
+      ['CnUnapprovedRecord','IncomingFile','IncomingFileRecord','CnIncomingFile','CnIncomingRecord']
     else
       []
     end
