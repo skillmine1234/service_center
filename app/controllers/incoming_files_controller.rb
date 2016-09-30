@@ -106,7 +106,7 @@ class IncomingFilesController < ApplicationController
     data = open("#{cmd}#{params[:file_path]}/#{params[:file_name]}").read rescue ""
     if data.to_s.empty?
       flash[:alert] = "File not found!"
-      redirect_to @incoming_file
+      redirect_to :back
     elsif params[:view].present?
       render plain: data
     elsif params[:download].present?
