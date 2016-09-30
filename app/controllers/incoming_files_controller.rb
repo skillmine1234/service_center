@@ -55,11 +55,11 @@ class IncomingFilesController < ApplicationController
           format.html
           format.json { render json: @result }
         end
-      # else
-      #   send_file @incoming_file.is_approved?[:file_path], :disposition => 'inline'
+      else
+        @result = {filename: @incoming_file.file_name, content: "The File content is not available for csv files."}
       end
     else
-      @result = {filename: @incoming_file.file_name, content: "File not found."}
+      @result = {filename: @incoming_file.file_name, content: "The File content is not available after the File is picked for processing."}
       respond_to do |format|
         format.html
         format.json { render json: @result }
