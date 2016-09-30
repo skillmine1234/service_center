@@ -81,7 +81,7 @@ class IncomingFilesController < ApplicationController
     else
       flash[:alert] = "delete is disabled since the file has already been proccessed"
     end
-    redirect_to incoming_files_path(:approval_status => 'U')
+    redirect_to incoming_files_path(:approval_status => 'U', :sc_service => @incoming_file.service_name)
   end
 
   def approve

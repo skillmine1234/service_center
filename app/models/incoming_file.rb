@@ -80,7 +80,7 @@ class IncomingFile < ActiveRecord::Base
 
   def update_fields
     self.size_in_bytes = self.file.file.try(:size).to_s
-    self.line_count =  %x{wc -l "#{self.file.path}"}.split.first.to_i
+    self.line_count =  File.readlines(self.file.path).size
     self.file_name = self.file.filename if file_name.nil?
     self.failed_record_count = 0
     self.record_count = 0
