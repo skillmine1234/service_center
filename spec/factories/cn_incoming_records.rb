@@ -2,9 +2,8 @@
 
 FactoryGirl.define do
   factory :cn_incoming_record do
-    incoming_file_record_id 1
-    # incoming_file_record_id {Factory(:incoming_file_record, :incoming_file => Factory(:incoming_file,:file_type => 'CNB',:service_name => 'CNB')).id}
-    file_name '1_EcolTransaction.csv'
+    incoming_file_record_id {Factory(:incoming_file_record, :incoming_file => Factory(:incoming_file,:file_type => 'CNB',:service_name => 'CNB')).id}
+    file_name 'file'
     message_type 'Payment'
     transaction_ref_no 12345
     debit_account_no "123456789"
