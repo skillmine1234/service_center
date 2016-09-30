@@ -101,7 +101,7 @@ class IncomingFile < ActiveRecord::Base
   
   def status_text(status_code)
     list = {'N': 'Not Started', 'I': 'In Progress', 'C': 'Completed', 'F': 'Failed'}
-    return list[status.to_sym]
+    status_code.nil? ? nil : list[status_code.to_sym]
   end
 
   def upload_time
