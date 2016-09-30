@@ -46,7 +46,7 @@ class IncomingFilesController < ApplicationController
   def view_raw_content
     @incoming_file = IncomingFile.unscoped.find_by_id(params[:id])
     file_extension = @incoming_file.file.file.extension
-    file_path = @incoming_file.file_path + '/' + @incoming_file.file_path
+    file_path = @incoming_file.file_path + '/' + @incoming_file.file_name
     if File.file?(file_path)
       if file_extension == IncomingFile::ExtensionList[0]
         @raw_file_content = %x(cat -nb #{file_path})
