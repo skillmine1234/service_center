@@ -1,14 +1,14 @@
 class CreateRcTransfers < ActiveRecord::Migration
   def change
     create_table :rc_transfers, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
-      t.string :rc_transfer_code, :limit => 50, :comment => 'the unique code for the beneficiary'  
-      t.integer :batch_no, :comment => 'the unique code for the beneficiary'  
-      t.string :status_code, :limit => 50, :comment => 'the unique code for the beneficiary'  
-      t.datetime :started_at, :comment => 'the unique code for the beneficiary'  
-      t.string :debit_account_no, :limit => 20, :comment => 'the account no of the provider, from where amount needs to be transferred'      
-      t.string :bene_account_no, :limit => 20, :comment => 'the account no of the beneficiary, where amount needs to be transferred from provider account'      
-      t.number :transfer_amount, :comment => 'the transfer amount'  
-      t.string :transfer_req_ref, :limit => 50, :comment => 'the unique request reference number which we pass to flexcube for CREDIT step'  
+      t.string :rc_transfer_code, :null => false, :limit => 50, :comment => 'the unique code for the beneficiary'  
+      t.integer :batch_no, :null => false, :comment => 'the unique code for the beneficiary'  
+      t.string :status_code, :null => false, :limit => 50, :comment => 'the unique code for the beneficiary'  
+      t.datetime :started_at, :null => false, :comment => 'the unique code for the beneficiary'  
+      t.string :debit_account_no, :null => false, :limit => 20, :comment => 'the account no of the provider, from where amount needs to be transferred'      
+      t.string :bene_account_no, :null => false, :limit => 20, :comment => 'the account no of the beneficiary, where amount needs to be transferred from provider account'      
+      t.number :transfer_amount, :null => false, :comment => 'the transfer amount'  
+      t.string :transfer_req_ref, :null => false, :limit => 50, :comment => 'the unique request reference number which we pass to flexcube for CREDIT step'  
       t.string :transfer_rep_ref, :limit => 50, :comment => 'the unique reply reference number which flexcube returns'  
       t.datetime :transferred_at, :comment => 'the timestamp when the credit was happened'  
       t.string :notify_status, :limit => 50, :comment => 'the status of notification'  
