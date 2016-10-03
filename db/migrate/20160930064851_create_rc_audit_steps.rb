@@ -17,7 +17,7 @@ class CreateRcAuditSteps < ActiveRecord::Migration
       t.text :req_bitstream, :comment => 'the full request payload as received from the client'
       t.text :rep_bitstream, :comment => 'the full reply payload as sent to the client'
       t.text :fault_bitstream, :comment => 'the complete exception list/stack trace of an exception that occured in the ESB'  
-      t.index([:rc_auditable_type, :rc_auditable_id, :step_no, :attempt_no], :unique => true, :name => "uk_rc_audit_steps")      
+      t.index([:rc_auditable_type, :rc_auditable_id, :step_no, :attempt_no], :unique => true, :name => "rc_audit_steps_01")      
     end
   end
 end

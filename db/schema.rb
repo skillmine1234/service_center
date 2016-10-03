@@ -2842,7 +2842,7 @@ ActiveRecord::Schema.define(version: 20161002101352) do
     t.text     "fault_bitstream"
   end
 
-  add_index "rc_audit_steps", ["rc_auditable_type", "rc_auditable_id", "step_no", "attempt_no"], name: "uk_rc_audit_steps", unique: true
+  add_index "rc_audit_steps", ["rc_auditable_type", "rc_auditable_id", "step_no", "attempt_no"], name: "rc_audit_steps_01", unique: true
 
   create_table "rc_pending_notifications", force: :cascade do |t|
     t.string   "broker_uuid",                   null: false
@@ -2866,20 +2866,28 @@ ActiveRecord::Schema.define(version: 20161002101352) do
     t.datetime "last_run_at"
     t.string   "app_code",         limit: 50
     t.string   "is_enabled",       limit: 1
-    t.integer  "last_batch_no",               precision: 38
+    t.integer  "last_batch_no",                precision: 38
+    t.datetime "created_at",                                                null: false
+    t.datetime "updated_at",                                                null: false
+    t.integer  "lock_version",                 precision: 38, default: 0,   null: false
+    t.string   "approval_status",  limit: 1,                  default: "U", null: false
+    t.string   "last_action",      limit: 1,                  default: "C", null: false
+    t.integer  "approved_version",             precision: 38
+    t.integer  "approved_id",      limit: nil
   end
 
-  add_index "rc_transfer_schedule", ["code"], name: "rc_transfer_schedules_01"
+  add_index "rc_transfer_schedule", ["code", "approval_status"], name: "rc_transfer_schedules_01", unique: true
 
   create_table "rc_transfers", force: :cascade do |t|
-    t.string   "rc_transfer_code",  limit: 50
-    t.integer  "batch_no",                       precision: 38
-    t.string   "status_code",       limit: 50
-    t.datetime "started_at"
-    t.string   "debit_account_no",  limit: 20
-    t.string   "bene_account_no",   limit: 20
-    t.decimal  "transfer_amount"
-    t.string   "transfer_req_ref",  limit: 50
+    t.string   "rc_transfer_code",  limit: 50,                  null: false
+    t.string   "app_code",          limit: 50
+    t.integer  "batch_no",                       precision: 38, null: false
+    t.string   "status_code",       limit: 50,                  null: false
+    t.datetime "started_at",                                    null: false
+    t.string   "debit_account_no",  limit: 20,                  null: false
+    t.string   "bene_account_no",   limit: 20,                  null: false
+    t.decimal  "transfer_amount",                               null: false
+    t.string   "transfer_req_ref",  limit: 50,                  null: false
     t.string   "transfer_rep_ref",  limit: 50
     t.datetime "transferred_at"
     t.string   "notify_status",     limit: 50
@@ -2887,12 +2895,12 @@ ActiveRecord::Schema.define(version: 20161002101352) do
     t.datetime "notify_attempt_at"
     t.datetime "notified_at"
     t.string   "notify_result",     limit: 50
-    t.string   "fault_code"
+    t.string   "fault_code",        limit: 50
     t.string   "fault_subcode",     limit: 50
     t.string   "fault_reason",      limit: 1000
   end
 
-  add_index "rc_transfers", ["rc_transfer_code"], name: "rc_transfers_01"
+  add_index "rc_transfers", ["batch_no"], name: "rc_transfers_01"
 
   create_table "reconciled_returns", force: :cascade do |t|
     t.string   "txn_type",        limit: 10
