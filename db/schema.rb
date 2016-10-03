@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160930064851) do
+ActiveRecord::Schema.define(version: 20161002101352) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",               null: false
@@ -610,6 +610,55 @@ ActiveRecord::Schema.define(version: 20160930064851) do
   end
 
   add_index "bms_mod_beneficiaries", ["req_no", "app_id", "attempt_no"], name: "uk_bms_mod_beneficiaries_1", unique: true
+
+  create_table "cn_incoming_files", force: :cascade do |t|
+    t.string "file_name",       limit: 50
+    t.string "batch_no",        limit: 20
+    t.string "rej_file_name",   limit: 50
+    t.string "rej_file_path"
+    t.string "rej_file_status"
+    t.string "cnb_file_name",   limit: 50
+    t.string "cnb_file_path"
+    t.string "cnb_file_status", limit: 50
+  end
+
+  add_index "cn_incoming_files", ["file_name"], name: "cn_incoming_files_01", unique: true
+
+  create_table "cn_incoming_records", force: :cascade do |t|
+    t.integer "incoming_file_record_id", limit: nil
+    t.string  "file_name",               limit: 50
+    t.string  "message_type",            limit: 3
+    t.string  "debit_account_no",        limit: 20
+    t.string  "rmtr_name",               limit: 50
+    t.string  "rmtr_address1"
+    t.string  "rmtr_address2"
+    t.string  "rmtr_address3"
+    t.string  "rmtr_address4"
+    t.string  "bene_ifsc_code",          limit: 50
+    t.string  "bene_account_no",         limit: 34
+    t.string  "bene_name"
+    t.string  "bene_add_line1"
+    t.string  "bene_add_line2"
+    t.string  "bene_add_line3"
+    t.string  "bene_add_line4"
+    t.string  "transaction_ref_no",      limit: 50
+    t.date    "upload_date"
+    t.decimal "amount"
+    t.string  "rmtr_to_bene_note"
+    t.string  "add_info1",               limit: 50
+    t.string  "add_info2",               limit: 50
+    t.string  "add_info3",               limit: 50
+    t.string  "add_info4",               limit: 50
+  end
+
+  add_index "cn_incoming_records", ["incoming_file_record_id", "file_name"], name: "cn_incoming_records_01", unique: true
+
+  create_table "cn_unapproved_records", force: :cascade do |t|
+    t.integer  "cn_approvable_id",   limit: nil
+    t.string   "cn_approvable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "csv_exports", force: :cascade do |t|
     t.integer  "user_id",      limit: nil
@@ -2809,7 +2858,7 @@ ActiveRecord::Schema.define(version: 20160930064851) do
     t.datetime "created_at",                    null: false
   end
 
-  create_table "rc_transfer_schedules", force: :cascade do |t|
+  create_table "rc_transfer_schedule", force: :cascade do |t|
     t.string   "code",             limit: 50
     t.string   "debit_account_no", limit: 20
     t.string   "bene_account_no",  limit: 20
@@ -2820,7 +2869,7 @@ ActiveRecord::Schema.define(version: 20160930064851) do
     t.integer  "last_batch_no",               precision: 38
   end
 
-  add_index "rc_transfer_schedules", ["code"], name: "rc_transfer_schedules_01", unique: true
+  add_index "rc_transfer_schedule", ["code"], name: "rc_transfer_schedules_01"
 
   create_table "rc_transfers", force: :cascade do |t|
     t.string   "rc_transfer_code",  limit: 50
