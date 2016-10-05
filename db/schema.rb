@@ -2886,8 +2886,8 @@ ActiveRecord::Schema.define(version: 20161002101352) do
     t.datetime "started_at",                                    null: false
     t.string   "debit_account_no",  limit: 20,                  null: false
     t.string   "bene_account_no",   limit: 20,                  null: false
-    t.decimal  "transfer_amount",                               null: false
-    t.string   "transfer_req_ref",  limit: 50,                  null: false
+    t.decimal  "transfer_amount"
+    t.string   "transfer_req_ref",  limit: 50
     t.string   "transfer_rep_ref",  limit: 50
     t.datetime "transferred_at"
     t.string   "notify_status",     limit: 50
