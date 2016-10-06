@@ -2869,6 +2869,8 @@ ActiveRecord::Schema.define(version: 20161002101352) do
     t.integer  "last_batch_no",                precision: 38
     t.datetime "created_at",                                                null: false
     t.datetime "updated_at",                                                null: false
+    t.string   "created_by",       limit: 20
+    t.string   "updated_by",       limit: 20
     t.integer  "lock_version",                 precision: 38, default: 0,   null: false
     t.string   "approval_status",  limit: 1,                  default: "U", null: false
     t.string   "last_action",      limit: 1,                  default: "C", null: false
