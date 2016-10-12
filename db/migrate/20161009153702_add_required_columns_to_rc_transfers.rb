@@ -5,7 +5,7 @@ class AddRequiredColumnsToRcTransfers < ActiveRecord::Migration
     add_column :rc_transfers, :mobile_no, :string, :limit => 10, :comment => 'the mobile no of the customer'    
     add_column :rc_transfers, :broker_uuid, :string, :limit => 255, :comment => "the UUID of the broker"
     db.execute "UPDATE rc_transfers SET broker_uuid = 'A'"
-    add_column :rc_transfers, :broker_uuid, :string, :limit => 255, :null => false, :comment => "the UUID of the broker"
+    change_column :rc_transfers, :broker_uuid, :string, :limit => 255, :null => false, :comment => "the UUID of the broker"
   end
 
   private
