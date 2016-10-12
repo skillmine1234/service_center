@@ -18,16 +18,7 @@
     = select_tag :status, options_for_select([['NEW','NEW'],['PENDING CREDIT','PENDING CREDIT'],['CREDITED','CREDITED'],['CREDIT FAILED','CREDIT FAILED'],['BALINQ FAILED','BALINQ FAILED']],params[:status]),:prompt => 'ANY'
   .control-group
     = label_tag "Notify Status", "Notify Status", :class => 'control-label'
-    = select_tag :notify_status, options_for_select([['PENDING NOTIFICATION','PENDING NOTIFICATION'],['NOTIFIED: REJECTED','NOTIFIED: REJECTED'],['NOTIFIED: OK','NOTIFIED: OK'],['NOTIFICATION FAILURE','NOTIFICATION FAILURE']],params[:notify_status]),:prompt => 'ANY'
-  .control-group
-    = label_tag "Batch No", "Batch No", :class => 'control-label'
-    = text_field_tag :batch_no, params[:batch_no]
-  .control-group
-    = label_tag "Started At", "Started At", :class => 'control-label'
-    = text_field_tag :from_date, params[:from_date]
-    To
-    = text_field_tag :to_date, params[:to_date]
-  
+    = select_tag :notify_status, options_for_select([['PENDING NOTIFICATION','PENDING NOTIFICATION'],['NOTIFIED: REJECTED','NOTIFIED: REJECTED'],['NOTIFIED: OK','NOTIFIED: OK'],['NOTIFICATION FAILURE','NOTIFICATION FAILURE']],params[:notify_status]),:prompt => 'ANY'  
   = hidden_field_tag :advanced_search, :true
   .form-actions
     = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"

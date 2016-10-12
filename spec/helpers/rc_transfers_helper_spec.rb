@@ -15,18 +15,12 @@ describe RcTransfersHelper do
       a = Factory(:rc_transfer, :rc_transfer_code => '123')
       find_rc_transfers({:rc_code => "123"},RcTransfer).should == [a]
       find_rc_transfers({:rc_code => "1234"},RcTransfer).should == []
-      a = Factory(:rc_transfer, :batch_no => 1)
-      find_rc_transfers({:batch_no => 1},RcTransfer).should == [a]
-      find_rc_transfers({:batch_no => 2},RcTransfer).should == []
       a = Factory(:rc_transfer, :debit_account_no => "1234")
       find_rc_transfers({:debit_account_no => "1234"},RcTransfer).should == [a]
       find_rc_transfers({:debit_account_no => "4321"},RcTransfer).should == []
       a = Factory(:rc_transfer, :bene_account_no => "1234")
       find_rc_transfers({:bene_account_no => "1234"},RcTransfer).should == [a]
       find_rc_transfers({:bene_account_no => "4321"},RcTransfer).should == []
-      a = Factory(:rc_transfer, :started_at => Time.zone.now)
-      find_rc_transfers({:from_date => Date.today.advance(:days => -1).to_s, :to_date => Date.today.advance(:days => 2).to_s},RcTransfer).should == [a]
-      find_rc_transfers({:from_date => Date.today.advance(:days => -5).to_s, :to_date => Date.today.advance(:days => -4).to_s},RcTransfer).should == []
       rc_transfer = [Factory(:rc_transfer, :transfer_amount => '10000')]
       rc_transfer << Factory(:rc_transfer, :transfer_amount => '9000')
       rc_transfer << Factory(:rc_transfer, :transfer_amount => '8000')

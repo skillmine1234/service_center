@@ -9,7 +9,7 @@ class RcTransfersController < ApplicationController
   
   def index
     rc_transfers = RcTransfer.order("id desc")
-    rc_transfers = find_rc_transfers(rc_transfers,params).order("id desc") if params[:advanced_search].present?
+    rc_transfers = find_rc_transfers(params,rc_transfers).order("id desc") if params[:advanced_search].present?
     @rc_transfers_count = rc_transfers.count(:id)
     @rc_transfers = rc_transfers.paginate(:per_page => 10, :page => params[:page]) rescue []
   end

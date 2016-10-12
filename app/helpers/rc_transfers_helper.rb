@@ -15,8 +15,6 @@ module RcTransfersHelper
     rc_transfers = rc_transfers.where("transfer_amount>=? and transfer_amount <=?",params[:from_amount].to_f,params[:to_amount].to_f) if params[:to_amount].present? and params[:from_amount].present?
     rc_transfers = rc_transfers.where("status_code=?",params[:status]) if params[:status].present?
     rc_transfers = rc_transfers.where("notify_status=?",params[:notify_status]) if params[:notify_status].present?
-    rc_transfers = rc_transfers.where("batch_no=?", params[:batch_no]) if params[:batch_no].present?
-    rc_transfers = rc_transfers.where("started_at >= ? and started_at <= ?",Time.zone.parse(params[:from_date]).beginning_of_day,Time.zone.parse(params[:to_date]).end_of_day) if params[:from_date].present? and params[:to_date].present?
     rc_transfers
   end
 end
