@@ -17,6 +17,9 @@ describe Group do
 
       group = Factory(:group,:name => 'cnb')
       group.model_list.should == ['CnUnapprovedRecord','IncomingFile','IncomingFileRecord','CnIncomingFile','CnIncomingRecord']
+
+      group = Factory(:group,:name => 'recurring-transfer')
+      group.model_list.should == ["RcTransferUnapprovedRecord", "RcTransfer", "RcTransferSchedule"]
     end
   end
 end

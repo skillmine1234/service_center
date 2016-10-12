@@ -1,0 +1,52 @@
+%br
+= link_to 'New RC Transfer Schedule', new_rc_transfer_schedule_path
+%br
+%br
+%h1 Listing RC Transfer Schedules
+%h2.collapsible
+  Advanced Search
+  %span.caret
+.collapsible-content
+  = render :partial => 'advanced_search'
+%br
+= "Total Count: #{@rc_transfer_schedules_count}"
+%br
+= will_paginate @rc_transfer_schedules
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Code
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Enabled?
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Debit Account No
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Beneficiary Account No
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      App Code
+  .tbody
+    - @rc_transfer_schedules.each do |rc_transfer_schedule|
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', rc_transfer_schedule
+        %td{:style=>'text-align:left;'}
+          = link_to 'Edit', edit_rc_transfer_schedule_path(rc_transfer_schedule)
+        %td{:style=>'text-align:left;'}
+          - if rc_transfer_schedule.approval_status == 'U'
+            = link_to 'Cancel', rc_transfer_schedule, :method => :delete, :data => { :confirm => 'Are you sure?' }
+          - else
+            = ""
+        %td{:style=>'text-align:left;'}
+          = rc_transfer_schedule.code
+        %td{:style=>'text-align:left;'}
+          = rc_transfer_schedule.is_enabled
+        %td{:style=>'text-align:left;'}
+          = rc_transfer_schedule.debit_account_no
+        %td{:style=>'text-align:left;'}
+          = rc_transfer_schedule.bene_account_no
+        %td{:style=>'text-align:left;'}
+          = rc_transfer_schedule.app_code

@@ -48,6 +48,11 @@ $(document).ready(function(){
     $('input#credit_acct_val_fail').val('');
   });
 
+  $("#rc_transfer_schedule_reset").on('click', function(){
+    $('input#code').val('');
+    $('select#is_enabled').val('');
+  });
+
   $("#ecol_transaction_reset").on('click', function(){
     $('input#transfer_unique_no').val('');
     $('input#customer_code').val('');
@@ -210,6 +215,8 @@ $(document).ready(function(){
   });
   
   $('#qg_ecol_todays_imps_txn_transfer_date').datepicker("setDate", $('#qg_ecol_todays_imps_txn_transfer_date').val());
+
+  $('#rc_transfer_schedule_next_run_at').datetimepicker();
 
 });
 
