@@ -86,6 +86,7 @@ ServiceCenter::Application.routes.draw do
   resources :sm_unapproved_records
 
   resources :cn_unapproved_records
+  resources :rc_transfers
 
   namespace :api do
     namespace :v1 do
@@ -101,6 +102,7 @@ ServiceCenter::Application.routes.draw do
   get 'override_records' => 'incoming_files#override_records'
   get 'incoming_files/:id/audit_steps/:step_name' => 'incoming_files#audit_steps'
   get 'incoming_file_records/:id/audit_steps/:step_name' => 'incoming_file_records#audit_steps'
+  get 'rc_transfers/:id/audit_steps/:step_name' => 'rc_transfers#audit_steps'
   get '/su_incoming_records/:id/audit_logs' => 'su_incoming_records#audit_logs'
   get '/ic_incoming_records/:id/audit_logs' => 'ic_incoming_records#audit_logs'
   get '/ft_incoming_records/:id/audit_logs' => 'ft_incoming_records#audit_logs'

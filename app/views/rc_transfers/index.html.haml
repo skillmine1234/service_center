@@ -1,0 +1,53 @@
+%br
+%h1 Listing Recurring Transfers
+%h2.collapsible
+  Advanced Search
+  %span.caret
+.collapsible-content
+  / # = render :partial => 'advanced_search'
+%br
+= "Total Count: #{@rc_transfers_count}"
+%br
+= will_paginate @rc_transfers
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Customer ID
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Provider Account No
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Mobile No
+    %th{:style=>'text-align:left; background-color: lightblue;'} 
+      Name
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Transfer Amount
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Transferred At
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Transfer Status
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Notification Status
+
+  .tbody
+    - @rc_transfers.each do |rc_transfer|
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', rc_transfer
+        %td{:style=>'text-align:left;'}
+          = rc_transfer.customer_id
+        %td{:style=>'text-align:left;'}
+          = rc_transfer.debit_account_no
+        %td{:style=>'text-align:left;'}
+          = rc_transfer.mobile_no
+        %td{:style=>'text-align:left;'}
+          = rc_transfer.customer_name
+        %td{:style=>'text-align:left;'}
+          = rc_transfer.transfer_amount
+        %td{:style=>'text-align:left;'}
+          = rc_transfer.transferred_at.try(:strftime, "%d/%m/%Y %I:%M:%S %p")
+        %td{:style=>'text-align:left;'}
+          = rc_transfer.status_code
+        %td{:style=>'text-align:left;'}
+          = rc_transfer.notify_status

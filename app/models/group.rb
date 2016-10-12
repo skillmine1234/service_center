@@ -27,6 +27,8 @@ class Group < ActiveRecord::Base
       ['SmUnapprovedRecord','SmBank','SmBankAccount']
     when "cnb"
       ['CnUnapprovedRecord','IncomingFile','IncomingFileRecord','CnIncomingFile','CnIncomingRecord']
+    when "recurring-transfer"
+      ['RcTransfer']
     else
       []
     end

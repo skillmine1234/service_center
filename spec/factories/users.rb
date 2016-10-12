@@ -21,6 +21,7 @@ FactoryGirl.define do
       Factory(:user_group, :user_id => user.id, :group_id => Factory(:group, :name => 'instant-credit').id)
       Factory(:user_group, :user_id => user.id, :group_id => Factory(:group, :name => 'smb').id)
       Factory(:user_group, :user_id => user.id, :group_id => Factory(:group, :name => 'cnb').id)
+      Factory(:user_group, :user_id => user.id, :group_id => Factory(:group, :name => 'recurring-transfer').id)
     end
   end
 end

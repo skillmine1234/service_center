@@ -10,5 +10,6 @@ Group.seed(:name,
   { name: "instant-credit"},
   { name: "prepaid-card2"},
   { name: "smb"},
-  { name: "cnb"}
+  { name: "cnb"},
+  { name: "recurring-transfer" }
 )
