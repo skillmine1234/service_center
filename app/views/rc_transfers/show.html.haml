@@ -81,7 +81,7 @@
         %tr
           %td.label Notify Status
           %td= @rc_transfer.notify_status
-      - if @rc_transfer.notify_status == 'NOTIFICATION'
+      - if @rc_transfer.notify_status == 'NOTIFIED: OK'
         %tr
           %td.label Notified At
           %td= @rc_transfer.notified_at.try(:strftime, "%d/%m/%Y %I:%M:%S %p")
