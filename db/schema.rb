@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161002101352) do
+ActiveRecord::Schema.define(version: 20161012074608) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",               null: false
@@ -761,7 +761,7 @@ ActiveRecord::Schema.define(version: 20161002101352) do
     t.string   "val_last_token_length", limit: 1
     t.string   "cust_alert_on",         limit: 1,                  default: "f", null: false
     t.string   "customer_id",           limit: 50,                 default: "0", null: false
-    t.string   "app_code",              limit: 15,                               null: false
+    t.string   "app_code",              limit: 15
     t.string   "identity_user_id"
     t.string   "pool_acct_no",          limit: 20
   end
@@ -2896,10 +2896,14 @@ ActiveRecord::Schema.define(version: 20161002101352) do
     t.integer  "notify_attempt_no",              precision: 38
     t.datetime "notify_attempt_at"
     t.datetime "notified_at"
-    t.string   "notify_result",     limit: 50
+    t.string   "notify_result",     limit: 100
     t.string   "fault_code",        limit: 50
     t.string   "fault_subcode",     limit: 50
     t.string   "fault_reason",      limit: 1000
+    t.string   "customer_name",     limit: 100
+    t.string   "customer_id",       limit: 50
+    t.string   "mobile_no",         limit: 10
+    t.string   "broker_uuid",                                   null: false
   end
 
   add_index "rc_transfers", ["batch_no"], name: "rc_transfers_01"
@@ -3173,6 +3177,65 @@ ActiveRecord::Schema.define(version: 20161002101352) do
     t.string   "fault_reason",        limit: 1000
   end
 
+  create_table "sc_backend_stats", force: :cascade do |t|
+    t.string   "code",                    limit: 20,  null: false
+    t.integer  "consecutive_failure_cnt", limit: nil, null: false
+    t.integer  "consecutive_success_cnt", limit: nil, null: false
+    t.datetime "window_started_at",                   null: false
+    t.datetime "window_ends_at",                      null: false
+    t.integer  "window_failure_cnt",      limit: nil, null: false
+    t.integer  "window_success_cnt",      limit: nil, null: false
+    t.string   "auditable_type",                      null: false
+    t.integer  "auditable_id",            limit: nil, null: false
+    t.string   "step_name",               limit: 100
+    t.datetime "updated_at",                          null: false
+    t.integer  "last_status_change_id",   limit: nil
+    t.datetime "last_alert_email_at"
+    t.string   "last_alert_email_ref",    limit: 64
+  end
+
+  add_index "sc_backend_stats", ["code"], name: "sc_backend_stats_1", unique: true
+
+  create_table "sc_backend_status", force: :cascade do |t|
+    t.string  "code",                  limit: 20,  null: false
+    t.string  "status",                limit: 1,   null: false
+    t.integer "last_status_change_id", limit: nil
+  end
+
+  add_index "sc_backend_status", ["code"], name: "sc_backend_status_2", unique: true
+  add_index "sc_backend_status", ["last_status_change_id"], name: "sc_backend_status_1"
+
+  create_table "sc_backend_status_changes", force: :cascade do |t|
+    t.string   "code",       limit: 20, null: false
+    t.string   "new_status", limit: 1,  null: false
+    t.string   "remarks",               null: false
+    t.string   "created_by", limit: 20
+    t.datetime "created_at",            null: false
+  end
+
+  create_table "sc_backends", force: :cascade do |t|
+    t.string   "code",                     limit: 20,                               null: false
+    t.string   "do_auto_shutdown",         limit: 1,                                null: false
+    t.integer  "max_consecutive_failures",             precision: 38,               null: false
+    t.integer  "window_in_mins",           limit: 2,   precision: 2,                null: false
+    t.integer  "max_window_failures",                  precision: 38,               null: false
+    t.string   "do_auto_start",            limit: 1,                                null: false
+    t.integer  "min_consecutive_success",              precision: 38,               null: false
+    t.integer  "min_window_success",                   precision: 38,               null: false
+    t.string   "alert_email_to"
+    t.string   "created_by",               limit: 20
+    t.string   "updated_by",               limit: 20
+    t.datetime "created_at",                                                        null: false
+    t.datetime "updated_at",                                                        null: false
+    t.integer  "lock_version",                         precision: 38, default: 0,   null: false
+    t.string   "approval_status",          limit: 1,                  default: "U", null: false
+    t.string   "last_action",              limit: 1,                  default: "C", null: false
+    t.integer  "approved_version",                     precision: 38
+    t.integer  "approved_id",              limit: nil
+  end
+
+  add_index "sc_backends", ["code"], name: "sc_backends_01", unique: true
+
   create_table "sc_services", force: :cascade do |t|
     t.string "code", limit: 50, null: false
     t.string "name", limit: 50, null: false
@@ -3384,6 +3447,11 @@ ActiveRecord::Schema.define(version: 20161002101352) do
     t.datetime "updated_at"
   end
 
+  create_table "t1", id: false, force: :cascade do |t|
+    t.decimal "a"
+    t.decimal "b"
+  end
+
   create_table "udf_attributes", force: :cascade do |t|
     t.string   "class_name",       limit: 100,                              null: false
     t.string   "attribute_name",   limit: 100,                              null: false
@@ -3500,5 +3568,7 @@ ActiveRecord::Schema.define(version: 20161002101352) do
   end
 
   add_index "whitelisted_identities", ["last_used_with_txn_id"], name: "i_whi_ide_las_use_wit_txn_id"
+
+  add_synonym "pk_qg_send_email", "smtpq.pk_qg_send_email", force: true
 
 end
