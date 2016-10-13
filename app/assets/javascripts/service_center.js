@@ -151,6 +151,12 @@ $(document).ready(function(){
     $('#urlText').modal();
   });
 
+  $("#submit_rc_transfer").click(function(){
+    $("#update_transactions").submit(function(){
+      $("#submit_rc_transfer").prop('disabled', true);
+    });
+  });
+
   $("#submit_override").click(function(){
     $("#update_records").submit(function(){
       $("#submit_override").prop('disabled', true);
