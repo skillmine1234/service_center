@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161012084839) do
+ActiveRecord::Schema.define(version: 20161012130041) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -2094,6 +2094,8 @@ ActiveRecord::Schema.define(version: 20161012084839) do
     t.string   "card_image_small_uri",  limit: 255
     t.string   "card_image_medium_uri", limit: 255
     t.string   "card_image_large_uri",  limit: 255
+    t.string   "program_code",          limit: 15
+    t.string   "product_code",          limit: 15
   end
 
   add_index "pc_card_registrations", ["req_no", "app_id", "attempt_no"], name: "uk_pc_card_regs", unique: true
@@ -2141,9 +2143,12 @@ ActiveRecord::Schema.define(version: 20161012084839) do
     t.string   "app_id",             limit: 50
     t.string   "activation_code",    limit: 255
     t.datetime "activated_at"
+    t.string   "program_code",       limit: 15,  null: false
+    t.string   "product_code",       limit: 15,  null: false
   end
 
-  add_index "pc_customers", ["mobile_no"], name: "uk_pc_card_custs_1", unique: true
+  add_index "pc_customers", ["email_id", "program_code"], name: "pc_customers_02", unique: true
+  add_index "pc_customers", ["mobile_no", "program_code"], name: "pc_customers_01", unique: true
 
   create_table "pc_fee_rules", force: :cascade do |t|
     t.string   "txn_kind",         limit: 50,               null: false
@@ -2174,10 +2179,10 @@ ActiveRecord::Schema.define(version: 20161012084839) do
     t.decimal  "tier1_pct_value",                           null: false
     t.decimal  "tier1_fixed_amt",                           null: false
     t.decimal  "tier1_to_amt",                              null: false
-    t.string   "program_code",     limit: 15,               null: false
+    t.string   "product_code",     limit: 15,               null: false
   end
 
-  add_index "pc_fee_rules", ["program_code", "txn_kind", "approval_status"], name: "pc_fee_rules_01", unique: true
+  add_index "pc_fee_rules", ["product_code", "txn_kind", "approval_status"], name: "pc_fee_rules_01", unique: true
   add_index "pc_fee_rules", ["txn_kind", "approval_status"], name: "uk_pc_fee_rules", unique: true
 
   create_table "pc_load_cards", force: :cascade do |t|
@@ -2249,12 +2254,14 @@ ActiveRecord::Schema.define(version: 20161012084839) do
     t.integer  "approved_id"
     t.string   "card_acct",           limit: 20,                null: false
     t.string   "sc_gl_income",        limit: 15,                null: false
+    t.string   "card_cust_id",                                  null: false
     t.string   "display_name"
     t.string   "cust_care_no",        limit: 16,                null: false
     t.string   "rkb_user",            limit: 30,                null: false
     t.string   "rkb_password",        limit: 40,                null: false
     t.string   "rkb_bcagent",         limit: 50,                null: false
     t.string   "rkb_channel_partner", limit: 3,                 null: false
+    t.string   "program_code",        limit: 15,                null: false
   end
 
   add_index "pc_products", ["code", "approval_status"], name: "pc_programs_01", unique: true
@@ -2274,13 +2281,6 @@ ActiveRecord::Schema.define(version: 20161012084839) do
   end
 
   add_index "pc_programs", ["code", "approval_status"], name: "pc_programs_02", unique: true
-
-  create_table "pc_programs_pc_products", id: false, force: :cascade do |t|
-    t.string "program_code", limit: 15, null: false
-    t.string "product_code", limit: 15, null: false
-  end
-
-  add_index "pc_programs_pc_products", ["product_code"], name: "pc_programs_products_01", unique: true
 
   create_table "pc_unapproved_records", force: :cascade do |t|
     t.integer  "pc_approvable_id"
@@ -2552,6 +2552,7 @@ ActiveRecord::Schema.define(version: 20161012084839) do
     t.string   "last_action",      limit: 1,  default: "C", null: false
     t.integer  "approved_version"
     t.integer  "approved_id"
+    t.string   "notify_mobile_no", limit: 10
   end
 
   add_index "rc_transfer_schedule", ["code", "approval_status"], name: "rc_transfer_schedules_01", unique: true
@@ -2564,13 +2565,13 @@ ActiveRecord::Schema.define(version: 20161012084839) do
   end
 
   create_table "rc_transfers", force: :cascade do |t|
-    t.string   "rc_transfer_code",  limit: 50,   null: false
+    t.string   "rc_transfer_code",  limit: 50,                 null: false
     t.string   "app_code",          limit: 50
-    t.integer  "batch_no",                       null: false
-    t.string   "status_code",       limit: 50,   null: false
-    t.datetime "started_at",                     null: false
-    t.string   "debit_account_no",  limit: 20,   null: false
-    t.string   "bene_account_no",   limit: 20,   null: false
+    t.integer  "batch_no",                                     null: false
+    t.string   "status_code",       limit: 50,                 null: false
+    t.datetime "started_at",                                   null: false
+    t.string   "debit_account_no",  limit: 20,                 null: false
+    t.string   "bene_account_no",   limit: 20,                 null: false
     t.decimal  "transfer_amount"
     t.string   "transfer_req_ref",  limit: 50
     t.string   "transfer_rep_ref",  limit: 50
@@ -2586,7 +2587,8 @@ ActiveRecord::Schema.define(version: 20161012084839) do
     t.string   "customer_name",     limit: 100
     t.string   "customer_id",       limit: 50
     t.string   "mobile_no",         limit: 10
-    t.string   "broker_uuid",       limit: 255,  null: false
+    t.string   "broker_uuid",       limit: 255,                null: false
+    t.string   "pending_approval",  limit: 1,    default: "Y", null: false
   end
 
   add_index "rc_transfers", ["batch_no"], name: "rc_transfers_01"

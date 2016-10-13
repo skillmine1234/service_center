@@ -28,6 +28,8 @@
     %h3
       Audit Logs:
       = link_to 'Show', {:controller => 'rc_transfers', :action => 'audit_steps', :id => @rc_transfer.id, :step_name => 'ALL'}
+  .toolbar
+    = render :partial => 'action_toolbar'
   .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; height: 450px; display: inline-block;'}
     #ticket-details
     %h3 Transfer Details:

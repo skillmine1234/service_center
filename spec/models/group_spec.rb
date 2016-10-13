@@ -19,7 +19,7 @@ describe Group do
       group.model_list.should == ['CnUnapprovedRecord','IncomingFile','IncomingFileRecord','CnIncomingFile','CnIncomingRecord']
 
       group = Factory(:group,:name => 'recurring-transfer')
-      group.model_list.should == ["RcTransferUnapprovedRecord", "RcTransfer", "RcTransferSchedule"]
+      group.model_list.should == ["RcTransferUnapprovedRecord", "RcTransfer", "RcTransferSchedule", "RcAuditStep"]
     end
   end
 end

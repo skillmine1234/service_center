@@ -88,7 +88,11 @@ ServiceCenter::Application.routes.draw do
   resources :cn_unapproved_records
 
   resources :rc_transfer_schedules
-  resources :rc_transfers
+  resources :rc_transfers do
+    collection do
+      put  'update_multiple'
+    end
+  end
   resources :rc_transfer_unapproved_records
 
   namespace :api do
