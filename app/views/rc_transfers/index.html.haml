@@ -41,7 +41,7 @@
           %td{:style=>'text-align:left;'}
             = link_to 'Show', rc_transfer
           %td{:style=>'text-align:left;'}
-            - if rc_transfer.pending_approval == 'Y' and @rc_transfer.notify_status == 'NOTIFICATION FAILURE'
+            - if rc_transfer.pending_approval == 'Y' and rc_transfer.notify_status == 'NOTIFICATION FAILURE'
               = check_box_tag "rc_transfer_ids[]", rc_transfer.id, false, class: 'txn_select'
           %td{:style=>'text-align:left;'}
             = rc_transfer.customer_id

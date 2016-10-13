@@ -7,6 +7,7 @@ describe RcTransferSchedule do
     it { should have_one(:rc_transfer_unapproved_record) }
     it { should belong_to(:unapproved_record) }
     it { should belong_to(:approved_record) }
+    it { should belong_to(:rc_transfer) }
   end
   
   context 'validation' do

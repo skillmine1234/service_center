@@ -6,6 +6,7 @@ class RcTransferSchedule < ActiveRecord::Base
 
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
+  belongs_to :rc_transfer, :foreign_key => 'code', :primary_key => 'rc_transfer_code'
 
   validates_presence_of :code, :debit_account_no, :bene_account_no, :is_enabled
 
