@@ -11,8 +11,18 @@ describe RcTransferSchedule do
   end
   
   context 'validation' do
-    [:code, :debit_account_no, :bene_account_no, :is_enabled].each do |att|
+    [:code, :debit_account_no, :bene_account_no, :app_code, :notify_mobile_no, :is_enabled].each do |att|
       it { should validate_presence_of(att) }
+    end
+
+    it do
+      rc_transfer_schedule = Factory(:rc_transfer_schedule, :approval_status => 'A')
+      should validate_length_of(:code).is_at_most(20)
+      [:debit_account_no, :bene_account_no].each do |att|
+        should validate_length_of(att).is_at_least(15).is_at_most(20)
+      end
+      should validate_length_of(:app_code).is_at_least(5).is_at_most(20)
+      should validate_length_of(:notify_mobile_no).is_at_least(10).is_at_most(10)
     end
 
     it do 
@@ -31,13 +41,13 @@ describe RcTransferSchedule do
   context "fields format" do
     it "should allow valid format" do
       [:code, :app_code].each do |att|
-        should allow_value('9876').for(att)
+        should allow_value('98765').for(att)
         should allow_value('ABCD90').for(att)
         should allow_value('abcd1234E').for(att)
       end
 
       [:debit_account_no, :bene_account_no].each do |att|
-        should allow_value('1234567890').for(att)
+        should allow_value('123456789012345').for(att)
       end
 
       should allow_value('9988776655').for(:notify_mobile_no)

@@ -3,10 +3,11 @@
 FactoryGirl.define do
   factory :rc_transfer_schedule do
     sequence(:code) {|n| "%04i" % "#{n}"}
-    debit_account_no "1234567898"
-    bene_account_no "1234567899"
+    debit_account_no "123456789877733"
+    bene_account_no "123456789877734"
     last_run_at "2016-10-12 11:33:24"
     app_code "APP1234"
+    notify_mobile_no "9988776655"
     created_by {Factory(:user).id}
     updated_by {Factory(:user).id}
     lock_version 1

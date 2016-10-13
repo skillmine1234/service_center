@@ -18,7 +18,6 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
-    %th{:style=>'text-align:left; background-color: lightblue;'}
       Code
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Enabled?
@@ -27,7 +26,13 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Beneficiary Account No
     %th{:style=>'text-align:left; background-color: lightblue;'}
+      Notify Mobile No
+    %th{:style=>'text-align:left; background-color: lightblue;'}
       App Code
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Last Run At
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Next Run At
   .tbody
     - @rc_transfer_schedules.each do |rc_transfer_schedule|
       %tr
@@ -35,11 +40,6 @@
           = link_to 'Show', rc_transfer_schedule
         %td{:style=>'text-align:left;'}
           = link_to 'Edit', edit_rc_transfer_schedule_path(rc_transfer_schedule)
-        %td{:style=>'text-align:left;'}
-          - if rc_transfer_schedule.approval_status == 'U'
-            = link_to 'Cancel', rc_transfer_schedule, :method => :delete, :data => { :confirm => 'Are you sure?' }
-          - else
-            = ""
         %td{:style=>'text-align:left;'}
           = rc_transfer_schedule.code
         %td{:style=>'text-align:left;'}
@@ -49,4 +49,10 @@
         %td{:style=>'text-align:left;'}
           = rc_transfer_schedule.bene_account_no
         %td{:style=>'text-align:left;'}
+          = rc_transfer_schedule.notify_mobile_no
+        %td{:style=>'text-align:left;'}
           = rc_transfer_schedule.app_code
+        %td{:style=>'text-align:left;'}
+          = rc_transfer_schedule.last_run_at
+        %td{:style=>'text-align:left;'}
+          = rc_transfer_schedule.next_run_at
