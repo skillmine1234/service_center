@@ -3,13 +3,11 @@ require 'spec_helper'
 describe RcTransferSchedulesHelper do
   context "find_rc_transfer_schedules" do
     it "should find rc_transfer_schedules" do
-      rc_transfer_schedule1 = Factory(:rc_transfer_schedule, :code => 'ABCD90', :approval_status => "A")
-      find_rc_transfer_schedules({:code => 'ABCD90'}).should == [rc_transfer_schedule1]
-      find_rc_transfer_schedules({:code => 'abcd90'}).should == [rc_transfer_schedule1]
-      find_rc_transfer_schedules({:code => 'Abcd90'}).should == [rc_transfer_schedule1]
-      find_rc_transfer_schedules({:code => 'Abcd 90'}).should == []
+      rc_transfer_schedule1 = Factory(:rc_transfer_schedule, :code => '1234', :approval_status => "A")
+      find_rc_transfer_schedules({:code => '1234'}).should == [rc_transfer_schedule1]
+      find_rc_transfer_schedules({:code => '1233453'}).should == []
 
-      rc_transfer_schedule2 = Factory(:rc_transfer_schedule, :code => "ABCD91", :is_enabled => "Y", :approval_status => 'A')
+      rc_transfer_schedule2 = Factory(:rc_transfer_schedule, :is_enabled => "Y", :approval_status => 'A')
       find_rc_transfer_schedules({:is_enabled => "Y"}).should == [rc_transfer_schedule1, rc_transfer_schedule2]
       find_rc_transfer_schedules({:is_enabled => "N"}).should == [] 
 
