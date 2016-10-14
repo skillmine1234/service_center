@@ -2101,9 +2101,12 @@ ActiveRecord::Schema.define(version: 20161012130041) do
   add_index "pc_card_registrations", ["req_no", "app_id", "attempt_no"], name: "uk_pc_card_regs", unique: true
 
   create_table "pc_customer_credentials", force: :cascade do |t|
-    t.string "username", null: false
-    t.string "password", null: false
+    t.string "username",                null: false
+    t.string "password",                null: false
+    t.string "program_code", limit: 15, null: false
   end
+
+  add_index "pc_customer_credentials", ["username", "program_code"], name: "pc_credentials_01", unique: true
 
   create_table "pc_customers", force: :cascade do |t|
     t.string   "mobile_no",          limit: 255, null: false
@@ -2258,7 +2261,7 @@ ActiveRecord::Schema.define(version: 20161012130041) do
     t.string   "display_name"
     t.string   "cust_care_no",        limit: 16,                null: false
     t.string   "rkb_user",            limit: 30,                null: false
-    t.string   "rkb_password",        limit: 40,                null: false
+    t.string   "rkb_password",                                  null: false
     t.string   "rkb_bcagent",         limit: 50,                null: false
     t.string   "rkb_channel_partner", limit: 3,                 null: false
     t.string   "program_code",        limit: 15,                null: false
@@ -2552,7 +2555,7 @@ ActiveRecord::Schema.define(version: 20161012130041) do
     t.string   "last_action",      limit: 1,  default: "C", null: false
     t.integer  "approved_version"
     t.integer  "approved_id"
-    t.string   "notify_mobile_no", limit: 10
+    t.string   "notify_mobile_no", limit: 10,               null: false
   end
 
   add_index "rc_transfer_schedule", ["code", "approval_status"], name: "rc_transfer_schedules_01", unique: true
