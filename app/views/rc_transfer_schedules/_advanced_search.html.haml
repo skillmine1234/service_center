@@ -14,10 +14,20 @@
   .control-group
     = label_tag "Notify Mobile No", "Notify Mobile No", :class => 'control-label'
     = text_field_tag :notify_mobile_no, params[:notify_mobile_no]
+  .control-group
+    = label_tag "Next Run At", "Next Run At", :class => 'control-label'
+    = text_field_tag :next_from_date, params[:next_from_date]
+    to
+    = text_field_tag :next_to_date, params[:next_to_date]
+  .control-group
+    = label_tag "Last Run At", "Last Run At", :class => 'control-label'
+    = text_field_tag :last_from_date, params[:last_from_date]
+    to
+    = text_field_tag :last_to_date, params[:last_from_date]
     = hidden_field_tag :approval_status, params[:approval_status]
   .form-actions
     = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"
-    = button_tag "Reset", :type => 'button', :value=>'Reset', :class => 'btn', :id => 'rc_transfer_schedule_reset'
+    = button_tag "Reset", :type => 'button', :value=>'Reset', :class => 'btn reset-btn'
   = hidden_field_tag :advanced_search, :true
 
 :javascript

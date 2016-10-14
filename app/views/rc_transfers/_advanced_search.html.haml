@@ -10,9 +10,9 @@
     = text_field_tag :debit_account_no, params[:debit_account_no]
   .control-group
     = label_tag "Transfer Amount", "Transfer Amount", :class => 'control-label'
-    = text_field_tag :from_amount, params[:from_amount]
+    = number_field_tag :from_amount, params[:from_amount]
     To
-    = text_field_tag :to_amount, params[:to_amount]
+    = number_field_tag :to_amount, params[:to_amount]
   .control-group
     = label_tag "Transfer Status", "Transfer Status", :class => 'control-label'
     = select_tag :status, options_for_select([['NEW','NEW'],['PENDING CREDIT','PENDING CREDIT'],['CREDITED','CREDITED'],['CREDIT FAILED','CREDIT FAILED'],['BALINQ FAILED','BALINQ FAILED']],params[:status]),:prompt => 'ANY'

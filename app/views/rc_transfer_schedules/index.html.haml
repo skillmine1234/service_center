@@ -55,8 +55,8 @@
         %td{:style=>'text-align:left;'}
           = rc_transfer_schedule.notify_mobile_no
         %td{:style=>'text-align:left;'}
-          = rc_transfer_schedule.last_run_at
+          = rc_transfer_schedule.last_run_at.try(:strftime, "%d/%m/%Y %I:%M%p")
         %td{:style=>'text-align:left;'}
-          = rc_transfer_schedule.next_run_at
+          = rc_transfer_schedule.next_run_at.try(:strftime, "%d/%m/%Y %I:%M%p")
         %td{:style=>'text-align:left;'}
           = rc_transfer_schedule.last_batch_no

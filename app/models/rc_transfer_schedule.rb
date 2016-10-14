@@ -16,4 +16,8 @@ class RcTransferSchedule < ActiveRecord::Base
   validates :notify_mobile_no, :numericality => {:only_integer => true}, length: {minimum: 10, maximum: 10}
 
   validates_uniqueness_of :code, :scope => :approval_status
+
+  def next_run_at_value
+    next_run_at.nil? ? Time.zone.now.try(:strftime, "%d/%m/%Y %I:%M%p") : next_run_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+  end
 end

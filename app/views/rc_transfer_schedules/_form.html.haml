@@ -42,7 +42,7 @@
         = error_message_for(@rc_transfer_schedule, :notify_mobile_no, :prepend_text => "")
     .control-group
       = f.label :next_run_at, "Next Run At", :class => 'control-label'
-      = f.text_field :next_run_at
+      = f.text_field :next_run_at, :value => f.object.next_run_at_value
       #msg-error
         = error_message_for(@rc_transfer_schedule, :next_run_at, :prepend_text => "")
   .form-actions

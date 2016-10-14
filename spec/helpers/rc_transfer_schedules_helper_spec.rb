@@ -26,10 +26,13 @@ describe RcTransferSchedulesHelper do
       find_rc_transfer_schedules({:notify_mobile_no => "9999221134"}).should == [] 
       find_rc_transfer_schedules({:notify_mobile_no => "999922113"}).should == [] 
 
-      rc_transfer_schedule5 = Factory(:rc_transfer_schedule, :notify_mobile_no => "9999221144", :approval_status => 'A')
-      find_rc_transfer_schedules({:notify_mobile_no => "9999221144"}).should == [rc_transfer_schedule5]
-      find_rc_transfer_schedules({:notify_mobile_no => "9999221145"}).should == [] 
-      find_rc_transfer_schedules({:notify_mobile_no => "999922114"}).should == [] 
+      rc_transfer_schedule7 = Factory(:rc_transfer_schedule, :next_run_at => Time.zone.now, :approval_status => 'A')
+      find_rc_transfer_schedules({:next_from_date => Time.zone.now.advance(:hours => -3).to_s, :next_to_date => Time.zone.now.advance(:hours => 3).to_s}).should == [rc_transfer_schedule7]
+      find_rc_transfer_schedules({:next_from_date => Time.zone.now.advance(:hours => -3).to_s, :next_to_date => Time.zone.now.advance(:hours => -1).to_s}).should == []
+
+      rc_transfer_schedule8 = Factory(:rc_transfer_schedule, :last_run_at => Time.zone.now, :approval_status => 'A')
+      find_rc_transfer_schedules({:last_from_date => Time.zone.now.advance(:hours => -3).to_s, :last_to_date => Time.zone.now.advance(:hours => 3).to_s}).should == [rc_transfer_schedule8]
+      find_rc_transfer_schedules({:last_from_date => Time.zone.now.advance(:hours => -3).to_s, :last_to_date => Time.zone.now.advance(:hours => -1).to_s}).should == []
     end
   end  
 end

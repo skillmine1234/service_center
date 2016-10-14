@@ -58,13 +58,13 @@
           %tr
             %td.label Next Run At
             %td.value
-              = @rc_transfer_schedule.next_run_at
+              = @rc_transfer_schedule.next_run_at.try(:strftime, "%d/%m/%Y %I:%M%p")
             %td#msg-error
               = error_message_for(@rc_transfer_schedule, :next_run_at, :prepend_text => "")
           %tr
             %td.label Last Run At
             %td.value
-              = @rc_transfer_schedule.last_run_at
+              = @rc_transfer_schedule.last_run_at.try(:strftime, "%d/%m/%Y %I:%M%p")
             %td#msg-error
               = error_message_for(@rc_transfer_schedule, :last_run_at, :prepend_text => "")
           %tr
