@@ -24,4 +24,27 @@ class RcTransfersController < ApplicationController
     @record_values_count = record_values.count(:id)
     @record_values = record_values.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
+
+  def update_multiple
+    if params[:rc_transfer_ids]
+      @rc_transfers = RcTransfer.find(params[:rc_transfer_ids])
+      unless @rc_transfers.empty?
+        @rc_transfers.each {|rc_transfer| rc_transfer.update_attributes(:pending_approval => "N", :notify_status => 'PENDING NOTIFICATION')}
+        flash[:notice] = "Updated transactions!"
+      end
+    else
+      flash[:notice] = "You haven't selected any transaction records!"
+    end
+    redirect_to :back
+  end
+
+  def update
+    @rc_transfer = RcTransfer.find(params[:id])
+    if @rc_transfer.update_attributes(:pending_approval => 'N', :notify_status => 'PENDING NOTIFICATION')
+      flash[:notice] = "RC Transfer is sucessfully updated"
+    else
+      flash[:notice] = @rc_transfer.errors.full_messages
+    end
+    redirect_to :back
+  end
 end

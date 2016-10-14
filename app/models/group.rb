@@ -28,10 +28,9 @@ class Group < ActiveRecord::Base
     when "cnb"
       ['CnUnapprovedRecord','IncomingFile','IncomingFileRecord','CnIncomingFile','CnIncomingRecord']
     when "recurring-transfer"
-      ['RcTransfer']
+      ['RcTransferUnapprovedRecord','RcTransfer','RcTransferSchedule','RcAuditStep']
     else
       []
     end
   end
-
 end

@@ -129,7 +129,7 @@ class PpcChanges < ActiveRecord::Migration
     add_column :pc_apps, :traceid_prefix, :integer, :comment => 'the trace id'
     add_column :pc_apps, :source_id, :string, :limit => 50, :comment => 'the source id'
     add_column :pc_apps, :channel_id, :string, :limit => 20, :comment => 'the channel id'
-    
+
     PcProduct.unscoped.find_each(batch_size: 100) do |p|
       apps = PcApp.unscoped.where("program_code=?",p.program_code)
       unless apps.empty?

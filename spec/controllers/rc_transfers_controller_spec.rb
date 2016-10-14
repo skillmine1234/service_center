@@ -44,4 +44,31 @@ describe RcTransfersController do
       assigns[:record_values].should == [log2]
     end
   end
+
+  describe "PUT update" do
+    it "updates the requested rc_transfer" do
+      rc_transfer = Factory(:rc_transfer, :pending_approval => 'Y', :notify_status => 'NOTIFICATION FAILURE')
+      params = rc_transfer.attributes.slice(*rc_transfer.class.attribute_names)
+      put :update, :id => rc_transfer.id
+      response.should be_redirect
+      rc_transfer.reload
+      rc_transfer.notify_status.should == 'PENDING NOTIFICATION'
+      rc_transfer.pending_approval.should == 'N'
+    end
+  end
+
+  describe "PUT update multiple" do
+    it "updates the requested rc_transfer" do
+      rc_transfer1 = Factory(:rc_transfer, :pending_approval => 'Y', :notify_status => 'NOTIFICATION FAILURE')
+      rc_transfer2 = Factory(:rc_transfer, :pending_approval => 'Y', :notify_status => 'NOTIFICATION FAILURE')
+      put :update_multiple, :rc_transfer_ids => [rc_transfer1.id, rc_transfer2.id]
+      response.should be_redirect
+      rc_transfer1.reload
+      rc_transfer1.notify_status.should == 'PENDING NOTIFICATION'
+      rc_transfer1.pending_approval.should == 'N'
+      rc_transfer2.reload
+      rc_transfer2.notify_status.should == 'PENDING NOTIFICATION'
+      rc_transfer2.pending_approval.should == 'N'
+    end
+  end
 end

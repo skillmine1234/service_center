@@ -390,3 +390,23 @@
         = image_tag 'work-list.jpg', :size => "80x80"
       %br
         = "Approval Worklist"
+
+- if @current_user.group_names.include?("recurring-transfer")
+  %h1 RC Trasnsfer
+  .slide-container
+    .box  
+      = link_to '/rc_transfer_unapproved_records' do
+        = image_tag 'work-list.jpg', :size => "80x80"
+      %br
+        = "Approval Worklist"
+  .slide-container
+    .box
+      = link_to '/rc_transfer_schedules' do
+        = image_tag 'rc_transfer_schedule.png', :size => "80x80"
+      %br
+        = "RC Transfer Schedules"
+    .box
+      = link_to '/rc_transfers' do
+        = image_tag 'rc_transfer.png', :size => "80x80"
+      %br
+        = "RC Transfers"

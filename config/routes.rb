@@ -86,7 +86,14 @@ ServiceCenter::Application.routes.draw do
   resources :sm_unapproved_records
 
   resources :cn_unapproved_records
-  resources :rc_transfers
+
+  resources :rc_transfer_schedules
+  resources :rc_transfers do
+    collection do
+      put  'update_multiple'
+    end
+  end
+  resources :rc_transfer_unapproved_records
 
   namespace :api do
     namespace :v1 do
@@ -137,6 +144,7 @@ ServiceCenter::Application.routes.draw do
   get '/ic_suppliers/:id/audit_logs' => 'ic_suppliers#audit_logs'
   get '/sm_banks/:id/audit_logs' => 'sm_banks#audit_logs'
   get '/sm_bank_accounts/:id/audit_logs' => 'sm_bank_accounts#audit_logs'
+  get '/rc_transfer_schedules/:id/audit_logs' => 'rc_transfer_schedules#audit_logs'
 
   get '/inward_remittances/:id/remitter_identities' => 'inward_remittances#remitter_identities'
   get '/inward_remittances/:id/beneficiary_identities' => 'inward_remittances#beneficiary_identities'
@@ -185,6 +193,7 @@ ServiceCenter::Application.routes.draw do
   put '/ic_suppliers/:id/approve' => "ic_suppliers#approve"
   put '/sm_banks/:id/approve' => "sm_banks#approve"
   put '/sm_bank_accounts/:id/approve' => 'sm_bank_accounts#approve'
+  put '/rc_transfer_schedules/:id/approve' => "rc_transfer_schedules#approve"
 
   get '/ecol_transactions/:id/ecol_audit_logs/:step_name' => 'ecol_transactions#ecol_audit_logs'
   put '/ecol_transactions/:id/approve' => "ecol_transactions#approve_transaction"
