@@ -1981,6 +1981,7 @@ ActiveRecord::Schema.define(version: 20161012074608) do
     t.string   "service_id"
     t.datetime "reconciled_at"
     t.string   "cbs_req_ref_no"
+    t.datetime "processed_at"
   end
 
   add_index "inward_remittances", ["bank_ref"], name: "i_inward_remittances_bank_ref"
