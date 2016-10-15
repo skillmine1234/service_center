@@ -17,7 +17,7 @@ describe RcTransferSchedule do
 
     it do
       rc_transfer_schedule = Factory(:rc_transfer_schedule, :approval_status => 'A')
-      should validate_length_of(:code).is_at_most(20)
+      should validate_length_of(:code).is_at_least(3).is_at_most(15)
       [:debit_account_no, :bene_account_no].each do |att|
         should validate_length_of(att).is_at_least(15).is_at_most(20)
       end
@@ -40,13 +40,13 @@ describe RcTransferSchedule do
 
   context "fields format" do
     it "should allow valid format" do
-      [:code, :app_code].each do |att|
+      [:app_code].each do |att|
         should allow_value('98765').for(att)
         should allow_value('ABCD90').for(att)
         should allow_value('abcd1234E').for(att)
       end
 
-      [:debit_account_no, :bene_account_no].each do |att|
+      [:code, :debit_account_no, :bene_account_no].each do |att|
         should allow_value('123456789012345').for(att)
       end
 
@@ -56,19 +56,9 @@ describe RcTransferSchedule do
     it "should not allow invalid format" do
       rc_transfer_schedule = Factory.build(:rc_transfer_schedule, :code => "BANK-01", :app_code => "abcd@QWER", :debit_account_no => "ACC12345", :bene_account_no => "123-456", :notify_mobile_no => "+998877665")
       rc_transfer_schedule.save.should be_false
-      [:code, :app_code].each do |att|
+      [:app_code].each do |att|
         rc_transfer_schedule.errors_on(att).should == ["Invalid format, expected format is : {[a-z|A-Z|0-9]}"]
       end
-    end
-  end
-
-
-  context "to_downcase" do 
-    it "should convert the code to lower case" do 
-      rc_transfer_schedule = Factory.build(:rc_transfer_schedule, :code => "BANK123")
-      rc_transfer_schedule.to_downcase
-      rc_transfer_schedule.code.should == "bank123"
-      rc_transfer_schedule.save.should be_true
     end
   end
   

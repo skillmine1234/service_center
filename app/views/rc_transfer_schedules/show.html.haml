@@ -20,17 +20,17 @@
             %td#msg-error
               = error_message_for(@rc_transfer_schedule, :base, :prepend_text => "")
           %tr
-            %td.label Code
+            %td.label Enabled?
+            %td.value
+              = @rc_transfer_schedule.is_enabled
+            %td#msg-error
+              = error_message_for(@rc_transfer_schedule, :is_enabled, :prepend_text => "")
+          %tr
+            %td.label Beneficiary Customer ID 
             %td.value
               = @rc_transfer_schedule.code
             %td#msg-error
               = error_message_for(@rc_transfer_schedule, :code, :prepend_text => "")
-          %tr
-            %td.label Debit Account No
-            %td.value
-              = @rc_transfer_schedule.debit_account_no
-            %td#msg-error
-              = error_message_for(@rc_transfer_schedule, :debit_account_no, :prepend_text => "")
           %tr
             %td.label Beneficiary Account No
             %td.value
@@ -38,37 +38,37 @@
             %td#msg-error
               = error_message_for(@rc_transfer_schedule, :bene_account_no, :prepend_text => "")
           %tr
-            %td.label Notify Mobile No
-            %td.value
-              = @rc_transfer_schedule.notify_mobile_no
-            %td#msg-error
-              = error_message_for(@rc_transfer_schedule, :notify_mobile_no, :prepend_text => "")
-          %tr
             %td.label App Code
             %td.value
               = @rc_transfer_schedule.app_code
             %td#msg-error
               = error_message_for(@rc_transfer_schedule, :app_code, :prepend_text => "")
           %tr
-            %td.label Is Enabled
+            %td.label Provider Account No
             %td.value
-              = @rc_transfer_schedule.is_enabled
+              = @rc_transfer_schedule.debit_account_no
             %td#msg-error
-              = error_message_for(@rc_transfer_schedule, :is_enabled, :prepend_text => "")
+              = error_message_for(@rc_transfer_schedule, :debit_account_no, :prepend_text => "")
+          %tr
+            %td.label Notify Mobile No
+            %td.value
+              = @rc_transfer_schedule.notify_mobile_no
+            %td#msg-error
+              = error_message_for(@rc_transfer_schedule, :notify_mobile_no, :prepend_text => "")
           %tr
             %td.label Next Run At
             %td.value
-              = @rc_transfer_schedule.next_run_at
+              = @rc_transfer_schedule.next_run_at.try(:strftime, "%d/%m/%Y %I:%M%p")
             %td#msg-error
               = error_message_for(@rc_transfer_schedule, :next_run_at, :prepend_text => "")
           %tr
             %td.label Last Run At
             %td.value
-              = @rc_transfer_schedule.last_run_at
+              = @rc_transfer_schedule.last_run_at.try(:strftime, "%d/%m/%Y %I:%M%p")
             %td#msg-error
               = error_message_for(@rc_transfer_schedule, :last_run_at, :prepend_text => "")
           %tr
-            %td.label Last Batch No.
+            %td.label Last Batch No
             %td.value
               = @rc_transfer_schedule.last_batch_no
             %td#msg-error

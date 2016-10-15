@@ -43,29 +43,14 @@ describe PcApp do
     end 
   end
 
-  context "app_id format" do 
-    [:app_id].each do |att|
+  context "identity_user_id and app_id format" do 
+    [:identity_user_id, :app_id].each do |att|
       it "should allow valid format" do
         should allow_value('1234567890').for(att)
         should allow_value('Abcd1234567890').for(att)
       end
 
       it "should not allow invalid format" do
-        should_not allow_value('Absdjhsd&&').for(att)
-        should_not allow_value('@AbcCo').for(att)
-        should_not allow_value('/ab0QWER').for(att)
-      end
-    end 
-  end
-
-  context "identity_user_id format" do 
-    [:identity_user_id].each do |att|
-      it "should allow valid format" do
-        should allow_value('1234567890').for(att)
-      end
-
-      it "should not allow invalid format" do
-        should_not allow_value('Abcd1234567890').for(att)
         should_not allow_value('Absdjhsd&&').for(att)
         should_not allow_value('@AbcCo').for(att)
         should_not allow_value('/ab0QWER').for(att)

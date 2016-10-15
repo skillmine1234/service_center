@@ -67,7 +67,10 @@
         = error_message_for(@pc_product, :mm_admin_user, :prepend_text => "")
     .control-group
       = f.label :mm_admin_password, "*MM Admin Password", :class => 'control-label'
-      = f.password_field :mm_admin_password, :required => true, :maxlength => 255
+      - if (!f.object.new_record? and f.object.errors.empty?) or (f.object.new_record? and !f.object.id.nil?)
+        = f.password_field :mm_admin_password, :required => true, :maxlength => 255, :value => PcProduct.decrypted_value(f.object.mm_admin_password)
+      - else
+        = f.password_field :mm_admin_password, :required => true, :maxlength => 255, :value => f.object.mm_admin_password
       #msg-error
         = error_message_for(@pc_product, :mm_admin_password, :prepend_text => "")
     .control-group
@@ -97,7 +100,10 @@
         = error_message_for(@pc_product, :rkb_user, :prepend_text => "")
     .control-group
       = f.label :rkb_password, "*RKB Password", :class => 'control-label'
-      = f.password_field :rkb_password, :maxlength => 40
+      - if (!f.object.new_record? and f.object.errors.empty?) or (f.object.new_record? and !f.object.id.nil?)
+        = f.password_field :rkb_password, :required => true, :maxlength => 255, :value => PcProduct.decrypted_value(f.object.rkb_password)
+      - else
+        = f.password_field :rkb_password, :required => true, :maxlength => 255, :value => f.object.rkb_password
       #msg-error
         = error_message_for(@pc_product, :rkb_password, :prepend_text => "")
     .control-group

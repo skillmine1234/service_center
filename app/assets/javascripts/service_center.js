@@ -48,11 +48,6 @@ $(document).ready(function(){
     $('input#credit_acct_val_fail').val('');
   });
 
-  $("#rc_transfer_schedule_reset").on('click', function(){
-    $('input#code').val('');
-    $('select#is_enabled').val('');
-  });
-
   $("#ecol_transaction_reset").on('click', function(){
     $('input#transfer_unique_no').val('');
     $('input#customer_code').val('');
@@ -97,7 +92,7 @@ $(document).ready(function(){
   });
 
   $(".reset-btn").on('click', function(){
-    $(".form-horizontal").find("input[type=text], select").val("");
+    $(".form-horizontal").find("input[type=text], select, input[type=number]").val("");
   });
 
   $(".val-request-link").on("click", function () {
@@ -222,7 +217,30 @@ $(document).ready(function(){
   
   $('#qg_ecol_todays_imps_txn_transfer_date').datepicker("setDate", $('#qg_ecol_todays_imps_txn_transfer_date').val());
 
-  $('#rc_transfer_schedule_next_run_at').datetimepicker();
+  $('#rc_transfer_schedule_next_run_at').datetimepicker({
+    dateFormat: "dd/mm/yy",
+    timeFormat: 'hh:mmTT' 
+  });
+
+  $('#next_from_date').datetimepicker({
+    dateFormat: "dd/mm/yy",
+    timeFormat: 'hh:mmTT' 
+  });
+
+  $('#next_to_date').datetimepicker({
+    dateFormat: "dd/mm/yy",
+    timeFormat: 'hh:mmTT' 
+  });
+
+  $('#last_from_date').datetimepicker({
+    dateFormat: "dd/mm/yy",
+    timeFormat: 'hh:mmTT' 
+  });
+
+  $('#last_to_date').datetimepicker({
+    dateFormat: "dd/mm/yy",
+    timeFormat: 'hh:mmTT' 
+  });
 
 });
 
