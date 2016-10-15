@@ -48,6 +48,10 @@ class PcProduct < ActiveRecord::Base
     end
   end
 
+  def self.decrypted_value(data)
+    DecPassGenerator.new(data,ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']).generate_decrypted_data
+  end
+
   def to_downcase
     unless self.frozen?
       self.code = self.code.downcase unless self.code.nil?
