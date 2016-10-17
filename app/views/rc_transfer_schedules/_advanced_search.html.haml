@@ -3,13 +3,13 @@
     = label_tag "Enabled?", "Enabled?", :class => 'control-label'
     = select_tag :is_enabled, options_for_select([['Yes','Y'],['No','N']],params[:is_enabled]),:prompt => "ANY"
   .control-group
-    = label_tag "Beneficiary Customer ID", "Beneficiary Customer ID", :class => 'control-label'
+    = label_tag "Code", "Code", :class => 'control-label'
     = text_field_tag :code, params[:code]
   .control-group
     = label_tag "Beneficiary Account No", "Beneficiary Account No", :class => 'control-label'
     = text_field_tag :bene_account_no, params[:bene_account_no]
   .control-group
-    = label_tag "Provider Account No", "Provider Account No", :class => 'control-label'
+    = label_tag "Debit Account No", "Debit Account No", :class => 'control-label'
     = text_field_tag :debit_account_no, params[:debit_account_no]
   .control-group
     = label_tag "Notify Mobile No", "Notify Mobile No", :class => 'control-label'

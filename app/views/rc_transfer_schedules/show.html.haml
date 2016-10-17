@@ -26,7 +26,7 @@
             %td#msg-error
               = error_message_for(@rc_transfer_schedule, :is_enabled, :prepend_text => "")
           %tr
-            %td.label Beneficiary Customer ID 
+            %td.label Code 
             %td.value
               = @rc_transfer_schedule.code
             %td#msg-error
@@ -44,7 +44,7 @@
             %td#msg-error
               = error_message_for(@rc_transfer_schedule, :app_code, :prepend_text => "")
           %tr
-            %td.label Provider Account No
+            %td.label Debit Account No
             %td.value
               = @rc_transfer_schedule.debit_account_no
             %td#msg-error
