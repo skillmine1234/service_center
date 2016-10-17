@@ -17,7 +17,7 @@
         = error_message_for(@sm_bank, :is_enabled, :prepend_text => "")
     .control-group
       = f.label :code, "*Code", :class => 'control-label'
-      = f.text_field :code, :maxlength => 15, :required => true
+      = f.text_field :code, :maxlength => 20, :required => true
       #msg-error
         = error_message_for(@rc_transfer_schedule, :code, :prepend_text => "")
     .control-group
