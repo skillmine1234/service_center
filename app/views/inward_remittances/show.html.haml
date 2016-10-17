@@ -111,6 +111,9 @@
         %tr
           %td.label Beneficiary Account IFSC
           %td= @inward_remittance.bene_account_ifsc
+        %tr
+          %td.label Processed At
+          %td= @inward_remittance.processed_at.try(:strftime, "%d/%m/%Y %I:%M%p")
       - if @inward_remittance.req_transfer_type != @inward_remittance.transfer_type
         .space{:style=>'height: 30px;'}
       - else
