@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161012130041) do
+ActiveRecord::Schema.define(version: 20161015141805) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",               null: false
@@ -2063,6 +2063,8 @@ ActiveRecord::Schema.define(version: 20161012130041) do
     t.string   "last_action",               limit: 1,                  default: "C"
     t.integer  "approved_version",                      precision: 38
     t.integer  "approved_id",               limit: nil
+    t.string   "add_req_ref_in_rep",        limit: 1,  default: "Y", null: false
+    t.string   "add_transfer_amt_in_rep",   limit: 1,  default: "Y", null: false
   end
 
   create_table "pc2_apps", force: :cascade do |t|

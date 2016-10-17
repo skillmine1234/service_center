@@ -20,6 +20,8 @@ FactoryGirl.define do
     allow_neft "N"
     allow_rtgs "N"
     allow_imps "Y"
+    add_req_ref_in_rep "Y"
+    add_transfer_amt_in_rep "Y"
     created_by "MyString"
     updated_by "MyString"
     customer_id 1234
