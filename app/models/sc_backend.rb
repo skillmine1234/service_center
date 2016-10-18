@@ -5,13 +5,17 @@ class ScBackend < ActiveRecord::Base
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
 
+  has_one :sc_backend_stat, :foreign_key => "code", :primary_key => 'code'
+  has_one :sc_backend_status, :foreign_key => "code", :primary_key => 'code'
+
   validates_presence_of :code, :do_auto_shutdown, :max_consecutive_failures, :window_in_mins, :max_window_failures, 
                         :do_auto_start, :min_consecutive_success, :min_window_success
   validates_uniqueness_of :code, :scope => :approval_status
 
   validates :code, length: { maximum: 20 }
   validates :do_auto_shutdown, length: { minimum: 1, maximum: 1 }
-  validates :window_in_mins, length: { minimum: 1, maximum: 2 }, :numericality => {:greater_than_or_equal_to => 1, :less_than_or_equal_to => 60}
+  validates :window_in_mins, length: { minimum: 1, maximum: 2 }
+  validates_inclusion_of :window_in_mins, :in => [1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60], :message => "Allowed Values: 1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60"
   validates :do_auto_start, length: { minimum: 1, maximum: 1 }
 
   validate :check_email_addresses

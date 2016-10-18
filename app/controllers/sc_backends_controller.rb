@@ -34,6 +34,8 @@ class ScBackendsController < ApplicationController
 
   def show
     @sc_backend = ScBackend.unscoped.find(params[:id])
+    @sc_backend_status = @sc_backend.sc_backend_status
+    @sc_backend_stat = @sc_backend.sc_backend_stat
   end
 
   def edit

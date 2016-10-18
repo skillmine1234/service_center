@@ -23,6 +23,10 @@ describe ScBackend do
       should validate_length_of(:do_auto_start).is_at_least(1).is_at_most(1)
     end
 
+    it do
+      should validate_inclusion_of(:window_in_mins).in_array([1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60])
+    end
+
     it do 
       sc_backend = Factory(:sc_backend, :approval_status => 'A')
       should validate_uniqueness_of(:code).scoped_to(:approval_status)
@@ -38,17 +42,23 @@ describe ScBackend do
     it "should return error when window_in_mins < 1" do
       sc_backend1 = Factory.build(:sc_backend, :window_in_mins => 0)
       sc_backend1.should_not be_valid
-      sc_backend1.errors_on(:window_in_mins).should == ["must be greater than or equal to 1"]
+      sc_backend1.errors_on(:window_in_mins).should == ["Allowed Values: 1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60"]
 
       sc_backend2 = Factory.build(:sc_backend, :window_in_mins => -1)
       sc_backend2.should_not be_valid
-      sc_backend2.errors_on(:window_in_mins).should == ["must be greater than or equal to 1"]
+      sc_backend2.errors_on(:window_in_mins).should == ["Allowed Values: 1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60"]
     end
 
     it "should return error when window_in_mins > 60" do
       sc_backend1 = Factory.build(:sc_backend, :window_in_mins => 61)
       sc_backend1.should_not be_valid
-      sc_backend1.errors_on(:window_in_mins).should == ["must be less than or equal to 60"]
+      sc_backend1.errors_on(:window_in_mins).should == ["Allowed Values: 1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60"]
+    end
+
+    it "should return error when window_in_mins is not divisor of 60" do
+      sc_backend1 = Factory.build(:sc_backend, :window_in_mins => 7)
+      sc_backend1.should_not be_valid
+      sc_backend1.errors_on(:window_in_mins).should == ["Allowed Values: 1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60"]
     end
   end
 
