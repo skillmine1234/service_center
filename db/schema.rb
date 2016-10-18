@@ -3246,7 +3246,7 @@ ActiveRecord::Schema.define(version: 20161015141805) do
     t.integer  "approved_id",              limit: nil
   end
 
-  add_index "sc_backends", ["code"], name: "sc_backends_01", unique: true
+  add_index "sc_backends", ["code", "approval_status"], name: "sc_backends_01", unique: true
 
   create_table "sc_services", force: :cascade do |t|
     t.string "code", limit: 50, null: false

@@ -95,6 +95,12 @@ ServiceCenter::Application.routes.draw do
   end
   resources :rc_transfer_unapproved_records
 
+  resources :sc_backends
+  # resources :sc_backend_stats
+  # resources :sc_backend_status
+  # resources :sc_backend_status_changes
+  resources :sc_unapproved_records
+
   namespace :api do
     namespace :v1 do
       resources :whitelisted_identities
@@ -145,6 +151,7 @@ ServiceCenter::Application.routes.draw do
   get '/sm_banks/:id/audit_logs' => 'sm_banks#audit_logs'
   get '/sm_bank_accounts/:id/audit_logs' => 'sm_bank_accounts#audit_logs'
   get '/rc_transfer_schedules/:id/audit_logs' => 'rc_transfer_schedules#audit_logs'
+  get '/sc_backend/:id/audit_logs' => 'sc_backends#audit_logs'
 
   get '/inward_remittances/:id/remitter_identities' => 'inward_remittances#remitter_identities'
   get '/inward_remittances/:id/beneficiary_identities' => 'inward_remittances#beneficiary_identities'
@@ -194,6 +201,7 @@ ServiceCenter::Application.routes.draw do
   put '/sm_banks/:id/approve' => "sm_banks#approve"
   put '/sm_bank_accounts/:id/approve' => 'sm_bank_accounts#approve'
   put '/rc_transfer_schedules/:id/approve' => "rc_transfer_schedules#approve"
+  put '/sc_backend/:id/approve' => "sc_backends#approve"
 
   get '/ecol_transactions/:id/ecol_audit_logs/:step_name' => 'ecol_transactions#ecol_audit_logs'
   put '/ecol_transactions/:id/approve' => "ecol_transactions#approve_transaction"

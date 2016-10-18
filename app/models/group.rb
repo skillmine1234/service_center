@@ -29,6 +29,8 @@ class Group < ActiveRecord::Base
       ['CnUnapprovedRecord','IncomingFile','IncomingFileRecord','CnIncomingFile','CnIncomingRecord']
     when "recurring-transfer"
       ['RcTransferUnapprovedRecord','RcTransfer','RcTransferSchedule','RcAuditStep']
+    when "sc-backend"
+      ['ScBackend', 'ScUnapprovedRecord']
     else
       []
     end

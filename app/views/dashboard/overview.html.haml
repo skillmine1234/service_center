@@ -410,3 +410,18 @@
         = image_tag 'rc_transfer.png', :size => "80x80"
       %br
         = "RC Transfers"
+
+- if @current_user.group_names.include?("sc-backend")
+  %h1 SC Backends
+  .slide-container
+    .box  
+      = link_to '/sc_unapproved_records' do
+        = image_tag 'work-list.jpg', :size => "80x80"
+      %br
+        = "Approval Worklist"
+  .slide-container
+    .box
+      = link_to '/sc_backends' do
+        = image_tag 'sc_backend.png', :size => "80x80"
+      %br
+        = "SC Backends"
