@@ -2,10 +2,15 @@
 
 FactoryGirl.define do
   factory :sc_backend_stat do
-    # sequence(:code) {|n| "9" + "%03i" % "#{n}" }
     code {Factory(:sc_backend).code}
-    new_status 'U'
-    remarks 'MyString'
-    created_by 1
+    consecutive_failure_cnt 1
+    consecutive_success_cnt 1
+    window_started_at "2016-10-19 15:12:44"
+    window_ends_at "2016-10-19 17:12:44"
+    window_failure_cnt 1
+    window_success_cnt 1
+    auditable_type "ScBackendStat"
+    auditable_id 1
+    last_status_change_id 1
   end
 end

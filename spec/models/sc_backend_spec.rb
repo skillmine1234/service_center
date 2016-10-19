@@ -7,6 +7,9 @@ describe ScBackend do
     it { should have_one(:sc_unapproved_record) }
     it { should belong_to(:unapproved_record) }
     it { should belong_to(:approved_record) }
+    it { should have_one(:sc_backend_stat) }
+    it { should have_one(:sc_backend_status) }
+    it { should have_many(:sc_backend_status_changes) }
   end
 
   context 'validation' do

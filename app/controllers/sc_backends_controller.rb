@@ -42,20 +42,25 @@ class ScBackendsController < ApplicationController
   def change_status
     @sc_backend = ScBackend.unscoped.find(params[:id])
     @sc_backend_status = @sc_backend.sc_backend_status
-    @sc_backend_status_change = @sc_backend.sc_backend_status_changes.build
 
-    if @sc_backend_status.status == 'U'
-      @sc_backend_status.status = 'D'
-      @sc_backend_status_change.new_status = 'D'
-    elsif @sc_backend_status.status == 'D'
-      @sc_backend_status.status = 'U'
-      @sc_backend_status_change.new_status = 'U'
+    if !@sc_backend_status.nil?
+      @sc_backend_status_change = @sc_backend.sc_backend_status_changes.build
+
+      if @sc_backend_status.status == 'U'
+        @sc_backend_status.status = 'D'
+        @sc_backend_status_change.new_status = 'D'
+      elsif @sc_backend_status.status == 'D'
+        @sc_backend_status.status = 'U'
+        @sc_backend_status_change.new_status = 'U'
+      end
+      @sc_backend_status_change.remarks = params[:sc_backend_status_change][:remarks]
+      @sc_backend_status_change.created_by = current_user.id
+      @sc_backend_status.save!
+      @sc_backend_status_change.save!
+      flash[:alert] = "SC Backend Status changed successfully"
+    else
+      flash[:alert] = "SC Backend Status not changed. Associated SC Backend Status record not found."
     end
-    @sc_backend_status_change.remarks = params[:sc_backend_status_change][:remarks]
-    @sc_backend_status_change.created_by = current_user.id
-    @sc_backend_status.save!
-    @sc_backend_status_change.save!
-    flash[:alert] = "SC Backend Status changed successfully"
     redirect_to @sc_backend
   end
 
