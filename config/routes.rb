@@ -95,10 +95,11 @@ ServiceCenter::Application.routes.draw do
   end
   resources :rc_transfer_unapproved_records
 
-  resources :sc_backends
-  # resources :sc_backend_stats
-  # resources :sc_backend_status
-  # resources :sc_backend_status_changes
+  resources :sc_backends do
+    member do
+      post 'change_status'
+    end
+  end
   resources :sc_unapproved_records
 
   namespace :api do

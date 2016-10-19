@@ -74,6 +74,18 @@ describe ScBackend do
     end
   end
 
+  context "failures_and_success" do 
+    it "should validate failures_and_success" do
+      sc_backend1 = Factory.build(:sc_backend, :max_consecutive_failures => 10, :min_consecutive_success => 9)
+      sc_backend1.should_not be_valid
+      sc_backend1.errors_on(:base).should == ["Condition: Max Consecutive Failures <= Min Consecutive Success <= Max Window Failures"]
+      
+      sc_backend2 = Factory.build(:sc_backend, :min_consecutive_success => 10, :max_window_failures => 9)
+      sc_backend2.should_not be_valid
+      sc_backend2.errors_on(:base).should == ["Condition: Max Consecutive Failures <= Min Consecutive Success <= Max Window Failures"]
+    end
+  end
+
   context "check_email_addresses" do 
     it "should validate email address" do 
       sc_backend = Factory.build(:sc_backend, :alert_email_to => "1234;esesdgs")

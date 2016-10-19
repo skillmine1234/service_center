@@ -109,6 +109,13 @@
                   %td.label Status
                   %td.value
                     = @sc_backend_status.status
+                    &nbsp; &nbsp;
+                    - if @sc_backend_status.status == 'U'
+                      - btn_lbl = "Down"
+                    - elsif @sc_backend_status.status == 'D'
+                      - btn_lbl = "Up"
+                    %a.btn{"data-toggle" => "modal", :href => "#scBackendStatusChangesModal", :role => "button", :class => "btn btn-primary"} 
+                      = btn_lbl
                 %tr
                   %td.label Last Status Change Id
                   %td.value
@@ -163,3 +170,15 @@
                   %td.label Last Alert Email Reference
                   %td.value
                     = @sc_backend_stat.last_alert_email_ref
+
+.modal.hide.fade{"id" => "scBackendStatusChangesModal", "aria-hidden" => "true", "aria-labelledby" => "  myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel Create SC Backend Status Changes
+    #error_message{:style => 'color:red'}
+  .modal-body
+    = simple_form_for @sc_backend_status_change, :url => {:action => 'change_status'}, :method => :post, :html=>{:id=>"transition"} do |ef|
+      = ef.label :remarks, "*Remarks"
+      = ef.text_field :remarks, :required => true
+      %br
+      = submit_tag "Change Status", :class=>"btn btn-primary transition_button", :id => "transition_button"

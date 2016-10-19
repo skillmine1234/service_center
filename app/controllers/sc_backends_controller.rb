@@ -36,6 +36,27 @@ class ScBackendsController < ApplicationController
     @sc_backend = ScBackend.unscoped.find(params[:id])
     @sc_backend_status = @sc_backend.sc_backend_status
     @sc_backend_stat = @sc_backend.sc_backend_stat
+    @sc_backend_status_change = @sc_backend.sc_backend_status_changes.new
+  end
+
+  def change_status
+    @sc_backend = ScBackend.unscoped.find(params[:id])
+    @sc_backend_status = @sc_backend.sc_backend_status
+    @sc_backend_status_change = @sc_backend.sc_backend_status_changes.build
+
+    if @sc_backend_status.status == 'U'
+      @sc_backend_status.status = 'D'
+      @sc_backend_status_change.new_status = 'D'
+    elsif @sc_backend_status.status == 'D'
+      @sc_backend_status.status = 'U'
+      @sc_backend_status_change.new_status = 'U'
+    end
+    @sc_backend_status_change.remarks = params[:sc_backend_status_change][:remarks]
+    @sc_backend_status_change.created_by = current_user.id
+    @sc_backend_status.save!
+    @sc_backend_status_change.save!
+    flash[:alert] = "SC Backend Status changed successfully"
+    redirect_to @sc_backend
   end
 
   def edit
@@ -90,6 +111,7 @@ class ScBackendsController < ApplicationController
     params.require(:sc_backend).permit(:code, :do_auto_shutdown, :max_consecutive_failures, :window_in_mins, :max_window_failures, 
                                        :do_auto_start, :min_consecutive_success, :min_window_success, :alert_email_to, 
                                        :approval_status, :last_action, :approved_version, :approved_id,
-                                       :created_by, :updated_by, :created_at, :updated_at, :lock_version)
+                                       :created_by, :updated_by, :created_at, :updated_at, :lock_version, 
+                                       sc_backend_status_changes_attributes: [:id, :code, :new_status, :remarks, :created_by, :created_at])
   end
 end
