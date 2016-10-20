@@ -1,4 +1,4 @@
-- if @rc_transfer.pending_approval == 'Y' and @rc_transfer.notify_status == 'NOTIFICATION FAILURE' 
+- if @rc_transfer.pending_approval == 'Y' and @rc_transfer.notify_status == 'NOTIFICATION FAILED' 
   %a.btn{"data-toggle" => "modal", :href => "#{'#myModal'}", :role => "button", :class => "btn btn-primary"} RETRY NOTIFICATION
   .modal.hide.fade{"id" => "myModal", "aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
     .modal-header

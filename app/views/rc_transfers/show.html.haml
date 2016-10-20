@@ -47,7 +47,7 @@
         %td
           = @rc_transfer.mobile_no
       %tr
-        %td.label Provider Account No
+        %td.label Debit Account No
         %td
           = @rc_transfer.debit_account_no
       %tr
@@ -88,7 +88,7 @@
           %td.label Notified At
           %td= @rc_transfer.notified_at.try(:strftime, "%d/%m/%Y %I:%M:%S %p")
           
-      - elsif @rc_transfer.notify_status == 'NOTIFICATION FAILURE'
+      - elsif @rc_transfer.notify_status == 'NOTIFICATION FAILED'
         %tr
           %td.label Notify Result
           %td

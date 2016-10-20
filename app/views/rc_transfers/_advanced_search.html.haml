@@ -1,12 +1,12 @@
 = form_tag '', :method => 'get', :class => 'form-horizontal', :autocomplete=>"off" do
   .control-group
-    = label_tag "Rc Transfer Code", "Rc Transfer Code", :class => 'control-label'
+    = label_tag "Recurring Transfer Code", "Rc Transfer Code", :class => 'control-label'
     = text_field_tag :rc_code, params[:rc_code]
   .control-group
     = label_tag "Beneficiary Account No", "Beneficiary Account No", :class => 'control-label'
     = text_field_tag :bene_account_no, params[:bene_account_no]
   .control-group
-    = label_tag "Provider Account No", "Provider Account No", :class => 'control-label'
+    = label_tag "Debit Account No", "Debit Account No", :class => 'control-label'
     = text_field_tag :debit_account_no, params[:debit_account_no]
   .control-group
     = label_tag "Transfer Amount", "Transfer Amount", :class => 'control-label'
@@ -18,7 +18,7 @@
     = select_tag :status, options_for_select([['NEW','NEW'],['PENDING CREDIT','PENDING CREDIT'],['CREDITED','CREDITED'],['CREDIT FAILED','CREDIT FAILED'],['BALINQ FAILED','BALINQ FAILED']],params[:status]),:prompt => 'ANY'
   .control-group
     = label_tag "Notify Status", "Notify Status", :class => 'control-label'
-    = select_tag :notify_status, options_for_select([['PENDING NOTIFICATION','PENDING NOTIFICATION'],['NOTIFIED: REJECTED','NOTIFIED: REJECTED'],['NOTIFIED: OK','NOTIFIED: OK'],['NOTIFICATION FAILURE','NOTIFICATION FAILURE']],params[:notify_status]),:prompt => 'ANY'  
+    = select_tag :notify_status, options_for_select([['PENDING NOTIFICATION','PENDING NOTIFICATION'],['NOTIFIED: REJECTED','NOTIFIED: REJECTED'],['NOTIFIED: OK','NOTIFIED: OK'],['NOTIFICATION FAILED','NOTIFICATION FAILED']],params[:notify_status]),:prompt => 'ANY'  
   = hidden_field_tag :advanced_search, :true
   .form-actions
     = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"

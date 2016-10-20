@@ -47,7 +47,7 @@ describe RcTransfersController do
 
   describe "PUT update" do
     it "updates the requested rc_transfer" do
-      rc_transfer = Factory(:rc_transfer, :pending_approval => 'Y', :notify_status => 'NOTIFICATION FAILURE')
+      rc_transfer = Factory(:rc_transfer, :pending_approval => 'Y', :notify_status => 'NOTIFICATION FAILED')
       params = rc_transfer.attributes.slice(*rc_transfer.class.attribute_names)
       put :update, :id => rc_transfer.id
       response.should be_redirect
@@ -59,8 +59,8 @@ describe RcTransfersController do
 
   describe "PUT update multiple" do
     it "updates the requested rc_transfer" do
-      rc_transfer1 = Factory(:rc_transfer, :pending_approval => 'Y', :notify_status => 'NOTIFICATION FAILURE')
-      rc_transfer2 = Factory(:rc_transfer, :pending_approval => 'Y', :notify_status => 'NOTIFICATION FAILURE')
+      rc_transfer1 = Factory(:rc_transfer, :pending_approval => 'Y', :notify_status => 'NOTIFICATION FAILED')
+      rc_transfer2 = Factory(:rc_transfer, :pending_approval => 'Y', :notify_status => 'NOTIFICATION FAILED')
       put :update_multiple, :rc_transfer_ids => [rc_transfer1.id, rc_transfer2.id]
       response.should be_redirect
       rc_transfer1.reload

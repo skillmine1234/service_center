@@ -17,9 +17,11 @@
       %th{:style=>'text-align:left; background-color: lightblue;'}
         = check_box_tag(:select_all, value = "1", checked = false, options = {})
       %th{:style=>'text-align:left; background-color: lightblue;'}
-        Customer ID
+        Recurring Transfer Code
       %th{:style=>'text-align:left; background-color: lightblue;'}
-        Provider Account No
+        Beneficiary Account No
+      %th{:style=>'text-align:left; background-color: lightblue;'}
+        Debit Account No
       %th{:style=>'text-align:left; background-color: lightblue;'}
         Mobile No
       %th{:style=>'text-align:left; background-color: lightblue;'} 
@@ -41,10 +43,12 @@
           %td{:style=>'text-align:left;'}
             = link_to 'Show', rc_transfer
           %td{:style=>'text-align:left;'}
-            - if rc_transfer.pending_approval == 'Y' and rc_transfer.notify_status == 'NOTIFICATION FAILURE'
+            - if rc_transfer.pending_approval == 'Y' and rc_transfer.notify_status == 'NOTIFICATION FAILED'
               = check_box_tag "rc_transfer_ids[]", rc_transfer.id, false, class: 'txn_select'
           %td{:style=>'text-align:left;'}
-            = rc_transfer.customer_id
+            = rc_transfer.rc_transfer_code
+          %td{:style=>'text-align:left;'}
+            = rc_transfer.bene_account_no
           %td{:style=>'text-align:left;'}
             = rc_transfer.debit_account_no
           %td{:style=>'text-align:left;'}

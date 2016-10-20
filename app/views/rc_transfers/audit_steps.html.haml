@@ -48,9 +48,9 @@
             %td{:style=>'text-align:left;'}
               = link_to "Show Response", "#", :class => 'val-reply-link', :href => "javascript:void()", data: { reply: value.rep_bitstream }
             %td{:style=>'text-align:left;'}
-              = value.req_timestamp.utc.try(:strftime, "%d/%m/%Y %I:%M:%S:%L%p") rescue nil
+              = value.req_timestamp.try(:strftime, "%d/%m/%Y %I:%M:%S:%L%p") rescue nil
             %td{:style=>'text-align:left;'}
-              = value.rep_timestamp.utc.try(:strftime, "%d/%m/%Y %I:%M:%S:%L%p") rescue nil
+              = value.rep_timestamp.try(:strftime, "%d/%m/%Y %I:%M:%S:%L%p") rescue nil
             %td{:style=>'text-align:left;'}
               = value.fault_code   
             %td{:style=>'text-align:left;'}
