@@ -20,6 +20,9 @@ describe Group do
 
       group = Factory(:group,:name => 'recurring-transfer')
       group.model_list.should == ["RcTransferUnapprovedRecord", "RcTransfer", "RcTransferSchedule", "RcAuditStep"]
+
+      group = Factory(:group,:name => 'sc-backend')
+      group.model_list.should == ['ScBackend','ScUnapprovedRecord']
     end
   end
 end

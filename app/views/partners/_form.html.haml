@@ -105,6 +105,16 @@
       #msg-error
         = error_message_for(@partner, :allow_imps, :prepend_text => "")
     .control-group
+      = f.label :add_req_ref_in_rep, "Add Request Reference In Response?", :class => 'control-label'
+      = f.check_box :add_req_ref_in_rep, {},"Y","N"
+      #msg-error
+        = error_message_for(@partner, :add_req_ref_in_rep, :prepend_text => "")
+    .control-group
+      = f.label :add_transfer_amt_in_rep, "Add Transfer Amount In Response?", :class => 'control-label'
+      = f.check_box :add_transfer_amt_in_rep, {},"Y","N"
+      #msg-error
+        = error_message_for(@partner, :add_transfer_amt_in_rep, :prepend_text => "")
+    .control-group
       = f.label :mmid, "MMID", :class => 'control-label'
       = f.text_field :mmid, :maxlength => 7
       #msg-error

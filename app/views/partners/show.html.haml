@@ -1,5 +1,5 @@
 .form-horizontal.show_form
-  .form-main-with-color{:style=>'background-color: #F1F2F8;'}
+  .form-main-with-color{:style=>'background-color: #F1F2F8; margin: 1%;'}
     #form-details
       %h3 Partner Details 
       %br
@@ -127,6 +127,18 @@
               = @partner.allow_imps
             %td#msg-error
               = error_message_for(@partner, :allow_imps, :prepend_text => "")
+          %tr
+            %td.label Add Request Reference In Response?
+            %td
+              = @partner.add_req_ref_in_rep
+            %td#msg-error
+              = error_message_for(@partner, :add_req_ref_in_rep, :prepend_text => "")
+          %tr
+            %td.label Add Transfer Amount In Response?
+            %td
+              = @partner.add_transfer_amt_in_rep
+            %td#msg-error
+              = error_message_for(@partner, :add_transfer_amt_in_rep, :prepend_text => "")
           %tr
             %td.label MMID
             %td.value

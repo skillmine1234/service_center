@@ -7,6 +7,7 @@ class WhitelistedIdentitiesController < ApplicationController
   before_filter :block_inactive_user!
   respond_to :json
   include ApplicationHelper
+  include IdentitiesHelper
 
   def new
     @whitelisted_identity = WhitelistedIdentity.new
@@ -27,9 +28,13 @@ class WhitelistedIdentitiesController < ApplicationController
       redirect_to :back
     end
   end 
-  
+
   def index
-    whitelisted_identities = (params[:approval_status].present? and params[:approval_status] == 'U') ? WhitelistedIdentity.unscoped.where("approval_status =?",'U').order("id desc") : WhitelistedIdentity.order("id desc")
+    if params[:advanced_search].present?
+      whitelisted_identities = find_identities(params).order("id desc")
+    else
+      whitelisted_identities = (params[:approval_status].present? and params[:approval_status] == 'U') ? WhitelistedIdentity.unscoped.where("approval_status =?",'U').order("id desc") : WhitelistedIdentity.order("id desc")
+    end
     @whitelisted_identities_count = whitelisted_identities.count
     @whitelisted_identities = whitelisted_identities.paginate(:per_page => 10, :page => params[:page]) rescue []
   end

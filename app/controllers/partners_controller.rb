@@ -94,6 +94,6 @@ class PartnersController < ApplicationController
                                     :remitter_email_allowed, :remitter_sms_allowed, :tech_email_id, 
                                     :txn_hold_period_days, :updated_by, :lock_version, :enabled, :customer_id,
                                     :country, :address_line1, :address_line2, :address_line3,:mmid, :mobile_no,
-                                    :approved_id, :approved_version)
+                                    :add_req_ref_in_rep, :add_transfer_amt_in_rep, :approved_id, :approved_version)
   end
 end

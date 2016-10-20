@@ -8,7 +8,7 @@ class Partner < ActiveRecord::Base
   validates_presence_of :code, :enabled, :name, :account_no, :txn_hold_period_days,
                         :customer_id, :remitter_email_allowed, :remitter_sms_allowed,
                         :allow_imps, :allow_neft, :allow_rtgs, :country, :account_ifsc,
-                        :identity_user_id
+                        :identity_user_id, :add_req_ref_in_rep, :add_transfer_amt_in_rep
   validates_uniqueness_of :code, :scope => :approval_status
   validates :low_balance_alert_at, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => '9e20'.to_f, :allow_nil => true }
   validates :account_no, :numericality => {:only_integer => true}, length: {in: 10..16}
@@ -19,6 +19,7 @@ class Partner < ActiveRecord::Base
   validates :customer_id, :numericality => {:only_integer => true}, length: {maximum: 15}
   validates :mmid, :numericality => {:only_integer => true}, length: {maximum: 7, minimum: 7}, :allow_blank => true
   validates :mobile_no, :numericality => {:only_integer => true}, length: {maximum: 10, minimum: 10}, :allow_blank => true
+  validates_length_of :add_req_ref_in_rep, :add_transfer_amt_in_rep, minimum: 1, maximum: 1
 
   validate :imps_and_mmid
   validate :check_email_addresses

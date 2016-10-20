@@ -12,7 +12,7 @@ describe Partner do
   context 'validation' do
     [:code, :enabled, :name, :account_no, :txn_hold_period_days,
     :remitter_email_allowed, :remitter_sms_allowed, :allow_imps, 
-    :allow_neft, :allow_rtgs, :country, :account_ifsc, :identity_user_id].each do |att|
+    :allow_neft, :allow_rtgs, :country, :account_ifsc, :identity_user_id, :add_req_ref_in_rep, :add_transfer_amt_in_rep].each do |att|
       it { should validate_presence_of(att) }
     end
     [:account_no, :low_balance_alert_at, :mmid, :mobile_no, :txn_hold_period_days].each do |att|
@@ -37,6 +37,8 @@ describe Partner do
     it { should validate_length_of(:mmid).is_at_least(7) }
     it { should validate_length_of(:mmid).is_at_most(7) }
     it { should validate_length_of(:customer_id).is_at_most(15) }
+    it { should validate_length_of(:add_req_ref_in_rep).is_at_least(1).is_at_most(1) }
+    it { should validate_length_of(:add_transfer_amt_in_rep).is_at_least(1).is_at_most(1) }
 
     context "txn_hold_period_days" do 
       it "should accept value 1 to 15" do
