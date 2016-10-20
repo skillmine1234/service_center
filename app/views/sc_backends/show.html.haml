@@ -119,9 +119,7 @@
                 %tr
                   %td.label Last Status Change Remark
                   %td.value
-                    / # = @sc_backend_status.last_status_change_id
-                    = @sc_backend_status.last_status_change.remarks
-          / %hr{:style=>"background-color: #F1F2F8; width: 100%"}
+                    = @sc_backend_status.last_status_change.try(:remarks)
           .bottom-block
             %h3
               Statistics :

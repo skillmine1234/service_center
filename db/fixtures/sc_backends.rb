@@ -1,4 +1,4 @@
-ScBackend.seed(:code) do |s|
+ScBackend.seed_once(:code) do |s|
   s.code = 'FCR'
   s.do_auto_shutdown = 'Y'
   s.do_auto_start = 'N'
@@ -16,12 +16,12 @@ ScBackend.seed(:code) do |s|
   s.approval_status = 'A'
 end
 
-ScBackendStatus.seed(:code) do |s|
+ScBackendStatus.seed_once(:code) do |s|
   s.code = 'FCR'
   s.status = 'U'
 end
 
-ScBackendStat.seed(:code) do |s|
+ScBackendStat.seed_once(:code) do |s|
   s.code = 'FCR'
   s.consecutive_failure_cnt = 0
   s.consecutive_success_cnt = 0
@@ -33,7 +33,7 @@ ScBackendStat.seed(:code) do |s|
   s.auditable_id = 0
 end
 
-ScBackend.seed(:code) do |s|
+ScBackend.seed_once(:code) do |s|
   s.code = 'ATOM'
   s.do_auto_shutdown = 'Y'
   s.do_auto_start = 'N'
@@ -50,12 +50,12 @@ ScBackend.seed(:code) do |s|
   s.approval_status = 'A'
 end
 
-ScBackendStatus.seed(:code) do |s|
+ScBackendStatus.seed_once(:code) do |s|
   s.code = 'ATOM'
   s.status = 'U'  
 end
 
-ScBackendStat.seed(:code) do |s|
+ScBackendStat.seed_once(:code) do |s|
   s.code = 'ATOM'
   s.consecutive_failure_cnt = 0
   s.consecutive_success_cnt = 0
