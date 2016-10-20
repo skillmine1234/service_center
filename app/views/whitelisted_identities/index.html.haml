@@ -1,5 +1,10 @@
 %br
 %h1 Listing Whitelisted Identities
+%h2.collapsible
+  Advanced Search
+  %span.caret
+.collapsible-content
+  = render :partial => 'advanced_search'
 %br
 = "Total Count: #{@whitelisted_identities_count}"
 %br
@@ -8,6 +13,8 @@
 %table.table.table-bordered.table-striped.table-hover
   .thead
     %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Partner Code
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Name
     %th{:style=>'text-align:left; background-color: lightblue;'}
@@ -31,6 +38,8 @@
       %tr
         %td{:style=>'text-align:left;'}
           = link_to 'Show', whitelisted_identity
+        %td{:style=>'text-align:left;'}
+          = whitelisted_identity.partner.try(:code)
         %td{:style=>'text-align:left;'}
           = whitelisted_identity.full_name
         %td{:style=>'text-align:left;'}
