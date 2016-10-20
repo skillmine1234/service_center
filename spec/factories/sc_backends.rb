@@ -9,7 +9,7 @@ FactoryGirl.define do
     max_window_failures 3
     window_in_mins 6
     do_auto_start "N"
-    min_window_success 1
+    min_window_success 4
     alert_email_to "def@ruby.com"
     approval_status "U"
     last_action "C"

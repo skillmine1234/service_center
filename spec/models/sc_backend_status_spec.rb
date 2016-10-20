@@ -3,6 +3,7 @@ require 'spec_helper'
 describe ScBackendStatus do
   context 'association' do
     it { should belong_to(:sc_backend) }
+    it { should belong_to(:last_status_change) }
   end
 
   context 'validation' do

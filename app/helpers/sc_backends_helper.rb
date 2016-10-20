@@ -4,4 +4,17 @@ module ScBackendsHelper
     sc_backends = sc_backends.where("code=?",params[:code]) if params[:code].present?
     sc_backends
   end
+
+  def assign_status(params,current_user)
+    @sc_backend_status_change = @sc_backend.sc_backend_status_changes.build
+    if @sc_backend_status.status == 'U'
+      @sc_backend_status.status = 'D'
+      @sc_backend_status_change.new_status = 'D'
+    elsif @sc_backend_status.status == 'D'
+      @sc_backend_status.status = 'U'
+      @sc_backend_status_change.new_status = 'U'
+    end
+    @sc_backend_status_change.remarks = params[:sc_backend_status_change][:remarks]
+    @sc_backend_status_change.created_by = current_user.id
+  end
 end

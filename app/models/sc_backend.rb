@@ -20,14 +20,35 @@ class ScBackend < ActiveRecord::Base
   validates_inclusion_of :window_in_mins, :in => [1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60], :message => "Allowed Values: 1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60"
   validates :do_auto_start, length: { minimum: 1, maximum: 1 }
 
-  validate :failures_and_success
+  validate :check_max_consecutive_failures
+  validate :check_min_consecutive_success
+  validate :check_max_window_failures
   validate :check_email_addresses
 
-  def failures_and_success
-    if !self.max_consecutive_failures.nil? || !self.min_consecutive_success.nil? || !self.max_window_failures.nil?
-      if !(max_consecutive_failures <= min_consecutive_success) || !(min_consecutive_success <= max_window_failures)
-        errors.add(:base, "Condition: Max Consecutive Failures <= Min Consecutive Success <= Max Window Failures")
-      end
+  def check_max_consecutive_failures
+    unless (self.max_consecutive_failures.nil? and self.min_consecutive_success.nil?)
+      errors[:max_consecutive_failures] << "should be less than Minimum Consecutive Failures" if (self.max_consecutive_failures > self.min_consecutive_success)
+    end
+    unless (self.max_consecutive_failures.nil? and self.max_window_failures.nil?)
+      errors[:max_consecutive_failures] << "should be less than Maximum Window Failures" if (self.max_consecutive_failures > self.max_window_failures)
+    end
+    unless (self.max_consecutive_failures.nil? and self.min_window_success.nil?)
+      errors[:max_consecutive_failures] << "should be less than Minimum Window Success" if (self.max_consecutive_failures > self.min_window_success)
+    end
+  end
+
+  def check_min_consecutive_success
+    unless (self.min_consecutive_success.nil? and self.max_window_failures.nil?)
+      errors[:min_consecutive_success] << "should be less than Maximum Window Failures" if (self.min_consecutive_success > self.max_window_failures)
+    end
+    unless (self.min_consecutive_success.nil? and self.min_window_success.nil?)
+      errors[:min_consecutive_success] << "should be less than Minimum Window Success" if (self.min_consecutive_success > self.min_window_success)
+    end
+  end
+
+  def check_max_window_failures
+    unless (self.max_window_failures.nil? and self.min_window_success.nil?)
+      errors[:max_window_failures] << "should be less than Minimum Window Success" if (self.max_window_failures > self.min_window_success)
     end
   end
 

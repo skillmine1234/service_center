@@ -412,7 +412,7 @@
         = "RC Transfers"
 
 - if @current_user.group_names.include?("sc-backend")
-  %h1 SC Backends
+  %h1 Service Center Backends
   .slide-container
     .box  
       = link_to '/sc_unapproved_records' do
@@ -424,4 +424,4 @@
       = link_to '/sc_backends' do
         = image_tag 'sc_backend.png', :size => "80x80"
       %br
-        = "SC Backends"
+        = "Service Center Backends"

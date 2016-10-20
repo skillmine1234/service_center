@@ -212,4 +212,37 @@ describe ScBackendsController do
       sc_backend.approval_status.should == 'A'
     end
   end
+
+  describe "POST change_status" do
+    describe "with valid params" do
+      it "updates the requested sc_backend" do
+        sc_backend = Factory(:sc_backend, :code => "7766")
+        sc_backend_stat = Factory(:sc_backend_stat, :code => sc_backend.code)
+        sc_backend_status = Factory(:sc_backend_status, :code => sc_backend.code)
+        params = sc_backend.attributes.slice(*sc_backend.class.attribute_names)
+        params[:code] = "7767"
+        post :change_status, {:id => sc_backend.id, :sc_backend_status_change => {:remarks => "Test"}}
+        sc_backend_stat.reload
+        sc_backend_status.reload
+        ScBackendStatusChange.last.remarks.should == 'Test'
+        sc_backend_stat.last_status_change_id.should == ScBackendStatusChange.last.id
+        sc_backend_status.last_status_change_id.should == ScBackendStatusChange.last.id
+      end
+
+      it "shows errors on failure" do
+        sc_backend = Factory(:sc_backend, :code => "7766")
+        sc_backend_stat = Factory(:sc_backend_stat, :code => sc_backend.code, :last_status_change_id => nil)
+        sc_backend_status = Factory(:sc_backend_status, :code => sc_backend.code, :status => 'A', :last_status_change_id => nil)
+        params = sc_backend.attributes.slice(*sc_backend.class.attribute_names)
+        params[:code] = "7767"
+        post :change_status, {:id => sc_backend.id, :sc_backend_status_change => {:remarks => "Test"}}
+        sc_backend_stat.reload
+        sc_backend_status.reload
+        flash[:alert].should == "New status can't be blank,New status is too short (minimum is 1 character)"
+        ScBackendStatusChange.last.should be_nil
+        sc_backend_stat.last_status_change_id.should be_nil
+        sc_backend_status.last_status_change_id.should be_nil
+      end
+    end
+  end
 end
