@@ -19,6 +19,12 @@
   .control-group
     = label_tag "Notify Status", "Notify Status", :class => 'control-label'
     = select_tag :notify_status, options_for_select([['PENDING NOTIFICATION','PENDING NOTIFICATION'],['NOTIFIED: REJECTED','NOTIFIED: REJECTED'],['NOTIFIED: OK','NOTIFIED: OK'],['NOTIFICATION FAILED','NOTIFICATION FAILED']],params[:notify_status]),:prompt => 'ANY'  
+  .control-group
+    = label_tag "Mobile No", "Mobile No", :class => 'control-label'
+    = text_field_tag :mobile_no, params[:mobile_no]
+  .control-group
+    = label_tag "Pending Approval?", "Pending Approval?", :class => 'control-label'
+    = select_tag :pending_approval, options_for_select([['Yes','Y'],['No','N']],params[:pending_approval]),:prompt => "ANY"
   = hidden_field_tag :advanced_search, :true
   .form-actions
     = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"

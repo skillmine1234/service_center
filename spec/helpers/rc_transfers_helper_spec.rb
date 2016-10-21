@@ -32,6 +32,12 @@ describe RcTransfersHelper do
       a = Factory(:rc_transfer, :notify_status => 'NOTIFIED: OK')
       find_rc_transfers({:notify_status => "NOTIFIED: OK"},RcTransfer).should == [a]
       find_rc_transfers({:notify_status => "NEW"},RcTransfer).should == []
+      a = Factory(:rc_transfer, :mobile_no => "1234567890")
+      find_rc_transfers({:mobile_no => "1234567890"},RcTransfer).should == [a]
+      find_rc_transfers({:mobile_no => "4321335342"},RcTransfer).should == []
+      a = Factory(:rc_transfer, :pending_approval => "N")
+      find_rc_transfers({:pending_approval => "N"},RcTransfer).should == [a]
+      find_rc_transfers({:pending_approval => "A"},RcTransfer).should == []
     end
   end
 end
