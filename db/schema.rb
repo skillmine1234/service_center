@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161024151144) do
+ActiveRecord::Schema.define(version: 20161025121148) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",               null: false
@@ -1927,6 +1927,8 @@ ActiveRecord::Schema.define(version: 20161024151144) do
     t.text     "req_bitstream"
     t.text     "rep_bitstream"
     t.text     "fault_bitstream"
+    t.string   "remote_host",        limit: 500
+    t.string   "req_uri",            limit: 500
   end
 
   add_index "inw_audit_steps", ["inw_auditable_type", "inw_auditable_id", "step_no", "attempt_no"], name: "uk_inw_audit_steps", unique: true
