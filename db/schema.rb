@@ -2128,8 +2128,8 @@ ActiveRecord::Schema.define(version: 20161024151144) do
     t.integer  "approved_id",               limit: nil
     t.string   "add_req_ref_in_rep",        limit: 1,                  default: "Y", null: false
     t.string   "add_transfer_amt_in_rep",   limit: 1,                  default: "Y", null: false
-    t.string   "app_code",                  limit: 100
-    t.string   "alert_on_status_change",    limit: 1
+    t.string   "app_code",                  limit: 20
+    t.string   "notify_on_status_change",   limit: 1
   end
 
   create_table "pc2_apps", force: :cascade do |t|
