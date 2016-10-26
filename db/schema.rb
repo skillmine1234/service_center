@@ -2065,9 +2065,9 @@ ActiveRecord::Schema.define(version: 20161026110357) do
     t.string   "broker_uuid",                  null: false
     t.string   "auditable_type",               null: false
     t.integer  "auditable_id",     limit: nil, null: false
-    t.string   "app_code",                     null: false
-    t.string   "service_code",                 null: false
-    t.string   "pending_approval",             null: false
+    t.string   "app_code",         limit: 20,  null: false
+    t.string   "service_code",     limit: 20,  null: false
+    t.string   "pending_approval", limit: 1,   null: false
     t.datetime "created_at",                   null: false
   end
 
