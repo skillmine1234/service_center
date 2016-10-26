@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161025121148) do
+ActiveRecord::Schema.define(version: 20161026110357) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",               null: false
@@ -2029,7 +2029,7 @@ ActiveRecord::Schema.define(version: 20161025121148) do
     t.string   "rmtr_to_bene_note"
     t.string   "purpose_code",           limit: 5
     t.string   "status_code",            limit: 25
-    t.string   "bank_ref",               limit: 30
+    t.string   "bank_ref",               limit: 50
     t.string   "rep_no"
     t.string   "rep_version",            limit: 10
     t.datetime "rep_timestamp"
@@ -2059,6 +2059,16 @@ ActiveRecord::Schema.define(version: 20161025121148) do
   create_table "inward_remittances_locks", id: false, force: :cascade do |t|
     t.integer "inward_remittance_id", limit: nil
     t.string  "created_at"
+  end
+
+  create_table "ns_pending_notifications", force: :cascade do |t|
+    t.string   "broker_uuid",                  null: false
+    t.string   "auditable_type",               null: false
+    t.integer  "auditable_id",     limit: nil, null: false
+    t.string   "app_code",                     null: false
+    t.string   "service_code",                 null: false
+    t.string   "pending_approval",             null: false
+    t.datetime "created_at",                   null: false
   end
 
   create_table "outgoing_file_types", force: :cascade do |t|
