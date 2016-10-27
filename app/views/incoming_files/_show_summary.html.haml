@@ -24,7 +24,7 @@
       %td{:style=>'text-align:left;'}
         = "Upload Started At"
       %td{:style=>'text-align:left;'}
-        = @incoming_file.started_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
+        = @incoming_file.started_at.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
     %tr
       %td{:style=>'text-align:left;'}
         = "Upload Time"
@@ -95,7 +95,7 @@
       %td{:style=>'text-align:left;'}
         = "Last Alert At"
       %td{:style=>'text-align:left;'}
-        = @incoming_file.last_alert_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
+        = @incoming_file.last_alert_at.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
     %tr
       %td{:style=>'text-align:left;'}
         = "Audit Steps"

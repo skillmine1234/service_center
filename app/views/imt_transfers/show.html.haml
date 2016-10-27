@@ -50,7 +50,7 @@
         %tr
           %td.label Initiated At
           %td.value
-            = @imt_transfer.initiated_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
+            = @imt_transfer.initiated_at.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
           %td#msg-error
             = error_message_for(@imt_transfer, :initiated_at, :prepend_text => "")
         %tr
@@ -68,7 +68,7 @@
         %tr
           %td.label Completed At
           %td.value
-            = @imt_transfer.completed_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
+            = @imt_transfer.completed_at.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
           %td#msg-error
             = error_message_for(@imt_transfer, :completed_at, :prepend_text => "")
         %tr
@@ -80,7 +80,7 @@
         %tr
           %td.label Cancelled At
           %td.value
-            = @imt_transfer.cancelled_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
+            = @imt_transfer.cancelled_at.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
           %td#msg-error
             = error_message_for(@imt_transfer, :cancelled_at, :prepend_text => "")
         %tr
@@ -92,7 +92,7 @@
         %tr
           %td.label Expired At
           %td.value
-            = @imt_transfer.expired_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
+            = @imt_transfer.expired_at.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
           %td#msg-error
             = error_message_for(@imt_transfer, :expired_at, :prepend_text => "")
         %tr

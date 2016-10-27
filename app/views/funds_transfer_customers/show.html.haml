@@ -113,12 +113,12 @@
           %tr
             %td.label Created At
             %td.value
-              = @funds_transfer_customer.created_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
+              = @funds_transfer_customer.created_at.try(:strftime, "%d/%m/%Y %I:%M%p")
             %td#msg-error
               = error_message_for(@funds_transfer_customer, :created_at, :prepend_text => "")
           %tr
             %td.label Updated At
             %td.value
-              = @funds_transfer_customer.updated_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
+              = @funds_transfer_customer.updated_at.try(:strftime, "%d/%m/%Y %I:%M%p")
             %td#msg-error
               = error_message_for(@funds_transfer_customer, :updated_at, :prepend_text => "")

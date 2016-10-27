@@ -52,12 +52,12 @@
           %tr
             %td.label Created At
             %td.value
-              = @ft_customer_account.created_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
+              = @ft_customer_account.created_at.try(:strftime, "%d/%m/%Y %I:%M%p")
             %td#msg-error
               = error_message_for(@ft_customer_account, :created_at, :prepend_text => "")
           %tr
             %td.label Updated At
             %td.value
-              = @ft_customer_account.updated_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
+              = @ft_customer_account.updated_at.try(:strftime, "%d/%m/%Y %I:%M%p")
             %td#msg-error
               = error_message_for(@ft_customer_account, :updated_at, :prepend_text => "")

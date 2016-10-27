@@ -20,7 +20,7 @@
         %tr
           %td.label Debited At
           %td.value
-            = @summary.try(:debited_at).utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
+            = @summary.try(:debited_at).try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
         %tr
           %td.label Reversal Amount
           %td.value
@@ -36,4 +36,4 @@
         %tr
           %td.label Reversed At
           %td.value
-            = @summary.try(:reversed_at).utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
+            = @summary.try(:reversed_at).try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""

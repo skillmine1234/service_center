@@ -78,12 +78,12 @@
           %tr
             %td.label Created At
             %td.value
-              = @ic_supplier.created_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
+              = @ic_supplier.created_at.try(:strftime, "%d/%m/%Y %I:%M%p")
             %td#msg-error
               = error_message_for(@ic_supplier, :created_at, :prepend_text => "")
           %tr
             %td.label Updated At
             %td.value
-              = @ic_supplier.updated_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
+              = @ic_supplier.updated_at.try(:strftime, "%d/%m/%Y %I:%M%p")
             %td#msg-error
               = error_message_for(@ic_supplier, :updated_at, :prepend_text => "")

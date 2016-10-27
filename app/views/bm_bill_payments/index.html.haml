@@ -66,4 +66,4 @@
         %td{:style=>'text-align:left;'}
           = bm_bill_payment.bill_id
         %td{:style=>'text-align:left;'}
-          = bm_bill_payment.billpaid_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue nil
+          = bm_bill_payment.billpaid_at.try(:strftime, "%d/%m/%Y %I:%M%p") rescue nil

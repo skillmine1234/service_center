@@ -29,7 +29,7 @@
           = link_to "Fault Text", "#", :class => 'fault-link', :href => "#faultText", :style => "font-weight:100"
     %h3
       Payment Date:
-      = @bm_aggregator_payment.created_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue nil
+      = @bm_aggregator_payment.created_at.try(:strftime, "%d/%m/%Y %I:%M%p") rescue nil
     %h3
       Request XML:
       - unless @bm_aggregator_payment.bm_audit_log.nil?
@@ -38,7 +38,7 @@
         = "-"
     %h3
       Request Timestamp:
-      = @bm_aggregator_payment.bm_audit_log.req_timestamp.utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue nil
+      = @bm_aggregator_payment.bm_audit_log.req_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p") rescue nil
   .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'}
     %h3 
       Reconciled? :
@@ -52,7 +52,7 @@
         = link_to "Show Response", "#", :class => 'reply-link', :href => "#replyText", data: { reply: @bm_aggregator_payment.bm_audit_log.rep_bitstream }
     %h3
       Response Timestamp:
-      = @bm_aggregator_payment.bm_audit_log.rep_timestamp.utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue nil
+      = @bm_aggregator_payment.bm_audit_log.rep_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p") rescue nil
 
   .header-form-main{:style=>'background-color: #F1F2F8; width: 100%; height: 300px; display: inline-block;'}
     #ticket-details

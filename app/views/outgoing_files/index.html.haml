@@ -44,6 +44,6 @@
         %td{:style=>'text-align:left;'}
           = outgoing_file.line_count
         %td{:style=>'text-align:left;'}
-          = outgoing_file.started_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
+          = outgoing_file.started_at.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
         %td{:style=>'text-align:left;'}
           = outgoing_file.email_ref

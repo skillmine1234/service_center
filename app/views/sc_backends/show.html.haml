@@ -90,13 +90,13 @@
               %tr
                 %td.label Created At
                 %td.value
-                  = @sc_backend.created_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
+                  = @sc_backend.created_at.try(:strftime, "%d/%m/%Y %I:%M%p")
                 %td#msg-error
                   = error_message_for(@sc_backend, :created_at, :prepend_text => "")
               %tr
                 %td.label Updated At
                 %td.value
-                  = @sc_backend.updated_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
+                  = @sc_backend.updated_at.try(:strftime, "%d/%m/%Y %I:%M%p")
                 %td#msg-error
                   = error_message_for(@sc_backend, :updated_at, :prepend_text => "")
         #right-block{:style => 'width: 49%; float: right;'}
@@ -136,11 +136,11 @@
                 %tr
                   %td.label Window Started At
                   %td.value
-                    = @sc_backend_stat.window_started_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
+                    = @sc_backend_stat.window_started_at.try(:strftime, "%d/%m/%Y %I:%M%p")
                 %tr
                   %td.label Window Ends At
                   %td.value
-                    = @sc_backend_stat.window_ends_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
+                    = @sc_backend_stat.window_ends_at.try(:strftime, "%d/%m/%Y %I:%M%p")
                 %tr
                   %td.label Window Failure Count
                   %td.value
@@ -156,7 +156,7 @@
                 %tr
                   %td.label Updated At
                   %td.value
-                    = @sc_backend_stat.updated_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
+                    = @sc_backend_stat.updated_at.try(:strftime, "%d/%m/%Y %I:%M%p")
                 %tr
                   %td.label Last Status Change ID
                   %td.value

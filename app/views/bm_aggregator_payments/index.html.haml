@@ -57,4 +57,4 @@
         %td{:style=>'text-align:left;'}
           = bm_aggregator_payment.payment_amount
         %td{:style=>'text-align:left;'}
-          = bm_aggregator_payment.created_at.utc.try(:strftime, "%d/%m/%Y %I:%M%p")
+          = bm_aggregator_payment.created_at.try(:strftime, "%d/%m/%Y %I:%M%p")
