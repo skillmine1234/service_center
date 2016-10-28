@@ -88,4 +88,14 @@ describe InwardRemittancesController do
       assigns(:identities).first.should eq(inward_remittance.beneficiary_identities.first)
     end
   end
+
+  describe "GET audit_logs" do
+    it "assigns the requested inward_remittance as @inward_remittance" do
+      inward_remittance = Factory(:inward_remittance, :partner_code => 20)
+      inw_audit_log = Factory(:inw_audit_step, :inw_auditable_type => 'InwardRemittance', :inw_auditable_id => inward_remittance.id)
+      get :audit_logs, {:id => inward_remittance.id, :step_name => 'ALL'}
+      assigns(:values_count).should eq(1)
+      assigns(:values).should eq([inw_audit_log])
+    end
+  end
 end

@@ -12,4 +12,12 @@ module InwardRemittanceHelper
     inw_remittances = inw_remittances.where("inward_remittances.req_timestamp>=? and inward_remittances.req_timestamp<=?",Time.zone.parse(params[:from_date]).beginning_of_day,Time.zone.parse(params[:to_date]).end_of_day) if params[:from_date].present? and params[:to_date].present?
     inw_remittances
   end
+
+  def find_logs(params,transaction)
+    if params[:step_name] != 'ALL'
+      transaction.audit_steps.where('step_name=?',params[:step_name]).order("attempt_no desc") rescue []
+    else
+      transaction.audit_steps.order("id desc") rescue []
+    end      
+  end
 end

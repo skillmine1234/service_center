@@ -39,6 +39,13 @@ class InwardRemittancesController < ApplicationController
     @identities = identities.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
 
+  def audit_logs
+    @inward_remittance = InwardRemittance.find(params[:id])
+    values = find_logs(params, @inward_remittance)
+    @values_count = values.count(:id)
+    @values = values.paginate(:per_page => 10, :page => params[:page]) rescue []
+  end
+
   private
 
   def inward_remittance_params

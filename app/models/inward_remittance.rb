@@ -8,6 +8,7 @@ class InwardRemittance < ActiveRecord::Base
 
   has_one :inw_audit_log
   has_one :inward_remittances_lock
+  has_many :audit_steps, :class_name => 'InwAuditStep', :as => :inw_auditable
 
   validates_presence_of :req_no, :req_version, :req_timestamp, :partner_code, :rmtr_identity_count, 
                         :bene_identity_count, :attempt_no

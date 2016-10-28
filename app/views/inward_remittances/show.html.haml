@@ -1,5 +1,5 @@
 .show_ticket
-  .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; display: inline-block;'}
+  .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'}
     %h3
       Partner:
       = @inward_remittance.partner_code 
@@ -16,16 +16,14 @@
     %h3
       Request XML:
       = link_to "Show Request", "#", :class => 'request-link', :href => "#requestText"
-  .header-form-extended{:style=>'background-color: #ecf5fa; width: 50%; display: inline-block;'}
+  .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'}
     %h3
       Status:
       = @inward_remittance.status_code
-      %tr
-        - if @inward_remittance.status_code == "FAILED"
-          = link_to "Fault Text", "#", :class => 'fault-link', :href => "#faultText", :style => "font-weight:100"
-      %tr
-        - if !@inward_remittance.inward_remittances_lock.nil?
-          = "Locked"
+      - if @inward_remittance.status_code == "FAILED"
+        = link_to "Fault Text", "#", :class => 'fault-link', :href => "#faultText", :style => "font-weight:100"
+      - if !@inward_remittance.inward_remittances_lock.nil?
+        = "Locked"
 
     %h3 
       Reply No:
@@ -40,11 +38,14 @@
     %h3
       Reply XML:
       = link_to "Show Reply", "#", :class => 'reply-link', :href => "#replyText"
+    %h3
+      Audit Logs:
+      = link_to 'Show', {:controller => 'inward_remittances', :action => 'audit_logs', :id => @inward_remittance.id, :step_name => 'ALL'}
 
-  .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; display: inline-block;'}
+  .header-form-main{:style=>'background-color: #F1F2F8; width: 100%; display: inline-block;'}
     #ticket-details
       %h3 Transfer Details
-      %table.table.no-border
+      %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:left;'}  
         %tr
           %td.label Purpose Code
           - if @inward_remittance.purpose.nil?
@@ -61,15 +62,53 @@
         %tr
           %td.label Self Transfer?
           %td= check_box_tag :transfer,@inward_remittance.is_self_transfer, @inward_remittance.self_transfer?, {:disabled => true}
+      %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:left;'} 
         %tr
           %td.label Transfer Amount
           %td= @inward_remittance.transfer_amount
-      %hr{:style=>'background-color: #F1F2F8; width: 220%'}    
-      %h3 
+        %tr
+          %td.label Beneficiary Account No
+          %td= @inward_remittance.bene_account_no
+        %tr
+          %td.label Beneficiary Account IFSC
+          %td= @inward_remittance.bene_account_ifsc
+        %tr
+          %td.label Processed At
+          %td= @inward_remittance.processed_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+      %hr{:style=>'background-color: #F1F2F8; width: 100%'}
+      %h3 Notification Status
+      %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:left;'}
+        %tr
+          %td.label Notify Attempt
+          %td
+            - if !@inward_remittance.notify_attempt_no.nil?
+              = link_to @inward_remittance.notify_attempt_no, {:controller => 'inward_remittances', :action => 'audit_logs', :id => @inward_remittance.id, :step_name => 'NOTIFY'}
+            - else
+              = "-"
+        %tr
+          %td.label Notify Attempt At
+          %td= @inward_remittance.notify_attempt_at.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
+        %tr
+          %td.label Notify Status
+          %td= @inward_remittance.notify_status
+      - if @inward_remittance.notify_status == 'NOTIFIED:OK'
+        %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:right;'}
+          %tr
+            %td.label Notified At
+            %td= @inward_remittance.notified_at
+        
+      - elsif @inward_remittance.notify_status == 'NOTIFICATION FAILED'
+        %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:right;'}
+          %tr
+            %td.label Notify Result
+            %td
+              = link_to "Show Result", "#", :class => 'notify-result', :href => "#notifyResult", :style => "font-weight:100"
+      %hr{:style=>'background-color: #F1F2F8; width: 100%'}
+      %h3{:style => 'width: 50%; float:left;'} 
         = "Remitter: " + "#{@inward_remittance.remitter_type}" + " (" 
         = link_to @inward_remittance.rmtr_identity_count,:controller => :inward_remittances, :action => :remitter_identities, :id => @inward_remittance.id 
         = " Identities)"
-      %table.table.no-border
+      %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:left;'} 
         %tr
           %td.label Name
           %td= @inward_remittance.rmtr_full_name
@@ -100,33 +139,11 @@
         %tr
           %td.label Mobile No
           %td= @inward_remittance.rmtr_mobile_no
-  .header-form-extended{:style=>'background-color: #F1F2F8; width: 50%;  display: inline-block;'}
-    #ticket-details
-      %h3
-      .space{:style=>'height: 15px;'}
-      %table.table.no-border
-        %tr
-          %td.label Beneficiary Account No
-          %td= @inward_remittance.bene_account_no
-        %tr
-          %td.label Beneficiary Account IFSC
-          %td= @inward_remittance.bene_account_ifsc
-        %tr
-          %td.label Processed At
-          %td= @inward_remittance.processed_at.try(:strftime, "%d/%m/%Y %I:%M%p")
-        %tr
-          %td.label Notify Status
-          %td= @inward_remittance.notify_status
-      - if @inward_remittance.req_transfer_type != @inward_remittance.transfer_type
-        .space{:style=>'height: 30px;'}
-      - else
-        .space{:style=>'height: 2px;'}
-      %hr{:style=>'background-color: #F1F2F8; width: 120%'}
       %h3
         = "Beneficiary: " + "#{@inward_remittance.beneficiary_type}" + " (" 
         = link_to @inward_remittance.bene_identity_count,:controller => :inward_remittances, :action => :beneficiary_identities, :id => @inward_remittance.id
         = " Identities)"
-      %table.table.no-border
+      %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:left;'} 
         %tr
           %td.label Name
           %td= @inward_remittance.bene_full_name
@@ -157,9 +174,7 @@
         %tr
           %td.label Mobile No
           %td= @inward_remittance.bene_mobile_no
-      .space{:style=>'height: 2px;'}
-  .header-form-main{:style=>'background-color: #ecf5fa; width: 100%; display: inline-block;'}
-    %table.table.no-border
+    %table.table.no-border{:style => 'background-color: #ecf5fa; word-wrap:break-word; table-layout: fixed; width: 100%; float:left;'} 
       %tr
         %td.label Remitter To Beneficiary Note
         %td= @inward_remittance.rmtr_to_bene_note
