@@ -68,7 +68,9 @@ class ScBackendsController < ApplicationController
 
   def previous_status_changes
     @sc_backend = ScBackend.unscoped.find(params[:id])
-    @previous_status_changes = @sc_backend.previous_status_changes
+    previous_status_changes = @sc_backend.sc_backend_status_changes.order("created_at desc")
+    @previous_status_changes_count = previous_status_changes.count(:id)
+    @previous_status_changes = previous_status_changes.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
 
   def edit
