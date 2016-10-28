@@ -77,21 +77,6 @@ describe ScBackend do
     end
   end
 
-  context "previous_status_changes" do 
-    it "should return previous_status_changes if present" do
-      sc_backend = Factory(:sc_backend, :code => '6543')
-      sc_backend_status_change1 = Factory(:sc_backend_status_change, :code => '6543', :new_status => 'A', :created_at => '2016-10-28 15:01:00')
-      sc_backend_status_change2 = Factory(:sc_backend_status_change, :code => '6543', :new_status => 'B', :created_at => '2016-10-28 15:02:00')
-      sc_backend_status_change3 = Factory(:sc_backend_status_change, :code => '6543', :new_status => 'C', :created_at => '2016-10-28 15:03:00')
-      expect(sc_backend.previous_status_changes).to eq([sc_backend_status_change3, sc_backend_status_change2, sc_backend_status_change1])
-    end
-
-    it "should return message if previous_status_changes are not present" do
-      sc_backend = Factory(:sc_backend, :code => '6544')
-      expect(sc_backend.previous_status_changes).to eq("No status change found for SC Backend 6544")
-    end
-  end
-
   context "check_max_consecutive_failures" do 
     it "should validate max_consecutive_failures" do
       sc_backend1 = Factory.build(:sc_backend, :max_consecutive_failures => 10, :min_consecutive_success => 9, :max_window_failures => 11, :min_window_success => 12)

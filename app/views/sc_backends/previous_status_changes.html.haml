@@ -10,26 +10,31 @@
           %td#msg-error
             = error_message_for(@sc_backend, :code, :prepend_text => "")
       %div{:style=>"padding: 5px;"}
-        - if @previous_status_changes.is_a?(String)
-          = @previous_status_changes
-        - else
-          %table.table.table-bordered.table-striped.table-hover
-            .thead
-              %th{:style=>'text-align:left; background-color: lightblue;'}
-                Status
-              %th{:style=>'text-align:left; background-color: lightblue;'}
-                Remarks
-              %th{:style=>'text-align:left; background-color: lightblue;'}
-                Changed At
-            .tbody
-              - @previous_status_changes.each do |sc_backend_status_change|
-                %tr
-                  %td{:style=>'text-align:left;'}
-                    = sc_backend_status_change.new_status
-                  %td{:style=>'text-align:left;'}
-                    = sc_backend_status_change.remarks
-                  %td{:style=>'text-align:left;'}
-                    = sc_backend_status_change.created_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+        = "Total Count: #{@previous_status_changes_count}"
+        %br
+        = will_paginate @previous_status_changes
+        %br
+        %table.table.table-bordered.table-striped.table-hover
+          .thead
+            %th{:style=>'text-align:left; background-color: lightblue;'}
+              Status
+            %th{:style=>'text-align:left; background-color: lightblue;'}
+              Remarks
+            %th{:style=>'text-align:left; background-color: lightblue;'}
+              Changed By
+            %th{:style=>'text-align:left; background-color: lightblue;'}
+              Changed At
+          .tbody
+            - @previous_status_changes.each do |sc_backend_status_change|
+              %tr
+                %td{:style=>'text-align:left;'}
+                  = sc_backend_status_change.full_status
+                %td{:style=>'text-align:left;'}
+                  = sc_backend_status_change.remarks
+                %td{:style=>'text-align:left;'}
+                  = sc_backend_status_change.created_user.try(:username)
+                %td{:style=>'text-align:left;'}
+                  = sc_backend_status_change.created_at.try(:strftime, "%d/%m/%Y %I:%M%p")
         %br
         = link_to 'Back', @sc_backend
 
