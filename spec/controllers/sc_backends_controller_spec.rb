@@ -32,6 +32,17 @@ describe ScBackendsController do
     end
   end
 
+  describe "GET previous_status_changes" do
+    it "should return @previous_status_changes for @sc_backend if present" do
+      sc_backend = Factory(:sc_backend, :code => '6545')
+      sc_backend_status_change1 = Factory(:sc_backend_status_change, :code => '6545', :new_status => 'A', :created_at => '2016-10-28 15:05:00')
+      sc_backend_status_change2 = Factory(:sc_backend_status_change, :code => '6545', :new_status => 'B', :created_at => '2016-10-28 15:06:00')
+      sc_backend_status_change3 = Factory(:sc_backend_status_change, :code => '6545', :new_status => 'C', :created_at => '2016-10-28 15:07:00')
+      get :previous_status_changes, {:id => sc_backend.id}
+      assigns(:previous_status_changes).should eq([sc_backend_status_change3, sc_backend_status_change2, sc_backend_status_change1])
+    end
+  end
+
   describe "GET new" do
     it "assigns a new sc_backend as @sc_backend" do
       get :new

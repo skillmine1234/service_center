@@ -66,6 +66,11 @@ class ScBackendsController < ApplicationController
     redirect_to @sc_backend
   end
 
+  def previous_status_changes
+    @sc_backend = ScBackend.unscoped.find(params[:id])
+    @previous_status_changes = @sc_backend.previous_status_changes
+  end
+
   def edit
     sc_backend = ScBackend.unscoped.find(params[:id])
     if sc_backend.approval_status == 'A' && sc_backend.unapproved_record.nil?

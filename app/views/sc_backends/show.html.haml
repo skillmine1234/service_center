@@ -120,6 +120,10 @@
                   %td.label Last Status Change Remark
                   %td.value
                     = @sc_backend_status.last_status_change.try(:remarks)
+                %tr
+                  %td.label 
+                    = link_to 'Previous Status Changes', previous_status_changes_path(@sc_backend)
+                  %td.value
           .bottom-block
             %h3
               Statistics :

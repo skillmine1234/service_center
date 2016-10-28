@@ -25,6 +25,10 @@ class ScBackend < ActiveRecord::Base
   validate :check_max_window_failures
   validate :check_email_addresses
 
+  def previous_status_changes
+    self.sc_backend_status_changes.empty? == true ? "No status change found for SC Backend #{self.code}" : self.sc_backend_status_changes.order('created_at DESC')
+  end
+
   def check_max_consecutive_failures
     unless (self.max_consecutive_failures.nil? and self.min_consecutive_success.nil?)
       errors[:max_consecutive_failures] << "should be less than Minimum Consecutive Failures" if (self.max_consecutive_failures > self.min_consecutive_success)
