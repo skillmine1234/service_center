@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161026110357) do
+ActiveRecord::Schema.define(version: 20161027135450) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",               null: false
@@ -1063,6 +1063,49 @@ ActiveRecord::Schema.define(version: 20161026110357) do
     t.datetime "created_at",                      null: false
   end
 
+  create_table "efdr_transactions", force: :cascade do |t|
+    t.string   "status_code",        limit: 50,                 null: false
+    t.string   "msgid",              limit: 20
+    t.integer  "msgtype",                        precision: 38
+    t.integer  "msgsubtype",                     precision: 38
+    t.string   "segment",            limit: 20
+    t.string   "memcode",            limit: 5
+    t.string   "colltype",           limit: 20
+    t.string   "instno",             limit: 30
+    t.string   "oldinstno",          limit: 30
+    t.date     "issue_date"
+    t.date     "maturity_date"
+    t.decimal  "lien_amount"
+    t.decimal  "interst_rate"
+    t.datetime "bgfd_created_at"
+    t.string   "lien_to",            limit: 5
+    t.string   "remarks",            limit: 200
+    t.string   "ifsc_code",          limit: 11
+    t.string   "to_account",         limit: 20
+    t.string   "nsccl_txnid",        limit: 20
+    t.string   "nsccl_rspmsgid",     limit: 20
+    t.string   "nsccl_rspcode",      limit: 8
+    t.string   "lien_id",            limit: 15
+    t.string   "lien_reason_code",   limit: 20
+    t.string   "final_repay_amount", limit: 20
+    t.string   "repay_account_id",   limit: 20
+    t.string   "remarks1",           limit: 200
+    t.string   "remarks2",           limit: 200
+    t.string   "remarks3",           limit: 200
+    t.string   "remarks4",           limit: 200
+    t.string   "remarks5",           limit: 200
+    t.string   "remarks6",           limit: 200
+    t.string   "phone_number",       limit: 20
+    t.string   "email_id",           limit: 50
+  end
+
+  create_table "employe_details", id: false, force: :cascade do |t|
+    t.string "name"
+    t.string "surname"
+    t.string "company"
+    t.string "qualification"
+  end
+
   create_table "example", id: false, force: :cascade do |t|
     t.integer "id",  limit: nil
     t.integer "val", limit: 10,  precision: 10
@@ -1369,6 +1412,13 @@ ActiveRecord::Schema.define(version: 20161026110357) do
 
   add_index "funds_transfers", ["TRUNC(\"REQ_TIMESTAMP\")"], name: "funds_xfer_req_timestamp"
   add_index "funds_transfers", ["req_no", "customer_id", "attempt_no"], name: "funds_xfer_unique_index", unique: true
+
+  create_table "get_employe_details", id: false, force: :cascade do |t|
+    t.string "employe_name"
+    t.string "employe_surname"
+    t.string "employe_company"
+    t.string "employe_qualification"
+  end
 
   create_table "groups", force: :cascade do |t|
     t.string   "name"
@@ -1997,6 +2047,10 @@ ActiveRecord::Schema.define(version: 20161026110357) do
     t.string   "cbs_req_ref_no"
     t.datetime "processed_at"
     t.string   "notify_status",          limit: 100
+    t.integer  "notify_attempt_no",                   precision: 38
+    t.datetime "notify_attempt_at"
+    t.datetime "notified_at"
+    t.string   "notify_result",          limit: 50
   end
 
   add_index "inward_remittances", ["bank_ref"], name: "i_inward_remittances_bank_ref"
@@ -2755,6 +2809,45 @@ ActiveRecord::Schema.define(version: 20161026110357) do
     t.string   "broker_uuid",               null: false
     t.integer  "sm_payment_id", limit: nil, null: false
     t.datetime "created_at",                null: false
+  end
+
+  create_table "persondetails", id: false, force: :cascade do |t|
+    t.string  "name"
+    t.integer "id",            limit: nil
+    t.string  "company"
+    t.integer "salary",                    precision: 38
+    t.string  "qualification"
+    t.integer "panno",                     precision: 38
+    t.integer "phoneno",                   precision: 38
+  end
+
+  create_table "ps_audit_steps", force: :cascade do |t|
+    t.string   "ps_auditable_type",                             null: false
+    t.integer  "ps_auditable_id",   limit: nil,                 null: false
+    t.integer  "step_no",                        precision: 38, null: false
+    t.integer  "attempt_no",                     precision: 38, null: false
+    t.string   "step_name",         limit: 100,                 null: false
+    t.string   "status_code",       limit: 25,                  null: false
+    t.string   "fault_code"
+    t.string   "fault_subcode",     limit: 50
+    t.string   "fault_reason",      limit: 1000
+    t.string   "req_reference"
+    t.datetime "req_timestamp"
+    t.string   "rep_reference"
+    t.datetime "rep_timestamp"
+    t.text     "req_bitstream"
+    t.text     "rep_bitstream"
+    t.text     "fault_bitstream"
+  end
+
+  add_index "ps_audit_steps", ["ps_auditable_type", "ps_auditable_id", "step_no", "attempt_no"], name: "uk_ps_audit_steps_01", unique: true
+
+  create_table "ps_pending_notifications", force: :cascade do |t|
+    t.string   "broker_uuid",                null: false
+    t.string   "status_code",    limit: 25,  null: false
+    t.string   "app_code",       limit: 25,  null: false
+    t.integer  "transaction_id", limit: nil, null: false
+    t.datetime "created_at",                 null: false
   end
 
   create_table "purpose_codes", force: :cascade do |t|
