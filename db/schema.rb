@@ -2762,7 +2762,7 @@ ActiveRecord::Schema.define(version: 20161027135450) do
   end
 
   create_table "purpose_codes", force: :cascade do |t|
-    t.string   "code",                  limit: 4
+    t.string   "code",                  :limit=>4, :index=>{:name=>"purpose_codes_01", :with=>["approval_status"], :unique=>true}
     t.string   "description"
     t.string   "is_enabled",            limit: 1
     t.string   "created_by",            limit: 20
