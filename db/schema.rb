@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161026110357) do
+ActiveRecord::Schema.define(version: 20161027135450) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",               null: false
@@ -1997,6 +1997,10 @@ ActiveRecord::Schema.define(version: 20161026110357) do
     t.string   "cbs_req_ref_no"
     t.datetime "processed_at"
     t.string   "notify_status",          limit: 100
+    t.integer  "notify_attempt_no",                   precision: 38
+    t.datetime "notify_attempt_at"
+    t.datetime "notified_at"
+    t.string   "notify_result",          limit: 50
   end
 
   add_index "inward_remittances", ["bank_ref"], name: "i_inward_remittances_bank_ref"
