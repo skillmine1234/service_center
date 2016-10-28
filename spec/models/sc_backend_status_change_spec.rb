@@ -15,12 +15,5 @@ describe ScBackendStatusChange do
       should validate_length_of(:code).is_at_most(20)
       should validate_length_of(:new_status).is_at_least(1).is_at_most(1)
     end
-
-    it "should return error if code is already taken" do
-      sc_backend_status_change1 = Factory(:sc_backend_status_change, :code => "9933")
-      sc_backend_status_change2 = Factory.build(:sc_backend_status_change, :code => "9933")
-      sc_backend_status_change2.should_not be_valid
-      sc_backend_status_change2.errors_on(:code).should == ["has already been taken"]
-    end
   end
 end
