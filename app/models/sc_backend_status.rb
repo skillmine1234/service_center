@@ -9,4 +9,13 @@ class ScBackendStatus < ActiveRecord::Base
 
   belongs_to :sc_backend, :foreign_key => 'code', :primary_key => 'code'
   belongs_to :last_status_change, :foreign_key => 'last_status_change_id', :primary_key => 'id', :class_name => 'ScBackendStatusChange'
+
+  def full_status
+    case status
+    when 'U'
+      'Up'
+    when 'D'
+      'Down'
+    end
+  end
 end

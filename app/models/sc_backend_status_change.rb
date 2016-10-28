@@ -1,6 +1,5 @@
 class ScBackendStatusChange < ActiveRecord::Base
   validates_presence_of :code, :new_status, :remarks
-  validates_uniqueness_of :code
 
   validates :code, length: { maximum: 20 }
   validates :new_status, length: { minimum: 1, maximum: 1 }

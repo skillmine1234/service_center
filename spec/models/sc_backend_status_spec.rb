@@ -29,4 +29,17 @@ describe ScBackendStatus do
       sc_backend_status2.errors_on(:code).should == ["has already been taken"]
     end
   end
+
+  context "full_status" do 
+    it "should return Up when staus id U" do 
+      status = Factory(:sc_backend_status, :status => 'U')
+      status.full_status.should == 'Up'
+    end
+
+    it "should return Up when staus id D" do 
+      status = Factory(:sc_backend_status, :status => 'D')
+      status.full_status.should == 'Down'
+    end
+  end
+
 end

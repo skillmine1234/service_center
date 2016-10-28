@@ -108,7 +108,7 @@
                 %tr
                   %td.label Status
                   %td.value
-                    = @sc_backend_status.status
+                    = @sc_backend_status.full_status
                     &nbsp; &nbsp;
                     - if @sc_backend_status.status == 'U'
                       - btn_lbl = "Down"
