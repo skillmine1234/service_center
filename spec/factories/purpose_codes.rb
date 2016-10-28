@@ -1,7 +1,7 @@
 # Read about factories at http://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  sequence(:code1) {|n| "%04i" % "#{n}"}
+  sequence(:code1) {|n| "PC%02i" % "#{n}"}
   sequence(:code2) {|n| "%05i" % "#{n}"}
   factory :purpose_code do
     code FactoryGirl.generate(:code1)

@@ -39,10 +39,12 @@ describe PurposeCode do
     context "code format" do
       it "should allow valid format" do 
         [:code].each do |att|
-          should allow_value('ab1V').for(att)
-          should allow_value('acde').for(att)
-          should allow_value('1343').for(att)
-          should allow_value('aBCD').for(att)
+          should allow_value('PC00').for(att)
+          should allow_value('PC01').for(att)
+          should allow_value('PC09').for(att)
+          should allow_value('PC10').for(att)
+          should allow_value('PC11').for(att)
+          should allow_value('PC99').for(att)
         end
 
         [:rbi_code].each do |att|
@@ -53,8 +55,20 @@ describe PurposeCode do
         end
       end
 
+      it "should not allow invalid format for code" do
+        purpose_code = Factory.build(:purpose_code, :code => 'ABC1')
+        purpose_code.errors_on(:code).should == ["Invalid format, expected format is : {PC[0-9]{2}}"]
+      end
+
+
       it "should not allow invalid format" do 
         [:code].each do |att|
+          should_not allow_value('pc12').for(att)
+          should_not allow_value('1111').for(att)
+          should_not allow_value('ab1V').for(att)
+          should_not allow_value('acde').for(att)          
+          should_not allow_value('1343').for(att)
+          should_not allow_value('aBCD').for(att)
           should_not allow_value('a 1V').for(att)
           should_not allow_value('@acd').for(att)
           should_not allow_value('134\n').for(att)
@@ -168,7 +182,7 @@ describe PurposeCode do
   context "default_scope" do 
     it "should only return 'A' records by default" do 
       purpose_code1 = Factory(:purpose_code, :approval_status => 'A') 
-      purpose_code2 = Factory(:purpose_code, :code => "0002")
+      purpose_code2 = Factory(:purpose_code, :code => "PC88")
       PurposeCode.all.should == [purpose_code1]
       purpose_code2.approval_status = 'A'
       purpose_code2.save
