@@ -16,4 +16,14 @@ $(document).ready(function(){
       $('#partner_mobile_no').prop('disabled',false)      
     }
   });
+
+  $("#partner_notify_on_status_change").on("click", function () {
+    if(!$('#partner_notify_on_status_change').is(":checked")){
+      $('#partner_app_code').val('');
+      $('#partner_app_code').prop('readOnly',true)
+    }
+    else{
+      $('#partner_app_code').prop('readOnly',false)     
+    }
+  });
 });

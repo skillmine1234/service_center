@@ -110,6 +110,18 @@
           /   %td#msg-error
           /     = error_message_for(@partner, :bbeneficiary_email_allowed, :prepend_text => "")
           %tr
+            %td.label  Notify On Status Change?
+            %td.value
+              = @partner.notify_on_status_change
+            %td#msg-error
+              = error_message_for(@partner, :notify_on_status_change, :prepend_text => "")
+          %tr
+            %td.label App Code
+            %td.value
+              = @partner.app_code
+            %td#msg-error
+              = error_message_for(@partner, :app_code, :prepend_text => "")
+          %tr
             %td.label NEFT Allowed?
             %td.value
               = @partner.allow_neft

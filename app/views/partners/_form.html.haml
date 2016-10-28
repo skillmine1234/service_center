@@ -86,6 +86,20 @@
     /   #msg-error
     /     = error_message_for(@partner, :beneficiary_email_allowed, :prepend_text => "")
     .control-group
+      = f.label :notify_on_status_change, "Notify On Status Change?", :class => 'control-label'
+      = f.check_box :notify_on_status_change, {},"Y","N"
+      #msg-error
+        = error_message_for(@partner, :notify_on_status_change, :prepend_text => "")
+    .control-group
+      = f.label :app_code, "App Code", :class => 'control-label'
+      - if f.object.notify_on_status_change == 'Y'
+        = f.text_field :app_code, :maxlength => 20
+      - else
+        = f.text_field :app_code, :readOnly => true, :maxlength => 20
+      #msg-error
+        = error_message_for(@partner, :app_code, :prepend_text => "")
+  .form-extended
+    .control-group
       = f.label :neft_allowd, "NEFT Allowed?", :class => 'control-label'
       - if f.object.allow_neft.nil?
         = f.check_box :allow_neft, {:checked => "checked"},"Y","N"
@@ -98,7 +112,6 @@
       = f.check_box :allow_rtgs, {},"Y","N"
       #msg-error
         = error_message_for(@partner, :allow_rgts, :prepend_text => "")
-  .form-extended
     .control-group
       = f.label :imps_allowed, "IMPS Allowed?", :class => 'control-label'
       = f.check_box :allow_imps, {},"Y","N"

@@ -12,17 +12,40 @@ describe Partner do
   context 'validation' do
     [:code, :enabled, :name, :account_no, :txn_hold_period_days,
     :remitter_email_allowed, :remitter_sms_allowed, :allow_imps, 
-    :allow_neft, :allow_rtgs, :country, :account_ifsc, :identity_user_id, :add_req_ref_in_rep, :add_transfer_amt_in_rep].each do |att|
+    :allow_neft, :allow_rtgs, :country, :account_ifsc, :identity_user_id, 
+    :add_req_ref_in_rep, :add_transfer_amt_in_rep, :notify_on_status_change].each do |att|
       it { should validate_presence_of(att) }
     end
+
     [:account_no, :low_balance_alert_at, :mmid, :mobile_no, :txn_hold_period_days].each do |att|
       it {should validate_numericality_of(att)}
     end
+
     it do
       partner = Factory(:partner, :account_no => '1234567890123456', :account_ifsc => 'abcd0123456', :approval_status => 'A')
       should validate_uniqueness_of(:code).scoped_to(:approval_status)
     end
+
+    it 'should check presence of app_code if notify on status change is Y' do
+      partner = Factory.build(:partner, :account_no => '1234567890123456', :account_ifsc => 'abcd0123456', :approval_status => 'A', :notify_on_status_change => 'Y')
+      partner.errors_on(:app_code).first.should == "Mandatory if notify on status change is checked"
+    end
+
+    it 'should check format and length of app_code if notify on status change is Y' do
+      partner = Factory.build(:partner, :account_no => '1234567890123456', :account_ifsc => 'abcd0123456', :approval_status => 'A', :notify_on_status_change => 'Y', :app_code => '1234#')
+      partner.errors_on(:app_code).first.should == "Invalid format, expected format is : {[a-z|A-Z|0-9]}"
+    end
     
+    it 'should check format and length of app_code if notify on status change is Y' do
+      partner = Factory.build(:partner, :account_no => '1234567890123456', :account_ifsc => 'abcd0123456', :approval_status => 'A', :notify_on_status_change => 'Y', :app_code => '1234567891011121343584354')
+      partner.errors_on(:app_code).first.should == "is too long (maximum is 20 characters)"
+    end
+
+    it 'should check format and length of app_code if notify on status change is Y' do
+      partner = Factory.build(:partner, :account_no => '1234567890123456', :account_ifsc => 'abcd0123456', :approval_status => 'A', :notify_on_status_change => 'Y', :app_code => '1234')
+      partner.errors_on(:app_code).first.should == "is too short (minimum is 5 characters)"
+    end
+
     it "should validate_unapproved_record" do 
       partner1 = Factory(:partner,:approval_status => 'A')
       partner2 = Factory(:partner, :approved_id => partner1.id)

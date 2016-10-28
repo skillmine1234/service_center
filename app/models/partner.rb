@@ -8,13 +8,16 @@ class Partner < ActiveRecord::Base
   validates_presence_of :code, :enabled, :name, :account_no, :txn_hold_period_days,
                         :customer_id, :remitter_email_allowed, :remitter_sms_allowed,
                         :allow_imps, :allow_neft, :allow_rtgs, :country, :account_ifsc,
-                        :identity_user_id, :add_req_ref_in_rep, :add_transfer_amt_in_rep
+                        :identity_user_id, :add_req_ref_in_rep, :add_transfer_amt_in_rep,
+                        :notify_on_status_change
   validates_uniqueness_of :code, :scope => :approval_status
   validates :low_balance_alert_at, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => '9e20'.to_f, :allow_nil => true }
   validates :account_no, :numericality => {:only_integer => true}, length: {in: 10..16}
   validates :account_ifsc, format: {with: /\A[A-Z|a-z]{4}[0][A-Za-z0-9]{6}+\z/, :allow_blank => true, message: "invalid format - expected format is : {[A-Z|a-z]{4}[0][A-Za-z0-9]{6}}" }
   validates :txn_hold_period_days, :numericality => { :greater_than => 0, :less_than => 16}
   validates :code, format: {with: /\A[A-Za-z0-9]+\z/, message: "invalid format - expected format is : {[A-Za-z0-9\s]}"}, length: {maximum: 10, minimum: 1}
+  validates_presence_of :app_code, message: 'Mandatory if notify on status change is checked', :if => :notify_on_status_change?
+  validates :app_code, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}' }, length: {minimum: 5, maximum: 20}, :if => :notify_on_status_change?
   validates :name, format: {with: /\A[A-Za-z0-9\s]+\z/, message: "invalid format - expected format is : {[A-Za-z0-9\s]}"}
   validates :customer_id, :numericality => {:only_integer => true}, length: {maximum: 15}
   validates :mmid, :numericality => {:only_integer => true}, length: {maximum: 7, minimum: 7}, :allow_blank => true
@@ -23,6 +26,10 @@ class Partner < ActiveRecord::Base
 
   validate :imps_and_mmid
   validate :check_email_addresses
+
+  def notify_on_status_change?
+    true if self.notify_on_status_change == 'Y'
+  end
 
   def imps_and_mmid
     errors.add(:mmid,"MMID Mandatory for IMPS") if allow_imps == 'Y' and mmid.to_s.empty?
