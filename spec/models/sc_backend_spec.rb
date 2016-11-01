@@ -18,6 +18,15 @@ describe ScBackend do
       it { should validate_presence_of(att) }
     end
 
+    it "should return error if integer fields are less than 0" do
+      sc_backend = Factory.build(:sc_backend, :max_consecutive_failures => -9, :max_window_failures => -7, :min_consecutive_success => -8, :min_window_success => -6)
+      sc_backend.should_not be_valid
+      sc_backend.errors_on(:max_consecutive_failures).should == ["must be greater than or equal to 0"]
+      sc_backend.errors_on(:max_window_failures).should == ["must be greater than or equal to 0"]
+      sc_backend.errors_on(:min_consecutive_success).should == ["must be greater than or equal to 0"]
+      sc_backend.errors_on(:min_window_success).should == ["must be greater than or equal to 0"]
+    end
+
     it do
       sc_backend = Factory(:sc_backend, :approval_status => 'A')
 
@@ -81,7 +90,7 @@ describe ScBackend do
     it "should validate max_consecutive_failures" do
       sc_backend1 = Factory.build(:sc_backend, :max_consecutive_failures => 10, :min_consecutive_success => 9, :max_window_failures => 11, :min_window_success => 12)
       sc_backend1.should_not be_valid
-      sc_backend1.errors_on(:max_consecutive_failures).should == ["should be less than Minimum Consecutive Failures"]
+      sc_backend1.errors_on(:max_consecutive_failures).should == ["should be less than Minimum Consecutive Success"]
       sc_backend2 = Factory.build(:sc_backend, :max_consecutive_failures => 10, :min_consecutive_success => 11, :max_window_failures => 9, :min_window_success => 12)
       sc_backend2.should_not be_valid
       sc_backend2.errors_on(:max_consecutive_failures).should == ["should be less than Maximum Window Failures"]

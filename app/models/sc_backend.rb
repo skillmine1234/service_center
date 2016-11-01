@@ -20,6 +20,11 @@ class ScBackend < ActiveRecord::Base
   validates_inclusion_of :window_in_mins, :in => [1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60], :message => "Allowed Values: 1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60"
   validates :do_auto_start, length: { minimum: 1, maximum: 1 }
 
+  validates :max_consecutive_failures, :numericality => { :only_integer => true, :greater_than_or_equal_to => 0 }
+  validates :max_window_failures, :numericality => { :greater_than_or_equal_to => 0 }
+  validates :min_consecutive_success, :numericality => { :greater_than_or_equal_to => 0 }
+  validates :min_window_success, :numericality => { :greater_than_or_equal_to => 0 }
+
   validate :check_max_consecutive_failures
   validate :check_min_consecutive_success
   validate :check_max_window_failures
@@ -27,7 +32,7 @@ class ScBackend < ActiveRecord::Base
 
   def check_max_consecutive_failures
     unless (self.max_consecutive_failures.nil? and self.min_consecutive_success.nil?)
-      errors[:max_consecutive_failures] << "should be less than Minimum Consecutive Failures" if (self.max_consecutive_failures > self.min_consecutive_success)
+      errors[:max_consecutive_failures] << "should be less than Minimum Consecutive Success" if (self.max_consecutive_failures > self.min_consecutive_success)
     end
     unless (self.max_consecutive_failures.nil? and self.max_window_failures.nil?)
       errors[:max_consecutive_failures] << "should be less than Maximum Window Failures" if (self.max_consecutive_failures > self.max_window_failures)

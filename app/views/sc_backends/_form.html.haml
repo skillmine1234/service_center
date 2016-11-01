@@ -19,7 +19,7 @@
         = error_message_for(@sc_backend, :do_auto_shutdown, :prepend_text => "")
     .control-group
       = f.label :max_consecutive_failures, "*Max Consecutive Failures", :class => 'control-label'
-      = f.number_field :max_consecutive_failures, :step => 1, :required => true
+      = f.number_field :max_consecutive_failures, :min => 1, :step => 1, :required => true
       #msg-error
         = error_message_for(@sc_backend, :max_consecutive_failures, :prepend_text => "")
     .control-group
@@ -29,7 +29,7 @@
         = error_message_for(@sc_backend, :window_in_mins, :prepend_text => "")
     .control-group
       = f.label :max_window_failures, "*Max Window Failures", :class => 'control-label'
-      = f.number_field :max_window_failures, :step => 1, :required => true
+      = f.number_field :max_window_failures, :min => 1, :step => 1, :required => true
       #msg-error
         = error_message_for(@sc_backend, :max_window_failures, :prepend_text => "")
     .control-group
@@ -39,12 +39,12 @@
         = error_message_for(@sc_backend, :do_auto_start, :prepend_text => "")
     .control-group
       = f.label :min_consecutive_success, "*Min Consecutive Success", :class => 'control-label'
-      = f.number_field :min_consecutive_success, :step => 1, :required => true
+      = f.number_field :min_consecutive_success, :min => 1, :step => 1, :required => true
       #msg-error
         = error_message_for(@sc_backend, :min_consecutive_success, :prepend_text => "")
     .control-group
       = f.label :min_window_success, "*Min Window Success", :class => 'control-label'
-      = f.number_field :min_window_success, :step => 1, :required => true
+      = f.number_field :min_window_success, :min => 1, :step => 1, :required => true
       #msg-error
         = error_message_for(@sc_backend, :min_window_success, :prepend_text => "")
     .control-group
