@@ -9,6 +9,7 @@ class IncomingFile < ActiveRecord::Base
   validate :file_size, :on => [:create]
 
   validates_presence_of :service_name, :file_type
+  validates :file_name, length: { maximum: 50 }
 
   BlackList = %w(exe vbs rb sh jar html msi bat com bin vb doc docx xlsx jpeg gif pdf png zip jpg)
 

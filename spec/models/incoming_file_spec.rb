@@ -18,6 +18,7 @@ describe IncomingFile do
   context 'validation' do
 
     it { should validate_presence_of(:file) }
+    it { should validate_length_of(:file_name).is_at_most(50) }
 
     it "throws error for file if it is in black list" do
       file = File.open('Test2.exe', "w")
