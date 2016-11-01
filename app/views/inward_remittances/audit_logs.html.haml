@@ -28,6 +28,8 @@
         %th{:style=>'text-align:left; background-color: lightblue;'}
           Replied At
         %th{:style=>'text-align:left; background-color: lightblue;'}
+          Status Code
+        %th{:style=>'text-align:left; background-color: lightblue;'}
           Fault Code
         %th{:style=>'text-align:left; background-color: lightblue;'}
           Fault Text
@@ -54,6 +56,8 @@
               = link_to "Show Response Header", "#", :class => 'val-rep-header-link', :href => "#replyHeader", data: { reply: value.rep_header }
             %td{:style=>'text-align:left;'}
               = value.rep_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
+            %td{:style=>'text-align:left;'}
+              = value.status_code
             %td{:style=>'text-align:left;'}
               = value.fault_code   
             %td{:style=>'text-align:left;'}
