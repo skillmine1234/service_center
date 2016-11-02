@@ -30,7 +30,9 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Transfer Type
     %th{:style=>'text-align:left; background-color: lightblue;'}
-      Transfer Amount 
+      Transfer Amount
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Notify Status 
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Request Date
     %th{:style=>'text-align:left; background-color: lightblue;'}
@@ -58,6 +60,8 @@
           = inward_remittance.transfer_type
         %td{:style=>'text-align:left;'}
           = inward_remittance.transfer_amount
+        %td{:style=>'text-align:left;'}
+          = inward_remittance.notify_status
         %td{:style=>'text-align:left;'}
           = inward_remittance.req_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p")
         %td{:style=>'text-align:left;'}

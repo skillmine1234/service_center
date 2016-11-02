@@ -9,6 +9,11 @@ describe InwardRemittanceHelper do
       find_inward_remittances(val,{:status => 'IN_PROCESS'}).should == [inward_remittances]
       find_inward_remittances(val,{:status => 'COMPLETED'}).should == []
       
+      inward_remittances = Factory(:inward_remittance,:notify_status => 'IN_PROCESS')
+      val = InwardRemittance
+      find_inward_remittances(val,{:notify_status => 'IN_PROCESS'}).should == [inward_remittances]
+      find_inward_remittances(val,{:notify_status => 'COMPLETED'}).should == []
+
       inward_remittance = Factory(:inward_remittance,:req_no => 'R1234')
       find_inward_remittances(val,{:request_no => 'R1234'}).should == [inward_remittance]
       find_inward_remittances(val,{:request_no => 'r1234'}).should == [inward_remittance]

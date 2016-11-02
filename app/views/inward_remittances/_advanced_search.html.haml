@@ -3,6 +3,9 @@
     = label_tag "Status", "Status", :class => 'control-label'
     = select_tag :status, options_for_select([['ONHOLD','ONHOLD'],['SENT_TO_BENEFICIARY','SENT_TO_BENEFICIARY'],['COMPLETED','COMPLETED'],['FAILED','FAILED']],params[:status]),:prompt => 'ANY'
   .control-group
+    = label_tag "Notify Status", "Notify Status", :class => 'control-label'
+    = select_tag :notify_status, options_for_select([['PENDING NOTIFICATION','PENDING NOTIFICATION'],['NOTIFIED:REJECTED','NOTIFIED:REJECTED'],['NOTIFIED:OK','NOTIFIED:OK'],['NOTIFICATION FAILED','NOTIFICATION FAILED']],params[:notify_status]),:prompt => 'ANY'
+  .control-group
     = label_tag "Request No", "Request No", :class => 'control-label'
     = text_field_tag :request_no, params[:request_no]
   .control-group
