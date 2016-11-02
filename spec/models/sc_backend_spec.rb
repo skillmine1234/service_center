@@ -27,6 +27,14 @@ describe ScBackend do
       sc_backend.errors_on(:min_window_success).should == ["must be greater than or equal to 0"]
     end
 
+    it "should return error if integer fields are not integer" do
+      sc_backend = Factory.build(:sc_backend, :max_consecutive_failures => 6.5, :max_window_failures => 8.5, :min_consecutive_success => 7.5, :min_window_success => 9.5)
+      sc_backend.errors_on(:max_consecutive_failures).should == ["must be an integer"]
+      sc_backend.errors_on(:max_window_failures).should == ["must be an integer"]
+      sc_backend.errors_on(:min_consecutive_success).should == ["must be an integer"]
+      sc_backend.errors_on(:min_window_success).should == ["must be an integer"]
+    end
+
     it do
       sc_backend = Factory(:sc_backend, :approval_status => 'A')
 

@@ -21,9 +21,9 @@ class ScBackend < ActiveRecord::Base
   validates :do_auto_start, length: { minimum: 1, maximum: 1 }
 
   validates :max_consecutive_failures, :numericality => { :only_integer => true, :greater_than_or_equal_to => 0 }
-  validates :max_window_failures, :numericality => { :greater_than_or_equal_to => 0 }
-  validates :min_consecutive_success, :numericality => { :greater_than_or_equal_to => 0 }
-  validates :min_window_success, :numericality => { :greater_than_or_equal_to => 0 }
+  validates :max_window_failures, :numericality => { :only_integer => true, :greater_than_or_equal_to => 0 }
+  validates :min_consecutive_success, :numericality => { :only_integer => true, :greater_than_or_equal_to => 0 }
+  validates :min_window_success, :numericality => { :only_integer => true, :greater_than_or_equal_to => 0 }
 
   validate :check_max_consecutive_failures
   validate :check_min_consecutive_success
