@@ -7,9 +7,9 @@
         = render 'ecol_customers/approve', :@record => @whitelisted_identity
       %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
         %tr
-          %td.label Partner ID
+          %td.label Partner Code
           %td.value
-            = @whitelisted_identity.partner_id
+            = @whitelisted_identity.partner.try(:code)
         %tr
           %td.label Full Name
           %td.value
