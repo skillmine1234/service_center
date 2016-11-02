@@ -55,6 +55,6 @@
         %td{:style=>'text-align:left;'}
           = whitelisted_identity.is_verified
         %td{:style=>'text-align:left;'}
-          = whitelisted_identity.verified_at
+          = whitelisted_identity.verified_at.try(:strftime, "%d/%m/%Y %I:%M%p")
         %td{:style=>'text-align:left;'}
           = whitelisted_identity.verified_by

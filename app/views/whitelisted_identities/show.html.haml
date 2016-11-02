@@ -49,7 +49,7 @@
         %tr
           %td.label Verified At
           %td.value
-            = @whitelisted_identity.verified_at
+            = @whitelisted_identity.verified_at.try(:strftime, "%d/%m/%Y %I:%M%p")
         %tr
           %td.label Verified By
           %td.value
@@ -81,11 +81,11 @@
         %tr
           %td.label Created At
           %td.value
-            = @whitelisted_identity.created_at
+            = @whitelisted_identity.created_at.try(:strftime, "%d/%m/%Y %I:%M%p")
         %tr
           %td.label Updated At
           %td.value
-            = @whitelisted_identity.updated_at
+            = @whitelisted_identity.updated_at.try(:strftime, "%d/%m/%Y %I:%M%p")
     %p{:style => 'padding-left:6px; padding-bottom:6px'}
             
             
