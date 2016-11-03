@@ -8,9 +8,6 @@ describe EcolTransactionsHelper do
       find_ecol_transactions(val,{:transfer_unique_no => "12345"}).should == [ecol_transaction]
       find_ecol_transactions(val,{:transfer_unique_no => " 12345"}).should == [ecol_transaction]
       find_ecol_transactions(val,{:transfer_unique_no => "98761"}).should_not == [ecol_transaction]
-
-      ecol_transaction = Factory(:ecol_transaction, :transfer_unique_no => " 53523")
-      find_ecol_transactions(val,{:transfer_unique_no => "53523"}).should == [ecol_transaction] 
       
       ecol_transaction = Factory(:ecol_transaction, :customer_code => "123456")
       find_ecol_transactions(val,{:customer_code => "123456"}).should == [ecol_transaction]
