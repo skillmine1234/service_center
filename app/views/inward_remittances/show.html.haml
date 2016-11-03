@@ -1,5 +1,5 @@
 .show_ticket
-  .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'}
+  .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; height: 200px; display: inline-block;'}
     %h3
       Partner:
       = @inward_remittance.partner_code 
@@ -14,9 +14,15 @@
       Request At:
       = @inward_remittance.req_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p")
     %h3
+      Request Version:
+      = @inward_remittance.req_version
+    %h3
       Request XML:
       = link_to "Show Request", "#", :class => 'request-link', :href => "#requestText"
-  .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'}
+    %h3
+      Reconciled At:
+      = @inward_remittance.reconciled_at.try(:strftime, "%d/%m/%Y")
+  .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; height: 200px; display: inline-block;'}
     %h3
       Status:
       = @inward_remittance.status_code
@@ -35,6 +41,9 @@
       Replied At:
       = @inward_remittance.rep_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p")
       = "(" + @inward_remittance.reply_time.to_s + " mins)"
+    %h3
+      Reply Version:
+      = @inward_remittance.rep_version
     %h3
       Reply XML:
       = link_to "Show Reply", "#", :class => 'reply-link', :href => "#replyText"
@@ -62,6 +71,15 @@
         %tr
           %td.label Self Transfer?
           %td= check_box_tag :transfer,@inward_remittance.is_self_transfer, @inward_remittance.self_transfer?, {:disabled => true}
+        %tr
+          %td.label Same Party Transfer?
+          %td= check_box_tag :transfer,@inward_remittance.is_same_party_transfer, @inward_remittance.same_party_transfer?, {:disabled => true}
+        %tr
+          %td.label Balance Available
+          %td= @inward_remittance.bal_available
+        %tr
+          %td.label Transfer Currency
+          %td= @inward_remittance.transfer_ccy
       %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:left;'} 
         %tr
           %td.label Transfer Amount
@@ -72,6 +90,10 @@
         %tr
           %td.label Beneficiary Account IFSC
           %td= @inward_remittance.bene_account_ifsc
+        %tr
+          %td.label CBS Request Reference
+          %td.value
+            = @inward_remittance.cbs_req_ref_no
         %tr
           %td.label Processed At
           %td= @inward_remittance.processed_at.try(:strftime, "%d/%m/%Y %I:%M%p")
@@ -174,6 +196,7 @@
         %tr
           %td.label Mobile No
           %td= @inward_remittance.bene_mobile_no
+    %br
     %table.table.no-border{:style => 'background-color: #ecf5fa; word-wrap:break-word; table-layout: fixed; width: 100%; float:left;'} 
       %tr
         %td.label Remitter To Beneficiary Note

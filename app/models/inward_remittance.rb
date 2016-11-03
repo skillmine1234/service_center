@@ -36,4 +36,8 @@ class InwardRemittance < ActiveRecord::Base
   def partner_name
     partner.try(:name) rescue nil
   end
+
+  def same_party_transfer?
+    is_same_party_transfer=='Y' ? true : false
+  end
 end
