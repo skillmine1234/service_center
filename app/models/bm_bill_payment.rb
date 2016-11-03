@@ -8,7 +8,7 @@ class BmBillPayment < ActiveRecord::Base
     bill_payments = bm_bill_payment
     bill_payments = bill_payments.where("bm_bill_payments.status=?",params[:status]) if params[:status].present?
     bill_payments = bill_payments.where("pending_approval=?",params[:pending]) if params[:pending].present?
-    bill_payments = bill_payments.where("lower(bm_bill_payments.req_no) LIKE ?","%#{params[:request_no].downcase}%") if params[:request_no].present?
+    bill_payments = bill_payments.where("bm_bill_payments.req_no LIKE ?","#{params[:request_no]}%") if params[:request_no].present?
     bill_payments = bill_payments.where("bm_bill_payments.customer_id=?",params[:cust_id]) if params[:cust_id].present?
     bill_payments = bill_payments.where("bm_bill_payments.debit_account_no=?",params[:debit_no]) if params[:debit_no].present?
     bill_payments = bill_payments.where("bm_bill_payments.txn_kind=?",params[:txn_kind]) if params[:txn_kind].present?

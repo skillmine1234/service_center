@@ -3,8 +3,8 @@ module InwardRemittanceHelper
     inw_remittances = inward_remittance
     inw_remittances = inw_remittances.where("inward_remittances.status_code=?",params[:status]) if params[:status].present?
     inw_remittances = inw_remittances.where("inward_remittances.notify_status=?",params[:notify_status]) if params[:notify_status].present?
-    inw_remittances = inw_remittances.where("lower(inward_remittances.req_no) LIKE ?","%#{params[:request_no].downcase}%") if params[:request_no].present?
-    inw_remittances = inw_remittances.where("lower(inward_remittances.partner_code) LIKE ?","%#{params[:partner_code].downcase}%") if params[:partner_code].present?
+    inw_remittances = inw_remittances.where("inward_remittances.req_no LIKE ?","#{params[:request_no]}%") if params[:request_no].present?
+    inw_remittances = inw_remittances.where("lower(inward_remittances.partner_code) LIKE ?","#{params[:partner_code].downcase}%") if params[:partner_code].present?
     inw_remittances = inw_remittances.where("inward_remittances.bank_ref=?",params[:bank_ref]) if params[:bank_ref].present?
     inw_remittances = inw_remittances.where("inward_remittances.rmtr_full_name=?",params[:rmtr_full_name]) if params[:rmtr_full_name].present?
     inw_remittances = inw_remittances.where("inward_remittances.req_transfer_type=?",params[:req_transfer_type]) if params[:req_transfer_type].present?
