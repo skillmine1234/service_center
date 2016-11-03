@@ -34,6 +34,8 @@
       Max Window Failures
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Alert Email To
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Current Status
   .tbody
     - @sc_backends.each do |sc_backend|
       %tr
@@ -59,5 +61,7 @@
           = sc_backend.max_window_failures
         %td{:style=>'text-align:left;'}
           = sc_backend.alert_email_to
+        %td{:style=>'text-align:left;'}
+          = sc_backend.sc_backend_status_changes.last.try(:full_status)
 
 

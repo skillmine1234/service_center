@@ -102,14 +102,16 @@
         #right-block{:style => 'width: 49%; float: right;'}
           .top-block
             %h3
-              Current Status :
+              Status :
             - if !@sc_backend_status.nil?
-              %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
+              %table.table.no-border{cellpadding: "20", cellspacing: "20", :style=>"width: 100%;"}
                 %tr
-                  %td.label Status
-                  %td.value
+                  %td.label{:style => 'height: 26px; width: 30%;'} Current Status
+                  %td.value{:style => 'height: 26px; font-weight: bold; font-size: 1.1em;'}
                     = @sc_backend_status.full_status
-                    &nbsp; &nbsp;
+                %tr
+                  %td.label{:style => 'height: 26px; width: 30%; padding-top: 8px;'} Change Status To
+                  %td.value{:style => 'height: 22px;'}
                     - if @sc_backend_status.status == 'U'
                       - btn_lbl = "Down"
                     - elsif @sc_backend_status.status == 'D'
@@ -117,13 +119,13 @@
                     %a.btn{"data-toggle" => "modal", :href => "#scBackendStatusChangesModal", :role => "button", :class => "btn btn-primary"} 
                       = btn_lbl
                 %tr
-                  %td.label Last Status Change Remark
-                  %td.value
+                  %td.label{:style => 'height: 26px; width: 30%;'} Last Status Change Remark
+                  %td.value{:style => 'height: 26px;'}
                     = @sc_backend_status.last_status_change.try(:remarks)
                 %tr
-                  %td.label 
+                  %td.label{:style => 'height: 26px; width: 30%;'}
                     = link_to 'Previous Status Changes', previous_status_changes_path(@sc_backend)
-                  %td.value
+                  %td.value{:style => 'height: 26px;'}
           .bottom-block
             %h3
               Statistics :
