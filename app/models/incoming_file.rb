@@ -68,6 +68,7 @@ class IncomingFile < ActiveRecord::Base
       file.filename.split(".").each do |ext|
         errors.add(:file, "Invalid file extension") and return false if BlackList.include?(ext)
       end
+      errors.add(:file, "name length is more than 50") if file.filename.length > 50
     end
   end
 
