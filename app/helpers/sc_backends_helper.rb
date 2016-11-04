@@ -13,6 +13,8 @@ module ScBackendsHelper
     elsif @sc_backend_status.status == 'D'
       @sc_backend_status.status = 'U'
       @sc_backend_status_change.new_status = 'U'
+      @sc_backend_stat.assign_attributes(window_success_cnt: 0, consecutive_failure_cnt: 0,
+                                         consecutive_success_cnt: 0)
     end
     @sc_backend_status_change.remarks = params[:sc_backend_status_change][:remarks]
     @sc_backend_status_change.created_by = current_user.id

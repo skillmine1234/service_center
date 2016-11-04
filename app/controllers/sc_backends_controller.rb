@@ -49,7 +49,7 @@ class ScBackendsController < ApplicationController
         if @sc_backend_status_change.save
           @sc_backend_status.last_status_change_id = @sc_backend_status_change.id
           @sc_backend_stat.last_status_change_id = @sc_backend_status_change.id
-          if @sc_backend_status.save & @sc_backend_stat.save
+          if @sc_backend_status.save && @sc_backend_stat.save
             flash[:alert] = "Service center Backend Status changed successfully"
           else
             flash[:alert] = @sc_backend_status.errors.full_messages.join(',') + ',' + @sc_backend_stat.errors.full_messages.join(',')
