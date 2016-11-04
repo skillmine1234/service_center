@@ -229,7 +229,7 @@ describe ScBackendsController do
       it "updates the requested sc_backend to Up" do
         sc_backend = Factory(:sc_backend, :code => "7766")
         sc_backend_stat = Factory(:sc_backend_stat, :code => sc_backend.code, :window_success_cnt => 9, :consecutive_failure_cnt => 8,
-                                  :consecutive_success_cnt => 10)
+                                  :window_failure_cnt => 10)
         sc_backend_status = Factory(:sc_backend_status, :status => 'D', :code => sc_backend.code)
         params = sc_backend.attributes.slice(*sc_backend.class.attribute_names)
         params[:code] = "7767"
@@ -242,13 +242,13 @@ describe ScBackendsController do
         sc_backend_status.status.should == 'U'
         sc_backend_stat.window_success_cnt.should == 0
         sc_backend_stat.consecutive_failure_cnt.should == 0
-        sc_backend_stat.consecutive_success_cnt.should == 0
+        sc_backend_stat.window_failure_cnt.should == 0
       end
 
       it "updates the requested sc_backend to Down" do
         sc_backend = Factory(:sc_backend, :code => "7766")
         sc_backend_stat = Factory(:sc_backend_stat, :code => sc_backend.code, :window_success_cnt => 9, :consecutive_failure_cnt => 8,
-                                  :consecutive_success_cnt => 10)
+                                  :window_failure_cnt => 10)
         sc_backend_status = Factory(:sc_backend_status, :status => 'U', :code => sc_backend.code)
         params = sc_backend.attributes.slice(*sc_backend.class.attribute_names)
         params[:code] = "7767"
@@ -260,8 +260,8 @@ describe ScBackendsController do
         sc_backend_status.last_status_change_id.should == ScBackendStatusChange.last.id
         sc_backend_status.status.should == 'D'
         sc_backend_stat.window_success_cnt.should == 9
-        sc_backend_stat.consecutive_failure_cnt.should == 8 
-        sc_backend_stat.consecutive_success_cnt.should == 10
+        sc_backend_stat.window_failure_cnt.should == 10 
+        sc_backend_stat.consecutive_failure_cnt.should == 8
       end
 
       it "shows errors on failure" do
