@@ -18,15 +18,15 @@ describe IncomingFile do
   context 'validation' do
 
     it { should validate_presence_of(:file) }
-    it { should validate_length_of(:file_name).is_at_most(50) }
+    it { should validate_length_of(:file_name).is_at_most(100) }
 
     it "throws error for file if file name length is more than 50" do
-      file = File.open('Test_TESTTTT_05550143676_4262663773-63672772-737388.csv', "w")
+      file = File.open('Test_TESTTTT_05550143676_4262663773-63672772-737388_Test_TESTTTT_05550143676_4262663773-63672772-737388_1234.csv', "w")
       incoming_file = Factory.build(:incoming_file,:file => ActionDispatch::Http::UploadedFile.new(:tempfile => file, :filename => File.basename(file)))
       incoming_file.save.should be_false
-      incoming_file.errors.messages.should == {:file=>["name length is more than 50"]}
+      incoming_file.errors.messages.should == {:file=>["name length is more than 100"]}
       incoming_file.errors.messages.should_not be_blank
-      FileUtils.rm_f 'Test_TESTTTT_05550143676_4262663773-63672772-737388.csv'
+      FileUtils.rm_f 'Test_TESTTTT_05550143676_4262663773-63672772-737388_Test_TESTTTT_05550143676_4262663773-63672772-737388_1234.csv'
     end
 
 

@@ -9,7 +9,7 @@ class IncomingFile < ActiveRecord::Base
   validate :file_size, :on => [:create]
 
   validates_presence_of :service_name, :file_type
-  validates :file_name, length: { maximum: 50 }
+  validates :file_name, length: { maximum: 100 }
 
   BlackList = %w(exe vbs rb sh jar html msi bat com bin vb doc docx xlsx jpeg gif pdf png zip jpg)
 
@@ -68,7 +68,7 @@ class IncomingFile < ActiveRecord::Base
       file.filename.split(".").each do |ext|
         errors.add(:file, "Invalid file extension") and return false if BlackList.include?(ext)
       end
-      errors.add(:file, "name length is more than 50") if file.filename.length > 50
+      errors.add(:file, "name length is more than 100") if file.filename.length > 100
     end
   end
 
