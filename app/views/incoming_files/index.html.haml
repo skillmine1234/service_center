@@ -1,6 +1,6 @@
 %br
-
-= link_to 'New File Upload', new_incoming_file_path(:sc_service => params[:sc_service]) unless @sc_service.has_auto_upload?
+- unless @sc_service.nil?
+  = link_to 'New File Upload', new_incoming_file_path(:sc_service => params[:sc_service]) unless @sc_service.has_auto_upload?
 
 %br
 %br
