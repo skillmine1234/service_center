@@ -16,8 +16,6 @@
         %th{:style=>'text-align:left; background-color: lightblue;'}
           Request
         %th{:style=>'text-align:left; background-color: lightblue;'}
-          Request Header
-        %th{:style=>'text-align:left; background-color: lightblue;'}
           URL
         %th{:style=>'text-align:left; background-color: lightblue;'}
           Requested At
@@ -42,8 +40,6 @@
               = value.attempt_no   
             %td{:style=>'text-align:left;'}
               = link_to "Show Request", "#", :class => 'val-request-link', :href => "#requestText", data: { request: value.req_bitstream }
-            %td{:style=>'text-align:left;'}
-              = link_to "Show Request Header", "#", :class => 'val-req-header-link', :href => "#requestHeader", data: { request: value.req_header }
             %td{:style=>'text-align:left;'}
               = link_to "Show URL", "#", :class => 'val-url-link', :href => "#urlText", data: { host: value.remote_host, uri: value.req_uri }
             %td{:style=>'text-align:left;'}
@@ -86,17 +82,6 @@
         %b Copy To Clipboard...
     %pre#req_xml{:style => 'word-wrap: break-word'}
       .request{:style => 'word-wrap: break-word'}
-#requestHeader.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-header
-    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3 Request Header
-    #error_message{:style => 'color:red'}
-  .modal-body{:style => "max-height:450px;"}
-    .demo-area
-      %button#d_clip_button2.my_clip_button2{"data-clipboard-target" => "req_header_xml"}
-        %b Copy To Clipboard...
-    %pre#req_header_xml{:style => 'word-wrap: break-word'}
-      .request_header{:style => 'word-wrap: break-word'}
 #replyText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
