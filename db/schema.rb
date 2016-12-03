@@ -1234,10 +1234,6 @@ ActiveRecord::Schema.define(version: 20161201234338) do
     t.text     "req_bitstream"
     t.text     "rep_bitstream"
     t.text     "fault_bitstream"
-    t.string   "remote_host",       limit: 500
-    t.string   "req_uri",           limit: 500
-    t.text     "req_header"
-    t.text     "rep_header"
   end
 
   add_index "ft_audit_steps", ["ft_auditable_type", "ft_auditable_id", "step_no", "attempt_no"], name: "uk_ft_audit_steps", unique: true
@@ -1283,8 +1279,6 @@ ActiveRecord::Schema.define(version: 20161201234338) do
     t.string   "needs_purpose_code",      limit: 1
     t.string   "reply_with_bene_name",    limit: 1,                  default: "f"
     t.string   "allow_all_accounts",      limit: 1,                  default: "Y", null: false
-    t.string   "notify_app_code",         limit: 20
-    t.string   "notify_on_status_change", limit: 1
   end
 
   add_index "ft_customers", ["app_id", "customer_id", "approval_status"], name: "in_ft_customers_2", unique: true
@@ -1343,13 +1337,6 @@ ActiveRecord::Schema.define(version: 20161201234338) do
   end
 
   add_index "ft_incoming_records", ["incoming_file_record_id"], name: "ft_incoming_records_01", unique: true
-
-  create_table "ft_pending_confirmations", force: :cascade do |t|
-    t.string   "broker_uuid",                   null: false
-    t.string   "ft_auditable_type",             null: false
-    t.integer  "ft_auditable_id",   limit: nil, null: false
-    t.datetime "created_at",                    null: false
-  end
 
   create_table "ft_purpose_codes", force: :cascade do |t|
     t.string   "code",                       limit: 20,                               null: false
@@ -1423,12 +1410,7 @@ ActiveRecord::Schema.define(version: 20161201234338) do
     t.string   "cbs_req_ref_no",         limit: 50
     t.string   "sub_code",               limit: 50
     t.string   "app_id",                 limit: 50
-    t.string   "name_with_bene_bank",    limit: 100
-    t.string   "notify_status",          limit: 100
-    t.integer  "notify_attempt_no",                   precision: 38
-    t.datetime "notify_attempt_at"
-    t.datetime "notified_at"
-    t.string   "notify_result",          limit: 50
+    t.string   "name_with_bene_bank"
   end
 
   add_index "funds_transfers", ["TRUNC(\"REQ_TIMESTAMP\")"], name: "funds_xfer_req_timestamp"
