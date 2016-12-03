@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161110084401) do
+ActiveRecord::Schema.define(version: 20161203115158) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   :null=>false
@@ -1494,7 +1494,7 @@ ActiveRecord::Schema.define(version: 20161110084401) do
   end
 
   create_table "inw_audit_logs", force: :cascade do |t|
-    t.integer "inward_remittance_id"
+    t.integer "inward_remittance_id", :index=>{:name=>"inw_audit_logs_01", :unique=>true}
     t.text    "request_bitstream"
     t.text    "reply_bitstream"
   end
