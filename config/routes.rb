@@ -1,5 +1,7 @@
 ServiceCenter::Application.routes.draw do
 
+  mount Rp::Engine, at: '/rp'
+
   resources :encrypted_passwords
   resources :qg_ecol_todays_rtgs_txns
   resources :qg_ecol_todays_neft_txns

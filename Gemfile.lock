@@ -13,6 +13,16 @@ GIT
       sort_alphabetical (~> 1.0)
 
 GIT
+  remote: git@github.com:quantiguous/rp.git
+  revision: e2d43a421970cd6a4ae347afff3b010e62fa77e8
+  specs:
+    rp (0.0.1)
+      haml-rails
+      net-scp
+      rails (~> 4.2.0)
+      will_paginate
+
+GIT
   remote: https://github.com/quantiguous/lazy_columns.git
   revision: afdcabc9df0bce3e8fd409e857219e7eadcd42f9
   specs:
@@ -514,6 +524,7 @@ DEPENDENCIES
   rolify (>= 3.2.0)
   roo
   rools (= 0.4.1)!
+  rp!
   rspec
   rspec-rails (= 2.14.0)
   ruby-oci8
@@ -545,5 +556,8 @@ DEPENDENCIES
   will_paginate
   zeroclipboard-rails
 
+RUBY VERSION
+   ruby 2.2.2p95
+
 BUNDLED WITH
-   1.11.2
+   1.13.6
