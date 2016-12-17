@@ -45,6 +45,7 @@ gem 'unscoped_associations'
 gem 'lazy_columns', :git=>'https://github.com/quantiguous/lazy_columns.git'
 gem 'seed-fu'
 gem 'net-scp'
+gem 'rp', :git => 'git@github.com:quantiguous/rp.git'
 
 # oracle is required only in production, CI tools run against sqlite3
 group :production do
