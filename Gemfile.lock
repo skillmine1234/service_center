@@ -13,16 +13,6 @@ GIT
       sort_alphabetical (~> 1.0)
 
 GIT
-  remote: git@github.com:quantiguous/rp.git
-  revision: e2d43a421970cd6a4ae347afff3b010e62fa77e8
-  specs:
-    rp (0.0.1)
-      haml-rails
-      net-scp
-      rails (~> 4.2.0)
-      will_paginate
-
-GIT
   remote: https://github.com/quantiguous/lazy_columns.git
   revision: afdcabc9df0bce3e8fd409e857219e7eadcd42f9
   specs:
@@ -34,6 +24,15 @@ GIT
   revision: 64354e44d1cc18e4f35a92610cd1e7d3de547c4b
   specs:
     rools (0.4.1)
+
+PATH
+  remote: /Users/divya/code/ruby/rp
+  specs:
+    rp (0.0.1)
+      haml-rails
+      net-scp
+      rails (~> 4.2.0)
+      will_paginate
 
 GEM
   remote: https://rubygems.org/
@@ -556,8 +555,5 @@ DEPENDENCIES
   will_paginate
   zeroclipboard-rails
 
-RUBY VERSION
-   ruby 2.2.2p95
-
 BUNDLED WITH
-   1.13.6
+   1.11.2
