@@ -26,7 +26,8 @@ GIT
     rools (0.4.1)
 
 PATH
-  remote: /Users/divya/code/ruby/rp
+  remote: git@github.com:quantiguous/rp.git
+  revision: e2d43a421970cd6a4ae347afff3b010e62fa77e8
   specs:
     rp (0.0.1)
       haml-rails
