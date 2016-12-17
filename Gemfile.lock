@@ -25,7 +25,7 @@ GIT
   specs:
     rools (0.4.1)
 
-PATH
+GIT
   remote: git@github.com:quantiguous/rp.git
   revision: e2d43a421970cd6a4ae347afff3b010e62fa77e8
   specs:
