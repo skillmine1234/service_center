@@ -12,5 +12,6 @@ Group.seed(:name,
   { name: "smb"},
   { name: "cnb"},
   { name: "recurring-transfer" },
-  { name: "sc-backend"}
+  { name: "sc-backend"},
+  { name: "rp"}
 )
