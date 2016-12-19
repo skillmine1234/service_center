@@ -425,5 +425,23 @@
         = image_tag 'sc_backend.png', :size => "80x80"
       %br
         = "Service Center Backends"
+- if @current_user.group_names.include?("rp")
+  %h1 Reports
+  .slide-container
+    .box
+      = link_to "/rp/settings" do
+        = image_tag 'settings_icon.png', :size => "80x80"
+      %br
+        = "Setting"
+    .box
+      = link_to '/rp' do
+        = image_tag 'available_report.png', :size => "80x80"
+      %br
+        = "Available Reports"
+    .box
+      = link_to '/rp/reports' do
+        = image_tag 'reports_icon.png', :size => "80x80"
+      %br
+        = "Generated Reports"
         
 
