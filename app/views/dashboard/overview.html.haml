@@ -428,12 +428,11 @@
 - if @current_user.group_names.include?("rp")
   %h1 Reports
   .slide-container
-    - unless Rp::Setting.first.nil?
-      .box
-        = link_to "/rp/settings/#{Rp::Setting.first.id}/edit" do
-          = image_tag 'settings_icon.png', :size => "80x80"
-        %br
-          = "Setting"
+    .box
+      = link_to "/rp/settings" do
+        = image_tag 'settings_icon.png', :size => "80x80"
+      %br
+        = "Setting"
     .box
       = link_to '/rp' do
         = image_tag 'available_report.png', :size => "80x80"
