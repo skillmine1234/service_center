@@ -9,7 +9,7 @@ class FundsTransferCustomer < ActiveRecord::Base
 
   has_many :ft_customer_accounts, :primary_key => 'customer_id', :foreign_key => 'customer_id', :class_name => 'FtCustomerAccount'
   
-  validates_presence_of :low_balance_alert_at, :identity_user_id, :name, :app_id, :allow_all_accounts
+  validates_presence_of :low_balance_alert_at, :identity_user_id, :name, :app_id, :allow_all_accounts, :is_filetoapi_allowed
   validates :low_balance_alert_at, :numericality => { :greater_than => 0}
   validates :identity_user_id, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}'}, :allow_blank => true
   validates :app_id, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}'}

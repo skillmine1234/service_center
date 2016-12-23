@@ -11,7 +11,7 @@ describe FundsTransferCustomer do
   end
   
   context 'validation' do
-    [:low_balance_alert_at, :identity_user_id, :name, :app_id, :allow_all_accounts].each do |att|
+    [:low_balance_alert_at, :identity_user_id, :name, :app_id, :allow_all_accounts, :is_filetoapi_allowed].each do |att|
       it { should validate_presence_of(att) }
     end
 

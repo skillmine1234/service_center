@@ -75,6 +75,11 @@
       = f.check_box :allow_all_accounts, {},"Y","N"
       #msg-error
         = error_message_for(@funds_transfer_customer, :allow_all_accounts, :prepend_text => "")
+    .control-group
+      = f.label :is_filetoapi_allowed, "FiletoApi Allowed ?", :class => 'control-label'
+      = f.check_box :is_filetoapi_allowed, {},"Y","N"
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :is_filetoapi_allowed, :prepend_text => "")
 
   .form-actions
     - (f.object.new_record? and f.object.app_id.nil?) ? label_name = "Create" : label_name = "Update"
