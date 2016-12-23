@@ -1,10 +1,11 @@
 GIT
   remote: git://github.com/quantiguous/rp.git
-  revision: 89a44d9685dfcafc831adc3164d4ae45bb801093
+  revision: 33643ebb9145288bd73ac75ce26a9dce3ea0d9cb
   specs:
     rp (0.0.1)
       haml-rails
       net-scp
+      pundit
       rails (~> 4.2.0)
       will_paginate
 
@@ -298,6 +299,8 @@ GEM
     progress_bar (1.0.3)
       highline (~> 1.6.1)
       options (~> 2.3.0)
+    pundit (1.1.0)
+      activesupport (>= 3.0.0)
     rack (1.6.4)
     rack-accept (0.4.5)
       rack (>= 0.4)
