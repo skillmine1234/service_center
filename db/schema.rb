@@ -285,6 +285,9 @@ ActiveRecord::Schema.define(version: 20161203115158) do
     t.string   "biller_nickname",   :limit=>10
   end
 
+  add_index "bm_billers", ["biller_category", "biller_location", "approval_status", "is_enabled"], name: "bm_billers_01"
+  add_index "bm_billers", ["biller_code", "approval_status"], name: "index_bm_billers_on_biller_code_and_approval_status", unique: true
+  add_index "bm_billers", ["biller_location", "approval_status", "is_enabled"], name: "bm_billers_02"
   create_table "bm_billpay_steps", force: :cascade do |t|
     t.integer  "bm_bill_payment_id", :null=>false, :index=>{:name=>"attepmt_no_index_billpay_steps", :with=>["step_no", "attempt_no"], :unique=>true}
     t.integer  "step_no",            :null=>false

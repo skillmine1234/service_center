@@ -97,7 +97,12 @@
               = @funds_transfer_customer.allow_all_accounts
             %td#msg-error
               = error_message_for(@funds_transfer_customer, :allow_all_accounts, :prepend_text => "")
-
+          %tr
+            %td.label FiletoApi Allowed?
+            %td.value
+              = @funds_transfer_customer.is_filetoapi_allowed
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :ais_filetoapi_allowed, :prepend_text => "")
           %tr
             %td.label Created By
             %td.value
