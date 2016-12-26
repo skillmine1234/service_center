@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/quantiguous/rp.git
-  revision: e6f157019e4ee3d1ade43b0978b1d056fa095243
+  revision: 394706b49efebd16ff28bd5370f5966dfd10342a
   specs:
     rp (0.0.1)
       haml-rails
