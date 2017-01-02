@@ -27,6 +27,7 @@
 //= require excanvas.js
 //= require jquery.flot.time
 //= require zeroclipboard
+//= require rp/rp.js
 
 $(document).ready(function() {
 
