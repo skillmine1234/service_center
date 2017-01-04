@@ -42,7 +42,7 @@
             %td.value
               = @rc_transfer_schedule.rc_app.try(:app_id)
             %td#msg-error
-              = error_message_for(@rc_transfer_schedule, :app_code, :prepend_text => "")
+              = error_message_for(@rc_transfer_schedule, :rc_app_id, :prepend_text => "")
           %tr
             %td.label Debit Account No
             %td.value
