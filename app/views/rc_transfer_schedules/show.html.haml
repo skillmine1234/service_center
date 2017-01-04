@@ -38,9 +38,9 @@
             %td#msg-error
               = error_message_for(@rc_transfer_schedule, :bene_account_no, :prepend_text => "")
           %tr
-            %td.label App Code
+            %td.label RC App
             %td.value
-              = @rc_transfer_schedule.app_code
+              = @rc_transfer_schedule.rc_app.try(:app_id)
             %td#msg-error
               = error_message_for(@rc_transfer_schedule, :app_code, :prepend_text => "")
           %tr

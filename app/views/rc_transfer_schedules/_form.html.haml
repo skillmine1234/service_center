@@ -26,11 +26,6 @@
       #msg-error
         = error_message_for(@rc_transfer_schedule, :bene_account_no, :prepend_text => "")
     .control-group
-      = f.label :app_code, "*App Code", :class => 'control-label'
-      = f.text_field :app_code, :minlength => 5, :maxlength => 20, :required => true
-      #msg-error
-        = error_message_for(@rc_transfer_schedule, :app_code, :prepend_text => "")
-    .control-group
       = f.label :debit_account_no, "*Debit Account No", :class => 'control-label'
       = f.text_field :debit_account_no, :minlength => 15, :maxlength => 20, :required => true
       #msg-error

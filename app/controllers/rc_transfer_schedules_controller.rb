@@ -97,7 +97,7 @@ class RcTransferSchedulesController < ApplicationController
   private
 
   def rc_transfer_schedule_params
-    params.require(:rc_transfer_schedule).permit(:code, :debit_account_no, :bene_account_no, :next_run_at, :last_run_at, :app_code, :is_enabled, 
+    params.require(:rc_transfer_schedule).permit(:code, :debit_account_no, :bene_account_no, :next_run_at, :last_run_at, :is_enabled, 
     :last_batch_no, :notify_mobile_no, :created_by, :updated_by, :lock_version, :approval_status, :last_action, :approved_version, :approved_id, :rc_app_id,
     :udf1_name, :udf1_type, :udf1_value,
     :udf2_name, :udf2_type, :udf2_value, 
