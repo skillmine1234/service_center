@@ -66,6 +66,13 @@
         %td.label Broker UUID
         %td
           = @rc_transfer.broker_uuid
+      - (1..5).each do |i|
+        - if @rc_transfer.send("udf#{i}_name").present?
+          %tr
+            %td.label
+              = @rc_transfer.send("udf#{i}_name")
+            %td.value
+              = @rc_transfer.send("udf#{i}_value")
   .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; height: 450px; display: inline-block;'}
     #ticket-details
       %h3 Notification Status
