@@ -11,7 +11,7 @@ describe RcTransferSchedule do
   end
   
   context 'validation' do
-    [:code, :debit_account_no, :bene_account_no, :app_code, :notify_mobile_no, :is_enabled].each do |att|
+    [:code, :debit_account_no, :bene_account_no, :is_enabled].each do |att|
       it { should validate_presence_of(att) }
     end
 
@@ -21,7 +21,6 @@ describe RcTransferSchedule do
       [:debit_account_no, :bene_account_no].each do |att|
         should validate_length_of(att).is_at_least(15).is_at_most(20)
       end
-      should validate_length_of(:app_code).is_at_least(5).is_at_most(20)
       should validate_length_of(:notify_mobile_no).is_at_least(10).is_at_most(10)
     end
 
@@ -40,7 +39,7 @@ describe RcTransferSchedule do
 
   context "fields format" do
     it "should allow valid format" do
-      [:app_code, :code].each do |att|
+      [:code].each do |att|
         should allow_value('98765').for(att)
         should allow_value('ABCD90').for(att)
         should allow_value('abcd1234E').for(att)
@@ -54,10 +53,10 @@ describe RcTransferSchedule do
     end
 
     it "should not allow invalid format" do
-      rc_transfer_schedule = Factory.build(:rc_transfer_schedule, :code => "BANK-01", :app_code => "abcd@QWER", :debit_account_no => "ACC12345", :bene_account_no => "123-456", :notify_mobile_no => "+998877665")
+      rc_transfer_schedule = Factory.build(:rc_transfer_schedule, :code => "BANK-01", :debit_account_no => "ACC12345", :bene_account_no => "123-456", :notify_mobile_no => "+998877665")
       rc_transfer_schedule.save.should be_false
-      [:app_code].each do |att|
-        rc_transfer_schedule.errors_on(att).should == ["Invalid format, expected format is : {[a-z|A-Z|0-9]}"]
+      [:bene_account_no].each do |att|
+        rc_transfer_schedule.errors_on(att).should == ["Invalid format, expected format is : {[0-9]}", "is too short (minimum is 15 characters)"]
       end
     end
   end

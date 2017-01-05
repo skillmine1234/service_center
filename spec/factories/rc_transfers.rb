@@ -3,7 +3,6 @@
 FactoryGirl.define do
   factory :rc_transfer do
     rc_transfer_code '1234'
-    app_code 'ABC'
     batch_no 0
     status_code 'C'
     started_at '2015-04-20'

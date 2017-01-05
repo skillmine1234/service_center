@@ -24,7 +24,7 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Beneficiary Account No
     %th{:style=>'text-align:left; background-color: lightblue;'}
-      App Code
+      RC App
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Debit Account No
     %th{:style=>'text-align:left; background-color: lightblue;'}
@@ -49,7 +49,7 @@
         %td{:style=>'text-align:left;'}
           = rc_transfer_schedule.bene_account_no
         %td{:style=>'text-align:left;'}
-          = rc_transfer_schedule.app_code
+          = rc_transfer_schedule.rc_app.try(:app_id)
         %td{:style=>'text-align:left;'}
           = rc_transfer_schedule.debit_account_no
         %td{:style=>'text-align:left;'}

@@ -95,6 +95,7 @@ ServiceCenter::Application.routes.draw do
       put  'update_multiple'
     end
   end
+  resources :rc_apps
   resources :rc_transfer_unapproved_records
 
   resources :sc_backends do
@@ -221,6 +222,7 @@ ServiceCenter::Application.routes.draw do
 
   get '/pc_products/:id/encrypt_password' => 'pc_products#encrypt_password', as: :pc_products_encrypt_password
     
+  get '/rc_apps/:id/audit_logs' => 'rc_apps#audit_logs'
   root :to => 'dashboard#overview'
 
   # See how all your routes lay out with "rake routes"
