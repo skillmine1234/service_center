@@ -42,7 +42,7 @@
         = error_message_for(@rc_transfer_schedule, :next_run_at, :prepend_text => "")
     .control-group
       = f.label :rc_app_id, "RC App", :class => 'control-label'
-      = f.select :rc_app_id, RcApp.unscoped.all.map {|u| [u.app_id, u.id]}, :include_blank => 'Select'
+      = f.select :rc_app_id, RcApp.all.map {|u| [u.app_id, u.id]}, :include_blank => 'Select'
       #msg-error
         = error_message_for(@rc_transfer_schedule, :rc_app_id, :prepend_text => "")
   .form-actions

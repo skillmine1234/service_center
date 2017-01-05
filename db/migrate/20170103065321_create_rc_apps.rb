@@ -1,6 +1,6 @@
 class CreateRcApps < ActiveRecord::Migration
   def change
-    create_table :rc_apps do |t|
+    create_table :rc_apps, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :app_id, null: false, limit: 50, comment: 'the app_id for the rc_app'
       t.integer :udfs_cnt, comment: 'the count of udfs for this app'
       t.string :udf1, comment: 'the udf 1 for the app'
@@ -14,7 +14,7 @@ class CreateRcApps < ActiveRecord::Migration
       t.string :updated_by, limit: 20, comment: "the person who updates the record"
       t.integer :lock_version, null: false, default: 0, comment: "the version number of the record, every update increments this by 1"
       t.string :last_action, limit: 1, default: 'C', null: false, comment: "the last action (create, update) that was performed on the record"
-      t.index(:app_id, unique: true)
+      t.index(:app_id, unique: true, name: 'rc_apps_01')
     end
   end
 end

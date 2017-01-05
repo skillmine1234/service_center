@@ -27,13 +27,13 @@
           %tr
             %td.label Created At
             %td.value
-              = @rc_app.created_at
+              = @rc_app.created_at.try(:strftime, "%d/%m/%Y %I:%M%p")
             %td#msg-error
               = error_message_for(@rc_app, :created_at, :prepend_text => "")
           %tr
             %td.label Updated At
             %td.value
-              = @rc_app.updated_at
+              = @rc_app.updated_at.try(:strftime, "%d/%m/%Y %I:%M%p")
             %td#msg-error
               = error_message_for(@rc_app, :updated_at, :prepend_text => "")
           %tr

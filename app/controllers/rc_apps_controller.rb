@@ -52,11 +52,7 @@ class RcAppsController < ApplicationController
   end
 
   def index
-    if params[:advanced_search].present?
-      rc_apps = find_rc_apps(params).order("id desc")
-    else
-      rc_apps = RcApp.unscoped.order("id desc")
-    end
+    rc_apps = RcApp.unscoped.order("id desc")
     @rc_apps_count = rc_apps.count
     @rc_apps = rc_apps.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
