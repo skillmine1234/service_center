@@ -62,6 +62,13 @@ class RcTransferSchedulesController < ApplicationController
     @rc_transfer_schedules = rc_transfer_schedules.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
   
+  def udfs
+    @rc_app = RcApp.find_by_id(params[:rc_app_id])
+    respond_to do |format|
+      format.js
+    end     
+  end
+  
   def audit_logs
     @rc_transfer_schedule = RcTransferSchedule.unscoped.find(params[:id]) rescue nil
     @audit = @rc_transfer_schedule.audits[params[:version_id].to_i] rescue nil

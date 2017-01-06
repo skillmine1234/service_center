@@ -21,5 +21,6 @@ FactoryGirl.define do
     customer_id '1234'
     mobile_no '9872536211'
     broker_uuid '1234'
+    rc_app_id { Factory(:rc_app).id }
   end
 end

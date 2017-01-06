@@ -14,5 +14,6 @@ FactoryGirl.define do
     last_action "C"
     approved_version 1
     is_enabled "Y"
+    rc_app_id { Factory(:rc_app).id }
   end
 end

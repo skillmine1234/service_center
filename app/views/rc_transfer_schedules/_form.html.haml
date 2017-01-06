@@ -22,7 +22,7 @@
         = error_message_for(@rc_transfer_schedule, :code, :prepend_text => "")
     .control-group
       = f.label :bene_account_no, "*Beneficiary Account No", :class => 'control-label'
-      = f.text_field :bene_account_no, :minlength => 15, :maxlength => 20, :required => true
+      = f.text_field :bene_account_no, :minlength => 15,  :required => true
       #msg-error
         = error_message_for(@rc_transfer_schedule, :bene_account_no, :prepend_text => "")
     .control-group
@@ -41,10 +41,12 @@
       #msg-error
         = error_message_for(@rc_transfer_schedule, :next_run_at, :prepend_text => "")
     .control-group
-      = f.label :rc_app_id, "RC App", :class => 'control-label'
+      = f.label :rc_app_id, "*RC App", :class => 'control-label'
       = f.select :rc_app_id, RcApp.all.map {|u| [u.app_id, u.id]}, :include_blank => 'Select'
       #msg-error
         = error_message_for(@rc_transfer_schedule, :rc_app_id, :prepend_text => "")
+    .udfs
+      = render :partial => 'udfs', locals: {udf: @rc_transfer_schedule} 
   .form-actions
     - (f.object.new_record? and f.object.code.nil?) ? label_name = "Create" : label_name = "Update"
     = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_customer', :value => label_name + ' Recurring Transfer Schedule'

@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe RcTransferSchedule do
+  subject { Factory(:rc_transfer_schedule) }
+  
   context 'association' do
     it { should belong_to(:created_user) }
     it { should belong_to(:updated_user) }
@@ -16,7 +18,6 @@ describe RcTransferSchedule do
     end
 
     it do
-      rc_transfer_schedule = Factory(:rc_transfer_schedule, :approval_status => 'A')
       should validate_length_of(:code).is_at_most(20)
       [:debit_account_no, :bene_account_no].each do |att|
         should validate_length_of(att).is_at_least(15).is_at_most(20)
@@ -25,7 +26,6 @@ describe RcTransferSchedule do
     end
 
     it do 
-      rc_transfer_schedule = Factory(:rc_transfer_schedule, :approval_status => 'A')
       should validate_uniqueness_of(:code).scoped_to(:approval_status)
     end
 
@@ -138,6 +138,29 @@ describe RcTransferSchedule do
       rc_transfer_schedule2 = Factory(:rc_transfer_schedule, :approval_status => 'U')
       rc_transfer_schedule1.enable_approve_button?.should == false
       rc_transfer_schedule2.enable_approve_button?.should == true
+    end
+  end
+  
+  context "udfs_should_be_correct" do
+    it "should give error when the value is nil" do
+      rc_transfer_schedule = Factory.build(:rc_transfer_schedule, udf1_name: 'udf1', udf1_type: 'text', udf1_value: nil, approval_status: 'A')
+      rc_transfer_schedule.save.should == false
+      rc_transfer_schedule.errors_on(:base).should == ["udf1 can't be blank"]
+    end
+    it "should give error when the type is date and value is not a valid date" do
+      rc_transfer_schedule = Factory.build(:rc_transfer_schedule, udf1_name: 'udf1', udf1_type: 'date', udf1_value: '2015-24-24', approval_status: 'A')
+      rc_transfer_schedule.save.should == false
+      rc_transfer_schedule.errors_on(:base).should == ["udf1 is not a date"]
+    end
+    it "should give error when the type is text and value is too long" do
+      rc_transfer_schedule = Factory.build(:rc_transfer_schedule, udf1_name: 'udf1', udf1_type: 'text', udf1_value: '1232301293819028312uw1288127312318923012381923019231uw192u8319238120wi1293812312wi1290', approval_status: 'A')
+      rc_transfer_schedule.save.should == false
+      rc_transfer_schedule.errors_on(:base).should == ["udf1 is too long, maximum is 50 charactres"]
+    end
+    it "should give error when the type is text and value includes special characters" do
+      rc_transfer_schedule = Factory.build(:rc_transfer_schedule, udf1_name: 'udf1', udf1_type: 'text', udf1_value: '!@123!@#', approval_status: 'A')
+      rc_transfer_schedule.save.should == false
+      rc_transfer_schedule.errors_on(:base).should == ["udf1 should not include special characters"]
     end
   end
 end
