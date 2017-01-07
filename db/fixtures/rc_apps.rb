@@ -1,4 +1,5 @@
 RcApp.seed(:app_id) do |s|
+  s.id = 10000
   s.app_id = 'VODAFONE'
   s.url = 'http://182.19.20.182:81/mcommerce.webservices/pgService'
   s.setting1_name  = 'username'
@@ -12,6 +13,7 @@ RcApp.seed(:app_id) do |s|
 end
 
 RcApp.seed(:app_id) do |s|
+  s.id = 10001
   s.app_id = 'RELIANCE'
   s.url = 'https://ecollection.ril.com/BankPymtWS/service.asmx'
   s.http_username = 'BkPymtUsr'
