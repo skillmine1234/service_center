@@ -44,24 +44,8 @@
             %td#msg-error
               = error_message_for(@rc_app, :updated_at, :prepend_text => "")
           %tr
-            - if @rc_app.udfs_cnt.present? and @rc_app.udfs_cnt > 0
-              %table.table.datatable{style: 'width: 50%;'}
-                %h4 UDFs
-                %thead
-                  %tr
-                    %th Name
-                    %th Type
-                %tbody
-                  - (1..@rc_app.udfs_cnt).each do |i|
-                    %tr
-                      %td
-                        = @rc_app.send("udf#{i}_name")
-                      %td
-                        = @rc_app.send("udf#{i}_type")
-          %tr
             - if @rc_app.settings_cnt.present? and @rc_app.settings_cnt > 0
               %table.table.datatable{style: 'width: 50%'}
-                %h4 Settings
                 %thead
                   %tr
                     %th Name
