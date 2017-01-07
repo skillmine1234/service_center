@@ -1,7 +1,7 @@
 class AddColumnsToRcApps < ActiveRecord::Migration
   def change
     add_column :rc_apps, :url, :string, limit: 100, comment: 'the URL for the app'
-    RcApp.update_all(url: 'http://localhost')
+    RcApp.unscoped.update_all(url: 'http://localhost')
     change_column :rc_apps, :url, :string, null: false
     add_column :rc_apps, :http_username, :string, limit: 50, comment: 'the http_username for the app'
     add_column :rc_apps, :http_password, :string, limit: 50, comment: 'the http_password for the app'
