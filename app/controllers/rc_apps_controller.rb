@@ -66,7 +66,7 @@ class RcAppsController < ApplicationController
     @rc_app = RcApp.unscoped.find(params[:id]) rescue nil
     RcApp.transaction do
       approval = @rc_app.approve
-      if @rc_app.save and approval.empty?
+      if approval.empty?
         flash[:alert] = "Rc App record was approved successfully"
       else
         msg = approval.empty? ? @rc_app.errors.full_messages : @rc_app.errors.full_messages << approval
@@ -76,11 +76,16 @@ class RcAppsController < ApplicationController
     end
     redirect_to @rc_app
   end
-  
+
   private
 
   def rc_app_params
     params.require(:rc_app).permit(:lock_version, :last_action, :updated_by, :url, :http_username, :http_password, 
-    :setting1_value, :setting2_value, :app_id)
+    :setting1_name, :setting1_type, :setting1_value, 
+    :setting2_name, :setting2_type, :setting2_value, 
+    :setting3_name, :setting3_type, :setting3_value, 
+    :setting4_name, :setting4_type, :setting4_value,
+    :setting5_name, :setting5_type, :setting5_value,
+    :app_id, :approval_status, :approved_version, :approved_id)
   end
 end

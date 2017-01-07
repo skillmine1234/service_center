@@ -163,4 +163,22 @@ describe RcTransferSchedule do
       rc_transfer_schedule.errors_on(:base).should == ["udf1 should not include special characters"]
     end
   end
+  
+  context "set_app_code" do
+    it "should set the app_code" do
+      rc_app = Factory(:rc_app, :app_id => 'APP000', :approval_status => 'A')
+      rc_transfer_schedule = Factory(:rc_transfer_schedule, :approval_status => 'A', :rc_app_id => rc_app.id)
+      rc_transfer_schedule.reload
+      rc_transfer_schedule.app_code.should == 'APP000'
+    end
+  end
+  
+  context "sanitize_udfs" do
+    it "should sanitize udfs" do
+      rc_transfer_schedule = Factory(:rc_transfer_schedule, udf1_name: 'udf1', udf1_type: 'text', udf1_value: 'abc', udf1_name: nil, udf1_type: nil, udf1_value: nil, approval_status: 'A')
+      rc_transfer_schedule.udf2_name.should be_nil
+      rc_transfer_schedule.udf2_type.should be_nil
+      rc_transfer_schedule.udf2_value.should be_nil
+    end
+  end
 end

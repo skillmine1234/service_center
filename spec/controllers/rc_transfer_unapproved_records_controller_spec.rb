@@ -14,7 +14,7 @@ describe RcTransferUnapprovedRecordsController do
     it "assigns all rc_transfer_unapproved_records as @rc_transfer_unapproved_records" do
       rc_transfer_unapproved_record = Factory(:rc_transfer_unapproved_record, :rc_transfer_approvable_type => 'RcTransferSchedule')
       get :index
-      assigns(:records).should eq([{:record_type=>"RcTransferSchedule", :record_count=>1}])
+      assigns(:records).should eq([{:record_type=>"RcTransferSchedule", :record_count=>1}, {:record_type=>"RcApp", :record_count=>0}])
     end
   end
 end

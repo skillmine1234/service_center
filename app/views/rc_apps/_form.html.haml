@@ -7,6 +7,8 @@
           %br
   .form-main
     = f.hidden_field :lock_version
+    = f.hidden_field :approved_id
+    = f.hidden_field :approved_version
     .control-group
       = f.label :app_id, "*App ID", :class => 'control-label'
       = f.text_field :app_id, :readonly => true
@@ -24,6 +26,8 @@
         - (1..@rc_app.settings_cnt).each do |i|
           = f.label @rc_app.send("setting#{i}_name")
           = f.send("#{@rc_app["setting#{i}"]["setting#{i}_type"] || 'text'}_field", "setting#{i}_value")
+          = f.hidden_field "setting#{i}_name", value: @rc_app.send("setting#{i}_name")
+          = f.hidden_field "setting#{i}_type", value: @rc_app.send("setting#{i}_type")
           %br
 
   .form-actions
