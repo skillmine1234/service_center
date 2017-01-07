@@ -6,5 +6,9 @@ FactoryGirl.define do
     udf1_name 'udf1'
     udf1_type 'number'
     url 'http://localhost'
+    approval_status "U"
+    last_action "C"
+    lock_version 1
+    approved_version 1
   end
 end

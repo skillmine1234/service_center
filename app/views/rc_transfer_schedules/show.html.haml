@@ -73,7 +73,7 @@
               = @rc_transfer_schedule.last_batch_no
             %td#msg-error
               = error_message_for(@rc_transfer_schedule, :last_batch_no, :prepend_text => "")
-          - (1..5).each do |i|
+          - (1..@rc_transfer_schedule.rc_app.udfs_cnt).each do |i|
             - if @rc_transfer_schedule.send("udf#{i}_name").present?
               %tr
                 %td.label

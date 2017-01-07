@@ -6,6 +6,7 @@
       %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
         - can = can? :edit, @rc_app
         %a.btn{:href => "#{!(can) ? '#' : '/rc_apps/' + @rc_app.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
+        = render 'approve', :@record => @rc_app
       %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
         - if !@rc_app.nil?
           %tr

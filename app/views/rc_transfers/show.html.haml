@@ -66,7 +66,7 @@
         %td.label Broker UUID
         %td
           = @rc_transfer.broker_uuid
-      - (1..5).each do |i|
+      - (1..@rc_transfer.rc_app.udfs_cnt).each do |i|
         - if @rc_transfer.send("udf#{i}_name").present?
           %tr
             %td.label

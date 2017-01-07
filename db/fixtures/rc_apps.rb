@@ -7,6 +7,8 @@ RcApp.seed(:app_id) do |s|
   s.setting2_name  = 'password'
   s.setting2_type  = 'text'
   s.setting2_value = 'z5xVCbkuR6EsM4W/BU3CNg=='
+  s.created_by = 'Q'
+  s.approval_status = 'A'
 end
 
 RcApp.seed(:app_id) do |s|
@@ -18,4 +20,6 @@ RcApp.seed(:app_id) do |s|
   s.udf1_type  = 'text'
   s.udf2_name  = 'remitter_identification_code'
   s.udf2_type  = 'text'
+  s.created_by = 'Q'
+  s.approval_status = 'A'
 end
