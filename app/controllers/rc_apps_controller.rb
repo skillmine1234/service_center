@@ -5,8 +5,25 @@ class RcAppsController < ApplicationController
   respond_to :json
   include ApplicationHelper
 
+  def create
+    @rc_app = RcApp.new(params[:rc_app])
+    if !@rc_app.valid?
+      render "edit"
+    else
+      @rc_app.created_by = current_user.id
+      @rc_app.save!
+      flash[:alert] = 'Rc App successfully created and is pending for approval'
+      redirect_to @rc_app
+    end
+  end
+  
   def edit
-    @rc_app = RcApp.unscoped.find_by_id(params[:id])  
+    rc_app = RcApp.unscoped.find_by_id(params[:id])
+    if rc_app.approval_status == 'A' && rc_app.unapproved_record.nil?
+      params = (rc_app.attributes).merge({:approved_id => rc_app.id,:approved_version => rc_app.lock_version, :app_id => rc_app.app_id})
+      rc_app = RcApp.new(params)
+    end
+    @rc_app = rc_app
   end
 
   def update
@@ -35,7 +52,7 @@ class RcAppsController < ApplicationController
   end
 
   def index
-    rc_apps = RcApp.unscoped.order("id desc")
+    rc_apps = (params[:approval_status].present? and params[:approval_status] == 'U') ? RcApp.unscoped.where("approval_status =?",'U').order("id desc") : RcApp.order("id desc")
     @rc_apps_count = rc_apps.count
     @rc_apps = rc_apps.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
@@ -45,10 +62,25 @@ class RcAppsController < ApplicationController
     @audit = @rc_app.audits[params[:version_id].to_i] rescue nil
   end
   
+  def approve
+    @rc_app = RcApp.unscoped.find(params[:id]) rescue nil
+    RcApp.transaction do
+      approval = @rc_app.approve
+      if @rc_app.save and approval.empty?
+        flash[:alert] = "Rc App record was approved successfully"
+      else
+        msg = approval.empty? ? @rc_app.errors.full_messages : @rc_app.errors.full_messages << approval
+        flash[:alert] = msg
+        raise ActiveRecord::Rollback
+      end
+    end
+    redirect_to @rc_app
+  end
+  
   private
 
   def rc_app_params
     params.require(:rc_app).permit(:lock_version, :last_action, :updated_by, :url, :http_username, :http_password, 
-    :setting1_value, :setting2_value)
+    :setting1_value, :setting2_value, :app_id)
   end
 end

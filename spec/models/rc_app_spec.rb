@@ -22,7 +22,10 @@ describe RcApp do
     end
   end
 
-  context "validation" do    
+  context "validation" do
+    [:app_id, :url].each do |att|
+      it { should validate_presence_of(att) }
+    end
     it "should validate presence of http_password if http_username is present" do
       rc_app = Factory.build(:rc_app, http_username: 'username', http_password: nil)
       rc_app.save.should == false
