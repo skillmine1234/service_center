@@ -69,7 +69,7 @@ class RcAppsController < ApplicationController
       if approval.empty?
         flash[:alert] = "Rc App record was approved successfully"
       else
-        msg = approval.empty? ? @rc_app.errors.full_messages : @rc_app.errors.full_messages << approval
+        msg = @rc_app.errors.full_messages << approval
         flash[:alert] = msg
         raise ActiveRecord::Rollback
       end
