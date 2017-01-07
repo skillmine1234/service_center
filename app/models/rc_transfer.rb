@@ -1,6 +1,7 @@
 class RcTransfer < ActiveRecord::Base
   has_many :rc_audit_steps, :as => :rc_auditable
   has_one :rc_transfer_schedule, :foreign_key => 'code', :primary_key => 'rc_transfer_code'
+  belongs_to :rc_app
   
   store :udf1, accessors: [:udf1_name, :udf1_type, :udf1_value], coder: JSON
   store :udf2, accessors: [:udf2_name, :udf2_type, :udf2_value], coder: JSON

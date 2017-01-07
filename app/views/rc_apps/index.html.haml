@@ -1,13 +1,6 @@
 %br
-= link_to 'New RC App', new_rc_app_path
-%br
 %br
 %h1 Listing RC Apps
-/ %h2.collapsible
-/   Advanced Search
-/   %span.caret
-/ .collapsible-content
-/   = render :partial => 'advanced_search'
 %br
 = "Total Count: #{@rc_apps_count}"
 %br
@@ -19,6 +12,8 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
       App ID
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      URL
 
   .tbody
     - @rc_apps.each do |rc_app|
@@ -29,3 +24,5 @@
           = link_to 'Edit', edit_rc_app_path(rc_app)
         %td{:style=>'text-align:left;'}
           = rc_app.app_id
+        %td{:style=>'text-align:left;'}
+          = rc_app.url

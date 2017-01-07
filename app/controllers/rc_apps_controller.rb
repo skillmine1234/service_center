@@ -4,23 +4,6 @@ class RcAppsController < ApplicationController
   before_filter :block_inactive_user!
   respond_to :json
   include ApplicationHelper
-  # include RcAppsHelper
-  
-  def new
-    @rc_app = RcApp.new
-  end
-
-  def create
-    @rc_app = RcApp.new(params[:rc_app])
-    if !@rc_app.valid?
-      render "new"
-    else
-      @rc_app.created_by = current_user.id
-      @rc_app.save!
-      flash[:alert] = 'Rc App successfully created successfully'
-      redirect_to @rc_app
-    end
-  end 
 
   def edit
     @rc_app = RcApp.unscoped.find_by_id(params[:id])  
@@ -65,8 +48,7 @@ class RcAppsController < ApplicationController
   private
 
   def rc_app_params
-    params.require(:rc_app).permit(:app_id, :udfs_cnt, :udf1_name, :udf1_type, :udf1_is_mandatory, :udf2_name, :udf2_type, :udf2_is_mandatory, 
-    :udf3_name, :udf3_type, :udf3_is_mandatory, :udf4_name, :udf4_type, :udf4_is_mandatory, :udf5_name, :udf5_type, :udf5_is_mandatory, 
-    :lock_version, :last_action, :created_by, :updated_by)
+    params.require(:rc_app).permit(:lock_version, :last_action, :updated_by, :url, :http_username, :http_password, 
+    :setting1_value, :setting2_value)
   end
 end

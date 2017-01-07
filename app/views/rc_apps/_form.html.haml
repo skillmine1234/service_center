@@ -1,34 +1,30 @@
 = simple_form_for @rc_app, :html => {:class=>'form-horizontal', :autocomplete=>"off", :id => "rc_app_form"} do |f|
   .control-group
-    = f.label ' '
-    #msg-error
-      = error_message_for(@rc_app, :base, :prepend_text => "")
+    - if @rc_app.errors.any?
+      #msg-error
+        - @rc_app.errors.full_messages.each do |msg|
+          = msg
+          %br
   .form-main
     = f.hidden_field :lock_version
     .control-group
       = f.label :app_id, "*App ID", :class => 'control-label'
-      = f.text_field :app_id, :maxlength => 20
-      #msg-error
-        = error_message_for(@rc_app, :app_id, :prepend_text => "")
-  .fieldset
-    %table.table.datatable
-      %thead
-        %tr
-          %th UDF
-          %th Name
-          %th Type
-          %th Mandatory
-      %tbody
-        - (1..5).each do |i|
-          %tr
-            %td
-              = i
-            %td
-              = f.text_field "udf#{i}_name"
-            %td
-              = f.select "udf#{i}_type", RcApp.udf_types.map { |key, value| [key.humanize, key] }
-            %td
-              = f.check_box "udf#{i}_is_mandatory", {},"Y","N"
+      = f.text_field :app_id, :readonly => true
+    .control-group
+      = f.label :http_username, "*HTTP Username", :class => 'control-label'
+      = f.text_field :http_username
+    .control-group
+      = f.label :http_password, "HTTP Password", :class => 'control-label'
+      - if (!f.object.new_record? and f.object.errors.empty?) or (f.object.new_record? and !f.object.id.nil?)
+        = f.password_field :http_password, :required => true, :maxlength => 255, :value => RcApp.decrypted_value(f.object.http_password)
+      - else
+        = f.password_field :http_password, :required => true, :maxlength => 255, :value => f.object.http_password
+    .control-group
+      - if @rc_app.settings_cnt > 0
+        - (1..@rc_app.settings_cnt).each do |i|
+          = f.label @rc_app.send("setting#{i}_name")
+          = f.send("#{@rc_app["setting#{i}"]["setting#{i}_type"] || 'text'}_field", "setting#{i}_value")
+          %br
 
   .form-actions
     - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
