@@ -219,7 +219,8 @@ $(document).ready(function(){
 
   $('#rc_transfer_schedule_next_run_at').datetimepicker({
     dateFormat: "dd/mm/yy",
-    timeFormat: 'hh:mmTT' 
+    timeFormat: 'hh:mmTT',
+    minDate: 0
   });
 
   $('#next_from_date').datetimepicker({
