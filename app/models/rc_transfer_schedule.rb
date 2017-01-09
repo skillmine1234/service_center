@@ -27,7 +27,12 @@ class RcTransferSchedule < ActiveRecord::Base
   before_save :set_app_code
   before_validation :sanitize_udfs, unless: Proc.new { |c| c.rc_app.nil? }
   validate :udfs_should_be_correct, unless: Proc.new { |c| c.rc_app.nil? }
-  
+  validate :validate_next_run_at
+   
+  def validate_next_run_at
+    errors.add(:next_run_at,"should not be less than today's date") if !next_run_at.nil? and next_run_at < Time.zone.today.beginning_of_day
+  end
+
   def next_run_at_value
     next_run_at.nil? ? Time.zone.now.try(:strftime, "%d/%m/%Y %I:%M%p") : next_run_at.try(:strftime, "%d/%m/%Y %I:%M%p")
   end

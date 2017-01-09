@@ -35,6 +35,18 @@ describe RcTransferSchedule do
       rc_transfer_schedule2.should_not be_valid
       rc_transfer_schedule2.errors_on(:code).should == ["has already been taken"]
     end
+
+    it 'should not accept previos date for next run at' do 
+      rc_transfer_schedule = Factory.build(:rc_transfer_schedule, :next_run_at => Time.zone.now.advance(:days => -1))
+      rc_transfer_schedule.should_not be_valid
+      rc_transfer_schedule.errors_on(:next_run_at).should == ["should not be less than today's date"]
+      rc_transfer_schedule = Factory(:rc_transfer_schedule, :next_run_at => Time.zone.now.beginning_of_day)
+      rc_transfer_schedule.should be_valid
+      rc_transfer_schedule = Factory(:rc_transfer_schedule, :next_run_at => Time.zone.now)
+      rc_transfer_schedule.should be_valid
+      rc_transfer_schedule = Factory(:rc_transfer_schedule, :next_run_at => Time.zone.now.advance(:days => 1))
+      rc_transfer_schedule.should be_valid
+    end
   end
 
   context "fields format" do
