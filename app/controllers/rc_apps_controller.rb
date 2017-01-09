@@ -81,6 +81,11 @@ class RcAppsController < ApplicationController
 
   def rc_app_params
     params.require(:rc_app).permit(:lock_version, :last_action, :updated_by, :url, :http_username, :http_password, 
+    :udf1_name, :udf1_type,
+    :udf2_name, :udf2_type,
+    :udf3_name, :udf3_type,
+    :udf4_name, :udf4_type,
+    :udf5_name, :udf5_type,
     :setting1_name, :setting1_type, :setting1_value, 
     :setting2_name, :setting2_type, :setting2_value, 
     :setting3_name, :setting3_type, :setting3_value, 

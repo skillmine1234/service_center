@@ -29,6 +29,11 @@
           = f.hidden_field "setting#{i}_name", value: @rc_app.send("setting#{i}_name")
           = f.hidden_field "setting#{i}_type", value: @rc_app.send("setting#{i}_type")
           %br
+    .control-group
+      - if @rc_app.udfs_cnt > 0
+        - (1..@rc_app.udfs_cnt).each do |i|
+          = f.hidden_field "udf#{i}_name", value: @rc_app.send("udf#{i}_name")
+          = f.hidden_field "udf#{i}_type", value: @rc_app.send("udf#{i}_type")
 
   .form-actions
     - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
