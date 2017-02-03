@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/quantiguous/rp.git
-  revision: 551a6637ca52c00ad7f7d2b11d6d0929e60aa54b
+  revision: 43b9df471a003831b635f38d73da26845ef076f0
   specs:
     rp (0.0.1)
       haml-rails
@@ -559,5 +559,8 @@ DEPENDENCIES
   will_paginate
   zeroclipboard-rails
 
+RUBY VERSION
+   ruby 2.2.2p95
+
 BUNDLED WITH
-   1.11.2
+   1.13.6
