@@ -129,10 +129,10 @@
           = f.text_field :id_country
         .control-group
           = f.label :id_issue_date, 'ID Issue Date', :class => 'control-label'
-          = f.text_field :id_issue_date
+          = f.date_field :id_issue_date
         .control-group
           = f.label :id_expiry_date, 'ID Expiry Date', :class => 'control-label'
-          = f.text_field :id_expiry_date
+          = f.date_field :id_expiry_date
         .control-group
           #attachments
             %h3 Attachments: (Maximum size 2MB)
