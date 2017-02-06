@@ -110,6 +110,8 @@ ServiceCenter::Application.routes.draw do
       resources :whitelisted_identities
     end
   end
+  
+  resources :inw_guidelines
 
   get 'su_incoming_file_summary' => 'su_incoming_records#incoming_file_summary'
   get 'ic_incoming_file_summary' => 'ic_incoming_records#incoming_file_summary'

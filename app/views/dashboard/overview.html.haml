@@ -54,6 +54,11 @@
         = image_tag 'white_list_icon.jpg', :size => "80x80"
       %br
         = "Whitelisted Identities"
+    .box
+      = link_to '/inw_guidelines' do
+        = image_tag 'partner.png', :size => "80x80"
+      %br
+        = "Inward Remittance Guideline"
 - if @current_user.group_names.include?("e-collect")
   %h1 E-Collect
   .slide-container{:style=>"vertical-align: top;"}

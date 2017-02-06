@@ -2,6 +2,8 @@ class Partner < ActiveRecord::Base
   include Approval
   include InwApproval
 
+  ServiceNames = %w(INW INW2)
+
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
 
@@ -54,5 +56,9 @@ class Partner < ActiveRecord::Base
   def country_name
     country = ISO3166::Country[self.country]
     country.translations[I18n.locale.to_s] || country.name rescue nil
+  end
+  
+  def self.options_for_auto_match_rule
+    [['None','N'],['Any','A'],['Between Parties','B']]
   end
 end

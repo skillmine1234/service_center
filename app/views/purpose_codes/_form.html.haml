@@ -40,7 +40,6 @@
       = f.text_field :mtd_txn_limit_self
       #msg-error
         = error_message_for(@purpose_code, :mtd_txn_limit_self, :prepend_text => "")
-  .form-extended
     .control-group
       = f.label :mtd_txn_cnt_sp, "Monthly Transaction Count (Same Party)", :class => 'control-label'
       = f.text_field :mtd_txn_cnt_sp
@@ -51,6 +50,12 @@
       = f.text_field :mtd_txn_limit_sp
       #msg-error
         = error_message_for(@purpose_code, :mtd_txn_limit_sp, :prepend_text => "")
+  .form-extended
+    .control-group
+      = f.label :guideline_id, "Guideline", :class => 'control-label'
+      = f.select :guideline_id, InwGuideline.all.map { |key, value| [key.code, key.id] }
+      #msg-error
+        = error_message_for(@purpose_code, :guideline_id, :prepend_text => "")
     .control-group
       = f.label :disallowed_rem_types, "Disallowed Remitter Types", :class => 'control-label'
       = f.select :disallowed_rem_types, options_for_select(PurposeCode.options_for_bene_and_rem_types, convert_options_to_array(@purpose_code.disallowed_rem_types)), {}, {:multiple => true}
