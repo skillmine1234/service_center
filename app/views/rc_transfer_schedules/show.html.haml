@@ -81,6 +81,18 @@
                 %td.value
                   = @rc_transfer_schedule.send("udf#{i}_value")
           %tr
+            %td.label Transaction Kind
+            %td.value
+              = @rc_transfer_schedule.txn_kind
+            %td#msg-error
+              = error_message_for(@rc_transfer_schedule, :txn_kind, :prepend_text => "")
+          %tr
+            %td.label Interval (in mins)
+            %td.value
+              = @rc_transfer_schedule.interval_in_mins
+            %td#msg-error
+              = error_message_for(@rc_transfer_schedule, :interval_in_mins, :prepend_text => "")
+          %tr
             %td.label Updated By
             %td.value
               = @rc_transfer_schedule.updated_user.try(:username)

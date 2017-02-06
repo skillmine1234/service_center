@@ -45,6 +45,16 @@
       = f.select :rc_app_id, RcApp.all.map {|u| [u.app_id, u.id]}, :include_blank => 'Select'
       #msg-error
         = error_message_for(@rc_transfer_schedule, :rc_app_id, :prepend_text => "")
+    .control-group
+      = f.label :txn_kind, "Transaction Kind", :class => 'control-label'
+      = f.select :txn_kind, RcTransferSchedule::TXN_KINDS.map { |key, value| [key, key] }
+      #msg-error
+        = error_message_for(@rc_transfer_schedule, :txn_kind, :prepend_text => "")
+    .control-group
+      = f.label :interval_in_mins, "Interval(in mins)", :class => 'control-label'
+      = f.number_field :interval_in_mins
+      #msg-error
+        = error_message_for(@rc_transfer_schedule, :interval_in_mins, :prepend_text => "")
     .udfs
       = render :partial => 'udfs', locals: {udf: @rc_transfer_schedule} 
   .form-actions

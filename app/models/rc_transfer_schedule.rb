@@ -2,6 +2,7 @@ class RcTransferSchedule < ActiveRecord::Base
   include Approval
   include RcTransferApproval
 
+  TXN_KINDS = %w(FT BALINQ)
   self.table_name = "rc_transfer_schedule"
   
   store :udf1, accessors: [:udf1_name, :udf1_type, :udf1_value], coder: JSON

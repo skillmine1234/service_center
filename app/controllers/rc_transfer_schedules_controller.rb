@@ -110,6 +110,7 @@ class RcTransferSchedulesController < ApplicationController
     :udf2_name, :udf2_type, :udf2_value, 
     :udf3_name, :udf3_type, :udf3_value, 
     :udf4_name, :udf4_type, :udf4_value, 
-    :udf5_name, :udf5_type, :udf5_value)
+    :udf5_name, :udf5_type, :udf5_value,
+    :txn_kind, :interval_in_mins)
   end
 end
