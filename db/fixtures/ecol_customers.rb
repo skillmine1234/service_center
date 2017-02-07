@@ -8,7 +8,7 @@ EcolCustomer.seed(:code,
 )
 
 
-QgEcolTodaysNeftTxn.seed(:id,
+QgEcolTodaysNeftTxn.seed(:transfer_unique_no,
   {:transfer_unique_no => SecureRandom.hex.slice(1,16), :rmtr_ref => SecureRandom.hex.slice(1,16), :bene_account_ifsc => 'HDFC0123456', :bene_account_no => 'QTEST1ABC', :bene_account_type => 'CA', :rmtr_account_ifsc => 'HDFC0123456', :rmtr_account_no => 'RMTRAC1', :rmtr_account_type => 'CA', :transfer_amt => 30, :transfer_date => Date.today, :rmtr_full_name => 'RMTR' },
   {:transfer_unique_no => SecureRandom.hex.slice(1,16), :rmtr_ref => SecureRandom.hex.slice(1,16), :bene_account_ifsc => 'HDFC0123456', :bene_account_no => 'QTEST2ABC', :bene_account_type => 'CA', :rmtr_account_ifsc => 'HDFC0123456', :rmtr_account_no => 'RMTRAC1', :rmtr_account_type => 'CA', :transfer_amt => 30, :transfer_date => Date.today, :rmtr_full_name => 'RMTR' },
   {:transfer_unique_no => SecureRandom.hex.slice(1,16), :rmtr_ref => SecureRandom.hex.slice(1,16), :bene_account_ifsc => 'HDFC0123456', :bene_account_no => 'QTEST3ABC', :bene_account_type => 'CA', :rmtr_account_ifsc => 'HDFC0123456', :rmtr_account_no => 'RMTRAC1', :rmtr_account_type => 'CA', :transfer_amt => 30, :transfer_date => Date.today, :rmtr_full_name => 'RMTR' },
