@@ -129,7 +129,7 @@
   .form-extended
     .control-group
       = f.label :service_name, "*Service Name", :class => 'control-label'
-      = f.select :service_name, Partner::ServiceNames.map { |key, value| [key, key] }
+      = f.select :service_name, options_for_select(Partner::SERVICE_NAMES, @partner.service_name)
       #msg-error
         = error_message_for(@partner, :service_name, :prepend_text => "")
     .control-group
@@ -164,7 +164,7 @@
         = error_message_for(@partner, :auto_match_rule, :prepend_text => "")
     .control-group
       = f.label :lcy_rate, "*LCY Rate", :class => 'control-label'
-      = f.number_field :lcy_rate
+      = f.number_field :lcy_rate, :step => "0.01"
       #msg-error
         = error_message_for(@partner, :lcy_rate, :prepend_text => "")
     .control-group

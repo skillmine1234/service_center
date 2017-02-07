@@ -97,3 +97,9 @@
               = @purpose_code.pattern_allowed_benes
             %td#msg-error
               = error_message_for(@purpose_code, :pattern_allowed_benes, :prepend_text => "")
+          %tr
+            %td.label Guideline
+            %td.value
+              = @purpose_code.guideline.try(:code)
+            %td#msg-error
+              = error_message_for(@purpose_code, :guideline_id, :prepend_text => "")

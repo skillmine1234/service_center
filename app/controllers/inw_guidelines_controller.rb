@@ -6,16 +6,12 @@ class InwGuidelinesController < ApplicationController
   before_filter :block_inactive_user!
   respond_to :json
   include ApplicationHelper
-  # include InwGuidelineHelper
-
-  def new
-    @inw_guideline = InwGuideline.new
-  end
+  include InwGuidelineHelper
 
   def create
     @inw_guideline = InwGuideline.new(params[:inw_guideline])
     if !@inw_guideline.valid?
-      render "new"
+      render "edit"
     else
       @inw_guideline.created_by = current_user.id
       @inw_guideline.save!
@@ -23,7 +19,7 @@ class InwGuidelinesController < ApplicationController
       flash[:alert] = 'InwGuideline successfully created and is pending for approval'
       redirect_to @inw_guideline
     end
-  end 
+  end
 
   def edit
     inw_guideline = InwGuideline.unscoped.find_by_id(params[:id])
@@ -89,6 +85,7 @@ class InwGuidelinesController < ApplicationController
 
   def inw_guideline_params
     params.require(:inw_guideline).permit(:code, :allow_neft, :allow_imps, :allow_rtgs, :ytd_txn_cnt_bene, :disallowed_products,
-                                          :needs_lcy_rate, :lock_version, :approval_status, :approved_id, :approved_version)
+                                          :needs_lcy_rate, :is_enabled, :created_by, :updated_by, :created_at, :updated_at, 
+                                          :lock_version, :approval_status, :approved_id, :approved_version)
   end
 end

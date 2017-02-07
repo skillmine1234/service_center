@@ -26,4 +26,30 @@ $(document).ready(function(){
       $('#partner_app_code').prop('readOnly',false)     
     }
   });
+  
+  if(!$('#partner_will_whitelist').is(":checked")){
+    $('#partner_hold_for_whitelisting').prop('disabled',true)
+  }
+
+  $("#partner_will_whitelist").on("click", function () {
+    if(!$('#partner_will_whitelist').is(":checked")){
+      $('#partner_hold_for_whitelisting').prop('disabled',true)
+    }
+    else{
+      $('#partner_hold_for_whitelisting').prop('disabled',false)
+    }
+  });
+
+  if(!$('#partner_hold_for_whitelisting').is(":checked")){
+    $('#partner_hold_period_days').prop('disabled',true)
+  }
+
+  $("#partner_hold_for_whitelisting").on("click", function () {
+    if(!$('#partner_hold_for_whitelisting').is(":checked")){
+      $('#partner_hold_period_days').prop('disabled',true)
+    }
+    else{
+      $('#partner_hold_period_days').prop('disabled',false)
+    }
+  });
 });

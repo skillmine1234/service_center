@@ -227,6 +227,8 @@ ServiceCenter::Application.routes.draw do
   get '/rc_apps/:id/audit_logs' => 'rc_apps#audit_logs'
   put '/rc_apps/:id/approve' => "rc_apps#approve"
   get '/rc_transfer_schedules/udfs/:rc_app_id' => 'rc_transfer_schedules#udfs'
+  get '/inw_guidelines/:id/audit_logs' => 'inw_guidelines#audit_logs'
+  put '/inw_guidelines/:id/approve' => "inw_guidelines#approve"
   root :to => 'dashboard#overview'
 
   # See how all your routes lay out with "rake routes"

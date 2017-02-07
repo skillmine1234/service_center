@@ -52,7 +52,17 @@ describe Partner do
       partner1.should_not be_valid
       partner1.errors_on(:base).should == ["Unapproved Record Already Exists for this record"]
     end
-  
+    
+    it 'should give error if will_whitelist = N and hold_for_whitelisting = Y' do
+      partner = Factory.build(:partner, :approval_status => 'A', :will_whitelist => 'N', :hold_for_whitelisting => 'Y')
+      partner.errors_on(:hold_for_whitelisting).first.should == "Allowed only when Will Whitelist is true"
+    end
+    
+    it 'should give error lcy_rate has more than two digits after decimal point' do
+      partner = Factory.build(:partner, :approval_status => 'A', lcy_rate: 10.888)
+      partner.errors_on(:lcy_rate).first.should == "is invalid, only two digits are allowed after decimal point"
+    end
+
     it { should validate_length_of(:account_no).is_at_least(10) }
     it { should validate_length_of(:account_no).is_at_most(16) }
     it { should validate_length_of(:mobile_no).is_at_least(10) }
@@ -62,6 +72,7 @@ describe Partner do
     it { should validate_length_of(:customer_id).is_at_most(15) }
     it { should validate_length_of(:add_req_ref_in_rep).is_at_least(1).is_at_most(1) }
     it { should validate_length_of(:add_transfer_amt_in_rep).is_at_least(1).is_at_most(1) }
+    it { should validate_numericality_of(:hold_period_days) }
 
     context "txn_hold_period_days" do 
       it "should accept value 1 to 15" do
@@ -241,6 +252,12 @@ describe Partner do
       partner2 = Factory(:partner, :approval_status => 'U')
       partner1.enable_approve_button?.should == false
       partner2.enable_approve_button?.should == true
+    end
+  end
+  
+  context "options_for_auto_match_rule" do
+    it "should return options_for_auto_match_rule" do
+      Partner.options_for_auto_match_rule.should == [['None','N'],['Any','A']]
     end
   end
   

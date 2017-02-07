@@ -8,6 +8,7 @@ class CreateInwGuidelines < ActiveRecord::Migration
       t.integer :ytd_txn_cnt_bene, comment: 'the count of transactions allowed for a beneficiary in a calendar year'
       t.text :disallowed_products, comment: 'the list of product code which are disallowed for guideline'
       t.string :needs_lcy_rate, limit: 1, null: false, default: 'N', comment: 'the indicator to specify if lcy_rate is required for this guideline'
+      t.string :is_enabled, limit: 1, null: false, default: 'Y', comment: 'the indicator to specify if the guideline is enabled or not'
       t.datetime :created_at, :null => false, :comment => "the timestamp when the record was created"
       t.datetime :updated_at, :null => false, :comment => "the timestamp when the record was last updated"
       t.string :created_by, :limit => 20, :comment => "the person who creates the record"
@@ -17,6 +18,7 @@ class CreateInwGuidelines < ActiveRecord::Migration
       t.string :last_action, :limit => 1, :default => 'C', :null => false, :comment => "the last action (create, update) that was performed on the record"
       t.integer :approved_version, :comment => "the version number of the record, at the time it was approved"
       t.integer :approved_id, :comment => "the id of the record that is being updated"
+      t.index([:code, :approval_status], :unique => true, name: 'uk_inw_guidelines_01')
     end
   end
 end

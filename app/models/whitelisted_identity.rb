@@ -12,7 +12,9 @@ class WhitelistedIdentity < ActiveRecord::Base
 
   validates_uniqueness_of :id_type, :scope => [:id_number,:id_country,:id_issue_date,:id_expiry_date,:approval_status]
 
-  validates_presence_of :partner_id, :is_verified, :created_by, :updated_by, :id_type, :id_number,:id_country,:id_issue_date,:id_expiry_date
+  validates_presence_of :partner_id, :is_verified, :created_by, :updated_by, :id_type, :id_number, :id_expiry_date
+  
+  validate :validate_expiry_date
 
   after_create :update_identities
 
@@ -22,5 +24,9 @@ class WhitelistedIdentity < ActiveRecord::Base
 
   def update_identities
     inw_identity.update_attributes(:was_auto_matched => 'N',:whitelisted_identity_id => id) unless inw_identity.nil?
+  end
+  
+  def validate_expiry_date
+    errors.add(:id_expiry_date,"should not be less than today's date") if !id_expiry_date.nil? and id_expiry_date < Date.today
   end
 end
