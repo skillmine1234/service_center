@@ -6,6 +6,7 @@ class CreateEcolApps < ActiveRecord::Migration
       t.string :validate_url, limit: 100, comment: 'the validate URL for the app'
       t.string :http_username, limit: 50, comment: 'the http_username for the app'
       t.string :http_password, limit: 50, comment: 'the http_password for the app'
+      t.string :use_proxy, limit: 1, default: 'N', comment: 'the flag which indicates whether proxy should be used for this app or not'
       t.integer :settings_cnt, comment: 'the count of settings for this app'
       t.string :setting1, comment: 'the setting 1 for the app'
       t.string :setting2, comment: 'the setting 2 for the app'
