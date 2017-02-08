@@ -76,8 +76,7 @@ class EcolAppsController < ApplicationController
   private
 
   def ecol_app_params
-    params.require(:ecol_app).permit(:lock_version, :last_action, :updated_by, :notify_url, :validate_url, 
-    :http_username, :http_password, :settings_cnt, :use_proxy,
+    params.require(:ecol_app).permit(:lock_version, :last_action, :updated_by, :notify_url, :validate_url, :http_username, :http_password, :settings_cnt,
     :setting1_name, :setting1_type, :setting1_value, 
     :setting2_name, :setting2_type, :setting2_value, 
     :setting3_name, :setting3_type, :setting3_value, 

@@ -32,12 +32,6 @@
             %td#msg-error
               = error_message_for(@ecol_app, :notify_url, :prepend_text => "")
           %tr
-            %td.label Use Proxy
-            %td.value
-              = @ecol_app.use_proxy
-            %td#msg-error
-              = error_message_for(@ecol_app, :use_proxy, :prepend_text => "")
-          %tr
             %td.label Username
             %td.value
               = @ecol_app.http_username
