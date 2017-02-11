@@ -1,4 +1,5 @@
 class WhitelistIdentityHelper
+  require "ruby-plsql"
   
   def self.auto_match_and_release(id)
     set_connection
