@@ -15,6 +15,8 @@ $(document).ready(function(){
     $("#whitelisted_identity_bene_account_no").val($(this).data('bene-account-no'));
     $("#whitelisted_identity_bene_account_ifsc").val($(this).data('bene-account-ifsc'));
     $("#whitelisted_identity_rmtr_code").val($(this).data('rmtr-code'));
+    $("#whitelisted_identity_created_for_identity_id").val($(this).data('created-for-identity-id'));
+    $("#whitelisted_identity_created_for_txn_id").val($(this).data('created-for-txn-id'));
     $('#verifyIdentity').modal();
   });
   
@@ -35,6 +37,8 @@ $(document).ready(function(){
     $addIdentityForm.find("#whitelisted_identity_bene_account_no").val(data["beneAccountNo"]);
     $addIdentityForm.find("#whitelisted_identity_bene_account_ifsc").val(data["beneAccountIfsc"]);
     $addIdentityForm.find("#whitelisted_identity_rmtr_code").val(data["rmtrCode"]);
+    $addIdentityForm.find("#whitelisted_identity_created_for_identity_id").val(data["createdForIdentityId"]);
+    $addIdentityForm.find("#whitelisted_identity_created_for_txn_id").val(data["createdForTxnId"]);
     $('#addIdentity').modal();
   });
 
