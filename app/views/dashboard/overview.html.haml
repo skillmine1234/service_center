@@ -79,6 +79,11 @@
         = "Approval Worklist"
   .slide-container{:style=>"height: auto;"}
     .box
+      = link_to '/ecol_apps' do
+        = image_tag 'ec_app_icon.jpeg', :size => "80x80"
+      %br
+        = "E-Collect Apps"
+    .box
       - if !EcolRule.first.nil?
         = link_to edit_ecol_rule_path(EcolRule.first) do
           = image_tag 'ecol_rule.png', :size => "80x80"

@@ -1,0 +1,40 @@
+= simple_form_for @ecol_app, :html => {:class=>'form-horizontal', :autocomplete=>"off", :id => "ecol_app_form"} do |f|
+  .control-group
+    - if @ecol_app.errors.any?
+      #msg-error
+        - @ecol_app.errors.full_messages.each do |msg|
+          = msg
+          %br
+  .form-main
+    = f.hidden_field :lock_version
+    = f.hidden_field :approved_id
+    = f.hidden_field :approved_version
+    = f.hidden_field :settings_cnt
+    .control-group
+      = f.label :app_code, "*App Code", :class => 'control-label'
+      = f.text_field :app_code, :readonly => true
+    .control-group
+      = f.label :validate_url, "Validate URL", :class => 'control-label'
+      = f.text_field :validate_url
+    .control-group
+      = f.label :notify_url, "Notify URL", :class => 'control-label'
+      = f.text_field :notify_url
+    .control-group
+      = f.label :http_username, "HTTP Username", :class => 'control-label'
+      = f.text_field :http_username
+    .control-group
+      = f.label :http_password, "HTTP Password", :class => 'control-label'
+      = f.password_field :http_password, :value => f.object.http_password
+    .control-group
+      - if @ecol_app.settings_cnt > 0
+        - (1..@ecol_app.settings_cnt).each do |i|
+          = f.label @ecol_app.send("setting#{i}_name")
+          = f.send("#{@ecol_app["setting#{i}"]["setting#{i}_type"] || 'text'}_field", "setting#{i}_value")
+          = f.hidden_field "setting#{i}_name", value: @ecol_app.send("setting#{i}_name")
+          = f.hidden_field "setting#{i}_type", value: @ecol_app.send("setting#{i}_type")
+          %br
+
+  .form-actions
+    - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_ecol_app', :value => label_name + ' Ecol App'
+    = link_to :Cancel,'/ecol_apps', :name => 'cancel', :class=>"cancel btn"

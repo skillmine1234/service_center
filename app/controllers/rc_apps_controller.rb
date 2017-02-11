@@ -20,7 +20,7 @@ class RcAppsController < ApplicationController
   def edit
     rc_app = RcApp.unscoped.find_by_id(params[:id])
     if rc_app.approval_status == 'A' && rc_app.unapproved_record.nil?
-      params = (rc_app.attributes).merge({:approved_id => rc_app.id,:approved_version => rc_app.lock_version, :app_id => rc_app.app_id})
+      params = (rc_app.attributes).merge({:approved_id => rc_app.id,:approved_version => rc_app.lock_version, :app_id => rc_app.app_id, :settings_cnt => rc_app.settings_cnt})
       rc_app = RcApp.new(params)
     end
     @rc_app = rc_app
@@ -80,7 +80,7 @@ class RcAppsController < ApplicationController
   private
 
   def rc_app_params
-    params.require(:rc_app).permit(:lock_version, :last_action, :updated_by, :url, :http_username, :http_password, 
+    params.require(:rc_app).permit(:lock_version, :last_action, :updated_by, :url, :http_username, :http_password, :settings_cnt,
     :udf1_name, :udf1_type,
     :udf2_name, :udf2_type,
     :udf3_name, :udf3_type,

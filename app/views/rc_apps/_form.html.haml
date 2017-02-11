@@ -9,6 +9,7 @@
     = f.hidden_field :lock_version
     = f.hidden_field :approved_id
     = f.hidden_field :approved_version
+    = f.hidden_field :settings_cnt
     .control-group
       = f.label :app_id, "*App ID", :class => 'control-label'
       = f.text_field :app_id, :readonly => true
@@ -29,11 +30,6 @@
           = f.hidden_field "setting#{i}_name", value: @rc_app.send("setting#{i}_name")
           = f.hidden_field "setting#{i}_type", value: @rc_app.send("setting#{i}_type")
           %br
-    .control-group
-      - if @rc_app.udfs_cnt > 0
-        - (1..@rc_app.udfs_cnt).each do |i|
-          = f.hidden_field "udf#{i}_name", value: @rc_app.send("udf#{i}_name")
-          = f.hidden_field "udf#{i}_type", value: @rc_app.send("udf#{i}_type")
 
   .form-actions
     - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
