@@ -26,7 +26,6 @@ class Partner < ActiveRecord::Base
   validates :mmid, :numericality => {:only_integer => true}, length: {maximum: 7, minimum: 7}, :allow_blank => true
   validates :mobile_no, :numericality => {:only_integer => true}, length: {maximum: 10, minimum: 10}, :allow_blank => true
   validates_length_of :add_req_ref_in_rep, :add_transfer_amt_in_rep, minimum: 1, maximum: 1
-  validates_numericality_of :hold_period_days
 
   validate :imps_and_mmid
   validate :check_email_addresses
@@ -34,7 +33,8 @@ class Partner < ActiveRecord::Base
   validate :whitelisting, :lcy_rate_is_valid_decimal_precision
   
   def whitelisting
-    errors.add(:hold_for_whitelisting, "Allowed only when Will Whitelist is true") if will_whitelist == 'N' && hold_for_whitelisting == 'Y'
+    errors.add(:hold_for_whitelisting, "Allowed only when service is INW2 and Will Whitelist is true") if (hold_for_whitelisting == 'Y' && (will_whitelist == 'N' || service_name == 'INW'))
+    errors.add(:will_send_id, "Allowed only when Will Whitelist is true") if will_whitelist == 'N' && will_send_id == 'Y'
   end
   
   def lcy_rate_is_valid_decimal_precision

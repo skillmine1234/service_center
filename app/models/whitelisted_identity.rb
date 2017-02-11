@@ -29,4 +29,15 @@ class WhitelistedIdentity < ActiveRecord::Base
   def validate_expiry_date
     errors.add(:id_expiry_date,"should not be less than today's date") if !id_expiry_date.nil? and id_expiry_date < Date.today
   end
+  
+  def auto_match_and_release
+    inw_identity = InwIdentity.find_by_id(self.created_for_identity_id)
+    unless inw_identity.nil?
+      if inw_identity.partner.auto_match_rule == 'N'
+        ::WhitelistIdentityHelper.try_release(self.created_for_txn_id)
+      else
+        ::WhitelistIdentityHelper.auto_match_and_release(self.id)
+      end
+    end
+  end
 end

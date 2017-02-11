@@ -97,6 +97,10 @@
         %tr
           %td.label Processed At
           %td= @inward_remittance.processed_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+        %tr
+          %td.label Remitter Code
+          %td.value
+            = @inward_remittance.rmtr_code
       %hr{:style=>'background-color: #F1F2F8; width: 100%'}
       %h3 Notification Status
       %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:left;'}

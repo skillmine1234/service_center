@@ -55,7 +55,17 @@ describe Partner do
     
     it 'should give error if will_whitelist = N and hold_for_whitelisting = Y' do
       partner = Factory.build(:partner, :approval_status => 'A', :will_whitelist => 'N', :hold_for_whitelisting => 'Y')
-      partner.errors_on(:hold_for_whitelisting).first.should == "Allowed only when Will Whitelist is true"
+      partner.errors_on(:hold_for_whitelisting).first.should == "Allowed only when service is INW2 and Will Whitelist is true"
+    end
+    
+    it 'should give error if service_name = INW and hold_for_whitelisting = Y' do
+      partner = Factory.build(:partner, :approval_status => 'A', :service_name => 'INW', :hold_for_whitelisting => 'Y')
+      partner.errors_on(:hold_for_whitelisting).first.should == "Allowed only when service is INW2 and Will Whitelist is true"
+    end
+    
+    it 'should give error if will_send_id = Y and will_whitelist = N' do
+      partner = Factory.build(:partner, :approval_status => 'A', :will_send_id => 'Y', :will_whitelist => 'N')
+      partner.errors_on(:will_send_id).first.should == "Allowed only when Will Whitelist is true"
     end
     
     it 'should give error lcy_rate has more than two digits after decimal point' do
@@ -72,7 +82,6 @@ describe Partner do
     it { should validate_length_of(:customer_id).is_at_most(15) }
     it { should validate_length_of(:add_req_ref_in_rep).is_at_least(1).is_at_most(1) }
     it { should validate_length_of(:add_transfer_amt_in_rep).is_at_least(1).is_at_most(1) }
-    it { should validate_numericality_of(:hold_period_days) }
 
     context "txn_hold_period_days" do 
       it "should accept value 1 to 15" do

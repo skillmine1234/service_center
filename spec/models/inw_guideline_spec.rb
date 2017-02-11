@@ -23,6 +23,25 @@ describe InwGuideline do
     it { should validate_numericality_of(:ytd_txn_cnt_bene) }
   end
   
+  context "code format" do
+    it "should allow valid format" do 
+      [:code].each do |att|
+        should allow_value('a12232424V').for(att)
+        should allow_value('abcddfgdfg').for(att)
+        should allow_value('1234545435').for(att)
+        should allow_value('aBCDdfdsgs').for(att)
+      end
+    end
+
+    it "should not allow invalid format" do 
+      [:code].each do |att|
+        should_not allow_value('ab*dsgdsgf').for(att)
+        should_not allow_value('@acddsfdfd').for(att)
+        should_not allow_value('134\ndsfdsg').for(att)
+      end
+    end
+  end
+  
   context "validate_disallowed_products" do 
     it "should validate keywords in disallowed products" do 
       inw_guideline = Factory.build(:inw_guideline, :disallowed_products => "1234 ese@sdgs")
@@ -46,7 +65,7 @@ describe InwGuideline do
       inw_guideline2.save
       InwGuideline.all.should == [inw_guideline1,inw_guideline2]
     end
-  end    
+  end
 
   context "inw_unapproved_records" do 
     it "oncreate: should create inw_unapproved_record if the approval_status is 'U'" do

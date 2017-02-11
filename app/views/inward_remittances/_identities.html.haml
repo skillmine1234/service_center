@@ -14,11 +14,11 @@
             %td.value
               - if !identity.whitelisted_identity.nil?
                 = "Verified"
-              - else
-                - if identity.inward_remittance.partner.will_send_id == 'N' and identity.was_auto_matched == 'N'
-                  = link_to 'Verify',"#", :class => 'verify-link', :href => "#verifyIdentity", data: { partner_id: identity.inward_remittance.partner.try(:id), full_name: identity.full_name, id_type: identity.id_type, id_number: identity.id_number, id_country: identity.id_country, id_issue_date: identity.id_issue_date, id_expiry_date: identity.id_expiry_date, user_id: user_id, inward_remittance_id: identity.inward_remittance.try(:id),  bene_account_no: identity.inward_remittance.bene_account_no, bene_account_ifsc: identity.inward_remittance.bene_account_ifsc, rmtr_code: identity.partner_rmtr_code }
-                - elsif identity.inward_remittance.partner.will_send_id = 'Y' and identity.was_auto_matched == 'N'
-                  = link_to 'Add', '#', :class => 'add-link', :href => '#addIdentity', data: { partner_id: identity.inward_remittance.partner.try(:id), full_name: identity.full_name, id_type: identity.id_type, id_number: identity.id_number, id_country: identity.id_country, id_issue_date: identity.id_issue_date, id_expiry_date: identity.id_expiry_date, user_id: user_id, inward_remittance_id: identity.inward_remittance.try(:id), bene_account_no: identity.inward_remittance.bene_account_no, bene_account_ifsc: identity.inward_remittance.bene_account_ifsc, rmtr_code: identity.partner_rmtr_code}
+              - elsif identity.inward_remittance.partner.will_whitelist == 'Y' and identity.was_auto_matched == 'N'
+                - if identity.inward_remittance.partner.will_send_id == 'N'
+                  = link_to 'Verify',"#", :class => 'verify-link', :href => "#verifyIdentity", data: { partner_id: identity.inward_remittance.partner.try(:id), full_name: identity.full_name, id_type: identity.id_type, id_number: identity.id_number, id_country: identity.id_country, id_issue_date: identity.id_issue_date, id_expiry_date: identity.id_expiry_date, user_id: user_id, inward_remittance_id: identity.inward_remittance.try(:id),  bene_account_no: identity.inward_remittance.bene_account_no, bene_account_ifsc: identity.inward_remittance.bene_account_ifsc, rmtr_code: identity.rmtr_code, created_for_identity_id: identity.id, created_for_txn_id: identity.inward_remittance.try(:id) }
+                - elsif identity.inward_remittance.partner.will_send_id = 'Y'
+                  = link_to 'Add', '#', :class => 'add-link', :href => '#addIdentity', data: { partner_id: identity.inward_remittance.partner.try(:id), full_name: identity.full_name, id_type: identity.id_type, id_number: identity.id_number, id_country: identity.id_country, id_issue_date: identity.id_issue_date, id_expiry_date: identity.id_expiry_date, user_id: user_id, inward_remittance_id: identity.inward_remittance.try(:id), bene_account_no: identity.inward_remittance.bene_account_no, bene_account_ifsc: identity.inward_remittance.bene_account_ifsc, rmtr_code: identity.rmtr_code, created_for_identity_id: identity.id, created_for_txn_id: identity.inward_remittance.try(:id)}
           %tr
             %td.label Partner Name
             %td.value
@@ -110,6 +110,8 @@
             = f.hidden_field :bene_account_no
             = f.hidden_field :bene_account_ifsc
             = f.hidden_field :rmtr_code
+            = f.hidden_field :created_for_txn_id
+            = f.hidden_field :created_for_identity_id
             = f.fields_for :attachments, :input_html => { :rows => 3} do |attachment_form|
               = attachment_form.label :note
               = attachment_form.text_area :note, :style => 'width:300px; height:30px', :maxlength => 255
@@ -162,6 +164,8 @@
               = f.hidden_field :bene_account_no
               = f.hidden_field :bene_account_ifsc
               = f.hidden_field :rmtr_code
+              = f.hidden_field :created_for_txn_id
+              = f.hidden_field :created_for_identity_id
               = f.fields_for :attachments, :input_html => { :rows => 3} do |attachment_form|
                 = attachment_form.label :note
                 = attachment_form.text_area :note, :style => 'width:300px; height:30px', :maxlength => 255

@@ -68,12 +68,6 @@
             %td#msg-error
               = error_message_for(@partner, :account_ifsc, :prepend_text => "")
           %tr
-            %td.label Transaction Hold Period Days
-            %td.value
-              = @partner.txn_hold_period_days
-            %td#msg-error
-              = error_message_for(@partner, :txn_hold_period_days, :prepend_text => "")
-          %tr
             %td.label Low Balance Alert At
             %td.value
               = @partner.low_balance_alert_at
@@ -218,11 +212,11 @@
             %td#msg-error
               = error_message_for(@partner, :hold_for_whitelisting, :prepend_text => "")
           %tr
-            %td.label Hold Period Days
+            %td.label Transaction Hold Period Days
             %td.value
-              = @partner.hold_period_days
+              = @partner.txn_hold_period_days
             %td#msg-error
-              = error_message_for(@partner, :hold_period_days, :prepend_text => "")
+              = error_message_for(@partner, :txn_hold_period_days, :prepend_text => "")
           %tr
             %td.label Auto Match Rule
             %td.value

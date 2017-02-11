@@ -49,6 +49,10 @@ class InwGuidelinesController < ApplicationController
 
   def show
     @inw_guideline = InwGuideline.unscoped.find_by_id(params[:id])
+    respond_to do |format|
+      format.json {render json: @inw_guideline.attributes}
+      format.html
+    end
   end
 
   def index

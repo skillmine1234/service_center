@@ -374,6 +374,7 @@ GEM
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
     ruby-oci8 (2.1.8)
+    ruby-plsql (0.6.0)
     ruby_parser (3.7.0)
       sexp_processor (~> 4.1)
     rubyzip (1.1.7)
@@ -531,6 +532,7 @@ DEPENDENCIES
   rspec
   rspec-rails (= 2.14.0)
   ruby-oci8
+  ruby-plsql
   rufus-scheduler
   sass-rails
   secure_headers

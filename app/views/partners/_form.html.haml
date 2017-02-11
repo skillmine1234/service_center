@@ -51,11 +51,6 @@
       #msg-error
         = error_message_for(@partner, :account_ifsc, :prepend_text => "")
     .control-group
-      = f.label :transaction_hold_period, "*Transaction Hold Period In Days", :class => 'control-label'
-      = f.number_field :txn_hold_period_days, min: 1
-      #msg-error
-        = error_message_for(@partner, :txn_hold_period_days, :prepend_text => "")
-    .control-group
       = f.label :low_balance_alert_at, "Low Balance Alert At", :class => 'control-label'
       = f.text_field :low_balance_alert_at
       #msg-error
@@ -153,10 +148,10 @@
       #msg-error
         = error_message_for(@partner, :hold_for_whitelisting, :prepend_text => "")
     .control-group
-      = f.label :hold_period_days, "*Hold Period Days", :class => 'control-label'
-      = f.number_field :hold_period_days
+      = f.label :transaction_hold_period, "*Transaction Hold Period (in days)", :class => 'control-label'
+      = f.number_field :txn_hold_period_days, min: 1
       #msg-error
-        = error_message_for(@partner, :hold_period_days, :prepend_text => "")
+        = error_message_for(@partner, :txn_hold_period_days, :prepend_text => "")
     .control-group
       = f.label :auto_match_rule, "*Auto Match Rule", :class => 'control-label'
       = f.select :auto_match_rule, Partner.options_for_auto_match_rule
