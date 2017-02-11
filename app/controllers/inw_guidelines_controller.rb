@@ -74,10 +74,10 @@ class InwGuidelinesController < ApplicationController
     @inw_guideline = InwGuideline.unscoped.find(params[:id]) rescue nil
     InwGuideline.transaction do
       approval = @inw_guideline.approve
-      if @inw_guideline.save and approval.empty?
+      if approval.empty?
         flash[:alert] = "InwGuideline record was approved successfully"
       else
-        msg = approval.empty? ? @inw_guideline.errors.full_messages : @inw_guideline.errors.full_messages << approval
+        msg = @inw_guideline.errors.full_messages << approval
         flash[:alert] = msg
         raise ActiveRecord::Rollback
       end

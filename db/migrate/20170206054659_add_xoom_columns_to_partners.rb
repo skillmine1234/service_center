@@ -1,8 +1,8 @@
 class AddXoomColumnsToPartners < ActiveRecord::Migration
   def change
     add_column :partners, :service_name, :string, limit: 5, null: false, default: 'INW', comment: 'the service used by the partner'
-    p = Partner.find_by(code: 'WUAPN')
-    p.update(service_name: 'INW2') unless p.nil?
+    p = Partner.unscoped.where(code: 'WUAPN')
+    p.update_all(service_name: 'INW2') unless p.empty?
     add_column :partners, :guideline_id, :integer, null: false, default: 1, comment: 'the guideline for the partner, refers to inw_guidelines'
     add_column :partners, :will_whitelist, :string, limit: 1, null: false, default: 'Y', comment: 'the identifier to specify if the partner is participating in the whitelisting process or not'
     add_column :partners, :will_send_id, :string, limit: 1, null: false, default: 'Y', comment: 'the identifier to specify if the partner will send ID information in the request'

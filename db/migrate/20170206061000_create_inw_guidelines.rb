@@ -18,7 +18,7 @@ class CreateInwGuidelines < ActiveRecord::Migration
       t.string :last_action, :limit => 1, :default => 'C', :null => false, :comment => "the last action (create, update) that was performed on the record"
       t.integer :approved_version, :comment => "the version number of the record, at the time it was approved"
       t.integer :approved_id, :comment => "the id of the record that is being updated"
-      t.index([:code, :approval_status], :unique => true, name: 'uk_inw_guidelines_01')
+      t.index([:code, :approval_status], :unique => true, name: 'inw_guidelines_01')
     end
   end
 end

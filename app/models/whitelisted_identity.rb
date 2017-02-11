@@ -27,7 +27,7 @@ class WhitelistedIdentity < ActiveRecord::Base
   end
   
   def validate_expiry_date
-    errors.add(:id_expiry_date,"should not be less than today's date") if !id_expiry_date.nil? and id_expiry_date < Date.today
+    errors.add(:id_expiry_date,"should not be less than today's date") if !id_expiry_date.nil? and id_expiry_date < Time.zone.today
   end
   
   def auto_match_and_release
