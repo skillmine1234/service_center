@@ -16,9 +16,9 @@
                 = "Verified"
               - elsif identity.inward_remittance.partner.will_whitelist == 'Y' and identity.was_auto_matched == 'N'
                 - if identity.inward_remittance.partner.will_send_id == 'N'
-                  = link_to 'Verify',"#", :class => 'verify-link', :href => "#verifyIdentity", data: { partner_id: identity.inward_remittance.partner.try(:id), full_name: identity.full_name, id_type: identity.id_type, id_number: identity.id_number, id_country: identity.id_country, id_issue_date: identity.id_issue_date, id_expiry_date: identity.id_expiry_date, user_id: user_id, inward_remittance_id: identity.inward_remittance.try(:id),  bene_account_no: identity.inward_remittance.bene_account_no, bene_account_ifsc: identity.inward_remittance.bene_account_ifsc, rmtr_code: identity.rmtr_code, created_for_identity_id: identity.id, created_for_txn_id: identity.inward_remittance.try(:id) }
+                  = link_to 'Verify',"#", :class => 'verify-link', :href => "#verifyIdentity", data: { partner_id: identity.inward_remittance.partner.try(:id), full_name: identity.full_name, id_type: identity.id_type, id_number: identity.id_number, id_country: identity.id_country, id_issue_date: identity.id_issue_date, id_expiry_date: identity.id_expiry_date, user_id: user_id, inward_remittance_id: identity.inward_remittance.try(:id),  bene_account_no: identity.inward_remittance.bene_account_no, bene_account_ifsc: identity.inward_remittance.bene_account_ifsc, rmtr_code: identity.inward_remittance.rmtr_code, created_for_identity_id: identity.id, created_for_txn_id: identity.inward_remittance.try(:id) }
                 - elsif identity.inward_remittance.partner.will_send_id = 'Y'
-                  = link_to 'Add', '#', :class => 'add-link', :href => '#addIdentity', data: { partner_id: identity.inward_remittance.partner.try(:id), full_name: identity.full_name, id_type: identity.id_type, id_number: identity.id_number, id_country: identity.id_country, id_issue_date: identity.id_issue_date, id_expiry_date: identity.id_expiry_date, user_id: user_id, inward_remittance_id: identity.inward_remittance.try(:id), bene_account_no: identity.inward_remittance.bene_account_no, bene_account_ifsc: identity.inward_remittance.bene_account_ifsc, rmtr_code: identity.rmtr_code, created_for_identity_id: identity.id, created_for_txn_id: identity.inward_remittance.try(:id)}
+                  = link_to 'Add', '#', :class => 'add-link', :href => '#addIdentity', data: { partner_id: identity.inward_remittance.partner.try(:id), full_name: identity.full_name, id_type: identity.id_type, id_number: identity.id_number, id_country: identity.id_country, id_issue_date: identity.id_issue_date, id_expiry_date: identity.id_expiry_date, user_id: user_id, inward_remittance_id: identity.inward_remittance.try(:id), bene_account_no: identity.inward_remittance.bene_account_no, bene_account_ifsc: identity.inward_remittance.bene_account_ifsc, rmtr_code: identity.inward_remittance.rmtr_code, created_for_identity_id: identity.id, created_for_txn_id: identity.inward_remittance.try(:id)}
           %tr
             %td.label Partner Name
             %td.value
@@ -72,10 +72,6 @@
             %td.label Verified At
             %td.value
               = identity.verified_at
-          %tr
-            %td.label Remitter Code
-            %td.value
-              = identity.rmtr_code
           %tr
             %td
               %hr{:style=>'background-color: #F1F2F8; width: 200%'}
