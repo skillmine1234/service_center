@@ -21,11 +21,14 @@ class WhitelistedIdentitiesController < ApplicationController
       redirect_to :back
     else
       @whitelisted_identity.created_by = current_user.id
-      if @whitelisted_identity.save!
-        EmailAlert.send_email(@whitelisted_identity.inward_remittance,@whitelisted_identity.partner.ops_email_id) rescue nil
-        @whitelisted_identity.auto_match_and_release
+      begin
+        if @whitelisted_identity.save!
+          EmailAlert.send_email(@whitelisted_identity.inward_remittance,@whitelisted_identity.partner.ops_email_id) rescue nil
+        end
+        flash[:alert] = 'Identity successfully verified'
+      rescue ::Fault::ProcedureFault => e
+       flash[:alert] = "#{e.message}"
       end
-      flash[:alert] = 'Identity successfully verified'
       redirect_to :back
     end
   end 

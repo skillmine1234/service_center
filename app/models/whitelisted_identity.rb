@@ -17,6 +17,8 @@ class WhitelistedIdentity < ActiveRecord::Base
   validate :validate_expiry_date
 
   after_create :update_identities
+  
+  after_save :auto_match_and_release
 
   def inw_identity
     inward_remittance.identities.where("id_type=? and id_number=? and id_country=? and id_issue_date=? and id_expiry_date=?", id_type,id_number,id_country,id_issue_date,id_expiry_date).first rescue nil
