@@ -67,6 +67,18 @@
           %td
             = @whitelisted_identity.times_used
         %tr
+          %td.label Beneficiary Account Number
+          %td
+            = @whitelisted_identity.bene_account_no
+        %tr
+          %td.label Beneficiary Account IFSC
+          %td
+            = @whitelisted_identity.bene_account_ifsc
+        %tr
+          %td.label Remitter Code
+          %td
+            = @whitelisted_identity.rmtr_code
+        %tr
           %td.label Created By
           %td
             = @whitelisted_identity.created_user.try(:username)

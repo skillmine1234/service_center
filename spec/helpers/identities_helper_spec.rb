@@ -12,6 +12,18 @@ describe IdentitiesHelper do
       find_identities({:name => 'foobar'}).should == [identity]
       find_identities({:name => 'foo'}).should == []
       find_identities({:name => 'bar'}).should == []
+      identity = Factory(:whitelisted_identity, :rmtr_code => 'foobar', :approval_status => 'A', :id_type => 'passport')
+      find_identities({:rmtr_code => 'foobar'}).should == [identity]
+      find_identities({:rmtr_code => 'foo'}).should == []
+      find_identities({:rmtr_code => 'bar'}).should == []
+      identity = Factory(:whitelisted_identity, :bene_account_no => '987654320987', :approval_status => 'A', :id_type => 'pan')
+      find_identities({:bene_account_no => '987654320987'}).should == [identity]
+      find_identities({:bene_account_no => 'foo'}).should == []
+      find_identities({:bene_account_no => 'bar'}).should == []
+      identity = Factory(:whitelisted_identity, :bene_account_ifsc => 'ABCD0123456', :approval_status => 'A', :id_type => 'aadhar')
+      find_identities({:bene_account_ifsc => 'ABCD0123456'}).should == [identity]
+      find_identities({:bene_account_ifsc => 'ABCD'}).should == []
+      find_identities({:bene_account_ifsc => 'abc'}).should == []
     end
   end 
 end

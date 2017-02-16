@@ -26,4 +26,108 @@ $(document).ready(function(){
       $('#partner_app_code').prop('readOnly',false)     
     }
   });
+  
+  if(!$('#partner_will_whitelist').is(":checked") ) {
+    $('#partner_hold_for_whitelisting').prop('disabled',true)
+    $('#partner_txn_hold_period_days').prop('disabled',true)
+    $('#partner_will_send_id').prop('disabled',true)
+  }
+  else {
+    if ($('#partner_service_name').val() != 'INW2') {
+      $('#partner_will_send_id').prop('disabled',false)
+    }
+    else {
+      $('#partner_hold_for_whitelisting').prop('disabled',false)
+      $('#partner_txn_hold_period_days').prop('disabled',false)
+      $('#partner_will_send_id').prop('disabled',false)
+    }
+  }
+  
+  $("#partner_will_whitelist").on("click", function () {
+    if(!$('#partner_will_whitelist').is(":checked") ) {
+      $('#partner_hold_for_whitelisting').prop('disabled',true)
+      $('#partner_txn_hold_period_days').prop('disabled',true)
+      $('#partner_will_send_id').prop('disabled',true)
+    }
+    else {
+      if ($('#partner_service_name').val() != 'INW2') {
+        $('#partner_will_send_id').prop('disabled',false)
+      }
+      else {
+        $('#partner_hold_for_whitelisting').prop('disabled',false)
+        $('#partner_txn_hold_period_days').prop('disabled',false)
+        $('#partner_will_send_id').prop('disabled',false)
+      }
+    }
+  });
+  
+  if ($('#partner_service_name').val() == 'INW2'){
+    if ($('#partner_will_whitelist').is(":checked")) {
+      $('#partner_hold_for_whitelisting').prop('disabled',false)
+      $('#partner_txn_hold_period_days').prop('disabled',false)
+      $('#partner_will_send_id').prop('disabled',false)
+    }
+    else {
+      $('#partner_hold_for_whitelisting').prop('disabled',true)
+      $('#partner_txn_hold_period_days').prop('disabled',true)
+      $('#partner_will_send_id').prop('disabled',true)
+    }
+  }
+  else {
+    if ($('#partner_will_whitelist').is(":checked")) {
+      $('#partner_will_send_id').prop('disabled',false)
+    }
+    else {
+      $('#partner_will_send_id').prop('disabled',true)
+    }
+    $('#partner_hold_for_whitelisting').prop('disabled',true)
+    $('#partner_txn_hold_period_days').prop('disabled',true)
+  }
+  
+  $("#partner_service_name").on("change", function () {
+    if ($('#partner_service_name').val() == 'INW2'){
+      if ($('#partner_will_whitelist').is(":checked")) {
+        $('#partner_hold_for_whitelisting').prop('disabled',false)
+        $('#partner_txn_hold_period_days').prop('disabled',false)
+        $('#partner_will_send_id').prop('disabled',false)
+      }
+      else {
+        $('#partner_hold_for_whitelisting').prop('disabled',true)
+        $('#partner_txn_hold_period_days').prop('disabled',true)
+        $('#partner_will_send_id').prop('disabled',true)
+      }
+    }
+    else {
+      if ($('#partner_will_whitelist').is(":checked")) {
+        $('#partner_will_send_id').prop('disabled',false)
+      }
+      else {
+        $('#partner_will_send_id').prop('disabled',true)
+      }
+      $('#partner_hold_for_whitelisting').prop('disabled',true)
+      $('#partner_txn_hold_period_days').prop('disabled',true)
+    }
+  });
+  
+  set_lcy_rate($('#partner_guideline_id').val());
+  
+  $("#partner_guideline_id").on("change", function () {
+    set_lcy_rate($('#partner_guideline_id').val());
+  });
+  
+  function set_lcy_rate(id) {
+    $.ajax({
+       url: "/inw_guidelines/"+id,
+       dataType: "json",
+       success: function(data){
+         if (data["needs_lcy_rate"] == 'N') {
+           $('#partner_lcy_rate').prop('disabled',true)
+         }
+         else {
+           $('#partner_lcy_rate').prop('disabled',false)
+         }
+       }
+    });
+  }
+  
 });

@@ -51,11 +51,6 @@
       #msg-error
         = error_message_for(@partner, :account_ifsc, :prepend_text => "")
     .control-group
-      = f.label :transaction_hold_period, "*Transaction Hold Period In Days", :class => 'control-label'
-      = f.number_field :txn_hold_period_days, min: 1
-      #msg-error
-        = error_message_for(@partner, :txn_hold_period_days, :prepend_text => "")
-    .control-group
       = f.label :low_balance_alert_at, "Low Balance Alert At", :class => 'control-label'
       = f.text_field :low_balance_alert_at
       #msg-error
@@ -98,7 +93,6 @@
         = f.text_field :app_code, :readOnly => true, :maxlength => 20
       #msg-error
         = error_message_for(@partner, :app_code, :prepend_text => "")
-  .form-extended
     .control-group
       = f.label :neft_allowd, "NEFT Allowed?", :class => 'control-label'
       - if f.object.allow_neft.nil?
@@ -127,6 +121,47 @@
       = f.check_box :add_transfer_amt_in_rep, {},"Y","N"
       #msg-error
         = error_message_for(@partner, :add_transfer_amt_in_rep, :prepend_text => "")
+  .form-extended
+    .control-group
+      = f.label :service_name, "*Service Name", :class => 'control-label'
+      = f.select :service_name, options_for_select(Partner::SERVICE_NAMES, @partner.service_name)
+      #msg-error
+        = error_message_for(@partner, :service_name, :prepend_text => "")
+    .control-group
+      = f.label :guideline_id, "*Guideline", :class => 'control-label'
+      = f.select :guideline_id, InwGuideline.all.map { |key, value| [key.code, key.id] }
+      #msg-error
+        = error_message_for(@partner, :guideline_id, :prepend_text => "")
+    .control-group
+      = f.label :will_whitelist, "*Will Whitelist", :class => 'control-label'
+      = f.check_box :will_whitelist, {},"Y","N"
+      #msg-error
+        = error_message_for(@partner, :will_whitelist, :prepend_text => "")
+    .control-group
+      = f.label :will_send_id, "*Will Send ID", :class => 'control-label'
+      = f.check_box :will_send_id, {},"Y","N"
+      #msg-error
+        = error_message_for(@partner, :will_send_id, :prepend_text => "")
+    .control-group
+      = f.label :hold_for_whitelisting, "*Hold For Whitelisting", :class => 'control-label'
+      = f.check_box :hold_for_whitelisting, {},"Y","N"
+      #msg-error
+        = error_message_for(@partner, :hold_for_whitelisting, :prepend_text => "")
+    .control-group
+      = f.label :transaction_hold_period, "*Transaction Hold Period (in days)", :class => 'control-label'
+      = f.number_field :txn_hold_period_days, min: 1
+      #msg-error
+        = error_message_for(@partner, :txn_hold_period_days, :prepend_text => "")
+    .control-group
+      = f.label :auto_match_rule, "*Auto Match Rule", :class => 'control-label'
+      = f.select :auto_match_rule, Partner.options_for_auto_match_rule
+      #msg-error
+        = error_message_for(@partner, :auto_match_rule, :prepend_text => "")
+    .control-group
+      = f.label :lcy_rate, "*LCY Rate", :class => 'control-label'
+      = f.number_field :lcy_rate, :step => "0.01"
+      #msg-error
+        = error_message_for(@partner, :lcy_rate, :prepend_text => "")
     .control-group
       = f.label :mmid, "MMID", :class => 'control-label'
       = f.text_field :mmid, :maxlength => 7

@@ -54,6 +54,7 @@ group :production do
   gem 'bcdatabase'
   gem 'passenger'
   gem 'rails_12factor'
+  gem 'ruby-plsql'
 end
 
 # Gems used only for assets and not required

@@ -14,6 +14,9 @@ if ActiveRecord::Base.connection.adapter_name == "OracleEnhanced"
     end
   end
   
+  require "ruby-plsql"
+  plsql.activerecord_class = ActiveRecord::Base
+   
 end 
 
 module ActiveRecord::ConnectionAdapters
