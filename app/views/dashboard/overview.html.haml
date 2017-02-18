@@ -59,6 +59,11 @@
         = image_tag 'inw_guideline_icon.jpg', :size => "80x80"
       %br
         = "Inward Remittance Guideline"
+    .box
+      = link_to '/partner_lcy_rates' do
+        = image_tag 'rate.png', :size => "80x80"
+      %br
+        = "Partner LCY Rates"
 - if @current_user.group_names.include?("e-collect")
   %h1 E-Collect
   .slide-container{:style=>"vertical-align: top;"}

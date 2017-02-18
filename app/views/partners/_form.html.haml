@@ -158,11 +158,6 @@
       #msg-error
         = error_message_for(@partner, :auto_match_rule, :prepend_text => "")
     .control-group
-      = f.label :lcy_rate, "*LCY Rate", :class => 'control-label'
-      = f.number_field :lcy_rate, :step => "0.01"
-      #msg-error
-        = error_message_for(@partner, :lcy_rate, :prepend_text => "")
-    .control-group
       = f.label :mmid, "MMID", :class => 'control-label'
       = f.text_field :mmid, :maxlength => 7
       #msg-error

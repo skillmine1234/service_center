@@ -108,26 +108,4 @@ $(document).ready(function(){
       $('#partner_txn_hold_period_days').prop('disabled',true)
     }
   });
-  
-  set_lcy_rate($('#partner_guideline_id').val());
-  
-  $("#partner_guideline_id").on("change", function () {
-    set_lcy_rate($('#partner_guideline_id').val());
-  });
-  
-  function set_lcy_rate(id) {
-    $.ajax({
-       url: "/inw_guidelines/"+id,
-       dataType: "json",
-       success: function(data){
-         if (data["needs_lcy_rate"] == 'N') {
-           $('#partner_lcy_rate').prop('disabled',true)
-         }
-         else {
-           $('#partner_lcy_rate').prop('disabled',false)
-         }
-       }
-    });
-  }
-  
 });

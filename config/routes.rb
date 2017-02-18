@@ -113,6 +113,7 @@ ServiceCenter::Application.routes.draw do
   
   resources :inw_guidelines
   resources :ecol_apps
+  resources :partner_lcy_rates
 
   get 'su_incoming_file_summary' => 'su_incoming_records#incoming_file_summary'
   get 'ic_incoming_file_summary' => 'ic_incoming_records#incoming_file_summary'
@@ -232,6 +233,8 @@ ServiceCenter::Application.routes.draw do
   put '/inw_guidelines/:id/approve' => "inw_guidelines#approve"
   get '/ecol_apps/:id/audit_logs' => 'ecol_apps#audit_logs'
   put '/ecol_apps/:id/approve' => "ecol_apps#approve"
+  get '/partner_lcy_rates/:id/audit_logs' => 'partner_lcy_rates#audit_logs'
+  put '/partner_lcy_rates/:id/approve' => "partner_lcy_rates#approve"
   root :to => 'dashboard#overview'
 
   # See how all your routes lay out with "rake routes"
