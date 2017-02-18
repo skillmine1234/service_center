@@ -67,11 +67,6 @@ describe Partner do
       partner = Factory.build(:partner, :approval_status => 'A', :will_send_id => 'Y', :will_whitelist => 'N')
       partner.errors_on(:will_send_id).first.should == "Allowed only when Will Whitelist is true"
     end
-    
-    it 'should give error lcy_rate has more than two digits after decimal point' do
-      partner = Factory.build(:partner, :approval_status => 'A', lcy_rate: 10.888)
-      partner.errors_on(:lcy_rate).first.should == "is invalid, only two digits are allowed after decimal point"
-    end
 
     it { should validate_length_of(:account_no).is_at_least(10) }
     it { should validate_length_of(:account_no).is_at_most(16) }
@@ -267,6 +262,20 @@ describe Partner do
   context "options_for_auto_match_rule" do
     it "should return options_for_auto_match_rule" do
       Partner.options_for_auto_match_rule.should == [['None','N'],['Any','A']]
+    end
+  end
+
+  context 'create_lcy_rate' do 
+    it "should create partner_lcy_rate record" do
+      partner = Factory(:partner, :guideline => Factory(:inw_guideline, :needs_lcy_rate => 'Y'))
+      partner.reload
+      partner.partner_lcy_rate.should_not be_nil
+      lcy_rate = partner.partner_lcy_rate
+      lcy_rate.partner_code.should == partner.code
+      lcy_rate.rate.should == 1
+      partner = Factory(:partner, :guideline => Factory(:inw_guideline, :needs_lcy_rate => 'N'))
+      partner.reload
+      partner.partner_lcy_rate.should be_nil
     end
   end
   

@@ -194,7 +194,6 @@ describe PartnersController do
       put :approve, {:id => partner2.id}
       InwUnapprovedRecord.count.should == 0
       partner1.reload
-      partner1.name.should == 'BarFoo'
       partner1.updated_by.should == "666"
       Partner.find_by_id(partner2.id).should be_nil
     end
