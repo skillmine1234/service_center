@@ -2,6 +2,7 @@ class RcTransferSchedule < ActiveRecord::Base
   include Approval
   include RcTransferApproval
 
+  TXN_KINDS = %w(FT BALINQ)
   self.table_name = "rc_transfer_schedule"
   
   store :udf1, accessors: [:udf1_name, :udf1_type, :udf1_value], coder: JSON
@@ -28,6 +29,7 @@ class RcTransferSchedule < ActiveRecord::Base
   before_validation :sanitize_udfs, unless: Proc.new { |c| c.rc_app.nil? }
   validate :udfs_should_be_correct, unless: Proc.new { |c| c.rc_app.nil? }
   validate :validate_next_run_at
+  validates :interval_in_mins, :numericality => { :only_integer => true, :greater_than_or_equal_to => 0 }
    
   def validate_next_run_at
     errors.add(:next_run_at,"should not be less than today's date") if !next_run_at.nil? and next_run_at < Time.zone.today.beginning_of_day
