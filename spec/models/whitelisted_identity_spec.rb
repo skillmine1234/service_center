@@ -147,4 +147,23 @@ describe WhitelistedIdentity do
     end
   end
   
+  context "presence_of_created_for_identity_id" do
+    it "should validate presence of created_for_identity_id" do
+      partner = Factory(:partner, :id => 100, :code => "ABC01012", will_send_id: 'Y')
+      whitelisted_identity1 = Factory.build(:whitelisted_identity, :approval_status => 'A', created_for_identity_id: nil)
+      whitelisted_identity1.partner = partner
+      whitelisted_identity1.save.should == false
+      whitelisted_identity1.errors_on(:created_for_identity_id).should == ["is mandatory if will_send_id is Y"]
+    end
+  end
+  
+  context "presence_of_rmtr_or_bene_values" do
+    it "should validate presence of presence of rmtr or bene values" do
+      partner = Factory(:partner, :id => 100, :code => "ABC01012", will_send_id: 'N')
+      whitelisted_identity1 = Factory.build(:whitelisted_identity, :approval_status => 'A', rmtr_code: nil, bene_account_no: nil)
+      whitelisted_identity1.partner = partner
+      whitelisted_identity1.save.should == false
+      whitelisted_identity1.errors_on(:base).should == ["Either rmtr_code or both bene_account_no and bene_account_ifsc are mandatory if partner's will_send_id is N"]
+    end
+  end
 end

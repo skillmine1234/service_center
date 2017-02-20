@@ -31,5 +31,6 @@ FactoryGirl.define do
     address_line1 "addr1"
     address_line2 "addr2"
     address_line3 "addr3"
+    will_send_id 'Y'
   end
 end

@@ -15,8 +15,6 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
-      Enabled?
-    %th{:style=>'text-align:left; background-color: lightblue;'}
       Partner Code
     %th{:style=>'text-align:left; background-color: lightblue;'} 
       Rate
@@ -31,8 +29,6 @@
           = link_to 'Show', partner_lcy_rate
         %td{:style=>'text-align:left;'}
           = link_to 'Edit', edit_partner_lcy_rate_path(partner_lcy_rate)
-        %td{:style=>'text-align:left;'}
-          = partner_lcy_rate.is_enabled
         %td{:style=>'text-align:left;'}
           = partner_lcy_rate.partner_code
         %td{:style=>'text-align:left;'}

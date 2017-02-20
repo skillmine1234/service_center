@@ -86,6 +86,6 @@ class PartnerLcyRatesController < ApplicationController
 
   def partner_lcy_rate_params
     params.require(:partner_lcy_rate).permit(:partner_code, :created_by, :updated_by, :approved_id, :approved_version, 
-                                             :is_enabled, :created_at, :updated_at, :lock_version, :rate, :approval_status)
+                                             :created_at, :updated_at, :lock_version, :rate, :approval_status)
   end
 end

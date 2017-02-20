@@ -273,9 +273,6 @@ describe Partner do
       lcy_rate = partner.partner_lcy_rate
       lcy_rate.partner_code.should == partner.code
       lcy_rate.rate.should == 1
-      partner = Factory(:partner, :guideline => Factory(:inw_guideline, :needs_lcy_rate => 'N'))
-      partner.reload
-      partner.partner_lcy_rate.should be_nil
     end
   end
   
