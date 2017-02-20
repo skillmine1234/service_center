@@ -28,6 +28,8 @@ describe RcTransferSchedule do
     it do 
       should validate_uniqueness_of(:code).scoped_to(:approval_status)
     end
+    
+    it { should validate_numericality_of(:interval_in_mins) }
 
     it "should return error if code is already taken" do
       rc_transfer_schedule1 = Factory(:rc_transfer_schedule, :code => "9001", :approval_status => 'A')

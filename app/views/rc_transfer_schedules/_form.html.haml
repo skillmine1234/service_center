@@ -47,7 +47,7 @@
         = error_message_for(@rc_transfer_schedule, :rc_app_id, :prepend_text => "")
     .control-group
       = f.label :txn_kind, "Transaction Kind", :class => 'control-label'
-      = f.select :txn_kind, RcTransferSchedule::TXN_KINDS.map { |key, value| [key, key] }
+      = f.select :txn_kind, options_for_select(RcTransferSchedule::TXN_KINDS, @rc_transfer_schedule.txn_kind)
       #msg-error
         = error_message_for(@rc_transfer_schedule, :txn_kind, :prepend_text => "")
     .control-group
