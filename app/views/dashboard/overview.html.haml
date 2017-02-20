@@ -463,5 +463,17 @@
         = image_tag 'reports_icon.png', :size => "80x80"
       %br
         = "Generated Reports"
-        
+- if @current_user.group_names.include?("rr")
+  %h1 Reconciled Returns
+  .slide-container
+    .box  
+      = link_to incoming_files_path(:sc_service => "RR") do
+        = image_tag 'upload.png', :size => "80x80"
+      %br
+        = "File Uploads"
+    .box  
+      = link_to '/rr_unapproved_records' do
+        = image_tag 'work-list.jpg', :size => "80x80"
+      %br
+        = "Approval Worklist"
 

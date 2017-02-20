@@ -13,5 +13,6 @@ Group.seed(:name,
   { name: "cnb"},
   { name: "recurring-transfer" },
   { name: "sc-backend"},
-  { name: "rp"}
+  { name: "rp"},
+  { name: "rr"}
 )

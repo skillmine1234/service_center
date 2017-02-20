@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170220105303) do
+ActiveRecord::Schema.define(version: 20170220174905) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -2955,6 +2955,13 @@ ActiveRecord::Schema.define(version: 20170220105303) do
   end
 
   add_index "rr_incoming_records", ["incoming_file_record_id"], name: "rr_incoming_records_01", unique: true
+
+  create_table "rr_unapproved_records", force: :cascade do |t|
+    t.integer  "rr_approvable_id"
+    t.string   "rr_approvable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "sc_backend_stats", force: :cascade do |t|
     t.string   "code",                    limit: 20,  null: false

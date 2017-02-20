@@ -31,6 +31,8 @@ class Group < ActiveRecord::Base
       ['RcTransferUnapprovedRecord','RcTransfer','RcTransferSchedule','RcAuditStep','RcApp']
     when "sc-backend"
       ['ScBackend', 'ScUnapprovedRecord']
+    when "rr"
+      ['RrUnapprovedRecord','IncomingFile','IncomingFileRecord','RrIncomingFile','RrIncomingRecord']
     else
       []
     end
