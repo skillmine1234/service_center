@@ -38,6 +38,12 @@ ScService.seed(:code) do |s|
   s.name = 'Corporate Net Banking'
 end
 
+ScService.seed(:code) do |s|
+  s.code = 'RR'
+  s.name = 'reconciled returns'
+end
+
+
 IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.sc_service_id = ScService.find_by(code: 'AML').id
   s.code = 'SDN'
@@ -268,4 +274,23 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.can_retry = 'N'
   s.build_nack_file = 'Y'
   s.skip_last = 'Y'
+end
+
+IncomingFileType.seed(:sc_service_id, :code) do |s|
+  s.sc_service_id = ScService.find_by(code: 'RR').id
+  s.code = 'RR'
+  s.name = 'RR'
+  s.msg_domain = 'DFDL'
+  s.msg_model = '{http://www.quantiguous.com/services/file}:reconciledReturns'
+  s.skip_first = 'Y'
+  s.auto_upload = 'Y'
+  s.validate_all = 'Y'
+  s.build_response_file = 'N'
+  s.db_unit_name = "pk_qg_rr_file_manager"
+  s.records_table = 'rr_incoming_records'
+  s.can_override = 'N'
+  s.can_skip = 'Y'
+  s.can_retry = 'N'
+  s.build_nack_file = 'N'
+  s.skip_last = 'N'
 end
