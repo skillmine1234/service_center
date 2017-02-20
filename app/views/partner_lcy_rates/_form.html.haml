@@ -8,14 +8,6 @@
     = f.hidden_field :approved_id
     = f.hidden_field :approved_version
     .control-group
-      = f.label :is_enabled,"Enabled?", :class => 'control-label'
-      - if f.object.is_enabled.nil?
-        = f.check_box :is_enabled, {:checked => "checked"},"Y","N"
-      - else 
-        = f.check_box :is_enabled, {},"Y","N"
-      #msg-error
-        = error_message_for(@partner_lcy_rate, :is_enabled, :prepend_text => "")
-    .control-group
       = f.label :partner_code
       = f.text_field :partner_code, :maxlength => 10, :readOnly => true
       #msg-error

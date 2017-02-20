@@ -11,7 +11,7 @@ describe PartnerLcyRate do
   end
 
   context 'validation' do
-    [:partner_code, :is_enabled, :rate].each do |att|
+    [:partner_code, :rate].each do |att|
       it { should validate_presence_of(att) }
     end
 
@@ -24,16 +24,26 @@ describe PartnerLcyRate do
       should validate_uniqueness_of(:partner_code).scoped_to(:approval_status)
     end
 
-    it "should validate_unapproved_record" do 
+    it "should validate_unapproved_record" do
       partner_lcy_rate1 = Factory(:partner_lcy_rate,:approval_status => 'A')
       partner_lcy_rate2 = Factory(:partner_lcy_rate, :approved_id => partner_lcy_rate1.id)
       partner_lcy_rate1.should_not be_valid
       partner_lcy_rate1.errors_on(:base).should == ["Unapproved Record Already Exists for this record"]
     end
-    
+
     it 'should give error lcy_rate has more than two digits after decimal point' do
       partner_lcy_rate = Factory.build(:partner_lcy_rate, :approval_status => 'A', rate: 10.888)
       partner_lcy_rate.errors_on(:rate).first.should == "is invalid, only two digits are allowed after decimal point"
+    end
+    
+    it 'should give error lcy_rate has value greater than 1 and needs_lcy_rate of guideline is N' do
+      inw_guideline = Factory(:inw_guideline, needs_lcy_rate: 'N', approval_status: 'A')
+      partner = Factory(:partner, guideline: inw_guideline, approval_status: 'A')
+      partner.reload
+      partner_lcy_rate = partner.partner_lcy_rate
+      partner_lcy_rate.rate = 2
+      partner_lcy_rate.save.should == false
+      partner_lcy_rate.errors_on(:rate).first.should == "can't be greater than 1 because needs_lcy_rate is N for the guideline"
     end
 
     context "code format" do

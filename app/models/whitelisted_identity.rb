@@ -12,10 +12,10 @@ class WhitelistedIdentity < ActiveRecord::Base
 
   validates_uniqueness_of :id_type, :scope => [:id_number,:id_country,:id_issue_date,:id_expiry_date,:approval_status]
 
-  validates_presence_of :partner_id, :is_verified, :created_by, :updated_by, :id_type, :id_number, :id_expiry_date
+  validates_presence_of :partner_id, :is_verified, :created_by, :updated_by, :id_type, :id_number, :id_expiry_date, :created_for_txn_id
   
-  validate :validate_expiry_date
-
+  validate :validate_expiry_date, :presence_of_created_for_identity_id, :presence_of_rmtr_or_bene_values
+  
   after_create :update_identities
   
   # the after_save callbacks call database packages which arent avialable in the test environment
@@ -51,5 +51,16 @@ class WhitelistedIdentity < ActiveRecord::Base
   def try_release
     result = plsql.pk_qg_inw_wl_service.try_release(pi_txn_id: self.created_for_txn_id, po_fault_code: nil, po_fault_subcode: nil, po_fault_reason: nil)
     raise ::Fault::ProcedureFault.new(OpenStruct.new(code: result[:po_fault_code], subCode: result[:po_fault_subcode], reasonText: "#{result[:po_fault_reason]}")) if result[:po_fault_code].present?
+  end
+  
+  def presence_of_created_for_identity_id
+    errors.add(:created_for_identity_id, "is mandatory if will_send_id is Y") if partner.present? && partner.will_send_id == 'Y' && created_for_identity_id.nil?
+  end
+  
+  def presence_of_rmtr_or_bene_values
+    if partner.present? && partner.will_send_id == 'N' && ((rmtr_code.nil? && (bene_account_no.nil? || bene_account_ifsc.nil?)) || 
+                                                           (rmtr_code.present? && (bene_account_no.present? || bene_account_ifsc.present?)))
+      errors[:base] << ["Either rmtr_code or both bene_account_no and bene_account_ifsc are mandatory if partner's will_send_id is N"]
+    end
   end
 end

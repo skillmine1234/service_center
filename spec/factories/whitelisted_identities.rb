@@ -19,6 +19,8 @@ FactoryGirl.define do
     times_used 1
     created_by {Factory(:user).id}
     updated_by {Factory(:user).id}
+    created_for_txn_id 1
+    created_for_identity_id 1
     lock_version 1
   end
 end

@@ -20,12 +20,6 @@
             %td#msg-error
               = error_message_for(@partner_lcy_rate, :base, :prepend_text => "")
           %tr
-            %td.label Enabled ?
-            %td.value
-              = @partner_lcy_rate.is_enabled
-            %td#msg-error
-              = error_message_for(@partner_lcy_rate, :is_enabled, :prepend_text => "")
-          %tr
             %td.label Partner Code
             %td.value
               = @partner_lcy_rate.partner_code
