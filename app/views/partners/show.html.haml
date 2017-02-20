@@ -68,12 +68,6 @@
             %td#msg-error
               = error_message_for(@partner, :account_ifsc, :prepend_text => "")
           %tr
-            %td.label Transaction Hold Period Days
-            %td.value
-              = @partner.txn_hold_period_days
-            %td#msg-error
-              = error_message_for(@partner, :txn_hold_period_days, :prepend_text => "")
-          %tr
             %td.label Low Balance Alert At
             %td.value
               = @partner.low_balance_alert_at
@@ -187,3 +181,45 @@
               = @partner.address_line3
             %td#msg-error
               = error_message_for(@partner, :address_line3, :prepend_text => "")
+          %tr
+            %td.label Service Name
+            %td.value
+              = @partner.service_name
+            %td#msg-error
+              = error_message_for(@partner, :service_name, :prepend_text => "")
+          %tr
+            %td.label Guideline
+            %td.value
+              = @partner.guideline.try(:code)
+            %td#msg-error
+              = error_message_for(@partner, :guideline_id, :prepend_text => "")
+          %tr
+            %td.label Will Whitelist
+            %td.value
+              = @partner.will_whitelist
+            %td#msg-error
+              = error_message_for(@partner, :will_whitelist, :prepend_text => "")
+          %tr
+            %td.label Will Send ID
+            %td.value
+              = @partner.will_send_id
+            %td#msg-error
+              = error_message_for(@partner, :will_send_id, :prepend_text => "")
+          %tr
+            %td.label Hold For Whitelisting
+            %td.value
+              = @partner.hold_for_whitelisting
+            %td#msg-error
+              = error_message_for(@partner, :hold_for_whitelisting, :prepend_text => "")
+          %tr
+            %td.label Transaction Hold Period Days
+            %td.value
+              = @partner.txn_hold_period_days
+            %td#msg-error
+              = error_message_for(@partner, :txn_hold_period_days, :prepend_text => "")
+          %tr
+            %td.label Auto Match Rule
+            %td.value
+              = @partner.auto_match_rule
+            %td#msg-error
+              = error_message_for(@partner, :auto_match_rule, :prepend_text => "")

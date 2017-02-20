@@ -4,6 +4,7 @@ class PurposeCode < ActiveRecord::Base
   
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
+  belongs_to :guideline, :foreign_key =>'guideline_id', :class_name => 'InwGuideline'
 
   validates_presence_of :code, :description, :is_enabled, :txn_limit
   validates_uniqueness_of :code, :scope => :approval_status

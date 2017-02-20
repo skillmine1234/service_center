@@ -54,6 +54,16 @@
         = image_tag 'white_list_icon.jpg', :size => "80x80"
       %br
         = "Whitelisted Identities"
+    .box
+      = link_to '/inw_guidelines' do
+        = image_tag 'inw_guideline_icon.jpg', :size => "80x80"
+      %br
+        = "Inward Remittance Guideline"
+    .box
+      = link_to '/partner_lcy_rates' do
+        = image_tag 'rate.png', :size => "80x80"
+      %br
+        = "Partner LCY Rates"
 - if @current_user.group_names.include?("e-collect")
   %h1 E-Collect
   .slide-container{:style=>"vertical-align: top;"}
@@ -73,6 +83,11 @@
       %br
         = "Approval Worklist"
   .slide-container{:style=>"height: auto;"}
+    .box
+      = link_to '/ecol_apps' do
+        = image_tag 'ec_app_icon.jpeg', :size => "80x80"
+      %br
+        = "E-Collect Apps"
     .box
       - if !EcolRule.first.nil?
         = link_to edit_ecol_rule_path(EcolRule.first) do

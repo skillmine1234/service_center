@@ -21,10 +21,14 @@ class WhitelistedIdentitiesController < ApplicationController
       redirect_to :back
     else
       @whitelisted_identity.created_by = current_user.id
-      if @whitelisted_identity.save!
-        EmailAlert.send_email(@whitelisted_identity.inward_remittance,@whitelisted_identity.partner.ops_email_id) rescue nil
+      begin
+        if @whitelisted_identity.save!
+          EmailAlert.send_email(@whitelisted_identity.inward_remittance,@whitelisted_identity.partner.ops_email_id) rescue nil
+        end
+        flash[:alert] = 'Identity successfully verified'
+      rescue ::Fault::ProcedureFault => e
+       flash[:alert] = "#{e.message}"
       end
-      flash[:alert] = 'Identity successfully verified'
       redirect_to :back
     end
   end 
@@ -78,7 +82,9 @@ class WhitelistedIdentitiesController < ApplicationController
     params.require(:whitelisted_identity).permit(:created_by, :first_name, :first_used_with_txn_id, :full_name, :id_country, 
                                                  :id_issue_date, :id_expiry_date, :id_number, :id_type, :is_verified, :last_name, 
                                                  :last_used_with_txn_id, :lock_version, :partner_id, :times_used,
-                                                 :updated_by, :verified_at, :verified_by, {:attachments_attributes => [:note, :user_id, :file, :_destroy]},
+                                                 :updated_by, :verified_at, :verified_by, :bene_account_no, :rmtr_code, :created_for_txn_id, 
+                                                 :created_for_identity_id, :bene_account_ifsc, 
+                                                 {:attachments_attributes => [:note, :user_id, :file, :_destroy]},
                                                  :approved_id, :approved_version)
   end
 end

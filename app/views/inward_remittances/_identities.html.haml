@@ -14,8 +14,11 @@
             %td.value
               - if !identity.whitelisted_identity.nil?
                 = "Verified"
-              - else
-                = link_to 'verify',"#", :class => 'verify-link', :href => "#verifyIdentity", data: { partner_id: identity.inward_remittance.partner.try(:id), full_name: identity.full_name, id_type: identity.id_type, id_number: identity.id_number, id_country: identity.id_country, id_issue_date: identity.id_issue_date, id_expiry_date: identity.id_expiry_date, user_id: user_id, inward_remittance_id: identity.inward_remittance.try(:id)} 
+              - elsif identity.inward_remittance.partner.will_whitelist == 'Y' and identity.was_auto_matched == 'N'
+                - if identity.inward_remittance.partner.will_send_id == 'Y'
+                  = link_to 'Verify',"#", :class => 'verify-link', :href => "#verifyIdentity", data: { partner_id: identity.inward_remittance.partner.try(:id), full_name: identity.full_name, id_type: identity.id_type, id_number: identity.id_number, id_country: identity.id_country, id_issue_date: identity.id_issue_date, id_expiry_date: identity.id_expiry_date, user_id: user_id, inward_remittance_id: identity.inward_remittance.try(:id),  bene_account_no: identity.inward_remittance.bene_account_no, bene_account_ifsc: identity.inward_remittance.bene_account_ifsc, rmtr_code: identity.inward_remittance.rmtr_code, created_for_identity_id: identity.id, created_for_txn_id: identity.inward_remittance.try(:id) }
+                - elsif identity.inward_remittance.partner.will_send_id = 'N'
+                  = link_to 'Add', '#', :class => 'add-link', :href => '#addIdentity', data: { partner_id: identity.inward_remittance.partner.try(:id), full_name: identity.full_name, id_type: identity.id_type, id_number: identity.id_number, id_country: identity.id_country, id_issue_date: identity.id_issue_date, id_expiry_date: identity.id_expiry_date, user_id: user_id, inward_remittance_id: identity.inward_remittance.try(:id), bene_account_no: identity.inward_remittance.bene_account_no, bene_account_ifsc: identity.inward_remittance.bene_account_ifsc, rmtr_code: identity.inward_remittance.rmtr_code, created_for_identity_id: identity.id, created_for_txn_id: identity.inward_remittance.try(:id)}
           %tr
             %td.label Partner Name
             %td.value
@@ -58,6 +61,10 @@
             %td.value
               = identity.was_auto_matched
           %tr
+            %td.label Auto Matched At
+            %td.value
+              = identity.auto_matched_at
+          %tr
             %td.label Verified By
             %td.value
               = identity.verified_by
@@ -96,6 +103,11 @@
             = f.hidden_field :times_used, :value => 1
             = f.hidden_field :first_used_with_txn_id
             = f.hidden_field :last_used_with_txn_id
+            = f.hidden_field :bene_account_no
+            = f.hidden_field :bene_account_ifsc
+            = f.hidden_field :rmtr_code
+            = f.hidden_field :created_for_txn_id
+            = f.hidden_field :created_for_identity_id
             = f.fields_for :attachments, :input_html => { :rows => 3} do |attachment_form|
               = attachment_form.label :note
               = attachment_form.text_area :note, :style => 'width:300px; height:30px', :maxlength => 255
@@ -107,3 +119,57 @@
           %br
           %br
           = f.submit 'Verify', :class => 'btn add btn-small'
+#addIdentity.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3.id_type Add Identity
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "height:1000px;"}
+    = simple_nested_form_for WhitelistedIdentity.new , :html => {:class=>'form-horizontal',:multipart => true, :autocomplete=>"off"} do |f|
+      .form-main
+        .control-group
+          = f.label :id_type, '*ID Type', :class => 'control-label'
+          = f.text_field :id_type
+        .control-group
+          = f.label :id_number, '*ID Number', :class => 'control-label'
+          = f.text_field :id_number
+        .control-group
+          = f.label :id_country, 'ID Country', :class => 'control-label'
+          = f.text_field :id_country
+        .control-group
+          = f.label :id_issue_date, 'ID Issue Date', :class => 'control-label'
+          = f.date_field :id_issue_date
+        .control-group
+          = f.label :id_expiry_date, '*ID Expiry Date', :class => 'control-label'
+          = f.date_field :id_expiry_date
+        .control-group
+          #attachments
+            %h3 Attachments: (Maximum size 2MB)
+            .control-group.hidden
+              = f.hidden_field :partner_id
+              = f.hidden_field :full_name
+              = f.hidden_field :is_verified, :value => 'Y'
+              = f.hidden_field :verified_at, :value => Time.zone.now
+              = f.hidden_field :verified_by, :value => user_id 
+              = f.hidden_field :created_by, :value => user_id
+              = f.hidden_field :updated_by, :value => user_id
+              = f.hidden_field :lock_version, :value => 0
+              = f.hidden_field :times_used, :value => 1
+              = f.hidden_field :first_used_with_txn_id
+              = f.hidden_field :last_used_with_txn_id
+              = f.hidden_field :bene_account_no
+              = f.hidden_field :bene_account_ifsc
+              = f.hidden_field :rmtr_code
+              = f.hidden_field :created_for_txn_id
+              = f.hidden_field :created_for_identity_id
+              = f.fields_for :attachments, :input_html => { :rows => 3} do |attachment_form|
+                = attachment_form.label :note
+                = attachment_form.text_area :note, :style => 'width:300px; height:30px', :maxlength => 255
+                = attachment_form.hidden_field :user_id, :value => @user_id
+                = attachment_form.label :file
+                = attachment_form.file_field :file
+                = attachment_form.link_to_remove content_tag(:span, content_tag(:i, '', :class=>"icon icon-remove") + "Remove"), :class => 'remove'
+            = f.link_to_add "Add attachment", :attachments, :class => 'btn add btn-small'
+            %br
+            %br
+            = f.submit 'Add', :class => 'btn add btn-small'

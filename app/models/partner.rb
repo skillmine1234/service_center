@@ -2,8 +2,12 @@ class Partner < ActiveRecord::Base
   include Approval
   include InwApproval
 
+  SERVICE_NAMES = %w(INW INW2)
+
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
+  belongs_to :guideline, :foreign_key =>'guideline_id', :class_name => 'InwGuideline'
+  has_one :partner_lcy_rate, :foreign_key => 'partner_code', :primary_key => 'code'
 
   validates_presence_of :code, :enabled, :name, :account_no, :txn_hold_period_days,
                         :customer_id, :remitter_email_allowed, :remitter_sms_allowed,
@@ -26,6 +30,21 @@ class Partner < ActiveRecord::Base
 
   validate :imps_and_mmid
   validate :check_email_addresses
+  
+  validate :whitelisting
+
+  after_create :create_lcy_rate
+
+  def create_lcy_rate
+    if partner_lcy_rate.nil? and (!guideline.nil? and guideline.needs_lcy_rate == 'Y')
+      PartnerLcyRate.create(partner_code: code, rate: 1, approval_status: 'A') 
+    end
+  end
+
+  def whitelisting
+    errors.add(:hold_for_whitelisting, "Allowed only when service is INW2 and Will Whitelist is true") if (hold_for_whitelisting == 'Y' && (will_whitelist == 'N' || service_name == 'INW'))
+    errors.add(:will_send_id, "Allowed only when Will Whitelist is true") if will_whitelist == 'N' && will_send_id == 'Y'
+  end
 
   def notify_on_status_change?
     true if self.notify_on_status_change == 'Y'
@@ -54,5 +73,9 @@ class Partner < ActiveRecord::Base
   def country_name
     country = ISO3166::Country[self.country]
     country.translations[I18n.locale.to_s] || country.name rescue nil
+  end
+  
+  def self.options_for_auto_match_rule
+    [['None','N'],['Any','A']]
   end
 end

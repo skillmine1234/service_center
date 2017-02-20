@@ -95,6 +95,7 @@ class PartnersController < ApplicationController
                                     :txn_hold_period_days, :updated_by, :lock_version, :enabled, :customer_id,
                                     :country, :address_line1, :address_line2, :address_line3,:mmid, :mobile_no,
                                     :add_req_ref_in_rep, :add_transfer_amt_in_rep, :approved_id, :approved_version,
-                                    :notify_on_status_change, :app_code)
+                                    :notify_on_status_change, :app_code, :service_name, :guideline_id, :will_whitelist,
+                                    :will_send_id, :hold_for_whitelisting, :hold_period_days, :auto_match_rule)
   end
 end

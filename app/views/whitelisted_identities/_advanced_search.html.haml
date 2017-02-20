@@ -5,6 +5,15 @@
   .control-group
     = label_tag "Name", "Name", :class => 'control-label'
     = text_field_tag :name, params[:name]
+  .control-group
+    = label_tag "Remitter Code", "Remitter Code", :class => 'control-label'
+    = text_field_tag :rmtr_code, params[:rmtr_code]
+  .control-group
+    = label_tag "Beneficiary Account No", "Beneficiary Account No", :class => 'control-label'
+    = text_field_tag :bene_account_no, params[:bene_account_no]
+  .control-group
+    = label_tag "Beneficiary Account IFSC", "Beneficiary Account IFSC", :class => 'control-label'
+    = text_field_tag :bene_account_ifsc, params[:bene_account_ifsc]
   = hidden_field_tag :advanced_search, :true
   .form-actions
     = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"

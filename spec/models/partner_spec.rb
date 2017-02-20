@@ -52,7 +52,22 @@ describe Partner do
       partner1.should_not be_valid
       partner1.errors_on(:base).should == ["Unapproved Record Already Exists for this record"]
     end
-  
+    
+    it 'should give error if will_whitelist = N and hold_for_whitelisting = Y' do
+      partner = Factory.build(:partner, :approval_status => 'A', :will_whitelist => 'N', :hold_for_whitelisting => 'Y')
+      partner.errors_on(:hold_for_whitelisting).first.should == "Allowed only when service is INW2 and Will Whitelist is true"
+    end
+    
+    it 'should give error if service_name = INW and hold_for_whitelisting = Y' do
+      partner = Factory.build(:partner, :approval_status => 'A', :service_name => 'INW', :hold_for_whitelisting => 'Y')
+      partner.errors_on(:hold_for_whitelisting).first.should == "Allowed only when service is INW2 and Will Whitelist is true"
+    end
+    
+    it 'should give error if will_send_id = Y and will_whitelist = N' do
+      partner = Factory.build(:partner, :approval_status => 'A', :will_send_id => 'Y', :will_whitelist => 'N')
+      partner.errors_on(:will_send_id).first.should == "Allowed only when Will Whitelist is true"
+    end
+
     it { should validate_length_of(:account_no).is_at_least(10) }
     it { should validate_length_of(:account_no).is_at_most(16) }
     it { should validate_length_of(:mobile_no).is_at_least(10) }
@@ -241,6 +256,26 @@ describe Partner do
       partner2 = Factory(:partner, :approval_status => 'U')
       partner1.enable_approve_button?.should == false
       partner2.enable_approve_button?.should == true
+    end
+  end
+  
+  context "options_for_auto_match_rule" do
+    it "should return options_for_auto_match_rule" do
+      Partner.options_for_auto_match_rule.should == [['None','N'],['Any','A']]
+    end
+  end
+
+  context 'create_lcy_rate' do 
+    it "should create partner_lcy_rate record" do
+      partner = Factory(:partner, :guideline => Factory(:inw_guideline, :needs_lcy_rate => 'Y'))
+      partner.reload
+      partner.partner_lcy_rate.should_not be_nil
+      lcy_rate = partner.partner_lcy_rate
+      lcy_rate.partner_code.should == partner.code
+      lcy_rate.rate.should == 1
+      partner = Factory(:partner, :guideline => Factory(:inw_guideline, :needs_lcy_rate => 'N'))
+      partner.reload
+      partner.partner_lcy_rate.should be_nil
     end
   end
   
