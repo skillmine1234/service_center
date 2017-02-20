@@ -58,8 +58,7 @@ class WhitelistedIdentity < ActiveRecord::Base
   end
   
   def presence_of_rmtr_or_bene_values
-    if partner.present? && partner.will_send_id == 'N' && ((rmtr_code.nil? && (bene_account_no.nil? || bene_account_ifsc.nil?)) || 
-                                                           (rmtr_code.present? && (bene_account_no.present? || bene_account_ifsc.present?)))
+    if partner.try(:will_send_id) == 'N' && (rmtr_code.to_s.empty? && (bene_account_no.to_s.empty? || bene_account_ifsc.to_s.empty?))
       errors[:base] << ["Either rmtr_code or both bene_account_no and bene_account_ifsc are mandatory if partner's will_send_id is N"]
     end
   end

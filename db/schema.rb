@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170218111208) do
+ActiveRecord::Schema.define(version: 20170220105303) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -1927,7 +1927,6 @@ ActiveRecord::Schema.define(version: 20170218111208) do
   create_table "partner_lcy_rates", force: :cascade do |t|
     t.string   "partner_code",     limit: 20,               null: false
     t.decimal  "rate"
-    t.string   "is_enabled",       limit: 1,  default: "Y", null: false
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
     t.string   "created_by",       limit: 20
