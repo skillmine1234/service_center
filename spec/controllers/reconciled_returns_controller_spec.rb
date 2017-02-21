@@ -61,7 +61,7 @@ describe ReconciledReturnsController do
     describe "with invalid params" do
       it "assigns a newly created but unsaved reconciled_return as @reconciled_return" do
         params = Factory.attributes_for(:reconciled_return)
-        params[:return_code] = nil
+        params[:return_code_type] = nil
         expect {
           post :create, {:reconciled_return => params}
         }.to change(ReconciledReturn, :count).by(0)
@@ -71,7 +71,7 @@ describe ReconciledReturnsController do
 
       it "re-renders the 'new' template when show_errors is true" do
         params = Factory.attributes_for(:reconciled_return)
-        params[:return_code] = nil
+        params[:return_code_type] = nil
         post :create, {:reconciled_return => params}
         response.should render_template("new")
       end
