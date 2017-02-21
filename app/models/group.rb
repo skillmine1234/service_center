@@ -18,7 +18,7 @@ class Group < ActiveRecord::Base
     when "imt"
       ['ImtCustomer','ImtTransfer','IncomingFile','ImtUnapprovedRecord','OutgoingFile']
     when "funds-transfer"
-      ['FundsTransferCustomer','FtUnapprovedRecord', 'ReconciledReturn', 'FtPurposeCode','FtIncomingRecord','IncomingFile','IncomingFileRecord','FtIncomingFile','FtCustomerAccount']
+      ['FundsTransferCustomer','FtUnapprovedRecord', 'FtPurposeCode','FtIncomingRecord','IncomingFile','IncomingFileRecord','FtIncomingFile','FtCustomerAccount']
     when "salary-upload"
       ['IncomingFile','SuCustomer','SuUnapprovedRecord','SuIncomingRecord','FmAuditStep','SuIncomingFile']
     when "instant-credit"
@@ -32,7 +32,7 @@ class Group < ActiveRecord::Base
     when "sc-backend"
       ['ScBackend', 'ScUnapprovedRecord']
     when "rr"
-      ['RrUnapprovedRecord','IncomingFile','IncomingFileRecord','RrIncomingFile','RrIncomingRecord']
+      ['RrUnapprovedRecord','IncomingFile','IncomingFileRecord','RrIncomingFile','RrIncomingRecord','ReconciledReturn']
     else
       []
     end

@@ -302,11 +302,6 @@
         = image_tag 'sm_bank_accounts.jpg', :size => "80x80"
       %br
         = "Funds Transfer Customer Accounts"
-    .box
-      = link_to '/reconciled_returns' do
-        = image_tag 'reconciled_returns.png', :size => "80x80"
-      %br
-        = "Reconciled Returns"
 
 - if @current_user.group_names.include?("salary-upload")
   %h1 Salary Upload
@@ -476,4 +471,10 @@
         = image_tag 'work-list.jpg', :size => "80x80"
       %br
         = "Approval Worklist"
+  .slide-container
+    .box
+      = link_to '/reconciled_returns' do
+        = image_tag 'reconciled_returns.png', :size => "80x80"
+      %br
+        = "Reconciled Returns"
 

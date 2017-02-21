@@ -7,7 +7,7 @@ describe ReconciledReturn do
   end
 
   context 'validation' do
-    [:txn_type, :return_code, :settlement_date, :bank_ref_no, :reason].each do |att|
+    [:txn_type, :return_code_type, :return_code, :settlement_date, :bank_ref_no, :reason].each do |att|
       it { should validate_presence_of(att) }
     end
 
@@ -23,4 +23,20 @@ describe ReconciledReturn do
     end
   end
 
+  context "set_return_code" do
+    it "should set return_code for a record" do
+      rr1 = Factory(:reconciled_return, txn_type: 'NEFT', return_code_type: 'COMPLETED')
+      rr1.return_code.should == '75'
+      rr2 = Factory(:reconciled_return, txn_type: 'NEFT', return_code_type: 'FAILED')
+      rr2.return_code.should == '99'
+      rr3 = Factory(:reconciled_return, txn_type: 'RTGS', return_code_type: 'COMPLETED')
+      rr3.return_code.should == 'COM'
+      rr4 = Factory(:reconciled_return, txn_type: 'RTGS', return_code_type: 'FAILED')
+      rr4.return_code.should == 'REJ'
+      rr5 = Factory(:reconciled_return, txn_type: 'IMPS', return_code_type: 'COMPLETED')
+      rr5.return_code.should == '00'
+      rr6 = Factory(:reconciled_return, txn_type: 'IMPS', return_code_type: 'FAILED')
+      rr6.return_code.should == '08'
+    end
+  end
 end
