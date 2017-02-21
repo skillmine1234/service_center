@@ -35,7 +35,7 @@ class WhitelistedIdentity < ActiveRecord::Base
   end
   
   def release
-    if self.partner.hold_for_whitelisting == 'Y'
+    if self.approval_status == 'A' && self.partner.hold_for_whitelisting == 'Y'
       try_release
       if self.partner.auto_match_rule == 'A'
         auto_match_and_release
