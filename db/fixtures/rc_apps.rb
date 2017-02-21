@@ -1,4 +1,4 @@
-RcApp.seed(:app_id) do |s|
+RcApp.seed_once(:app_id) do |s|
   s.id = 10000
   s.app_id = 'VODAFONE'
   s.url = 'http://182.19.20.182:81/mcommerce.webservices/pgService'
@@ -12,7 +12,7 @@ RcApp.seed(:app_id) do |s|
   s.approval_status = 'A'
 end
 
-RcApp.seed(:app_id) do |s|
+RcApp.seed_once(:app_id) do |s|
   s.id = 10001
   s.app_id = 'RELIANCE'
   s.url = 'https://ecollection.ril.com/BankPymtWS/service.asmx'
@@ -26,7 +26,7 @@ RcApp.seed(:app_id) do |s|
   s.approval_status = 'A'
 end
 
-RcApp.seed(:app_id) do |s|
+RcApp.seed_once(:app_id) do |s|
   s.id = 10002
   s.app_id = 'TATAPOWER'
   s.url = 'https://www.tatapower-ddl.com/h2hlinkagetest/Service.asmx'

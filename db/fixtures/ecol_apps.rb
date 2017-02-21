@@ -1,4 +1,4 @@
-EcolApp.seed(:app_code) do |s|
+EcolApp.seed_once(:app_code) do |s|
   s.app_code = 'QGTEST1'
   s.validate_url = 'https://ditto.quantiguous.com/ecollect/qgtest1/validate'
   s.notify_url = 'https://ditto.quantiguous.com/ecollect/qgtest1/notify'
@@ -6,7 +6,7 @@ EcolApp.seed(:app_code) do |s|
   s.approval_status = 'A'
 end
 
-EcolApp.seed(:app_code) do |s|
+EcolApp.seed_once(:app_code) do |s|
   s.app_code = 'QGTEST2'
   s.validate_url = 'https://ditto.quantiguous.com/ecollect/qgtest2/validate'
   s.notify_url = 'https://ditto.quantiguous.com/ecollect/qgtest2/notify'
@@ -29,7 +29,7 @@ EcolApp.seed(:app_code) do |s|
   s.approval_status = 'A'
 end
 
-EcolApp.seed(:app_code) do |s|
+EcolApp.seed_once(:app_code) do |s|
   s.app_code = 'QGTEST3'
   s.validate_url = 'https://ditto.quantiguous.com/ecollect/qgtest3/validate'
   s.notify_url = 'https://ditto.quantiguous.com/ecollect/qgtest3/notify'
@@ -37,7 +37,7 @@ EcolApp.seed(:app_code) do |s|
   s.approval_status = 'A'
 end
 
-EcolApp.seed(:app_code) do |s|
+EcolApp.seed_once(:app_code) do |s|
   s.app_code = 'QGTEST4'
   s.validate_url = 'https://ditto.quantiguous.com/ecollect/qgtest4/validate'
   s.notify_url = 'https://ditto.quantiguous.com/ecollect/qgtest4/notify'
@@ -45,14 +45,14 @@ EcolApp.seed(:app_code) do |s|
   s.approval_status = 'A'
 end
 
-EcolApp.seed(:app_code) do |s|
+EcolApp.seed_once(:app_code) do |s|
   s.app_code = 'QGTEST5'
   s.validate_url = 'https://ditto.quantiguous.com/ecollect/qgtest5/validate'
   s.created_by = 'Q'
   s.approval_status = 'A'
 end
 
-EcolApp.seed(:app_code) do |s|
+EcolApp.seed_once(:app_code) do |s|
   s.app_code = 'QGTEST6'
   s.validate_url = 'https://ditto.quantiguous.com/ecollect/qgtest6/validate'
   s.created_by = 'Q'
