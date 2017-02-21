@@ -26,7 +26,7 @@ class WhitelistedIdentitiesController < ApplicationController
           EmailAlert.send_email(@whitelisted_identity.inward_remittance,@whitelisted_identity.partner.ops_email_id) rescue nil
         end
         flash[:alert] = 'Identity successfully verified'
-      rescue ::Fault::ProcedureFault => e
+      rescue ::Fault::ProcedureFault, OCIError => e
        flash[:alert] = "#{e.message}"
       end
       redirect_to :back
