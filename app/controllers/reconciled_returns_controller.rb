@@ -44,7 +44,7 @@ class ReconciledReturnsController < ApplicationController
 
   def reconciled_return_params
     params.require(:reconciled_return).permit(:txn_type, :return_code, :settlement_date, :bank_ref_no, :reason, 
-                   :created_by, :updated_by, :updated_by, :last_action)
+                   :created_by, :updated_by, :updated_by, :last_action, :return_code_type)
   end
 
 end
