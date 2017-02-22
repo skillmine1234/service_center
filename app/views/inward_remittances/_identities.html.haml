@@ -16,7 +16,10 @@
             %td.label Status
             %td.value
               - if identity.whitelisted_identity.nil?
-                = link_to 'Add', new_whitelisted_identity_path(id_id: identity.id)
+                - if identity.id_type == 'partnerProvidedID'
+                  = '-'
+                - else
+                  = link_to 'Add', new_whitelisted_identity_path(id_id: identity.id)
               - else
                 = link_to 'WhiteListed', identity.whitelisted_identity
           %tr
@@ -40,10 +43,10 @@
             %td.value
               = identity.id_number
           %tr
-            %td.label Issued By
+            %td.label Issued By Country
             %td.value
-              = identity.id_number
-            %tr
+              = identity.id_country
+          %tr
             %td.label Issued Date
             %td.value
               = identity.id_issue_date

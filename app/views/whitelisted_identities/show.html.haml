@@ -7,6 +7,10 @@
         = render 'ecol_customers/approve', :@record => @whitelisted_identity
       %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
         %tr
+          %td.label Revoked?
+          %td.value
+            = @whitelisted_identity.is_revoked
+        %tr
           %td.label Partner Code
           %td.value
             = @whitelisted_identity.partner.try(:code)
@@ -81,7 +85,10 @@
         %tr
           %td.label Last Used With Transaction ID
           %td
-            = @whitelisted_identity.last_used_with_txn_id
+            - if @whitelisted_identity.last_used_with_txn_id.nil?
+              = '-'
+            - else
+              = link_to @whitelisted_identity.last_used_with_txn_id, inward_remittance_path(@whitelisted_identity.last_used_with_txn_id)
         %tr
           %td.label Times Used
           %td

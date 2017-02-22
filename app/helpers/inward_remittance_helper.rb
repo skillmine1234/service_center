@@ -26,7 +26,7 @@ module InwardRemittanceHelper
     wl_id = inward_remittance.send("#{party}_wl_id")
     if wl_id.nil?
       if inward_remittance.send("#{party}_needs_wl") == 'Y'
-        link_to 'Add', new_whitelisted_identity_path(inw_id: inward_remittance.id, id_for: party[0].upcase)
+        link_to 'Required : Add', new_whitelisted_identity_path(inw_id: inward_remittance.id, id_for: party[0].upcase)
       else
         '-'
       end

@@ -87,7 +87,7 @@ class WhitelistedIdentity < ActiveRecord::Base
         errors.add(:full_name, "the name entered does not match the remitter name #{inw_txn.rmtr_full_name}") if inw_txn.rmtr_full_name != full_name
       end
       
-      errors.add(:full_name, "the transaction does not have any remitter code, choose a different transaction to whitelist this remitter ") if partner.will_send_id == 'N' and self.rmtr_code.nil? and self.id_for == 'R'
+      errors.add(:full_name, "the transaction does not have any remitter code, choose a different transaction to whitelist this remitter ") if partner.will_send_id == 'N' and inw_txn.rmtr_code.nil? and self.id_for == 'R'
     end
    
     if partner.will_send_id == 'Y' 
