@@ -9,6 +9,10 @@ class InwardRemittance < ActiveRecord::Base
   has_one :inw_audit_log
   has_one :inward_remittances_lock
   has_many :audit_steps, :class_name => 'InwAuditStep', :as => :inw_auditable
+  
+  belongs_to :rmtr_wl_identity, class_name: 'WhiteListedIdentity', foreign_key: 'rmtr_wl_id'
+  belongs_to :bene_wl_identity, class_name: 'WhiteListedIdentity', foreign_key: 'bene_wl_id'
+  
 
   validates_presence_of :req_no, :req_version, :req_timestamp, :partner_code, :rmtr_identity_count, 
                         :bene_identity_count, :attempt_no
@@ -17,6 +21,10 @@ class InwardRemittance < ActiveRecord::Base
     string :req_no
   end
 
+  def self.find_last_attempt_for_req_no(partner_code, req_no)
+    where(req_no: req_no, partner_code: partner_code).order("attempt_no desc").first
+  end
+  
   def remitter_address
     rmtr_address1.to_s + " " + rmtr_address2.to_s + " " + rmtr_address3.to_s
   end
@@ -40,4 +48,6 @@ class InwardRemittance < ActiveRecord::Base
   def same_party_transfer?
     is_same_party_transfer=='Y' ? true : false
   end
+  
+
 end

@@ -102,42 +102,18 @@
           %td.value
             = @inward_remittance.rmtr_code
       %hr{:style=>'background-color: #F1F2F8; width: 100%'}
-      %h3 Notification Status
-      %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:left;'}
-        %tr
-          %td.label Notify Attempt
-          %td
-            - if !@inward_remittance.notify_attempt_no.nil?
-              = link_to @inward_remittance.notify_attempt_no, {:controller => 'inward_remittances', :action => 'audit_logs', :id => @inward_remittance.id, :step_name => 'NOTIFY'}
-            - else
-              = "-"
-        %tr
-          %td.label Notify Attempt At
-          %td= @inward_remittance.notify_attempt_at.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
-        %tr
-          %td.label Notify Status
-          %td= @inward_remittance.notify_status
-      - if @inward_remittance.notify_status == 'NOTIFIED:OK'
-        %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:right;'}
-          %tr
-            %td.label Notified At
-            %td= @inward_remittance.notified_at
-        
-      - elsif @inward_remittance.notify_status == 'NOTIFICATION FAILED'
-        %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:right;'}
-          %tr
-            %td.label Notify Result
-            %td
-              = link_to "Show Result", "#", :class => 'notify-result', :href => "#notifyResult", :style => "font-weight:100"
-      %hr{:style=>'background-color: #F1F2F8; width: 100%'}
       %h3{:style => 'width: 50%; float:left;'} 
-        = "Remitter: " + "#{@inward_remittance.remitter_type}" + " (" 
-        = link_to @inward_remittance.rmtr_identity_count,:controller => :inward_remittances, :action => :remitter_identities, :id => @inward_remittance.id 
-        = " Identities)"
+        = "Remitter: " + "#{@inward_remittance.remitter_type}"
       %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:left;'} 
         %tr
           %td.label Name
           %td= @inward_remittance.rmtr_full_name
+        %tr
+          %td.label Identities In Request
+          %td= link_to "#{@inward_remittance.rmtr_identity_count}", :controller => :inward_remittances, :action => :remitter_identities, :id => @inward_remittance.id
+        %tr
+          %td.label WhiteListed Identity
+          %td= link_to_whitelisted_identity_path(@inward_remittance, 'rmtr')
         %tr
           %td.label Address
           %td= @inward_remittance.rmtr_address1
@@ -166,13 +142,17 @@
           %td.label Mobile No
           %td= @inward_remittance.rmtr_mobile_no
       %h3
-        = "Beneficiary: " + "#{@inward_remittance.beneficiary_type}" + " (" 
-        = link_to @inward_remittance.bene_identity_count,:controller => :inward_remittances, :action => :beneficiary_identities, :id => @inward_remittance.id
-        = " Identities)"
+        = "Beneficiary: " + "#{@inward_remittance.beneficiary_type}" 
       %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:left;'} 
         %tr
           %td.label Name
           %td= @inward_remittance.bene_full_name
+        %tr
+          %td.label Identities In Request
+          %td= link_to "#{@inward_remittance.bene_identity_count}", :controller => :inward_remittances, :action => :beneficiary_identities, :id => @inward_remittance.id
+        %tr
+          %td.label WhiteListed Identity
+          %td= link_to_whitelisted_identity_path(@inward_remittance, 'bene')
         %tr
           %td.label Address
           %td= @inward_remittance.bene_address1
@@ -205,6 +185,35 @@
       %tr
         %td.label Remitter To Beneficiary Note
         %td= @inward_remittance.rmtr_to_bene_note
+    %hr{:style=>'background-color: #F1F2F8; width: 100%'}
+    %h3 Notification Status
+    %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:left;'}
+      %tr
+        %td.label Notify Attempt
+        %td
+          - if !@inward_remittance.notify_attempt_no.nil?
+            = link_to @inward_remittance.notify_attempt_no, {:controller => 'inward_remittances', :action => 'audit_logs', :id => @inward_remittance.id, :step_name => 'NOTIFY'}
+          - else
+            = "-"
+      %tr
+        %td.label Notify Attempt At
+        %td= @inward_remittance.notify_attempt_at.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
+      %tr
+        %td.label Notify Status
+        %td= @inward_remittance.notify_status
+    - if @inward_remittance.notify_status == 'NOTIFIED:OK'
+      %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:right;'}
+        %tr
+          %td.label Notified At
+          %td= @inward_remittance.notified_at
+      
+    - elsif @inward_remittance.notify_status == 'NOTIFICATION FAILED'
+      %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:right;'}
+        %tr
+          %td.label Notify Result
+          %td
+            = link_to "Show Result", "#", :class => 'notify-result', :href => "#notifyResult", :style => "font-weight:100"
+
 #requestText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
