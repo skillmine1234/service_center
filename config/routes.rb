@@ -11,8 +11,18 @@ ServiceCenter::Application.routes.draw do
 
   resources :partners
   resources :purpose_codes
-  resources :inward_remittances
-  resources :whitelisted_identities
+  resources :inward_remittances do
+    member do
+      put 'release'
+    end
+  end
+  resources :whitelisted_identities do
+    member do
+      put 'revoke'
+      put 'ratify'
+    end
+  end
+  
   resources :inw_remittance_rules
   resources :banks
   resources :ecol_rules

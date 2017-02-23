@@ -48,7 +48,6 @@ class WhitelistedIdentitiesController < ApplicationController
     @whitelisted_identity = WhitelistedIdentity.new(params[:whitelisted_identity])
     @whitelisted_identity.created_by = @current_user.id
     if !@whitelisted_identity.valid?
-      flash[:alert] = @whitelisted_identity.errors.full_messages
       render "new"
     else
       @whitelisted_identity.created_by = current_user.id
@@ -105,6 +104,34 @@ class WhitelistedIdentitiesController < ApplicationController
       end
     end
     redirect_to @whitelisted_identity
+  end
+
+  def ratify
+    whitelisted_identity = WhitelistedIdentity.find(params[:id])   
+    whitelisted_identity.is_revoked = 'N'      
+    if !whitelisted_identity.save
+      flash[:alert] = whitelisted_identity.errors.full_messages
+    else
+      flash[:alert] = 'WhitesListed Identity successfully ratified'
+    end
+  rescue ActiveRecord::StaleObjectError
+    flash[:alert] = 'Someone edited the whitelisted identity the same time you did. Please re-apply your changes.'
+  ensure
+    redirect_to whitelisted_identities_path
+  end
+  
+  def revoke
+    whitelisted_identity = WhitelistedIdentity.find(params[:id])   
+    whitelisted_identity.is_revoked = 'Y'
+    if !whitelisted_identity.save
+      flash[:alert] = whitelisted_identity.errors.full_messages
+    else
+      flash[:alert] = 'WhitesListed Identity successfully revoked'
+    end
+  rescue ActiveRecord::StaleObjectError
+    flash[:alert] = 'Someone edited the whitelisted identity the same time you did. Please re-apply your changes.'
+  ensure
+    redirect_to whitelisted_identities_path
   end
 
   private

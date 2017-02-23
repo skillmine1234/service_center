@@ -20,7 +20,7 @@ class WhitelistedIdentity < ActiveRecord::Base
   
   # the after_save callbacks call database packages which arent avialable in the test environment
   after_save :release unless Rails.env.test? 
-
+  
   private   
   def set_defaults_for_create
     partner = Partner.find_by_id(self.partner_id)
@@ -49,7 +49,7 @@ class WhitelistedIdentity < ActiveRecord::Base
   
   # on the approval of the creation of the whitelisted identity a the association is done and a release is attempted
   def release
-    if self.approval_status == 'A' && self.last_action = 'C'
+    if self.approval_status == 'A' && (self.last_action = 'C' or self.is_revoked_changed?(from: 'Y', to: 'N'))
       associate_and_try_release
       if self.partner.auto_match_rule == 'A'
         auto_match_and_release
