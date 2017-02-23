@@ -24,6 +24,13 @@ class InwardRemittancesController < ApplicationController
     @inward_remittances_count = inward_remittances.count
     @inward_remittances = inward_remittances.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
+  
+  # to reuse the view
+  def identity
+    inw_txn = InwardRemittance.find(params[:id])
+    @identities = InwIdentity.where(id: params[:id_id]).paginate(:per_page => 10, :page => params[:page]) rescue []
+    render '_identities'
+  end
 
   def remitter_identities
     @user = current_user

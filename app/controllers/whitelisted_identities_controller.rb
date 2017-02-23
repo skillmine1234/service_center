@@ -9,27 +9,58 @@ class WhitelistedIdentitiesController < ApplicationController
   include ApplicationHelper
   include IdentitiesHelper
 
-  def new
+  def new    
     @whitelisted_identity = WhitelistedIdentity.new
+    
+    # for creation of a whitelisted identity for a transaction 
+    if params[:inw_id].present?
+      inw_txn = InwardRemittance.find_by_id(params[:inw_id])
+    # for creation of a whitelisted identity for a identity
+    elsif params[:id_id].present? && !(inw_identity = InwIdentity.find_by_id(params[:id_id])).nil?
+      inw_txn = inw_identity.inward_remittance
+
+      @whitelisted_identity.txn_identity_no = inw_txn.identities.index {|x| x.id == inw_identity.id}
+      
+      @whitelisted_identity.id_type = inw_identity.id_type
+      @whitelisted_identity.id_number = inw_identity.id_number
+      @whitelisted_identity.id_country = inw_identity.id_country
+      @whitelisted_identity.id_issue_date = inw_identity.id_issue_date
+      @whitelisted_identity.id_expiry_date = inw_identity.id_expiry_date
+    end
+
+    # fields set by default when we know the transaction for which the whitelisted is to be created
+    unless inw_txn.nil?
+      @whitelisted_identity.partner_id = inw_txn.partner.id
+      @whitelisted_identity.created_for_req_no = inw_txn.req_no
+      if params[:id_for] == 'R'
+        @whitelisted_identity.id_for = 'R'
+        @whitelisted_identity.full_name = inw_txn.rmtr_full_name
+      else
+        @whitelisted_identity.id_for = 'B'
+        @whitelisted_identity.full_name = inw_txn.bene_full_name
+      end
+    end
+    
     @user = current_user
   end
 
   def create
     @whitelisted_identity = WhitelistedIdentity.new(params[:whitelisted_identity])
+    @whitelisted_identity.created_by = @current_user.id
     if !@whitelisted_identity.valid?
-      flash[:alert] = @whitelisted_identity.errors.full_messages.to_sentence
-      redirect_to :back
+      flash[:alert] = @whitelisted_identity.errors.full_messages
+      render "new"
     else
       @whitelisted_identity.created_by = current_user.id
       begin
         if @whitelisted_identity.save!
           EmailAlert.send_email(@whitelisted_identity.inward_remittance,@whitelisted_identity.partner.ops_email_id) rescue nil
         end
-        flash[:alert] = 'Identity successfully verified'
+        flash[:alert] = 'Identity successfully verified, pending approval'
       rescue ::Fault::ProcedureFault, OCIError => e
        flash[:alert] = "#{e.message}"
       end
-      redirect_to :back
+      redirect_to whitelisted_identities_path
     end
   end 
 
@@ -79,12 +110,10 @@ class WhitelistedIdentitiesController < ApplicationController
   private
 
   def whitelisted_identity_params
-    params.require(:whitelisted_identity).permit(:created_by, :first_name, :first_used_with_txn_id, :full_name, :id_country, 
-                                                 :id_issue_date, :id_expiry_date, :id_number, :id_type, :is_verified, :last_name, 
-                                                 :last_used_with_txn_id, :lock_version, :partner_id, :times_used,
-                                                 :updated_by, :verified_at, :verified_by, :bene_account_no, :rmtr_code, :created_for_txn_id, 
-                                                 :created_for_identity_id, :bene_account_ifsc, 
-                                                 {:attachments_attributes => [:note, :user_id, :file, :_destroy]},
-                                                 :approved_id, :approved_version)
+    params.require(:whitelisted_identity).permit(:created_by, :full_name, :id_country, 
+                                                 :id_issue_date, :id_expiry_date, :id_number, :id_type, 
+                                                 :lock_version, :partner_id,
+                                                 :updated_by, {:attachments_attributes => [:note, :user_id, :file, :_destroy]},
+                                                 :approved_id, :approved_version, :created_for_req_no, :id_for, :txn_identity_no)
   end
 end

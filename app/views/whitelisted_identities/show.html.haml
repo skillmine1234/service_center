@@ -7,21 +7,25 @@
         = render 'ecol_customers/approve', :@record => @whitelisted_identity
       %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
         %tr
+          %td.label Revoked?
+          %td.value
+            = @whitelisted_identity.is_revoked
+        %tr
           %td.label Partner Code
           %td.value
             = @whitelisted_identity.partner.try(:code)
         %tr
+          %td.label Req No
+          %td.value
+            = link_to @whitelisted_identity.created_for_req_no, inward_remittance_path(@whitelisted_identity.first_used_with_txn_id)
+        %tr
+          %td.label Remitter Or Beneficiary
+          %td.value
+            = @whitelisted_identity.id_for
+        %tr
           %td.label Full Name
           %td.value
             = @whitelisted_identity.full_name
-        %tr
-          %td.label First Name
-          %td.value
-            = @whitelisted_identity.first_name
-        %tr
-          %td.label Last Name
-          %td.value
-            = @whitelisted_identity.last_name
         %tr
           %td.label ID Type
           %td.value
@@ -43,29 +47,10 @@
           %td.value
             = @whitelisted_identity.id_expiry_date
         %tr
-          %td.label Is Verified? 
-          %td.value
-            = @whitelisted_identity.is_verified
-        %tr
-          %td.label Verified At
-          %td.value
-            = @whitelisted_identity.verified_at.try(:strftime, "%d/%m/%Y %I:%M%p")
-        %tr
-          %td.label Verified By
-          %td.value
-            = @whitelisted_identity.verified_by
-        %tr
-          %td.label First Used With Transaction ID
-          %td.value
-            = @whitelisted_identity.first_used_with_txn_id
-        %tr
-          %td.label Last Used With Transaction ID
           %td
-            = @whitelisted_identity.last_used_with_txn_id
-        %tr
-          %td.label Times Used
+            %hr
           %td
-            = @whitelisted_identity.times_used
+            %hr
         %tr
           %td.label Beneficiary Account Number
           %td
@@ -78,6 +63,36 @@
           %td.label Remitter Code
           %td
             = @whitelisted_identity.rmtr_code
+        %tr
+          %td.label Identity In the Request
+          %td
+            - if @whitelisted_identity.created_for_identity_id.nil?
+              = '-'
+            - else
+              = link_to @whitelisted_identity.created_for_identity_id, :controller => :inward_remittances, :action => :identity, :id_id => @whitelisted_identity.created_for_identity_id, :id => @whitelisted_identity.created_for_txn_id
+        %tr
+          %td
+            %hr
+          %td
+            %hr
+        %tr
+          %td.label First Used With Transaction ID
+          %td.value
+            - if @whitelisted_identity.first_used_with_txn_id.nil?
+              = '-'
+            - else
+              = link_to @whitelisted_identity.first_used_with_txn_id, inward_remittance_path(@whitelisted_identity.first_used_with_txn_id)
+        %tr
+          %td.label Last Used With Transaction ID
+          %td
+            - if @whitelisted_identity.last_used_with_txn_id.nil?
+              = '-'
+            - else
+              = link_to @whitelisted_identity.last_used_with_txn_id, inward_remittance_path(@whitelisted_identity.last_used_with_txn_id)
+        %tr
+          %td.label Times Used
+          %td
+            = @whitelisted_identity.times_used
         %tr
           %td.label Created By
           %td

@@ -40,7 +40,7 @@ describe WhitelistedIdentitiesController do
     describe "with invalid params" do
       it "assigns a newly created but unsaved whitelisted_identitiy as @whitelisted_identitiy" do
         params = Factory.attributes_for(:whitelisted_identity)
-        params[:partner_id] = nil
+        params[:id_type] = nil
         expect {
           post :create, {:whitelisted_identity => params}
         }.to change(WhitelistedIdentity, :count).by(0)
@@ -50,9 +50,9 @@ describe WhitelistedIdentitiesController do
 
       it "re-renders the 'new' template when show_errors is true" do
         params = Factory.attributes_for(:whitelisted_identity)
-        params[:partner_id] = nil
+        params[:id_type] = nil
         post :create, {:whitelisted_identity => params}
-        response.should be_redirect
+        response.should render_template("new")
       end
     end
     
@@ -99,14 +99,14 @@ describe WhitelistedIdentitiesController do
        user_role.delete
        Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
        whitelisted_identity1 = Factory(:whitelisted_identity, :approval_status => 'A')
-       whitelisted_identity2 = Factory(:whitelisted_identity, :approval_status => 'U', :full_name => 'Bar Foo', :approved_version => whitelisted_identity1.lock_version, :approved_id => whitelisted_identity1.id, :created_by => 666)
+       whitelisted_identity2 = Factory(:whitelisted_identity, :approval_status => 'U', :full_name => 'MyString', :approved_version => whitelisted_identity1.lock_version, :approved_id => whitelisted_identity1.id, :created_by => 666)
        # the following line is required for reload to get triggered (TODO)
        whitelisted_identity1.approval_status.should == 'A'
        InwUnapprovedRecord.count.should == 1
        put :approve, {:id => whitelisted_identity2.id}
        InwUnapprovedRecord.count.should == 0
        whitelisted_identity1.reload
-       whitelisted_identity1.full_name.should == 'Bar Foo'
+       whitelisted_identity1.full_name.should == 'MyString'
        whitelisted_identity1.updated_by.should == "666"
        WhitelistedIdentity.find_by_id(whitelisted_identity2.id).should be_nil
      end
@@ -115,12 +115,12 @@ describe WhitelistedIdentitiesController do
        user_role = UserRole.find_by_user_id(@user.id)
        user_role.delete
        Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
-       whitelisted_identity = Factory(:whitelisted_identity, :full_name => 'Bar Foo', :approval_status => 'U')
+       whitelisted_identity = Factory(:whitelisted_identity, :full_name => 'MyString', :approval_status => 'U')
        InwUnapprovedRecord.count.should == 1
        put :approve, {:id => whitelisted_identity.id}
        InwUnapprovedRecord.count.should == 0
        whitelisted_identity.reload
-       whitelisted_identity.full_name.should == 'Bar Foo'
+       whitelisted_identity.full_name.should == 'MyString'
        whitelisted_identity.approval_status.should == 'A'
      end
 

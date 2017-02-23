@@ -13,57 +13,15 @@ describe WhitelistedIdentity do
   end
 
   context 'validation' do
-    [:partner_id, :is_verified, :created_by, :updated_by, 
-     :id_type, :id_number,:id_expiry_date].each do |att|
+    [:partner, :id_for, :created_for_req_no, :created_by, :id_type, :id_number, :id_expiry_date].each do |att|
       it { should validate_presence_of(att) }
     end
-    
-    it do
-      whitelisted_identity = Factory(:whitelisted_identity, :approval_status => 'A')
-      should validate_uniqueness_of(:id_type).scoped_to(:id_number,:id_country,:id_issue_date,:id_expiry_date,:approval_status)
-    end
-    
+
     it "should validate_unapproved_record" do 
       whitelisted_identity1 = Factory(:whitelisted_identity,:approval_status => 'A')
       whitelisted_identity2 = Factory(:whitelisted_identity, :approved_id => whitelisted_identity1.id)
       whitelisted_identity1.should_not be_valid
       whitelisted_identity1.errors_on(:base).should == ["Unapproved Record Already Exists for this record"]
-    end
-  end
-
-  context "inw_identity" do 
-    it "should return identity if found" do 
-      inward_remittance = Factory(:inward_remittance)
-      whitelisted_identity = Factory(:whitelisted_identity, :first_used_with_txn_id => inward_remittance.id)
-      identity = Factory(:inw_identity, :inw_remittance_id => inward_remittance.id)
-      identity.id_issue_date = whitelisted_identity.id_issue_date
-      identity.id_expiry_date = whitelisted_identity.id_expiry_date
-      identity.id_type = whitelisted_identity.id_type
-      identity.id_number = whitelisted_identity.id_number
-      identity.id_country = whitelisted_identity.id_country
-      whitelisted_identity.inw_identity.should == identity
-    end
-
-    it "should return nill if identity not found" do 
-      inward_remittance = Factory(:inward_remittance)
-      whitelisted_identity = Factory(:whitelisted_identity, :first_used_with_txn_id => inward_remittance.id)
-      whitelisted_identity.inw_identity.should == nil
-    end
-  end
-
-  context "update_identities" do 
-    it "should return identity if found" do 
-      inward_remittance = Factory(:inward_remittance)
-      identity = Factory(:inw_identity, :inw_remittance_id => inward_remittance.id, :was_auto_matched => nil)
-      whitelisted_identity = Factory(:whitelisted_identity, :first_used_with_txn_id => inward_remittance.id,
-                                     :id_issue_date => identity.id_issue_date,
-                                     :id_expiry_date => identity.id_expiry_date,
-                                     :id_type => identity.id_type,
-                                     :id_number => identity.id_number,
-                                     :id_country => identity.id_country)
-      identity.reload
-      identity.was_auto_matched.should == 'N'
-      identity.whitelisted_identity_id.should == whitelisted_identity.id
     end
   end
   
@@ -144,26 +102,6 @@ describe WhitelistedIdentity do
       whitelisted_identity2 = Factory(:whitelisted_identity, :approval_status => 'U')
       whitelisted_identity1.enable_approve_button?.should == false
       whitelisted_identity2.enable_approve_button?.should == true
-    end
-  end
-  
-  context "presence_of_created_for_identity_id" do
-    it "should validate presence of created_for_identity_id" do
-      partner = Factory(:partner, :id => 100, :code => "ABC01012", will_send_id: 'Y')
-      whitelisted_identity1 = Factory.build(:whitelisted_identity, :approval_status => 'A', created_for_identity_id: nil)
-      whitelisted_identity1.partner = partner
-      whitelisted_identity1.save.should == false
-      whitelisted_identity1.errors_on(:created_for_identity_id).should == ["is mandatory if will_send_id is Y"]
-    end
-  end
-  
-  context "presence_of_rmtr_or_bene_values" do
-    it "should validate presence of presence of rmtr or bene values" do
-      partner = Factory(:partner, :id => 100, :code => "ABC01012", will_send_id: 'N')
-      whitelisted_identity1 = Factory.build(:whitelisted_identity, :approval_status => 'A', rmtr_code: nil, bene_account_no: nil)
-      whitelisted_identity1.partner = partner
-      whitelisted_identity1.save.should == false
-      whitelisted_identity1.errors_on(:base).should == ["Either rmtr_code or both bene_account_no and bene_account_ifsc are mandatory if partner's will_send_id is N"]
     end
   end
 end

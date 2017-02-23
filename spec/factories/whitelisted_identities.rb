@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :whitelisted_identity do
-    partner_id 1
-    full_name "Foo Bar"
+    partner_id { @partner = Factory(:partner, will_send_id: 'N', approval_status: 'A').id }
+    full_name "MyString"
     first_name "Foo"
     last_name "Bar"
     id_type "Passport"
@@ -22,5 +22,8 @@ FactoryGirl.define do
     created_for_txn_id 1
     created_for_identity_id 1
     lock_version 1
+    created_for_req_no { Factory(:inward_remittance, partner_code: (Partner.find_by_id(@partner).code), rmtr_code: '12351', rmtr_full_name: 'MyString').req_no }
+    rmtr_code '12351'
+    id_for 'R'
   end
 end
