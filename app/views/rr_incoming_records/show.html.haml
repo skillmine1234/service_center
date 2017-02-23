@@ -33,7 +33,7 @@
         %tr
           %td.label Settlement Date
           %td.value
-            = @rr_record.settlement_date
+            = @rr_record.settlement_date.try(:strftime, "%d/%m/%Y %I:%M%p")
         %tr
           %td.label Return Code
           %td.value

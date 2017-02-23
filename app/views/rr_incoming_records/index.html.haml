@@ -33,8 +33,6 @@
         %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
           Status
         %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
-          Transfer Amount
-        %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
           Fault Text
         %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
           Fault Bitstream
@@ -53,15 +51,13 @@
           %td{:style=>'text-align:left;'}
             = record.txn_type
           %td{:style=>'text-align:left;'}
-            = record.bank_reference_no
+            = record.bank_ref_no
           %td{:style=>'text-align:left;'}
             = record.settlement_date.try(:strftime, "%d/%m/%Y %I:%M%p")
           %td{:style=>'text-align:left;'}
             = record.incoming_file_record.attempt_no
           %td{:style=>'text-align:left;'}
             = record.incoming_file_record.status
-          %td{:style=>'text-align:left;'}
-            = record.amount
           %td{:style=>'text-align:left;'}
             - if record.incoming_file_record.fault_code.nil?
               - link_text = "Show Fault Text"
