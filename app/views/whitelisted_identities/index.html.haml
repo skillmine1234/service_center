@@ -28,13 +28,10 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Id Expiry Date
     %th{:style=>'text-align:left; background-color: lightblue;'}
-      Is Verified ?
+      Is Revoked ?
     %th{:style=>'text-align:left; background-color: lightblue;'}
-      Verified At
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Verified By 
   .tbody
-    - @whitelisted_identities.each do |whitelisted_identity|   
+    - @whitelisted_identities.each do |whitelisted_identity|
       %tr
         %td{:style=>'text-align:left;'}
           = link_to 'Show', whitelisted_identity
@@ -53,8 +50,10 @@
         %td{:style=>'text-align:left;'}
           = whitelisted_identity.id_expiry_date
         %td{:style=>'text-align:left;'}
-          = whitelisted_identity.is_verified
+          = whitelisted_identity.is_revoked
         %td{:style=>'text-align:left;'}
-          = whitelisted_identity.verified_at.try(:strftime, "%d/%m/%Y %I:%M%p")
-        %td{:style=>'text-align:left;'}
-          = whitelisted_identity.verified_by
+          - if whitelisted_identity.approval_status == 'A'
+            - if whitelisted_identity.is_revoked == "N"
+              = link_to "Revoke", revoke_whitelisted_identity_path(whitelisted_identity), class: "btn btn-primary", method: :put
+            - else
+              = link_to "Ratify", ratify_whitelisted_identity_path(whitelisted_identity), class: "btn btn-primary", method: :put

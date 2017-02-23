@@ -31,6 +31,16 @@ class InwardRemittancesController < ApplicationController
     @identities = InwIdentity.where(id: params[:id_id]).paginate(:per_page => 10, :page => params[:page]) rescue []
     render '_identities'
   end
+  
+  # to attempt a release of an on-hold txn
+  def release
+    inw_txn = InwardRemittance.find(params[:id])
+    inw_txn.release
+  rescue ::Fault::ProcedureFault, OCIError => e
+   flash[:alert] = "#{e.message}"    
+  ensure
+   redirect_to inw_txn
+  end
 
   def remitter_identities
     @user = current_user

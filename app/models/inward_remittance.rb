@@ -49,5 +49,10 @@ class InwardRemittance < ActiveRecord::Base
     is_same_party_transfer=='Y' ? true : false
   end
   
+  def release
+    return if Rails.env.test?
+    result = plsql.pk_qg_inw_wl_service.try_release(pi_txn_id: self.id, po_fault_code: nil, po_fault_subcode: nil, po_fault_reason: nil)
+    raise ::Fault::ProcedureFault.new(OpenStruct.new(code: result[:po_fault_code], subCode: result[:po_fault_subcode], reasonText: "#{result[:po_fault_reason]}")) if result[:po_fault_code].present?    
+  end
 
 end
