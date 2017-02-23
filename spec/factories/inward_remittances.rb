@@ -40,5 +40,4 @@ Factory.define(:inward_remittance) do |i|
     i.rep_version "MyString"
     i.rep_timestamp "2015-04-20 15:12:44"
     i.attempt_no 1.5
-  
 end
