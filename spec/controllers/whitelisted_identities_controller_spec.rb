@@ -40,7 +40,7 @@ describe WhitelistedIdentitiesController do
     describe "with invalid params" do
       it "assigns a newly created but unsaved whitelisted_identitiy as @whitelisted_identitiy" do
         params = Factory.attributes_for(:whitelisted_identity)
-        params[:partner_id] = nil
+        params[:id_type] = nil
         expect {
           post :create, {:whitelisted_identity => params}
         }.to change(WhitelistedIdentity, :count).by(0)
@@ -50,7 +50,7 @@ describe WhitelistedIdentitiesController do
 
       it "re-renders the 'new' template when show_errors is true" do
         params = Factory.attributes_for(:whitelisted_identity)
-        params[:partner_id] = nil
+        params[:id_type] = nil
         post :create, {:whitelisted_identity => params}
         response.should render_template("new")
       end

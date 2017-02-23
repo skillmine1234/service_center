@@ -16,7 +16,7 @@ describe WhitelistedIdentity do
     [:partner, :id_for, :created_for_req_no, :created_by, :id_type, :id_number, :id_expiry_date].each do |att|
       it { should validate_presence_of(att) }
     end
-    
+
     it "should validate_unapproved_record" do 
       whitelisted_identity1 = Factory(:whitelisted_identity,:approval_status => 'A')
       whitelisted_identity2 = Factory(:whitelisted_identity, :approved_id => whitelisted_identity1.id)
