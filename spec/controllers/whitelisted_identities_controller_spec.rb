@@ -125,5 +125,16 @@ describe WhitelistedIdentitiesController do
      end
 
    end
-  
+
+   describe "GET audit_logs" do
+    it "assigns the requested whitelisted_identity as @whitelisted_identity" do
+      whitelisted_identity = Factory(:whitelisted_identity)
+      get :audit_logs, {:id => whitelisted_identity.id, :version_id => 0}
+      assigns(:record).should eq(whitelisted_identity)
+      assigns(:audit).should eq(whitelisted_identity.audits.first)
+      get :audit_logs, {:id => 12345, :version_id => "i"}
+      assigns(:record).should eq(nil)
+      assigns(:audit).should eq(nil)
+    end
+  end
 end
