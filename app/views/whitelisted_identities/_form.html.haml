@@ -16,11 +16,6 @@
       = f.label :id_for, '*Remitter Or Beneficiary', :class => 'control-label'
       = f.select :id_for, options_for_select([['Remitter','R'],['Beneficiary','B']], @whitelisted_identity.id_for)
     .control-group
-      = f.label :txn_identity_no, 'ID Position No In Request', :class => 'control-label'
-      = f.select :txn_identity_no, options_for_select([[1,0],[2,1],[3,2],[4,3]], @whitelisted_identity.txn_identity_no), {:include_blank => ''}
-      #msg-error
-        = error_message_for(@whitelisted_identity, :txn_identity_no)
-    .control-group
       = f.label :full_name, '*Full Name', :class => 'control-label'
       = f.text_field :full_name
       #msg-error
@@ -65,3 +60,4 @@
         %br
         %br
         = f.submit 'Add', :class => 'btn add btn-small'
+        

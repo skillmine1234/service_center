@@ -18,8 +18,6 @@ class WhitelistedIdentitiesController < ApplicationController
     # for creation of a whitelisted identity for a identity
     elsif params[:id_id].present? && !(inw_identity = InwIdentity.find_by_id(params[:id_id])).nil?
       inw_txn = inw_identity.inward_remittance
-
-      @whitelisted_identity.txn_identity_no = inw_txn.identities.index {|x| x.id == inw_identity.id}
       
       @whitelisted_identity.id_type = inw_identity.id_type
       @whitelisted_identity.id_number = inw_identity.id_number
@@ -103,6 +101,9 @@ class WhitelistedIdentitiesController < ApplicationController
         raise ActiveRecord::Rollback
       end
     end
+  rescue ::Fault::ProcedureFault, OCIError => e
+   flash[:alert] = "#{e.message}"
+  ensure
     redirect_to @whitelisted_identity
   end
 
@@ -128,6 +129,8 @@ class WhitelistedIdentitiesController < ApplicationController
     else
       flash[:alert] = 'WhitesListed Identity successfully revoked'
     end
+  rescue ::Fault::ProcedureFault, OCIError => e
+   flash[:alert] = "#{e.message}"
   rescue ActiveRecord::StaleObjectError
     flash[:alert] = 'Someone edited the whitelisted identity the same time you did. Please re-apply your changes.'
   ensure
@@ -141,6 +144,6 @@ class WhitelistedIdentitiesController < ApplicationController
                                                  :id_issue_date, :id_expiry_date, :id_number, :id_type, 
                                                  :lock_version, :partner_id,
                                                  :updated_by, {:attachments_attributes => [:note, :user_id, :file, :_destroy]},
-                                                 :approved_id, :approved_version, :created_for_req_no, :id_for, :txn_identity_no)
+                                                 :approved_id, :approved_version, :created_for_req_no, :id_for)
   end
 end

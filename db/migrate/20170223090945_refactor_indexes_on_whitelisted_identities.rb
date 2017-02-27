@@ -1,7 +1,5 @@
 class RefactorIndexesOnWhitelistedIdentities < ActiveRecord::Migration
-  def change
-    remove_index :whitelisted_identities, column: :last_used_with_txn_id
-    
+  def change    
     add_index :whitelisted_identities, [:partner_id, :id_type, :id_number, :id_country, :id_issue_date, :id_expiry_date, :is_revoked, :created_for_req_no, :approval_status], name: :in_wl_1
     add_index :whitelisted_identities, [:partner_id, :bene_account_no, :bene_account_ifsc, :id_expiry_date, :is_revoked, :created_for_req_no, :approval_status], name: :in_wl_2
     add_index :whitelisted_identities, [:partner_id, :rmtr_code, :id_expiry_date, :is_revoked, :created_for_req_no, :approval_status], name: :in_wl_3
