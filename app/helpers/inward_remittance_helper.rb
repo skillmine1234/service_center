@@ -11,6 +11,8 @@ module InwardRemittanceHelper
     inw_remittances = inw_remittances.where("inward_remittances.transfer_type=?",params[:transfer_type]) if params[:transfer_type].present?
     inw_remittances = inw_remittances.where("inward_remittances.transfer_amount>=? and inward_remittances.transfer_amount <=?",params[:from_amount].to_f,params[:to_amount].to_f) if params[:to_amount].present? and params[:from_amount].present?
     inw_remittances = inw_remittances.where("inward_remittances.req_timestamp>=? and inward_remittances.req_timestamp<=?",Time.zone.parse(params[:from_date]).beginning_of_day,Time.zone.parse(params[:to_date]).end_of_day) if params[:from_date].present? and params[:to_date].present?
+    inw_remittances = inw_remittances.where("inward_remittances.rmtr_wl_id=?", params[:wl_id]) if params[:wl_id].present? &&  params[:wl_id_for] == 'R'
+    inw_remittances = inw_remittances.where("inward_remittances.bene_wl_id=?", params[:wl_id]) if params[:wl_id].present? &&  params[:wl_id_for] == 'B'
     inw_remittances
   end
 
@@ -26,7 +28,16 @@ module InwardRemittanceHelper
     wl_id = inward_remittance.send("#{party}_wl_id")
     if wl_id.nil?
       if inward_remittance.send("#{party}_needs_wl") == 'Y'
-        link_to 'Required : Add', new_whitelisted_identity_path(inw_id: inward_remittance.id, id_for: party[0].upcase)
+        if inward_remittance.partner.will_send_id == 'Y'
+          if party == 'rmtr' && inward_remittance.rmtr_identity_count > 0
+            return link_to 'Required : Add', new_whitelisted_identity_path(id_id: inward_remittance.remitter_identities.first, id_for: party[0].upcase)
+          end
+          if party == 'bene' && inward_remittance.bene_identity_count > 0
+            return link_to 'Required : Add', new_whitelisted_identity_path(id_id: inward_remittance.beneficiary_identities.first, id_for: party[0].upcase)
+          end
+        else
+          link_to 'Required : Add', new_whitelisted_identity_path(inw_id: inward_remittance.id, id_for: party[0].upcase)
+        end
       else
         '-'
       end

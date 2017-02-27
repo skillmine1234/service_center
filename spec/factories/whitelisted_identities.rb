@@ -20,7 +20,6 @@ FactoryGirl.define do
     created_by {Factory(:user).id}
     updated_by {Factory(:user).id}
     created_for_txn_id 1
-    created_for_identity_id 1
     lock_version 1
     created_for_req_no { Factory(:inward_remittance, partner_code: (Partner.find_by_id(@partner).code), rmtr_code: '12351', rmtr_full_name: 'MyString').req_no }
     rmtr_code '12351'

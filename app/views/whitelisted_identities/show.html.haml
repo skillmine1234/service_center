@@ -21,7 +21,7 @@
         %tr
           %td.label Req No
           %td.value
-            = link_to @whitelisted_identity.created_for_req_no, inward_remittance_path(@whitelisted_identity.first_used_with_txn_id)
+            = link_to @whitelisted_identity.created_for_req_no, inward_remittance_path(@whitelisted_identity.created_for_txn_id)
         %tr
           %td.label Remitter Or Beneficiary
           %td.value
@@ -56,6 +56,13 @@
           %td
             %hr
         %tr
+          %td.label Match
+          %td
+            - if @whitelisted_identity.partner.auto_match_rule == 'N'
+              = "Only Request With No : #{@whitelisted_identity.created_for_req_no}"
+            - else
+              = "Any Request For #{@whitelisted_identity.id_for == 'R' ? 'Remitter' : 'Beneficiary'} By #{@whitelisted_identity.partner.will_send_id == 'Y' ? 'ID Detail' : (@whitelisted_identity.id_for == 'R' ? 'Remitter Code' : 'Beneficiary Account & IFSC')}"
+        %tr
           %td.label Beneficiary Account Number
           %td
             = @whitelisted_identity.bene_account_no
@@ -68,17 +75,17 @@
           %td
             = @whitelisted_identity.rmtr_code
         %tr
-          %td.label Identity In the Request
           %td
-            - if @whitelisted_identity.created_for_identity_id.nil?
+            %hr
+          %td
+            %hr
+        %tr
+          %td.label Created For Transaction ID
+          %td.value
+            - if @whitelisted_identity.created_for_txn_id.nil?
               = '-'
             - else
-              = link_to @whitelisted_identity.created_for_identity_id, :controller => :inward_remittances, :action => :identity, :id_id => @whitelisted_identity.created_for_identity_id, :id => @whitelisted_identity.created_for_txn_id
-        %tr
-          %td
-            %hr
-          %td
-            %hr
+              = link_to @whitelisted_identity.created_for_txn_id, inward_remittance_path(@whitelisted_identity.created_for_txn_id)              
         %tr
           %td.label First Used With Transaction ID
           %td.value
@@ -96,7 +103,7 @@
         %tr
           %td.label Times Used
           %td
-            = @whitelisted_identity.times_used
+            = link_to @whitelisted_identity.times_used, inward_remittances_path(advanced_search: true, wl_id: @whitelisted_identity.id, wl_id_for: @whitelisted_identity.id_for)
         %tr
           %td.label Created By
           %td
