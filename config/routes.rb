@@ -174,6 +174,7 @@ ServiceCenter::Application.routes.draw do
   get '/sm_bank_accounts/:id/audit_logs' => 'sm_bank_accounts#audit_logs'
   get '/rc_transfer_schedules/:id/audit_logs' => 'rc_transfer_schedules#audit_logs'
   get '/sc_backend/:id/audit_logs' => 'sc_backends#audit_logs'
+  get '/whitelisted_identity/:id/audit_logs' => 'whitelisted_identities#audit_logs'
   get '/sc_backend/:id/previous_status_changes' => 'sc_backends#previous_status_changes', as: :previous_status_changes
 
   get '/inward_remittances/:id/identity/:id_id' => 'inward_remittances#identity'

@@ -110,11 +110,7 @@ class WhitelistedIdentitiesController < ApplicationController
   def ratify
     whitelisted_identity = WhitelistedIdentity.find(params[:id])   
     whitelisted_identity.is_revoked = 'N'      
-    if !whitelisted_identity.save
-      flash[:alert] = whitelisted_identity.errors.full_messages
-    else
-      flash[:alert] = 'WhitesListed Identity successfully ratified'
-    end
+    flash[:alert] = !whitelisted_identity.save ? whitelisted_identity.errors.full_messages : 'WhitesListed Identity successfully ratified'
   rescue ActiveRecord::StaleObjectError
     flash[:alert] = 'Someone edited the whitelisted identity the same time you did. Please re-apply your changes.'
   ensure
@@ -135,6 +131,11 @@ class WhitelistedIdentitiesController < ApplicationController
     flash[:alert] = 'Someone edited the whitelisted identity the same time you did. Please re-apply your changes.'
   ensure
     redirect_to whitelisted_identities_path
+  end
+
+  def audit_logs
+    @record = WhitelistedIdentity.unscoped.find(params[:id]) rescue nil
+    @audit = @record.audits[params[:version_id].to_i] rescue nil
   end
 
   private

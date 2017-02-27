@@ -7,6 +7,10 @@
         = render 'ecol_customers/approve', :@record => @whitelisted_identity
       %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
         %tr
+          %td.label Version
+          %td.value
+            = link_to "#{audit_count(@whitelisted_identity)}", :controller => :whitelisted_identities, :action => :audit_logs, :version_id => audit_count(@whitelisted_identity), :id => @whitelisted_identity.id
+        %tr
           %td.label Revoked?
           %td.value
             = @whitelisted_identity.is_revoked
