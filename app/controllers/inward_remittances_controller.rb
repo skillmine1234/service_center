@@ -13,16 +13,8 @@ class InwardRemittancesController < ApplicationController
   end
 
   def index
-    inward_remittances = InwardRemittance.order("id desc")
-    if params[:req_no]
-      inward_remittances = inward_remittances.where(:req_no => params[:req_no]).order("id desc") 
-    else
-      maxQuery = InwardRemittance.select("max(attempt_no) as attempt_no,req_no").group(:req_no)      
-      inward_remittances = InwardRemittance.joins("inner join (#{maxQuery.to_sql}) a on a.req_no=inward_remittances.req_no and a.attempt_no=inward_remittances.attempt_no").order("inward_remittances.id DESC")
-    end
-    inward_remittances = find_inward_remittances(inward_remittances,params) if params[:advanced_search].present?
-    @inward_remittances_count = inward_remittances.count
-    @inward_remittances = inward_remittances.paginate(:per_page => 10, :page => params[:page]) rescue []
+    @searcher = InwardRemittanceSearcher.new(search_params)
+    @inward_remittances = @searcher.paginate
   end
   
   # to reuse the view
@@ -65,6 +57,11 @@ class InwardRemittancesController < ApplicationController
 
   private
 
+  def search_params
+    params.permit(:page, :status_code, :request_no, :all_attempts, :req_no, :partner_code, :bank_ref, :rmtr_full_name, :req_transfer_type, :transfer_type,
+                  :from_amount, :to_amount, :from_date, :to_date, :wl_id, :wl_id_for, :rmtr_code, :bene_account_no, :bene_account_ifsc)
+  end
+  
   def inward_remittance_params
     params.require(:inward_remittance).permit(:attempt_no, :bank_ref, :bene_account_ifsc, :bene_account_no, :bene_address1, 
                   :bene_address2, :bene_address3, :bene_city, :bene_country, :bene_email_id, 
