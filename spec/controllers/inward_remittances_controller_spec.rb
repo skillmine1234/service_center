@@ -45,7 +45,7 @@ describe InwardRemittancesController do
       
       inward_remittances_with_max_attempt = [inward_remittances[0]]
             
-      get :index, :advanced_search => true, :request_no => 'TT0114'
+      get :index, :request_no => 'TT0114', partner_code: "PARTNER1"
       expect(assigns(:inward_remittances)).to match_array(inward_remittances_with_max_attempt)
     end
     
