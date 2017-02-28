@@ -7,7 +7,6 @@ class WhitelistedIdentitiesController < ApplicationController
   before_filter :block_inactive_user!
   respond_to :json
   include ApplicationHelper
-  include IdentitiesHelper
 
   def new    
     @whitelisted_identity = WhitelistedIdentity.new
