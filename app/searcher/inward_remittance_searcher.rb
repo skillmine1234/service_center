@@ -1,6 +1,6 @@
 class InwardRemittanceSearcher
   include ActiveModel::Validations
-  attr_accessor :page, :status_code, :all_attempts, :req_no, :request_no, :partner_code, :bank_ref, :rmtr_full_name, :req_transfer_type, :transfer_type,
+  attr_accessor :page, :status_code, :all_attempts, :notify_status, :req_no, :request_no, :partner_code, :bank_ref, :rmtr_full_name, :req_transfer_type, :transfer_type,
                 :from_amount, :to_amount, :from_date, :to_date, :wl_id, :wl_id_for, :rmtr_code, :bene_account_no, :bene_account_ifsc
   PER_PAGE = 10
   
@@ -40,10 +40,11 @@ class InwardRemittanceSearcher
     else
       # show only one (latest) attempt per req_no
       maxQuery = InwardRemittance.select("max(attempt_no) as attempt_no,req_no").group(:req_no)
-      reln = InwardRemittance.joins("inner join (#{maxQuery.to_sql}) a on a.req_no=inward_remittances.req_no and a.attempt_no=inward_remittances.attempt_no").order("inward_remittances.id DESC")      
+      reln = InwardRemittance.joins("inner join (#{maxQuery.to_sql}) a on a.req_no=inward_remittances.req_no and a.attempt_no=inward_remittances.attempt_no").order("inward_remittances.id DESC")
     end
 
     reln = reln.where("inward_remittances.status_code=?", status_code) if status_code.present?
+    reln = reln.where("inward_remittances.notify_status=?", notify_status) if notify_status.present?
     reln = reln.where("inward_remittances.req_no LIKE ?", "#{request_no}%") if request_no.present?
     reln = reln.where("lower(inward_remittances.partner_code) LIKE ?", "#{partner_code.downcase}%") if partner_code.present?
     reln = reln.where("inward_remittances.bank_ref=?", bank_ref) if bank_ref.present?

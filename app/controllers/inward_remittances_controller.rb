@@ -58,7 +58,7 @@ class InwardRemittancesController < ApplicationController
   private
 
   def search_params
-    params.permit(:page, :status_code, :request_no, :all_attempts, :req_no, :partner_code, :bank_ref, :rmtr_full_name, :req_transfer_type, :transfer_type,
+    params.permit(:page, :status_code, :notify_status, :request_no, :all_attempts, :req_no, :partner_code, :bank_ref, :rmtr_full_name, :req_transfer_type, :transfer_type,
                   :from_amount, :to_amount, :from_date, :to_date, :wl_id, :wl_id_for, :rmtr_code, :bene_account_no, :bene_account_ifsc)
   end
   
