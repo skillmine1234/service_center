@@ -62,13 +62,8 @@ class WhitelistedIdentitiesController < ApplicationController
   end 
 
   def index
-    if params[:advanced_search].present?
-      whitelisted_identities = find_identities(params).order("whitelisted_identities.id desc")
-    else
-      whitelisted_identities = (params[:approval_status].present? and params[:approval_status] == 'U') ? WhitelistedIdentity.unscoped.where("approval_status =?",'U').order("whitelisted_identities.id desc") : WhitelistedIdentity.order("whitelisted_identities.id desc")
-    end
-    @whitelisted_identities_count = whitelisted_identities.count
-    @whitelisted_identities = whitelisted_identities.paginate(:per_page => 10, :page => params[:page]) rescue []
+    @searcher = WhitelistedIdentitySearcher.new(search_params)
+    @whitelisted_identities = @searcher.paginate
   end
   
   def show
@@ -139,6 +134,10 @@ class WhitelistedIdentitiesController < ApplicationController
   end
 
   private
+
+  def search_params
+    params.permit(:page, :partner_code, :name, :rmtr_code, :bene_account_no, :bene_account_ifsc, :approval_status)
+  end
 
   def whitelisted_identity_params
     params.require(:whitelisted_identity).permit(:created_by, :full_name, :id_country, 

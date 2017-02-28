@@ -1,7 +1,11 @@
-= form_tag '', :method => 'get', :class => 'form-horizontal', :autocomplete=>"off" do
+= form_tag whitelisted_identities_path, :method => :get, :class => 'form-horizontal', :autocomplete=>"off" do
+  .control-group
+    = label_tag ' '
+    #msg-error
+      = error_message_for(@searcher, :base)
   .control-group
     = label_tag "Partner Code", nil, :class => 'control-label'
-    = text_field_tag :code, params[:code]
+    = text_field_tag :partner_code, params[:partner_code]
   .control-group
     = label_tag "Name", "Name", :class => 'control-label'
     = text_field_tag :name, params[:name]
