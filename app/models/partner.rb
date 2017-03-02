@@ -18,7 +18,7 @@ class Partner < ActiveRecord::Base
   validates :low_balance_alert_at, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => '9e20'.to_f, :allow_nil => true }
   validates :account_no, :numericality => {:only_integer => true}, length: {in: 10..16}
   validates :account_ifsc, format: {with: /\A[A-Z|a-z]{4}[0][A-Za-z0-9]{6}+\z/, :allow_blank => true, message: "invalid format - expected format is : {[A-Z|a-z]{4}[0][A-Za-z0-9]{6}}" }
-  validates :txn_hold_period_days, :numericality => { :greater_than => 0, :less_than => 16}
+  validates :txn_hold_period_days, :numericality => { :greater_than_or_equal_to => 0, :less_than => 16}
   validates :code, format: {with: /\A[A-Za-z0-9]+\z/, message: "invalid format - expected format is : {[A-Za-z0-9\s]}"}, length: {maximum: 10, minimum: 1}
   validates_presence_of :app_code, message: 'Mandatory if notify on status change is checked', :if => :notify_on_status_change?
   validates :app_code, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}' }, length: {minimum: 5, maximum: 20}, :if => :notify_on_status_change?
@@ -43,6 +43,7 @@ class Partner < ActiveRecord::Base
 
   def whitelisting
     errors.add(:hold_for_whitelisting, "Allowed only when service is INW2 and Will Whitelist is true") if (hold_for_whitelisting == 'Y' && (will_whitelist == 'N' || service_name == 'INW'))
+    errors.add(:txn_hold_period_days, "Allowed only when Hold for Whitelisting is true") if (hold_for_whitelisting == 'N' && txn_hold_period_days != 0)
     errors.add(:will_send_id, "Allowed only when Will Whitelist is true") if will_whitelist == 'N' && will_send_id == 'Y'
   end
 

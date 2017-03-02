@@ -58,6 +58,11 @@ describe Partner do
       partner.errors_on(:hold_for_whitelisting).first.should == "Allowed only when service is INW2 and Will Whitelist is true"
     end
     
+    it 'should give error if hold_for_whitelisting = N and txn_hold_period_days != 0' do
+      partner = Factory.build(:partner, :approval_status => 'A', :txn_hold_period_days => 8, :hold_for_whitelisting => 'N')
+      partner.errors_on(:txn_hold_period_days).first.should == "Allowed only when Hold for Whitelisting is true"
+    end
+    
     it 'should give error if service_name = INW and hold_for_whitelisting = Y' do
       partner = Factory.build(:partner, :approval_status => 'A', :service_name => 'INW', :hold_for_whitelisting => 'Y')
       partner.errors_on(:hold_for_whitelisting).first.should == "Allowed only when service is INW2 and Will Whitelist is true"
@@ -79,13 +84,12 @@ describe Partner do
     it { should validate_length_of(:add_transfer_amt_in_rep).is_at_least(1).is_at_most(1) }
 
     context "txn_hold_period_days" do 
-      it "should accept value 1 to 15" do
-        should allow_value(1).for(:txn_hold_period_days)
-        should allow_value(15).for(:txn_hold_period_days)
+      it "should accept value 0 to 15" do
+        should allow_value(0).for(:txn_hold_period_days)
       end
 
-      it "should not accept value other than 1 to 15" do
-        should_not allow_value(0).for(:txn_hold_period_days)
+      it "should not accept value other than 0 to 15" do
+        should_not allow_value(-1).for(:txn_hold_period_days)
         should_not allow_value(16).for(:txn_hold_period_days)
       end
     end

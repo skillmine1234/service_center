@@ -10,7 +10,7 @@ FactoryGirl.define do
     ops_email_id "foo@ruby.com"
     account_no "1234567890123456"
     account_ifsc "abcd0123456"
-    txn_hold_period_days 1
+    txn_hold_period_days 0
     identity_user_id "MyString"
     low_balance_alert_at 1.5
     remitter_sms_allowed "MyString"
