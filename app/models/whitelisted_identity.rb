@@ -52,7 +52,7 @@ class WhitelistedIdentity < ActiveRecord::Base
   end
   
   def auto_match_and_release
-    plsql.pk_qg_inw_wl_service.auto_match_and_release(pi_wl_id: self.id)
+    plsql.pk_qg_inw_wl_service.auto_match_and_release(pi_broker_uuid: ENV['CONFIG_IIB_SMTP_BROKER_UUID'], pi_wl_id: self.id)
   end
 
   def validate_whitelisted_identity_on_create
