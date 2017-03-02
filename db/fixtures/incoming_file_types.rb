@@ -294,3 +294,22 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.build_nack_file = 'N'
   s.skip_last = 'N'
 end
+
+IncomingFileType.seed(:sc_service_id, :code) do |s|
+  s.sc_service_id = ScService.find_by(code: 'CNB').id
+  s.code = 'CNB2'
+  s.name = 'Reliance File Upload'
+  s.msg_domain = 'DFDL'
+  s.msg_model = '{http://www.quantiguous.com/services/file}:reliance'
+  s.skip_first = 'Y'
+  s.auto_upload = 'Y'
+  s.validate_all = 'Y'
+  s.build_response_file = 'N'
+  s.db_unit_name = "pk_qg_cnb2_file_manager"
+  s.records_table = 'cnb2_incoming_records'
+  s.can_override = 'N'
+  s.can_skip = 'Y'
+  s.can_retry = 'N'
+  s.build_nack_file = 'Y'
+  s.skip_last = 'N'
+end
