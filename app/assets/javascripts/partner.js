@@ -41,7 +41,7 @@ $(document).ready(function(){
     }
     else {
       $('#partner_hold_for_whitelisting').prop('disabled',false)
-      $('#partner_txn_hold_period_days').prop('disabled',false)
+      $('#partner_txn_hold_period_days').prop('readOnly',false)
       $('#partner_will_send_id').prop('disabled',false)
     }
   }
@@ -51,7 +51,7 @@ $(document).ready(function(){
       $('#partner_hold_for_whitelisting').prop("checked",false);
       $('#partner_hold_for_whitelisting').prop('disabled',true)
       $('#partner_txn_hold_period_days').val(0);
-      $('#partner_txn_hold_period_days').prop('disabled',true)
+      $('#partner_txn_hold_period_days').prop('readOnly',true)
       $('#partner_will_send_id').prop("checked",false)
       $('#partner_will_send_id').prop('disabled',true)
     }
@@ -61,7 +61,7 @@ $(document).ready(function(){
       }
       else {
         $('#partner_hold_for_whitelisting').prop('disabled',false)
-        $('#partner_txn_hold_period_days').prop('disabled',false)
+        $('#partner_txn_hold_period_days').prop('readOnly',false)
         $('#partner_will_send_id').prop('disabled',false)
       }
     }
@@ -70,7 +70,7 @@ $(document).ready(function(){
   if ($('#partner_service_name').val() == 'INW2'){
     if ($('#partner_will_whitelist').is(":checked")) {
       $('#partner_hold_for_whitelisting').prop('disabled',false)
-      $('#partner_txn_hold_period_days').prop('disabled',false)
+      $('#partner_txn_hold_period_days').prop('readOnly',false)
       $('#partner_will_send_id').prop('disabled',false)
     }
     else {
@@ -78,7 +78,7 @@ $(document).ready(function(){
       $('#partner_txn_hold_period_days').val(0);
       $('#partner_will_send_id').prop("checked",false);
       $('#partner_hold_for_whitelisting').prop('disabled',true)
-      $('#partner_txn_hold_period_days').prop('disabled',true)
+      $('#partner_txn_hold_period_days').prop('readOnly',true)
       $('#partner_will_send_id').prop('disabled',true)
     }
   }
@@ -100,7 +100,7 @@ $(document).ready(function(){
     if ($('#partner_service_name').val() == 'INW2'){
       if ($('#partner_will_whitelist').is(":checked")) {
         $('#partner_hold_for_whitelisting').prop('disabled',false);
-        $('#partner_txn_hold_period_days').prop('disabled',false);
+        $('#partner_txn_hold_period_days').prop('readOnly',false);
         $('#partner_will_send_id').prop('disabled',false);
       }
       else {
@@ -108,7 +108,7 @@ $(document).ready(function(){
         $('#partner_txn_hold_period_days').val(0);
         $('#partner_will_send_id').prop("checked",false);
         $('#partner_hold_for_whitelisting').prop('disabled',true);
-        $('#partner_txn_hold_period_days').prop('disabled',true);
+        $('#partner_txn_hold_period_days').prop('readOnly',true);
         $('#partner_will_send_id').prop('disabled',true);
       }
     }
