@@ -32,5 +32,6 @@ FactoryGirl.define do
     address_line2 "addr2"
     address_line3 "addr3"
     will_send_id 'Y'
+    guideline_id { Factory(:inw_guideline, approval_status: 'A').id }
   end
 end

@@ -32,7 +32,7 @@ class Partner < ActiveRecord::Base
   validate :check_email_addresses
   
   validate :whitelisting
-  validate :transfer_types, if: "guideline.present?"
+  validate :transfer_types
 
   after_create :create_lcy_rate
 
