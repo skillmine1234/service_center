@@ -32,7 +32,7 @@ class Partner < ActiveRecord::Base
   validate :check_email_addresses
   
   validate :whitelisting
-  validate :transfer_types
+  validate :transfer_types, if: "guideline.present?"
 
   after_create :create_lcy_rate
 
@@ -49,7 +49,6 @@ class Partner < ActiveRecord::Base
   end
   
   def transfer_types
-    return if guideline.nil?
     errors.add(:allow_neft, "Allowed only if the chosen guideline supports NEFT") if allow_neft == 'Y' && guideline.allow_neft == 'N'
     errors.add(:allow_rtgs, "Allowed only if the chosen guideline supports RTGS") if allow_rtgs == 'Y' && guideline.allow_rtgs == 'N'
     errors.add(:allow_imps, "Allowed only if the chosen guideline supports IMPS") if allow_imps == 'Y' && guideline.allow_imps == 'N'
