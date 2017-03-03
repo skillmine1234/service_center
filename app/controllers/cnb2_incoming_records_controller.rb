@@ -27,7 +27,5 @@ class Cnb2IncomingRecordsController < ApplicationController
 
   def incoming_file_summary
     @summary = Cnb2IncomingFile.find_by_file_name(params[:file_name])
-    p @summary
-    p Cnb2IncomingFile.all
   end
 end
