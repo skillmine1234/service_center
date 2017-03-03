@@ -1,0 +1,134 @@
+.show_ticket      
+  .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'}
+    %h3
+      Paying Company Code:
+      = @cnb2_record.pay_comp_code
+    %h3
+      Document No:
+      = @cnb2_record.doc_no
+    %h3
+      Additional Identification:
+      = @cnb2_record.add_identification
+    %h3
+      Vendor Code:
+      = @cnb2_record.vendor_code
+    %h3
+      Version
+      = link_to "#{audit_count(@cnb2_record.incoming_file_record)}", :controller => :ft_incoming_records, :action => :audit_logs, :version_id => audit_count(@cnb2_record.incoming_file_record), :id => @cnb2_record.incoming_file_record_id
+  .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'}
+    %h3
+      Run Date:
+      = @cnb2_record.run_date
+    %h3
+      Amount:
+      = @cnb2_record.amount
+    %h3
+      Currency:
+      = @cnb2_record.currency
+    %h3
+      Payment Method:
+      = @cnb2_record.pay_method
+    %h3
+      Record Text:
+      - if @cnb2_record.incoming_file_record.record_txt.nil?
+        .span{:class =>"has-tooltip", "data-toggle" => 'tooltip',"title" => "No Record Text Available for this record", "data-placement" => 'bottom', "data-html" => true}
+          Show Record Text
+      - else
+        = link_to "Show Record Text", "#", :class => 'show_record_text', :href => "javascript:void()", data: { record_txt: @cnb2_record.incoming_file_record.record_txt} 
+  .header-form-main{:style=>'background-color: #F1F2F8; width: 100%; display: inline-block;'}
+    #ticket-details
+      %h3 Payment Details
+      %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:left;'}  
+        %tr
+          %td.label House Bank
+          %td= @cnb2_record.house_bank
+        %tr
+          %td.label Account Detail ID
+          %td= @cnb2_record.acct_dtl_id
+        %tr
+          %td.label Value Date
+          %td= @cnb2_record_date
+        %tr
+          %td.label System Date
+          %td= @cnb2_record.system_date
+      %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:left;'} 
+        %tr
+          %td.label Delivery Mode
+          %td= @cnb2_record.delivery_mode
+        %tr
+          %td.label Cheque No
+          %td= @cnb2_record.cheque_no
+        %tr
+          %td.label Pay Location
+          %td= @cnb2_record.pay_location
+  .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; height: 380px; display: inline-block;'}
+    #ticket-details
+      %h3
+        Payee Details:
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
+        %tr
+          %td.label Title
+          %td
+            = @cnb2_record.payee_title
+        %tr
+          %td.label Name
+          %td
+            = @cnb2_record.payee_name
+        %tr
+          %td.label Payee Address
+          %td
+            = @cnb2_record.payee_addr1
+        %tr
+          %td.label
+          %td
+            = @cnb2_record.payee_addr2
+        %tr
+          %td.label 
+          %td
+            = @cnb2_record.payee_addr3
+        %tr
+          %td.label
+          %td
+            = @cnb2_record.payee_addr4
+        %tr
+          %td.label
+          %td
+            = @cnb2_record.payee_addr5
+
+  .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; height: 380px; display: inline-block;'}
+    #ticket-details
+      %h3
+        Beneficiary Details:
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
+        %tr
+          %td.label Beneficiary Account No
+          %td
+            = @cnb2_record.bene_account_no
+        %tr
+          %td.label IFSC Code
+          %td
+            = @cnb2_record.ifsc_code
+        %tr
+          %td.label Bank Name
+          %td
+            = @cnb2_record.bank_name
+        %tr
+          %td.label Beneficiary Email ID
+          %td
+            = @cnb2_record.bene_mail_id
+        %tr
+          %td.label Beneficiary Email ID 2
+          %td
+            = @cnb2_record.bene_email_id_2
+
+#recordText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Record Text
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    .demo-area
+      %button#d_clip_button1.my_clip_button1{"data-clipboard-target" => "record_txt"}
+        %b Copy To Clipboard...
+    %pre#record_txt{:style => 'word-wrap: break-word'}
+      .reply{:style => 'word-wrap: break-word'}
