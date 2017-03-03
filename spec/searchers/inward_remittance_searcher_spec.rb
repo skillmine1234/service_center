@@ -7,11 +7,8 @@ describe InwardRemittanceSearcher do
       inward_remittance2 = Factory(:inward_remittance,:req_no => 'Z123', :attempt_no => 1)      
       searcher = InwardRemittanceSearcher.new({:status_code => 'IN_PROCESS'})
       searcher.errors_on(:base).should_not be_nil
-      searcher.errors_on(:base).should == ['Partner code is mandatory']
+      searcher.errors_on(:base).should == ['Partner code is mandatory when using advanced search']
       searcher.paginate.should == []
-
-      InwardRemittanceSearcher.new({:partner_code => inward_remittance.partner_code,:all_attempts => true,:req_no => 'Z123'}).paginate.should == [inward_remittance2, inward_remittance]
-      InwardRemittanceSearcher.new({:req_no => 'Z123'}).paginate.should == [inward_remittance2]
 
       inward_remittance = Factory(:inward_remittance,:status_code => 'IN_PROCESS')
       InwardRemittanceSearcher.new({:partner_code => inward_remittance.partner_code, :status_code => 'IN_PROCESS'}).paginate.should == [inward_remittance]
@@ -22,11 +19,11 @@ describe InwardRemittanceSearcher do
       InwardRemittanceSearcher.new({:partner_code => inward_remittance.partner_code, :notify_status => 'COMPLETED'}).paginate.should == []
   
       inward_remittance = Factory(:inward_remittance,:req_no => 'R1234')
-      InwardRemittanceSearcher.new({:partner_code => inward_remittance.partner_code, :request_no => 'R1234'}).paginate.should == [inward_remittance]
-      InwardRemittanceSearcher.new({:partner_code => inward_remittance.partner_code, :request_no => 'r1234'}).paginate.should == [inward_remittance]
-      InwardRemittanceSearcher.new({:partner_code => inward_remittance.partner_code, :request_no => 'r12'}).paginate.should == [inward_remittance]
-      InwardRemittanceSearcher.new({:partner_code => inward_remittance.partner_code, :request_no => 'R12'}).paginate.should == [inward_remittance]
-      InwardRemittanceSearcher.new({:partner_code => inward_remittance.partner_code, :request_no => '4321R'}).paginate.should == []
+      InwardRemittanceSearcher.new({:partner_code => inward_remittance.partner_code, :req_no => 'R1234'}).paginate.should == [inward_remittance]
+      InwardRemittanceSearcher.new({:partner_code => inward_remittance.partner_code, :req_no => 'r1234'}).paginate.should == [inward_remittance]
+      InwardRemittanceSearcher.new({:partner_code => inward_remittance.partner_code, :req_no => 'r12'}).paginate.should == [inward_remittance]
+      InwardRemittanceSearcher.new({:partner_code => inward_remittance.partner_code, :req_no => 'R12'}).paginate.should == [inward_remittance]
+      InwardRemittanceSearcher.new({:partner_code => inward_remittance.partner_code, :req_no => '4321R'}).paginate.should == []
   
       inward_remittance = Factory(:inward_remittance,:partner_code => 'PARTNER1')
       InwardRemittanceSearcher.new({:partner_code => 'PARTNER1'}).paginate.should == [inward_remittance]

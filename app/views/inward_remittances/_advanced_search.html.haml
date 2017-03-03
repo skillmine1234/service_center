@@ -1,57 +1,55 @@
-= form_tag inward_remittances_path, :method => :get, :class => 'form-horizontal', :autocomplete=>"off" do
+= form_tag inward_remittances_path, :method => :post, :class => 'form-horizontal', :autocomplete=>"off" do
   .control-group
     = label_tag ' '
     #msg-error
       = error_message_for(@searcher, :base)
   .control-group
-    = label_tag "Status", "Status", :class => 'control-label'
-    = select_tag :status_code, options_for_select([['ONHOLD','ONHOLD'],['SENT_TO_BENEFICIARY','SENT_TO_BENEFICIARY'],['COMPLETED','COMPLETED'],['FAILED','FAILED']],params[:status]),:prompt => 'ANY'
-  .control-group
-    = label_tag "Notify Status", "Notify Status", :class => 'control-label'
-    = select_tag :notify_status, options_for_select([['PENDING NOTIFICATION','PENDING NOTIFICATION'],['NOTIFIED:REJECTED','NOTIFIED:REJECTED'],['NOTIFIED:OK','NOTIFIED:OK'],['NOTIFICATION FAILED','NOTIFICATION FAILED']],params[:notify_status]),:prompt => 'ANY'
-  .control-group
-    = label_tag "Request No", "Request No", :class => 'control-label'
-    = text_field_tag :request_no, params[:request_no]
-  .control-group
-    = label_tag "Partner Code", "Partner Code", :class => 'control-label'
+    = label_tag :partner_code, "Partner Code*", :class => 'control-label'
     = text_field_tag :partner_code, params[:partner_code]
   .control-group
-    = label_tag "Remitter Code", "Remitter Code", :class => 'control-label'
+    = label_tag :status_code, "Status", :class => 'control-label'
+    = select_tag :status_code, options_for_select([['ONHOLD','ONHOLD'],['SENT_TO_BENEFICIARY','SENT_TO_BENEFICIARY'],['COMPLETED','COMPLETED'],['FAILED','FAILED']],params[:status_code]),:prompt => 'ANY'
+  .control-group
+    = label_tag :notify_status, "Notify Status", :class => 'control-label'
+    = select_tag :notify_status, options_for_select([['PENDING NOTIFICATION','PENDING NOTIFICATION'],['NOTIFIED:REJECTED','NOTIFIED:REJECTED'],['NOTIFIED:OK','NOTIFIED:OK'],['NOTIFICATION FAILED','NOTIFICATION FAILED']],params[:notify_status]),:prompt => 'ANY'
+  .control-group
+    = label_tag :req_no, "Request No", :class => 'control-label'
+    = text_field_tag :req_no, params[:req_no]
+  .control-group
+    = label_tag :rmtr_code, "Remitter Code", :class => 'control-label'
     = text_field_tag :rmtr_code, params[:rmtr_code]
   .control-group
-    = label_tag "Beneficiary Account No", "Beneficiary Account No", :class => 'control-label'
+    = label_tag :bene_account_no, "Beneficiary Account No", :class => 'control-label'
     = text_field_tag :bene_account_no, params[:bene_account_no]
   .control-group
-    = label_tag "Beneficiary Account IFSC", "Beneficiary Account IFSC", :class => 'control-label'
+    = label_tag :bene_account_ifsc, "Beneficiary Account IFSC", :class => 'control-label'
     = text_field_tag :bene_account_ifsc, params[:bene_account_ifsc]
   .control-group
-    = label_tag "Bank Reference No", "Bank Reference No", :class => 'control-label'
+    = label_tag :bank_ref, "Bank Reference No", :class => 'control-label'
     = text_field_tag :bank_ref, params[:bank_ref]
   .control-group
-    = label_tag "Remitter Name", "Remitter Name", :class => 'control-label'
+    = label_tag :rmtr_full_name, "Remitter Name", :class => 'control-label'
     = text_field_tag :rmtr_full_name, params[:rmtr_full_name]
   .control-group
-    = label_tag "Request Transfer Type", "Request Transfer Type", :class => 'control-label'
+    = label_tag :req_transfer_type, "Request Transfer Type", :class => 'control-label'
     = select_tag :req_transfer_type, options_for_select([['NEFT','NEFT'],['IMPS','IMPS'],['RTGS','RTGS'],['FT','FT']],params[:req_transfer_type]),:prompt => 'ANY'
   .control-group
-    = label_tag "Transfer Type", "Transfer Type", :class => 'control-label'
+    = label_tag :transfer_type, "Transfer Type", :class => 'control-label'
     = select_tag :transfer_type, options_for_select([['NEFT','NEFT'],['IMPS','IMPS'],['RTGS','RTGS'],['FT','FT']],params[:transfer_type]),:prompt => 'ANY'
   .control-group
-    = label_tag "Transfer Amount", "Transfer Amount", :class => 'control-label'
+    = label_tag :from_amount, "Transfer Amount", :class => 'control-label'
     = text_field_tag :from_amount, params[:from_amount]
     To
     = text_field_tag :to_amount, params[:to_amount]
   .control-group
-    = label_tag "Request Date", "Request Date", :class => 'control-label'
+    = label_tag :from_date, "Request Date", :class => 'control-label'
     = text_field_tag :from_date, params[:from_date]
     To
     = text_field_tag :to_date, params[:to_date]
-  = hidden_field_tag :advanced_search, :true
-  - if params[:req_no].present?
-    = hidden_field_tag :req_no, params[:req_no]
   .form-actions
     = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"
     = button_tag "Reset", :type => 'button', :value=>'Reset', :class => 'btn', :id => 'adv_search_reset_button'
 
-:javascript
-  var in_advanced_search = true;
+- if @searcher.errors.present?
+  :javascript
+    $('.collapsible-content').show(); 

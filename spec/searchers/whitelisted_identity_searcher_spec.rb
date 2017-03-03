@@ -21,7 +21,7 @@ describe WhitelistedIdentitySearcher do
       WhitelistedIdentitySearcher.new({:partner_code => inward_remittance.partner_code, :name => 'bar'}).paginate.should == []
 
       inward_remittance = Factory(:inward_remittance, partner_code: partner.code, rmtr_full_name: 'foobar2', rmtr_code: 'foobar2')
-      identity = Factory(:whitelisted_identity, :partner_id => partner.id, created_for_req_no: inward_remittance.req_no, :full_name => 'foobar2', :approval_status => 'A', :id_type => 'passport', full_name: 'foobar2', rmtr_code: 'foobar2')
+      identity = Factory(:whitelisted_identity, :partner_id => partner.id, created_for_req_no: inward_remittance.req_no, :full_name => 'foobar2', :approval_status => 'A', :id_type => 'passport', rmtr_code: 'foobar2')
       WhitelistedIdentitySearcher.new({:partner_code => inward_remittance.partner_code, :rmtr_code => 'foobar2'}).paginate.should == [identity]
       WhitelistedIdentitySearcher.new({:partner_code => inward_remittance.partner_code, :rmtr_code => 'foo'}).paginate.should == []
       WhitelistedIdentitySearcher.new({:partner_code => inward_remittance.partner_code, :rmtr_code => 'bar'}).paginate.should == []
