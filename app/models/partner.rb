@@ -32,6 +32,7 @@ class Partner < ActiveRecord::Base
   validate :check_email_addresses
   
   validate :whitelisting
+  validate :transfer_types
 
   after_create :create_lcy_rate
 
@@ -45,6 +46,12 @@ class Partner < ActiveRecord::Base
     errors.add(:hold_for_whitelisting, "Allowed only when service is INW2 and Will Whitelist is true") if (hold_for_whitelisting == 'Y' && (will_whitelist == 'N' || service_name == 'INW'))
     errors.add(:txn_hold_period_days, "Allowed only when Hold for Whitelisting is true") if (hold_for_whitelisting == 'N' && txn_hold_period_days != 0)
     errors.add(:will_send_id, "Allowed only when Will Whitelist is true") if will_whitelist == 'N' && will_send_id == 'Y'
+  end
+  
+  def transfer_types
+    errors.add(:allow_neft, "Allowed only if the chosen guideline supports NEFT") if allow_neft == 'Y' && guideline.allow_neft == 'N'
+    errors.add(:allow_rtgs, "Allowed only if the chosen guideline supports RTGS") if allow_rtgs == 'Y' && guideline.allow_rtgs == 'N'
+    errors.add(:allow_imps, "Allowed only if the chosen guideline supports IMPS") if allow_imps == 'Y' && guideline.allow_imps == 'N'
   end
 
   def notify_on_status_change?
