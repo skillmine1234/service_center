@@ -72,6 +72,20 @@ describe Partner do
       partner = Factory.build(:partner, :approval_status => 'A', :will_send_id => 'Y', :will_whitelist => 'N')
       partner.errors_on(:will_send_id).first.should == "Allowed only when Will Whitelist is true"
     end
+    
+    it 'should give error if any transfer_type is not allowed in the guideline and the same is allowed for the partner' do
+      guideline1 = Factory(:inw_guideline, approval_status: 'A', allow_neft: 'N')
+      partner = Factory.build(:partner, :approval_status => 'A', allow_neft: 'Y', guideline_id: guideline1.id)
+      partner.errors_on(:allow_neft).first.should == "Allowed only if the chosen guideline supports NEFT"
+      
+      guideline2 = Factory(:inw_guideline, approval_status: 'A', allow_rtgs: 'N')
+      partner = Factory.build(:partner, :approval_status => 'A', allow_rtgs: 'Y', guideline_id: guideline2.id)
+      partner.errors_on(:allow_rtgs).first.should == "Allowed only if the chosen guideline supports RTGS"
+      
+      guideline3 = Factory(:inw_guideline, approval_status: 'A', allow_imps: 'N')
+      partner = Factory.build(:partner, :approval_status => 'A', allow_imps: 'Y', guideline_id: guideline3.id)
+      partner.errors_on(:allow_imps).first.should == "Allowed only if the chosen guideline supports IMPS"
+    end
 
     it { should validate_length_of(:account_no).is_at_least(10) }
     it { should validate_length_of(:account_no).is_at_most(16) }
