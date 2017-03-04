@@ -1,0 +1,34 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8;  height:630px;'}
+    #form-details
+      %h3 Corporate Net Banking 2 Incoming File
+      %br
+      %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px;'}
+      - unless @summary.nil?
+        %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
+          %tr
+            %td.label File Name
+            %td.value
+              = @summary.try(:file_name)
+          %tr
+            %td.label Account No
+            %td.value
+              = @summary.try(:account)
+          %tr
+            %td.label CNB File Name
+            %td.value
+              = @summary.try(:cnb_file_name)
+              - if (!ENV['CONFIG_SCP_IIB_FILE_MGR'].nil? or !ENV['CONFIG_SCP_IIB_FILE_MGR'].empty?)and !@summary.cnb_file_status.nil?
+                = "("
+                = link_to 'Download', download_file_incoming_file_path(@summary.incoming_file, :file_path => @summary.try(:cnb_file_path), :file_name => @summary.try(:cnb_file_name), :download => true)
+                = "/"
+                = link_to 'View', download_file_incoming_file_path(@summary.incoming_file, :file_path => @summary.try(:cnb_file_path), :file_name => @summary.try(:cnb_file_name), :view => true)
+                = ")"
+          %tr
+            %td.label CNB File Path
+            %td.value
+              = @summary.try(:cnb_file_path)
+          %tr
+            %td.label CNB File Status
+            %td.value
+              = @summary.try(:cnb_file_status)

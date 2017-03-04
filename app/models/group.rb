@@ -26,7 +26,7 @@ class Group < ActiveRecord::Base
     when "smb"
       ['SmUnapprovedRecord','SmBank','SmBankAccount']
     when "cnb"
-      ['CnUnapprovedRecord','IncomingFile','IncomingFileRecord','CnIncomingFile','CnIncomingRecord']
+      ['CnUnapprovedRecord','IncomingFile','IncomingFileRecord','CnIncomingFile','CnIncomingRecord','Cnb2IncomingFile','Cnb2IncomingRecord']
     when "recurring-transfer"
       ['RcTransferUnapprovedRecord','RcTransfer','RcTransferSchedule','RcAuditStep','RcApp']
     when "sc-backend"

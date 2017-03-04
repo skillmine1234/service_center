@@ -92,6 +92,12 @@ ServiceCenter::Application.routes.draw do
   resources :ft_incoming_records
   resources :pc_mm_cd_incoming_records
   resources :cn_incoming_records
+  resources :cnb2_incoming_records, except: :index do
+    collection do
+      get :index
+      post :index
+    end
+  end
   resources :rr_incoming_records
   resources :outgoing_files do
     member do
@@ -141,6 +147,7 @@ ServiceCenter::Application.routes.draw do
   get 'ft_incoming_file_summary' => 'ft_incoming_records#incoming_file_summary'
   get 'pc_mm_cd_incoming_file_summary' => 'pc_mm_cd_incoming_records#incoming_file_summary'
   get 'cn_incoming_file_summary' => 'cn_incoming_records#incoming_file_summary'
+  get 'cnb2_incoming_file_summary' => 'cnb2_incoming_records#incoming_file_summary'
   get 'rr_incoming_file_summary' => 'rr_incoming_records#incoming_file_summary'
   get 'override_records' => 'incoming_files#override_records'
   get 'incoming_files/:id/audit_steps/:step_name' => 'incoming_files#audit_steps'
@@ -151,6 +158,7 @@ ServiceCenter::Application.routes.draw do
   get '/ft_incoming_records/:id/audit_logs' => 'ft_incoming_records#audit_logs'
   get '/pc_mm_cd_incoming_records/:id/audit_logs' => 'pc_mm_cd_incoming_records#audit_logs'
   get '/cn_incoming_records/:id/audit_logs' => 'cn_incoming_records#audit_logs'
+  get '/cnb2_incoming_records/:id/audit_logs' => 'cnb2_incoming_records#audit_logs'
   get '/rr_incoming_records/:id/audit_logs' => 'rr_incoming_records#audit_logs'
   get '/partner/:id/audit_logs' => 'partners#audit_logs'
   get '/purpose_code/:id/audit_logs' => 'purpose_codes#audit_logs'

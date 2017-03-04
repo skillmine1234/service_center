@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170220174905) do
+ActiveRecord::Schema.define(version: 20170304060111) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -628,6 +628,50 @@ ActiveRecord::Schema.define(version: 20170220174905) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "cnb2_incoming_files", force: :cascade do |t|
+    t.string "file_name",       limit: 100
+    t.string "account",         limit: 20
+    t.string "cnb_file_name",   limit: 100
+    t.string "cnb_file_path",   limit: 255
+    t.string "cnb_file_status", limit: 50
+  end
+
+  add_index "cnb2_incoming_files", ["file_name"], name: "cnb2_incoming_files_01", unique: true
+
+  create_table "cnb2_incoming_records", force: :cascade do |t|
+    t.integer "incoming_file_record_id"
+    t.string  "file_name",               limit: 100
+    t.string  "run_date",                limit: 50
+    t.string  "add_identification",      limit: 50
+    t.string  "pay_comp_code",           limit: 50
+    t.string  "doc_no",                  limit: 50
+    t.string  "amount",                  limit: 50
+    t.string  "currency",                limit: 50
+    t.string  "pay_method",              limit: 50
+    t.string  "vendor_code",             limit: 50
+    t.string  "payee_title",             limit: 50
+    t.string  "payee_name",              limit: 255
+    t.string  "payee_addr1",             limit: 50
+    t.string  "payee_addr2",             limit: 50
+    t.string  "payee_addr3",             limit: 50
+    t.string  "payee_addr4",             limit: 50
+    t.string  "payee_addr5",             limit: 50
+    t.string  "house_bank",              limit: 50
+    t.string  "acct_dtl_id",             limit: 50
+    t.string  "value_date",              limit: 50
+    t.string  "system_date",             limit: 50
+    t.string  "delivery_mode",           limit: 50
+    t.string  "cheque_no",               limit: 50
+    t.string  "pay_location",            limit: 50
+    t.string  "bene_account_no",         limit: 50
+    t.string  "ifsc_code",               limit: 50
+    t.string  "bank_name",               limit: 50
+    t.string  "bene_email_id",           limit: 255
+    t.string  "bene_email_id_2",         limit: 1000
+  end
+
+  add_index "cnb2_incoming_records", ["incoming_file_record_id", "file_name"], name: "cnb2_incoming_records_01", unique: true
 
   create_table "csv_exports", force: :cascade do |t|
     t.integer  "user_id"
