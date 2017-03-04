@@ -15,9 +15,7 @@ describe Cnb2IncomingRecordsController do
     it "assigns all cnb2_incoming_record as @cnb2_incoming_record" do
       cnb2_incoming_record = Factory(:cnb2_incoming_record)
       get :index, :file_name => cnb2_incoming_record.file_name, :status => 'FAILED'
-      p response
       assigns(:records).should eq([cnb2_incoming_record])
-      assigns(:records_count).should eq(1)
     end
   end
 

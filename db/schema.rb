@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170303112113) do
+ActiveRecord::Schema.define(version: 20170304060111) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -667,7 +667,7 @@ ActiveRecord::Schema.define(version: 20170303112113) do
     t.string  "bene_account_no",         limit: 50
     t.string  "ifsc_code",               limit: 50
     t.string  "bank_name",               limit: 50
-    t.string  "bene_mail_id",            limit: 255
+    t.string  "bene_email_id",           limit: 255
     t.string  "bene_email_id_2",         limit: 1000
   end
 

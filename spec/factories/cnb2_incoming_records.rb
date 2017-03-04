@@ -29,7 +29,7 @@ FactoryGirl.define do
     bene_account_no '4653657547'
     ifsc_code 'asdf0435453'
     bank_name 'ABCD'
-    bene_mail_id 'abcd@gmail.com'
+    bene_email_id 'abcd@gmail.com'
     bene_email_id_2 'dcba@gmail.com'
   end
 end
