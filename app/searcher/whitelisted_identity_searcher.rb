@@ -22,7 +22,7 @@ class WhitelistedIdentitySearcher
   private
   def validate_search_criteria
     if partner_code.blank? && (name.present? || rmtr_code.present? || bene_account_ifsc.present? || bene_account_no.present? )
-      errors[:base] << "Partner code is mandatory" 
+      errors[:base] << "Partner code is mandatory when using advanced search" 
     end
   end
   
