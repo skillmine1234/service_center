@@ -55,6 +55,13 @@ describe InwGuideline do
     end
   end
   
+  context "set_txn_cnt" do
+    it "should set ytd_txn_cnt_bene if it is nil" do
+      inw_guideline = Factory(:inw_guideline, ytd_txn_cnt_bene: nil)
+      inw_guideline.ytd_txn_cnt_bene.should == 0
+    end
+  end
+  
   context "default_scope" do 
     it "should only return 'A' records by default" do 
       inw_guideline1 = Factory(:inw_guideline, :approval_status => 'A') 

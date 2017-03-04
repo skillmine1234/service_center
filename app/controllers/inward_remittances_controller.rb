@@ -8,12 +8,14 @@ class InwardRemittancesController < ApplicationController
   include ApplicationHelper
   include InwardRemittanceHelper
 
-  def show
-    @inward_remittance = InwardRemittance.find_by_id(params[:id])
-  end
-
   def index
-    @searcher = InwardRemittanceSearcher.new(search_params)
+    if request.get?
+      # only 'safe/non-personal' parameters are allowed as search parameters in a query string
+      @searcher = InwardRemittanceSearcher.new(params.permit(:partner_code, :req_no, :wl_id, :wl_id_for))
+    else
+      # rest parameters are in post
+      @searcher = InwardRemittanceSearcher.new(search_params)
+    end
     @inward_remittances = @searcher.paginate
   end
   
