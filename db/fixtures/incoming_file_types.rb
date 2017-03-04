@@ -274,6 +274,7 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.can_retry = 'N'
   s.build_nack_file = 'Y'
   s.skip_last = 'Y'
+  s.complete_with_failed_records = 'N'
 end
 
 IncomingFileType.seed(:sc_service_id, :code) do |s|
