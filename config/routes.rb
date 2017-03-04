@@ -21,10 +21,14 @@ ServiceCenter::Application.routes.draw do
     end
   end
   
-  resources :whitelisted_identities do
+  resources :whitelisted_identities, except: :index do
     member do
       put 'revoke'
       put 'ratify'
+    end
+    collection do
+      get :index
+      post :index
     end
   end
   

@@ -8,7 +8,7 @@ describe WhitelistedIdentitySearcher do
       identity = Factory(:whitelisted_identity, :partner_id => partner.id, created_for_req_no: inward_remittance.req_no, full_name: 'MyString', rmtr_code: 'MyString', :approval_status => 'A')
       searcher = WhitelistedIdentitySearcher.new({:rmtr_code => '1234'})
       searcher.errors_on(:base).should_not be_nil
-      searcher.errors_on(:base).should == ['Partner code is mandatory']
+      searcher.errors_on(:base).should == ['Partner code is mandatory when using advanced search']
       searcher.paginate.should == []
       WhitelistedIdentitySearcher.new({:partner_code => 'a123'}).paginate.should == [identity]
       WhitelistedIdentitySearcher.new({:partner_code => 'A123'}).paginate.should == []
