@@ -133,22 +133,22 @@
       #msg-error
         = error_message_for(@partner, :guideline_id, :prepend_text => "")
     .control-group
-      = f.label :will_whitelist, "*Will Whitelist", :class => 'control-label'
+      = f.label :will_whitelist, "Will Whitelist", :class => 'control-label'
       = f.check_box :will_whitelist, {},"Y","N"
       #msg-error
         = error_message_for(@partner, :will_whitelist, :prepend_text => "")
     .control-group
-      = f.label :will_send_id, "*Will Send ID", :class => 'control-label'
+      = f.label :will_send_id, "Will Send ID", :class => 'control-label'
       = f.check_box :will_send_id, {},"Y","N"
       #msg-error
         = error_message_for(@partner, :will_send_id, :prepend_text => "")
     .control-group
-      = f.label :hold_for_whitelisting, "*Hold For Whitelisting", :class => 'control-label'
+      = f.label :hold_for_whitelisting, "Hold For Whitelisting", :class => 'control-label'
       = f.check_box :hold_for_whitelisting, {},"Y","N"
       #msg-error
         = error_message_for(@partner, :hold_for_whitelisting, :prepend_text => "")
     .control-group
-      = f.label :transaction_hold_period, "*Transaction Hold Period (in days)", :class => 'control-label'
+      = f.label :transaction_hold_period, "Transaction Hold Period (in days)", :class => 'control-label'
       = f.number_field :txn_hold_period_days, min: 1
       #msg-error
         = error_message_for(@partner, :txn_hold_period_days, :prepend_text => "")
