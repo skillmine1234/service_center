@@ -6,6 +6,7 @@ class InwGuideline < ActiveRecord::Base
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
   
   before_validation :squish_disallowed_products
+  before_save :set_txn_cnt, if: "ytd_txn_cnt_bene.nil?"
   
   validates_uniqueness_of :code, scope: :approval_status
   validates_presence_of :code, :allow_neft, :allow_imps, :allow_rtgs
@@ -15,5 +16,9 @@ class InwGuideline < ActiveRecord::Base
 
   def squish_disallowed_products
     self.disallowed_products = disallowed_products.squeeze(' ').strip.each_line.reject{|x| x.strip == ''}.join unless disallowed_products.nil?
+  end
+  
+  def set_txn_cnt
+    self.ytd_txn_cnt_bene = 0
   end
 end

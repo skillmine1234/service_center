@@ -86,6 +86,16 @@ describe Partner do
       partner = Factory.build(:partner, :approval_status => 'A', allow_imps: 'Y', guideline_id: guideline3.id)
       partner.errors_on(:allow_imps).first.should == "Allowed only if the chosen guideline supports IMPS"
     end
+    
+    it 'should give error if service_name = INW2 and remitter_sms_allowed = Y' do
+      partner = Factory.build(:partner, :approval_status => 'A', :service_name => 'INW2', :remitter_sms_allowed => 'Y')
+      partner.errors_on(:remitter_sms_allowed).first.should == "Allowed only when service is INW"
+    end
+    
+    it 'should give error if service_name = INW2 and remitter_email_allowed = Y' do
+      partner = Factory.build(:partner, :approval_status => 'A', :service_name => 'INW2', :remitter_email_allowed => 'Y')
+      partner.errors_on(:remitter_email_allowed).first.should == "Allowed only when service is INW"
+    end
 
     it { should validate_length_of(:account_no).is_at_least(10) }
     it { should validate_length_of(:account_no).is_at_most(16) }
