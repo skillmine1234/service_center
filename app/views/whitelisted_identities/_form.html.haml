@@ -6,7 +6,7 @@
   .form-main
     .control-group
       = f.label :partner_id, '*Partner', :class => 'control-label'
-      = f.select :partner_id, Partner.all.collect {|a| [a.name, a.id]}
+      = f.select :partner_id, Partner.all.collect {|a| [a.code + '-' + a.name, a.id]}
     .control-group
       = f.label :created_for_req_no, '*Req No', :class => 'control-label'
       = f.text_field :created_for_req_no

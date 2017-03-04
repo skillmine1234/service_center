@@ -15,9 +15,9 @@
           %td.value
             = @whitelisted_identity.is_revoked
         %tr
-          %td.label Partner Code
+          %td.label Partner
           %td.value
-            = @whitelisted_identity.partner.try(:code)
+            = @whitelisted_identity.partner.try(:code).to_s + '-' + @whitelisted_identity.partner.try(:name).to_s 
         %tr
           %td.label Req No
           %td.value
