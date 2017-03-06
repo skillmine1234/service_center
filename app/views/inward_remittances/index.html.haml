@@ -6,8 +6,6 @@
 .collapsible-content
   = render :partial => 'advanced_search'
 %br
-= "Total Count: #{@inward_remittances_count}"
-%br
 = will_paginate @inward_remittances
 %br
 %table.table.table-bordered.table-striped.table-hover
