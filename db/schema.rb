@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170304060111) do
+ActiveRecord::Schema.define(version: 20170306102102) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -631,7 +631,6 @@ ActiveRecord::Schema.define(version: 20170304060111) do
 
   create_table "cnb2_incoming_files", force: :cascade do |t|
     t.string "file_name",       limit: 100
-    t.string "account",         limit: 20
     t.string "cnb_file_name",   limit: 100
     t.string "cnb_file_path",   limit: 255
     t.string "cnb_file_status", limit: 50
