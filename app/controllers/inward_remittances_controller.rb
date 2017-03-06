@@ -11,7 +11,7 @@ class InwardRemittancesController < ApplicationController
   def index
     if request.get?
       # only 'safe/non-personal' parameters are allowed as search parameters in a query string
-      @searcher = InwardRemittanceSearcher.new(params.permit(:partner_code, :req_no, :wl_id, :wl_id_for))
+      @searcher = InwardRemittanceSearcher.new(params.permit(:partner_code, :req_no, :wl_id, :wl_id_for, :page))
     else
       # rest parameters are in post
       @searcher = InwardRemittanceSearcher.new(search_params)
