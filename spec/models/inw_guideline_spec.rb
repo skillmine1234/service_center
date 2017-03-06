@@ -47,7 +47,10 @@ describe InwGuideline do
       inw_guideline = Factory.build(:inw_guideline, :disallowed_products => "1234 ese@sdgs")
       inw_guideline.should_not be_valid
       inw_guideline.errors_on("disallowed_products").should == ["is invalid"]
-      inw_guideline = Factory.build(:inw_guideline, :disallowed_products => "1234 esesdgs")
+      inw_guideline = Factory.build(:inw_guideline, :disallowed_products => "1234 abcdef")
+      inw_guideline.should_not be_valid
+      inw_guideline.errors_on("disallowed_products").should == ["is invalid"]
+      inw_guideline = Factory.build(:inw_guideline, :disallowed_products => "1234 1111")
       inw_guideline.should be_valid
       inw_guideline = Factory.build(:inw_guideline, :disallowed_products => "  ")
       inw_guideline.should be_valid

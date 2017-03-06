@@ -14,10 +14,13 @@ class WhitelistedIdentitiesController < ApplicationController
     # for creation of a whitelisted identity for a transaction 
     if params[:inw_id].present?
       inw_txn = InwardRemittance.find_by_id(params[:inw_id])
+      
+      @whitelisted_identity.id_for = params[:id_for]      
     # for creation of a whitelisted identity for a identity
     elsif params[:id_id].present? && !(inw_identity = InwIdentity.find_by_id(params[:id_id])).nil?
       inw_txn = inw_identity.inward_remittance
-      
+
+      @whitelisted_identity.id_for = inw_identity.id_for
       @whitelisted_identity.id_type = inw_identity.id_type
       @whitelisted_identity.id_number = inw_identity.id_number
       @whitelisted_identity.id_country = inw_identity.id_country
@@ -29,11 +32,9 @@ class WhitelistedIdentitiesController < ApplicationController
     unless inw_txn.nil?
       @whitelisted_identity.partner_id = inw_txn.partner.id
       @whitelisted_identity.created_for_req_no = inw_txn.req_no
-      if params[:id_for] == 'R'
-        @whitelisted_identity.id_for = 'R'
+      if @whitelisted_identity.id_for == 'R'
         @whitelisted_identity.full_name = inw_txn.rmtr_full_name
       else
-        @whitelisted_identity.id_for = 'B'
         @whitelisted_identity.full_name = inw_txn.bene_full_name
       end
     end
