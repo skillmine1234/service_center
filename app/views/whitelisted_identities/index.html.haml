@@ -8,8 +8,6 @@
 .collapsible-content
   = render :partial => 'advanced_search'
 %br
-= "Total Count: #{@whitelisted_identities_count}"
-%br
 = will_paginate @whitelisted_identities
 %br
 %table.table.table-bordered.table-striped.table-hover
