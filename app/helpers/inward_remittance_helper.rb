@@ -18,9 +18,9 @@ module InwardRemittanceHelper
           if party == 'bene' && inward_remittance.bene_identity_count > 0
             return link_to 'Required : Add', new_whitelisted_identity_path(id_id: inward_remittance.beneficiary_identities.first, id_for: party[0].upcase)
           end
-        else
-          link_to 'Required : Add', new_whitelisted_identity_path(inw_id: inward_remittance.id, id_for: party[0].upcase)
         end
+        # the partner will send id but didnt send any, or the partner doesnt send the id at all
+        link_to 'Required : Add', new_whitelisted_identity_path(inw_id: inward_remittance.id, id_for: party[0].upcase)
       else
         '-'
       end
