@@ -59,5 +59,6 @@
         = f.link_to_add "Add attachment", :attachments, :class => 'btn add btn-small'
         %br
         %br
-        = f.submit 'Add', :class => 'btn add btn-small'
-        
+    .form-actions
+      = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_identity', :value => 'Create Identity'
+      = link_to :Cancel,'/whitelisted_identities', :name => 'cancel', :class=>"cancel btn"
