@@ -64,7 +64,7 @@ class WhitelistedIdentitiesController < ApplicationController
   def index
     if request.get?
       # only 'safe/non-personal' parameters are allowed as search parameters in a query string
-      @searcher = WhitelistedIdentitySearcher.new(params.permit(:approval_status))
+      @searcher = WhitelistedIdentitySearcher.new(params.permit(:approval_status, :page))
     else
       # rest parameters are in post
       @searcher = WhitelistedIdentitySearcher.new(search_params)

@@ -17,7 +17,7 @@ ServiceCenter::Application.routes.draw do
     end
     collection do
       get :index
-      post :index
+      put :index
     end
   end
   
@@ -28,7 +28,7 @@ ServiceCenter::Application.routes.draw do
     end
     collection do
       get :index
-      post :index
+      put :index
     end
   end
   
