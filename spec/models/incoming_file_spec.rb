@@ -34,7 +34,7 @@ describe IncomingFile do
       file = File.open('Test2.exe', "w")
       incoming_file = Factory.build(:incoming_file,:file => ActionDispatch::Http::UploadedFile.new(:tempfile => file, :filename => File.basename(file)))
       incoming_file.save.should be_false
-      incoming_file.errors.messages.should == {:file=>["You are not allowed to upload \"exe\" files, allowed types: txt, csv", "can't be blank"]}
+      incoming_file.errors.messages.should == {:file=>["You are not allowed to upload \"exe\" files, allowed types: txt, csv, pmt", "can't be blank"]}
       incoming_file.errors.messages.should_not be_blank
       FileUtils.rm_f 'Test2.exe'
     end
