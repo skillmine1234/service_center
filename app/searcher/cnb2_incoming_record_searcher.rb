@@ -21,9 +21,9 @@ class Cnb2IncomingRecordSearcher
     reln = Cnb2IncomingRecord.joins(:incoming_file_record).where("cnb2_incoming_records.file_name=? and status=?",file_name,status).order("cnb2_incoming_records.id desc")
     reln = reln.where("incoming_file_records.overrides is not null") if overrided_flag.present? and overrided_flag == "true"
     reln = reln.where("incoming_file_records.overrides is null") if overrided_flag.present? and overrided_flag == "false"
-    reln = reln.where("cnb2_incoming_records.pay_comp_code=?",pay_comp_code) if pay_comp_code.present?
-    reln = reln.where("cnb2_incoming_records.vendor_code=?",vendor_code) if vendor_code.present?
-    reln = reln.where("cnb2_incoming_records.bene_account_no=?",bene_account_no) if bene_account_no.present?
+    reln = reln.where("cnb2_incoming_records.pay_comp_code like ?","#{pay_comp_code}%") if pay_comp_code.present?
+    reln = reln.where("cnb2_incoming_records.vendor_code like ?","#{vendor_code}%") if vendor_code.present?
+    reln = reln.where("cnb2_incoming_records.bene_account_no like ?","#{bene_account_no}%") if bene_account_no.present?
     reln
   end
 end
