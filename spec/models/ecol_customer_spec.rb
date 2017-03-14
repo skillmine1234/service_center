@@ -1,5 +1,11 @@
 require 'spec_helper'
-describe EcolCustomer do
+describe EcolCustomer do  
+  include HelperMethods
+  
+  before(:each) do
+    mock_ldap
+  end
+
   context 'association' do
     it { should belong_to(:created_user) }
     it { should belong_to(:updated_user) }
@@ -92,7 +98,7 @@ describe EcolCustomer do
   end
   
   context "fields format" do 
-    [:code, :app_code, :identity_user_id].each do |att|
+    [:code, :app_code].each do |att|
       it "should allow valid format" do
         should allow_value('9876').for(att)
         should allow_value('ABCD9000').for(att)

@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe PartnerHelper do
+  include HelperMethods
+
+  before(:each) do
+    mock_ldap
+  end
 
   context 'find_partner'do
     it 'should return partners' do

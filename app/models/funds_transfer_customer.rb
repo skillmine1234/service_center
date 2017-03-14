@@ -24,6 +24,8 @@ class FundsTransferCustomer < ActiveRecord::Base
   validates :identity_user_id, length: { maximum: 20 }
   validates :notify_app_code, length: { maximum: 20}, :allow_blank =>true
 
+  validate :presence_of_iam_cust_user
+
   before_save :to_upcase
 
   def to_upcase
@@ -34,5 +36,9 @@ class FundsTransferCustomer < ActiveRecord::Base
 
   def validate_customer_id
     errors.add(:customer_id,"is mandatory for corporate") if is_retail == 'N' and customer_id.to_s.empty?
+  end
+
+  def presence_of_iam_cust_user
+    errors.add(:identity_user_id, 'IAM Customer User does not exist for this username') if IamCustUser.find_by(username: identity_user_id).nil?
   end
 end

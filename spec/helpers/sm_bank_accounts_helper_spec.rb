@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe SmBankAccountsHelper do
+  include HelperMethods
+
+  before(:each) do
+    mock_ldap
+  end
+
   context "find_sm_bank_accounts" do
     it "should find sm_bank_accounts" do
       sm_bank1 = Factory(:sm_bank, :code => "AAA1310", :approval_status => 'A')

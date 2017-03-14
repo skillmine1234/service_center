@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe EcolCustomersHelper do
+  include HelperMethods
+  
+  before(:each) do
+    mock_ldap
+  end
   
   context "show_page_value_for_account_tokens" do
     it "should show token description" do

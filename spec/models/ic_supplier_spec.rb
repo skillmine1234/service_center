@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe IcSupplier do
+  include HelperMethods
+
+  before(:each) do
+    mock_ldap
+  end
+
   context 'association' do
     it { should belong_to(:created_user) }
     it { should belong_to(:updated_user) }
@@ -45,7 +51,6 @@ describe IcSupplier do
       ic_supplier1.should_not be_valid
       ic_supplier1.errors_on(:corp_customer_id).should == ["is not present in customers"]
       Factory(:ic_customer, :customer_id => "1234", :approval_status => 'A')
-      p ic_supplier1
       ic_supplier1.should be_valid
     end
   end

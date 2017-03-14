@@ -6,6 +6,6 @@ FactoryGirl.define do
     sequence(:app_id) {|n| "90" + "%03i" % "#{n}" }
     is_enabled "N"
     approval_status "U"
-    identity_user_id "1234"
+    identity_user_id { Factory(:iam_cust_user, approval_status: 'A').username }
   end
 end

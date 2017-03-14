@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe SmBank do
+  include HelperMethods
+
+  before(:each) do
+    mock_ldap
+  end
+
   context 'association' do
     it { should belong_to(:created_user) }
     it { should belong_to(:updated_user) }
@@ -60,7 +66,7 @@ describe SmBank do
 
   context "fields format" do
     it "should allow valid format" do
-      [:code, :identity_user_id].each do |att|
+      [:code].each do |att|
         should allow_value('9876').for(att)
         should allow_value('ABCD90').for(att)
         should allow_value('abcd1234E').for(att)
@@ -77,9 +83,9 @@ describe SmBank do
     end
 
     it "should not allow invalid format" do
-      sm_bank = Factory.build(:sm_bank, :code => "BANK-01", :name => "abcd@QWER", :bank_code => "@Bank01", :identity_user_id => "IUID-1")
+      sm_bank = Factory.build(:sm_bank, :code => "BANK-01", :name => "abcd@QWER", :bank_code => "@Bank01")
       sm_bank.save.should be_false
-      [:code, :identity_user_id].each do |att|
+      [:code].each do |att|
         sm_bank.errors_on(att).should == ["Invalid format, expected format is : {[a-z|A-Z|0-9]}"]
       end
       sm_bank.errors_on(:name).should ==  ["Invalid format, expected format is : {[a-z|A-Z|0-9|\\s|\\.|\\-]}"]

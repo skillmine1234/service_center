@@ -37,6 +37,8 @@ class Group < ActiveRecord::Base
       ['IncomingFile','IncomingFileRecord','FrR01IncomingFile','FrR01IncomingRecord']
     when "ns"
       ['NsCallback']
+    when "iam"
+      ['IamCustUser']
     else
       []
     end

@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe PartnerLcyRateHelper do
+  include HelperMethods
+
+  before(:each) do
+    mock_ldap
+  end
 
   context 'find_partner_lcy_rate'do
     it 'should return partner_lcy_rates' do

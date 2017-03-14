@@ -30,6 +30,7 @@ class EcolCustomer < ActiveRecord::Base
   validates :rmtr_pass_txt, format: {with: /\A[a-z|A-Z|0-9|\.|\,\s]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\.|\,\s]}' }, length: {maximum: 500, minimum: 1}, :allow_blank => true
   validates :rmtr_return_txt, format: {with: /\A[a-z|A-Z|0-9|\.|\,\s]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\.|\,\s]}' }, length: {maximum: 500, minimum: 1}, :allow_blank => true
   validates :customer_id, presence: true, format: {with: /\A[1-9][0-9]+\z/, :message => 'should not start with a 0 and should contain only numbers'}, length: {maximum: 50}
+  validate :presence_of_iam_cust_user
   
   before_save :to_upcase
 
@@ -78,5 +79,8 @@ class EcolCustomer < ActiveRecord::Base
       self.token_3_ends_with = self.token_3_ends_with.upcase unless self.token_3_ends_with.nil?
     end
   end
-   
+  
+  def presence_of_iam_cust_user
+    errors.add(:identity_user_id, 'IAM Customer User does not exist for this username') if identity_user_id.present? && IamCustUser.find_by(username: identity_user_id).nil?
+  end
 end

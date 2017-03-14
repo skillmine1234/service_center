@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe PcAppsHelper do
+  include HelperMethods
+
+  before(:each) do
+    mock_ldap
+  end
+
   context "find_pc_apps" do
     it "should find pc_apps" do
       pc_program = Factory(:pc_program, :approval_status => 'A', :code => 'pcapp1')

@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe EcolTransactionsHelper do
+  include HelperMethods
+
+  before(:each) do
+    mock_ldap
+  end
+
   context "find_ecol_transactions" do
     it "should return ecol trasactions" do
       ecol_transaction = Factory(:ecol_transaction, :transfer_unique_no => "12345")

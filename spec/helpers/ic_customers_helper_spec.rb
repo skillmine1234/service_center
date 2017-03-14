@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe IcCustomersHelper do
+  include HelperMethods
+
+  before(:each) do
+    mock_ldap
+  end
+
   context "find_ic_customers" do
     it "should find ic_customers" do
       ic_customer = Factory(:ic_customer, :customer_id => "1122", :approval_status => "A")
@@ -11,8 +17,9 @@ describe IcCustomersHelper do
       find_ic_customers({:app_id => '88888'}).should == [ic_customer]
       find_ic_customers({:app_id => '88887'}).should == []
 
-      ic_customer = Factory(:ic_customer, :identity_user_id => '7777', :approval_status => "A")
-      find_ic_customers({:identity_user_id => '7777'}).should == [ic_customer]
+      iam_cust_user = Factory(:iam_cust_user, username: 'user123', approval_status: "A")
+      ic_customer = Factory(:ic_customer, :identity_user_id => 'user123', :approval_status => "A")
+      find_ic_customers({:identity_user_id => 'user123'}).should == [ic_customer]
       find_ic_customers({:identity_user_id => '7776'}).should == []
       
       ic_customer = Factory(:ic_customer, :repay_account_no => '6666666666', :approval_status => "A")

@@ -1,6 +1,12 @@
 require 'spec_helper'
 
-describe Pc2App do
+describe Pc2App do  
+  include HelperMethods
+  
+  before(:each) do
+    mock_ldap
+  end
+
   context "associations" do
     it { should belong_to(:created_user) }
     it { should belong_to(:updated_user) }

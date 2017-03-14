@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe ImtCustomer do
+  include HelperMethods
+
+  before(:each) do
+    mock_ldap
+  end
+
   context 'association' do
     it { should belong_to(:created_user) }
     it { should belong_to(:updated_user) }

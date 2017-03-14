@@ -1,0 +1,46 @@
+%br
+= link_to "New IAM Customer User", new_iam_cust_user_path
+%br
+%br
+%h1 Listing IAM Customer Users
+%h2.collapsible
+  Advanced Search
+  %span.caret
+.collapsible-content
+  = render :partial => 'advanced_search'
+%br
+= "Total Count: #{@iam_cust_users_count}"
+%br
+= will_paginate @iam_cust_users
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Username
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      First Name
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Last Name
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Email
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Mobile Number
+  .tbody
+    - @iam_cust_users.each do |iam_cust_user|
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', iam_cust_user
+        %td{:style=>'text-align:left;'}
+          = link_to 'Edit', edit_iam_cust_user_path(iam_cust_user)
+        %td{:style=>'text-align:left;'}
+          = iam_cust_user.username
+        %td{:style=>'text-align:left;'}
+          = iam_cust_user.first_name
+        %td{:style=>'text-align:left;'}
+          = iam_cust_user.last_name
+        %td{:style=>'text-align:left;'}
+          = iam_cust_user.email
+        %td{:style=>'text-align:left;'}
+          = iam_cust_user.mobile_no

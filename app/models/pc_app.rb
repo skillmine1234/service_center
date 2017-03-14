@@ -11,4 +11,10 @@ class PcApp < ActiveRecord::Base
   validates :app_id, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => "Invalid format, expected format is : {[a-z|A-Z|0-9]}" }, length: { minimum: 5,  maximum: 20 }
   validates :identity_user_id, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => "Invalid format, expected format is : {[a-z|A-Z|0-9]}" }, length: { minimum: 1,  maximum: 20 }
   validates :program_code, format: {with: /\A[a-z|A-Z|0-9|\-\_]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\-\_]}' }, length: {maximum: 6}
+
+  validate :presence_of_iam_cust_user
+
+  def presence_of_iam_cust_user
+    errors.add(:identity_user_id, 'IAM Customer User does not exist for this username') if IamCustUser.find_by(username: identity_user_id).nil?
+  end
 end

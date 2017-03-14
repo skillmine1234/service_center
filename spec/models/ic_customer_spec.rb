@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe IcCustomer do
+  include HelperMethods
+
+  before(:each) do
+    mock_ldap
+  end
+
   context 'association' do
     it { should belong_to(:created_user) }
     it { should belong_to(:updated_user) }
@@ -76,11 +82,11 @@ describe IcCustomer do
 
   context "fields format" do
     it "should allow valid format" do
-      [:customer_id, :app_id, :identity_user_id, :repay_account_no, :fee_income_gl, :cust_contact_mobile].each do |att|
+      [:customer_id, :app_id, :repay_account_no, :fee_income_gl, :cust_contact_mobile].each do |att|
         should allow_value('0123456789').for(att)
       end
 
-      [:identity_user_id, :app_id].each do |att|
+      [:app_id].each do |att|
         should allow_value('ABC123').for(att)
       end
 
@@ -91,10 +97,10 @@ describe IcCustomer do
 
     it "should not allow invalid format" do
       ic_customer = Factory.build(:ic_customer, :customer_id => '111.11', :app_id => '@acddsfdfd', 
-                                  :identity_user_id => "IUID-1", :repay_account_no => "ACC1234567", :fee_pct => "45.5f", 
+                                  :repay_account_no => "ACC1234567", :fee_pct => "45.5f", 
                                   :fee_income_gl => "400000000$", :max_overdue_pct => "77f", :cust_contact_mobile => "MOB99-0999", :customer_name => 'ABC@DEF')
       ic_customer.save == false
-      [:identity_user_id, :app_id].each do |att|
+      [:app_id].each do |att|
         ic_customer.errors_on(att).should == ["Invalid format, expected format is : {[a-z|A-Z|0-9]}"]
       end
       [:customer_id, :repay_account_no, :fee_income_gl, :cust_contact_mobile].each do |att|

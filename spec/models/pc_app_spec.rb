@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe PcApp do
+  include HelperMethods
+
+  before(:each) do
+    mock_ldap
+  end
+
   context "associations" do
     it { should belong_to(:created_user) }
     it { should belong_to(:updated_user) }
@@ -44,7 +50,7 @@ describe PcApp do
   end
 
   context "identity_user_id and app_id format" do 
-    [:identity_user_id, :app_id].each do |att|
+    [:app_id].each do |att|
       it "should allow valid format" do
         should allow_value('1234567890').for(att)
         should allow_value('Abcd1234567890').for(att)

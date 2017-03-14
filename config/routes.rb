@@ -166,6 +166,13 @@ ServiceCenter::Application.routes.draw do
     end
   end
   
+  resources :iam_cust_users, except: :index do
+    collection do
+      get :index
+      put :index
+    end
+  end
+  
   resources :ecol_app_udtables
 
   resources :fr_r01_incoming_records, except: :index do
@@ -336,6 +343,7 @@ ServiceCenter::Application.routes.draw do
   put '/ecol_apps/:id/approve' => "ecol_apps#approve"
   get '/partner_lcy_rates/:id/audit_logs' => 'partner_lcy_rates#audit_logs'
   put '/partner_lcy_rates/:id/approve' => "partner_lcy_rates#approve"
+<<<<<<< HEAD
 
   get '/sc_backend_response_codes/:id/audit_logs' => 'sc_backend_response_codes#audit_logs'
   put '/sc_backend_response_codes/:id/approve' => "sc_backend_response_codes#approve"
@@ -347,6 +355,10 @@ ServiceCenter::Application.routes.draw do
   
   get 'ic001_incoming_file_summary' => 'ic001_incoming_records#incoming_file_summary'
   get '/ic001_incoming_records/:id/audit_logs' => 'ic001_incoming_records#audit_logs'
+=======
+  get '/iam_cust_users/:id/audit_logs' => 'iam_cust_users#audit_logs'
+  put '/iam_cust_users/:id/approve' => "iam_cust_users#approve"
+>>>>>>> bab6adc... SY-65 screens for IamCustUser
   
   root :to => 'dashboard#overview'
 

@@ -6,7 +6,7 @@ FactoryGirl.define do
     name "Foo"
     bank_code "ABCD0XYZABC"
     low_balance_alert_at 0
-    identity_user_id "MyString"
+    identity_user_id { Factory(:iam_cust_user, approval_status: 'A').username }
     neft_allowed "N"
     imps_allowed "N"
     created_by {Factory(:user).id}

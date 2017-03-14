@@ -2,7 +2,7 @@ class Partner < ActiveRecord::Base
   include Approval2::ModelAdditions
 
   SERVICE_NAMES = %w(INW INW2)
-
+  
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
   belongs_to :guideline, :foreign_key =>'guideline_id', :class_name => 'InwGuideline'
@@ -32,6 +32,8 @@ class Partner < ActiveRecord::Base
   
   validate :whitelisting
   validate :transfer_types
+  
+  validate :presence_of_iam_cust_user
 
   after_create :create_lcy_rate
 
@@ -86,5 +88,9 @@ class Partner < ActiveRecord::Base
   
   def self.options_for_auto_match_rule
     [['None','N'],['Any','A']]
+  end
+  
+  def presence_of_iam_cust_user
+    errors.add(:identity_user_id, 'IAM Customer User does not exist for this username') if IamCustUser.find_by(username: identity_user_id).nil?
   end
 end

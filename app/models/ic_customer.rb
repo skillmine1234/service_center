@@ -37,6 +37,8 @@ class IcCustomer < ActiveRecord::Base
   
   validate :fields_based_on_sc_backend_code
 
+  validate :presence_of_iam_cust_user
+
   def check_email_addresses
     ["cust_contact_email","ops_email","rm_email"].each do |email_id|
       invalid_ids = []
@@ -63,5 +65,9 @@ class IcCustomer < ActiveRecord::Base
     elsif self.sc_backend_code.blank? && (self.fee_pct.nil? || self.fee_income_gl.nil? || self.max_overdue_pct.nil?)
       errors[:base] << 'Fee Percentage, Fee Income Account No and Maximum Overdue Percentage are mandatory when Backend System is null'
     end
+  end
+
+  def presence_of_iam_cust_user
+    errors.add(:identity_user_id, 'IAM Customer User does not exist for this username') if identity_user_id.present? && IamCustUser.find_by(username: identity_user_id).nil?
   end
 end

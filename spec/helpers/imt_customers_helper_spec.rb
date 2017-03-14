@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe ImtCustomersHelper do
+  include HelperMethods
+  
+  before(:each) do
+    mock_ldap
+  end
+
   context "find_imt_customers" do
     it "should find imt_customers" do
       imt_customer = Factory(:imt_customer, :customer_code => '1234', :approval_status => "A", :app_id => '1111')

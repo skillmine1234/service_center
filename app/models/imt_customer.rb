@@ -16,7 +16,9 @@ class ImtCustomer < ActiveRecord::Base
   validates :expiry_period, :numericality => { :greater_than_or_equal_to => 1, :less_than_or_equal_to => 999, :only_integer => true}
   validates :email_id, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/, :message => 'Invalid Email ID, expected format is abc@def.com' }
   validates :address_line1, :address_line2, :address_line3, format: {with: /\A[a-z|A-Z|0-9|\s|\.|\,|\-]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\s|\.|\,|\-]}'}, :allow_blank => true
-  
+
+  validate :presence_of_iam_cust_user
+
   before_save :convert_customer_name_to_upcase
   
   def self.options_for_txn_mode
@@ -30,5 +32,9 @@ class ImtCustomer < ActiveRecord::Base
   
   def convert_customer_name_to_upcase
     self.customer_name = self.customer_name.upcase unless self.frozen?
+  end
+
+  def presence_of_iam_cust_user
+    errors.add(:identity_user_id, 'IAM Customer User does not exist for this username') if identity_user_id.present? && IamCustUser.find_by(username: identity_user_id).nil?
   end
 end

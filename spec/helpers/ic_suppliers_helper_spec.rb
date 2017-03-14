@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe IcSuppliersHelper do
+  include HelperMethods
+
+  before(:each) do
+    mock_ldap
+  end
+  
   context "find_ic_suppliers" do
     it "should find ic_suppliers" do
       ic_supplier = Factory(:ic_supplier, :supplier_code => '2233', :approval_status => "A")

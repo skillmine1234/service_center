@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :ic_customer do
     sequence(:customer_id) {|n| "9" + "%03i" % "#{n}" }
     sequence(:app_id) {|n| "8" + "%04i" % "#{n}" }
-    sequence(:identity_user_id) {|n| "7" + "%03i" % "#{n}" }
+    identity_user_id  { Factory(:iam_cust_user, approval_status: 'A').username }
     sequence(:repay_account_no) {|n| "6" + "%09i" % "#{n}" }
     customer_name "Foo"
     fee_pct "9.99"

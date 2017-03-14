@@ -8,6 +8,8 @@ describe PcAppsController do
     sign_in @user = Factory(:user)
     Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'editor').id)
     request.env["HTTP_REFERER"] = "/"
+    
+    mock_ldap
   end
   
   describe "GET index" do
@@ -186,15 +188,16 @@ describe PcAppsController do
       user_role = UserRole.find_by_user_id(@user.id)
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
+      iam_cust_user = Factory(:iam_cust_user, username: 'user123456', approval_status: 'A')
       pc_app1 = Factory(:pc_app, :app_id => "App01", :approval_status => 'A')
-      pc_app2 = Factory(:pc_app, :app_id => "App01", :approval_status => 'U', :identity_user_id => '123456', :approved_version => pc_app1.lock_version, :approved_id => pc_app1.id, :created_by => 666)
+      pc_app2 = Factory(:pc_app, :app_id => "App01", :approval_status => 'U', :identity_user_id => 'user123456', :approved_version => pc_app1.lock_version, :approved_id => pc_app1.id, :created_by => 666)
       # the following line is required for reload to get triggered (TODO)
       pc_app1.approval_status.should == 'A'
       PcUnapprovedRecord.count.should == 1
       put :approve, {:id => pc_app2.id}
       PcUnapprovedRecord.count.should == 0
       pc_app1.reload
-      pc_app1.identity_user_id.should == '123456'
+      pc_app1.identity_user_id.should == 'user123456'
       pc_app1.updated_by.should == "666"
       PcApp.find_by_id(pc_app2.id).should be_nil
     end
@@ -203,12 +206,13 @@ describe PcAppsController do
       user_role = UserRole.find_by_user_id(@user.id)
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
-      pc_app = Factory(:pc_app, :app_id => "App01", :approval_status => 'U', :identity_user_id => '12345')
+      iam_cust_user = Factory(:iam_cust_user, username: 'user12345', approval_status: 'A')
+      pc_app = Factory(:pc_app, :app_id => "App01", :approval_status => 'U', :identity_user_id => 'user12345')
       PcUnapprovedRecord.count.should == 1
       put :approve, {:id => pc_app.id}
       PcUnapprovedRecord.count.should == 0
       pc_app.reload
-      pc_app.identity_user_id.should == '12345'
+      pc_app.identity_user_id.should == 'user12345'
       pc_app.approval_status.should == 'A'
     end
   end

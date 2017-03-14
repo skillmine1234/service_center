@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe EcolRemittersHelper do
+  include HelperMethods
+
+  before(:each) do
+    mock_ldap
+  end
 
   context "filter_ecol_remitter" do 
     it "should return ecol_remitters" do 

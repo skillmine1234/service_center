@@ -15,6 +15,8 @@ class SmBank < ActiveRecord::Base
   validates :low_balance_alert_at, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => '9e20'.to_f }
   validates :identity_user_id, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}'}, length: {maximum: 20}
 
+  validate :presence_of_iam_cust_user
+
   validates_uniqueness_of :code, :scope => :approval_status
 
   before_save :to_downcase
@@ -30,4 +32,7 @@ class SmBank < ActiveRecord::Base
     imps_allowed == "Y" ? true : false
   end
 
+  def presence_of_iam_cust_user
+    errors.add(:identity_user_id, 'IAM Customer User does not exist for this username') if IamCustUser.find_by(username: identity_user_id).nil?
+  end
 end

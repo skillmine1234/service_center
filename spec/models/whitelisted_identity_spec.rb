@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe WhitelistedIdentity do
+  include HelperMethods
+
+  before(:each) do
+    mock_ldap
+  end
+
   context 'association' do
     it { should have_many(:attachments)}
     it { should belong_to(:created_user)}

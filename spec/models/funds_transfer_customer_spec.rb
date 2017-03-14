@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe FundsTransferCustomer do
+  include HelperMethods
+
+  before(:each) do
+    mock_ldap
+  end
+
   context 'association' do
     it { should belong_to(:created_user) }
     it { should belong_to(:updated_user) }
@@ -27,10 +33,9 @@ describe FundsTransferCustomer do
     end
 
     it "should not allow invalid format" do
-      ft_customer = Factory.build(:funds_transfer_customer, :customer_id => '111.11', :app_id => '@acddsfdfd', 
-                                  :identity_user_id => "IUID-1", :name => 'ABC@DEF')
+      ft_customer = Factory.build(:funds_transfer_customer, :customer_id => '111.11', :app_id => '@acddsfdfd', :name => 'ABC@DEF')
       ft_customer.save == false
-      [:identity_user_id, :app_id].each do |att|
+      [:app_id].each do |att|
         ft_customer.errors_on(att).should == ["Invalid format, expected format is : {[a-z|A-Z|0-9]}"]
       end
       [:customer_id].each do |att|

@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe WhitelistedIdentitySearcher do
+  include HelperMethods
+
+  before(:each) do
+    mock_ldap
+  end
+
   context 'searcher' do
     it 'should return whitelisted identities' do
       partner = Factory(:partner,:enabled => 'Y', will_send_id: 'N', :approval_status => 'A', :code => 'a123')

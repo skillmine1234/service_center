@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe Attachment do
+  include HelperMethods
+  
+  before(:each) do
+    mock_ldap
+  end
+
   context 'association' do
     it { should belong_to(:user) }
     it { should belong_to(:attachable) }

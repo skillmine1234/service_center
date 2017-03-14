@@ -33,7 +33,7 @@ FactoryGirl.define do
     last_action 'C'
     customer_id 1234
     app_code "1234"
-    sequence(:identity_user_id) {|n| "7" + "%03i" % "#{n}" }
+    identity_user_id { Factory(:iam_cust_user, approval_status: 'A').username }
     should_prevalidate 'N'
   end
 end

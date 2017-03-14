@@ -4,7 +4,7 @@ FactoryGirl.define do
     customer_name "MyString"
     contact_person "MyString"
     email_id "abc@gmail.com"
-    identity_user_id "a"
+    identity_user_id { Factory(:iam_cust_user, approval_status: 'A').username }
     app_id "MyString"
     account_no "0987654321"
     mobile_no "0987654321"

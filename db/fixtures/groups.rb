@@ -16,5 +16,6 @@ Group.seed(:name,
   { name: "rp"},
   { name: "rr"},
   { name: "fr"},
-  { name: "ns"}
+  { name: "ns"},
+  { name: "iam"}
 )
