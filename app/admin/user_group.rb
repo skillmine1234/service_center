@@ -44,10 +44,10 @@ ActiveAdmin.register UserGroup do
     @user_group = UserGroup.unscoped.find(params[:id]) rescue nil
     UserGroup.transaction do
       approval = @user_group.approve
-      if @user_group.save and approval.empty?
+      if approval.empty?
         flash[:alert] = "User Group record was approved successfully"
       else
-        msg = approval.empty? ? @user_group.errors.full_messages : @user_group.errors.full_messages << approval
+        msg = @user_group.errors.full_messages << approval
         flash[:alert] = msg
         raise ActiveRecord::Rollback
       end

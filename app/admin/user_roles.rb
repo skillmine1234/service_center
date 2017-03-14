@@ -42,10 +42,10 @@ ActiveAdmin.register UserRole do
     @user_role = UserRole.unscoped.find(params[:id]) rescue nil
     UserRole.transaction do
       approval = @user_role.approve
-      if @user_role.save and approval.empty?
+      if approval.empty?
         flash[:alert] = "User Role record was approved successfully"
       else
-        msg = approval.empty? ? @user_role.errors.full_messages : @user_role.errors.full_messages << approval
+        msg = @user_role.errors.full_messages << approval
         flash[:alert] = msg
         raise ActiveRecord::Rollback
       end
