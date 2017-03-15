@@ -12,9 +12,14 @@ describe UnapprovedRecordsController do
 
   describe "GET index" do
     it "assigns all unapproved_records as @unapproved_records" do
-      unapproved_record = Factory(:unapproved_record, :approvable_type => 'IncomingFile')
-      get :index
+      incoming_file1 = Factory(:incoming_file, :service_name => 'AML')
+      incoming_file2 = Factory(:incoming_file, :service_name => 'ECOL')
+      get :index, :sc_service => 'AML', :group_name => 'inward-remittance'
       assigns(:records).should eq([{:record_type=>"IncomingFile", :record_count=>1}])
+      partner = Factory(:partner)
+      ecol_remitter = Factory(:ecol_remitter)
+      get :index, :sc_service => 'AML', :group_name => 'inward-remittance'
+      assigns(:records).should eq([{:record_type=>"IncomingFile", :record_count=>1},{:record_type=>"Partner", :record_count=>1}])
     end
   end
 end

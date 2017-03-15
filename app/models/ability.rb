@@ -1,10 +1,11 @@
 class Ability
   include CanCan::Ability
 
-  def initialize(user_obj)
+  def initialize(user_obj,group_name = nil)
     # The order of the below methods are much important
     @user = user_obj
     @user ||= User.new # guest @user (not logged in)
+    @group = @user.groups.find_by_name(group_name) if @user.class.name == 'User'
     super_admin_permissions if @user.has_role? :super_admin
     admin_permissions if @user.has_role? :admin
     user_admin_permissions if @user.has_role? :user_admin
@@ -24,6 +25,7 @@ class Ability
       can :download_file, model_name.constantize
       can :view_raw_content, model_name.constantize
     end
+    can :manage, UnapprovedRecord, approvable_type: @group.try(:model_list)
   end
 
   def editor_permissions(models)
@@ -39,6 +41,7 @@ class Ability
       cannot :process_file, model_name.constantize
       cannot :reset, model_name.constantize
     end
+    can :manage, UnapprovedRecord, approvable_type: @group.try(:model_list)
   end
 
   def supervisor_permissions(models)
@@ -59,6 +62,7 @@ class Ability
       can :process_file, model_name.constantize
       can :reset, model_name.constantize
     end
+    can :manage, UnapprovedRecord, approvable_type: @group.try(:model_list)
   end
 
   def tester_permissions(models)
@@ -66,6 +70,7 @@ class Ability
       can :read, model_name.constantize
       can :manage, model_name.constantize
     end
+    can :manage, UnapprovedRecord, approvable_type: @group.try(:model_list)
   end
 
   def user_admin_permissions

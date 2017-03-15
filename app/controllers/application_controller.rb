@@ -45,7 +45,7 @@ class ApplicationController < ActionController::Base
   end
  
   def current_ability
-    @current_ability ||= Ability.new(current_user)
+    @current_ability ||= Ability.new(current_user,params[:group_name])
   end
   
   def block_screens
