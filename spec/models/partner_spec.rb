@@ -310,4 +310,14 @@ describe Partner do
     end
   end
   
+  context "presence_of_iam_cust_user" do
+    it "should validate existence of iam_cust_user" do
+      partner = Factory.build(:partner, identity_user_id: '1234')
+      partner.errors_on(:identity_user_id).should == ['IAM Customer User does not exist for this username']
+      
+      iam_cust_user = Factory(:iam_cust_user, username: '1234', approval_status: 'A')
+      partner.errors_on(:identity_user_id).should == []
+    end
+  end
+  
 end

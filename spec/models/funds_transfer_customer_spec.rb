@@ -150,4 +150,14 @@ describe FundsTransferCustomer do
       funds_transfer_customer2.enable_approve_button?.should == true
     end
   end
+  
+  context "presence_of_iam_cust_user" do
+    it "should validate existence of iam_cust_user" do
+      funds_transfer_customer = Factory.build(:funds_transfer_customer, identity_user_id: '1234')
+      funds_transfer_customer.errors_on(:identity_user_id).should == ['IAM Customer User does not exist for this username']
+      
+      iam_cust_user = Factory(:iam_cust_user, username: '1234', approval_status: 'A')
+      funds_transfer_customer.errors_on(:identity_user_id).should == []
+    end
+  end
 end
