@@ -12,8 +12,7 @@ class IamCustUser < ActiveRecord::Base
   validates :mobile_no, numericality: true, length: { maximum: 10 }
   
   before_save :generate_password
-  after_save :add_user_to_ldap# unless Rails.env.development?
-  after_save :notify_customer unless Rails.env.test?
+  after_save :add_user_to_ldap unless Rails.env.development?
   after_save :reset_password unless Rails.env.development?
   
   def generate_password
@@ -24,7 +23,10 @@ class IamCustUser < ActiveRecord::Base
   end
 
   def add_user_to_ldap
-    LDAP.add_user(username, generated_password) if approval_status == 'A' && last_action == 'C'
+    if approval_status == 'A' && last_action == 'C'
+      LDAP.add_user(username, generated_password)
+      notify_customer unless Rails.env.test?
+    end
   end
   
   def reset_password
@@ -32,6 +34,7 @@ class IamCustUser < ActiveRecord::Base
       self.generated_password = Passgen::generate(pronounceable: true, digits_after: 3, length: 10)
       LDAP.reset_password(username, generated_password)
       update_column(:should_reset_password, 'N')
+      notify_customer unless Rails.env.test?
     end
   end
 

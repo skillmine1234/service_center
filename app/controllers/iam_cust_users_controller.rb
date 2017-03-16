@@ -6,8 +6,8 @@ class IamCustUsersController < ApplicationController
   include ApplicationHelper
   include Approval2::ControllerAdditions
   
-  rescue_from 'LDAPFault' do |e|
-    flash[:alert] = e.reason
+  rescue_from 'LDAPFault', OCIError, ArgumentError do |e|
+    flash[:alert] = e.message
     redirect_to :back
   end
   

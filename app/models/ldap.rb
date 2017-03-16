@@ -2,11 +2,11 @@ require 'net/ldap'
 require 'yaml'
 
 class LDAPFault < StandardError
-  attr_reader :operation, :code, :reason
-  def initialize(operation, code, reason)
+  attr_reader :operation, :code, :message
+  def initialize(operation, code, message)
     @operation = operation
     @code = code
-    @reason = reason
+    @message = message
   end
 end
 
