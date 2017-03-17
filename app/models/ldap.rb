@@ -12,15 +12,20 @@ end
 
 class LDAP
   def self.config
-    YAML.load_file(ENV['LDAP_CONFIG_FILE_PATH'])['data']
+    raise LDAPFault.new(nil, nil, 'IAM_LDAP_CONFIG_FILE_PATH config variable is not set') if ENV['IAM_LDAP_CONFIG_FILE_PATH'].blank?
+    raise LDAPFault.new(nil, nil, "No such file or directory : #{ENV['IAM_LDAP_CONFIG_FILE_PATH']}") unless File.exists? (ENV['IAM_LDAP_CONFIG_FILE_PATH'])
+
+    data = YAML.load_file(ENV['IAM_LDAP_CONFIG_FILE_PATH'])['data']
+    raise LDAPFault.new(nil, nil, "Cannot connect to LDAP since data setup in #{ENV['IAM_LDAP_CONFIG_FILE_PATH']} is inclomplete") if (data['ssl'].blank? || data['host'].blank? || 
+                        data['port'].blank? || data['admin_user'].blank? || data['admin_password'].blank? || data['base'].blank? || data['required_group'].blank? )
+    data
   end
-  
+
   def self.ldap
     l = Net::LDAP.new
     l.encryption(config['ssl']) if config['ssl'] == :simple_tls
     l.host = config['host']
     l.port = config['port']
-    raise LDAPFault.new(nil, nil, 'LDAP Connection failed') if l.host.blank? or l.port.blank?
 
     @admin_user = config['admin_user']
     @admin_password = config['admin_password']
@@ -30,7 +35,7 @@ class LDAP
 
     l.auth  @admin_user, @admin_password
 
-    raise LDAPFault.new(nil, nil, 'failed to bind') if l.bind == false
+    raise LDAPFault.new(nil, nil, 'LDAP : Failed to bind') if l.bind == false
     
     return l
   end
