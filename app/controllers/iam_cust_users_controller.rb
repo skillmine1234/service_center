@@ -6,14 +6,9 @@ class IamCustUsersController < ApplicationController
   include ApplicationHelper
   include Approval2::ControllerAdditions
   
-  rescue_from 'LDAPFault', 'OCIError', ArgumentError, Psych::SyntaxError, SystemCallError, Net::LDAP::LdapError do |e|
-    flash[:alert] = e.message
-    redirect_to :back
-  end
-  
   def new
     @iam_cust_user = IamCustUser.new
-    @iam_cust_user.username = params[:username] if params[:username]
+    @iam_cust_user.will_connect_to_ldap
   end
 
   def create
@@ -26,6 +21,10 @@ class IamCustUsersController < ApplicationController
       flash[:alert] = "User successfully created is pending for approval"
       redirect_to @iam_cust_user
     end
+  end
+  
+  def edit
+    @iam_cust_user.will_connect_to_ldap
   end
 
   def update
@@ -47,6 +46,7 @@ class IamCustUsersController < ApplicationController
 
   def show
     @iam_cust_user = IamCustUser.unscoped.find_by_id(params[:id])
+    @ldap_error = @iam_cust_user.will_connect_to_ldap
   end
   
   def index
@@ -65,6 +65,20 @@ class IamCustUsersController < ApplicationController
   
   def approve
     redirect_to unapproved_records_path(group_name: 'iam')
+  end
+
+  def connect_to_ldap
+    @iam_cust_user = IamCustUser.unscoped.find_by_id(params[:id])
+    if params[:add_user]
+      @message = @iam_cust_user.add_user_to_ldap
+    elsif params[:resend_password]
+      @message = @iam_cust_user.resend_password
+    else
+      @message = @iam_cust_user.test_ldap_login
+    end
+    respond_to do |format|
+      format.js {render file: 'iam_cust_users/message.js.haml'}
+    end
   end
 
   private

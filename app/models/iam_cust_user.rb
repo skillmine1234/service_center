@@ -12,33 +12,64 @@ class IamCustUser < ActiveRecord::Base
   validates :mobile_no, numericality: true, length: { maximum: 10 }
   
   before_save :generate_password
-  after_save :add_user_to_ldap unless Rails.env.development?
-  after_save :reset_password unless Rails.env.development?
+  after_save :add_user_to_ldap_on_approval# unless Rails.env.development?
   
-  def generate_password
-    if last_action == 'C'
-      self.generated_password = Passgen::generate(pronounceable: true, digits_after: 3, length: 10)
-      self.encrypted_password = EncPassGenerator.new(generated_password, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']).generate_encrypted_password
-    end
+  def will_connect_to_ldap
+    LDAP.ldap
+    return nil
+  rescue LDAPFault, Psych::SyntaxError, SystemCallError, Net::LDAP::LdapError => e
+    errors[:base] << "LDAP connection error : #{e.message}"
+  end
+  
+  def test_ldap_login
+    LDAP.login(username, decrypted_password)
+    "Login Successful!"
+  rescue LDAPFault, Psych::SyntaxError, SystemCallError, Net::LDAP::LdapError => e
+    e.message
+  end
+  
+  def resend_password
+    notify_customer
+    "Email has been sent!"
+  rescue OCIError, ArgumentError => e
+    e.message
+  end
+  
+  def add_user_to_ldap
+    LDAP.add_user(username, decrypted_password)
+    notify_customer unless Rails.env.test?
+    "Entry added successfully to LDAP!"
+  rescue LDAPFault, Psych::SyntaxError, SystemCallError, Net::LDAP::LdapError, OCIError, ArgumentError => e
+    e.message
   end
 
-  def add_user_to_ldap
+  def add_user_to_ldap_on_approval
     if approval_status == 'A' && last_action == 'C'
       LDAP.add_user(username, generated_password)
+      update_column(:was_user_added, 'Y')
       notify_customer unless Rails.env.test?
     end
+  rescue 
+    nil
   end
   
-  def reset_password
-    if approval_status == 'A' && should_reset_password == 'Y'
+  def generate_password
+    if last_action == 'C' || ( approval_status == 'A' && should_reset_password == 'Y' )
       self.generated_password = Passgen::generate(pronounceable: true, digits_after: 3, length: 10)
-      LDAP.reset_password(username, generated_password)
-      update_column(:should_reset_password, 'N')
-      notify_customer unless Rails.env.test?
+      self.encrypted_password = EncPassGenerator.new(generated_password, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']).generate_encrypted_password
+      unless last_action ==  'C'
+        self.should_reset_password = 'N'
+        self.last_password_reset_at = Time.now
+      end
     end
   end
 
   def notify_customer
-    plsql.pk_qg_iam_cust_user.notify(ENV['CONFIG_IIB_SMTP_BROKER_UUID'], self.email, self.mobile_no, self.username, generated_password)
+    plsql.pk_qg_iam_cust_user.notify(ENV['CONFIG_IIB_SMTP_BROKER_UUID'], self.email, self.mobile_no, self.username, decrypted_password)
+    update_column(:notification_sent_at, Time.now)
+  end
+  
+  def decrypted_password
+    DecPassGenerator.new(encrypted_password,ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']).generate_decrypted_data
   end
 end

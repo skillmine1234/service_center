@@ -171,6 +171,9 @@ ServiceCenter::Application.routes.draw do
       get :index
       put :index
     end
+    member do
+      get :connect_to_ldap
+    end
   end
   
   resources :ecol_app_udtables

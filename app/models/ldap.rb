@@ -82,11 +82,6 @@ class LDAP
      raise LDAPFault.new('delete user', ldap_result.code, ldap_result.message) if ldap_result.code != 0
   end
 
-  private
-  def self.str2unicodePwd(str)
-    ('"' + str + '"').encode('utf-16le').force_encoding('utf-8')
-  end
-
   def self.login(username, password)
     ldap.auth username, password
     ldap.bind
@@ -96,4 +91,10 @@ class LDAP
   ensure
     ldap.auth  @admin_user, @admin_password
   end
+
+  private
+  def self.str2unicodePwd(str)
+    ('"' + str + '"').encode('utf-16le').force_encoding('utf-8')
+  end
+
 end

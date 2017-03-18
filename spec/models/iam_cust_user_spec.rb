@@ -34,16 +34,7 @@ describe IamCustUser do
   context "add_user_to_ldap" do
     it "should add user to ldap" do
       iam_cust_user = Factory(:iam_cust_user, approval_status: 'A')
-      iam_cust_user.add_user_to_ldap.should_not raise_error
-    end
-  end
-
-  context "reset_password" do
-    it "should reset password" do
-      iam_cust_user = Factory(:iam_cust_user, should_reset_password: 'Y')
-      iam_cust_user.should_reset_password = 'Y'
-      iam_cust_user.approval_status = 'Y'
-      iam_cust_user.reset_password.should_not raise_error
+      iam_cust_user.add_user_to_ldap_on_approval.should_not raise_error
     end
   end
 
