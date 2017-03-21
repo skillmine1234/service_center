@@ -5,7 +5,7 @@
       %br
       %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
         - can = can? :edit, @partner_lcy_rate
-        %a.btn{:href => "#{!(can) ? '#' : '/partners/' + @partner_lcy_rate.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
+        %a.btn{:href => "#{!(can) ? '#' : '/partner_lcy_rates/' + @partner_lcy_rate.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
         = render 'ecol_customers/approve', :@record => @partner_lcy_rate
       %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
         - if !@partner_lcy_rate.nil?

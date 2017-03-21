@@ -20,4 +20,4 @@
   .form-actions
     - (f.object.new_record? and f.object.partner_code.nil?) ? label_name = "Create" : label_name = "Update"
     = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_partner', :value => label_name + ' Partner Lcy Rate'
-    = link_to :Cancel,'/partners', :name => 'cancel', :class=>"cancel btn"
+    = link_to :Cancel,'/partner_lcy_rates', :name => 'cancel', :class=>"cancel btn"
