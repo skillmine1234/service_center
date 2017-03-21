@@ -25,6 +25,23 @@ describe WhitelistedIdentity do
     end
   end
   
+  context "fields format" do
+    it "should allow valid format" do
+      [:id_country].each do |att|
+        should allow_value('IN').for(att)
+        should allow_value('US').for(att)
+      end
+    end
+
+    it "should not allow invalid format" do
+      whitelisted_identity = Factory.build(:whitelisted_identity, :id_country => 'A', :id_type => "Aadhar1")
+      whitelisted_identity.save.should be_false
+      [:id_country].each do |att|
+        whitelisted_identity.errors_on(att).should == ["is too short (minimum is 2 characters)"]
+      end
+    end
+  end 
+  
   context "default_scope" do 
     it "should only return 'A' records by default" do 
       whitelisted_identity1 = Factory(:whitelisted_identity, :approval_status => 'A') 

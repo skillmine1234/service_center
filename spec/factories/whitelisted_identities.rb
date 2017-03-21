@@ -8,7 +8,7 @@ FactoryGirl.define do
     last_name "Bar"
     id_type "Passport"
     id_number "G12424"
-    id_country "India"
+    id_country "IN"
     id_issue_date "2015-04-20"
     id_expiry_date "2040-05-19"
     is_verified "Y"
