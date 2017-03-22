@@ -13,8 +13,8 @@ class WhitelistedIdentity < ActiveRecord::Base
 
   accepts_nested_attributes_for :attachments
 
-  validates_presence_of :partner, :id_for, :created_for_req_no, :created_by, :id_type, :id_number, :id_expiry_date
-  validates :id_country, format: {with: /\A[A-Z]+\z/, :message => 'Invalid format, expected format is : {[A-Z]}' }, length: { minimum: 2, maximum: 2 }, allow_blank: true
+  validates_presence_of :partner, :id_for, :created_for_req_no, :created_by, :id_type, :id_number, :id_expiry_date, :full_name
+  validates :id_country, format: {with: /\A[A-Z]{2}+\z/, :message => 'Invalid format, expected format is : {[A-Z]{2}}' }, allow_blank: true
   
   validate :validate_whitelisted_identity_on_create, :on => :create
   

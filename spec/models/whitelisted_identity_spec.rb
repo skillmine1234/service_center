@@ -13,7 +13,7 @@ describe WhitelistedIdentity do
   end
 
   context 'validation' do
-    [:partner, :id_for, :created_for_req_no, :created_by, :id_type, :id_number, :id_expiry_date].each do |att|
+    [:partner, :id_for, :created_for_req_no, :created_by, :id_type, :id_number, :id_expiry_date, :full_name].each do |att|
       it { should validate_presence_of(att) }
     end
 
@@ -37,7 +37,7 @@ describe WhitelistedIdentity do
       whitelisted_identity = Factory.build(:whitelisted_identity, :id_country => 'A', :id_type => "Aadhar1")
       whitelisted_identity.save.should be_false
       [:id_country].each do |att|
-        whitelisted_identity.errors_on(att).should == ["is too short (minimum is 2 characters)"]
+        whitelisted_identity.errors_on(att).should == ["Invalid format, expected format is : {[A-Z]{2}}"]
       end
     end
   end 
