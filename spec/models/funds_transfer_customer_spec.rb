@@ -214,4 +214,25 @@ describe FundsTransferCustomer do
       funds_transfer_customer.errors_on(:base).should == ["IMPS is not allowed for account_no 1234567890"]
     end
   end
+
+  context "apbs_values" do
+    it "should validate presence of fields when trasfer type is APBS" do
+      funds_transfer_customer1 = Factory.build(:funds_transfer_customer, allow_apbs: 'Y', apbs_user_no: nil)
+      funds_transfer_customer1.errors_on(:apbs_user_no).should == ['is mandatory if Allow APBS is Y']
+      
+      funds_transfer_customer2 = Factory.build(:funds_transfer_customer, allow_apbs: 'Y', apbs_user_no: '12345', apbs_user_name: nil)
+      funds_transfer_customer2.errors_on(:apbs_user_name).should == ['is mandatory if Allow APBS is Y']
+      
+      funds_transfer_customer3 = Factory.build(:funds_transfer_customer, allow_apbs: 'Y', apbs_user_no: '12345', apbs_user_name: 'Foo')
+      funds_transfer_customer3.errors_on(:apbs_user_no).should == []
+      funds_transfer_customer3.errors_on(:apbs_user_name).should == []
+    end
+  end
+  
+  context "set_needs_purpose_code" do
+    it "should set the value of needs_purpose_code as Y if allow_apbs is Y" do
+      funds_transfer_customer = Factory(:funds_transfer_customer, allow_apbs: 'Y', apbs_user_no: '12345', apbs_user_name: 'Foo')
+      funds_transfer_customer.needs_purpose_code.should == 'Y'
+    end
+  end
 end

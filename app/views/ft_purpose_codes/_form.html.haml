@@ -30,6 +30,11 @@
       = f.check_box :allow_only_registered_bene, {},"Y","N"
       #msg-error
         = error_message_for(@ft_purpose_code, :allow_only_registered_bene, :prepend_text => "")
+    .control-group
+      = f.label :allowed_transfer_type, "Allowed Transfer Type", :class => 'control-label'
+      = f.select :allowed_transfer_type, options_for_select(FtPurposeCode::TRANSFER_TYPES, @ft_purpose_code.allowed_transfer_type)
+      #msg-error
+        = error_message_for(@partner, :allowed_transfer_type, :prepend_text => "")
   .form-actions
     - (f.object.new_record? and f.object.code.nil?) ? label_name = "Create" : label_name = "Update"
     = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_ft_purpose_code', :value => label_name + ' FT Purpose Code'

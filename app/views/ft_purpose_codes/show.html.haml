@@ -43,3 +43,9 @@
               = @ft_purpose_code.allow_only_registered_bene
             %td#msg-error
               = error_message_for(@ft_purpose_code, :allow_only_registered_bene, :prepend_text => "")
+          %tr
+            %td.label Allowed Transfer Type
+            %td.value
+              = @ft_purpose_code.allowed_transfer_type
+            %td#msg-error
+              = error_message_for(@ft_purpose_code, :allowed_transfer_type, :prepend_text => "")

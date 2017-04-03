@@ -86,6 +86,24 @@
             %td#msg-error
               = error_message_for(@funds_transfer_customer, :allow_rtgs, :prepend_text => "")
           %tr
+            %td.label APBS Allowed
+            %td.value
+              = @funds_transfer_customer.allow_apbs
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :allow_apbs, :prepend_text => "")
+          %tr
+            %td.label APBS User Number
+            %td.value
+              = @funds_transfer_customer.apbs_user_no
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :apbs_user_no, :prepend_text => "")
+          %tr
+            %td.label APBS Username
+            %td.value
+              = @funds_transfer_customer.apbs_user_name
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :apbs_user_name, :prepend_text => "")
+          %tr
             %td.label Needs Purpose Code
             %td.value
               = @funds_transfer_customer.needs_purpose_code

@@ -88,7 +88,7 @@ class FtPurposeCodesController < ApplicationController
 
   def ft_purpose_code_params
     params.require(:ft_purpose_code).permit(:code, :description, :is_enabled, :allow_only_registered_bene, :created_by, :updated_by,
-                                            :lock_version, :approval_status, :approved_version, :approved_id)
+                                            :lock_version, :approval_status, :approved_version, :approved_id, :allowed_transfer_type)
   end
   
 end
