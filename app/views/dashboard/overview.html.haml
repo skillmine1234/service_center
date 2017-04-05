@@ -302,11 +302,6 @@
         = image_tag 'sm_bank_accounts.jpg', :size => "80x80"
       %br
         = "Funds Transfer Customer Accounts"
-    .box  
-      = link_to '/sc_jobs' do
-        = image_tag 'jobs.png', :size => "80x80"
-      %br
-        = "Service Center Jobs"
 
 - if @current_user.group_names.include?("salary-upload")
   %h1 Salary Upload
@@ -445,7 +440,7 @@
         = image_tag 'sc_backend.png', :size => "80x80"
       %br
         = "Service Center Backends"
-    .box  
+    .box
       = link_to '/sc_backend_response_codes' do
         = image_tag 'sc_response_code.jpeg', :size => "80x80"
       %br
@@ -455,6 +450,11 @@
         = image_tag 'sc_fault_code.png', :size => "80x80"
       %br
         = "Service Center Fault Codes"
+    .box
+      = link_to '/sc_jobs' do
+        = image_tag 'jobs.png', :size => "80x80"
+      %br
+        = "Service Center Jobs"
 - if @current_user.group_names.include?("rp")
   %h1 Reports
   .slide-container
