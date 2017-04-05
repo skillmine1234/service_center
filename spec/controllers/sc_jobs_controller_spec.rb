@@ -14,7 +14,7 @@ describe ScJobsController do
     it "should assign all sc_jobs as @sc_jobs" do
       sc_job = Factory(:sc_job)
       get :index
-      assigns(:sc_jobs).should eq([sc_job])
+      assigns(:records).should eq([sc_job])
     end
   end
 

@@ -7,11 +7,11 @@ class ScJobsController < ApplicationController
 
   def index
     if request.get?
-      @searcher = ScJobSearcher.new(params.permit(:approval_status, :page))
+      @searcher = ScJobSearcher.new(params.permit(:page))
     else
       @searcher = ScJobSearcher.new(search_params)
     end
-    @sc_jobs = @searcher.paginate
+    @records = @searcher.paginate
   end
 
   def show
@@ -20,10 +20,12 @@ class ScJobsController < ApplicationController
   
   def run
     sc_job = ScJob.find(params[:id])
-    if sc_job.run_now == 'N'
-      sc_job.update_column(:run_now, 'Y')
-      sc_job.update_column(:paused, 'N')
-      flash[:alert] = 'Your job will start now!'
+    ActiveRecord::Base.transaction do
+      if sc_job.run_now == 'N'
+        sc_job.update_column(:run_now, 'Y')
+        sc_job.update_column(:paused, 'N')
+        flash[:alert] = 'Your job will start now!'
+      end
     end
   rescue ::ActiveRecord::ActiveRecordError => e
     flash[:alert] = e.message
@@ -33,10 +35,12 @@ class ScJobsController < ApplicationController
   
   def pause
     sc_job = ScJob.find(params[:id])
-    if sc_job.paused == 'N'
-      sc_job.update_column(:paused, 'Y')
-      sc_job.update_column(:run_now, 'N')
-      flash[:alert] = 'Your job will start now!'
+    ActiveRecord::Base.transaction do
+      if sc_job.paused == 'N'
+        sc_job.update_column(:paused, 'Y')
+        sc_job.update_column(:run_now, 'N')
+        flash[:alert] = 'Your job is paused now!'
+      end
     end
   rescue ::ActiveRecord::ActiveRecordError => e
     flash[:alert] = e.message

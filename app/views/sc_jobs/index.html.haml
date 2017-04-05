@@ -1,15 +1,8 @@
 %br
 %br
 %h1 Listing SC Jobs
-%h2.collapsible
-  Advanced Search
-  %span.caret
-.collapsible-content
-  = render :partial => 'advanced_search'
+= render :partial => 'advanced_search'
 %br
-= "Total Count: #{@sc_jobs_count}"
-%br
-= will_paginate @sc_jobs
 %br
 
 %table.table.table-bordered.table-striped.table-hover
@@ -25,7 +18,7 @@
       Pause
 
   .tbody
-    - @sc_jobs.each do |sc_job|
+    - @records.each do |sc_job|
       %tr
         %td{:style=>'text-align:left;'}
           = link_to 'Show', sc_job
