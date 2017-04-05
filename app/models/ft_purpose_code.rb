@@ -12,4 +12,10 @@ class FtPurposeCode < ActiveRecord::Base
   validates :description, format: {with: /\A[a-z|A-Z|0-9|\s|\.|\-]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\s|\.|\-]}'}
 
   validates_uniqueness_of :code, :scope => :approval_status
+  
+  before_save :set_allow_only_registered_bene, if: "allowed_transfer_type == 'APBS'"
+
+  def set_allow_only_registered_bene
+    self.allow_only_registered_bene = 'N' unless self.frozen?
+  end
 end

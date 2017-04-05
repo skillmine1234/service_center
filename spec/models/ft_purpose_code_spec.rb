@@ -146,4 +146,11 @@ describe FtPurposeCode do
     end
   end
   
+  context "set_allow_only_registered_bene" do
+    it "should set the value of allow_only_registered_bene as N if allowed_transfer_type is APBS" do
+      ft_purpose_code = Factory(:ft_purpose_code, :approval_status => 'A', allowed_transfer_type: 'APBS')
+      ft_purpose_code.allow_only_registered_bene.should == 'N'
+    end
+  end
+  
 end
