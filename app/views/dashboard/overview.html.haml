@@ -302,6 +302,11 @@
         = image_tag 'sm_bank_accounts.jpg', :size => "80x80"
       %br
         = "Funds Transfer Customer Accounts"
+    .box  
+      = link_to '/sc_jobs' do
+        = image_tag 'jobs.png', :size => "80x80"
+      %br
+        = "Service Center Jobs"
 
 - if @current_user.group_names.include?("salary-upload")
   %h1 Salary Upload

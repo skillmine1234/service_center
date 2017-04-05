@@ -175,6 +175,19 @@ ServiceCenter::Application.routes.draw do
     end
   end
 
+  resources :unapproved_records
+  
+  resources :sc_jobs, except: :index do
+    collection do
+      get :index
+      put :index
+    end
+    member do
+      put :run
+      put :pause
+    end
+  end
+
   get 'su_incoming_file_summary' => 'su_incoming_records#incoming_file_summary'
   get 'ic_incoming_file_summary' => 'ic_incoming_records#incoming_file_summary'
   get 'ft_incoming_file_summary' => 'ft_incoming_records#incoming_file_summary'
