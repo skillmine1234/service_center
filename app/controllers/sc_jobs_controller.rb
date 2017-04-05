@@ -20,23 +20,27 @@ class ScJobsController < ApplicationController
   
   def run
     sc_job = ScJob.find(params[:id])
-    sc_job.run_now = 'Y'
-    if sc_job.save
+    if sc_job.run_now == 'N'
+      sc_job.update_column(:run_now, 'Y')
+      sc_job.update_column(:paused, 'N')
       flash[:alert] = 'Your job will start now!'
-    else
-      flash[:alert] = sc_job.errors.full_messages
     end
+  rescue ::ActiveRecord::ActiveRecordError => e
+    flash[:alert] = e.message
+  ensure
     redirect_to sc_jobs_path
   end
   
   def pause
     sc_job = ScJob.find(params[:id])
-    sc_job.paused = 'Y'
-    if sc_job.save
-      flash[:alert] = 'Your job has been paused!'
-    else
-      flash[:alert] = sc_job.errors.full_messages
+    if sc_job.paused == 'N'
+      sc_job.update_column(:paused, 'Y')
+      sc_job.update_column(:run_now, 'N')
+      flash[:alert] = 'Your job will start now!'
     end
+  rescue ::ActiveRecord::ActiveRecordError => e
+    flash[:alert] = e.message
+  ensure
     redirect_to sc_jobs_path
   end
 

@@ -27,19 +27,21 @@ describe ScJobsController do
   end
   
   describe "PUT run" do
-    it "should update run_now field of the requested sc_job as Y" do
+    it "should update run_now and paused fields of the requested sc_job as Y" do
       sc_job = Factory(:sc_job, run_now: 'N')
       put :run, {:id => sc_job.id}
       sc_job.reload
       sc_job.run_now.should == 'Y'
+      sc_job.paused.should == 'N'
     end
   end
   
   describe "PUT pause" do
-    it "should update paused field of the requested sc_job as Y" do
+    it "should update paused and run_now fields of the requested sc_job as Y" do
       sc_job = Factory(:sc_job, paused: 'N')
       put :pause, {:id => sc_job.id}
       sc_job.reload
+      sc_job.run_now.should == 'N'
       sc_job.paused.should == 'Y'
     end
   end
