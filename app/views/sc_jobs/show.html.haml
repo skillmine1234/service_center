@@ -11,7 +11,7 @@
         %tr
           %td.label Service
           %td.value
-            = @sc_job.sc_service.name
+            = @sc_job.sc_service.try(:name)
           %td
         %tr
           %td.label Run At Hour
