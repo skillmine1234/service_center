@@ -333,22 +333,3 @@ ScFaultCode.seed_once(:fault_code) do |s|
  s.occurs_when = 'An upstream service returned an unexpected error'
  s.remedial_action = 'Contact Support'
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
