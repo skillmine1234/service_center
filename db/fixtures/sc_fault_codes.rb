@@ -171,7 +171,7 @@ ScFaultCode.seed_once(:fault_code) do |s|
  s.fault_reason = 'Outward Transaction Rejected'
  s.fault_kind = 'B'
  s.occurs_when = 'Transaction is in error due to issue with the transaction details.'
- s.remedial_action = 'Give back money'
+ s.remedial_action = 'Give back money'
 end
 
 ScFaultCode.seed_once(:fault_code) do |s|
