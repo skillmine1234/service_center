@@ -10,7 +10,7 @@ $(document).ready(function(){
          $('#fault_reason').text('Fault Reason : ' + (data["reason"] || 'not found'));
        },
        error: function(data){
-        $(parent).html('<span>Error in loading Plans</span>');
+        $(parent).html('<span>Error in loading fault reason</span>');
       }
     });
     
