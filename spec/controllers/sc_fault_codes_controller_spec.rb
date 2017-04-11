@@ -25,4 +25,14 @@ describe ScFaultCodesController do
       assigns(:sc_fault_code).should eq(sc_fault_code)
     end
   end
+
+  context "GET get fault reason" do
+    it "gets the fault reason" do
+      sc_fault_code = Factory(:sc_fault_code)
+      get :get_fault_reason, :fault_code => sc_fault_code.fault_code, :format => :json
+      response.should be_ok
+      body = JSON.parse(response.body)
+      body.should == {"reason" => sc_fault_code.fault_reason}
+    end
+  end
 end

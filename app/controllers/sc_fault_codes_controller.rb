@@ -6,7 +6,7 @@ class ScFaultCodesController < ApplicationController
   include ApplicationHelper
 
   def show
-    @sc_fault_code = ScFaultCode.unscoped.find_by_id(params[:id])
+    @sc_fault_code = ScFaultCode.find_by_id(params[:id])
     respond_to do |format|
       format.json { render json: @sc_fault_code }
       format.html 
@@ -23,10 +23,9 @@ class ScFaultCodesController < ApplicationController
   end
   
   def get_fault_reason
-    sc_fault_code = ScFaultCode.unscoped.find_by(fault_code: params[:fault_code])
+    sc_fault_code = ScFaultCode.find_by(fault_code: params[:fault_code])
     respond_to do |format|
-      format.json { render json: (sc_fault_code.nil? ? '' : sc_fault_code.fault_reason) }
-      format.html
+      format.json { render json: ({reason: sc_fault_code.try(:fault_reason)}) }
     end
   end
 
