@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170320104442) do
+ActiveRecord::Schema.define(version: 20170412180704) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -281,6 +281,7 @@ ActiveRecord::Schema.define(version: 20170320104442) do
 
   add_index "bm_bill_payments", ["app_id", "req_no", "attempt_no"], name: "attepmt_index_bill_payments", unique: true
   add_index "bm_bill_payments", ["billpay_rep_ref"], name: "uk_billpay_rep_ref", unique: true
+  add_index "bm_bill_payments", ["status", "txn_kind", "req_timestamp"], name: "bm_bill_payments_01"
 
   create_table "bm_billers", force: :cascade do |t|
     t.string   "biller_code",       limit: 100,               null: false
@@ -995,6 +996,7 @@ ActiveRecord::Schema.define(version: 20170320104442) do
     t.string   "validation_ref",        limit: 50
   end
 
+  add_index "ecol_transactions", ["customer_code", "status"], name: "ecol_transactions_02"
   add_index "ecol_transactions", ["customer_code", "transfer_unique_no", "status", "pending_approval", "notify_status", "validation_status", "settle_status", "transfer_type", "bene_account_no", "transfer_timestamp", "transfer_amt"], name: "ECOL_TRANSACTIONS_01"
   add_index "ecol_transactions", ["transfer_type", "transfer_unique_no"], name: "ecol_transaction_unique_index", unique: true
 
@@ -2837,6 +2839,8 @@ ActiveRecord::Schema.define(version: 20170320104442) do
 
   add_index "rc_transfers", ["batch_no"], name: "rc_transfers_01"
   add_index "rc_transfers", ["rc_app_id"], name: "index_rc_transfers_on_rc_app_id"
+  add_index "rc_transfers", ["status_code", "notify_status", "rc_app_id", "app_code"], name: "rc_transfers_03"
+  add_index "rc_transfers", ["status_code"], name: "rc_transfers_02"
 
   create_table "reconciled_returns", force: :cascade do |t|
     t.string   "txn_type",        limit: 10,   null: false
