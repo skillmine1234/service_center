@@ -533,3 +533,211 @@ ScBackendResponseCode.seed_once(:sc_backend_code, :response_code) do |s|
  s.fault_code = 'ns:E502'
  s.approval_status = 'A' 
 end
+
+ScBackendResponseCode.seed_once(:sc_backend_code, :response_code) do |s|
+ s.is_enabled = 'Y'
+ s.sc_backend_code = 'ATOM'
+ s.response_code = 'atom:E404'
+ s.fault_code = 'atom:E404'
+ s.approval_status = 'A' 
+end
+
+ScBackendResponseCode.seed_once(:sc_backend_code, :response_code) do |s|
+ s.is_enabled = 'Y'
+ s.sc_backend_code = 'ATOM'
+ s.response_code = 'npci:E61'
+ s.fault_code = 'npci:E61'
+ s.approval_status = 'A' 
+end
+
+ScBackendResponseCode.seed_once(:sc_backend_code, :response_code) do |s|
+ s.is_enabled = 'Y'
+ s.sc_backend_code = 'ATOM'
+ s.response_code = 'npci:E68'
+ s.fault_code = 'npci:E68'
+ s.approval_status = 'A' 
+end
+
+ScBackendResponseCode.seed_once(:sc_backend_code, :response_code) do |s|
+ s.is_enabled = 'Y'
+ s.sc_backend_code = 'ATOM'
+ s.response_code = 'npci:E91'
+ s.fault_code = 'npci:E91'
+ s.approval_status = 'A' 
+end
+
+ScBackendResponseCode.seed_once(:sc_backend_code, :response_code) do |s|
+ s.is_enabled = 'Y'
+ s.sc_backend_code = 'ATOM'
+ s.response_code = 'npci:EM1'
+ s.fault_code = 'npci:EM1'
+ s.approval_status = 'A' 
+end
+
+ScBackendResponseCode.seed_once(:sc_backend_code, :response_code) do |s|
+ s.is_enabled = 'Y'
+ s.sc_backend_code = 'ATOM'
+ s.response_code = 'npci:EM2'
+ s.fault_code = 'npci:EM2'
+ s.approval_status = 'A' 
+end
+
+ScBackendResponseCode.seed_once(:sc_backend_code, :response_code) do |s|
+ s.is_enabled = 'Y'
+ s.sc_backend_code = 'ATOM'
+ s.response_code = 'npci:EM3'
+ s.fault_code = 'npci:EM3'
+ s.approval_status = 'A' 
+end
+
+ScBackendResponseCode.seed_once(:sc_backend_code, :response_code) do |s|
+ s.is_enabled = 'Y'
+ s.sc_backend_code = 'ATOM'
+ s.response_code = 'npci:EM4'
+ s.fault_code = 'npci:EM4'
+ s.approval_status = 'A' 
+end
+
+ScBackendResponseCode.seed_once(:sc_backend_code, :response_code) do |s|
+ s.is_enabled = 'Y'
+ s.sc_backend_code = 'ATOM'
+ s.response_code = 'npci:EM5'
+ s.fault_code = 'npci:EM5'
+ s.approval_status = 'A' 
+end
+
+ScBackendResponseCode.seed_once(:sc_backend_code, :response_code) do |s|
+ s.is_enabled = 'Y'
+ s.sc_backend_code = 'ATOM'
+ s.response_code = 'npci:E08'
+ s.fault_code = 'npci:E08'
+ s.approval_status = 'A' 
+end
+
+ScBackendResponseCode.seed_once(:sc_backend_code, :response_code) do |s|
+ s.is_enabled = 'Y'
+ s.sc_backend_code = 'ATOM'
+ s.response_code = 'npci:EMC'
+ s.fault_code = 'ns:E405'
+ s.approval_status = 'A' 
+end
+
+ScBackendResponseCode.seed_once(:sc_backend_code, :response_code) do |s|
+ s.is_enabled = 'Y'
+ s.sc_backend_code = 'ATOM'
+ s.response_code = 'npci:EMG'
+ s.fault_code = 'ns:E405'
+ s.approval_status = 'A' 
+end
+
+ScBackendResponseCode.seed_once(:sc_backend_code, :response_code) do |s|
+ s.is_enabled = 'Y'
+ s.sc_backend_code = 'ATOM'
+ s.response_code = 'npci:EMP'
+ s.fault_code = 'ns:E405'
+ s.approval_status = 'A' 
+end
+
+ScBackendResponseCode.seed_once(:sc_backend_code, :response_code) do |s|
+ s.is_enabled = 'Y'
+ s.sc_backend_code = 'ATOM'
+ s.response_code = 'npci:E40'
+ s.fault_code = 'ns:E406'
+ s.approval_status = 'A' 
+end
+
+ScBackendResponseCode.seed_once(:sc_backend_code, :response_code) do |s|
+ s.is_enabled = 'Y'
+ s.sc_backend_code = 'ATOM'
+ s.response_code = 'npci:E52'
+ s.fault_code = 'ns:E406'
+ s.approval_status = 'A' 
+end
+
+ScBackendResponseCode.seed_once(:sc_backend_code, :response_code) do |s|
+ s.is_enabled = 'Y'
+ s.sc_backend_code = 'ATOM'
+ s.response_code = 'npci:E53'
+ s.fault_code = 'ns:E406'
+ s.approval_status = 'A' 
+end
+
+ScBackendResponseCode.seed_once(:sc_backend_code, :response_code) do |s|
+ s.is_enabled = 'Y'
+ s.sc_backend_code = 'ATOM'
+ s.response_code = 'npci:E57'
+ s.fault_code = 'ns:E406'
+ s.approval_status = 'A' 
+end
+
+ScBackendResponseCode.seed_once(:sc_backend_code, :response_code) do |s|
+ s.is_enabled = 'Y'
+ s.sc_backend_code = 'ATOM'
+ s.response_code = 'npci:EMA'
+ s.fault_code = 'ns:E406'
+ s.approval_status = 'A' 
+end
+
+ScBackendResponseCode.seed_once(:sc_backend_code, :response_code) do |s|
+ s.is_enabled = 'Y'
+ s.sc_backend_code = 'ATOM'
+ s.response_code = 'npci:EML'
+ s.fault_code = 'ns:E406'
+ s.approval_status = 'A' 
+end
+
+ScBackendResponseCode.seed_once(:sc_backend_code, :response_code) do |s|
+ s.is_enabled = 'Y'
+ s.sc_backend_code = 'ATOM'
+ s.response_code = 'atom:EA26'
+ s.fault_code = 'ns:E429'
+ s.approval_status = 'A' 
+end
+
+ScBackendResponseCode.seed_once(:sc_backend_code, :response_code) do |s|
+ s.is_enabled = 'Y'
+ s.sc_backend_code = 'ATOM'
+ s.response_code = 'npci:E51'
+ s.fault_code = 'ns:E402'
+ s.approval_status = 'A' 
+end
+
+ScBackendResponseCode.seed_once(:sc_backend_code, :response_code) do |s|
+ s.is_enabled = 'Y'
+ s.sc_backend_code = 'ATOM'
+ s.response_code = 'atom:E8037'
+ s.fault_code = 'ns:E402'
+ s.approval_status = 'A' 
+end
+
+ScBackendResponseCode.seed_once(:sc_backend_code, :response_code) do |s|
+ s.is_enabled = 'Y'
+ s.sc_backend_code = 'ATOM'
+ s.response_code = 'atom:EEXT_RSP9045'
+ s.fault_code = 'ns:E402'
+ s.approval_status = 'A' 
+end
+
+ScBackendResponseCode.seed_once(:sc_backend_code, :response_code) do |s|
+ s.is_enabled = 'Y'
+ s.sc_backend_code = 'ATOM'
+ s.response_code = 'atom:EEXT_RSP9031'
+ s.fault_code = 'ns:E402'
+ s.approval_status = 'A' 
+end
+
+ScBackendResponseCode.seed_once(:sc_backend_code, :response_code) do |s|
+ s.is_enabled = 'Y'
+ s.sc_backend_code = 'ATOM'
+ s.response_code = 'atom:EEXT_RSP9086'
+ s.fault_code = 'ns:E402'
+ s.approval_status = 'A' 
+end
+
+ScBackendResponseCode.seed_once(:sc_backend_code, :response_code) do |s|
+ s.is_enabled = 'Y'
+ s.sc_backend_code = 'ATOM'
+ s.response_code = 'ns:E504'
+ s.fault_code = 'ns:E504'
+ s.approval_status = 'A' 
+end
