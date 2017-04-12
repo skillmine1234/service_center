@@ -21,7 +21,10 @@
         %tr
           %td.label Req No
           %td.value
-            = link_to @whitelisted_identity.created_for_req_no, inward_remittance_path(@whitelisted_identity.created_for_txn_id)
+            - if @whitelisted_identity.created_for_txn_id.nil?
+              = @whitelisted_identity.created_for_req_no
+            - else
+              = link_to @whitelisted_identity.created_for_req_no, inward_remittance_path(@whitelisted_identity.created_for_txn_id)
         %tr
           %td.label Remitter Or Beneficiary
           %td.value
