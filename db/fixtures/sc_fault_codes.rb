@@ -447,15 +447,7 @@ ScFaultCode.seed_once(:fault_code) do |s|
 end
 
 ScFaultCode.seed_once(:fault_code) do |s|
- s.fault_code = 'flex:E31'
- s.fault_reason = ' '
- s.fault_kind = 'B'
- s.occurs_when = ' '
- s.remedial_action = ' '
-end
-
-ScFaultCode.seed_once(:fault_code) do |s|
- s.fault_code = 'NPCI:100'
+ s.fault_code = 'npci:E100'
  s.fault_reason = 'NPCI or Bene Bank Tech failure'
  s.fault_kind = 'B'
  s.occurs_when = ' '
