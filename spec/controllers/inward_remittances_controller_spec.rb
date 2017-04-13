@@ -15,13 +15,13 @@ describe InwardRemittancesController do
     it "assigns all inward_remittances as @inward_remittances" do
       inward_remittance = Factory(:inward_remittance)
       get :index
-      assigns(:inward_remittances).should eq([inward_remittance])
+      assigns(:records).should eq([inward_remittance])
     end    
 
     it "assigns all inward_remittances with particular request_no" do
       inward_remittance = Factory(:inward_remittance)
       get :index, {:req_no => inward_remittance.req_no, partner_code: inward_remittance.partner_code}
-      assigns(:inward_remittances).should eq([inward_remittance])
+      assigns(:records).should eq([inward_remittance])
     end
   end
 

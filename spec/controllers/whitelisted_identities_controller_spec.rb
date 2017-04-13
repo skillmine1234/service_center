@@ -60,13 +60,13 @@ describe WhitelistedIdentitiesController do
       it "assigns all whitelisted identities as @whitelisted_identities" do
         whitelisted_identity = Factory(:whitelisted_identity, :approval_status => 'A')
         get :index
-        assigns(:whitelisted_identities).should eq([whitelisted_identity])
+        assigns(:records).should eq([whitelisted_identity])
       end
       
       it "assigns all unapproved whitelisted identities as @whitelisted identities when approval_status is passed" do
         whitelisted_identity = Factory(:whitelisted_identity, :approval_status => 'U')
         get :index, :approval_status => 'U'
-        assigns(:whitelisted_identities).should eq([whitelisted_identity])
+        assigns(:records).should eq([whitelisted_identity])
       end
     end
 
