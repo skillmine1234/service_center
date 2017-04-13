@@ -16,7 +16,7 @@ class InwardRemittancesController < ApplicationController
       # rest parameters are in post
       @searcher = InwardRemittanceSearcher.new(search_params)
     end
-    @inward_remittances = @searcher.paginate
+    @records = @searcher.paginate
   end
   
   # to reuse the view

@@ -1,12 +1,8 @@
 %br
 %h1 Inward Remittances
-%h2.collapsible
-  Advanced Search
-  %span.caret
-.collapsible-content
-  = render :partial => 'advanced_search'
 %br
-= will_paginate @inward_remittances
+= render :partial => 'advanced_search'
+%br
 %br
 %table.table.table-bordered.table-striped.table-hover
   .thead
@@ -36,31 +32,31 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Response Date
   .tbody
-    - @inward_remittances.each do |inward_remittance|   
+    - @records.each do |record|   
       %tr
         %td{:style=>'text-align:left;'}
-          = link_to 'Show', inward_remittance
+          = link_to 'Show', record
         %td{:style=>'text-align:left;'}
-          = inward_remittance.status_code
+          = record.status_code
         %td{:style=>'text-align:left;'}
-          = inward_remittance.req_no
+          = record.req_no
         %td{:style=>'text-align:left;'}
-          = inward_remittance.partner_code.to_s + "-" +inward_remittance.partner.try(:name).to_s
+          = record.partner_code.to_s + "-" +record.partner.try(:name).to_s
         %td{:style=>'text-align:left;'}
-          = inward_remittance.bank_ref
+          = record.bank_ref
         %td{:style=>'text-align:left;'}
-          = inward_remittance.rmtr_full_name
+          = record.rmtr_full_name
         %td{:style=>'text-align:left;'}
-          = inward_remittance.bene_full_name
+          = record.bene_full_name
         %td{:style=>'text-align:left;'}
-          = inward_remittance.req_transfer_type
+          = record.req_transfer_type
         %td{:style=>'text-align:left;'}
-          = inward_remittance.transfer_type
+          = record.transfer_type
         %td{:style=>'text-align:left;'}
-          = inward_remittance.transfer_amount
+          = record.transfer_amount
         %td{:style=>'text-align:left;'}
-          = inward_remittance.notify_status
+          = record.notify_status
         %td{:style=>'text-align:left;'}
-          = inward_remittance.req_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p")
+          = record.req_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p")
         %td{:style=>'text-align:left;'}
-          = inward_remittance.rep_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p")
+          = record.rep_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p")

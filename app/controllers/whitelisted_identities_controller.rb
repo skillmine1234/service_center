@@ -70,7 +70,7 @@ class WhitelistedIdentitiesController < ApplicationController
       # rest parameters are in post
       @searcher = WhitelistedIdentitySearcher.new(search_params)
     end
-    @whitelisted_identities = @searcher.paginate
+    @records = @searcher.paginate
   end
   
   def show
