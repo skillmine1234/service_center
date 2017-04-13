@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170412180704) do
+ActiveRecord::Schema.define(version: 20170413100501) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -2839,8 +2839,7 @@ ActiveRecord::Schema.define(version: 20170412180704) do
 
   add_index "rc_transfers", ["batch_no"], name: "rc_transfers_01"
   add_index "rc_transfers", ["rc_app_id"], name: "index_rc_transfers_on_rc_app_id"
-  add_index "rc_transfers", ["status_code", "notify_status", "rc_app_id", "app_code"], name: "rc_transfers_03"
-  add_index "rc_transfers", ["status_code"], name: "rc_transfers_02"
+  add_index "rc_transfers", ["status_code", "notify_status", "rc_app_id", "app_code", "broker_uuid"], name: "rc_transfers_02"
 
   create_table "reconciled_returns", force: :cascade do |t|
     t.string   "txn_type",        limit: 10,   null: false
