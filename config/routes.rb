@@ -131,7 +131,6 @@ ServiceCenter::Application.routes.draw do
       post 'change_status'
     end
   end
-  resources :sc_unapproved_records
 
   namespace :api do
     namespace :v1 do

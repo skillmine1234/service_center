@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170413100501) do
+ActiveRecord::Schema.define(version: 20170413135248) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -3012,6 +3012,24 @@ ActiveRecord::Schema.define(version: 20170413100501) do
     t.datetime "updated_at"
   end
 
+  create_table "sc_backend_response_codes", force: :cascade do |t|
+    t.string   "is_enabled",       limit: 1,                null: false
+    t.string   "sc_backend_code",  limit: 20,               null: false
+    t.string   "response_code",    limit: 50,               null: false
+    t.string   "fault_code",       limit: 50,               null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.string   "created_by",       limit: 20
+    t.string   "updated_by",       limit: 20
+    t.integer  "lock_version",                default: 0,   null: false
+    t.string   "approval_status",  limit: 1,  default: "U", null: false
+    t.string   "last_action",      limit: 1,  default: "C"
+    t.integer  "approved_id"
+    t.integer  "approved_version"
+  end
+
+  add_index "sc_backend_response_codes", ["sc_backend_code", "response_code", "approval_status"], name: "sc_backend_response_codes_01", unique: true
+
   create_table "sc_backend_stats", force: :cascade do |t|
     t.string   "code",                    limit: 20,  null: false
     t.integer  "consecutive_failure_cnt",             null: false
@@ -3071,6 +3089,28 @@ ActiveRecord::Schema.define(version: 20170413100501) do
 
   add_index "sc_backends", ["code", "approval_status"], name: "sc_backends_01", unique: true
 
+  create_table "sc_fault_codes", force: :cascade do |t|
+    t.string   "fault_code",      limit: 50,   null: false
+    t.string   "fault_reason",    limit: 1000, null: false
+    t.string   "fault_kind",      limit: 1,    null: false
+    t.string   "occurs_when",     limit: 1000, null: false
+    t.string   "remedial_action", limit: 1000, null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  create_table "sc_jobs", force: :cascade do |t|
+    t.string   "code",          limit: 100, null: false
+    t.integer  "sc_service_id",             null: false
+    t.integer  "run_at_hour"
+    t.datetime "last_run_at"
+    t.string   "last_run_by",   limit: 100
+    t.string   "run_now",       limit: 1
+    t.string   "paused",        limit: 1
+  end
+
+  add_index "sc_jobs", ["code", "sc_service_id"], name: "sc_jobs_01", unique: true
+
   create_table "sc_services", force: :cascade do |t|
     t.string "code", limit: 50, null: false
     t.string "name", limit: 50, null: false
@@ -3078,13 +3118,6 @@ ActiveRecord::Schema.define(version: 20170413100501) do
 
   add_index "sc_services", ["code"], name: "index_sc_services_on_code", unique: true
   add_index "sc_services", ["name"], name: "index_sc_services_on_name", unique: true
-
-  create_table "sc_unapproved_records", force: :cascade do |t|
-    t.integer  "sc_approvable_id"
-    t.string   "sc_approvable_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "sm_audit_logs", force: :cascade do |t|
     t.string   "req_no",            limit: 32,   null: false
