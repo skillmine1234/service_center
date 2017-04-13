@@ -415,14 +415,6 @@ ScFaultCode.seed_once(:fault_code) do |s|
 end
 
 ScFaultCode.seed_once(:fault_code) do |s|
- s.fault_code = 'npci:EMC'
- s.fault_reason = 'Invalid Transfer Type'
- s.fault_kind = 'B'
- s.occurs_when = 'The Transaction Type is not from the list specified'
- s.remedial_action = 'Retry the transaction with a valid transferType or with ANY'
-end
-
-ScFaultCode.seed_once(:fault_code) do |s|
  s.fault_code = 'ns:E406'
  s.fault_reason = 'Beneficiary Not Acceptable'
  s.fault_kind = 'B'
@@ -436,4 +428,60 @@ ScFaultCode.seed_once(:fault_code) do |s|
  s.fault_kind = 'B'
  s.occurs_when = 'Number of requests that have come from you have exceeded the permissible limit set by an upstream system'
  s.remedial_action = 'Retry next day'
+end
+
+ScFaultCode.seed_once(:fault_code) do |s|
+ s.fault_code = 'ns:E405'
+ s.fault_reason = 'Invalid Transfer Type'
+ s.fault_kind = 'B'
+ s.occurs_when = 'The Transaction Type is not from the list specified'
+ s.remedial_action = 'Retry the transaction with a valid transferType or with ANY'
+end
+
+ScFaultCode.seed_once(:fault_code) do |s|
+ s.fault_code = 'flex:E0010'
+ s.fault_reason = ' '
+ s.fault_kind = 'B'
+ s.occurs_when = ' '
+ s.remedial_action = ' '
+end
+
+ScFaultCode.seed_once(:fault_code) do |s|
+ s.fault_code = 'flex:E31'
+ s.fault_reason = ' '
+ s.fault_kind = 'B'
+ s.occurs_when = ' '
+ s.remedial_action = ' '
+end
+
+ScFaultCode.seed_once(:fault_code) do |s|
+ s.fault_code = 'NPCI:100'
+ s.fault_reason = 'NPCI or Bene Bank Tech failure'
+ s.fault_kind = 'B'
+ s.occurs_when = ' '
+ s.remedial_action = 'NPCI/Beneficiary Bank Reject. Retry with correct details for IMPS or Try NEFT'
+end
+
+ScFaultCode.seed_once(:fault_code) do |s|
+ s.fault_code = 'atom:E1000'
+ s.fault_reason = 'Incorrect Beneficiary account details'
+ s.fault_kind = 'B'
+ s.occurs_when = ' '
+ s.remedial_action = 'Retry with Correct Customer Details'
+end
+
+ScFaultCode.seed_once(:fault_code) do |s|
+ s.fault_code = 'atom:E1002'
+ s.fault_reason = 'YBL system issue Retry'
+ s.fault_kind = 'B'
+ s.occurs_when = ' '
+ s.remedial_action = 'Retry after 15 or 30 minutes'
+end
+
+ScFaultCode.seed_once(:fault_code) do |s|
+ s.fault_code = 'ns:E2000'
+ s.fault_reason = 'YBL system issue. Contact Yes Bank'
+ s.fault_kind = 'B'
+ s.occurs_when = ' '
+ s.remedial_action = 'Contact YES Bank'
 end
