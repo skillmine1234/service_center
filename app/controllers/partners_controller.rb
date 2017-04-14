@@ -51,8 +51,9 @@ class PartnersController < ApplicationController
     if params[:advanced_search].present?
       @partners = find_partners(params).order("id desc")
     else
-      @partners ||= Partner.order("id desc").paginate(:per_page => 10, :page => params[:page])
+      @partners ||= Partner.order("id desc")
     end
+    @partners = @partners.paginate(:per_page => 10, :page => params[:page])
     @partners_count = @partners.count
   end
 
