@@ -30,7 +30,7 @@ class Group < ActiveRecord::Base
     when "recurring-transfer"
       ['RcTransferUnapprovedRecord','RcTransfer','RcTransferSchedule','RcAuditStep','RcApp']
     when "sc-backend"
-      ['ScBackend', 'ScUnapprovedRecord']
+      ['ScBackend', 'ScUnapprovedRecord','ScFaultCode','ScBackendResponseCode']
     when "rr"
       ['RrUnapprovedRecord','IncomingFile','IncomingFileRecord','RrIncomingFile','RrIncomingRecord','ReconciledReturn']
     else

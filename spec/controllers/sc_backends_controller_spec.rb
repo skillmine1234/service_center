@@ -201,13 +201,13 @@ describe ScBackendsController do
       sc_backend2 = Factory(:sc_backend, :approval_status => 'U', :code => '7772', :approved_version => sc_backend1.lock_version, :approved_id => sc_backend1.id, :created_by => 666)
       # the following line is required for reload to get triggered (TODO)
       sc_backend1.approval_status.should == 'A'
-      ScUnapprovedRecord.count.should == 1
+      UnapprovedRecord.count.should == 1
       put :approve, {:id => sc_backend2.id}
-      ScUnapprovedRecord.count.should == 0
+      UnapprovedRecord.count.should == 0
       sc_backend1.reload
       sc_backend1.code.should == '7772'
       sc_backend1.updated_by.should == "666"
-      ScUnapprovedRecord.find_by_id(sc_backend2.id).should be_nil
+      UnapprovedRecord.find_by_id(sc_backend2.id).should be_nil
     end
 
     it "(create) unapproved record can be approved" do
@@ -215,9 +215,9 @@ describe ScBackendsController do
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
       sc_backend = Factory(:sc_backend, :code => '7772', :approval_status => 'U')
-      ScUnapprovedRecord.count.should == 1
+      UnapprovedRecord.count.should == 1
       put :approve, {:id => sc_backend.id}
-      ScUnapprovedRecord.count.should == 0
+      UnapprovedRecord.count.should == 0
       sc_backend.reload
       sc_backend.code.should == '7772'
       sc_backend.approval_status.should == 'A'

@@ -4,7 +4,6 @@ describe ScBackend do
   context 'association' do
     it { should belong_to(:created_user) }
     it { should belong_to(:updated_user) }
-    it { should have_one(:sc_unapproved_record) }
     it { should belong_to(:unapproved_record) }
     it { should belong_to(:approved_record) }
     it { should have_one(:sc_backend_stat) }

@@ -142,6 +142,21 @@ ServiceCenter::Application.routes.draw do
   resources :inw_guidelines
   resources :ecol_apps
   resources :partner_lcy_rates
+  
+  resources :sc_backend_response_codes, except: :index do
+    collection do
+      get :index
+      put :index
+    end
+  end
+  
+  resources :sc_fault_codes, except: :index do
+    collection do
+      get :index
+      put :index
+      get :get_fault_reason
+    end
+  end
 
   get 'su_incoming_file_summary' => 'su_incoming_records#incoming_file_summary'
   get 'ic_incoming_file_summary' => 'ic_incoming_records#incoming_file_summary'
@@ -269,6 +284,10 @@ ServiceCenter::Application.routes.draw do
   put '/ecol_apps/:id/approve' => "ecol_apps#approve"
   get '/partner_lcy_rates/:id/audit_logs' => 'partner_lcy_rates#audit_logs'
   put '/partner_lcy_rates/:id/approve' => "partner_lcy_rates#approve"
+
+  get '/sc_backend_response_codes/:id/audit_logs' => 'sc_backend_response_codes#audit_logs'
+  put '/sc_backend_response_codes/:id/approve' => "sc_backend_response_codes#approve"
+  
   root :to => 'dashboard#overview'
 
   # See how all your routes lay out with "rake routes"

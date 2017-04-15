@@ -5,6 +5,8 @@ class ScBackendsController < ApplicationController
   respond_to :json
   include ApplicationHelper
   include ScBackendsHelper
+  
+  include Approval2::ControllerAdditions
 
   def index
     if params[:advanced_search].present?
@@ -105,18 +107,7 @@ class ScBackendsController < ApplicationController
   end
 
   def approve
-    @sc_backend = ScBackend.unscoped.find(params[:id]) rescue nil
-    ScBackend.transaction do
-      approval = @sc_backend.approve
-      if @sc_backend.save and approval.empty?
-        flash[:alert] = "SC Backend record was approved successfully"
-      else
-        msg = approval.empty? ? @sc_backend.errors.full_messages : @sc_backend.errors.full_messages << approval
-        flash[:alert] = msg
-        raise ActiveRecord::Rollback
-      end
-    end
-    redirect_to @sc_backend
+    redirect_to unapproved_records_path(group_name: 'sc-backend')
   end
 
   private

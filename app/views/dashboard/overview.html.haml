@@ -430,7 +430,7 @@
   %h1 Service Center Backends
   .slide-container
     .box  
-      = link_to '/sc_unapproved_records' do
+      = link_to '/unapproved_records?group_name=sc-backend' do
         = image_tag 'work-list.jpg', :size => "80x80"
       %br
         = "Approval Worklist"
@@ -440,6 +440,16 @@
         = image_tag 'sc_backend.png', :size => "80x80"
       %br
         = "Service Center Backends"
+    .box  
+      = link_to '/sc_backend_response_codes' do
+        = image_tag 'sc_response_code.jpeg', :size => "80x80"
+      %br
+        = "Service Center Response Codes"
+    .box  
+      = link_to '/sc_fault_codes' do
+        = image_tag 'sc_fault_code.png', :size => "80x80"
+      %br
+        = "Service Center Fault Codes"
 - if @current_user.group_names.include?("rp")
   %h1 Reports
   .slide-container
