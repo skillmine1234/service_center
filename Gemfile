@@ -46,7 +46,7 @@ gem 'lazy_columns', :git=>'https://github.com/quantiguous/lazy_columns.git'
 gem 'seed-fu'
 gem 'net-scp'
 gem 'rp', :github => 'quantiguous/rp'
-gem 'approval2', '0.1.6'
+gem 'approval2', '0.1.7'
 
 # oracle is required only in production, CI tools run against sqlite3
 group :production do
