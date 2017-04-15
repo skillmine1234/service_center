@@ -1843,13 +1843,6 @@ ActiveRecord::Schema.define(version: 20170413100501) do
     t.integer  "approved_id"
   end
 
-  create_table "inw_unapproved_records", force: :cascade do |t|
-    t.integer  "inw_approvable_id"
-    t.string   "inw_approvable_type"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-  end
-
   create_table "inward_remittances", force: :cascade do |t|
     t.string   "req_no",                              null: false
     t.string   "req_version",            limit: 10,   null: false
