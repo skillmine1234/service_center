@@ -190,9 +190,11 @@ describe PartnersController do
       partner2 = Factory(:partner, :name => 'BarFoo', :approval_status => 'U', :approved_version => partner1.lock_version, :approved_id => partner1.id, :created_by => 666)
       # the following line is required for reload to get triggered (TODO)
       partner1.approval_status.should == 'A'
-      InwUnapprovedRecord.count.should == 1
+      UnapprovedRecord.count.should == 1
+      UnapprovedRecord.find_by_approvable_id(partner2.id).should_not be_nil
       put :approve, {:id => partner2.id}
-      InwUnapprovedRecord.count.should == 0
+      UnapprovedRecord.count.should == 0
+      UnapprovedRecord.find_by_approvable_id(partner2.id).should be_nil
       partner1.reload
       partner1.updated_by.should == "666"
       Partner.find_by_id(partner2.id).should be_nil
@@ -203,9 +205,11 @@ describe PartnersController do
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
       partner = Factory(:partner, :name => 'BarFoo', :approval_status => 'U')
-      InwUnapprovedRecord.count.should == 1
+      UnapprovedRecord.count.should == 1
+      UnapprovedRecord.find_by_approvable_id(partner.id).should_not be_nil
       put :approve, {:id => partner.id}
-      InwUnapprovedRecord.count.should == 0
+      UnapprovedRecord.count.should == 0
+      UnapprovedRecord.find_by_approvable_id(partner.id).should be_nil
       partner.reload
       partner.name.should == 'BarFoo'
       partner.approval_status.should == 'A'

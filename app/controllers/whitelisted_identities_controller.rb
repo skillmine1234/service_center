@@ -6,6 +6,7 @@ class WhitelistedIdentitiesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :block_inactive_user!
   respond_to :json
+  include Approval2::ControllerAdditions
   include ApplicationHelper
 
   def new    
@@ -91,21 +92,10 @@ class WhitelistedIdentitiesController < ApplicationController
   end
   
   def approve
-    @whitelisted_identity = WhitelistedIdentity.unscoped.find(params[:id]) rescue nil
-    WhitelistedIdentity.transaction do
-      approval = @whitelisted_identity.approve
-      if @whitelisted_identity.save and approval.empty?
-        flash[:alert] = "WhitelistedIdentity record was approved successfully"
-      else
-        msg = approval.empty? ? @whitelisted_identity.errors.full_messages : @whitelisted_identity.errors.full_messages << approval
-        flash[:alert] = msg
-        raise ActiveRecord::Rollback
-      end
-    end
   rescue ::Fault::ProcedureFault, OCIError => e
    flash[:alert] = "#{e.message}"
   ensure
-    redirect_to @whitelisted_identity
+    redirect_to unapproved_records_path(group_name: 'inward-remittance')
   end
 
   def ratify

@@ -4,7 +4,7 @@ describe UserGroup do
   context 'association' do
     it { should belong_to(:created_user) }
     it { should belong_to(:updated_user) }
-    it { should have_one(:inw_unapproved_record) }
+    it { should have_one(:unapproved_record_entry) }
     it { should belong_to(:unapproved_record) }
     it { should belong_to(:approved_record) }
   end
@@ -32,20 +32,20 @@ describe UserGroup do
     end
   end    
 
-  context "create_inw_unapproved_records" do 
-    it "should create inw_unapproved_record if the approval_status is 'U' and there is no previous record" do
+  context "create unapproved_records" do 
+    it "should create unapproved_record_entry if the approval_status is 'U' and there is no previous record" do
       user_group = Factory(:user_group, :approval_status => 'U')
       user_group.reload
-      user_group.inw_unapproved_record.should_not be_nil
-      record = user_group.inw_unapproved_record
+      user_group.unapproved_record_entry.should_not be_nil
+      record = user_group.unapproved_record_entry
       user_group.user_id = 8
       user_group.save
-      user_group.inw_unapproved_record.should == record
+      user_group.unapproved_record_entry.should == record
     end
 
-    it "should not create inw_unapproved_record if the approval_status is 'A'" do
+    it "should not create unapproved_record_entry if the approval_status is 'A'" do
       user_group = Factory(:user_group, :approval_status => 'A')
-      user_group.inw_unapproved_record.should be_nil
+      user_group.unapproved_record_entry.should be_nil
     end
   end  
 

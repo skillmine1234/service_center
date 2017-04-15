@@ -1,6 +1,5 @@
 class Partner < ActiveRecord::Base
-  include Approval
-  include InwApproval
+  include Approval2::ModelAdditions
 
   SERVICE_NAMES = %w(INW INW2)
 

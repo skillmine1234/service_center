@@ -183,9 +183,11 @@ describe InwGuidelinesController do
       inw_guideline2 = Factory(:inw_guideline, :code => 'BarFoo', :approval_status => 'U', :approved_version => inw_guideline1.lock_version, :approved_id => inw_guideline1.id, :created_by => 666)
       # the following line is required for reload to get triggered (TODO)
       inw_guideline1.approval_status.should == 'A'
-      InwUnapprovedRecord.count.should == 1
+      UnapprovedRecord.count.should == 1
+      UnapprovedRecord.find_by_approvable_id(inw_guideline2.id).should_not be_nil
       put :approve, {:id => inw_guideline2.id}
-      InwUnapprovedRecord.count.should == 0
+      UnapprovedRecord.count.should == 0
+      UnapprovedRecord.find_by_approvable_id(inw_guideline2.id).should be_nil
       inw_guideline1.reload
       inw_guideline1.code.should == 'BarFoo'
       inw_guideline1.updated_by.should == "666"

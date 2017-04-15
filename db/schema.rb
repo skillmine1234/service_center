@@ -3342,6 +3342,15 @@ ActiveRecord::Schema.define(version: 20170413100501) do
 
   add_index "udf_attributes", ["class_name", "attribute_name", "approval_status"], name: "udf_attribute_index_on_status", unique: true
 
+  create_table "unapproved_records", force: :cascade do |t|
+    t.integer  "approvable_id"
+    t.string   "approvable_type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "unapproved_records", ["approvable_id", "approvable_type"], name: "uk_unapproved_records", unique: true
+
   create_table "user_groups", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "group_id"

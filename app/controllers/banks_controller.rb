@@ -5,6 +5,7 @@ class BanksController < ApplicationController
   before_filter :authenticate_user!
   before_filter :block_inactive_user!
   respond_to :json
+  include Approval2::ControllerAdditions
   include ApplicationHelper
 
   def new
@@ -21,15 +22,6 @@ class BanksController < ApplicationController
       flash[:alert] = 'Bank successfully created and is pending for approval'
       redirect_to @bank
     end
-  end 
-
-  def edit
-    bank = Bank.unscoped.find_by_id(params[:id])
-    if bank.approval_status == 'A' && bank.unapproved_record.nil?
-      params = (bank.attributes).merge({:approved_id => bank.id,:approved_version => bank.lock_version})
-      bank = Bank.new(params)
-    end
-    @bank = bank  
   end
 
   def update
@@ -54,9 +46,8 @@ class BanksController < ApplicationController
   end
 
   def index
-    banks = (params[:approval_status].present? and params[:approval_status] == 'U') ? Bank.unscoped.where("approval_status =?",'U').order("id desc") : Bank.order("id desc")
-    @banks_count = banks.count
-    @banks = banks.paginate(:per_page => 10, :page => params[:page]) rescue []
+    @banks ||= Bank.order("id desc").paginate(:per_page => 10, :page => params[:page])
+    @banks_count = @banks.count
   end
 
   def audit_logs
@@ -65,18 +56,7 @@ class BanksController < ApplicationController
   end
 
   def approve
-    @bank = Bank.unscoped.find(params[:id]) rescue nil
-    Bank.transaction do
-      approval = @bank.approve
-      if @bank.save and approval.empty?
-        flash[:alert] = "Bank record was approved successfully"
-      else
-        msg = approval.empty? ? @bank.errors.full_messages : @bank.errors.full_messages << approval
-        flash[:alert] = msg
-        raise ActiveRecord::Rollback
-      end
-    end
-    redirect_to @bank
+    redirect_to unapproved_records_path(group_name: 'inward-remittance')
   end
 
   private

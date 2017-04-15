@@ -5,6 +5,7 @@ class PartnersController < ApplicationController
   before_filter :authenticate_user!
   before_filter :block_inactive_user!
   respond_to :json
+  include Approval2::ControllerAdditions
   include ApplicationHelper
   include PartnerHelper
 
@@ -23,15 +24,6 @@ class PartnersController < ApplicationController
       flash[:alert] = 'Partner successfully created and is pending for approval'
       redirect_to @partner
     end
-  end 
-
-  def edit
-    partner = Partner.unscoped.find_by_id(params[:id])
-    if partner.approval_status == 'A' && partner.unapproved_record.nil?
-      params = (partner.attributes).merge({:approved_id => partner.id,:approved_version => partner.lock_version})
-      partner = Partner.new(params)
-    end
-    @partner = partner   
   end
 
   def update
@@ -57,12 +49,11 @@ class PartnersController < ApplicationController
 
   def index
     if params[:advanced_search].present?
-      partners = find_partners(params).order("id desc")
+      @partners = find_partners(params).order("id desc")
     else
-      partners = (params[:approval_status].present? and params[:approval_status] == 'U') ? Partner.unscoped.where("approval_status =?",'U').order("id desc") : Partner.order("id desc")
+      @partners ||= Partner.order("id desc").paginate(:per_page => 10, :page => params[:page])
     end
-    @partners_count = partners.count
-    @partners = partners.paginate(:per_page => 10, :page => params[:page]) rescue []
+    @partners_count = @partners.count
   end
 
   def audit_logs
@@ -71,18 +62,7 @@ class PartnersController < ApplicationController
   end
   
   def approve
-    @partner = Partner.unscoped.find(params[:id]) rescue nil
-    Partner.transaction do
-      approval = @partner.approve
-      if @partner.save and approval.empty?
-        flash[:alert] = "Partner record was approved successfully"
-      else
-        msg = approval.empty? ? @partner.errors.full_messages : @partner.errors.full_messages << approval
-        flash[:alert] = msg
-        raise ActiveRecord::Rollback
-      end
-    end
-    redirect_to @partner
+    redirect_to unapproved_records_path(group_name: 'inward-remittance')
   end
 
   private

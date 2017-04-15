@@ -1,6 +1,5 @@
 class UserGroup < ActiveRecord::Base
-  include Approval
-  include InwApproval
+  include Approval2::ModelAdditions
   
   belongs_to :user
   belongs_to :group

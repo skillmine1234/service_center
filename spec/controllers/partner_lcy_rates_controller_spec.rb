@@ -177,9 +177,11 @@ describe PartnerLcyRatesController do
       partner_lcy_rate2 = Factory(:partner_lcy_rate, :rate => 1, :approval_status => 'U', :approved_version => partner_lcy_rate1.lock_version, :approved_id => partner_lcy_rate1.id, :created_by => 666)
       # the following line is required for reload to get triggered (TODO)
       partner_lcy_rate1.approval_status.should == 'A'
-      InwUnapprovedRecord.count.should == 1
+      UnapprovedRecord.count.should == 1
+      UnapprovedRecord.find_by_approvable_id(partner_lcy_rate2.id).should_not be_nil
       put :approve, {:id => partner_lcy_rate2.id}
-      InwUnapprovedRecord.count.should == 0
+      UnapprovedRecord.count.should == 0
+      UnapprovedRecord.find_by_approvable_id(partner_lcy_rate2.id).should be_nil
       partner_lcy_rate1.reload
       partner_lcy_rate1.rate.should == 1
       partner_lcy_rate1.updated_by.should == "666"

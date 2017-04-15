@@ -5,6 +5,7 @@ class PartnerLcyRatesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :block_inactive_user!
   respond_to :json
+  include Approval2::ControllerAdditions
   include ApplicationHelper
   include PartnerLcyRateHelper
 
@@ -20,15 +21,6 @@ class PartnerLcyRatesController < ApplicationController
       flash[:alert] = 'Partner Lcy Rate successfully created and is pending for approval'
       redirect_to @partner_lcy_rate
     end
-  end 
-
-  def edit
-    partner_lcy_rate = PartnerLcyRate.unscoped.find_by_id(params[:id])
-    if partner_lcy_rate.approval_status == 'A' && partner_lcy_rate.unapproved_record.nil?
-      params = (partner_lcy_rate.attributes).merge({:approved_id => partner_lcy_rate.id,:approved_version => partner_lcy_rate.lock_version})
-      partner_lcy_rate = PartnerLcyRate.new(params)
-    end
-    @partner_lcy_rate = partner_lcy_rate   
   end
 
   def update
@@ -54,12 +46,11 @@ class PartnerLcyRatesController < ApplicationController
 
   def index
     if params[:advanced_search].present?
-      partner_lcy_rates = find_partner_lcy_rates(params).order("id desc")
+      @partner_lcy_rates = find_partner_lcy_rates(params).order("id desc").paginate(:per_page => 10, :page => params[:page])
     else
-      partner_lcy_rates = (params[:approval_status].present? and params[:approval_status] == 'U') ? PartnerLcyRate.unscoped.where("approval_status =?",'U').order("id desc") : PartnerLcyRate.order("id desc")
+      @partner_lcy_rates ||= PartnerLcyRate.order("id desc").paginate(:per_page => 10, :page => params[:page])
     end
-    @partner_lcy_rates_count = partner_lcy_rates.count
-    @partner_lcy_rates = partner_lcy_rates.paginate(:per_page => 10, :page => params[:page]) rescue []
+    @partner_lcy_rates_count = @partner_lcy_rates.count
   end
 
   def audit_logs
@@ -68,18 +59,7 @@ class PartnerLcyRatesController < ApplicationController
   end
   
   def approve
-    @partner_lcy_rate = PartnerLcyRate.unscoped.find(params[:id]) rescue nil
-    PartnerLcyRate.transaction do
-      approval = @partner_lcy_rate.approve
-      if approval.empty?
-        flash[:alert] = "Partner Lcy Rate record was approved successfully"
-      else
-        msg = @partner_lcy_rate.errors.full_messages << approval
-        flash[:alert] = msg
-        raise ActiveRecord::Rollback
-      end
-    end
-    redirect_to @partner_lcy_rate
+    redirect_to unapproved_records_path(group_name: 'inward-remittance')
   end
 
   private

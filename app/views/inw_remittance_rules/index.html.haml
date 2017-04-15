@@ -16,7 +16,7 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Known Salutations For Individuals
   .tbody
-    - @rules.each do |inw_remittance_rule|
+    - @inw_remittance_rules.each do |inw_remittance_rule|
       %tr
         %td{:style=>'text-align:left;'}
           = link_to 'Show', inw_remittance_rule

@@ -102,9 +102,11 @@ describe WhitelistedIdentitiesController do
        whitelisted_identity2 = Factory(:whitelisted_identity, :approval_status => 'U', :full_name => 'MyString', :approved_version => whitelisted_identity1.lock_version, :approved_id => whitelisted_identity1.id, :created_by => 666)
        # the following line is required for reload to get triggered (TODO)
        whitelisted_identity1.approval_status.should == 'A'
-       InwUnapprovedRecord.count.should == 1
+       UnapprovedRecord.count.should == 1
+       UnapprovedRecord.find_by_approvable_id(whitelisted_identity2.id).should_not be_nil
        put :approve, {:id => whitelisted_identity2.id}
-       InwUnapprovedRecord.count.should == 0
+       UnapprovedRecord.count.should == 0
+       UnapprovedRecord.find_by_approvable_id(whitelisted_identity2.id).should be_nil
        whitelisted_identity1.reload
        whitelisted_identity1.full_name.should == 'MyString'
        whitelisted_identity1.updated_by.should == "666"
@@ -116,9 +118,11 @@ describe WhitelistedIdentitiesController do
        user_role.delete
        Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
        whitelisted_identity = Factory(:whitelisted_identity, :full_name => 'MyString', :approval_status => 'U')
-       InwUnapprovedRecord.count.should == 1
+       UnapprovedRecord.count.should == 1
+       UnapprovedRecord.find_by_approvable_id(whitelisted_identity.id).should_not be_nil
        put :approve, {:id => whitelisted_identity.id}
-       InwUnapprovedRecord.count.should == 0
+       UnapprovedRecord.count.should == 0
+       UnapprovedRecord.find_by_approvable_id(whitelisted_identity.id).should be_nil
        whitelisted_identity.reload
        whitelisted_identity.full_name.should == 'MyString'
        whitelisted_identity.approval_status.should == 'A'

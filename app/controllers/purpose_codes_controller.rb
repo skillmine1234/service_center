@@ -5,6 +5,7 @@ class PurposeCodesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :block_inactive_user!
   respond_to :json
+  include Approval2::ControllerAdditions
   include ApplicationHelper
   include PurposeCodeHelper
   
@@ -24,15 +25,6 @@ class PurposeCodesController < ApplicationController
       flash[:alert] = 'Purpose Code successfully created and is pending for approval'
       redirect_to @purpose_code
     end
-  end 
-
-  def edit
-    purpose_code = PurposeCode.unscoped.find_by_id(params[:id])
-    if purpose_code.approval_status == 'A' && purpose_code.unapproved_record.nil?
-      params = (purpose_code.attributes).merge({:approved_id => purpose_code.id,:approved_version => purpose_code.lock_version})
-      purpose_code = PurposeCode.new(params)
-    end
-    @purpose_code = purpose_code 
   end
 
   def update
@@ -60,12 +52,11 @@ class PurposeCodesController < ApplicationController
 
   def index
     if params[:advanced_search].present?
-      purpose_codes = find_purpose_codes(params).order("id desc")
+      @purpose_codes = find_purpose_codes(params).order("id desc").paginate(:per_page => 10, :page => params[:page])
     else
-      purpose_codes = (params[:approval_status].present? and params[:approval_status] == 'U') ? PurposeCode.unscoped.where("approval_status =?",'U').order("id desc") : PurposeCode.order("id desc")
+      @purpose_codes ||= PurposeCode.order("id desc").paginate(:per_page => 10, :page => params[:page])
     end
-    @purpose_codes_count = purpose_codes.count
-    @purpose_codes = purpose_codes.paginate(:per_page => 10, :page => params[:page]) rescue []
+    @purpose_codes_count = @purpose_codes.count
   end
 
   def audit_logs
@@ -74,18 +65,7 @@ class PurposeCodesController < ApplicationController
   end
   
   def approve
-    @purpose_code = PurposeCode.unscoped.find(params[:id]) rescue nil
-    PurposeCode.transaction do
-      approval = @purpose_code.approve
-      if @purpose_code.save and approval.empty?
-        flash[:alert] = "PurposeCode record was approved successfully"
-      else
-        msg = approval.empty? ? @purpose_code.errors.full_messages : @purpose_code.errors.full_messages << approval
-        flash[:alert] = msg
-        raise ActiveRecord::Rollback
-      end
-    end
-    redirect_to @purpose_code
+    redirect_to unapproved_records_path(group_name: 'inward-remittance')
   end
 
   private

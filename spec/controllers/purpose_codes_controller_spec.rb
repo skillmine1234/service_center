@@ -190,9 +190,11 @@ describe PurposeCodesController do
       purpose_code2 = Factory(:purpose_code, :description => 'BarFoo', :approval_status => 'U', :approved_version => purpose_code1.lock_version, :approved_id => purpose_code1.id, :created_by => 666)
       # the following line is required for reload to get triggered (TODO)
       purpose_code1.approval_status.should == 'A'
-      InwUnapprovedRecord.count.should == 1
+      UnapprovedRecord.count.should == 1
+      UnapprovedRecord.find_by_approvable_id(purpose_code2.id).should_not be_nil
       put :approve, {:id => purpose_code2.id}
-      InwUnapprovedRecord.count.should == 0
+      UnapprovedRecord.count.should == 0
+      UnapprovedRecord.find_by_approvable_id(purpose_code2.id).should be_nil
       purpose_code1.reload
       purpose_code1.description.should == 'BarFoo'
       purpose_code1.updated_by.should == "666"
@@ -204,9 +206,11 @@ describe PurposeCodesController do
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
       purpose_code = Factory(:purpose_code, :description => 'BarFoo', :approval_status => 'U')
-      InwUnapprovedRecord.count.should == 1
+      UnapprovedRecord.count.should == 1
+      UnapprovedRecord.find_by_approvable_id(purpose_code.id).should_not be_nil
       put :approve, {:id => purpose_code.id}
-      InwUnapprovedRecord.count.should == 0
+      UnapprovedRecord.count.should == 0
+      UnapprovedRecord.find_by_approvable_id(purpose_code.id).should be_nil
       purpose_code.reload
       purpose_code.description.should == 'BarFoo'
       purpose_code.approval_status.should == 'A'

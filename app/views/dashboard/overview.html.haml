@@ -18,7 +18,7 @@
       %br
         = "AML Search"
     .box  
-      = link_to '/inw_unapproved_records' do
+      = link_to unapproved_records_path(group_name: 'inward-remittance') do
         = image_tag 'work-list.jpg', :size => "80x80"
       %br
         = "Approval Worklist"

@@ -5,6 +5,7 @@ class InwRemittanceRulesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :block_inactive_user!
   respond_to :json
+  include Approval2::ControllerAdditions
   include ApplicationHelper
   
   def new
@@ -23,15 +24,6 @@ class InwRemittanceRulesController < ApplicationController
     end
   end
 
-  def edit
-    rule = InwRemittanceRule.unscoped.find_by_id(params[:id])
-    if rule.approval_status == 'A' && rule.unapproved_record.nil?
-      params = (rule.attributes).merge({:approved_id => rule.id,:approved_version => rule.lock_version})
-      rule = InwRemittanceRule.new(params)     
-    end
-    @rule = rule 
-  end
-
   def update
     @rule = InwRemittanceRule.unscoped.find_by_id(params[:id])
     @rule.attributes = params[:inw_remittance_rule]
@@ -47,16 +39,14 @@ class InwRemittanceRulesController < ApplicationController
       @rule.reload
       flash[:alert] = 'Someone edited the rule the same time you did. Please re-apply your changes to the rule.'
       render "edit"
-  end 
-  
+  end
+
   def index
-    rules = InwRemittanceRule.unscoped.where("approval_status=?",'U').order("id desc")
-    @rules_count = rules.count
-    @rules = rules.paginate(:per_page => 10, :page => params[:page]) rescue []
+    @inw_remittance_rules_count = @inw_remittance_rules.count
   end
 
   def show
-    @rule = InwRemittanceRule.unscoped.find_by_id(params[:id])
+    @inw_remittance_rule = InwRemittanceRule.unscoped.find_by_id(params[:id])
   end
 
   def audit_logs
@@ -70,18 +60,7 @@ class InwRemittanceRulesController < ApplicationController
   end
   
   def approve
-    @rule = InwRemittanceRule.unscoped.find(params[:id]) rescue nil
-    InwRemittanceRule.transaction do
-      approval = @rule.approve
-      if (@rule.destroyed? || @rule.save) and approval.empty?
-        flash[:alert] = "Rule record was approved successfully"
-      else
-        msg = approval.empty? ? @rule.errors.full_messages : @rule.errors.full_messages << approval
-        flash[:alert] = msg
-        raise ActiveRecord::Rollback
-      end
-    end
-    redirect_to @rule
+    redirect_to unapproved_records_path(group_name: 'inward-remittance')
   end
 
   private

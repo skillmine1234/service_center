@@ -93,6 +93,9 @@ GEM
     acts_as_list (0.7.2)
       activerecord (>= 3.0)
     addressable (2.3.8)
+    approval2 (0.1.6)
+      audited
+      will_paginate
     arbre (1.0.3)
       activesupport (>= 3.0.0)
     arel (6.0.0)
@@ -487,6 +490,7 @@ DEPENDENCIES
   activerecord-oracle_enhanced-adapter!
   acts_as_commentable (= 3.0.1)
   acts_as_list
+  approval2 (= 0.1.6)
   audited-activerecord
   bcdatabase
   cancancan (~> 1.10)
@@ -562,4 +566,4 @@ DEPENDENCIES
   zeroclipboard-rails
 
 BUNDLED WITH
-   1.11.2
+   1.13.7

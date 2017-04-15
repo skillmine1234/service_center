@@ -5,6 +5,7 @@ class InwGuidelinesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :block_inactive_user!
   respond_to :json
+  include Approval2::ControllerAdditions
   include ApplicationHelper
   include InwGuidelineHelper
 
@@ -19,15 +20,6 @@ class InwGuidelinesController < ApplicationController
       flash[:alert] = 'InwGuideline successfully created and is pending for approval'
       redirect_to @inw_guideline
     end
-  end
-
-  def edit
-    inw_guideline = InwGuideline.unscoped.find_by_id(params[:id])
-    if inw_guideline.approval_status == 'A' && inw_guideline.unapproved_record.nil?
-      params = (inw_guideline.attributes).merge({:approved_id => inw_guideline.id,:approved_version => inw_guideline.lock_version})
-      inw_guideline = InwGuideline.new(params)
-    end
-    @inw_guideline = inw_guideline   
   end
 
   def update
@@ -57,12 +49,11 @@ class InwGuidelinesController < ApplicationController
 
   def index
     if params[:advanced_search].present?
-      inw_guidelines = find_inw_guidelines(params).order("id desc")
+      @inw_guidelines = find_inw_guidelines(params).order("id desc").paginate(:per_page => 10, :page => params[:page])
     else
-      inw_guidelines = (params[:approval_status].present? and params[:approval_status] == 'U') ? InwGuideline.unscoped.where("approval_status =?",'U').order("id desc") : InwGuideline.order("id desc")
+      @inw_guidelines ||= InwGuideline.order("id desc").paginate(:per_page => 10, :page => params[:page])
     end
-    @inw_guidelines_count = inw_guidelines.count
-    @inw_guidelines = inw_guidelines.paginate(:per_page => 10, :page => params[:page]) rescue []
+    @inw_guidelines_count = @inw_guidelines.count
   end
 
   def audit_logs
@@ -71,18 +62,7 @@ class InwGuidelinesController < ApplicationController
   end
   
   def approve
-    @inw_guideline = InwGuideline.unscoped.find(params[:id]) rescue nil
-    InwGuideline.transaction do
-      approval = @inw_guideline.approve
-      if approval.empty?
-        flash[:alert] = "InwGuideline record was approved successfully"
-      else
-        msg = @inw_guideline.errors.full_messages << approval
-        flash[:alert] = msg
-        raise ActiveRecord::Rollback
-      end
-    end
-    redirect_to @inw_guideline
+    redirect_to unapproved_records_path(group_name: 'inward-remittance')
   end
 
   private

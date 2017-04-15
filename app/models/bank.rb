@@ -1,6 +1,5 @@
 class Bank < ActiveRecord::Base
-  include Approval
-  include InwApproval
+  include Approval2::ModelAdditions
   
   validates_presence_of :ifsc, :name
   validates_uniqueness_of :ifsc, :scope => :approval_status

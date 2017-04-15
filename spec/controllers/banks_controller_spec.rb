@@ -190,9 +190,11 @@ describe BanksController do
       bank2 = Factory(:bank, :approval_status => 'U', :name => 'Bar Foo', :approved_version => bank1.lock_version, :approved_id => bank1.id, :created_by => 666)
       # the following line is required for reload to get triggered (TODO)
       bank1.approval_status.should == 'A'
-      InwUnapprovedRecord.count.should == 1
+      UnapprovedRecord.count.should == 1
+      UnapprovedRecord.find_by_approvable_id(bank2.id).should_not be_nil
       put :approve, {:id => bank2.id}
-      InwUnapprovedRecord.count.should == 0
+      UnapprovedRecord.count.should == 0
+      UnapprovedRecord.find_by_approvable_id(bank2.id).should be_nil
       bank1.reload
       bank1.name.should == 'Bar Foo'
       bank1.updated_by.should == "666"
@@ -204,9 +206,11 @@ describe BanksController do
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
       bank = Factory(:bank, :name => 'Bar Foo', :approval_status => 'U')
-      InwUnapprovedRecord.count.should == 1
+      UnapprovedRecord.count.should == 1
+      UnapprovedRecord.find_by_approvable_id(bank.id).should_not be_nil
       put :approve, {:id => bank.id}
-      InwUnapprovedRecord.count.should == 0
+      UnapprovedRecord.count.should == 0
+      UnapprovedRecord.find_by_approvable_id(bank.id).should be_nil
       bank.reload
       bank.name.should == 'Bar Foo'
       bank.approval_status.should == 'A'

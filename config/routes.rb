@@ -31,6 +31,8 @@ ServiceCenter::Application.routes.draw do
       put :index
     end
   end
+
+  resources :unapproved_records, only: :index
   
   resources :inw_remittance_rules
   resources :banks
@@ -59,7 +61,6 @@ ServiceCenter::Application.routes.draw do
   resources :incoming_file_records
   resources :ecol_fetch_statistics
   resources :ecol_unapproved_records
-  resources :inw_unapproved_records
   resources :bm_unapproved_records
   resources :bm_rules
   resources :bm_billers

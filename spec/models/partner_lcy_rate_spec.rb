@@ -5,7 +5,7 @@ describe PartnerLcyRate do
     it { should belong_to(:created_user) }
     it { should belong_to(:updated_user) }
     it { should belong_to(:partner) }
-    it { should have_one(:inw_unapproved_record) }
+    it { should have_one(:unapproved_record_entry ) }
     it { should belong_to(:unapproved_record) }
     it { should belong_to(:approved_record) }
   end
@@ -77,49 +77,49 @@ describe PartnerLcyRate do
     end
   end    
 
-  context "inw_unapproved_records" do 
-    it "oncreate: should create inw_unapproved_record if the approval_status is 'U'" do
+  context "unapproved_records" do 
+    it "oncreate: should create unapproved_record_entry if the approval_status is 'U'" do
       partner_lcy_rate = Factory(:partner_lcy_rate)
       partner_lcy_rate.reload
-      partner_lcy_rate.inw_unapproved_record.should_not be_nil
+      partner_lcy_rate.unapproved_record_entry.should_not be_nil
     end
 
-    it "oncreate: should not create inw_unapproved_record if the approval_status is 'A'" do
+    it "oncreate: should not create unapproved_record_entry if the approval_status is 'A'" do
       partner_lcy_rate = Factory(:partner_lcy_rate, :approval_status => 'A')
-      partner_lcy_rate.inw_unapproved_record.should be_nil
+      partner_lcy_rate.unapproved_record_entry.should be_nil
     end
 
-    it "onupdate: should not remove inw_unapproved_record if approval_status did not change from U to A" do
+    it "onupdate: should not remove unapproved_record_entry if approval_status did not change from U to A" do
       partner_lcy_rate = Factory(:partner_lcy_rate)
       partner_lcy_rate.reload
-      partner_lcy_rate.inw_unapproved_record.should_not be_nil
-      record = partner_lcy_rate.inw_unapproved_record
+      partner_lcy_rate.unapproved_record_entry.should_not be_nil
+      record = partner_lcy_rate.unapproved_record_entry
       # we are editing the U record, before it is approved
       partner_lcy_rate.rate = 'Fooo'
       partner_lcy_rate.save
       partner_lcy_rate.reload
-      partner_lcy_rate.inw_unapproved_record.should == record
+      partner_lcy_rate.unapproved_record_entry.should == record
     end
     
-    it "onupdate: should remove inw_unapproved_record if the approval_status changed from 'U' to 'A' (approval)" do
+    it "onupdate: should remove unapproved_record_entry if the approval_status changed from 'U' to 'A' (approval)" do
       partner_lcy_rate = Factory(:partner_lcy_rate)
       partner_lcy_rate.reload
-      partner_lcy_rate.inw_unapproved_record.should_not be_nil
+      partner_lcy_rate.unapproved_record_entry.should_not be_nil
       # the approval process changes the approval_status from U to A for a newly edited record
       partner_lcy_rate.approval_status = 'A'
       partner_lcy_rate.save
       partner_lcy_rate.reload
-      partner_lcy_rate.inw_unapproved_record.should be_nil
+      partner_lcy_rate.unapproved_record_entry.should be_nil
     end
     
-    it "ondestroy: should remove inw_unapproved_record if the record with approval_status 'U' was destroyed (approval) " do
+    it "ondestroy: should remove unapproved_record_entry if the record with approval_status 'U' was destroyed (approval) " do
       partner_lcy_rate = Factory(:partner_lcy_rate)
       partner_lcy_rate.reload
-      partner_lcy_rate.inw_unapproved_record.should_not be_nil
-      record = partner_lcy_rate.inw_unapproved_record
+      partner_lcy_rate.unapproved_record_entry.should_not be_nil
+      record = partner_lcy_rate.unapproved_record_entry
       # the approval process destroys the U record, for an edited record 
       partner_lcy_rate.destroy
-      InwUnapprovedRecord.find_by_id(record.id).should be_nil
+      UnapprovedRecord.find_by_id(record.id).should be_nil
     end
   end
 

@@ -6,7 +6,7 @@
       %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
         - can = can? :edit, @purpose_code
         %a.btn{:href => "#{!(can) ? '#' : '/purpose_codes/' + @purpose_code.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
-        = render 'ecol_customers/approve', :@record => @purpose_code
+        = render 'unapproved_records/approve', :@record => @purpose_code
       %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
         - if !@purpose_code.nil?
           %tr

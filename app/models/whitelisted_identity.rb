@@ -1,6 +1,5 @@
 class WhitelistedIdentity < ActiveRecord::Base
-  include Approval
-  include InwApproval
+  include Approval2::ModelAdditions
   
   audited
   attr_accessor :txn_identity_no

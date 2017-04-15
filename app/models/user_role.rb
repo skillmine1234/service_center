@@ -1,6 +1,5 @@
 class UserRole < ActiveRecord::Base
-  include Approval
-  include InwApproval
+  include Approval2::ModelAdditions
   
   belongs_to :user
   belongs_to :role
