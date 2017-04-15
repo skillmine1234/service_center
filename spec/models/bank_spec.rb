@@ -125,7 +125,7 @@ describe Bank do
   context "approve" do 
     it "should approve unapproved_record" do 
       bank = Factory(:bank, :approval_status => 'U')
-      bank.approve.should == ""
+      bank.approve.save.should == true
       bank.approval_status.should == 'A'
     end
 

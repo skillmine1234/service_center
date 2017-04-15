@@ -267,7 +267,7 @@ describe Partner do
   context "approve" do 
     it "should approve unapproved_record" do 
       partner = Factory(:partner, :approval_status => 'U')
-      partner.approve.should == ""
+      partner.approve.save.should == true
       partner.approval_status.should == 'A'
     end
 

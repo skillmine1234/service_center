@@ -103,7 +103,7 @@ describe InwRemittanceRule do
   context "approve" do 
     it "should approve unapproved_record" do 
       inw_rule = Factory(:inw_remittance_rule, :approval_status => 'U')
-      inw_rule.approve.should == ""
+      inw_rule.approve.save.should == true
       inw_rule.approval_status.should == 'A'
     end
 

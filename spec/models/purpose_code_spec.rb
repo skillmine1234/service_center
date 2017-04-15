@@ -239,7 +239,7 @@ describe PurposeCode do
   context "approve" do 
     it "should approve unapproved_record" do 
       purpose_code = Factory(:purpose_code, :approval_status => 'U')
-      purpose_code.approve.should == ""
+      purpose_code.approve.save.should == true
       purpose_code.approval_status.should == 'A'
     end
 

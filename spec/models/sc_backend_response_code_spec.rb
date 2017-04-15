@@ -73,7 +73,7 @@ describe ScBackendResponseCode do
   context "approve" do 
     it "should approve unapproved_record" do 
       sc_backend_response_code = Factory(:sc_backend_response_code, :approval_status => 'U')
-      sc_backend_response_code.approve.should == ""
+      sc_backend_response_code.approve.save.should == true
       sc_backend_response_code.approval_status.should == 'A'
     end
 

@@ -102,7 +102,7 @@ describe WhitelistedIdentity do
   context "approve" do 
     it "should approve unapproved_record" do 
       whitelisted_identity = Factory(:whitelisted_identity, :approval_status => 'U')
-      whitelisted_identity.approve.should == ""
+      whitelisted_identity.approve.save.should == true
       whitelisted_identity.approval_status.should == 'A'
     end
 

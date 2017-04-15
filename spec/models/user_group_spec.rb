@@ -69,7 +69,7 @@ describe UserGroup do
   context "approve" do 
     it "should approve unapproved_record" do 
       user_group = Factory(:user_group, :approval_status => 'U')
-      user_group.approve.should == ""
+      user_group.approve.save.should == true
       user_group.approval_status.should == 'A'
     end
 

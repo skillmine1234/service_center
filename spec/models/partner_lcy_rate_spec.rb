@@ -126,7 +126,7 @@ describe PartnerLcyRate do
   context "approve" do 
     it "should approve unapproved_record" do 
       partner_lcy_rate = Factory(:partner_lcy_rate, :approval_status => 'U')
-      partner_lcy_rate.approve.should == ""
+      partner_lcy_rate.approve.save.should == true
       partner_lcy_rate.approval_status.should == 'A'
     end
 

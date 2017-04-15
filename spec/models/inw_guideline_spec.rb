@@ -126,7 +126,7 @@ describe InwGuideline do
   context "approve" do 
     it "should approve unapproved_record" do 
       inw_guideline = Factory(:inw_guideline, :approval_status => 'U')
-      inw_guideline.approve.should == ""
+      inw_guideline.approve.save.should == true
       inw_guideline.approval_status.should == 'A'
     end
 

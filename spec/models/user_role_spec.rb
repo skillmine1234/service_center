@@ -68,7 +68,7 @@ describe UserRole do
   context "approve" do 
     it "should approve unapproved_record" do 
       user_role = Factory(:user_role, :approval_status => 'U')
-      user_role.approve.should == ""
+      user_role.approve.save.should == true
       user_role.approval_status.should == 'A'
     end
 
