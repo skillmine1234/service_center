@@ -2,7 +2,7 @@ module EcolRemitterValidation
   extend ActiveSupport::Concern
   included do
     validates :customer_code, presence: true, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}'}, length: {maximum: 15, minimum: 1}
-    validates :customer_subcode, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}'}, length: {maximum: 15, minimum: 1}, :allow_blank =>true
+    validates :customer_subcode, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}'}, length: {maximum: 28, minimum: 1}, :allow_blank =>true
     validates :remitter_code, presence: true, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}' }, length: {maximum: 28, minimum: 1}
     validates :credit_acct_no, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9]}' }, length: {maximum: 25, minimum: 10}, :allow_blank =>true
     validates :customer_subcode_mobile, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9]}' }, length: {maximum: 10, minimum: 10}, :allow_blank =>true 
