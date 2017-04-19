@@ -87,6 +87,7 @@ class SmBankAccountsController < ApplicationController
   def sm_bank_account_params
     params.require(:sm_bank_account).permit(:sm_code, :customer_id, :account_no, :mmid, :mobile_no, 
                                             :created_by, :updated_by, :created_at, :updated_at, 
-                                            :lock_version, :approval_status, :last_action, :approved_version, :approved_id)
+                                            :lock_version, :approval_status, :last_action, :approved_version, :approved_id,
+                                            :is_enabled)
   end
 end
