@@ -34,5 +34,6 @@ FactoryGirl.define do
     customer_id 1234
     app_code "1234"
     sequence(:identity_user_id) {|n| "7" + "%03i" % "#{n}" }
+    should_prevalidate 'N'
   end
 end

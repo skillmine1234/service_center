@@ -56,6 +56,12 @@
             %td#msg-error
               = error_message_for(@ecol_customer, :val_method, :prepend_text => "")
           %tr
+            %td.label Should Prevalidate
+            %td.value
+              = @ecol_customer.should_prevalidate
+            %td#msg-error
+              = error_message_for(@ecol_customer, :should_prevalidate, :prepend_text => "")
+          %tr
             %td.label Account Token 1
             %td.value
               = show_page_value_for_account_tokens(@ecol_customer.token_1_type)

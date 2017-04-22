@@ -12,7 +12,7 @@ describe EcolCustomer do
     [:code, :name, :is_enabled, :val_method, :token_1_type, :token_1_length, :val_token_1, :token_2_type, :token_2_length, 
       :val_token_2, :token_3_type, :token_3_length, :val_token_3, :val_txn_date, :val_txn_amt, :val_ben_name, :val_rem_acct, 
       :return_if_val_reject, :nrtv_sufx_1, :nrtv_sufx_2, :nrtv_sufx_3, :rmtr_alert_on, :credit_acct_val_pass,
-      :customer_id].each do |att|
+      :customer_id, :should_prevalidate].each do |att|
       it { should validate_presence_of(att) }
     end 
        
