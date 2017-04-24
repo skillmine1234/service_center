@@ -249,6 +249,12 @@ describe EcolCustomer do
       ecol_customer.save.should == false
       ecol_customer.errors_on(:credit_acct_val_fail).should == ["Since transaction is not to be returned on validation failure(as 'Return if Validation Fails' box is unchecked) Credit Account No(Validation Fail) field cannot be blank"]
     end
+    
+    it "should check if should_prevalidate is enabled when val_method != W" do
+      ecol_customer = Factory.build(:ecol_customer, :val_method => 'D', :should_prevalidate => 'Y')
+      ecol_customer.save.should == false
+      ecol_customer.errors_on(:should_prevalidate).should == ['should not be enabled when Validation Method is not Web Service']
+    end
   end
   
   context "options_for_select_boxes" do

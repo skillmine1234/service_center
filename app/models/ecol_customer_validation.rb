@@ -16,7 +16,8 @@ module EcolCustomerValidation
     :value_of_validation_fields,
     :presence_of_credit_acct_no_val_fail,
     :value_of_ntrv_sufx_if_val_method_is_N,
-    :validate_app_code
+    :validate_app_code, 
+    :validate_should_prevalidate
   end
   
   def val_tokens_should_be_N_if_val_method_is_N
@@ -100,6 +101,12 @@ module EcolCustomerValidation
   def validate_app_code
     if (self.val_method == "W" and self.app_code.blank?)
       errors[:app_code] << "Can't be blank if Validation Method is Web Service"
+    end
+  end
+  
+  def validate_should_prevalidate
+    if (self.val_method != 'W' and self.should_prevalidate == 'Y')
+      errors.add(:should_prevalidate, 'should not be enabled when Validation Method is not Web Service')
     end
   end
 end
