@@ -38,6 +38,11 @@
             %td#msg-error
               = error_message_for(@ecol_app, :http_username, :prepend_text => "")
           %tr
+            %td.label E-Collect UDTable Records
+            %td.value
+              = link_to_unless (@ecol_app.udfs_cnt == 0), @ecol_app.ecol_app_udtables.count, udtables_path(app_code: @ecol_app.app_code)
+            %td
+          %tr
             %td.label Created At
             %td.value
               = @ecol_app.created_at.try(:strftime, "%d/%m/%Y %I:%M%p")

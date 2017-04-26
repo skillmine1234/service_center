@@ -156,6 +156,13 @@ ServiceCenter::Application.routes.draw do
       get :get_fault_reason
     end
   end
+  
+  resources :ecol_app_udtables, except: :index do
+    collection do
+      get :index
+      put :index
+    end
+  end
 
   get 'su_incoming_file_summary' => 'su_incoming_records#incoming_file_summary'
   get 'ic_incoming_file_summary' => 'ic_incoming_records#incoming_file_summary'
@@ -286,6 +293,11 @@ ServiceCenter::Application.routes.draw do
 
   get '/sc_backend_response_codes/:id/audit_logs' => 'sc_backend_response_codes#audit_logs'
   put '/sc_backend_response_codes/:id/approve' => "sc_backend_response_codes#approve"
+  
+  get 'ecol_apps/:app_code/ecol_app_udtables' => 'ecol_apps#ecol_app_udtables', as: :udtables
+  get '/ecol_app_udtables/udfs/:app_code' => 'ecol_app_udtables#udfs'
+  get '/ecol_app_udtables/:id/audit_logs' => 'ecol_app_udtables#audit_logs'
+  put '/ecol_app_udtables/:id/approve' => "ecol_app_udtables#approve"
   
   root :to => 'dashboard#overview'
 

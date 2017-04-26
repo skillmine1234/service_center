@@ -4,6 +4,7 @@ class EcolRulesController < ApplicationController
   before_filter :block_inactive_user!
   respond_to :json
   include ApplicationHelper
+  include Approval2::ControllerAdditions
   
   def new
     @ecol_rule = EcolRule.new
@@ -19,15 +20,6 @@ class EcolRulesController < ApplicationController
       flash[:alert] = 'Rule successfully created and is pending for approval'
       redirect_to @ecol_rule
     end
-  end
-
-  def edit
-    ecol_rule = EcolRule.unscoped.find_by_id(params[:id])
-    if ecol_rule.approval_status == 'A' && ecol_rule.unapproved_record.nil?
-      params = (ecol_rule.attributes).merge({:approved_id => ecol_rule.id,:approved_version => ecol_rule.lock_version})
-      ecol_rule = EcolRule.new(params)
-    end
-    @ecol_rule = ecol_rule
   end
   
   def update
@@ -68,18 +60,7 @@ class EcolRulesController < ApplicationController
   end
   
   def approve
-    @ecol_rule = EcolRule.unscoped.find(params[:id]) rescue nil
-    EcolRule.transaction do
-      approval = @ecol_rule.approve
-      if @ecol_rule.save and approval.empty?
-        flash[:alert] = "Ecollect Rule record was approved successfully"
-      else
-        msg = approval.empty? ? @ecol_rule.errors.full_messages : @ecol_rule.errors.full_messages << approval
-        flash[:alert] = msg
-        raise ActiveRecord::Rollback
-      end
-    end
-    redirect_to @ecol_rule
+    redirect_to unapproved_records_path(group_name: 'e-collect')
   end
   
   def destroy

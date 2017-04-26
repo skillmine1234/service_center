@@ -190,9 +190,9 @@ describe EcolRemittersController do
       ecol_remitter2 = Factory(:ecol_remitter, :remitter_code => 'BarFoo', :approval_status => 'U', :approved_version => ecol_remitter1.lock_version, :approved_id => ecol_remitter1.id, :created_by => 666)
       # the following line is required for reload to get triggered (TODO)
       ecol_remitter1.approval_status.should == 'A'
-      EcolUnapprovedRecord.count.should == 1
+      UnapprovedRecord.count.should == 1
       put :approve, {:id => ecol_remitter2.id}
-      EcolUnapprovedRecord.count.should == 0
+      UnapprovedRecord.count.should == 0
       ecol_remitter1.reload
       ecol_remitter1.remitter_code.should == 'BARFOO'
       ecol_remitter1.updated_by.should == "666"
@@ -204,9 +204,9 @@ describe EcolRemittersController do
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
       ecol_remitter = Factory(:ecol_remitter, :remitter_code => 'BarFoo', :approval_status => 'U')
-      EcolUnapprovedRecord.count.should == 1
+      UnapprovedRecord.count.should == 1
       put :approve, {:id => ecol_remitter.id}
-      EcolUnapprovedRecord.count.should == 0
+      UnapprovedRecord.count.should == 0
       ecol_remitter.reload
       ecol_remitter.remitter_code.should == 'BARFOO'
       ecol_remitter.approval_status.should == 'A'
@@ -216,10 +216,10 @@ describe EcolRemittersController do
   describe "destroy" do
     it "should destroy the ecol_remitter when created_user = current_user" do 
       ecol_remitter = Factory(:ecol_remitter, :created_by => @user.id)
-      EcolUnapprovedRecord.count.should == 1
+      UnapprovedRecord.count.should == 1
       delete :destroy, {:id => ecol_remitter.id}
       EcolRemitter.unscoped.find_by_id(ecol_remitter.id).should be_nil
-      EcolUnapprovedRecord.count.should == 0
+      UnapprovedRecord.count.should == 0
     end
     
     it "should not destroy the ecol_remitter when created_user != current_user" do 

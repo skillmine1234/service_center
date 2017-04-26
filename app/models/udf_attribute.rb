@@ -1,11 +1,9 @@
 class UdfAttribute < ActiveRecord::Base
-  include Approval
-  include EcolApproval
+  include Approval2::ModelAdditions
   include UdfAttributeValidation
   attr_writer :length, :max_length, :min_length, :min_value, :max_value
   attr_reader :length, :max_length, :min_length, :min_value, :max_value
 
-  has_one :ecol_unapproved_record, :as => :ecol_approvable
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
 

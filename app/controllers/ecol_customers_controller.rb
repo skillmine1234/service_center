@@ -5,6 +5,7 @@ class EcolCustomersController < ApplicationController
   respond_to :json
   include ApplicationHelper
   include EcolCustomersHelper
+  include Approval2::ControllerAdditions
   
   def new
     @ecol_customer = EcolCustomer.new
@@ -20,15 +21,6 @@ class EcolCustomersController < ApplicationController
       flash[:alert] = 'Customer successfully created and is pending for approval'
       redirect_to @ecol_customer
     end
-  end
-  
-  def edit
-    ecol_customer = EcolCustomer.unscoped.find_by_id(params[:id])
-    if ecol_customer.approval_status == 'A' && ecol_customer.unapproved_record.nil?
-      params = (ecol_customer.attributes).merge({:approved_id => ecol_customer.id,:approved_version => ecol_customer.lock_version})
-      ecol_customer = EcolCustomer.new(params)
-    end
-    @ecol_customer = ecol_customer
   end
   
   def update
@@ -68,18 +60,7 @@ class EcolCustomersController < ApplicationController
   end
 
   def approve
-    @ecol_customer = EcolCustomer.unscoped.find(params[:id]) rescue nil
-    EcolCustomer.transaction do
-      approval = @ecol_customer.approve
-      if @ecol_customer.save and approval.empty?
-        flash[:alert] = "Ecollect Customer record was approved successfully"
-      else
-        msg = approval.empty? ? @ecol_customer.errors.full_messages : @ecol_customer.errors.full_messages << approval
-        flash[:alert] = msg
-        raise ActiveRecord::Rollback
-      end
-    end
-    redirect_to @ecol_customer
+    redirect_to unapproved_records_path(group_name: 'e-collect')
   end
   
   def destroy

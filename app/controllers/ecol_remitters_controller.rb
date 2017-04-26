@@ -5,6 +5,7 @@ class EcolRemittersController < ApplicationController
   respond_to :json
   include ApplicationHelper
   include EcolRemittersHelper
+  include Approval2::ControllerAdditions
   
   def new
     @ecol_remitter = EcolRemitter.new
@@ -20,15 +21,6 @@ class EcolRemittersController < ApplicationController
       flash[:alert] = 'Remitter successfully created and is pending for approval'
       redirect_to @ecol_remitter
     end
-  end
-  
-  def edit
-    ecol_remitter = EcolRemitter.unscoped.find_by_id(params[:id])
-    if ecol_remitter.approval_status == 'A' && ecol_remitter.unapproved_record.nil?
-      params = (ecol_remitter.attributes).merge({:approved_id => ecol_remitter.id,:approved_version => ecol_remitter.lock_version})
-      ecol_remitter = EcolRemitter.new(params)
-    end
-    @ecol_remitter = ecol_remitter
   end
   
   def update
@@ -67,18 +59,7 @@ class EcolRemittersController < ApplicationController
   end
   
   def approve
-    @ecol_remitter = EcolRemitter.unscoped.find(params[:id]) rescue nil
-    EcolRemitter.transaction do
-      approval = @ecol_remitter.approve
-      if @ecol_remitter.save and approval.empty?
-        flash[:alert] = "Ecollect Remitter record was approved successfully"
-      else
-        msg = approval.empty? ? @ecol_remitter.errors.full_messages : @ecol_remitter.errors.full_messages << approval
-        flash[:alert] = msg
-        raise ActiveRecord::Rollback
-      end
-    end
-    redirect_to @ecol_remitter
+    redirect_to unapproved_records_path(group_name: 'e-collect')
   end
   
   def destroy

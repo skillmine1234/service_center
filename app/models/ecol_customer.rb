@@ -1,6 +1,5 @@
 class EcolCustomer < ActiveRecord::Base  
-  include Approval
-  include EcolApproval
+  include Approval2::ModelAdditions
   include EcolCustomerValidation
   include EcolCustomerOptions
 

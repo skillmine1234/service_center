@@ -78,10 +78,15 @@
       %br
         = "Outgoing Files"
     .box  
-      = link_to '/ecol_unapproved_records' do
+      = link_to '/unapproved_records?group_name=e-collect' do
         = image_tag 'work-list.jpg', :size => "80x80"
       %br
         = "Approval Worklist"
+    .box  
+      = link_to incoming_files_path(:sc_service => "ECOL", approval_status: 'U') do
+        = image_tag 'work-list.jpg', :size => "80x80"
+      %br
+        = "Approval Worklist (File Uploads)"
   .slide-container{:style=>"height: auto;"}
     .box
       = link_to '/ecol_apps' do

@@ -33,6 +33,11 @@
           = f.hidden_field "setting#{i}_name", value: @ecol_app.send("setting#{i}_name")
           = f.hidden_field "setting#{i}_type", value: @ecol_app.send("setting#{i}_type")
           %br
+    .control-group
+      - if @ecol_app.udfs_cnt > 0
+        - (1..@ecol_app.udfs_cnt).each do |i|
+          = f.hidden_field "udf#{i}_name", value: @ecol_app.send("udf#{i}_name")
+          = f.hidden_field "udf#{i}_type", value: @ecol_app.send("udf#{i}_type")
 
   .form-actions
     - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"

@@ -4,8 +4,7 @@ describe EcolRule do
   context 'association' do
     it { should belong_to(:created_user) }
     it { should belong_to(:updated_user) }
-    it { should have_one(:ecol_unapproved_record) }
-    it { should belong_to(:unapproved_record) }
+    it { should have_one(:unapproved_record_entry) }
     it { should belong_to(:approved_record) }
   end
   
@@ -71,72 +70,72 @@ describe EcolRule do
     end
   end    
 
-  context "create_ecol_unapproved_records" do 
-    it "should create ecol_unapproved_record if the approval_status is 'U' and there is no previous record" do
+  context "create_unapproved_record_entrys" do 
+    it "should create unapproved_record_entry if the approval_status is 'U' and there is no previous record" do
       ecol_rule = Factory(:ecol_rule)
       ecol_rule.reload
-      ecol_rule.ecol_unapproved_record.should_not be_nil
-      record = ecol_rule.ecol_unapproved_record
+      ecol_rule.unapproved_record_entry.should_not be_nil
+      record = ecol_rule.unapproved_record_entry
       ecol_rule.save
-      ecol_rule.ecol_unapproved_record.should == record
+      ecol_rule.unapproved_record_entry.should == record
     end
 
-    it "should not create ecol_unapproved_record if the approval_status is 'A'" do
+    it "should not create unapproved_record_entry if the approval_status is 'A'" do
       ecol_rule = Factory(:ecol_rule, :approval_status => 'A')
-      ecol_rule.ecol_unapproved_record.should be_nil
+      ecol_rule.unapproved_record_entry.should be_nil
     end
   end  
 
-  context "ecol_unapproved_records" do 
-    it "oncreate: should create ecol_unapproved_record if the approval_status is 'U'" do
+  context "unapproved_record_entrys" do 
+    it "oncreate: should create unapproved_record_entry if the approval_status is 'U'" do
       ecol_rule = Factory(:ecol_rule)
       ecol_rule.reload
-      ecol_rule.ecol_unapproved_record.should_not be_nil
+      ecol_rule.unapproved_record_entry.should_not be_nil
     end
 
-    it "oncreate: should not create ecol_unapproved_record if the approval_status is 'A'" do
+    it "oncreate: should not create unapproved_record_entry if the approval_status is 'A'" do
       ecol_rule = Factory(:ecol_rule, :approval_status => 'A')
-      ecol_rule.ecol_unapproved_record.should be_nil
+      ecol_rule.unapproved_record_entry.should be_nil
     end
 
-    it "onupdate: should not remove ecol_unapproved_record if approval_status did not change from U to A" do
+    it "onupdate: should not remove unapproved_record_entry if approval_status did not change from U to A" do
       ecol_rule = Factory(:ecol_rule)
       ecol_rule.reload
-      ecol_rule.ecol_unapproved_record.should_not be_nil
-      record = ecol_rule.ecol_unapproved_record
+      ecol_rule.unapproved_record_entry.should_not be_nil
+      record = ecol_rule.unapproved_record_entry
       # we are editing the U record, before it is approved
       ecol_rule.cod_acct_no = 'Fooo'
       ecol_rule.save
       ecol_rule.reload
-      ecol_rule.ecol_unapproved_record.should == record
+      ecol_rule.unapproved_record_entry.should == record
     end
     
-    it "onupdate: should remove ecol_unapproved_record if the approval_status changed from 'U' to 'A' (approval)" do
+    it "onupdate: should remove unapproved_record_entry if the approval_status changed from 'U' to 'A' (approval)" do
       ecol_rule = Factory(:ecol_rule)
       ecol_rule.reload
-      ecol_rule.ecol_unapproved_record.should_not be_nil
+      ecol_rule.unapproved_record_entry.should_not be_nil
       # the approval process changes the approval_status from U to A for a newly edited record
       ecol_rule.approval_status = 'A'
       ecol_rule.save
       ecol_rule.reload
-      ecol_rule.ecol_unapproved_record.should be_nil
+      ecol_rule.unapproved_record_entry.should be_nil
     end
     
-    it "ondestroy: should remove ecol_unapproved_record if the record with approval_status 'U' was destroyed (approval) " do
+    it "ondestroy: should remove unapproved_record_entry if the record with approval_status 'U' was destroyed (approval) " do
       ecol_rule = Factory(:ecol_rule)
       ecol_rule.reload
-      ecol_rule.ecol_unapproved_record.should_not be_nil
-      record = ecol_rule.ecol_unapproved_record
+      ecol_rule.unapproved_record_entry.should_not be_nil
+      record = ecol_rule.unapproved_record_entry
       # the approval process destroys the U record, for an edited record 
       ecol_rule.destroy
-      EcolUnapprovedRecord.find_by_id(record.id).should be_nil
+      UnapprovedRecord.find_by_id(record.id).should be_nil
     end
   end
 
   context "approve" do 
     it "should approve unapproved_record" do 
       ecol_rule = Factory(:ecol_rule, :approval_status => 'U')
-      ecol_rule.approve.should == ""
+      ecol_rule.approve.save.should == true
       ecol_rule.approval_status.should == 'A'
     end
 

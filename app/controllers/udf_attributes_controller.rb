@@ -4,6 +4,7 @@ class UdfAttributesController < ApplicationController
   before_filter :block_inactive_user!
   respond_to :json
   include ApplicationHelper
+  include Approval2::ControllerAdditions
   
   def new
     @udf_attribute = UdfAttribute.new
@@ -19,15 +20,6 @@ class UdfAttributesController < ApplicationController
       flash[:alert] = 'Udf successfully created and is pending for approval'
       redirect_to @udf_attribute
     end
-  end
-
-  def edit
-    udf_attribute = UdfAttribute.unscoped.find_by_id(params[:id])
-    if udf_attribute.approval_status == 'A' && udf_attribute.unapproved_record.nil?
-      params = (udf_attribute.attributes).merge({:approved_id => udf_attribute.id,:approved_version => udf_attribute.lock_version})
-      udf_attribute = UdfAttribute.new(params)
-    end
-    @udf_attribute = udf_attribute
   end
 
   def update
@@ -63,18 +55,7 @@ class UdfAttributesController < ApplicationController
   end
 
   def approve
-    @udf_attribute = UdfAttribute.unscoped.find(params[:id]) rescue nil
-    UdfAttribute.transaction do
-      approval = @udf_attribute.approve
-      if (@udf_attribute.destroyed? || @udf_attribute.save) and approval.empty?
-        flash[:alert] = "UDF Attribute record was approved successfully"
-      else
-        msg = approval.empty? ? @udf_attribute.errors.full_messages : @udf_attribute.errors.full_messages << approval
-        flash[:alert] = msg
-        raise ActiveRecord::Rollback
-      end
-    end
-    redirect_to @udf_attribute
+    redirect_to unapproved_records_path(group_name: 'e-collect')
   end
   
   def destroy

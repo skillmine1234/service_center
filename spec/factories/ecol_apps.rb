@@ -11,5 +11,8 @@ FactoryGirl.define do
     last_action "C"
     lock_version 1
     approved_version 1
+    udf1_name 'udf1'
+    udf1_type 'text'
+    unique_udfs_cnt 1
   end
 end

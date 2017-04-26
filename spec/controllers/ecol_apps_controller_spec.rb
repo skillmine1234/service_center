@@ -174,13 +174,13 @@ describe EcolAppsController do
       ecol_app2 = Factory(:ecol_app, :approval_status => 'U', :notify_url => "http://localhost", :approved_version => ecol_app1.lock_version, :approved_id => ecol_app1.id, :created_by => 666)
       # the following line is required for reload to get triggered (TODO)
       ecol_app1.approval_status.should == 'A'
-      EcolUnapprovedRecord.count.should == 1
+      UnapprovedRecord.count.should == 1
       put :approve, {:id => ecol_app2.id}
-      EcolUnapprovedRecord.count.should == 0
+      UnapprovedRecord.count.should == 0
       ecol_app1.reload
       ecol_app1.notify_url.should == 'http://localhost'
       ecol_app1.updated_by.should == "666"
-      EcolUnapprovedRecord.find_by_id(ecol_app2.id).should be_nil
+      UnapprovedRecord.find_by_id(ecol_app2.id).should be_nil
     end
   end
   

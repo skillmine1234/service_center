@@ -190,9 +190,9 @@ describe EcolCustomersController do
       ecol_customer2 = Factory(:ecol_customer, :code => "CUSTOM01", :approval_status => 'U', :name => 'Foobar', :approved_version => ecol_customer1.lock_version, :approved_id => ecol_customer1.id, :created_by => 666)
       # the following line is required for reload to get triggered (TODO)
       ecol_customer1.approval_status.should == 'A'
-      EcolUnapprovedRecord.count.should == 1
+      UnapprovedRecord.count.should == 1
       put :approve, {:id => ecol_customer2.id}
-      EcolUnapprovedRecord.count.should == 0
+      UnapprovedRecord.count.should == 0
       ecol_customer1.reload
       ecol_customer1.name.should == 'Foobar'
       ecol_customer1.updated_by.should == "666"
@@ -204,9 +204,9 @@ describe EcolCustomersController do
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
       ecol_customer = Factory(:ecol_customer, :code => "CUSTOM01", :approval_status => 'U', :name => 'Foobar')
-      EcolUnapprovedRecord.count.should == 1
+      UnapprovedRecord.count.should == 1
       put :approve, {:id => ecol_customer.id}
-      EcolUnapprovedRecord.count.should == 0
+      UnapprovedRecord.count.should == 0
       ecol_customer.reload
       ecol_customer.name.should == 'Foobar'
       ecol_customer.approval_status.should == 'A'
@@ -216,10 +216,10 @@ describe EcolCustomersController do
   describe "destroy" do
     it "should destroy the ecol_customer when created_user = current_user" do 
       ecol_customer = Factory(:ecol_customer, :created_by => @user.id)
-      EcolUnapprovedRecord.count.should == 1
+      UnapprovedRecord.count.should == 1
       delete :destroy, {:id => ecol_customer.id}
       EcolCustomer.unscoped.find_by_id(ecol_customer.id).should be_nil
-      EcolUnapprovedRecord.count.should == 0
+      UnapprovedRecord.count.should == 0
     end
     
     it "should not destroy the ecol_customer when created_user != current_user" do 
