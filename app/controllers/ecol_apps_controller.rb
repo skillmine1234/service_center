@@ -54,13 +54,9 @@ class EcolAppsController < ApplicationController
     redirect_to unapproved_records_path(group_name: 'e-collect')
   end
   
-  def ecol_app_udtables
-    @ecol_app = EcolApp.find_by(app_code: params[:app_code])
-    if params[:approval_status].present?
-      @records = EcolAppUdtable.unscoped.where(app_code: params[:app_code], approval_status: params[:approval_status])
-    else
-      @records = @ecol_app.ecol_app_udtables
-    end
+  def ecol_app_udtables    
+    @searcher = EcolAppUdtableSearcher.new(params.permit(:approval_status, :app_code, :page))
+    @records = @searcher.paginate
     render 'ecol_app_udtables/grouped_index'
   end
 
