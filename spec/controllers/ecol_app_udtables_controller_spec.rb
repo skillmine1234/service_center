@@ -171,10 +171,10 @@ describe EcolAppUdtablesController do
     it "assigns the requested ecol_app_udtable as @ecol_app_udtable" do
       ecol_app_udtable = Factory(:ecol_app_udtable)
       get :audit_logs, {:id => ecol_app_udtable.id, :version_id => 0}
-      assigns(:ecol_app_udtable).should eq(ecol_app_udtable)
+      assigns(:record).should eq(ecol_app_udtable)
       assigns(:audit).should eq(ecol_app_udtable.audits.first)
       get :audit_logs, {:id => 12345, :version_id => "i"}
-      assigns(:ecol_app_udtable).should eq(nil)
+      assigns(:record).should eq(nil)
       assigns(:audit).should eq(nil)
     end
   end

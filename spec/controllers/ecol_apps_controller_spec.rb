@@ -188,10 +188,10 @@ describe EcolAppsController do
     it "assigns the requested ecol_app as @ecol_app" do
       ecol_app = Factory(:ecol_app)
       get :audit_logs, {:id => ecol_app.id, :version_id => 0}
-      assigns(:ecol_app).should eq(ecol_app)
+      assigns(:record).should eq(ecol_app)
       assigns(:audit).should eq(ecol_app.audits.first)
       get :audit_logs, {:id => 12345, :version_id => "i"}
-      assigns(:ecol_app).should eq(nil)
+      assigns(:record).should eq(nil)
       assigns(:audit).should eq(nil)
     end
   end

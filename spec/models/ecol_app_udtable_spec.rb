@@ -5,6 +5,7 @@ describe EcolAppUdtable do
   context 'association' do
     it { should belong_to(:created_user) }
     it { should belong_to(:updated_user) }
+    it { should belong_to(:ecol_app) }
   end
 
   context "validation" do
@@ -120,13 +121,23 @@ describe EcolAppUdtable do
       ecol_app_udtable = Factory.build(:ecol_app_udtable, udf1: '!@123!@#', approval_status: 'A')
       ecol_app_udtable.save.should == false
       ecol_app_udtable.errors_on(:base).should == ["udf1 should not include special characters"]
+    end    
+    it "should not give any error when the udfs are correct" do
+      ecol_app = Factory(:ecol_app, unique_udfs_cnt: 1, udf1_name: 'udf1', udf1_type: 'text', approval_status: 'A')
+      ecol_app_udtable = Factory.build(:ecol_app_udtable, app_code: ecol_app.app_code, udf1: 'name', approval_status: 'A')
+      ecol_app_udtable.save.should == true
     end
   end
   
   context "sanitize_udfs" do
     it "should sanitize udfs" do
-      ecol_app_udtable = Factory(:ecol_app_udtable, udf1: 'abc', udf2: nil, udf3: 'a', approval_status: 'A')
+      ecol_app = Factory(:ecol_app, unique_udfs_cnt: 1, udf1_name: 'udf1', udf1_type: 'text', approval_status: 'A')
+      ecol_app_udtable = Factory(:ecol_app_udtable, app_code: ecol_app.app_code, udf1: 'abc', udf2: nil, udf3: 'a', approval_status: 'A')
+      ecol_app_udtable.udf1.should_not be_nil
+      ecol_app_udtable.udf2.should be_nil
       ecol_app_udtable.udf3.should be_nil
+      ecol_app_udtable.udf4.should be_nil
+      ecol_app_udtable.udf5.should be_nil
     end
   end
 end

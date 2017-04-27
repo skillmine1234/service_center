@@ -6,7 +6,7 @@ class EcolAppUdtable < ActiveRecord::Base
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
   
-  has_one :ecol_app, :class_name => 'EcolApp', :primary_key => 'app_code', :foreign_key => 'app_code'
+  belongs_to :ecol_app, :class_name => 'EcolApp', :primary_key => 'app_code', :foreign_key => 'app_code'
   
   validates_presence_of :app_code, :udf1
 

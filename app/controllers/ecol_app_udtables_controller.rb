@@ -57,8 +57,8 @@ class EcolAppUdtablesController < ApplicationController
   end
   
   def audit_logs
-    @ecol_app_udtable = EcolAppUdtable.unscoped.find(params[:id]) rescue nil
-    @audit = @ecol_app_udtable.audits[params[:version_id].to_i] rescue nil
+    @record = EcolAppUdtable.unscoped.find(params[:id]) rescue nil
+    @audit = @record.audits[params[:version_id].to_i] rescue nil
   end
 
   def approve
