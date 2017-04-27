@@ -1,6 +1,6 @@
 class CreateEcolAppUdtable < ActiveRecord::Migration
   def change
-    create_table :ecol_app_udtable do |t|
+    create_table :ecol_app_udtable, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :app_code, null: false, comment: 'the app_code of the associated ecol_app for this record'
       t.string :udf1, null: false, limit: 100, comment: 'the value for udf1 for this record'
       t.string :udf2, limit: 100, comment: 'the value for udf2 for this record'
