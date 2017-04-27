@@ -16,8 +16,8 @@ class CreateEcolAppUdtable < ActiveRecord::Migration
 
       t.approval_columns
 
-      t.index([:app_code, :udf1, :approval_status], unique: true, name: 'uk_ecol_app_udtable_01')
-      t.index([:app_code, :udf1, :udf2, :udf3, :udf4, :udf5, :approval_status], name: 'i_ecol_app_udtable_02')
+      t.index([:app_code, :udf1, :approval_status], unique: true, name: 'ecol_app_udtable_01')
+      t.index([:app_code, :udf1, :udf2, :udf3, :udf4, :udf5, :approval_status], name: 'ecol_app_udtable_02')
     end
   end
 end

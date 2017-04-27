@@ -126,58 +126,58 @@ describe IncomingFile do
     end
   end  
 
-  context "ecol_unapproved_records" do 
-    it "oncreate: should create ecol_unapproved_record if the approval_status is 'U'" do
+  context "new_unapproved_records" do 
+    it "oncreate: should create new_unapproved_record if the approval_status is 'U'" do
       sc_service = Factory(:sc_service, :code => 'ECOL', :name => 'Ecollect')
       inc_file_type = Factory(:incoming_file_type, :sc_service_id => sc_service.id, :code => 'RMTRS', :name => 'Remitters')
       incoming_file = Factory(:incoming_file, :service_name => sc_service.code, :file_type => inc_file_type.code)
-      incoming_file.ecol_unapproved_record.should_not be_nil
+      incoming_file.new_unapproved_record.should_not be_nil
     end
 
-    it "oncreate: should not create ecol_unapproved_record if the approval_status is 'A'" do
+    it "oncreate: should not create new_unapproved_record if the approval_status is 'A'" do
       sc_service = Factory(:sc_service, :code => 'ECOL', :name => 'Ecollect')
       inc_file_type = Factory(:incoming_file_type, :sc_service_id => sc_service.id, :code => 'RMTRS', :name => 'Remitters')
       incoming_file = Factory(:incoming_file, :service_name => sc_service.code, :file_type => inc_file_type.code, :approval_status => 'A')
-      incoming_file.ecol_unapproved_record.should be_nil
+      incoming_file.new_unapproved_record.should be_nil
     end
 
-    it "onupdate: should not remove ecol_unapproved_record if approval_status did not change from U to A" do
+    it "onupdate: should not remove new_unapproved_record if approval_status did not change from U to A" do
       sc_service = Factory(:sc_service, :code => 'ECOL', :name => 'Ecollect')
       inc_file_type = Factory(:incoming_file_type, :sc_service_id => sc_service.id, :code => 'RMTRS', :name => 'Remitters')
       incoming_file = Factory(:incoming_file, :service_name => sc_service.code, :file_type => inc_file_type.code)
       incoming_file.reload
-      incoming_file.ecol_unapproved_record.should_not be_nil
-      record = incoming_file.ecol_unapproved_record
+      incoming_file.new_unapproved_record.should_not be_nil
+      record = incoming_file.new_unapproved_record
       # we are editing the U record, before it is approved
       incoming_file.status = 'F'
       incoming_file.save
       incoming_file.reload
-      incoming_file.ecol_unapproved_record.should == record
+      incoming_file.new_unapproved_record.should == record
     end
 
-    it "onupdate: should remove ecol_unapproved_record if the approval_status changed from 'U' to 'A' (approval)" do
+    it "onupdate: should remove new_unapproved_record if the approval_status changed from 'U' to 'A' (approval)" do
       sc_service = Factory(:sc_service, :code => 'ECOL', :name => 'Ecollect')
       inc_file_type = Factory(:incoming_file_type, :sc_service_id => sc_service.id, :code => 'RMTRS', :name => 'Remitters')
       incoming_file = Factory(:incoming_file, :service_name => sc_service.code, :file_type => inc_file_type.code)
       incoming_file.reload
-      incoming_file.ecol_unapproved_record.should_not be_nil
+      incoming_file.new_unapproved_record.should_not be_nil
       # the approval process changes the approval_status from U to A for a newly edited record
       incoming_file.approval_status = 'A'
       incoming_file.save
       incoming_file.reload
-      incoming_file.ecol_unapproved_record.should be_nil
+      incoming_file.new_unapproved_record.should be_nil
     end
 
-    it "ondestroy: should remove ecol_unapproved_record if the record with approval_status 'U' was destroyed (approval) " do
+    it "ondestroy: should remove new_unapproved_record if the record with approval_status 'U' was destroyed (approval) " do
       sc_service = Factory(:sc_service, :code => 'ECOL', :name => 'Ecollect')
       inc_file_type = Factory(:incoming_file_type, :sc_service_id => sc_service.id, :code => 'RMTRS', :name => 'Remitters')
       incoming_file = Factory(:incoming_file, :service_name => sc_service.code, :file_type => inc_file_type.code)
       incoming_file.reload
-      incoming_file.ecol_unapproved_record.should_not be_nil
-      record = incoming_file.ecol_unapproved_record
+      incoming_file.new_unapproved_record.should_not be_nil
+      record = incoming_file.new_unapproved_record
       # the approval process destroys the U record, for an edited record
       incoming_file.destroy
-      EcolUnapprovedRecord.find_by_id(record.id).should be_nil
+      UnapprovedRecord.find_by_id(record.id).should be_nil
     end
   end
 

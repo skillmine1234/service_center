@@ -136,9 +136,9 @@ describe IncomingFilesController do
       sc_service = Factory(:sc_service, :code => 'ECOL', :name => 'Ecollect')
       inc_file_type = Factory(:incoming_file_type, :sc_service_id => sc_service.id, :code => 'RMTRS', :name => 'Remitters')
       incoming_file = Factory(:incoming_file, :service_name => sc_service.code, :file_type => inc_file_type.code, :approval_status => 'U')
-      EcolUnapprovedRecord.count.should == 1
+      UnapprovedRecord.count.should == 1
       put :approve, {:id => incoming_file.id}
-      EcolUnapprovedRecord.count.should == 0
+      UnapprovedRecord.count.should == 0
       incoming_file.reload
       incoming_file.approval_status.should == 'A'
     end
