@@ -195,4 +195,13 @@ describe EcolAppsController do
       assigns(:audit).should eq(nil)
     end
   end
+  
+  describe "GET ecol_app_udtables" do
+    it "assigns all ecol_app_udtables for an app_code as @records" do
+      ecol_app = Factory(:ecol_app, :approval_status => 'A')
+      ecol_app_udtable = Factory(:ecol_app_udtable, app_code: ecol_app.app_code, :approval_status => 'A')
+      get :ecol_app_udtables, app_code: ecol_app.app_code
+      assigns(:records).should eq([ecol_app_udtable])
+    end
+  end
 end

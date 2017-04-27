@@ -157,12 +157,7 @@ ServiceCenter::Application.routes.draw do
     end
   end
   
-  resources :ecol_app_udtables, except: :index do
-    collection do
-      get :index
-      put :index
-    end
-  end
+  resources :ecol_app_udtables
 
   get 'su_incoming_file_summary' => 'su_incoming_records#incoming_file_summary'
   get 'ic_incoming_file_summary' => 'ic_incoming_records#incoming_file_summary'
