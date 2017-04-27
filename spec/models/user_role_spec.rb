@@ -16,7 +16,7 @@ describe UserRole do
 
     it do
       user_role = Factory(:user_role)
-      should validate_uniqueness_of(:user_id).scoped_to(:approval_status)
+      should validate_uniqueness_of(:user_id)
     end
   end
   
