@@ -37,6 +37,14 @@ describe WhitelistedIdentitySearcher do
       WhitelistedIdentitySearcher.new({:partner_code => inward_remittance.partner_code, :bene_account_ifsc => 'ABCD0123456'}).paginate.should == [identity]
       WhitelistedIdentitySearcher.new({:partner_code => inward_remittance.partner_code, :bene_account_ifsc => 'ABCD'}).paginate.should == []
       WhitelistedIdentitySearcher.new({:partner_code => inward_remittance.partner_code, :bene_account_ifsc => 'abc'}).paginate.should == []   
+      
+      partner = Factory(:partner,:enabled => 'Y', will_send_id: 'Y', :approval_status => 'A', :code => 'a222')
+      inward_remittance = Factory(:inward_remittance, partner_code: partner.code, rmtr_full_name: 'MyString', rmtr_code: 'MyString')
+      identity = Factory(:whitelisted_identity, :partner_id => partner.id, created_for_req_no: inward_remittance.req_no, full_name: 'MyString', rmtr_code: 'MyString1', :approval_status => 'A')
+      searcher = WhitelistedIdentitySearcher.new({:partner_code => 'a222', :rmtr_code => 'MyString1'})
+      searcher.errors_on(:base).should_not be_nil
+      searcher.errors_on(:base).should == ['Search is not allowed on ID Detail (i.e., RemitterCode, Beneficiary Account No and Beneficiary IFSC) for this Partner since Will Send ID is not N']
+      searcher.paginate.should == []
     end
   end
 end
