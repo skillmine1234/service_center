@@ -13,11 +13,28 @@ describe UserRole do
     [:user_id, :role_id].each do |att|
       it { should validate_presence_of(att) }
     end
-
+    
     it do
       user_role = Factory(:user_role)
-      should validate_uniqueness_of(:user_id)
+      should validate_uniqueness_of(:user_id).scoped_to(:approval_status)
     end
+
+    it 'should give uniqueness validation error when a new role is created for a user who is already assigned a role' do
+      user = Factory(:user)
+      user_role1 = Factory(:user_role, user_id: user.id, approval_status: 'A')
+      
+      user_role2 = Factory.build(:user_role, user_id: user.id, approval_status: 'U')
+      user_role2.errors_on(:user_id).should == ['A role already exists for the user']
+    end
+    
+    it 'should give uniqueness validation error when a new role is created for a user, but there is already an unapproved user_role record for the same user' do
+      user = Factory(:user)
+      user_role1 = Factory(:user_role, user_id: user.id, approval_status: 'U')
+      
+      user_role2 = Factory.build(:user_role, user_id: user.id, approval_status: 'U')
+      user_role2.errors_on(:user_id).should == ['has already been taken', 'A role already exists for the user']
+    end
+
   end
   
   context "default_scope" do 
