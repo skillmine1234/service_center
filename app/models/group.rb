@@ -33,6 +33,8 @@ class Group < ActiveRecord::Base
       ['ScBackend','ScFaultCode','ScBackendResponseCode']
     when "rr"
       ['RrUnapprovedRecord','IncomingFile','IncomingFileRecord','RrIncomingFile','RrIncomingRecord','ReconciledReturn']
+    when "fr"
+      ['IncomingFile','IncomingFileRecord','FrR01IncomingFile','FrR01IncomingRecord']
     else
       []
     end

@@ -1,0 +1,21 @@
+%h2.collapsible
+  Advanced Search
+  %span.caret
+.collapsible-content
+  = form_tag fr_r01_incoming_records_path, :method => :post, :class => 'form-horizontal', :autocomplete=>"off" do
+    .control-group
+      = label_tag "Customer Name", "Customer Name", :class => 'control-label'
+      = text_field_tag :customer_name, params[:customer_name]
+
+    .control-group
+      = label_tag "Account No", "Account No", :class => 'control-label'
+      = text_field_tag :account_no, params[:account_no]
+
+    = hidden_field_tag :file_name, params[:file_name]
+    = hidden_field_tag :status, params[:status]
+    = hidden_field_tag :page, params[:page]
+    .form-actions
+      = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button",onclick: "$('#page').val(1)"
+      = button_tag "Reset", :type => 'button', :value=>'Reset', :class => 'btn', :id => 'adv_search_reset_button'
+
+= advanced_search_page_links

@@ -22,7 +22,12 @@ describe Group do
       group.model_list.should == ["RcTransferUnapprovedRecord", "RcTransfer", "RcTransferSchedule", "RcAuditStep", "RcApp"]
 
       group = Factory(:group,:name => 'sc-backend')
-      group.model_list.should == ['ScBackend', "ScFaultCode", "ScBackendResponseCode"]
+
+      group.model_list.should == ['ScBackend','ScJob', "ScFaultCode", "ScBackendResponseCode"]
+      
+      group = Factory(:group,:name => 'fr')
+      group.model_list.should == ['IncomingFile','IncomingFileRecord','FrR01IncomingFile','FrR01IncomingRecord']
+
     end
   end
 end

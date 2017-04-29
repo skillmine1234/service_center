@@ -24,6 +24,7 @@ FactoryGirl.define do
       Factory(:user_group, :user_id => user.id, :group_id => Factory(:group, :name => 'recurring-transfer').id)
       Factory(:user_group, :user_id => user.id, :group_id => Factory(:group, :name => 'sc-backend').id)
       Factory(:user_group, :user_id => user.id, :group_id => Factory(:group, :name => 'rr').id)
+      Factory(:user_group, :user_id => user.id, :group_id => Factory(:group, :name => 'fr').id)
     end
   end
 end
