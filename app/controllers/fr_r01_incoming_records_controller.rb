@@ -30,7 +30,6 @@ class FrR01IncomingRecordsController < ApplicationController
 
   def incoming_file_summary
     @summary = FrR01IncomingFile.find_by_file_name(params[:file_name])
-    p @summary
   end
 
   private

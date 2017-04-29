@@ -2,7 +2,7 @@
   Advanced Search
   %span.caret
 .collapsible-content
-  = form_tag fr_r01_incoming_records_path, :method => :post, :class => 'form-horizontal', :autocomplete=>"off" do
+  = form_tag fr_r01_incoming_records_path, :method => :post, :class => 'form-horizontal', :autocomplete=>"off", :id => 'advanced_search'  do
     .control-group
       = label_tag "Customer Name", "Customer Name", :class => 'control-label'
       = text_field_tag :customer_name, params[:customer_name]
