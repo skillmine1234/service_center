@@ -25,7 +25,7 @@ class WhitelistedIdentitySearcher
       errors[:base] << "Partner code is mandatory when using advanced search"
     elsif partner_code.present?
       partner = Partner.find_by(code: partner_code)
-      if partner.present? and partner.will_send_id == 'Y' and (rmtr_code.present? || bene_account_ifsc.present? || bene_account_no.present? )
+      if partner.present? && partner.will_send_id == 'Y' && (rmtr_code.present? || bene_account_ifsc.present? || bene_account_no.present? )
         errors[:base] << "Search is not allowed on ID Detail (i.e., RemitterCode, Beneficiary Account No and Beneficiary IFSC) for this Partner since Will Send ID is not N"
       end
     end
