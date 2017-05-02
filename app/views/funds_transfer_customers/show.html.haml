@@ -140,6 +140,12 @@
             %td#msg-error
               = error_message_for(@funds_transfer_customer, :notification_sent_at, :prepend_text => "")
           %tr
+            %td.label Allow Async?
+            %td.value
+              = @funds_transfer_customer.allow_async
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :allow_async, :prepend_text => "")
+          %tr
             %td.label Created By
             %td.value
               = @funds_transfer_customer.created_user.try(:username)

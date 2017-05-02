@@ -107,6 +107,6 @@ class FundsTransferCustomersController < ApplicationController
                                                     :enabled, :customer_id, :lock_version, :approval_status, :allow_rtgs, :is_retail,
                                                     :last_action, :approved_version, :approved_id, :created_by, :updated_by, :needs_purpose_code,
                                                     :reply_with_bene_name, :allow_all_accounts, :is_filetoapi_allowed, :allow_apbs, :apbs_user_no, 
-                                                    :apbs_user_name, :allow_start_transfer, :notify_on_status_change, :notify_app_code, :notification_sent_at)
+                                                    :apbs_user_name, :allow_async, :allow_start_transfer, :notify_on_status_change, :notify_app_code, :notification_sent_at)
   end
 end
