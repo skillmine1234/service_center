@@ -250,14 +250,16 @@ describe EcolCustomer do
       ecol_customer.errors_on(:credit_acct_val_fail).should == ["Since transaction is not to be returned on validation failure(as 'Return if Validation Fails' box is unchecked) Credit Account No(Validation Fail) field cannot be blank"]
     end
     
-    it "should check if should_prevalidate is enabled when val_method != W or cust_alert is off" do
-      ecol_customer = Factory.build(:ecol_customer, val_method: 'D', should_prevalidate: 'Y')
+    it "should check if should_prevalidate is enabled when val_method != W and cust_alert is off" do
+      ecol_customer = Factory.build(:ecol_customer, val_method: 'D', cust_alert_on: 'N', should_prevalidate: 'Y')
       ecol_customer.save.should == false
-      ecol_customer.errors_on(:should_prevalidate).should == ['should not be enabled when Validation Method is not Web Service or Customer Alert is off']
+      ecol_customer.errors_on(:should_prevalidate).should == ['should not be enabled when Validation Method is not Web Service and Customer Alert is off']
+
+      ecol_customer1 = Factory.build(:ecol_customer, val_method: 'W', cust_alert_on: 'N', should_prevalidate: 'Y')
+      ecol_customer1.save.should == true
       
-      ecol_customer1 = Factory.build(:ecol_customer, cust_alert_on: 'N', should_prevalidate: 'Y')
-      ecol_customer1.save.should == false
-      ecol_customer1.errors_on(:should_prevalidate).should == ['should not be enabled when Validation Method is not Web Service or Customer Alert is off']
+      ecol_customer2 = Factory.build(:ecol_customer, val_method: 'N', cust_alert_on: 'A', should_prevalidate: 'Y')
+      ecol_customer2.save.should == true
     end
   end
   
