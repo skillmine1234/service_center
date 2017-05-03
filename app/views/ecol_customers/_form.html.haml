@@ -33,6 +33,8 @@
     .control-group
       = f.label :should_prevalidate, "Should Prevalidate?", :class => 'control-label'
       = f.check_box :should_prevalidate, {},"Y","N"
+      #msg-error
+        = error_message_for(@ecol_customer, :should_prevalidate, :prepend_text => "")
     .control-group
       = f.label :app_code, "Application Code", :class => 'control-label'
       = f.text_field :app_code, :maxlength => 15

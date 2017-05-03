@@ -105,8 +105,8 @@ module EcolCustomerValidation
   end
   
   def validate_should_prevalidate
-    if (self.val_method != 'W' and self.should_prevalidate == 'Y')
-      errors.add(:should_prevalidate, 'should not be enabled when Validation Method is not Web Service')
+    if (self.should_prevalidate == 'Y' && (self.val_method != 'W' || self.cust_alert_on == 'N'))
+      errors.add(:should_prevalidate, 'should not be enabled when Validation Method is not Web Service or Customer Alert is off')
     end
   end
 end
