@@ -11,6 +11,8 @@ class CreatePc2BlockCards < ActiveRecord::Migration
       t.string :proxy_card_no, :null => false, :limit => 50, :comment => "the proxy card number is used instead of the real card number to ensure security."
       t.datetime :rep_timestamp, :comment => "the SYSDATE when the reply was sent to the client"
       t.string :fault_code, :limit => 50, :comment => "the code that identifies the business failure reason/exception"
+      t.string :rep_version, :limit => 10, :comment => "the service version number sent to client in response" 
+      t.string :rep_no, :limit => 255, :comment => "the unique reference number to be sent to client in response"          
       t.string :fault_subcode, :limit => 50, :comment => "the diagnositc code that represents the failure reason/exception"
       t.string :fault_reason, :limit => 1000, :comment => "the english reason of the business failure reason/exception"
       t.index([:req_no, :app_id, :attempt_no], :unique => true, :name => 'uk_pc2_block_cards')      
