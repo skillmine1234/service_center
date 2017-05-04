@@ -39,8 +39,8 @@ class EcolCustomer < ActiveRecord::Base
         errors.add(:code, "the code can be either a 4 digit number starting with 9, or a 6 character alpha-numeric code, that does not start with 9, or a 8 character alpha-numeric code, that does not start with 9")
       end
     else
-      unless code =~ /\A[0-9A-Za-z]{8}\Z/i or code =~ /\A[0-9A-Za-z]{6}\Z/i
-        errors.add(:code, "the code can be either a 4 digit number starting with 9, or a 6 character alpha-numeric code, that does not start with 9, or a 8 character alpha-numeric code, that does not start with 9")
+      unless code =~ /\A[0-9A-Za-z]{8}\Z/i or code =~ /\A[0-9A-Za-z]{6}\Z/i or code =~ /\A[0-9A-Za-z]{11}\Z/i
+        errors.add(:code, "the code can be either a 4 digit number starting with 9, or a 6 character alpha-numeric code, that does not start with 9, or a 8 character alpha-numeric code, that does not start with 9, or alphanumeric of 11 character,  that does not start with 9")
       end
     end
   end
