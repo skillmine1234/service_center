@@ -66,3 +66,23 @@ ScBackendStat.seed_once(:code) do |s|
   s.auditable_type = 'ScBackend'
   s.auditable_id = 0
 end
+
+ScBackend.seed_once(:code) do |s|
+  s.code = 'PURATECH'
+  s.do_auto_shutdown = 'N'
+  s.do_auto_start = 'N'
+  s.window_in_mins = 0
+  s.max_consecutive_failures = 0
+  s.min_consecutive_success = 0
+
+  s.max_window_failures = 0
+  s.min_window_success = 0  
+  s.created_by = 'Q'
+  s.created_at = Time.zone.now
+  s.approval_status = 'A'
+end
+
+ScBackendStatus.seed_once(:code) do |s|
+  s.code = 'PURATECH'
+  s.status = 'U'
+end

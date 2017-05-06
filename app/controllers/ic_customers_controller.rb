@@ -88,6 +88,6 @@ class IcCustomersController < ApplicationController
     params.require(:ic_customer).permit(:customer_id, :app_id, :identity_user_id, :repay_account_no, :fee_pct, :fee_income_gl, 
                                         :max_overdue_pct, :cust_contact_email, :cust_contact_mobile, :ops_email, :rm_email, 
                                         :is_enabled, :created_by, :updated_by, :created_at, :updated_at, :lock_version, 
-                                        :approval_status, :last_action, :approved_version, :approved_id, :customer_name)
+                                        :approval_status, :last_action, :approved_version, :approved_id, :customer_name, :sc_backend_code)
   end
 end

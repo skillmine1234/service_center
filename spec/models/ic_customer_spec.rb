@@ -10,10 +10,11 @@ describe IcCustomer do
   end
   
   context 'validation' do
-    [:customer_id, :app_id, :repay_account_no, :fee_pct, 
-     :fee_income_gl, :max_overdue_pct, :is_enabled, :customer_name].each do |att|
+    [:customer_id, :app_id, :repay_account_no, :is_enabled, :customer_name].each do |att|
       it { should validate_presence_of(att) }
     end
+    
+    it { should validate_inclusion_of(:sc_backend_code).in_array(%w( PURATECH ))}
 
     it do
       ic_customer = Factory(:ic_customer, :approval_status => 'A')
@@ -31,7 +32,6 @@ describe IcCustomer do
       should validate_length_of(:cust_contact_mobile).is_at_least(10).is_at_most(10)
       should allow_value("", nil).for(:cust_contact_mobile)
 
-      should allow_value(nil).for(:identity_user_id)
     end
 
     it do 
@@ -236,4 +236,13 @@ describe IcCustomer do
     end
   end
   
+  context "fields_based_on_sc_backend_code" do
+    it "should validate presence of values based on sc_backend code" do
+      ic_customer = Factory.build(:ic_customer, sc_backend_code: 'PURATECH', fee_income_gl: '12345671628', fee_pct: '12', cust_contact_email: 'abc@b.com')
+      ic_customer.errors_on(:base).should == ['Fee Percentage, Fee Income Account No, Maximum Overdue Percentage, Customer Email, Customer Mobile No, Operations Email and Relationship Manager Email are not allowed when Backend System is PURATECH']
+      
+      ic_customer = Factory.build(:ic_customer, sc_backend_code: nil, fee_income_gl: nil, fee_pct: nil)
+      ic_customer.errors_on(:base).should == ['Fee Percentage, Fee Income Account No and Maximum Overdue Percentage are mandatory when Backend System is null']
+    end
+  end
 end
