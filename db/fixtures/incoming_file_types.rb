@@ -321,6 +321,25 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
 end
 
 IncomingFileType.seed(:sc_service_id, :code) do |s|
+  s.sc_service_id = ScService.find_by(code: 'INSTANTCREDIT').id
+  s.code = 'IC_001'
+  s.name = 'Puratech FileUpload'
+  s.msg_domain = 'DFDL'
+  s.msg_model = '{http://www.quantiguous.com/services/file}:ic_001'
+  s.skip_first = 'N'
+  s.auto_upload = 'Y'
+  s.validate_all = 'Y'
+  s.build_response_file = 'N'
+  s.db_unit_name = "pk_qg_ic_001_file_manager"
+  s.records_table = 'ic_001_incoming_records'
+  s.can_override = 'N'
+  s.can_skip = 'Y'
+  s.can_retry = 'N'
+  s.build_nack_file = 'Y'
+  s.skip_last = 'N'
+end
+
+IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.sc_service_id = ScService.find_by(code: 'FR').id
   s.code = 'R01'
   s.name = 'Balance Enquiry'
