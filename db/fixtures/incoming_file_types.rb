@@ -331,7 +331,7 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.validate_all = 'Y'
   s.build_response_file = 'N'
   s.db_unit_name = "pk_qg_ic_001_file_manager"
-  s.records_table = 'ic_001_incoming_records'
+  s.records_table = 'ic001_incoming_records'
   s.can_override = 'N'
   s.can_skip = 'Y'
   s.can_retry = 'N'
