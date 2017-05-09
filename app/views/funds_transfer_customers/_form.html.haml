@@ -105,16 +105,6 @@
       = f.text_field :notify_app_code, :maxlength => 20
       #msg-error
         = error_message_for(@funds_transfer_customer, :notify_app_code, :prepend_text => "")
-    .control-group
-      = f.label :allow_async, "Allow Async ?", :class => 'control-label'
-      = f.check_box :allow_async, {},"Y","N"
-      #msg-error
-        = error_message_for(@funds_transfer_customer, :allow_async, :prepend_text => "")
-    .control-group
-      = f.label :allow_start_transfer, "Allow Start Transfer ?", :class => 'control-label'
-      = f.check_box :allow_start_transfer, {},"Y","N"
-      #msg-error
-        = error_message_for(@funds_transfer_customer, :allow_start_transfer, :prepend_text => "")
 
   .form-actions
     - (f.object.new_record? and f.object.app_id.nil?) ? label_name = "Create" : label_name = "Update"
