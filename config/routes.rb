@@ -168,6 +168,13 @@ ServiceCenter::Application.routes.draw do
     end
   end
 
+  resources :ic001_incoming_records, except: :index do
+    collection do
+      get :index
+      post :index
+    end
+  end
+
   get 'su_incoming_file_summary' => 'su_incoming_records#incoming_file_summary'
   get 'ic_incoming_file_summary' => 'ic_incoming_records#incoming_file_summary'
   get 'ft_incoming_file_summary' => 'ft_incoming_records#incoming_file_summary'
@@ -304,6 +311,9 @@ ServiceCenter::Application.routes.draw do
   get '/ecol_app_udtables/udfs/:app_code' => 'ecol_app_udtables#udfs'
   get '/ecol_app_udtables/:id/audit_logs' => 'ecol_app_udtables#audit_logs'
   put '/ecol_app_udtables/:id/approve' => "ecol_app_udtables#approve"
+  
+  get 'ic001_incoming_records' => 'ic001_incoming_records#incoming_file_summary'
+  get '/ic001_incoming_records/:id/audit_logs' => 'ic001_incoming_records#audit_logs'
   
   root :to => 'dashboard#overview'
 

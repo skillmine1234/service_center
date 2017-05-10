@@ -10,7 +10,7 @@ describe Group do
       group.model_list.should == ['EcolRule','EcolCustomer','EcolRemitter','EcolTransaction','UdfAttribute','IncomingFile','EcolFetchStatistic','QgEcolTodaysNeftTxn','QgEcolTodaysRtgsTxn','QgEcolTodaysImpsTxn', "OutgoingFile", "EcolApp", "EcolAppUdtable"]
 
       group = Factory(:group,:name => 'instant-credit')
-      group.model_list.should == ['IncomingFile','IcIncomingRecord','IncomingFileRecord','IcCustomer','IcSupplier','IcUnapprovedRecord','IcInvoice','FmAuditStep','IcIncomingFile']
+      group.model_list.should == ['IncomingFile','IcIncomingRecord','IncomingFileRecord','IcCustomer','IcSupplier','IcUnapprovedRecord','IcInvoice','FmAuditStep','IcIncomingFile','Ic001IncomingRecord','Ic001IncomingFile']
 
       group = Factory(:group,:name => 'smb')
       group.model_list.should == ['SmUnapprovedRecord','SmBank','SmBankAccount']
