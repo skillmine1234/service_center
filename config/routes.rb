@@ -312,7 +312,7 @@ ServiceCenter::Application.routes.draw do
   get '/ecol_app_udtables/:id/audit_logs' => 'ecol_app_udtables#audit_logs'
   put '/ecol_app_udtables/:id/approve' => "ecol_app_udtables#approve"
   
-  get 'ic001_incoming_records' => 'ic001_incoming_records#incoming_file_summary'
+  get 'ic001_incoming_file_summary' => 'ic001_incoming_records#incoming_file_summary'
   get '/ic001_incoming_records/:id/audit_logs' => 'ic001_incoming_records#audit_logs'
   
   root :to => 'dashboard#overview'

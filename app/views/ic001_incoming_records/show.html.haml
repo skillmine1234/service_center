@@ -8,7 +8,7 @@
         %tr
           %td.label Version
           %td.value
-            = link_to "#{audit_count(@ic_record.incoming_file_record)}", :controller => :ic_001_incoming_records, :action => :audit_logs, :version_id => audit_count(@ic_record.incoming_file_record), :id => @ic_record.incoming_file_record_id
+            = link_to "#{audit_count(@ic_record.incoming_file_record)}", :controller => :ic001_incoming_records, :action => :audit_logs, :version_id => audit_count(@ic_record.incoming_file_record), :id => @ic_record.incoming_file_record_id
         %tr
           %td.label Record Text
           %td.value
@@ -50,17 +50,13 @@
           %td.value
             = @ic_record.invoice_amount
         %tr
-          %td.label Invoice Date
-          %td.value
-            = @ic_record.invoice_date
-        %tr
           %td.label Additional Field 1
           %td.value
-            = @ic_record.additional_field_1
+            = @ic_record.additional_field1
         %tr
           %td.label Additional Field 2
           %td.value
-            = @ic_record.additional_field_2
+            = @ic_record.additional_field2
         %tr
           %td.label Reference Number
           %td.value
