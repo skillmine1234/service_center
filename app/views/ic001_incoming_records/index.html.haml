@@ -15,6 +15,8 @@
         %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
           File Name
         %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
+          Serial No.
+        %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
           Anchor Account ID
         %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
           Invoice No
@@ -44,6 +46,8 @@
               = check_box_tag "record_ids[]", record.incoming_file_record_id, false, class: 'txn_select'
           %td{:style=>'text-align:left;'}
             = record.file_name
+          %td{:style=>'text-align:left;'}
+            = record.sl_no
           %td{:style=>'text-align:left;'}
             = record.anchor_account_id
           %td{:style=>'text-align:left;'}

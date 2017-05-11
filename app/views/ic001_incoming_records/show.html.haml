@@ -16,7 +16,11 @@
               .span{:class =>"has-tooltip", "data-toggle" => 'tooltip',"title" => "No Record Text Available for this record", "data-placement" => 'bottom', "data-html" => true}
                 Show Record Text
             - else
-              = link_to "Show Record Text", "#", :class => 'show_record_text', :href => "#recordText", data: { record_txt: @ic_record.incoming_file_record.record_txt} 
+              = link_to "Show Record Text", "#", :class => 'show_record_text', :href => "#recordText", data: { record_txt: @ic_record.incoming_file_record.record_txt}
+        %tr
+          %td.label Serial No.
+          %td.value
+            = @ic_record.sl_no
         %tr
           %td.label Anchor Customer ID
           %td.value
@@ -61,6 +65,10 @@
           %td.label Reference Number
           %td.value
             = @ic_record.ref_number
+        %tr
+          %td.label Created Date
+          %td.value
+            = @ic_record.created_date
         %tr
           %td.label Status
           %td.value

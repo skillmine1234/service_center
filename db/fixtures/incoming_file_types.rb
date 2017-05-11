@@ -335,7 +335,7 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.can_override = 'N'
   s.can_skip = 'Y'
   s.can_retry = 'N'
-  s.build_nack_file = 'Y'
+  s.build_nack_file = 'N'
   s.skip_last = 'N'
 end
 
