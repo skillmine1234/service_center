@@ -68,7 +68,7 @@
         %tr
           %td.label Created Date
           %td.value
-            = @ic_record.created_date
+            = @ic_record.created_date.try(:strftime, "%d/%m/%Y")
         %tr
           %td.label Status
           %td.value
