@@ -70,6 +70,10 @@
           %td.value
             = @ic_record.created_date.try(:strftime, "%d/%m/%Y")
         %tr
+          %td.label Book Date
+          %td.value
+            = @ic_record.book_date.try(:strftime, "%d/%m/%Y")
+        %tr
           %td.label Status
           %td.value
             = @ic_record.status
