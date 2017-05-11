@@ -14,7 +14,7 @@ describe RcTransfersController do
     it "assigns all rc_transfers as @rc_transfers" do
       rc_transfer = Factory(:rc_transfer)
       get :index
-      assigns(:rc_transfers).should eq([rc_transfer])
+      assigns(:records).should eq([rc_transfer])
     end
   end
   

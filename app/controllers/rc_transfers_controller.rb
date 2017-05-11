@@ -8,10 +8,12 @@ class RcTransfersController < ApplicationController
   include RcTransfersHelper
   
   def index
-    rc_transfers = RcTransfer.order("id desc")
-    rc_transfers = find_rc_transfers(params,rc_transfers).order("id desc") if params[:advanced_search].present?
-    @rc_transfers_count = rc_transfers.count(:id)
-    @rc_transfers = rc_transfers.paginate(:per_page => 10, :page => params[:page]) rescue []
+    if request.get?
+      @searcher = RcTransferSearcher.new(params.permit(:page))
+    else
+      @searcher = RcTransferSearcher.new(search_params)
+    end
+    @records = @searcher.paginate
   end
   
   def show
@@ -46,5 +48,11 @@ class RcTransfersController < ApplicationController
       flash[:notice] = @rc_transfer.errors.full_messages
     end
     redirect_to :back
+  end
+  
+  private
+
+  def search_params
+    params.permit(:page, :rc_code, :bene_account_no, :debit_account_no, :from_amount, :to_amount, :status, :notify_status, :mobile_no, :pending_approval)
   end
 end

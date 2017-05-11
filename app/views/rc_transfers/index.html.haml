@@ -1,14 +1,7 @@
 %br
 %h1 Listing Recurring Transfers
-%h2.collapsible
-  Advanced Search
-  %span.caret
-.collapsible-content
-  = render :partial => 'advanced_search'
+= render :partial => 'advanced_search'
 %br
-= "Total Count: #{@rc_transfers_count}"
-%br
-= will_paginate @rc_transfers
 %br
 = simple_form_for :rc_transfer, :url => update_multiple_rc_transfers_path, :html => { :method => :put, :class => 'form-horizontal', :autocomplete=>"off", :id => 'update_transactions', :style=> 'overflow: auto;'} do |f| 
   %table.table.table-bordered.table-striped.table-hover
@@ -38,7 +31,7 @@
         Pending Approval
 
     .tbody
-      - @rc_transfers.each do |rc_transfer|
+      - @records.each do |rc_transfer|
         %tr
           %td{:style=>'text-align:left;'}
             = link_to 'Show', rc_transfer

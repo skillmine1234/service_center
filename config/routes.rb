@@ -118,9 +118,11 @@ ServiceCenter::Application.routes.draw do
   resources :rr_unapproved_records
   
   resources :rc_transfer_schedules
-  resources :rc_transfers do
+  resources :rc_transfers, except: :index do
     collection do
       put  'update_multiple'
+      get :index
+      put :index
     end
   end
   resources :rc_apps
