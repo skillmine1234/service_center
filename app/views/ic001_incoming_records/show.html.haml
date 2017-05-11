@@ -64,6 +64,10 @@
         %tr
           %td.label Status
           %td.value
+            = @ic_record.status
+        %tr
+          %td.label Failure Reason
+          %td.value
             = @ic_record.failure_reason
 #recordText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
