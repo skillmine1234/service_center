@@ -22,6 +22,21 @@
       = f.check_box :needs_otp, {},"Y","N"
       #msg-error
         = error_message_for(@bm_app, :needs_otp, :prepend_text => "")
+    .control-group
+      = f.label :is_configuration_global, "Is Configuration Global?", :class => 'control-label'
+      = f.check_box :is_configuration_global, {},"Y","N"
+      #msg-error
+        = error_message_for(@bm_app, :is_configuration_global, :prepend_text => "")
+    .control-group
+      = f.label :flex_user_id, "Flex User Id", :class => 'control-label', :id => "flex_user_id_lbl"
+      = f.text_field :flex_user_id, :maxlength => 50
+      #msg-error
+        = error_message_for(@bm_app, :flex_user_id, :prepend_text => "")
+    .control-group
+      = f.label :flex_narrative_prefix, "Flex Narrative Prefix", :class => 'control-label', :id => "flex_narrative_prefix_lbl"
+      = f.text_field :flex_narrative_prefix, :maxlength => 50
+      #msg-error
+        = error_message_for(@bm_app, :flex_narrative_prefix, :prepend_text => "")
 
   .form-actions
     - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"

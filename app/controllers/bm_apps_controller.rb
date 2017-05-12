@@ -86,6 +86,6 @@ class BmAppsController < ApplicationController
 
   def bm_app_params
     params.require(:bm_app).permit(:app_id, :channel_id, :lock_version, :approval_status, :last_action, :approved_version, 
-                                   :approved_id, :created_by, :updated_by, :needs_otp)
+                                   :approved_id, :created_by, :updated_by, :needs_otp, :is_configuration_global, :flex_user_id, :flex_narrative_prefix)
   end
 end

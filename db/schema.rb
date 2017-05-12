@@ -204,6 +204,9 @@ ActiveRecord::Schema.define(version: 20170413135248) do
     t.string   "created_by",       limit: 20
     t.string   "updated_by",       limit: 20
     t.string   "needs_otp",        limit: 1,  default: "N", null: false
+    t.string   "is_configuration_global", limit: 1,  default: "Y"
+    t.string   "flex_user_id",            limit: 50
+    t.string   "flex_narrative_prefix",   limit: 50
   end
 
   add_index "bm_apps", ["app_id", "approval_status"], name: "index_bm_apps_on_app_id_and_approval_status", unique: true
