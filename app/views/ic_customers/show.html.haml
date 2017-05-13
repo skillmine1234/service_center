@@ -18,7 +18,13 @@
             %td.value
               = ' '
             %td#msg-error
-              = error_message_for(@ic_customer, :base, :prepend_text => "")
+              = error_message_for(@ic_customer, :base, :prepend_text => "")        
+          %tr
+            %td.label Backend System
+            %td.value
+              = @ic_customer.sc_backend_code
+            %td#msg-error
+              = error_message_for(@ic_customer, :sc_backend_code, :prepend_text => "")
           %tr
             %td.label Customer ID
             %td.value
