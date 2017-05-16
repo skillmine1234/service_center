@@ -54,5 +54,19 @@ describe BmApp do
       bm_app.save.should == true
       bm_app.errors_on(:flex_narrative_prefix).should == []
     end
+
+    it "should show an error if length exceeds limit for flex_user_id and flex_narrative_prefix" do 
+      bm_app = Factory.build(:bm_app, :approval_status => 'A', :is_configuration_global => 'N', :flex_user_id => ("abcd" + "%050i" % 0), :flex_narrative_prefix => ("abcde" + "%050i" % 0))
+      bm_app.should_not be_valid
+      bm_app.errors_on(:flex_user_id).should == ["is too long (maximum is 50 characters)"]
+      bm_app.errors_on(:flex_narrative_prefix).should == ["is too long (maximum is 50 characters)"]
+    end
+
+    it "should not show an error if length does not exceeds limit for flex_user_id and flex_narrative_prefix" do 
+      bm_app = Factory.build(:bm_app, :approval_status => 'A', :is_configuration_global => 'N', :flex_user_id => ("abcd" + "%046i" % 0), :flex_narrative_prefix => ("abcde" + "%045i" % 0))
+      bm_app.should be_valid
+      bm_app.errors_on(:flex_user_id).should == []
+      bm_app.errors_on(:flex_narrative_prefix).should == []
+    end
   end
 end
