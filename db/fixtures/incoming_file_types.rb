@@ -360,17 +360,17 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
 end
 
 IncomingFileType.seed(:sc_service_id, :code) do |s|
-  s.sc_service_id = ScService.find_by(code: 'FUNDSTRANSFER').id
-  s.code = 'APBS'
-  s.name = 'APBS'
+  s.sc_service_id = ScService.find_by(code: 'IMTSERVICE').id
+  s.code = 'SETTLEMENT'
+  s.name = 'SETTLEMENT'
   s.msg_domain = 'DFDL'
-  s.msg_model = '{http://www.quantiguous.com/services/file}:apbs'
-  s.skip_first = 'Y'
+  s.msg_model = '{http://www.quantiguous.com/services/file}:imt_settlements'
+  s.skip_first = 'N'
   s.auto_upload = 'Y'
   s.validate_all = 'Y'
   s.build_response_file = 'N'
-  s.db_unit_name = "pk_qg_ft_apbs_file_manager"
-  s.records_table = 'ft_apbs_incoming_records'
+  s.db_unit_name = "pk_qg_imt_file_manager"
+  s.records_table = 'imt_incoming_records'
   s.can_override = 'N'
   s.can_skip = 'Y'
   s.can_retry = 'N'
