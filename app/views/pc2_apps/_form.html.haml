@@ -14,7 +14,7 @@
         = error_message_for(@pc2_app, :app_id, :prepend_text => "")
     .control-group
       = f.label :customer_id, "*Customer ID", :class => 'control-label'
-      = f.text_field :customer_id, :maxlength => 20
+      = f.text_field :customer_id, :maxlength => 15
       #msg-error
         = error_message_for(@pc2_app, :customer_id, :prepend_text => "")
     .control-group

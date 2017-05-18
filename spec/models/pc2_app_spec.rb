@@ -4,6 +4,10 @@ describe Pc2App do
   context "associations" do
     it { should belong_to(:created_user) }
     it { should belong_to(:updated_user) }
+    it { should have_one(:pc2_unapproved_record) }
+    it { should belong_to(:unapproved_record) }
+    it { should belong_to(:approved_record) }
+    it { should have_many(:pc2_cust_accounts) }
   end
   
   context "validations" do
@@ -16,6 +20,11 @@ describe Pc2App do
     it do
       pc2_app = Factory(:pc2_app, :app_id => 'App10', :approval_status => 'A')
       should validate_uniqueness_of(:app_id).scoped_to(:approval_status)
+    end
+
+    it "should validate length" do
+      pc2_app = Factory(:pc2_app, :approval_status => 'A')
+      should validate_length_of(:customer_id).is_at_most(15)
     end
   end
   

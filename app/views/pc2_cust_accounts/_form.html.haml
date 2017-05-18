@@ -1,0 +1,28 @@
+= simple_form_for @pc2_cust_account, :html => {:class=>'form-horizontal', :autocomplete=>"off", :id => "pc2_cust_account_form"} do |f|
+  .control-group
+    = f.label ' '
+    #msg-error
+      = error_message_for(@pc2_cust_account, :base, :prepend_text => "")
+  .form-main
+    = f.hidden_field :lock_version
+    = f.hidden_field :approved_id
+    = f.hidden_field :approved_version
+    .control-group
+      = f.label :customer_id, "*Customer ID", :class => 'control-label'
+      = f.text_field :customer_id, :maxlength => 15
+      #msg-error
+        = error_message_for(@pc2_cust_account, :customer_id, :prepend_text => "")
+    .control-group
+      = f.label :account_no, "*Account No", :class => 'control-label'
+      = f.text_field :account_no, :minlength => 5, :maxlength => 20
+      #msg-error
+        = error_message_for(@pc2_cust_account, :account_no, :prepend_text => "")
+    .control-group
+      = f.label :is_enabled, "Is Enabled ?", :class => 'control-label'
+      = f.check_box :is_enabled, {},"Y","N"
+      #msg-error
+        = error_message_for(@pc2_cust_account, :is_enabled, :prepend_text => "")
+  .form-actions
+    - (f.object.new_record? and f.object.customer_id.nil?) ? label_name = "Create" : label_name = "Update"
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_pc2_cust_account', :value => label_name + ' Customer Account'
+    = link_to :Cancel,'/pc2_cust_accounts', :name => 'cancel', :class=>"cancel btn"

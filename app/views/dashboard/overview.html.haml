@@ -367,6 +367,11 @@
         = image_tag 'pc_apps.png', :size => "80x80"
       %br
         = "PC2 Apps"
+    .box
+      = link_to '/pc2_cust_accounts' do
+        = image_tag 'pc2_cust_accounts.png', :size => "80x80"
+      %br
+        = "PC2 Customer Accounts"
 
 - if @current_user.group_names.include?("smb")
   %h1 Sub Member Bank

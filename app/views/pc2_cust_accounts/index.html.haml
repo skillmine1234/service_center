@@ -1,0 +1,39 @@
+%br
+= link_to 'New PC2 Customer Account', new_pc2_cust_account_path
+%br
+%br
+%h1 Listing Customer Accounts
+%h2.collapsible
+  Advanced Search
+  %span.caret
+.collapsible-content
+  = render :partial => 'advanced_search'
+%br
+= "Total Count: #{@pc2_cust_accounts_count}"
+%br
+= will_paginate @pc2_cust_accounts
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Customer ID
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Account No.
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Is Enabled?
+
+  .tbody
+    - @pc2_cust_accounts.each do |pc2_cust_account|
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', pc2_cust_account
+        %td{:style=>'text-align:left;'}
+          = link_to 'Edit', edit_pc2_cust_account_path(pc2_cust_account)
+        %td{:style=>'text-align:left;'}
+          = pc2_cust_account.customer_id
+        %td{:style=>'text-align:left;'}
+          = pc2_cust_account.account_no
+        %td{:style=>'text-align:left;'}
+          = pc2_cust_account.is_enabled
