@@ -3,7 +3,7 @@ class CreateImtIncomingRecords < ActiveRecord::Migration
     create_table :imt_incoming_records, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
     	t.integer :incoming_file_record_id, :null => false, :comment => "the foreign key to the incoming_files table"
       t.string :file_name, :limit => 50, :null => false, :comment => "the name of the incoming_file"
-      t.number :record_no, :null => false, :comment => "the serial no of the imt transaction which has come in the file"
+      t.integer :record_no, :null => false, :comment => "the serial no of the imt transaction which has come in the file"
       t.string :issuing_bank, :null => false, :limit => 50, :comment => "the name of the bank which issued"
       t.string :acquiring_bank, :null => false, :limit => 50, :comment => "the name of the bank that processes payments on behalf of merchant"
       t.string :imt_ref_no, :null => false, :limit => 35, :comment => "the unique reference no through which imt has been initiated"
