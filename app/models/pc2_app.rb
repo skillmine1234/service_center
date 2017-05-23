@@ -7,7 +7,7 @@ class Pc2App < ActiveRecord::Base
   
   validates :customer_id, presence: true, :numericality => {:only_integer => true}, length: { maximum: 15 }
   validates_presence_of :app_id, :identity_user_id
-  validates_uniqueness_of :app_id, :scope => :approval_status
+  validates_uniqueness_of :customer_id, :scope => [:app_id, :approval_status]
 
   has_many :pc2_cust_accounts, :primary_key => 'customer_id', :foreign_key => 'customer_id', :class_name => 'Pc2CustAccount'
 end

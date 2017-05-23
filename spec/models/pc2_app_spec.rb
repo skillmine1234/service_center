@@ -19,7 +19,7 @@ describe Pc2App do
 
     it do
       pc2_app = Factory(:pc2_app, :app_id => 'App10', :approval_status => 'A')
-      should validate_uniqueness_of(:app_id).scoped_to(:approval_status)
+      should validate_uniqueness_of(:customer_id).scoped_to(:app_id, :approval_status)  
     end
 
     it "should validate length" do
