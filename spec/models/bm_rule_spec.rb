@@ -17,6 +17,7 @@ describe BmRule do
     it do
       bm_rule = Factory(:bm_rule)
       should validate_length_of(:narrative_prefix).is_at_most(50)
+      should validate_length_of(:user_id).is_at_most(50)
     end
 
     it "should validate_unapproved_record" do

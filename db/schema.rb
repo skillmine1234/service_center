@@ -487,6 +487,7 @@ ActiveRecord::Schema.define(version: 20170520144713) do
     t.integer  "traceid_prefix",                default: 1,    null: false
     t.string   "service_id",        limit: 255
     t.string   "narrative_prefix",  limit: 50
+    t.string   "user_id",           limit: 50
   end
 
   create_table "bm_unapproved_records", force: :cascade do |t|
