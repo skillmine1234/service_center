@@ -16,7 +16,7 @@ class Group < ActiveRecord::Base
     when "flex-proxy"
       ['FpOperation','FpAuthRule','FpUnapprovedRecord']
     when "imt"
-      ['ImtCustomer','ImtTransfer','IncomingFile','ImtUnapprovedRecord','OutgoingFile']
+      ['ImtCustomer','ImtTransfer','IncomingFile','ImtUnapprovedRecord','OutgoingFile','ImtIncomingFile','ImtIncomingRecord']
     when "funds-transfer"
       ['FundsTransferCustomer','FtUnapprovedRecord', 'FtPurposeCode','FtIncomingRecord','IncomingFile','IncomingFileRecord','FtIncomingFile','FtCustomerAccount','FtApbsIncomingFile','FtApbsIncomingRecord']
     when "salary-upload"
