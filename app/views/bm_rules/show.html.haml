@@ -56,6 +56,12 @@
             %td#msg-error
               = error_message_for(@bm_rule, :service_id, :prepend_text => "")
           %tr
+            %td.label Narrative Prefix
+            %td.value
+              = @bm_rule.narrative_prefix
+            %td#msg-error
+              = error_message_for(@bm_rule, :narrative_prefix, :prepend_text => "")
+          %tr
             %td.label Updated By
             %td.value
               = @bm_rule.updated_user.try(:username)

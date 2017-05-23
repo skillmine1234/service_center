@@ -14,6 +14,11 @@ describe BmRule do
       it { should validate_presence_of(att) }
     end
 
+    it do
+      bm_rule = Factory(:bm_rule)
+      should validate_length_of(:narrative_prefix).is_at_most(50)
+    end
+
     it "should validate_unapproved_record" do
       bm_rule1 = Factory(:bm_rule,:approval_status => 'A')
       bm_rule2 = Factory(:bm_rule, :approved_id => bm_rule1.id)

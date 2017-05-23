@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170413135248) do
+ActiveRecord::Schema.define(version: 20170520144713) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -486,6 +486,7 @@ ActiveRecord::Schema.define(version: 20170413135248) do
     t.string   "source_id",         limit: 50,  default: "qg", null: false
     t.integer  "traceid_prefix",                default: 1,    null: false
     t.string   "service_id",        limit: 255
+    t.string   "narrative_prefix",  limit: 50
   end
 
   create_table "bm_unapproved_records", force: :cascade do |t|

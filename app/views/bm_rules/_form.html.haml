@@ -37,6 +37,11 @@
       = f.text_field :service_id
       #msg-error
         = error_message_for(@bm_rule, :service_id, :prepend_text => "")
+    .control-group
+      = f.label :narrative_prefix, "Narrative Prefix", :class => 'control-label'
+      = f.text_field :narrative_prefix, :maxlength => 50
+      #msg-error
+        = error_message_for(@bm_rule, :narrative_prefix, :prepend_text => "")
 
   .form-actions
     - (f.object.new_record? and f.object.cod_acct_no.nil?) ? label_name = "Create" : label_name = "Update"
