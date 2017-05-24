@@ -65,8 +65,8 @@ class Pc2AppsController < ApplicationController
   end
 
   def audit_logs
-    @pc2_app = Pc2App.unscoped.find(params[:id]) rescue nil
-    @audit = @pc2_app.audits[params[:version_id].to_i] rescue nil
+    @record = Pc2App.unscoped.find(params[:id]) rescue nil
+    @audit = @record.audits[params[:version_id].to_i] rescue nil
   end
 
   def approve

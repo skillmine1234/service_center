@@ -173,10 +173,10 @@ describe Pc2AppsController do
     it "assigns the requested pc2_app as @pc2_app" do
       pc2_app = Factory(:pc2_app)
       get :audit_logs, {:id => pc2_app.id, :version_id => 0}
-      assigns(:pc2_app).should eq(pc2_app)
+      assigns(:record).should eq(pc2_app)
       assigns(:audit).should eq(pc2_app.audits.first)
       get :audit_logs, {:id => 12345, :version_id => "i"}
-      assigns(:pc2_app).should eq(nil)
+      assigns(:record).should eq(nil)
       assigns(:audit).should eq(nil)
     end
   end

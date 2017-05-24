@@ -173,10 +173,10 @@ describe Pc2CustAccountsController do
     it "assigns the requested pc2_cust_account as @pc2_cust_account" do
       pc2_cust_account = Factory(:pc2_cust_account)
       get :audit_logs, {:id => pc2_cust_account.id, :version_id => 0}
-      assigns(:pc2_cust_account).should eq(pc2_cust_account)
+      assigns(:record).should eq(pc2_cust_account)
       assigns(:audit).should eq(pc2_cust_account.audits.first)
       get :audit_logs, {:id => 12345, :version_id => "i"}
-      assigns(:pc2_cust_account).should eq(nil)
+      assigns(:record).should eq(nil)
       assigns(:audit).should eq(nil)
     end
   end
