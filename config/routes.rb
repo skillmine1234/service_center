@@ -275,6 +275,13 @@ ServiceCenter::Application.routes.draw do
     end
   end
 
+  resources :imt_incoming_records, except: :index do
+    collection do
+      get :index
+      post :index
+    end
+  end
+
   get 'su_incoming_file_summary' => 'su_incoming_records#incoming_file_summary'
   get 'ic_incoming_file_summary' => 'ic_incoming_records#incoming_file_summary'
   get 'ft_incoming_file_summary' => 'ft_incoming_records#incoming_file_summary'
@@ -421,6 +428,9 @@ ServiceCenter::Application.routes.draw do
   
   get 'ic001_incoming_file_summary' => 'ic001_incoming_records#incoming_file_summary'
   get '/ic001_incoming_records/:id/audit_logs' => 'ic001_incoming_records#audit_logs'
+
+  get 'imt_incoming_file_summary' => 'imt_incoming_records#incoming_file_summary'
+  get '/imt_incoming_records/:id/audit_logs' => 'imt_incoming_records#audit_logs'
   
   get 'ft_apbs_incoming_file_summary' => 'ft_apbs_incoming_records#incoming_file_summary'
   get '/ft_apbs_incoming_records/:id/audit_logs' => 'ft_apbs_incoming_records#audit_logs'

@@ -1694,6 +1694,36 @@ ActiveRecord::Schema.define(version: 20170607090814) do
 
   add_index "imt_del_beneficiaries", ["req_no", "app_id", "attempt_no"], name: "uk_imt_del_bene", unique: true
 
+  create_table "imt_incoming_files", force: :cascade do |t|
+    t.string "file_name", limit: 50
+  end
+
+  add_index "imt_incoming_files", ["file_name"], name: "imt_incoming_files_01", unique: true
+
+  create_table "imt_incoming_records", force: :cascade do |t|
+    t.integer  "incoming_file_record_id",            null: false
+    t.string   "file_name",               limit: 50, null: false
+    t.integer  "record_no",                          null: false
+    t.string   "issuing_bank",            limit: 50, null: false
+    t.string   "acquiring_bank",          limit: 50, null: false
+    t.string   "imt_ref_no",              limit: 35, null: false
+    t.datetime "txn_issue_date",                     null: false
+    t.datetime "txn_acquire_date",                   null: false
+    t.datetime "chargeback_action_date"
+    t.string   "issuing_bank_txn_id",     limit: 50, null: false
+    t.string   "acquiring_bank_txn_id",   limit: 50
+    t.string   "txn_status"
+    t.string   "crdr",                    limit: 2,  null: false
+    t.decimal  "amount",                             null: false
+    t.decimal  "acquiring_fee",                      null: false
+    t.decimal  "sc_on_acquiring_fee",                null: false
+    t.decimal  "npci_charges",                       null: false
+    t.decimal  "sc_on_npci_charges",                 null: false
+    t.decimal  "total_net_position",                 null: false
+  end
+
+  add_index "imt_incoming_records", ["incoming_file_record_id", "file_name"], name: "imt_incoming_records_01", unique: true
+
   create_table "imt_initiate_transfers", force: :cascade do |t|
     t.string   "req_no",            limit: 255,                null: false
     t.integer  "attempt_no",                                   null: false
@@ -1726,6 +1756,27 @@ ActiveRecord::Schema.define(version: 20170607090814) do
     t.datetime "created_at",                                null: false
     t.integer  "imt_audit_step_id",             default: 1, null: false
   end
+
+  create_table "imt_resend_otp", force: :cascade do |t|
+    t.string   "req_no",               limit: 30,   null: false
+    t.integer  "attempt_no",                        null: false
+    t.string   "status_code",          limit: 25,   null: false
+    t.string   "req_version",          limit: 10,   null: false
+    t.datetime "req_timestamp",                     null: false
+    t.string   "app_id",               limit: 50,   null: false
+    t.string   "customer_id",          limit: 50,   null: false
+    t.string   "imt_ref_no",           limit: 32
+    t.string   "initiate_transfer_no", limit: 50,   null: false
+    t.string   "rep_no",               limit: 32
+    t.string   "rep_version",          limit: 10
+    t.integer  "otp_attempt_no"
+    t.datetime "rep_timestamp"
+    t.string   "fault_code",           limit: 50
+    t.string   "fault_subcode",        limit: 50
+    t.string   "fault_reason",         limit: 1000
+  end
+
+  add_index "imt_resend_otp", ["req_no", "app_id", "attempt_no"], name: "uk_imt_resend_otp", unique: true
 
   create_table "imt_transfers", force: :cascade do |t|
     t.string   "imt_ref_no",            limit: 35

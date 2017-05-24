@@ -5,7 +5,6 @@ class ImtIncomingRecordsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :block_inactive_user!
   respond_to :json, :html
-  # include SuIncomingRecordsHelper
 
   def index    
     @incoming_file = IncomingFile.find_by_file_name(params[:file_name]) rescue nil
@@ -20,7 +19,7 @@ class ImtIncomingRecordsController < ApplicationController
   end
 
   def show
-    @ic_record = ImtIncomingRecord.find_by_id(params[:id])
+    @imt_record = ImtIncomingRecord.find_by_id(params[:id])
   end
 
   def audit_logs
@@ -29,7 +28,7 @@ class ImtIncomingRecordsController < ApplicationController
   end
 
   def incoming_file_summary
-    @summary = ImtIncomingRecord.find_by_file_name(params[:file_name])
+    @summary = ImtIncomingFile.find_by_file_name(params[:file_name])
   end
   
   def search_params

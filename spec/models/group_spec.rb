@@ -9,6 +9,9 @@ describe Group do
       group = Factory(:group,:name => 'e-collect')
       group.model_list.should == ['EcolRule','EcolCustomer','EcolRemitter','EcolTransaction','UdfAttribute','IncomingFile','EcolFetchStatistic','QgEcolTodaysNeftTxn','QgEcolTodaysRtgsTxn','QgEcolTodaysImpsTxn', "OutgoingFile", "EcolApp", "EcolAppUdtable"]
 
+      group = Factory(:group,:name => 'imt')
+      group.model_list.should == ['ImtCustomer','ImtTransfer','IncomingFile','ImtUnapprovedRecord','OutgoingFile','ImtIncomingFile','ImtIncomingRecord']
+
       group = Factory(:group,:name => 'instant-credit')
       group.model_list.should == ['IncomingFile','IcIncomingRecord','IncomingFileRecord','IcCustomer','IcSupplier','IcUnapprovedRecord','IcInvoice','FmAuditStep','IcIncomingFile','Ic001IncomingRecord','Ic001IncomingFile']
 
