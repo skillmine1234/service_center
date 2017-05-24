@@ -104,6 +104,18 @@
             %td#msg-error
               = error_message_for(@funds_transfer_customer, :ais_filetoapi_allowed, :prepend_text => "")
           %tr
+            %td.label Notify On Status Change ?
+            %td.value
+              = @funds_transfer_customer.notify_on_status_change
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :notify_on_status_change, :prepend_text => "")
+          %tr
+            %td.label Notify App Code
+            %td.value
+              = @funds_transfer_customer.notify_app_code
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :notify_app_code, :prepend_text => "")
+          %tr
             %td.label Created By
             %td.value
               = @funds_transfer_customer.created_user.try(:username)

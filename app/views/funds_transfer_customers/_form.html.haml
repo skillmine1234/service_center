@@ -80,6 +80,16 @@
       = f.check_box :is_filetoapi_allowed, {},"Y","N"
       #msg-error
         = error_message_for(@funds_transfer_customer, :is_filetoapi_allowed, :prepend_text => "")
+    .control-group
+      = f.label :notify_on_status_change, "Notify On Status Change ?", :class => 'control-label'
+      = f.check_box :notify_on_status_change, {},"Y","N"
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :notify_on_status_change, :prepend_text => "")
+    .control-group
+      = f.label :notify_app_code, "Notify App Code", :class => 'control-label'
+      = f.text_field :notify_app_code
+      #msg-error
+        = error_message_for(@funds_transfer_customer, :notify_app_code, :prepend_text => "")
 
   .form-actions
     - (f.object.new_record? and f.object.app_id.nil?) ? label_name = "Create" : label_name = "Update"
