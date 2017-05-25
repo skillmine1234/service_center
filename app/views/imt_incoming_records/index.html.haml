@@ -53,9 +53,9 @@
           %td{:style=>'text-align:left;'}
             = record.imt_ref_no
           %td{:style=>'text-align:left;'}
-            = record.txn_issue_date
+            = record.txn_issue_date.try(:strftime, "%d/%m/%Y")
           %td{:style=>'text-align:left;'}
-            = record.txn_acquire_date
+            = record.txn_acquire_date.try(:strftime, "%d/%m/%Y")
           %td{:style=>'text-align:left;'}
             = record.amount
           %td{:style=>'text-align:left;'}
