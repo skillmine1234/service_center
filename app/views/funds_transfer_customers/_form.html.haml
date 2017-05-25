@@ -87,7 +87,7 @@
         = error_message_for(@funds_transfer_customer, :notify_on_status_change, :prepend_text => "")
     .control-group
       = f.label :notify_app_code, "Notify App Code", :class => 'control-label'
-      = f.text_field :notify_app_code
+      = f.text_field :notify_app_code, :maxlength => 20
       #msg-error
         = error_message_for(@funds_transfer_customer, :notify_app_code, :prepend_text => "")
 
