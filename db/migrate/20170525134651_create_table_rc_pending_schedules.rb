@@ -6,8 +6,7 @@ class CreateTableRcPendingSchedules < ActiveRecord::Migration
       t.integer :rc_auditable_id, :null => false, :comment => "the id of the row that represents the request that is related to this record"
       t.datetime :created_at, :null => false, :comment => "the timestamp when the record was created" 
       t.index([:rc_auditable_id, :rc_auditable_type], :unique => true, :name => "uk_rc_pending_schedules")
-      t.index(:created_at, :name => "uk_1_rc_pending_schedules")
-      t.index(:broker_uuid, :name => "uk_2_rc_pending_schedules")
+      t.index([:broker_uuid, :created_at], :name => "uk_1_rc_pending_schedules")
     end
   end
 end
