@@ -13,7 +13,7 @@ describe RcTransferSchedule do
   end
   
   context 'validation' do
-    [:code, :debit_account_no, :bene_account_no, :is_enabled].each do |att|
+    [:code, :debit_account_no, :bene_account_no, :is_enabled, :ch_sweep_out, :bene_account_ifsc, :max_retries, :retry_in_mins].each do |att|
       it { should validate_presence_of(att) }
     end
 
@@ -30,6 +30,8 @@ describe RcTransferSchedule do
     end
     
     it { should validate_numericality_of(:interval_in_mins) }
+    it { should validate_numericality_of(:max_retries) }
+    it { should validate_numericality_of(:retry_in_mins) }
 
     it "should return error if code is already taken" do
       rc_transfer_schedule1 = Factory(:rc_transfer_schedule, :code => "9001", :approval_status => 'A')
@@ -64,14 +66,16 @@ describe RcTransferSchedule do
       end
 
       should allow_value('9988776655').for(:notify_mobile_no)
+      
+      should allow_value('ABCD0123456').for(:bene_account_ifsc)
+      should allow_value('abcd0123456').for(:bene_account_ifsc)
     end
 
     it "should not allow invalid format" do
-      rc_transfer_schedule = Factory.build(:rc_transfer_schedule, :code => "BANK-01", :debit_account_no => "ACC12345", :bene_account_no => "123-456", :notify_mobile_no => "+998877665")
+      rc_transfer_schedule = Factory.build(:rc_transfer_schedule, :code => "BANK-01", :debit_account_no => "ACC12345", :bene_account_no => "123-456", :notify_mobile_no => "+998877665", :bene_account_ifsc => '12340abcd')
       rc_transfer_schedule.save.should be_false
-      [:bene_account_no].each do |att|
-        rc_transfer_schedule.errors_on(att).should == ["Invalid format, expected format is : {[0-9]}", "is too short (minimum is 15 characters)"]
-      end
+      rc_transfer_schedule.errors_on(:bene_account_no).should == ["Invalid format, expected format is : {[0-9]}", "is too short (minimum is 15 characters)"]
+      rc_transfer_schedule.errors_on(:bene_account_ifsc).should == ["Invalid format, expected format is : {[A-Z|a-z]{4}[0][A-Za-z0-9]{6}}"]
     end
   end
   
@@ -193,6 +197,41 @@ describe RcTransferSchedule do
       rc_transfer_schedule.udf2_name.should be_nil
       rc_transfer_schedule.udf2_type.should be_nil
       rc_transfer_schedule.udf2_value.should be_nil
+    end
+  end
+  
+  context "retry_interval" do
+    it "should validate the retry interval" do
+      rc_transfer_schedule = Factory.build(:rc_transfer_schedule, retry_in_mins: 10, max_retries: 3, interval_in_mins: 20)
+      rc_transfer_schedule.errors_on(:base).should == ["Retry Interval should be less than Schedule Interval"]
+      
+      rc_transfer_schedule = Factory.build(:rc_transfer_schedule, retry_in_mins: 10, max_retries: 3, interval_in_mins: 50)
+      rc_transfer_schedule.errors_on(:base).should == []
+    end
+  end
+  
+  context "value_of_ch_sweep_out" do
+    it "should validate ch_sweep_out" do
+      rc_transfer_schedule = Factory.build(:rc_transfer_schedule, ch_sweep_out: 100.99999)
+      rc_transfer_schedule.errors_on(:ch_sweep_out).should == ["is invalid, only two digits are allowed after decimal point"]
+      
+      rc_transfer_schedule = Factory.build(:rc_transfer_schedule, ch_sweep_out: 100.99)
+      rc_transfer_schedule.errors_on(:ch_sweep_out).should == []
+
+      rc_transfer_schedule = Factory.build(:rc_transfer_schedule, ch_sweep_out: 100)
+      rc_transfer_schedule.errors_on(:ch_sweep_out).should == []
+    end
+  end
+  
+  context "set_interval_in_mins" do
+    it "should set interval_in_mins if interval_kind = Days" do
+      rc_transfer_schedule = Factory(:rc_transfer_schedule, interval_unit: 'Days', interval_in_mins: 2)
+      rc_transfer_schedule.reload
+      rc_transfer_schedule.interval_in_mins.should == 2880
+      
+      rc_transfer_schedule = Factory(:rc_transfer_schedule, interval_unit: 'Minutes', interval_in_mins: 30)
+      rc_transfer_schedule.reload
+      rc_transfer_schedule.interval_in_mins.should == 30
     end
   end
 end

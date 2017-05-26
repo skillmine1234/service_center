@@ -164,6 +164,9 @@ ServiceCenter::Application.routes.draw do
       get :index
       put :index
     end
+    member do
+      put :retry
+    end
   end
   resources :rc_apps
   resources :rc_transfer_unapproved_records

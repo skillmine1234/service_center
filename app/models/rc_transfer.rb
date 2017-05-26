@@ -8,4 +8,10 @@ class RcTransfer < ActiveRecord::Base
   store :udf3, accessors: [:udf3_name, :udf3_type, :udf3_value], coder: JSON
   store :udf4, accessors: [:udf4_name, :udf4_type, :udf4_value], coder: JSON
   store :udf5, accessors: [:udf5_name, :udf5_type, :udf5_value], coder: JSON
+  
+  def retry
+    return if Rails.env.test?
+    result = plsql.pk_qg_rc_transfers.retry_retry(pi_rc_transfer_id: self.id, pi_rc_schedule_id: self.rc_transfer_schedule.id, po_fault_code: nil, po_fault_reason: nil)
+    raise ::Fault::ProcedureFault.new(OpenStruct.new(code: result[:po_fault_code], subCode: nil, reasonText: "#{result[:po_fault_reason]}")) if result[:po_fault_code].present?
+  end
 end

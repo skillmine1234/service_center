@@ -1,5 +1,5 @@
 .show_ticket
-  .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'}
+  .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; height: 170px; display: inline-block;'}
     %h3 
       Recurring Transfer Code:
       = link_to @rc_transfer.rc_transfer_code, @rc_transfer.rc_transfer_schedule
@@ -12,7 +12,13 @@
     %h3 
       Batch No:
       = @rc_transfer.batch_no
-  .header-form-extended{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'}
+    %h3
+      Max. Retries:
+      = @rc_transfer.max_retries
+    %h3
+      Attempt No:
+      = @rc_transfer.attempt_no
+  .header-form-extended{:style=>'background-color: #ecf5fa; width: 50%; height: 170px; display: inline-block;'}
     %h3
       Transfer Status:
       = @rc_transfer.status_code
@@ -28,6 +34,9 @@
     %h3
       Audit Logs:
       = link_to 'Show', {:controller => 'rc_transfers', :action => 'audit_steps', :id => @rc_transfer.id, :step_name => 'ALL'}
+    - if allow_retry(@rc_transfer) == true
+      %br
+      = link_to "Retry", retry_rc_transfer_path(@rc_transfer), class: "btn btn-primary", method: :put
   .toolbar
     = render :partial => 'action_toolbar'
   .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; height: 450px; display: inline-block;'}
@@ -55,10 +64,6 @@
         %td
           = @rc_transfer.bene_account_no
       %tr
-        %td.label Transfer Amount
-        %td
-          = @rc_transfer.transfer_amount
-      %tr
         %td.label Transferred At
         %td
           = @rc_transfer.transferred_at
@@ -70,6 +75,22 @@
         %td.label Broker UUID
         %td
           = @rc_transfer.broker_uuid
+      %tr
+        %td.label Transfer Type
+        %td
+          = @rc_transfer.transfer_type
+      %tr
+        %td.label Available Balance
+        %td
+          = @rc_transfer.available_balance
+      %tr
+        %td.label Sweep Out Balance
+        %td
+          = @rc_transfer.ch_sweep_out
+      %tr
+        %td.label Transfer Amount
+        %td
+          = @rc_transfer.transfer_amount
       - (1..@rc_transfer.rc_app.udfs_cnt).each do |i|
         - if @rc_transfer.send("udf#{i}_name").present?
           %tr
@@ -94,16 +115,16 @@
         %tr
           %td.label Notify Status
           %td= @rc_transfer.notify_status
-      - if @rc_transfer.notify_status == 'NOTIFIED:OK'
-        %tr
-          %td.label Notified At
-          %td= @rc_transfer.notified_at.try(:strftime, "%d/%m/%Y %I:%M:%S %p")
+        - if @rc_transfer.notify_status == 'NOTIFIED:OK'
+          %tr
+            %td.label Notified At
+            %td= @rc_transfer.notified_at.try(:strftime, "%d/%m/%Y %I:%M:%S %p")
           
-      - elsif @rc_transfer.notify_status == 'NOTIFICATION FAILED'
-        %tr
-          %td.label Notify Result
-          %td
-            = link_to "Show Result", "#", :class => 'notify-result', :href => "#notifyResult", :style => "font-weight:100"
+        - elsif @rc_transfer.notify_status == 'NOTIFICATION FAILED'
+          %tr
+            %td.label Notify Result
+            %td
+              = link_to "Show Result", "#", :class => 'notify-result', :href => "#notifyResult", :style => "font-weight:100"
 #faultText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×

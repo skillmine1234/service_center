@@ -111,6 +111,6 @@ class RcTransferSchedulesController < ApplicationController
     :udf3_name, :udf3_type, :udf3_value, 
     :udf4_name, :udf4_type, :udf4_value, 
     :udf5_name, :udf5_type, :udf5_value,
-    :txn_kind, :interval_in_mins)
+    :txn_kind, :interval_in_mins, :ch_sweep_out, :bene_account_ifsc, :max_retries, :retry_in_mins, :interval_unit)
   end
 end

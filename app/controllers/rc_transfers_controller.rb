@@ -49,6 +49,15 @@ class RcTransfersController < ApplicationController
     end
     redirect_to :back
   end
+
+  def retry
+    rc_transfer = RcTransfer.find(params[:id])
+    rc_transfer.retry
+  rescue ::Fault::ProcedureFault, OCIError => e
+   flash[:alert] = "#{e.message}"    
+  ensure
+   redirect_to rc_transfer
+  end
   
   private
 

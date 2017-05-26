@@ -26,6 +26,11 @@
       #msg-error
         = error_message_for(@rc_transfer_schedule, :bene_account_no, :prepend_text => "")
     .control-group
+      = f.label :bene_account_ifsc, "Beneficiary IFSC", :class => 'control-label'
+      = f.text_field :bene_account_ifsc
+      #msg-error
+        = error_message_for(@rc_transfer_schedule, :bene_account_ifsc, :prepend_text => "")
+    .control-group
       = f.label :debit_account_no, "*Debit Account No", :class => 'control-label'
       = f.text_field :debit_account_no, :minlength => 15, :maxlength => 20, :required => true
       #msg-error
@@ -51,10 +56,30 @@
       #msg-error
         = error_message_for(@rc_transfer_schedule, :txn_kind, :prepend_text => "")
     .control-group
-      = f.label :interval_in_mins, "Interval(in mins)", :class => 'control-label'
+      = f.label :ch_sweep_out, "Sweep Out Balance", :class => 'control-label'
+      = f.number_field :ch_sweep_out, step: "0.01"
+      #msg-error
+        = error_message_for(@rc_transfer_schedule, :ch_sweep_out, :prepend_text => "")
+    .control-group
+      = f.label :interval_unit, "Schedule Interval Unit", :class => 'control-label'
+      = f.select :interval_unit, options_for_select(RcTransferSchedule::INTERVAL_UNITS, @rc_transfer_schedule.interval_unit)
+      #msg-error
+        = error_message_for(@rc_transfer_schedule, :interval_unit, :prepend_text => "")
+    .control-group
+      = f.label :interval_in_mins, "Schedule Interval", :class => 'control-label'
       = f.number_field :interval_in_mins
       #msg-error
         = error_message_for(@rc_transfer_schedule, :interval_in_mins, :prepend_text => "")
+    .control-group
+      = f.label :max_retries, "Max. No. of Retries", :class => 'control-label'
+      = f.number_field :max_retries
+      #msg-error
+        = error_message_for(@rc_transfer_schedule, :max_retries, :prepend_text => "")
+    .control-group
+      = f.label :retry_in_mins, "Retry Interval(in mins)", :class => 'control-label'
+      = f.number_field :retry_in_mins
+      #msg-error
+        = error_message_for(@rc_transfer_schedule, :retry_in_mins, :prepend_text => "")
     .udfs
       = render :partial => 'udfs', locals: {udf: @rc_transfer_schedule} 
   .form-actions

@@ -38,6 +38,12 @@
             %td#msg-error
               = error_message_for(@rc_transfer_schedule, :bene_account_no, :prepend_text => "")
           %tr
+            %td.label Beneficiary IFSC
+            %td.value
+              = @rc_transfer_schedule.bene_account_ifsc
+            %td#msg-error
+              = error_message_for(@rc_transfer_schedule, :bene_account_ifsc, :prepend_text => "")
+          %tr
             %td.label RC App
             %td.value
               = @rc_transfer_schedule.rc_app.try(:app_id)
@@ -87,11 +93,29 @@
             %td#msg-error
               = error_message_for(@rc_transfer_schedule, :txn_kind, :prepend_text => "")
           %tr
-            %td.label Interval (in mins)
+            %td.label Sweep Out Balance
+            %td.value
+              = @rc_transfer_schedule.ch_sweep_out
+            %td#msg-error
+              = error_message_for(@rc_transfer_schedule, :ch_sweep_out, :prepend_text => "")
+          %tr
+            %td.label Schedule Interval (in mins)
             %td.value
               = @rc_transfer_schedule.interval_in_mins
             %td#msg-error
               = error_message_for(@rc_transfer_schedule, :interval_in_mins, :prepend_text => "")
+          %tr
+            %td.label Max. No. of Retries
+            %td.value
+              = @rc_transfer_schedule.max_retries
+            %td#msg-error
+              = error_message_for(@rc_transfer_schedule, :max_retries, :prepend_text => "")
+          %tr
+            %td.label Retry Interval (in mins)
+            %td.value
+              = @rc_transfer_schedule.retry_in_mins
+            %td#msg-error
+              = error_message_for(@rc_transfer_schedule, :retry_in_mins, :prepend_text => "")
           %tr
             %td.label Updated By
             %td.value

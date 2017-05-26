@@ -3,6 +3,7 @@ class RcTransferSchedule < ActiveRecord::Base
   include RcTransferApproval
 
   TXN_KINDS = %w(FT BALINQ)
+  INTERVAL_UNITS = %w(Minutes Days)
   self.table_name = "rc_transfer_schedule"
   
   store :udf1, accessors: [:udf1_name, :udf1_type, :udf1_value], coder: JSON
@@ -14,10 +15,15 @@ class RcTransferSchedule < ActiveRecord::Base
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
   belongs_to :rc_transfer, :foreign_key => 'code', :primary_key => 'rc_transfer_code'
-  belongs_to :rc_app  
+  belongs_to :rc_app
 
-  validates_presence_of :code, :debit_account_no, :bene_account_no, :is_enabled
+  attr_accessor :interval_unit
+  
+  before_validation :set_interval_in_mins, if: "interval_unit=='Days'"
+
+  validates_presence_of :code, :debit_account_no, :bene_account_no, :is_enabled, :ch_sweep_out, :bene_account_ifsc, :max_retries, :retry_in_mins
   validates :rc_app, :presence => true
+  validates :bene_account_ifsc, format: {with: /\A[A-Z|a-z]{4}[0][A-Za-z0-9]{6}+\z/, message: "Invalid format, expected format is : {[A-Z|a-z]{4}[0][A-Za-z0-9]{6}}" }
 
   validates :code, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}' }, length: {maximum: 20}
   validates :debit_account_no, :bene_account_no, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9]}' }, length: {minimum: 15, maximum: 20}
@@ -29,8 +35,10 @@ class RcTransferSchedule < ActiveRecord::Base
   before_validation :sanitize_udfs, unless: Proc.new { |c| c.rc_app.nil? }
   validate :udfs_should_be_correct, unless: Proc.new { |c| c.rc_app.nil? }
   validate :validate_next_run_at
-  validates :interval_in_mins, :numericality => { :only_integer => true, :greater_than_or_equal_to => 0 }
-   
+  validates :interval_in_mins, :max_retries, :retry_in_mins, :numericality => { :only_integer => true, :greater_than_or_equal_to => 0 }
+  validate :retry_interval, unless: "retry_in_mins.nil? || max_retries.nil? || interval_in_mins.nil?"
+  validate :value_of_ch_sweep_out
+
   def validate_next_run_at
     errors.add(:next_run_at,"should not be less than today's date") if !next_run_at.nil? and next_run_at < Time.zone.today.beginning_of_day
   end
@@ -39,7 +47,11 @@ class RcTransferSchedule < ActiveRecord::Base
     next_run_at.nil? ? Time.zone.now.try(:strftime, "%d/%m/%Y %I:%M%p") : next_run_at.try(:strftime, "%d/%m/%Y %I:%M%p")
   end
 
-  private 
+  private
+
+  def set_interval_in_mins
+    self.interval_in_mins = self.interval_in_mins * 1440
+  end
   
   def set_app_code
     self.app_code = rc_app.app_id if rc_app_id_changed?
@@ -76,5 +88,13 @@ class RcTransferSchedule < ActiveRecord::Base
     DateTime.parse udf_value rescue errors[:base] << "#{udf_name} is not a date" if udf_type == "date"
     errors[:base] << "#{udf_name} is too long, maximum is 50 charactres" if udf_type == "text" and udf_value.present? and udf_value.length > 50
     errors[:base] << "#{udf_name} should not include special characters" if udf_type == "text" and udf_value.present? and (udf_value =~ /[A-Za-z0-9]+$/).nil?
+  end
+  
+  def retry_interval
+    errors[:base] << "Retry Interval should be less than Schedule Interval" if ((retry_in_mins * max_retries) > interval_in_mins)
+  end
+
+  def value_of_ch_sweep_out
+    errors.add(:ch_sweep_out, "is invalid, only two digits are allowed after decimal point") if ch_sweep_out.to_f != ch_sweep_out.to_f.round(2)
   end
 end
