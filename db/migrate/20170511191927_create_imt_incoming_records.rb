@@ -20,7 +20,6 @@ class CreateImtIncomingRecords < ActiveRecord::Migration
       t.number :npci_charges, :null => false, :comment => "the amount charged by NPCI for processing"
       t.number :sc_on_npci_charges, :null => false, :comment => "the service charge on npci charges"
       t.number :total_net_position, :null => false, :comment => "the value of the position subtracting the initial cost of setting up the position"
-      t.string :cbs_ref_no, :limit => 50, :comment => "the unique response reference no for the fcr call"
       t.index([:incoming_file_record_id,:file_name], :unique => true, :name => 'imt_incoming_records_01')
     end
   end
