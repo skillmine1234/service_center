@@ -190,9 +190,9 @@ describe Pc2CustAccountsController do
       pc2_cust_account2 = Factory(:pc2_cust_account, :account_no => "123456789", :approval_status => 'U', :approved_version => pc2_cust_account1.lock_version, :approved_id => pc2_cust_account1.id, :created_by => 666)
       # the following line is required for reload to get triggered (TODO)
       pc2_cust_account1.approval_status.should == 'A'
-      Pc2UnapprovedRecord.count.should == 1
+      UnapprovedRecord.count.should == 1
       put :approve, {:id => pc2_cust_account2.id}
-      Pc2UnapprovedRecord.count.should == 0
+      UnapprovedRecord.count.should == 0
       pc2_cust_account1.reload
       pc2_cust_account1.account_no.should == "123456789"
       pc2_cust_account1.updated_by.should == "666"
@@ -204,9 +204,9 @@ describe Pc2CustAccountsController do
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
       pc2_cust_account = Factory(:pc2_cust_account, :account_no => "123456789", :approval_status => 'U')
-      Pc2UnapprovedRecord.count.should == 1
+      UnapprovedRecord.count.should == 1
       put :approve, {:id => pc2_cust_account.id}
-      Pc2UnapprovedRecord.count.should == 0
+      UnapprovedRecord.count.should == 0
       pc2_cust_account.reload
       pc2_cust_account.account_no.should == "123456789"
       pc2_cust_account.approval_status.should == 'A'

@@ -73,7 +73,6 @@ ServiceCenter::Application.routes.draw do
   resources :pc2_apps
   resources :pc2_cust_accounts
   resources :pc_unapproved_records
-  resources :pc2_unapproved_records
   resources :pc_fee_rules
   resources :fp_unapproved_records
   resources :fp_operations

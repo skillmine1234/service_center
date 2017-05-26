@@ -12,7 +12,7 @@ class Group < ActiveRecord::Base
     when "prepaid-card"
       ['PcApp','PcProgram', 'PcProduct', 'PcFeeRule','PcUnapprovedRecord','PcMmCdIncomingRecord','IncomingFile','IncomingFileRecord','PcMmCdIncomingFile']
     when "prepaid-card2"
-      ['Pc2App','Pc2CustAccount','Pc2UnapprovedRecord']
+      ['Pc2App','Pc2CustAccount']
     when "flex-proxy"
       ['FpOperation','FpAuthRule','FpUnapprovedRecord']
     when "imt"

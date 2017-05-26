@@ -4,7 +4,7 @@ describe Pc2App do
   context "associations" do
     it { should belong_to(:created_user) }
     it { should belong_to(:updated_user) }
-    it { should have_one(:pc2_unapproved_record) }
+    it { should have_one(:unapproved_record_entry) }    
     it { should belong_to(:unapproved_record) }
     it { should belong_to(:approved_record) }
     it { should have_many(:pc2_cust_accounts) }
@@ -39,56 +39,56 @@ describe Pc2App do
     end
   end    
 
-  context "pc2_unapproved_records" do 
-    it "oncreate: should create pc2_unapproved_record if the approval_status is 'U'" do
+  context "unapproved_records" do 
+    it "oncreate: should create unapproved_record_entry if the approval_status is 'U'" do
       pc2_app = Factory(:pc2_app)
       pc2_app.reload
-      pc2_app.pc2_unapproved_record.should_not be_nil
+      pc2_app.unapproved_record_entry.should_not be_nil
     end
 
-    it "oncreate: should not create pc2_unapproved_record if the approval_status is 'A'" do
+    it "oncreate: should not create unapproved_record_entry if the approval_status is 'A'" do
       pc2_app = Factory(:pc2_app, :approval_status => 'A')
-      pc2_app.pc2_unapproved_record.should be_nil
+      pc2_app.unapproved_record_entry.should be_nil
     end
 
-    it "onupdate: should not remove pc2_unapproved_record if approval_status did not change from U to A" do
+    it "onupdate: should not remove unapproved_record_entry if approval_status did not change from U to A" do
       pc2_app = Factory(:pc2_app)
       pc2_app.reload
-      pc2_app.pc2_unapproved_record.should_not be_nil
-      record = pc2_app.pc2_unapproved_record
+      pc2_app.unapproved_record_entry.should_not be_nil
+      record = pc2_app.unapproved_record_entry
       # we are editing the U record, before it is approved
       pc2_app.customer_id = 'Fooo'
       pc2_app.save
       pc2_app.reload
-      pc2_app.pc2_unapproved_record.should == record
+      pc2_app.unapproved_record_entry.should == record
     end
     
-    it "onupdate: should remove pc2_unapproved_record if the approval_status changed from 'U' to 'A' (approval)" do
+    it "onupdate: should remove unapproved_record_entry if the approval_status changed from 'U' to 'A' (approval)" do
       pc2_app = Factory(:pc2_app)
       pc2_app.reload
-      pc2_app.pc2_unapproved_record.should_not be_nil
+      pc2_app.unapproved_record_entry.should_not be_nil
       # the approval process changes the approval_status from U to A for a newly edited record
       pc2_app.approval_status = 'A'
       pc2_app.save
       pc2_app.reload
-      pc2_app.pc2_unapproved_record.should be_nil
+      pc2_app.unapproved_record_entry.should be_nil
     end
     
-    it "ondestroy: should remove pc2_unapproved_record if the record with approval_status 'U' was destroyed (approval) " do
+    it "ondestroy: should remove unapproved_record_entry if the record with approval_status 'U' was destroyed (approval) " do
       pc2_app = Factory(:pc2_app)
       pc2_app.reload
-      pc2_app.pc2_unapproved_record.should_not be_nil
-      record = pc2_app.pc2_unapproved_record
+      pc2_app.unapproved_record_entry.should_not be_nil
+      record = pc2_app.unapproved_record_entry
       # the approval process destroys the U record, for an edited record 
       pc2_app.destroy
-      Pc2UnapprovedRecord.find_by_id(record.id).should be_nil
+      UnapprovedRecord.find_by_id(record.id).should be_nil
     end
   end
 
   context "approve" do 
     it "should approve unapproved_record" do 
       pc2_app = Factory(:pc2_app, :approval_status => 'U')
-      pc2_app.approve.should == ""
+      pc2_app.approve.save.should == true
       pc2_app.approval_status.should == 'A'
     end
 

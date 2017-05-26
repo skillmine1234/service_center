@@ -1,5 +1,3 @@
-require 'will_paginate/array'
-
 class Pc2AppsController < ApplicationController
   authorize_resource
   before_filter :authenticate_user!
@@ -7,6 +5,7 @@ class Pc2AppsController < ApplicationController
   respond_to :json
   include ApplicationHelper
   include Pc2AppsHelper
+  include Approval2::ControllerAdditions
 
   def new
     @pc2_app = Pc2App.new
@@ -22,15 +21,6 @@ class Pc2AppsController < ApplicationController
       flash[:alert] = 'Pc2App successfully created and is pending for approval'
       redirect_to @pc2_app
     end
-  end 
-
-  def edit
-    pc2_app = Pc2App.unscoped.find_by_id(params[:id])
-    if pc2_app.approval_status == 'A' && pc2_app.unapproved_record.nil?
-      params = (pc2_app.attributes).merge({:approved_id => pc2_app.id,:approved_version => pc2_app.lock_version})
-      pc2_app = Pc2App.new(params)
-    end
-    @pc2_app = pc2_app  
   end
 
   def update
@@ -56,12 +46,12 @@ class Pc2AppsController < ApplicationController
 
   def index
     if params[:advanced_search].present?
-      pc2_apps = find_pc2_apps(params).order("id desc")
+      @pc2_apps = find_pc2_apps(params).order("id desc")
     else
-      pc2_apps = (params[:approval_status].present? and params[:approval_status] == 'U') ? Pc2App.unscoped.where("approval_status =?",'U').order("id desc") : Pc2App.order("id desc")
+      @pc2_apps ||= Pc2App.order("id desc")
     end
-    @pc2_apps_count = pc2_apps.count
-    @pc2_apps = pc2_apps.paginate(:per_page => 10, :page => params[:page]) rescue []
+    @pc2_apps = @pc2_apps.paginate(:per_page => 10, :page => params[:page]) rescue []
+    @pc2_apps_count = @pc2_apps.count
   end
 
   def audit_logs
@@ -70,18 +60,7 @@ class Pc2AppsController < ApplicationController
   end
 
   def approve
-    @pc2_app = Pc2App.unscoped.find(params[:id]) rescue nil
-    Pc2App.transaction do
-      approval = @pc2_app.approve
-      if @pc2_app.save and approval.empty?
-        flash[:alert] = "Pc2App record was approved successfully"
-      else
-        msg = approval.empty? ? @pc2_app.errors.full_messages : @pc2_app.errors.full_messages << approval
-        flash[:alert] = msg
-        raise ActiveRecord::Rollback
-      end
-    end
-    redirect_to @pc2_app
+    redirect_to unapproved_records_path(group_name: 'prepaid-card2')
   end
 
   private

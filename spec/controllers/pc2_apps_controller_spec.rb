@@ -190,9 +190,9 @@ describe Pc2AppsController do
       pc2_app2 = Factory(:pc2_app, :app_id => "App01", :approval_status => 'U', :customer_id => 8888, :approved_version => pc2_app1.lock_version, :approved_id => pc2_app1.id, :created_by => 666)
       # the following line is required for reload to get triggered (TODO)
       pc2_app1.approval_status.should == 'A'
-      Pc2UnapprovedRecord.count.should == 1
+      UnapprovedRecord.count.should == 1
       put :approve, {:id => pc2_app2.id}
-      Pc2UnapprovedRecord.count.should == 0
+      UnapprovedRecord.count.should == 0
       pc2_app1.reload
       pc2_app1.customer_id.should == "8888"
       pc2_app1.updated_by.should == "666"
@@ -204,9 +204,9 @@ describe Pc2AppsController do
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
       pc2_app = Factory(:pc2_app, :app_id => "App01", :approval_status => 'U', :customer_id => 8888)
-      Pc2UnapprovedRecord.count.should == 1
+      UnapprovedRecord.count.should == 1
       put :approve, {:id => pc2_app.id}
-      Pc2UnapprovedRecord.count.should == 0
+      UnapprovedRecord.count.should == 0
       pc2_app.reload
       pc2_app.customer_id.should == "8888"
       pc2_app.approval_status.should == 'A'

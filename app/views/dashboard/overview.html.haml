@@ -357,7 +357,7 @@
   %h1 Prepaid Card2
   .slide-container
     .box  
-      = link_to '/pc2_unapproved_records' do
+      = link_to unapproved_records_path(group_name: 'prepaid-card2') do
         = image_tag 'work-list.jpg', :size => "80x80"
       %br
         = "Approval Worklist"
