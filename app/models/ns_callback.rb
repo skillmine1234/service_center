@@ -16,6 +16,11 @@ class NsCallback < ActiveRecord::Base
   store :udf4, accessors: [:udf4_name, :udf4_type], coder: JSON
   store :udf5, accessors: [:udf5_name, :udf5_type], coder: JSON
 
+  validates_presence_of :udf1_name, unless: "udf2_name.blank?", message: "can't be blank when Udf2 name is present"
+  validates_presence_of :udf2_name, unless: "udf3_name.blank?", message: "can't be blank when Udf3 name is present"
+  validates_presence_of :udf3_name, unless: "udf4_name.blank?", message: "can't be blank when Udf4 name is present"
+  validates_presence_of :udf4_name, unless: "udf5_name.blank?", message: "can't be blank when Udf5 name is present"
+
   validates_presence_of :app_code
   
   validates_uniqueness_of :app_code, :scope => :approval_status

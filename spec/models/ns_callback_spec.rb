@@ -38,6 +38,23 @@ describe NsCallback do
       should validate_length_of(:http_password).is_at_most(50)
       should validate_length_of(:notify_url).is_at_most(100)
     end
+    
+    it "should not allow to set value udf2 if udf1 is not present" do
+      ns_callback = Factory.build(:ns_callback, udf1_name: nil, udf1_type: nil, udf2_name: 'udf2', udf2_type: 'text')
+      ns_callback.errors_on(:udf1_name).should == ["can't be blank when Udf2 name is present"]
+    end
+    it "should not allow to set value udf3 if udf2 is not present" do
+      ns_callback = Factory.build(:ns_callback, udf1_name: 'udf1', udf1_type: 'text', udf2_name: nil, udf2_type: nil, udf3_name: 'udf2', udf3_type: 'text')
+      ns_callback.errors_on(:udf2_name).should == ["can't be blank when Udf3 name is present"]
+    end
+    it "should not allow to set value udf4 if udf3 is not present" do
+      ns_callback = Factory.build(:ns_callback, udf1_name: 'udf1', udf1_type: 'text', udf2_name: 'udf2', udf2_type: 'text', udf3_name: nil, udf3_type: nil, udf4_name: 'udf2', udf4_type: 'text')
+      ns_callback.errors_on(:udf3_name).should == ["can't be blank when Udf4 name is present"]
+    end
+    it "should not allow to set value udf5 if udf4 is not present" do
+      ns_callback = Factory.build(:ns_callback, udf1_name: 'udf1', udf1_type: 'text', udf2_name: 'udf2', udf2_type: 'text', udf3_name: 'udf2', udf3_type: 'text', udf4_name: nil, udf4_type: nil, udf5_name: 'udf2', udf5_type: 'text')
+      ns_callback.errors_on(:udf4_name).should == ["can't be blank when Udf5 name is present"]
+    end
   end
 
   context "unapproved_record_entrys" do 
