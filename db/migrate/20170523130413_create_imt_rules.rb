@@ -1,8 +1,8 @@
 class CreateImtRules < ActiveRecord::Migration
   def change
     create_table :imt_rules, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
-    	t.string :cod_account_no, :limit => 50, :null => false, :comment => "the bank pool account which gets debited for settlement"
-    	t.number :stl_gl_account, :limit => 50, :null => false, :comment => "the bank gl account which gets credited for settlement"
+    	t.string :cod_account_no, :limit => 20, :null => false, :comment => "the bank pool account which gets debited for settlement"
+    	t.string :stl_gl_account, :limit => 20, :null => false, :comment => "the bank gl account which gets credited for settlement"
       t.datetime :created_at, null: false, comment: "the timestamp when the record was created"
       t.datetime :updated_at, null: false, comment: "the timestamp when the record was last updated"
       t.string :created_by, limit: 20, comment: "the person who creates the record"
