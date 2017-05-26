@@ -505,3 +505,18 @@
         = image_tag 'work-list.jpg', :size => "80x80"
       %br
         = "Approval Worklist"
+
+- if @current_user.group_names.include?("ns")
+  %h1 Notifications
+  .slide-container
+    .box  
+      = link_to unapproved_records_path(group_name: 'ns') do
+        = image_tag 'work-list.jpg', :size => "80x80"
+      %br
+        = "Approval Worklist"
+  .slide-container
+    .box
+      = link_to '/ns_callbacks' do
+        = image_tag 'callbacks_icon.png', :size => "80x80"
+      %br
+        = "Callbacks"

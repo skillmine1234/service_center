@@ -15,5 +15,7 @@ Group.seed(:name,
   { name: "sc-backend"},
   { name: "rp"},
   { name: "rr"},
-  { name: "fr"}
+  { name: "fr"},
+  { name: "ns"}
+>>>>>>> 4640e05... FT-323 screens for NsCallback
 )

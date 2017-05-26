@@ -187,6 +187,17 @@ ServiceCenter::Application.routes.draw do
       put :pause
     end
   end
+  
+  resources :ns_callbacks do
+    collection do
+      get :index
+      put :index
+    end
+    member do
+      get 'audit_logs'
+      put 'approve'
+    end
+  end
 
   get 'su_incoming_file_summary' => 'su_incoming_records#incoming_file_summary'
   get 'ic_incoming_file_summary' => 'ic_incoming_records#incoming_file_summary'

@@ -35,6 +35,8 @@ class Group < ActiveRecord::Base
       ['RrUnapprovedRecord','IncomingFile','IncomingFileRecord','RrIncomingFile','RrIncomingRecord','ReconciledReturn']
     when "fr"
       ['IncomingFile','IncomingFileRecord','FrR01IncomingFile','FrR01IncomingRecord']
+    when "ns"
+      ['NsCallback']
     else
       []
     end

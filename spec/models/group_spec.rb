@@ -26,6 +26,9 @@ describe Group do
       
       group = Factory(:group,:name => 'fr')
       group.model_list.should == ['IncomingFile','IncomingFileRecord','FrR01IncomingFile','FrR01IncomingRecord']
+
+      group = Factory(:group,:name => 'ns')
+      group.model_list.should == ['NsCallback']
     end
   end
 end

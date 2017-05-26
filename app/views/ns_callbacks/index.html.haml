@@ -1,0 +1,26 @@
+%br
+%br
+%h1 Listing Callbacks
+%br
+= will_paginate @ns_callbacks, :page_links => false
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      App Code
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Notify URL
+
+  .tbody
+    - @ns_callbacks.each do |ns_callback|
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', ns_callback
+        %td{:style=>'text-align:left;'}
+          = link_to 'Edit', edit_ns_callback_path(ns_callback)
+        %td{:style=>'text-align:left;'}
+          = ns_callback.app_code
+        %td{:style=>'text-align:left;'}
+          = ns_callback.notify_url

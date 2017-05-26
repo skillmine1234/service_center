@@ -25,6 +25,7 @@ FactoryGirl.define do
       Factory(:user_group, :user_id => user.id, :group_id => Factory(:group, :name => 'sc-backend').id)
       Factory(:user_group, :user_id => user.id, :group_id => Factory(:group, :name => 'rr').id)
       Factory(:user_group, :user_id => user.id, :group_id => Factory(:group, :name => 'fr').id)
+      Factory(:user_group, :user_id => user.id, :group_id => Factory(:group, :name => 'ns').id)
     end
   end
 end

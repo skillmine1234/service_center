@@ -1,0 +1,54 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8;'}
+    #form-details
+      %h3 Callback Details
+      %br
+      %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
+        - can = can? :edit, @ns_callback
+        %a.btn{:href => "#{!(can) ? '#' : '/ns_callbacks/' + @ns_callback.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
+        = render 'unapproved_records/approve', :@record => @ns_callback
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
+        - if !@ns_callback.nil?
+          %tr
+            %td.label Version
+            %td.value
+              = link_to "#{audit_count(@ns_callback)}", :controller => :ns_callbacks, :action => :audit_logs, :version_id => audit_count(@ns_callback), :id => @ns_callback.id
+          %tr
+            %td.label App Code
+            %td.value
+              = @ns_callback.app_code
+            %td
+          %tr
+            %td.label Notify URL
+            %td.value
+              = @ns_callback.notify_url
+            %td
+          %tr
+            %td.label Username
+            %td.value
+              = @ns_callback.http_username
+            %td
+          %tr
+            %td.label Created At
+            %td.value
+              = @ns_callback.created_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td
+          %tr
+            %td.label Updated At
+            %td.value
+              = @ns_callback.updated_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td
+          %tr
+            - if @ns_callback.settings_cnt.present? and @ns_callback.settings_cnt > 0
+              %table.table.datatable{style: 'width: 50%'}
+                %thead
+                  %tr
+                    %th Name
+                    %th Value
+                %tbody
+                  - (1..@ns_callback.settings_cnt).each do |i|
+                    %tr
+                      %td
+                        = @ns_callback.send("setting#{i}_name")
+                      %td
+                        = @ns_callback.send("setting#{i}_value")
