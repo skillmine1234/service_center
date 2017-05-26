@@ -31,6 +31,13 @@ describe NsCallback do
       ns_callback.save.should == false
       ns_callback.errors[:base].should == ["HTTP Password can't be blank if HTTP Username is present"]
     end
+    
+    it "should validate length of fields" do 
+      should validate_length_of(:app_code).is_at_most(50)
+      should validate_length_of(:http_username).is_at_most(50)
+      should validate_length_of(:http_password).is_at_most(50)
+      should validate_length_of(:notify_url).is_at_most(100)
+    end
   end
 
   context "unapproved_record_entrys" do 

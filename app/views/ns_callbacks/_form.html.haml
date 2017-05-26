@@ -1,10 +1,8 @@
 = simple_form_for @ns_callback, :html => {:class=>'form-horizontal', :autocomplete=>"off", :id => "ns_callback_form"} do |f|
   .control-group
-    - if @ns_callback.errors.any?
-      #msg-error
-        - @ns_callback.errors.full_messages.each do |msg|
-          = msg
-          %br
+    = f.label ' '
+    #msg-error
+      = error_message_for(@ns_callback, :base, :prepend_text => "")
   .form-main
     = f.hidden_field :lock_version
     = f.hidden_field :approved_id
@@ -12,16 +10,24 @@
     = f.hidden_field :settings_cnt
     .control-group
       = f.label :app_code, "*App Code", :class => 'control-label'
-      = f.text_field :app_code, :readonly => true
+      = f.text_field :app_code, :readonly => true, :maxlength => 50
+      #msg-error
+        = error_message_for(@ns_callback, :app_code, :prepend_text => "")
     .control-group
       = f.label :notify_url, "Notify URL", :class => 'control-label'
-      = f.text_field :notify_url
+      = f.text_field :notify_url, :maxlength => 100
+      #msg-error
+        = error_message_for(@ns_callback, :notify_url, :prepend_text => "")
     .control-group
       = f.label :http_username, "HTTP Username", :class => 'control-label'
-      = f.text_field :http_username
+      = f.text_field :http_username, :maxlength => 50
+      #msg-error
+        = error_message_for(@ns_callback, :http_username, :prepend_text => "")
     .control-group
       = f.label :http_password, "HTTP Password", :class => 'control-label'
-      = f.password_field :http_password, :value => f.object.http_password
+      = f.password_field :http_password, :value => f.object.http_password, :maxlength => 50
+      #msg-error
+        = error_message_for(@ns_callback, :http_password, :prepend_text => "")
     .control-group
       - if @ns_callback.settings_cnt > 0
         - (1..@ns_callback.settings_cnt).each do |i|

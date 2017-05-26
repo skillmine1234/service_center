@@ -20,6 +20,10 @@ class NsCallback < ActiveRecord::Base
   
   validates_uniqueness_of :app_code, :scope => :approval_status
   
+  validates_length_of :app_code, maximum: 50
+  validates_length_of :notify_url, maximum: 100, allow_blank: true
+  validates_length_of :http_username, :http_password, maximum: 50, allow_blank: true
+  
   before_save :set_settings_cnt, :set_udfs_cnt
   validate :password_should_be_present
   
