@@ -1,10 +1,15 @@
 $(document).ready(function(){
-    
+
+  $("#test_login_btn").on("click", function () {
+    empty_modal();
+  });
+  
   $(".resend-link").on("click", function () {
     $('#resendPassword').modal().show();
   });
 
   $("#resend").on("click", function () {
+    empty_modal();
     $('#resendPassword').hide();
   });
   
@@ -13,7 +18,12 @@ $(document).ready(function(){
   });
 
   $("#add").on("click", function () {
+    empty_modal();
     $('#addUser').hide();
   });
+  
+  function empty_modal(){
+    $("#modal-window").find(".modal-body").text("");
+  }
 
 });
