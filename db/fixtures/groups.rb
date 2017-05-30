@@ -17,5 +17,4 @@ Group.seed(:name,
   { name: "rr"},
   { name: "fr"},
   { name: "ns"}
->>>>>>> 4640e05... FT-323 screens for NsCallback
 )
