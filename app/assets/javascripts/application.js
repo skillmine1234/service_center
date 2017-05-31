@@ -48,6 +48,17 @@ setInterval( function() {
 	$("#servertime").html(datestring + " " + timestring);
 	},1000);
 
+$('#sign-in-form').submit(function(){
+  $("#username-hidden").val($('#username-show').val());
+  $("#password-hidden").val($('#password-show').val());
+});
+  
+$("#username-show,#password-show").keypress(function(e) {
+  if (e.which == 13) {
+    $("#sign-in-form").submit();
+  }
+});
+
 $('.modal').on('hidden', function () {
   $(".formError").remove();
 })

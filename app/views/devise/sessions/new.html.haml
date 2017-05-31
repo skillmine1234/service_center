@@ -1,18 +1,20 @@
 #sign-in
   %h1
     Sign In
-    %span
-      - if devise_mapping.registerable? && controller_name != 'registrations'
-        = link_to "Sign up", new_registration_path(resource_name)
-  = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:autocomplete => "off"}) do |f|
-    %fieldset
-      = f.label :username, "User Id"
-      = f.text_field :username, :autofocus => true, :class=>"span3"
-    %fieldset
-      = f.label :password
-      = f.password_field :password, :class=>"span3"
-    %fieldset
-      .helper
-        = render "devise/shared/links"
-      %br
+    / %span
+    /   - if devise_mapping.registerable? && controller_name != 'registrations'
+    /     = link_to "Sign up", new_registration_path(resource_name)
+  %br
+  %fieldset
+    = label_tag :username, "User Id"
+    %br
+    = text_field_tag :username, nil, id: 'username-show', autocomplete: 'off'
+  %fieldset
+    = label_tag :password
+    %br
+    = password_field_tag :password, nil, id: 'password-show', autocomplete: 'off'
+  = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:autocomplete => "off",:id => 'sign-in-form'}) do |f|
+    = f.hidden_field :username, :autofocus => true, :class=>"span3", :autocomplete => "off", :id => 'username-hidden'
+    = f.hidden_field :password, :class=>"span3", :autocomplete => "off", :id => 'password-hidden'
+    .helper
       = f.submit "Sign In" ,:class=>"btn btn-primary"
