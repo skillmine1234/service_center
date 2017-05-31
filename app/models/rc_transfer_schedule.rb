@@ -21,7 +21,7 @@ class RcTransferSchedule < ActiveRecord::Base
   
   before_validation :set_interval_in_mins, if: "interval_unit=='Days'"
 
-  validates_presence_of :code, :debit_account_no, :bene_account_no, :is_enabled, :ch_sweep_out, :bene_account_ifsc, :max_retries, :retry_in_mins
+  validates_presence_of :code, :debit_account_no, :bene_account_no, :is_enabled, :acct_threshold_amt, :bene_account_ifsc, :max_retries, :retry_in_mins
   validates :rc_app, :presence => true
   validates :bene_account_ifsc, format: {with: /\A[A-Z|a-z]{4}[0][A-Za-z0-9]{6}+\z/, message: "Invalid format, expected format is : {[A-Z|a-z]{4}[0][A-Za-z0-9]{6}}" }
 
@@ -37,7 +37,8 @@ class RcTransferSchedule < ActiveRecord::Base
   validate :validate_next_run_at
   validates :interval_in_mins, :max_retries, :retry_in_mins, :numericality => { :only_integer => true, :greater_than_or_equal_to => 0 }
   validate :retry_interval, unless: "retry_in_mins.nil? || max_retries.nil? || interval_in_mins.nil?"
-  validate :value_of_ch_sweep_out
+  validates_length_of :bene_name, maximum: 25, allow_blank: true
+  validate :value_of_acct_threshold_amt
 
   def validate_next_run_at
     errors.add(:next_run_at,"should not be less than today's date") if !next_run_at.nil? and next_run_at < Time.zone.today.beginning_of_day
@@ -94,7 +95,7 @@ class RcTransferSchedule < ActiveRecord::Base
     errors[:base] << "Retry Interval should be less than Schedule Interval" if ((retry_in_mins * max_retries) > interval_in_mins)
   end
 
-  def value_of_ch_sweep_out
-    errors.add(:ch_sweep_out, "is invalid, only two digits are allowed after decimal point") if ch_sweep_out.to_f != ch_sweep_out.to_f.round(2)
+  def value_of_acct_threshold_amt
+    errors.add(:acct_threshold_amt, "is invalid, only two digits are allowed after decimal point") if acct_threshold_amt.to_f != acct_threshold_amt.to_f.round(2)
   end
 end

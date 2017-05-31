@@ -11,7 +11,9 @@ class RcTransfer < ActiveRecord::Base
   
   def retry
     return if Rails.env.test?
-    result = plsql.pk_qg_rc_transfers.retry_retry(pi_rc_transfer_id: self.id, pi_rc_schedule_id: self.rc_transfer_schedule.id, po_fault_code: nil, po_fault_reason: nil)
-    raise ::Fault::ProcedureFault.new(OpenStruct.new(code: result[:po_fault_code], subCode: nil, reasonText: "#{result[:po_fault_reason]}")) if result[:po_fault_code].present?
+    if (max_retries > 0 && ((attempt_no % max_retries) == 0) && (batch_no == rc_transfer_schedule.try(:last_batch_no)) && (['CREDIT FAILED','BALINQ FAILED'].include?(status_code)))
+      result = plsql.pk_qg_rc_transfers.retry_retry(pi_rc_transfer_id: self.id, pi_rc_schedule_id: self.rc_transfer_schedule.id, po_fault_code: nil, po_fault_reason: nil)
+      raise ::Fault::ProcedureFault.new(OpenStruct.new(code: result[:po_fault_code], subCode: nil, reasonText: "#{result[:po_fault_reason]}")) if result[:po_fault_code].present?
+    end
   end
 end

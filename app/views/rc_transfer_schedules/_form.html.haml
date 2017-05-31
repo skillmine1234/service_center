@@ -21,6 +21,11 @@
       #msg-error
         = error_message_for(@rc_transfer_schedule, :code, :prepend_text => "")
     .control-group
+      = f.label :bene_name, "Beneficiary Name", :class => 'control-label'
+      = f.text_field :bene_name, :maxlength => 25
+      #msg-error
+        = error_message_for(@rc_transfer_schedule, :bene_name, :prepend_text => "")
+    .control-group
       = f.label :bene_account_no, "*Beneficiary Account No", :class => 'control-label'
       = f.text_field :bene_account_no, :maxlength => 20, :minlength => 15,  :required => true
       #msg-error
@@ -56,8 +61,8 @@
       #msg-error
         = error_message_for(@rc_transfer_schedule, :txn_kind, :prepend_text => "")
     .control-group
-      = f.label :ch_sweep_out, "Sweep Out Balance", :class => 'control-label'
-      = f.number_field :ch_sweep_out, step: "0.01"
+      = f.label :acct_threshold_amt, "Account Threshold Amount", :class => 'control-label'
+      = f.number_field :acct_threshold_amt, step: "0.01"
       #msg-error
         = error_message_for(@rc_transfer_schedule, :ch_sweep_out, :prepend_text => "")
     .control-group

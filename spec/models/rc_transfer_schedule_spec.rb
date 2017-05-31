@@ -13,7 +13,7 @@ describe RcTransferSchedule do
   end
   
   context 'validation' do
-    [:code, :debit_account_no, :bene_account_no, :is_enabled, :ch_sweep_out, :bene_account_ifsc, :max_retries, :retry_in_mins].each do |att|
+    [:code, :debit_account_no, :bene_account_no, :is_enabled, :acct_threshold_amt, :bene_account_ifsc, :max_retries, :retry_in_mins].each do |att|
       it { should validate_presence_of(att) }
     end
 
@@ -23,6 +23,7 @@ describe RcTransferSchedule do
         should validate_length_of(att).is_at_least(15).is_at_most(20)
       end
       should validate_length_of(:notify_mobile_no).is_at_least(10).is_at_most(10)
+      should validate_length_of(:bene_name).is_at_most(25)
     end
 
     it do 
@@ -210,16 +211,16 @@ describe RcTransferSchedule do
     end
   end
   
-  context "value_of_ch_sweep_out" do
-    it "should validate ch_sweep_out" do
-      rc_transfer_schedule = Factory.build(:rc_transfer_schedule, ch_sweep_out: 100.99999)
-      rc_transfer_schedule.errors_on(:ch_sweep_out).should == ["is invalid, only two digits are allowed after decimal point"]
+  context "value_of_acct_threshold_amt" do
+    it "should validate acct_threshold_amt" do
+      rc_transfer_schedule = Factory.build(:rc_transfer_schedule, acct_threshold_amt: 100.99999)
+      rc_transfer_schedule.errors_on(:acct_threshold_amt).should == ["is invalid, only two digits are allowed after decimal point"]
       
-      rc_transfer_schedule = Factory.build(:rc_transfer_schedule, ch_sweep_out: 100.99)
-      rc_transfer_schedule.errors_on(:ch_sweep_out).should == []
+      rc_transfer_schedule = Factory.build(:rc_transfer_schedule, acct_threshold_amt: 100.99)
+      rc_transfer_schedule.errors_on(:acct_threshold_amt).should == []
 
-      rc_transfer_schedule = Factory.build(:rc_transfer_schedule, ch_sweep_out: 100)
-      rc_transfer_schedule.errors_on(:ch_sweep_out).should == []
+      rc_transfer_schedule = Factory.build(:rc_transfer_schedule, acct_threshold_amt: 100)
+      rc_transfer_schedule.errors_on(:acct_threshold_amt).should == []
     end
   end
   

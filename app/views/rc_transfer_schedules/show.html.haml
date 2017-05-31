@@ -32,6 +32,12 @@
             %td#msg-error
               = error_message_for(@rc_transfer_schedule, :code, :prepend_text => "")
           %tr
+            %td.label Beneficiary Name
+            %td.value
+              = @rc_transfer_schedule.bene_name
+            %td#msg-error
+              = error_message_for(@rc_transfer_schedule, :bene_name, :prepend_text => "")
+          %tr
             %td.label Beneficiary Account No
             %td.value
               = @rc_transfer_schedule.bene_account_no
@@ -93,11 +99,11 @@
             %td#msg-error
               = error_message_for(@rc_transfer_schedule, :txn_kind, :prepend_text => "")
           %tr
-            %td.label Sweep Out Balance
+            %td.label Account Threshold Amount
             %td.value
-              = @rc_transfer_schedule.ch_sweep_out
+              = @rc_transfer_schedule.acct_threshold_amt
             %td#msg-error
-              = error_message_for(@rc_transfer_schedule, :ch_sweep_out, :prepend_text => "")
+              = error_message_for(@rc_transfer_schedule, :acct_threshold_amt, :prepend_text => "")
           %tr
             %td.label Schedule Interval (in mins)
             %td.value
