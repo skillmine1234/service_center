@@ -102,16 +102,18 @@ class IncomingFilesController < ApplicationController
   
   def download_file
     require 'uri/open-scp'
-    @incoming_file = IncomingFile.find(params[:id]) 
+    @incoming_file = IncomingFile.find(params[:id])
+    file_name = (params[:flag] == 'response' ? @incoming_file.try(:rep_file_name) : (params[:flag] == 'nack' ? @incoming_file.try(:nack_file_name) : ''))
+    file_path = (params[:flag] == 'response' ? @incoming_file.try(:rep_file_path) : (params[:flag] == 'nack' ? @incoming_file.try(:nack_file_path) : ''))
     cmd = "scp://iibadm@#{ENV['CONFIG_SCP_IIB_FILE_MGR']}" unless ENV['CONFIG_SCP_IIB_FILE_MGR'] = '127.0.0.1'
-    data = open("#{cmd}#{params[:file_path]}/#{params[:file_name]}").read rescue ""
+    data = open("#{cmd}#{file_path}/#{file_name}").read rescue ""
     if data.to_s.empty?
       flash[:alert] = "File not found!"
-      redirect_to :back
+      redirect_to @incoming_file
     elsif params[:view].present?
       render plain: data
     elsif params[:download].present?
-      send_data data, :filename => params[:file_name]
+      send_data data, :filename => file_name
     end
   end
 

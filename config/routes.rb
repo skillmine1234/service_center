@@ -92,8 +92,15 @@ ServiceCenter::Application.routes.draw do
   resources :ic_incoming_records
   resources :ft_incoming_records
   resources :pc_mm_cd_incoming_records
-  resources :cn_incoming_records
+  resources :cn_incoming_records do
+    member do
+      get 'download_file'
+    end
+  end
   resources :cnb2_incoming_records, except: :index do
+    member do
+      get 'download_file'
+    end
     collection do
       get :index
       post :index

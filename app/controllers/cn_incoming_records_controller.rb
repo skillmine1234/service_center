@@ -28,4 +28,21 @@ class CnIncomingRecordsController < ApplicationController
   def incoming_file_summary
     @summary = CnIncomingFile.find_by_file_name(params[:file_name])
   end
+
+  def download_file
+    require 'uri/open-scp'
+    @summary = CnbIncomingFile.find(params[:id])
+    file_name = (params[:flag] == 'rej' ? @summary.try(:rej_file_name) : (params[:flag] == 'cnb' ? @summary.try(:cnb_file_name) : ''))
+    file_path = (params[:flag] == 'rej' ? @summary.try(:rej_file_path) : (params[:flag] == 'cnb' ? @summary.try(:cnb_file_path) : ''))
+    cmd = "scp://iibadm@#{ENV['CONFIG_SCP_IIB_FILE_MGR']}" unless ENV['CONFIG_SCP_IIB_FILE_MGR'] = '127.0.0.1'
+    data = open("#{cmd}#{file_path}/#{file_name}").read rescue ""
+    if data.to_s.empty?
+      flash[:alert] = "File not found!"
+      redirect_to @summary
+    elsif params[:view].present?
+      render plain: data
+    elsif params[:download].present?
+      send_data data, :filename => file_name
+    end
+  end
 end

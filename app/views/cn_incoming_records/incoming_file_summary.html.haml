@@ -20,9 +20,9 @@
               = @summary.try(:rej_file_name)
               - if (!ENV['CONFIG_SCP_IIB_FILE_MGR'].nil? or !ENV['CONFIG_SCP_IIB_FILE_MGR'].empty?) and !@summary.rej_file_status.nil?
                 = "("
-                = link_to 'Download', download_file_incoming_file_path(@summary.incoming_file, :file_path => @summary.try(:rej_file_path), :file_name => @summary.try(:rej_file_name), :download => true)
+                = link_to 'Download', download_file_cn_incoming_record_path(@summary, :flag => 'rej', :download => true)
                 = "/"
-                = link_to 'View', download_file_incoming_file_path(@summary.incoming_file, :file_path => @summary.try(:rej_file_path), :file_name => @summary.try(:rej_file_name), :view => true)
+                = link_to 'View', download_file_cn_incoming_record_path(@summary, , :flag => 'rej', :view => true)
                 = ")"
           %tr
             %td.label Rejected File Path
@@ -38,9 +38,9 @@
               = @summary.try(:cnb_file_name)
               - if (!ENV['CONFIG_SCP_IIB_FILE_MGR'].nil? or !ENV['CONFIG_SCP_IIB_FILE_MGR'].empty?)and !@summary.cnb_file_status.nil?
                 = "("
-                = link_to 'Download', download_file_incoming_file_path(@summary.incoming_file, :file_path => @summary.try(:cnb_file_path), :file_name => @summary.try(:cnb_file_name), :download => true)
+                = link_to 'Download', download_file_cn_incoming_record_path(@summary, :flag => 'cnb', :download => true)
                 = "/"
-                = link_to 'View', download_file_incoming_file_path(@summary.incoming_file, :file_path => @summary.try(:cnb_file_path), :file_name => @summary.try(:cnb_file_name), :view => true)
+                = link_to 'View', download_file_cn_incoming_record_path(@summary, :flag => 'cnb', :view => true)
                 = ")"
           %tr
             %td.label CNB File Path

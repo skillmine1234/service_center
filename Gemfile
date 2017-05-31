@@ -82,7 +82,7 @@ group :development, :test do
   gem 'simplecov', :require => false
   gem 'simplecov-rcov', :require => false
   gem "unicorn"
-  gem 'rake'
+  gem 'rake', '< 11.0'
   gem 'test-unit'
   gem 'cucumber-rails', :require => false
   gem 'selenium-webdriver'
