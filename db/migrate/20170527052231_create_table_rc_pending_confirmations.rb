@@ -6,7 +6,7 @@ class CreateTableRcPendingConfirmations < ActiveRecord::Migration
       t.integer :rc_auditable_id, :null => false, :comment => "the id of the row that represents the request that is related to this record"
       t.datetime :created_at, :null => false, :comment => "the timestamp when the record was created" 
       t.index([:rc_auditable_id, :rc_auditable_type], :unique => true, :name => "rc_pending_confirmations_01")
-      t.index([:broker_uuid, :created_at], :name => "rc_pending_schedules_02")
+      t.index([:broker_uuid, :created_at], :name => "rc_pending_confirmations_02")
     end
   end
 end
