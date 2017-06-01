@@ -31,7 +31,7 @@ class CnIncomingRecordsController < ApplicationController
 
   def download_file
     require 'uri/open-scp'
-    @summary = CnbIncomingFile.find(params[:id])
+    @summary = CnIncomingFile.find(params[:id])
     file_name = (params[:flag] == 'rej' ? @summary.try(:rej_file_name) : (params[:flag] == 'cnb' ? @summary.try(:cnb_file_name) : ''))
     file_path = (params[:flag] == 'rej' ? @summary.try(:rej_file_path) : (params[:flag] == 'cnb' ? @summary.try(:cnb_file_path) : ''))
     cmd = "scp://iibadm@#{ENV['CONFIG_SCP_IIB_FILE_MGR']}" unless ENV['CONFIG_SCP_IIB_FILE_MGR'] = '127.0.0.1'
