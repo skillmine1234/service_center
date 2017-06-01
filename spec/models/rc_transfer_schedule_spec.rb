@@ -13,7 +13,7 @@ describe RcTransferSchedule do
   end
   
   context 'validation' do
-    [:code, :debit_account_no, :bene_account_no, :is_enabled, :acct_threshold_amt, :bene_account_ifsc, :max_retries, :retry_in_mins].each do |att|
+    [:code, :debit_account_no, :bene_account_no, :is_enabled, :acct_threshold_amt, :bene_account_ifsc, :max_retries, :retry_in_mins, :rc_app_id].each do |att|
       it { should validate_presence_of(att) }
     end
 

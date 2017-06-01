@@ -64,7 +64,7 @@
       = f.label :acct_threshold_amt, "Account Threshold Amount", :class => 'control-label'
       = f.number_field :acct_threshold_amt, step: "0.01"
       #msg-error
-        = error_message_for(@rc_transfer_schedule, :ch_sweep_out, :prepend_text => "")
+        = error_message_for(@rc_transfer_schedule, :acct_threshold_amt, :prepend_text => "")
     .control-group
       = f.label :interval_unit, "Schedule Interval Unit", :class => 'control-label'
       = f.select :interval_unit, options_for_select(RcTransferSchedule::INTERVAL_UNITS, @rc_transfer_schedule.interval_unit)

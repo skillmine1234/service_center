@@ -21,7 +21,7 @@ class RcTransferSchedule < ActiveRecord::Base
   
   before_validation :set_interval_in_mins, if: "interval_unit=='Days'"
 
-  validates_presence_of :code, :debit_account_no, :bene_account_no, :is_enabled, :acct_threshold_amt, :bene_account_ifsc, :max_retries, :retry_in_mins
+  validates_presence_of :code, :debit_account_no, :bene_account_no, :is_enabled, :acct_threshold_amt, :bene_account_ifsc, :max_retries, :retry_in_mins, :rc_app_id
   validates :rc_app, :presence => true
   validates :bene_account_ifsc, format: {with: /\A[A-Z|a-z]{4}[0][A-Za-z0-9]{6}+\z/, message: "Invalid format, expected format is : {[A-Z|a-z]{4}[0][A-Za-z0-9]{6}}" }
 
