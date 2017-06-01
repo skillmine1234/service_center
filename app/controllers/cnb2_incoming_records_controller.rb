@@ -41,7 +41,7 @@ class Cnb2IncomingRecordsController < ApplicationController
     data = open("#{cmd}#{file_path}/#{file_name}").read rescue ""
     if data.to_s.empty?
       flash[:alert] = "File not found!"
-      redirect_to @summary
+      redirect_to cnb2_incoming_file_summary_path(file_name: @summary.try(:file_name))
     elsif params[:view].present?
       render plain: data
     elsif params[:download].present?
