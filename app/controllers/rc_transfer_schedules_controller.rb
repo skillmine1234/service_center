@@ -12,13 +12,12 @@ class RcTransferSchedulesController < ApplicationController
   
   def create
     @rc_transfer_schedule = RcTransferSchedule.new(params[:rc_transfer_schedule])
-    if !@rc_transfer_schedule.valid?
-      render "new"
-    else
-      @rc_transfer_schedule.created_by = current_user.id
-      @rc_transfer_schedule.save!
+    @rc_transfer_schedule.created_by = current_user.id
+    if @rc_transfer_schedule.save
       flash[:alert] = 'Rc Transfer Schedule successfully created and is pending for approval'
       redirect_to @rc_transfer_schedule
+    else
+      render "new"
     end
   end
   
@@ -34,13 +33,12 @@ class RcTransferSchedulesController < ApplicationController
   def update
     @rc_transfer_schedule = RcTransferSchedule.unscoped.find_by_id(params[:id])
     @rc_transfer_schedule.attributes = params[:rc_transfer_schedule]
-    if !@rc_transfer_schedule.valid?
-      render "edit"
-    else
-      @rc_transfer_schedule.updated_by = current_user.id
-      @rc_transfer_schedule.save!
+    @rc_transfer_schedule.updated_by = current_user.id
+    if @rc_transfer_schedule.save
       flash[:alert] = 'Rc Transfer Schedule successfully modified and is pending for approval'
       redirect_to @rc_transfer_schedule
+    else
+      render "edit"
     end
     rescue ActiveRecord::StaleObjectError
       @rc_transfer_schedule.reload
