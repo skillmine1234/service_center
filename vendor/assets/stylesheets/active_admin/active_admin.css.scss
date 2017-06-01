@@ -33,6 +33,53 @@ body.active_admin #header #utility_nav {
 }
 
 body.active_admin {
+  .inputs-login
+  {
+    box-shadow: none;
+    background: none;
+    padding: 0;
+    margin-bottom: 0;
+  }
+
+  .login-ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .fieldset-li {
+    padding: 10px 0;
+  }
+
+  .label-li {
+    display: block;
+    width: 20%;
+    float: left;
+    font-size: 1.0em;
+    font-weight: bold;
+    color: #5E6469;
+  }
+
+  .input-li{
+    width: 70%;
+    border: 1px solid #99a2aa;
+    box-shadow: 0 0 4px #99a2aa;
+    border: 1px solid #c9d0d6;
+    border-radius: 3px;
+    font-size: 0.95em;
+    font-family: Helvetica, Arial, sans-serif;
+    outline: none;
+    padding: 8px 10px 7px;
+    box-sizing: border-box;
+    display: 'inline';
+  }
+
+  #session_new fieldset.inputs{
+    display: 'none';
+  }
+}
+
+body.active_admin {
   .ui-datepicker {
     font-size: 120%;
     width: 12.2em;
