@@ -52,6 +52,15 @@ describe RcTransferSchedule do
       rc_transfer_schedule = Factory(:rc_transfer_schedule, :next_run_at => Time.zone.now.advance(:days => 1))
       rc_transfer_schedule.should be_valid
     end
+    
+    it "should give error when retry_in_mins < 15 and max_retries > 0" do
+      rc_transfer_schedule = Factory.build(:rc_transfer_schedule, max_retries: 1, retry_in_mins: 5, interval_in_mins: 10)
+      rc_transfer_schedule.should_not be_valid
+      rc_transfer_schedule = Factory(:rc_transfer_schedule, max_retries: 1, retry_in_mins: 15, interval_in_mins: 40)
+      rc_transfer_schedule.should be_valid
+      rc_transfer_schedule = Factory(:rc_transfer_schedule, max_retries: 0, retry_in_mins: 10, interval_in_mins: 40)
+      rc_transfer_schedule.should be_valid
+    end
   end
 
   context "fields format" do

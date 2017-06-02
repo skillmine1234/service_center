@@ -35,7 +35,8 @@ class RcTransferSchedule < ActiveRecord::Base
   before_validation :sanitize_udfs, unless: Proc.new { |c| c.rc_app.nil? }
   validate :udfs_should_be_correct, unless: Proc.new { |c| c.rc_app.nil? }
   validate :validate_next_run_at
-  validates :interval_in_mins, :max_retries, :retry_in_mins, :numericality => { :only_integer => true, :greater_than_or_equal_to => 0 }
+  validates :interval_in_mins, :retry_in_mins, :max_retries, :numericality => { :only_integer => true, :greater_than_or_equal_to => 0 }
+  validates :retry_in_mins, :numericality => { :greater_than_or_equal_to => 15 }, if: "max_retries.present? && max_retries > 0"
   validate :retry_interval, unless: "retry_in_mins.nil? || max_retries.nil? || interval_in_mins.nil?"
   validates_length_of :bene_name, maximum: 25, allow_blank: true
   validate :value_of_acct_threshold_amt
