@@ -74,7 +74,12 @@ class IamCustUsersController < ApplicationController
     elsif params[:resend_password]
       @message = @iam_cust_user.resend_password
     else
-      @message = @iam_cust_user.test_ldap_login
+      result = @iam_cust_user.test_ldap_login
+      if result == true
+        @message = 'Login successful!'
+      else
+        @message = result
+      end
     end
     respond_to do |format|
       format.js {render file: 'iam_cust_users/message.js.haml'}

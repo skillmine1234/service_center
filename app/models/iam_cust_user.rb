@@ -22,8 +22,8 @@ class IamCustUser < ActiveRecord::Base
   end
   
   def test_ldap_login
-    LDAP.login(username, decrypted_password)
-    "Login Successful!"
+    LDAP.try_login(username, decrypted_password)
+    true
   rescue LDAPFault, Psych::SyntaxError, SystemCallError, Net::LDAP::LdapError => e
     e.message
   end
@@ -59,14 +59,14 @@ class IamCustUser < ActiveRecord::Base
       self.encrypted_password = EncPassGenerator.new(generated_password, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']).generate_encrypted_password
       unless last_action ==  'C'
         self.should_reset_password = 'N'
-        self.last_password_reset_at = Time.now
+        self.last_password_reset_at = Time.zone.now
       end
     end
   end
 
   def notify_customer
     plsql.pk_qg_iam_cust_user.notify(ENV['CONFIG_IIB_SMTP_BROKER_UUID'], self.email, self.mobile_no, self.username, decrypted_password)
-    update_column(:notification_sent_at, Time.now)
+    update_column(:notification_sent_at, Time.zone.now)
   end
   
   def decrypted_password

@@ -82,12 +82,16 @@ class LDAP
      raise LDAPFault.new('delete user', ldap_result.code, ldap_result.message) if ldap_result.code != 0
   end
 
-  def self.login(username, password)
+  def self.try_login(username, password)
     ldap.auth username, password
     ldap.bind
+  end
+
+  def self.login(username, password)
+    try_login(username, password)
     true
   rescue => e
-     false
+    false
   ensure
     ldap.auth  @admin_user, @admin_password
   end
