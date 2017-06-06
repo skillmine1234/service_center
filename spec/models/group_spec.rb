@@ -28,7 +28,7 @@ describe Group do
       group.model_list.should == ['IncomingFile','IncomingFileRecord','FrR01IncomingFile','FrR01IncomingRecord']
 
       group = Factory(:group,:name => 'ns')
-      group.model_list.should == ['NsCallback']
+      group.model_list.should == ['NsCallback', 'NsTemplate']
     end
   end
 end

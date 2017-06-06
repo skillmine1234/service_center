@@ -216,6 +216,13 @@ ServiceCenter::Application.routes.draw do
     end
   end
 
+  resources :ns_templates do
+    member do
+      get 'audit_logs'
+      put 'approve'
+    end
+  end
+
   get 'su_incoming_file_summary' => 'su_incoming_records#incoming_file_summary'
   get 'ic_incoming_file_summary' => 'ic_incoming_records#incoming_file_summary'
   get 'ft_incoming_file_summary' => 'ft_incoming_records#incoming_file_summary'

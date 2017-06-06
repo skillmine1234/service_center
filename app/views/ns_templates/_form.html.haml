@@ -1,0 +1,36 @@
+= simple_form_for @ns_template, :html => {:class=>'form-horizontal', :autocomplete=>"off", :id => "ns_template_form"} do |f|
+  .control-group
+    = f.label ' '
+    #msg-error
+      = error_message_for(@ns_template, :base, :prepend_text => "")
+  .form-main
+    = f.hidden_field :lock_version
+    = f.hidden_field :approved_id
+    = f.hidden_field :approved_version
+    .control-group
+      = f.label :is_enabled,"Enabled?", :class => 'control-label'
+      - if f.object.is_enabled.nil?
+        = f.check_box :is_enabled, {:checked => "checked"},"Y","N"
+      - else 
+        = f.check_box :is_enabled, {},"Y","N"
+      #msg-error
+        = error_message_for(@ns_template, :enabled, :prepend_text => "")
+    .control-group
+      = f.label :sc_event_id, "*Event", :class => 'control-label'
+      = f.select(:sc_event_id, ScEvent.all.map {|c| [c.event,c.id]}, :prompt => 'Select')
+      #msg-error
+        = error_message_for(@ns_template, :sc_event_id, :prepend_text => "")
+    .control-group
+      = f.label :sms_template, "SMS Template", :class => 'control-label'
+      = f.text_area :sms_template, :placeholder => "Please place the variables in {{ }} Eg: Hi {{customer.name}}", :style => "height: 250px; width: 250px;"
+      #msg-error
+        = error_message_for(@ns_template, :sms_template, :prepend_text => "")
+    .control-group
+      = f.label :email_template, "Email Template", :class => 'control-label'
+      = f.text_area :email_template, :placeholder => "Please place the variables in {{ }} Eg: Hi {{customer.name}}", :style => "height: 250px; width: 250px;"
+      #msg-error
+        = error_message_for(@ns_template, :email_template, :prepend_text => "")
+  .form-actions
+    - (f.object.new_record? and f.object.sc_event_id.nil?) ? label_name = "Create" : label_name = "Update"
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_ns_template', :value => label_name + ' Template'
+    = link_to :Cancel,'/ns_templates', :name => 'cancel', :class=>"cancel btn"

@@ -48,6 +48,7 @@ gem 'net-scp'
 gem 'rp', :github => 'quantiguous/rp'
 gem 'approval2', '0.1.7'
 gem 'passgen'
+gem "mustache"
 
 # oracle is required only in production, CI tools run against sqlite3
 group :production do

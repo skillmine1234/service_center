@@ -1,0 +1,27 @@
+%br
+= link_to 'New Template', new_ns_template_path
+%br
+%br
+%h1 Listing Templates
+%br
+= will_paginate @ns_templates, :page_links => false
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Event
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Enabled?
+  .tbody
+    - @ns_templates.each do |ns_template|
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', ns_template
+        %td{:style=>'text-align:left;'}
+          = link_to 'Edit', edit_ns_template_path(ns_template)
+        %td{:style=>'text-align:left;'}
+          = ns_template.sc_event.try(:event)
+        %td{:style=>'text-align:left;'}
+          = ns_template.is_enabled
