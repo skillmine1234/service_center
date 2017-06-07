@@ -37,6 +37,13 @@ describe IamCustUser do
       iam_cust_user.add_user_to_ldap_on_approval.should_not raise_error
     end
   end
+  
+  context "delete_user_from_ldap_on_approval" do
+    it "should delete user from ldap" do
+      iam_cust_user = Factory(:iam_cust_user, approval_status: 'A', is_enabled: 'N')
+      iam_cust_user.delete_user_from_ldap_on_approval.should_not raise_error
+    end
+  end
 
   context "default_scope" do 
     it "should only return 'A' records by default" do 

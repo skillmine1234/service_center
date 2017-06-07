@@ -36,6 +36,9 @@
       .control-group
         = f.label :should_reset_password, "Reset Password?", :class => 'control-label'
         = f.check_box :should_reset_password, {},"Y","N"
+      .control-group
+        = f.label :is_enabled, "Enabled?", :class => 'control-label'
+        = f.check_box :is_enabled, {},"Y","N"
 
   .form-actions
     - (f.object.new_record? and f.object.username.nil?) ? label_name = "Create" : label_name = "Update"

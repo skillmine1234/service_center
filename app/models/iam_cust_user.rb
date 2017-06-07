@@ -12,7 +12,8 @@ class IamCustUser < ActiveRecord::Base
   validates :mobile_no, numericality: true, length: { maximum: 10 }
   
   before_save :generate_password
-  after_save :add_user_to_ldap_on_approval# unless Rails.env.development?
+  after_save :add_user_to_ldap_on_approval unless Rails.env.development?
+  after_save :delete_user_from_ldap_on_approval unless Rails.env.development?
   
   def will_connect_to_ldap
     LDAP.ldap
@@ -49,7 +50,15 @@ class IamCustUser < ActiveRecord::Base
       update_column(:was_user_added, 'Y')
       notify_customer unless Rails.env.test?
     end
-  rescue 
+  rescue
+    nil
+  end
+
+  def delete_user_from_ldap_on_approval
+    if approval_status == 'A' && is_enabled == 'N' && is_enabled_was == 'Y'
+      LDAP.delete_user(username)
+    end
+  rescue
     nil
   end
   

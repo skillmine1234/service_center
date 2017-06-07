@@ -18,6 +18,12 @@
             %td.value
               = @ldap_error
           %tr
+            %td.label Enabled?
+            %td
+              = @iam_cust_user.is_enabled
+            %td#msg-error
+              = error_message_for(@iam_cust_user, :is_enabled, :prepend_text => "")
+          %tr
             %td.label Username
             %td.value
               = @iam_cust_user.username
@@ -90,6 +96,7 @@
             %td#msg-error
               = error_message_for(@iam_cust_user, :updated_at, :prepend_text => "")
 
+    %p{:style => 'text-align:left; padding-left:6px; padding-bottom:10px'}
       = link_to 'Test Login', connect_to_ldap_iam_cust_user_path(@iam_cust_user), {remote: true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary', id: 'test_login_btn'}
       = link_to 'Resend Password', "#", {'data-toggle' =>  "modal", 'data-target' => '#resendPassword', class: 'btn btn-primary'}
       = link_to 'Add LDAP Entry', "#", {'data-toggle' =>  "modal", 'data-target' => '#addUser', class: 'btn btn-primary'}
