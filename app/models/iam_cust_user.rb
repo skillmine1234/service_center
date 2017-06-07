@@ -39,7 +39,7 @@ class IamCustUser < ActiveRecord::Base
   def add_user_to_ldap
     LDAP.add_user(username, decrypted_password)
     notify_customer unless Rails.env.test?
-    "Entry added successfully to LDAP!"
+    "Entry added successfully to LDAP for #{username}!"
   rescue LDAPFault, Psych::SyntaxError, SystemCallError, Net::LDAP::LdapError, OCIError, ArgumentError => e
     e.message
   end
@@ -52,6 +52,15 @@ class IamCustUser < ActiveRecord::Base
     end
   rescue
     nil
+  end
+
+  def delete_user_from_ldap
+    if is_enabled == 'N'
+      LDAP.delete_user(username)
+      "Entry deleted from LDAP for #{username}!"
+    end
+  rescue LDAPFault, Psych::SyntaxError, SystemCallError, Net::LDAP::LdapError, OCIError, ArgumentError => e
+    e.message
   end
 
   def delete_user_from_ldap_on_approval

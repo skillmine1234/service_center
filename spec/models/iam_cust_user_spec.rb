@@ -39,7 +39,7 @@ describe IamCustUser do
   end
   
   context "delete_user_from_ldap_on_approval" do
-    it "should delete user from ldap" do
+    it "should delete user from ldap on approval" do
       iam_cust_user = Factory(:iam_cust_user, approval_status: 'A', is_enabled: 'N')
       iam_cust_user.delete_user_from_ldap_on_approval.should_not raise_error
     end

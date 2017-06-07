@@ -100,6 +100,8 @@
       = link_to 'Test Login', connect_to_ldap_iam_cust_user_path(@iam_cust_user), {remote: true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary', id: 'test_login_btn'}
       = link_to 'Resend Password', "#", {'data-toggle' =>  "modal", 'data-target' => '#resendPassword', class: 'btn btn-primary'}
       = link_to 'Add LDAP Entry', "#", {'data-toggle' =>  "modal", 'data-target' => '#addUser', class: 'btn btn-primary'}
+      - if @iam_cust_user.is_enabled == 'N'
+        = link_to 'Delete LDAP Entry', "#", {'data-toggle' =>  "modal", 'data-target' => '#deleteUser', class: 'btn btn-primary'}
       %div{ id:"modal-window", class:"modal hide fade", role: "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden' => "true"}
 
 #resendPassword.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
@@ -118,3 +120,11 @@
     Are you sure ?
     &nbsp
     = link_to 'Add', connect_to_ldap_iam_cust_user_path(@iam_cust_user, add_user: true), {remote: true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary', id: 'add'}
+#deleteUser.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Acknowledge
+  .modal-body{:style => "max-height:450px;"}
+    Are you sure ?
+    &nbsp
+    = link_to 'Delete', connect_to_ldap_iam_cust_user_path(@iam_cust_user, delete_user: true), {remote: true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary', id: 'delete'}

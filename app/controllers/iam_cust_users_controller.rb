@@ -73,6 +73,8 @@ class IamCustUsersController < ApplicationController
       @message = @iam_cust_user.add_user_to_ldap
     elsif params[:resend_password]
       @message = @iam_cust_user.resend_password
+    elsif params[:delete_user]
+      @message = @iam_cust_user.delete_user_from_ldap
     else
       @message = @iam_cust_user.test_ldap_login
     end

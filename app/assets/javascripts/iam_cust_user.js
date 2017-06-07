@@ -22,6 +22,15 @@ $(document).ready(function(){
     $('#addUser').hide();
   });
   
+  $(".delete-link").on("click", function () {
+    $('#deleteUser').modal().show();
+  });
+
+  $("#delete").on("click", function () {
+    empty_modal();
+    $('#deleteUser').hide();
+  });
+  
   function empty_modal(){
     $("#modal-window").find(".modal-body").text("");
   }
