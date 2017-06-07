@@ -34,6 +34,9 @@ class Partner < ActiveRecord::Base
   validate :transfer_types
   
   validate :presence_of_iam_cust_user
+  
+  validate :should_allow_neft?, if: "allow_neft=='Y'"
+  validate :should_allow_imps?, if: "allow_imps=='Y'"
 
   after_create :create_lcy_rate
 
@@ -92,5 +95,28 @@ class Partner < ActiveRecord::Base
   
   def presence_of_iam_cust_user
     errors.add(:identity_user_id, 'IAM Customer User does not exist for this username') if IamCustUser.find_by(username: identity_user_id).nil?
+  end
+  
+  def should_allow_neft?
+    fcr_customer = Fcr::Customer.get_customer(self.code)
+    if fcr_customer.nil?
+      errors.add(:code, "no record found in FCR for #{self.code}")
+    else
+      errors[:base] << "Customer details not found in FCR for #{self.code}" unless fcr_customer.transfer_type_allowed?('NEFT')
+    end
+  end
+  
+  def should_allow_imps?
+    fcr_customer = Fcr::Customer.get_customer(self.code)
+    atom_customer_by_cust_id = Atom::Customer.get_customer_by_cust_id(self.code)
+    atom_customer_by_debit_acct = Atom::Customer.get_customer_by_debit_acct(self.account_no)
+
+    if atom_customer_by_cust_id.present? && atom_customer_by_debit_acct.present?
+      errors[:base] << "Customer details not found in ATOM for #{self.account_no}" unless atom_customer_by_debit_acct.imps_allowed?
+      errors[:base] << "Mobile no.s in ATOM and FCR setup do not match for #{self.code}" if fcr_customer.present? && (fcr_customer.ref_phone_mobile != atom_customer_by_cust_id.mobile)
+    else
+      errors.add(:code, "no record found in ATOM for #{self.code}") if atom_customer_by_cust_id.nil?
+      errors.add(:account_no, "no record found in ATOM for #{self.account_no}") if atom_customer_by_debit_acct.nil?
+    end
   end
 end

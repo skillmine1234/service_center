@@ -19,7 +19,7 @@ FactoryGirl.define do
     beneficiary_email_allowed "MyString"
     allow_neft "N"
     allow_rtgs "N"
-    allow_imps "Y"
+    allow_imps "N"
     add_req_ref_in_rep "Y"
     add_transfer_amt_in_rep "Y"
     created_by "MyString"
