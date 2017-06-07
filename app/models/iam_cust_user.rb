@@ -14,6 +14,10 @@ class IamCustUser < ActiveRecord::Base
   before_save :generate_password
   after_save :add_user_to_ldap_on_approval unless Rails.env.development?
   after_save :delete_user_from_ldap_on_approval unless Rails.env.development?
+
+  def template_variables
+    {username: username, first_name: first_name, last_name: last_name, mobile_no: mobile_no, email: email, password_part_1: decrypted_password, password_part_2: decrypted_password}
+  end
   
   def will_connect_to_ldap
     LDAP.ldap
@@ -30,7 +34,7 @@ class IamCustUser < ActiveRecord::Base
   end
   
   def resend_password
-    notify_customer
+    notify_customer('Password Generated')
     "Email has been sent!"
   rescue OCIError, ArgumentError => e
     e.message
@@ -38,7 +42,7 @@ class IamCustUser < ActiveRecord::Base
   
   def add_user_to_ldap
     LDAP.add_user(username, decrypted_password)
-    notify_customer unless Rails.env.test?
+    notify_customer('Password Generated') unless Rails.env.test?
     "Entry added successfully to LDAP for #{username}!"
   rescue LDAPFault, Psych::SyntaxError, SystemCallError, Net::LDAP::LdapError, OCIError, ArgumentError => e
     e.message
@@ -48,7 +52,7 @@ class IamCustUser < ActiveRecord::Base
     if approval_status == 'A' && last_action == 'C'
       LDAP.add_user(username, generated_password)
       update_column(:was_user_added, 'Y')
-      notify_customer unless Rails.env.test?
+      notify_customer('Password Generated') unless Rails.env.test?
     end
   rescue
     nil
@@ -57,6 +61,7 @@ class IamCustUser < ActiveRecord::Base
   def delete_user_from_ldap
     if is_enabled == 'N'
       LDAP.delete_user(username)
+      notify_customer('Access Removed')
       "Entry deleted from LDAP for #{username}!"
     end
   rescue LDAPFault, Psych::SyntaxError, SystemCallError, Net::LDAP::LdapError, OCIError, ArgumentError => e
@@ -66,6 +71,7 @@ class IamCustUser < ActiveRecord::Base
   def delete_user_from_ldap_on_approval
     if approval_status == 'A' && is_enabled == 'N' && is_enabled_was == 'Y'
       LDAP.delete_user(username)
+      notify_customer('Access Removed')
     end
   rescue
     nil
@@ -82,9 +88,14 @@ class IamCustUser < ActiveRecord::Base
     end
   end
 
-  def notify_customer
-    plsql.pk_qg_iam_cust_user.notify(ENV['CONFIG_IIB_SMTP_BROKER_UUID'], self.email, self.mobile_no, self.username, decrypted_password)
-    update_column(:notification_sent_at, Time.zone.now)
+  def notify_customer(event)
+    event = ScEvent.find_by_event(event)
+    template = NsTemplate.find_by_ns_event_id(event.id) rescue nil
+    unless template.nil?
+      plsql.pk_qg_send_email.enqueue1(ENV['CONFIG_IIB_SMTP_BROKER_UUID'], self.email, NsTemplate.render_template(template.email_subject, template_variables), NsTemplate.render_template(template.email_body, template_variables)) unless template.email_body.to_s.empty?
+      plsql.pk_qg_send_sms.enqueue(ENV['CONFIG_IIB_SMTP_BROKER_UUID'], self.mobile_no, NsTemplate.render_template(template.sms_text, template_variables)) unless template.sms_text.to_s.empty?
+      update_column(:notification_sent_at, Time.zone.now)
+    end
   end
   
   def decrypted_password

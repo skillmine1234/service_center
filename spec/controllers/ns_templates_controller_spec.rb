@@ -63,62 +63,62 @@ describe NsTemplatesController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested ns_template" do
-        ns_template = Factory(:ns_template, :sms_template => "http://localhost")
+        ns_template = Factory(:ns_template, :sms_text => "http://localhost")
         params = ns_template.attributes.slice(*ns_template.class.attribute_names)
-        params[:sms_template] = "https://www.google.com"
+        params[:sms_text] = "https://www.google.com"
         put :update, {:id => ns_template.id, :ns_template => params}
         ns_template.reload
-        ns_template.sms_template.should == "https://www.google.com"
+        ns_template.sms_text.should == "https://www.google.com"
       end
 
       it "assigns the requested ns_template as @ns_template" do
-        ns_template = Factory(:ns_template, :sms_template => "http://localhost")
+        ns_template = Factory(:ns_template, :sms_text => "http://localhost")
         params = ns_template.attributes.slice(*ns_template.class.attribute_names)
-        params[:sms_template] = "https://www.google.com"
+        params[:sms_text] = "https://www.google.com"
         put :update, {:id => ns_template.to_param, :ns_template => params}
         assigns(:ns_template).should eq(ns_template)
       end
 
       it "redirects to the ns_template" do
-        ns_template = Factory(:ns_template, :sms_template => "http://localhost")
+        ns_template = Factory(:ns_template, :sms_text => "http://localhost")
         params = ns_template.attributes.slice(*ns_template.class.attribute_names)
-        params[:sms_template] = "https://www.google.com"
+        params[:sms_text] = "https://www.google.com"
         put :update, {:id => ns_template.to_param, :ns_template => params}
         response.should redirect_to(ns_template)
       end
 
       it "should raise error when tried to update at same time by many" do
-        ns_template = Factory(:ns_template, :sms_template => "http://localhost")
+        ns_template = Factory(:ns_template, :sms_text => "http://localhost")
         params = ns_template.attributes.slice(*ns_template.class.attribute_names)
-        params[:sms_template] = "https://www.google.com"
+        params[:sms_text] = "https://www.google.com"
         ns_template2 = ns_template
         put :update, {:id => ns_template.id, :ns_template => params}
         ns_template.reload
-        ns_template.sms_template.should == "https://www.google.com"
-        params[:sms_template] = "https://www.yahoo.com"
+        ns_template.sms_text.should == "https://www.google.com"
+        params[:sms_text] = "https://www.yahoo.com"
         put :update, {:id => ns_template2.id, :ns_template => params}
         ns_template.reload
-        ns_template.sms_template.should == "https://www.google.com"
+        ns_template.sms_text.should == "https://www.google.com"
         flash[:alert].should  match(/Someone edited the template the same time you did. Please re-apply your changes to the template/)
       end
     end
 
     describe "with invalid params" do
       it "assigns the ns_template as @ns_template" do
-        ns_template = Factory(:ns_template, :sms_template => "http://localhost")
+        ns_template = Factory(:ns_template, :sms_text => "http://localhost")
         params = ns_template.attributes.slice(*ns_template.class.attribute_names)
-        params[:sms_template] = nil
+        params[:sms_text] = nil
         put :update, {:id => ns_template.to_param, :ns_template => params}
         assigns(:ns_template).should eq(ns_template)
         ns_template.reload
-        params[:sms_template] = nil
+        params[:sms_text] = nil
       end
 
       it "re-renders the 'edit' template when there are errors" do
         ns_template = Factory(:ns_template)
         params = ns_template.attributes.slice(*ns_template.class.attribute_names)
-        params[:sms_template] = nil
-        params[:email_template] = nil
+        params[:sms_text] = nil
+        params[:email_body] = nil
         put :update, {:id => ns_template.id, :ns_template => params}
         response.should render_template("edit")
       end
@@ -153,8 +153,8 @@ describe NsTemplatesController do
     describe "with invalid params" do
       it "assigns a newly created but unsaved ns_template as @ns_template" do
         params = Factory.attributes_for(:ns_template)
-        params[:sms_template] = nil
-        params[:email_template] = nil
+        params[:sms_text] = nil
+        params[:email_body] = nil
         expect {
           post :create, {:ns_template => params}
         }.to change(NsTemplate, :count).by(0)
@@ -164,8 +164,8 @@ describe NsTemplatesController do
 
       it "re-renders the 'new' template when show_errors is true" do
         params = Factory.attributes_for(:ns_template)
-        params[:sms_template] = nil
-        params[:email_template] = nil
+        params[:sms_text] = nil
+        params[:email_body] = nil
         post :create, {:ns_template => params}
         response.should render_template("edit")
       end
@@ -178,14 +178,14 @@ describe NsTemplatesController do
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
       ns_template1 = Factory(:ns_template, :approval_status => 'A')
-      ns_template2 = Factory(:ns_template, :approval_status => 'U', :sms_template => "http://localhost", :approved_version => ns_template1.lock_version, :approved_id => ns_template1.id, :created_by => 666)
+      ns_template2 = Factory(:ns_template, :approval_status => 'U', :sms_text => "http://localhost", :approved_version => ns_template1.lock_version, :approved_id => ns_template1.id, :created_by => 666)
       # the following line is required for reload to get triggered (TODO)
       ns_template1.approval_status.should == 'A'
       UnapprovedRecord.count.should == 1
       put :approve, {:id => ns_template2.id}
       UnapprovedRecord.count.should == 0
       ns_template1.reload
-      ns_template1.sms_template.should == 'http://localhost'
+      ns_template1.sms_text.should == 'http://localhost'
       ns_template1.updated_by.should == "666"
       UnapprovedRecord.find_by_id(ns_template2.id).should be_nil
     end

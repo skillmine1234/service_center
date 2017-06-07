@@ -16,38 +16,38 @@ describe NsTemplate do
       should validate_uniqueness_of(:sc_event_id).scoped_to(:approval_status)
     end
     
-    it "should validate presence of sms_template or email_template" do
-      ns_template = Factory.build(:ns_template, sms_template: nil, email_template: nil)
+    it "should validate presence of sms_text or email_body" do
+      ns_template = Factory.build(:ns_template, sms_text: nil, email_body: nil)
       ns_template.save.should == false
-      ns_template.errors[:base].should == ["Either SMS or Email template should be present"]
+      ns_template.errors[:base].should == ["Either SMS or Email should be present"]
     end
 
-    it "should validate presence of email_subject if email_template is present" do
-      ns_template = Factory.build(:ns_template, sms_template: nil, email_subject: nil, email_template: 'Hi')
+    it "should validate presence of email_subject if email_body is present" do
+      ns_template = Factory.build(:ns_template, sms_text: nil, email_subject: nil, email_body: 'Hi')
       ns_template.save.should == false
-      ns_template.errors[:email_subject].should == ["should be present when email template is not emmpty"]
+      ns_template.errors[:email_subject].should == ["should be present when email body is not emmpty"]
     end
 
-    it "should validate presence of email_template if email_subject is present" do
-      ns_template = Factory.build(:ns_template, sms_template: nil, email_subject: 'Hi', email_template: nil)
+    it "should validate presence of email_body if email_subject is present" do
+      ns_template = Factory.build(:ns_template, sms_text: nil, email_subject: 'Hi', email_body: nil)
       ns_template.save.should == false
-      ns_template.errors[:email_template].should == ["should be present when email subject is not empty"]
+      ns_template.errors[:email_body].should == ["should be present when email subject is not empty"]
     end
 
     context "validate_template" do 
       it "should validate sms_text template" do
-        topic = Factory.build(:ns_template, :sms_template => "Hi {{name}")
+        topic = Factory.build(:ns_template, :sms_text => "Hi {{name}")
         topic.should_not be_valid
-        topic.errors_on(:sms_template).count.should == 1
-        topic.sms_template = "Hi {{name}}"
+        topic.errors_on(:sms_text).count.should == 1
+        topic.sms_text = "Hi {{name}}"
         topic.should be_valid
       end
 
       it "should validate email_text template" do
-        topic = Factory.build(:ns_template, :email_subject => 'subject', :email_template => "Hi {{name}")
+        topic = Factory.build(:ns_template, :email_subject => 'subject', :email_body => "Hi {{name}")
         topic.should_not be_valid
-        topic.errors_on(:email_template).count.should == 1
-        topic.email_template = "Hi {{name}}"
+        topic.errors_on(:email_body).count.should == 1
+        topic.email_body = "Hi {{name}}"
         topic.should be_valid
       end
     end
@@ -60,7 +60,7 @@ describe NsTemplate do
       ns_template.unapproved_record_entry.should_not be_nil
       record = ns_template.unapproved_record_entry
       # we are editing the U record, before it is approved
-      ns_template.sms_template = 'template'
+      ns_template.sms_text = 'template'
       ns_template.save
       ns_template.reload
       ns_template.unapproved_record_entry.should == record
@@ -115,7 +115,7 @@ describe NsTemplate do
   context "default_scope" do 
     it "should only return 'A' records by default" do 
       ns_template1 = Factory(:ns_template, :approval_status => 'A') 
-      ns_template2 = Factory(:ns_template, :sms_template => 'template')
+      ns_template2 = Factory(:ns_template, :sms_text => 'template')
       NsTemplate.all.should == [ns_template1]
       ns_template2.approval_status = 'A'
       ns_template2.save

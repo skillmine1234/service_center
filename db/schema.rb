@@ -2075,9 +2075,9 @@ ActiveRecord::Schema.define(version: 20170607090814) do
 
   create_table "ns_templates", force: :cascade do |t|
     t.integer  "sc_event_id",                               null: false
-    t.text     "sms_template"
+    t.text     "sms_text"
     t.string   "email_subject"
-    t.text     "email_template"
+    t.text     "email_body"
     t.string   "is_enabled",       limit: 1,  default: "Y", null: false
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false

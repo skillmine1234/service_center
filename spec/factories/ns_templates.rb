@@ -3,6 +3,6 @@
 FactoryGirl.define do
   factory :ns_template do
     sc_event_id {Factory(:sc_event).id}
-    sms_template 'This is a SMS template'
+    sms_text 'This is a SMS template'
   end
 end

@@ -12,16 +12,16 @@ class NsTemplate < ActiveRecord::Base
   validate :validate_template
 
   def presence_of_template
-    errors.add(:base, 'Either SMS or Email template should be present') if sms_template.to_s.empty? && email_template.to_s.empty?
-    errors.add(:email_template, 'should be present when email subject is not empty') if email_template.to_s.empty? && !email_subject.to_s.empty?
+    errors.add(:base, 'Either SMS or Email should be present') if sms_text.to_s.empty? && email_body.to_s.empty?
+    errors.add(:email_body, 'should be present when email subject is not empty') if email_body.to_s.empty? && !email_subject.to_s.empty?
   end
 
   def presence_of_email_subject
-    errors.add(:email_subject, 'should be present when email template is not emmpty') if !email_template.to_s.empty? && email_subject.to_s.empty?
+    errors.add(:email_subject, 'should be present when email body is not emmpty') if !email_body.to_s.empty? && email_subject.to_s.empty?
   end
 
   def validate_template
-    ["sms_template","email_template"].each do |template|
+    ["sms_text","email_body"].each do |template|
       error_msg = ""
       begin
         Mustache::Template.new(send(template)).tokens unless send(template).nil?
