@@ -23,7 +23,7 @@ class IamCustUser < ActiveRecord::Base
   
   def test_ldap_login
     LDAP.try_login(username, decrypted_password)
-    true
+    "Login Successful"
   rescue LDAPFault, Psych::SyntaxError, SystemCallError, Net::LDAP::LdapError => e
     e.message
   end
