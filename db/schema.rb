@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170606104824) do
+ActiveRecord::Schema.define(version: 20170607090814) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -1319,6 +1319,8 @@ ActiveRecord::Schema.define(version: 20170606104824) do
     t.string   "approval_status",        limit: 1,   default: "U", null: false
     t.integer  "approved_version"
     t.integer  "approved_id"
+    t.datetime "notification_sent_at"
+    t.string   "is_enabled",             limit: 1
   end
 
   add_index "iam_cust_users", ["username", "approval_status"], name: "iam_cust_users_01", unique: true
@@ -2074,6 +2076,7 @@ ActiveRecord::Schema.define(version: 20170606104824) do
   create_table "ns_templates", force: :cascade do |t|
     t.integer  "sc_event_id",                               null: false
     t.text     "sms_template"
+    t.string   "email_subject"
     t.text     "email_template"
     t.string   "is_enabled",       limit: 1,  default: "Y", null: false
     t.datetime "created_at",                                null: false

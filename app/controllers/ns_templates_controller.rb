@@ -60,6 +60,6 @@ class NsTemplatesController < ApplicationController
 
   def ns_template_params
     params.require(:ns_template).permit(:lock_version, :last_action, :updated_by, :sc_event_id, :is_enabled, :sms_template, :email_template,
-                                        :approval_status, :approved_version, :approved_id)
+                                        :approval_status, :approved_version, :approved_id, :email_subject)
   end
 end

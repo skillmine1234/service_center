@@ -8,10 +8,16 @@ class NsTemplate < ActiveRecord::Base
   validates_presence_of :sc_event_id
   validates_uniqueness_of :sc_event_id, :scope => :approval_status
   validate :presence_of_template
+  validate :presence_of_email_subject
   validate :validate_template
 
   def presence_of_template
     errors.add(:base, 'Either SMS or Email template should be present') if sms_template.to_s.empty? && email_template.to_s.empty?
+    errors.add(:email_template, 'should be present when email subject is not empty') if email_template.to_s.empty? && !email_subject.to_s.empty?
+  end
+
+  def presence_of_email_subject
+    errors.add(:email_subject, 'should be present when email template is not emmpty') if !email_template.to_s.empty? && email_subject.to_s.empty?
   end
 
   def validate_template

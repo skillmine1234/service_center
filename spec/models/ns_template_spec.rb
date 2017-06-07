@@ -22,6 +22,18 @@ describe NsTemplate do
       ns_template.errors[:base].should == ["Either SMS or Email template should be present"]
     end
 
+    it "should validate presence of email_subject if email_template is present" do
+      ns_template = Factory.build(:ns_template, sms_template: nil, email_subject: nil, email_template: 'Hi')
+      ns_template.save.should == false
+      ns_template.errors[:email_subject].should == ["should be present when email template is not emmpty"]
+    end
+
+    it "should validate presence of email_template if email_subject is present" do
+      ns_template = Factory.build(:ns_template, sms_template: nil, email_subject: 'Hi', email_template: nil)
+      ns_template.save.should == false
+      ns_template.errors[:email_template].should == ["should be present when email subject is not empty"]
+    end
+
     context "validate_template" do 
       it "should validate sms_text template" do
         topic = Factory.build(:ns_template, :sms_template => "Hi {{name}")
@@ -32,7 +44,7 @@ describe NsTemplate do
       end
 
       it "should validate email_text template" do
-        topic = Factory.build(:ns_template, :email_template => "Hi {{name}")
+        topic = Factory.build(:ns_template, :email_subject => 'subject', :email_template => "Hi {{name}")
         topic.should_not be_valid
         topic.errors_on(:email_template).count.should == 1
         topic.email_template = "Hi {{name}}"

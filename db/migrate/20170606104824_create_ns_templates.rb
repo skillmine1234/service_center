@@ -3,6 +3,7 @@ class CreateNsTemplates < ActiveRecord::Migration
     create_table :ns_templates , {sequence_start_value: '1 cache 20 order increment by 1'} do |t|
       t.integer :sc_event_id, null: false, comment: 'the id of the sc event record'
       t.text :sms_template, comment: 'the template for the SMS'
+      t.string :email_subject, comment: 'the subject for the email'
       t.text :email_template, comment: 'the template for the email'
       t.string :is_enabled, limit: 1, default: 'Y', null: false, comment: 'the flag to indicate whether the template is enabled or not'
       t.datetime :created_at, null: false, comment: "the timestamp when the record was created"
