@@ -13,7 +13,7 @@ class IamCustUserSearcher
     if valid? 
       find.paginate(per_page: PER_PAGE, page: page)
     else
-      WhitelistedIdentity.none.paginate(per_page: PER_PAGE, page: page)
+      IamCustUser.none.paginate(per_page: PER_PAGE, page: page)
     end
   end
 
