@@ -49,11 +49,10 @@ class IamOrganisationsController < ApplicationController
     else
       @searcher = IamOrganisationSearcher.new(search_params)
     end
-    @iam_organisations = @searcher.paginate
+    @records = @searcher.paginate
   end
 
   def audit_logs
-    # iam_organisation -> record
     @iam_organisation = IamOrganisation.unscoped.find(params[:id]) rescue nil
     @audit = @iam_organisation.audits[params[:version_id].to_i] rescue nil
   end

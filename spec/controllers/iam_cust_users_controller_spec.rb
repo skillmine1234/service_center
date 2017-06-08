@@ -14,16 +14,16 @@ describe IamCustUsersController do
   end
 
   describe "GET index" do
-    it "assigns all iam_cust_users as @iam_cust_users" do
+    it "assigns all iam_cust_users as @records" do
       iam_cust_user = Factory(:iam_cust_user, :approval_status => 'A')
       get :index
-      assigns(:iam_cust_users).should eq([iam_cust_user])
+      assigns(:records).should eq([iam_cust_user])
     end
 
-    it "assigns all unapproved iam_cust_users as @iam_cust_users when approval_status is passed" do
+    it "assigns all unapproved iam_cust_users as @records when approval_status is passed" do
       iam_cust_user = Factory(:iam_cust_user, :approval_status => 'U')
       get :index, :approval_status => 'U'
-      assigns(:iam_cust_users).should eq([iam_cust_user])
+      assigns(:records).should eq([iam_cust_user])
     end
   end
 

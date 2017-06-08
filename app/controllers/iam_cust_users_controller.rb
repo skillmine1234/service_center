@@ -55,7 +55,7 @@ class IamCustUsersController < ApplicationController
     else
       @searcher = IamCustUserSearcher.new(search_params)
     end
-    @iam_cust_users = @searcher.paginate
+    @records = @searcher.paginate
   end
 
   def audit_logs

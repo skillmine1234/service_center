@@ -14,16 +14,16 @@ describe IamOrganisationsController do
   end
 
   describe "GET index" do
-    it "assigns all iam_organisations as @iam_organisations" do
+    it "assigns all iam_organisations as @records" do
       iam_organisation = Factory(:iam_organisation, :approval_status => 'A')
       get :index
-      assigns(:iam_organisations).should eq([iam_organisation])
+      assigns(:records).should eq([iam_organisation])
     end
 
-    it "assigns all unapproved iam_organisations as @iam_organisations when approval_status is passed" do
+    it "assigns all unapproved iam_organisations as @records when approval_status is passed" do
       iam_organisation = Factory(:iam_organisation, :approval_status => 'U')
       get :index, :approval_status => 'U'
-      assigns(:iam_organisations).should eq([iam_organisation])
+      assigns(:records).should eq([iam_organisation])
     end
   end
 

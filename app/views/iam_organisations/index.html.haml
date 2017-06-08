@@ -3,15 +3,7 @@
 %br
 %br
 %h1 Listing IAM Organisations
-%h2.collapsible
-  Advanced Search
-  %span.caret
-.collapsible-content
-  = render :partial => 'advanced_search'
-%br
-= "Total Count: #{@iam_organisations_count}"
-%br
-= will_paginate @iam_organisations
+= render :partial => 'advanced_search'
 %br
 %table.table.table-bordered.table-striped.table-hover
   .thead
@@ -27,18 +19,18 @@
       Is Enabled?
     
   .tbody
-    - @iam_organisations.each do |iam_organisation|
+    - @records.each do |record|
       %tr
         %td{:style=>'text-align:left;'}
-          = link_to 'Show', iam_organisation
+          = link_to 'Show', record
         %td{:style=>'text-align:left;'}
-          = link_to 'Edit', edit_iam_organisation_path(iam_organisation)
+          = link_to 'Edit', edit_iam_organisation_path(record)
         %td{:style=>'text-align:left;'}
-          = iam_organisation.name
+          = record.name
         %td{:style=>'text-align:left;'}
-          = iam_organisation.org_uuid
+          = record.org_uuid
         %td{:style=>'text-align:left;'}
-          = iam_organisation.on_vpn
+          = record.on_vpn
         %td{:style=>'text-align:left;'}
-          = iam_organisation.is_enabled
+          = record.is_enabled
         

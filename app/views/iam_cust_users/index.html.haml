@@ -3,15 +3,7 @@
 %br
 %br
 %h1 Listing IAM Customer Users
-%h2.collapsible
-  Advanced Search
-  %span.caret
-.collapsible-content
-  = render :partial => 'advanced_search'
-%br
-= "Total Count: #{@iam_cust_users_count}"
-%br
-= will_paginate @iam_cust_users
+= render :partial => 'advanced_search'
 %br
 %table.table.table-bordered.table-striped.table-hover
   .thead
@@ -28,19 +20,19 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Mobile Number
   .tbody
-    - @iam_cust_users.each do |iam_cust_user|
+    - @records.each do |record|
       %tr
         %td{:style=>'text-align:left;'}
-          = link_to 'Show', iam_cust_user
+          = link_to 'Show', record
         %td{:style=>'text-align:left;'}
-          = link_to 'Edit', edit_iam_cust_user_path(iam_cust_user)
+          = link_to 'Edit', edit_iam_cust_user_path(record)
         %td{:style=>'text-align:left;'}
-          = iam_cust_user.username
+          = record.username
         %td{:style=>'text-align:left;'}
-          = iam_cust_user.first_name
+          = record.first_name
         %td{:style=>'text-align:left;'}
-          = iam_cust_user.last_name
+          = record.last_name
         %td{:style=>'text-align:left;'}
-          = iam_cust_user.email
+          = record.email
         %td{:style=>'text-align:left;'}
-          = iam_cust_user.mobile_no
+          = record.mobile_no
