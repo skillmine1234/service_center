@@ -1354,6 +1354,26 @@ ActiveRecord::Schema.define(version: 20170607090814) do
 
   add_index "ic001_incoming_records", ["incoming_file_record_id", "file_name"], name: "ic001_incoming_records_01", unique: true
 
+  create_table "iam_organisations", force: :cascade do |t|
+    t.string   "name",             limit: 255,                null: false
+    t.string   "org_uuid",         limit: 255,                null: false
+    t.string   "on_vpn",           limit: 1,                  null: false
+    t.string   "cert_dn",          limit: 255
+    t.string   "source_ips",       limit: 4000
+    t.string   "is_enabled",       limit: 1,                  null: false
+    t.string   "created_by",       limit: 20
+    t.string   "updated_by",       limit: 20
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.integer  "lock_version",                  default: 0,   null: false
+    t.string   "approval_status",  limit: 1,    default: "U", null: false
+    t.string   "last_action",      limit: 1,    default: "C"
+    t.integer  "approved_id"
+    t.integer  "approved_version"
+  end
+
+  add_index "iam_organisations", ["org_uuid", "approval_status"], name: "iam_organisations_01", unique: true
+
   create_table "ic_audit_logs", force: :cascade do |t|
     t.string   "req_no",            limit: 32,   null: false
     t.string   "app_id",            limit: 32,   null: false

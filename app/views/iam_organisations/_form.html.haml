@@ -1,0 +1,44 @@
+= simple_form_for @iam_organisation, :html => {:class=>'form-horizontal', :autocomplete=>"off", :id => "iam_organisation_form"} do |f|
+  .control-group
+    = f.label ' '
+    #msg-error
+      = error_message_for(@iam_organisation, :base, :prepend_text => "")
+  .form-main
+    = f.hidden_field :lock_version
+    = f.hidden_field :approved_id
+    = f.hidden_field :approved_version    
+    .control-group
+      = f.label :name, "*Name", :class => 'control-label'
+      = f.text_field :name
+      #msg-error
+        = error_message_for(@iam_organisation, :name, :prepend_text => "")
+    .control-group
+      = f.label :org_uuid, "*Organisation UUID", :class => 'control-label'
+      = f.text_field :org_uuid
+      #msg-error
+        = error_message_for(@iam_organisation, :org_uuid, :prepend_text => "")
+    .control-group
+      = f.label :on_vpn, "Is VPN On?", :class => 'control-label'
+      = f.check_box :on_vpn, {},"Y","N"
+      #msg-error
+        = error_message_for(@iam_organisation, :on_vpn, :prepend_text => "")
+    .control-group
+      = f.label :cert_dn, "Certificate DN", :class => 'control-label', :id => "cert_dn_lbl"
+      = f.text_field :cert_dn
+      #msg-error
+        = error_message_for(@iam_organisation, :cert_dn, :prepend_text => "")
+    .control-group
+      = f.label :source_ips, "Source IPs", :class => 'control-label', :id => "source_ips_lbl"
+      = f.text_area :source_ips, {:style => "width:200px; height:100px;"}
+      #msg-error
+        = error_message_for(@iam_organisation, :source_ips, :prepend_text => "")
+    .control-group
+      = f.label :is_enabled, "Is Enabled ?", :class => 'control-label'
+      = f.check_box :is_enabled, {},"Y","N"
+      #msg-error
+        = error_message_for(@iam_organisation, :is_enabled, :prepend_text => "")
+
+  .form-actions
+    - (f.object.new_record? and f.object.name.nil?) ? label_name = "Create" : label_name = "Update"
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_iam_organisation', :value => label_name + ' Organisation'
+    = link_to :Cancel,'/iam_organisations', :name => 'cancel', :class=>"cancel btn"

@@ -1,0 +1,44 @@
+%br
+= link_to "New IAM Organisation", new_iam_organisation_path
+%br
+%br
+%h1 Listing IAM Organisations
+%h2.collapsible
+  Advanced Search
+  %span.caret
+.collapsible-content
+  = render :partial => 'advanced_search'
+%br
+= "Total Count: #{@iam_organisations_count}"
+%br
+= will_paginate @iam_organisations
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Name
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Organisation UUID
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Is VPN On?
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Is Enabled?
+    
+  .tbody
+    - @iam_organisations.each do |iam_organisation|
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', iam_organisation
+        %td{:style=>'text-align:left;'}
+          = link_to 'Edit', edit_iam_organisation_path(iam_organisation)
+        %td{:style=>'text-align:left;'}
+          = iam_organisation.name
+        %td{:style=>'text-align:left;'}
+          = iam_organisation.org_uuid
+        %td{:style=>'text-align:left;'}
+          = iam_organisation.on_vpn
+        %td{:style=>'text-align:left;'}
+          = iam_organisation.is_enabled
+        

@@ -38,7 +38,7 @@ class Group < ActiveRecord::Base
     when "ns"
       ['NsCallback', 'NsTemplate']
     when "iam"
-      ['IamCustUser']
+      ['IamCustUser','IamOrganisation']
     else
       []
     end

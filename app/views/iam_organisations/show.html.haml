@@ -1,0 +1,81 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8; margin: 1%;'}
+    #form-details
+      %h3 IAM Organisation Details 
+      %br
+      %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
+        - can = can? :edit, @iam_organisation
+        %a.btn{:href => "#{!(can) ? '#' : '/iam_organisations/' + @iam_organisation.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
+        = render 'unapproved_records/approve', :@record => @iam_organisation
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
+        - if !@iam_organisation.nil?
+          %tr
+            %td.label Version
+            %td.value
+              = link_to "#{audit_count(@iam_organisation)}", :controller => :iam_organisations, :action => :audit_logs, :version_id => audit_count(@iam_organisation), :id => @iam_organisation.id
+          %tr
+            %td.label Errors
+            %td.value
+              = ' '
+            %td#msg-error
+              = error_message_for(@iam_organisation, :base, :prepend_text => "")
+          %tr
+            %td.label Enabled?
+            %td
+              = @iam_organisation.is_enabled
+            %td#msg-error
+              = error_message_for(@iam_organisation, :is_enabled, :prepend_text => "")
+          %tr
+            %td.label Name
+            %td.value
+              = @iam_organisation.name
+            %td#msg-error
+              = error_message_for(@iam_organisation, :name, :prepend_text => "")
+          %tr
+            %td.label Organisation UUID
+            %td.value
+              = @iam_organisation.org_uuid
+            %td#msg-error
+              = error_message_for(@iam_organisation, :org_uuid, :prepend_text => "")
+          %tr
+            %td.label Is VPN On?
+            %td.value
+              = @iam_organisation.on_vpn
+            %td#msg-error
+              = error_message_for(@iam_organisation, :on_vpn, :prepend_text => "")
+          %tr
+            %td.label Certificate DN
+            %td.value
+              = @iam_organisation.cert_dn
+            %td#msg-error
+              = error_message_for(@iam_organisation, :cert_dn, :prepend_text => "")
+          %tr
+            %td.label Source IPs
+            %td.value
+              = @iam_organisation.source_ips
+            %td#msg-error
+              = error_message_for(@iam_organisation, :source_ips, :prepend_text => "")
+          %tr
+            %td.label Created By
+            %td.value
+              = @iam_organisation.created_user.try(:username)
+            %td#msg-error
+              = error_message_for(@iam_organisation, :created_by, :prepend_text => "")
+          %tr
+            %td.label Updated By
+            %td.value
+              = @iam_organisation.updated_user.try(:username)
+            %td#msg-error
+              = error_message_for(@iam_organisation, :updated_by, :prepend_text => "")
+          %tr
+            %td.label Created At
+            %td.value
+              = @iam_organisation.created_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td#msg-error
+              = error_message_for(@iam_organisation, :created_at, :prepend_text => "")
+          %tr
+            %td.label Updated At
+            %td.value
+              = @iam_organisation.updated_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td#msg-error
+              = error_message_for(@iam_organisation, :updated_at, :prepend_text => "")
