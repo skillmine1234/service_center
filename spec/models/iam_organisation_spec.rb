@@ -39,6 +39,18 @@ describe IamOrganisation do
     end
   end
 
+  context "check_email_addresses" do 
+    it "should validate email address" do 
+      iam_organisation = Factory.build(:iam_organisation, :email_id => "1234;esesdgs")
+      iam_organisation.should_not be_valid
+      iam_organisation.errors_on("email_id").should == ["is invalid"]
+      
+      iam_organisation = Factory.build(:iam_organisation, :email_id => "foo@ruby.com;bar@ruby.com")
+      iam_organisation.should be_valid
+      iam_organisation.errors_on("email_id").should == []
+    end
+  end
+
   context "value_of_source_ips" do
     it 'should return an error if source_ips are not valid' do
       iam_organisation = Factory.build(:iam_organisation, :source_ips => '123.78.89.9123.12.12.1', approval_status: 'A')

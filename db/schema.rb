@@ -1370,6 +1370,7 @@ ActiveRecord::Schema.define(version: 20170607090814) do
     t.string   "last_action",      limit: 1,    default: "C"
     t.integer  "approved_id"
     t.integer  "approved_version"
+    t.string   "email_id"
   end
 
   add_index "iam_organisations", ["org_uuid", "approval_status"], name: "iam_organisations_01", unique: true

@@ -9,6 +9,7 @@ class IamOrganisation < ActiveRecord::Base
   validates_presence_of :name, :org_uuid, :on_vpn, :is_enabled
   validates_uniqueness_of :org_uuid, :scope => :approval_status
   validates :on_vpn, length: { minimum: 1, maximum: 1 }
+  validate :check_email_addresses
   validates_format_of :source_ips, :with => /\A\w[\w\-\(\)\.\s\r\n]*\z/, :allow_blank => true
   validate :value_of_source_ips
 
@@ -17,6 +18,19 @@ class IamOrganisation < ActiveRecord::Base
 
   def is_vpn_on?
     on_vpn == 'Y' ? true : false
+  end
+
+  def check_email_addresses
+    invalid_ids = []
+    value = email_id
+    unless value.nil?
+      value.split(/;\s*/).each do |email| 
+        unless email =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
+          invalid_ids << email
+        end
+      end
+    end
+    errors.add(:email_id, "is invalid") unless invalid_ids.empty?
   end
 
   def value_of_source_ips

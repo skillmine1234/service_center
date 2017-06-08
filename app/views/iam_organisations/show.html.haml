@@ -32,6 +32,12 @@
             %td#msg-error
               = error_message_for(@iam_organisation, :name, :prepend_text => "")
           %tr
+            %td.label Email ID
+            %td.value
+              = @iam_organisation.email_id
+            %td#msg-error
+              = error_message_for(@iam_organisation, :email_id, :prepend_text => "")
+          %tr
             %td.label Organisation UUID
             %td.value
               = @iam_organisation.org_uuid

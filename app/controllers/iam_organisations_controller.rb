@@ -68,7 +68,7 @@ class IamOrganisationsController < ApplicationController
   end
 
   def iam_organisation_params
-    params.require(:iam_organisation).permit(:name, :org_uuid, :on_vpn, :cert_dn, :source_ips, :is_enabled, :approval_status, :last_action, 
+    params.require(:iam_organisation).permit(:name, :email_id, :org_uuid, :on_vpn, :cert_dn, :source_ips, :is_enabled, :approval_status, :last_action, 
                                              :approved_id, :approved_version, :created_by, :updated_by, :created_at, :updated_at, :lock_version)
   end
 end
