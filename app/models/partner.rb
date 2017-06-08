@@ -1,5 +1,6 @@
 class Partner < ActiveRecord::Base
   include Approval2::ModelAdditions
+  include ServiceNotification
 
   SERVICE_NAMES = %w(INW INW2)
   
@@ -118,5 +119,12 @@ class Partner < ActiveRecord::Base
       errors.add(:code, "no record found in ATOM for #{self.code}") if atom_customer_by_cust_id.nil?
       errors.add(:account_no, "no record found in ATOM for #{self.account_no}") if atom_customer_by_debit_acct.nil?
     end
+  end
+
+  def template_variables
+    user = IamCustUser.find_by(username: identity_user_id)
+    { username: user.try(:username), first_name: user.try(:first_name), last_name: user.try(:last_name), mobile_no: user.try(:mobile_no),
+      email: user.try(:email), service_name: 'InwardRemittance', customer_id: customer_id, app_id: app_code, account_no: account_no,
+      partner_code: code }
   end
 end

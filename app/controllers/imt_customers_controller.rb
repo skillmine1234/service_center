@@ -82,6 +82,12 @@ class ImtCustomersController < ApplicationController
     redirect_to @imt_customer
   end
 
+  def resend_notification
+    @imt_customer = ImtCustomer.find(params[:id]) rescue nil
+    flash[:alert] = @imt_customer.resend_setup
+    redirect_to @imt_customer
+  end
+
   private
 
   def imt_customer_params
@@ -89,6 +95,6 @@ class ImtCustomersController < ApplicationController
                                          :account_no, :expiry_period, :txn_mode, :address_line1, :is_enabled,
                                          :address_line2, :address_line3, :country, :lock_version, :approval_status, 
                                          :last_action, :approved_version, :approved_id, :created_by, :updated_by, :app_id, 
-                                         :identity_user_id)
+                                         :identity_user_id, :notification_sent_at)
   end
 end

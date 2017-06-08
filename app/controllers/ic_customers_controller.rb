@@ -82,12 +82,19 @@ class IcCustomersController < ApplicationController
     redirect_to @ic_customer
   end
 
+  def resend_notification
+    @ic_customer = IcCustomer.find(params[:id]) rescue nil
+    flash[:alert] = @ic_customer.resend_setup
+    redirect_to @ic_customer
+  end
+
   private
 
   def ic_customer_params
     params.require(:ic_customer).permit(:customer_id, :app_id, :identity_user_id, :repay_account_no, :fee_pct, :fee_income_gl, 
                                         :max_overdue_pct, :cust_contact_email, :cust_contact_mobile, :ops_email, :rm_email, 
                                         :is_enabled, :created_by, :updated_by, :created_at, :updated_at, :lock_version, 
-                                        :approval_status, :last_action, :approved_version, :approved_id, :customer_name, :sc_backend_code)
+                                        :approval_status, :last_action, :approved_version, :approved_id, :customer_name, :sc_backend_code,
+                                        :notification_sent_at)
   end
 end

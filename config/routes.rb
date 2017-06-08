@@ -9,7 +9,11 @@ ServiceCenter::Application.routes.draw do
   devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
 
-  resources :partners
+  resources :partners do
+    member do
+      put :resend_notification
+    end
+  end
   resources :purpose_codes
   resources :inward_remittances, except: :index do
     member do
@@ -70,19 +74,31 @@ ServiceCenter::Application.routes.draw do
   resources :pc_apps
   resources :pc_programs
   resources :pc_products
-  resources :pc2_apps
+  resources :pc2_apps do
+    member do
+      put :resend_notification
+    end
+  end
   resources :pc2_cust_accounts
   resources :pc_unapproved_records
   resources :pc_fee_rules
   resources :fp_unapproved_records
   resources :fp_operations
   resources :fp_auth_rules
-  resources :imt_customers
+  resources :imt_customers do
+    member do
+      put :resend_notification
+    end
+  end
   resources :imt_unapproved_records
   resources :imt_transfers
   resources :csv_exports
   resources :ft_unapproved_records
-  resources :funds_transfer_customers
+  resources :funds_transfer_customers do
+    member do
+      put :resend_notification
+    end
+  end
   resources :ft_purpose_codes
   resources :ft_customer_accounts
   resources :reconciled_returns
@@ -112,12 +128,21 @@ ServiceCenter::Application.routes.draw do
       get 'download_response_file'
     end
   end
-  resources :ic_customers
+  resources :ic_customers do
+    member do
+      put :resend_notification
+    end
+  end
   resources :ic_suppliers
   resources :ic_invoices
   resources :ic_unapproved_records
 
-  resources :sm_banks
+  resources :sm_banks do
+    member do
+      put :resend_notification
+    end
+  end
+
   resources :sm_bank_accounts
   resources :sm_unapproved_records
 

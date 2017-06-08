@@ -6,7 +6,7 @@
       %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
         - can = can? :edit, @funds_transfer_customer
         %a.btn{:href => "#{!(can) ? '#' : '/funds_transfer_customers/' + @funds_transfer_customer.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
-        = render 'approve', :@record => @funds_transfer_customer
+        = render 'unapproved_records/approve_and_resend', :@record => @funds_transfer_customer
       %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
         - if !@funds_transfer_customer.nil?
           %tr
@@ -115,6 +115,12 @@
               = @funds_transfer_customer.notify_app_code
             %td#msg-error
               = error_message_for(@funds_transfer_customer, :notify_app_code, :prepend_text => "")
+          %tr
+            %td.label Notification Sent At
+            %td
+              = @funds_transfer_customer.notification_sent_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :notification_sent_at, :prepend_text => "")
           %tr
             %td.label Created By
             %td.value

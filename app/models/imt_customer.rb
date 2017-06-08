@@ -1,7 +1,8 @@
 class ImtCustomer < ActiveRecord::Base
   include Approval
   include ImtApproval
-  
+  include ServiceNotification
+
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
   
@@ -36,5 +37,11 @@ class ImtCustomer < ActiveRecord::Base
 
   def presence_of_iam_cust_user
     errors.add(:identity_user_id, 'IAM Customer User does not exist for this username') if IamCustUser.find_by(username: identity_user_id).nil?
+  end
+
+  def template_variables
+    user = IamCustUser.find_by(username: identity_user_id)
+    { username: user.try(:username), first_name: user.try(:first_name), last_name: user.try(:last_name), mobile_no: user.try(:mobile_no),
+      email: user.try(:email), service_name: 'InstantMoneyTransfer', customer_id: customer_code, app_id: app_id, account_no: account_no }
   end
 end

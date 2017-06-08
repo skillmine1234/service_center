@@ -82,11 +82,17 @@ class SmBanksController < ApplicationController
     redirect_to @sm_bank
   end
 
+  def resend_notification
+    @sm_bank = SmBank.find(params[:id]) rescue nil
+    flash[:alert] = @sm_bank.resend_setup
+    redirect_to @sm_bank
+  end
+
   private
 
   def sm_bank_params
     params.require(:sm_bank).permit(:code, :name, :bank_code, :low_balance_alert_at, :identity_user_id, :neft_allowed, :imps_allowed, :is_enabled,  
                                     :created_by, :updated_by, :created_at, :updated_at, 
-                                    :lock_version, :approval_status, :last_action, :approved_version, :approved_id)
+                                    :lock_version, :approval_status, :last_action, :approved_version, :approved_id, :notification_sent_at)
   end
 end

@@ -63,10 +63,16 @@ class Pc2AppsController < ApplicationController
     redirect_to unapproved_records_path(group_name: 'prepaid-card2')
   end
 
+  def resend_notification
+    @pc2_app = Pc2App.find(params[:id]) rescue nil
+    flash[:alert] = @pc2_app.resend_setup
+    redirect_to @pc2_app
+  end
+
   private
 
   def pc2_app_params
     params.require(:pc2_app).permit(:app_id, :customer_id, :is_enabled, :identity_user_id, :lock_version, :approval_status, :last_action, :approved_version,
-                                   :approved_id, :created_by, :updated_by)
+                                   :approved_id, :created_by, :updated_by, :notification_sent_at)
   end
 end

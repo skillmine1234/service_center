@@ -6,7 +6,7 @@
       %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
         - can = can? :edit, @pc2_app
         %a.btn{:href => "#{!(can) ? '#' : '/pc2_apps/' + @pc2_app.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
-        = render 'pc2_apps/approve', :@record => @pc2_app
+        = render 'unapproved_records/approve_and_resend', :@record => @pc2_app
       %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
         - if !@pc2_app.nil?
           %tr
@@ -43,6 +43,12 @@
               = @pc2_app.identity_user_id
             %td#msg-error
               = error_message_for(@pc2_app, :identity_user_id, :prepend_text => "")
+          %tr
+            %td.label Notification Sent At
+            %td
+              = @pc2_app.notification_sent_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td#msg-error
+              = error_message_for(@pc2_app, :notification_sent_at, :prepend_text => "")
           %tr
             %td.label Created By
             %td.value

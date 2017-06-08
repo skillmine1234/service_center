@@ -6,7 +6,7 @@
       %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
         - can = can? :edit, @partner
         %a.btn{:href => "#{!(can) ? '#' : '/partners/' + @partner.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
-        = render 'unapproved_records/approve', :@record => @partner
+        = render 'unapproved_records/approve_and_resend', :@record => @partner
       %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
         - if !@partner.nil?
           %tr
@@ -223,3 +223,9 @@
               = @partner.auto_match_rule
             %td#msg-error
               = error_message_for(@partner, :auto_match_rule, :prepend_text => "")
+          %tr
+            %td.label Notification Sent At
+            %td
+              = @partner.notification_sent_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td#msg-error
+              = error_message_for(@partner, :notification_sent_at, :prepend_text => "")

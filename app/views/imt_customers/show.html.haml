@@ -6,7 +6,7 @@
       %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
         - can = can? :edit, @imt_customer
         %a.btn{:href => "#{!(can) ? '#' : '/imt_customers/' + @imt_customer.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
-        = render 'approve', :@record => @imt_customer
+        = render 'unapproved_records/approve_and_resend', :@record => @imt_customer
       %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
         - if !@imt_customer.nil?
           %tr
@@ -109,6 +109,12 @@
               = @imt_customer.country_name
             %td#msg-error
               = error_message_for(@imt_customer, :country, :prepend_text => "")
+          %tr
+            %td.label Notification Sent At
+            %td
+              = @imt_customer.notification_sent_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td#msg-error
+              = error_message_for(@imt_customer, :notification_sent_at, :prepend_text => "")
           %tr
             %td.label Created By
             %td.value

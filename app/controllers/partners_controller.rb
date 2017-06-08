@@ -66,6 +66,12 @@ class PartnersController < ApplicationController
     redirect_to unapproved_records_path(group_name: 'inward-remittance')
   end
 
+  def resend_notification
+    @partner = Partner.find(params[:id]) rescue nil
+    flash[:alert] = @partner.resend_setup
+    redirect_to @partner
+  end
+
   private
 
   def partner_params
@@ -77,6 +83,7 @@ class PartnersController < ApplicationController
                                     :country, :address_line1, :address_line2, :address_line3,:mmid, :mobile_no,
                                     :add_req_ref_in_rep, :add_transfer_amt_in_rep, :approved_id, :approved_version,
                                     :notify_on_status_change, :app_code, :service_name, :guideline_id, :will_whitelist,
-                                    :will_send_id, :hold_for_whitelisting, :hold_period_days, :auto_match_rule)
+                                    :will_send_id, :hold_for_whitelisting, :hold_period_days, :auto_match_rule,
+                                    :notification_sent_at)
   end
 end

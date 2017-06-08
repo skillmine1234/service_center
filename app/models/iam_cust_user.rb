@@ -15,8 +15,24 @@ class IamCustUser < ActiveRecord::Base
   after_save :add_user_to_ldap_on_approval unless Rails.env.development?
   after_save :delete_user_from_ldap_on_approval unless Rails.env.development?
 
-  def template_variables
-    {username: username, first_name: first_name, last_name: last_name, mobile_no: mobile_no, email: email, password_part_1: decrypted_password, password_part_2: decrypted_password}
+  def template_variables(event)
+    if event == 'Password Generated'
+      { username: username, first_name: first_name, last_name: last_name, mobile_no: mobile_no, email: email, password_part_1: password_part_1(decrypted_password), password_part_2: password_part_2(decrypted_password) }
+    elsif event == 'Access Removed'
+      { username: username, first_name: first_name, last_name: last_name, mobile_no: mobile_no, email: email }
+    end
+  end
+
+  def password_part_1(passwd)
+    passwd.slice(0..(passwd.length/2)-1)
+  end
+
+  def password_part_2(passwd)
+    passwd.slice((passwd.length/2)..passwd.length)
+  end
+
+  def password_part_1
+    decrypted_password()
   end
   
   def will_connect_to_ldap
@@ -90,8 +106,8 @@ class IamCustUser < ActiveRecord::Base
     event = ScEvent.find_by_event(event)
     template = NsTemplate.find_by_ns_event_id(event.id) rescue nil
     unless template.nil?
-      plsql.pk_qg_send_email.enqueue1(ENV['CONFIG_IIB_SMTP_BROKER_UUID'], self.email, NsTemplate.render_template(template.email_subject, template_variables), NsTemplate.render_template(template.email_body, template_variables)) unless template.email_body.to_s.empty?
-      plsql.pk_qg_send_sms.enqueue(ENV['CONFIG_IIB_SMTP_BROKER_UUID'], self.mobile_no, NsTemplate.render_template(template.sms_text, template_variables)) unless template.sms_text.to_s.empty?
+      plsql.pk_qg_send_email.enqueue1(ENV['CONFIG_IIB_SMTP_BROKER_UUID'], self.email, NsTemplate.render_template(template.email_subject, template_variables(event)), NsTemplate.render_template(template.email_body, template_variables(event))) unless template.email_body.to_s.empty?
+      plsql.pk_qg_send_sms.enqueue(ENV['CONFIG_IIB_SMTP_BROKER_UUID'], self.mobile_no, NsTemplate.render_template(template.sms_text, template_variables(event))) unless template.sms_text.to_s.empty?
       update_column(:notification_sent_at, Time.zone.now)
     end
   end

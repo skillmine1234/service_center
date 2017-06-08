@@ -1,6 +1,7 @@
 class FundsTransferCustomer < ActiveRecord::Base
   include Approval
   include FtApproval
+  include ServiceNotification
 
   self.table_name = "ft_customers"
   
@@ -29,6 +30,12 @@ class FundsTransferCustomer < ActiveRecord::Base
   validate :presence_of_iam_cust_user
 
   before_save :to_upcase
+
+  def template_variables
+    user = IamCustUser.find_by(username: identity_user_id)
+    { username: user.try(:username), first_name: user.try(:first_name), last_name: user.try(:last_name), mobile_no: user.try(:mobile_no), 
+      email: user.try(:email), service_name: 'FundsTransfer', customer_id: customer_id, app_id: app_id, account_no: ft_customer_accounts.first.try(:account_no) }
+  end
 
   def to_upcase
     unless self.frozen?
