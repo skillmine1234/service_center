@@ -6,7 +6,12 @@
   .form-main
     = f.hidden_field :lock_version
     = f.hidden_field :approved_id
-    = f.hidden_field :approved_version    
+    = f.hidden_field :approved_version
+    .control-group
+      = f.label :is_enabled, "Is Enabled ?", :class => 'control-label'
+      = f.check_box :is_enabled, {},"Y","N"
+      #msg-error
+        = error_message_for(@iam_organisation, :is_enabled, :prepend_text => "")
     .control-group
       = f.label :name, "*Name", :class => 'control-label'
       = f.text_field :name
@@ -32,11 +37,6 @@
       = f.text_area :source_ips, {:style => "width:200px; height:100px;"}
       #msg-error
         = error_message_for(@iam_organisation, :source_ips, :prepend_text => "")
-    .control-group
-      = f.label :is_enabled, "Is Enabled ?", :class => 'control-label'
-      = f.check_box :is_enabled, {},"Y","N"
-      #msg-error
-        = error_message_for(@iam_organisation, :is_enabled, :prepend_text => "")
 
   .form-actions
     - (f.object.new_record? and f.object.name.nil?) ? label_name = "Create" : label_name = "Update"
