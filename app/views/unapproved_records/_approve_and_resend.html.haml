@@ -9,7 +9,7 @@
 .modal.hide.fade{"id" => "myModalResend", "aria-hidden" => "true", "aria-labelledby" => "  myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3#myModalLabel  Resend Service Setup
+    %h3#myModalLabel  Resend Setup
     #error_message{:style => 'color:red'}
   .modal-body
     = simple_form_for @record, :url => {:action => 'resend_notification'}, :method => :put, :html=>{:id=>"transition"} do |ef|

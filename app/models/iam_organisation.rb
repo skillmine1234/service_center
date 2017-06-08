@@ -1,5 +1,6 @@
 class IamOrganisation < ActiveRecord::Base
   include Approval2::ModelAdditions
+  include OrgNotification
 
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
@@ -15,6 +16,10 @@ class IamOrganisation < ActiveRecord::Base
 
   validates_presence_of :cert_dn, :message => "Required when 'Is VPN On?' is not selected.", :if => '!is_vpn_on?'
   validates_presence_of :source_ips, :message => "Required when 'Is VPN On?' is selected.", :if => 'is_vpn_on?'
+
+  def template_variables
+    { email: email_id, org_uuid: org_uuid , on_vpn: on_vpn, cert_dn: cert_dn, sourve_ips: sourve_ips}
+  end
 
   def is_vpn_on?
     on_vpn == 'Y' ? true : false

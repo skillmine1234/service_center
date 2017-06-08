@@ -96,14 +96,15 @@
             %td#msg-error
               = error_message_for(@iam_cust_user, :updated_at, :prepend_text => "")
 
-    %p{:style => 'text-align:left; padding-left:6px; padding-bottom:10px'}
-      = link_to 'Test Login', connect_to_ldap_iam_cust_user_path(@iam_cust_user), {remote: true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary', id: 'test_login_btn'}
-      = link_to 'Resend Password', "#", {'data-toggle' =>  "modal", 'data-target' => '#resendPassword', class: 'btn btn-primary'}
-      = link_to 'Add LDAP Entry', "#", {'data-toggle' =>  "modal", 'data-target' => '#addUser', class: 'btn btn-primary'}
+    %p{:style => 'text-align:left; padding-left:6px; padding-bottom:30px'}
+      - can = can? :connect_to_ldap, @record
+      - flag = @record.enable_resend_button?
+      = link_to 'Test Login', connect_to_ldap_iam_cust_user_path(@iam_cust_user), {remote: true, 'data-toggle' =>  "modal", 'data-target' => "#{!(can && flag) ? '#' : '#modal-window'}", class: "btn btn-primary #{(can && flag) ? '' : 'disabled'}", :href => "#{!(can && flag) ? '#' : '#myModalLogin'}", id: 'test_login_btn'}
+      = link_to 'Resend Password', "#", {'data-toggle' =>  "modal", 'data-target' => "#{!(can && flag) ? '#' : '#resendPassword'}", class: "btn btn-primary #{(can && flag) ? '' : 'disabled'}"}
+      = link_to 'Add LDAP Entry', "#", {'data-toggle' =>  "modal", 'data-target' => "#{!(can && flag) ? '#' : '#addUser'}", class: "btn btn-primary #{(can && flag) ? '' : 'disabled'}"}
       - if @iam_cust_user.is_enabled == 'N'
-        = link_to 'Delete LDAP Entry', "#", {'data-toggle' =>  "modal", 'data-target' => '#deleteUser', class: 'btn btn-primary'}
+        = link_to 'Delete LDAP Entry', "#", {'data-toggle' =>  "modal", 'data-target' => "#{!(can && flag) ? '#' : '#deleteUser'}", class: "btn btn-primary #{(can && flag) ? '' : 'disabled'}"}
       %div{ id:"modal-window", class:"modal hide fade", role: "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden' => "true"}
-
 #resendPassword.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×

@@ -191,6 +191,9 @@ ServiceCenter::Application.routes.draw do
       get :index
       put :index
     end
+    member do
+      put :resend_notification
+    end
   end
   
   resources :sc_backend_response_codes, except: :index do

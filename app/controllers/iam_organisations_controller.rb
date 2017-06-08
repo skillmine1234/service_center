@@ -61,6 +61,12 @@ class IamOrganisationsController < ApplicationController
     redirect_to unapproved_records_path(group_name: 'iam')
   end
 
+  def resend_notification
+    @iam_org = IamOrganisation.find(params[:id]) rescue nil
+    flash[:alert] = @iam_org.resend_setup
+    redirect_to @iam_org
+  end
+
   private
 
   def search_params
@@ -69,6 +75,7 @@ class IamOrganisationsController < ApplicationController
 
   def iam_organisation_params
     params.require(:iam_organisation).permit(:name, :email_id, :org_uuid, :on_vpn, :cert_dn, :source_ips, :is_enabled, :approval_status, :last_action, 
-                                             :approved_id, :approved_version, :created_by, :updated_by, :created_at, :updated_at, :lock_version)
+                                             :approved_id, :approved_version, :created_by, :updated_by, :created_at, :updated_at, :lock_version,
+                                             :notification_sent_at)
   end
 end

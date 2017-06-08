@@ -18,20 +18,20 @@
       #msg-error
         = error_message_for(@ns_template, :sc_event_id, :prepend_text => "")
     .control-group
-      = f.label :sms_template, "SMS Template", :class => 'control-label'
-      = f.text_area :sms_template, :placeholder => "Please place the variables in {{ }} Eg: Hi {{customer.name}}", :style => "height: 250px; width: 250px;"
+      = f.label :sms_text, "SMS Text", :class => 'control-label'
+      = f.text_area :sms_text, :placeholder => "Please place the variables in {{ }} Eg: Hi {{customer.name}}", :style => "height: 250px; width: 250px;"
       #msg-error
-        = error_message_for(@ns_template, :sms_template, :prepend_text => "")
+        = error_message_for(@ns_template, :sms_text, :prepend_text => "")
     .control-group
       = f.label :email_subject, "Email Subject", :class => 'control-label'
       = f.text_area :email_subject, :placeholder => "Please place the variables in {{ }} Eg: Hi {{customer.name}}", :style => "height: 100px; width: 250px;", :maxlength => 255
       #msg-error
-        = error_message_for(@ns_template, :sms_template, :prepend_text => "")
+        = error_message_for(@ns_template, :email_subject, :prepend_text => "")
     .control-group
-      = f.label :email_template, "Email Template", :class => 'control-label'
-      = f.text_area :email_template, :placeholder => "Please place the variables in {{ }} Eg: Hi {{customer.name}}", :style => "height: 250px; width: 250px;"
+      = f.label :email_body, "Email Body", :class => 'control-label'
+      = f.text_area :email_body, :placeholder => "Please place the variables in {{ }} Eg: Hi {{customer.name}}", :style => "height: 250px; width: 250px;"
       #msg-error
-        = error_message_for(@ns_template, :email_template, :prepend_text => "")
+        = error_message_for(@ns_template, :email_body, :prepend_text => "")
   .form-actions
     - (f.object.new_record? and f.object.sc_event_id.nil?) ? label_name = "Create" : label_name = "Update"
     = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_ns_template', :value => label_name + ' Template'
