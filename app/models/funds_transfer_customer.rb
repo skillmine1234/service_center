@@ -66,7 +66,7 @@ class FundsTransferCustomer < ActiveRecord::Base
         errors[:base] << "no accounts found in FCR for #{self.customer_id}"
       end
     else
-      errors.add(:customer_id, "no record found in FCR for #{self.customer_id}") if fcr_customer.nil?
+      errors.add(:customer_id, "no record found in FCR for #{self.customer_id}")
     end
   end
 end

@@ -278,7 +278,7 @@ describe SmBankAccount do
       atom_customer = Factory(:atom_customer, customerid: '2345', mobile: '2222222222', isactive: '1', accountno: '1234567890')
       sm_bank = Factory(:sm_bank, code: '1234', neft_allowed: 'N', imps_allowed: 'Y', approval_status: 'A')
       sm_bank_account = Factory.build(:sm_bank_account, sm_code: sm_bank.code, customer_id: '234', account_no: '0987654321')
-      sm_bank_account.errors_on(:customer_id).should == ["no record found in FCR for 234", "no record found in ATOM for 234"]
+      sm_bank_account.errors_on(:customer_id).should == ["no record found in FCR for 234"]
       sm_bank_account.errors_on(:account_no).should == ["no record found in ATOM for 0987654321"]
     end
 
