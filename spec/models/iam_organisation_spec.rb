@@ -43,11 +43,11 @@ describe IamOrganisation do
     it "should validate email address" do 
       iam_organisation = Factory.build(:iam_organisation, :email_id => "1234;esesdgs")
       iam_organisation.should_not be_valid
-      iam_organisation.errors_on("email_id").should == ["is invalid"]
+      iam_organisation.errors_on(:email_id).should == ["is invalid"]
       
       iam_organisation = Factory.build(:iam_organisation, :email_id => "foo@ruby.com;bar@ruby.com")
       iam_organisation.should be_valid
-      iam_organisation.errors_on("email_id").should == []
+      iam_organisation.errors_on(:email_id).should == []
     end
   end
 
