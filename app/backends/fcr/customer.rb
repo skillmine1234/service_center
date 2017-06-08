@@ -2,6 +2,11 @@ class Fcr::Customer < ArFcr
   self.table_name = 'ci_custmast'
   self.primary_key = :cod_cust_id
   
+  has_many :customer_accounts, foreign_key: :cod_cust
+  has_many :allowed_corporate_accounts, -> { allowed_corporate_relationships }, foreign_key: :cod_cust, :class_name => 'Fcr::CustomerAccount'
+  
+  default_scope {where(flg_mnt_status: 'A')}
+  
   alias_attribute :ref_phone_mobile, :ref_cust_telex
 
   def transfer_type_allowed?(transfer_type)
@@ -10,7 +15,8 @@ class Fcr::Customer < ArFcr
     end
   end
   
-  def self.get_customer(cust_id)
-    find_by(cod_cust_id: cust_id)
+  def accounts
+    allowed_corporate_accounts
   end
+
 end

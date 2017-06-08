@@ -116,4 +116,31 @@ describe FtCustomerAccount do
       ft_customer_account2.enable_approve_button?.should == true
     end
   end
+  
+  context "validate_account" do
+    it "should allow imps for the ft_customer_account when the customer setup is complete in FCR and ATOM" do
+      fcr_customer = Factory(:fcr_customer, cod_cust_id: '1234', ref_phone_mobile: '2222222222', ref_cust_email: 'aaa@gmail.com')
+      atom_customer = Factory(:atom_customer, customerid: '1234', mobile: '2222222222', isactive: '1', accountno: '1234567890')
+      funds_transfer_customer = Factory(:funds_transfer_customer, customer_id: '1234', allow_neft: 'N', allow_imps: 'Y', approval_status: 'A', allow_all_accounts: 'N', enabled: 'Y')
+      ft_customer_account = Factory.build(:ft_customer_account, customer_id: funds_transfer_customer.customer_id, account_no: '1234567890')
+      ft_customer_account.errors_on(:customer_id).should == []
+    end
+
+    it "should raise error when there is no corresponding record in ATOM" do
+      fcr_customer = Factory(:fcr_customer, cod_cust_id: '2345', ref_phone_mobile: '2222222222', ref_cust_email: 'aaa@gmail.com')
+      atom_customer = Factory(:atom_customer, customerid: '2345', mobile: '2222222222', isactive: '1', accountno: '1234567890')
+      funds_transfer_customer = Factory(:funds_transfer_customer, customer_id: '1234', allow_neft: 'N', allow_imps: 'Y', approval_status: 'A', allow_all_accounts: 'N', enabled: 'Y')
+      ft_customer_account = Factory.build(:ft_customer_account, customer_id: funds_transfer_customer.customer_id, account_no: '0987654321')
+      ft_customer_account.errors_on(:customer_id).should == ["no record found in FCR for 1234"]
+      ft_customer_account.errors_on(:account_no).should == ["no record found in ATOM for 0987654321"]
+    end
+
+    it "should raise error when the mobile no.s in FCR and ATOM do not match for the customer" do
+      atom_customer = Factory(:atom_customer, customerid: '2345', mobile: '2222222222', isactive: '1', accountno: '1234567890')
+      fcr_customer = Factory(:fcr_customer, cod_cust_id: '2345', ref_phone_mobile: '9999000099', ref_cust_email: 'aaa@gmail.com')
+      funds_transfer_customer = Factory(:funds_transfer_customer, customer_id: '2345', allow_neft: 'N', allow_imps: 'Y', approval_status: 'A', allow_all_accounts: 'N', enabled: 'Y')
+      ft_customer_account = Factory.build(:ft_customer_account, customer_id: funds_transfer_customer.customer_id, account_no: '1234567890')
+      ft_customer_account.errors_on(:account_no).should == ["Required setup for IMPS transfer not found in ATOM for 1234567890"]
+    end
+  end
 end

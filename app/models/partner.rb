@@ -98,23 +98,23 @@ class Partner < ActiveRecord::Base
   end
   
   def should_allow_neft?
-    fcr_customer = Fcr::Customer.get_customer(self.code)
+    fcr_customer = Fcr::Customer.find_by_cod_cust_id(self.code)
     if fcr_customer.nil?
       errors.add(:code, "no record found in FCR for #{self.code}")
     else
-      errors[:base] << "Customer details not found in FCR for #{self.code}" unless fcr_customer.transfer_type_allowed?('NEFT')
+      errors.add(:allow_neft, "NEFT is not allowed for #{self.code} as the data setup in FCR is invalid") unless fcr_customer.transfer_type_allowed?('NEFT')
     end
   end
   
   def should_allow_imps?
-    fcr_customer = Fcr::Customer.get_customer(self.code)
-    atom_customer_by_cust_id = Atom::Customer.get_customer_by_cust_id(self.code)
-    atom_customer_by_debit_acct = Atom::Customer.get_customer_by_debit_acct(self.account_no)
+    fcr_customer = Fcr::Customer.find_by_cod_cust_id(self.code)
+    atom_customer_by_cust_id = Atom::Customer.find_by_customerid(self.code)
+    atom_customer_by_debit_acct = Atom::Customer.find_by_accountno(self.account_no)
 
-    if atom_customer_by_cust_id.present? && atom_customer_by_debit_acct.present?
-      errors[:base] << "Customer details not found in ATOM for #{self.account_no}" unless atom_customer_by_debit_acct.imps_allowed?
-      errors[:base] << "Mobile no.s in ATOM and FCR setup do not match for #{self.code}" if fcr_customer.present? && (fcr_customer.ref_phone_mobile != atom_customer_by_cust_id.mobile)
+    if fcr_customer.present? && atom_customer_by_cust_id.present? && atom_customer_by_debit_acct.present?
+      errors.add(:account_no, "IMPS is not allowed for #{self.account_no} as the data setup in ATOM is invalid") unless atom_customer_by_debit_acct.imps_allowed?(fcr_customer.ref_phone_mobile)
     else
+      errors.add(:code, "no record found in FCR for #{self.code}") if fcr_customer.nil?
       errors.add(:code, "no record found in ATOM for #{self.code}") if atom_customer_by_cust_id.nil?
       errors.add(:account_no, "no record found in ATOM for #{self.account_no}") if atom_customer_by_debit_acct.nil?
     end

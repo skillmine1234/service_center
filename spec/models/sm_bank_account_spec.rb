@@ -48,8 +48,10 @@ describe SmBankAccount do
     end
 
     it "should not return presence validation error on mmid and mobile_no if is_mmid_and_mobile_no_mandatory? is true and mmid and mobile_no not nil" do
+      fcr_customer = Factory(:fcr_customer, cod_cust_id: '2345', ref_phone_mobile: '2222222222', ref_cust_email: 'aaa@gmail.com')
+      atom_customer = Factory(:atom_customer, customerid: '2345', mobile: '2222222222', isactive: '1', accountno: '1234567890')
       sm_bank = Factory(:sm_bank, :code => "AAA1217", :imps_allowed => "Y", :approval_status => 'A')
-      sm_bank_account = Factory.build(:sm_bank_account, :sm_code => sm_bank.code, :mmid => "1112223", :mobile_no => "8765432100")
+      sm_bank_account = Factory.build(:sm_bank_account, :sm_code => sm_bank.code, customer_id: '2345', account_no: '1234567890', :mmid => "1112223", :mobile_no => "8765432100")
       sm_bank_account.should be_valid
       sm_bank_account.errors_on(:mmid).should == []
       sm_bank_account.errors_on(:mobile_no).should == []
@@ -143,10 +145,8 @@ describe SmBankAccount do
 
     it "should not allow invalid format" do
       sm_bank = Factory(:sm_bank, :code => "AAA1205", :imps_allowed => "Y", :approval_status => 'A')
-      sm_bank_account = Factory.build(:sm_bank_account, :sm_code => sm_bank.code, :customer_id => "CUST01", :account_no => "ACC-01", :mmid => "MMID-01", :mobile_no => "+918888665")
+      sm_bank_account = Factory.build(:sm_bank_account, :sm_code => sm_bank.code, :mmid => "MMID-01", :mobile_no => "+918888665")
       sm_bank_account.save.should be_false
-      sm_bank_account.errors_on(:account_no).should == ["Invalid format, expected format is : {[0-9]}"]
-      sm_bank_account.errors_on(:customer_id).should == ["Invalid format, expected format is : {[0-9]}"]
       sm_bank_account.errors_on(:mmid).should == ["Invalid format, expected format is : {[0-9]{7}}"]
       sm_bank_account.errors_on(:mobile_no).should == ["Invalid format, expected format is : {[0-9]{10}}"]
     end
@@ -238,6 +238,56 @@ describe SmBankAccount do
       sm_bank_account2 = Factory(:sm_bank_account, :sm_code => sm_bank.code, :approval_status => 'U')
       sm_bank_account1.enable_approve_button?.should == false
       sm_bank_account2.enable_approve_button?.should == true
+    end
+  end
+  
+  context "validate_customer_with_fcr" do
+    it "should allow neft for the sm_bank_account when the customer setup is complete in FCR" do
+      fcr_customer = Factory(:fcr_customer, cod_cust_id: '2345', ref_phone_mobile: '2222222222', ref_cust_email: 'aaa@gmail.com')
+      sm_bank = Factory(:sm_bank, code: '1234', neft_allowed: 'Y', imps_allowed: 'N', approval_status: 'A')
+      sm_bank_account = Factory.build(:sm_bank_account, sm_code: sm_bank.code, customer_id: '2345', account_no: '1234567890')
+      sm_bank_account.errors_on(:customer_id).should == []
+    end
+
+    it "should raise error when the mobile no. and email are not present in the customer setup in FCR" do
+      fcr_customer = Factory(:fcr_customer, cod_cust_id: '2345', ref_phone_mobile: '2222222222', ref_cust_email: nil)
+      sm_bank = Factory(:sm_bank, code: '1234', neft_allowed: 'Y', imps_allowed: 'N', approval_status: 'A')
+      sm_bank_account = Factory.build(:sm_bank_account, sm_code: sm_bank.code, customer_id: '2345', account_no: '1234567890')
+      sm_bank_account.errors_on(:base).should == ["Required setup for NEFT transfer not found in FCR for 2345"]
+    end
+
+    it "should raise error when there is no corresponding record in FCR" do
+      fcr_customer = Factory(:fcr_customer, cod_cust_id: '2345', ref_phone_mobile: '2222222222', ref_cust_email: 'aaa@gmail.com')
+      sm_bank = Factory(:sm_bank, code: '1234', neft_allowed: 'Y', imps_allowed: 'N', approval_status: 'A')
+      sm_bank_account = Factory.build(:sm_bank_account, sm_code: sm_bank.code, customer_id: '234', account_no: '0987654321')
+      sm_bank_account.errors_on(:customer_id).should == ["no record found in FCR for 234"]
+    end
+  end
+  
+  context "validate_account" do
+    it "should allow imps for the sm_bank_account when the customer setup is complete in FCR and ATOM" do
+      fcr_customer = Factory(:fcr_customer, cod_cust_id: '2345', ref_phone_mobile: '2222222222', ref_cust_email: 'aaa@gmail.com')
+      atom_customer = Factory(:atom_customer, customerid: '2345', mobile: '2222222222', isactive: '1', accountno: '1234567890')
+      sm_bank = Factory(:sm_bank, code: '1234', neft_allowed: 'N', imps_allowed: 'Y', approval_status: 'A')
+      sm_bank_account = Factory.build(:sm_bank_account, sm_code: sm_bank.code, customer_id: '2345', account_no: '1234567890')
+      sm_bank_account.errors_on(:customer_id).should == []
+    end
+
+    it "should raise error when there is no corresponding record in ATOM" do
+      fcr_customer = Factory(:fcr_customer, cod_cust_id: '2345', ref_phone_mobile: '2222222222', ref_cust_email: 'aaa@gmail.com')
+      atom_customer = Factory(:atom_customer, customerid: '2345', mobile: '2222222222', isactive: '1', accountno: '1234567890')
+      sm_bank = Factory(:sm_bank, code: '1234', neft_allowed: 'N', imps_allowed: 'Y', approval_status: 'A')
+      sm_bank_account = Factory.build(:sm_bank_account, sm_code: sm_bank.code, customer_id: '234', account_no: '0987654321')
+      sm_bank_account.errors_on(:customer_id).should == ["no record found in FCR for 234", "no record found in ATOM for 234"]
+      sm_bank_account.errors_on(:account_no).should == ["no record found in ATOM for 0987654321"]
+    end
+
+    it "should raise error when the mobile no.s in FCR and ATOM do not match for the customer" do
+      atom_customer = Factory(:atom_customer, customerid: '2345', mobile: '2222222222', isactive: '1', accountno: '1234567890')
+      fcr_customer = Factory(:fcr_customer, cod_cust_id: '2345', ref_phone_mobile: '9999000099', ref_cust_email: 'aaa@gmail.com')
+      sm_bank = Factory(:sm_bank, code: '1234', neft_allowed: 'N', imps_allowed: 'Y', approval_status: 'A')
+      sm_bank_account = Factory.build(:sm_bank_account, sm_code: sm_bank.code, customer_id: '2345', account_no: '1234567890')
+      sm_bank_account.errors_on(:account_no).should == ["Required setup for IMPS transfer not found in ATOM for 1234567890"]
     end
   end
 end

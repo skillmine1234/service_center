@@ -3,16 +3,21 @@ class Atom::Customer < Atom
   self.primary_key = :customerid
   
   alias_attribute :mobile, :mobileno
+  
+  def self.imps_allowed_for_accounts?(accounts, fcr_mobile)
+    accounts.each do |account|
+      acct_no = account.cod_acct_no
+      record = find_by_accountno(acct_no)
+      return {account_no: acct_no, reason: "no record found in ATOM for #{acct_no}"} if record.nil?
 
-  def imps_allowed?
-    (mobile == '2222222222' && isactive == '1') ? true : false
+      result = record.imps_allowed?(fcr_mobile)
+      return {account_no: record.accountno, reason: "IMPS is not allowed for account_no #{record.accountno}"} if result == false
+    end
+    return true
   end
-  
-  def self.get_customer_by_cust_id(cust_id)
-    find_by(customerid: cust_id)
+
+  def imps_allowed?(fcr_mobile_no)
+    (mobileno == fcr_mobile_no && isactive == '1') ? true : false
   end
-  
-  def self.get_customer_by_debit_acct(acct_no)
-    find_by(accountno: acct_no)
-  end
+
 end

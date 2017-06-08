@@ -23,6 +23,8 @@ class FundsTransferCustomer < ActiveRecord::Base
   validates :name, length: {maximum: 100 }
   validates :identity_user_id, length: { maximum: 20 }
   validates :notify_app_code, length: { maximum: 20}, :allow_blank =>true
+  validate :should_allow_neft?, if: "allow_neft=='Y'"
+  validate :should_allow_imps?, if: "allow_imps=='Y' && allow_all_accounts=='Y'"
 
   validate :presence_of_iam_cust_user
 
@@ -40,5 +42,31 @@ class FundsTransferCustomer < ActiveRecord::Base
 
   def presence_of_iam_cust_user
     errors.add(:identity_user_id, 'IAM Customer User does not exist for this username') if IamCustUser.find_by(username: identity_user_id).nil?
+  end
+
+  def should_allow_neft?
+    fcr_customer = Fcr::Customer.find_by_cod_cust_id(self.customer_id)
+    if fcr_customer.nil?
+      errors.add(:customer_id, "no record found in FCR for #{self.customer_id}")
+    else
+      errors.add(:allow_neft, "NEFT is not allowed for #{self.customer_id} as the data setup in FCR is invalid") unless fcr_customer.transfer_type_allowed?('NEFT')
+    end
+  end
+  
+  def should_allow_imps?
+    fcr_customer = Fcr::Customer.find_by_cod_cust_id(self.customer_id)
+    
+    if fcr_customer.present?
+      debit_accounts = fcr_customer.accounts
+
+      if debit_accounts.present?
+        res = Atom::Customer.imps_allowed_for_accounts?(debit_accounts, fcr_customer.ref_phone_mobile)
+        errors[:base] << res[:reason] unless res == true
+      else
+        errors[:base] << "no accounts found in FCR for #{self.customer_id}"
+      end
+    else
+      errors.add(:customer_id, "no record found in FCR for #{self.customer_id}") if fcr_customer.nil?
+    end
   end
 end
