@@ -29,10 +29,6 @@ class IamCustUser < ActiveRecord::Base
   def password_part_2(passwd)
     passwd.slice((passwd.length/2)..passwd.length)
   end
-
-  def password_part_1
-    decrypted_password()
-  end
   
   def will_connect_to_ldap
     LDAP.new
