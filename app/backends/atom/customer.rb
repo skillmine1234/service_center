@@ -4,7 +4,7 @@ class Atom::Customer < Atom
   
   def self.imps_allowed_for_accounts?(accounts, fcr_mobile)
     accounts.each do |account|
-      acct_no = account.cod_acct_no
+      acct_no = account.cod_acct_no.strip
       record = find_by_accountno(acct_no)
       return {account_no: acct_no, reason: "no record found in ATOM for #{acct_no}"} if record.nil?
 
