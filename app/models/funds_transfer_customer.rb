@@ -24,8 +24,8 @@ class FundsTransferCustomer < ActiveRecord::Base
   validates :name, length: {maximum: 100 }
   validates :identity_user_id, length: { maximum: 20 }
   validates :notify_app_code, length: { maximum: 20}, :allow_blank =>true
-  validate :should_allow_neft?, if: "allow_neft=='Y'"
-  validate :should_allow_imps?, if: "allow_imps=='Y' && allow_all_accounts=='Y'"
+  validate :should_allow_neft?, if: "customer_id.present? && allow_neft=='Y'"
+  validate :should_allow_imps?, if: "customer_id.present? && allow_imps=='Y' && allow_all_accounts=='Y'"
 
   validate :presence_of_iam_cust_user
 

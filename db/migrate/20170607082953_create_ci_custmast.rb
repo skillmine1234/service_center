@@ -28,6 +28,7 @@ class CreateCiCustmast < ActiveRecord::Migration
         t.date :dat_incorporated
         t.string :ref_cust_phone, limit: 10
         t.string :cod_mis_cust_code_2, limit: 100
+        t.string :ref_phone_mobile, limit: 36
       end
     end
   end

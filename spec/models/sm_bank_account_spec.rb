@@ -49,7 +49,7 @@ describe SmBankAccount do
 
     it "should not return presence validation error on mmid and mobile_no if is_mmid_and_mobile_no_mandatory? is true and mmid and mobile_no not nil" do
       fcr_customer = Factory(:fcr_customer, cod_cust_id: '2345', ref_phone_mobile: '2222222222', ref_cust_email: 'aaa@gmail.com')
-      atom_customer = Factory(:atom_customer, customerid: '2345', mobile: '2222222222', isactive: '1', accountno: '1234567890')
+      atom_customer = Factory(:atom_customer, customerid: '2345', mobileno: '2222222222', isactive: '1', accountno: '1234567890')
       sm_bank = Factory(:sm_bank, :code => "AAA1217", :imps_allowed => "Y", :approval_status => 'A')
       sm_bank_account = Factory.build(:sm_bank_account, :sm_code => sm_bank.code, customer_id: '2345', account_no: '1234567890', :mmid => "1112223", :mobile_no => "8765432100")
       sm_bank_account.should be_valid
@@ -267,7 +267,7 @@ describe SmBankAccount do
   context "validate_account" do
     it "should allow imps for the sm_bank_account when the customer setup is complete in FCR and ATOM" do
       fcr_customer = Factory(:fcr_customer, cod_cust_id: '2345', ref_phone_mobile: '2222222222', ref_cust_email: 'aaa@gmail.com')
-      atom_customer = Factory(:atom_customer, customerid: '2345', mobile: '2222222222', isactive: '1', accountno: '1234567890')
+      atom_customer = Factory(:atom_customer, customerid: '2345', mobileno: '2222222222', isactive: '1', accountno: '1234567890')
       sm_bank = Factory(:sm_bank, code: '1234', neft_allowed: 'N', imps_allowed: 'Y', approval_status: 'A')
       sm_bank_account = Factory.build(:sm_bank_account, sm_code: sm_bank.code, customer_id: '2345', account_no: '1234567890')
       sm_bank_account.errors_on(:customer_id).should == []
@@ -275,7 +275,7 @@ describe SmBankAccount do
 
     it "should raise error when there is no corresponding record in ATOM" do
       fcr_customer = Factory(:fcr_customer, cod_cust_id: '2345', ref_phone_mobile: '2222222222', ref_cust_email: 'aaa@gmail.com')
-      atom_customer = Factory(:atom_customer, customerid: '2345', mobile: '2222222222', isactive: '1', accountno: '1234567890')
+      atom_customer = Factory(:atom_customer, customerid: '2345', mobileno: '2222222222', isactive: '1', accountno: '1234567890')
       sm_bank = Factory(:sm_bank, code: '1234', neft_allowed: 'N', imps_allowed: 'Y', approval_status: 'A')
       sm_bank_account = Factory.build(:sm_bank_account, sm_code: sm_bank.code, customer_id: '234', account_no: '0987654321')
       sm_bank_account.errors_on(:customer_id).should == ["no record found in FCR for 234"]
@@ -283,7 +283,7 @@ describe SmBankAccount do
     end
 
     it "should raise error when the mobile no.s in FCR and ATOM do not match for the customer" do
-      atom_customer = Factory(:atom_customer, customerid: '2345', mobile: '2222222222', isactive: '1', accountno: '1234567890')
+      atom_customer = Factory(:atom_customer, customerid: '2345', mobileno: '2222222222', isactive: '1', accountno: '1234567890')
       fcr_customer = Factory(:fcr_customer, cod_cust_id: '2345', ref_phone_mobile: '9999000099', ref_cust_email: 'aaa@gmail.com')
       sm_bank = Factory(:sm_bank, code: '1234', neft_allowed: 'N', imps_allowed: 'Y', approval_status: 'A')
       sm_bank_account = Factory.build(:sm_bank_account, sm_code: sm_bank.code, customer_id: '2345', account_no: '1234567890')

@@ -2,8 +2,6 @@ class Atom::Customer < Atom
   self.table_name = 'mmid_master'
   self.primary_key = :customerid
   
-  alias_attribute :mobile, :mobileno
-  
   def self.imps_allowed_for_accounts?(accounts, fcr_mobile)
     accounts.each do |account|
       acct_no = account.cod_acct_no

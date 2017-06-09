@@ -22,12 +22,12 @@ describe PartnerHelper do
 
     it 'should return partners' do  
       fcr_customer1 = Factory(:fcr_customer, cod_cust_id: '2345', ref_phone_mobile: '2222222222', ref_cust_email: 'aaa@gmail.com')
-      atom_customer1 = Factory(:atom_customer, customerid: '2345', mobile: '2222222222', isactive: '1', accountno: '1234567890')
+      atom_customer1 = Factory(:atom_customer, customerid: '2345', mobileno: '2222222222', isactive: '1', accountno: '1234567890')
       
       fcr_customer2 = Factory(:fcr_customer, cod_cust_id: '6789', ref_phone_mobile: '2222222222', ref_cust_email: 'aaa@gmail.com')
-      atom_customer2 = Factory(:atom_customer, customerid: '6789', mobile: '2222222222', isactive: '1', accountno: '1234567890')
+      atom_customer2 = Factory(:atom_customer, customerid: '6789', mobileno: '2222222222', isactive: '1', accountno: '1234567890')
 
-      partner = Factory(:partner, code: '2345', :allow_neft => 'Y', :approval_status => 'A', account_no: '1234567890')
+      partner = Factory(:partner, customer_id: '2345', :allow_neft => 'Y', :approval_status => 'A', account_no: '1234567890')
       find_partners({:allow_neft => 'Y'}).should == [partner]
       find_partners({:allow_neft => 'N'}).should == []  
       Partner.delete_all
@@ -35,7 +35,7 @@ describe PartnerHelper do
       find_partners({:allow_rtgs => 'Y'}).should == [partner]
       find_partners({:allow_rtgs => 'N'}).should == []  
       Partner.delete_all
-      partner = Factory(:partner, code: '6789',:allow_imps => 'Y', :approval_status => 'A', account_no: '1234567890')
+      partner = Factory(:partner, customer_id: '6789',:allow_imps => 'Y', :approval_status => 'A', account_no: '1234567890')
       find_partners({:allow_imps => 'Y'}).should == [partner]
       find_partners({:allow_imps => 'N'}).should == []  
     end

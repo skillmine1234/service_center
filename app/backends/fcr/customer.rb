@@ -7,8 +7,6 @@ class Fcr::Customer < ArFcr
   
   default_scope {where(flg_mnt_status: 'A')}
   
-  alias_attribute :ref_phone_mobile, :ref_cust_telex
-
   def transfer_type_allowed?(transfer_type)
     if transfer_type == 'NEFT'
       (ref_phone_mobile.present? && ref_cust_email.present?) ? true : false
