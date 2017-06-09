@@ -99,7 +99,7 @@
     %p{:style => 'text-align:left; padding-left:6px; padding-bottom:30px'}
       - can = can? :connect_to_ldap, @record
       - flag = @record.enable_resend_button?
-      = link_to 'Test Login', connect_to_ldap_iam_cust_user_path(@iam_cust_user), {remote: true, 'data-toggle' =>  "modal", 'data-target' => "#{!(can && flag) ? '#' : '#modal-window'}", class: "btn btn-primary #{(can && flag) ? '' : 'disabled'}", :href => "#{!(can && flag) ? '#' : '#myModalLogin'}", id: 'test_login_btn'}
+      = link_to 'Test Login', connect_to_ldap_iam_cust_user_path(@iam_cust_user), {remote: true, 'data-toggle' =>  "modal", 'data-target' => "#{!(can && flag) ? '#' : '#modal-window'}", class: "btn btn-primary #{(can && flag) ? '' : 'disabled'}", id: 'test_login_btn'}
       = link_to 'Resend Password', "#", {'data-toggle' =>  "modal", 'data-target' => "#{!(can && flag) ? '#' : '#resendPassword'}", class: "btn btn-primary #{(can && flag) ? '' : 'disabled'}"}
       = link_to 'Add LDAP Entry', "#", {'data-toggle' =>  "modal", 'data-target' => "#{!(can && flag) ? '#' : '#addUser'}", class: "btn btn-primary #{(can && flag) ? '' : 'disabled'}"}
       - if @iam_cust_user.is_enabled == 'N'

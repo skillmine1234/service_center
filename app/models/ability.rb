@@ -41,6 +41,7 @@ class Ability
       cannot :process_file, model_name.constantize
       cannot :reset, model_name.constantize
       can :resend_notification, model_name.constantize
+      can :connect_to_ldap, model_name.constantize
     end
     can :manage, UnapprovedRecord, approvable_type: @group.try(:model_list)
   end
