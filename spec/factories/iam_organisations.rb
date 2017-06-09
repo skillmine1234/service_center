@@ -9,5 +9,6 @@ FactoryGirl.define do
     last_action "C"
     lock_version 1
     approved_version 1
+    email_id 'abc@foobar.com'
   end
 end

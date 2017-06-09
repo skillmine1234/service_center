@@ -41,6 +41,8 @@ class Partner < ActiveRecord::Base
 
   after_create :create_lcy_rate
 
+  alias_attribute :is_enabled, :enabled
+
   def create_lcy_rate
     if partner_lcy_rate.nil?
       PartnerLcyRate.create(partner_code: code, rate: 1, approval_status: 'A')

@@ -4,7 +4,7 @@
 
 - notify_can = can? :resend_notification, @record
 - notify_flag = @record.enable_resend_button?
-%a.btn{"data-toggle" => "modal", :href => "#{!(notify_can && notify_flag) ? '#' : '#myModalResend'}", :role => "button", :class => "btn btn-primary #{(notify_can && notify_flag) ? '' : 'disabled'}"} Resend Service Setup
+%a.btn{"data-toggle" => "modal", :href => "#{!(notify_can && notify_flag) ? '#' : '#myModalResend'}", :role => "button", :class => "btn btn-primary #{(notify_can && notify_flag) ? '' : 'disabled'}"} Resend Setup
 
 .modal.hide.fade{"id" => "myModalResend", "aria-hidden" => "true", "aria-labelledby" => "  myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header

@@ -31,6 +31,8 @@ class FundsTransferCustomer < ActiveRecord::Base
 
   before_save :to_upcase
 
+  alias_attribute :is_enabled, :enabled
+
   def template_variables
     user = IamCustUser.find_by(username: identity_user_id)
     { username: user.try(:username), first_name: user.try(:first_name), last_name: user.try(:last_name), mobile_no: user.try(:mobile_no), 

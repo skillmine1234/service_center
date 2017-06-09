@@ -58,7 +58,7 @@ module UserNotification
 
   def notify_customer(event)
     event = ScEvent.find_by_event(event)
-    template = NsTemplate.find_by_sc_event_id(event.id) rescue nil
+    template = NsTemplate.find_by_sc_event_id_and_is_enabled(event.id,'Y') rescue nil
     unless template.nil?
       plsql.pk_qg_send_email.enqueue1(ENV['CONFIG_IIB_SMTP_BROKER_UUID'], self.email, NsTemplate.render_template(template.email_subject, template_variables(event)), NsTemplate.render_template(template.email_body, template_variables(event))) unless template.email_body.to_s.empty?
       plsql.pk_qg_send_sms.enqueue(ENV['CONFIG_IIB_SMTP_BROKER_UUID'], self.mobile_no, NsTemplate.render_template(template.sms_text, template_variables(event))) unless template.sms_text.to_s.empty?

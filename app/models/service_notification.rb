@@ -23,7 +23,7 @@ module ServiceNotification
 
   def notify_customer(event)
     event = ScEvent.find_by_event(event)
-    template = NsTemplate.find_by_sc_event_id(event.id) rescue nil
+    template = NsTemplate.find_by_sc_event_id_and_is_enabled(event.id,'Y') rescue nil
     user = IamCustUser.find_by(username: identity_user_id)
     unless template.nil? && user.nil?
       plsql.pk_qg_send_email.enqueue1(ENV['CONFIG_IIB_SMTP_BROKER_UUID'], user.email, NsTemplate.render_template(template.email_subject, template_variables), NsTemplate.render_template(template.email_body, template_variables)) unless template.email_body.to_s.empty?
