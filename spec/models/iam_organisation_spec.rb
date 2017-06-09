@@ -14,7 +14,7 @@ describe IamOrganisation do
   end
 
   context "validation" do
-    [:name, :org_uuid, :on_vpn, :is_enabled].each do |att|
+    [:name, :org_uuid, :on_vpn, :is_enabled, :email_id].each do |att|
       it { should validate_presence_of(att) }
     end
 

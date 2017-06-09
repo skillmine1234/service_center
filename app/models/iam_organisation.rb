@@ -7,7 +7,7 @@ class IamOrganisation < ActiveRecord::Base
 
   before_validation :squish_ips
   
-  validates_presence_of :name, :org_uuid, :on_vpn, :is_enabled
+  validates_presence_of :name, :org_uuid, :on_vpn, :is_enabled, :email_id
   validates_uniqueness_of :org_uuid, :scope => :approval_status
   validates :on_vpn, length: { minimum: 1, maximum: 1 }
   validate :check_email_addresses
@@ -18,7 +18,7 @@ class IamOrganisation < ActiveRecord::Base
   validates_presence_of :source_ips, :message => "Required when 'Is VPN On?' is selected.", :if => 'is_vpn_on?'
 
   def template_variables
-    { email: email_id, org_uuid: org_uuid , on_vpn: on_vpn, cert_dn: cert_dn, sourve_ips: sourve_ips}
+    { email: email_id, org_uuid: org_uuid , on_vpn: on_vpn, cert_dn: cert_dn, source_ips: source_ips}
   end
 
   def is_vpn_on?
