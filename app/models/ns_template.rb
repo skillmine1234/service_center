@@ -32,7 +32,7 @@ class NsTemplate < ActiveRecord::Base
     end
   end
 
-  def render_template(template,options)
+  def self.render_template(template,options)
     Mustache.render(template,options)
   end
 end
