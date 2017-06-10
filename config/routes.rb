@@ -182,7 +182,10 @@ ServiceCenter::Application.routes.draw do
       put :index
     end
     member do
-      get :connect_to_ldap
+      put :try_login
+      put :add_user
+      put :delete_user
+      put :resend_password
     end
   end
 

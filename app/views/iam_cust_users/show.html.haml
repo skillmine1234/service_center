@@ -97,11 +97,14 @@
               = error_message_for(@iam_cust_user, :updated_at, :prepend_text => "")
 
     %p{:style => 'text-align:left; padding-left:6px; padding-bottom:30px'}
-      - can = can? :connect_to_ldap, @record
+      - can = can? :try_login, @record
       - flag = @record.enable_resend_button?
-      = link_to 'Test Login', connect_to_ldap_iam_cust_user_path(@iam_cust_user), {remote: true, 'data-toggle' =>  "modal", 'data-target' => "#{!(can && flag) ? '#' : '#modal-window'}", class: "btn btn-primary #{(can && flag) ? '' : 'disabled'}", id: 'test_login_btn'}
+      = link_to 'Test Login', try_login_iam_cust_user_path(@iam_cust_user), {remote: true, method: :put, 'data-toggle' =>  "modal", 'data-target' => "#{!(can && flag) ? '#' : '#modal-window'}", class: "btn btn-primary #{(can && flag) ? '' : 'disabled'}", id: 'test_login_btn'}
+      - can = can? :resend_password, @record
       = link_to 'Resend Password', "#", {'data-toggle' =>  "modal", 'data-target' => "#{!(can && flag) ? '#' : '#resendPassword'}", class: "btn btn-primary #{(can && flag) ? '' : 'disabled'}"}
+      - can = can? :add_user, @record
       = link_to 'Add LDAP Entry', "#", {'data-toggle' =>  "modal", 'data-target' => "#{!(can && flag) ? '#' : '#addUser'}", class: "btn btn-primary #{(can && flag) ? '' : 'disabled'}"}
+      - can = can? :delete_user, @record
       - if @iam_cust_user.is_enabled == 'N'
         = link_to 'Delete LDAP Entry', "#", {'data-toggle' =>  "modal", 'data-target' => "#{!(can && flag) ? '#' : '#deleteUser'}", class: "btn btn-primary #{(can && flag) ? '' : 'disabled'}"}
       %div{ id:"modal-window", class:"modal hide fade", role: "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden' => "true"}
@@ -112,7 +115,7 @@
   .modal-body{:style => "max-height:450px;"}
     Are you sure ?
     &nbsp
-    = link_to 'Send', connect_to_ldap_iam_cust_user_path(@iam_cust_user, resend_password: true), {remote: true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary', id: 'resend'}
+    = link_to 'Send', resend_password_iam_cust_user_path(@iam_cust_user), {remote: true, method: :put, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary', id: 'resend'}
 #addUser.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
@@ -120,7 +123,7 @@
   .modal-body{:style => "max-height:450px;"}
     Are you sure ?
     &nbsp
-    = link_to 'Add', connect_to_ldap_iam_cust_user_path(@iam_cust_user, add_user: true), {remote: true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary', id: 'add'}
+    = link_to 'Add', add_user_iam_cust_user_path(@iam_cust_user), {remote: true, method: :put, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary', id: 'add'}
 #deleteUser.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
@@ -128,4 +131,4 @@
   .modal-body{:style => "max-height:450px;"}
     Are you sure ?
     &nbsp
-    = link_to 'Delete', connect_to_ldap_iam_cust_user_path(@iam_cust_user, delete_user: true), {remote: true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary', id: 'delete'}
+    = link_to 'Delete', delete_user_iam_cust_user_path(@iam_cust_user), {remote: true, method: :put, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary', id: 'delete'}

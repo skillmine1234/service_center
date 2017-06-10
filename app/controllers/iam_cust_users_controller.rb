@@ -67,23 +67,37 @@ class IamCustUsersController < ApplicationController
     redirect_to unapproved_records_path(group_name: 'iam')
   end
 
-  def connect_to_ldap
+  def try_login
     @iam_cust_user = IamCustUser.unscoped.find_by_id(params[:id])
-    if params[:add_user]
-      @message = @iam_cust_user.add_user_to_ldap
-    elsif params[:resend_password]
-      @message = @iam_cust_user.resend_password
-    elsif params[:delete_user]
-      @message = @iam_cust_user.delete_user_from_ldap
-    else
-      @message = @iam_cust_user.test_ldap_login
-    end
+    @message = @iam_cust_user.test_ldap_login
+    return_message
+  end
+
+  def add_user
+    @iam_cust_user = IamCustUser.unscoped.find_by_id(params[:id])
+    @message = @iam_cust_user.add_user_to_ldap
+    return_message
+  end
+
+  def delete_user
+    @iam_cust_user = IamCustUser.unscoped.find_by_id(params[:id])
+    @message = @iam_cust_user.delete_user_from_ldap
+    return_message
+  end
+
+  def resend_password
+    @iam_cust_user = IamCustUser.unscoped.find_by_id(params[:id])
+    @message = @iam_cust_user.resend_password
+    return_message
+  end
+
+  private
+  
+  def return_message
     respond_to do |format|
       format.js {render file: 'iam_cust_users/message.js.haml'}
     end
   end
-
-  private
 
   def search_params
     params.permit(:page, :username, :email, :mobile_no, :approval_status)
