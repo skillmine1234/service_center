@@ -18,7 +18,7 @@ class IamOrganisation < ActiveRecord::Base
   validates_presence_of :source_ips, :message => "Required when 'Is VPN On?' is selected.", :if => 'is_vpn_on?'
 
   def template_variables
-    { email: email_id, org_uuid: org_uuid , on_vpn: on_vpn, cert_dn: cert_dn, source_ips: source_ips}
+    { name: name, email: email_id, org_uuid: org_uuid , on_vpn: on_vpn, cert_dn: cert_dn, source_ips: source_ips}
   end
 
   def is_vpn_on?
