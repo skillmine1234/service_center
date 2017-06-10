@@ -44,6 +44,7 @@ class IamCustUser < ActiveRecord::Base
       unless last_action ==  'C'
         self.should_reset_password = 'N'
         self.last_password_reset_at = Time.zone.now
+        notify_customer('Password Generated')
       end
     end
   end
