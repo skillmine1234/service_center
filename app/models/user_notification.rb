@@ -6,7 +6,7 @@ module UserNotification
   end
 
   def test_ldap_login
-    LDAP.try_login(username, decrypted_password)
+    LDAP.new.try_login(username, decrypted_password)
     "Login Successful"
   rescue LDAPFault, Psych::SyntaxError, SystemCallError, Net::LDAP::LdapError => e
     e.message
@@ -20,7 +20,7 @@ module UserNotification
   end
   
   def add_user_to_ldap
-    LDAP.add_user(username, decrypted_password)
+    LDAP.new.add_user(username, decrypted_password)
     notify = notify_customer('Password Generated')
     notify == true ? "Entry added successfully to LDAP for #{username} and notification sent!" : "Entry added successfully to LDAP for #{username}!"
   rescue LDAPFault, Psych::SyntaxError, SystemCallError, Net::LDAP::LdapError, OCIError, ArgumentError => e
@@ -29,7 +29,7 @@ module UserNotification
 
   def delete_user_from_ldap
     if is_enabled == 'N'
-      LDAP.delete_user(username)
+      LDAP.new.delete_user(username)
       notify = notify_customer('Access Removed')
       notify == true ? "Entry deleted from LDAP for #{username} and notification sent!" : "Entry deleted from LDAP for #{username}!"
     end
@@ -39,7 +39,7 @@ module UserNotification
 
   def add_user_to_ldap_on_approval
     if approval_status == 'A' && last_action == 'C'
-      LDAP.add_user(username, generated_password)
+      LDAP.new.add_user(username, generated_password)
       update_column(:was_user_added, 'Y')
       notify_customer('Password Generated') unless Rails.env.test?
     end
@@ -49,7 +49,7 @@ module UserNotification
 
   def delete_user_from_ldap_on_approval
     if approval_status == 'A' && is_enabled == 'N' && is_enabled_was == 'Y'
-      LDAP.delete_user(username)
+      LDAP.new.delete_user(username)
       notify_customer('Access Removed')
     end
   rescue
