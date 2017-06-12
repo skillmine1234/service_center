@@ -242,7 +242,6 @@ describe IcCustomer do
     end
   end
   
-<<<<<<< HEAD
   context "fields_based_on_sc_backend_code" do
     it "should validate presence of values based on sc_backend code" do
       ic_customer = Factory.build(:ic_customer, sc_backend_code: 'PURATECH', fee_income_gl: '12345671628', fee_pct: '12', cust_contact_email: 'abc@b.com')
@@ -259,9 +258,6 @@ describe IcCustomer do
       ic_customer.errors_on(:identity_user_id).should == ['IAM Customer User does not exist for this username']
       
       iam_cust_user = Factory(:iam_cust_user, username: '1234', approval_status: 'A')
-      ic_customer.errors_on(:identity_user_id).should == []
-      
-      ic_customer = Factory.build(:ic_customer, identity_user_id: nil)
       ic_customer.errors_on(:identity_user_id).should == []
     end
   end

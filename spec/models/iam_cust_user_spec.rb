@@ -105,7 +105,7 @@ describe IamCustUser do
   context "approve" do 
     it "should approve unapproved_record" do 
       iam_cust_user = Factory(:iam_cust_user, :approval_status => 'U')
-      iam_cust_user.approve.should == ""
+      iam_cust_user.approve.save.should == true
       iam_cust_user.approval_status.should == 'A'
     end
 

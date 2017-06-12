@@ -20,7 +20,7 @@ class FundsTransferCustomer < ActiveRecord::Base
   validate :validate_customer_id
   
   validates :app_id, length: { minimum: 5, maximum: 20 }
-  validates :customer_id, length: { minimum: 5, maximum: 10 }, :allow_blank =>true
+  validates :customer_id, length: { maximum: 10 }, :allow_blank =>true
   validates :name, length: {maximum: 100 }
   validates :identity_user_id, length: { maximum: 20 }
   validates :notify_app_code, length: { maximum: 20}, :allow_blank =>true

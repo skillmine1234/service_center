@@ -26,7 +26,7 @@ describe FundsTransferCustomer do
       should validate_uniqueness_of(:app_id).scoped_to(:customer_id,:approval_status)  
 
       should validate_length_of(:app_id).is_at_least(5).is_at_most(20)
-      should validate_length_of(:customer_id).is_at_least(5).is_at_most(10)
+      should validate_length_of(:customer_id).is_at_most(10)
       should validate_length_of(:name).is_at_most(100)
       should validate_length_of(:identity_user_id).is_at_most(20)
       should validate_length_of(:notify_app_code).is_at_most(20)

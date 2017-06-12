@@ -13,7 +13,7 @@ class FtCustomerAccount < ActiveRecord::Base
   validates :customer_id, :account_no, :numericality => {:only_integer => true, :message => 'Invalid format, expected format is : {[0-9]}'}
   validates_uniqueness_of :customer_id, :scope => [:account_no,:approval_status]
   
-  validates :customer_id, length: { minimum: 5, maximum: 10 }
+  validates :customer_id, length: { maximum: 10 }
   validates :account_no, length: { minimum: 5, maximum: 15 }
 
   validate :validate_customer_id

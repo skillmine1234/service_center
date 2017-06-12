@@ -38,15 +38,13 @@ class IcCustomer < ActiveRecord::Base
   
   validate :fields_based_on_sc_backend_code
 
-<<<<<<< HEAD
   validate :presence_of_iam_cust_user
-=======
+
   def template_variables
     user = IamCustUser.find_by(username: identity_user_id)
     { username: user.try(:username), first_name: user.try(:first_name), last_name: user.try(:last_name), mobile_no: user.try(:mobile_no), 
       email: user.try(:email), service_name: 'InstantCredit', customer_id: customer_id, app_id: app_id, account_no: repay_account_no }
   end
->>>>>>> 206f61a... resend service setup changes
 
   def check_email_addresses
     ["cust_contact_email","ops_email","rm_email"].each do |email_id|

@@ -26,7 +26,7 @@ describe FtCustomerAccount do
       should validate_uniqueness_of(:customer_id).scoped_to(:account_no,:approval_status)  
 
       should validate_length_of(:account_no).is_at_least(5).is_at_most(15)
-      should validate_length_of(:customer_id).is_at_least(5).is_at_most(10)
+      should validate_length_of(:customer_id).is_at_most(10)
     end
 
     it "should not allow invalid format" do
