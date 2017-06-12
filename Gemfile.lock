@@ -576,8 +576,4 @@ DEPENDENCIES
   zeroclipboard-rails
 
 BUNDLED WITH
-<<<<<<< HEAD
    1.13.7
-=======
-   1.13.6
->>>>>>> bab6adc... SY-65 screens for IamCustUser
