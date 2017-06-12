@@ -493,11 +493,7 @@ DEPENDENCIES
   activerecord-oracle_enhanced-adapter!
   acts_as_commentable (= 3.0.1)
   acts_as_list
-<<<<<<< HEAD
   approval2 (= 0.1.7)
-=======
-  approval2 (= 0.1.6)
->>>>>>> bab6adc... SY-65 screens for IamCustUser
   audited-activerecord
   bcdatabase
   cancancan (~> 1.10)
