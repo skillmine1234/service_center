@@ -146,10 +146,27 @@ describe FtPurposeCode do
     end
   end
   
-  context "set_allow_only_registered_bene" do
-    it "should set the value of allow_only_registered_bene as N if allowed_transfer_type is APBS" do
-      ft_purpose_code = Factory(:ft_purpose_code, :approval_status => 'A', allowed_transfer_type: 'APBS')
-      ft_purpose_code.allow_only_registered_bene.should == 'N'
+  context "value_for_reg_bene_for_apbs" do
+    it "should validate whether the value of allow_only_registered_bene is N if allowed_transfer_type is APBS" do
+      ft_purpose_code = Factory.build(:ft_purpose_code, :approval_status => 'A', allowed_transfer_types: ['APBS'], allow_only_registered_bene: 'Y')
+      ft_purpose_code.errors_on(:allow_only_registered_bene).should == ["Allow Only Registered Bene cannot be enabled when APBS is allowed"]
+    end
+  end
+  
+  context "check_allowed_transfer_types" do
+    it "should validate allowed_transfer_types" do
+      ft_purpose_code = Factory.build(:ft_purpose_code, :approval_status => 'A', allowed_transfer_types: ['APBS'])
+      ft_purpose_code.errors_on(:allowed_transfer_types).should == []
+      
+      ft_purpose_code = Factory.build(:ft_purpose_code, :approval_status => 'A', allowed_transfer_types: ['APBS','IMPS','NEFT'])
+      ft_purpose_code.errors_on(:allowed_transfer_types).should == ['Either APBS or one or more of [IMPS, NEFT, RTGS] can be selected']
+    end
+  end
+  
+  context "set_settings_cnt" do
+    it "should set counts of settings" do
+      ft_purpose_code = Factory(:ft_purpose_code, setting1_name: 'set1', setting1_type: 'number', setting1_value: 1)
+      ft_purpose_code.settings_cnt.should == 1
     end
   end
   

@@ -32,6 +32,12 @@
             %td#msg-error
               = error_message_for(@ft_purpose_code, :is_enabled, :prepend_text => "")
           %tr
+            %td.label Frozen?
+            %td.value
+              = @ft_purpose_code.is_frozen
+            %td#msg-error
+              = error_message_for(@ft_purpose_code, :is_frozen, :prepend_text => "")
+          %tr
             %td.label Description
             %td.value
               = @ft_purpose_code.description
@@ -44,8 +50,22 @@
             %td#msg-error
               = error_message_for(@ft_purpose_code, :allow_only_registered_bene, :prepend_text => "")
           %tr
-            %td.label Allowed Transfer Type
+            %td.label Allowed Transfer Types
             %td.value
-              = @ft_purpose_code.allowed_transfer_type
+              = @ft_purpose_code.allowed_transfer_types
             %td#msg-error
-              = error_message_for(@ft_purpose_code, :allowed_transfer_type, :prepend_text => "")
+              = error_message_for(@ft_purpose_code, :allowed_transfer_types, :prepend_text => "")
+          %tr
+            - if @ft_purpose_code.settings_cnt > 0
+              %table.table.datatable{style: 'width: 50%'}
+                %thead
+                  %tr
+                    %th Setting Name
+                    %th Setting Value
+                %tbody
+                  - (1..@ft_purpose_code.settings_cnt).each do |i|
+                    %tr
+                      %td
+                        = @ft_purpose_code.send("setting#{i}_name")
+                      %td
+                        = @ft_purpose_code.send("setting#{i}_value")

@@ -7,11 +7,8 @@
     = f.hidden_field :lock_version
     = f.hidden_field :approved_id
     = f.hidden_field :approved_version
-    .control-group
-      = f.label :code, "*Purpose Code", :class => 'control-label'
-      = f.text_field :code, :minlength => 2, :maxlength => 6, :required => true
-      #msg-error
-        = error_message_for(@ft_purpose_code, :code, :prepend_text => "")
+    = f.hidden_field :is_frozen
+    = f.hidden_field :settings_cnt
     .control-group
       = f.label :is_enabled, "Enabled?", :class => 'control-label'
       - if f.object.is_enabled.nil?
@@ -20,6 +17,11 @@
         = f.check_box :is_enabled, {},"Y","N"
       #msg-error
         = error_message_for(@ft_purpose_code, :is_enabled, :prepend_text => "")
+    .control-group
+      = f.label :code, "*Purpose Code", :class => 'control-label'
+      = f.text_field :code, :minlength => 2, :maxlength => 6, :required => true
+      #msg-error
+        = error_message_for(@ft_purpose_code, :code, :prepend_text => "")
     .control-group
       = f.label :description, "*Description", :class => 'control-label'
       = f.text_area :description, :maxlength => 100, :rows => 8, :required => true
@@ -31,10 +33,18 @@
       #msg-error
         = error_message_for(@ft_purpose_code, :allow_only_registered_bene, :prepend_text => "")
     .control-group
-      = f.label :allowed_transfer_type, "Allowed Transfer Type", :class => 'control-label'
-      = f.select :allowed_transfer_type, options_for_select(FtPurposeCode::TRANSFER_TYPES, @ft_purpose_code.allowed_transfer_type)
+      = f.label :allowed_transfer_types, "Allowed Transfer Types", :class => 'control-label'
+      = f.select :allowed_transfer_types, options_for_select(FtPurposeCode::TRANSFER_TYPES, @ft_purpose_code.allowed_transfer_types), {}, {multiple: true}
       #msg-error
-        = error_message_for(@partner, :allowed_transfer_type, :prepend_text => "")
+        = error_message_for(@ft_purpose_code, :allowed_transfer_types, :prepend_text => "")
+    .control-group
+      - if @ft_purpose_code.settings_cnt > 0
+        - (1..@ft_purpose_code.settings_cnt).each do |i|
+          = f.label @ft_purpose_code.send("setting#{i}_name")
+          = f.send("#{@ft_purpose_code["setting#{i}"]["setting#{i}_type"] || 'text'}_field", "setting#{i}_value")
+          = f.hidden_field "setting#{i}_name", value: @ft_purpose_code.send("setting#{i}_name")
+          = f.hidden_field "setting#{i}_type", value: @ft_purpose_code.send("setting#{i}_type")
+          %br
   .form-actions
     - (f.object.new_record? and f.object.code.nil?) ? label_name = "Create" : label_name = "Update"
     = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_ft_purpose_code', :value => label_name + ' FT Purpose Code'

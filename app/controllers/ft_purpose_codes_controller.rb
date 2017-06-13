@@ -13,6 +13,7 @@ class FtPurposeCodesController < ApplicationController
   end
 
   def create
+    p params[:ft_purpose_code]
     @ft_purpose_code = FtPurposeCode.new(params[:ft_purpose_code])
     if !@ft_purpose_code.valid?
       render "new"
@@ -88,7 +89,13 @@ class FtPurposeCodesController < ApplicationController
 
   def ft_purpose_code_params
     params.require(:ft_purpose_code).permit(:code, :description, :is_enabled, :allow_only_registered_bene, :created_by, :updated_by,
-                                            :lock_version, :approval_status, :approved_version, :approved_id, :allowed_transfer_type)
+                                            :lock_version, :approval_status, :approved_version, :approved_id, {:allowed_transfer_types => []},
+                                            :is_frozen, :settings_cnt, 
+                                            :setting1_name, :setting1_type, :setting1_value, 
+                                            :setting2_name, :setting2_type, :setting2_value, 
+                                            :setting3_name, :setting3_type, :setting3_value, 
+                                            :setting4_name, :setting4_type, :setting4_value,
+                                            :setting5_name, :setting5_type, :setting5_value)
   end
   
 end
