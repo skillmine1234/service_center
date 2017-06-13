@@ -28,4 +28,6 @@ $(document).ready(function(){
   $('#ft_purpose_code_form').bind('submit', function() {
     $(this).find(':input').removeAttr('disabled');
   });
+
+  $('#ft_purpose_code_allowed_transfer_types').multiselect({selectedList: 4});
 });
