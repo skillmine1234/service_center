@@ -13,7 +13,6 @@ class FtPurposeCodesController < ApplicationController
   end
 
   def create
-    p params[:ft_purpose_code]
     @ft_purpose_code = FtPurposeCode.new(params[:ft_purpose_code])
     if !@ft_purpose_code.valid?
       render "new"
