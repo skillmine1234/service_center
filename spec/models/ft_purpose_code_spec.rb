@@ -10,7 +10,7 @@ describe FtPurposeCode do
   end
 
   context 'validation' do
-    [:code, :description, :is_enabled].each do |att|
+    [:code, :description, :is_enabled, :allowed_transfer_types].each do |att|
       it { should validate_presence_of(att) }
     end
 
