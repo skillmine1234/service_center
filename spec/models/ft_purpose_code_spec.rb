@@ -169,5 +169,14 @@ describe FtPurposeCode do
       ft_purpose_code.settings_cnt.should == 1
     end
   end
+
+  context "set_transfer_type" do
+    it "should set transfer type" do
+      ft_purpose_code = Factory(:ft_purpose_code, :approval_status => 'A', :allowed_transfer_types => ['APBS'])
+      ft_purpose_code1 = Factory.build(:ft_purpose_code, :approval_status => 'U', :approved_id => ft_purpose_code.id, :allowed_transfer_types => nil)
+      ft_purpose_code1.should be_valid
+      ft_purpose_code1.allowed_transfer_types.should == ['APBS']
+    end
+  end
   
 end
