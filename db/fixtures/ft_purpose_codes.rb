@@ -13,3 +13,15 @@ FtPurposeCode.seed(:code) do |s|
   s.approval_status = 'A'
   s.created_by = 'Q'
 end
+
+FtPurposeCode.seed(:code) do |s|
+  s.code = '77'
+  s.is_enabled = 'Y'
+  s.is_frozen = 'Y'
+  s.is_enabled = 'Y'
+  s.description = 'APBS'
+  s.allow_only_registered_bene = 'N'
+  s.allowed_transfer_types = ['APBS']
+  s.approval_status = 'A'
+  s.created_by = 'Q'
+end

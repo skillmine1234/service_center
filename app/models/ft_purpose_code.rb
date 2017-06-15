@@ -2,7 +2,7 @@ class FtPurposeCode < ActiveRecord::Base
   include Approval
   include FtApproval
 
-  TRANSFER_TYPES = [['IMPS','IMPS'],['NEFT','NEFT'],['RTGS','RTGS'],['APBS','APBS']]
+  TRANSFER_TYPES = [['IMPS','IMPS'],['NEFT','NEFT'],['RTGS','RTGS']]
 
   serialize :allowed_transfer_types, ArrayAsCsv
   

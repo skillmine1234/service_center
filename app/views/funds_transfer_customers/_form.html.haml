@@ -36,7 +36,7 @@
       #msg-error
         = error_message_for(@funds_transfer_customer, :name, :prepend_text => "")
     .control-group
-      = f.label :reply_with_bene_name, "Beneficiary Name to be verified ?", :class => 'control-label'
+      = f.label :reply_with_bene_name, "Reply With Beneficicary Name ?", :class => 'control-label'
       = f.check_box :reply_with_bene_name, {},"Y","N"
       #msg-error
         = error_message_for(@funds_transfer_customer, :reply_with_bene_name, :prepend_text => "")

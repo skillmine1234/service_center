@@ -53,4 +53,8 @@ module ApplicationHelper
       concat link_to_if @records.next_page, 'Next', "javascript:$('#page').val(#{@records.next_page});$('#advanced_search').submit()"
     end
   end
+  
+  def relative_time(timestamp)
+    timestamp.present? ? time_ago_in_words(timestamp)+' ago' : '-'
+  end
 end
