@@ -123,9 +123,6 @@ ServiceCenter::Application.routes.draw do
     end
   end
   resources :ft_apbs_incoming_records, except: :index do
-    member do
-      get 'download_file'
-    end
     collection do
       get :index
       post :index
