@@ -362,7 +362,7 @@ end
 IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.sc_service_id = ScService.find_by(code: 'FUNDSTRANSFER').id
   s.code = 'APBS'
-  s.name = 'APBS response file upload'
+  s.name = 'APBS'
   s.msg_domain = 'DFDL'
   s.msg_model = '{http://www.quantiguous.com/services/file}:apbs'
   s.skip_first = 'Y'

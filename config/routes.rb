@@ -122,6 +122,15 @@ ServiceCenter::Application.routes.draw do
       post :index
     end
   end
+  resources :ft_apbs_incoming_records, except: :index do
+    member do
+      get 'download_file'
+    end
+    collection do
+      get :index
+      post :index
+    end
+  end
   resources :rr_incoming_records
   resources :outgoing_files do
     member do
@@ -415,6 +424,9 @@ ServiceCenter::Application.routes.draw do
   
   get 'ic001_incoming_file_summary' => 'ic001_incoming_records#incoming_file_summary'
   get '/ic001_incoming_records/:id/audit_logs' => 'ic001_incoming_records#audit_logs'
+  
+  get 'ft_apbs_incoming_file_summary' => 'ft_apbs_incoming_records#incoming_file_summary'
+  get '/ft_apbs_incoming_records/:id/audit_logs' => 'ft_apbs_incoming_records#audit_logs'
 
   get '/iam_cust_users/:id/audit_logs' => 'iam_cust_users#audit_logs'
   put '/iam_cust_users/:id/approve' => "iam_cust_users#approve"
