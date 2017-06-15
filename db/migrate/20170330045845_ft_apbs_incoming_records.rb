@@ -3,7 +3,7 @@ class FtApbsIncomingRecords < ActiveRecord::Migration
     create_table :ft_apbs_incoming_records, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.integer :incoming_file_record_id, :comment => "the foreign key to the incoming_files table" 
       t.string :file_name, :limit => 100, :comment => "the name of the incoming_file"            
-      t.number :apbs_trans_code, :limit => 4, :comment => "the transaction code for apbs"
+      t.number :apbs_trans_code, :comment => "the transaction code for apbs"
       t.string :dest_bank_iin, :limit => 15, :comment => "destination bank name"
       t.string :dest_acctype, :limit => 4, :comment => "destination account type"
       t.string :ledger_folio_num, :limit => 6, :comment => "alphanumeric ledger folio particulars"
