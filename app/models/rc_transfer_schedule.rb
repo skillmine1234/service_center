@@ -93,7 +93,7 @@ class RcTransferSchedule < ActiveRecord::Base
   end
   
   def retry_interval
-    errors[:base] << "Retry Interval should be less than Schedule Interval" if ((retry_in_mins * max_retries) > interval_in_mins)
+    errors[:base] << "Total Retry Interval (Retry Interval * Max No. of Retries) should be less than Schedule Interval" if ((retry_in_mins * max_retries) > interval_in_mins)
   end
 
   def value_of_acct_threshold_amt

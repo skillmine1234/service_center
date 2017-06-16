@@ -213,7 +213,7 @@ describe RcTransferSchedule do
   context "retry_interval" do
     it "should validate the retry interval" do
       rc_transfer_schedule = Factory.build(:rc_transfer_schedule, retry_in_mins: 10, max_retries: 3, interval_in_mins: 20)
-      rc_transfer_schedule.errors_on(:base).should == ["Retry Interval should be less than Schedule Interval"]
+      rc_transfer_schedule.errors_on(:base).should == ["Total Retry Interval (Retry Interval * Max No. of Retries) should be less than Schedule Interval"]
       
       rc_transfer_schedule = Factory.build(:rc_transfer_schedule, retry_in_mins: 10, max_retries: 3, interval_in_mins: 50)
       rc_transfer_schedule.errors_on(:base).should == []
