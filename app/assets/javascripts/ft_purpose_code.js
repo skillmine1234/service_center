@@ -20,7 +20,6 @@ $(document).ready(function(){
 
   if($('#ft_purpose_code_is_frozen').val() == 'Y'){
     $('#ft_purpose_code_code').prop('readonly',true);
-    $('#ft_purpose_code_description').prop('readonly',true);
     $('#ft_purpose_code_allow_only_registered_bene').prop('disabled',true);
     $('#ft_purpose_code_allowed_transfer_types').prop('disabled',true);
   }
