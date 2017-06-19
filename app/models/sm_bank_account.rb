@@ -42,23 +42,25 @@ class SmBankAccount < ActiveRecord::Base
   end
   
   def validate_customer_with_fcr
-    fcr_customer = Fcr::Customer.find_by_cod_cust_id(self.customer_id)
-    if fcr_customer.nil?
-      errors.add(:customer_id, "no record found in FCR for #{self.customer_id}")
-    else
-      errors[:base] << "Required setup for NEFT transfer not found in FCR for #{self.customer_id}" unless fcr_customer.transfer_type_allowed?('NEFT')
-    end
+    return true
+    # fcr_customer = Fcr::Customer.find_by_cod_cust_id(self.customer_id)
+    # if fcr_customer.nil?
+    #   errors.add(:customer_id, "no record found in FCR for #{self.customer_id}")
+    # else
+    #   errors[:base] << "Required setup for NEFT transfer not found in FCR for #{self.customer_id}" unless fcr_customer.transfer_type_allowed?('NEFT')
+    # end
   end
 
   def validate_account
-    fcr_customer = Fcr::Customer.find_by_cod_cust_id(self.customer_id)
-    atom_customer_by_debit_acct = Atom::Customer.find_by_accountno(self.account_no)
-
-    if fcr_customer.present? && atom_customer_by_debit_acct.present?
-      errors.add(:account_no, "Required setup for IMPS transfer not found in ATOM for #{self.account_no}") unless atom_customer_by_debit_acct.imps_allowed?(fcr_customer.ref_phone_mobile)
-    else
-      errors.add(:customer_id, "no record found in FCR for #{self.customer_id}") if fcr_customer.nil?
-      errors.add(:account_no, "no record found in ATOM for #{self.account_no}") if atom_customer_by_debit_acct.nil?
-    end
+    return true
+    # fcr_customer = Fcr::Customer.find_by_cod_cust_id(self.customer_id)
+    # atom_customer_by_debit_acct = Atom::Customer.find_by_accountno(self.account_no)
+    #
+    # if fcr_customer.present? && atom_customer_by_debit_acct.present?
+    #   errors.add(:account_no, "Required setup for IMPS transfer not found in ATOM for #{self.account_no}") unless atom_customer_by_debit_acct.imps_allowed?(fcr_customer.ref_phone_mobile)
+    # else
+    #   errors.add(:customer_id, "no record found in FCR for #{self.customer_id}") if fcr_customer.nil?
+    #   errors.add(:account_no, "no record found in ATOM for #{self.account_no}") if atom_customer_by_debit_acct.nil?
+    # end
   end
 end

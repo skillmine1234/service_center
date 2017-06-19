@@ -450,16 +450,16 @@ describe EcolCustomer do
     end
   end
 
-  context "presence_of_iam_cust_user" do
-    it "should validate existence of iam_cust_user" do
-      ecol_customer = Factory.build(:ecol_customer, identity_user_id: '1234')
-      ecol_customer.errors_on(:identity_user_id).should == ['IAM Customer User does not exist for this username']
-
-      iam_cust_user = Factory(:iam_cust_user, username: '1234', approval_status: 'A')
-      ecol_customer.errors_on(:identity_user_id).should == []
-      
-      ecol_customer = Factory.build(:ecol_customer, identity_user_id: nil)
-      ecol_customer.errors_on(:identity_user_id).should == []
-    end
-  end
+  # context "presence_of_iam_cust_user" do
+  #   it "should validate existence of iam_cust_user" do
+  #     ecol_customer = Factory.build(:ecol_customer, identity_user_id: '1234')
+  #     ecol_customer.errors_on(:identity_user_id).should == ['IAM Customer User does not exist for this username']
+  #
+  #     iam_cust_user = Factory(:iam_cust_user, username: '1234', approval_status: 'A')
+  #     ecol_customer.errors_on(:identity_user_id).should == []
+  #
+  #     ecol_customer = Factory.build(:ecol_customer, identity_user_id: nil)
+  #     ecol_customer.errors_on(:identity_user_id).should == []
+  #   end
+  # end
 end

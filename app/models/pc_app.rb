@@ -15,6 +15,6 @@ class PcApp < ActiveRecord::Base
   validate :presence_of_iam_cust_user
 
   def presence_of_iam_cust_user
-    errors.add(:identity_user_id, 'IAM Customer User does not exist for this username') if IamCustUser.find_by(username: identity_user_id).nil?
+    errors.add(:identity_user_id, 'IAM Customer User does not exist for this username') unless IamCustUser.iam_cust_user_exists?
   end
 end

@@ -61,6 +61,10 @@ class IcCustomer < ActiveRecord::Base
     end
   end
 
+  def presence_of_iam_cust_user
+    errors.add(:identity_user_id, 'IAM Customer User does not exist for this username') unless IamCustUser.iam_cust_user_exists?
+  end
+
   def self.options_for_backend_code
     [['PuraTech','PURATECH']]
   end
@@ -74,7 +78,4 @@ class IcCustomer < ActiveRecord::Base
     end
   end
 
-  def presence_of_iam_cust_user
-    errors.add(:identity_user_id, 'IAM Customer User does not exist for this username') if identity_user_id.present? && IamCustUser.find_by(username: identity_user_id).nil?
-  end
 end

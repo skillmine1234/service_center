@@ -197,13 +197,13 @@ describe SmBank do
     end
   end
   
-  context "presence_of_iam_cust_user" do
-    it "should validate existence of iam_cust_user" do
-      sm_bank = Factory.build(:sm_bank, identity_user_id: '1234')
-      sm_bank.errors_on(:identity_user_id).should == ['IAM Customer User does not exist for this username']
-      
-      iam_cust_user = Factory(:iam_cust_user, username: '1234', approval_status: 'A')
-      sm_bank.errors_on(:identity_user_id).should == []
-    end
-  end
+  # context "presence_of_iam_cust_user" do
+  #   it "should validate existence of iam_cust_user" do
+  #     sm_bank = Factory.build(:sm_bank, identity_user_id: '1234')
+  #     sm_bank.errors_on(:identity_user_id).should == ['IAM Customer User does not exist for this username']
+  #
+  #     iam_cust_user = Factory(:iam_cust_user, username: '1234', approval_status: 'A')
+  #     sm_bank.errors_on(:identity_user_id).should == []
+  #   end
+  # end
 end

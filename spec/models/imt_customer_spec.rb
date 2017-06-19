@@ -224,13 +224,13 @@ describe ImtCustomer do
     end
   end
   
-  context "presence_of_iam_cust_user" do
-    it "should validate existence of iam_cust_user" do
-      imt_customer = Factory.build(:imt_customer, identity_user_id: '1234')
-      imt_customer.errors_on(:identity_user_id).should == ['IAM Customer User does not exist for this username']
-
-      iam_cust_user = Factory(:iam_cust_user, username: '1234', approval_status: 'A')
-      imt_customer.errors_on(:identity_user_id).should == []
-    end
-  end
+  # context "presence_of_iam_cust_user" do
+  #   it "should validate existence of iam_cust_user" do
+  #     imt_customer = Factory.build(:imt_customer, identity_user_id: '1234')
+  #     imt_customer.errors_on(:identity_user_id).should == ['IAM Customer User does not exist for this username']
+  #
+  #     iam_cust_user = Factory(:iam_cust_user, username: '1234', approval_status: 'A')
+  #     imt_customer.errors_on(:identity_user_id).should == []
+  #   end
+  # end
 end
