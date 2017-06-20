@@ -1,7 +1,7 @@
 class QgEcolTodaysUpiTxn < Upi
 
-  validates_presence_of :rrn, :transfer_type, :transfer_unique_no, :bene_account_ifsc, :bene_account_no, :rmtr_account_ifsc, :rmtr_account_no, :transfer_amt, 
-                        :transfer_ccy, :transfer_date, :pool_account_no, :status
+  validates_presence_of :rrn, :transfer_unique_no, :bene_account_ifsc, :bene_account_no, :rmtr_account_ifsc, :rmtr_account_no, :transfer_amt, 
+                        :transfer_date, :pool_account_no
 
   validates :rrn, length: { maximum: 30 }
   validates :transfer_type, :error_code, length: { maximum: 3 }
