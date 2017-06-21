@@ -50,8 +50,11 @@ class QgEcolTodaysUpiTxnsController < ApplicationController
 
   def destroy
     qg_ecol_todays_upi_txn = QgEcolTodaysUpiTxn.find(params[:id])
-    qg_ecol_todays_upi_txn.destroy
-    flash[:alert] = "UPI Transaction record has been deleted!"
+    if qg_ecol_todays_upi_txn.destroy
+      flash[:alert] = "UPI Transaction record has been deleted!"
+    else
+      flash[:alert] = "UPI Transaction record cannot be deleted!"
+    end
     redirect_to qg_ecol_todays_upi_txns_path
   end
 

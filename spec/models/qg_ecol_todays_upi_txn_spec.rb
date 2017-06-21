@@ -52,17 +52,6 @@ describe QgEcolTodaysUpiTxn do
       qg_ecol_todays_upi_txn.should_not be_valid
     end
 
-    it "should validate Account No format" do
-      qg_ecol_todays_upi_txn = Factory.build(:qg_ecol_todays_upi_txn, :bene_account_no => "123456789012345", :rmtr_account_no => "123456789012340", :pool_account_no => "123456789012349")
-      qg_ecol_todays_upi_txn.should be_valid
-
-      qg_ecol_todays_upi_txn = Factory.build(:qg_ecol_todays_upi_txn, :bene_account_no => "ACC12345", :rmtr_account_no => "123-456", :pool_account_no => "+998877665")
-      qg_ecol_todays_upi_txn.save.should be_false
-      qg_ecol_todays_upi_txn.errors_on(:bene_account_no).should == ["Invalid format, expected format is : {[0-9]}"]
-      qg_ecol_todays_upi_txn.errors_on(:rmtr_account_no).should == ["Invalid format, expected format is : {[0-9]}"]
-      qg_ecol_todays_upi_txn.errors_on(:pool_account_no).should == ["Invalid format, expected format is : {[0-9]}"]
-    end
-
     it "should validate transfer_amt" do
       qg_ecol_todays_upi_txn = Factory.build(:qg_ecol_todays_upi_txn, :transfer_amt => 100001)
       qg_ecol_todays_upi_txn.should_not be_valid

@@ -121,8 +121,8 @@ describe QgEcolTodaysUpiTxnsController do
     it "should destroy the qg_ecol_todays_upi_txn" do 
       qg_ecol_todays_upi_txn = Factory(:qg_ecol_todays_upi_txn)
       expect {delete :destroy, {:id => qg_ecol_todays_upi_txn.id}}.to change(QgEcolTodaysUpiTxn, :count).by(-1)
+      QgEcolTodaysUpiTxn.find_by_id(qg_ecol_todays_upi_txn.id).should be_nil
     end
-
 
     it "redirects to the qg_ecol_todays_upi_txn list" do
       qg_ecol_todays_upi_txn = Factory(:qg_ecol_todays_upi_txn)

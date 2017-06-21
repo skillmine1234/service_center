@@ -13,7 +13,6 @@ class QgEcolTodaysUpiTxn < Upi
   validates :status, length: { maximum: 4 }
 
   validates :bene_account_ifsc, :rmtr_account_ifsc, format: {with: /\A[A-Z|a-z]{4}[0][A-Za-z0-9]{6}+\z/, message: "invalid format - expected format is : {[A-Z|a-z]{4}[0][A-Za-z0-9]{6}}" }  
-  validates :bene_account_no, :rmtr_account_no, :pool_account_no, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9]}' }
   validates_uniqueness_of :transfer_unique_no
 
   validates :transfer_amt, :numericality => { :less_than_or_equal_to => 100000 }
