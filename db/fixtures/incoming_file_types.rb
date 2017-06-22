@@ -362,9 +362,9 @@ end
 IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.sc_service_id = ScService.find_by(code: 'IMTSERVICE').id
   s.code = 'SETTLEMENT'
-  s.name = 'SETTLEMENT'
+  s.name = 'Settlement File Upload'
   s.msg_domain = 'DFDL'
-  s.msg_model = '{http://www.quantiguous.com/services/file}:imt_settlements'
+  s.msg_model = '{http://www.quantiguous.com/services/file}:imtSettlements'
   s.skip_first = 'N'
   s.auto_upload = 'Y'
   s.validate_all = 'Y'
