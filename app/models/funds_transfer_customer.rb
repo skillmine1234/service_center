@@ -26,12 +26,12 @@ class FundsTransferCustomer < ActiveRecord::Base
   validates :notify_app_code, length: { maximum: 20}, :allow_blank =>true
   validate :should_allow_neft?, if: "customer_id.present? && allow_neft=='Y'"
   validate :should_allow_imps?, if: "customer_id.present? && allow_imps=='Y' && allow_all_accounts=='Y'"
+  validate :check_needs_purpose_code, if: "allow_apbs == 'Y'"
 
   validate :presence_of_iam_cust_user
   validate :apbs_values
 
   before_save :to_upcase  
-  before_save :set_needs_purpose_code, if: "allow_apbs == 'Y'"
 
   alias_attribute :is_enabled, :enabled
 
@@ -53,6 +53,15 @@ class FundsTransferCustomer < ActiveRecord::Base
 
   def presence_of_iam_cust_user
     errors.add(:identity_user_id, 'IAM Customer User does not exist for this username') unless IamCustUser.iam_cust_user_exists?
+  end
+  
+  def apbs_values
+    errors.add(:apbs_user_no, 'is mandatory if Allow APBS is Y') if allow_apbs == 'Y' and apbs_user_no.blank?
+    errors.add(:apbs_user_name, 'is mandatory if Allow APBS is Y') if allow_apbs == 'Y' and apbs_user_name.blank?
+  end
+  
+  def check_needs_purpose_code
+    errors.add(:needs_purpose_code, "should be enabled when APBS is allowed") if needs_purpose_code == 'N'
   end
 
   def should_allow_neft?
@@ -81,14 +90,5 @@ class FundsTransferCustomer < ActiveRecord::Base
     # else
     #   errors.add(:customer_id, "no record found in FCR for #{self.customer_id}")
     # end
-  end
-
-  def apbs_values
-    errors.add(:apbs_user_no, 'is mandatory if Allow APBS is Y') if allow_apbs == 'Y' and apbs_user_no.blank?
-    errors.add(:apbs_user_name, 'is mandatory if Allow APBS is Y') if allow_apbs == 'Y' and apbs_user_name.blank?
-  end
-  
-  def set_needs_purpose_code
-    self.needs_purpose_code = 'Y' unless self.frozen?
   end
 end

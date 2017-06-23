@@ -175,10 +175,13 @@ describe FundsTransferCustomer do
     end
   end
   
-  context "set_needs_purpose_code" do
-    it "should set the value of needs_purpose_code as Y if allow_apbs is Y" do
-      funds_transfer_customer = Factory(:funds_transfer_customer, allow_apbs: 'Y', apbs_user_no: '12345', apbs_user_name: 'Foo')
-      funds_transfer_customer.needs_purpose_code.should == 'Y'
+  context "check_needs_purpose_code" do
+    it "should validate the value of needs_purpose_code as Y if allow_apbs is Y" do
+      funds_transfer_customer = Factory.build(:funds_transfer_customer, allow_apbs: 'Y', apbs_user_no: '12345', apbs_user_name: 'Foo', needs_purpose_code: 'N')
+      funds_transfer_customer.errors_on(:needs_purpose_code).should == ["should be enabled when APBS is allowed"]
+      
+      funds_transfer_customer = Factory.build(:funds_transfer_customer, allow_apbs: 'N', apbs_user_no: '12345', apbs_user_name: 'Foo', needs_purpose_code: 'N')
+      funds_transfer_customer.errors_on(:needs_purpose_code).should == []
     end
   end
   
