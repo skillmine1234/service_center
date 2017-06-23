@@ -12,7 +12,7 @@ FactoryGirl.define do
     txn_acquire_date '2017-05-06 10:04:40'
     sequence(:issuing_bank_txn_id) {|n| "TXN#{n}"} 
     crdr 'Y'
-    amount '12.2'
+    transfer_amount '12.2'
     acquiring_fee '1111.2'
     sc_on_acquiring_fee '1111.3'
     npci_charges '1111.4'

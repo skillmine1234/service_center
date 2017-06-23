@@ -262,6 +262,17 @@
       %br
         = "Approval Worklist"
   .slide-container
+    .box
+      - if !ImtRule.first.nil?
+        = link_to edit_imt_rule_path(ImtRule.first) do
+          = image_tag 'bm_rule.png', :size => "80x80"
+        %br
+          = "IMT Rules"
+      - else
+        = link_to imt_rule_error_msg_path do
+          = image_tag 'rules.jpeg', :size => "80x80"
+        %br
+          = "IMT Rules"
     .box  
       = link_to '/imt_customers' do
         = image_tag 'ecol_customer.gif', :size => "80x80"

@@ -23,7 +23,7 @@
         %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
           Transaction Acquire Date
         %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
-          Amount
+          Transfer Amount
         %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
           Transaction Status
         %th{:style=>'text-align:left; font-size:12px; background-color: lightblue;'}
@@ -57,7 +57,7 @@
           %td{:style=>'text-align:left;'}
             = record.txn_acquire_date.try(:strftime, "%d/%m/%Y")
           %td{:style=>'text-align:left;'}
-            = record.amount
+            = record.transfer_amount
           %td{:style=>'text-align:left;'}
             = record.txn_status
           %td{:style=>'text-align:left;'}

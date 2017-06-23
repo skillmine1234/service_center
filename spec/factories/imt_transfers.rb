@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :imt_transfer do
+    app_id "MyString"
     imt_ref_no "MyString"
     status_code "MyString"
     customer_id "MyString"

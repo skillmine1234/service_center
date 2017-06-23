@@ -30,6 +30,8 @@
       Initiation Bank Ref No
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Cancellation Bank Ref No
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Settlement Status
 
   .tbody
     - @imt_transfers.each do |imt_transfer|
@@ -52,4 +54,6 @@
           = imt_transfer.initiation_bank_ref
         %td{:style=>'text-align:left;'}
           = imt_transfer.cancellation_bank_ref
+        %td{:style=>'text-align:left;'}
+          = imt_transfer.settlement_status
 

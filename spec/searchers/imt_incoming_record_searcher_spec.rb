@@ -20,7 +20,7 @@ describe ImtIncomingRecordSearcher do
       ImtIncomingRecordSearcher.new({file_name: imt_incoming_records[0].file_name, from_acquire_date: '2010-09-09', to_acquire_date: '2010-10-20', status: 'FAILED'}).paginate.should == [imt_incoming_records[0]]
       ImtIncomingRecordSearcher.new({file_name: imt_incoming_records[0].file_name, from_acquire_date: '2010-09-09', to_acquire_date: '2015-10-20', status: 'FAILED'}).paginate.should == imt_incoming_records.reverse
 
-      imt_incoming_record = Factory(:imt_incoming_record, :amount => 100)
+      imt_incoming_record = Factory(:imt_incoming_record, :transfer_amount => 100)
       ImtIncomingRecordSearcher.new({file_name: imt_incoming_record.file_name, from_amount: 50, to_amount: 200, status: 'FAILED'}).paginate.should == [imt_incoming_record]
       ImtIncomingRecordSearcher.new({file_name: imt_incoming_record.file_name, from_amount: 150, to_amount: 200, status: 'FAILED'}).paginate.should == []   
     end

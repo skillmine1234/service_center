@@ -85,6 +85,8 @@ ServiceCenter::Application.routes.draw do
   resources :fp_unapproved_records
   resources :fp_operations
   resources :fp_auth_rules
+
+  resources :imt_rules
   resources :imt_customers do
     member do
       put :resend_notification
@@ -322,6 +324,7 @@ ServiceCenter::Application.routes.draw do
   get '/pc_fee_rule/:id/audit_logs' => 'pc_fee_rules#audit_logs'
   get '/fp_operation/:id/audit_logs' => 'fp_operations#audit_logs'
   get '/fp_auth_rule/:id/audit_logs' => 'fp_auth_rules#audit_logs'
+  get '/imt_rule/:id/audit_logs' => 'imt_rules#audit_logs'
   get '/imt_customer/:id/audit_logs' => 'imt_customers#audit_logs'
   get '/funds_transfer_customer/:id/audit_logs' => 'funds_transfer_customers#audit_logs'
   get '/ft_purpose_code/:id/audit_logs' => 'ft_purpose_codes#audit_logs'
@@ -353,6 +356,7 @@ ServiceCenter::Application.routes.draw do
   get '/inw_error_msg' => "inw_remittance_rules#error_msg"
   get '/ecol_error_msg' => "ecol_rules#error_msg"
   get '/bm_rule_error_msg' => "bm_rules#error_msg"
+  get '/imt_rule_error_msg' => "imt_rules#error_msg"
 
   put '/ecol_customer/:id/approve' => "ecol_customers#approve"
   put '/udf_attribute/:id/approve' => "udf_attributes#approve"
@@ -377,6 +381,7 @@ ServiceCenter::Application.routes.draw do
   put '/pc_fee_rule/:id/approve' => "pc_fee_rules#approve"
   put '/fp_operation/:id/approve' => "fp_operations#approve"
   put '/fp_auth_rule/:id/approve' => "fp_auth_rules#approve"
+  put '/imt_rule/:id/approve' => "imt_rules#approve"
   put '/imt_customer/:id/approve' => "imt_customers#approve"
   put '/funds_transfer_customer/:id/approve' => "funds_transfer_customers#approve"
   put '/ft_purpose_code/:id/approve' => "ft_purpose_codes#approve"

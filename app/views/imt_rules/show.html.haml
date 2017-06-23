@@ -1,0 +1,58 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8;'}
+    #form-details
+      %h3 IMT Rule Details
+      %br
+      %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
+        - can = can? :edit, @imt_rule
+        %a.btn{:href => "#{!(can) ? '#' : '/imt_rules/' + @imt_rule.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
+        = render 'approve', :@record => @imt_rule
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
+        - if !@imt_rule.nil?
+          %tr
+            %td.label Version
+            %td.value
+              = link_to "#{audit_count(@imt_rule)}", :controller => :imt_rules, :action => :audit_logs, :version_id => audit_count(@imt_rule), :id => @imt_rule.id
+          %tr
+            %td.label Form Errors
+            %td.value
+              = ' '
+            %td#msg-error
+              = error_message_for(@imt_rule, :base, :prepend_text => "")
+          %tr
+            %td.label Settlement GL Account
+            %td.value
+              = @imt_rule.stl_gl_account
+            %td#msg-error
+              = error_message_for(@imt_rule, :stl_gl_account, :prepend_text => "")
+          %tr
+            %td.label Chargeback GL Account
+            %td.value
+              = @imt_rule.chargeback_gl_account
+            %td#msg-error
+              = error_message_for(@imt_rule, :chargeback_gl_account, :prepend_text => "")
+          %tr
+            %td.label Created By
+            %td.value
+              = @imt_rule.created_user.try(:username)
+            %td#msg-error
+              = error_message_for(@imt_rule, :created_by, :prepend_text => "")
+          %tr
+            %td.label Created At
+            %td.value
+              = @imt_rule.created_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td#msg-error
+              = error_message_for(@imt_rule, :created_at, :prepend_text => "")
+          %tr
+            %td.label Updated By
+            %td.value
+              = @imt_rule.updated_user.try(:username)
+            %td#msg-error
+              = error_message_for(@imt_rule, :updated_by, :prepend_text => "")
+          %tr
+            %td.label Updated At
+            %td.value
+              = @imt_rule.updated_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td#msg-error
+              = error_message_for(@imt_rule, :updated_at, :prepend_text => "")
+      = link_to 'Back to Dashboard', root_path              
