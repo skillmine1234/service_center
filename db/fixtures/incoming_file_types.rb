@@ -373,7 +373,8 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.records_table = 'imt_incoming_records'
   s.can_override = 'N'
   s.can_skip = 'Y'
-  s.can_retry = 'N'
+  s.can_retry = 'Y'
   s.build_nack_file = 'N'
   s.skip_last = 'N'
+  s.complete_with_failed_records = 'N'
 end
