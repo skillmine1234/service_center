@@ -31,6 +31,12 @@ class FundsTransferCustomer < ActiveRecord::Base
   validate :presence_of_iam_cust_user
   validate :apbs_values
 
+  validates_presence_of :notify_app_code, :message => "is mandatory if Notify On Status Change? is Y", :if => 'notify_on_status_change?'
+
+  def notify_on_status_change?
+    notify_on_status_change == 'Y' ? true : false
+  end
+
   before_save :to_upcase  
 
   alias_attribute :is_enabled, :enabled

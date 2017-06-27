@@ -55,4 +55,33 @@ $(document).ready(function(){
   $('#funds_transfer_customer_form').bind('submit', function() {
       $(this).find(':input').removeAttr('disabled');
   });
+
+  if ($("#funds_transfer_customer_notify_on_status_change").attr('checked')) {
+    toggle_required_fields('Y');
+  }
+  else {
+    toggle_required_fields('N'); 
+  }
+
+  $("#funds_transfer_customer_notify_on_status_change").on("change",function(){
+    if ($(this).attr('checked')) {
+      toggle_required_fields('Y');
+    } 
+    else {
+      toggle_required_fields('N'); 
+    }
+  });
+
+  function toggle_required_fields(notify_on_status_change){
+    var mandatory_mark = "*";
+    if (notify_on_status_change == 'Y') {
+      $("#funds_transfer_customer_notify_app_code").prop('required',true);
+      $("#notify_app_code_lbl").text(mandatory_mark + $("#notify_app_code_lbl").text().replace(/\*/g, ''));
+    }
+    else {
+      $("#funds_transfer_customer_notify_app_code").prop('required',false);
+      $("#notify_app_code_lbl").text($("#notify_app_code_lbl").text().replace(mandatory_mark,''));
+    }
+  }
+
 });

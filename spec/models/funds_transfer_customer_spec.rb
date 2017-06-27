@@ -57,6 +57,46 @@ describe FundsTransferCustomer do
         funds_transfer_customer.errors_on(:customer_id).should == []
       end
     end
+
+    context 'notify_on_status_change?' do
+      it 'should return true if notify_on_status_change is Y' do
+        funds_transfer_customer = Factory.build(:funds_transfer_customer, :notify_on_status_change => 'Y', :approval_status => 'A')
+        funds_transfer_customer.notify_on_status_change?.should == true
+        funds_transfer_customer.save.should == false
+      end
+
+      it 'should return false if notify_on_status_change is N' do
+        funds_transfer_customer = Factory.build(:funds_transfer_customer, :notify_on_status_change => 'N', :notify_app_code => nil, :approval_status => 'A')
+        funds_transfer_customer.notify_on_status_change?.should == false
+        funds_transfer_customer.save.should == true
+      end
+    end
+
+    context 'validates_presence_of notify_app_code' do
+      it 'should return an error if notify_on_status_change is Y and notify_app_code is nil' do
+        funds_transfer_customer = Factory.build(:funds_transfer_customer, :notify_on_status_change => 'Y', :notify_app_code => nil, :approval_status => 'A')
+        funds_transfer_customer.save.should == false
+        funds_transfer_customer.errors_on(:notify_app_code).should == ["is mandatory if Notify On Status Change? is Y"]
+      end
+
+      it 'should not return an error if notify_on_status_change is Y and notify_app_code is not nil' do
+        funds_transfer_customer = Factory.build(:funds_transfer_customer, :notify_on_status_change => 'Y', :notify_app_code => 'APP01', :approval_status => 'A')
+        funds_transfer_customer.save.should == true
+        funds_transfer_customer.errors_on(:notify_app_code).should == []
+      end
+
+      it 'should not return an error if notify_on_status_change is N and notify_app_code is nil' do
+        funds_transfer_customer = Factory.build(:funds_transfer_customer, :notify_on_status_change => 'N', :notify_app_code => nil, :approval_status => 'A')
+        funds_transfer_customer.save.should == true
+        funds_transfer_customer.errors_on(:notify_app_code).should == []
+      end
+
+      it 'should not return an error if notify_on_status_change is N and notify_app_code is not nil' do
+        funds_transfer_customer = Factory.build(:funds_transfer_customer, :notify_on_status_change => 'N', :notify_app_code => 'APP01', :approval_status => 'A')
+        funds_transfer_customer.save.should == true
+        funds_transfer_customer.errors_on(:notify_app_code).should == []
+      end
+    end
   end
 
   context "customer name format" do
