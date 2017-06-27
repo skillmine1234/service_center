@@ -85,6 +85,26 @@
           %td.label Total Net Position
           %td.value
             = @imt_record.total_net_position
+        %tr
+          %td.label Settlement At
+          %td.value
+            = @imt_record.settlement_at.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
+        %tr
+          %td.label Settlement Status
+          %td.value
+            = @imt_record.settlement_status
+        %tr
+          %td.label Settlement Attempt No
+          %td.value
+            = @imt_record.settlement_attempt_no
+        %tr
+          %td.label Settlement Bank Ref
+          %td.value
+            = @imt_record.settlement_bank_ref
+        %tr
+          %td.label Total Net Position
+          %td.value
+            = @imt_record.total_net_position
 #recordText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×

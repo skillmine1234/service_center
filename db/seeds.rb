@@ -43,10 +43,6 @@ unless Rails.env == 'production'
   if BmRule.all.empty?
     BmRule.create(:cod_acct_no => "0123456789", :customer_id => "QWEASD", :bene_acct_no => "0123456788", :bene_account_ifsc => "IFSC0123456", :neft_sender_ifsc => 'IFSC0123456', :approval_status => 'A', :service_id => 'NETUSER')
   end
-
-  if ImtRule.all.empty?
-    ImtRule.create(:stl_gl_account => "0123456789", :chargeback_gl_account => "0123456780", :approval_status => 'A')
-  end
   
   if FpOperation.all.empty? 
     FpOperation.create(:operation_name => 'validateCustomer', :approval_status => 'A')

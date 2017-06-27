@@ -5,22 +5,6 @@ class ImtRulesController < ApplicationController
   respond_to :json
   include ApplicationHelper
 
-  def new
-    @imt_rule = ImtRule.new
-  end
-
-  def create
-    @imt_rule = ImtRule.new(params[:imt_rule])
-    if !@imt_rule.valid?
-      render "new"
-    else
-      @imt_rule.created_by = current_user.id
-      @imt_rule.save
-      flash[:alert] = 'Rule successfully created and is pending for approval'
-      redirect_to @imt_rule
-    end
-  end
-
   def edit
     imt_rule = ImtRule.unscoped.find_by_id(params[:id])
     if imt_rule.approval_status == 'A' && imt_rule.unapproved_record.nil?
@@ -58,8 +42,8 @@ class ImtRulesController < ApplicationController
   end
 
   def audit_logs
-    @imt_rule = ImtRule.unscoped.find(params[:id]) rescue nil
-    @audit = @imt_rule.audits[params[:version_id].to_i] rescue nil
+    @record = ImtRule.unscoped.find(params[:id]) rescue nil
+    @audit = @record.audits[params[:version_id].to_i] rescue nil
   end
 
   def error_msg

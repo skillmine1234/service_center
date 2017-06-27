@@ -86,7 +86,7 @@ ServiceCenter::Application.routes.draw do
   resources :fp_operations
   resources :fp_auth_rules
 
-  resources :imt_rules
+  resources :imt_rules, :except => [:new, :create, :destroy]
   resources :imt_customers do
     member do
       put :resend_notification
