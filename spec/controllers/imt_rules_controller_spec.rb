@@ -10,6 +10,58 @@ describe ImtRulesController do
     request.env["HTTP_REFERER"] = "/"
   end
 
+  describe "GET new" do
+    it "assigns a new imt_rule as @imt_rule" do
+      get :new
+      assigns(:imt_rule).should be_a_new(ImtRule)
+    end
+  end
+
+  describe "POST create" do
+    describe "with valid params" do
+      it "creates a new imt_rule" do
+        params = Factory.attributes_for(:imt_rule)
+        expect {
+          post :create, {:imt_rule => params}
+        }.to change(ImtRule.unscoped, :count).by(1)
+        flash[:alert].should  match(/Rule successfully created/)
+        response.should be_redirect
+      end
+
+      it "assigns a newly created imt_rule as @imt_rule" do
+        params = Factory.attributes_for(:imt_rule)
+        post :create, {:imt_rule => params}
+        assigns(:imt_rule).should be_a(ImtRule)
+        assigns(:imt_rule).should be_persisted
+      end
+
+      it "redirects to the created imt_rule" do
+        params = Factory.attributes_for(:imt_rule)
+        post :create, {:imt_rule => params}
+        response.should redirect_to(ImtRule.unscoped.last)
+      end
+    end
+
+    describe "with invalid params" do
+      it "assigns a newly created but unsaved imt_rule as @imt_rule" do
+        params = Factory.attributes_for(:imt_rule)
+        params[:stl_gl_account] = nil
+        expect {
+          post :create, {:imt_rule => params}
+        }.to change(ImtRule, :count).by(0)
+        assigns(:imt_rule).should be_a(ImtRule)
+        assigns(:imt_rule).should_not be_persisted
+      end
+
+      it "re-renders the 'new' template when show_errors is true" do
+        params = Factory.attributes_for(:imt_rule)
+        params[:stl_gl_account] = nil
+        post :create, {:imt_rule => params}
+        response.should render_template("new")
+      end
+    end
+  end
+
   describe "GET index" do
     it "assigns all imt_rules with approval_status 'U' as @imt_rules" do
       imt_rule1 = Factory(:imt_rule, :approval_status => 'A')
