@@ -72,7 +72,7 @@
         = error_message_for(@funds_transfer_customer, :allow_apbs, :prepend_text => "")
     .control-group
       = f.label :apbs_user_no, "APBS User No", :class => 'control-label'
-      = f.text_field :apbs_user_no, :maxlength => 20
+      = f.text_field :apbs_user_no, :minlength => 7, :maxlength => 7
       #msg-error
         = error_message_for(@funds_transfer_customer, :apbs_user_no, :prepend_text => "")
     .control-group

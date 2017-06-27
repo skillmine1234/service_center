@@ -24,6 +24,8 @@ class FundsTransferCustomer < ActiveRecord::Base
   validates :name, length: {maximum: 100 }
   validates :identity_user_id, length: { maximum: 20 }
   validates :notify_app_code, length: { maximum: 20}, :allow_blank =>true
+
+  validates :apbs_user_no, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}' }, length: {minimum: 7, maximum: 7}, :allow_blank => true
   validate :should_allow_neft?, if: "customer_id.present? && allow_neft=='Y'"
   validate :should_allow_imps?, if: "customer_id.present? && allow_imps=='Y' && allow_all_accounts=='Y'"
   validate :check_needs_purpose_code, if: "allow_apbs == 'Y'"

@@ -30,10 +30,11 @@ describe FundsTransferCustomer do
       should validate_length_of(:name).is_at_most(100)
       should validate_length_of(:identity_user_id).is_at_most(20)
       should validate_length_of(:notify_app_code).is_at_most(20)
+      should validate_length_of(:apbs_user_no).is_at_least(7).is_at_most(7)
     end
 
     it "should not allow invalid format" do
-      ft_customer = Factory.build(:funds_transfer_customer, :customer_id => '111.11', :app_id => '@acddsfdfd', :name => 'ABC@DEF')
+      ft_customer = Factory.build(:funds_transfer_customer, :customer_id => '111.11', :app_id => '@acddsfdfd', :name => 'ABC@DEF', :apbs_user_no => '')
       ft_customer.save == false
       [:app_id].each do |att|
         ft_customer.errors_on(att).should == ["Invalid format, expected format is : {[a-z|A-Z|0-9]}"]
@@ -108,6 +109,44 @@ describe FundsTransferCustomer do
     it "should not allow invalid format" do
       should_not allow_value('@AbcCo').for(:name)
       should_not allow_value('/ab0QWER').for(:name)
+    end
+  end
+
+  context "apbs_user_no format" do
+    it "should allow valid format" do
+      funds_transfer_customer = Factory.build(:funds_transfer_customer, :allow_apbs => 'Y', :apbs_user_no => "AAA1204", :apbs_user_name => 'USER1', :approval_status => 'A')
+      funds_transfer_customer.save.should be_true
+      funds_transfer_customer.errors_on(:apbs_user_no).should == []
+
+      funds_transfer_customer = Factory.build(:funds_transfer_customer, :allow_apbs => 'Y', :apbs_user_no => "ABCDECo", :apbs_user_name => 'USER1', :approval_status => 'A')
+      funds_transfer_customer.save.should be_true
+      funds_transfer_customer.errors_on(:apbs_user_no).should == []
+      
+      funds_transfer_customer = Factory.build(:funds_transfer_customer, :allow_apbs => 'Y', :apbs_user_no => "9876543", :apbs_user_name => 'USER1', :approval_status => 'A')
+      funds_transfer_customer.save.should be_true
+      funds_transfer_customer.errors_on(:apbs_user_no).should == []
+
+      funds_transfer_customer = Factory.build(:funds_transfer_customer, :allow_apbs => 'N', :apbs_user_no => nil, :apbs_user_name => nil, :approval_status => 'A')
+      funds_transfer_customer.save.should be_true
+      funds_transfer_customer.errors_on(:apbs_user_no).should == []
+    end
+
+    it "should not allow invalid format" do
+      funds_transfer_customer = Factory.build(:funds_transfer_customer, :allow_apbs => 'Y', :apbs_user_no => "@AbcCc1", :apbs_user_name => 'USER1', :approval_status => 'A')
+      funds_transfer_customer.save.should be_false
+      funds_transfer_customer.errors_on(:apbs_user_no).should == ["Invalid format, expected format is : {[a-z|A-Z|0-9]}"]
+
+      funds_transfer_customer = Factory.build(:funds_transfer_customer, :allow_apbs => 'Y', :apbs_user_no => "/ab0QWE", :apbs_user_name => 'USER1', :approval_status => 'A')
+      funds_transfer_customer.save.should be_false
+      funds_transfer_customer.errors_on(:apbs_user_no).should == ["Invalid format, expected format is : {[a-z|A-Z|0-9]}"]
+
+      funds_transfer_customer = Factory.build(:funds_transfer_customer, :allow_apbs => 'Y', :apbs_user_no => "CUST01/", :apbs_user_name => 'USER1', :approval_status => 'A')
+      funds_transfer_customer.save.should be_false
+      funds_transfer_customer.errors_on(:apbs_user_no).should == ["Invalid format, expected format is : {[a-z|A-Z|0-9]}"]
+
+      funds_transfer_customer = Factory.build(:funds_transfer_customer, :allow_apbs => 'Y', :apbs_user_no => "CUST-01", :apbs_user_name => 'USER1', :approval_status => 'A')
+      funds_transfer_customer.save.should be_false
+      funds_transfer_customer.errors_on(:apbs_user_no).should == ["Invalid format, expected format is : {[a-z|A-Z|0-9]}"]
     end
   end
   
@@ -206,10 +245,10 @@ describe FundsTransferCustomer do
       funds_transfer_customer1 = Factory.build(:funds_transfer_customer, allow_apbs: 'Y', apbs_user_no: nil)
       funds_transfer_customer1.errors_on(:apbs_user_no).should == ['is mandatory if Allow APBS is Y']
       
-      funds_transfer_customer2 = Factory.build(:funds_transfer_customer, allow_apbs: 'Y', apbs_user_no: '12345', apbs_user_name: nil)
+      funds_transfer_customer2 = Factory.build(:funds_transfer_customer, allow_apbs: 'Y', apbs_user_no: '1234567', apbs_user_name: nil)
       funds_transfer_customer2.errors_on(:apbs_user_name).should == ['is mandatory if Allow APBS is Y']
       
-      funds_transfer_customer3 = Factory.build(:funds_transfer_customer, allow_apbs: 'Y', apbs_user_no: '12345', apbs_user_name: 'Foo')
+      funds_transfer_customer3 = Factory.build(:funds_transfer_customer, allow_apbs: 'Y', apbs_user_no: '1234567', apbs_user_name: 'Foo')
       funds_transfer_customer3.errors_on(:apbs_user_no).should == []
       funds_transfer_customer3.errors_on(:apbs_user_name).should == []
     end
@@ -217,10 +256,10 @@ describe FundsTransferCustomer do
   
   context "check_needs_purpose_code" do
     it "should validate the value of needs_purpose_code as Y if allow_apbs is Y" do
-      funds_transfer_customer = Factory.build(:funds_transfer_customer, allow_apbs: 'Y', apbs_user_no: '12345', apbs_user_name: 'Foo', needs_purpose_code: 'N')
+      funds_transfer_customer = Factory.build(:funds_transfer_customer, allow_apbs: 'Y', apbs_user_no: '1234567', apbs_user_name: 'Foo', needs_purpose_code: 'N')
       funds_transfer_customer.errors_on(:needs_purpose_code).should == ["should be enabled when APBS is allowed"]
       
-      funds_transfer_customer = Factory.build(:funds_transfer_customer, allow_apbs: 'N', apbs_user_no: '12345', apbs_user_name: 'Foo', needs_purpose_code: 'N')
+      funds_transfer_customer = Factory.build(:funds_transfer_customer, allow_apbs: 'N', apbs_user_no: '1234567', apbs_user_name: 'Foo', needs_purpose_code: 'N')
       funds_transfer_customer.errors_on(:needs_purpose_code).should == []
     end
   end
