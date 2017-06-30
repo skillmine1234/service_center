@@ -24,7 +24,7 @@ class OutgoingFilesController < ApplicationController
     data = open("scp://iibadm@#{ENV['CONFIG_SCP_IIB_FILE_MGR']}#{@outgoing_file.file_path}/#{@outgoing_file.file_name}").read rescue ""
     if data.empty?
       flash[:alert] = "File not found!"
-      redirect_to outgoing_files_path
+      redirect_to outgoing_files_path(sc_service: @outgoing_file.service_code)
     elsif params[:view].present?
       render plain: data
     elsif params[:download].present?
