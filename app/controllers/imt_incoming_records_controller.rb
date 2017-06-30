@@ -32,6 +32,7 @@ class ImtIncomingRecordsController < ApplicationController
   end
   
   def search_params
-    params.permit(:page, :anchor_account_id, :from_amount, :to_amount, :invoice_no, :status, :file_name, :overrided_flag)
+    params.permit(:page, :imt_ref_no, :from_issue_date, :to_issue_date, :from_acquire_date, :to_acquire_date, 
+                  :from_amount, :to_amount, :file_name, :status, :overrided_flag)
   end
 end

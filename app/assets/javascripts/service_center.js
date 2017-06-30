@@ -243,6 +243,20 @@ $(document).ready(function(){
     timeFormat: 'hh:mmTT' 
   });
 
+  $('#ft_purge_saf_transfer_from_req_timestamp, #ft_purge_saf_transfer_to_req_timestamp').datetimepicker({
+    dateFormat: "dd/mm/yy",
+    timeFormat: 'hh:mmTT',
+  });
+
+  $('#from_request_timestamp, #to_request_timestamp, #from_reply_timestamp, #to_reply_timestamp').datetimepicker({
+    dateFormat: "dd/mm/yy",
+    timeFormat: 'hh:mmTT',
+  });
+
+  $('#from_issue_date, #to_issue_date, #from_acquire_date, #to_acquire_date').datetimepicker({
+    dateFormat: "dd/mm/yy",
+    timeFormat: 'hh:mmTT',
+  });
 });
 
 

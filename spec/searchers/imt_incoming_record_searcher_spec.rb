@@ -5,6 +5,10 @@ describe ImtIncomingRecordSearcher do
     it 'should return imt_incoming_records' do
       a = Factory(:imt_incoming_record, :incoming_file_record => Factory(:incoming_file_record, :overrides => 'Y:76',:record_no => 23))
       ImtIncomingRecordSearcher.new({overrided_flag: "true",file_name: a.file_name, status: 'FAILED'}).paginate.should == [a]
+
+      a = Factory(:imt_incoming_record, :imt_ref_no => nil, :incoming_file_record => Factory(:incoming_file_record, :overrides => 'Y:76',:record_no => 24))
+      ImtIncomingRecordSearcher.new({imt_ref_no: '2223', file_name: a.file_name, status: 'FAILED'}).paginate.should == []
+      ImtIncomingRecordSearcher.new({imt_ref_no: '2223', file_name: a.file_name, status: 'SKIPPED'}).paginate.should == []
       
       imt_incoming_record = Factory(:imt_incoming_record, :imt_ref_no => '2222')
       ImtIncomingRecordSearcher.new({imt_ref_no: '2222', file_name: imt_incoming_record.file_name, status: 'FAILED'}).paginate.should == [imt_incoming_record]

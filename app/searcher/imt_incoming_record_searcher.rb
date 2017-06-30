@@ -22,7 +22,7 @@ class ImtIncomingRecordSearcher
   end
 
   def find
-    reln = ImtIncomingRecord.joins(:incoming_file_record).where("imt_incoming_records.file_name=? and status=?",file_name,status).order("imt_incoming_records.id desc")
+    reln = ImtIncomingRecord.joins(:incoming_file_record).where("imt_incoming_records.file_name=? and incoming_file_records.status=?",file_name,status).order("imt_incoming_records.id desc")
     reln = reln.where("incoming_file_records.overrides is not null") if overrided_flag.present? and overrided_flag == "true"
     reln = reln.where("incoming_file_records.overrides is null") if overrided_flag.present? and overrided_flag == "false"
     reln = reln.where("imt_incoming_records.imt_ref_no=?",imt_ref_no) if imt_ref_no.present?
