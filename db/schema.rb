@@ -1575,6 +1575,7 @@ ActiveRecord::Schema.define(version: 20170607090814) do
     t.string   "fault_subcode",     limit: 50
   end
 
+  add_index "imt_add_beneficiaries", ["customer_id", "app_id", "req_no", "attempt_no", "status_code", "req_timestamp", "rep_timestamp"], name: "imt_add_beneficiaries_01"
   add_index "imt_add_beneficiaries", ["req_no", "app_id", "attempt_no"], name: "uk_imt_add_bene", unique: true
 
   create_table "imt_audit_logs", force: :cascade do |t|
@@ -1640,6 +1641,7 @@ ActiveRecord::Schema.define(version: 20170607090814) do
     t.string   "pending_approval", limit: 1,    default: "Y"
   end
 
+  add_index "imt_cancel_transfers", ["customer_id", "app_id", "req_no", "attempt_no", "status_code", "req_timestamp", "rep_timestamp"], name: "imt_cancel_transfers_01"
   add_index "imt_cancel_transfers", ["bank_ref_no"], name: "index_imt_cancel_transfers_on_bank_ref_no", unique: true
   add_index "imt_cancel_transfers", ["req_no", "app_id", "attempt_no"], name: "uk_imt_cancel_trans", unique: true
 
@@ -1692,6 +1694,7 @@ ActiveRecord::Schema.define(version: 20170607090814) do
     t.string   "fault_subcode",  limit: 50
   end
 
+  add_index "imt_del_beneficiaries", ["customer_id", "app_id", "req_no", "attempt_no", "status_code", "req_timestamp", "rep_timestamp"], name: "imt_del_beneficiaries_01"
   add_index "imt_del_beneficiaries", ["req_no", "app_id", "attempt_no"], name: "uk_imt_del_bene", unique: true
 
   create_table "imt_incoming_files", force: :cascade do |t|
@@ -1748,6 +1751,7 @@ ActiveRecord::Schema.define(version: 20170607090814) do
     t.decimal  "transfer_amount",                              null: false
   end
 
+  add_index "imt_initiate_transfers", ["customer_id", "app_id", "req_no", "attempt_no", "status_code", "req_timestamp", "rep_timestamp"], name: "imt_initiate_transfers_01"
   add_index "imt_initiate_transfers", ["bank_ref_no"], name: "index_imt_initiate_transfers_on_bank_ref_no", unique: true
   add_index "imt_initiate_transfers", ["req_no", "app_id", "attempt_no"], name: "uk_imt_tranfers", unique: true
 
@@ -1776,6 +1780,7 @@ ActiveRecord::Schema.define(version: 20170607090814) do
     t.string   "fault_reason",         limit: 1000
   end
 
+  add_index "imt_resend_otp", ["customer_id", "app_id", "req_no", "attempt_no", "status_code", "req_timestamp", "rep_timestamp"], name: "imt_resend_otp_01"
   add_index "imt_resend_otp", ["req_no", "app_id", "attempt_no"], name: "uk_imt_resend_otp", unique: true
 
   create_table "imt_transfers", force: :cascade do |t|
