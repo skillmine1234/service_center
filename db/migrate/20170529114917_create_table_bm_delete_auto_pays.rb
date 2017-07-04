@@ -7,8 +7,8 @@ class CreateTableBmDeleteAutoPays < ActiveRecord::Migration
       t.string :req_version, :limit => 5, :null => false, :comment => 'the service version number received in the request'
       t.datetime :req_timestamp, :null => false, :comment => 'the SYSDATE when the request was received'
       t.string :customer_id, :limit => 15, :null => false, :comment => 'the unique id of the customer that initiated the request'
-      t.string :biller_type, :limit => 50, :comment => ''
-      t.string :biller_acct_id, :limit => 50, :comment => 'the biller account generated for the customer'
+      t.string :biller_code, :limit => 50, :comment => "the biler code of the customer"
+      t.string :biller_acct_no, :limit => 50, :comment => 'the biller account generated for the customer'
       t.string :status_code, :limit => 50, :null => false, :comment => 'the status of this request'
       t.string :rep_version, :limit => 5, :comment => 'the service version sent in the reply'
       t.string :rep_no, :limit => 32, :comment => 'the unique number sent as part of the reply'
