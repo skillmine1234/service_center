@@ -88,6 +88,22 @@ class EcolTransactionsController < ApplicationController
     end
     redirect_to :back
   end
+  
+  def override_transaction
+    ecol_transaction = EcolTransaction.find(params[:id])
+    ActiveRecord::Base.transaction do
+      if params[:status].blank?
+        flash[:alert] = "Please choose a status!"
+      else
+        result = ecol_transaction.override(params[:status], @current_user.id)
+        flash[:alert] = "Transaction status has been overriden successfully!"
+      end
+    end
+  rescue ::Fault::ProcedureFault, OCIError => e
+   flash[:alert] = "#{e.message}"    
+  ensure
+   redirect_to ecol_transaction
+  end
 
   private
 

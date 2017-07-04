@@ -48,6 +48,9 @@ ServiceCenter::Application.routes.draw do
     collection do
       put  'update_multiple'
     end
+    member do
+      put :override_transaction
+    end
   end
   resources :udf_attributes
   
