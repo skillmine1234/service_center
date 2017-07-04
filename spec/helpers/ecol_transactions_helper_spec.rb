@@ -47,6 +47,10 @@ describe EcolTransactionsHelper do
       find_ecol_transactions(val,{:transfer_type => "IMPS"}).should == [ecol_transaction]
       find_ecol_transactions(val,{:transfer_type => "NEFT"}).should_not == [ecol_transaction] 
       
+      ecol_transaction = Factory(:ecol_transaction, :return_transfer_type => "NEFT", :transfer_unique_no => "1723912301")
+      find_ecol_transactions(val,{:return_transfer_type => "NEFT"}).should == [ecol_transaction]
+      find_ecol_transactions(val,{:return_transfer_type => "AAA"}).should_not == [ecol_transaction] 
+      
       ecol_transaction = Factory(:ecol_transaction, :bene_account_no => "0987654321", :transfer_unique_no => "56789")
       find_ecol_transactions(val,{:bene_account_no => "0987654321"}).should == [ecol_transaction]
       find_ecol_transactions(val,{:bene_account_no => "1234567890"}).should_not == [ecol_transaction] 
