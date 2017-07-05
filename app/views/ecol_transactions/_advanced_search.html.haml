@@ -19,7 +19,7 @@
     = select_tag :settle_status, options_for_select([['PENDING SETTLEMENT','PENDING SETTLEMENT'],['SETTLEMENT FAILED','SETTLEMENT FAILED'],['SETTLED','SETTLED']],params[:settle_status]),:prompt => 'ANY'
   .control-group
     = label_tag "Transfer Type", "Transfer Type" , :class => 'control-label'
-    = select_tag :transfer_type, options_for_select([['NEFT','NEFT'],['IMPS','IMPS'],['RTGS','RTGS']],params[:transfer_type]),:prompt => 'ANY'
+    = select_tag :transfer_type, options_for_select([['NEFT','NEFT'],['IMPS','IMPS'],['RTGS','RTGS'],['UPI','UPI']],params[:transfer_type]),:prompt => 'ANY'
   .control-group
     = label_tag "Beneficiary Account Number", "Beneficiary Account Number" , :class => 'control-label'
     = text_field_tag :bene_account_no, params[:bene_account_no]
