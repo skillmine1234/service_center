@@ -18,8 +18,8 @@ class CreateTableBmAddAutoPays < ActiveRecord::Migration
      t.string :param4, :limit => 100, :comment => 'the value of the parameter received in the request'
      t.string :param5, :limit => 100, :comment => 'the value of the parameter received in the request'
      t.number :amount_limit, :comment => "the limit of the amount for autopay"
-     t.datetime :start_date, :comment => "the start date of the autopay"
-     t.datetime :end_date, :comment => "the end date of the autopay"
+     t.date :start_date, :comment => "the start date of the autopay"
+     t.date :end_date, :comment => "the end date of the autopay"
      t.string :interval, :limit => 20, :comment => "the number of times in a particular period eg: monthly, yearly"
      t.string :email_id1, :limit => 100, :comment => "the registered first email id of the customer"
      t.string :email_id2, :limit => 100, :comment => "the registered second email id of the customer"
@@ -30,7 +30,8 @@ class CreateTableBmAddAutoPays < ActiveRecord::Migration
      t.datetime :rep_timestamp, :comment => "the SYSDATE when the reply was sent to the client"
      t.string :fault_code, :limit => 50, :comment => "the code that identifies the business failure reason/exception"
      t.string :fault_subcode, :limit => 50, :comment => "the error code that the third party will return"
-     t.string :fault_reason, :limit => 1000, :comment => "the english reason of the business failure reason/exception"     
+     t.string :fault_reason, :limit => 1000, :comment => "the english reason of the business failure reason/exception"
+     t.index([:req_no, :app_id, :attempt_no], :unique => true, :name => 'bm_add_auto_pays_01')  
     end
   end
 end

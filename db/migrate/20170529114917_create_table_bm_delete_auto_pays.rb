@@ -16,6 +16,7 @@ class CreateTableBmDeleteAutoPays < ActiveRecord::Migration
       t.string :fault_code, :limit => 50, :comment => 'the code that identifies the business failure reason/exception'
       t.string :fault_subcode, :limit => 50, :comment => "the error code that the third party will return"
       t.string :fault_reason, :limit => 1000, :comment => 'the english reason of the business failure reason/exception'
+      t.index([:req_no, :app_id, :attempt_no], :unique => true, :name => 'bm_delete_auto_pays_01')
     end
   end
 end

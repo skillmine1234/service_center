@@ -11,8 +11,8 @@ class CreateTableBmModifyAutoPays < ActiveRecord::Migration
      t.string :biller_code, :limit => 100, :null => false, :comment => "the biler code of the customer"
      t.string :biller_acct_no, :limit => 20, :null => false, :comment => "the biller account generated for the customer"
      t.number :amount_limit, :comment => "the limit of the amount for autopay"
-     t.datetime :start_date, :comment => "the start date of the autopay"
-     t.datetime :end_date, :comment => "the end date of the autopay"
+     t.date :start_date, :comment => "the start date of the autopay"
+     t.date :end_date, :comment => "the end date of the autopay"
      t.string :interval, :limit => 20, :comment => "the number of times in a particular period eg: monthly, yearly"
      t.string :email_id1, :limit => 100, :comment => "the registered first email id of the customer"
      t.string :email_id2, :limit => 100, :comment => "the registered second email id of the customer"
@@ -23,6 +23,7 @@ class CreateTableBmModifyAutoPays < ActiveRecord::Migration
      t.string :fault_code, :limit => 50, :comment => "the code that identifies the business failure reason/exception"
      t.string :fault_subcode, :limit => 50, :comment => "the error code that the third party will return"
      t.string :fault_reason, :limit => 1000, :comment => "the english reason of the business failure reason/exception"
+     t.index([:req_no, :app_id, :attempt_no], :unique => true, :name => 'bm_modify_auto_pays_01')
     end
   end
 end
