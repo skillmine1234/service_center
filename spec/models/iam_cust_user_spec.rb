@@ -22,11 +22,9 @@ describe IamCustUser do
 
     it { should validate_numericality_of(:mobile_no) }
 
-    [:username, :first_name, :last_name].each do |att|
-      it { should validate_length_of(att).is_at_most(50) }
+    [:username, :first_name, :last_name, :email].each do |att|
+      it { should validate_length_of(att).is_at_most(100) }
     end
-
-    it { should validate_length_of(:email).is_at_most(100) }
 
     context "format" do
       context "username" do 
@@ -53,8 +51,8 @@ describe IamCustUser do
 
         it "should not accept value which does not match the format" do
           [:first_name, :last_name].each do |att|
-            should_not allow_value('user@name').for(:username)
-            should_not allow_value('user@123*^').for(:username)
+            should_not allow_value('user@name').for(att)
+            should_not allow_value('user@123*^').for(att)
           end
         end
       end

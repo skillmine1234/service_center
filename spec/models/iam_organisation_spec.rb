@@ -37,6 +37,32 @@ describe IamOrganisation do
       iam_organisation.save.should == true
       iam_organisation.errors_on(:source_ips).should == []
     end
+    
+    it { should validate_length_of(:name).is_at_most(100) }
+    it { should validate_length_of(:org_uuid).is_at_most(32) }
+    it { should validate_length_of(:cert_dn).is_at_most(300) }
+    it { should validate_length_of(:email_id).is_at_most(255) }
+
+    context "format" do
+
+      context "name, org_uuid, cert_dn" do 
+        it "should accept value matching the format" do
+          [:name, :org_uuid, :cert_dn].each do |att|
+            should allow_value('username').for(att)
+            should allow_value('user-name').for(att)
+            should allow_value('user.123').for(att)
+            should allow_value('user 123').for(att)
+          end
+        end
+
+        it "should not accept value which does not match the format" do
+          [:name, :org_uuid, :cert_dn].each do |att|
+            should_not allow_value('user@name').for(att)
+            should_not allow_value('user@123*^').for(att)
+          end
+        end
+      end
+    end
   end
 
   context "check_email_addresses" do 

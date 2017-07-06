@@ -14,17 +14,17 @@
         = error_message_for(@iam_organisation, :is_enabled, :prepend_text => "")
     .control-group
       = f.label :name, "*Name", :class => 'control-label'
-      = f.text_field :name
+      = f.text_field :name, maxlength: 100
       #msg-error
         = error_message_for(@iam_organisation, :name, :prepend_text => "")
     .control-group
       = f.label :email_id, "*Email ID", :class => 'control-label'
-      = f.text_field :email_id, :placeholder => "Enter Email IDs separated by ';'"
+      = f.text_field :email_id, :placeholder => "Enter Email IDs separated by ';'", maxlength: 255
       #msg-error
         = error_message_for(@iam_organisation, :email_id, :prepend_text => "")
     .control-group
       = f.label :org_uuid, "*Organisation UUID", :class => 'control-label'
-      = f.text_field :org_uuid
+      = f.text_field :org_uuid, maxlength: 32
       #msg-error
         = error_message_for(@iam_organisation, :org_uuid, :prepend_text => "")
     .control-group
@@ -34,7 +34,7 @@
         = error_message_for(@iam_organisation, :on_vpn, :prepend_text => "")
     .control-group
       = f.label :cert_dn, "Certificate DN", :class => 'control-label', :id => "cert_dn_lbl"
-      = f.text_field :cert_dn
+      = f.text_field :cert_dn, maxlength: 300
       #msg-error
         = error_message_for(@iam_organisation, :cert_dn, :prepend_text => "")
     .control-group

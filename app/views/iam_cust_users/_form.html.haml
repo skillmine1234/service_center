@@ -9,17 +9,17 @@
     = f.hidden_field :approved_version
     .control-group
       = f.label :username, "*Username", :class => 'control-label'
-      = f.text_field :username, maxlength: 50
+      = f.text_field :username, maxlength: 100
       #msg-error
         = error_message_for(@iam_cust_user, :username, :prepend_text => "")
     .control-group
       = f.label :first_name, "*First Name", :class => 'control-label'
-      = f.text_field :first_name, maxlength: 50
+      = f.text_field :first_name, maxlength: 100
       #msg-error
         = error_message_for(@iam_cust_user, :first_name, :prepend_text => "")
     .control-group
       = f.label :last_name, "Last Name", :class => 'control-label'
-      = f.text_field :last_name, maxlength: 50
+      = f.text_field :last_name, maxlength: 100
       #msg-error
         = error_message_for(@iam_cust_user, :last_name, :prepend_text => "")
     .control-group
