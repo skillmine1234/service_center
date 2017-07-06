@@ -9,27 +9,27 @@
     = f.hidden_field :approved_version
     .control-group
       = f.label :username, "*Username", :class => 'control-label'
-      = f.text_field :username
+      = f.text_field :username, maxlength: 50
       #msg-error
         = error_message_for(@iam_cust_user, :username, :prepend_text => "")
     .control-group
       = f.label :first_name, "*First Name", :class => 'control-label'
-      = f.text_field :first_name
+      = f.text_field :first_name, maxlength: 50
       #msg-error
         = error_message_for(@iam_cust_user, :first_name, :prepend_text => "")
     .control-group
       = f.label :last_name, "Last Name", :class => 'control-label'
-      = f.text_field :last_name
+      = f.text_field :last_name, maxlength: 50
       #msg-error
         = error_message_for(@iam_cust_user, :last_name, :prepend_text => "")
     .control-group
       = f.label :email, "*Email", :class => 'control-label'
-      = f.text_field :email
+      = f.text_field :email, maxlength: 100
       #msg-error
         = error_message_for(@iam_cust_user, :email, :prepend_text => "")
     .control-group
       = f.label :mobile_no, "*Mobile Number", :class => 'control-label'
-      = f.text_field :mobile_no
+      = f.text_field :mobile_no, maxlength: 10
       #msg-error
         = error_message_for(@iam_cust_user, :mobile_no, :prepend_text => "")
     - unless action_name == 'new'
