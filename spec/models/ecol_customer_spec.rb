@@ -322,7 +322,7 @@ describe EcolCustomer do
       
       ecol_customer = Factory.build(:ecol_customer, :code => '98760988767')
       ecol_customer.save.should == false
-      ecol_customer.errors_on(:code).should == ["the code can be either a 4 digit number starting with 9, or a 6 character alpha-numeric code, that does not start with 9, or a 8 character alpha-numeric code, that does not start with 9"]
+      ecol_customer.errors_on(:code).should == ["the code can be either a 4 digit number starting with 9, or a 6 character alpha-numeric code, that does not start with 9, or a 8 character alpha-numeric code, that does not start with 9, or 6 characters alpha-numeric code (format [A-Z|a-z]{3}[A-Za-z0-9]{2}) starting with 9"]
 
       ecol_customer = Factory.build(:ecol_customer, :code => 'ABCD0123456')
       ecol_customer.save.should == true
@@ -330,6 +330,23 @@ describe EcolCustomer do
       ecol_customer = Factory.build(:ecol_customer, :code => '123456789011')
       ecol_customer.save.should == false
       ecol_customer.errors_on(:code).should == ['the code can be either a 4 digit number starting with 9, or a 6 character alpha-numeric code, that does not start with 9, or a 8 character alpha-numeric code, that does not start with 9, or alphanumeric (with format [A-Z|a-z]{4}[0][A-Za-z0-9]{6}) with 11 characters']
+
+      ecol_customer = Factory.build(:ecol_customer, :code => '9iuy99')
+      ecol_customer.save.should == true
+
+      ecol_customer = Factory.build(:ecol_customer, :code => '9iUN99')
+      ecol_customer.save.should == true
+
+      ecol_customer = Factory.build(:ecol_customer, :code => '9iuyi9')
+      ecol_customer.save.should == true
+
+      ecol_customer = Factory.build(:ecol_customer, :code => '987j98')
+      ecol_customer.save.should == false
+      ecol_customer.errors_on(:code).should == ["the code can be either a 4 digit number starting with 9, or a 6 character alpha-numeric code, that does not start with 9, or a 8 character alpha-numeric code, that does not start with 9, or 6 characters alpha-numeric code (format [A-Z|a-z]{3}[A-Za-z0-9]{2}) starting with 9"]
+
+      ecol_customer = Factory.build(:ecol_customer, :code => '9hju899')
+      ecol_customer.save.should == false
+      ecol_customer.errors_on(:code).should == ["the code can be either a 4 digit number starting with 9, or a 6 character alpha-numeric code, that does not start with 9, or a 8 character alpha-numeric code, that does not start with 9, or 6 characters alpha-numeric code (format [A-Z|a-z]{3}[A-Za-z0-9]{2}) starting with 9"]
     end
   end
 

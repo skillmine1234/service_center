@@ -36,8 +36,8 @@ class EcolCustomer < ActiveRecord::Base
 
   def customer_code_format
     if !code.nil? && code.start_with?("9")
-      unless code =~ /\A(9[0-9]{3})\Z/i
-        errors.add(:code, "the code can be either a 4 digit number starting with 9, or a 6 character alpha-numeric code, that does not start with 9, or a 8 character alpha-numeric code, that does not start with 9")
+      unless code =~ /\A(9[0-9]{3})\Z/i || code =~ /\A(9[A-Za-z]{3}[0-9A-Za-z]{2})\Z/i
+        errors.add(:code, "the code can be either a 4 digit number starting with 9, or a 6 character alpha-numeric code, that does not start with 9, or a 8 character alpha-numeric code, that does not start with 9, or 6 characters alpha-numeric code (format [A-Z|a-z]{3}[A-Za-z0-9]{2}) starting with 9")
       end
     else
       unless code =~ /\A[0-9A-Za-z]{8}\Z/i || code =~ /\A[0-9A-Za-z]{6}\Z/i || code =~ /\A[A-Z|a-z]{4}[0][A-Za-z0-9]{6}+\Z/i
