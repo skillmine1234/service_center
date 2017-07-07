@@ -146,6 +146,12 @@
             %td#msg-error
               = error_message_for(@partner, :add_transfer_amt_in_rep, :prepend_text => "")
           %tr
+            %td.label Auto Reschedule To Next Work Day?
+            %td
+              = @partner.auto_reschdl_to_next_wrk_day
+            %td#msg-error
+              = error_message_for(@partner, :auto_reschdl_to_next_wrk_day, :prepend_text => "")
+          %tr
             %td.label MMID
             %td.value
               = @partner.mmid
