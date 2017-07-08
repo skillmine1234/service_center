@@ -9,6 +9,13 @@ describe EcolAppsController do
     Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'editor').id)
     request.env["HTTP_REFERER"] = "/"
   end
+  
+  describe "GET new" do
+    it "assigns a new ecol_app as @ecol_app" do
+      get :new
+      assigns(:ecol_app).should be_a_new(EcolApp)
+    end
+  end
 
   describe "GET show" do
     it "assigns the requested ecol_app as @ecol_app" do
@@ -160,7 +167,7 @@ describe EcolAppsController do
         params[:http_username] = 'abc'
         params[:http_password] = nil
         post :create, {:ecol_app => params}
-        response.should render_template("edit")
+        response.should render_template("new")
       end
     end
   end

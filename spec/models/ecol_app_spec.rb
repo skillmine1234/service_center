@@ -31,6 +31,24 @@ describe EcolApp do
       ecol_app.save.should == false
       ecol_app.errors[:base].should == ["HTTP Password can't be blank if HTTP Username is present"]
     end
+    it "should validate presence of customer_code if the app_code is standard" do
+      ecol_app = Factory.build(:ecol_app, app_code: 'STD_CODE2', customer_code: nil)
+      ecol_app.save.should == false
+      ecol_app.errors_on(:customer_code).should == ["can't be blank"]
+      
+      ecol_app = Factory.build(:ecol_app, app_code: 'STD_CODE2', customer_code: 'CUST01')
+      ecol_app.save.should == true
+      ecol_app.errors_on(:customer_code).should == []
+    end
+    it "should validate that customer_code is not present if the app_code is not standard" do
+      ecol_app = Factory.build(:ecol_app, app_code: 'ABC_CODE2', customer_code: 'CUST01')
+      ecol_app.save.should == false
+      ecol_app.errors[:base].should == ["Customer Code is not allowed if the App Code is not Standard"]
+      
+      ecol_app = Factory.build(:ecol_app, app_code: 'ABC_CODE2', customer_code: nil)
+      ecol_app.save.should == true
+      ecol_app.errors[:base].should == []
+    end
   end
 
   context "unapproved_record_entrys" do 

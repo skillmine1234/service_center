@@ -5,11 +5,15 @@ class EcolAppsController < ApplicationController
   respond_to :json
   include ApplicationHelper
   include Approval2::ControllerAdditions
+  
+  def new
+    @ecol_app = EcolApp.new(params[:ecol_app])
+  end
 
   def create
     @ecol_app = EcolApp.new(params[:ecol_app])
     if !@ecol_app.valid?
-      render "edit"
+      render "new"
     else
       @ecol_app.created_by = current_user.id
       @ecol_app.save!
@@ -76,6 +80,6 @@ class EcolAppsController < ApplicationController
     :udf3_name, :udf3_type, 
     :udf4_name, :udf4_type,
     :udf5_name, :udf5_type,
-    :app_code, :approval_status, :approved_version, :approved_id)
+    :app_code, :approval_status, :approved_version, :approved_id, :customer_code)
   end
 end

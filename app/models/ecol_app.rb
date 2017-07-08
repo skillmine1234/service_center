@@ -1,5 +1,8 @@
 class EcolApp < ActiveRecord::Base
   include Approval2::ModelAdditions
+  
+  STD_APP_CODES = ['STD_CODE1','STD_CODE2']
+  UDF_TYPES = ['text','number','date']
 
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
@@ -19,11 +22,14 @@ class EcolApp < ActiveRecord::Base
   store :udf5, accessors: [:udf5_name, :udf5_type], coder: JSON
 
   validates_presence_of :app_code
+  validates_presence_of :customer_code, if: "EcolApp::STD_APP_CODES.include?(app_code)"
   
-  validates_uniqueness_of :app_code, :scope => :approval_status
+  validates_uniqueness_of :app_code, :scope => [:customer_code, :approval_status]
+  validates_uniqueness_of :customer_code, :scope => :approval_status, if: "customer_code.present?"
   
   before_save :set_settings_cnt, :set_udfs_cnt
   validate :password_should_be_present
+  validate :customer_code_be_nil, unless: "EcolApp::STD_APP_CODES.include?(app_code)"
   
   before_save :encrypt_password
   after_save :decrypt_password
@@ -59,5 +65,9 @@ class EcolApp < ActiveRecord::Base
 
   def password_should_be_present
     errors[:base] << "HTTP Password can't be blank if HTTP Username is present" if self.http_username.present? and (self.http_password.blank? or self.http_password.nil?)
+  end
+  
+  def customer_code_be_nil
+    errors[:base] << "Customer Code is not allowed if the App Code is not Standard" if customer_code.present?
   end
 end
