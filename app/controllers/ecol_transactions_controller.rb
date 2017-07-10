@@ -95,7 +95,7 @@ class EcolTransactionsController < ApplicationController
       if params[:status].blank?
         flash[:alert] = "Please choose a status!"
       else
-        ecol_transaction.override(params[:status], @current_user.id)
+        ecol_transaction.override(params[:status], @current_user.id, params[:remarks])
         flash[:alert] = "Transaction status has been overriden successfully!"
       end
     end
