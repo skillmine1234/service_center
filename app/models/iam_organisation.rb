@@ -14,8 +14,9 @@ class IamOrganisation < ActiveRecord::Base
   validates_format_of :source_ips, :with => /\A\w[\w\-\(\)\.\s\r\n]*\z/, :allow_blank => true
   validate :value_of_source_ips
 
-  validates_presence_of :cert_dn, :message => "Required when 'Is VPN On?' is not selected.", :if => '!is_vpn_on?'
-  validates_presence_of :source_ips, :message => "Required when 'Is VPN On?' is selected.", :if => 'is_vpn_on?'
+  validates_presence_of :cert_dn, :message => "Required when 'Is VPN On?' is not checked.", :if => '!is_vpn_on?'
+  validates_presence_of :source_ips, :message => "Required when 'Is VPN On?' is not checked.", :if => '!is_vpn_on?'
+  validate :absence_of_cert_dn, if: 'is_vpn_on?'
 
   validates_length_of :name, maximum: 100
   validates_length_of :org_uuid, maximum: 32
@@ -60,5 +61,9 @@ class IamOrganisation < ActiveRecord::Base
 
   def squish_ips
     self.source_ips = source_ips.squeeze(' ').strip.each_line.reject{|x| x.strip == ''}.join if (!self.frozen? and !source_ips.nil?)
+  end
+  
+  def absence_of_cert_dn
+    errors.add(:cert_dn, "is not allowed when 'Is VPN On?' is checked") if cert_dn.present?
   end
 end
