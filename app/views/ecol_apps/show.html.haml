@@ -74,17 +74,3 @@
                         = @ecol_app.send("setting#{i}_name")
                       %td
                         = @ecol_app.send("setting#{i}_value")
-          %tr
-            - if @ecol_app.udfs_cnt.present? and @ecol_app.udfs_cnt > 0
-              %table.table.datatable{style: 'width: 50%'}
-                %thead
-                  %tr
-                    %th UDF Name
-                    %th UDF Type
-                %tbody
-                  - (1..@ecol_app.udfs_cnt).each do |i|
-                    %tr
-                      %td
-                        = @ecol_app.send("udf#{i}_name")
-                      %td
-                        = @ecol_app.send("udf#{i}_type")

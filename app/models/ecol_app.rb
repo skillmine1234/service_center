@@ -1,7 +1,7 @@
 class EcolApp < ActiveRecord::Base
   include Approval2::ModelAdditions
   
-  STD_APP_CODES = ['STD_CODE1','STD_CODE2']
+  STD_APP_CODES = ['ECSTDX','ECSTDJ']
   UDF_TYPES = ['text','number','date']
 
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'

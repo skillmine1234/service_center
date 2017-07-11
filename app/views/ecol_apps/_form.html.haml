@@ -67,23 +67,11 @@
                   = f.select "setting#{i}_type", options_for_select(EcolApp::UDF_TYPES, @ecol_app.send("setting#{i}_type"))
                 %td
                   = f.text_field "setting#{i}_value"
-      .control-group
-        %table.table.datatable
-          %thead
-            %tr
-              %th Udf
-              %th Name
-              %th Type
-          %tbody
-            - (1..5).each do |i|
-              %tr
-                %td
-                  = i
-                %td
-                  = f.text_field "udf#{i}_name"
-                %td
-                  = f.select "udf#{i}_type", options_for_select(EcolApp::UDF_TYPES, @ecol_app.send("udf#{i}_type"))
-
+    .control-group
+      - if !@ecol_app.udfs_cnt.nil? && @ecol_app.udfs_cnt > 0
+        - (1..@ecol_app.udfs_cnt).each do |i|
+          = f.hidden_field "udf#{i}_name", value: @ecol_app.send("udf#{i}_name")
+          = f.hidden_field "udf#{i}_type", value: @ecol_app.send("udf#{i}_type")
   .form-actions
     - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
     = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_ecol_app', :value => label_name + ' Ecol App'
