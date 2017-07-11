@@ -59,7 +59,7 @@
                 %td
                   = f.text_field "setting#{i}_name"
                 %td
-                  = f.select "setting#{i}_type", options_for_select(EcolApp::UDF_TYPES, @ecol_app.send("setting#{i}_type"))
+                  = f.select "setting#{i}_type", options_for_select(EcolApp::SETTING_TYPES, @ecol_app.send("setting#{i}_type"))
                 %td
                   = f.text_field "setting#{i}_value"
     .control-group
