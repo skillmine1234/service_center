@@ -7,7 +7,7 @@ class EcolAppsController < ApplicationController
   include Approval2::ControllerAdditions
   
   def new
-    @ecol_app = EcolApp.new(params[:ecol_app])
+    @ecol_app = EcolApp.new
   end
 
   def create

@@ -34,7 +34,7 @@
     .control-group
       = f.label :http_password, "HTTP Password", :class => 'control-label'
       = f.password_field :http_password, :value => f.object.http_password
-    - if ['edit','update'].include?(action_name) && !EcolApp::STD_APP_CODES.include?(@ecol_app.app_code) && @ecol_app.settings_cnt > 0
+    - if ['edit','update','create'].include?(action_name) && !EcolApp::STD_APP_CODES.include?(@ecol_app.app_code) && @ecol_app.settings_cnt > 0
       .control-group
         - (1..@ecol_app.settings_cnt).each do |i|
           = f.label @ecol_app.send("setting#{i}_name")
