@@ -42,11 +42,6 @@
           = f.hidden_field "setting#{i}_name", value: @ecol_app.send("setting#{i}_name")
           = f.hidden_field "setting#{i}_type", value: @ecol_app.send("setting#{i}_type")
           %br
-      .control-group
-        - if @ecol_app.udfs_cnt > 0
-          - (1..@ecol_app.udfs_cnt).each do |i|
-            = f.hidden_field "udf#{i}_name", value: @ecol_app.send("udf#{i}_name")
-            = f.hidden_field "udf#{i}_type", value: @ecol_app.send("udf#{i}_type")
     - elsif (['edit','update'].include?(action_name) && EcolApp::STD_APP_CODES.include?(@ecol_app.app_code)) || ['new','create'].include?(action_name)
       .control-group
         %table.table.datatable
