@@ -21,6 +21,54 @@ describe IamCustUser do
     it { should validate_uniqueness_of(:username).scoped_to(:approval_status) }
 
     it { should validate_numericality_of(:mobile_no) }
+
+    [:username, :first_name, :last_name, :email].each do |att|
+      it { should validate_length_of(att).is_at_most(100) }
+    end
+
+    context "format" do
+      context "username" do 
+        it "should accept value matching the format" do
+          should allow_value('username').for(:username)
+          should allow_value('user_name').for(:username)
+          should allow_value('user.123').for(:username)
+        end
+
+        it "should not accept value which does not match the format" do
+          should_not allow_value('user@name').for(:username)
+          should_not allow_value('user@123*^').for(:username)
+        end
+      end
+      context "first_name, last_name" do 
+        it "should accept value matching the format" do
+          [:first_name, :last_name].each do |att|
+            should allow_value('username').for(att)
+            should allow_value('user-name').for(att)
+            should allow_value('user.123').for(att)
+            should allow_value('user 123').for(att)
+          end
+        end
+
+        it "should not accept value which does not match the format" do
+          [:first_name, :last_name].each do |att|
+            should_not allow_value('user@name').for(att)
+            should_not allow_value('user@123*^').for(att)
+          end
+        end
+      end
+      context "email" do 
+        it "should accept value matching the format" do
+          should allow_value('username@asd.com').for(:email)
+          should allow_value('user_name@qwe.in').for(:email)
+        end
+
+        it "should not accept value which does not match the format" do
+          should_not allow_value('username').for(:email)
+          should_not allow_value('user@name').for(:email)
+          should_not allow_value('user@123*^').for(:email)
+        end
+      end
+    end
   end
 
   context "generate_password" do

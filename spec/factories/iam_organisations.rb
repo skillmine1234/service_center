@@ -10,5 +10,6 @@ FactoryGirl.define do
     lock_version 1
     approved_version 1
     email_id 'abc@foobar.com'
+    source_ips "123.12.12.1"
   end
 end

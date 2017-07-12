@@ -37,6 +37,32 @@ describe IamOrganisation do
       iam_organisation.save.should == true
       iam_organisation.errors_on(:source_ips).should == []
     end
+    
+    it { should validate_length_of(:name).is_at_most(100) }
+    it { should validate_length_of(:org_uuid).is_at_most(32) }
+    it { should validate_length_of(:cert_dn).is_at_most(300) }
+    it { should validate_length_of(:email_id).is_at_most(255) }
+
+    context "format" do
+
+      context "name, org_uuid, cert_dn" do 
+        it "should accept value matching the format" do
+          [:name, :org_uuid, :cert_dn].each do |att|
+            should allow_value('username').for(att)
+            should allow_value('user-name').for(att)
+            should allow_value('user.123').for(att)
+            should allow_value('user 123').for(att)
+          end
+        end
+
+        it "should not accept value which does not match the format" do
+          [:name, :org_uuid, :cert_dn].each do |att|
+            should_not allow_value('user@name').for(att)
+            should_not allow_value('user@123*^').for(att)
+          end
+        end
+      end
+    end
   end
 
   context "check_email_addresses" do 
@@ -87,25 +113,25 @@ describe IamOrganisation do
     it 'should return an error if on_vpn is N and cert_dn is nil' do
       iam_organisation = Factory.build(:iam_organisation, :on_vpn => 'N', :cert_dn => nil, :approval_status => 'A')
       iam_organisation.save.should == false
-      iam_organisation.errors_on(:cert_dn).should == ["Required when 'Is VPN On?' is not selected."]
+      iam_organisation.errors_on(:cert_dn).should == ["Required when 'Is VPN On?' is not checked."]
     end
 
-    it 'should not return an error if on_vpn is N and cert_dn is not nil' do
-      iam_organisation = Factory.build(:iam_organisation, :on_vpn => 'N', :cert_dn => 'ABCDE', :approval_status => 'A')
-      iam_organisation.save.should == true
-      iam_organisation.errors_on(:cert_dn).should == []
+    it 'should return an error if on_vpn is Y and cert_dn is not nil' do
+      iam_organisation = Factory.build(:iam_organisation, :on_vpn => 'Y', :cert_dn => 'ABCDE', :approval_status => 'A')
+      iam_organisation.save.should == false
+      iam_organisation.errors_on(:cert_dn).should == ["is not allowed when 'Is VPN On?' is checked"]
     end
   end
 
   context 'validates_presence_of source_ips' do
-    it 'should return an error if on_vpn is Y and source_ips is nil' do
-      iam_organisation = Factory.build(:iam_organisation, :on_vpn => 'Y', :source_ips => nil, :approval_status => 'A')
+    it 'should return an error if on_vpn is N and source_ips is nil' do
+      iam_organisation = Factory.build(:iam_organisation, :on_vpn => 'N', :source_ips => nil, :approval_status => 'A')
       iam_organisation.save.should == false
-      iam_organisation.errors_on(:source_ips).should == ["Required when 'Is VPN On?' is selected."]
+      iam_organisation.errors_on(:source_ips).should == ["Required when 'Is VPN On?' is not checked."]
     end
 
-    it 'should not return an error if on_vpn is N and source_ips is not nil' do
-      iam_organisation = Factory.build(:iam_organisation, :on_vpn => 'N', :source_ips => '123.78.89.91', :approval_status => 'A')
+    it 'should not return an error if on_vpn is Y and source_ips is not nil' do
+      iam_organisation = Factory.build(:iam_organisation, :on_vpn => 'Y', :cert_dn => nil, :source_ips => '123.78.89.91', :approval_status => 'A')
       iam_organisation.save.should == true
       iam_organisation.errors_on(:source_ips).should == []
     end

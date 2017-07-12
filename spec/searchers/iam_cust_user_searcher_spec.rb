@@ -9,9 +9,9 @@ describe IamCustUserSearcher do
 
   context 'searcher' do
     it 'should return iam_cust_user records' do      
-      iam_cust_user = Factory(:iam_cust_user, :username => 'user#123', :approval_status => 'A')
-      IamCustUserSearcher.new({:username => 'user#123'}).paginate.should == [iam_cust_user]
-      IamCustUserSearcher.new({:username => 'user#234'}).paginate.should == []
+      iam_cust_user = Factory(:iam_cust_user, :username => 'user_123', :approval_status => 'A')
+      IamCustUserSearcher.new({:username => 'user_123'}).paginate.should == [iam_cust_user]
+      IamCustUserSearcher.new({:username => 'user.234'}).paginate.should == []
       
       iam_cust_user = Factory(:iam_cust_user, :mobile_no => '9999888899', :approval_status => 'A')
       IamCustUserSearcher.new({:mobile_no => '9999888899'}).paginate.should == [iam_cust_user]

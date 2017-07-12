@@ -14,8 +14,16 @@ class IamOrganisation < ActiveRecord::Base
   validates_format_of :source_ips, :with => /\A\w[\w\-\(\)\.\s\r\n]*\z/, :allow_blank => true
   validate :value_of_source_ips
 
-  validates_presence_of :cert_dn, :message => "Required when 'Is VPN On?' is not selected.", :if => '!is_vpn_on?'
-  validates_presence_of :source_ips, :message => "Required when 'Is VPN On?' is selected.", :if => 'is_vpn_on?'
+  validates_presence_of :cert_dn, :message => "Required when 'Is VPN On?' is not checked.", :if => '!is_vpn_on?'
+  validates_presence_of :source_ips, :message => "Required when 'Is VPN On?' is not checked.", :if => '!is_vpn_on?'
+  validate :absence_of_cert_dn, if: 'is_vpn_on?'
+
+  validates_length_of :name, maximum: 100
+  validates_length_of :org_uuid, maximum: 32
+  validates_length_of :cert_dn, maximum: 300
+  validates_length_of :email_id, maximum: 255
+  validates_format_of :name, :org_uuid, with: /\A[a-z|A-Z|0-9|\s|\.|\-]+\z/, message: "invalid format - expected format is : {[a-z|A-Z|0-9|\s|\.|\-]}"
+  validates_format_of :cert_dn, with: /\A[a-z|A-Z|0-9|\s|\.|\-]+\z/, message: "invalid format - expected format is : {[a-z|A-Z|0-9|\s|\.|\-]}", allow_blank: true
 
   def template_variables
     { name: name, email: email_id, org_uuid: org_uuid , on_vpn: on_vpn, cert_dn: cert_dn, source_ips: source_ips}
@@ -53,5 +61,9 @@ class IamOrganisation < ActiveRecord::Base
 
   def squish_ips
     self.source_ips = source_ips.squeeze(' ').strip.each_line.reject{|x| x.strip == ''}.join if (!self.frozen? and !source_ips.nil?)
+  end
+  
+  def absence_of_cert_dn
+    errors.add(:cert_dn, "is not allowed when 'Is VPN On?' is checked") if cert_dn.present?
   end
 end
