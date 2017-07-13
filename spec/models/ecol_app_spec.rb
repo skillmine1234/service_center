@@ -26,6 +26,19 @@ describe EcolApp do
     [:app_code].each do |att|
       it { should validate_presence_of(att) }
     end
+
+    [:app_code, :http_username].each do |att|
+      it { should validate_length_of(att).is_at_most(50) }
+    end
+
+    it { should validate_length_of(:customer_code).is_at_most(20) }
+
+    [:notify_url, :validate_url].each do |att|
+      it { should validate_length_of(att).is_at_most(100) }
+    end
+
+    it { should validate_length_of(:http_password).is_at_most(255) }
+    
     it "should validate presence of http_password if http_username is present" do
       ecol_app = Factory.build(:ecol_app, http_username: 'username', http_password: nil)
       ecol_app.save.should == false
@@ -48,6 +61,44 @@ describe EcolApp do
       ecol_app = Factory.build(:ecol_app, app_code: 'ABC_CODE2', customer_code: nil)
       ecol_app.save.should == true
       ecol_app.errors[:base].should == []
+    end
+    it "should validate presence of setting names" do
+      ecol_app = Factory.build(:ecol_app, setting1_name: nil, setting2_name: 'setting2')
+      ecol_app.save.should == false
+      ecol_app.errors_on(:setting1_name).should == ["can't be blank when Setting2 name is present"]
+    end
+    it "should validate the setting values" do
+      ecol_app = Factory.build(:ecol_app, setting1_name: 'name1', setting1_type: 'text', setting1_value: nil)
+      ecol_app.save.should == false
+      ecol_app.errors_on(:setting1_value).should == ["can't be blank"]
+
+      ecol_app = Factory.build(:ecol_app, setting1_name: 'name1', setting1_type: 'text', setting1_value: 'text')
+      ecol_app.save.should == true
+      ecol_app.errors_on(:setting1_value).should == []
+
+      ecol_app = Factory.build(:ecol_app, setting1_name: 'name1', setting1_type: 'number', setting1_value: 'TEXT')
+      ecol_app.save.should == false
+      ecol_app.errors_on(:setting1_value).should == ["should include only digits"]
+
+      ecol_app = Factory.build(:ecol_app, setting1_name: 'name1', setting1_type: 'number', setting1_value: '1234')
+      ecol_app.save.should == true
+      ecol_app.errors_on(:setting1_value).should == []
+
+      ecol_app = Factory.build(:ecol_app, setting1_name: 'name1', setting1_type: 'text', setting1_value: '@$TEXT')
+      ecol_app.save.should == false
+      ecol_app.errors_on(:setting1_value).should == ["should not include special characters"]
+
+      ecol_app = Factory.build(:ecol_app, setting1_name: 'name1', setting1_type: 'text', setting1_value: 'yterqweytweuyqtweyqteyqtwerqwyertqweuryqwieuryqwerehquqwkjhequeuqeyuqjwhegruqywerqwjkeqjwehqjweqjhwegqhwe')
+      ecol_app.save.should == false
+      ecol_app.errors_on(:setting1_value).should == ["is longer than maximum (100)"]
+
+      ecol_app = Factory.build(:ecol_app, setting1_name: 'name1', setting1_type: 'date', setting1_value: '2014:12:12')
+      ecol_app.save.should == false
+      ecol_app.errors_on(:setting1_value).should == ["is not a date"]
+
+      ecol_app = Factory.build(:ecol_app, setting1_name: 'name1', setting1_type: 'date', setting1_value: '2014-12-12')
+      ecol_app.save.should == true
+      ecol_app.errors_on(:setting1_value).should == []
     end
   end
 
@@ -111,7 +162,7 @@ describe EcolApp do
   
   context "set_settings_cnt" do
     it "should set counts of settings" do
-      ecol_app = Factory(:ecol_app, setting1_name: 'set1', setting1_type: 'number', setting1_value: 1)
+      ecol_app = Factory(:ecol_app, setting1_name: 'set1', setting1_type: 'number', setting1_value: '1')
       ecol_app.settings_cnt.should == 1
     end
   end
