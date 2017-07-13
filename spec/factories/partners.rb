@@ -33,5 +33,6 @@ FactoryGirl.define do
     address_line3 "addr3"
     will_send_id 'Y'
     guideline_id { Factory(:inw_guideline, approval_status: 'A').id }
+    auto_reschdl_to_next_wrk_day 'N'
   end
 end
