@@ -27,7 +27,7 @@ describe EcolApp do
       it { should validate_presence_of(att) }
     end
 
-    [:app_code, :http_username].each do |att|
+    [:app_code, :http_username, :http_password].each do |att|
       it { should validate_length_of(att).is_at_most(50) }
     end
 
@@ -36,8 +36,6 @@ describe EcolApp do
     [:notify_url, :validate_url].each do |att|
       it { should validate_length_of(att).is_at_most(100) }
     end
-
-    it { should validate_length_of(:http_password).is_at_most(255) }
     
     it "should validate presence of http_password if http_username is present" do
       ecol_app = Factory.build(:ecol_app, http_username: 'username', http_password: nil)
