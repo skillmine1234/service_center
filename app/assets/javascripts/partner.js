@@ -85,6 +85,7 @@ $(document).ready(function(){
     $('#partner_remitter_sms_allowed').prop('disabled',true);
     $('#partner_remitter_email_allowed').prop("checked",false);
     $('#partner_remitter_email_allowed').prop('disabled',true);
+    $('#partner_auto_reschdl_to_next_wrk_day').prop('checked',false);
     $('#partner_auto_reschdl_to_next_wrk_day').prop('disabled',false);
   }
   else {
@@ -139,6 +140,7 @@ $(document).ready(function(){
       $('#partner_txn_hold_period_days').prop('readOnly',true);
       $('#partner_remitter_sms_allowed').prop('disabled',false);
       $('#partner_remitter_email_allowed').prop('disabled',false);
+      $('#partner_auto_reschdl_to_next_wrk_day').prop('checked',false);
       $('#partner_auto_reschdl_to_next_wrk_day').prop('disabled',true);
     }
   });

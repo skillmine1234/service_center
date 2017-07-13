@@ -38,9 +38,6 @@ class Partner < ActiveRecord::Base
   
   validate :should_allow_neft?, if: "allow_neft=='Y'"
   validate :should_allow_imps?, if: "allow_imps=='Y'"
-  
-
-  after_initialize :set_auto_resch
   validate :auto_resch_and_service_name
   
   after_create :create_lcy_rate
@@ -53,14 +50,8 @@ class Partner < ActiveRecord::Base
     end
   end
   
-  def set_auto_resch
-    unless self.frozen? 
-      self.auto_reschdl_to_next_wrk_day = "N" if self.service_name == "INW"
-    end
-  end
-  
   def auto_resch_and_service_name
-    errors.add(:auto_reschdl_to_next_wrk_day, "Auto Reschedule To Next Work Day? should not be checked when Service Name is INW") if service_name == 'INW' and auto_reschdl_to_next_wrk_day == "Y"
+    errors.add(:auto_reschdl_to_next_wrk_day, "Should not be checked when Service Name is INW") if service_name == 'INW' and auto_reschdl_to_next_wrk_day == "Y"
   end
 
   def whitelisting
