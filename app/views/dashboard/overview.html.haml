@@ -125,21 +125,27 @@
       %br
         = "UDF Attributes"
     - if ENV['CONFIG_ENVIRONMENT'] == 'test'
-      .box
-        = link_to '/qg_ecol_todays_neft_txns' do
-          = image_tag 'neft-icon.png', :size => "80x80"
-        %br
-          = "NEFT Transactions"
-      .box
-        = link_to '/qg_ecol_todays_rtgs_txns' do
-          = image_tag 'rtgs-icon.jpg', :size => "80x80"
-        %br
-          = "RTGS Transactions"
-      .box
-        = link_to '/qg_ecol_todays_imps_txns' do
-          = image_tag 'imps-icon.jpg', :size => "80x60"
-        %br
-          = "IMPS Transactions"
+      .div{:style=>"clear: both; padding-top: 5px;"}
+        .box
+          = link_to '/qg_ecol_todays_neft_txns' do
+            = image_tag 'neft-icon.png', :size => "80x80"
+          %br
+            = "NEFT Transactions"
+        .box
+          = link_to '/qg_ecol_todays_rtgs_txns' do
+            = image_tag 'rtgs-icon.jpg', :size => "80x80"
+          %br
+            = "RTGS Transactions"
+        .box{:style=>"margin-top: 28px;"}
+          = link_to '/qg_ecol_todays_imps_txns' do
+            = image_tag 'imps-icon.jpg', :size => "80x52"
+          %br
+            = "IMPS Transactions"
+        .box{:style=>"margin-top: 20px;"}
+          = link_to '/qg_ecol_todays_upi_txns' do
+            = image_tag 'upi-icon.jpg', :size => "80x60"
+          %br
+            = "UPI Transactions"
 - if @current_user.group_names.include?("bill-management")
   %h1 Bill-Management
   .slide-container

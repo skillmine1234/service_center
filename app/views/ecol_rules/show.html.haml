@@ -56,6 +56,12 @@
             %td#msg-error
               = error_message_for(@ecol_rule, :return_account_no, :prepend_text => "")
           %tr
+            %td.label Allow Return by RTGS?
+            %td.value
+              = @ecol_rule.allow_return_by_rtgs
+            %td#msg-error
+              = error_message_for(@ecol_rule, :allow_return_by_rtgs, :prepend_text => "")
+          %tr
             %td.label Updated By
             %td.value
               = @ecol_rule.updated_user.try(:username)

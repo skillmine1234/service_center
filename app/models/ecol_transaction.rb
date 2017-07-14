@@ -35,4 +35,9 @@ class EcolTransaction < ActiveRecord::Base
       end
     end
   end
+  
+  def override(status, user_id, remarks)
+    result = plsql.pk_qg_ecol_audit_helper.override_and_enqueue(id, status, user_id, nil, remarks, nil, nil)
+    raise ::Fault::ProcedureFault.new(OpenStruct.new(code: result[:po_fault_code], subCode: nil, reasonText: "#{result[:po_fault_reason]}")) if result[:po_fault_code].present?
+  end
 end

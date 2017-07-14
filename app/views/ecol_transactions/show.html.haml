@@ -162,6 +162,9 @@
               = link_to @ecol_transaction.return_attempt_no, {:controller => 'ecol_transactions', :action => 'ecol_audit_logs', :id => @ecol_transaction.id, :step_name => 'RETURN'}
             - else
               = "-"
+        %tr
+          %td.label Return Transfer Type
+          %td= @ecol_transaction.return_transfer_type
         - if @ecol_transaction.status == 'RETURNED'
           %tr
             %td.label Returned At

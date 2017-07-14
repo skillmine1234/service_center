@@ -37,6 +37,11 @@
       = f.text_field :return_account_no, :maxlength => 20
       #msg-error
         = error_message_for(@ecol_rule, :return_account_no, :prepend_text => "")
+    .control-group
+      = f.label :allow_return_by_rtgs, "Allow Return by RTGS?", class: 'control-label'
+      = f.check_box :allow_return_by_rtgs, {}, 'Y','N'
+      #msg-error
+        = error_message_for(@ecol_rule, :allow_return_by_rtgs, :prepend_text => "")
 
   .form-actions
     - (f.object.new_record? and f.object.ifsc.nil?) ? label_name = "Create" : label_name = "Update"
