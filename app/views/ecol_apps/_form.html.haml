@@ -21,19 +21,19 @@
     - if ['new','create'].include?(action_name) || EcolApp::STD_APP_CODES.include?(@ecol_app.app_code)
       .control-group
         = f.label :customer_code, "*Customer Code", :class => 'control-label'
-        = f.text_field :customer_code
+        = f.text_field :customer_code, maxlength: 20
     .control-group
       = f.label :validate_url, "Validate URL", :class => 'control-label'
-      = f.text_field :validate_url
+      = f.text_field :validate_url, maxlength: 100
     .control-group
       = f.label :notify_url, "Notify URL", :class => 'control-label'
-      = f.text_field :notify_url
+      = f.text_field :notify_url, maxlength: 100
     .control-group
       = f.label :http_username, "HTTP Username", :class => 'control-label'
-      = f.text_field :http_username
+      = f.text_field :http_username, maxlength: 50
     .control-group
       = f.label :http_password, "HTTP Password", :class => 'control-label'
-      = f.password_field :http_password, :value => f.object.http_password
+      = f.password_field :http_password, :value => f.object.http_password, maxlength: 50
     - if ['edit','update','create'].include?(action_name) && !EcolApp::STD_APP_CODES.include?(@ecol_app.app_code) && @ecol_app.settings_cnt > 0
       .control-group
         - (1..@ecol_app.settings_cnt).each do |i|
