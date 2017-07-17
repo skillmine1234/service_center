@@ -1,4 +1,33 @@
 $(document).ready(function(){
+
+  $('#funds_transfer_customer_allowed_relns').multiselect({selectedList: 6});
+  
+  var mandatory_mark = '*';
+  if($('#funds_transfer_customer_use_std_relns').attr('checked')){
+    $('#funds_transfer_customer_allowed_relns').val('');
+    $('#funds_transfer_customer_allowed_relns').multiselect('disable');
+    $("#funds_transfer_customer_allowed_relns").prop('required',false);
+    $("#allowed_relns_lbl").text($("#allowed_relns_lbl").text().replace(mandatory_mark,'')); 
+  }
+  else{
+    $('#funds_transfer_customer_allowed_relns').multiselect('enable');
+    $("#funds_transfer_customer_allowed_relns").prop('required',true);
+    $("#allowed_relns_lbl").text(mandatory_mark + $("#allowed_relns_lbl").text().replace(/\*/g, ''));
+  }
+
+  $("#funds_transfer_customer_use_std_relns").on("click", function () {
+    if ($(this).attr('checked')){
+      $('#funds_transfer_customer_allowed_relns').val('');
+      $('#funds_transfer_customer_allowed_relns').multiselect('disable');
+      $("#funds_transfer_customer_allowed_relns").prop('required',false);
+      $("#allowed_relns_lbl").text($("#allowed_relns_lbl").text().replace(mandatory_mark,'')); 
+    }
+    else{
+      $('#funds_transfer_customer_allowed_relns').multiselect('enable');
+      $("#funds_transfer_customer_allowed_relns").prop('required',true);
+      $("#allowed_relns_lbl").text(mandatory_mark + $("#allowed_relns_lbl").text().replace(/\*/g, ''));
+    }
+  });
 	
   if(!$('#funds_transfer_customer_allow_imps').attr('checked')){
 		$('#funds_transfer_customer_mmid').val('');

@@ -4,7 +4,13 @@ class FundsTransferCustomer < ActiveRecord::Base
   include ServiceNotification
 
   self.table_name = "ft_customers"
-  
+
+  RELATIONS = %w(GUR JOF JOO SOW TRU AUS)
+
+  attr_accessor :use_std_relns
+
+  serialize :allowed_relns, ArrayAsCsv
+
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
 
@@ -34,6 +40,8 @@ class FundsTransferCustomer < ActiveRecord::Base
   validate :apbs_values
 
   validates_presence_of :notify_app_code, :message => "is mandatory if Notify On Status Change? is Y", :if => 'notify_on_status_change?'
+
+  validate :allowed_relns_values
 
   def notify_on_status_change?
     notify_on_status_change == 'Y' ? true : false
@@ -72,6 +80,10 @@ class FundsTransferCustomer < ActiveRecord::Base
     errors.add(:needs_purpose_code, "should be enabled when APBS is allowed") if needs_purpose_code == 'N'
   end
 
+  def allowed_relns_values
+    errors.add(:allowed_relns, "atleast one value should be selected when 'Use Standard Relationships?' is not checked") if allowed_relns.empty? && use_std_relns == 'N'
+  end
+
   def should_allow_neft?
     return true
     # fcr_customer = Fcr::Customer.find_by_cod_cust_id(self.customer_id)
@@ -98,5 +110,9 @@ class FundsTransferCustomer < ActiveRecord::Base
     # else
     #   errors.add(:customer_id, "no record found in FCR for #{self.customer_id}")
     # end
+  end
+
+  def use_std_relns_value
+    allowed_relns.empty? ? 'Y' : 'N'
   end
 end

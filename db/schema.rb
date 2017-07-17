@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170607090814) do
+ActiveRecord::Schema.define(version: 20170717063408) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   null: false
@@ -1204,6 +1204,7 @@ ActiveRecord::Schema.define(version: 20170607090814) do
     t.string   "apbs_user_no",            limit: 50
     t.string   "apbs_user_name",          limit: 50
     t.string   "allow_start_transfer",    limit: 1,   default: "N", null: false
+    t.string   "allowed_relns"
   end
 
   add_index "ft_customers", ["app_id", "customer_id", "approval_status"], name: "in_ft_customers_2", unique: true

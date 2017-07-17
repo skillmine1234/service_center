@@ -98,6 +98,14 @@ describe FundsTransferCustomer do
         funds_transfer_customer.errors_on(:notify_app_code).should == []
       end
     end
+
+    context "standard relations" do 
+      it "should validate the presence of allowed relationships when use standard relationships is 'N'" do
+        funds_transfer_customer = Factory.build(:funds_transfer_customer, :use_std_relns => 'N', :allowed_relns => [])
+        funds_transfer_customer.save.should == false
+        funds_transfer_customer.errors_on(:allowed_relns).should == ["atleast one value should be selected when 'Use Standard Relationships?' is not checked"]
+      end
+    end
   end
 
   context "customer name format" do

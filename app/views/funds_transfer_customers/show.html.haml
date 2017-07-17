@@ -20,6 +20,12 @@
             %td#msg-error
               = error_message_for(@funds_transfer_customer, :base, :prepend_text => "")
           %tr
+            %td.label Enabled
+            %td.value
+              = @funds_transfer_customer.enabled
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :enabled, :prepend_text => "")
+          %tr
             %td.label App ID
             %td.value
               = @funds_transfer_customer.app_id
@@ -32,11 +38,17 @@
             %td#msg-error
               = error_message_for(@funds_transfer_customer, :customer_id, :prepend_text => "")
           %tr
-            %td.label Enabled
+            %td.label Use Standard Relationship ?
             %td.value
-              = @funds_transfer_customer.enabled
+              = @funds_transfer_customer.use_std_relns_value
             %td#msg-error
-              = error_message_for(@funds_transfer_customer, :enabled, :prepend_text => "")
+              = error_message_for(@funds_transfer_customer, :use_std_relns, :prepend_text => "")
+          %tr
+            %td.label Allowed Relationships
+            %td.value
+              = @funds_transfer_customer.allowed_relns
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :allowed_relns, :prepend_text => "")
           %tr
             %td.label Name
             %td.value
