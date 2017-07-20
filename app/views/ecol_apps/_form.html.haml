@@ -67,6 +67,6 @@
           = f.hidden_field "udf#{i}_name", value: @ecol_app.send("udf#{i}_name")
           = f.hidden_field "udf#{i}_type", value: @ecol_app.send("udf#{i}_type")
   .form-actions
-    - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
+    - (f.object.new_record? and f.object.app_code.nil?) ? label_name = "Create" : label_name = "Update"
     = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_ecol_app', :value => label_name + ' Ecol App'
     = link_to :Cancel,'/ecol_apps', :name => 'cancel', :class=>"cancel btn"
