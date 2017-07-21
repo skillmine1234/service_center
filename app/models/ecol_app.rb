@@ -70,7 +70,7 @@ class EcolApp < ActiveRecord::Base
   def validate_setting(attr_name, setting_name, setting_type, setting_value)
     errors.add(attr_name, "can't be blank") if setting_name.present? && setting_value.blank?
     if setting_name.present? and setting_value.present?
-      Time.zone.parse setting_value rescue errors.add(attr_name, "is not a date") if setting_type == "date"
+      errors.add(attr_name, "is not a valid date, the correct format is dd/mm/yyyy") if (setting_type == "date" && setting_value =~ /\A\d{2}\/\d{2}\/\d{4}+$\z/).nil?
       errors.add(attr_name, "is longer than maximum (100)") if setting_type == "text" && setting_value.length > 100
       errors.add(attr_name, "should not include special characters") if setting_type == "text" && (setting_value =~ /\A[A-Za-z0-9]+$\z/).nil?
       errors.add(attr_name, "should include only digits") if setting_type == "number" && (setting_value =~ /\A[0-9]+$\z/).nil?
