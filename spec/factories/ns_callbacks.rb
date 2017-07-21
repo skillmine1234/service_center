@@ -14,5 +14,6 @@ FactoryGirl.define do
     udf1_name 'udf1'
     udf1_type 'text'
     unique_udfs_cnt 1
+    sc_service_id { Factory(:sc_service).id }
   end
 end

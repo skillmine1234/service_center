@@ -6,19 +6,21 @@ describe NsCallback do
     it { should belong_to(:updated_user) }
   end
   
-  context "encrypt_password" do 
+  context "encrypt_values" do 
     it "should encrypt the http_password" do 
-      ns_callback = Factory.build(:ns_callback, http_username: 'username', http_password: 'password')
+      ns_callback = Factory.build(:ns_callback, http_username: 'username', http_password: 'password', include_hash: 'Y', hash_header_name: 'Header', hash_algo: 'SHA-256', hash_key: '1234567890')
       ns_callback.save.should be_true
       ns_callback.reload
       ns_callback.http_password.should == "password"
+      ns_callback.hash_key.should == "1234567890"
     end
   end
   
-  context "decrypt_password" do 
+  context "decrypt_values" do 
     it "should decrypt the http_password" do 
-      ns_callback = Factory(:ns_callback, http_username: 'username', http_password: 'password')
+      ns_callback = Factory(:ns_callback, http_username: 'username', http_password: 'password', include_hash: 'Y', hash_header_name: 'Header', hash_algo: 'SHA-256', hash_key: '1234567890')
       ns_callback.http_password.should == "password"
+      ns_callback.hash_key.should == "1234567890"
     end
   end
 
@@ -54,6 +56,42 @@ describe NsCallback do
     it "should not allow to set value udf5 if udf4 is not present" do
       ns_callback = Factory.build(:ns_callback, udf1_name: 'udf1', udf1_type: 'text', udf2_name: 'udf2', udf2_type: 'text', udf3_name: 'udf2', udf3_type: 'text', udf4_name: nil, udf4_type: nil, udf5_name: 'udf2', udf5_type: 'text')
       ns_callback.errors_on(:udf4_name).should == ["can't be blank when Udf5 name is present"]
+    end
+    
+    it "should validate presence of hash_header_name, hash_algo, and hash_key if include_hash = Y" do
+      ns_callback = Factory.build(:ns_callback, include_hash: 'Y', hash_header_name: nil, hash_algo: nil, hash_key: '1234567890')
+      ns_callback.save.should == false
+      ns_callback.errors_on(:hash_header_name).should == ["can't be blank"]
+      ns_callback.errors_on(:hash_algo).should == ["can't be blank"]
+      ns_callback.errors_on(:hash_key).should == []
+
+      ns_callback = Factory.build(:ns_callback, include_hash: 'Y', hash_header_name: 'Header', hash_algo: 'SHA-256', hash_key: '1234567890')
+      ns_callback.save.should == true
+      ns_callback.errors_on(:hash_header_name).should == []
+      ns_callback.errors_on(:hash_algo).should == []
+      ns_callback.errors_on(:hash_key).should == []
+    end
+    
+    it "should validate absence of hash_header_name, hash_algo, and hash_key if include_hash = N" do
+      ns_callback = Factory.build(:ns_callback, include_hash: 'N', hash_header_name: nil, hash_algo: 'SHA-256', hash_key: '1234567890')
+      ns_callback.save.should == false
+      ns_callback.errors_on(:hash_header_name).should == []
+      ns_callback.errors_on(:hash_algo).should == ["must be blank"]
+      ns_callback.errors_on(:hash_key).should == ["must be blank"]
+
+      ns_callback = Factory.build(:ns_callback, include_hash: 'N', hash_header_name: nil, hash_algo: nil, hash_key: nil)
+      ns_callback.save.should == true
+      ns_callback.errors_on(:hash_header_name).should == []
+      ns_callback.errors_on(:hash_algo).should == []
+      ns_callback.errors_on(:hash_key).should == []
+    end
+    
+    it "should validate format of the fields" do
+      ns_callback = Factory.build(:ns_callback, include_hash: 'Y', hash_header_name: 'HeaderName01', hash_algo: 'SHA-123', hash_key: '123567890')
+      ns_callback.valid?.should == true
+      
+      ns_callback = Factory.build(:ns_callback, include_hash: 'Y', hash_header_name: 'HeaderName01@$', hash_algo: 'SHA-123!', hash_key: '123567890(*)')
+      ns_callback.valid?.should == false
     end
   end
 

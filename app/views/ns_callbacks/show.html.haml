@@ -19,6 +19,11 @@
               = @ns_callback.app_code
             %td
           %tr
+            %td.label Service
+            %td.value
+              = @ns_callback.sc_service.try(:name)
+            %td
+          %tr
             %td.label Notify URL
             %td.value
               = @ns_callback.notify_url
@@ -27,6 +32,26 @@
             %td.label Username
             %td.value
               = @ns_callback.http_username
+            %td
+          %tr
+            %td.label Include Hash?
+            %td.value
+              = @ns_callback.include_hash
+            %td
+          %tr
+            %td.label Hash Header Name
+            %td.value
+              = @ns_callback.hash_header_name
+            %td
+          %tr
+            %td.label Hash Algorithm
+            %td.value
+              = @ns_callback.hash_algo
+            %td
+          %tr
+            %td.label Hash Key
+            %td.value
+              = @ns_callback.hash_key
             %td
           %tr
             %td.label Created At

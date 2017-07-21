@@ -56,7 +56,7 @@ class NsCallbacksController < ApplicationController
 
   def ns_callback_params
     params.require(:ns_callback).permit(:lock_version, :last_action, :updated_by, :notify_url, :http_username, :http_password, 
-    :settings_cnt, :udfs_cnt, :unique_udfs_cnt, 
+    :settings_cnt, :udfs_cnt, :unique_udfs_cnt, :include_hash, :hash_header_name, :hash_algo, :hash_key, :sc_service_id,
     :setting1_name, :setting1_type, :setting1_value, 
     :setting2_name, :setting2_type, :setting2_value, 
     :setting3_name, :setting3_type, :setting3_value, 
