@@ -17,4 +17,9 @@ module FundsTransferCustomersHelper
       return ft_customer.allowed_relns.join(', ')
     end
   end
+
+  def options_for_notify_app_code
+    sc_service_id = ScService.find_by(code: 'FUNDSTRANSFER').try(:id)
+    sc_service_id.present? ? NsCallback.where(sc_service_id: sc_service_id).map { |key, value| [key.app_code, key.app_code]} : []
+  end
 end
