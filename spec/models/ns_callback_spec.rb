@@ -39,6 +39,8 @@ describe NsCallback do
       should validate_length_of(:http_username).is_at_most(50)
       should validate_length_of(:http_password).is_at_most(50)
       should validate_length_of(:notify_url).is_at_most(100)
+      should validate_length_of(:hash_header_name).is_at_most(100)
+      should validate_length_of(:hash_algo).is_at_most(100)
     end
     
     it "should not allow to set value udf2 if udf1 is not present" do

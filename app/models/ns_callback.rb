@@ -27,8 +27,8 @@ class NsCallback < ActiveRecord::Base
   validates_uniqueness_of :app_code, :scope => :approval_status
   
   validates_length_of :app_code, maximum: 50
-  validates_length_of :notify_url, maximum: 100, allow_blank: true
-  validates_length_of :http_username, :http_password, maximum: 50, allow_blank: true
+  validates_length_of :hash_header_name, :hash_algo, :notify_url, maximum: 100, allow_blank: true
+  validates_length_of :http_username, :http_password, :hash_key, maximum: 50, allow_blank: true
   
   validates_presence_of :hash_header_name, :hash_algo, :hash_key, if: "include_hash=='Y'"
   validates_absence_of :hash_header_name, :hash_algo, :hash_key, if: "include_hash=='N'"
