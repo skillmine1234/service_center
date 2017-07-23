@@ -28,8 +28,4 @@ $(document).ready(function(){
       $("#ns_callback_hash_key").prop("readOnly",false);
     }
   });
-
-  $('#ns_callback_form').bind('submit', function() {
-      $(this).find(':input').removeAttr('disabled');
-  });
 });
