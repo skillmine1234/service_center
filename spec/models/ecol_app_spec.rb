@@ -82,10 +82,6 @@ describe EcolApp do
       ecol_app.save.should == true
       ecol_app.errors_on(:setting1_value).should == []
 
-      ecol_app = Factory.build(:ecol_app, setting1_name: 'name1', setting1_type: 'text', setting1_value: '@$TEXT')
-      ecol_app.save.should == false
-      ecol_app.errors_on(:setting1_value).should == ["should not include special characters"]
-
       ecol_app = Factory.build(:ecol_app, setting1_name: 'name1', setting1_type: 'text', setting1_value: 'yterqweytweuyqtweyqteyqtwerqwyertqweuryqwieuryqwerehquqwkjhequeuqeyuqjwhegruqywerqwjkeqjwehqjweqjhwegqhwe')
       ecol_app.save.should == false
       ecol_app.errors_on(:setting1_value).should == ["is longer than maximum (100)"]
