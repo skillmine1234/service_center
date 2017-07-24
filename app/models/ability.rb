@@ -24,6 +24,7 @@ class Ability
       can :incoming_file_summary, model_name.constantize
       can :download_file, model_name.constantize
       can :view_raw_content, model_name.constantize
+      can [:audit_logs, :ecol_audit_logs], model_name.constantize
     end
     can :manage, UnapprovedRecord, approvable_type: @group.try(:model_list)
   end
@@ -66,6 +67,7 @@ class Ability
       cannot :approve_restart, model_name.constantize
       can :process_file, model_name.constantize
       can :reset, model_name.constantize
+      can [:audit_logs, :ecol_audit_logs], model_name.constantize
     end
     can :manage, UnapprovedRecord, approvable_type: @group.try(:model_list)
   end
