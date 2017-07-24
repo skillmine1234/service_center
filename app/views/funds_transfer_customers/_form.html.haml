@@ -40,7 +40,7 @@
         = error_message_for(@funds_transfer_customer, :use_std_relns, :prepend_text => "")
     .control-group
       = f.label :allowed_relns, "Allowed Relationships", :class => 'control-label', :id => "allowed_relns_lbl"
-      = f.select :allowed_relns, options_for_select(FundsTransferCustomer::RELATIONS, (params[:allowed_relns] || f.object.allowed_relns)), {}, {multiple: true}
+      = f.select :allowed_relns, options_for_select(FundsTransferCustomer::RELATIONS, f.object.allowed_relns), {}, {multiple: true}
       #msg-error
         = error_message_for(@funds_transfer_customer, :allowed_relns, :prepend_text => "")
     .control-group

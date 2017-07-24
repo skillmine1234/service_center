@@ -19,12 +19,22 @@ $(document).ready(function(){
     if ($(this).attr('checked')){
       $('#funds_transfer_customer_allowed_relns').val('');
       $('#funds_transfer_customer_allowed_relns').multiselect('disable');
+      $('#funds_transfer_customer_allowed_relns').multiselect('refresh');
       $("#funds_transfer_customer_allowed_relns").prop('required',false);
       $("#allowed_relns_lbl").text($("#allowed_relns_lbl").text().replace(mandatory_mark,'')); 
     }
     else{
       $('#funds_transfer_customer_allowed_relns').multiselect('enable');
       $("#funds_transfer_customer_allowed_relns").prop('required',true);
+      if (!$("#funds_transfer_customer_is_retail").attr('checked')){
+        $('#funds_transfer_customer_allowed_relns').multiselect('checkAll',true);
+        $('#funds_transfer_customer_allowed_relns').multiselect('refresh');
+      }
+      else{
+        $('#funds_transfer_customer_allowed_relns').multiselect('checkAll',true);
+        $('#funds_transfer_customer_allowed_relns').find("option[value=AUS]").removeAttr("selected");
+        $('#funds_transfer_customer_allowed_relns').multiselect('refresh');
+      }
       $("#allowed_relns_lbl").text(mandatory_mark + $("#allowed_relns_lbl").text().replace(/\*/g, ''));
     }
   });
