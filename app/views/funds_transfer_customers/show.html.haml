@@ -1,5 +1,5 @@
 .form-horizontal.show_form
-  .form-main-with-color{:style=>'background-color: #F1F2F8; height: 900px; padding-bottom: 2%;'}
+  .form-main-with-color{:style=>'background-color: #F1F2F8; height: 1000px; padding-bottom: 2%;'}
     #form-details
       %h3 Funds Transfer Customer Details 
       %br
@@ -151,6 +151,12 @@
               = @funds_transfer_customer.notification_sent_at.try(:strftime, "%d/%m/%Y %I:%M%p")
             %td#msg-error
               = error_message_for(@funds_transfer_customer, :notification_sent_at, :prepend_text => "")
+          %tr
+            %td.label Beneficiary Backend
+            %td.value
+              = @funds_transfer_customer.bene_backend
+            %td#msg-error
+              = error_message_for(@funds_transfer_customer, :bene_backend, :prepend_text => "")
           %tr
             %td.label Created By
             %td.value

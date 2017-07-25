@@ -10,6 +10,11 @@ class CreateScBackendSettings < ActiveRecord::Migration
       t.string :setting3, comment: 'the setting 3 for the setting'
       t.string :setting4, comment: 'the setting 4 for the setting'
       t.string :setting5, comment: 'the setting 5 for the setting'
+      t.string :setting6, comment: 'the setting 6 for the setting'
+      t.string :setting7, comment: 'the setting 7 for the setting'
+      t.string :setting8, comment: 'the setting 8 for the setting'
+      t.string :setting9, comment: 'the setting 9 for the setting'
+      t.string :setting10, comment: 'the setting 10 for the setting'
       t.datetime :created_at, null: false, comment: "the timestamp when the record was created"
       t.datetime :updated_at, null: false, comment: "the timestamp when the record was last updated"
       t.string :created_by, limit: 20, comment: "the person who creates the record"

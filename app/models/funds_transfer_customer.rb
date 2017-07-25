@@ -6,6 +6,8 @@ class FundsTransferCustomer < ActiveRecord::Base
   self.table_name = "ft_customers"
 
   RELATIONS = %w(GUR JOF JOO SOW TRU AUS)
+  
+  BENE_BACKENDS = %w(NETB UCXP)
 
   attr_accessor :use_std_relns
 
@@ -42,6 +44,8 @@ class FundsTransferCustomer < ActiveRecord::Base
   validates_presence_of :notify_app_code, :message => "is mandatory if Notify On Status Change? is Y", :if => 'notify_on_status_change?'
 
   validate :allowed_relns_values
+  
+  validate :value_of_backend_code
 
   def notify_on_status_change?
     notify_on_status_change == 'Y' ? true : false
@@ -114,5 +118,9 @@ class FundsTransferCustomer < ActiveRecord::Base
 
   def use_std_relns_value
     allowed_relns.empty? ? 'Y' : 'N'
+  end
+  
+  def value_of_backend_code
+    errors.add(:bene_backend, "should be NETB when customer is retail") if is_retail == 'Y' && bene_backend != 'NETB'
   end
 end

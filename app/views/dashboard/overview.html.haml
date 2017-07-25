@@ -492,6 +492,11 @@
         = image_tag 'jobs.png', :size => "80x80"
       %br
         = "Service Center Jobs"
+    .box  
+      = link_to '/sc_backend_settings' do
+        = image_tag 'sc_backend_settings_icon.jpeg', :size => "80x80"
+      %br
+        = "Service Center Backend Settings"
 - if @current_user.group_names.include?("rp")
   %h1 Reports
   .slide-container
