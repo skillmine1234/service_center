@@ -88,6 +88,11 @@ class ScBackendSettingsController < ApplicationController
     :setting3_name, :setting3_type, :setting3_value, 
     :setting4_name, :setting4_type, :setting4_value,
     :setting5_name, :setting5_type, :setting5_value,
+    :setting6_name, :setting6_type, :setting6_value, 
+    :setting7_name, :setting7_type, :setting7_value, 
+    :setting8_name, :setting8_type, :setting8_value, 
+    :setting9_name, :setting9_type, :setting9_value,
+    :setting10_name, :setting10_type, :setting10_value,
     :created_at, :updated_at, :created_by, :updated_by, :lock_version, :approved_id, :approved_version, :last_action)
   end
 end

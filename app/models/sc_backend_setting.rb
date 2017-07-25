@@ -24,7 +24,8 @@ class ScBackendSetting < ActiveRecord::Base
   validates_presence_of :app_id, on: :create, if: "(approved_record.nil?) || (approved_record.app_id.present?)"
   validates_presence_of :app_id, on: :update, unless: "app_id_was.blank?"
 
-  validates_uniqueness_of :backend_code, :scope => [:service_code, :app_id, :approval_status]
+  validates_uniqueness_of :backend_code, scope: [:service_code, :app_id, :approval_status], if: "app_id.present?"
+  validates_uniqueness_of :backend_code, scope: [:service_code, :approval_status], if: "!app_id.present?"
   
   validates :backend_code, :service_code, format: {with: /\A[a-z|A-Z|0-9|\.|\-]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\.|\-]}' }, length: { maximum: 50 }
   validates :app_id, format: {with: /\A[a-z|A-Z|0-9|\.|\-]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\.|\-]}' }, length: { maximum: 50 }, allow_blank: true
@@ -36,6 +37,11 @@ class ScBackendSetting < ActiveRecord::Base
   validates_presence_of :setting2_name, if: "setting2_name.blank? && !setting3_name.blank?", message: "can't be blank when Setting3 name is present"
   validates_presence_of :setting3_name, if: "setting3_name.blank? && !setting4_name.blank?", message: "can't be blank when Setting4 name is present"
   validates_presence_of :setting4_name, if: "setting4_name.blank? && !setting5_name.blank?", message: "can't be blank when Setting5 name is present"
+  validates_presence_of :setting5_name, if: "setting5_name.blank? && !setting6_name.blank?", message: "can't be blank when Setting6 name is present"
+  validates_presence_of :setting6_name, if: "setting6_name.blank? && !setting7_name.blank?", message: "can't be blank when Setting7 name is present"
+  validates_presence_of :setting7_name, if: "setting7_name.blank? && !setting8_name.blank?", message: "can't be blank when Setting8 name is present"
+  validates_presence_of :setting8_name, if: "setting8_name.blank? && !setting9_name.blank?", message: "can't be blank when Setting9 name is present"
+  validates_presence_of :setting9_name, if: "setting9_name.blank? && !setting10_name.blank?", message: "can't be blank when Setting10 name is present"
 
   private
 
@@ -46,6 +52,11 @@ class ScBackendSetting < ActiveRecord::Base
     self.settings_cnt += 1 unless setting3_name.blank?
     self.settings_cnt += 1 unless setting4_name.blank?
     self.settings_cnt += 1 unless setting5_name.blank?
+    self.settings_cnt += 1 unless setting6_name.blank?
+    self.settings_cnt += 1 unless setting7_name.blank?
+    self.settings_cnt += 1 unless setting8_name.blank?
+    self.settings_cnt += 1 unless setting9_name.blank?
+    self.settings_cnt += 1 unless setting10_name.blank?
   end
   
   def settings_should_be_correct
@@ -54,6 +65,11 @@ class ScBackendSetting < ActiveRecord::Base
     validate_setting(:setting3_value, setting3_name, setting3_type, setting3_value)
     validate_setting(:setting4_value, setting4_name, setting4_type, setting4_value)
     validate_setting(:setting5_value, setting5_name, setting5_type, setting5_value)
+    validate_setting(:setting6_value, setting6_name, setting6_type, setting6_value)
+    validate_setting(:setting7_value, setting7_name, setting7_type, setting7_value)
+    validate_setting(:setting8_value, setting8_name, setting8_type, setting8_value)
+    validate_setting(:setting9_value, setting9_name, setting9_type, setting9_value)
+    validate_setting(:setting10_value, setting10_name, setting10_type, setting10_value)
   end
   
   def validate_setting(attr_name, setting_name, setting_type, setting_value)

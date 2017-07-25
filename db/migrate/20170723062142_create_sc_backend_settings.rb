@@ -1,6 +1,6 @@
 class CreateScBackendSettings < ActiveRecord::Migration
   def change
-    create_table :sc_backend_settings do |t|
+    create_table :sc_backend_settings, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.string :backend_code, null: false, limit: 50, comment: 'the backend code for the setting'
       t.string :service_code, null: false, limit: 50, comment: 'the service code for the setting'
       t.string :app_id, limit: 50, comment: 'the app_id for the setting'
