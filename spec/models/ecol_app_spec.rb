@@ -88,9 +88,9 @@ describe EcolApp do
 
       ecol_app = Factory.build(:ecol_app, setting1_name: 'name1', setting1_type: 'date', setting1_value: '2014:12:12')
       ecol_app.save.should == false
-      ecol_app.errors_on(:setting1_value).should == ["invalid format, the correct format is dd/mm/yyyy", "is not a date"]
+      ecol_app.errors_on(:setting1_value).should == ["invalid format, the correct format is yyyy-mm-dd", "is not a date"]
 
-      ecol_app = Factory.build(:ecol_app, setting1_name: 'name1', setting1_type: 'date', setting1_value: '12/12/2016')
+      ecol_app = Factory.build(:ecol_app, setting1_name: 'name1', setting1_type: 'date', setting1_value: '2016-12-12')
       ecol_app.save.should == true
       ecol_app.errors_on(:setting1_value).should == []
     end

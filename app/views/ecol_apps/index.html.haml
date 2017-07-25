@@ -15,10 +15,12 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       App Code
     %th{:style=>'text-align:left; background-color: lightblue;'}
+      Customer Code			
+    %th{:style=>'text-align:left; background-color: lightblue;'}
       Validate URL
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Notify URL
-
+			
   .tbody
     - @ecol_apps.each do |ecol_app|
       %tr
@@ -28,6 +30,8 @@
           = link_to 'Edit', edit_ecol_app_path(ecol_app)
         %td{:style=>'text-align:left;'}
           = ecol_app.app_code
+        %td{:style=>'text-align:left;'}
+          = ecol_app.customer_code										
         %td{:style=>'text-align:left;'}
           = ecol_app.validate_url
         %td{:style=>'text-align:left;'}
