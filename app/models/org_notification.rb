@@ -5,7 +5,7 @@ module OrgNotification
   end
 
   def send_notification_on_approval
-    if approval_status == 'A' && last_action == 'C'
+    if approval_status == 'A'
       notify_customer('Org Setup Completed') unless Rails.env.test?
     end
   rescue
