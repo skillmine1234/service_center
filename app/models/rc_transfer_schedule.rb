@@ -21,12 +21,14 @@ class RcTransferSchedule < ActiveRecord::Base
   
   before_validation :set_interval_in_mins, if: "interval_unit=='Days'"
 
-  validates_presence_of :code, :debit_account_no, :bene_account_no, :is_enabled, :acct_threshold_amt, :bene_account_ifsc, :max_retries, :retry_in_mins, :rc_app_id
+  validates_presence_of :code, :debit_account_no, :is_enabled, :max_retries, :retry_in_mins, :rc_app_id
+  validates_presence_of :bene_account_no, :acct_threshold_amt, :bene_account_ifsc, :bene_name, if: "txn_kind=='FT'", message: "can't be blank when Transaction Kind is FT"
   validates :rc_app, :presence => true
-  validates :bene_account_ifsc, format: {with: /\A[A-Z|a-z]{4}[0][A-Za-z0-9]{6}+\z/, message: "Invalid format, expected format is : {[A-Z|a-z]{4}[0][A-Za-z0-9]{6}}" }
+  validates :bene_account_ifsc, format: {with: /\A[A-Z|a-z]{4}[0][A-Za-z0-9]{6}+\z/, message: "Invalid format, expected format is : {[A-Z|a-z]{4}[0][A-Za-z0-9]{6}}" }, allow_blank: true
 
   validates :code, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}' }, length: {maximum: 20}
-  validates :debit_account_no, :bene_account_no, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9]}' }, length: {minimum: 15, maximum: 20}
+  validates :debit_account_no, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9]}' }, length: {minimum: 15, maximum: 20}
+  validates :bene_account_no, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9]}' }, length: {minimum: 15, maximum: 20}, allow_blank: true
   validates :notify_mobile_no, :numericality => {:only_integer => true}, length: {minimum: 10, maximum: 10}, allow_blank: true
 
   validates_uniqueness_of :code, :scope => :approval_status

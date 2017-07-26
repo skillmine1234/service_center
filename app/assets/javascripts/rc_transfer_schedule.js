@@ -11,4 +11,33 @@ $(document).ready(function(){
     get_rc_app($('#rc_transfer_schedule_rc_app_id').val());
   });
 
+  $('#rc_transfer_schedule_txn_kind').on('change',function(){
+    if ($(this).val() != 'FT') {
+      $('#rc_transfer_schedule_bene_account_no').val('');
+      $('#rc_transfer_schedule_bene_account_no').prop('readOnly',true);
+      $('#rc_transfer_schedule_bene_account_ifsc').val('');
+      $('#rc_transfer_schedule_bene_account_ifsc').prop('readOnly',true);
+      $('#rc_transfer_schedule_bene_name').val('');
+      $('#rc_transfer_schedule_bene_name').prop('readOnly',true);
+      $('#rc_transfer_schedule_acct_threshold_amt').val('');
+      $('#rc_transfer_schedule_acct_threshold_amt').prop('readOnly',true);
+    }
+    else {
+      $('#rc_transfer_schedule_bene_account_no').prop('readOnly',false);
+      $('#rc_transfer_schedule_bene_account_ifsc').prop('readOnly',false);
+      $('#rc_transfer_schedule_bene_name').prop('readOnly',false);
+      $('#rc_transfer_schedule_acct_threshold_amt').prop('readOnly',false);
+    }
+  });
+
+  if ($('#rc_transfer_schedule_txn_kind').val() != 'FT') {
+    $('#rc_transfer_schedule_bene_account_no').val('');
+    $('#rc_transfer_schedule_bene_account_no').prop('readOnly',true);
+    $('#rc_transfer_schedule_bene_account_ifsc').val('');
+    $('#rc_transfer_schedule_bene_account_ifsc').prop('readOnly',true);
+    $('#rc_transfer_schedule_bene_name').val('');
+    $('#rc_transfer_schedule_bene_name').prop('readOnly',true);
+    $('#rc_transfer_schedule_acct_threshold_amt').val('');
+    $('#rc_transfer_schedule_acct_threshold_amt').prop('readOnly',true);
+  }
 });

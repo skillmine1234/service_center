@@ -7,6 +7,7 @@ FactoryGirl.define do
     bene_account_no "123456789877734"
     last_run_at "2016-10-12 11:33:24"
     notify_mobile_no "9988776655"
+    txn_kind "BALINQ"
     created_by {Factory(:user).id}
     updated_by {Factory(:user).id}
     lock_version 1
