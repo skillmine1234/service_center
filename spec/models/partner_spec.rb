@@ -364,4 +364,16 @@ describe Partner do
   #   end
   # end
   
+  context "auto_resch_and_service_name" do
+    it "should raise error when service_name is 'INW' and auto_reschdl_to_next_wrk_day is 'Y'" do      
+      partner = Factory.build(:partner, service_name: 'INW', auto_reschdl_to_next_wrk_day: 'Y')
+      partner.errors_on(:auto_reschdl_to_next_wrk_day).should == ['Should not be checked when Service Name is INW']
+    end
+    
+    it "should not raise error when service_name is 'INW' and auto_reschdl_to_next_wrk_day is 'N'" do      
+      partner = Factory.build(:partner, service_name: 'INW', auto_reschdl_to_next_wrk_day: 'N')
+      partner.errors_on(:auto_reschdl_to_next_wrk_day).should == []
+    end
+  end
+  
 end

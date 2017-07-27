@@ -38,7 +38,8 @@ class Partner < ActiveRecord::Base
   
   validate :should_allow_neft?, if: "allow_neft=='Y'"
   validate :should_allow_imps?, if: "allow_imps=='Y'"
-
+  validate :auto_resch_and_service_name
+  
   after_create :create_lcy_rate
 
   alias_attribute :is_enabled, :enabled
@@ -47,6 +48,10 @@ class Partner < ActiveRecord::Base
     if partner_lcy_rate.nil?
       PartnerLcyRate.create(partner_code: code, rate: 1, approval_status: 'A')
     end
+  end
+  
+  def auto_resch_and_service_name
+    errors.add(:auto_reschdl_to_next_wrk_day, "Should not be checked when Service Name is INW") if service_name == 'INW' and auto_reschdl_to_next_wrk_day == "Y"
   end
 
   def whitelisting

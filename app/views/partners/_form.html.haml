@@ -128,6 +128,11 @@
       #msg-error
         = error_message_for(@partner, :service_name, :prepend_text => "")
     .control-group
+      = f.label :auto_reschdl_to_next_wrk_day, "Auto Reschedule To Next Work Day?", :class => 'control-label'
+      = f.check_box :auto_reschdl_to_next_wrk_day, {},"Y","N"
+      #msg-error
+        = error_message_for(@partner, :auto_reschdl_to_next_wrk_day, :prepend_text => "")
+    .control-group
       = f.label :guideline_id, "*Guideline", :class => 'control-label'
       = f.select :guideline_id, InwGuideline.all.map { |key, value| [key.code, key.id] }
       #msg-error
