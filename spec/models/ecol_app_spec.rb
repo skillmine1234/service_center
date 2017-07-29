@@ -43,16 +43,18 @@ describe EcolApp do
       ecol_app.errors[:base].should == ["HTTP Password can't be blank if HTTP Username is present"]
     end
     it "should validate presence of customer_code if the app_code is standard" do
-      ecol_app = Factory.build(:ecol_app, app_code: 'ECSTDX', customer_code: nil)
+      ecol_app = Factory.build(:ecol_app, app_code: 'ECSTDX01', customer_code: nil)
       ecol_app.save.should == false
       ecol_app.errors_on(:customer_code).should == ["can't be blank"]
       
-      ecol_app = Factory.build(:ecol_app, app_code: 'ECSTDX', customer_code: 'CUST01')
+      ecol_customer = Factory(:ecol_customer, code: 'CUST01', val_method: 'W', approval_status: 'A')
+      ecol_app = Factory.build(:ecol_app, app_code: 'ECSTDX01', customer_code: ecol_customer.code, validate_url: 'https://google.com')
       ecol_app.save.should == true
       ecol_app.errors_on(:customer_code).should == []
     end
     it "should validate that customer_code is not present if the app_code is not standard" do
-      ecol_app = Factory.build(:ecol_app, app_code: 'ABC_CODE2', customer_code: 'CUST01')
+      ecol_customer = Factory(:ecol_customer, code: 'CUST01', val_method: 'W', approval_status: 'A')
+      ecol_app = Factory.build(:ecol_app, app_code: 'ABC_CODE2', customer_code: ecol_customer.code, validate_url: 'https://google.com')
       ecol_app.save.should == false
       ecol_app.errors[:base].should == ["Customer Code is not allowed if the App Code is not Standard"]
       
@@ -93,6 +95,27 @@ describe EcolApp do
       ecol_app = Factory.build(:ecol_app, setting1_name: 'name1', setting1_type: 'date', setting1_value: '2016-12-12')
       ecol_app.save.should == true
       ecol_app.errors_on(:setting1_value).should == []
+    end
+    it "should match customer" do
+      ecol_customer = Factory(:ecol_customer, code: 'CUST01QW', val_method: 'N', cust_alert_on: 'N', approval_status: 'A')
+      ecol_app = Factory.build(:ecol_app, app_code: 'ECSTDX01', customer_code: ecol_customer.code, notify_url: nil, validate_url: nil)
+      ecol_app.save.should be_false
+      ecol_app.errors_on(:base).should == ["This customer neither supports validation nor notification"]
+      
+      ecol_customer = Factory(:ecol_customer, code: 'CUST02QW', val_method: 'W', cust_alert_on: 'N', approval_status: 'A')
+      ecol_app = Factory.build(:ecol_app, app_code: 'ECSTDX01', customer_code: ecol_customer.code, notify_url: nil, validate_url: nil)
+      ecol_app.save.should be_false
+      ecol_app.errors_on(:base).should == ["Validate URL can't be blank since the customer setup requires validation"]
+      
+      ecol_customer = Factory(:ecol_customer, code: 'CUST03QW', val_method: 'W', cust_alert_on: 'A', approval_status: 'A')
+      ecol_app = Factory.build(:ecol_app, app_code: 'ECSTDX01', customer_code: ecol_customer.code, notify_url: nil, validate_url: "https://google.com")
+      ecol_app.save.should be_false
+      ecol_app.errors_on(:base).should == ["Notify URL can't be blank since the customer setup requires notification"]
+      
+      ecol_customer = Factory(:ecol_customer, code: 'CUST04QW', val_method: 'W', cust_alert_on: 'A', approval_status: 'A')
+      ecol_app = Factory.build(:ecol_app, app_code: 'ECSTDX01', customer_code: ecol_customer.code, notify_url: 'https://google.com', validate_url: "https://google.com")
+      ecol_app.save.should be_true
+      ecol_app.errors_on(:base).should == []
     end
   end
 

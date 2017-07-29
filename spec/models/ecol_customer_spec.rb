@@ -91,15 +91,14 @@ describe EcolCustomer do
     it "should validate app_code" do 
       ecol_customer = Factory.build(:ecol_customer, :val_method => 'W', :app_code => nil)
       ecol_customer.should_not be_valid
-      ecol_customer.errors_on(:app_code).should == ["Can't be blank if Validation Method is Web Service"]
-      ecol_customer.app_code = 'APP123'
-      ecol_customer.errors_on(:app_code).should == []
-      
-      ecol_customer = Factory.build(:ecol_customer, :val_method => 'W', cust_alert_on: 'A', app_code: '12345')
+      ecol_customer.errors_on(:app_code).should == ["Can't be blank if Validation Method is Web Service or Customer Alert is On"]
+
+      ecol_customer = Factory.build(:ecol_customer, :cust_alert_on => 'A', :app_code => nil)
       ecol_customer.should_not be_valid
-      ecol_customer.errors_on(:app_code).should == ["is invalid"]
-      ecol_app = Factory(:ecol_app, app_code: '12345', approval_status: 'A')
-      ecol_customer.app_code = '12345'
+      ecol_customer.errors_on(:app_code).should == ["Can't be blank if Validation Method is Web Service or Customer Alert is On"]
+      
+      ecol_customer = Factory.build(:ecol_customer, :val_method => 'W', :cust_alert_on => 'A', :app_code => 'APP12')
+      ecol_customer.should be_valid
       ecol_customer.errors_on(:app_code).should == []
     end
   end

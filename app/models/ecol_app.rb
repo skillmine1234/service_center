@@ -1,7 +1,7 @@
 class EcolApp < ActiveRecord::Base
   include Approval2::ModelAdditions
   
-  STD_APP_CODES = ['ECSTDX','ECSTDJ']
+  STD_APP_CODES = ['ECSTDX01','ECSTDJ01']
   SETTING_TYPES = ['text','number','date']
 
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
@@ -23,6 +23,7 @@ class EcolApp < ActiveRecord::Base
 
   validates_presence_of :app_code
   validates_presence_of :customer_code, if: "EcolApp::STD_APP_CODES.include?(app_code)"
+  validate :match_customer, if: "customer_code.present?"
   
   validates_uniqueness_of :app_code, :scope => [:customer_code, :approval_status]
   validates_uniqueness_of :customer_code, :scope => :approval_status, if: "customer_code.present?"
@@ -100,5 +101,16 @@ class EcolApp < ActiveRecord::Base
   
   def customer_code_be_nil
     errors[:base] << "Customer Code is not allowed if the App Code is not Standard" if customer_code.present?
+  end
+
+  def match_customer
+    customer = EcolCustomer.find_by(code: customer_code, approval_status: 'A')
+    if customer.present?
+      errors[:base] << "This customer neither supports validation nor notification" if customer.val_method == 'N' && customer.cust_alert_on == 'N'
+      errors[:base] << "Validate URL can't be blank since the customer setup requires validation" if customer.val_method == 'W' && validate_url.blank?
+      errors[:base] << "Notify URL can't be blank since the customer setup requires notification" if customer.cust_alert_on != 'N' && notify_url.blank?
+    else
+      errors[:base] << "Customer setup should be present in EcolCustomer for this code"
+    end
   end
 end
