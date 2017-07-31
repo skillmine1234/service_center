@@ -46,7 +46,7 @@
           %tr
             %td.label Allowed Relationships
             %td.value
-              = @funds_transfer_customer.allowed_relns
+              = get_allowed_relns(@funds_transfer_customer)
             %td#msg-error
               = error_message_for(@funds_transfer_customer, :allowed_relns, :prepend_text => "")
           %tr
