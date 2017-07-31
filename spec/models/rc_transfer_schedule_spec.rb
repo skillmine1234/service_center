@@ -13,7 +13,7 @@ describe RcTransferSchedule do
   end
   
   context 'validation' do
-    [:code, :debit_account_no, :bene_account_no, :is_enabled, :acct_threshold_amt, :bene_account_ifsc, :max_retries, :retry_in_mins, :rc_app_id].each do |att|
+    [:code, :debit_account_no, :is_enabled, :max_retries, :retry_in_mins, :rc_app_id].each do |att|
       it { should validate_presence_of(att) }
     end
 
@@ -28,6 +28,14 @@ describe RcTransferSchedule do
 
     it do 
       should validate_uniqueness_of(:code).scoped_to(:approval_status)
+    end
+    
+    it do
+      rc_transfer_schedule = Factory.build(:rc_transfer_schedule, bene_account_no: nil, bene_account_ifsc: 'YESB0123456', bene_name: nil, acct_threshold_amt: nil, txn_kind: 'FT')
+      rc_transfer_schedule.save.should == false
+      rc_transfer_schedule.errors_on(:bene_account_no).should == ["can't be blank when Transaction Kind is FT"]
+      rc_transfer_schedule.errors_on(:bene_name).should == ["can't be blank when Transaction Kind is FT"]
+      rc_transfer_schedule.errors_on(:acct_threshold_amt).should == ["can't be blank when Transaction Kind is FT"]
     end
     
     it { should validate_numericality_of(:interval_in_mins) }

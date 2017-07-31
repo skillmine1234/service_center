@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   
   rescue_from CanCan::AccessDenied do |exception|
     flash[:alert] = "Access denied. You are not authorized to access the requested page."
-    redirect_to root_path
+    redirect_to(request.referrer || root_path)
   end
 
   before_filter do
