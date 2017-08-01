@@ -1,6 +1,12 @@
 %br
+= link_to 'New BM Rule', new_bm_rule_path
+%br
+%br
 %h1 Bill Payment Rules
 %br
+= "Total Count: #{@bm_rules_count}"
+%br
+= will_paginate @bm_rules
 %table.table.table-bordered.table-striped.table-hover
   .thead
     %th{:style=>'text-align:left; background-color: lightblue;'}

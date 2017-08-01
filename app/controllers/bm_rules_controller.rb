@@ -48,7 +48,7 @@ class BmRulesController < ApplicationController
   end
 
   def index
-    bm_rules = BmRule.unscoped.where("approval_status=?",'U').order("id desc")
+    bm_rules = (params[:approval_status].present? and params[:approval_status] == 'U') ? BmRule.unscoped.where("approval_status=?",'U').order("id desc") : BmRule.order("id desc")
     @bm_rules_count = bm_rules.count
     @bm_rules = bm_rules.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
@@ -87,7 +87,7 @@ class BmRulesController < ApplicationController
   def bm_rule_params
     params.require(:bm_rule).permit(:cod_acct_no, :customer_id, :bene_acct_no, :bene_account_ifsc,
                                     :neft_sender_ifsc, :lock_version, :approval_status, :last_action,
-                                    :approved_version, :approved_id, :service_id, :narrative_prefix, :user_id)
+                                    :approved_version, :approved_id, :service_id, :narrative_prefix, :user_id, :app_id)
   end
 
 end

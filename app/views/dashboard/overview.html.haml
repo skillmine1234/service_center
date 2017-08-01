@@ -161,16 +161,10 @@
         = "Csv Exports"
   .slide-container
     .box
-      - if !BmRule.first.nil?
-        = link_to edit_bm_rule_path(BmRule.first) do
-          = image_tag 'bm_rule.png', :size => "80x80"
-        %br
-          = "Bill Payment Rules"
-      - else
-        = link_to bm_rule_error_msg_path do
-          = image_tag 'rules.jpeg', :size => "80x80"
-        %br
-          = "Bill Payment Rules"
+      = link_to '/bm_rules' do
+        = image_tag 'bm_rule.png', :size => "80x80"
+      %br
+        = "Bill Payment Rules"
     .box  
       = link_to '/bm_billers' do
         = image_tag 'biller_icon.jpg', :size => "80x80"

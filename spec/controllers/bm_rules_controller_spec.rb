@@ -63,10 +63,17 @@ describe BmRulesController do
   end
 
   describe "GET index" do
-    it "assigns all bm_rules with approval_status 'U' as @bm_rules" do
+    it "assigns all bm_rules with approval_status 'A' as @bm_rules" do
       bm_rule1 = Factory(:bm_rule, :approval_status => 'A')
       bm_rule2 = Factory(:bm_rule, :approval_status => 'U')
       get :index
+      assigns(:bm_rules).should eq([bm_rule1])
+    end
+    
+    it "assigns all bm_rules with approval_status 'U' as @bm_rules" do
+      bm_rule1 = Factory(:bm_rule, :approval_status => 'A')
+      bm_rule2 = Factory(:bm_rule, :approval_status => 'U')
+      get :index, approval_status: 'U'
       assigns(:bm_rules).should eq([bm_rule2])
     end
   end
