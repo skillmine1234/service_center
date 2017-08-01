@@ -12,6 +12,8 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
+      App ID    
+    %th{:style=>'text-align:left; background-color: lightblue;'}
       Aggregator Pool Account
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Customer ID
@@ -28,6 +30,8 @@
           = link_to 'Show', bm_rule
         %td{:style=>'text-align:left;'}
           = link_to 'Edit', edit_bm_rule_path(bm_rule)
+        %td{:style=>'text-align:left;'}
+          = bm_rule.app_id
         %td{:style=>'text-align:left;'}
           = bm_rule.cod_acct_no
         %td{:style=>'text-align:left;'}
