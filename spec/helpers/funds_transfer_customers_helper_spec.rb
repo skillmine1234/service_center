@@ -16,5 +16,18 @@ describe FundsTransferCustomersHelper do
       find_funds_transfer_customers({:name => 'JOHN'}).should == [funds_transfer_customer]
       find_funds_transfer_customers({:name => 'OOOO'}).should == []
     end
-  end  
+  end
+
+  context "get_allowed_relns" do
+    it "should return allowed relations for a customer" do
+      funds_transfer_customer = Factory(:funds_transfer_customer, approval_status: "A", is_retail: 'Y', allowed_relns: nil)
+      get_allowed_relns(funds_transfer_customer).should ==  "GUR, JOF, JOO, SOW, TRU"
+      
+      funds_transfer_customer = Factory(:funds_transfer_customer, approval_status: "A", is_retail: 'N', allowed_relns: nil)
+      get_allowed_relns(funds_transfer_customer).should ==  "GUR, JOF, JOO, SOW, TRU, AUS"
+      
+      funds_transfer_customer = Factory(:funds_transfer_customer, approval_status: "A", use_std_relns: 'N', allowed_relns: ['GUR','JOF','AUS'])
+      get_allowed_relns(funds_transfer_customer).should ==  "GUR, JOF, AUS"
+    end
+  end
 end

@@ -9,12 +9,12 @@ module FundsTransferCustomersHelper
   def get_allowed_relns(ft_customer)
     if ft_customer.allowed_relns.empty?
       if ft_customer.is_retail == 'Y'
-        return "GUR,JOF,JOO,SOW,TRU" 
+        return "GUR, JOF, JOO, SOW, TRU"
       else
-        return "GUR,JOF,JOO,SOW,TRU,AUS"
+        return "GUR, JOF, JOO, SOW, TRU, AUS"
       end
     else
-      return ft_customer.allowed_relns.join(',')
+      return ft_customer.allowed_relns.join(', ')
     end
   end
 end
