@@ -89,11 +89,20 @@ describe NsCallback do
     end
     
     it "should validate format of the fields" do
-      ns_callback = Factory.build(:ns_callback, include_hash: 'Y', hash_header_name: 'HeaderName01', hash_algo: 'SHA-123', hash_key: '123567890')
+      ns_callback = Factory.build(:ns_callback, include_hash: 'Y', hash_header_name: 'HeaderName01', hash_algo: 'SHA-256', hash_key: '123567890')
       ns_callback.valid?.should == true
       
-      ns_callback = Factory.build(:ns_callback, include_hash: 'Y', hash_header_name: 'HeaderName01@$', hash_algo: 'SHA-123!', hash_key: '123567890(*)')
+      ns_callback = Factory.build(:ns_callback, include_hash: 'Y', hash_header_name: 'HeaderName01@$', hash_algo: 'SHA-256!', hash_key: '123567890(*)')
       ns_callback.valid?.should == false
+    end
+    
+    it "should check value of hash algo" do
+      ns_callback = Factory.build(:ns_callback, include_hash: 'Y', hash_header_name: 'HeaderName01', hash_algo: 'SHA-123', hash_key: '123567890')
+      ns_callback.valid?.should == false
+      ns_callback.errors_on(:hash_algo).should == ["Only SHA-256 is allowed"]
+      
+      ns_callback = Factory.build(:ns_callback, include_hash: 'Y', hash_header_name: 'HeaderName01', hash_algo: 'SHA-256', hash_key: '123567890')
+      ns_callback.valid?.should == true
     end
   end
 

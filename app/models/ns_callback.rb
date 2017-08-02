@@ -1,5 +1,7 @@
 class NsCallback < ActiveRecord::Base
   include Approval2::ModelAdditions
+  
+  ALLOWED_HASH_ALGO = 'SHA-256'
 
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
@@ -36,6 +38,7 @@ class NsCallback < ActiveRecord::Base
   
   before_save :set_settings_cnt, :set_udfs_cnt
   validate :password_should_be_present
+  validate :hash_algo_should_be_allowed, if: "hash_algo.present?"
   
   before_save :encrypt_values
   after_save :decrypt_values
@@ -73,6 +76,10 @@ class NsCallback < ActiveRecord::Base
 
   def password_should_be_present
     errors[:base] << "HTTP Password can't be blank if HTTP Username is present" if self.http_username.present? and (self.http_password.blank? or self.http_password.nil?)
+  end
+
+  def hash_algo_should_be_allowed
+    errors.add(:hash_algo, "Only #{ALLOWED_HASH_ALGO} is allowed") if hash_algo != ALLOWED_HASH_ALGO
   end
   
 end
