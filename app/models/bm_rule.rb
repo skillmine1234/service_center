@@ -5,7 +5,7 @@ class BmRule < ActiveRecord::Base
   belongs_to :created_user, :foreign_key => 'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key => 'updated_by', :class_name => 'User'
   
-  validates_uniqueness_of :app_id, scope: [:approval_status], if: "app_id.present?"
+  validates_uniqueness_of :app_id, scope: [:approval_status]
   
   validates_presence_of :app_id, on: :create, if: "(approved_record.nil?) || (approved_record.app_id.present?)"
   validates_presence_of :app_id, on: :update, unless: "app_id_was.blank?"

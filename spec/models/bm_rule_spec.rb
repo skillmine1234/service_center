@@ -15,8 +15,9 @@ describe BmRule do
     end
 
     it do
-      bm_rule = Factory(:bm_rule)
+      bm_rule = Factory(:bm_rule, approval_status: 'A')
       should validate_length_of(:app_id).is_at_most(50)
+      should validate_uniqueness_of(:app_id).scoped_to(:approval_status)
     end
 
     it "should validate_unapproved_record" do
