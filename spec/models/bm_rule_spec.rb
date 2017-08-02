@@ -10,7 +10,7 @@ describe BmRule do
   end
 
   context 'validation' do
-    [:cod_acct_no, :customer_id, :bene_acct_no, :bene_account_ifsc, :neft_sender_ifsc, :lock_version, :approval_status].each do |att|
+    [:cod_acct_no, :customer_id, :bene_acct_no, :bene_account_ifsc, :neft_sender_ifsc, :lock_version, :approval_status, :traceid_prefix, :source_id].each do |att|
       it { should validate_presence_of(att) }
     end
 
