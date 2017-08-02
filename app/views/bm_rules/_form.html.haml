@@ -37,6 +37,16 @@
       = f.text_field :neft_sender_ifsc, :maxlength => 11
       #msg-error
         = error_message_for(@bm_rule, :neft_sender_ifsc, :prepend_text => "")
+    .control-group
+      = f.label :source_id, "*Source ID", :class => 'control-label'
+      = f.text_field :source_id, :maxlength => 50
+      #msg-error
+        = error_message_for(@bm_rule, :source_id, :prepend_text => "")
+    .control-group
+      = f.label :traceid_prefix, "*Trace ID Prefix", :class => 'control-label'
+      = f.number_field :traceid_prefix
+      #msg-error
+        = error_message_for(@bm_rule, :traceid_prefix, :prepend_text => "")
 
   .form-actions
     - (f.object.new_record? and f.object.cod_acct_no.nil?) ? label_name = "Create" : label_name = "Update"

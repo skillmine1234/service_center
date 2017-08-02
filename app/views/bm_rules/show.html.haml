@@ -56,6 +56,18 @@
             %td#msg-error
               = error_message_for(@bm_rule, :neft_sender_ifsc, :prepend_text => "")
           %tr
+            %td.label Source ID
+            %td.value
+              = @bm_rule.source_id
+            %td#msg-error
+              = error_message_for(@bm_rule, :source_id, :prepend_text => "")
+          %tr
+            %td.label Trace ID Prefix
+            %td.value
+              = @bm_rule.traceid_prefix
+            %td#msg-error
+              = error_message_for(@bm_rule, :traceid_prefix, :prepend_text => "")
+          %tr
             %td.label Updated By
             %td.value
               = @bm_rule.updated_user.try(:username)
