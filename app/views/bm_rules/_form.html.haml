@@ -9,7 +9,7 @@
     = f.hidden_field :approved_version
     .control-group
       = f.label :app_id, "*App ID", :class => 'control-label'
-      = f.text_field :app_id, :maxlength => 50
+      = f.select(:app_id, BmApp.all.map { |key, value| [key.app_id, key.app_id] }, prompt: 'Select')
       #msg-error
         = error_message_for(@bm_rule, :app_id, :prepend_text => "")
     .control-group

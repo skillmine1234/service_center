@@ -10,7 +10,7 @@ class BmRule < ActiveRecord::Base
   validates_presence_of :app_id, on: :create, if: "(approved_record.nil?) || (approved_record.app_id.present?)"
   validates_presence_of :app_id, on: :update, unless: "app_id_was.blank?"
 
-  validates_presence_of :cod_acct_no, :customer_id, :bene_acct_no, :bene_account_ifsc, :neft_sender_ifsc, :lock_version, :approval_status
+  validates_presence_of :cod_acct_no, :customer_id, :bene_acct_no, :bene_account_ifsc, :neft_sender_ifsc, :lock_version, :approval_status, :source_id, :traceid_prefix
   validates :cod_acct_no, :bene_acct_no, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => "Invalid format, expected format is : {[a-z|A-Z|0-9]}" }, length: {maximum: 16, minimum: 1}
   validates :customer_id, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => "Invalid format, expected format is : {[a-z|A-Z|0-9]}" }, length: {maximum: 15, minimum: 1}
   validates :bene_account_ifsc, :neft_sender_ifsc, format: {with: /\A[A-Z]{4}[0][0-9]{6}+\z/, :message => "Invalid format, expected format is : {[A-Z]{4}[0][0-9]{6}}" }
