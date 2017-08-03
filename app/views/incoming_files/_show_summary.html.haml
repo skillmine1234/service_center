@@ -221,15 +221,17 @@
         %td{:style=>'text-align:left;'}
           = @incoming_file.record_count || 0
         %td{:style=>'text-align:left;'}
+          = link_to @incoming_file.completed_record_count || 0, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'COMPLETED')
+        %td{:style=>'text-align:left;'}
           = link_to @incoming_file.bad_record_count || 0, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'BAD')
+        %td{:style=>'text-align:left;'}
+          = link_to @incoming_file.failed_record_count || 0, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'FAILED')
         %td{:style=>'text-align:left;'}
           = link_to @incoming_file.timedout_record_count || 0, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'TIMED OUT')
         %td{:style=>'text-align:left;'}
           = link_to @incoming_file.skipped_record_count || 0, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'SKIPPED')
         %td{:style=>'text-align:left;'}
-          = link_to @incoming_file.completed_record_count || 0, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'COMPLETED')
-        %td{:style=>'text-align:left;'}
-          = link_to @incoming_file.failed_record_count || 0, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'FAILED')
+          = '-'
         %td{:style=>'text-align:left;'}
           = '-'
 
