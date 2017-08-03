@@ -42,3 +42,15 @@ ScBackendSetting.seed_once(:backend_code, :service_code, :app_id) do |s|
   s.approval_status = 'A'
 end
 
+ScBackendSetting.seed_once(:backend_code, :service_code, :app_id) do |s|
+  s.backend_code = 'FCR'
+  s.service_code = 'SBS'
+  s.app_id = nil
+  s.setting1_name = 'userId'
+  s.setting1_type = 'text'
+  s.setting1_value = 'ESBSUSER'
+  s.created_by = 'Q'
+  s.created_at = Time.zone.now
+  s.approval_status = 'A'
+end
+
