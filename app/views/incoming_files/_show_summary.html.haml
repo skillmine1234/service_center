@@ -215,7 +215,7 @@
       /   %td{:style=>'text-align:left;'}
       /     = '-'
 
-      - if @incoming_file.incoming_file_type.records_table.empty? && @incoming_file.service_name == 'IMTSERVICE'
+      - if @incoming_file.incoming_file_type.records_table.nil? && @incoming_file.service_name == 'IMTSERVICE'
         %td{:style=>'text-align:left;'}
           = "IMT Transaction"
         %td{:style=>'text-align:left;'}
@@ -233,7 +233,7 @@
         %td{:style=>'text-align:left;'}
           = '-'
 
-      - elsif !@incoming_file.incoming_file_type.records_table.empty?
+      - elsif !@incoming_file.incoming_file_type.records_table.nil?
         - table = @incoming_file.incoming_file_type.records_table
         %td{:style=>'text-align:left;'}
           = @incoming_file.file_type
