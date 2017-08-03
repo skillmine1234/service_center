@@ -218,21 +218,21 @@
       - if @incoming_file.incoming_file_type.records_table.nil? && @incoming_file.service_name == 'IMTSERVICE'
         %td{:style=>'text-align:left;'}
           = "IMT Transaction"
-        %td{:style=>'text-align:left;'}
+        %td{:style=>'text-align:center; border-left: 3px solid #ffffff;'}
           = @incoming_file.record_count || 0
-        %td{:style=>'text-align:left;'}
+        %td{:style=>'text-align:center;'}
           = link_to @incoming_file.completed_record_count || 0, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'COMPLETED')
-        %td{:style=>'text-align:left;'}
+        %td{:style=>'text-align:center;'}
           = link_to @incoming_file.bad_record_count || 0, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'BAD')
-        %td{:style=>'text-align:left;'}
+        %td{:style=>'text-align:center; border-right: 3px solid #ffffff;'}
           = link_to @incoming_file.failed_record_count || 0, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'FAILED')
-        %td{:style=>'text-align:left;'}
+        %td{:style=>'text-align:center;'}
           = link_to @incoming_file.timedout_record_count || 0, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'TIMED OUT')
-        %td{:style=>'text-align:left;'}
+        %td{:style=>'text-align:center; border-left: 3px solid #ffffff;'}
           = link_to @incoming_file.skipped_record_count || 0, incoming_file_records_path(:incoming_file_id => @incoming_file.id, :status => 'SKIPPED')
-        %td{:style=>'text-align:left;'}
+        %td{:style=>'text-align:center;'}
           = '-'
-        %td{:style=>'text-align:left;'}
+        %td{:style=>'text-align:center; border-right: 3px solid #ffffff;'}
           = '-'
 
       - elsif !@incoming_file.incoming_file_type.records_table.nil?
