@@ -11,6 +11,10 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       App Code
     %th{:style=>'text-align:left; background-color: lightblue;'}
+      Service Code
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Include Hash?
+    %th{:style=>'text-align:left; background-color: lightblue;'}
       Notify URL
 
   .tbody
@@ -22,5 +26,9 @@
           = link_to 'Edit', edit_ns_callback_path(ns_callback)
         %td{:style=>'text-align:left;'}
           = ns_callback.app_code
+        %td{:style=>'text-align:left;'}
+          = ns_callback.sc_service.try(:name)
+        %td{:style=>'text-align:left;'}
+          = ns_callback.include_hash
         %td{:style=>'text-align:left;'}
           = ns_callback.notify_url

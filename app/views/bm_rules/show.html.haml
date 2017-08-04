@@ -20,6 +20,12 @@
             %td#msg-error
               = error_message_for(@bm_rule, :base, :prepend_text => "")
           %tr
+            %td.label App ID
+            %td.value
+              = @bm_rule.app_id
+            %td#msg-error
+              = error_message_for(@bm_rule, :app_id, :prepend_text => "")
+          %tr
             %td.label Aggregator Pool Account
             %td.value
               = @bm_rule.cod_acct_no
@@ -50,23 +56,17 @@
             %td#msg-error
               = error_message_for(@bm_rule, :neft_sender_ifsc, :prepend_text => "")
           %tr
-            %td.label Service ID
+            %td.label Source ID
             %td.value
-              = @bm_rule.service_id
+              = @bm_rule.source_id
             %td#msg-error
-              = error_message_for(@bm_rule, :service_id, :prepend_text => "")
+              = error_message_for(@bm_rule, :source_id, :prepend_text => "")
           %tr
-            %td.label Narrative Prefix
+            %td.label Trace ID Prefix
             %td.value
-              = @bm_rule.narrative_prefix
+              = @bm_rule.traceid_prefix
             %td#msg-error
-              = error_message_for(@bm_rule, :narrative_prefix, :prepend_text => "")
-          %tr
-            %td.label User ID
-            %td.value
-              = @bm_rule.user_id
-            %td#msg-error
-              = error_message_for(@bm_rule, :user_id, :prepend_text => "")
+              = error_message_for(@bm_rule, :traceid_prefix, :prepend_text => "")
           %tr
             %td.label Updated By
             %td.value

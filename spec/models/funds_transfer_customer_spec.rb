@@ -98,6 +98,20 @@ describe FundsTransferCustomer do
         funds_transfer_customer.errors_on(:notify_app_code).should == []
       end
     end
+
+    context "standard relations" do 
+      it "should validate the presence of allowed relationships when use standard relationships is 'N'" do
+        funds_transfer_customer = Factory.build(:funds_transfer_customer, :use_std_relns => 'N', :allowed_relns => [])
+        funds_transfer_customer.save.should == false
+        funds_transfer_customer.errors_on(:allowed_relns).should == ["atleast one value should be selected when 'Use Standard Relationships?' is not checked"]
+      end
+
+      it "should not validate the presence of allowed relationships when use standard relationships is 'Y'" do
+        funds_transfer_customer = Factory.build(:funds_transfer_customer, :use_std_relns => 'Y', :allowed_relns => [])
+        funds_transfer_customer.save.should == true
+        funds_transfer_customer.errors_on(:allowed_relns).should == []
+      end
+    end
   end
 
   context "customer name format" do
@@ -147,6 +161,20 @@ describe FundsTransferCustomer do
       funds_transfer_customer = Factory.build(:funds_transfer_customer, :allow_apbs => 'Y', :apbs_user_no => "CUST-01", :apbs_user_name => 'USER1', :approval_status => 'A')
       funds_transfer_customer.save.should be_false
       funds_transfer_customer.errors_on(:apbs_user_no).should == ["Invalid format, expected format is : {[a-z|A-Z|0-9]}"]
+    end
+    
+    it "should value_of_backend_code" do
+      ft_customer = Factory.build(:funds_transfer_customer, is_retail: 'Y', bene_backend: 'UCXP')
+      ft_customer.save.should be_false
+      ft_customer.errors_on(:bene_backend).should == ["should be NETB when customer is retail"]
+      
+      ft_customer = Factory.build(:funds_transfer_customer, is_retail: 'N', bene_backend: 'UCXP')
+      ft_customer.save.should be_true
+      ft_customer.errors_on(:bene_backend).should == []
+      
+      ft_customer = Factory.build(:funds_transfer_customer, is_retail: 'Y', bene_backend: 'NETB')
+      ft_customer.save.should be_true
+      ft_customer.errors_on(:bene_backend).should == []
     end
   end
   

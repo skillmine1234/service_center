@@ -290,6 +290,19 @@ ServiceCenter::Application.routes.draw do
       post :index
     end
   end
+  
+  resources :sc_backend_settings, except: :index do
+    collection do
+      get :index
+      put :index
+      get :get_service_codes
+      get :settings
+    end
+    member do
+      get 'audit_logs'
+      put 'approve'
+    end
+  end
 
   get 'su_incoming_file_summary' => 'su_incoming_records#incoming_file_summary'
   get 'ic_incoming_file_summary' => 'ic_incoming_records#incoming_file_summary'

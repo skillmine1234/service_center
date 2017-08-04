@@ -38,24 +38,6 @@
             %td#msg-error
               = error_message_for(@bm_app, :needs_otp, :prepend_text => "")
           %tr
-            %td.label Is Configuration Global?
-            %td.value
-              = @bm_app.is_configuration_global
-            %td#msg-error
-              = error_message_for(@bm_app, :is_configuration_global, :prepend_text => "")
-          %tr
-            %td.label Flex User Id
-            %td.value
-              = @bm_app.flex_user_id
-            %td#msg-error
-              = error_message_for(@bm_app, :flex_user_id, :prepend_text => "")
-          %tr
-            %td.label Flex Narrative Prefix
-            %td.value
-              = @bm_app.flex_narrative_prefix
-            %td#msg-error
-              = error_message_for(@bm_app, :flex_narrative_prefix, :prepend_text => "")
-          %tr
             %td.label Created By
             %td.value
               = @bm_app.created_user.try(:username)

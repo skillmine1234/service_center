@@ -8,6 +8,11 @@
     = f.hidden_field :approved_id
     = f.hidden_field :approved_version
     .control-group
+      = f.label :app_id, "*App ID", :class => 'control-label'
+      = f.select(:app_id, BmApp.all.map { |key| [key.app_id, key.app_id] }, prompt: 'Select')
+      #msg-error
+        = error_message_for(@bm_rule, :app_id, :prepend_text => "")
+    .control-group
       = f.label :cod_acct_no, "*Aggregator Pool Account", :class => 'control-label'
       = f.text_field :cod_acct_no, :maxlength => 16
       #msg-error
@@ -33,23 +38,18 @@
       #msg-error
         = error_message_for(@bm_rule, :neft_sender_ifsc, :prepend_text => "")
     .control-group
-      = f.label :service_id, "Service ID", :class => 'control-label'
-      = f.text_field :service_id
+      = f.label :source_id, "*Source ID", :class => 'control-label'
+      = f.text_field :source_id, :maxlength => 50
       #msg-error
-        = error_message_for(@bm_rule, :service_id, :prepend_text => "")
+        = error_message_for(@bm_rule, :source_id, :prepend_text => "")
     .control-group
-      = f.label :narrative_prefix, "Narrative Prefix", :class => 'control-label'
-      = f.text_field :narrative_prefix, :maxlength => 50
+      = f.label :traceid_prefix, "*Trace ID Prefix", :class => 'control-label'
+      = f.number_field :traceid_prefix
       #msg-error
-        = error_message_for(@bm_rule, :narrative_prefix, :prepend_text => "")
-    .control-group
-      = f.label :user_id, "User ID", :class => 'control-label'
-      = f.text_field :user_id, :maxlength => 50
-      #msg-error
-        = error_message_for(@bm_rule, :user_id, :prepend_text => "")
+        = error_message_for(@bm_rule, :traceid_prefix, :prepend_text => "")
 
   .form-actions
     - (f.object.new_record? and f.object.cod_acct_no.nil?) ? label_name = "Create" : label_name = "Update"
     = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_rule', :value => label_name + ' Bm Rules'
-    = link_to :Cancel,root_path, :name => 'cancel', :class=>"cancel btn"
+    = link_to :Cancel,'/bm_rules', :name => 'cancel', :class=>"cancel btn"
 

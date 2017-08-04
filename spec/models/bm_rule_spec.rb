@@ -10,14 +10,14 @@ describe BmRule do
   end
 
   context 'validation' do
-    [:cod_acct_no, :customer_id, :bene_acct_no, :bene_account_ifsc, :neft_sender_ifsc, :lock_version, :approval_status].each do |att|
+    [:cod_acct_no, :customer_id, :bene_acct_no, :bene_account_ifsc, :neft_sender_ifsc, :lock_version, :approval_status, :traceid_prefix, :source_id].each do |att|
       it { should validate_presence_of(att) }
     end
 
     it do
-      bm_rule = Factory(:bm_rule)
-      should validate_length_of(:narrative_prefix).is_at_most(50)
-      should validate_length_of(:user_id).is_at_most(50)
+      bm_rule = Factory(:bm_rule, approval_status: 'A')
+      should validate_length_of(:app_id).is_at_most(50)
+      should validate_uniqueness_of(:app_id).scoped_to(:approval_status)
     end
 
     it "should validate_unapproved_record" do
@@ -25,6 +25,15 @@ describe BmRule do
       bm_rule2 = Factory(:bm_rule, :approved_id => bm_rule1.id)
       bm_rule1.should_not be_valid
       bm_rule1.errors_on(:base).should == ["Unapproved Record Already Exists for this record"]
+    end
+    
+    it "should validate presence of app_id if its a new record or when an approved record with app_id not null is edited" do
+      bm_rule1 = Factory.build(:bm_rule, app_id: nil)
+      bm_rule1.errors_on(:app_id) == ["can't be blank"]
+
+      bm_rule2 = Factory(:bm_rule, :approval_status => 'A', app_id: '12345')      
+      bm_rule3 = Factory.build(:bm_rule, :approval_status => 'U', :approved_id => bm_rule2.id, app_id: '12345')
+      bm_rule3.errors_on(:app_id) == []
     end
 
     context "fields format" do

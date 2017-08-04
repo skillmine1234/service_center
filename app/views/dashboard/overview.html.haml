@@ -161,16 +161,10 @@
         = "Csv Exports"
   .slide-container
     .box
-      - if !BmRule.first.nil?
-        = link_to edit_bm_rule_path(BmRule.first) do
-          = image_tag 'bm_rule.png', :size => "80x80"
-        %br
-          = "Bill Payment Rules"
-      - else
-        = link_to bm_rule_error_msg_path do
-          = image_tag 'rules.jpeg', :size => "80x80"
-        %br
-          = "Bill Payment Rules"
+      = link_to '/bm_rules' do
+        = image_tag 'bm_rule.png', :size => "80x80"
+      %br
+        = "Bill Payment Rules"
     .box  
       = link_to '/bm_billers' do
         = image_tag 'biller_icon.jpg', :size => "80x80"
@@ -481,7 +475,7 @@
       = link_to '/sc_backend_response_codes' do
         = image_tag 'sc_response_code.jpeg', :size => "80x80"
       %br
-        = "Service Center Response Codes"
+        = "Service Center Backend Response Codes"
     .box  
       = link_to '/sc_fault_codes' do
         = image_tag 'sc_fault_code.png', :size => "80x80"
@@ -492,6 +486,11 @@
         = image_tag 'jobs.png', :size => "80x80"
       %br
         = "Service Center Jobs"
+    .box  
+      = link_to '/sc_backend_settings' do
+        = image_tag 'sc_backend_settings_icon.jpeg', :size => "80x80"
+      %br
+        = "Service Center Backend Settings"
 - if @current_user.group_names.include?("rp")
   %h1 Reports
   .slide-container

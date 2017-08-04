@@ -23,12 +23,6 @@
       Channel ID
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Needs OTP
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Is Configuration Global?
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Flex User Id
-    %th{:style=>'text-align:left; background-color: lightblue;'}
-      Flex Narrative Prefix
 
   .tbody
     - @bm_apps.each do |bm_app|
@@ -43,9 +37,3 @@
           = bm_app.channel_id
         %td{:style=>'text-align:left;'}
           = bm_app.needs_otp
-        %td{:style=>'text-align:left;'}
-          = bm_app.is_configuration_global
-        %td{:style=>'text-align:left;'}
-          = bm_app.flex_user_id
-        %td{:style=>'text-align:left;'}
-          = bm_app.flex_narrative_prefix

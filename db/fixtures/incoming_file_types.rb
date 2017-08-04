@@ -365,7 +365,7 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.name = 'Settlement File Upload'
   s.msg_domain = 'DFDL'
   s.msg_model = '{http://www.quantiguous.com/services/file}:imtSettlements'
-  s.skip_first = 'N'
+  s.skip_first = 'Y'
   s.auto_upload = 'Y'
   s.validate_all = 'Y'
   s.build_response_file = 'N'
