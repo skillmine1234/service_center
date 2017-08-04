@@ -9,7 +9,8 @@ $(document).ready(function(){
   }
   else {
     $("#ns_callback_hash_header_name").prop("readOnly",false);
-    $("#ns_callback_hash_algo").prop("readOnly",false);
+    $("#ns_callback_hash_algo").val('SHA-256');
+    $("#ns_callback_hash_algo").prop("readOnly",true);
     $("#ns_callback_hash_key").prop("readOnly",false);
   }
 
@@ -24,7 +25,8 @@ $(document).ready(function(){
     }
     else {
       $("#ns_callback_hash_header_name").prop("readOnly",false);
-      $("#ns_callback_hash_algo").prop("readOnly",false);
+      $("#ns_callback_hash_algo").val('SHA-256');
+      $("#ns_callback_hash_algo").prop("readOnly",true);
       $("#ns_callback_hash_key").prop("readOnly",false);
     }
   });
