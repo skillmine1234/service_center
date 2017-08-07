@@ -34,7 +34,7 @@ describe QgEcolTodaysNeftTxn do
     
     it "should validate uniqueness of transfer_unique_no" do
       qg_ecol_todays_neft_txn = Factory(:qg_ecol_todays_neft_txn)
-      should validate_uniqueness_of(:transfer_unique_no)
+      should validate_uniqueness_of(:transfer_unique_no).scoped_to(:rmtr_account_ifsc)
     end
   end  
 end
