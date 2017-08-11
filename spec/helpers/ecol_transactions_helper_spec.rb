@@ -54,6 +54,10 @@ describe EcolTransactionsHelper do
       ecol_transaction = Factory(:ecol_transaction, :bene_account_no => "0987654321", :transfer_unique_no => "56789")
       find_ecol_transactions(val,{:bene_account_no => "0987654321"}).should == [ecol_transaction]
       find_ecol_transactions(val,{:bene_account_no => "1234567890"}).should_not == [ecol_transaction] 
+      
+      ecol_transaction = Factory(:ecol_transaction, :rmtr_account_ifsc => "HDFC0123123", :transfer_unique_no => "9012839")
+      find_ecol_transactions(val,{:rmtr_account_ifsc => "HDFC0123123"}).should == [ecol_transaction]
+      find_ecol_transactions(val,{:rmtr_account_ifsc => "ABCD0123123"}).should_not == [ecol_transaction] 
 
       ecol_transaction = [Factory(:ecol_transaction, :transfer_timestamp => '2014-09-09', :transfer_unique_no => "xswert")]
       ecol_transaction << Factory(:ecol_transaction, :transfer_timestamp => '2014-10-09', :transfer_unique_no => "oyntrg")

@@ -20,6 +20,12 @@
             %td#msg-error
               = error_message_for(@ecol_app, :app_code, :prepend_text => "")
           %tr
+            %td.label Customer Code
+            %td.value
+              = @ecol_app.customer_code
+            %td#msg-error
+              = error_message_for(@ecol_app, :customer_code, :prepend_text => "")
+          %tr
             %td.label Validate URL
             %td.value
               = @ecol_app.validate_url
@@ -59,8 +65,8 @@
               %table.table.datatable{style: 'width: 50%'}
                 %thead
                   %tr
-                    %th Name
-                    %th Value
+                    %th Setting Name
+                    %th Setting Value
                 %tbody
                   - (1..@ecol_app.settings_cnt).each do |i|
                     %tr

@@ -5,7 +5,7 @@ FactoryGirl.define do
     sequence(:app_code) {|n| "%03i" % "#{n}"}
     setting1_name 'udf1'
     setting1_type 'number'
-    setting1_value 1
+    setting1_value '1234'
     notify_url 'http://localhost'
     approval_status "U"
     last_action "C"

@@ -91,8 +91,14 @@ describe EcolCustomer do
     it "should validate app_code" do 
       ecol_customer = Factory.build(:ecol_customer, :val_method => 'W', :app_code => nil)
       ecol_customer.should_not be_valid
-      ecol_customer.errors_on(:app_code).should == ["Can't be blank if Validation Method is Web Service"]
-      ecol_customer.app_code = 'APP123'
+      ecol_customer.errors_on(:app_code).should == ["Can't be blank if Validation Method is Web Service or Customer Alert is On"]
+
+      ecol_customer = Factory.build(:ecol_customer, :cust_alert_on => 'A', :app_code => nil)
+      ecol_customer.should_not be_valid
+      ecol_customer.errors_on(:app_code).should == ["Can't be blank if Validation Method is Web Service or Customer Alert is On"]
+      
+      ecol_customer = Factory.build(:ecol_customer, :val_method => 'W', :cust_alert_on => 'A', :app_code => 'APP12')
+      ecol_customer.should be_valid
       ecol_customer.errors_on(:app_code).should == []
     end
   end
@@ -266,6 +272,16 @@ describe EcolCustomer do
       
       ecol_customer2 = Factory.build(:ecol_customer, val_method: 'N', cust_alert_on: 'A', should_prevalidate: 'Y')
       ecol_customer2.save.should == true
+    end
+    
+    it "should validate app_code" do
+      ecol_customer = Factory.build(:ecol_customer, app_code: 'ECSTDX01', return_if_val_reject: 'N')
+      ecol_customer.save.should == false
+      ecol_customer.errors_on(:return_if_val_reject).should == ["Should be enabled when App Code is Standard"]
+      
+      ecol_customer = Factory.build(:ecol_customer, app_code: 'ECSTDX01', return_if_val_reject: 'Y')
+      ecol_customer.save.should == true
+      ecol_customer.errors_on(:return_if_val_reject).should == []
     end
   end
   
