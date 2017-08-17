@@ -1,6 +1,6 @@
 class RcTransferSearcher
   include ActiveModel::Validations
-  attr_accessor :page, :rc_code, :bene_account_no, :debit_account_no, :from_amount, :to_amount, :status, :notify_status, :mobile_no, :pending_approval
+  attr_accessor :page, :rc_code, :bene_account_no, :debit_account_no, :from_amount, :to_amount, :status, :notify_status, :mobile_no, :pending_approval, :transfer_rep_ref, :remove_defaults     
   PER_PAGE = 10
   
   def initialize(attributes = {})
@@ -24,9 +24,11 @@ class RcTransferSearcher
 
   def find
     reln = RcTransfer.order("id desc")
+    reln = reln.where.not("txn_kind = 'BALINQ' and status_code IN ('BALINQ FAILED','SKIP CREDIT:NO BALANCE')") unless remove_defaults.present?
     reln = reln.where("rc_transfer_code=?", rc_code) if rc_code.present?
     reln = reln.where("bene_account_no=?", bene_account_no) if bene_account_no.present?
     reln = reln.where("debit_account_no=?", debit_account_no) if debit_account_no.present?
+    reln = reln.where("transfer_rep_ref=?", transfer_rep_ref) if transfer_rep_ref.present?
     reln = reln.where("transfer_amount>=? and transfer_amount <=?",from_amount.to_f,to_amount.to_f) if to_amount.present? && from_amount.present?
     reln = reln.where("status_code=?",status) if status.present?
     reln = reln.where("notify_status=?",notify_status) if notify_status.present?

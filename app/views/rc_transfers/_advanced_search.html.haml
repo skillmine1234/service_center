@@ -4,6 +4,9 @@
 .collapsible-content
   = form_tag rc_transfers_path, :method => :put, :class => 'form-horizontal', :autocomplete=>"off", id: 'advanced_search' do
     .control-group
+      = label_tag "Remove Defaults", "Remove Defaults", :class => 'control-label'
+      = check_box_tag :remove_defaults, 'Y', params[:remove_defaults]
+    .control-group
       = label_tag "Recurring Transfer Code", "Rc Transfer Code", :class => 'control-label'
       = text_field_tag :rc_code, params[:rc_code]
     .control-group
@@ -13,13 +16,16 @@
       = label_tag "Debit Account No", "Debit Account No", :class => 'control-label'
       = text_field_tag :debit_account_no, params[:debit_account_no]
     .control-group
+      = label_tag "Transfer Reply Reference", "Transfer Reply Reference", :class => 'control-label'
+      = text_field_tag :transfer_rep_ref, params[:transfer_rep_ref]
+    .control-group
       = label_tag "Transfer Amount", "Transfer Amount", :class => 'control-label'
       = number_field_tag :from_amount, params[:from_amount]
       To
       = number_field_tag :to_amount, params[:to_amount]
     .control-group
       = label_tag "Transfer Status", "Transfer Status", :class => 'control-label'
-      = select_tag :status, options_for_select([['NEW','NEW'],['PENDING CREDIT','PENDING CREDIT'],['COMPLETED','COMPLETED'],['CREDIT FAILED','CREDIT FAILED'],['BALINQ FAILED','BALINQ FAILED']],params[:status]),:prompt => 'ANY'
+      = select_tag :status, options_for_select([['NEW','NEW'],['PENDING CREDIT','PENDING CREDIT'],['COMPLETED','COMPLETED'],['CREDIT FAILED','CREDIT FAILED'],['BALINQ FAILED','BALINQ FAILED'],['SENT_TO_BENEFICIARY', 'SENT_TO_BENEFICIARY']],params[:status]),:prompt => 'ANY'
     .control-group
       = label_tag "Notify Status", "Notify Status", :class => 'control-label'
       = select_tag :notify_status, options_for_select([['PENDING NOTIFICATION','PENDING NOTIFICATION'],['NOTIFIED:REJECTED','NOTIFIED:REJECTED'],['NOTIFIED:OK','NOTIFIED:OK'],['NOTIFICATION FAILED','NOTIFICATION FAILED']],params[:notify_status]),:prompt => 'ANY'  
