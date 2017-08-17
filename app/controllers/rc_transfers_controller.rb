@@ -62,6 +62,6 @@ class RcTransfersController < ApplicationController
   private
 
   def search_params
-    params.permit(:page, :rc_code, :bene_account_no, :debit_account_no, :from_amount, :to_amount, :status, :notify_status, :mobile_no, :pending_approval, :transfer_rep_ref)
+    params.permit(:page, :rc_code, :bene_account_no, :debit_account_no, :from_amount, :to_amount, :status, :notify_status, :mobile_no, :pending_approval, :transfer_rep_ref, :remove_defaults)
   end
 end

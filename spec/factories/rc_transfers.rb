@@ -22,5 +22,6 @@ FactoryGirl.define do
     mobile_no '9872536211'
     broker_uuid '1234'
     rc_app_id { Factory(:rc_app).id }
+    txn_kind 'FT'
   end
 end

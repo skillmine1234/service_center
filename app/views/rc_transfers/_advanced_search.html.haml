@@ -4,6 +4,9 @@
 .collapsible-content
   = form_tag rc_transfers_path, :method => :put, :class => 'form-horizontal', :autocomplete=>"off", id: 'advanced_search' do
     .control-group
+      = label_tag "Remove Defaults", "Remove Defaults", :class => 'control-label'
+      = check_box_tag :remove_defaults, 'Y', params[:remove_defaults]
+    .control-group
       = label_tag "Recurring Transfer Code", "Rc Transfer Code", :class => 'control-label'
       = text_field_tag :rc_code, params[:rc_code]
     .control-group

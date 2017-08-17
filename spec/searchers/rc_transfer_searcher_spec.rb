@@ -2,10 +2,17 @@ require 'spec_helper'
 
 describe RcTransferSearcher do
   context "searcher" do
-    it "should return rc_transfer records" do 
+    it "should return rc_transfer records" do
+      rc_transfers = [Factory(:rc_transfer, txn_kind: 'BALINQ', status_code: 'BALINQ FAILED')]
+      rc_transfers << Factory(:rc_transfer, txn_kind: 'BALINQ', status_code: 'SKIP CREDIT:NO BALANCE')
+      rc_transfers << Factory(:rc_transfer, txn_kind: 'FT')
+      RcTransferSearcher.new({:remove_defaults => nil}).paginate.should == [rc_transfers[2]]
+      RcTransferSearcher.new({:remove_defaults => 'Y', status: 'BALINQ FAILED'}).paginate.should == [rc_transfers[0]]
+      RcTransferSearcher.new({:remove_defaults => 'Y'}).paginate.should == rc_transfers.reverse
+
       rc_transfer = Factory(:rc_transfer, :rc_transfer_code => '123')
       RcTransferSearcher.new({:rc_code => "123"}).paginate.should == [rc_transfer]
-      RcTransferSearcher.new({:rc_code => "1234"}).paginate.should == []
+      RcTransferSearcher.new({:rc_code => "1230"}).paginate.should == []
 
       rc_transfer = Factory(:rc_transfer, :debit_account_no => "1234")
       RcTransferSearcher.new({:debit_account_no => "1234"}).paginate.should == [rc_transfer]
