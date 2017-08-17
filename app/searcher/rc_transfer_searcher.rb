@@ -27,12 +27,12 @@ class RcTransferSearcher
     reln = reln.where("rc_transfer_code=?", rc_code) if rc_code.present?
     reln = reln.where("bene_account_no=?", bene_account_no) if bene_account_no.present?
     reln = reln.where("debit_account_no=?", debit_account_no) if debit_account_no.present?
+    reln = reln.where("transfer_rep_ref=?", transfer_rep_ref) if transfer_rep_ref.present?
     reln = reln.where("transfer_amount>=? and transfer_amount <=?",from_amount.to_f,to_amount.to_f) if to_amount.present? && from_amount.present?
     reln = reln.where("status_code=?",status) if status.present?
     reln = reln.where("notify_status=?",notify_status) if notify_status.present?
     reln = reln.where("mobile_no=?", mobile_no) if mobile_no.present?
     reln = reln.where("pending_approval=?", pending_approval) if pending_approval.present?
-    reln = reln.where("transfer_rep_ref=?", transfer_rep_ref) if transfer_rep_ref.present?
     reln
   end
 end
