@@ -19,7 +19,7 @@
       = number_field_tag :to_amount, params[:to_amount]
     .control-group
       = label_tag "Transfer Status", "Transfer Status", :class => 'control-label'
-      = select_tag :status, options_for_select([['NEW','NEW'],['PENDING CREDIT','PENDING CREDIT'],['COMPLETED','COMPLETED'],['CREDIT FAILED','CREDIT FAILED'],['BALINQ FAILED','BALINQ FAILED']],params[:status]),:prompt => 'ANY'
+      = select_tag :status, options_for_select([['NEW','NEW'],['PENDING CREDIT','PENDING CREDIT'],['COMPLETED','COMPLETED'],['CREDIT FAILED','CREDIT FAILED'],['BALINQ FAILED','BALINQ FAILED'],['SENT_TO_BENEFICIARY', 'SENT_TO_BENEFICIARY']],params[:status]),:prompt => 'ANY'
     .control-group
       = label_tag "Notify Status", "Notify Status", :class => 'control-label'
       = select_tag :notify_status, options_for_select([['PENDING NOTIFICATION','PENDING NOTIFICATION'],['NOTIFIED:REJECTED','NOTIFIED:REJECTED'],['NOTIFIED:OK','NOTIFIED:OK'],['NOTIFICATION FAILED','NOTIFICATION FAILED']],params[:notify_status]),:prompt => 'ANY'  
