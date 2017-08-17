@@ -609,6 +609,21 @@
         = image_tag 'template.jpeg', :size => "80x80"
       %br
         = "Templates"
+- if @current_user.group_names.include?("icol")
+  %h1 I-Collect
+  .slide-container
+    .box  
+      = link_to unapproved_records_path(group_name: 'icol') do
+        = image_tag 'work-list.jpg', :size => "80x80"
+      %br
+        = "Approval Worklist"
+  .slide-container
+    .box
+      = link_to '#' do
+        = image_tag 'callbacks_icon.png', :size => "80x80"
+      %br
+        = "Validate Steps"
+
 - if @current_user.group_names.include?("ssp")
   %h1 SimSePay Banks
   .slide-container
