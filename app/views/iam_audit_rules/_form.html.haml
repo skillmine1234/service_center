@@ -1,0 +1,25 @@
+= simple_form_for @iam_audit_rule, :html => {:class=>'form-horizontal', :autocomplete=>"off", :id => "iam_audit_rule"} do |f|
+  .control-group
+    = f.label ' '
+    #msg-error
+      = error_message_for(@iam_audit_rule, :base, :prepend_text => "")
+  .form-main{:style => 'width:100%'}
+    = f.hidden_field :lock_version
+    .control-group
+      = f.label :org_uuid, "Org UUID", :class => 'control-label'
+      = f.check_box :org_uuid, {},"Y","N"      
+    .control-group
+      = f.label :cert_dn, "Cert DN", :class => 'control-label'
+      = f.check_box :cert_dn, {},"Y","N"   
+    .control-group
+      = f.label :source_ip, "Source IP", :class => 'control-label'
+      = f.check_box :source_ip, {},"Y","N"   
+    .control-group
+      = f.label :interval_in_mins, "*Interval", :class => 'control-label'
+      = f.number_field :interval_in_mins
+      
+  .form-actions
+    - (f.object.new_record? and f.object.org_uuid.nil?) ? label_name = "Create" : label_name = "Update"
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_rule', :value => label_name + ' IAM Audit Rules'
+    = link_to :Cancel,root_path, :name => 'cancel', :class=>"cancel btn"
+

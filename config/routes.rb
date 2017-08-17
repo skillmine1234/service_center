@@ -42,6 +42,7 @@ ServiceCenter::Application.routes.draw do
   resources :inw_remittance_rules
   resources :banks
   resources :ecol_rules
+  resources :iam_audit_rules
   resources :ecol_customers
   resources :ecol_remitters
   resources :ecol_transactions do
@@ -329,6 +330,7 @@ ServiceCenter::Application.routes.draw do
   get '/inw_remittance_rule/:id/audit_logs' => 'inw_remittance_rules#audit_logs'
   get '/bank/:id/audit_logs' => 'banks#audit_logs'
   get '/ecol_rule/:id/audit_logs' => 'ecol_rules#audit_logs'
+  get '/iam_audit_rule/:id/audit_logs' => 'iam_audit_rules#audit_logs'
   get '/ecol_customer/:id/audit_logs' => 'ecol_customers#audit_logs'
   get '/ecol_remitter/:id/audit_logs' => 'ecol_remitters#audit_logs'
   get '/udf_attribute/:id/audit_logs' => 'udf_attributes#audit_logs'
@@ -375,6 +377,7 @@ ServiceCenter::Application.routes.draw do
 
   get '/inw_error_msg' => "inw_remittance_rules#error_msg"
   get '/ecol_error_msg' => "ecol_rules#error_msg"
+  get '/iam_audit_rule_error_msg' => "iam_audit_rules#error_msg"
   get '/bm_rule_error_msg' => "bm_rules#error_msg"
   get '/imt_rule_error_msg' => "imt_rules#error_msg"
 

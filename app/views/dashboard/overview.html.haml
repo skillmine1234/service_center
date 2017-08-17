@@ -551,6 +551,17 @@
         = "Approval Worklist"
   .slide-container
     .box
+      - if !IamAuditRule.first.nil?
+        = link_to edit_iam_audit_rule_path(IamAuditRule.first) do
+          = image_tag 'ecol_rule.png', :size => "80x80"
+        %br
+          = "IAM Audit Rules"
+      - else
+        = link_to iam_audit_rule_error_msg_path do
+          = image_tag 'rules.jpeg', :size => "80x80"
+        %br
+          = "IAM Audit Rules"
+    .box
       = link_to '/iam_organisations' do
         = image_tag 'iam_organisation_icon.png', :size => "80x80"
       %br

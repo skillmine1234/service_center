@@ -33,12 +33,12 @@ class Group < ActiveRecord::Base
       ['ScBackend','ScJob','ScFaultCode','ScBackendResponseCode','ScBackendSetting']
     when "rr"
       ['RrUnapprovedRecord','IncomingFile','IncomingFileRecord','RrIncomingFile','RrIncomingRecord','ReconciledReturn']
+    when "iam"
+      ['IamAuditRule','IamCustUser','IamOrganisation']
     when "fr"
       ['IncomingFile','IncomingFileRecord','FrR01IncomingFile','FrR01IncomingRecord']
     when "ns"
       ['NsCallback', 'NsTemplate']
-    when "iam"
-      ['IamCustUser','IamOrganisation']
     else
       []
     end
