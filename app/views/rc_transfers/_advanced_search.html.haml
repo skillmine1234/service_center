@@ -13,6 +13,9 @@
       = label_tag "Debit Account No", "Debit Account No", :class => 'control-label'
       = text_field_tag :debit_account_no, params[:debit_account_no]
     .control-group
+      = label_tag "Transfer Reply Reference", "Transfer Reply Reference", :class => 'control-label'
+      = text_field_tag :transfer_rep_ref, params[:transfer_rep_ref]
+    .control-group
       = label_tag "Transfer Amount", "Transfer Amount", :class => 'control-label'
       = number_field_tag :from_amount, params[:from_amount]
       To

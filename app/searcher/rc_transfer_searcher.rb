@@ -1,6 +1,6 @@
 class RcTransferSearcher
   include ActiveModel::Validations
-  attr_accessor :page, :rc_code, :bene_account_no, :debit_account_no, :from_amount, :to_amount, :status, :notify_status, :mobile_no, :pending_approval
+  attr_accessor :page, :rc_code, :bene_account_no, :debit_account_no, :from_amount, :to_amount, :status, :notify_status, :mobile_no, :pending_approval, :transfer_rep_ref     
   PER_PAGE = 10
   
   def initialize(attributes = {})
@@ -32,6 +32,7 @@ class RcTransferSearcher
     reln = reln.where("notify_status=?",notify_status) if notify_status.present?
     reln = reln.where("mobile_no=?", mobile_no) if mobile_no.present?
     reln = reln.where("pending_approval=?", pending_approval) if pending_approval.present?
+    reln = reln.where("transfer_rep_ref=?", transfer_rep_ref) if transfer_rep_ref.present?
     reln
   end
 end

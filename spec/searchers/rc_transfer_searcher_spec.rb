@@ -36,6 +36,10 @@ describe RcTransferSearcher do
       rc_transfer = Factory(:rc_transfer, :pending_approval => "N")
       RcTransferSearcher.new({:pending_approval => "N"}).paginate.should == [rc_transfer]
       RcTransferSearcher.new({:pending_approval => "A"}).paginate.should == []
+      
+      rc_transfer = Factory(:rc_transfer, :transfer_rep_ref => "QW12345")
+      RcTransferSearcher.new({:transfer_rep_ref => "QW12345"}).paginate.should == [rc_transfer]
+      RcTransferSearcher.new({:transfer_rep_ref => "QAQWSWQ"}).paginate.should == []
     end
   end
 end
