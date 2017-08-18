@@ -628,6 +628,11 @@
         = image_tag 'validate_step_icon.png', :size => "80x80"
       %br
         = "I-Collect Validate Steps"
+    .box
+      = link_to '/icol_notifications' do
+        = image_tag 'icol_notify_icon.png', :size => "80x80"
+      %br
+        = "I-Collect Notifications"
 
 - if @current_user.group_names.include?("ssp")
   %h1 SimSePay Banks

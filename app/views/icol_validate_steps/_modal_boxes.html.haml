@@ -31,21 +31,3 @@
         %b Copy To Clipboard...
     %pre#header{:style => 'word-wrap: break-word'}
       .headerdata{:style => 'word-wrap: break-word'}
-#faultText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-header
-    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3 Fault Text
-    #error_message{:style => 'color:red'}
-  .modal-body{:style => "max-height:450px;"}
-    .demo-area
-    %pre#fault_text{:style => 'word-wrap: break-word'}
-    %table.table.no-border
-      %tr
-        %td.label Fault Code:
-        %td= record.fault_code
-      %tr
-        %td.label Fault Code:
-        %td= record.fault_subcode
-      %tr
-        %td.label Fault Reason:
-        %td= record.fault_reason

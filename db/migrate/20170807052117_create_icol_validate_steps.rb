@@ -2,7 +2,7 @@ class CreateIcolValidateSteps < ActiveRecord::Migration
   def change
     create_table :icol_validate_steps do |t|
       t.string :step_name, limit: 100, null: false, comment: 'the english name of the step'
-      t.string :status_code, limit: 25, null: false, comment: 'the status of this attempt of the step'
+      t.string :status_code, limit: 100, null: false, comment: 'the status of this attempt of the step'
       t.string :app_code, limit: 25, null: false, comment: 'the app_code for the step'
       t.string :customer_code, limit: 25, null: false, comment: 'the customer_code for the step'
       
@@ -12,14 +12,14 @@ class CreateIcolValidateSteps < ActiveRecord::Migration
       t.datetime :up_req_timestamp, comment: 'the SYSDATE when the request built by the system was sent'
       t.string :up_host, limit: 100, comment: 'the up host for this request'
       t.string :up_req_uri, limit: 100, comment: 'the up request uri for this request'
-      t.string :up_req_header, limit: 2000, comment: 'the up request header for this request'
       t.datetime :up_rep_timestamp, comment: 'the SYSDATE when the reply was received by the system'
-      t.string :up_rep_header, limit: 2000, comment: 'the up request header for this request'
       
       t.string :fault_code, limit: 50, comment: 'the code that identifies the exception, if an exception occured in the ESB'
       t.string :fault_subcode, limit: 50, comment: 'the error code that the third party will return'
       t.string :fault_reason, limit: 1000, comment: 'the english reason of the exception, if an exception occurred in the ESB'
-      
+
+      t.text :up_req_header, comment: 'the up request header for this request'
+      t.text :up_rep_header, limit: 2000, comment: 'the up reply header'
       t.text :up_req_bitstream, comment: 'the full request payload as received from the client'
       t.text :up_rep_bitstream, comment: 'the full request payload as received from the client'
       t.text :req_bitstream, null: false, comment: 'the full request payload as received from the client'

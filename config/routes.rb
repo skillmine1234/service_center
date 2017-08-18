@@ -322,6 +322,17 @@ ServiceCenter::Application.routes.draw do
       put :approve
     end
   end
+  
+  resources :icol_notifications, only: [:index, :show] do
+    collection do 
+      get :index
+      put :index
+    end
+    member do
+      get :audit_steps
+    end
+  end
+      
 
   resources :iam_audit_logs, only: [:index, :show] do 
     collection do
