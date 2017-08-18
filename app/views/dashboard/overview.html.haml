@@ -619,10 +619,15 @@
         = "Approval Worklist"
   .slide-container
     .box
+      = link_to '/icol_customers' do
+        = image_tag 'ecol_customer.gif', :size => "80x80"
+      %br
+        = "I-Collect Customers"
+    .box
       = link_to '/icol_validate_steps' do
         = image_tag 'validate_step_icon.png', :size => "80x80"
       %br
-        = "Validate Steps"
+        = "I-Collect Validate Steps"
 
 - if @current_user.group_names.include?("ssp")
   %h1 SimSePay Banks

@@ -42,7 +42,7 @@ class Group < ActiveRecord::Base
     when "ssp"
       ['SspBank', 'SspAuditStep']
     when "icol"
-      ["IcolValidateStep"]
+      ["IcolCustomer", "IcolValidateStep"]
     else
       []
     end

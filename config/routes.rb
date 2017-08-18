@@ -312,6 +312,17 @@ ServiceCenter::Application.routes.draw do
     end
   end
 
+  resources :icol_customers do
+    collection do
+      get :index
+      put :index
+    end
+    member do
+      get :audit_logs
+      put :approve
+    end
+  end
+
   resources :iam_audit_logs, only: [:index, :show] do 
     collection do
       get :index
@@ -331,10 +342,10 @@ ServiceCenter::Application.routes.draw do
   end
   
   resources :ssp_audit_steps, only: [:index, :show] do
-   collection do
-     get :index
-     put :index
-   end
+    collection do
+      get :index
+      put :index
+    end
   end
 
   get 'su_incoming_file_summary' => 'su_incoming_records#incoming_file_summary'

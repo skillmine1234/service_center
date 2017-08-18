@@ -25,7 +25,7 @@ class CreateIcolCustomers < ActiveRecord::Migration
       t.integer :approved_version, comment: "the version number of the record, at the time it was approved"
       t.integer :approved_id, comment: "the id of the record that is being updated"
 
-      t.index([:app_code, :customer_code, :approval_status], unique: true, name: 'icol_customers_01')
+      t.index([:customer_code, :approval_status], unique: true, name: 'icol_customers_01')
     end
   end
 end
