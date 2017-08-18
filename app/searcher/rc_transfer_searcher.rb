@@ -24,7 +24,7 @@ class RcTransferSearcher
 
   def find
     reln = RcTransfer.order("id desc")
-    reln = reln.where.not("txn_kind = 'BALINQ' and status_code IN ('BALINQ FAILED','SKIP CREDIT:NO BALANCE')") unless remove_defaults.present?
+    reln = reln.where.not("status_code IN ('BALINQ FAILED','SKIP CREDIT:NO BALANCE')") unless remove_defaults.present?
     reln = reln.where("rc_transfer_code=?", rc_code) if rc_code.present?
     reln = reln.where("bene_account_no=?", bene_account_no) if bene_account_no.present?
     reln = reln.where("debit_account_no=?", debit_account_no) if debit_account_no.present?
