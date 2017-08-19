@@ -45,7 +45,7 @@
       %tr
         %td.label Request Headers
         %td.value
-          = link_to "Show Header", "#", :class => 'header-link', :href => "javascript:void();", :style => "font-weight:100", data: { headerdata: @validate_step.up_req_header }
+          = link_to "Show Header", "#", :class => 'val-req-header-link', :href => "javascript:void()", :style => "font-weight:100", data: {request: @validate_step.up_req_header }
       %tr
         %td.label Request Timestamp
         %td.value
@@ -64,7 +64,7 @@
       %tr
         %td.label Reply Headers
         %td.value
-          = link_to "Show Header", "javascript:void()", :class => 'header-link', :style => "font-weight:100", data: {headerdata: @validate_step.up_rep_header}
+          = link_to "Show Header", "javascript:void()", :class => 'val-rep-header-link', :style => "font-weight:100", data: {reply: @validate_step.up_rep_header}
       %tr
         %td.label Reply Timestamp
         %td.value
@@ -76,7 +76,7 @@
           = show_xml('Show Reply','reply-link',@validate_step.up_rep_bitstream)
         %td
 
-= render partial: 'modal_boxes', locals: {record: @validate_step}
+= render partial: 'modal_boxes'
 
 #faultText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header

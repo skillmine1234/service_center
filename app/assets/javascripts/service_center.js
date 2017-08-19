@@ -25,12 +25,6 @@ $(document).ready(function(){
   $("a.fault-link").on("click", function () {
     $('#faultText').modal();
   });
-  
-  $("a.header-link").on("click", function () {
-    $('#headerText').modal();
-    text = $(this).data('headerdata');
-    $(".headerdata").text(text);
-  });
 
   $("a.result-link").on("click", function () {
     $('#resultText').modal();

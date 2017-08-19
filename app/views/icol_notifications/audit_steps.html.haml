@@ -73,50 +73,6 @@
         %b Copy To Clipboard...
     %pre#fault_xml{:style => 'word-wrap: break-word'}
       .fault{:style => 'word-wrap: break-word'}
-#requestText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-header
-    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3 Request
-    #error_message{:style => 'color:red'}
-  .modal-body{:style => "max-height:450px;"}
-    .demo-area
-      %button#d_clip_button1.my_clip_button1{"data-clipboard-target" => "req_xml"}
-        %b Copy To Clipboard...
-    %pre#req_xml{:style => 'word-wrap: break-word'}
-      .request{:style => 'word-wrap: break-word'}
-#requestHeader.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-header
-    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3 Request Header
-    #error_message{:style => 'color:red'}
-  .modal-body{:style => "max-height:450px;"}
-    .demo-area
-      %button#d_clip_button2.my_clip_button2{"data-clipboard-target" => "req_header_xml"}
-        %b Copy To Clipboard...
-    %pre#req_header_xml{:style => 'word-wrap: break-word'}
-      .request_header{:style => 'word-wrap: break-word'}
-#replyText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-header
-    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3 Reply
-    #error_message{:style => 'color:red'}
-  .modal-body{:style => "max-height:450px;"}
-    .demo-area
-      %button#d_clip_button5.my_clip_button5{"data-clipboard-target" => "reply_xml"}
-        %b Copy To Clipboard...
-    %pre#reply_xml{:style => 'word-wrap: break-word'}
-      .reply{:style => 'word-wrap: break-word'}
-#replyHeader.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-header
-    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3 Reply Header
-    #error_message{:style => 'color:red'}
-  .modal-body{:style => "max-height:450px;"}
-    .demo-area
-      %button#d_clip_button4.my_clip_button4{"data-clipboard-target" => "rep_header_xml"}
-        %b Copy To Clipboard...
-    %pre#rep_header_xml{:style => 'word-wrap: break-word'}
-      .reply_header{:style => 'word-wrap: break-word'}
 #faultText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
@@ -151,3 +107,4 @@
         %td.label Request URI:
         %td
           %label.req_uri{:style => 'word-wrap: break-word'}
+= render partial: 'icol_validate_steps/modal_boxes'
