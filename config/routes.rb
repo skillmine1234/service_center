@@ -304,6 +304,13 @@ ServiceCenter::Application.routes.draw do
       put 'approve'
     end
   end
+  
+  resources :iam_audit_logs, only: [:index, :show] do 
+    collection do
+      get :index
+      put :index
+    end
+  end
 
   get 'su_incoming_file_summary' => 'su_incoming_records#incoming_file_summary'
   get 'ic_incoming_file_summary' => 'ic_incoming_records#incoming_file_summary'

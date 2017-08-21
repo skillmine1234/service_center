@@ -4,6 +4,7 @@ class IamOrganisation < ActiveRecord::Base
 
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
+  has_many :iam_audit_logs, :foreign_key => 'org_uuid', :primary_key => 'org_uuid', :class_name => 'IamAuditLog'
 
   before_validation :squish_ips
   

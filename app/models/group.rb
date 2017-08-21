@@ -34,7 +34,7 @@ class Group < ActiveRecord::Base
     when "rr"
       ['RrUnapprovedRecord','IncomingFile','IncomingFileRecord','RrIncomingFile','RrIncomingRecord','ReconciledReturn']
     when "iam"
-      ['IamAuditRule','IamCustUser','IamOrganisation']
+      ['IamAuditLog', 'IamAuditRule','IamCustUser','IamOrganisation']
     when "fr"
       ['IncomingFile','IncomingFileRecord','FrR01IncomingFile','FrR01IncomingRecord']
     when "ns"
