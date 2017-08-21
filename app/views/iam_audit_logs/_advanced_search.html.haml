@@ -12,6 +12,7 @@
     .control-group
       = label_tag "Source Ip", "Source Ip", :class => 'control-label'
       = text_field_tag :source_ip, params[:source_ip]
+      = hidden_field_tag :page, params[:page] || 1
     .form-actions
       = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button",onclick: "$('#page').val(1)"
       = button_tag "Reset", :type => 'button', :value=>'Reset', :class => 'btn', :id => 'adv_search_reset_button'
