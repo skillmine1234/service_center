@@ -1306,11 +1306,14 @@ ActiveRecord::Schema.define(version: 20170717063408) do
     t.string   "cert_dn",       limit: 255
     t.string   "source_ip",     limit: 4000
     t.text     "req_bitstream"
+    t.text     "rep_bitstream"
     t.datetime "req_timestamp",              null: false
     t.datetime "rep_timestamp"
     t.string   "fault_code",    limit: 50
     t.string   "fault_reason",  limit: 1000
   end
+  
+  add_index "iam_audit_logs", ["org_uuid"], name: "iam_audit_logs_01"
 
   create_table "iam_audit_rules", force: :cascade do |t|
     t.string   "org_uuid",         limit: 1,  default: "N", null: false
