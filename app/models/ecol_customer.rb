@@ -2,7 +2,11 @@ class EcolCustomer < ActiveRecord::Base
   include Approval2::ModelAdditions
   include EcolCustomerValidation
   include EcolCustomerOptions
+  
+  ALLOWED_OPERATIONS = ['getStatus', 'acceptPayment', 'acceptPaymentWithCreditAcctNo', 'returnPayment']
 
+  serialize :allowed_operations, ArrayAsCsv
+  
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
   
@@ -31,6 +35,9 @@ class EcolCustomer < ActiveRecord::Base
   validates :rmtr_return_txt, format: {with: /\A[a-z|A-Z|0-9|\.|\,\s]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\.|\,\s]}' }, length: {maximum: 500, minimum: 1}, :allow_blank => true
   validates :customer_id, presence: true, format: {with: /\A[1-9][0-9]+\z/, :message => 'should not start with a 0 and should contain only numbers'}, length: {maximum: 50}
   validate :presence_of_iam_cust_user
+
+  validates_presence_of :allowed_operations, if: "identity_user_id.present?", message: "can't be blank when Identity User ID is present"
+  validates_presence_of :identity_user_id, if: "allowed_operations.present?", message: "can't be blank when Allowed Operations is present"
   
   before_save :to_upcase
 

@@ -836,6 +836,7 @@ ActiveRecord::Schema.define(version: 20170717063408) do
     t.string   "app_code",              limit: 15
     t.string   "identity_user_id",      limit: 20
     t.string   "should_prevalidate",    limit: 1,   default: "N", null: false
+    t.string   "allowed_operations",    limit: 100
   end
 
   add_index "ecol_customers", ["code", "approval_status"], name: "customer_index_on_status", unique: true

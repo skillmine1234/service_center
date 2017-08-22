@@ -17,7 +17,8 @@ module EcolCustomerValidation
     :presence_of_credit_acct_no_val_fail,
     :value_of_ntrv_sufx_if_val_method_is_N,
     :validate_app_code, 
-    :validate_should_prevalidate
+    :validate_should_prevalidate,
+    :check_options_of_allowed_operations
   end
   
   def val_tokens_should_be_N_if_val_method_is_N
@@ -107,5 +108,10 @@ module EcolCustomerValidation
     if (self.should_prevalidate == 'Y' && (self.val_method != 'W' && self.cust_alert_on == 'N'))
       errors.add(:should_prevalidate, 'should not be enabled when Validation Method is not Web Service and Customer Alert is off')
     end
+  end
+  
+  def check_options_of_allowed_operations
+    errors.add(:allowed_operations, "returnPayment is not allowed if Return If Validation Fails is 'N'") if allowed_operations.include?('returnPayment') && return_if_val_reject == 'N'
+    errors.add(:allowed_operations, "both 'acceptPayment' and 'acceptPaymentWithCreditAcctNo' cannot be selected, choose any one of the two") if allowed_operations.include?('acceptPayment') &&  allowed_operations.include?('acceptPaymentWithCreditAcctNo')
   end
 end

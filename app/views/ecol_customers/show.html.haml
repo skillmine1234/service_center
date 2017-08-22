@@ -239,6 +239,11 @@
             %td#msg-error
               = error_message_for(@ecol_customer, :credit_acct_val_fail, :prepend_text => "")
           %tr
+            %td.label Allowed Operations
+            %td.value
+              = get_allowed_operations(@ecol_customer.allowed_operations)
+            %td
+          %tr
             %td.label Narration Suffix 1
             %td.value
               = show_page_value_for_nrtv_sufx(@ecol_customer.nrtv_sufx_1)

@@ -203,6 +203,11 @@
       #msg-error
         = error_message_for(@ecol_customer, :credit_acct_val_fail, :prepend_text => "")
     .control-group
+      = f.label :allowed_operations, "Allowed Operations", :class => 'control-label'
+      = f.select :allowed_operations, options_for_select(EcolCustomer::ALLOWED_OPERATIONS, f.object.allowed_operations), {}, {multiple: true, style: "width: 250px;"}
+      #msg-error
+        = error_message_for(@ecol_customer, :allowed_operations, :prepend_text => "")
+    .control-group
       = f.label :nrtv_sufx_1, "*Narration Suffix 1", :class => 'control-label'
       = f.select :nrtv_sufx_1, options_for_select(EcolCustomer.options_for_nrtv_sufxs, @ecol_customer.nrtv_sufx_1),:prompt => 'SELECT'
       #msg-error

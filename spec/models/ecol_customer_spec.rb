@@ -283,6 +283,41 @@ describe EcolCustomer do
       ecol_customer.save.should == true
       ecol_customer.errors_on(:return_if_val_reject).should == []
     end
+    
+    it "should validate presence/absence of the combination of identity_user_id and allowed_operations" do
+      ecol_customer = Factory.build(:ecol_customer, allowed_operations: nil, identity_user_id: '12345')
+      ecol_customer.save.should == false
+      ecol_customer.errors_on(:allowed_operations).should == ["can't be blank when Identity User ID is present"]
+      
+      ecol_customer = Factory.build(:ecol_customer, allowed_operations: ['getStatus'], identity_user_id: nil)
+      ecol_customer.save.should == false
+      ecol_customer.errors_on(:identity_user_id).should == ["can't be blank when Allowed Operations is present"]
+      
+      ecol_customer = Factory.build(:ecol_customer, allowed_operations: nil, identity_user_id: nil)
+      ecol_customer.save.should == true
+      ecol_customer.errors_on(:allowed_operations).should == []
+      ecol_customer.errors_on(:identity_user_id).should == []
+      
+      ecol_customer = Factory.build(:ecol_customer, allowed_operations: ['getStatus'], identity_user_id: '12345')
+      ecol_customer.save.should == true
+      ecol_customer.errors_on(:allowed_operations).should == []
+      ecol_customer.errors_on(:identity_user_id).should == []
+    end
+    
+    it "should check 'acceptPaymentWithCreditAcctNo' and 'acceptPayment' can't be together" do 
+      ecol_customer = Factory.build(:ecol_customer, allowed_operations: ['acceptPaymentWithCreditAcctNo', 'acceptPayment'])
+      ecol_customer.save.should == false
+      ecol_customer.errors_on(:allowed_operations).should == ["both 'acceptPayment' and 'acceptPaymentWithCreditAcctNo' cannot be selected, choose any one of the two"]
+    end
+
+    it "should check returnPayment is not allowed if return_valus is false" do 
+      ecol_customer = Factory.build(:ecol_customer, allowed_operations: ['returnPayment'], return_if_val_reject: "N")
+      ecol_customer.save.should == false
+      ecol_customer.errors_on(:allowed_operations).should == ["returnPayment is not allowed if Return If Validation Fails is 'N'"]
+      
+      ecol_customer = Factory.build(:ecol_customer, allowed_operations: ['returnPayment'], return_if_val_reject: "Y")
+      ecol_customer.save.should == true
+    end
   end
   
   context "options_for_select_boxes" do
