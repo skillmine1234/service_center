@@ -11,6 +11,7 @@ describe IamOrganisation do
   context 'association' do
     it { should belong_to(:created_user) }
     it { should belong_to(:updated_user) }
+    it { should have_many(:iam_audit_logs) }
   end
 
   context "validation" do
