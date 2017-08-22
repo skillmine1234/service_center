@@ -101,4 +101,13 @@ describe IamAuditRulesController do
       assigns(:audit).should eq(nil)
     end
   end
+  
+  describe "GET error_msg" do
+    it "displays the flash msg and redirects to root" do
+      iam_audit_rule = Factory(:iam_audit_rule)
+      get :error_msg
+      flash[:alert].should  match(/Rule is not yet configured/)      
+      response.should redirect_to(:root)
+    end
+  end
 end

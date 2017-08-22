@@ -13,17 +13,17 @@
             %td.value
               = link_to "#{audit_count(@iam_audit_rule)}", :controller => :iam_audit_rules, :action => :audit_logs, :version_id => audit_count(@iam_audit_rule), :id => @iam_audit_rule.id
           %tr
-            %td.label Org UUID
+            %td.label Organisation UUID
             %td.value
               = @iam_audit_rule.org_uuid
             %td
           %tr
-            %td.label Cert DN
+            %td.label Certificate DN
             %td.value
               = @iam_audit_rule.cert_dn
             %td
           %tr
-            %td.label IP Address
+            %td.label Source IP
             %td.value
               = @iam_audit_rule.source_ip
             %td
