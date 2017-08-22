@@ -7,17 +7,25 @@
     = f.hidden_field :lock_version
     .control-group
       = f.label :org_uuid, "Org UUID", :class => 'control-label'
-      = f.check_box :org_uuid, {},"Y","N"      
+      = f.check_box :org_uuid, {},"Y","N"
+      #msg-error
+        = error_message_for(@iam_audit_rule, :org_uuid, :prepend_text => "")
     .control-group
       = f.label :cert_dn, "Cert DN", :class => 'control-label'
-      = f.check_box :cert_dn, {},"Y","N"   
+      = f.check_box :cert_dn, {},"Y","N"
+      #msg-error
+        = error_message_for(@iam_audit_rule, :cert_dn, :prepend_text => "")
     .control-group
       = f.label :source_ip, "Source IP", :class => 'control-label'
-      = f.check_box :source_ip, {},"Y","N"   
+      = f.check_box :source_ip, {},"Y","N"
+      #msg-error
+        = error_message_for(@iam_audit_rule, :source_ip, :prepend_text => "")
     .control-group
       = f.label :interval_in_mins, "*Interval", :class => 'control-label'
-      = f.number_field :interval_in_mins
-      
+      = f.number_field :interval_in_mins, min: 1
+      #msg-error
+        = error_message_for(@iam_audit_rule, :interval_in_mins, :prepend_text => "")
+
   .form-actions
     - (f.object.new_record? and f.object.org_uuid.nil?) ? label_name = "Create" : label_name = "Update"
     = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_rule', :value => label_name + ' IAM Audit Rules'

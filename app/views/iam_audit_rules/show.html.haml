@@ -13,40 +13,32 @@
             %td.value
               = link_to "#{audit_count(@iam_audit_rule)}", :controller => :iam_audit_rules, :action => :audit_logs, :version_id => audit_count(@iam_audit_rule), :id => @iam_audit_rule.id
           %tr
-            %td.label Form Errors
-            %td.value
-              = ' '
-            %td#msg-error
-              = error_message_for(@iam_audit_rule, :base, :prepend_text => "")
-          %tr
             %td.label Org UUID
             %td.value
               = @iam_audit_rule.org_uuid
-            %td#msg-error
-              = error_message_for(@iam_audit_rule, :org_uuid, :prepend_text => "")
+            %td
           %tr
             %td.label Cert DN
             %td.value
               = @iam_audit_rule.cert_dn
-            %td#msg-error
-              = error_message_for(@iam_audit_rule, :cert_dn, :prepend_text => "")
+            %td
           %tr
             %td.label IP Address
             %td.value
               = @iam_audit_rule.source_ip
-            %td#msg-error
-              = error_message_for(@iam_audit_rule, :source_ip, :prepend_text => "")
-
+            %td
+          %tr
+            %td.label Interval (in mins)
+            %td.value
+              = @iam_audit_rule.interval_in_mins
+            %td
           %tr
             %td.label Updated By
             %td.value
               = @iam_audit_rule.updated_user.try(:username)
-            %td#msg-error
-              = error_message_for(@ecol_rule, :updated_by, :prepend_text => "")
+            %td
           %tr
             %td.label Updated At
             %td.value
               = @iam_audit_rule.updated_at.try(:strftime, "%d/%m/%Y %I:%M%p")
-            %td#msg-error
-              = error_message_for(@ecol_rule, :updated_at, :prepend_text => "")
-      = link_to 'Back to Dashboard', root_path              
+            %td
