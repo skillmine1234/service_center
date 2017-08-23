@@ -425,7 +425,7 @@ $(document).ready(function(){
     }
   });
   
-  $('#ecol_customer_allowed_operations').multiselect({selectedList: 6});
+  $('#ecol_customer_allowed_operations').multiselect({selectedList: 4});
   
   $('#ecol_customer_form').bind('submit', function() {
       $(this).find(':input').removeAttr('disabled');
