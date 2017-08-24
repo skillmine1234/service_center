@@ -6,18 +6,18 @@
   .form-main{:style => 'width:100%'}
     = f.hidden_field :lock_version
     .control-group
-      = f.label :log_bad_org_uuid, :class => 'control-label'
-      = f.check_box :log_bad_org_uuid, {},"Y","N"
-      #msg-error
-        = error_message_for(@iam_audit_rule, :log_bad_org_uuid, :prepend_text => "")
-    .control-group
-      = f.label :iam_organisation_id, :class => 'control-label'
+      = f.label :iam_organisation_id, '*IAM Organisation', :class => 'control-label'
       = f.select :iam_organisation_id, IamOrganisation.all.map { |key, value| [key.name, key.id] }
       #msg-error
         = error_message_for(@iam_audit_rule, :iam_organisation_id, :prepend_text => "")
     .control-group
+      = f.label :log_bad_org_uuid, 'Log Bad Organisation UUID', :class => 'control-label'
+      = f.check_box :log_bad_org_uuid, {},"Y","N"
+      #msg-error
+        = error_message_for(@iam_audit_rule, :log_bad_org_uuid, :prepend_text => "")
+    .control-group
       = f.label :enabled_at, "*Last Enabled At", :class => 'control-label'
-      = f.datetime_field :enabled_at
+      = f.text_field :enabled_at
       #msg-error
         = error_message_for(@iam_audit_rule, :enabled_at, :prepend_text => "")
     .control-group
