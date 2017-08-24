@@ -41,9 +41,9 @@
     %h3 
       Validation Result:
       - if !@ecol_transaction.validation_result.nil?
-        = link_to @ecol_transaction.validation_status, "#", :class => 'result-link', :href => "#resultText", :style => "font-weight:100"
+        = link_to "#{@ecol_transaction.validation_status} (#{desc_for_decision_by(@ecol_transaction.decision_by)})", "#", :class => 'result-link', :href => "#resultText", :style => "font-weight:100"
       - else
-        = @ecol_transaction.validation_status
+        = "#{@ecol_transaction.validation_status} (#{desc_for_decision_by(@ecol_transaction.decision_by)})"
     %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:left;'}  
       %tr
         %td.label Validation Attempt

@@ -38,6 +38,10 @@ describe EcolTransactionsHelper do
       ecol_transaction = Factory(:ecol_transaction, :status => 'SUCCESS', :validation_status => "PENDING VALIDATION", :transfer_unique_no => "o iopoi")
       find_ecol_transactions(val,{:validation_status => "PENDING VALIDATION"}).should == [ecol_transaction]
       find_ecol_transactions(val,{:validation_status => "FAILED"}).should_not == [ecol_transaction]
+      
+      ecol_transaction = Factory(:ecol_transaction, :decision_by => 'H', :transfer_unique_no => "00asd")
+      find_ecol_transactions(val,{:decision_by => "H"}).should == [ecol_transaction]
+      find_ecol_transactions(val,{:decision_by => "A"}).should_not == [ecol_transaction]
 
       ecol_transaction = Factory(:ecol_transaction, :transfer_type => "ASD", :transfer_unique_no => "fvsdfaw")
       find_ecol_transactions(val,{:transfer_type => "ASD"}).should == [ecol_transaction]
@@ -212,6 +216,14 @@ describe EcolTransactionsHelper do
       update_transactions([transaction],{:approval => 'N', :notify_status => 'NOTIFICATION FAILED'})
       transaction.reload
       transaction.notify_status.should == 'PENDING NOTIFICATION'
+    end
+  end
+  
+  context "desc_for_decision_by" do
+    it "should return description" do
+      desc_for_decision_by('A').should == 'Automatic'
+      desc_for_decision_by('H').should == 'Human'
+      desc_for_decision_by('W').should == 'WebService'
     end
   end
 end
