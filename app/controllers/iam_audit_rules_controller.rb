@@ -43,6 +43,6 @@ class IamAuditRulesController < ApplicationController
   private
 
   def iam_audit_rule_params
-    params.require(:iam_audit_rule).permit(:org_uuid, :cert_dn, :source_ip, :interval_in_mins, :lock_version)
+    params.require(:iam_audit_rule).permit(:iam_organisation_id, :log_bad_org_uuid, :interval_in_mins, :lock_version, :enabled_at)
   end
 end

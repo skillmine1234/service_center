@@ -13,22 +13,22 @@
             %td.value
               = link_to "#{audit_count(@iam_audit_rule)}", :controller => :iam_audit_rules, :action => :audit_logs, :version_id => audit_count(@iam_audit_rule), :id => @iam_audit_rule.id
           %tr
+            %td.label Log Bad Org UUID
+            %td.value
+              = @iam_audit_rule.log_bad_org_uuid
+            %td
+          %tr
             %td.label Organisation UUID
             %td.value
-              = @iam_audit_rule.org_uuid
+              = link_to @iam_audit_rule.org_uuid, @iam_audit_rule.iam_organisation
             %td
           %tr
-            %td.label Certificate DN
+            %td.label Enabled At
             %td.value
-              = @iam_audit_rule.cert_dn
+              = @iam_audit_rule.enabled_at.try(:strftime, "%d/%m/%Y %I:%M%p")
             %td
           %tr
-            %td.label Source IP
-            %td.value
-              = @iam_audit_rule.source_ip
-            %td
-          %tr
-            %td.label Interval (in mins)
+            %td.label Enabled For (in mins)
             %td.value
               = @iam_audit_rule.interval_in_mins
             %td

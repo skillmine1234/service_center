@@ -49,7 +49,7 @@ class IamOrganisation < ActiveRecord::Base
 
   def value_of_source_ips
     unless self.source_ips.nil?
-      arr =  self.source_ips.split(' ')
+      arr =  self.source_ips.lines.map(&:chomp)
       invalid_ips = []
       arr.each do |a|
         if (Resolv::IPv4::Regex =~ a) == nil

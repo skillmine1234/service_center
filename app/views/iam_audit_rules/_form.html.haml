@@ -6,22 +6,22 @@
   .form-main{:style => 'width:100%'}
     = f.hidden_field :lock_version
     .control-group
-      = f.label :org_uuid, "Organisation UUID", :class => 'control-label'
-      = f.check_box :org_uuid, {},"Y","N"
+      = f.label :log_bad_org_uuid, :class => 'control-label'
+      = f.check_box :log_bad_org_uuid, {},"Y","N"
       #msg-error
-        = error_message_for(@iam_audit_rule, :org_uuid, :prepend_text => "")
+        = error_message_for(@iam_audit_rule, :log_bad_org_uuid, :prepend_text => "")
     .control-group
-      = f.label :cert_dn, "Certificate DN", :class => 'control-label'
-      = f.check_box :cert_dn, {},"Y","N"
+      = f.label :iam_organisation_id, :class => 'control-label'
+      = f.select :iam_organisation_id, IamOrganisation.all.map { |key, value| [key.name, key.id] }
       #msg-error
-        = error_message_for(@iam_audit_rule, :cert_dn, :prepend_text => "")
+        = error_message_for(@iam_audit_rule, :iam_organisation_id, :prepend_text => "")
     .control-group
-      = f.label :source_ip, "Source IP", :class => 'control-label'
-      = f.check_box :source_ip, {},"Y","N"
+      = f.label :enabled_at, "*Last Enabled At", :class => 'control-label'
+      = f.datetime_field :enabled_at
       #msg-error
-        = error_message_for(@iam_audit_rule, :source_ip, :prepend_text => "")
+        = error_message_for(@iam_audit_rule, :enabled_at, :prepend_text => "")
     .control-group
-      = f.label :interval_in_mins, "*Interval (in mins)", :class => 'control-label'
+      = f.label :interval_in_mins, "*Enabled For (in mins)", :class => 'control-label'
       = f.number_field :interval_in_mins, min: 1
       #msg-error
         = error_message_for(@iam_audit_rule, :interval_in_mins, :prepend_text => "")
