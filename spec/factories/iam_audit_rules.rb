@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :iam_audit_rule do
-    org_uuid 'UUID'
-    cert_dn '123123'
-    source_ip '10.0.20.230'
+    iam_organisation_id {Factory(:iam_organisation).id}
+    enabled_at Time.zone.now
     interval_in_mins 10
+    log_bad_org_uuid 'Y'
     lock_version 1
   end
 end
