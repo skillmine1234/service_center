@@ -9,7 +9,7 @@ describe IamAuditRule do
   end
 
   context "validation" do
-    [:log_bad_org_uuid, :enabled_at, :interval_in_mins, :iam_organisation_id].each do |att|
+    [:log_bad_org_uuid, :enabled_at, :interval_in_mins].each do |att|
       it { should validate_presence_of(att) }
     end
 

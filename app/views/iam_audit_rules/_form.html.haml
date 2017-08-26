@@ -6,8 +6,8 @@
   .form-main{:style => 'width:100%'}
     = f.hidden_field :lock_version
     .control-group
-      = f.label :iam_organisation_id, '*IAM Organisation', :class => 'control-label'
-      = f.select :iam_organisation_id, IamOrganisation.all.map { |key, value| [key.name, key.id] }
+      = f.label :iam_organisation_id, 'IAM Organisation', :class => 'control-label'
+      = f.select(:iam_organisation_id, IamOrganisation.all.map { |key, value| [key.name, key.id] }, include_blank: 'Select')
       #msg-error
         = error_message_for(@iam_audit_rule, :iam_organisation_id, :prepend_text => "")
     .control-group

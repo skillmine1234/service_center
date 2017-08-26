@@ -20,7 +20,8 @@
           %tr
             %td.label IAM Organisation
             %td.value
-              = link_to @iam_audit_rule.iam_organisation.name, @iam_audit_rule.iam_organisation
+              - if @iam_audit_rule.iam_organisation.present? 
+                = link_to @iam_audit_rule.iam_organisation.name, @iam_audit_rule.iam_organisation
             %td
           %tr
             %td.label Enabled At
