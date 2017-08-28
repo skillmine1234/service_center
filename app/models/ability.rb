@@ -14,10 +14,11 @@ class Ability
     editor_permissions(@user.group_model_list) if @user.has_role? :editor
     supervisor_permissions(@user.group_model_list) if @user.has_role? :supervisor
     tester_permissions(@user.group_model_list) if @user.has_role? :tester
+    support_permissions(@user.group_model_list) if @user.has_role? :support
     can :read, ActiveAdmin::Page, :name => "Dashboard"
   end
-
-  def user_permissions(models)
+  
+  def support_permissions(models)
     models.each do |model_name|
       can :read, model_name.constantize
       can :audit_steps, model_name.constantize
@@ -29,6 +30,18 @@ class Ability
       cannot :approve_transaction, model_name.constantize
       cannot :update, model_name.constantize
       cannot :override_transaction, model_name.constantize
+    end
+    can :manage, UnapprovedRecord, approvable_type: @group.try(:model_list)
+  end
+
+  def user_permissions(models)
+    models.each do |model_name|
+      can :read, model_name.constantize
+      can :audit_steps, model_name.constantize
+      can :incoming_file_summary, model_name.constantize
+      can :download_file, model_name.constantize
+      can :view_raw_content, model_name.constantize
+      can [:audit_logs, :ecol_audit_logs], model_name.constantize
     end
     can :manage, UnapprovedRecord, approvable_type: @group.try(:model_list)
   end
