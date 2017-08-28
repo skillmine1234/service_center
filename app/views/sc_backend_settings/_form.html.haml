@@ -10,15 +10,30 @@
     = f.hidden_field :approved_id
     = f.hidden_field :approved_version
     = f.hidden_field :settings_cnt
+    = f.hidden_field :is_std
     .control-group
-      = f.label :backend_code, "*Backend Code", :class => 'control-label'
-      = f.select :backend_code, options_for_select(ScBackendSetting.options_for_backend_code, @sc_backend_setting.backend_code), prompt: 'Select'
-    .control-group
-      = f.label :service_code, "*Service Code", :class => 'control-label'
-      = f.select :service_code, options_for_select(ScBackendSetting.options_for_service_code(@sc_backend_setting.backend_code) | [@sc_backend_setting.service_code], @sc_backend_setting.service_code)
-    .control-group
-      = f.label :app_id, "App ID", :class => 'control-label'
-      = f.text_field :app_id, maxlength: 50
+      = f.label :is_enabled, 'Is Enabled?', class: 'control-label'
+      = f.check_box :is_enabled, {}, 'Y', 'N'
+    - if @sc_backend_setting.is_std == 'Y'
+      .control-group
+        = f.label :backend_code, "*Backend Code", :class => 'control-label'
+        = f.text_field :backend_code, readonly: true
+      .control-group
+        = f.label :service_code, "*Service Code", :class => 'control-label'
+        = f.text_field :service_code, readonly: true
+      .control-group
+        = f.label :app_id, "App ID", :class => 'control-label'
+        = f.text_field :app_id, maxlength: 50, readonly: true
+    - else
+      .control-group
+        = f.label :backend_code, "*Backend Code", :class => 'control-label'
+        = f.select :backend_code, options_for_select(ScBackendSetting.options_for_backend_code, @sc_backend_setting.backend_code), prompt: 'Select'
+      .control-group
+        = f.label :service_code, "*Service Code", :class => 'control-label'
+        = f.select :service_code, options_for_select(ScBackendSetting.options_for_service_code(@sc_backend_setting.backend_code) | [@sc_backend_setting.service_code], @sc_backend_setting.service_code)
+      .control-group
+        = f.label :app_id, "App ID", :class => 'control-label'
+        = f.text_field :app_id, maxlength: 50
     .settings
       = render :partial => 'settings', locals: {setting: @sc_backend_setting}
 

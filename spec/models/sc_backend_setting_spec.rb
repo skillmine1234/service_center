@@ -41,12 +41,25 @@ describe ScBackendSetting do
     end
     
     it "should validate presence of app_id if its a new record or when an approved record with app_id not null is edited" do
-      sc_backend_setting1 = Factory.build(:sc_backend_setting, app_id: nil)
-      sc_backend_setting1.errors_on(:app_id) == ["can't be blank"]
+      sc_backend_setting1 = Factory.build(:sc_backend_setting, app_id: nil, is_std: 'N')
+      sc_backend_setting1.errors_on(:app_id).should == ["can't be blank"]
 
-      sc_backend_setting2 = Factory(:sc_backend_setting, :approval_status => 'A', app_id: '12345')      
+      sc_backend_setting2 = Factory(:sc_backend_setting, :approval_status => 'A', app_id: '12345', is_std: 'N')
       sc_backend_setting3 = Factory.build(:sc_backend_setting, :approval_status => 'U', :approved_id => sc_backend_setting2.id, app_id: '12345')
-      sc_backend_setting3.errors_on(:app_id) == []
+      sc_backend_setting3.errors_on(:app_id).should == []
+
+      sc_backend_setting3 = Factory.build(:sc_backend_setting, app_id: '12314', is_std: 'Y')
+      sc_backend_setting3.errors_on(:app_id).should == ["must be blank for standard settings"]
+    end
+    
+    it "should validate that the backend_code and service code are not modified on edit of standard settings" do
+      sc_backend_setting1 = Factory(:sc_backend_setting, :approval_status => 'A', app_id: nil, is_std: 'Y', backend_code: 'B123', service_code: 'S123')      
+      sc_backend_setting2 = Factory.build(:sc_backend_setting, :approval_status => 'U', :approved_id => sc_backend_setting1.id, app_id: nil, backend_code: 'B111', is_std: 'Y')
+      sc_backend_setting2.errors_on(:base).should == ["Backend Code and Service Code can't be modified for standard settings"]
+      
+      sc_backend_setting3 = Factory(:sc_backend_setting, :approval_status => 'A', app_id: nil, is_std: 'Y', backend_code: 'B901', service_code: 'S111')      
+      sc_backend_setting4 = Factory.build(:sc_backend_setting, :approval_status => 'U', :approved_id => sc_backend_setting3.id, app_id: nil, service_code: 'B111', is_std: 'Y')
+      sc_backend_setting4.errors_on(:base).should == ["Backend Code and Service Code can't be modified for standard settings"]
     end
     
     it "should validate presence of setting names" do
@@ -58,31 +71,31 @@ describe ScBackendSetting do
     it "should validate the setting values" do
       sc_backend_setting = Factory.build(:sc_backend_setting, setting1_name: 'name1', setting1_type: 'text', setting1_value: nil)
       sc_backend_setting.save.should == false
-      sc_backend_setting.errors_on(:setting1_value).should == ["can't be blank"]
+      sc_backend_setting.errors_on('name1').should == ["can't be blank"]
 
       sc_backend_setting = Factory.build(:sc_backend_setting, setting1_name: 'name1', setting1_type: 'text', setting1_value: 'text')
       sc_backend_setting.save.should == true
-      sc_backend_setting.errors_on(:setting1_value).should == []
+      sc_backend_setting.errors_on('name1').should == []
 
       sc_backend_setting = Factory.build(:sc_backend_setting, setting1_name: 'name1', setting1_type: 'number', setting1_value: 'TEXT')
       sc_backend_setting.save.should == false
-      sc_backend_setting.errors_on(:setting1_value).should == ["should include only digits"]
+      sc_backend_setting.errors_on('name1').should == ["should include only digits"]
 
       sc_backend_setting = Factory.build(:sc_backend_setting, setting1_name: 'name1', setting1_type: 'number', setting1_value: '1234')
       sc_backend_setting.save.should == true
-      sc_backend_setting.errors_on(:setting1_value).should == []
+      sc_backend_setting.errors_on('name1').should == []
 
       sc_backend_setting = Factory.build(:sc_backend_setting, setting1_name: 'name1', setting1_type: 'text', setting1_value: 'yterqweytweuyqtweyqteyqtwerqwyertqweuryqwieuryqwerehquqwkjhequeuqeyuqjwhegruqywerqwjkeqjwehqjweqjhwegqhwe')
       sc_backend_setting.save.should == false
-      sc_backend_setting.errors_on(:setting1_value).should == ["is longer than maximum (100)"]
+      sc_backend_setting.errors_on('name1').should == ["is longer than maximum (100)"]
 
       sc_backend_setting = Factory.build(:sc_backend_setting, setting1_name: 'name1', setting1_type: 'date', setting1_value: '2014:12:12')
       sc_backend_setting.save.should == false
-      sc_backend_setting.errors_on(:setting1_value).should == ["invalid format, the correct format is yyyy-mm-dd", "is not a date"]
+      sc_backend_setting.errors_on('name1').should == ["invalid format, the correct format is yyyy-mm-dd", "is not a date"]
 
       sc_backend_setting = Factory.build(:sc_backend_setting, setting1_name: 'name1', setting1_type: 'date', setting1_value: '2016-12-12')
       sc_backend_setting.save.should == true
-      sc_backend_setting.errors_on(:setting1_value).should == []
+      sc_backend_setting.errors_on('name1').should == []
     end
   end
 
