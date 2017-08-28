@@ -24,7 +24,7 @@ class IamOrganisation < ActiveRecord::Base
   validates_length_of :cert_dn, maximum: 300
   validates_length_of :email_id, maximum: 255
   validates_format_of :name, :org_uuid, with: /\A[a-z|A-Z|0-9|\s|\.|\-]+\z/, message: "invalid format - expected format is : {[a-z|A-Z|0-9|\s|\.|\-]}"
-  validates_format_of :cert_dn, with: /\A[a-z|A-Z|0-9|\s|\.|\-|\\|\/|\=|\*]+\z/, message: "invalid format - expected format is : {[a-z|A-Z|0-9|\s|\.|\-|\\|\/|\=|\*]}", allow_blank: true
+  validates_format_of :cert_dn, with: /\A[a-z|A-Z|0-9|\s|\.|\,|\-|\\|\/|\=|\*]+\z/, message: "invalid format - expected format is : {[a-z|A-Z|0-9|\s|\.|\,|\-|\\|\/|\=|\*]}", allow_blank: true
 
   def template_variables
     { name: name, email: email_id, org_uuid: org_uuid , on_vpn: on_vpn, cert_dn: cert_dn, source_ips: source_ips}

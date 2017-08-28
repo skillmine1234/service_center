@@ -24,7 +24,7 @@
                 = link_to @iam_audit_rule.iam_organisation.name, @iam_audit_rule.iam_organisation
             %td
           %tr
-            %td.label Enabled At
+            %td.label Last Enabled At
             %td.value
               = @iam_audit_rule.enabled_at.try(:strftime, "%d/%m/%Y %I:%M%p")
             %td
