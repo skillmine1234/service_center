@@ -25,6 +25,10 @@ class Ability
       can :download_file, model_name.constantize
       can :view_raw_content, model_name.constantize
       can [:audit_logs, :ecol_audit_logs], model_name.constantize
+      cannot :update_multiple, model_name.constantize
+      cannot :approve_transaction, model_name.constantize
+      cannot :update, model_name.constantize
+      cannot :override_transaction, model_name.constantize
     end
     can :manage, UnapprovedRecord, approvable_type: @group.try(:model_list)
   end
