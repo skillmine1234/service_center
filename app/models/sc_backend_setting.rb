@@ -53,7 +53,7 @@ class ScBackendSetting < ActiveRecord::Base
   end
   
   def validate_standard_values
-    errors[:base] << "Backend Code and Service Code can't be modified for standard settings" if (self.approved_record.backend_code != backend_code || self.approved_record.service_code != service_code)
+    errors[:base] << "Backend Code, Service Code and Enabled? can't be modified for standard settings" if (self.approved_record.backend_code != backend_code || self.approved_record.service_code != service_code || self.approved_record.is_enabled != is_enabled)
   end
 
   def set_settings_cnt

@@ -53,13 +53,17 @@ describe ScBackendSetting do
     end
     
     it "should validate that the backend_code and service code are not modified on edit of standard settings" do
-      sc_backend_setting1 = Factory(:sc_backend_setting, :approval_status => 'A', app_id: nil, is_std: 'Y', backend_code: 'B123', service_code: 'S123')      
+      sc_backend_setting1 = Factory(:sc_backend_setting, :approval_status => 'A', app_id: nil, is_std: 'Y', backend_code: 'B123', service_code: 'S123')
       sc_backend_setting2 = Factory.build(:sc_backend_setting, :approval_status => 'U', :approved_id => sc_backend_setting1.id, app_id: nil, backend_code: 'B111', is_std: 'Y')
-      sc_backend_setting2.errors_on(:base).should == ["Backend Code and Service Code can't be modified for standard settings"]
+      sc_backend_setting2.errors_on(:base).should == ["Backend Code, Service Code and Enabled? can't be modified for standard settings"]
       
-      sc_backend_setting3 = Factory(:sc_backend_setting, :approval_status => 'A', app_id: nil, is_std: 'Y', backend_code: 'B901', service_code: 'S111')      
+      sc_backend_setting3 = Factory(:sc_backend_setting, :approval_status => 'A', app_id: nil, is_std: 'Y', backend_code: 'B901', service_code: 'S111')
       sc_backend_setting4 = Factory.build(:sc_backend_setting, :approval_status => 'U', :approved_id => sc_backend_setting3.id, app_id: nil, service_code: 'B111', is_std: 'Y')
-      sc_backend_setting4.errors_on(:base).should == ["Backend Code and Service Code can't be modified for standard settings"]
+      sc_backend_setting4.errors_on(:base).should == ["Backend Code, Service Code and Enabled? can't be modified for standard settings"]
+      
+      sc_backend_setting5 = Factory(:sc_backend_setting, :approval_status => 'A', app_id: nil, is_std: 'Y', backend_code: 'B902', service_code: 'S222', is_enabled: 'Y')
+      sc_backend_setting6 = Factory.build(:sc_backend_setting, :approval_status => 'U', :approved_id => sc_backend_setting5.id, app_id: nil, backend_code: 'B902', service_code: 'S222', is_std: 'Y', is_enabled: 'N')
+      sc_backend_setting6.errors_on(:base).should == ["Backend Code, Service Code and Enabled? can't be modified for standard settings"]
     end
     
     it "should validate presence of setting names" do
