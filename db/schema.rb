@@ -836,6 +836,7 @@ ActiveRecord::Schema.define(version: 20170717063408) do
     t.string   "app_code",              limit: 15
     t.string   "identity_user_id",      limit: 20
     t.string   "should_prevalidate",    limit: 1,   default: "N", null: false
+    t.string   "allowed_operations",    limit: 100
   end
 
   add_index "ecol_customers", ["code", "approval_status"], name: "customer_index_on_status", unique: true
@@ -1299,6 +1300,32 @@ ActiveRecord::Schema.define(version: 20170717063408) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+  
+  create_table "iam_audit_logs", force: :cascade do |t|
+    t.string   "org_uuid",      limit: 255,  null: false
+    t.string   "cert_dn",       limit: 255
+    t.string   "source_ip",     limit: 4000
+    t.text     "req_bitstream"
+    t.text     "rep_bitstream"
+    t.datetime "req_timestamp",              null: false
+    t.datetime "rep_timestamp"
+    t.string   "fault_code",    limit: 50
+    t.string   "fault_reason",  limit: 1000
+  end
+  
+  add_index "iam_audit_logs", ["org_uuid"], name: "iam_audit_logs_01"
+
+  create_table "iam_audit_rules", force: :cascade do |t|
+    t.string   "org_uuid",         limit: 1,  default: "N", null: false
+    t.string   "cert_dn",          limit: 1,  default: "N", null: false
+    t.string   "source_ip",        limit: 1,  default: "N", null: false
+    t.integer  "interval_in_mins",            default: 15,  null: false
+    t.string   "created_by",       limit: 20
+    t.string   "updated_by",       limit: 20
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.integer  "lock_version",                default: 0,   null: false
   end
 
   create_table "iam_cust_users", force: :cascade do |t|

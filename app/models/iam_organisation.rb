@@ -4,6 +4,7 @@ class IamOrganisation < ActiveRecord::Base
 
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
+  has_many :iam_audit_logs, :foreign_key => 'org_uuid', :primary_key => 'org_uuid', :class_name => 'IamAuditLog'
 
   before_validation :squish_ips
   
@@ -11,7 +12,7 @@ class IamOrganisation < ActiveRecord::Base
   validates_uniqueness_of :org_uuid, :scope => :approval_status
   validates :on_vpn, length: { minimum: 1, maximum: 1 }
   validate :check_email_addresses
-  validates_format_of :source_ips, :with => /\A\w[\w\-\(\)\.\s\r\n]*\z/, :allow_blank => true
+  validates_format_of :source_ips, :with => /\A\w[\w\-\(\)\.\r\n]*\z/, :allow_blank => true
   validate :value_of_source_ips
 
   validates_presence_of :cert_dn, :message => "Required when 'Is VPN On?' is not checked.", :if => '!is_vpn_on?'
@@ -23,7 +24,7 @@ class IamOrganisation < ActiveRecord::Base
   validates_length_of :cert_dn, maximum: 300
   validates_length_of :email_id, maximum: 255
   validates_format_of :name, :org_uuid, with: /\A[a-z|A-Z|0-9|\s|\.|\-]+\z/, message: "invalid format - expected format is : {[a-z|A-Z|0-9|\s|\.|\-]}"
-  validates_format_of :cert_dn, with: /\A[a-z|A-Z|0-9|\s|\.|\-]+\z/, message: "invalid format - expected format is : {[a-z|A-Z|0-9|\s|\.|\-]}", allow_blank: true
+  validates_format_of :cert_dn, with: /\A[a-z|A-Z|0-9|\s|\.|\,|\-|\\|\/|\=|\*]+\z/, message: "invalid format - expected format is : {[a-z|A-Z|0-9|\s|\.|\,|\-|\\|\/|\=|\*]}", allow_blank: true
 
   def template_variables
     { name: name, email: email_id, org_uuid: org_uuid , on_vpn: on_vpn, cert_dn: cert_dn, source_ips: source_ips}
@@ -48,7 +49,7 @@ class IamOrganisation < ActiveRecord::Base
 
   def value_of_source_ips
     unless self.source_ips.nil?
-      arr =  self.source_ips.split(' ')
+      arr =  self.source_ips.lines.map(&:chomp)
       invalid_ips = []
       arr.each do |a|
         if (Resolv::IPv4::Regex =~ a) == nil

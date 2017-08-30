@@ -7,6 +7,7 @@ module EcolTransactionsHelper
     ecol_transactions = ecol_transactions.where("status=? and pending_approval=?",params[:status],params[:pending]) if params[:status].present? and params[:pending].present?
     ecol_transactions = ecol_transactions.where("pending_approval=?",params[:pending]) if params[:pending].present?
     ecol_transactions = ecol_transactions.where("status=?",params[:status]) if params[:status].present?
+    ecol_transactions = ecol_transactions.where("decision_by=?",params[:decision_by]) if params[:decision_by].present?
     ecol_transactions = ecol_transactions.where("notify_status=?",params[:notification_status]) if params[:notification_status].present?
     ecol_transactions = ecol_transactions.where("validation_status=?",params[:validation_status]) if params[:validation_status].present?
     ecol_transactions = ecol_transactions.where("settle_status=?",params[:settle_status]) if params[:settle_status].present?
@@ -98,6 +99,17 @@ module EcolTransactionsHelper
       elsif params[:notify_status].present?
         ecol_transaction.update_attributes(:pending_approval => "N", :notify_status => 'PENDING ' + params[:notify_status].split(' ')[0])  
       end
+    end
+  end
+  
+  def desc_for_decision_by(value)
+    case value
+    when 'A'
+      'Automatic'
+    when 'H'
+      'Human'
+    when 'W'
+      'WebService'
     end
   end
 end

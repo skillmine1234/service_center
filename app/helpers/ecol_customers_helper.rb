@@ -56,4 +56,8 @@ module EcolCustomersHelper
       "User Defined Field 2"  
     end
   end
+  
+  def get_allowed_operations(value)
+    value.join(', ') unless value.nil?
+  end
 end

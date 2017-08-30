@@ -67,4 +67,11 @@ describe EcolCustomersHelper do
       show_page_value_for_nrtv_sufx("UDF2").should == "User Defined Field 2"
     end
   end
+  
+  context "get_allowed_operations" do
+    it "should return the value of allowed_operations as string" do
+      ecol_customer = Factory(:ecol_customer, allowed_operations: ['getStatus', 'returnPayment'], return_if_val_reject: 'Y')
+      get_allowed_operations(ecol_customer.allowed_operations).should == 'getStatus, returnPayment'
+    end
+  end
 end

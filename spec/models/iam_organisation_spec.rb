@@ -11,6 +11,7 @@ describe IamOrganisation do
   context 'association' do
     it { should belong_to(:created_user) }
     it { should belong_to(:updated_user) }
+    it { should have_many(:iam_audit_logs) }
   end
 
   context "validation" do
@@ -85,11 +86,11 @@ describe IamOrganisation do
 
       iam_organisation = Factory.build(:iam_organisation, :source_ips => '123:78:89:91 23.12:12::1', approval_status: 'A')
       iam_organisation.save.should == false
-      iam_organisation.errors_on(:source_ips).should == ["is invalid", "Invalid IPs [\"123:78:89:91\", \"23.12:12::1\"]"]
+      iam_organisation.errors_on(:source_ips).should == ["is invalid", "Invalid IPs [\"123:78:89:91 23.12:12::1\"]"]
     end
 
     it 'should not return an error if source_ips are valid' do
-      iam_organisation = Factory.build(:iam_organisation, :source_ips => '123.78.89.91 23.12.12.1', approval_status: 'A')
+      iam_organisation = Factory.build(:iam_organisation, :source_ips => "123.78.89.91\r\n23.12.12.1", approval_status: 'A')
       iam_organisation.save.should == true
       iam_organisation.errors_on(:source_ips).should == []
     end

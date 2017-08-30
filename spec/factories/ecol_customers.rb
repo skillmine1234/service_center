@@ -34,6 +34,7 @@ FactoryGirl.define do
     customer_id 1234
     app_code "1234"
     identity_user_id { Factory(:iam_cust_user, approval_status: 'A').username }
+    allowed_operations ['getStatus']
     should_prevalidate 'N'
   end
 end

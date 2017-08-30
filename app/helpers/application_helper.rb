@@ -57,4 +57,8 @@ module ApplicationHelper
   def relative_time(timestamp)
     timestamp.present? ? time_ago_in_words(timestamp)+' ago' : '-'
   end
+  
+  def show_xml(link,class_name,request)
+    link_to_unless((current_user.has_role? :customer), link, '#',{:class => class_name, :href => "javascript:void()", data: { request: request, reply: request }})
+  end
 end

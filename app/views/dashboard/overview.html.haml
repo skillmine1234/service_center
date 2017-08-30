@@ -551,6 +551,17 @@
         = "Approval Worklist"
   .slide-container
     .box
+      - if !IamAuditRule.first.nil?
+        = link_to edit_iam_audit_rule_path(IamAuditRule.first) do
+          = image_tag 'ecol_rule.png', :size => "80x80"
+        %br
+          = "IAM Audit Rule"
+      - else
+        = link_to iam_audit_rule_error_msg_path do
+          = image_tag 'ecol_rule.png', :size => "80x80"
+        %br
+          = "IAM Audit Rule"
+    .box
       = link_to '/iam_organisations' do
         = image_tag 'iam_organisation_icon.png', :size => "80x80"
       %br
@@ -560,6 +571,24 @@
         = image_tag 'iam_cust_user_icon.png', :size => "80x80"
       %br
         = "IAM Customer User"
+    .box
+      = link_to iam_audit_logs_path do
+        = image_tag 'i_am_audit_log.png', :size => "80x80"
+      %br
+        = "IAM Audit Logs"
+- if @current_user.group_names.include?("fr")
+  %h1 File Reports
+  .slide-container
+    .box  
+      = link_to incoming_files_path(:sc_service => "FR") do
+        = image_tag 'upload.png', :size => "80x80"
+      %br
+        = "File Uploads"
+    .box  
+      = link_to unapproved_records_path(group_name: 'fr', sc_service: 'FR') do
+        = image_tag 'work-list.jpg', :size => "80x80"
+      %br
+        = "Approval Worklist"
 
 - if @current_user.group_names.include?("ns")
   %h1 Notifications
