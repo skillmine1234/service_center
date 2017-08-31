@@ -27,7 +27,6 @@ class ScBackendSetting < ActiveRecord::Base
   validates_absence_of :app_id, if: "is_std == 'Y'", message: "must be blank for standard settings"
 
   validates_uniqueness_of :backend_code, scope: [:service_code, :app_id, :approval_status], if: "app_id.present?"
-  validates_uniqueness_of :backend_code, scope: [:service_code, :approval_status], if: "!app_id.present?"
   
   validates :backend_code, :service_code, format: {with: /\A[a-z|A-Z|0-9|\.|\-]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\.|\-]}' }, length: { maximum: 50 }
   validates :app_id, format: {with: /\A[a-z|A-Z|0-9|\.|\-]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\.|\-]}' }, length: { maximum: 50 }, allow_blank: true
