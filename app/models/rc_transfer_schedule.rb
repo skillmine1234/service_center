@@ -2,7 +2,7 @@ class RcTransferSchedule < ActiveRecord::Base
   include Approval
   include RcTransferApproval
 
-  TXN_KINDS = %w(FT BALINQ)
+  TXN_KINDS = %w(FT BALINQ COLLECT)
   INTERVAL_UNITS = %w(Minutes Days)
   self.table_name = "rc_transfer_schedule"
   
@@ -21,9 +21,8 @@ class RcTransferSchedule < ActiveRecord::Base
   
   before_validation :set_interval_in_mins, if: "interval_unit=='Days'"
 
-  validates_presence_of :code, :debit_account_no, :is_enabled, :max_retries, :retry_in_mins, :rc_app_id
+  validates_presence_of :code, :debit_account_no, :is_enabled, :max_retries, :retry_in_mins
   validates_presence_of :bene_account_no, :acct_threshold_amt, :bene_account_ifsc, :bene_name, if: "txn_kind=='FT'", message: "can't be blank when Transaction Kind is FT"
-  validates :rc_app, :presence => true
   validates :bene_account_ifsc, format: {with: /\A[A-Z|a-z]{4}[0][A-Za-z0-9]{6}+\z/, message: "Invalid format, expected format is : {[A-Z|a-z]{4}[0][A-Za-z0-9]{6}}" }, allow_blank: true
 
   validates :code, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}' }, length: {maximum: 20}
@@ -42,6 +41,9 @@ class RcTransferSchedule < ActiveRecord::Base
   validate :retry_interval, unless: "retry_in_mins.nil? || max_retries.nil? || interval_in_mins.nil?"
   validates_length_of :bene_name, maximum: 25, allow_blank: true
   validate :value_of_acct_threshold_amt
+  
+  validates_absence_of :bene_name, if: "txn_kind=='COLLECT'", message: 'must be blank when Transaction Kind is COLLECT'
+  validates_absence_of :bene_account_ifsc, if: "txn_kind=='COLLECT'", message: 'must be blank when Transaction Kind is COLLECT'
 
   def validate_next_run_at
     errors.add(:next_run_at,"should not be less than today's date") if !next_run_at.nil? and next_run_at < Time.zone.today.beginning_of_day

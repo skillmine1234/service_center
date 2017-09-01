@@ -13,7 +13,7 @@ describe RcTransferSchedule do
   end
   
   context 'validation' do
-    [:code, :debit_account_no, :is_enabled, :max_retries, :retry_in_mins, :rc_app_id].each do |att|
+    [:code, :debit_account_no, :is_enabled, :max_retries, :retry_in_mins].each do |att|
       it { should validate_presence_of(att) }
     end
 
@@ -67,6 +67,16 @@ describe RcTransferSchedule do
       rc_transfer_schedule = Factory(:rc_transfer_schedule, max_retries: 1, retry_in_mins: 15, interval_in_mins: 40)
       rc_transfer_schedule.should be_valid
       rc_transfer_schedule = Factory(:rc_transfer_schedule, max_retries: 0, retry_in_mins: 10, interval_in_mins: 40)
+      rc_transfer_schedule.should be_valid
+    end
+    
+    it "should validate absence of bene ifsc and name if txn_kind is COLLECT" do
+      rc_transfer_schedule = Factory.build(:rc_transfer_schedule, bene_account_ifsc: 'HDFC0123456', bene_name: 'John', txn_kind: 'COLLECT')
+      rc_transfer_schedule.should_not be_valid
+      rc_transfer_schedule.errors_on(:bene_account_ifsc).should == ['must be blank when Transaction Kind is COLLECT']
+      rc_transfer_schedule.errors_on(:bene_name).should == ['must be blank when Transaction Kind is COLLECT']
+      
+      rc_transfer_schedule = Factory.build(:rc_transfer_schedule, bene_account_ifsc: nil, bene_name: nil, txn_kind: 'COLLECT')
       rc_transfer_schedule.should be_valid
     end
   end
