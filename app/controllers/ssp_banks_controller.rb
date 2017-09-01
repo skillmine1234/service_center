@@ -17,7 +17,7 @@ class SspBanksController < ApplicationController
     else
       @ssp_bank.created_by = current_user.id
       @ssp_bank.save!
-      flash[:alert] = 'SspBank successfully created and is pending for approval'
+      flash[:alert] = 'SimSePay Bank successfully created and is pending for approval'
       redirect_to @ssp_bank
     end
   end
@@ -30,12 +30,12 @@ class SspBanksController < ApplicationController
     else
       @ssp_bank.updated_by = current_user.id
       @ssp_bank.save!
-      flash[:alert] = 'SspBank successfully modified successfully'
+      flash[:alert] = 'SimSePay Bank successfully modified successfully'
       redirect_to @ssp_bank
     end
     rescue ActiveRecord::StaleObjectError
       @ssp_bank.reload
-      flash[:alert] = 'Someone edited the customer the same time you did. Please re-apply your changes to the customer.'
+      flash[:alert] = 'Someone edited the SimSePay Bank the same time you did. Please re-apply your changes to the SimSePay Bank.'
       render "edit"
   end 
 
@@ -66,7 +66,7 @@ class SspBanksController < ApplicationController
   def ssp_bank_params
     params.require(:ssp_bank).permit(:customer_code, :debit_account_url, :reverse_debit_account_url,
     :get_status_url, :get_account_status_url, :app_code, :settings_cnt, 
-    :lock_version, :last_action, :updated_by, :notify_url, :validate_url, 
+    :lock_version, :last_action, :updated_by, 
     :http_username, :http_password, :approval_status, :approved_version, 
     :approved_id, :max_retries_for_notify, :retry_notify_in_mins,
     :setting1_name, :setting1_type, :setting1_value, 
