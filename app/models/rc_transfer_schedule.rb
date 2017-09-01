@@ -32,7 +32,7 @@ class RcTransferSchedule < ActiveRecord::Base
 
   validates_uniqueness_of :code, :scope => :approval_status
   
-  before_save :set_app_code, unless: "self.frozen?"
+  before_save :set_app_code, unless: "rc_app.nil?"
   before_validation :sanitize_udfs, unless: Proc.new { |c| c.rc_app.nil? }
   validate :udfs_should_be_correct, unless: Proc.new { |c| c.rc_app.nil? }
   validate :validate_next_run_at
