@@ -32,7 +32,7 @@ class RcTransferSchedule < ActiveRecord::Base
 
   validates_uniqueness_of :code, :scope => :approval_status
   
-  before_save :set_app_code, unless: "rc_app.nil?"
+  before_save :set_app_code
   before_validation :sanitize_udfs, unless: Proc.new { |c| c.rc_app.nil? }
   validate :udfs_should_be_correct, unless: Proc.new { |c| c.rc_app.nil? }
   validate :validate_next_run_at
@@ -60,8 +60,8 @@ class RcTransferSchedule < ActiveRecord::Base
   end
   
   def set_app_code
-    self.app_code = rc_app.app_id if rc_app_id_changed?
-  end
+     self.app_code = self.try(:rc_app).try(:app_id) if rc_app_id_changed?
+   end
   
   def sanitize_udfs
     (self.udf5_name = nil; self.udf5_type = nil; self.udf5_value = nil) if rc_app.udfs_cnt < 5
