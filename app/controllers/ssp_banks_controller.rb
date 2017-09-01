@@ -35,7 +35,7 @@ class SspBanksController < ApplicationController
     end
     rescue ActiveRecord::StaleObjectError
       @ssp_bank.reload
-      flash[:alert] = 'Someone edited the SimSePay Bank the same time you did. Please re-apply your changes to the SimSePay Bank.'
+      flash[:alert] = 'Someone edited the SimSePay Bank the same time you did. Please re-apply your changes to the SimSePay Bank'
       render "edit"
   end 
 

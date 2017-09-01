@@ -99,7 +99,7 @@ describe SspBanksController do
         put :update, {:id => ssp_bank2.id, :ssp_bank => params}
         ssp_bank.reload
         ssp_bank.debit_account_url.should == "https://www.google.com"
-        flash[:alert].should  match(/Someone edited the customer the same time you did. Please re-apply your changes to the customer/)
+        flash[:alert].should  match(/Someone edited the SimSePay Bank the same time you did. Please re-apply your changes to the SimSePay Bank/)
       end
     end
 
@@ -132,7 +132,7 @@ describe SspBanksController do
         expect {
           post :create, {:ssp_bank => params}
         }.to change(SspBank.unscoped, :count).by(1)
-        flash[:alert].should  match(/SspBank successfully created and is pending for approval/)
+        flash[:alert].should  match(/SimSePay Bank successfully created and is pending for approval/)
         response.should be_redirect
       end
 
