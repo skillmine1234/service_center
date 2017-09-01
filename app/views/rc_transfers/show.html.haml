@@ -8,7 +8,7 @@
       = @rc_transfer.transfer_req_ref
     %h3 
       Application Code:
-      = @rc_transfer.rc_app.app_id
+      = @rc_transfer.rc_app.try(:app_id)
     %h3 
       Batch No:
       = @rc_transfer.batch_no
@@ -91,13 +91,14 @@
         %td.label Transfer Amount
         %td
           = @rc_transfer.transfer_amount
-      - (1..@rc_transfer.rc_app.udfs_cnt).each do |i|
-        - if @rc_transfer.send("udf#{i}_name").present?
-          %tr
-            %td.label
-              = @rc_transfer.send("udf#{i}_name")
-            %td.value
-              = @rc_transfer.send("udf#{i}_value")
+      - if @rc_transfer.rc_app.present?
+        - (1..@rc_transfer.rc_app.udfs_cnt).each do |i|
+          - if @rc_transfer.send("udf#{i}_name").present?
+            %tr
+              %td.label
+                = @rc_transfer.send("udf#{i}_name")
+              %td.value
+                = @rc_transfer.send("udf#{i}_value")
   .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; height: 450px; display: inline-block;'}
     #ticket-details
       %h3 Notification Status
