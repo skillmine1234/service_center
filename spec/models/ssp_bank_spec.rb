@@ -6,10 +6,32 @@ describe SspBank do
     it { should belong_to(:created_user) }
     it { should belong_to(:updated_user) }
   end
+  
+  context "encrypt_password" do 
+    it "should encrypt the http_password" do 
+      rc_app = Factory.build(:ssp_bank, http_username: 'username', http_password: 'password')
+      rc_app.save.should be_true
+      rc_app.reload
+      rc_app.http_password.should == "password"
+    end
+  end
+  
+  context "decrypt_password" do 
+    it "should decrypt the http_password" do 
+      rc_app = Factory(:ssp_bank, http_username: 'username', http_password: 'password')
+      rc_app.http_password.should == "password"
+    end
+  end
 
   context "validation" do
     [:customer_code, :app_code].each do |att|
       it { should validate_presence_of(att) }
+    end
+    
+    it "should validate presence of http_password if http_username is present" do
+      rc_app = Factory.build(:rc_app, http_username: 'username', http_password: nil)
+      rc_app.save.should == false
+      rc_app.errors[:base].should == ["HTTP Password can't be blank if HTTP Username is present"]
     end
 
     it "should validate uniqueness of customer code" do
@@ -25,7 +47,7 @@ describe SspBank do
       it { should validate_length_of(att).is_at_most(100) }
     end
     
-    it { should validate_length_of(:customer_code).is_at_most(10) }
+    it { should validate_length_of(:customer_code).is_at_most(15) }
     it { should validate_length_of(:app_code).is_at_most(50) }
 
     context "format" do
@@ -60,6 +82,42 @@ describe SspBank do
           end
         end
       end
+    end
+    
+    it "should validate presence of setting names" do
+      ssp_bank = Factory.build(:ssp_bank, setting1_name: nil, setting2_name: 'setting2')
+      ssp_bank.save.should == false
+      ssp_bank.errors_on(:setting1_name).should == ["can't be blank when Setting2 name is present"]
+    end
+    
+    it "should validate the setting values" do
+      ssp_bank = Factory.build(:ssp_bank, setting1_name: 'name1', setting1_type: 'text', setting1_value: nil)
+      ssp_bank.save.should == false
+      ssp_bank.errors_on(:setting1_value).should == ["can't be blank"]
+
+      ssp_bank = Factory.build(:ssp_bank, setting1_name: 'name1', setting1_type: 'text', setting1_value: 'text')
+      ssp_bank.save.should == true
+      ssp_bank.errors_on(:setting1_value).should == []
+
+      ssp_bank = Factory.build(:ssp_bank, setting1_name: 'name1', setting1_type: 'number', setting1_value: 'TEXT')
+      ssp_bank.save.should == false
+      ssp_bank.errors_on(:setting1_value).should == ["should include only digits"]
+
+      ssp_bank = Factory.build(:ssp_bank, setting1_name: 'name1', setting1_type: 'number', setting1_value: '1234')
+      ssp_bank.save.should == true
+      ssp_bank.errors_on(:setting1_value).should == []
+
+      ssp_bank = Factory.build(:ssp_bank, setting1_name: 'name1', setting1_type: 'text', setting1_value: 'yterqweytweuyqtweyqteyqtwerqwyertqweuryqwieuryqwerehquqwkjhequeuqeyuqjwhegruqywerqwjkeqjwehqjweqjhwegqhwe')
+      ssp_bank.save.should == false
+      ssp_bank.errors_on(:setting1_value).should == ["is longer than maximum (100)"]
+
+      ssp_bank = Factory.build(:ssp_bank, setting1_name: 'name1', setting1_type: 'date', setting1_value: '2014:12:12')
+      ssp_bank.save.should == false
+      ssp_bank.errors_on(:setting1_value).should == ["invalid format, the correct format is yyyy-mm-dd", "is not a date"]
+
+      ssp_bank = Factory.build(:ssp_bank, setting1_name: 'name1', setting1_type: 'date', setting1_value: '2016-12-12')
+      ssp_bank.save.should == true
+      ssp_bank.errors_on(:setting1_value).should == []
     end
   end
 

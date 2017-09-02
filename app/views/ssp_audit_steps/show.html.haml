@@ -2,7 +2,6 @@
   .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'}
     %h3 
       Customer Code:
-      / = link_to @audit_step.customer_code, @audit_step.icol_customer
       = @audit_step.customer_code
     %h3 
       App Code:
@@ -77,22 +76,3 @@
         %td
 
 = render partial: 'modal_boxes'
-
-#faultText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-header
-    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3 Fault Text
-    #error_message{:style => 'color:red'}
-  .modal-body{:style => "max-height:450px;"}
-    .demo-area
-    %pre#fault_text{:style => 'word-wrap: break-word'}
-    %table.table.no-border
-      %tr
-        %td.label Fault Code:
-        %td= @audit_step.fault_code
-      %tr
-        %td.label Fault Code:
-        %td= @audit_step.fault_subcode
-      %tr
-        %td.label Fault Reason:
-        %td= @audit_step.fault_reason

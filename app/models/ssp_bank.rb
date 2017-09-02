@@ -10,8 +10,9 @@ class SspBank < ActiveRecord::Base
   validates_numericality_of :retry_notify_in_mins, :max_retries_for_notify, allow_blank: true
   validates_uniqueness_of :customer_code, scope: [:approval_status]
   validates_length_of :http_username, maximum: 100, allow_blank: true
+  validates_length_of :http_password, maximum: 100, allow_blank: true
   
-  validates :customer_code, format: {with: /\A[a-z|A-Z|0-9|\.|\-]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\.|\-]}' }, length: { maximum: 10 }
+  validates :customer_code, format: {with: /\A[a-z|A-Z|0-9|\.|\-]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\.|\-]}' }, length: { maximum: 15 }
   validates :app_code, format: {with: /\A[a-z|A-Z|0-9|\.|\-]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\.|\-]}' }, length: { maximum: 50 }
   validates :debit_account_url, :reverse_debit_account_url, :get_status_url, :get_account_status_url,  format: {with: URI.regexp, :message => 'Invalid format, expected format is : https://example.com' }, length: { maximum: 100 }, allow_blank: true
     
@@ -23,7 +24,16 @@ class SspBank < ActiveRecord::Base
   
   validate :settings_should_be_correct
   validates_presence_of :http_password, if: "http_username.present?"
+  
+  validates_presence_of :setting1_name, if: "setting1_name.blank? && !setting2_name.blank?", message: "can't be blank when Setting2 name is present"
+  validates_presence_of :setting2_name, if: "setting2_name.blank? && !setting3_name.blank?", message: "can't be blank when Setting3 name is present"
+  validates_presence_of :setting3_name, if: "setting3_name.blank? && !setting4_name.blank?", message: "can't be blank when Setting4 name is present"
+  validates_presence_of :setting4_name, if: "setting4_name.blank? && !setting5_name.blank?", message: "can't be blank when Setting5 name is present"
+
   before_save :set_settings_cnt
+  before_save :encrypt_password
+  after_save :decrypt_password
+  after_find :decrypt_password
 
   private
 
@@ -53,4 +63,13 @@ class SspBank < ActiveRecord::Base
       errors.add(attr_name, "should include only digits") if setting_type == "number" && (setting_value =~ /\A[0-9]+$\z/).nil?
     end
   end
+
+  def decrypt_password
+    self.http_password = DecPassGenerator.new(http_password,ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']).generate_decrypted_data if http_password.present?
+  end
+  
+  def encrypt_password
+    self.http_password = EncPassGenerator.new(self.http_password, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']).generate_encrypted_password unless http_password.to_s.empty?
+  end
+  
 end

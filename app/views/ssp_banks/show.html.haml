@@ -6,7 +6,7 @@
       %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
         - can = can? :edit, @ssp_bank
         %a.btn{:href => "#{!(can) ? '#' : '/ssp_banks/' + @ssp_bank.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
-        = render 'approve', :@record => @ssp_bank
+        = render 'unapproved_records/approve', :@record => @ssp_bank
       %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
         - if !@ssp_bank.nil?
           %tr
@@ -22,6 +22,22 @@
             %td.label Customer Code
             %td.value
               = @ssp_bank.customer_code
+          %tr
+            %td.label Debit Account Url
+            %td.value
+              = @ssp_bank.debit_account_url
+          %tr
+            %td.label Reverse Debit Account Url
+            %td.value
+              = @ssp_bank.reverse_debit_account_url
+          %tr
+            %td.label Get Status Url
+            %td.value
+              = @ssp_bank.get_status_url
+          %tr
+            %td.label Get Account Status Url
+            %td.value
+              = @ssp_bank.get_account_status_url
           %tr
             %td.label HTTP Username
             %td.value
