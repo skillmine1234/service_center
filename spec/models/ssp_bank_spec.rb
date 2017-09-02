@@ -9,17 +9,17 @@ describe SspBank do
   
   context "encrypt_password" do 
     it "should encrypt the http_password" do 
-      rc_app = Factory.build(:ssp_bank, http_username: 'username', http_password: 'password')
-      rc_app.save.should be_true
-      rc_app.reload
-      rc_app.http_password.should == "password"
+      ssp_bank = Factory.build(:ssp_bank, http_username: 'username', http_password: 'password')
+      ssp_bank.save.should be_true
+      ssp_bank.reload
+      ssp_bank.http_password.should == "password"
     end
   end
   
   context "decrypt_password" do 
     it "should decrypt the http_password" do 
-      rc_app = Factory(:ssp_bank, http_username: 'username', http_password: 'password')
-      rc_app.http_password.should == "password"
+      ssp_bank = Factory(:ssp_bank, http_username: 'username', http_password: 'password')
+      ssp_bank.http_password.should == "password"
     end
   end
 
@@ -29,9 +29,9 @@ describe SspBank do
     end
     
     it "should validate presence of http_password if http_username is present" do
-      rc_app = Factory.build(:rc_app, http_username: 'username', http_password: nil)
-      rc_app.save.should == false
-      rc_app.errors[:base].should == ["HTTP Password can't be blank if HTTP Username is present"]
+      ssp_bank = Factory.build(:ssp_bank, http_username: 'username', http_password: nil)
+      ssp_bank.save.should == false
+      ssp_bank.errors[:base].should == ["HTTP Password can't be blank if HTTP Username is present"]
     end
 
     it "should validate uniqueness of customer code" do

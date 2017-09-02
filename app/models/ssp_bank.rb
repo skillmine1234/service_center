@@ -23,7 +23,7 @@ class SspBank < ActiveRecord::Base
   store :setting5, accessors: [:setting5_name, :setting5_type, :setting5_value], coder: JSON
   
   validate :settings_should_be_correct
-  validates_presence_of :http_password, if: "http_username.present?"
+  validate :password_should_be_present
   
   validates_presence_of :setting1_name, if: "setting1_name.blank? && !setting2_name.blank?", message: "can't be blank when Setting2 name is present"
   validates_presence_of :setting2_name, if: "setting2_name.blank? && !setting3_name.blank?", message: "can't be blank when Setting3 name is present"
@@ -70,6 +70,10 @@ class SspBank < ActiveRecord::Base
   
   def encrypt_password
     self.http_password = EncPassGenerator.new(self.http_password, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']).generate_encrypted_password unless http_password.to_s.empty?
+  end
+  
+  def password_should_be_present
+    errors[:base] << "HTTP Password can't be blank if HTTP Username is present" if self.http_username.present? and (self.http_password.blank? or self.http_password.nil?)
   end
   
 end
