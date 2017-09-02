@@ -1,6 +1,6 @@
 class CreateIcolNotifications < ActiveRecord::Migration
   def change
-    create_table :icol_notifications do |t|
+    create_table :icol_notifications, {:sequence_start_value => '1 cache 20 order increment by 1'}  do |t|
       t.string :app_code, limit: 25, null: false, comment: 'the app_code for the step'
       t.string :customer_code, limit: 50, null: false, comment: 'the customer_code for this request'
       t.string :status_code, limit: 100, null: false, comment: 'the status of this transaction'

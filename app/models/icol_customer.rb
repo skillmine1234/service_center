@@ -10,8 +10,9 @@ class IcolCustomer < ActiveRecord::Base
   validates_numericality_of :retry_notify_in_mins, :max_retries_for_notify, allow_blank: true
   validates_uniqueness_of :customer_code, scope: [:approval_status]
   validates_length_of :http_username, maximum: 100, allow_blank: true
+  validates_length_of :http_password, maximum: 100, allow_blank: true
   
-  validates :customer_code, format: {with: /\A[a-z|A-Z|0-9|\.|\-]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\.|\-]}' }, length: { maximum: 10 }
+  validates :customer_code, format: {with: /\A[a-z|A-Z|0-9|\.|\-]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\.|\-]}' }, length: { maximum: 15 }
   validates :app_code, format: {with: /\A[a-z|A-Z|0-9|\.|\-]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\.|\-]}' }, length: { maximum: 50 }
   validates :notify_url, :validate_url, format: {with: URI.regexp, :message => 'Invalid format, expected format is : https://example.com' }, length: { maximum: 100 }, allow_blank: true
     
@@ -22,8 +23,17 @@ class IcolCustomer < ActiveRecord::Base
   store :setting5, accessors: [:setting5_name, :setting5_type, :setting5_value], coder: JSON
   
   validate :settings_should_be_correct
-  validates_presence_of :http_password, if: "http_username.present?"
+  validate :password_should_be_present
+  
+  validates_presence_of :setting1_name, if: "setting1_name.blank? && !setting2_name.blank?", message: "can't be blank when Setting2 name is present"
+  validates_presence_of :setting2_name, if: "setting2_name.blank? && !setting3_name.blank?", message: "can't be blank when Setting3 name is present"
+  validates_presence_of :setting3_name, if: "setting3_name.blank? && !setting4_name.blank?", message: "can't be blank when Setting4 name is present"
+  validates_presence_of :setting4_name, if: "setting4_name.blank? && !setting5_name.blank?", message: "can't be blank when Setting5 name is present"
+
   before_save :set_settings_cnt
+  before_save :encrypt_password
+  after_save :decrypt_password
+  after_find :decrypt_password
 
   private
 
@@ -52,5 +62,17 @@ class IcolCustomer < ActiveRecord::Base
       errors.add(attr_name, "is longer than maximum (100)") if setting_type == "text" && setting_value.length > 100
       errors.add(attr_name, "should include only digits") if setting_type == "number" && (setting_value =~ /\A[0-9]+$\z/).nil?
     end
+  end
+
+  def decrypt_password
+    self.http_password = DecPassGenerator.new(http_password,ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']).generate_decrypted_data if http_password.present?
+  end
+  
+  def encrypt_password
+    self.http_password = EncPassGenerator.new(self.http_password, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']).generate_encrypted_password unless http_password.to_s.empty?
+  end
+  
+  def password_should_be_present
+    errors[:base] << "HTTP Password can't be blank if HTTP Username is present" if self.http_username.present? and (self.http_password.blank? or self.http_password.nil?)
   end
 end

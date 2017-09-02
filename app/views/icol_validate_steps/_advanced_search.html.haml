@@ -25,6 +25,7 @@
       = text_field_tag :from_reply_timestamp, params[:from_reply_timestamp]
       To
       = text_field_tag :to_reply_timestamp, params[:to_reply_timestamp]
+      = hidden_field_tag :page, params[:page] || 1
 
     .form-actions
       = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button",onclick: "$('#page').val(1)"

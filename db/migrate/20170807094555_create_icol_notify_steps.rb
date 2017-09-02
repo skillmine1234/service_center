@@ -14,8 +14,8 @@ class CreateIcolNotifySteps < ActiveRecord::Migration
       t.string :fault_subcode, limit: 50, comment: 'the error code that the third party will return'
       t.string :fault_reason, limit: 1000, comment: 'the english reason of the exception, if an exception occurred in the ESB'
 
-      t.string :rep_header, limit: 255, comment: 'the header which were passed with the reply'
-      t.text :req_header, limit: 255, comment: 'the header which were passed with the request'
+      t.text :rep_header, comment: 'the header which were passed with the reply'
+      t.text :req_header, comment: 'the header which were passed with the request'
       t.text :req_bitstream, null: false, comment: 'the full request payload as received from the client'
       t.text :rep_bitstream, comment: 'the full reply payload as sent to the client'
       t.text :fault_bitstream, comment: 'the complete exception list/stack trace of an exception that occured in the ESB'

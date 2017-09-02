@@ -25,4 +25,17 @@ describe IcolNotificationSearcher do
       IcolNotificationSearcher.new({:txn_number => "AAAAAAAAAAA"}).paginate.should == []
     end
   end
+  
+  context "txn code format" do 
+    it "should allow valid format" do
+      should allow_value('9876').for(:txn_number)
+      should allow_value('9034').for(:txn_number)
+    end 
+    
+    it "should not allow invalid format" do
+      should_not allow_value('@CUST01').for(:txn_number)
+      should_not allow_value('CUST01/').for(:txn_number)
+      should_not allow_value('CUST-01').for(:txn_number)
+    end     
+  end
 end

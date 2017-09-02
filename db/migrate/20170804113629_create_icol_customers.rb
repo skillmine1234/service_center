@@ -1,7 +1,7 @@
 class CreateIcolCustomers < ActiveRecord::Migration
   def change
     create_table :icol_customers, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
-      t.string :customer_code, limit: 10, comment: 'the unique code for the customer'
+      t.string :customer_code, limit: 15, null: false, comment: 'the unique code for the customer'
       t.string :app_code, limit: 50, null: false, comment: 'the app_code for the customer'
       t.string :notify_url, limit: 100, comment: 'the notify_url for the customer'
       t.string :validate_url, limit: 100, comment: 'the validate_url for the customer'

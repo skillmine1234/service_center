@@ -7,11 +7,33 @@ describe IcolCustomer do
     it { should belong_to(:updated_user) }
   end
 
+  context "encrypt_password" do 
+    it "should encrypt the http_password" do 
+      icol_customer = Factory.build(:icol_customer, http_username: 'username', http_password: 'password')
+      icol_customer.save.should be_true
+      icol_customer.reload
+      icol_customer.http_password.should == "password"
+    end
+  end
+  
+  context "decrypt_password" do 
+    it "should decrypt the http_password" do 
+      icol_customer = Factory(:icol_customer, http_username: 'username', http_password: 'password')
+      icol_customer.http_password.should == "password"
+    end
+  end
+  
   context "validation" do
     [:customer_code, :app_code].each do |att|
       it { should validate_presence_of(att) }
     end
 
+    it "should validate presence of http_password if http_username is present" do
+      icol_customer = Factory.build(:icol_customer, http_username: 'username', http_password: nil)
+      icol_customer.save.should == false
+      icol_customer.errors[:base].should == ["HTTP Password can't be blank if HTTP Username is present"]
+    end
+    
     it "should validate uniqueness of customer code" do
       icol_customer = Factory(:icol_customer, approval_status: 'A')
       should validate_uniqueness_of(:customer_code).scoped_to(:approval_status)
@@ -25,7 +47,7 @@ describe IcolCustomer do
       it { should validate_length_of(att).is_at_most(100) }
     end
     
-    it { should validate_length_of(:customer_code).is_at_most(10) }
+    it { should validate_length_of(:customer_code).is_at_most(15) }
     it { should validate_length_of(:app_code).is_at_most(50) }
 
     context "format" do
@@ -118,6 +140,36 @@ describe IcolCustomer do
       icol_customer.destroy
       UnapprovedRecord.find_by_id(record.id).should be_nil
     end
+  end
+  
+  it "should validate the setting values" do
+    icol_customer = Factory.build(:icol_customer, setting1_name: 'name1', setting1_type: 'text', setting1_value: nil)
+    icol_customer.save.should == false
+    icol_customer.errors_on(:setting1_value).should == ["can't be blank"]
+
+    icol_customer = Factory.build(:icol_customer, setting1_name: 'name1', setting1_type: 'text', setting1_value: 'text')
+    icol_customer.save.should == true
+    icol_customer.errors_on(:setting1_value).should == []
+
+    icol_customer = Factory.build(:icol_customer, setting1_name: 'name1', setting1_type: 'number', setting1_value: 'TEXT')
+    icol_customer.save.should == false
+    icol_customer.errors_on(:setting1_value).should == ["should include only digits"]
+
+    icol_customer = Factory.build(:icol_customer, setting1_name: 'name1', setting1_type: 'number', setting1_value: '1234')
+    icol_customer.save.should == true
+    icol_customer.errors_on(:setting1_value).should == []
+
+    icol_customer = Factory.build(:icol_customer, setting1_name: 'name1', setting1_type: 'text', setting1_value: 'yterqweytweuyqtweyqteyqtwerqwyertqweuryqwieuryqwerehquqwkjhequeuqeyuqjwhegruqywerqwjkeqjwehqjweqjhwegqhwe')
+    icol_customer.save.should == false
+    icol_customer.errors_on(:setting1_value).should == ["is longer than maximum (100)"]
+
+    icol_customer = Factory.build(:icol_customer, setting1_name: 'name1', setting1_type: 'date', setting1_value: '2014:12:12')
+    icol_customer.save.should == false
+    icol_customer.errors_on(:setting1_value).should == ["invalid format, the correct format is yyyy-mm-dd", "is not a date"]
+
+    icol_customer = Factory.build(:icol_customer, setting1_name: 'name1', setting1_type: 'date', setting1_value: '2016-12-12')
+    icol_customer.save.should == true
+    icol_customer.errors_on(:setting1_value).should == []
   end
 
   context "approve" do 
