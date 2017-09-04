@@ -7,8 +7,7 @@ class SspBank < ActiveRecord::Base
   SETTING_TYPES = ['text','number','date']
   
   validates_presence_of :customer_code, :app_code
-  validates_numericality_of :retry_notify_in_mins, :max_retries_for_notify, allow_blank: true
-  validates_uniqueness_of :customer_code, scope: [:approval_status]
+  validates_uniqueness_of :customer_code, scope: [:approval_status, :app_code]
   validates_length_of :http_username, maximum: 100, allow_blank: true
   validates_length_of :http_password, maximum: 100, allow_blank: true
   

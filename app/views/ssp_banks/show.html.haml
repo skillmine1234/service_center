@@ -44,16 +44,6 @@
               = @ssp_bank.http_username
             %td
           %tr
-            %td.label Retry Notify (in mins)
-            %td.value
-              = @ssp_bank.retry_notify_in_mins
-            %td
-          %tr
-            %td.label Max. Retries for Notify
-            %td.value
-              = @ssp_bank.max_retries_for_notify
-            %td
-          %tr
             %td.label Created At
             %td.value
               = @ssp_bank.created_at.try(:strftime, "%d/%m/%Y %I:%M%p")

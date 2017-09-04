@@ -24,9 +24,8 @@ class CreateSspBanks < ActiveRecord::Migration
       t.integer :approved_version, comment: "the version number of the record, at the time it was approved"
       t.integer :approved_id, comment: "the id of the record that is being updated"
       t.string :app_code, limit: 50, null: false, comment: 'the app_code for the bank'
-      t.integer :max_retries_for_notify, comment: 'the maximum no. of retries for notification for the bank'
-      t.integer :retry_notify_in_mins, comment: 'the interval in minutes for retrying notification for the bank'
-      t.index([:customer_code, :approval_status], unique: true, name: 'ssp_banks_01')
+      t.string :is_enabled, limit: 1, :null => false, :default => 'Y', comment: 'the flag which indicates whether this bank is enabled or not'
+      t.index([:customer_code, :app_code, :approval_status], unique: true, name: 'ssp_banks_01')
     end
   end
 end

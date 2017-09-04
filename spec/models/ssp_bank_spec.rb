@@ -34,13 +34,9 @@ describe SspBank do
       ssp_bank.errors[:base].should == ["HTTP Password can't be blank if HTTP Username is present"]
     end
 
-    it "should validate uniqueness of customer code" do
+    it "should validate uniqueness of customer code with approval status a" do
       ssp_bank = Factory(:ssp_bank, approval_status: 'A')
-      should validate_uniqueness_of(:customer_code).scoped_to(:approval_status)
-    end    
-    
-    [:retry_notify_in_mins, :max_retries_for_notify].each do |att|
-      it { should validate_numericality_of(att) }
+      should validate_uniqueness_of(:customer_code).scoped_to(:approval_status, :app_code)
     end
 
     [:http_username, :debit_account_url, :reverse_debit_account_url, :get_status_url, :get_account_status_url].each do |att|
@@ -84,10 +80,58 @@ describe SspBank do
       end
     end
     
+    context "set_settings_cnt" do
+      it "should set counts of settings_count 1" do
+        ecol_app = Factory(:ssp_bank, setting1_name: 'set1', setting1_type: 'number', setting1_value: '1')
+        ecol_app.settings_cnt.should == 1
+      end
+      
+      it "should set counts of settings_count 2" do
+        ecol_app = Factory(:ssp_bank, setting1_name: 'set1', setting1_type: 'number', setting1_value: '1' , setting2_name: 'set1', setting2_type: 'number', setting2_value: '1')
+        ecol_app.settings_cnt.should == 2
+      end
+      
+      it "should set counts of settings_count 3" do
+        ecol_app = Factory(:ssp_bank, setting1_name: 'set1', setting1_type: 'number', setting1_value: '1' ,
+         setting2_name: 'set1', setting2_type: 'number', setting2_value: '1',
+         setting3_name: 'set1', setting3_type: 'number', setting3_value: '1')
+        ecol_app.settings_cnt.should == 3
+      end
+      
+      it "should set counts of settings_count 4" do
+        ecol_app = Factory(:ssp_bank, setting1_name: 'set1', setting1_type: 'number', setting1_value: '1' ,
+         setting2_name: 'set1', setting2_type: 'number', setting2_value: '1',
+         setting3_name: 'set1', setting3_type: 'number', setting3_value: '1',
+         setting4_name: 'set1', setting4_type: 'number', setting4_value: '1')
+        ecol_app.settings_cnt.should == 4
+      end
+      
+      it "should set counts of settings_count 4" do
+        ecol_app = Factory(:ssp_bank, setting1_name: 'set1', setting1_type: 'number', setting1_value: '1' ,
+         setting2_name: 'set1', setting2_type: 'number', setting2_value: '1',
+         setting3_name: 'set1', setting3_type: 'number', setting3_value: '1',
+         setting4_name: 'set1', setting4_type: 'number', setting4_value: '1',
+         setting5_name: 'set1', setting5_type: 'number', setting5_value: '1')
+        ecol_app.settings_cnt.should == 5
+      end
+    end
+    
     it "should validate presence of setting names" do
       ssp_bank = Factory.build(:ssp_bank, setting1_name: nil, setting2_name: 'setting2')
       ssp_bank.save.should == false
       ssp_bank.errors_on(:setting1_name).should == ["can't be blank when Setting2 name is present"]
+      
+      ssp_bank = Factory.build(:ssp_bank, setting2_name: nil, setting3_name: 'setting3')
+      ssp_bank.save.should == false
+      ssp_bank.errors_on(:setting2_name).should == ["can't be blank when Setting3 name is present"]
+      
+      ssp_bank = Factory.build(:ssp_bank, setting3_name: nil, setting4_name: 'setting4')
+      ssp_bank.save.should == false
+      ssp_bank.errors_on(:setting3_name).should == ["can't be blank when Setting4 name is present"]
+      
+      ssp_bank = Factory.build(:ssp_bank, setting4_name: nil, setting5_name: 'setting5')
+      ssp_bank.save.should == false
+      ssp_bank.errors_on(:setting4_name).should == ["can't be blank when Setting5 name is present"]
     end
     
     it "should validate the setting values" do

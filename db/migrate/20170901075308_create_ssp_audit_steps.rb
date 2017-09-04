@@ -3,8 +3,8 @@ class CreateSspAuditSteps < ActiveRecord::Migration
     create_table :ssp_audit_steps, {:sequence_start_value => '1 cache 20 order increment by 1'}  do |t|
       t.string :step_name, limit: 100, null: false, comment: 'the english name of the step'
       t.string :status_code, limit: 100, null: false, comment: 'the status of this attempt of the step'
-      t.string :app_code, limit: 50, null: false, comment: 'the app_code for the step'
-      t.string :customer_code, limit: 15, null: false, comment: 'the customer_code for the step'
+      t.string :app_code, limit: 50, comment: 'the app_code for the step'
+      t.string :customer_code, limit: 15, comment: 'the customer_code for the step'
 
       t.datetime :req_timestamp, null: false, comment: 'the SYSDATE when the request was received'
       t.datetime :rep_timestamp, comment: 'the SYSDATE when the request was sent'
