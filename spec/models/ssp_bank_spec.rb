@@ -24,7 +24,7 @@ describe SspBank do
   end
 
   context "validation" do
-    [:customer_code, :app_code].each do |att|
+    [:customer_code, :app_code, :is_enabled].each do |att|
       it { should validate_presence_of(att) }
     end
     

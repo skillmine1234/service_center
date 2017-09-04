@@ -38,7 +38,7 @@
       = f.text_field :http_username, maxlength: 100
     .control-group
       = f.label :http_password, "HTTP Password", :class => 'control-label'
-      = f.password_field :http_password, :value => f.object.http_password, maxlength: 255
+      = f.password_field :http_password, :value => f.object.http_password, maxlength: 100
     .control-group
       %table.table.datatable
         %thead
