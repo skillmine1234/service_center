@@ -1,8 +1,12 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8;'}
+    #form-details
+      %h3 I -Collect Validate Step
+      %br
 .show_ticket
   .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'}
     %h3 
       Customer Code:
-      / = link_to @validate_step.customer_code, @validate_step.icol_customer
       = @validate_step.customer_code
     %h3 
       App Code:
@@ -31,7 +35,6 @@
       = show_xml('Show Reply','reply-link', @validate_step.rep_bitstream)
 
   .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; height: 450px; display: inline-block;'}
-    #ticket-details
     %h3 Up Request Details:
     %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
       %tr
@@ -58,7 +61,6 @@
         %td
 
   .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; height: 450px; display: inline-block;'}
-    #ticket-details
     %h3 Up Reply Details:
     %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
       %tr

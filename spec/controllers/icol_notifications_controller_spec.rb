@@ -30,9 +30,10 @@ describe IcolNotificationsController do
       notification1 = Factory(:icol_notification)
       step1 = Factory(:icol_notify_step, step_name: 'Validate', icol_notification_id: notification1.id)
       step2 = Factory(:icol_notify_step, step_name: 'Notify', icol_notification_id: notification1.id)
-
+      step3 = Factory(:icol_notify_step, step_name: 'Valida', icol_notification_id: notification1.id)
+      
       get :audit_steps, {:id => notification1.id}
-      assigns(:steps).should eq([step2, step1])
+      assigns(:steps).should eq([step3, step2, step1])
       
       notification2 = Factory(:icol_notification)
       get :audit_steps, {:id => notification2.id}

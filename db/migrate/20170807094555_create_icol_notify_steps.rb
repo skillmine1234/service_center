@@ -1,6 +1,6 @@
 class CreateIcolNotifySteps < ActiveRecord::Migration
   def change
-    create_table :icol_notify_steps do |t|
+    create_table :icol_notify_steps, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.integer :icol_notification_id, null: false, comment: 'the id of the associated icol_notification record'
       t.string :step_name, limit: 100, null: false, comment: 'the english name of the step'
       t.integer :attempt_no, null: false , comment: 'the attempt number of the request, failed requests can be retried'

@@ -7,8 +7,8 @@ class CreateIcolCustomers < ActiveRecord::Migration
       t.string :validate_url, limit: 100, comment: 'the validate_url for the customer'
       t.string :http_username, limit: 100, comment: 'the http_username for the customer'
       t.string :http_password, limit: 255, comment: 'the http_password for the customer'
-      t.integer :max_retries_for_notify, comment: 'the maximum no. of retries for notification for the customer'
-      t.integer :retry_notify_in_mins, comment: 'the interval in minutes for retrying notification for the customer'
+      t.integer :max_retries_for_notify, default: 3, comment: 'the maximum no. of retries for notification for the customer'
+      t.integer :retry_notify_in_mins, default: 3, comment: 'the interval in minutes for retrying notification for the customer'
       t.integer :settings_cnt, comment: 'the count of settings for the customer'
       t.string :setting1, comment: 'the setting 1 for the customer'
       t.string :setting2, comment: 'the setting 2 for the customer'
@@ -24,8 +24,10 @@ class CreateIcolCustomers < ActiveRecord::Migration
       t.string :approval_status, limit: 1, default: 'U', null: false, comment: "the indicator to denote whether this record is pending approval or is approved"
       t.integer :approved_version, comment: "the version number of the record, at the time it was approved"
       t.integer :approved_id, comment: "the id of the record that is being updated"
+      t.string :is_enabled, limit: 1, :null => false, :default => 'Y', comment: 'the flag which indicates whether this customer is enabled or not'
+ 
 
-      t.index([:customer_code, :approval_status], unique: true, name: 'icol_customers_01')
+      t.index([:customer_code, :app_code, :approval_status], unique: true, name: 'icol_customers_01')
     end
   end
 end

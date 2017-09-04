@@ -14,6 +14,12 @@
             %td.value
               = link_to "#{audit_count(@icol_customer)}", :controller => :icol_customers, :action => :audit_logs, :version_id => audit_count(@icol_customer), :id => @icol_customer.id
           %tr
+            %td.label Enabled?
+            %td
+              = @icol_customer.is_enabled
+            %td#msg-error
+              = error_message_for(@icol_customer, :is_enabled, :prepend_text => "")
+          %tr
             %td.label App Code
             %td.value
               = @icol_customer.app_code

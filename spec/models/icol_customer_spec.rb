@@ -24,7 +24,7 @@ describe IcolCustomer do
   end
   
   context "validation" do
-    [:customer_code, :app_code].each do |att|
+    [:customer_code, :app_code, :is_enabled].each do |att|
       it { should validate_presence_of(att) }
     end
 
@@ -142,6 +142,60 @@ describe IcolCustomer do
     end
   end
   
+  context "set_settings_cnt" do
+    it "should set counts of settings_count 1" do
+      icol_customer = Factory(:icol_customer, setting1_name: 'set1', setting1_type: 'number', setting1_value: '1')
+      icol_customer.settings_cnt.should == 1
+    end
+    
+    it "should set counts of settings_count 2" do
+      icol_customer = Factory(:icol_customer, setting1_name: 'set1', setting1_type: 'number', setting1_value: '1' , setting2_name: 'set1', setting2_type: 'number', setting2_value: '1')
+      icol_customer.settings_cnt.should == 2
+    end
+    
+    it "should set counts of settings_count 3" do
+      icol_customer = Factory(:icol_customer, setting1_name: 'set1', setting1_type: 'number', setting1_value: '1' ,
+       setting2_name: 'set1', setting2_type: 'number', setting2_value: '1',
+       setting3_name: 'set1', setting3_type: 'number', setting3_value: '1')
+      icol_customer.settings_cnt.should == 3
+    end
+    
+    it "should set counts of settings_count 4" do
+      icol_customer = Factory(:icol_customer, setting1_name: 'set1', setting1_type: 'number', setting1_value: '1' ,
+       setting2_name: 'set1', setting2_type: 'number', setting2_value: '1',
+       setting3_name: 'set1', setting3_type: 'number', setting3_value: '1',
+       setting4_name: 'set1', setting4_type: 'number', setting4_value: '1')
+      icol_customer.settings_cnt.should == 4
+    end
+    
+    it "should set counts of settings_count 4" do
+      icol_customer = Factory(:icol_customer, setting1_name: 'set1', setting1_type: 'number', setting1_value: '1' ,
+       setting2_name: 'set1', setting2_type: 'number', setting2_value: '1',
+       setting3_name: 'set1', setting3_type: 'number', setting3_value: '1',
+       setting4_name: 'set1', setting4_type: 'number', setting4_value: '1',
+       setting5_name: 'set1', setting5_type: 'number', setting5_value: '1')
+      icol_customer.settings_cnt.should == 5
+    end
+  end
+  
+  it "should validate presence of setting names" do
+    icol_customer = Factory.build(:icol_customer, setting1_name: nil, setting2_name: 'setting2')
+    icol_customer.save.should == false
+    icol_customer.errors_on(:setting1_name).should == ["can't be blank when Setting2 name is present"]
+    
+    icol_customer = Factory.build(:icol_customer, setting2_name: nil, setting3_name: 'setting3')
+    icol_customer.save.should == false
+    icol_customer.errors_on(:setting2_name).should == ["can't be blank when Setting3 name is present"]
+    
+    icol_customer = Factory.build(:icol_customer, setting3_name: nil, setting4_name: 'setting4')
+    icol_customer.save.should == false
+    icol_customer.errors_on(:setting3_name).should == ["can't be blank when Setting4 name is present"]
+    
+    icol_customer = Factory.build(:icol_customer, setting4_name: nil, setting5_name: 'setting5')
+    icol_customer.save.should == false
+    icol_customer.errors_on(:setting4_name).should == ["can't be blank when Setting5 name is present"]
+  end
+
   it "should validate the setting values" do
     icol_customer = Factory.build(:icol_customer, setting1_name: 'name1', setting1_type: 'text', setting1_value: nil)
     icol_customer.save.should == false
