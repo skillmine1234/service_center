@@ -7,9 +7,9 @@ class SspBank < ActiveRecord::Base
   SETTING_TYPES = ['text','number','date']
   
   validates_presence_of :customer_code, :app_code
-  validates_uniqueness_of :customer_code, scope: [:approval_status, :app_code]
+  validates_uniqueness_of :customer_code, scope: [:app_code, :approval_status]
   validates_length_of :http_username, maximum: 100, allow_blank: true
-  validates_length_of :http_password, maximum: 100, allow_blank: true
+  validates_length_of :http_password, maximum: 255, allow_blank: true
   
   validates :customer_code, format: {with: /\A[a-z|A-Z|0-9|\.|\-]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\.|\-]}' }, length: { maximum: 15 }
   validates :app_code, format: {with: /\A[a-z|A-Z|0-9|\.|\-]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9|\.|\-]}' }, length: { maximum: 50 }
