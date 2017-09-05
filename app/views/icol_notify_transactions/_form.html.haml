@@ -39,8 +39,8 @@
       = f.label :payment_status, "*Payment Status", :class => 'control-label'
       = f.text_field :payment_status
       #msg-error
-        = error_message_for(@icol_notify_transaction, :trnsctn_nmbr, :prepend_text => "")
+        = error_message_for(@icol_notify_transaction, :payment_status, :prepend_text => "")
   .form-actions
     - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
-    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_todays_neft_txn', :value => label_name + ' I-Collect Notify Transaction'
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_notify_transaction', :value => label_name + ' Notify Transaction'
     = link_to :Cancel,'/icol_notify_transactions', :name => 'cancel', :class=>"cancel btn"
