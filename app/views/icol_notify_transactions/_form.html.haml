@@ -22,7 +22,7 @@
         = error_message_for(@icol_notify_transaction, :template_id, :prepend_text => "")
     .control-group
       = f.label :template_data, "*Template Data", :class => 'control-label'
-      = f.text_area :template_data
+      = f.text_area :template_data, :maxlength => 1000
       #msg-error
         = error_message_for(@icol_notify_transaction, :template_data, :prepend_text => "")
     .control-group
