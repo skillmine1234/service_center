@@ -13,5 +13,6 @@ FactoryGirl.define do
     template_data "Template"
     company_id 1
     template_id 1
+    pending_approval 'N'
   end
 end
