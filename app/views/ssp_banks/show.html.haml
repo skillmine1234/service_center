@@ -20,6 +20,12 @@
             %td#msg-error
               = error_message_for(@ssp_bank, :is_enabled, :prepend_text => "")
           %tr
+            %td.label User Proxy
+            %td
+              = @ssp_bank.user_proxy
+            %td#msg-error
+              = error_message_for(@ssp_bank, :user_proxy, :prepend_text => "")
+          %tr
             %td.label App Code
             %td.value
               = @ssp_bank.app_code

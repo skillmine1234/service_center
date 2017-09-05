@@ -25,6 +25,7 @@ class CreateSspBanks < ActiveRecord::Migration
       t.integer :approved_id, comment: "the id of the record that is being updated"
       t.string :app_code, limit: 50, null: false, comment: 'the app_code for the bank'
       t.string :is_enabled, limit: 1, :null => false, :default => 'Y', comment: 'the flag which indicates whether this bank is enabled or not'
+      t.string :user_proxy, limit: 1, :null => false, :default => 'Y', comment: 'the identifier to tell if proxy has to be used for this customer'
       t.index([:customer_code, :app_code, :approval_status], unique: true, name: 'ssp_banks_01')
     end
   end
