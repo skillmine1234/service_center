@@ -21,7 +21,7 @@ class IcolNotificationsController < ApplicationController
   def audit_steps
     icol_notification = IcolNotification.find(params[:id])
     steps = icol_notification.icol_notify_steps
-    @steps = steps.paginate(page: params[:page], per_page: 10).order("id desc")
+    @steps = steps.order("id desc").paginate(page: params[:page], per_page: 10)
   end
   
   private

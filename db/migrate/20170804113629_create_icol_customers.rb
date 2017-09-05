@@ -27,7 +27,7 @@ class CreateIcolCustomers < ActiveRecord::Migration
       t.string :is_enabled, limit: 1, :null => false, :default => 'Y', comment: 'the flag which indicates whether this customer is enabled or not'
  
 
-      t.index([:customer_code, :app_code, :approval_status], unique: true, name: 'icol_customers_01')
+      t.index([:customer_code, :approval_status], unique: true, name: 'icol_customers_01')
     end
   end
 end

@@ -5,5 +5,6 @@ class CreateIcolPendingNotifications < ActiveRecord::Migration
       t.string :icol_notification_id, null: false, comment: 'the id of the associated icol_notifications record'
       t.datetime :created_at, null: false, comment: 'the timestamp when the record was created'
     end
+    add_index :icol_pending_notifications, [:broker_uuid,:icol_notification_id], unique: true, name: 'icol_p_notifications_01'
   end
 end

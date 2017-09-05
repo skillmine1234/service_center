@@ -11,14 +11,14 @@ class CreateIcolNotifications < ActiveRecord::Migration
       t.string :payment_status, limit: 3, null: false, comment: 'the payment status'
       t.string :template_data, limit: 1000, null: false, comment: 'the template data'
       t.integer :template_id, null: false, comment: 'the template id'
-      t.datetime :created_at, comment: 'the timestamp when this record was created'
-      t.string :pending_approval, limit: 1, comment: 'the indicator which decides whether this record is pending to be approved'
+      t.datetime :created_at, null: false, comment: 'the timestamp when this record was created'
+      t.string :pending_approval, limit: 1, null: false, comment: 'the indicator which decides whether this record is pending to be approved'
       t.string :fault_code, limit: 50, comment: 'the code that identifies the exception, if an exception occured in the ESB'
       t.string :fault_subcode, limit: 50, comment: 'the error code that the third party will return'
       t.string :fault_reason, limit: 1000, comment: 'the english reason of the exception, if an exception occurred in the ESB'
       t.integer :attempt_no, comment: "the attempt no"
       t.integer :company_id, null: false, comment: "the company id"
-      t.index([:txn_number], unique: true, name: "icol_notifications_01")
+      t.index([:company_name, :txn_number, :txn_mode, :payment_status], unique: true, name: "icol_notifications_01")
     end
   end
 end
