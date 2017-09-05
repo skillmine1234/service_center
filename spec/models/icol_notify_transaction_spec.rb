@@ -11,11 +11,11 @@ describe IcolNotifyTransaction do
       [:payment_status, :trnsctn_mode].each do |att|
         should validate_length_of(att).is_at_most(3)
       end
-    end
-    
-    it do
       [:template_data].each do |att|
         should validate_length_of(att).is_at_most(1000)
+      end
+      [:comapny_name].each do |att|
+        should validate_length_of(att).is_at_most(100)
       end
     end
 
