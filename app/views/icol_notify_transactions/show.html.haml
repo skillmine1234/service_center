@@ -10,51 +10,48 @@
       %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
         - if !@icol_notify_transaction.nil?
           %tr
-            %td.label Form Errors
-            %td.value
-              = ' '
-            %td#msg-error
-              = error_message_for(@icol_notify_transaction, :base, :prepend_text => "")
-          %tr
             %td.label Company Id
             %td.value
               = @icol_notify_transaction.compny_id
-            %td#msg-error
-              = error_message_for(@icol_notify_transaction, :compny_id, :prepend_text => "")
+            %td
           %tr
             %td.label Company Name
             %td.value
               = @icol_notify_transaction.comapny_name
-            %td#msg-error
-              = error_message_for(@icol_notify_transaction, :comapny_name, :prepend_text => "")
+            %td
           %tr
-            %td.label Transfer Mode
+            %td.label Transaction Mode
             %td.value
               = @icol_notify_transaction.trnsctn_mode
-            %td#msg-error
-              = error_message_for(@icol_notify_transaction, :trnsctn_mode, :prepend_text => "")
+            %td
           %tr
-            %td.label Transfer Number
+            %td.label Transaction Number
             %td.value
               = @icol_notify_transaction.trnsctn_nmbr
-            %td#msg-error
-              = error_message_for(@icol_notify_transaction, :trnsctn_nmbr, :prepend_text => "")
+            %td
           %tr
             %td.label Payment Status
             %td.value
               = @icol_notify_transaction.payment_status
-            %td#msg-error
-              = error_message_for(@icol_notify_transaction, :payment_status, :prepend_text => "")
+            %td
           %tr
-            %td.label Template Id
+            %td.label Template ID
             %td.value
               = @icol_notify_transaction.template_id
-            %td#msg-error
-              = error_message_for(@icol_notify_transaction, :template_id, :prepend_text => "")           
+            %td          
           %tr
             %td.label Template Data
             %td.value
               = @icol_notify_transaction.template_data
-            %td#msg-error
-              = error_message_for(@icol_notify_transaction, :template_data, :prepend_text => "")
+            %td
+          %tr
+            %td.label Template Data
+            %td.value
+              = @icol_notify_transaction.template_data
+            %td
+          %tr
+            %td.label Created At
+            %td.value
+              = @icol_notify_transaction.crtd_date_time.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td
       = link_to 'Back to Todays UPI Transcations', icol_notify_transactions_path

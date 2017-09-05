@@ -32,10 +32,9 @@ upi_development:
   database: db/upi.sqlite3
   pool: 5
   timeout: 5000
-  
-invx_development:
+invxp_development:
   adapter: sqlite3
-  database: db/invx.sqlite3
+  database: db/invxp.sqlite3
   pool: 5
   timeout: 5000
 
@@ -67,10 +66,9 @@ upi_test:
   database: db/upi_test.sqlite3
   pool: 5
   timeout: 5000
-  
-invx_test:
+invxp_test:
   adapter: sqlite3
-  database: db/test_invx.sqlite3
+  database: db/test_invxp.sqlite3
   pool: 5
   timeout: 5000
 

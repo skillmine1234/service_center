@@ -15,7 +15,7 @@ class IcolNotifyTransactionsController < ApplicationController
       render "new"
     else
       @icol_notify_transaction.save!
-      flash[:alert] = 'UPI Transaction successfully created'
+      flash[:alert] = 'Notify Transaction successfully created'
       redirect_to icol_notify_transactions_path
     end
   end
@@ -31,7 +31,7 @@ class IcolNotifyTransactionsController < ApplicationController
       render "edit"
     else
       @icol_notify_transaction.save!
-      flash[:alert] = 'UPI Transaction successfully modified'
+      flash[:alert] = 'Notify Transaction successfully modified'
       redirect_to icol_notify_transactions_path
     end
   end
@@ -49,9 +49,9 @@ class IcolNotifyTransactionsController < ApplicationController
   def destroy
     icol_notify_transaction = IcolNotifyTransaction.find(params[:id])
     if icol_notify_transaction.destroy
-      flash[:alert] = "UPI Transaction record has been deleted!"
+      flash[:alert] = "Notify Transaction record has been deleted!"
     else
-      flash[:alert] = "UPI Transaction record cannot be deleted!"
+      flash[:alert] = "Notify Transaction record cannot be deleted!"
     end
     redirect_to icol_notify_transactions_path
   end
@@ -60,5 +60,4 @@ class IcolNotifyTransactionsController < ApplicationController
     def icol_notify_transaction_params
       params.require(:icol_notify_transaction).permit(:template_id, :compny_id, :comapny_name, :trnsctn_mode, :trnsctn_nmbr, :payment_status,:template_data)
     end
-
 end
