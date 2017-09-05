@@ -2,7 +2,7 @@ class CreateTrnsctnStt < ActiveRecord::Migration
   def up
     unless Rails.env == 'production'
       def self.connection
-        Invx.connection
+        Invxp.connection
       end
       create_table :trnsctn_stt, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
         t.integer :template_id, :null => false, :comment => "the template id"
@@ -21,7 +21,7 @@ class CreateTrnsctnStt < ActiveRecord::Migration
   def down
     unless Rails.env == 'production'
       def self.connection
-        Invx.connection
+        Invxp.connection
       end
       drop_table :trnsctn_stt
     end
