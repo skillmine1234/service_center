@@ -633,11 +633,12 @@
         = image_tag 'icol_notify_icon.png', :size => "80x80"
       %br
         = "I-Collect Notifications"
-    .box
-      = link_to '/icol_notify_transactions' do
-        = image_tag 'ecol_transactions.jpg', :size => "80x80"
-      %br
-        = "I-Collect Notification Transaction"
+    - if ENV['CONFIG_ENVIRONMENT'] == 'test'
+      .box
+        = link_to '/icol_notify_transactions' do
+          = image_tag 'ecol_transactions.jpg', :size => "80x80"
+        %br
+          = "I-Collect Notification Transaction"
 
 - if @current_user.group_names.include?("ssp")
   %h1 SimSePay Banks
