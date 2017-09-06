@@ -6,7 +6,7 @@ class SspBank < ActiveRecord::Base
   
   SETTING_TYPES = ['text','number','date']
   
-  validates_presence_of :customer_code, :app_code, :is_enabled, :user_proxy
+  validates_presence_of :customer_code, :app_code, :is_enabled, :use_proxy
   validates_uniqueness_of :customer_code, scope: [:app_code, :approval_status]
   validates_length_of :http_username, maximum: 100, allow_blank: true
   validates_length_of :http_password, maximum: 100, allow_blank: true

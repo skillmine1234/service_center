@@ -16,10 +16,10 @@
       #msg-error
         = error_message_for(@ssp_bank, :is_enabled, :prepend_text => "")
     .control-group
-      = f.label :user_proxy, "User Proxy", :class => 'control-label'
-      = f.check_box :user_proxy, {},"Y","N"
+      = f.label :use_proxy, "Use Proxy", :class => 'control-label'
+      = f.check_box :use_proxy, {},"Y","N"
       #msg-error
-        = error_message_for(@ssp_bank, :user_proxy, :prepend_text => "")
+        = error_message_for(@ssp_bank, :use_proxy, :prepend_text => "")
     .control-group
       = f.label :app_code, "*App Code", :class => 'control-label'
       = f.text_field :app_code, maxlength: 50

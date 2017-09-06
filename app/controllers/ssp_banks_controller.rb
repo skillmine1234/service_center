@@ -65,7 +65,7 @@ class SspBanksController < ApplicationController
 
   def ssp_bank_params
     params.require(:ssp_bank).permit(:customer_code, :debit_account_url, :reverse_debit_account_url,
-    :get_status_url, :get_account_status_url, :app_code, :settings_cnt, :user_proxy,
+    :get_status_url, :get_account_status_url, :app_code, :settings_cnt, :use_proxy,
     :lock_version, :last_action, :updated_by, 
     :http_username, :http_password, :approval_status, :approved_version, :approved_id,
     :setting1_name, :setting1_type, :setting1_value, 
