@@ -14,7 +14,7 @@
             %td.value
               = link_to "#{audit_count(@ssp_bank)}", :controller => :ssp_banks, :action => :audit_logs, :version_id => audit_count(@ssp_bank), :id => @ssp_bank.id
           %tr
-            %td.label Enabled?
+            %td.label Is Enabled ?
             %td
               = @ssp_bank.is_enabled
             %td#msg-error
