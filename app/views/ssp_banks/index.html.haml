@@ -1,0 +1,32 @@
+%br
+= link_to 'New Ssp Bank', new_ssp_bank_path
+%br
+%br
+%h1 Listing Ssp Bank
+= render :partial => 'advanced_search'
+%br
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      App Code
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Customer Code			
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Validate URL
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Notify URL
+			
+  .tbody
+    - @records.each do |ssp_bank|
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', ssp_bank
+        %td{:style=>'text-align:left;'}
+          = link_to 'Edit', edit_ssp_bank_path(ssp_bank)
+        %td{:style=>'text-align:left;'}
+          = ssp_bank.app_code
+        %td{:style=>'text-align:left;'}
+          = ssp_bank.customer_code

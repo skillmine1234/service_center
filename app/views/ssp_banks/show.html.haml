@@ -1,0 +1,63 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8;'}
+    #form-details
+      %h3 Ssp Bank Details 
+      %br
+      %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
+        - can = can? :edit, @ssp_bank
+        %a.btn{:href => "#{!(can) ? '#' : '/ssp_banks/' + @ssp_bank.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
+        = render 'approve', :@record => @ssp_bank
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
+        - if !@ssp_bank.nil?
+          %tr
+            %td.label Version
+            %td.value
+              = link_to "#{audit_count(@ssp_bank)}", :controller => :ssp_banks, :action => :audit_logs, :version_id => audit_count(@ssp_bank), :id => @ssp_bank.id
+          %tr
+            %td.label App Code
+            %td.value
+              = @ssp_bank.app_code
+            %td
+          %tr
+            %td.label Customer Code
+            %td.value
+              = @ssp_bank.customer_code
+          %tr
+            %td.label HTTP Username
+            %td.value
+              = @ssp_bank.http_username
+            %td
+          %tr
+            %td.label Retry Notify (in mins)
+            %td.value
+              = @ssp_bank.retry_notify_in_mins
+            %td
+          %tr
+            %td.label Max. Retries for Notify
+            %td.value
+              = @ssp_bank.max_retries_for_notify
+            %td
+          %tr
+            %td.label Created At
+            %td.value
+              = @ssp_bank.created_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td
+          %tr
+            %td.label Updated At
+            %td.value
+              = @ssp_bank.updated_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td
+          %tr
+            - if @ssp_bank.settings_cnt.present? and @ssp_bank.settings_cnt > 0
+              %table.table.datatable{style: 'width: 50%'}
+                %thead
+                  %tr
+                    %th Setting Name
+                    %th Setting Value
+                %tbody
+                  - (1..@ssp_bank.settings_cnt).each do |i|
+                    %tr
+                      %td
+                        = @ssp_bank.send("setting#{i}_name")
+                      %td
+                        = @ssp_bank.send("setting#{i}_value")

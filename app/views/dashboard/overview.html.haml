@@ -609,3 +609,17 @@
         = image_tag 'template.jpeg', :size => "80x80"
       %br
         = "Templates"
+- if @current_user.group_names.include?("ssp") || true
+  %h1 Ssp Banks
+  .slide-container
+    .box  
+      = link_to unapproved_records_path(group_name: 'ssp') do
+        = image_tag 'work-list.jpg', :size => "80x80"
+      %br
+        = "Approval Ssp Banks"
+  .slide-container
+    .box
+      = link_to '/ssp_banks' do
+        = image_tag 'callbacks_icon.png', :size => "80x80"
+      %br
+        = "Ssp Banks"

@@ -32,6 +32,9 @@ describe Group do
 
       group = Factory(:group,:name => 'ns')
       group.model_list.should == ['NsCallback', 'NsTemplate']
+      
+      group = Factory(:group,:name => 'ssp')
+      group.model_list.should == ['SspBank']
     end
   end
 end

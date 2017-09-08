@@ -39,6 +39,8 @@ class Group < ActiveRecord::Base
       ['IncomingFile','IncomingFileRecord','FrR01IncomingFile','FrR01IncomingRecord']
     when "ns"
       ['NsCallback', 'NsTemplate']
+    when "ssp"
+      ['SspBank']
     else
       []
     end
