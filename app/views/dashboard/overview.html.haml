@@ -609,7 +609,7 @@
         = image_tag 'template.jpeg', :size => "80x80"
       %br
         = "Templates"
-- if @current_user.group_names.include?("ssp") || true
+- if @current_user.group_names.include?("ssp")
   %h1 SimSePay Banks
   .slide-container
     .box  
@@ -623,3 +623,8 @@
         = image_tag 'sm_banks.jpg', :size => "80x80"
       %br
         = "SimSePay Banks"
+    .box
+      = link_to '/ssp_audit_steps' do
+        = image_tag 'txn_summary.png', :size => "80x80"
+      %br
+        = "SimSePay Audit Step"

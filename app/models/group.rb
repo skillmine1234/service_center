@@ -40,7 +40,7 @@ class Group < ActiveRecord::Base
     when "ns"
       ['NsCallback', 'NsTemplate']
     when "ssp"
-      ['SspBank']
+      ['SspBank', 'SspAuditStep']
     else
       []
     end

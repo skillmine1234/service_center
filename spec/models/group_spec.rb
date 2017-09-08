@@ -34,7 +34,7 @@ describe Group do
       group.model_list.should == ['NsCallback', 'NsTemplate']
       
       group = Factory(:group,:name => 'ssp')
-      group.model_list.should == ['SspBank']
+      group.model_list.should == ['SspBank', 'SspAuditStep']
     end
   end
 end
