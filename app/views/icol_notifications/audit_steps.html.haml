@@ -31,6 +31,8 @@
           Fault Text
         %th{:style=>'text-align:left; background-color: lightblue;'}
           Fault Result
+        %th{:style=>'text-align:left; background-color: lightblue;'}
+          Fault Bitstream
       .tbody
         - @steps.each do |value|
           %tr
@@ -61,6 +63,9 @@
                 = '-' 
             %td{:style=>'text-align:left;'}
               = link_to "Show Fault", "#", :class => 'val-fault-link', :href => "#faultLink", data: { fault: value.fault_bitstream }
+            %td{:style=>'text-align:left;'}
+              - if @validate_step.fault_bitstream.present?
+                = link_to "Fault Bitstream", "#", :class => 'show_fault_bitstream', :href => "#faultBitstream", data: { fault_bitstream: @validate_step.fault_bitstream}
             
 #faultLink.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
