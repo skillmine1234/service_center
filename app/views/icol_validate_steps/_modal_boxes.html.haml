@@ -42,14 +42,14 @@
         %b Copy To Clipboard...
     %pre#rep_header_xml{:style => 'word-wrap: break-word'}
       .reply_header{:style => 'word-wrap: break-word'}
-#faultBitstream.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+#faultLink.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3 Fault Bitstream
+    %h3 Fault
     #error_message{:style => 'color:red'}
   .modal-body{:style => "max-height:450px;"}
     .demo-area
-      %button#d_clip_button2.my_clip_button2{"data-clipboard-target" => "fault_bitstream"}
+      %button#d_clip_button3.my_clip_button3{"data-clipboard-target" => "fault_xml"}
         %b Copy To Clipboard...
-    %pre#fault_bitstream{:style => 'word-wrap: break-word'}
-      .reply{:style => 'word-wrap: break-word'}
+    %pre#fault_xml{:style => 'word-wrap: break-word'}
+      .fault{:style => 'word-wrap: break-word'}

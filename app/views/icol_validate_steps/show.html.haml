@@ -25,8 +25,7 @@
         - if @validate_step.status_code == "FAILED"
           = link_to "Fault Text", "#", :class => 'fault-link', :href => "javascript:void()", :style => "font-weight:100"
         - if @validate_step.fault_bitstream.present?
-          = link_to "Fault Bitstream", "#", :class => 'show_fault_bitstream', :href => "#faultBitstream", data: { fault_bitstream: @validate_step.fault_bitstream}
-        
+          = link_to "Fault Bitstream", "#", :class => 'val-fault-link', :href => "#faultLink", data: { fault: @validate_step.fault_bitstream}
     %h3
       Step Name:
       = @validate_step.step_name

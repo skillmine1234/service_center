@@ -31,8 +31,6 @@
           Fault Text
         %th{:style=>'text-align:left; background-color: lightblue;'}
           Fault Result
-        %th{:style=>'text-align:left; background-color: lightblue;'}
-          Fault Bitstream
       .tbody
         - @steps.each do |value|
           %tr
@@ -62,22 +60,10 @@
               - else
                 = '-' 
             %td{:style=>'text-align:left;'}
-              = link_to "Show Fault", "#", :class => 'val-fault-link', :href => "#faultLink", data: { fault: value.fault_bitstream }
-            %td{:style=>'text-align:left;'}
               - if value.fault_bitstream.present?
-                = link_to "Fault Bitstream", "#", :class => 'show_fault_bitstream', :href => "#faultBitstream", data: { fault_bitstream: value.fault_bitstream}
-            
-#faultLink.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-header
-    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3 Fault
-    #error_message{:style => 'color:red'}
-  .modal-body{:style => "max-height:450px;"}
-    .demo-area
-      %button#d_clip_button3.my_clip_button3{"data-clipboard-target" => "fault_xml"}
-        %b Copy To Clipboard...
-    %pre#fault_xml{:style => 'word-wrap: break-word'}
-      .fault{:style => 'word-wrap: break-word'}
+                = link_to "Show Fault", "#", :class => 'val-fault-link', :href => "#faultLink", data: { fault: value.fault_bitstream }
+              - else 
+                = '-'
 #faultText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
