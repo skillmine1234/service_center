@@ -121,7 +121,7 @@ describe IcolNotifyTransactionsController do
     it "should destroy the icol_notify_transaction" do 
       icol_notify_transaction = Factory(:icol_notify_transaction)
       expect {delete :destroy, {:id => icol_notify_transaction.id}}.to change(IcolNotifyTransaction, :count).by(-1)
-      IcolNotifyTransaction.find_by_id(icol_notify_transaction.id).should be_nil
+      IcolNotifyTransaction.find_by_trnsctn_nmbr(icol_notify_transaction.id).should be_nil
     end
 
     it "redirects to the icol_notify_transaction list" do
