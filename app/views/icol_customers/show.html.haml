@@ -14,7 +14,7 @@
             %td.value
               = link_to "#{audit_count(@icol_customer)}", :controller => :icol_customers, :action => :audit_logs, :version_id => audit_count(@icol_customer), :id => @icol_customer.id
           %tr
-            %td.label Enabled?
+            %td.label Is Enabled ?
             %td
               = @icol_customer.is_enabled
             %td#msg-error
