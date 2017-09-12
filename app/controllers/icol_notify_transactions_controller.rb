@@ -37,7 +37,7 @@ class IcolNotifyTransactionsController < ApplicationController
   end
 
   def index
-    icol_notify_transactions = IcolNotifyTransaction.order("trnsctn_nmbr desc")
+    icol_notify_transactions = IcolNotifyTransaction.order("crtd_date_time desc")
     @icol_notify_transactions_count = icol_notify_transactions.count
     @icol_notify_transactions = icol_notify_transactions.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
