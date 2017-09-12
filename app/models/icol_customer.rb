@@ -5,6 +5,7 @@ class IcolCustomer < ActiveRecord::Base
   belongs_to :updated_user, class_name: 'User', foreign_key: 'updated_by'
   
   SETTING_TYPES = ['text','number','date']
+  validate :any_one_url_should_present?
   
   validates_presence_of :customer_code, :app_code, :is_enabled
   validates_numericality_of :retry_notify_in_mins, :max_retries_for_notify, allow_blank: true
@@ -37,6 +38,12 @@ class IcolCustomer < ActiveRecord::Base
 
   private
 
+  def any_one_url_should_present?
+    if %w(notify_url validate_url ).all?{|attr| self[attr].blank?}
+      errors.add :base, "Require atleast one of them notify url, validate url"
+    end
+  end
+  
   def set_settings_cnt
     self.settings_cnt = 0
     self.settings_cnt += 1 unless setting1_name.blank?

@@ -27,6 +27,24 @@ describe IcolCustomer do
     [:customer_code, :app_code, :is_enabled].each do |att|
       it { should validate_presence_of(att) }
     end
+    
+    context "validate_url, notify_url" do 
+      it "notify_url " do 
+        icol_customer = Factory.build(:icol_customer, validate_url: nil, notify_url: 'http://localhost:3002/icol_customers')
+        icol_customer.save.should be_true 
+      end
+
+      it "validate_url " do 
+        icol_customer = Factory.build(:icol_customer, validate_url: 'http://localhost:3002/icol_customers', notify_url: nil)
+        icol_customer.save.should be_true 
+      end
+      
+      it "validate_url and notify_url both are null" do
+        icol_customer = Factory.build(:icol_customer, validate_url: nil, notify_url: nil)
+        icol_customer.save.should be_false
+        icol_customer.errors[:base].should == ["Require atleast one of them notify url, validate url"]
+      end
+    end
 
     it "should validate presence of http_password if http_username is present" do
       icol_customer = Factory.build(:icol_customer, http_username: 'username', http_password: nil)
