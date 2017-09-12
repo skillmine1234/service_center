@@ -14,8 +14,8 @@ class CreateTrnsctnStt < ActiveRecord::Migration
         t.string :payment_status, :limit => 3, :null => false, :comment => "the Paymenyt status"
         t.string :template_data, limit: 1000, null: false, comment: 'the template data'
       end
+      add_index :trnsctn_stt, :trnsctn_nmbr, :unique => true, :name => 'icol_notify_transactions_01' 
     end
-    add_index :trnsctn_stt, :trnsctn_nmbr, :unique => true, :name => 'icol_notify_transactions_01' 
   end
 
   def down
