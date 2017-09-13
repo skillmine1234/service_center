@@ -11,7 +11,7 @@
     = f.hidden_field :approved_version
     = f.hidden_field :settings_cnt
     .control-group
-      = f.label :is_enabled, "Is Enabled ?", :class => 'control-label'
+      = f.label :is_enabled, "Enabled?", :class => 'control-label'
       = f.check_box :is_enabled, {},"Y","N"
       #msg-error
         = error_message_for(@icol_customer, :is_enabled, :prepend_text => "")
