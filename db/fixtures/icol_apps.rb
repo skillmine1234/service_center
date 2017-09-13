@@ -1,17 +1,15 @@
 IcolApp.seed_once(:app_code) do |s|
   s.id = 10000
-  s.app_code = 'HUDAAPP1'
+  s.app_code = 'HUDABP'
   s.created_at = Time.zone.now
   s.created_by = 'Q'
-  s.expected_input = '[{"name":"name","label":"customer name","dataType":"string"},{"name":"address","label":"customer address","dataType":"string"},{"name":"dob","label":"customer dob","dataType":"dateTime"}]'
-  s.expected_output = '[{"name":"name2","label":"customer gender","dataType":"string","required":"true"},{"name":"place2","label":"customer address","dataType":"string","required":"true"},{"name":"place3","label":"customer address2","dataType":"string","required":"false","enum":["male","female"]}]'
+  s.expected_input = '[{"name":"Site_Code","label":"Site Code","dataType":"string"},{"name":"Consumer_No","label":"Consumer No","dataType":"string"}]'
 end
 
 IcolApp.seed_once(:app_code) do |s|
   s.id = 10001
-  s.app_code = 'HUDAAPP2'
+  s.app_code = 'HUDAVP'
   s.created_at = Time.zone.now
   s.created_by = 'Q'
-  s.expected_input = '[{"name":"name1","label":"customer name","dataType":"string"},{"name":"address","label":"customer address","dataType":"string"},{"name":"dob","label":"customer dob","dataType":"dateTime"}]'
-  s.expected_output = '[{"name":"name2","label":"customer gender","dataType":"string","required":"true"},{"name":"place2","label":"customer address","dataType":"string","required":"true"},{"name":"place3","label":"customer address2","dataType":"string","required":"false","enum":["male","female"]}]'
+  s.expected_input = '[{"name":"Voucher_No","label":"Voucher No","dataType":"string"}]'
 end
