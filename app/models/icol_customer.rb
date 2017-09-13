@@ -39,7 +39,7 @@ class IcolCustomer < ActiveRecord::Base
   private
 
   def atleast_one_url_should_present?
-    if %w(notify_url validate_url ).all?{|attr| self[attr].blank?}
+    if notify_url.blank? & validate_url.blank?
       errors.add :base, "Require atleast one of them notify url, validate url"
     end
   end

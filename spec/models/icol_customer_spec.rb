@@ -39,6 +39,11 @@ describe IcolCustomer do
         icol_customer.save.should be_true 
       end
       
+      it "should validate when validate_url and notify_url both are present" do 
+        icol_customer = Factory.build(:icol_customer, validate_url: 'http://localhost:3002/icol_customers', notify_url: 'http://localhost:3002/icol_customers')
+        icol_customer.save.should be_true 
+      end
+      
       it "validate_url and notify_url both are null" do
         icol_customer = Factory.build(:icol_customer, validate_url: nil, notify_url: nil)
         icol_customer.save.should be_false
