@@ -2,7 +2,7 @@ IcolCustomer.seed_once(:customer_code) do |s|
   s.customer_code = 'HUDABP'
   s.app_code = 'HUDABP'
   s.validate_url = 'http://59.145.173.88:8081/Service.asmx'
-  s.notify_url = 'https://ditto.quantiguous.com/icollect/notification'
+  s.notify_url = 'http://59.145.173.88:8081/Service.asmx'
   s.http_username = nil
   s.http_password = nil
   s.setting1_name  = 'clientCode'
@@ -28,7 +28,7 @@ IcolCustomer.seed_once(:customer_code) do |s|
   s.customer_code = 'HUDAVP'
   s.app_code = 'HUDAVP'
   s.validate_url = 'http://59.145.173.88:8081/Service.asmx'
-  s.notify_url = 'https://ditto.quantiguous.com/icollect/notification'
+  s.notify_url = 'http://59.145.173.88:8081/Service.asmx'
   s.http_username = nil
   s.http_password = nil
   s.setting1_name  = 'clientCode'
