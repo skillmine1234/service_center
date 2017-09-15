@@ -203,6 +203,7 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.build_nack_file = 'N'
   s.skip_last = 'N'
   s.complete_with_failed_records = 'N'
+  s.apprv_before_process_records = 'Y'
 end
 
 IncomingFileType.seed(:sc_service_id, :code) do |s|
