@@ -32,6 +32,11 @@ upi_development:
   database: db/upi.sqlite3
   pool: 5
   timeout: 5000
+invxp_development:
+  adapter: sqlite3
+  database: db/invxp.sqlite3
+  pool: 5
+  timeout: 5000
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -59,6 +64,11 @@ atom_test:
 upi_test:
   adapter: sqlite3
   database: db/upi_test.sqlite3
+  pool: 5
+  timeout: 5000
+invxp_test:
+  adapter: sqlite3
+  database: db/test_invxp.sqlite3
   pool: 5
   timeout: 5000
 

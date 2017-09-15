@@ -41,6 +41,8 @@ class Group < ActiveRecord::Base
       ['NsCallback', 'NsTemplate']
     when "ssp"
       ['SspBank', 'SspAuditStep']
+    when "icol"
+      ['IcolCustomer', 'IcolValidateStep', 'IcolNotification', 'IcolNotifyStep', 'IcolNotifyTransaction']
     else
       []
     end

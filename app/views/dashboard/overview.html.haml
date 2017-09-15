@@ -609,6 +609,37 @@
         = image_tag 'template.jpeg', :size => "80x80"
       %br
         = "Templates"
+- if @current_user.group_names.include?("icol")
+  %h1 I-Collect
+  .slide-container
+    .box  
+      = link_to unapproved_records_path(group_name: 'icol') do
+        = image_tag 'work-list.jpg', :size => "80x80"
+      %br
+        = "Approval Worklist"
+  .slide-container
+    .box
+      = link_to '/icol_customers' do
+        = image_tag 'ecol_customer.gif', :size => "80x80"
+      %br
+        = "I-Collect Customers"
+    .box
+      = link_to '/icol_validate_steps' do
+        = image_tag 'validate_step_icon.png', :size => "80x80"
+      %br
+        = "I-Collect Validate Steps"
+    .box
+      = link_to '/icol_notifications' do
+        = image_tag 'icol_notify_icon.png', :size => "80x80"
+      %br
+        = "I-Collect Notifications"
+    - if ENV['CONFIG_ENVIRONMENT'] == 'test'
+      .box
+        = link_to '/icol_notify_transactions' do
+          = image_tag 'ecol_transactions.jpg', :size => "80x80"
+        %br
+          = "I-Collect Notification Transaction"
+
 - if @current_user.group_names.include?("ssp")
   %h1 SimSePay Banks
   .slide-container

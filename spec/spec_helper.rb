@@ -48,6 +48,7 @@ Spork.prefork do
             DatabaseCleaner[:active_record, { :connection => :fcatrt_test }],
             DatabaseCleaner[:active_record, { :connection => :atom_test }],
             DatabaseCleaner[:active_record, { :connection => :upi_test }],
+            DatabaseCleaner[:active_record, { :connection => :invxp_test }],
             DatabaseCleaner[:active_record, { :connection => :test }]
           ]
 

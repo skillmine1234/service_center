@@ -35,6 +35,9 @@ describe Group do
       
       group = Factory(:group,:name => 'ssp')
       group.model_list.should == ['SspBank', 'SspAuditStep']
+
+      group = Factory(:group,:name => 'icol')
+      group.model_list.should == ['IcolCustomer', 'IcolValidateStep', 'IcolNotification', 'IcolNotifyStep', 'IcolNotifyTransaction']
     end
   end
 end

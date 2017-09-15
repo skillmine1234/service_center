@@ -304,7 +304,36 @@ ServiceCenter::Application.routes.draw do
       put 'approve'
     end
   end
+
+  resources :icol_validate_steps, only: [:index, :show] do
+    collection do
+      get :index
+      put :index
+    end
+  end
+
+  resources :icol_customers do
+    collection do
+      get :index
+      put :index
+    end
+    member do
+      get :audit_logs
+      put :approve
+    end
+  end
   
+  resources :icol_notifications, only: [:index, :show] do
+    collection do 
+      get :index
+      put :index
+    end
+    member do
+      get :audit_steps
+    end
+  end
+      
+
   resources :iam_audit_logs, only: [:index, :show] do 
     collection do
       get :index
@@ -324,11 +353,13 @@ ServiceCenter::Application.routes.draw do
   end
   
   resources :ssp_audit_steps, only: [:index, :show] do
-   collection do
-     get :index
-     put :index
-   end
+    collection do
+      get :index
+      put :index
+    end
   end
+
+  resources :icol_notify_transactions
 
   get 'su_incoming_file_summary' => 'su_incoming_records#incoming_file_summary'
   get 'ic_incoming_file_summary' => 'ic_incoming_records#incoming_file_summary'
