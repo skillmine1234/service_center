@@ -16,7 +16,7 @@
       = @validate_step.req_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p")
     %h3
       Request Bitstream:
-      = show_xml('Show Reply','request-link', @validate_step.req_bitstream)
+      = show_xml('Show Request','request-link', @validate_step.req_bitstream)
   .header-form-extended{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'}
     %h3
       Status:

@@ -18,13 +18,9 @@
       = label_tag "Transaction Number", "Transaction Number", :class => 'control-label'
       = text_field_tag :txn_number, params[:txn_number]
     .control-group
-      = label_tag "Status Code", "Status Code", :class => 'control-label'
+      = label_tag :status_code, "Status", :class => 'control-label'
       / what  are options should be ?
-      = select_tag :status_code, options_for_select([['NEW','NEW'],['COMPLETED','COMPLETED']],params[:status_code]),:prompt => 'ANY'
-    .control-group
-      = label_tag "Payment Status", "Payment Status", :class => 'control-label'
-      / what  are options should be ?
-      = select_tag :payment_status, options_for_select([['NEW','NEW'],['COMPLETED','COMPLETED']],params[:payment_status]),:prompt => 'ANY'
+      = select_tag :status_code, options_for_select([['NEW','NEW'],['COMPLETED','COMPLETED'], ['IN PROCESS', 'IN PROCESS'], ['RETRYING', 'RETRYING'], ['TIMED OUT', 'TIMED OUT'], ['FAILED', 'FAILED']],params[:status_code]),:prompt => 'ANY'
       = hidden_field_tag :page, params[:page] || 1
     .form-actions
       = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button",onclick: "$('#page').val(1)"
