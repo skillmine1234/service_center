@@ -14,7 +14,7 @@
       = text_field_tag :step_name, params[:step_name]
     .control-group
       = label_tag "Status", "Status", :class => 'control-label'
-      = select_tag :status_code, options_for_select([['NEW','NEW'],['COMPLETED','COMPLETED']],params[:status_code]),:prompt => 'ANY'
+      = select_tag :status_code, options_for_select([['NEW','NEW'],['COMPLETED','COMPLETED'], ['TIMED OUT', 'TIMED OUT'], ['FAILED', 'FAILED']],params[:status_code]),:prompt => 'ANY'
     .control-group
       = label_tag "Request Timestamp", "Request Timestamp", :class => 'control-label'
       = text_field_tag :from_request_timestamp, params[:from_request_timestamp]
