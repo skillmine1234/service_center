@@ -20,10 +20,10 @@
       Status:
       = @icol_notification.status_code
       - if @icol_notification.status_code == "FAILED"
-        = link_to "Fault Text", "#", :class => 'fault-link', :href => "#faultText"
+        = link_to "Fault Text", "#", :class => 'fault-link', :href => "javascript:void()"
       &nbsp
       - if @icol_notification.fault_bitstream.present?
-        = link_to "Fault Bitstream", "#", :class => 'val-fault-link', :href => "#faultLink", data: { fault: @icol_notification.fault_bitstream}
+        = link_to "Fault Bitstream", "#", :class => 'val-fault-link', :href => "javascript:void()", data: { fault: @icol_notification.fault_bitstream}
     %h3
       Payment Status:
       = @icol_notification.payment_status
