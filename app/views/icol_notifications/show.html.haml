@@ -8,7 +8,10 @@
   .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'}
     %h3 
       Customer Code:
-      = @icol_notification.customer_code
+      - if @icol_notification.icol_customer.present?
+        = link_to @icol_notification.customer_code, @icol_notification.icol_customer
+      - else
+        = @icol_notification.customer_code
     %h3 
       App Code:
       = @icol_notification.app_code
