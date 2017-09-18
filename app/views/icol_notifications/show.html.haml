@@ -8,7 +8,10 @@
   .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'}
     %h3 
       Customer Code:
-      = @icol_notification.customer_code
+      - if @icol_notification.icol_customer.present?
+        = link_to @icol_notification.customer_code, @icol_notification.icol_customer
+      - else
+        = @icol_notification.customer_code
     %h3 
       App Code:
       = @icol_notification.app_code
@@ -20,7 +23,10 @@
       Status:
       = @icol_notification.status_code
       - if @icol_notification.status_code == "FAILED"
-        = link_to "Fault Text", "#", :class => 'fault-link', :href => "#faultText", :style => "font-weight:100"
+        = link_to "Fault Text", "#", :class => 'fault-link', :href => "javascript:void()"
+      &nbsp
+      - if @icol_notification.fault_bitstream.present?
+        = link_to "Fault Bitstream", "#", :class => 'val-fault-link', :href => "javascript:void()", data: { fault: @icol_notification.fault_bitstream}
     %h3
       Payment Status:
       = @icol_notification.payment_status

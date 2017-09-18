@@ -7,7 +7,10 @@
   .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'}
     %h3 
       Customer Code:
-      = @validate_step.customer_code
+      - if @validate_step.icol_customer.present?
+        = link_to @validate_step.customer_code, @validate_step.icol_customer
+      - else
+        = @validate_step.customer_code
     %h3 
       App Code:
       = @validate_step.app_code
