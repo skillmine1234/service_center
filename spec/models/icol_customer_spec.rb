@@ -24,7 +24,7 @@ describe IcolCustomer do
   end
   
   context "validation" do
-    [:customer_code, :app_code, :is_enabled].each do |att|
+    [:customer_code, :app_code, :is_enabled, :template_code, :use_proxy].each do |att|
       it { should validate_presence_of(att) }
     end
     
@@ -47,7 +47,7 @@ describe IcolCustomer do
       it "validate_url and notify_url both are null" do
         icol_customer = Factory.build(:icol_customer, validate_url: nil, notify_url: nil)
         icol_customer.save.should be_false
-        icol_customer.errors[:base].should == ["Require atleast one of them notify url, validate url"]
+        icol_customer.errors[:base].should == ["Either Notify URL or Validate URL must be present"]
       end
     end
 
@@ -62,7 +62,7 @@ describe IcolCustomer do
       should validate_uniqueness_of(:customer_code).scoped_to(:approval_status)
     end    
     
-    [:retry_notify_in_mins, :max_retries_for_notify].each do |att|
+    [:retry_notify_in_mins, :max_retries_for_notify, :template_code].each do |att|
       it { should validate_numericality_of(att) }
     end
 

@@ -4,6 +4,7 @@ FactoryGirl.define do
   factory :icol_customer do
     app_code 'APP12'
     sequence(:customer_code) {|n| "%03i" % "#{n}"}
+    template_code 1234
     setting1_name 'udf1'
     setting1_type 'number'
     setting1_value '1234'

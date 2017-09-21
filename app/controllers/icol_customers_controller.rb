@@ -67,12 +67,17 @@ class IcolCustomersController < ApplicationController
     params.require(:icol_customer).permit(:customer_code, :app_code, :settings_cnt, 
     :lock_version, :last_action, :updated_by, :notify_url, :validate_url, 
     :http_username, :http_password, :approval_status, :approved_version, 
-    :approved_id, :max_retries_for_notify, :retry_notify_in_mins,
+    :approved_id, :max_retries_for_notify, :retry_notify_in_mins, :template_code, :use_proxy,
     :setting1_name, :setting1_type, :setting1_value, 
     :setting2_name, :setting2_type, :setting2_value, 
     :setting3_name, :setting3_type, :setting3_value, 
     :setting4_name, :setting4_type, :setting4_value,
-    :setting5_name, :setting5_type, :setting5_value
+    :setting5_name, :setting5_type, :setting5_value,
+    :setting6_name, :setting6_type, :setting6_value, 
+    :setting7_name, :setting7_type, :setting7_value, 
+    :setting8_name, :setting8_type, :setting8_value, 
+    :setting9_name, :setting9_type, :setting9_value,
+    :setting10_name, :setting10_type, :setting10_value
     )
   end
   
