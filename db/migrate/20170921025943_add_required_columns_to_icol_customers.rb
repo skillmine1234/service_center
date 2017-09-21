@@ -1,8 +1,9 @@
 class AddRequiredColumnsToIcolCustomers < ActiveRecord::Migration
   def change
-    add_column :icol_customers, :template_code, :integer, :null => false, :default => 0 , comment: 'the unique template code for a customer' 
+    add_column :icol_customers, :template_code, :integer, comment: 'the unique template code for a customer' 
     IcolCustomer.where(:app_code => 'HUDABP').update_all(:template_code => 30)
     IcolCustomer.where(:app_code => 'HUDAVP').update_all(:template_code => 31)   
+    change_column :icol_customers, :template_code, :integer, :null => false
 
     add_column :icol_customers, :use_proxy, :string, limit: 1, :null => false, :default => 'Y', comment: 'the identifier to tell if proxy has to be used for this customer'    
     
