@@ -3,7 +3,7 @@ IcolApp.seed_once(:app_code) do |s|
   s.app_code = 'HUDABP'
   s.created_at = Time.zone.now
   s.created_by = 'Q'
-  s.expected_input = '[{"name":"Site_Code","label":"Site Code","dataType":"string"},{"name":"Consumer_No","label":"Consumer No","dataType":"string"}]'
+  s.expected_input = '[{"name":"field1","label":"Site Code","dataType":"string"},{"name":"field2","label":"Consumer No","dataType":"string"}]'
 end
 
 IcolApp.seed_once(:app_code) do |s|
@@ -11,5 +11,5 @@ IcolApp.seed_once(:app_code) do |s|
   s.app_code = 'HUDAVP'
   s.created_at = Time.zone.now
   s.created_by = 'Q'
-  s.expected_input = '[{"name":"Voucher_No","label":"Voucher No","dataType":"string"}]'
+  s.expected_input = '[{"name":"field1","label":"Voucher No","dataType":"string"}]'
 end

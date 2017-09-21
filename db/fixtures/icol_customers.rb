@@ -5,6 +5,7 @@ IcolCustomer.seed_once(:customer_code) do |s|
   s.notify_url = 'http://59.145.173.88:8081/Service.asmx'
   s.http_username = nil
   s.http_password = nil
+  s.template_code = 30
   s.setting1_name  = 'clientCode'
   s.setting1_type  = 'text'
   s.setting1_value = 'YESBANK'
@@ -17,9 +18,12 @@ IcolCustomer.seed_once(:customer_code) do |s|
   s.setting4_name  = 'paymentType'
   s.setting4_type  = 'text'
   s.setting4_value = 'BILLPAYMENT'
-  s.setting5_name  = nil
-  s.setting5_type  = nil
-  s.setting5_value = nil
+  s.setting5_name  = 'bankName'
+  s.setting5_type  = 'text'
+  s.setting5_value = 'YesBank'
+  s.setting6_name  = 'towards'
+  s.setting6_type  = 'text'
+  s.setting6_value = 'BILL PAYMENT'  
   s.created_by = 'Q'
   s.approval_status = 'A'
 end
@@ -31,6 +35,7 @@ IcolCustomer.seed_once(:customer_code) do |s|
   s.notify_url = 'http://59.145.173.88:8081/Service.asmx'
   s.http_username = nil
   s.http_password = nil
+  s.template_code = 31
   s.setting1_name  = 'clientCode'
   s.setting1_type  = 'text'
   s.setting1_value = 'YESBANK'
@@ -43,9 +48,9 @@ IcolCustomer.seed_once(:customer_code) do |s|
   s.setting4_name  = 'paymentType'
   s.setting4_type  = 'text'
   s.setting4_value = 'VOUCHERPAYMENT'
-  s.setting5_name  = nil
-  s.setting5_type  = nil
-  s.setting5_value = nil
+  s.setting5_name  = 'bankName'
+  s.setting5_type  = 'text'
+  s.setting5_value = 'YesBank'
   s.created_by = 'Q'
   s.approval_status = 'A'
 end
