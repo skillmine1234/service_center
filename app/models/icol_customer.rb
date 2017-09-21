@@ -10,7 +10,7 @@ class IcolCustomer < ActiveRecord::Base
   validates_presence_of :customer_code, :app_code, :is_enabled, :template_code, :use_proxy
   validates_numericality_of :retry_notify_in_mins, :max_retries_for_notify, allow_blank: true
   validates :template_code, numericality: { greater_than_or_equal_to: 0 }
-  validates_uniqueness_of :customer_code, scope: [:approval_status]
+  validates_uniqueness_of :customer_code, scope: [:template_code, :approval_status]
   validates_length_of :http_username, maximum: 100, allow_blank: true
   validates_length_of :http_password, maximum: 100, allow_blank: true
   

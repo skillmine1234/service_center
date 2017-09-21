@@ -59,7 +59,7 @@ describe IcolCustomer do
     
     it "should validate uniqueness of customer code" do
       icol_customer = Factory(:icol_customer, approval_status: 'A')
-      should validate_uniqueness_of(:customer_code).scoped_to(:approval_status)
+      should validate_uniqueness_of(:customer_code).scoped_to(:template_code, :approval_status)
     end    
     
     [:retry_notify_in_mins, :max_retries_for_notify, :template_code].each do |att|
