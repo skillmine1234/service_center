@@ -480,27 +480,9 @@
         = image_tag 'template.jpeg', :size => "80x80"
       %br
         = "Templates"
-
+        
 = render partial: 'panel', locals: { group: 'icol' }
 
-- if @current_user.group_names.include?("ssp")
-  %h1 SimSePay Banks
-  .slide-container
-    .box  
-      = link_to unapproved_records_path(group_name: 'ssp') do
-        = image_tag 'work-list.jpg', :size => "80x80"
-      %br
-        = "Approval Worklist"
-  .slide-container
-    .box
-      = link_to '/ssp_banks' do
-        = image_tag 'sm_banks.jpg', :size => "80x80"
-      %br
-        = "SimSePay Banks"
-    .box
-      = link_to '/ssp_audit_steps' do
-        = image_tag 'txn_summary.png', :size => "80x80"
-      %br
-        = "SimSePay Audit Steps"
+= render partial: 'panel', locals: { group: 'ssp' }
 
 = render partial: 'panel', locals: { group: 'asba' }
