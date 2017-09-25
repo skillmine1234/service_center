@@ -38,6 +38,7 @@ GIT
 
 GEM
   remote: https://rubygems.org/
+  remote: https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/
   specs:
     actionmailer (4.2.2)
       actionpack (= 4.2.2)
@@ -304,6 +305,8 @@ GEM
       options (~> 2.3.0)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
+    qg-icol (1.0.0)
+      rails (= 4.2.2)
     rack (1.6.8)
     rack-accept (0.4.5)
       rack (>= 0.4)
@@ -526,6 +529,7 @@ DEPENDENCIES
   passenger
   passgen
   progress_bar (~> 1.0.0)
+  qg-icol (= 1.0.0)!
   rails (= 4.2.2)
   rails_12factor
   rake (< 11.0)
