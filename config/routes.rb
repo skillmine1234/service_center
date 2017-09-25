@@ -522,6 +522,8 @@ ServiceCenter::Application.routes.draw do
   get '/iam_cust_users/:id/audit_logs' => 'iam_cust_users#audit_logs'
   put '/iam_cust_users/:id/approve' => "iam_cust_users#approve"
   
+  get '/version' => 'dashboard#version'
+  
   root :to => 'dashboard#overview'
 
   # See how all your routes lay out with "rake routes"

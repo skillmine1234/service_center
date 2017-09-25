@@ -75,9 +75,7 @@ group :development, :test do
   gem "rspec"
   gem 'rspec-rails', "2.14.0"
   gem 'rb-readline'
-  gem "spork", "> 0.9.0.rc", :require => false
   gem "factory_girl", "2.2.0"
-  gem "factory_girl_rails"
   gem "shoulda-matchers"
   gem 'database_cleaner', '< 1.1.0'
   gem 'timecop'
