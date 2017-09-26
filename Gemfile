@@ -51,7 +51,7 @@ gem 'passgen'
 gem "mustache"
 
 source "https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/" do
-  gem 'qg-icol', '1.0.0'
+  gem 'qg-icol', '1.0.1'
 end
 
 # oracle is required only in production, CI tools run against sqlite3
