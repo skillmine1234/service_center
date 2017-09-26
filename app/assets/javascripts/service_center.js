@@ -120,6 +120,11 @@ $(document).ready(function(){
     display_beautified_data(fault, "div.fault", "#faultLink");
   });
   
+  $(".data-link").on("click", function () {
+    var data = $(this).data('temp');
+    display_beautified_data(data, "div.temp_data", "#templateData");
+  });
+
   $("a.active-link").on("click", function () {
     var f_code = $(this).data('fault-code');
     var f_reason = $(this).data('fault-reason');

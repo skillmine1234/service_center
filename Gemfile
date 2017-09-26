@@ -50,6 +50,10 @@ gem 'approval2', '0.1.7'
 gem 'passgen'
 gem "mustache"
 
+source "https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/" do
+  gem 'qg-icol', '1.0.2'
+end
+
 # oracle is required only in production, CI tools run against sqlite3
 group :production do
   gem 'activerecord-oracle_enhanced-adapter',:git => 'git://github.com/rsim/oracle-enhanced.git'
@@ -75,9 +79,7 @@ group :development, :test do
   gem "rspec"
   gem 'rspec-rails', "2.14.0"
   gem 'rb-readline'
-  gem "spork", "> 0.9.0.rc", :require => false
   gem "factory_girl", "2.2.0"
-  gem "factory_girl_rails"
   gem "shoulda-matchers"
   gem 'database_cleaner', '< 1.1.0'
   gem 'timecop'

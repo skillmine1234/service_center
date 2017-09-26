@@ -1,0 +1,16 @@
+- m = build_menu(group)
+- unless m.nil?
+  %h1 #{m[:name]}
+  .slide-container
+    .box  
+      = link_to unapproved_records_path(group_name: m[:group]) do
+        = image_tag 'work-list.jpg', :size => "80x80"
+      %br
+        = "Approval Worklist"
+  .slide-container
+    - m[:items].each do |i|
+      .box
+        = link_to i[:link_to] do
+          = image_tag i[:image_tag], :size => i[:size]
+        %br
+          = i[:name]

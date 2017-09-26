@@ -8,4 +8,8 @@ class DashboardController < ApplicationController
   def overview
     @current_user = current_user
   end
+
+  def version
+    @list = Bundler.load.specs.select { |g| g.name.start_with?('qg-') }
+  end
 end
