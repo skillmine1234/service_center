@@ -12,7 +12,7 @@ module DashboardHelper
       end
       
       items.each do |i|
-        m[:items] << {name: (I18n.t "menu.#{i}"), link_to: polymorphic_url(i.to_s.pluralize.classify.constantize), image_tag: "#{i}.png", size: '80x80'}
+        m[:items] << {name: (I18n.t "menu.#{i}"), link_to: polymorphic_url(i.to_s.pluralize.classify.constantize), image_tag: "#{engine.const_get('GROUP')}/#{i}.png", size: '80x80'}
       end
 
       return m
