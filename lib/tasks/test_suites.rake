@@ -1,5 +1,3 @@
-require 'rspec/core/rake_task'
-
 SPEC_SUITES = [{ :id => :service_center, :title => 'Service Center', :pattern => "spec/" }]
 
 Bundler.load.specs.select { |x| x.name.start_with?('qg-') }.each do |engine|
