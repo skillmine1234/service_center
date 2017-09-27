@@ -431,6 +431,7 @@ ServiceCenter::Application.routes.draw do
   put '/iam_cust_users/:id/approve' => "iam_cust_users#approve"
   
   get '/version' => 'dashboard#version'
+  get '/error_msg' => 'dashboard#error_msg'
   
   root :to => 'dashboard#overview'
 
