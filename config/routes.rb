@@ -70,12 +70,6 @@ ServiceCenter::Application.routes.draw do
   resources :incoming_file_records
   resources :ecol_fetch_statistics
   resources :ecol_unapproved_records
-  resources :bm_unapproved_records
-  resources :bm_rules
-  resources :bm_billers
-  resources :bm_bill_payments
-  resources :bm_aggregator_payments
-  resources :bm_apps
   resources :pc_apps
   resources :pc_programs
   resources :pc_products
@@ -359,10 +353,6 @@ ServiceCenter::Application.routes.draw do
   get '/ecol_customer/:id/audit_logs' => 'ecol_customers#audit_logs'
   get '/ecol_remitter/:id/audit_logs' => 'ecol_remitters#audit_logs'
   get '/udf_attribute/:id/audit_logs' => 'udf_attributes#audit_logs'
-  get '/bm_biller/:id/audit_logs' => 'bm_billers#audit_logs'
-  get '/bm_rule/:id/audit_logs' => 'bm_rules#audit_logs'
-  get '/bm_aggregator_payment/:id/audit_logs' => 'bm_aggregator_payments#audit_logs'
-  get '/bm_app/:id/audit_logs' => 'bm_apps#audit_logs'
   get '/pc_app/:id/audit_logs' => 'pc_apps#audit_logs'
   get '/pc_program/:id/audit_logs' => 'pc_programs#audit_logs'
   get '/pc_product/:id/audit_logs' => 'pc_products#audit_logs'
@@ -394,7 +384,6 @@ ServiceCenter::Application.routes.draw do
   get '/download_attachment' => 'whitelisted_identities#download_attachment'
   
   get '/summary' => 'ecol_transactions#summary'
-  get '/bm_bill_payments_summary' => 'bm_bill_payments#summary'
   
   get '/sdn/search' => 'aml_search#find_search_results'
   get '/sdn/search_results' => 'aml_search#results'
@@ -403,7 +392,6 @@ ServiceCenter::Application.routes.draw do
   get '/inw_error_msg' => "inw_remittance_rules#error_msg"
   get '/ecol_error_msg' => "ecol_rules#error_msg"
   get '/iam_audit_rule_error_msg' => "iam_audit_rules#error_msg"
-  get '/bm_rule_error_msg' => "bm_rules#error_msg"
   get '/imt_rule_error_msg' => "imt_rules#error_msg"
 
   put '/ecol_customer/:id/approve' => "ecol_customers#approve"
@@ -417,10 +405,6 @@ ServiceCenter::Application.routes.draw do
   put '/inw_remittance_rule/:id/approve' => "inw_remittance_rules#approve"
   put '/whitelisted_identity/:id/approve' => "whitelisted_identities#approve"
   
-  put '/bm_biller/:id/approve' => "bm_billers#approve"
-  put '/bm_rule/:id/approve' => "bm_rules#approve"
-  put '/bm_aggregator_payment/:id/approve' => "bm_aggregator_payments#approve"
-  put '/bm_app/:id/approve' => "bm_apps#approve"
   put '/pc_app/:id/approve' => "pc_apps#approve"
   put '/pc_program/:id/approve' => "pc_programs#approve"
   put '/pc_product/:id/approve' => "pc_products#approve"
@@ -446,9 +430,6 @@ ServiceCenter::Application.routes.draw do
   put '/ecol_transactions/:id/approve' => "ecol_transactions#approve_transaction"
 
   get '/inward_remittances/:id/audit_logs/:step_name' => 'inward_remittances#audit_logs'
-
-  get '/bm_bill_payments/:id/audit_logs/:step_name' => 'bm_bill_payments#audit_logs'
-  get '/bm_aggregator_payment/hit_api/:id' => 'bm_aggregator_payments#hit_api', as: :hit_api
 
   get '/view_raw_content/:id' => "incoming_files#view_raw_content"
   

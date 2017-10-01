@@ -1,25 +1,39 @@
 - m = build_menu(group)
+- service = sc_service rescue nil
 - unless m.nil?
   %h1 #{m[:name]}
   .slide-container
-    .box  
-      = link_to unapproved_records_path(group_name: m[:group]) do
-        = image_tag 'work-list.jpg', :size => "80x80"
-      %br
-        = "Approval Worklist"
     - unless m[:common_items].empty?
       - if m[:common_items].include?(:incoming_file)
         .box
-          = link_to incoming_files_path(:sc_service => sc_service) do
+          = link_to incoming_files_path(:sc_service => service) do
             = image_tag 'upload.png', :size => "80x80"
           %br
             = "File Uploads"
       - if m[:common_items].include?(:outgoing_file)
         .box
-          = link_to outgoing_files_path(:sc_service => "ECOL") do
+          = link_to outgoing_files_path(:sc_service => service) do
             = image_tag 'outgoing_file.png', :size => "80x80"
           %br
             = "Outgoing Files"
+      - if m[:common_items].include?(:csv_export)
+        .box
+          = link_to csv_exports_path(group: m[:name]) do
+            = image_tag 'csv_export.png', :size => "80x80"
+          %br
+            = "Csv Exports"
+    - if m[:group] == 'bill-management'
+      .box  
+        = link_to bm_unapproved_records_path(group_name: m[:group], sc_service: service) do
+          = image_tag 'work-list.jpg', :size => "80x80"
+        %br
+          = "Approval Worklist"
+    - else
+      .box  
+        = link_to unapproved_records_path(group_name: m[:group], sc_service: service) do
+          = image_tag 'work-list.jpg', :size => "80x80"
+        %br
+          = "Approval Worklist"
   .slide-container
     - m[:items].each do |i|
       .box
