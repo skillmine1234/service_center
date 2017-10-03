@@ -146,50 +146,9 @@
             = image_tag 'upi-icon.jpg', :size => "80x60"
           %br
             = "UPI Transactions"
-- if @current_user.group_names.include?("bill-management")
-  %h1 Bill-Management
-  .slide-container
-    .box  
-      = link_to '/bm_unapproved_records' do
-        = image_tag 'work-list.jpg', :size => "80x80"
-      %br
-        = "Approval Worklist"
-    .box
-      = link_to csv_exports_path(group: "BillManagement") do
-        = image_tag 'csv_export.png', :size => "80x80"
-      %br
-        = "Csv Exports"
-  .slide-container
-    .box
-      = link_to '/bm_rules' do
-        = image_tag 'bm_rule.png', :size => "80x80"
-      %br
-        = "Bill Payment Rules"
-    .box  
-      = link_to '/bm_billers' do
-        = image_tag 'biller_icon.jpg', :size => "80x80"
-      %br
-        = "Billers"
-    .box  
-      = link_to '/bm_bill_payments' do
-        = image_tag 'bill-payment.jpeg', :size => "80x80"
-      %br
-        = "Bill Payments"
-    .box
-      = link_to '/bm_bill_payments_summary' do
-        = image_tag 'txn_summary.png', :size => "80x80"
-      %br
-        = "Bill Payments Summary"
-    .box
-      = link_to '/bm_aggregator_payments' do
-        = image_tag 'bm_aggregator_payment.png', :size => "80x80"
-      %br
-        = "Bill Payments Via Aggregator"
-    .box
-      = link_to '/bm_apps' do
-        = image_tag 'bm_app_icon.png', :size => "80x80"
-      %br
-        = "BM Apps"
+
+= render partial: 'panel', locals: { group: 'bm' }
+
 - if @current_user.group_names.include?("prepaid-card")
   %h1 Prepaid Card
   .slide-container
