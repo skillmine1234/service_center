@@ -28,6 +28,7 @@
 //= require jquery.flot.time
 //= require zeroclipboard
 //= require rp/rp.js
+//= require ecol/ecol.js
 
 $(document).ready(function() {
 

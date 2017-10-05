@@ -3,10 +3,6 @@ ServiceCenter::Application.routes.draw do
   mount Rp::Engine, at: '/rp'
 
   resources :encrypted_passwords
-  resources :qg_ecol_todays_rtgs_txns
-  resources :qg_ecol_todays_neft_txns
-  resources :qg_ecol_todays_imps_txns
-  resources :qg_ecol_todays_upi_txns
   devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
 
@@ -41,19 +37,7 @@ ServiceCenter::Application.routes.draw do
   
   resources :inw_remittance_rules
   resources :banks
-  resources :ecol_rules
   resources :iam_audit_rules
-  resources :ecol_customers
-  resources :ecol_remitters
-  resources :ecol_transactions do
-    collection do
-      put  'update_multiple'
-    end
-    member do
-      put :override_transaction
-    end
-  end
-  resources :udf_attributes
   
   resources :incoming_files do
     member do
@@ -68,8 +52,6 @@ ServiceCenter::Application.routes.draw do
   end
   
   resources :incoming_file_records
-  resources :ecol_fetch_statistics
-  resources :ecol_unapproved_records
   resources :pc_apps
   resources :pc_programs
   resources :pc_products
@@ -183,7 +165,6 @@ ServiceCenter::Application.routes.draw do
   end
   
   resources :inw_guidelines
-  resources :ecol_apps
   resources :partner_lcy_rates
 
   resources :iam_cust_users, except: :index do
@@ -233,8 +214,6 @@ ServiceCenter::Application.routes.draw do
       get :connect_to_ldap
     end
   end
-  
-  resources :ecol_app_udtables
 
   resources :fr_r01_incoming_records, except: :index do
     collection do
@@ -348,11 +327,7 @@ ServiceCenter::Application.routes.draw do
   get '/purpose_code/:id/audit_logs' => 'purpose_codes#audit_logs'
   get '/inw_remittance_rule/:id/audit_logs' => 'inw_remittance_rules#audit_logs'
   get '/bank/:id/audit_logs' => 'banks#audit_logs'
-  get '/ecol_rule/:id/audit_logs' => 'ecol_rules#audit_logs'
   get '/iam_audit_rule/:id/audit_logs' => 'iam_audit_rules#audit_logs'
-  get '/ecol_customer/:id/audit_logs' => 'ecol_customers#audit_logs'
-  get '/ecol_remitter/:id/audit_logs' => 'ecol_remitters#audit_logs'
-  get '/udf_attribute/:id/audit_logs' => 'udf_attributes#audit_logs'
   get '/pc_app/:id/audit_logs' => 'pc_apps#audit_logs'
   get '/pc_program/:id/audit_logs' => 'pc_programs#audit_logs'
   get '/pc_product/:id/audit_logs' => 'pc_products#audit_logs'
@@ -383,21 +358,14 @@ ServiceCenter::Application.routes.draw do
   
   get '/download_attachment' => 'whitelisted_identities#download_attachment'
   
-  get '/summary' => 'ecol_transactions#summary'
-  
   get '/sdn/search' => 'aml_search#find_search_results'
   get '/sdn/search_results' => 'aml_search#results'
   get '/sdn/search_result' => 'aml_search#search_result'
 
   get '/inw_error_msg' => "inw_remittance_rules#error_msg"
-  get '/ecol_error_msg' => "ecol_rules#error_msg"
   get '/iam_audit_rule_error_msg' => "iam_audit_rules#error_msg"
   get '/imt_rule_error_msg' => "imt_rules#error_msg"
 
-  put '/ecol_customer/:id/approve' => "ecol_customers#approve"
-  put '/udf_attribute/:id/approve' => "udf_attributes#approve"
-  put '/ecol_remitter/:id/approve' => "ecol_remitters#approve"
-  put '/ecol_rule/:id/approve' => "ecol_rules#approve"
   put '/incoming_file/:id/approve' => "incoming_files#approve"
   put '/partner/:id/approve' => "partners#approve"
   put '/purpose_code/:id/approve' => "purpose_codes#approve"
@@ -426,9 +394,6 @@ ServiceCenter::Application.routes.draw do
   put '/rc_transfer_schedules/:id/approve' => "rc_transfer_schedules#approve"
   put '/sc_backend/:id/approve' => "sc_backends#approve"
 
-  get '/ecol_transactions/:id/ecol_audit_logs/:step_name' => 'ecol_transactions#ecol_audit_logs'
-  put '/ecol_transactions/:id/approve' => "ecol_transactions#approve_transaction"
-
   get '/inward_remittances/:id/audit_logs/:step_name' => 'inward_remittances#audit_logs'
 
   get '/view_raw_content/:id' => "incoming_files#view_raw_content"
@@ -442,8 +407,6 @@ ServiceCenter::Application.routes.draw do
   get '/rc_transfer_schedules/udfs/:rc_app_id' => 'rc_transfer_schedules#udfs'
   get '/inw_guidelines/:id/audit_logs' => 'inw_guidelines#audit_logs'
   put '/inw_guidelines/:id/approve' => "inw_guidelines#approve"
-  get '/ecol_apps/:id/audit_logs' => 'ecol_apps#audit_logs'
-  put '/ecol_apps/:id/approve' => "ecol_apps#approve"
   get '/partner_lcy_rates/:id/audit_logs' => 'partner_lcy_rates#audit_logs'
   put '/partner_lcy_rates/:id/approve' => "partner_lcy_rates#approve"
 
@@ -454,12 +417,7 @@ ServiceCenter::Application.routes.draw do
 
   get '/sc_backend_response_codes/:id/audit_logs' => 'sc_backend_response_codes#audit_logs'
   put '/sc_backend_response_codes/:id/approve' => "sc_backend_response_codes#approve"
-  
-  get 'ecol_apps/:app_code/ecol_app_udtables' => 'ecol_apps#ecol_app_udtables', as: :udtables
-  get '/ecol_app_udtables/udfs/:app_code' => 'ecol_app_udtables#udfs'
-  get '/ecol_app_udtables/:id/audit_logs' => 'ecol_app_udtables#audit_logs'
-  put '/ecol_app_udtables/:id/approve' => "ecol_app_udtables#approve"
-  
+    
   get 'ic001_incoming_file_summary' => 'ic001_incoming_records#incoming_file_summary'
   get '/ic001_incoming_records/:id/audit_logs' => 'ic001_incoming_records#audit_logs'
 
@@ -473,6 +431,7 @@ ServiceCenter::Application.routes.draw do
   put '/iam_cust_users/:id/approve' => "iam_cust_users#approve"
   
   get '/version' => 'dashboard#version'
+  get '/error_msg' => 'dashboard#error_msg'
   
   root :to => 'dashboard#overview'
 

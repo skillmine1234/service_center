@@ -12,4 +12,9 @@ class DashboardController < ApplicationController
   def version
     @list = Bundler.load.specs.select { |g| g.name.start_with?('qg-') }
   end
+  
+  def error_msg
+    flash[:alert] = "Rule is not yet configured"
+    redirect_to :root
+  end
 end

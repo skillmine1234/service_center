@@ -6,7 +6,7 @@ class Group < ActiveRecord::Base
     when "inward-remittance"
       ['Partner','Bank','PurposeCode','WhitelistedIdentity','InwIdentity','InwardRemittance', 'InwRemittanceRule','IncomingFile','InwGuideline','PartnerLcyRate']
     when "e-collect"
-      ['EcolRule','EcolCustomer','EcolRemitter','EcolTransaction','UdfAttribute','IncomingFile','EcolFetchStatistic','QgEcolTodaysNeftTxn','QgEcolTodaysRtgsTxn','QgEcolTodaysImpsTxn','QgEcolTodaysUpiTxn','OutgoingFile','EcolApp','EcolAppUdtable']
+      Qg::Ecol::MODELS
     when "bill-management"
       Qg::Bm::MODELS
     when "prepaid-card"

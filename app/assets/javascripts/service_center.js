@@ -15,11 +15,13 @@ $(document).ready(function(){
   });
 
   $("a.request-link").on("click", function () {
-    $('#requestText').modal();
+    var request = $(this).data('request');
+    display_beautified_data(request, "div.request", "#requestText");
   });
 
   $("a.reply-link").on("click", function () {
-    $('#replyText').modal();
+    var reply = $(this).data('reply');
+    display_beautified_data(reply, "div.reply", "#replyText");
   });
 
   $("a.fault-link").on("click", function () {
