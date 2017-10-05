@@ -59,6 +59,6 @@ module ApplicationHelper
   end
   
   def show_xml(link,class_name,request)
-    link_to_unless((current_user.has_role? :customer), link, '#',{:class => class_name, :href => "javascript:void()", data: { request: request, reply: request }})
+    link_to_unless((current_user.has_role? :customer), link, '#',{:class => class_name, :href => "javascript:void(0);", data: { request: request, reply: request }})
   end
 end
