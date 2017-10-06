@@ -51,7 +51,7 @@ gem 'passgen'
 gem "mustache"
 
 source "https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/" do
-  gem 'qg-icol', '1.0.2'
+  gem 'qg-icol', '1.0.3'
   gem 'qg-bm', '1.0.2'
   gem 'qg-ecol', '1.2.8'
 end
