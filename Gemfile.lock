@@ -305,7 +305,7 @@ GEM
       options (~> 2.3.0)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
-    qg-bm (1.0.2)
+    qg-bm (1.0.3)
       rails (= 4.2.2)
     qg-ecol (1.2.8)
       rails (= 4.2.2)
@@ -533,7 +533,7 @@ DEPENDENCIES
   passenger
   passgen
   progress_bar (~> 1.0.0)
-  qg-bm (= 1.0.2)!
+  qg-bm (= 1.0.3)!
   qg-ecol (= 1.2.8)!
   qg-icol (= 1.0.3)!
   rails (= 4.2.2)
