@@ -43,6 +43,8 @@ class Group < ActiveRecord::Base
       ['SspBank', 'SspAuditStep']
     when "icol"
       Qg::Icol::MODELS
+    when "asba"
+      Qg::Asba::MODELS
     else
       []
     end
