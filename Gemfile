@@ -54,6 +54,7 @@ source "https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/" do
   gem 'qg-icol', '1.0.3'
   gem 'qg-ecol', '1.2.8'
   gem 'qg-bm', '1.0.3'
+  gem 'qg-asba', '1.0.2'
 end
 
 # oracle is required only in production, CI tools run against sqlite3

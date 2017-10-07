@@ -29,6 +29,7 @@ FactoryGirl.define do
       Factory(:user_group, :user_id => user.id, :group_id => Factory(:group, :name => 'iam').id)
       Factory(:user_group, :user_id => user.id, :group_id => Factory(:group, :name => 'ssp').id)
       Factory(:user_group, :user_id => user.id, :group_id => Factory(:group, :name => 'icol').id)
+      Factory(:user_group, :user_id => user.id, :group_id => Factory(:group, :name => 'asba').id)
     end
   end
 end
