@@ -31,6 +31,14 @@
 //= require ecol/ecol.js
 //= require bm/bm.js
 
+jQuery.fn.extend({
+    live: function (event, callback) {
+       if (this.selector) {
+            jQuery(document).on(event, this.selector, callback);
+        }
+    }
+});
+
 $(document).ready(function() {
 
 server_date = $('#clock').text();
