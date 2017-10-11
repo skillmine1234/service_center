@@ -19,9 +19,8 @@ describe RcTransferSchedule do
 
     it do
       should validate_length_of(:code).is_at_most(20)
-      [:debit_account_no, :bene_account_no].each do |att|
-        should validate_length_of(att).is_at_least(15).is_at_most(20)
-      end
+      should validate_length_of(:debit_account_no).is_at_least(15).is_at_most(20)
+      should validate_length_of(:bene_account_no).is_at_most(20)
       should validate_length_of(:notify_mobile_no).is_at_least(10).is_at_most(10)
       should validate_length_of(:bene_name).is_at_most(25)
     end
@@ -102,7 +101,7 @@ describe RcTransferSchedule do
     it "should not allow invalid format" do
       rc_transfer_schedule = Factory.build(:rc_transfer_schedule, :code => "BANK-01", :debit_account_no => "ACC12345", :bene_account_no => "123-456", :notify_mobile_no => "+998877665", :bene_account_ifsc => '12340abcd')
       rc_transfer_schedule.save.should be_false
-      rc_transfer_schedule.errors_on(:bene_account_no).should == ["Invalid format, expected format is : {[0-9]}", "is too short (minimum is 15 characters)"]
+      rc_transfer_schedule.errors_on(:bene_account_no).should == ["Invalid format, expected format is : {[0-9]}"]
       rc_transfer_schedule.errors_on(:bene_account_ifsc).should == ["Invalid format, expected format is : {[A-Z|a-z]{4}[0][A-Za-z0-9]{6}}"]
     end
   end

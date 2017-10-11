@@ -27,7 +27,7 @@ class RcTransferSchedule < ActiveRecord::Base
 
   validates :code, format: {with: /\A[a-z|A-Z|0-9]+\z/, :message => 'Invalid format, expected format is : {[a-z|A-Z|0-9]}' }, length: {maximum: 20}
   validates :debit_account_no, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9]}' }, length: {minimum: 15, maximum: 20}
-  validates :bene_account_no, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9]}' }, length: {minimum: 15, maximum: 20}, allow_blank: true
+  validates :bene_account_no, format: {with: /\A[0-9]+\z/, :message => 'Invalid format, expected format is : {[0-9]}' }, length: {minimum: 1, maximum: 20}, allow_blank: true
   validates :notify_mobile_no, :numericality => {:only_integer => true}, length: {minimum: 10, maximum: 10}, allow_blank: true
 
   validates_uniqueness_of :code, :scope => :approval_status
