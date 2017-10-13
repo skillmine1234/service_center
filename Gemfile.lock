@@ -315,6 +315,12 @@ GEM
       rails (= 4.2.2)
     qg-sm (1.0.1)
       rails (~> 4.2.2)
+    qg-searcher (1.0.1)
+      rails (~> 4.2.2)
+      simple_enum
+      simple_enum-multiple
+      simple_form
+      will_paginate
     qg-ssp (1.0.2)
       rails (= 4.2.2)
     rack (1.6.8)
@@ -418,6 +424,10 @@ GEM
       activesupport (>= 3.0.0)
     simple-navigation (4.0.3)
       activesupport (>= 2.3.2)
+    simple_enum (2.3.0)
+      activesupport (>= 4.0.0)
+    simple_enum-multiple (0.1.7)
+      simple_enum (~> 2.3)
     simple_form (3.1.0)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
@@ -543,7 +553,11 @@ DEPENDENCIES
   qg-bm (= 1.0.3)!
   qg-ecol (= 1.2.8)!
   qg-icol (= 1.0.3)!
+<<<<<<< HEAD
   qg-sm (= 1.0.1)!
+=======
+  qg-searcher (= 1.0.1)!
+>>>>>>> 996eadd... searcher engine added
   qg-ssp (= 1.0.2)!
   rails (= 4.2.2)
   rails_12factor

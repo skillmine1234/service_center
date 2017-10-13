@@ -29,6 +29,7 @@
 //= require zeroclipboard
 //= require rp/rp.js
 //= require ecol/ecol.js
+//= require searcher/qg_searcher.js
 //= require bm/bm.js
 
 $(document).ready(function() {
