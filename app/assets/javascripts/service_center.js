@@ -1,4 +1,10 @@
 $(document).ready(function(){
+  
+  $("#adv_search_reset_button").on('click', function(){
+    $(".form-horizontal").find("input[type=text],input[type=number], input[type=datetime], input[type=date], select").val("");
+    return false; 
+  });
+  
   $('.dropdown').hover(function(){
     $(this).find('.dropdown-menu').slideDown(100);
   }, function(){
@@ -206,6 +212,16 @@ $(document).ready(function(){
       $("#submit_generate").prop('disabled', true);
     });
   });
+  
+  $("input.between_input[type=datetime]").datetimepicker({
+    dateFormat: "dd/mm/yy",
+    timeFormat: 'hh:mmTT' 
+  });
+  
+  $("input.between_input[type=date]").datepicker({
+    dateFormat: "dd/mm/yy"
+  });
+  
 
   $("#from_date, #to_date, #search_params_idIssueDate, #search_params_idExpiryDate, #invoice_from_due_date, #invoice_to_due_date, #repayment_from_date, #repayment_to_date").datepicker({
     dateFormat: 'yy-mm-dd',

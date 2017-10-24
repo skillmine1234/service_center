@@ -575,6 +575,8 @@ DEPENDENCIES
   selenium-webdriver
   shoulda-matchers
   simple-navigation
+  simple_enum
+  simple_enum-multiple
   simple_form
   simplecov
   simplecov-rcov

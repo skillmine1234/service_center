@@ -49,6 +49,8 @@ gem 'rp', :github => 'quantiguous/rp'
 gem 'approval2', '0.1.7'
 gem 'passgen'
 gem "mustache"
+gem 'simple_enum'
+gem 'simple_enum-multiple'
 
 source "https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/" do
   gem 'qg-icol', '1.0.3'
