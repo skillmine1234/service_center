@@ -126,12 +126,6 @@ ServiceCenter::Application.routes.draw do
   resources :rc_apps
   resources :rc_transfer_unapproved_records
 
-  resources :sc_backends do
-    member do
-      post 'change_status'
-    end
-  end
-
   namespace :api do
     namespace :v1 do
       resources :whitelisted_identities
@@ -164,21 +158,6 @@ ServiceCenter::Application.routes.draw do
     end
   end
   
-  resources :sc_backend_response_codes, except: :index do
-    collection do
-      get :index
-      put :index
-    end
-  end
-  
-  resources :sc_fault_codes, except: :index do
-    collection do
-      get :index
-      put :index
-      get :get_fault_reason
-    end
-  end
-  
   resources :iam_cust_users, except: :index do
     collection do
       get :index
@@ -188,6 +167,7 @@ ServiceCenter::Application.routes.draw do
       get :connect_to_ldap
     end
   end
+  resources :unapproved_records
 
   resources :fr_r01_incoming_records, except: :index do
     collection do
@@ -238,19 +218,6 @@ ServiceCenter::Application.routes.draw do
       post :index
     end
   end
-  
-  resources :sc_backend_settings, except: :index do
-    collection do
-      get :index
-      put :index
-      get :get_service_codes
-      get :settings
-    end
-    member do
-      get 'audit_logs'
-      put 'approve'
-    end
-  end 
 
   resources :iam_audit_logs, only: [:index, :show] do 
     collection do
@@ -295,9 +262,7 @@ ServiceCenter::Application.routes.draw do
   get '/sm_banks/:id/audit_logs' => 'sm_banks#audit_logs'
   get '/sm_bank_accounts/:id/audit_logs' => 'sm_bank_accounts#audit_logs'
   get '/rc_transfer_schedules/:id/audit_logs' => 'rc_transfer_schedules#audit_logs'
-  get '/sc_backend/:id/audit_logs' => 'sc_backends#audit_logs'
   get '/whitelisted_identity/:id/audit_logs' => 'whitelisted_identities#audit_logs'
-  get '/sc_backend/:id/previous_status_changes' => 'sc_backends#previous_status_changes', as: :previous_status_changes
 
   get '/inward_remittances/:id/identity/:id_id' => 'inward_remittances#identity'
   get '/inward_remittances/:id/remitter_identities' => 'inward_remittances#remitter_identities'
@@ -331,7 +296,6 @@ ServiceCenter::Application.routes.draw do
   put '/sm_banks/:id/approve' => "sm_banks#approve"
   put '/sm_bank_accounts/:id/approve' => 'sm_bank_accounts#approve'
   put '/rc_transfer_schedules/:id/approve' => "rc_transfer_schedules#approve"
-  put '/sc_backend/:id/approve' => "sc_backends#approve"
 
   get '/inward_remittances/:id/audit_logs/:step_name' => 'inward_remittances#audit_logs'
 
@@ -354,9 +318,6 @@ ServiceCenter::Application.routes.draw do
   get '/iam_organisations/:id/audit_logs' => 'iam_organisations#audit_logs'
   put '/iam_organisations/:id/approve' => "iam_organisations#approve"
 
-  get '/sc_backend_response_codes/:id/audit_logs' => 'sc_backend_response_codes#audit_logs'
-  put '/sc_backend_response_codes/:id/approve' => "sc_backend_response_codes#approve"
-    
   get 'ic001_incoming_file_summary' => 'ic001_incoming_records#incoming_file_summary'
   get '/ic001_incoming_records/:id/audit_logs' => 'ic001_incoming_records#audit_logs'
 

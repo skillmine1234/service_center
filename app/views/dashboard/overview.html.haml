@@ -229,40 +229,8 @@
       %br
         = "Recurring Transfers"
 
-- if @current_user.group_names.include?("sc-backend")
-  %h1 Service Center Backends
-  .slide-container
-    .box  
-      = link_to '/unapproved_records?group_name=sc-backend' do
-        = image_tag 'work-list.jpg', :size => "80x80"
-      %br
-        = "Approval Worklist"
-  .slide-container
-    .box
-      = link_to '/sc_backends' do
-        = image_tag 'sc_backend.png', :size => "80x80"
-      %br
-        = "Service Center Backends"
-    .box
-      = link_to '/sc_backend_response_codes' do
-        = image_tag 'sc_response_code.jpeg', :size => "80x80"
-      %br
-        = "Service Center Backend Response Codes"
-    .box  
-      = link_to '/sc_fault_codes' do
-        = image_tag 'sc_fault_code.png', :size => "80x80"
-      %br
-        = "Service Center Fault Codes"
-    .box
-      = link_to '/sc_jobs' do
-        = image_tag 'jobs.png', :size => "80x80"
-      %br
-        = "Service Center Jobs"
-    .box  
-      = link_to '/sc_backend_settings' do
-        = image_tag 'sc_backend_settings_icon.jpeg', :size => "80x80"
-      %br
-        = "Service Center Backend Settings"
+= render partial: 'panel', locals: { group: 'sc' }
+
 - if @current_user.group_names.include?("rp")
   %h1 Reports
   .slide-container
