@@ -315,7 +315,7 @@ GEM
       rails (= 4.2.2)
     qg-sm (1.0.1)
       rails (~> 4.2.2)
-    qg-ssp (1.0.1)
+    qg-ssp (1.0.2)
       rails (= 4.2.2)
     rack (1.6.8)
     rack-accept (0.4.5)
@@ -544,7 +544,7 @@ DEPENDENCIES
   qg-ecol (= 1.2.8)!
   qg-icol (= 1.0.3)!
   qg-sm (= 1.0.1)!
-  qg-ssp (= 1.0.1)!
+  qg-ssp (= 1.0.2)!
   rails (= 4.2.2)
   rails_12factor
   rake (< 11.0)
