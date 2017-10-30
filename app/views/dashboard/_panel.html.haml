@@ -22,7 +22,7 @@
             = image_tag 'csv_export.png', :size => "80x80"
           %br
             = "Csv Exports"
-    - if respond_to?("#{group}_unapproved_records_path", sc_service: service)
+    - if respond_to?("#{group}_unapproved_records_path", sc_service: service) and group != 'ecol'
       .box
         = link_to send("#{group}_unapproved_records_path") do
           = image_tag 'work-list.jpg', :size => "80x80"
