@@ -287,25 +287,8 @@
       %br
         = "PC2 Customer Accounts"
 
-- if @current_user.group_names.include?("smb")
-  %h1 Sub Member Bank
-  .slide-container
-    .box  
-      = link_to '/sm_unapproved_records' do
-        = image_tag 'work-list.jpg', :size => "80x80"
-      %br
-        = "Approval Worklist"
-  .slide-container
-    .box{:style=>"margin-top: 2.2%;"}
-      = link_to '/sm_banks' do
-        = image_tag 'sm_banks.jpg', :size => "102x70", :style=>"padding-bottom: 4%;"
-      %br
-        = "Sub Member Banks"
-    .box
-      = link_to '/sm_bank_accounts' do
-        = image_tag 'sm_bank_accounts.jpg', :size => "90x90"
-      %br
-        = "Sub Member Bank Accounts"
+= render partial: 'panel', locals: { group: 'sm' }
+
 - if @current_user.group_names.include?("cnb")
   %h1 Corporate Net Banking
   .slide-container

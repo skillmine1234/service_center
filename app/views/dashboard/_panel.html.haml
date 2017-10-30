@@ -22,18 +22,18 @@
             = image_tag 'csv_export.png', :size => "80x80"
           %br
             = "Csv Exports"
-    - if m[:group] == 'bill-management'
-      .box  
-        = link_to bm_unapproved_records_path(group_name: m[:group], sc_service: service) do
+    - if respond_to?("#{group}_unapproved_records_path", sc_service: service) and group != 'ecol'
+      .box
+        = link_to send("#{group}_unapproved_records_path") do
           = image_tag 'work-list.jpg', :size => "80x80"
         %br
-          = "Approval Worklist"
+        = "Approval Worklist"
     - else
-      .box  
+      .box
         = link_to unapproved_records_path(group_name: m[:group], sc_service: service) do
           = image_tag 'work-list.jpg', :size => "80x80"
         %br
-          = "Approval Worklist"
+        = "Approval Worklist"
   .slide-container
     - m[:items].each do |i|
       .box
