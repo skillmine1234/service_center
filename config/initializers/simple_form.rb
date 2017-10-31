@@ -5,6 +5,15 @@ SimpleForm.setup do |config|
   # wrapper, change the order or even add your own to the
   # stack. The options given below are used to wrap the
   # whole input.
+
+  config.wrappers :dresssed_horizontal_form, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+    b.use :label, class: 'col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label'
+    b.wrapper tag: 'div', class: 'col-xs-12 col-sm-5 col-md-5 col-lg-5' do |ba|
+      ba.use :input, class: 'form-control'
+      ba.use :error, wrap_with: { tag: 'class', class: 'help-block' }
+    end
+  end
+
   config.wrappers :checkbox, :tag => 'div', :class => 'control-group', :error_class => 'error' do |b|
     b.use :tag => 'div', :class => 'controls' do |ba|
       ba.use :label_input

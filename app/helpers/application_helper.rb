@@ -90,4 +90,15 @@ module ApplicationHelper
   def fa_icon_tag(name)
     content_tag(:i, nil, class: "fa fa-#{name}")
   end
+
+  def beautify_xml(inputs_xml)
+    begin
+      xml = REXML::Document.new(inputs_xml)
+      output_xml = ''
+      xml.write(output_xml, 2)
+    rescue
+      output_xml = "<error>Error => #{inputs_xml}</error>"
+    end
+    output_xml
+  end
 end

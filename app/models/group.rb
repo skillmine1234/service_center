@@ -16,7 +16,7 @@ class Group < ActiveRecord::Base
     when "flex-proxy"
       ['FpOperation','FpAuthRule','FpUnapprovedRecord']
     when "imt"
-      ['ImtRule','ImtCustomer','ImtTransfer','IncomingFile','ImtUnapprovedRecord','OutgoingFile','ImtIncomingFile','ImtIncomingRecord']
+      Qg::Imt::MODELS
     when "funds-transfer"
       ['FundsTransferCustomer','FtUnapprovedRecord', 'FtPurposeCode','FtIncomingRecord','IncomingFile','IncomingFileRecord','FtIncomingFile','FtCustomerAccount','FtApbsIncomingFile','FtApbsIncomingRecord']
     when "salary-upload"

@@ -1,14 +1,17 @@
 class ApplicationController < ActionController::Base
   include SecureHeaders
+  include Pundit
   protect_from_forgery
   ensure_security_headers
   helper_method :current_ability
-  before_filter :set_as_private
+  before_action :set_as_private
+  before_action :authenticate_user!, if: :protected_by_pundit
   
-  rescue_from CanCan::AccessDenied do |exception|
-    flash[:alert] = "Access denied. You are not authorized to access the requested page."
-    redirect_to(request.referrer || root_path)
-  end
+  after_action :verify_authorized, except: :index, if: :protected_by_pundit
+  after_action :verify_policy_scoped, only: :index, if: :protected_by_pundit
+
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  rescue_from CanCan::AccessDenied, with: :user_not_authorized
 
   before_filter do
     resource = controller_name.singularize.to_sym
@@ -52,5 +55,16 @@ class ApplicationController < ActionController::Base
       flash[:alert] = "Access denied. You are not authorized to access the requested page."
       redirect_to root_path
     end
+  end
+
+  private
+
+  def protected_by_pundit
+    false
+  end
+
+  def user_not_authorized
+    flash[:alert] = "You are not authorized to perform this action."
+    redirect_to(request.referrer || root_path)
   end
 end
