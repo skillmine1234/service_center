@@ -3,7 +3,7 @@ require 'active_support/concern'
 module Setting
   extend ActiveSupport::Concern
   included do
-    SETTING_TYPES = ['text','number','date','password']
+    SETTING_TYPES = ['text','number','date']
 
     store :setting1, accessors: [:setting1_name, :setting1_type, :setting1_value], coder: JSON
     store :setting2, accessors: [:setting2_name, :setting2_type, :setting2_value], coder: JSON
