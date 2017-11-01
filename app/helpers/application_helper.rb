@@ -61,4 +61,33 @@ module ApplicationHelper
   def show_xml(link,class_name,request)
     link_to_unless((current_user.has_role? :customer), link, '#',{:class => class_name, :href => "javascript:void(0);", data: { request: request, reply: request }})
   end
+  
+  def search_form_for(object, *args, &block) 
+    options = args.extract_options!
+    
+    html1 = content_tag(:h2, class: 'collapsible') do
+      ("Advanced Search <span class = 'caret'></span>").html_safe
+    end
+    
+    html2 = content_tag(:div, class: 'collapsible-content') do
+      simple_form_for(object, *(args << options.merge(wrapper: :horizontal_form, builder: SearchFormBuilder, html: { class: "form-horizontal"}, autocomplete: "off", disabled: true, url: polymorphic_path(object.klass), method: :put)), &block)
+    end
+    html1 + html2
+  end
+  
+  def pagination_links(records)
+    searcher_klass = @searcher.class.name
+    object_name = searcher_klass.underscore
+    form_id = "'#new_#{object_name}'"
+    page_id = "'##{object_name}_page'"
+    content_tag :div do
+      concat link_to_if records.previous_page, 'Previous', "javascript:$(#{page_id}).val(#{records.previous_page});$(#{form_id}).submit()"
+      concat " "
+      concat link_to_if records.next_page, 'Next', "javascript:$(#{page_id}).val(#{records.next_page});$(#{form_id}).submit()"
+    end
+  end
+  
+  def fa_icon_tag(name)
+    content_tag(:i, nil, class: "fa fa-#{name}")
+  end
 end

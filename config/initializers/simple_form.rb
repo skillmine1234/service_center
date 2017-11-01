@@ -10,6 +10,15 @@ SimpleForm.setup do |config|
       ba.use :label_input
     end
   end
+  
+  config.wrappers :horizontal_form, tag: 'div', :wrap_with => 'form-horizontal' do |b|
+    b.use :html5
+    b.wrapper :tag => 'div', :class => 'control-group' do |c|
+      c.use :label
+      c.use :input
+    end
+  end
+  
   config.wrappers :default, :class => :input,
     :hint_class => :field_with_hint, :error_class => :field_with_errors do |b|
     ## Extensions enabled by default

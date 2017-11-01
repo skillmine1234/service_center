@@ -311,11 +311,11 @@ GEM
       rails (= 4.2.2)
     qg-ecol (1.2.8)
       rails (= 4.2.2)
-    qg-icol (1.0.3)
+    qg-icol (1.1.4)
       rails (= 4.2.2)
     qg-sm (1.0.1)
       rails (~> 4.2.2)
-    qg-ssp (1.0.2)
+    qg-ssp (1.0.7)
       rails (= 4.2.2)
     rack (1.6.8)
     rack-accept (0.4.5)
@@ -418,6 +418,10 @@ GEM
       activesupport (>= 3.0.0)
     simple-navigation (4.0.3)
       activesupport (>= 2.3.2)
+    simple_enum (2.3.0)
+      activesupport (>= 4.0.0)
+    simple_enum-multiple (0.1.7)
+      simple_enum (~> 2.3)
     simple_form (3.1.0)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
@@ -542,9 +546,9 @@ DEPENDENCIES
   qg-asba (= 1.0.2)!
   qg-bm (= 1.0.3)!
   qg-ecol (= 1.2.8)!
-  qg-icol (= 1.0.3)!
+  qg-icol (= 1.1.4)!
   qg-sm (= 1.0.1)!
-  qg-ssp (= 1.0.2)!
+  qg-ssp (= 1.0.7)!
   rails (= 4.2.2)
   rails_12factor
   rake (< 11.0)
@@ -564,6 +568,8 @@ DEPENDENCIES
   selenium-webdriver
   shoulda-matchers
   simple-navigation
+  simple_enum
+  simple_enum-multiple
   simple_form
   simplecov
   simplecov-rcov

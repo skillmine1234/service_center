@@ -49,14 +49,16 @@ gem 'rp', :github => 'quantiguous/rp'
 gem 'approval2', '0.1.7'
 gem 'passgen'
 gem "mustache"
+gem 'simple_enum'
+gem 'simple_enum-multiple'
 
 source "https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/" do
-  gem 'qg-icol', '1.0.3'
+  gem 'qg-icol', '1.1.4'
   gem 'qg-ecol', '1.2.8'
   gem 'qg-bm', '1.0.3'
   gem 'qg-asba', '1.0.2'
   gem 'qg-sm', '1.0.1'
-  gem 'qg-ssp', '1.0.2'
+  gem 'qg-ssp', '1.0.7'
 end
 
 # oracle is required only in production, CI tools run against sqlite3
