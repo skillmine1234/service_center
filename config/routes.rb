@@ -63,9 +63,6 @@ ServiceCenter::Application.routes.draw do
   resources :pc2_cust_accounts
   resources :pc_unapproved_records
   resources :pc_fee_rules
-  resources :fp_unapproved_records
-  resources :fp_operations
-  resources :fp_auth_rules
 
   resources :csv_exports
   resources :ft_unapproved_records
@@ -308,8 +305,6 @@ ServiceCenter::Application.routes.draw do
   get '/pc2_app/:id/audit_logs' => 'pc2_apps#audit_logs'
   get '/pc2_cust_account/:id/audit_logs' => 'pc2_cust_accounts#audit_logs'
   get '/pc_fee_rule/:id/audit_logs' => 'pc_fee_rules#audit_logs'
-  get '/fp_operation/:id/audit_logs' => 'fp_operations#audit_logs'
-  get '/fp_auth_rule/:id/audit_logs' => 'fp_auth_rules#audit_logs'
   get '/funds_transfer_customer/:id/audit_logs' => 'funds_transfer_customers#audit_logs'
   get '/ft_purpose_code/:id/audit_logs' => 'ft_purpose_codes#audit_logs'
   get '/ft_customer_account/:id/audit_logs' => 'ft_customer_accounts#audit_logs'
@@ -350,8 +345,6 @@ ServiceCenter::Application.routes.draw do
   put '/pc2_app/:id/approve' => "pc2_apps#approve"
   put '/pc2_cust_account/:id/approve' => "pc2_cust_accounts#approve"
   put '/pc_fee_rule/:id/approve' => "pc_fee_rules#approve"
-  put '/fp_operation/:id/approve' => "fp_operations#approve"
-  put '/fp_auth_rule/:id/approve' => "fp_auth_rules#approve"
   put '/funds_transfer_customer/:id/approve' => "funds_transfer_customers#approve"
   put '/ft_purpose_code/:id/approve' => "ft_purpose_codes#approve"
   put '/ft_customer_account/:id/approve' => "ft_customer_accounts#approve"

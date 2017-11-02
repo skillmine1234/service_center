@@ -14,7 +14,7 @@ class Group < ActiveRecord::Base
     when "prepaid-card2"
       ['Pc2App','Pc2CustAccount']
     when "flex-proxy"
-      ['FpOperation','FpAuthRule','FpUnapprovedRecord']
+      Qg::Fp::MODELS
     when "imt"
       Qg::Imt::MODELS
     when "funds-transfer"

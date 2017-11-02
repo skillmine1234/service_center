@@ -102,25 +102,8 @@
         = image_tag 'pc_fee_rules.png', :size => "80x80"
       %br
         = "PC Fee Rules"
-- if @current_user.group_names.include?("flex-proxy")
-  %h1 Flex Proxy
-  .slide-container
-    .box  
-      = link_to '/fp_unapproved_records' do
-        = image_tag 'work-list.jpg', :size => "80x80"
-      %br
-        = "Approval Worklist"
-  .slide-container
-    .box  
-      = link_to '/fp_operations' do
-        = image_tag 'fp_operations_icon.jpg', :size => "80x80"
-      %br
-        = "FP Operations"
-    .box  
-      = link_to '/fp_auth_rules' do
-        = image_tag 'ecol_customer.gif', :size => "80x80"
-      %br
-        = "FP Authorisation Rules"
+= render partial: 'panel', locals: { group: 'fp' }
+
 = render partial: 'panel', locals: { group: 'imt', sc_service: 'IMTSERVICE' }
 - if @current_user.group_names.include?("funds-transfer")
   %h1 Funds Transfer

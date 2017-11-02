@@ -30,6 +30,7 @@
 //= require rp/rp.js
 //= require ecol/ecol.js
 //= require bm/bm.js
+//= require fp/fp_auth_rule.js
 
 jQuery.fn.extend({
     live: function (event, callback) {
