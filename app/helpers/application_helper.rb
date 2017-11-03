@@ -97,7 +97,19 @@ module ApplicationHelper
       output_xml = ''
       xml.write(output_xml, 2)
     rescue
-      output_xml = "<error>Error => #{inputs_xml}</error>"
+      output_xml = "#{inputs_xml}"
+    end
+    
+    begin
+      if output_xml.blank?
+        output_xml = JSON.pretty_generate(JSON.parse(inputs_xml))
+      end
+    rescue
+      output_xml = "#{inputs_xml}"
+    end
+    
+    if output_xml.blank?
+      output_xml = "#{inputs_xml}"
     end
     output_xml
   end
