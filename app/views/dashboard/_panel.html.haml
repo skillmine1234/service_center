@@ -34,6 +34,23 @@
           = image_tag 'work-list.jpg', :size => "80x80"
         %br
         = "Approval Worklist"
+    - if m[:reports].present?
+      .box
+        = link_to rp_routes.send("#{group}_available_reports_path") do
+          = image_tag 'available_report.png', :size => "80x80"
+        %br
+          = "Available Reports"
+      .box
+        = link_to rp_routes.send("#{group}_reports_path") do
+          = image_tag 'reports_icon.png', :size => "80x80"
+        %br
+          = "Generated Reports"
+      - if rp_routes.respond_to?("#{group}_system_generated_reports_reports_path")
+        .box
+          = link_to "/rp/reports/#{group}_system_generated_reports" do
+            = image_tag 'settings_icon.png', :size => "80x80"
+          %br
+            = "System Generated Reports"
   .slide-container
     - m[:items].each do |i|
       .box

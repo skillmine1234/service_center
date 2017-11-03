@@ -33,6 +33,9 @@ module DashboardHelper
       operations = engine.const_get('OPERATIONS') rescue []
       m[:ops_menu] = true unless operations.empty?
 
+      #to support reports list menu
+      m[:reports] = engine.const_get('REPORTS') rescue false
+
       return m
     end
     

@@ -120,5 +120,8 @@ module ApplicationHelper
 
     output
   end
-
+  
+  def rp_routes
+    Rp::Engine.routes.url_helpers
+  end
 end
