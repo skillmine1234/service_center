@@ -17,10 +17,9 @@ class ApplicationController < ActionController::Base
   end
 
   def set_as_private
-    expires_now
-    response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate, pre-check=0, post-check=0, max-age=0, s-maxage=0"
     response.headers["Pragma"] = "no-cache"
-    response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
+    response.headers["Expires"] = "0"
   end
 
   def sign_out(*args)

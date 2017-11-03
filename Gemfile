@@ -10,7 +10,7 @@ gem 'mime-types'
 gem "rolify", ">= 3.2.0"
 gem "devise_ldap_authenticatable", '0.6.1'
 gem 'will_paginate'
-gem 'jquery-rails','2.0.2'
+gem 'jquery-rails', '4.3.1'
 gem 'carrierwave'
 gem 'nested_form'
 gem 'simple_form'

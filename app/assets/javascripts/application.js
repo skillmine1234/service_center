@@ -31,6 +31,14 @@
 //= require ecol/ecol.js
 //= require bm/bm.js
 
+jQuery.fn.extend({
+    live: function (event, callback) {
+       if (this.selector) {
+            jQuery(document).on(event, this.selector, callback);
+        }
+    }
+});
+
 $(document).ready(function() {
 
 server_date = $('#clock').text();
@@ -65,7 +73,5 @@ $('.modal').on('hidden', function () {
   $(".formError").remove();
 })
 
-$('head').append('<meta content="no-cache" http-equiv="Cache-control">');
-$('head').append('<meta content="no-store" http-equiv="Cache-control">');
 $(".ui-datepicker-inline").width("75em");
 });
