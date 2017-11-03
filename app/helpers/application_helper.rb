@@ -101,14 +101,11 @@ module ApplicationHelper
     end
     
     begin
-      if output_xml.blank?
+      unless output_xml.blank?
         output_xml = JSON.pretty_generate(JSON.parse(inputs_xml))
+        output_xml = "#{inputs_xml}" if output_xml.blank?
       end
     rescue
-      output_xml = "#{inputs_xml}"
-    end
-    
-    if output_xml.blank?
       output_xml = "#{inputs_xml}"
     end
     output_xml
