@@ -18,7 +18,7 @@ class Group < ActiveRecord::Base
     when "imt"
       Qg::Imt::MODELS
     when "funds-transfer"
-      ['FundsTransferCustomer','FtUnapprovedRecord', 'FtPurposeCode','FtIncomingRecord','IncomingFile','IncomingFileRecord','FtIncomingFile','FtCustomerAccount','FtApbsIncomingFile','FtApbsIncomingRecord']
+      Qg::Ft::MODELS
     when "salary-upload"
       ['IncomingFile','SuCustomer','SuUnapprovedRecord','SuIncomingRecord','FmAuditStep','SuIncomingFile']
     when "instant-credit"
