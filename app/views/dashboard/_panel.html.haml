@@ -60,7 +60,7 @@
           = i[:name]
     - if m[:ops_menu].present?
       .box
-        = link_to operations_path(group: m[:group]) do
+        = link_to operations_path(group: group) do
           = image_tag "operations.png", :size => "80x80"
         %br
         = "Operations"
