@@ -91,6 +91,15 @@ module ApplicationHelper
     content_tag(:i, nil, class: "fa fa-#{name}")
   end
 
+  def beautify(inputs)
+    output = beautify_xml(inputs)
+    if output.blank?
+      beautify_json(inputs)
+    else
+      output
+    end
+  end
+  
   def beautify_xml(inputs_xml)
     output_xml = ''
     begin
@@ -98,17 +107,18 @@ module ApplicationHelper
       xml.write(output_xml, 2)
     rescue
     end
-
-    begin
-      if output_xml.blank?
-        output_xml = JSON.pretty_generate(JSON.parse(inputs_xml))
-      end
-    rescue
-      output_xml = "#{inputs_xml}"
-    end
-    if output_xml.blank?
-      output_xml = "#{inputs_xml}"
-    end
     output_xml
   end
+
+  def beautify_json(inputs)
+    begin
+      output = JSON.pretty_generate(JSON.parse(inputs))
+      output = "#{inputs}" if output.blank?
+    rescue
+      output = "#{inputs}"
+    end
+
+    output
+  end
+
 end
