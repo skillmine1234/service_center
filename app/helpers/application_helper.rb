@@ -92,20 +92,21 @@ module ApplicationHelper
   end
 
   def beautify_xml(inputs_xml)
+    output_xml = ''
     begin
       xml = REXML::Document.new(inputs_xml)
-      output_xml = ''
       xml.write(output_xml, 2)
+    rescue
+    end
+
+    begin
+      if output_xml.blank?
+        output_xml = JSON.pretty_generate(JSON.parse(inputs_xml))
+      end
     rescue
       output_xml = "#{inputs_xml}"
     end
-    
-    begin
-      unless output_xml.blank?
-        output_xml = JSON.pretty_generate(JSON.parse(inputs_xml))
-        output_xml = "#{inputs_xml}" if output_xml.blank?
-      end
-    rescue
+    if output_xml.blank?
       output_xml = "#{inputs_xml}"
     end
     output_xml
