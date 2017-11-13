@@ -329,7 +329,7 @@ GEM
       rails (= 4.2.2)
     qg-bm (1.0.3)
       rails (= 4.2.2)
-    qg-ecol (1.2.8)
+    qg-ecol (1.3.6)
       rails (= 4.2.2)
     qg-icol (1.1.4)
       rails (= 4.2.2)
@@ -571,7 +571,7 @@ DEPENDENCIES
   progress_bar (~> 1.0.0)
   qg-asba (= 1.0.2)!
   qg-bm (= 1.0.3)!
-  qg-ecol (= 1.2.8)!
+  qg-ecol (= 1.3.6)!
   qg-icol (= 1.1.4)!
   qg-imt (= 1.0.9)!
   qg-sm (= 1.0.1)!
