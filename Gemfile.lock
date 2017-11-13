@@ -333,7 +333,7 @@ GEM
       rails (= 4.2.2)
     qg-icol (1.1.4)
       rails (= 4.2.2)
-    qg-imt (1.0.2)
+    qg-imt (1.0.9)
       rails (~> 4.2.2)
     qg-sm (1.0.1)
       rails (~> 4.2.2)
@@ -573,7 +573,7 @@ DEPENDENCIES
   qg-bm (= 1.0.3)!
   qg-ecol (= 1.2.8)!
   qg-icol (= 1.1.4)!
-  qg-imt (= 1.0.2)!
+  qg-imt (= 1.0.9)!
   qg-sm (= 1.0.1)!
   qg-ssp (= 1.0.7)!
   rails (= 4.2.2)
@@ -621,4 +621,4 @@ RUBY VERSION
    ruby 2.2.2p95
 
 BUNDLED WITH
-   1.13.7
+   1.16.0
