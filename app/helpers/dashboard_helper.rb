@@ -29,9 +29,31 @@ module DashboardHelper
       #to support common screens, like IncomingFile
       m[:common_items] = engine.const_get('COMMON_MENU_ITEMS') rescue []
 
+      #to support operations list menu
+      operations = engine.const_get('OPERATIONS') rescue []
+      m[:ops_menu] = true unless operations.empty?
+
+      #to support reports list menu
+      m[:reports] = engine.const_get('REPORTS') rescue false
+
       return m
     end
     
     nil
+  end
+
+  #to build the operations menu
+  def build_operations_menu(gem_name)
+    engine = "Qg::#{gem_name.capitalize}".constantize
+
+    items = []
+    operations = engine.const_get('OPERATIONS') rescue []
+    unless operations.empty?
+      operations.each do |i|
+        items << {name: (I18n.t "menu.#{i}"), link_to: polymorphic_url(i.to_s.pluralize.classify.constantize)}
+      end
+    end
+
+    return items
   end
 end

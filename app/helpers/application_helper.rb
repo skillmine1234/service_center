@@ -90,4 +90,38 @@ module ApplicationHelper
   def fa_icon_tag(name)
     content_tag(:i, nil, class: "fa fa-#{name}")
   end
+
+  def beautify(inputs)
+    output = beautify_xml(inputs)
+    if output.blank?
+      beautify_json(inputs)
+    else
+      output
+    end
+  end
+  
+  def beautify_xml(inputs_xml)
+    output_xml = ''
+    begin
+      xml = REXML::Document.new(inputs_xml)
+      xml.write(output_xml, 2)
+    rescue
+    end
+    output_xml
+  end
+
+  def beautify_json(inputs)
+    begin
+      output = JSON.pretty_generate(JSON.parse(inputs))
+      output = "#{inputs}" if output.blank?
+    rescue
+      output = "#{inputs}"
+    end
+
+    output
+  end
+  
+  def rp_routes
+    Rp::Engine.routes.url_helpers
+  end
 end

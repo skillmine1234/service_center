@@ -1,0 +1,18 @@
+- columns = [:step_no, :step_name, :attempt_no, :req_timestamp, :req_reference, :rep_timestamp, :rep_reference, :status_code]
+.row
+  .col-xs-12.col-sm-12.col-md-12.col-lg-12
+    #panels.panel.panel-primary
+      .panel-heading
+        = @title
+      .panel-body
+        %table.table#transactions_table
+          %thead
+            %tr
+              - columns.each do |column|
+                %th= t column.to_s
+              %th
+          %tbody
+            - @steps.each do |step|
+              %tr
+                - columns.each_with_index do |column, i|
+                  %td= step.decorate.send(column.to_s)

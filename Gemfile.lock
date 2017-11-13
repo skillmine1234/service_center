@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/quantiguous/rp.git
-  revision: 5c033938ed00b65bc8f099ad7c2795f5508060c0
+  revision: 98a707b5492f6bafef181425b011205cfe48280e
   specs:
     rp (0.0.1)
       haml-rails
@@ -68,7 +68,6 @@ GEM
       inherited_resources (~> 1.6)
       jquery-rails
       jquery-ui-rails (~> 5.0)
-      kaminari (~> 0.15)
       rails (>= 3.2, < 5.0)
       ransack (~> 1.3)
       sass-rails
@@ -167,6 +166,7 @@ GEM
       compass (~> 1.0.0)
       sass-rails (<= 5.0.1)
       sprockets (< 2.13)
+    concurrent-ruby (1.0.5)
     countries (0.11.4)
       currencies (~> 0.4.2)
       i18n_data (~> 0.7.0)
@@ -212,6 +212,11 @@ GEM
     dotenv-rails (2.0.2)
       dotenv (= 2.0.2)
       railties (~> 4.0)
+    draper (2.1.0)
+      actionpack (>= 3.0)
+      activemodel (>= 3.0)
+      activesupport (>= 3.0)
+      request_store (~> 1.0)
     erubis (2.7.0)
     execjs (2.5.2)
     factory_girl (2.2.0)
@@ -225,6 +230,8 @@ GEM
     florrick (1.1.2)
     flot-rails (0.0.6)
       jquery-rails
+    font-awesome-rails (4.7.0.2)
+      railties (>= 3.2, < 5.2)
     formtastic (3.1.3)
       actionpack (>= 3.2.13)
     formtastic_i18n (0.4.1)
@@ -253,7 +260,8 @@ GEM
     httparty (0.13.5)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
-    i18n (0.8.6)
+    i18n (0.9.0)
+      concurrent-ruby (~> 1.0)
     i18n_data (0.7.0)
     inherited_resources (1.6.0)
       actionpack (>= 3.2, < 5)
@@ -267,9 +275,18 @@ GEM
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
     json (1.8.6)
-    kaminari (0.16.3)
-      actionpack (>= 3.0.0)
-      activesupport (>= 3.0.0)
+    kaminari (1.0.1)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.0.1)
+      kaminari-activerecord (= 1.0.1)
+      kaminari-core (= 1.0.1)
+    kaminari-actionview (1.0.1)
+      actionview
+      kaminari-core (= 1.0.1)
+    kaminari-activerecord (1.0.1)
+      activerecord
+      kaminari-core (= 1.0.1)
+    kaminari-core (1.0.1)
     kgio (2.9.3)
     libv8 (3.16.14.11)
     loofah (2.1.1)
@@ -278,7 +295,7 @@ GEM
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     mime-types (2.6.1)
-    mini_portile (0.6.2)
+    mini_portile2 (2.1.0)
     minitest (5.10.3)
     multi_json (1.11.1)
     multi_test (0.1.2)
@@ -291,8 +308,8 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (2.9.2)
     newrelic_rpm (3.15.0.314)
-    nokogiri (1.6.6.4)
-      mini_portile (~> 0.6.0)
+    nokogiri (1.6.8.1)
+      mini_portile2 (~> 2.1.0)
     options (2.3.2)
     orm_adapter (0.5.0)
     passenger (5.1.4)
@@ -312,10 +329,12 @@ GEM
       rails (= 4.2.2)
     qg-bm (1.0.3)
       rails (= 4.2.2)
-    qg-ecol (1.2.8)
+    qg-ecol (1.3.6)
       rails (= 4.2.2)
     qg-icol (1.1.4)
       rails (= 4.2.2)
+    qg-imt (1.0.9)
+      rails (~> 4.2.2)
     qg-sm (1.0.1)
       rails (~> 4.2.2)
     qg-ssp (1.0.7)
@@ -369,6 +388,7 @@ GEM
       ffi (>= 0.5.0)
     rb-readline (0.5.3)
     ref (1.0.5)
+    request_store (1.3.2)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
     rolify (4.0.0)
@@ -528,15 +548,18 @@ DEPENDENCIES
   devise_ldap_authenticatable (= 0.6.1)
   devise_security_extension
   dotenv-rails
+  draper
   factory_girl (= 2.2.0)
   faker
   faraday
   flexmock
   florrick (~> 1.1)
   flot-rails
+  font-awesome-rails
   haml-rails
   httparty
   jquery-rails (= 4.3.1)
+  kaminari (= 1.0.1)
   lazy_columns!
   mime-types
   mustache
@@ -548,8 +571,9 @@ DEPENDENCIES
   progress_bar (~> 1.0.0)
   qg-asba (= 1.0.2)!
   qg-bm (= 1.0.3)!
-  qg-ecol (= 1.2.8)!
+  qg-ecol (= 1.3.6)!
   qg-icol (= 1.1.4)!
+  qg-imt (= 1.0.9)!
   qg-sm (= 1.0.1)!
   qg-ssp (= 1.0.7)!
   rails (= 4.2.2)
@@ -597,4 +621,4 @@ RUBY VERSION
    ruby 2.2.2p95
 
 BUNDLED WITH
-   1.13.7
+   1.16.0

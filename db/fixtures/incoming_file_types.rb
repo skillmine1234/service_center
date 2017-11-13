@@ -9,11 +9,6 @@ ScService.seed(:code) do |s|
 end
 
 ScService.seed(:code) do |s|
-  s.code = 'IMTSERVICE'
-  s.name = 'Instant Money Transfer'
-end
-
-ScService.seed(:code) do |s|
   s.code = 'SALARY'
   s.name = 'Salary Processing'
 end
@@ -93,91 +88,6 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.auto_upload = 'N'
   s.validate_all = 'N'
   s.build_response_file = 'N'
-  s.can_override = 'N'
-  s.can_skip = 'Y'
-  s.can_retry = 'N'
-  s.build_nack_file = 'N'
-  s.skip_last = 'N'
-end
-
-IncomingFileType.seed(:sc_service_id, :code) do |s|
-  s.sc_service_id = ScService.find_by(code: 'IMTSERVICE').id
-  s.code = 'ADDBENEFICIARY'
-  s.name = 'Add Beneficiary'
-  s.msg_domain = 'DFDL'
-  s.msg_model = '{http://www.quantiguous.com/services/file}:addBeneficiary'
-  s.skip_first = 'Y'
-  s.auto_upload = 'Y'
-  s.validate_all = 'N'
-  s.build_response_file = 'Y'
-  s.can_override = 'N'
-  s.can_skip = 'Y'
-  s.can_retry = 'N'
-  s.build_nack_file = 'N'
-  s.skip_last = 'N'
-end
-
-IncomingFileType.seed(:sc_service_id, :code) do |s|
-  s.sc_service_id = ScService.find_by(code: 'IMTSERVICE').id
-  s.code = 'DELETEBENEFICIARY'
-  s.name = 'Delete Beneficiary'
-  s.msg_domain = 'DFDL'
-  s.msg_model = '{http://www.quantiguous.com/services/file}:deleteBeneficiary'
-  s.skip_first = 'Y'
-  s.auto_upload = 'Y'
-  s.validate_all = 'N'
-  s.build_response_file = 'Y'  
-  s.can_override = 'N'
-  s.can_skip = 'Y'
-  s.can_retry = 'N'
-  s.build_nack_file = 'N'
-  s.skip_last = 'N'
-end
-
-IncomingFileType.seed(:sc_service_id, :code) do |s|
-  s.sc_service_id = ScService.find_by(code: 'IMTSERVICE').id
-  s.code = 'INITIATETRANSFER'
-  s.name = 'Initiate Transfer'
-  s.msg_domain = 'DFDL'
-  s.msg_model = '{http://www.quantiguous.com/services/file}:initiateTransfer'
-  s.skip_first = 'Y'
-  s.auto_upload = 'Y'
-  s.validate_all = 'N'
-  s.build_response_file = 'Y'  
-  s.can_override = 'N'
-  s.can_skip = 'Y'
-  s.can_retry = 'N'
-  s.build_nack_file = 'N'
-  s.skip_last = 'N'
-end
-
-IncomingFileType.seed(:sc_service_id, :code) do |s|
-  s.sc_service_id = ScService.find_by(code: 'IMTSERVICE').id
-  s.code = 'CANCELTRANSFER'
-  s.name = 'Cancel Transfer'
-  s.msg_domain = 'DFDL'
-  s.msg_model = '{http://www.quantiguous.com/services/file}:cancelTransfer'
-  s.skip_first = 'Y'
-  s.auto_upload = 'Y'
-  s.validate_all = 'N'
-  s.build_response_file = 'Y'  
-  s.can_override = 'N'
-  s.can_skip = 'Y'
-  s.can_retry = 'N'
-  s.build_nack_file = 'N'
-  s.skip_last = 'N'
-end
-
-IncomingFileType.seed(:sc_service_id, :code) do |s|
-  s.sc_service_id = ScService.find_by(code: 'IMTSERVICE').id
-  s.code = 'TXNS'
-  s.name = 'TXNS'
-  s.msg_domain = 'DFDL'
-  s.msg_model = '{http://www.quantiguous.com/services/file}:empays_transaction'
-  s.skip_first = 'Y'
-  s.auto_upload = 'Y'
-  s.validate_all = 'N'
-  s.build_response_file = 'N' 
   s.can_override = 'N'
   s.can_skip = 'Y'
   s.can_retry = 'N'
@@ -358,24 +268,4 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.build_nack_file = 'Y'
   s.skip_last = 'N'
   s.complete_with_failed_records = 'Y'
-end
-
-IncomingFileType.seed(:sc_service_id, :code) do |s|
-  s.sc_service_id = ScService.find_by(code: 'IMTSERVICE').id
-  s.code = 'SETTLEMENT'
-  s.name = 'Settlement File Upload'
-  s.msg_domain = 'DFDL'
-  s.msg_model = '{http://www.quantiguous.com/services/file}:imtSettlements'
-  s.skip_first = 'Y'
-  s.auto_upload = 'Y'
-  s.validate_all = 'Y'
-  s.build_response_file = 'N'
-  s.db_unit_name = "pk_qg_imt_file_manager"
-  s.records_table = 'imt_incoming_records'
-  s.can_override = 'N'
-  s.can_skip = 'Y'
-  s.can_retry = 'Y'
-  s.build_nack_file = 'N'
-  s.skip_last = 'N'
-  s.complete_with_failed_records = 'N'
 end

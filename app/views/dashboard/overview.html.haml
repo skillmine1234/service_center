@@ -121,47 +121,7 @@
         = image_tag 'ecol_customer.gif', :size => "80x80"
       %br
         = "FP Authorisation Rules"
-- if @current_user.group_names.include?("imt")
-  %h1 IMT
-  .slide-container
-    .box  
-      = link_to incoming_files_path(:sc_service => "IMTSERVICE") do
-        = image_tag 'upload.png', :size => "80x80"
-      %br
-        = "File Uploads"
-    .box  
-      = link_to outgoing_files_path(:sc_service => "IMTSERVICE") do
-        = image_tag 'outgoing_file.png', :size => "80x80"
-      %br
-        = "Outgoing Files"
-    .box  
-      = link_to '/imt_unapproved_records' do
-        = image_tag 'work-list.jpg', :size => "80x80"
-      %br
-        = "Approval Worklist"
-  .slide-container
-    .box
-      - if !ImtRule.first.nil?
-        = link_to edit_imt_rule_path(ImtRule.first) do
-          = image_tag 'bm_rule.png', :size => "80x80"
-        %br
-          = "IMT Rules"
-      - else
-        = link_to imt_rule_error_msg_path do
-          = image_tag 'rules.jpeg', :size => "80x80"
-        %br
-          = "IMT Rules"
-    .box  
-      = link_to '/imt_customers' do
-        = image_tag 'ecol_customer.gif', :size => "80x80"
-      %br
-        = "IMT Customers"
-    .box
-      = link_to '/imt_transfers' do
-        = image_tag 'ecol_transactions.jpg', :size => "80x80"
-      %br
-        = "IMT Transfers"
-				
+= render partial: 'panel', locals: { group: 'imt', sc_service: 'IMTSERVICE' }
 - if @current_user.group_names.include?("funds-transfer")
   %h1 Funds Transfer
   .slide-container

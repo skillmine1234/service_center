@@ -18,6 +18,11 @@ class User < ActiveRecord::Base
     :case_sensitive => false
   }
 
+  # hack: for gems to work across console and sc
+  def accessible_customers
+    []
+  end
+
   def role
     user_role.try(:role)
   end

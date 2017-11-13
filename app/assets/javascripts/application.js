@@ -40,7 +40,7 @@ jQuery.fn.extend({
 });
 
 $(document).ready(function() {
-
+$('.modal').hide();
 server_date = $('#clock').text();
 $('#clock').hide();
 var montharray=new Array("January","February","March","April","May","June","July","August","September","October","November","December")
@@ -68,6 +68,7 @@ $("#username-show,#password-show").keypress(function(e) {
     $("#sign-in-form").submit();
   }
 });
+
 
 $('.modal').on('hidden', function () {
   $(".formError").remove();

@@ -67,14 +67,6 @@ ServiceCenter::Application.routes.draw do
   resources :fp_operations
   resources :fp_auth_rules
 
-  resources :imt_rules
-  resources :imt_customers do
-    member do
-      put :resend_notification
-    end
-  end
-  resources :imt_unapproved_records
-  resources :imt_transfers
   resources :csv_exports
   resources :ft_unapproved_records
   resources :funds_transfer_customers do
@@ -228,7 +220,7 @@ ServiceCenter::Application.routes.draw do
       post :index
     end
   end
-  
+
   resources :sc_jobs, except: :index do
     collection do
       get :index
@@ -318,8 +310,6 @@ ServiceCenter::Application.routes.draw do
   get '/pc_fee_rule/:id/audit_logs' => 'pc_fee_rules#audit_logs'
   get '/fp_operation/:id/audit_logs' => 'fp_operations#audit_logs'
   get '/fp_auth_rule/:id/audit_logs' => 'fp_auth_rules#audit_logs'
-  get '/imt_rule/:id/audit_logs' => 'imt_rules#audit_logs'
-  get '/imt_customer/:id/audit_logs' => 'imt_customers#audit_logs'
   get '/funds_transfer_customer/:id/audit_logs' => 'funds_transfer_customers#audit_logs'
   get '/ft_purpose_code/:id/audit_logs' => 'ft_purpose_codes#audit_logs'
   get '/ft_customer_account/:id/audit_logs' => 'ft_customer_accounts#audit_logs'
@@ -346,7 +336,6 @@ ServiceCenter::Application.routes.draw do
 
   get '/inw_error_msg' => "inw_remittance_rules#error_msg"
   get '/iam_audit_rule_error_msg' => "iam_audit_rules#error_msg"
-  get '/imt_rule_error_msg' => "imt_rules#error_msg"
 
   put '/incoming_file/:id/approve' => "incoming_files#approve"
   put '/partner/:id/approve' => "partners#approve"
@@ -363,8 +352,6 @@ ServiceCenter::Application.routes.draw do
   put '/pc_fee_rule/:id/approve' => "pc_fee_rules#approve"
   put '/fp_operation/:id/approve' => "fp_operations#approve"
   put '/fp_auth_rule/:id/approve' => "fp_auth_rules#approve"
-  put '/imt_rule/:id/approve' => "imt_rules#approve"
-  put '/imt_customer/:id/approve' => "imt_customers#approve"
   put '/funds_transfer_customer/:id/approve' => "funds_transfer_customers#approve"
   put '/ft_purpose_code/:id/approve' => "ft_purpose_codes#approve"
   put '/ft_customer_account/:id/approve' => "ft_customer_accounts#approve"
@@ -414,6 +401,7 @@ ServiceCenter::Application.routes.draw do
   
   get '/version' => 'dashboard#version'
   get '/error_msg' => 'dashboard#error_msg'
+  get 'dashboard/operations', as: :operations
   
   root :to => 'dashboard#overview'
 
