@@ -52,7 +52,6 @@ gem "mustache"
 gem 'simple_enum'
 gem 'simple_enum-multiple'
 
-gem 'kaminari', '1.0.1'
 gem 'draper'
 gem 'font-awesome-rails'
 
@@ -63,7 +62,8 @@ source "https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/" do
   gem 'qg-asba', '1.0.2'
   gem 'qg-sm', '1.0.1'
   gem 'qg-ssp', '1.0.7'
-  gem 'qg-imt', '1.0.9'
+  gem 'qg-imt', '1.1.0'
+  gem 'qg-fp', '1.0.6'
 end
 
 # oracle is required only in production, CI tools run against sqlite3
