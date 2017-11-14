@@ -52,7 +52,6 @@ gem "mustache"
 gem 'simple_enum'
 gem 'simple_enum-multiple'
 
-gem 'kaminari', '1.0.1'
 gem 'draper'
 gem 'font-awesome-rails'
 
