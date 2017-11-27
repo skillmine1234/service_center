@@ -36,14 +36,6 @@ GIT
   specs:
     rools (0.4.1)
 
-PATH
-  remote: /Users/divya/code/ruby/xyz/qg-ft
-  specs:
-    qg-ft (0.0.1)
-      draper
-      pundit
-      rails (>= 4.2.2)
-
 GEM
   remote: https://rubygems.org/
   remote: https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/
@@ -333,6 +325,10 @@ GEM
       rails (= 4.2.2)
     qg-fp (1.0.6)
       rails (~> 4.2.2)
+    qg-ft (1.0.0)
+      draper
+      pundit
+      rails (>= 4.2.2)
     qg-icol (1.1.4)
       rails (= 4.2.2)
     qg-imt (1.1.0)
@@ -574,8 +570,7 @@ DEPENDENCIES
   qg-bm (= 1.0.3)!
   qg-ecol (= 1.3.6)!
   qg-fp (= 1.0.6)!
-  qg-ecol (= 1.3.2)!
-  qg-ft!
+  qg-ft (= 1.0.0)!
   qg-icol (= 1.1.4)!
   qg-imt (= 1.1.0)!
   qg-sm (= 1.0.1)!
