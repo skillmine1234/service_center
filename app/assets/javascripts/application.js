@@ -32,8 +32,7 @@
 //= require bm/bm.js
 //= require fp/fp.js
 //= require ft/ft.js
-//= require sc/sc_backend_setting.js
-//= require sc/sc_backend_response_code.js
+//= require sc/sc.js
 
 jQuery.fn.extend({
     live: function (event, callback) {
