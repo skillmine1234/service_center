@@ -65,20 +65,11 @@ ServiceCenter::Application.routes.draw do
   resources :pc_fee_rules
 
   resources :csv_exports
-  resources :ft_unapproved_records
-  resources :funds_transfer_customers do
-    member do
-      put :resend_notification
-    end
-  end
-  resources :ft_purpose_codes
-  resources :ft_customer_accounts
   resources :reconciled_returns
   resources :su_customers
   resources :su_unapproved_records
   resources :su_incoming_records
   resources :ic_incoming_records
-  resources :ft_incoming_records
   resources :pc_mm_cd_incoming_records
   resources :cn_incoming_records do
     member do
@@ -89,12 +80,6 @@ ServiceCenter::Application.routes.draw do
     member do
       get 'download_file'
     end
-    collection do
-      get :index
-      post :index
-    end
-  end
-  resources :ft_apbs_incoming_records, except: :index do
     collection do
       get :index
       post :index
@@ -141,12 +126,6 @@ ServiceCenter::Application.routes.draw do
   resources :rc_apps
   resources :rc_transfer_unapproved_records
 
-  resources :sc_backends do
-    member do
-      post 'change_status'
-    end
-  end
-
   namespace :api do
     namespace :v1 do
       resources :whitelisted_identities
@@ -176,21 +155,6 @@ ServiceCenter::Application.routes.draw do
     end
     member do
       put :resend_notification
-    end
-  end
-  
-  resources :sc_backend_response_codes, except: :index do
-    collection do
-      get :index
-      put :index
-    end
-  end
-  
-  resources :sc_fault_codes, except: :index do
-    collection do
-      get :index
-      put :index
-      get :get_fault_reason
     end
   end
   
@@ -253,19 +217,6 @@ ServiceCenter::Application.routes.draw do
       post :index
     end
   end
-  
-  resources :sc_backend_settings, except: :index do
-    collection do
-      get :index
-      put :index
-      get :get_service_codes
-      get :settings
-    end
-    member do
-      get 'audit_logs'
-      put 'approve'
-    end
-  end 
 
   resources :iam_audit_logs, only: [:index, :show] do 
     collection do
@@ -276,7 +227,6 @@ ServiceCenter::Application.routes.draw do
 
   get 'su_incoming_file_summary' => 'su_incoming_records#incoming_file_summary'
   get 'ic_incoming_file_summary' => 'ic_incoming_records#incoming_file_summary'
-  get 'ft_incoming_file_summary' => 'ft_incoming_records#incoming_file_summary'
   get 'pc_mm_cd_incoming_file_summary' => 'pc_mm_cd_incoming_records#incoming_file_summary'
   get 'cn_incoming_file_summary' => 'cn_incoming_records#incoming_file_summary'
   get 'cnb2_incoming_file_summary' => 'cnb2_incoming_records#incoming_file_summary'
@@ -288,7 +238,6 @@ ServiceCenter::Application.routes.draw do
   get 'rc_transfers/:id/audit_steps/:step_name' => 'rc_transfers#audit_steps'
   get '/su_incoming_records/:id/audit_logs' => 'su_incoming_records#audit_logs'
   get '/ic_incoming_records/:id/audit_logs' => 'ic_incoming_records#audit_logs'
-  get '/ft_incoming_records/:id/audit_logs' => 'ft_incoming_records#audit_logs'
   get '/pc_mm_cd_incoming_records/:id/audit_logs' => 'pc_mm_cd_incoming_records#audit_logs'
   get '/cn_incoming_records/:id/audit_logs' => 'cn_incoming_records#audit_logs'
   get '/cnb2_incoming_records/:id/audit_logs' => 'cnb2_incoming_records#audit_logs'
@@ -305,9 +254,6 @@ ServiceCenter::Application.routes.draw do
   get '/pc2_app/:id/audit_logs' => 'pc2_apps#audit_logs'
   get '/pc2_cust_account/:id/audit_logs' => 'pc2_cust_accounts#audit_logs'
   get '/pc_fee_rule/:id/audit_logs' => 'pc_fee_rules#audit_logs'
-  get '/funds_transfer_customer/:id/audit_logs' => 'funds_transfer_customers#audit_logs'
-  get '/ft_purpose_code/:id/audit_logs' => 'ft_purpose_codes#audit_logs'
-  get '/ft_customer_account/:id/audit_logs' => 'ft_customer_accounts#audit_logs'
   get '/reconciled_returns/:id/audit_logs' => 'reconciled_returns#audit_logs'
   get '/su_customers/:id/audit_logs' => 'su_customers#audit_logs'
   get '/ic_customers/:id/audit_logs' => 'ic_customers#audit_logs'
@@ -315,9 +261,7 @@ ServiceCenter::Application.routes.draw do
   get '/sm_banks/:id/audit_logs' => 'sm_banks#audit_logs'
   get '/sm_bank_accounts/:id/audit_logs' => 'sm_bank_accounts#audit_logs'
   get '/rc_transfer_schedules/:id/audit_logs' => 'rc_transfer_schedules#audit_logs'
-  get '/sc_backend/:id/audit_logs' => 'sc_backends#audit_logs'
   get '/whitelisted_identity/:id/audit_logs' => 'whitelisted_identities#audit_logs'
-  get '/sc_backend/:id/previous_status_changes' => 'sc_backends#previous_status_changes', as: :previous_status_changes
 
   get '/inward_remittances/:id/identity/:id_id' => 'inward_remittances#identity'
   get '/inward_remittances/:id/remitter_identities' => 'inward_remittances#remitter_identities'
@@ -345,16 +289,12 @@ ServiceCenter::Application.routes.draw do
   put '/pc2_app/:id/approve' => "pc2_apps#approve"
   put '/pc2_cust_account/:id/approve' => "pc2_cust_accounts#approve"
   put '/pc_fee_rule/:id/approve' => "pc_fee_rules#approve"
-  put '/funds_transfer_customer/:id/approve' => "funds_transfer_customers#approve"
-  put '/ft_purpose_code/:id/approve' => "ft_purpose_codes#approve"
-  put '/ft_customer_account/:id/approve' => "ft_customer_accounts#approve"
   put '/su_customers/:id/approve' => "su_customers#approve"
   put '/ic_customers/:id/approve' => "ic_customers#approve"
   put '/ic_suppliers/:id/approve' => "ic_suppliers#approve"
   put '/sm_banks/:id/approve' => "sm_banks#approve"
   put '/sm_bank_accounts/:id/approve' => 'sm_bank_accounts#approve'
   put '/rc_transfer_schedules/:id/approve' => "rc_transfer_schedules#approve"
-  put '/sc_backend/:id/approve' => "sc_backends#approve"
 
   get '/inward_remittances/:id/audit_logs/:step_name' => 'inward_remittances#audit_logs'
 
@@ -377,18 +317,12 @@ ServiceCenter::Application.routes.draw do
   get '/iam_organisations/:id/audit_logs' => 'iam_organisations#audit_logs'
   put '/iam_organisations/:id/approve' => "iam_organisations#approve"
 
-  get '/sc_backend_response_codes/:id/audit_logs' => 'sc_backend_response_codes#audit_logs'
-  put '/sc_backend_response_codes/:id/approve' => "sc_backend_response_codes#approve"
-    
   get 'ic001_incoming_file_summary' => 'ic001_incoming_records#incoming_file_summary'
   get '/ic001_incoming_records/:id/audit_logs' => 'ic001_incoming_records#audit_logs'
 
   get 'imt_incoming_file_summary' => 'imt_incoming_records#incoming_file_summary'
   get '/imt_incoming_records/:id/audit_logs' => 'imt_incoming_records#audit_logs'
   
-  get 'ft_apbs_incoming_file_summary' => 'ft_apbs_incoming_records#incoming_file_summary'
-  get '/ft_apbs_incoming_records/:id/audit_logs' => 'ft_apbs_incoming_records#audit_logs'
-
   get '/iam_cust_users/:id/audit_logs' => 'iam_cust_users#audit_logs'
   put '/iam_cust_users/:id/approve' => "iam_cust_users#approve"
   

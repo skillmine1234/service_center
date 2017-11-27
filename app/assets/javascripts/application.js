@@ -31,6 +31,8 @@
 //= require ecol/ecol.js
 //= require bm/bm.js
 //= require fp/fp.js
+//= require ft/ft.js
+//= require sc/sc.js
 
 jQuery.fn.extend({
     live: function (event, callback) {
