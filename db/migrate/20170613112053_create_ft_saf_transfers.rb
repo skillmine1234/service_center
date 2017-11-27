@@ -11,8 +11,8 @@ class CreateFtSafTransfers < ActiveRecord::Migration
       t.text :req_bitstream, :comment => "the full request payload as received from the client"
       t.text :rep_bitstream, :comment => "the full reply payload as sent to the client"
       
-      t.index([:customer_id, :req_no], :unique => true, :name => 'uk_ft_saf_transfers_01')
-      t.index([:req_timestamp, :req_transfer_type, :customer_id], :name => 'uk_ft_saf_transfers_02')     
+      t.index([:customer_id, :req_no], :unique => true, :name => 'ft_saf_transfers_01')
+      t.index([:req_timestamp, :req_transfer_type, :customer_id], :name => 'ft_saf_transfers_02')
     end
   end
 end
