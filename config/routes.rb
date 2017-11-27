@@ -167,7 +167,6 @@ ServiceCenter::Application.routes.draw do
       get :connect_to_ldap
     end
   end
-  resources :unapproved_records
 
   resources :fr_r01_incoming_records, except: :index do
     collection do
