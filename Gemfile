@@ -56,7 +56,7 @@ gem 'draper'
 gem 'font-awesome-rails'
 
 source "https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/" do
-  gem 'qg-icol', '1.1.4'
+  gem 'qg-icol', '1.1.5'
   gem 'qg-ecol', '1.3.6'
   gem 'qg-bm', '1.0.3'
   gem 'qg-asba', '1.0.2'
