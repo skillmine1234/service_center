@@ -67,6 +67,7 @@ source "https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/" do
   gem 'qg-ft', '1.1.5'
   gem 'qg-sc', '1.0.6'
   gem 'qg-gm', '1.0.0'
+  gem 'qg-cc', path: '/Users/divya/code/ruby/engines/qg-cc'
 end
 
 # oracle is required only in production, CI tools run against sqlite3

@@ -33,6 +33,7 @@
 //= require fp/fp.js
 //= require ft/ft.js
 //= require sc/sc.js
+//= require cc/cc.js
 
 jQuery.fn.extend({
     live: function (event, callback) {
