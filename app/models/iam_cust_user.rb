@@ -62,4 +62,8 @@ class IamCustUser < ActiveRecord::Base
     return true
     # IamCustUser.find_by(username: identity_user_id).nil?
   end
+  
+  def self.iam_cust_user_exists?(identity_user_id)
+    IamCustUser.find_by(username: identity_user_id).present?
+  end
 end
