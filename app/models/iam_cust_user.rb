@@ -58,12 +58,11 @@ class IamCustUser < ActiveRecord::Base
     DecPassGenerator.new(encrypted_password,ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']).generate_decrypted_data
   end
   
-  def self.iam_cust_user_exists?
-    return true
-    # IamCustUser.find_by(username: identity_user_id).nil?
-  end
-  
-  def self.iam_cust_user_exists?(identity_user_id)
-    IamCustUser.find_by(username: identity_user_id).present?
+  def self.iam_cust_user_exists?(*args)
+    if args.size == 0
+      return true
+    else
+      IamCustUser.find_by(username: args[0]).present?
+    end
   end
 end
