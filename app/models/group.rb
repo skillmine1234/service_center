@@ -47,6 +47,8 @@ class Group < ActiveRecord::Base
       Qg::Asba::MODELS
     when "payByCreditCard"
       Qg::Cc::MODELS
+    when "gm"
+      Qg::Gm::MODELS
     else
       []
     end

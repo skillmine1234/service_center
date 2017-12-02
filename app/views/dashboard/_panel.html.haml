@@ -28,6 +28,7 @@
           = image_tag 'work-list.jpg', :size => "80x80"
         %br
         = "Approval Worklist"
+    - elsif m[:approval_worklist] == 'false'
     - else
       .box
         = link_to unapproved_records_path(group_name: m[:group], sc_service: service) do
