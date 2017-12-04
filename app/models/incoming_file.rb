@@ -142,7 +142,7 @@ class IncomingFile < ActiveRecord::Base
   def on_create_create_unapproved_record
     if approval_status == 'U'
       ImtUnapprovedRecord.create!(:imt_approvable => self) if self.service_name == "IMTSERVICE"
-      UnapprovedRecord.create!(:approvable => self) if (self.service_name == "AML" || self.service_name == "ECOL" || self.service_name == "FR")
+      UnapprovedRecord.create!(:approvable => self) if (self.service_name == "AML" || self.service_name == "ECOL" || self.service_name == "FR" || self.service_name == "CC")
       SuUnapprovedRecord.create!(:su_approvable => self) if self.service_name == "SALARY"
       IcUnapprovedRecord.create!(:ic_approvable => self) if self.service_name == "INSTANTCREDIT"
       FtUnapprovedRecord.create!(:ft_approvable => self) if self.service_name == "FUNDSTRANSFER"
