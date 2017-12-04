@@ -45,7 +45,6 @@ class Group < ActiveRecord::Base
       Qg::Icol::MODELS
     when "asba"
       Qg::Asba::MODELS
-      ['AsbaBroker', 'AsbaAuditStep']
     when "payByCreditCard"
       Qg::Cc::MODELS
     else
