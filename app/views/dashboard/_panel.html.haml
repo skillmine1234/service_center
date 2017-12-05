@@ -21,20 +21,20 @@
           = link_to csv_exports_path(group: m[:name]) do
             = image_tag 'csv_export.png', :size => "80x80"
           %br
-            = "Csv Exports"
-    - if respond_to?("#{group}_unapproved_records_path", sc_service: service) and group != 'ecol'
-      .box
-        = link_to send("#{group}_unapproved_records_path") do
-          = image_tag 'work-list.jpg', :size => "80x80"
-        %br
-        = "Approval Worklist"
-    - elsif m[:approval_worklist] == 'false'
-    - else
-      .box
-        = link_to unapproved_records_path(group_name: m[:group], sc_service: service) do
-          = image_tag 'work-list.jpg', :size => "80x80"
-        %br
-        = "Approval Worklist"
+            = "Csv Exports" 
+    - if m[:approval_worklist] == true
+      - if respond_to?("#{group}_unapproved_records_path", sc_service: service)
+        .box
+          = link_to send("#{group}_unapproved_records_path") do
+            = image_tag 'work-list.jpg', :size => "80x80"
+          %br
+          = "Approval Worklist"
+      - else
+        .box
+          = link_to unapproved_records_path(group_name: m[:group], sc_service: service) do
+            = image_tag 'work-list.jpg', :size => "80x80"
+          %br
+          = "Approval Worklist"
     - if m[:reports].present?
       .box
         = link_to rp_routes.send("#{group}_available_reports_path") do
