@@ -35,6 +35,8 @@ module DashboardHelper
 
       #to support reports list menu
       m[:reports] = engine.const_get('REPORTS') rescue false
+      
+      m[:approval_worklist] = engine.const_get('APPROVAL_WORKLIST') rescue true
 
       return m
     end
