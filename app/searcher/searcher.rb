@@ -8,9 +8,17 @@ class Searcher
   
   def self.attr_searchable(*vars)
     @attributes ||= []
+    @between_attributes ||= []    
+    vars = vars.flat_map { |attr|
+      if attr.is_a?(Hash) 
+        @between_attributes << attr.key(:range)
+        [:"from_#{attr.key(:range)}", :"to_#{attr.key(:range)}"]
+      else
+        attr
+      end
+    }
     vars |= [:page, :approval_status]
     @attributes.concat vars
-
     attr_accessor(*vars)
   end
 
@@ -31,7 +39,7 @@ class Searcher
   end      
 
   def klass
-    self.class.name.chomp('Searcher').constantize
+    self.class.klass
   end
   
   # the policy class is the same as that of the model
@@ -56,12 +64,34 @@ class Searcher
     attrs.each do |a|
       reln = reln.where("#{klass.table_name}.#{a} = ?", self.try(a)) unless [nil, ''].include?(self.try(a))
     end
-
+    
+    self.class.between_attributes.each do |a|
+      from_a = self.try("from_#{a}".to_sym)
+      to_a = self.try("to_#{a}".to_sym)
+      
+      if klass.columns_hash[a.to_s].type == :datetime
+        from_a = Time.zone.parse(from_a) unless from_a.nil?
+        to_a = Time.zone.parse(to_a) unless to_a.nil?
+      end
+            
+      if ![nil, ''].include?(to_a) && ![nil, ''].include?(from_a)
+        reln = reln.where("#{klass.table_name}.#{a} between ? and ?", from_a, to_a)
+      elsif ![nil, ''].include?(to_a)
+        reln = reln.where("#{klass.table_name}.#{a} < ?", to_a)
+      elsif ![nil, ''].include?(from_a)
+        reln = reln.where("#{klass.table_name}.#{a} > ?", from_a)
+      end
+    end
+    
     # call the find for custom finder code implemented in subclasses
     find.nil? ? reln : reln.merge(find)
   end
 
   private
+  
+  def self.klass
+    name.chomp('Searcher').constantize
+  end
 
   def attrs
     # not all attributes are present in the model
@@ -69,14 +99,10 @@ class Searcher
     a - (a - klass.column_names) - ["approval_status"]
   end
 
-  # returns true if any 1 searachable attribute has a value
-  def searching?
-    attrs.each do |a|
-      return true unless [nil, ''].include?(self.try(a))
-    end
-    false
+  def self.between_attributes
+    @between_attributes
   end
-
+  
   def self.attributes
     @attributes
   end
