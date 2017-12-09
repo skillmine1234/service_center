@@ -6,7 +6,7 @@
         %button.close{"data-dismiss": "modal", type: "button"} ×
         %h4.modal-title #{object.step_name}
       .modal-body
-        %p #{object.remote_host}
-        %p #{object.req_uri}
+        %p #{object.try(:remote_host)}
+        %p #{object.try(:req_uri)}
       .modal-footer
         %button.btn.btn-default{"data-dismiss": "modal", type: "button"} Close

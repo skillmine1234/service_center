@@ -1,5 +1,5 @@
 ServiceCenter::Application.routes.draw do
-
+    
   mount Rp::Engine, at: '/rp'
 
   resources :encrypted_passwords
