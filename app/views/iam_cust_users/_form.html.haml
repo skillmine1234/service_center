@@ -29,7 +29,7 @@
         = error_message_for(@iam_cust_user, :email, :prepend_text => "")
     .control-group
       = f.label :mobile_no, "*Mobile Number", :class => 'control-label'
-      = f.text_field :mobile_no, maxlength: 10
+      = f.text_field :mobile_no, maxlength: 20
       #msg-error
         = error_message_for(@iam_cust_user, :mobile_no, :prepend_text => "")
     - unless action_name == 'new'

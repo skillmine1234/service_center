@@ -10,7 +10,7 @@ class IamCustUser < ActiveRecord::Base
   validates_presence_of :username
   validates_presence_of :first_name, :email, :mobile_no, unless: :skip_presence_validation
   validates_uniqueness_of :username, :scope => :approval_status
-  validates :mobile_no, numericality: true, length: { maximum: 10 }
+  validates :mobile_no, numericality: true, length: { maximum: 20 }
   validates_length_of :username, :first_name, :last_name, maximum: 100
   validates_format_of :username, with: /\A[a-z|A-Z|0-9|\_|\.]+\z/, message: "invalid format - expected format is : {[a-z|A-Z|0-9|\_|\.]}"
   validates_format_of :first_name, with: /\A[a-z|A-Z|0-9|\s|\.|\-]+\z/, message: "invalid format - expected format is : {[a-z|A-Z|0-9|\s|\.|\-]}"
