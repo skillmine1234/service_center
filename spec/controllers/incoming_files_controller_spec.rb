@@ -133,7 +133,7 @@ describe IncomingFilesController do
       user_role = UserRole.find_by_user_id(@user.id)
       user_role.delete
       Factory(:user_role, :user_id => @user.id, :role_id => Factory(:role, :name => 'supervisor').id)
-      sc_service = Factory(:sc_service, :code => 'ECOL', :name => 'Ecollect')
+      sc_service = Factory(:sc_service, :code => 'ECOL', :name => 'Ecollect', approval_status: 'A')
       inc_file_type = Factory(:incoming_file_type, :sc_service_id => sc_service.id, :code => 'RMTRS', :name => 'Remitters')
       incoming_file = Factory(:incoming_file, :service_name => sc_service.code, :file_type => inc_file_type.code, :approval_status => 'U')
       UnapprovedRecord.count.should == 1

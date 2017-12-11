@@ -128,21 +128,21 @@ describe IncomingFile do
 
   context "new_unapproved_records" do 
     it "oncreate: should create new_unapproved_record if the approval_status is 'U'" do
-      sc_service = Factory(:sc_service, :code => 'ECOL', :name => 'Ecollect')
+      sc_service = Factory(:sc_service, :code => 'ECOL', :name => 'Ecollect', approval_status: 'A')
       inc_file_type = Factory(:incoming_file_type, :sc_service_id => sc_service.id, :code => 'RMTRS', :name => 'Remitters')
       incoming_file = Factory(:incoming_file, :service_name => sc_service.code, :file_type => inc_file_type.code)
       incoming_file.new_unapproved_record.should_not be_nil
     end
 
     it "oncreate: should not create new_unapproved_record if the approval_status is 'A'" do
-      sc_service = Factory(:sc_service, :code => 'ECOL', :name => 'Ecollect')
+      sc_service = Factory(:sc_service, :code => 'ECOL', :name => 'Ecollect', approval_status: 'A')
       inc_file_type = Factory(:incoming_file_type, :sc_service_id => sc_service.id, :code => 'RMTRS', :name => 'Remitters')
       incoming_file = Factory(:incoming_file, :service_name => sc_service.code, :file_type => inc_file_type.code, :approval_status => 'A')
       incoming_file.new_unapproved_record.should be_nil
     end
 
     it "onupdate: should not remove new_unapproved_record if approval_status did not change from U to A" do
-      sc_service = Factory(:sc_service, :code => 'ECOL', :name => 'Ecollect')
+      sc_service = Factory(:sc_service, :code => 'ECOL', :name => 'Ecollect', approval_status: 'A')
       inc_file_type = Factory(:incoming_file_type, :sc_service_id => sc_service.id, :code => 'RMTRS', :name => 'Remitters')
       incoming_file = Factory(:incoming_file, :service_name => sc_service.code, :file_type => inc_file_type.code)
       incoming_file.reload
@@ -156,7 +156,7 @@ describe IncomingFile do
     end
 
     it "onupdate: should remove new_unapproved_record if the approval_status changed from 'U' to 'A' (approval)" do
-      sc_service = Factory(:sc_service, :code => 'ECOL', :name => 'Ecollect')
+      sc_service = Factory(:sc_service, :code => 'ECOL', :name => 'Ecollect', approval_status: 'A')
       inc_file_type = Factory(:incoming_file_type, :sc_service_id => sc_service.id, :code => 'RMTRS', :name => 'Remitters')
       incoming_file = Factory(:incoming_file, :service_name => sc_service.code, :file_type => inc_file_type.code)
       incoming_file.reload
@@ -169,7 +169,7 @@ describe IncomingFile do
     end
 
     it "ondestroy: should remove new_unapproved_record if the record with approval_status 'U' was destroyed (approval) " do
-      sc_service = Factory(:sc_service, :code => 'ECOL', :name => 'Ecollect')
+      sc_service = Factory(:sc_service, :code => 'ECOL', :name => 'Ecollect', approval_status: 'A')
       inc_file_type = Factory(:incoming_file_type, :sc_service_id => sc_service.id, :code => 'RMTRS', :name => 'Remitters')
       incoming_file = Factory(:incoming_file, :service_name => sc_service.code, :file_type => inc_file_type.code)
       incoming_file.reload
