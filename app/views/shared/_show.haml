@@ -3,7 +3,7 @@
     - colors = ["#F1F2F8", "#ecf5fa"]
     - panel.each_with_index do |r, i|
       - h = nil
-      - w = 100/r.size
+      - w = 100/r.size rescue 0
       - r.each do |c|
         - h = h || c[:height]
         - if i == 0
