@@ -44,7 +44,7 @@ class IamCustUser < ActiveRecord::Base
   
   def generate_password
     if last_action == 'C' || ( approval_status == 'A' && should_reset_password == 'Y' )
-      self.generated_password = Passgen::generate(pronounceable: true, digits_after: 3, length: 10)
+      self.generated_password = [*('A'..'Z')].sample(4).join + rand(10..99).to_s + [*('a'..'z')].sample(4).join
       self.encrypted_password = EncPassGenerator.new(generated_password, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']).generate_encrypted_password
       unless last_action ==  'C'
         self.should_reset_password = 'N'
