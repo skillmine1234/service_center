@@ -3,7 +3,7 @@
 FactoryGirl.define do
   sequence(:file_name) { |n| "file#{n}" }
   factory :incoming_file do
-    service_name {Factory(:sc_service).code}
+    service_name {Factory(:sc_service, approval_status: 'A').code}
     file_type {Factory(:incoming_file_type).code}
     file Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/rails.txt')))
     file_name 
