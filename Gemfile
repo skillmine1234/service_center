@@ -57,7 +57,7 @@ gem 'font-awesome-rails'
 
 source "https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/" do
   gem 'qg-icol', '1.1.5'
-  gem 'qg-ecol', '1.3.6'
+  gem 'qg-ecol', '1.3.7'
   gem 'qg-bm', '1.0.3'
   gem 'qg-asba', '1.0.2'
   gem 'qg-sm', '1.0.1'
@@ -67,7 +67,7 @@ source "https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/" do
   gem 'qg-ft', '1.1.6'
   gem 'qg-sc', '1.1.0'
   gem 'qg-gm', '1.0.2'
-  gem 'qg-cc', '1.0.2'
+  gem 'qg-cc', '1.0.8'
 end
 
 # oracle is required only in production, CI tools run against sqlite3
