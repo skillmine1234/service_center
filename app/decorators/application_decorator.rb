@@ -40,6 +40,7 @@ class ApplicationDecorator < Draper::Decorator
   end
 
   def user_action
+    p "---------------- #{object} #{object.class}"
     h.capture do
       h.concat h.link_to h.fa_icon_tag("eye"), object, rel: 'tooltip', title: 'Show'
       h.concat " "

@@ -24,7 +24,7 @@ class OperationsController < ApplicationController
   end
   
   def searcher_klass
-    "#{model_klass.to_s + 'Searcher'}".constantize
+    model_klass.included_modules.include?(SearchAbility) ? model_klass : "#{model_klass.to_s + 'Searcher'}".constantize
   end
   
   def decorator_klass
@@ -40,7 +40,7 @@ class OperationsController < ApplicationController
       params.permit(:page)
     else
       pc = searcher_klass.to_s.tableize.singularize.to_sym
-      params.require(pc).permit(searcher_klass.attributes)
+      model_klass.included_modules.include?(SearchAbility) ? params.require(pc).permit(searcher_klass.searchable_attributes) : params.require(pc).permit(searcher_klass.attributes)      
     end
   end
 
