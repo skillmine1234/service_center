@@ -29,6 +29,9 @@ end
 ScService.seed(:code) do |s|
   s.code = 'FUNDSTRANSFER'
   s.name = 'Funds Transfer'
+  s.url = 'https://uatsky.yesbank.in/app/uat/fundsTransferByCustomerService2'
+  s.use_proxy = 'N'
+
   s.approval_status = 'A'
   s.created_by = 'Q'
 end
