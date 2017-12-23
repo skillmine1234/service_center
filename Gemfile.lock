@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/quantiguous/rp.git
-  revision: 98a707b5492f6bafef181425b011205cfe48280e
+  revision: 55c6c15bc908e16923c7804a4105db42cb3aebef
   specs:
     rp (0.0.1)
       haml-rails
@@ -321,7 +321,7 @@ GEM
       rails (= 4.2.2)
     qg-bm (1.0.3)
       rails (= 4.2.2)
-    qg-cc (1.1.1)
+    qg-cc (1.1.3)
       rails (= 4.2.2)
     qg-ecol (1.3.7)
       rails (= 4.2.2)
@@ -574,7 +574,7 @@ DEPENDENCIES
   progress_bar (~> 1.0.0)
   qg-asba (= 1.0.2)!
   qg-bm (= 1.0.3)!
-  qg-cc (= 1.1.1)!
+  qg-cc (= 1.1.3)!
   qg-ecol (= 1.3.7)!
   qg-fp (= 1.0.6)!
   qg-ft (= 1.1.6)!
