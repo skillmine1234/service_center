@@ -64,6 +64,13 @@ ScService.seed(:code) do |s|
   s.created_by = 'Q'
 end
 
+ScService.seed(:code) do |s|
+  s.code = 'CP'
+  s.name = 'Cinepolis File Upload'
+  s.approval_status = 'A'
+  s.created_by = 'Q'
+end
+
 
 IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.sc_service_id = ScService.find_by(code: 'AML').id
@@ -289,4 +296,25 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.build_nack_file = 'Y'
   s.skip_last = 'N'
   s.complete_with_failed_records = 'Y'
+end
+
+IncomingFileType.seed(:sc_service_id, :code) do |s|
+  s.sc_service_id = ScService.find_by(code: 'CP').id
+  s.code = 'CP'
+  s.name = 'Cinepolis File Upload'
+  s.msg_domain = 'XMLNSC'
+  s.msg_model = ''
+  s.skip_first = 'N'
+  s.auto_upload = 'Y'
+  s.validate_all = 'N'
+  s.build_response_file = ''
+  s.db_unit_name = ""
+  s.records_table = ''
+  s.can_override = 'N'
+  s.can_skip = 'N'
+  s.can_retry = 'N'
+  s.build_nack_file = 'Y'
+  s.skip_last = 'N'
+  s.max_file_size = '10'
+  s.finish_each_file = 'N'
 end
