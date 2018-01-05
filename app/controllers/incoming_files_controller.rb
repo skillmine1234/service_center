@@ -105,6 +105,11 @@ class IncomingFilesController < ApplicationController
     @incoming_file = IncomingFile.find(params[:id])
     file_name = (params[:flag] == 'response' ? @incoming_file.try(:rep_file_name) : (params[:flag] == 'nack' ? @incoming_file.try(:nack_file_name) : ''))
     file_path = (params[:flag] == 'response' ? @incoming_file.try(:rep_file_path) : (params[:flag] == 'nack' ? @incoming_file.try(:nack_file_path) : ''))
+    if params[:flag] == 'output_file'
+      output_file = FmOutputFile.find_by_id(params[:file_id])
+      file_name = output_file.try(:file_name)
+      file_path = output_file.try(:file_path)
+    end
     cmd = "scp://iibadm@#{ENV['CONFIG_SCP_IIB_FILE_MGR']}" unless ENV['CONFIG_SCP_IIB_FILE_MGR'] = '127.0.0.1'
     data = open("#{cmd}#{file_path}/#{file_name}").read rescue ""
     if data.to_s.empty?
@@ -201,6 +206,10 @@ class IncomingFilesController < ApplicationController
         req.body = reqBody.join(',')
       end
     end
+  end
+  
+  def output_file
+    @fm_output_file = FmOutputFile.find_by_id(params[:file_id])
   end
 
   def incoming_file_params

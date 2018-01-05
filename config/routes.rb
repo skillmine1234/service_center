@@ -48,6 +48,7 @@ ServiceCenter::Application.routes.draw do
       get 'reject'
       get 'process_file'
       get 'reset'
+      get 'output_file'
     end
   end
   

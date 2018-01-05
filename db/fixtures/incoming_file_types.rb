@@ -317,4 +317,5 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.skip_last = 'N'
   s.max_file_size = '10'
   s.finish_each_file = 'N'
+  s.is_file_mapper = 'Y'
 end

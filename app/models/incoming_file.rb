@@ -33,6 +33,7 @@ class IncomingFile < ActiveRecord::Base
   belongs_to :cn_incoming_file, :foreign_key => "file_name", :primary_key => "file_name"
   belongs_to :rr_incoming_file, :foreign_key => "file_name", :primary_key => "file_name"
   has_many :fm_audit_steps, :as => :auditable
+  has_many :fm_output_files
 
   has_one :imt_unapproved_record, :as => :imt_approvable
   has_one :new_unapproved_record, as: :approvable, class_name: 'UnapprovedRecord'
@@ -42,6 +43,7 @@ class IncomingFile < ActiveRecord::Base
   has_one :pc_unapproved_record, :as => :pc_approvable
   has_one :cn_unapproved_record, :as => :cn_approvable
   has_one :rr_unapproved_record, :as => :rr_approvable
+  has_one :cp_unapporved_record, as: :cc_approvable
 
   after_create :on_create_create_unapproved_record
   after_destroy :on_destory_remove_unapproved_records
@@ -142,7 +144,7 @@ class IncomingFile < ActiveRecord::Base
   def on_create_create_unapproved_record
     if approval_status == 'U'
       ImtUnapprovedRecord.create!(:imt_approvable => self) if self.service_name == "IMTSERVICE"
-      UnapprovedRecord.create!(:approvable => self) if (self.service_name == "AML" || self.service_name == "ECOL" || self.service_name == "FR" || self.service_name == "CC")
+      UnapprovedRecord.create!(:approvable => self) if (self.service_name == "AML" || self.service_name == "ECOL" || self.service_name == "FR" || self.service_name == "CC" || self.service_name == "CP")
       SuUnapprovedRecord.create!(:su_approvable => self) if self.service_name == "SALARY"
       IcUnapprovedRecord.create!(:ic_approvable => self) if self.service_name == "INSTANTCREDIT"
       FtUnapprovedRecord.create!(:ft_approvable => self) if self.service_name == "FUNDSTRANSFER"
@@ -155,7 +157,7 @@ class IncomingFile < ActiveRecord::Base
   def on_destory_remove_unapproved_records
     if approval_status == 'U'
       imt_unapproved_record.delete if self.service_name == "IMTSERVICE"
-      new_unapproved_record.delete if (self.service_name == "AML" || self.service_name == "ECOL" || self.service_name == "FR")
+      new_unapproved_record.delete if (self.service_name == "AML" || self.service_name == "ECOL" || self.service_name == "FR" || self.service_name == "CP")
       su_unapproved_record.delete if self.service_name == "SALARY"
       ic_unapproved_record.delete if self.service_name == "INSTANTCREDIT"
       ft_unapproved_record.delete if self.service_name == "FUNDSTRANSFER"
@@ -168,7 +170,7 @@ class IncomingFile < ActiveRecord::Base
   def on_update_remove_unapproved_records
     if approval_status == 'A' and approval_status_was == 'U'
       imt_unapproved_record.delete if self.service_name == "IMTSERVICE"
-      new_unapproved_record.delete if (self.service_name == "AML" || self.service_name == "ECOL" || self.service_name == "FR")
+      new_unapproved_record.delete if (self.service_name == "AML" || self.service_name == "ECOL" || self.service_name == "FR" || self.service_name == "CP")
       su_unapproved_record.delete if self.service_name == "SALARY"
       ic_unapproved_record.delete if self.service_name == "INSTANTCREDIT"
       ft_unapproved_record.delete if self.service_name == "FUNDSTRANSFER"
