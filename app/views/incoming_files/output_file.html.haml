@@ -19,7 +19,7 @@
           %td
             = @fm_output_file.file_name
             &nbsp;
-            - if (!ENV['CONFIG_SCP_IIB_FILE_MGR'].nil? or !ENV['CONFIG_SCP_IIB_FILE_MGR'].empty?) and @incoming_file.status == 'C'
+            - if (!ENV['CONFIG_SCP_IIB_FILE_MGR'].nil? or !ENV['CONFIG_SCP_IIB_FILE_MGR'].empty?) and @fm_output_file.incoming_file.status == 'C'
               = "("
               = link_to 'Download', download_file_incoming_file_path(@fm_output_file.incoming_file, file_id: @fm_output_file.id, :flag => 'output_file', :download => true)
               = "/"
