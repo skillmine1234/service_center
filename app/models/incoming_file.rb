@@ -43,7 +43,7 @@ class IncomingFile < ActiveRecord::Base
   has_one :pc_unapproved_record, :as => :pc_approvable
   has_one :cn_unapproved_record, :as => :cn_approvable
   has_one :rr_unapproved_record, :as => :rr_approvable
-  has_one :cp_unapporved_record, as: :cc_approvable
+  has_one :cp_unapporved_record, as: :cp_approvable
 
   after_create :on_create_create_unapproved_record
   after_destroy :on_destory_remove_unapproved_records
