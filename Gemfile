@@ -57,7 +57,7 @@ gem 'font-awesome-rails'
 
 source "https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/" do
   gem 'qg-icol', '1.1.5'
-  gem 'qg-ecol', '1.3.7'
+  gem 'qg-ecol', '1.3.8'
   gem 'qg-bm', '1.0.3'
   gem 'qg-asba', '1.0.2'
   gem 'qg-sm', '1.0.2'
