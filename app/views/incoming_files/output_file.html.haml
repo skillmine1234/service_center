@@ -41,6 +41,11 @@
             = @fm_output_file.ended_at.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
           %td
         %tr
+          %td.label Size in Bytes
+          %td
+            = @fm_output_file.size_in_bytes.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
+          %td
+        %tr
           %td.label Status
           %td.value
             = @fm_output_file.status_code
