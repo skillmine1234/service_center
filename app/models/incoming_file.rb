@@ -13,7 +13,7 @@ class IncomingFile < ActiveRecord::Base
 
   BlackList = %w(exe vbs rb sh jar html msi bat com bin vb doc docx xlsx jpeg gif pdf png zip jpg)
 
-  ExtensionList = %w(txt csv pmt)
+  ExtensionList = %w(txt csv pmt xml)
 
   before_create :update_fields
 
