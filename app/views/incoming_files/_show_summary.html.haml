@@ -254,6 +254,36 @@
           %td{:style=>'text-align:center; border-right: 3px solid #ffffff;'}
             = link_to @incoming_file.pending_retry_record_count || 0, public_send("#{table}_path",:file_name => @incoming_file.file_name, :status => 'PENDING RETRY')
 - else
+  - if @incoming_file.incoming_file_type.build_nack_file == 'Y'
+    %table.table.table-bordered.table-striped.table-hover.align_center
+      %thead
+        %tr 
+          %th{:style=>'text-align:left;'}
+            = "Response"
+          %th
+      %tbody
+        %tr
+          %td{:style=>'text-align:left;'}
+            = "Nack File Name"
+          %td{:style=>'text-align:left;'}
+            = @incoming_file.nack_file_name
+            &nbsp;
+            - if (!ENV['CONFIG_SCP_IIB_FILE_MGR'].nil? or !ENV['CONFIG_SCP_IIB_FILE_MGR'].empty?) and @incoming_file.status == 'F' and !(@incoming_file.nack_file_status.nil?)
+              = "("
+              = link_to 'Download', download_file_incoming_file_path(@incoming_file, :flag => 'nack', :download => true)
+              = "/"
+              = link_to 'View', download_file_incoming_file_path(@incoming_file, :flag => 'nack', :view => true)
+              = ")"
+        %tr
+          %td{:style=>'text-align:left;'}
+            = "Nack File Path"
+          %td{:style=>'text-align:left;'}
+            = @incoming_file.nack_file_path
+        %tr
+          %td{:style=>'text-align:left;'}
+            = "Nack File Status"    
+          %td{:style=>'text-align:left;'}
+            = @incoming_file.status_text(@incoming_file.nack_file_status)
   %br
   %table.table.table-bordered.table-striped.table-hover
     .thead
