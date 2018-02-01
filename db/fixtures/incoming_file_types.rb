@@ -1,32 +1,32 @@
-ScService.seed(:code) do |s|
+ScService.seed_once(:code) do |s|
   s.code = 'AML'
   s.name = 'Anti Money Laundering'
   s.approval_status = 'A'
   s.created_by = 'Q'
 end
 
-ScService.seed(:code) do |s|
+ScService.seed_once(:code) do |s|
   s.code = 'ECOL'
   s.name = 'Ecollect'
   s.approval_status = 'A'
   s.created_by = 'Q'
 end
 
-ScService.seed(:code) do |s|
+ScService.seed_once(:code) do |s|
   s.code = 'SALARY'
   s.name = 'Salary Processing'
   s.approval_status = 'A'
   s.created_by = 'Q'
 end
 
-ScService.seed(:code) do |s|
+ScService.seed_once(:code) do |s|
   s.code = 'INSTANTCREDIT'
   s.name = 'Instant Credit'
   s.approval_status = 'A'
   s.created_by = 'Q'
 end
 
-ScService.seed(:code) do |s|
+ScService.seed_once(:code) do |s|
   s.code = 'FUNDSTRANSFER'
   s.name = 'Funds Transfer'
   s.url = 'https://uatsky.yesbank.in/app/uat/fundsTransferByCustomerService2'
@@ -36,28 +36,28 @@ ScService.seed(:code) do |s|
   s.created_by = 'Q'
 end
 
-ScService.seed(:code) do |s|
+ScService.seed_once(:code) do |s|
   s.code = 'PPC'
   s.name = 'Prepaid Cards'
   s.approval_status = 'A'
   s.created_by = 'Q'
 end
 
-ScService.seed(:code) do |s|
+ScService.seed_once(:code) do |s|
   s.code = 'CNB'
   s.name = 'Corporate Net Banking'
   s.approval_status = 'A'
   s.created_by = 'Q'
 end
 
-ScService.seed(:code) do |s|
+ScService.seed_once(:code) do |s|
   s.code = 'RR'
   s.name = 'reconciled returns'
   s.approval_status = 'A'
   s.created_by = 'Q'
 end
 
-ScService.seed(:code) do |s|
+ScService.seed_once(:code) do |s|
   s.code = 'FR'
   s.name = 'File Reports'
   s.approval_status = 'A'
