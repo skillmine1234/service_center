@@ -1,0 +1,69 @@
+- if incoming_file.incoming_file_type.build_nack_file == 'Y'
+  %table.table.table-bordered.table-striped.table-hover.align_center
+    %thead
+      %tr 
+        %th{:style=>'text-align:left;'}
+          = "Response"
+        %th
+    %tbody
+      %tr
+        %td{:style=>'text-align:left;'}
+          = "Nack File Name"
+        %td{:style=>'text-align:left;'}
+          = incoming_file.nack_file_name
+          &nbsp;
+          - if (!ENV['CONFIG_SCP_IIB_FILE_MGR'].nil? or !ENV['CONFIG_SCP_IIB_FILE_MGR'].empty?) and incoming_file.status == 'F' and !(incoming_file.nack_file_status.nil?)
+            = "("
+            = link_to 'Download', download_file_incoming_file_path(incoming_file, :flag => 'nack', :download => true)
+            = "/"
+            = link_to 'View', download_file_incoming_file_path(incoming_file, :flag => 'nack', :view => true)
+            = ")"
+      %tr
+        %td{:style=>'text-align:left;'}
+          = "Nack File Path"
+        %td{:style=>'text-align:left;'}
+          = incoming_file.nack_file_path
+      %tr
+        %td{:style=>'text-align:left;'}
+          = "Nack File Status"    
+        %td{:style=>'text-align:left;'}
+          = incoming_file.status_text(incoming_file.nack_file_status)
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Step Name
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Status Code
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      File Name
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Started At
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Ended At
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Size in Bytes
+  .tbody
+    - incoming_file.fm_output_files.each do |record|
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', output_file_incoming_file_path(id: incoming_file.id, file_id: record.id)
+        %td{:style=>'text-align:left;'}
+          = record.step_name
+        %td{:style=>'text-align:left;'}
+          = record.status_code
+        %td{:style=>'text-align:left;'}
+          = record.file_name
+          - if (!ENV['CONFIG_SCP_IIB_FILE_MGR'].nil? or !ENV['CONFIG_SCP_IIB_FILE_MGR'].empty?) and record.status_code == 'COMPLETED'
+            = "("
+            = link_to 'Download', download_file_incoming_file_path(incoming_file, file_id: record.id, :flag => 'output_file', :download => true)
+            = "/"
+            = link_to 'View', download_file_incoming_file_path(incoming_file, file_id: record.id, :flag => 'output_file', :view => true)
+            = ")"
+        %td{:style=>'text-align:left;'}
+          = record.started_at.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
+        %td{:style=>'text-align:left;'}
+          = record.ended_at.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
+        %td{:style=>'text-align:left;'}
+          = record.size_in_bytes

@@ -49,6 +49,8 @@ class Group < ActiveRecord::Base
       Qg::Cc::MODELS
     when "gm"
       Qg::Gm::MODELS
+    when "cinepolis"
+      Qg::Cp::MODELS
     else
       []
     end

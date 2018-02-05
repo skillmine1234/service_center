@@ -248,4 +248,13 @@ describe IncomingFilesController do
       response.should be_redirect
     end
   end
+  
+  describe "output_file" do
+    it "should return the output file" do
+      incoming_file = Factory(:incoming_file, :approval_status => 'A')
+      output_file = Factory(:fm_output_file, incoming_file_id: incoming_file.id)
+      get :output_file, {id: incoming_file.id, file_id: output_file.id}
+      assigns(:fm_output_file).should eq(output_file)
+    end
+  end
 end

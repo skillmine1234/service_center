@@ -64,7 +64,6 @@ ScService.seed(:code) do |s|
   s.created_by = 'Q'
 end
 
-
 IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.sc_service_id = ScService.find_by(code: 'AML').id
   s.code = 'SDN'
