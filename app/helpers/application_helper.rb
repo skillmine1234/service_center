@@ -71,7 +71,8 @@ module ApplicationHelper
     
     html2 = content_tag(:div, class: 'collapsible-content') do
       klass = object.class.included_modules.include?(SearchAbility) ? object.class : object.klass
-      simple_form_for(object, *(args << options.merge(wrapper: :horizontal_form, builder: SearchFormBuilder, html: { class: "form-horizontal"}, autocomplete: "off", disabled: true, url: polymorphic_path(klass), method: :put)), &block)
+      form_url = options[:url] || polymorphic_path(klass)
+      simple_form_for(object, *(args << options.merge(wrapper: :horizontal_form, builder: SearchFormBuilder, html: { class: "form-horizontal"}, autocomplete: "off", disabled: true, url: form_url, method: :put)), &block)
     end
     html1 + html2
   end

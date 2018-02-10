@@ -1,4 +1,4 @@
-- if @incoming_file.service_name == 'ECOL'
+- if @incoming_file.service_name == 'ECOL' && @incoming_file.file_type == 'RMTRS'
   = render :partial => "show_ecol"
 - else
   = render :partial => "show_summary"
