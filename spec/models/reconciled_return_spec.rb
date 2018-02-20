@@ -36,7 +36,7 @@ describe ReconciledReturn do
       rr5 = Factory(:reconciled_return, txn_type: 'IMPS', return_code_type: 'COMPLETED')
       rr5.return_code.should == '00'
       rr6 = Factory(:reconciled_return, txn_type: 'IMPS', return_code_type: 'FAILED')
-      rr6.return_code.should == '08'
+      rr6.return_code.should == '308'
     end
   end
 end
