@@ -41,7 +41,7 @@ class ReconciledReturn < ActiveRecord::Base
       if return_code_type == 'COMPLETED'
         self.return_code = '00'
       else
-        self.return_code = '08'
+        self.return_code = '308'
       end
     end
   end
