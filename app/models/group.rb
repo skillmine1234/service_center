@@ -38,7 +38,7 @@ class Group < ActiveRecord::Base
     when "fr"
       ['IncomingFile','IncomingFileRecord','FrR01IncomingFile','FrR01IncomingRecord']
     when "ns"
-      ['NsCallback', 'NsTemplate']
+      Qg::Ns::MODELS
     when "ssp"
       ['SspBank', 'SspAuditStep']
     when "icol"
