@@ -144,7 +144,7 @@ class IncomingFile < ActiveRecord::Base
   def on_create_create_unapproved_record
     if approval_status == 'U'
       ImtUnapprovedRecord.create!(:imt_approvable => self) if self.service_name == "IMTSERVICE"
-      UnapprovedRecord.create!(:approvable => self) if (self.service_name == "AML" || self.service_name == "ECOL" || self.service_name == "FR" || self.service_name == "CC" || self.service_name == "CP")
+      UnapprovedRecord.create!(:approvable => self) if (self.service_name == "AML" || self.service_name == "ECOL" || self.service_name == "FR" || self.service_name == "CC" || self.service_name == "CP" || self.service_name == 'GEM')
       SuUnapprovedRecord.create!(:su_approvable => self) if self.service_name == "SALARY"
       IcUnapprovedRecord.create!(:ic_approvable => self) if self.service_name == "INSTANTCREDIT"
       FtUnapprovedRecord.create!(:ft_approvable => self) if self.service_name == "FUNDSTRANSFER"
@@ -157,7 +157,7 @@ class IncomingFile < ActiveRecord::Base
   def on_destory_remove_unapproved_records
     if approval_status == 'U'
       imt_unapproved_record.delete if self.service_name == "IMTSERVICE"
-      new_unapproved_record.delete if (self.service_name == "AML" || self.service_name == "ECOL" || self.service_name == "FR" || self.service_name == "CP")
+      new_unapproved_record.delete if (self.service_name == "AML" || self.service_name == "ECOL" || self.service_name == "FR" || self.service_name == "CP" || self.service_name == 'GEM')
       su_unapproved_record.delete if self.service_name == "SALARY"
       ic_unapproved_record.delete if self.service_name == "INSTANTCREDIT"
       ft_unapproved_record.delete if self.service_name == "FUNDSTRANSFER"
@@ -170,7 +170,7 @@ class IncomingFile < ActiveRecord::Base
   def on_update_remove_unapproved_records
     if approval_status == 'A' and approval_status_was == 'U'
       imt_unapproved_record.delete if self.service_name == "IMTSERVICE"
-      new_unapproved_record.delete if (self.service_name == "AML" || self.service_name == "ECOL" || self.service_name == "FR" || self.service_name == "CP")
+      new_unapproved_record.delete if (self.service_name == "AML" || self.service_name == "ECOL" || self.service_name == "FR" || self.service_name == "CP" || self.service_name == 'GEM')
       su_unapproved_record.delete if self.service_name == "SALARY"
       ic_unapproved_record.delete if self.service_name == "INSTANTCREDIT"
       ft_unapproved_record.delete if self.service_name == "FUNDSTRANSFER"

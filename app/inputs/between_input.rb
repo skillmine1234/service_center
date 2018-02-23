@@ -3,7 +3,8 @@ class BetweenInput < SimpleForm::Inputs::Base
     
     from_field = :"from_#{attribute_name}"
     to_field = :"to_#{attribute_name}"
-    field_type = object.klass.columns_hash[attribute_name.to_s].type
+    klass = object.class.included_modules.include?(SearchAbility) ? object.class : object.klass    
+    field_type = klass.columns_hash[attribute_name.to_s].type
 
     def input_html_options
       super.merge({class: 'between_input'})

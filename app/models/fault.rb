@@ -6,7 +6,7 @@ module Fault
       @code = fault.code
       @subCode = fault.subCode || ''
       @reason = fault.reasonText || ''
-      @message = "#{fault.code} : #{fault.subCode} : #{fault.reasonText}"
+      @message = "Code :- #{fault.code} : Subcode :- #{fault.subCode} : Reason :- #{fault.reasonText}"
     end
   end
 end

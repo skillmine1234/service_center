@@ -53,7 +53,7 @@
     %tr
       - if @incoming_file.service_name == 'ECOL'
         %td{:style=>'text-align:left;'}
-          = "Remitter"    
+          = @incoming_file.incoming_file_type.try(:name) || @incoming_file.file_type
         %td{:style=>'text-align:left;'}
           = @incoming_file.ecol_remitters.count(:id) + @incoming_file.failed_records.count(:id)
         %td{:style=>'text-align:left;'}
