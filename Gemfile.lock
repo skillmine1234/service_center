@@ -339,7 +339,7 @@ GEM
       rails (= 4.2.2)
     qg-imt (1.1.11)
       rails (~> 4.2.2)
-    qg-sc (1.1.0)
+    qg-sc (1.1.2)
       rails (~> 4.2.2)
     qg-sm (1.0.3)
       rails (~> 4.2.2)
@@ -584,7 +584,7 @@ DEPENDENCIES
   qg-gm (= 1.1.1)!
   qg-icol (= 1.1.5)!
   qg-imt (= 1.1.11)!
-  qg-sc (= 1.1.0)!
+  qg-sc (= 1.1.2)!
   qg-sm (= 1.0.3)!
   qg-ssp (= 1.0.7)!
   rails (= 4.2.2)
