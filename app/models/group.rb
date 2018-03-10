@@ -51,6 +51,8 @@ class Group < ActiveRecord::Base
       Qg::Gm::MODELS
     when "cinepolis"
       Qg::Cp::MODELS
+    when "account-enquiry"
+      Qg::Ae::MODELS
     else
       []
     end
