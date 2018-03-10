@@ -317,6 +317,8 @@ GEM
       options (~> 2.3.0)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
+    qg-ae (1.0.1)
+      rails (= 4.2.2)
     qg-asba (1.0.2)
       rails (= 4.2.2)
     qg-bm (1.0.3)
@@ -574,6 +576,7 @@ DEPENDENCIES
   passenger
   passgen
   progress_bar (~> 1.0.0)
+  qg-ae (= 1.0.1)!
   qg-asba (= 1.0.2)!
   qg-bm (= 1.0.3)!
   qg-cc (= 1.2.1)!
