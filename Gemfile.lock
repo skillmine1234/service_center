@@ -331,7 +331,7 @@ GEM
       rails (= 4.2.2)
     qg-fp (1.0.6)
       rails (~> 4.2.2)
-    qg-ft (1.2.1)
+    qg-ft (1.2.5)
       draper
       pundit
       rails (>= 4.2.2)
@@ -583,7 +583,7 @@ DEPENDENCIES
   qg-cp (= 1.0.2)!
   qg-ecol (= 1.5.4)!
   qg-fp (= 1.0.6)!
-  qg-ft (= 1.2.1)!
+  qg-ft (= 1.2.5)!
   qg-gm (= 1.1.2)!
   qg-icol (= 1.1.5)!
   qg-imt (= 1.1.11)!
