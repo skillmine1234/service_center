@@ -65,7 +65,7 @@ source "https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/" do
   gem 'qg-imt', '1.1.11'
   gem 'qg-fp', '1.0.6'
   gem 'qg-ft', '1.2.5'
-  gem 'qg-sc', '1.1.2'
+  gem 'qg-sc', '1.1.3'
   gem 'qg-gm', '1.1.6'
   gem 'qg-cc', '1.2.3'
   gem 'qg-cp', '1.0.2'
