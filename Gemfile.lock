@@ -327,7 +327,7 @@ GEM
       rails (= 4.2.2)
     qg-cp (1.0.2)
       rails (= 4.2.2)
-    qg-ecol (1.5.4.1)
+    qg-ecol (1.5.5)
       rails (= 4.2.2)
     qg-fp (1.0.6)
       rails (~> 4.2.2)
@@ -341,7 +341,7 @@ GEM
       rails (= 4.2.2)
     qg-imt (1.1.11)
       rails (~> 4.2.2)
-    qg-ns (1.0.2)
+    qg-ns (1.0.3)
       rails (~> 4.2.2)
     qg-sc (1.1.3)
       rails (~> 4.2.2)
@@ -583,13 +583,13 @@ DEPENDENCIES
   qg-bm (= 1.0.3)!
   qg-cc (= 1.2.3)!
   qg-cp (= 1.0.2)!
-  qg-ecol (= 1.5.4.1)!
+  qg-ecol (= 1.5.5)!
   qg-fp (= 1.0.6)!
   qg-ft (= 1.2.5)!
   qg-gm (= 1.1.6)!
   qg-icol (= 1.1.5)!
   qg-imt (= 1.1.11)!
-  qg-ns (= 1.0.2)!
+  qg-ns (= 1.0.3)!
   qg-sc (= 1.1.3)!
   qg-sm (= 1.0.3)!
   qg-ssp (= 1.0.8)!
