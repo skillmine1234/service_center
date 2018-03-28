@@ -183,42 +183,6 @@ ServiceCenter::Application.routes.draw do
     end
   end
 
-  resources :sc_jobs, except: :index do
-    collection do
-      get :index
-      put :index
-    end
-    member do
-      put :run
-      put :pause
-    end
-  end
-  
-  resources :ns_callbacks do
-    collection do
-      get :index
-      put :index
-    end
-    member do
-      get 'audit_logs'
-      put 'approve'
-    end
-  end
-
-  resources :ns_templates do
-    member do
-      get 'audit_logs'
-      put 'approve'
-    end
-  end
-
-  resources :imt_incoming_records, except: :index do
-    collection do
-      get :index
-      post :index
-    end
-  end
-
   resources :iam_audit_logs, only: [:index, :show] do 
     collection do
       get :index

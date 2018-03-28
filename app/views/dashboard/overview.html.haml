@@ -330,26 +330,7 @@
       %br
         = "Approval Worklist"
 
-- if @current_user.group_names.include?("ns")
-  %h1 Notifications
-  .slide-container
-    .box  
-      = link_to unapproved_records_path(group_name: 'ns') do
-        = image_tag 'work-list.jpg', :size => "80x80"
-      %br
-        = "Approval Worklist"
-  .slide-container
-    .box
-      = link_to '/ns_callbacks' do
-        = image_tag 'callbacks_icon.png', :size => "80x80"
-      %br
-        = "Callbacks"
-    .box
-      = link_to '/ns_templates' do
-        = image_tag 'template.jpeg', :size => "80x80"
-      %br
-        = "Templates"
-        
+= render partial: 'panel', locals: { group: 'ns' }
 = render partial: 'panel', locals: { group: 'icol' }
 = render partial: 'panel', locals: { group: 'ssp' }
 = render partial: 'panel', locals: { group: 'asba' }
