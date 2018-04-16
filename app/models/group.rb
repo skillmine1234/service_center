@@ -40,7 +40,7 @@ class Group < ActiveRecord::Base
     when "ns"
       Qg::Ns::MODELS
     when "ssp"
-      ['SspBank', 'SspAuditStep']
+      Qg::Ssp::MODELS
     when "icol"
       Qg::Icol::MODELS
     when "asba"
