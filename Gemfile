@@ -61,7 +61,7 @@ source "https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/" do
   gem 'qg-bm', '1.0.3'
   gem 'qg-asba', '1.0.2'
   gem 'qg-sm', '1.0.3'
-  gem 'qg-ssp', '1.0.8'
+  gem 'qg-ssp', '1.0.9'
   gem 'qg-imt', '1.1.11'
   gem 'qg-fp', '1.0.6'
   gem 'qg-ft', '1.2.5'
