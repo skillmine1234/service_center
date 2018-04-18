@@ -36,6 +36,7 @@
 //= require cc/cc.js
 //= require ae/ae.js
 //= require ns/ns_callback.js
+//= require rx/rx.js
 
 jQuery.fn.extend({
     live: function (event, callback) {
