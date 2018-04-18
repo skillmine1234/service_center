@@ -53,6 +53,8 @@ class Group < ActiveRecord::Base
       Qg::Cp::MODELS
     when "account-enquiry"
       Qg::Ae::MODELS
+    when "reverse-proxy"
+      Qg::Rx::MODELS
     else
       []
     end

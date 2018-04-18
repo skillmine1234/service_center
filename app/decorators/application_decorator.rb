@@ -46,4 +46,9 @@ class ApplicationDecorator < Draper::Decorator
       h.concat h.link_to h.fa_icon_tag("pencil"), "#{object.class.name.underscore.pluralize}/#{object.id}/edit", rel: 'tooltip', title: 'Edit' if h.policy(object).edit?
     end
   end
+
+  def audit_count
+    count = object.audits.count
+    count > 0 ? count - 1 : 0
+  end
 end
