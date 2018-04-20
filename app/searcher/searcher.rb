@@ -57,7 +57,7 @@ class Searcher
 
   def _find
     if self.try(:approval_status).present? && approval_status == 'U'
-      reln = klass.unscoped.where("approval_status = ?", approval_status).order("#{klass.table_name}.id desc")
+      reln = klass.unscoped.where("#{klass.table_name}.approval_status = ?", approval_status).order("#{klass.table_name}.id desc")
     else
       reln = klass.order("#{klass.table_name}.id desc")
     end
