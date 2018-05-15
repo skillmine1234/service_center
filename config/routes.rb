@@ -73,6 +73,7 @@ ServiceCenter::Application.routes.draw do
   resources :su_incoming_records
   resources :ic_incoming_records
   resources :pc_mm_cd_incoming_records
+
   resources :cn_incoming_records do
     member do
       get 'download_file'
@@ -93,14 +94,6 @@ ServiceCenter::Application.routes.draw do
       get 'download_response_file'
     end
   end
-  resources :ic_customers do
-    member do
-      put :resend_notification
-    end
-  end
-  resources :ic_suppliers
-  resources :ic_invoices
-  resources :ic_unapproved_records
 
   resources :sm_banks do
     member do
@@ -171,13 +164,6 @@ ServiceCenter::Application.routes.draw do
   end
 
   resources :fr_r01_incoming_records, except: :index do
-    collection do
-      get :index
-      post :index
-    end
-  end
-
-  resources :ic001_incoming_records, except: :index do
     collection do
       get :index
       post :index
@@ -282,9 +268,6 @@ ServiceCenter::Application.routes.draw do
   put '/iam_cust_users/:id/approve' => "iam_cust_users#approve"
   get '/iam_organisations/:id/audit_logs' => 'iam_organisations#audit_logs'
   put '/iam_organisations/:id/approve' => "iam_organisations#approve"
-
-  get 'ic001_incoming_file_summary' => 'ic001_incoming_records#incoming_file_summary'
-  get '/ic001_incoming_records/:id/audit_logs' => 'ic001_incoming_records#audit_logs'
 
   get 'imt_incoming_file_summary' => 'imt_incoming_records#incoming_file_summary'
   get '/imt_incoming_records/:id/audit_logs' => 'imt_incoming_records#audit_logs'
