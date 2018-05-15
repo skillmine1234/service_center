@@ -3,8 +3,9 @@ ServiceCenter::Application.routes.draw do
   mount Rp::Engine, at: '/rp'
 
   resources :encrypted_passwords
-  devise_for :users
-  devise_for :admin_users, ActiveAdmin::Devise.config
+
+  devise_for :users, controllers: { sessions: 'sessions' }
+  devise_for :admin_users, ActiveAdmin::Devise.config.merge(controllers: { sessions: 'admin/sessions', password_expired: 'password_expired' })
 
   resources :partners do
     member do

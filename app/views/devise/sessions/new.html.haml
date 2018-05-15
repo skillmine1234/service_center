@@ -1,3 +1,4 @@
+- @public_key = encrypted_field_public_key if @public_key.nil?
 #sign-in
   %h1
     Sign In
@@ -6,6 +7,7 @@
     /     = link_to "Sign up", new_registration_path(resource_name)
   %br
   %fieldset
+    = hidden_field_tag(:public_key, @public_key)
     = label_tag :username, "User Id"
     %br
     = text_field_tag :username, nil, id: 'username-show', autocomplete: 'off'
@@ -15,6 +17,6 @@
     = password_field_tag :password, nil, id: 'password-show', autocomplete: 'off'
   = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:autocomplete => "off",:id => 'sign-in-form'}) do |f|
     = f.hidden_field :username, :autofocus => true, :class=>"span3", :autocomplete => "off", :id => 'username-hidden'
-    = f.hidden_field :password, :class=>"span3", :autocomplete => "off", :id => 'password-hidden'
+    = f.hidden_field :password, :class=>"span3", :autocomplete => "off", :id => 'password-hidden', data: { encrypt: true }
     .helper
       = f.submit "Sign In" ,:class=>"btn btn-primary"

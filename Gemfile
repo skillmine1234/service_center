@@ -55,6 +55,8 @@ gem 'simple_enum-multiple'
 gem 'draper'
 gem 'font-awesome-rails'
 
+gem 'encrypted_field', '0.1.6'
+
 source "https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/" do
   gem 'qg-icol', '1.1.5'
   gem 'qg-ecol', '1.6.0'

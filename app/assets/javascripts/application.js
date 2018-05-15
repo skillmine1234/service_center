@@ -37,6 +37,7 @@
 //= require ae/ae.js
 //= require ns/ns_callback.js
 //= require rx/rx.js
+//= require encrypted_field
 
 jQuery.fn.extend({
     live: function (event, callback) {
