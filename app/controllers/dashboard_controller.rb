@@ -13,6 +13,18 @@ class DashboardController < ApplicationController
     @list = Bundler.load.specs.select { |g| g.name.start_with?('qg-') }
     @rpm_version = rpm_version
   end
+
+  def env_config
+    if Rails.env.production?
+      @config_env_vars = {}
+      `service-center config`.split("\n").each do |e|
+         key_value_arr = e.split("=",2)
+         @config_env_vars[key_value_arr.first] = key_value_arr.second
+      end
+    else
+      @config_env_vars = Dotenv.load
+    end
+  end
   
   def error_msg
     flash[:alert] = "Rule is not yet configured"

@@ -276,6 +276,7 @@ ServiceCenter::Application.routes.draw do
   put '/iam_cust_users/:id/approve' => "iam_cust_users#approve"
   
   get '/version' => 'dashboard#version'
+  get '/env_config' => 'dashboard#env_config'
   get '/error_msg' => 'dashboard#error_msg'
   get 'dashboard/operations', as: :operations
   
