@@ -94,7 +94,7 @@ GEM
     acts_as_list (0.7.2)
       activerecord (>= 3.0)
     addressable (2.3.8)
-    approval2 (0.1.7)
+    approval2 (0.1.9)
       audited
       will_paginate
     arbre (1.0.3)
@@ -344,6 +344,8 @@ GEM
       rails (= 4.2.2)
     qg-imt (1.1.11)
       rails (~> 4.2.2)
+    qg-inw (1.0.5.1)
+      rails (= 4.2.2)
     qg-ns (1.0.3)
       rails (~> 4.2.2)
     qg-rx (1.1.7)
@@ -544,7 +546,7 @@ DEPENDENCIES
   activerecord-oracle_enhanced-adapter!
   acts_as_commentable (= 3.0.1)
   acts_as_list
-  approval2 (= 0.1.7)
+  approval2 (= 0.1.9)
   audited-activerecord
   bcdatabase
   cancancan (~> 1.10)
@@ -596,6 +598,7 @@ DEPENDENCIES
   qg-ic (= 1.0.6)!
   qg-icol (= 1.1.8)!
   qg-imt (= 1.1.11)!
+  qg-inw (= 1.0.5.1)!
   qg-ns (= 1.0.3)!
   qg-rx (= 1.1.7)!
   qg-sc (= 1.1.4)!

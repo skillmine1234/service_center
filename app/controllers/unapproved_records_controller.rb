@@ -20,6 +20,10 @@ class UnapprovedRecordsController < ApplicationController
     end
 
     @records = result.paginate(:per_page => 10, :page => params[:page]) rescue []
+    
+    # the approval2 gem requires a known session variable to include any redirect params to be sent to the unapproved_records_path
+    # for the reject action
+    session[:approval2_redirect_params] = {group_name: params[:group_name], sc_service: params[:sc_service]}
   end
 
   private

@@ -38,6 +38,7 @@
 //= require ns/ns_callback.js
 //= require rx/rx.js
 //= require encrypted_field
+//= require inw/inw.js
 
 jQuery.fn.extend({
     live: function (event, callback) {
