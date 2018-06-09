@@ -2,6 +2,7 @@
 //= require chosen-jquery
 //= require_tree ./active_admin
 //= require activeadmin-sortable
+//= require encrypted_field
 
 $(document).ready(function(){
   $(".ui-datepicker-inline").width("75em");

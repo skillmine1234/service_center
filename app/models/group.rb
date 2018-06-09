@@ -22,7 +22,7 @@ class Group < ActiveRecord::Base
     when "salary-upload"
       ['IncomingFile','SuCustomer','SuUnapprovedRecord','SuIncomingRecord','FmAuditStep','SuIncomingFile']
     when "instant-credit"
-      ['IncomingFile','IcIncomingRecord','IncomingFileRecord','IcCustomer','IcSupplier','IcUnapprovedRecord','IcInvoice','FmAuditStep','IcIncomingFile','Ic001IncomingRecord','Ic001IncomingFile']
+      Qg::Ic::MODELS
     when "smb"
       Qg::Sm::MODELS
     when "cnb"

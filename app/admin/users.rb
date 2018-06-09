@@ -59,6 +59,46 @@ ActiveAdmin.register User do
       row :updated_at
     end
   end
+  
+  controller do
+    include EncryptedField::ControllerAdditions
+
+    def create
+      @user = User.new(permitted_params[:user])
+      unless (CONFIG[:authenticate_devise_with_ldap] || Rails.env.test?)
+        @user.password = decrypt_encrypted_field(permitted_params[:user][:password])
+        @user.password_confirmation = decrypt_encrypted_field(permitted_params[:user][:password_confirmation])
+      end
+      if !@user.valid?
+        render "new"
+      else
+        @user.save!
+        flash[:alert] = 'User successfully created!'
+        redirect_to :action => 'show', :id => @user.id
+      end
+    end 
+
+    def update
+      @user = User.find_by_id(params[:id])
+      @user.attributes = permitted_params[:user]
+      unless (CONFIG[:authenticate_devise_with_ldap] || Rails.env.test?)
+        @user.password = decrypt_encrypted_field(permitted_params[:user][:password])
+        @user.password_confirmation = decrypt_encrypted_field(permitted_params[:user][:password_confirmation])
+      end
+      if !@user.valid?
+        flash[:error] = @user.errors.full_messages
+        render "edit"
+      else
+        @user.save!
+        flash[:alert] = 'User successfully modified!'
+        redirect_to :action => 'show', :id => @user.id
+      end
+      rescue ActiveRecord::StaleObjectError
+        @user.reload
+        flash[:alert] = 'Someone edited the user the same time you did. Please re-apply your changes to the user.'
+        render "edit"
+    end
+  end
 
   form :partial => "form"
 

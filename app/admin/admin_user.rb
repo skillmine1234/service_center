@@ -63,11 +63,13 @@ ActiveAdmin.register AdminUser do
   end
 
   form do |f|
+    @public_key = encrypted_field_public_key if @public_key.nil?
+    f.hidden_field :public_key, value: @public_key, id: 'public_key'
     f.inputs "Admin Details" do
       f.input :username
       f.input :email
-      f.input :password
-      f.input :password_confirmation
+      f.input :password, input_html: { data: { encrypt: true } }
+      f.input :password_confirmation, input_html: { data: { encrypt: true } }
       f.input :inactive
     end
     f.actions
@@ -134,6 +136,44 @@ ActiveAdmin.register AdminUser do
     user = AdminUser.find(params[:id])
     user.remove_role :admin if current_admin_user.has_role? :super_admin
     redirect_to :back
+  end
+  
+  controller do
+    include EncryptedField::ControllerAdditions
+
+    def create
+      @admin_user = AdminUser.new(permitted_params[:admin_user])
+      unless Rails.env.test?
+        @admin_user.password = decrypt_encrypted_field(permitted_params[:admin_user][:password])
+        @admin_user.password_confirmation = decrypt_encrypted_field(permitted_params[:admin_user][:password_confirmation])
+      end
+      if !@admin_user.valid?
+        render "new"
+      else
+        @admin_user.save!
+        flash[:alert] = 'Admin User successfully created!'
+        redirect_to :action => 'show', :id => @admin_user.id
+      end
+    end 
+
+    def update
+      @admin_user = AdminUser.find_by_id(params[:id])
+      @admin_user.attributes = permitted_params[:admin_user]
+      @admin_user.password = decrypt_encrypted_field(permitted_params[:admin_user][:password])
+      @admin_user.password_confirmation = decrypt_encrypted_field(permitted_params[:admin_user][:password_confirmation])
+      if !@admin_user.valid?
+        flash[:error] = @admin_user.errors.full_messages
+        render "edit"
+      else
+        @admin_user.save!
+        flash[:alert] = 'Admin User successfully modified!'
+        redirect_to :action => 'show', :id => @admin_user.id
+      end
+      rescue ActiveRecord::StaleObjectError
+        @admin_user.reload
+        flash[:alert] = 'Someone edited the user the same time you did. Please re-apply your changes to the user.'
+        render "edit"
+    end
   end
 
   csv :download_links => true do

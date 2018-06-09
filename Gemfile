@@ -55,23 +55,26 @@ gem 'simple_enum-multiple'
 gem 'draper'
 gem 'font-awesome-rails'
 
+gem 'encrypted_field', '0.1.6'
+
 source "https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/" do
   gem 'qg-icol', '1.1.5'
   gem 'qg-ecol', '1.6.0'
   gem 'qg-bm', '1.0.3'
   gem 'qg-asba', '1.0.2'
   gem 'qg-sm', '1.0.3'
-  gem 'qg-ssp', '1.0.9'
+  gem 'qg-ssp', '2.0.0'
   gem 'qg-imt', '1.1.11'
   gem 'qg-fp', '1.0.6'
   gem 'qg-ft', '1.2.5'
-  gem 'qg-sc', '1.1.3'
+  gem 'qg-sc', '1.1.4'
   gem 'qg-gm', '1.1.6'
   gem 'qg-cc', '1.2.3'
   gem 'qg-cp', '1.0.2'
   gem 'qg-ae', '1.0.1'
   gem 'qg-ns', '1.0.3'
-  gem 'qg-rx', '1.1.3'
+  gem 'qg-rx', '1.1.7'
+  gem 'qg-ic', '1.0.5'
 end
 
 # oracle is required only in production, CI tools run against sqlite3

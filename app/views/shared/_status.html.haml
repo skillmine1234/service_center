@@ -1,7 +1,7 @@
 - btn_class = case object.status_code; when :COMPLETED, :Y, :S; 'btn-success'; when :FAILED, :RETURNED_FROM_BENEFICIARY, :F; 'btn-danger'; when nil , "";  else 'btn-info'; end
 %button.btn.btn-xs{"data-target": "##{id}", "data-toggle": "modal", type: "button", class: btn_class} #{object.status_code || "NA"}
 - if [:FAILED, :RETURNED_FROM_BENEFICIARY, :F].include?(object.status_code)
-  .modal.fade{role: "dialog", id: "#{id}"}
+  .modal.hide.fade{role: "dialog", id: "#{id}"}
     .modal-dialog
       .modal-content
         .modal-header

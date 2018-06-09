@@ -20,13 +20,6 @@ ScService.seed_once(:code) do |s|
 end
 
 ScService.seed_once(:code) do |s|
-  s.code = 'INSTANTCREDIT'
-  s.name = 'Instant Credit'
-  s.approval_status = 'A'
-  s.created_by = 'Q'
-end
-
-ScService.seed_once(:code) do |s|
   s.code = 'FUNDSTRANSFER'
   s.name = 'Funds Transfer'
   s.url = 'https://uatsky.yesbank.in/app/uat/fundsTransferByCustomerService2'
@@ -134,25 +127,6 @@ IncomingFileType.seed(:sc_service_id, :code) do |s|
   s.skip_last = 'N'
   s.complete_with_failed_records = 'N'
   s.apprv_before_process_records = 'Y'
-end
-
-IncomingFileType.seed(:sc_service_id, :code) do |s|
-  s.sc_service_id = ScService.find_by(code: 'INSTANTCREDIT').id
-  s.code = 'PAYNOW'
-  s.name = 'REPAYMENT'
-  s.msg_domain = 'DFDL'
-  s.msg_model = '{http://www.quantiguous.com/services/file}:repayCredit'
-  s.skip_first = 'Y'
-  s.auto_upload = 'Y'
-  s.validate_all = 'Y'
-  s.build_response_file = 'Y' 
-  s.db_unit_name = "pk_qg_ic_file_manager"
-  s.records_table = 'ic_incoming_records'
-  s.can_override = 'N'
-  s.can_skip = 'Y'
-  s.can_retry = 'Y'
-  s.build_nack_file = 'N'
-  s.skip_last = 'N'
 end
   
 IncomingFileType.seed(:sc_service_id, :code) do |s|
