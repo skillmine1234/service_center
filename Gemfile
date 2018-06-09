@@ -73,7 +73,7 @@ source "https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/" do
   gem 'qg-cp', '1.0.2'
   gem 'qg-ae', '1.0.1'
   gem 'qg-ns', '1.0.3'
-  gem 'qg-rx', '1.1.3'
+  gem 'qg-rx', '1.1.7'
 end
 
 # oracle is required only in production, CI tools run against sqlite3
