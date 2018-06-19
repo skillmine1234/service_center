@@ -62,7 +62,7 @@ source "https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/" do
   gem 'qg-ecol', '1.6.0'
   gem 'qg-bm', '1.0.3'
   gem 'qg-asba', '1.0.2'
-  gem 'qg-sm', '1.0.3'
+  gem 'qg-sm', '1.0.9.1'
   gem 'qg-ssp', '2.0.0'
   gem 'qg-imt', '1.1.11'
   gem 'qg-fp', '1.0.8'
