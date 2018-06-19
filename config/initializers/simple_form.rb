@@ -25,6 +25,7 @@ SimpleForm.setup do |config|
     b.wrapper :tag => 'div', :class => 'control-group' do |c|
       c.use :label
       c.use :input
+      c.use :error, wrap_with: { tag: 'class', class: 'horizontal_form_error' }
     end
   end
   

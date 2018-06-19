@@ -56,4 +56,10 @@ module Approval
   def enable_approve_button?
     self.approval_status == 'U' ? true : false
   end
+  
+  def enable_reject_button?
+    # only unaproved records are allowed to be destroyed
+    self.approval_status == 'U'
+  end
+  
 end
