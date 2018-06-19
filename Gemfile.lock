@@ -328,7 +328,7 @@ GEM
       rails (= 4.2.2)
     qg-cp (1.0.2)
       rails (= 4.2.2)
-    qg-ecol (1.6.0)
+    qg-ecol (1.6.2)
       rails (= 4.2.2)
     qg-fp (1.0.8)
       rails (~> 4.2.2)
@@ -591,7 +591,7 @@ DEPENDENCIES
   qg-bm (= 1.0.3)!
   qg-cc (= 1.2.3)!
   qg-cp (= 1.0.2)!
-  qg-ecol (= 1.6.0)!
+  qg-ecol (= 1.6.2)!
   qg-fp (= 1.0.8)!
   qg-ft (= 1.2.5)!
   qg-gm (= 1.1.6)!
