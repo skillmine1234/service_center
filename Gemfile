@@ -58,7 +58,7 @@ gem 'font-awesome-rails'
 gem 'encrypted_field', '0.1.6'
 
 source "https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/" do
-  gem 'qg-icol', '1.1.5'
+  gem 'qg-icol', '1.1.8'
   gem 'qg-ecol', '1.6.0'
   gem 'qg-bm', '1.0.3'
   gem 'qg-asba', '1.0.2'
