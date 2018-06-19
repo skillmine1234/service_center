@@ -208,6 +208,7 @@ ServiceCenter::Application.routes.draw do
   
   get '/iam_cust_users/:id/audit_logs' => 'iam_cust_users#audit_logs'
   put '/iam_cust_users/:id/approve' => "iam_cust_users#approve"
+  get '/iam_audit_rule_error_msg' => "iam_audit_rules#error_msg"
   
   get '/version' => 'dashboard#version'
   get '/env_config' => 'dashboard#env_config'
