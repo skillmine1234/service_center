@@ -147,7 +147,6 @@ ServiceCenter::Application.routes.draw do
   get 'fr_r01_incoming_file_summary' => 'fr_r01_incoming_records#incoming_file_summary'
   get 'rr_incoming_file_summary' => 'rr_incoming_records#incoming_file_summary'
   get 'override_records' => 'incoming_files#override_records'
-  put '/incoming_file/:id/approve' => "incoming_files#approve"
   get 'incoming_files/:id/audit_steps/:step_name' => 'incoming_files#audit_steps'
   get 'incoming_file_records/:id/audit_steps/:step_name' => 'incoming_file_records#audit_steps'
   get 'rc_transfers/:id/audit_steps/:step_name' => 'rc_transfers#audit_steps'
@@ -184,9 +183,6 @@ ServiceCenter::Application.routes.draw do
   put '/su_customers/:id/approve' => "su_customers#approve"
   put '/ic_customers/:id/approve' => "ic_customers#approve"
   put '/ic_suppliers/:id/approve' => "ic_suppliers#approve"
-
-  get '/sm_banks/:id/audit_logs' => 'sm_banks#audit_logs'
-  get '/sm_bank_accounts/:id/audit_logs' => 'sm_bank_accounts#audit_logs'
 
   put '/sm_banks/:id/approve' => "sm_banks#approve"
   put '/sm_bank_accounts/:id/approve' => 'sm_bank_accounts#approve'
