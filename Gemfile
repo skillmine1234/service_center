@@ -57,6 +57,8 @@ gem 'font-awesome-rails'
 
 gem 'encrypted_field', '0.1.6'
 
+gem 'qg-inw', '2.1.0', :git => "https://3ff7bdae30f941d499c9baadb31a8cb8c50cc9f3:x-oauth-basic@github.com/quantiguous/qg-inw.git"
+
 source "https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/" do
   gem 'qg-icol', '1.1.8'
   gem 'qg-ecol', '1.6.2'
@@ -70,7 +72,6 @@ source "https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/" do
   gem 'qg-sc', '1.1.4'
   gem 'qg-gm', '1.1.6'
   gem 'qg-cc', '1.2.3'
-  gem 'qg-inw', '1.0.5.1'
   gem 'qg-cp', '1.0.2'
   gem 'qg-ae', '1.0.1'
   gem 'qg-ns', '1.0.3'
@@ -81,7 +82,7 @@ end
 # oracle is required only in production, CI tools run against sqlite3
 group :production do
   gem 'activerecord-oracle_enhanced-adapter',:git => 'git://github.com/rsim/oracle-enhanced.git'
-  gem 'ruby-oci8'
+  gem 'ruby-oci8', '2.2.5.1'
   gem 'bcdatabase'
   gem 'passenger'
   gem 'rails_12factor'

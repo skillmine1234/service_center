@@ -36,6 +36,13 @@ GIT
   specs:
     rools (0.4.1)
 
+GIT
+  remote: https://3ff7bdae30f941d499c9baadb31a8cb8c50cc9f3:x-oauth-basic@github.com/quantiguous/qg-inw.git
+  revision: 1b1c26303869058228418b393004e694ae86a667
+  specs:
+    qg-inw (2.1.0)
+      rails (= 4.2.2)
+
 GEM
   remote: https://rubygems.org/
   remote: https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/
@@ -344,8 +351,6 @@ GEM
       rails (= 4.2.2)
     qg-imt (1.1.11)
       rails (~> 4.2.2)
-    qg-inw (1.0.5.1)
-      rails (= 4.2.2)
     qg-ns (1.0.3)
       rails (~> 4.2.2)
     qg-rx (1.1.7)
@@ -429,7 +434,7 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
-    ruby-oci8 (2.1.8)
+    ruby-oci8 (2.2.5.1)
     ruby-plsql (0.6.0)
     ruby_parser (3.7.0)
       sexp_processor (~> 4.1)
@@ -598,7 +603,7 @@ DEPENDENCIES
   qg-ic (= 1.0.6)!
   qg-icol (= 1.1.8)!
   qg-imt (= 1.1.11)!
-  qg-inw (= 1.0.5.1)!
+  qg-inw (= 2.1.0)!
   qg-ns (= 1.0.3)!
   qg-rx (= 1.1.7)!
   qg-sc (= 1.1.4)!
@@ -614,7 +619,7 @@ DEPENDENCIES
   rp!
   rspec
   rspec-rails (= 2.14.0)
-  ruby-oci8
+  ruby-oci8 (= 2.2.5.1)
   ruby-plsql
   rufus-scheduler
   sass-rails
@@ -649,4 +654,4 @@ RUBY VERSION
    ruby 2.2.2p95
 
 BUNDLED WITH
-   1.16.0
+   1.16.2
