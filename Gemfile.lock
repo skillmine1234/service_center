@@ -37,8 +37,9 @@ GIT
     rools (0.4.1)
 
 GIT
-  remote: https://3ff7bdae30f941d499c9baadb31a8cb8c50cc9f3:x-oauth-basic@github.com/quantiguous/qg-inw.git
+  remote: https://63a08a2c0cadd7cd728a04427884dd0406241d55:x-oauth-basic@github.com/quantiguous/qg-inw.git
   revision: 1b1c26303869058228418b393004e694ae86a667
+  branch: prod
   specs:
     qg-inw (2.1.0)
       rails (= 4.2.2)
