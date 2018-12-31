@@ -57,7 +57,7 @@ gem 'font-awesome-rails'
 
 gem 'encrypted_field', '0.1.6'
 
-gem 'qg-inw', '2.1.0', :git => "https://63a08a2c0cadd7cd728a04427884dd0406241d55:x-oauth-basic@github.com/quantiguous/qg-inw.git", branch: 'prod'
+gem 'qg-inw', '2.1.0', :git => "https://63a08a2c0cadd7cd728a04427884dd0406241d55:x-oauth-basic@github.com/quantiguous/qg-inw.git", branch: 'prod_hot_issue'
 
 source "https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/" do
   gem 'qg-icol', '1.1.8'

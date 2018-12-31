@@ -38,8 +38,8 @@ GIT
 
 GIT
   remote: https://63a08a2c0cadd7cd728a04427884dd0406241d55:x-oauth-basic@github.com/quantiguous/qg-inw.git
-  revision: 1b1c26303869058228418b393004e694ae86a667
-  branch: prod
+  revision: 197592129babf09f7302e767e2b3bddcdaa1f9a3
+  branch: prod_hot_issue
   specs:
     qg-inw (2.1.0)
       rails (= 4.2.2)
