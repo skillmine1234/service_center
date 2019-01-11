@@ -57,27 +57,24 @@ gem 'font-awesome-rails'
 
 gem 'encrypted_field', '0.1.6'
 
-gem 'qg-inw', '2.1.0', :git => "https://63a08a2c0cadd7cd728a04427884dd0406241d55:x-oauth-basic@github.com/quantiguous/qg-inw.git", branch: 'prod_hot_issue'
-
-source "https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/" do
-  gem 'qg-icol', '1.1.8'
-  gem 'qg-ecol', '1.6.2'
-  gem 'qg-bm', '1.0.3'
-  gem 'qg-asba', '1.0.4'
-  gem 'qg-sm', '1.0.9.1'
-  gem 'qg-ssp', '2.0.0'
-  gem 'qg-imt', '1.1.11'
-  gem 'qg-fp', '1.0.8'
-  gem 'qg-ft', '1.2.5'
-  gem 'qg-sc', '1.1.4'
-  gem 'qg-gm', '1.1.6'
-  gem 'qg-cc', '1.2.3'
-  gem 'qg-cp', '1.0.2'
-  gem 'qg-ae', '1.0.1'
-  gem 'qg-ns', '1.0.3'
-  gem 'qg-rx', '1.1.7'
-  gem 'qg-ic', '1.0.6'
-end
+gem 'qg-inw', '2.1.1', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git", branch: 'prod_hot_issue'
+gem 'qg-icol', '1.1.8', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-icol.git"
+gem 'qg-ecol', '1.6.2', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ecol.git"
+gem 'qg-bm', '1.0.3', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-bm.git"
+gem 'qg-asba', '1.0.4', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-asba.git"
+gem 'qg-sm', '1.0.9', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-sm.git"
+gem 'qg-ssp', '2.0.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ssp.git"
+gem 'qg-imt', '1.1.11', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-imt.git"
+gem 'qg-fp', '1.0.8', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-fp.git"
+gem 'qg-ft', '1.2.6', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ft.git"
+gem 'qg-sc', '1.1.4', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-sc.git"
+gem 'qg-gm', '1.1.6', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-gm.git", branch: 'production'
+gem 'qg-cc', '1.2.3', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-cc.git"
+gem 'qg-cp', '1.0.2', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-cp.git"
+gem 'qg-ae', '1.0.1', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ae.git"
+gem 'qg-ns', '1.0.3', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ns.git"
+gem 'qg-rx', '1.1.7', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-rx.git"
+gem 'qg-ic', '1.0.7', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ic.git"
 
 # oracle is required only in production, CI tools run against sqlite3
 group :production do

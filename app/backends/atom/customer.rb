@@ -15,7 +15,7 @@ class Atom::Customer < Atom
   end
 
   def imps_allowed?(fcr_mobile_no)
-    (mobileno == fcr_mobile_no && isactive == '1') ? true : false
+    ( isactive == '1') ? true : false
   end
 
 end

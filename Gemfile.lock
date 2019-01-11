@@ -37,16 +37,137 @@ GIT
     rools (0.4.1)
 
 GIT
-  remote: https://63a08a2c0cadd7cd728a04427884dd0406241d55:x-oauth-basic@github.com/quantiguous/qg-inw.git
-  revision: 197592129babf09f7302e767e2b3bddcdaa1f9a3
+  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ae.git
+  revision: d7e12310743fe01adf21604b0dc76d9800cccfd9
+  specs:
+    qg-ae (1.0.1)
+      rails (= 4.2.2)
+
+GIT
+  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-asba.git
+  revision: 43d8194146fffdf335c9187687b31c4fe1dd304d
+  specs:
+    qg-asba (1.0.4)
+      rails (= 4.2.2)
+
+GIT
+  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-bm.git
+  revision: 4e91d8ed5287686124913daaaf65cbcb9fa07e11
+  specs:
+    qg-bm (1.0.3)
+      rails (= 4.2.2)
+
+GIT
+  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-cc.git
+  revision: 63b07d2161a32cb63c10cb3d1ba3b4ba79d7fa70
+  specs:
+    qg-cc (1.2.3)
+      rails (= 4.2.2)
+
+GIT
+  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-cp.git
+  revision: 4b88103fbeabfc6358b96935add68eaf59a4e8a9
+  specs:
+    qg-cp (1.0.2)
+      rails (= 4.2.2)
+
+GIT
+  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ecol.git
+  revision: 5c89a0a163f7448118f04dcad1a1350374323e68
+  specs:
+    qg-ecol (1.6.2)
+      rails (= 4.2.2)
+
+GIT
+  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-fp.git
+  revision: 750c2227b19f1419f71c1d2269b83b97c7eca7fa
+  specs:
+    qg-fp (1.0.8)
+      rails (~> 4.2.2)
+
+GIT
+  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ft.git
+  revision: 1ee3c0203549a7617bd6fe56ed531b851b38753f
+  specs:
+    qg-ft (1.2.6)
+      draper
+      pundit
+      rails (>= 4.2.2)
+
+GIT
+  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-gm.git
+  revision: 42ba247c3ed58f7543b784c20da2d5f86825bf1d
+  branch: production
+  specs:
+    qg-gm (1.1.6)
+      rails (= 4.2.2)
+
+GIT
+  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ic.git
+  revision: 53a54a0bb7582bea833a863d7e3ecaec8a42fced
+  specs:
+    qg-ic (1.0.7)
+      rails (= 4.2.2)
+
+GIT
+  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-icol.git
+  revision: 9687c3c6af84e1ea6da3f55d352b35122898966f
+  specs:
+    qg-icol (1.1.8)
+      rails (= 4.2.2)
+
+GIT
+  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-imt.git
+  revision: f932b718ff8b0eca75786a3060d0f3ee979adb37
+  specs:
+    qg-imt (1.1.11)
+      rails (~> 4.2.2)
+
+GIT
+  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git
+  revision: 84f8ec260adb790b2a786e1d3048764f57b2ab87
   branch: prod_hot_issue
   specs:
-    qg-inw (2.1.0)
+    qg-inw (2.1.1)
+      rails (= 4.2.2)
+
+GIT
+  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ns.git
+  revision: ffaf9d04788954ac2b8890e9138ab012c0b341b7
+  specs:
+    qg-ns (1.0.3)
+      rails (~> 4.2.2)
+
+GIT
+  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-rx.git
+  revision: b89e7946fd43f1f916db37f6e591c91830c1d5ad
+  specs:
+    qg-rx (1.1.7)
+      rails (= 4.2.2)
+
+GIT
+  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-sc.git
+  revision: 3829f996b24fc4e49b398448892e0956a253dcd9
+  specs:
+    qg-sc (1.1.4)
+      rails (~> 4.2.2)
+
+GIT
+  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-sm.git
+  revision: ac45cfcf7e27faf777d5dbd12a1c4886c949be17
+  specs:
+    qg-sm (1.0.9)
+      rails (~> 4.2.2)
+
+GIT
+  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ssp.git
+  revision: 91ad0910c7ae18e89b2ec1f7df0fb7d818faa764
+  specs:
+    qg-ssp (2.0.0)
       rails (= 4.2.2)
 
 GEM
   remote: https://rubygems.org/
-  remote: https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/
   specs:
     actionmailer (4.2.2)
       actionpack (= 4.2.2)
@@ -326,42 +447,6 @@ GEM
       options (~> 2.3.0)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
-    qg-ae (1.0.1)
-      rails (= 4.2.2)
-    qg-asba (1.0.4)
-      rails (= 4.2.2)
-    qg-bm (1.0.3)
-      rails (= 4.2.2)
-    qg-cc (1.2.3)
-      rails (= 4.2.2)
-    qg-cp (1.0.2)
-      rails (= 4.2.2)
-    qg-ecol (1.6.2)
-      rails (= 4.2.2)
-    qg-fp (1.0.8)
-      rails (~> 4.2.2)
-    qg-ft (1.2.5)
-      draper
-      pundit
-      rails (>= 4.2.2)
-    qg-gm (1.1.6)
-      rails (= 4.2.2)
-    qg-ic (1.0.6)
-      rails (= 4.2.2)
-    qg-icol (1.1.8)
-      rails (= 4.2.2)
-    qg-imt (1.1.11)
-      rails (~> 4.2.2)
-    qg-ns (1.0.3)
-      rails (~> 4.2.2)
-    qg-rx (1.1.7)
-      rails (= 4.2.2)
-    qg-sc (1.1.4)
-      rails (~> 4.2.2)
-    qg-sm (1.0.9.1)
-      rails (~> 4.2.2)
-    qg-ssp (2.0.0)
-      rails (= 4.2.2)
     rack (1.6.8)
     rack-accept (0.4.5)
       rack (>= 0.4)
@@ -599,16 +684,16 @@ DEPENDENCIES
   qg-cp (= 1.0.2)!
   qg-ecol (= 1.6.2)!
   qg-fp (= 1.0.8)!
-  qg-ft (= 1.2.5)!
+  qg-ft (= 1.2.6)!
   qg-gm (= 1.1.6)!
-  qg-ic (= 1.0.6)!
+  qg-ic (= 1.0.7)!
   qg-icol (= 1.1.8)!
   qg-imt (= 1.1.11)!
-  qg-inw (= 2.1.0)!
+  qg-inw (= 2.1.1)!
   qg-ns (= 1.0.3)!
   qg-rx (= 1.1.7)!
   qg-sc (= 1.1.4)!
-  qg-sm (= 1.0.9.1)!
+  qg-sm (= 1.0.9)!
   qg-ssp (= 2.0.0)!
   rails (= 4.2.2)
   rails_12factor

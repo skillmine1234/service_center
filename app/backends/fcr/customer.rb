@@ -9,7 +9,8 @@ class Fcr::Customer < ArFcr
   
   def transfer_type_allowed?(transfer_type)
     if transfer_type == 'NEFT'
-      (ref_phone_mobile.present? && ref_cust_email.present?) ? true : false
+      #(ref_phone_mobile.present? && ref_cust_email.present?) ? true : false
+      true
     end
   end
   
