@@ -7,33 +7,33 @@
 - if @current_user.group_names.include?("prepaid-card")
   %h1 Prepaid Card
   .slide-container
-    .box  
+    .box
       = link_to incoming_files_path(:sc_service => "PPC") do
         = image_tag 'upload.png', :size => "80x80"
       %br
         = "File Uploads"
-    .box  
+    .box
       = link_to '/pc_unapproved_records' do
         = image_tag 'work-list.jpg', :size => "80x80"
       %br
         = "Approval Worklist"
   .slide-container
-    .box  
+    .box
       = link_to '/pc_programs' do
         = image_tag 'pc_programs.gif', :size => "80x80"
       %br
         = "PC Programs"
-    .box  
+    .box
       = link_to '/pc_products' do
         = image_tag 'prepaid-card-products.png', :size => "80x80"
       %br
         = "PC Products"
-    .box  
+    .box
       = link_to '/pc_apps' do
         = image_tag 'pc_apps.png', :size => "80x80"
       %br
         = "PC Apps"
-    .box  
+    .box
       = link_to '/pc_fee_rules' do
         = image_tag 'pc_fee_rules.png', :size => "80x80"
       %br
@@ -47,7 +47,7 @@
 - if @current_user.group_names.include?("salary-upload")
   %h1 Salary Upload
   .slide-container
-    .box  
+    .box
       = link_to incoming_files_path(:sc_service => "SALARY") do
         = image_tag 'upload.png', :size => "80x80"
       %br
@@ -68,7 +68,7 @@
       %br
         = "Generated Reports"
   .slide-container
-    .box  
+    .box
       = link_to '/su_customers' do
         = image_tag 'su_customers_icon.png', :size => "80x80"
       %br
@@ -79,7 +79,7 @@
 - if @current_user.group_names.include?("prepaid-card2")
   %h1 Prepaid Card2
   .slide-container
-    .box  
+    .box
       = link_to unapproved_records_path(group_name: 'prepaid-card2') do
         = image_tag 'work-list.jpg', :size => "80x80"
       %br
@@ -101,12 +101,12 @@
 - if @current_user.group_names.include?("cnb")
   %h1 Corporate Net Banking
   .slide-container
-    .box  
+    .box
       = link_to incoming_files_path(:sc_service => "CNB") do
         = image_tag 'upload.png', :size => "80x80"
       %br
         = "File Uploads"
-    .box  
+    .box
       = link_to '/cn_unapproved_records' do
         = image_tag 'work-list.jpg', :size => "80x80"
       %br
@@ -115,7 +115,7 @@
 - if @current_user.group_names.include?("recurring-transfer")
   %h1 Recurring Transfer
   .slide-container
-    .box  
+    .box
       = link_to '/rc_transfer_unapproved_records' do
         = image_tag 'work-list.jpg', :size => "80x80"
       %br
@@ -160,12 +160,12 @@
 - if @current_user.group_names.include?("rr")
   %h1 Reconciled Returns
   .slide-container
-    .box  
+    .box
       = link_to incoming_files_path(:sc_service => "RR") do
         = image_tag 'upload.png', :size => "80x80"
       %br
         = "File Uploads"
-    .box  
+    .box
       = link_to '/rr_unapproved_records' do
         = image_tag 'work-list.jpg', :size => "80x80"
       %br
@@ -179,12 +179,12 @@
 - if @current_user.group_names.include?("fr")
   %h1 File Reports
   .slide-container
-    .box  
+    .box
       = link_to incoming_files_path(:sc_service => "FR") do
         = image_tag 'upload.png', :size => "80x80"
       %br
         = "File Uploads"
-    .box  
+    .box
       = link_to unapproved_records_path(group_name: 'fr', sc_service: 'FR') do
         = image_tag 'work-list.jpg', :size => "80x80"
       %br
@@ -192,7 +192,7 @@
 - if @current_user.group_names.include?("iam")
   %h1 Identity & Access Management
   .slide-container
-    .box  
+    .box
       = link_to '/unapproved_records?group_name=iam' do
         = image_tag 'work-list.jpg', :size => "80x80"
       %br
@@ -227,12 +227,12 @@
 - if @current_user.group_names.include?("fr")
   %h1 File Reports
   .slide-container
-    .box  
+    .box
       = link_to incoming_files_path(:sc_service => "FR") do
         = image_tag 'upload.png', :size => "80x80"
       %br
         = "File Uploads"
-    .box  
+    .box
       = link_to unapproved_records_path(group_name: 'fr', sc_service: 'FR') do
         = image_tag 'work-list.jpg', :size => "80x80"
       %br
@@ -247,3 +247,4 @@
 = render partial: 'panel', locals: { group: 'cp', sc_service: 'CP' }
 = render partial: 'panel', locals: { group: 'ae'}
 = render partial: 'panel', locals: { group: 'rx'}
+= render partial: 'panel', locals: { group: 'rpl'}

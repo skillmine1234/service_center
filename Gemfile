@@ -56,7 +56,8 @@ gem 'draper'
 gem 'font-awesome-rails'
 
 gem 'encrypted_field', '0.1.6'
-
+gem 'savon', '~> 2.0'
+gem 'qg-rpl', '1.0.6', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-rpl.git"
 gem 'qg-inw', '2.2.2', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git", branch: 'prod_hot_issue'
 gem 'qg-icol', '1.1.8', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-icol.git"
 gem 'qg-ecol', '1.6.3', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ecol.git",branch: "submember-banks"
