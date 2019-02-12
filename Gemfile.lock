@@ -126,10 +126,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git
-  revision: 84f8ec260adb790b2a786e1d3048764f57b2ab87
+  revision: c7a87a3904d4770627a4d055b3c9308cff1a08d4
   branch: prod_hot_issue
   specs:
-    qg-inw (2.1.1)
+    qg-inw (2.2.2)
       rails (= 4.2.2)
 
 GIT
@@ -690,7 +690,7 @@ DEPENDENCIES
   qg-ic (= 1.0.7)!
   qg-icol (= 1.1.8)!
   qg-imt (= 1.1.11)!
-  qg-inw (= 2.1.1)!
+  qg-inw (= 2.2.2)!
   qg-ns (= 1.0.3)!
   qg-rx (= 1.1.7)!
   qg-sc (= 1.1.4)!
