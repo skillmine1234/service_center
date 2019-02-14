@@ -126,7 +126,7 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git
-  revision: c7a87a3904d4770627a4d055b3c9308cff1a08d4
+  revision: 3fccd64652d80074a278262bae094c0b94e7a581
   branch: prod_hot_issue
   specs:
     qg-inw (2.2.2)
