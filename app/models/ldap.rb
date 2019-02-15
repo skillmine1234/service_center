@@ -43,7 +43,7 @@ class LDAP
     @ldap.auth  @admin_user, @admin_password
     @ldap_bind = @ldap.bind
     Rails.logger.info "===========ldap bind response===========================" if ENV['LDAP_LOGGERS_ENABLED'] == "true" rescue nil
-    Rails.logger.info @ldap_bind.inspect rescue nil
+    Rails.logger.info @ldap_bind.inspect if ENV['LDAP_LOGGERS_ENABLED'] == "true" rescue nil
     Rails.logger.info "================================================" if ENV['LDAP_LOGGERS_ENABLED'] == "true" rescue nil
     raise LDAPFault.new(nil, @ldap.get_operation_result) if @ldap_bind == false
   end
