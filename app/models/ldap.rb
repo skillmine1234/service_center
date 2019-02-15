@@ -71,15 +71,6 @@ class LDAP
         :userPassword => password
      }
 
-
-     Rails.logger.info "===========ad_attr object===============================================" if ENV['LDAP_LOGGERS_ENABLED'] == "true"  rescue nil
-     Rails.logger.info ad_attr.inspect if ENV['LDAP_LOGGERS_ENABLED'] == "true"  rescue nil
-     Rails.logger.info "=========================================================================" if ENV['LDAP_LOGGERS_ENABLED'] == "true"  rescue nil
-
-     Rails.logger.info "===========ad_attr object===============================================" if ENV['LDAP_LOGGERS_ENABLED'] == "true"  rescue nil
-     Rails.logger.info ol_attr.inspect if ENV['LDAP_LOGGERS_ENABLED'] == "true"  rescue nil
-     Rails.logger.info "=========================================================================" if ENV['LDAP_LOGGERS_ENABLED'] == "true"  rescue nil
-
      if @ldap_kind == 'openldap'
        res = @ldap.add(:dn => dn, :attributes => ol_attr)
        Rails.logger.info "============ldap add response in open ldap ========ldap_kind=#{@ldap_kind}============" if ENV['LDAP_LOGGERS_ENABLED'] == "true"  rescue nil
