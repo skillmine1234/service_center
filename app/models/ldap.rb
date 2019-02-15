@@ -28,7 +28,6 @@ class LDAP
     @ldap = Net::LDAP.new
 
     config = read_config
-
     @ldap.encryption(config['ssl']) if config['ssl'] == :simple_tls
     @ldap.host = config['host']
     @ldap.port = config['port']
@@ -42,8 +41,11 @@ class LDAP
     @ldap_kind = config['kind']
 
     @ldap.auth  @admin_user, @admin_password
-
-    raise LDAPFault.new(nil, @ldap.get_operation_result) if @ldap.bind == false
+    @ldap_bind = @ldap.bind
+    Rails.logger.info "===========ldap bind response===========================" if ENV['LDAP_LOGGERS_ENABLED'] == "true" rescue nil
+    Rails.logger.info @ldap_bind.inspect rescue nil
+    Rails.logger.info "================================================" if ENV['LDAP_LOGGERS_ENABLED'] == "true" rescue nil
+    raise LDAPFault.new(nil, @ldap.get_operation_result) if @ldap_bind == false
   end
 
   def add_user(username, password)
