@@ -37,15 +37,17 @@ class LDAP
 
     @admin_user = "CN=#{config['admin_user']},#{@base}"
     @admin_password = config['admin_password']
-
     @ldap_kind = config['kind']
-
-    Rails.logger.info "===========config ===========================" if ENV['LDAP_LOGGERS_ENABLED'] == "true" rescue nil
-    Rails.logger.info config.inspect if ENV['LDAP_LOGGERS_ENABLED'] == "true" rescue nil
-    Rails.logger.info "================================================" if ENV['LDAP_LOGGERS_ENABLED'] == "true" rescue nil
-
     @ldap.auth  @admin_user, @admin_password
     @ldap_bind = @ldap.bind
+
+    Rails.logger.info "=========== config ===========================" if ENV['LDAP_LOGGERS_ENABLED'] == "true" rescue nil
+    config_obj = config if ENV['LDAP_LOGGERS_ENABLED'] == "true"  rescue nil
+    config_obj["admin_password"] = "xxxxxxxxx" if ENV['LDAP_LOGGERS_ENABLED'] == "true"  rescue nil
+    Rails.logger.info config_obj.inspect if ENV['LDAP_LOGGERS_ENABLED'] == "true" rescue nil
+    Rails.logger.info "================================================" if ENV['LDAP_LOGGERS_ENABLED'] == "true" rescue nil
+
+
     Rails.logger.info "===========ldap bind response===========================" if ENV['LDAP_LOGGERS_ENABLED'] == "true" rescue nil
     Rails.logger.info @ldap_bind.inspect if ENV['LDAP_LOGGERS_ENABLED'] == "true" rescue nil
     Rails.logger.info "================================================" if ENV['LDAP_LOGGERS_ENABLED'] == "true" rescue nil
