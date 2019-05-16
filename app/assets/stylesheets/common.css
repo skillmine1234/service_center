@@ -139,3 +139,32 @@ a:hover {
   word-wrap: break-word;
   white-space: pre-wrap;
 }
+.datepicker{
+  width:75px;
+}
+#get_balance_api_form{
+  height: 150px;
+  width: 560px;
+  float: left;
+}
+#statement_api_form{
+  width: 500px;
+  float: right;
+  margin-right: 300px;
+  margin-top: 75px;
+}
+#customer_form{
+  width: 960px;
+  margin-top: 15px;
+}
+#statement_data{
+  margin-top: 150px;
+}
+#download_csv_btn
+{
+  height: 20px;
+  width: 100px;
+  text-decoration-style: bold;
+  float: right;
+}
+
