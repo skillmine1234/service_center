@@ -126,10 +126,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git
-  revision: 5f176cca016049c27408fd8e7fb7fb1b0ff7d38d
+  revision: 97951bffb803f60631903bf9755a8643dc0c7326
   branch: inw_ripple_prod
   specs:
-    qg-inw (3.0.15)
+    qg-inw (3.0.16)
       rails (= 4.2.2)
 
 GIT
@@ -141,9 +141,9 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-rpl.git
-  revision: 4818825a871b9ad6ab30676cae29e6b186130722
+  revision: 364c16b280d6c2f92f29917af6fec3741c006384
   specs:
-    qg-rpl (1.0.12)
+    qg-rpl (1.0.14)
       rails (= 4.2.2)
 
 GIT
@@ -697,9 +697,9 @@ DEPENDENCIES
   qg-ic (= 1.0.7)!
   qg-icol (= 1.1.8)!
   qg-imt (= 1.1.11)!
-  qg-inw (= 3.0.15)!
+  qg-inw (= 3.0.16)!
   qg-ns (= 1.0.3)!
-  qg-rpl (= 1.0.12)!
+  qg-rpl (= 1.0.14)!
   qg-rx (= 1.1.7)!
   qg-sc (= 1.1.4)!
   qg-sm (= 1.0.9)!
