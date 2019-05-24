@@ -57,7 +57,7 @@ gem 'font-awesome-rails'
 
 gem 'encrypted_field', '0.1.6'
 
-gem 'qg-rpl','1.0.15', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-rpl.git"
+gem 'qg-rpl','1.0.16', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-rpl.git"
 gem 'qg-inw','3.0.19', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git", branch: 'inw_ripple_prod_with_lcy_rate_update'
 gem 'qg-icol', '1.1.8', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-icol.git"
 gem 'qg-ecol', '1.6.3', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ecol.git",branch: "submember-banks"
