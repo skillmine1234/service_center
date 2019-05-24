@@ -97,7 +97,12 @@ class IncomingFilesController < ApplicationController
         raise ActiveRecord::Rollback
       end
     end
-    redirect_to @incoming_file
+
+    if @incoming_file.service_name == "AML" && (@incoming_file.auto_upload?)
+      redirect_to unapproved_records_path(group_name: 'inward-remittance',sc_service: 'AML')
+    else
+      redirect_to @incoming_file
+    end
   end
   
   def download_file

@@ -11,7 +11,8 @@
       = f.hidden_field :service_name, :value => params[:sc_service]
     .control-group
       = f.label :file_type,nil,:class => 'control-label'
-      = f.select :file_type, IncomingFileType.where(:sc_service_id => @sc_service.id, :auto_upload => 'N').map {|u| [u.name, u.code]}, :include_blank => 'select'
+      - auto_upload = params[:sc_service] == "AML" ? 'Y' : 'N'
+      = f.select :file_type, IncomingFileType.where(:sc_service_id => @sc_service.id, :auto_upload => auto_upload).map {|u| [u.name, u.code]}, :include_blank => 'select'
     .control-group
       = f.label :file,nil,:class => 'control-label'
       = f.file_field :file

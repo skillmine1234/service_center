@@ -5,7 +5,9 @@
 - unless @incoming_file.auto_upload?
   %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
     = render 'ecol_customers/approve', :@record => @incoming_file
-
+  - if @incoming_file.service_name == "AML" && @incoming_file.auto_upload?
+  %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
+    = render 'incoming_files/approve', :@record => @incoming_file    
 %table.table.table-bordered.table-striped.table-hover.align_center{:style=>'width:45%;float: left; margin-right: 2%;'}
   %thead
     %tr 

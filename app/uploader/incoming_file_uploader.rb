@@ -19,7 +19,7 @@ class IncomingFileUploader < CarrierWave::Uploader::Base
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
     if Rails.env == "production"
-      ENV['CONFIG_FILE_UPLOAD_PATH']
+      self.model.service_name == "AML" ? "#{ENV['CONFIG_FILE_UPLOAD_PATH']}/aml/aml_fileuploads" : ENV['CONFIG_FILE_UPLOAD_PATH']
     else
       "uploads"
     end
