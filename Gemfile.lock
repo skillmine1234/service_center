@@ -141,9 +141,9 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-rpl.git
-  revision: 364c16b280d6c2f92f29917af6fec3741c006384
+  revision: ce50fc83b9a1ba622f565445088cc3fdd7c91fc1
   specs:
-    qg-rpl (1.0.14)
+    qg-rpl (1.0.15)
       rails (= 4.2.2)
 
 GIT
@@ -699,7 +699,7 @@ DEPENDENCIES
   qg-imt (= 1.1.11)!
   qg-inw (= 3.0.17)!
   qg-ns (= 1.0.3)!
-  qg-rpl (= 1.0.14)!
+  qg-rpl (= 1.0.15)!
   qg-rx (= 1.1.7)!
   qg-sc (= 1.1.4)!
   qg-sm (= 1.0.9)!

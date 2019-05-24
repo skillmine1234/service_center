@@ -143,22 +143,25 @@ a:hover {
   width:75px;
 }
 #get_balance_api_form{
-  height: 150px;
-  width: 560px;
+  height: 200px;
+  width: 400px;
   float: left;
+  margin-left: 5px;
 }
 #statement_api_form{
-  width: 500px;
+  width: 400px;
   float: right;
-  margin-right: 300px;
-  margin-top: 75px;
+  height: 100px;
+  margin-top: 80px;
+  margin-right: 100px;
 }
 #customer_form{
   width: 960px;
   margin-top: 15px;
 }
 #statement_data{
-  margin-top: 150px;
+  margin-top: 40px;
+  height: 100%px;
 }
 #download_csv_btn
 {
@@ -166,5 +169,23 @@ a:hover {
   width: 100px;
   text-decoration-style: bold;
   float: right;
+}
+.text_field1
+{
+  width:125px; 
+}
+#display_area
+{
+  height: 200px;
+  width: 960px;
+  border: 1px #CCC solid;
+  background-color: #F6F6F6;
+  margin-top: 30px;
+  border-radius:5px;
+}
+#ripple_heading{
+  height: 20px;
+  width: 960px;
+  margin-top: 2px;
 }
 
