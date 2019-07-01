@@ -52,9 +52,9 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-bm.git
-  revision: 4e91d8ed5287686124913daaaf65cbcb9fa07e11
+  revision: 68bd5d7db076062b27731cde6b15e313bdfbc2b5
   specs:
-    qg-bm (1.0.3)
+    qg-bm (1.0.5)
       rails (= 4.2.2)
 
 GIT
@@ -126,10 +126,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git
-  revision: 9e14547a19a2902fc6ef32bb82a3411e372d3719
-  branch: inw_ripple_prod_with_lcy_rate_update
+  revision: db66a574542469bd80e9d747542e12f61757e2b8
+  branch: inw_ripple_prod_with_lcy_rate_update_with_upi
   specs:
-    qg-inw (3.0.22)
+    qg-inw (3.0.24)
       rails (= 4.2.2)
 
 GIT
@@ -687,7 +687,7 @@ DEPENDENCIES
   progress_bar (~> 1.0.0)
   qg-ae (= 1.0.1)!
   qg-asba (= 1.0.4)!
-  qg-bm (= 1.0.3)!
+  qg-bm (= 1.0.5)!
   qg-cc (= 1.2.3)!
   qg-cp (= 1.0.2)!
   qg-ecol (= 1.6.3)!
@@ -697,7 +697,7 @@ DEPENDENCIES
   qg-ic (= 1.0.7)!
   qg-icol (= 1.1.8)!
   qg-imt (= 1.1.11)!
-  qg-inw (= 3.0.22)!
+  qg-inw (= 3.0.24)!
   qg-ns (= 1.0.3)!
   qg-rpl (= 1.0.20)!
   qg-rx (= 1.1.7)!

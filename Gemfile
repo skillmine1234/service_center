@@ -58,10 +58,10 @@ gem 'font-awesome-rails'
 gem 'encrypted_field', '0.1.6'
 
 gem 'qg-rpl','1.0.20', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-rpl.git"
-gem 'qg-inw','3.0.22', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git", branch: 'inw_ripple_prod_with_lcy_rate_update'
+gem 'qg-inw','3.0.24', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git", branch: 'inw_ripple_prod_with_lcy_rate_update_with_upi'
 gem 'qg-icol', '1.1.8', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-icol.git"
 gem 'qg-ecol', '1.6.3', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ecol.git",branch: "submember-banks"
-gem 'qg-bm', '1.0.3', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-bm.git"
+gem 'qg-bm', '1.0.5', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-bm.git"
 gem 'qg-asba', '1.0.4', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-asba.git"
 gem 'qg-sm', '1.0.9', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-sm.git"
 gem 'qg-ssp', '2.0.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ssp.git"
