@@ -126,10 +126,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git
-  revision: 55e52039646b0d475f23e91464ad9f262bdd4482
-  branch: add_UPI_in_dropdown
+  revision: d2d03fd2f238b66c0a0a3c21eb6fe9837622eafd
+  branch: current_prod_with_upidrop_with_4000
   specs:
-    qg-inw (3.0.26)
+    qg-inw (3.0.27)
       rails (= 4.2.2)
 
 GIT
@@ -697,7 +697,7 @@ DEPENDENCIES
   qg-ic (= 1.0.7)!
   qg-icol (= 1.1.8)!
   qg-imt (= 1.1.11)!
-  qg-inw (= 3.0.26)!
+  qg-inw (= 3.0.27)!
   qg-ns (= 1.0.3)!
   qg-rpl (= 1.0.20)!
   qg-rx (= 1.1.7)!
