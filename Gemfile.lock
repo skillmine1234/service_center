@@ -445,7 +445,6 @@ GEM
     passenger (5.1.4)
       rack
       rake (>= 0.8.1)
-    passgen (1.0.2)
     polyamorous (1.2.0)
       activerecord (>= 3.0)
     power_assert (0.2.3)
@@ -683,7 +682,6 @@ DEPENDENCIES
   net-scp
   newrelic_rpm
   passenger
-  passgen
   progress_bar (~> 1.0.0)
   qg-ae (= 1.0.1)!
   qg-asba (= 1.0.4)!

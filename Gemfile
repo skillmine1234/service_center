@@ -46,7 +46,6 @@ gem 'lazy_columns', :git=>'https://github.com/quantiguous/lazy_columns.git'
 gem 'seed-fu'
 gem 'net-scp'
 gem 'rp', :github => 'quantiguous/rp'
-gem 'passgen'
 gem 'approval2', '0.1.9'
 gem "mustache"
 gem 'simple_enum'
