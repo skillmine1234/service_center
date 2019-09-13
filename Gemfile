@@ -57,7 +57,7 @@ gem 'font-awesome-rails'
 gem 'encrypted_field', '0.1.6'
 
 gem 'qg-rpl','1.0.20', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-rpl.git"
-gem 'qg-inw', '3.0.27', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git", branch: 'current_prod_with_upidrop_with_4000'
+gem 'qg-inw', '3.0.28', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git", branch: 'current_prod_with_upidrop_with_4000'
 gem 'qg-icol', '1.1.8', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-icol.git"
 gem 'qg-ecol', '1.6.3', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ecol.git",branch: "submember-banks"
 gem 'qg-bm', '1.0.5', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-bm.git"
