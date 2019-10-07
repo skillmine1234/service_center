@@ -68,6 +68,10 @@ class Ability
       can :process_file, model_name.constantize
       can :reset, model_name.constantize
       can [:audit_logs, :ecol_audit_logs], model_name.constantize
+      can :pending_validation, model_name.constantize
+      can :approve_ecol_trans, model_name.constantize
+      can :approve_transaction, model_name.constantize
+      can :override_transaction, model_name.constantize
     end
     can :manage, UnapprovedRecord, approvable_type: @group.try(:model_list)
   end
