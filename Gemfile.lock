@@ -134,9 +134,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ns.git
-  revision: ffaf9d04788954ac2b8890e9138ab012c0b341b7
+  revision: b9108fd05b9ad55fb971c26f451dd0889140cb9f
+  branch: form_for_new_callback_notification
   specs:
-    qg-ns (1.0.3)
+    qg-ns (1.0.4)
       rails (~> 4.2.2)
 
 GIT
@@ -696,7 +697,7 @@ DEPENDENCIES
   qg-icol (= 1.1.8)!
   qg-imt (= 1.1.11)!
   qg-inw (= 3.0.28)!
-  qg-ns (= 1.0.3)!
+  qg-ns (= 1.0.4)!
   qg-rpl (= 1.0.20)!
   qg-rx (= 1.1.7)!
   qg-sc (= 1.1.4)!
