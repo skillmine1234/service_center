@@ -73,10 +73,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ecol.git
-  revision: 0f11369a8c53c819e1520af7c89e8c270d82b312
+  revision: e3ee5872fea205fc9f5041cda367a7542033fa2d
   branch: ecol_approval
   specs:
-    qg-ecol (2.6.0)
+    qg-ecol (2.7.0)
       rails (= 4.2.2)
 
 GIT
@@ -688,7 +688,7 @@ DEPENDENCIES
   qg-bm (= 1.0.5)!
   qg-cc (= 1.2.3)!
   qg-cp (= 1.0.2)!
-  qg-ecol (= 2.6.0)!
+  qg-ecol (= 2.7.0)!
   qg-fp (= 1.0.8)!
   qg-ft (= 1.2.6)!
   qg-gm (= 1.1.6)!
