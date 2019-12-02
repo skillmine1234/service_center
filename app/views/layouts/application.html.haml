@@ -6,7 +6,7 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body#generic-app
-    .header{style: "z-index:999"}
+    .header{:style => "z-index: 9"}
       = render :partial => 'layouts/header'
     .content
       - if notice
@@ -22,4 +22,3 @@
       = yield
     .footer
       = render :partial => 'layouts/footer'
-
