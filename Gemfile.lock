@@ -126,10 +126,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git
-  revision: a0d8fc6901ab6c1af542a8de17b6e9307a3175df
+  revision: 30779f37fb53f0013febc5e68f640799d209e216
   branch: current_prod_with_upidrop_with_4000
   specs:
-    qg-inw (3.0.28)
+    qg-inw (3.1.0)
       rails (= 4.2.2)
 
 GIT
@@ -142,10 +142,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-obdx.git
-  revision: 4106eb0558802ddb256d83d38aca202d0f4330b4
+  revision: 81b3990fa4aa9da8123211658163b368cd481b85
   branch: obdx_reports
   specs:
-    qg-obdx (2.2.0)
+    qg-obdx (2.3.0)
       rails (= 4.2.2)
 
 GIT
@@ -704,9 +704,9 @@ DEPENDENCIES
   qg-ic (= 1.0.7)!
   qg-icol (= 1.1.8)!
   qg-imt (= 1.1.11)!
-  qg-inw (= 3.0.28)!
+  qg-inw (= 3.1.0)!
   qg-ns (= 1.0.5)!
-  qg-obdx (= 2.2.0)!
+  qg-obdx (= 2.3.0)!
   qg-rpl (= 1.0.20)!
   qg-rx (= 1.1.7)!
   qg-sc (= 1.1.4)!
