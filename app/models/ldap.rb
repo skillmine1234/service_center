@@ -55,8 +55,9 @@ class LDAP
   end
 
   def add_user(username, password)
-
+    
     Rails.logger.info "===========ldap object===========================" if ENV['LDAP_LOGGERS_ENABLED'] == "true" rescue nil
+    Rails.logger.info "============Add User Method Started======="
     ldap_obj = JSON.parse(@ldap.to_json) rescue nil
     ldap_obj["auth"]["password"] = "xxxxxxxxx" rescue nil
     Rails.logger.info ldap_obj.inspect if ENV['LDAP_LOGGERS_ENABLED'] == "true" rescue nil
@@ -98,7 +99,7 @@ class LDAP
      Rails.logger.info "============ldap result after adding===========" if ENV['LDAP_LOGGERS_ENABLED'] == "true"  rescue nil
      Rails.logger.info ldap_result.inspect if ENV['LDAP_LOGGERS_ENABLED'] == "true"  rescue nil
      Rails.logger.info " =========================================" if ENV['LDAP_LOGGERS_ENABLED'] == "true"  rescue nil
-
+     Rails.logger.info "===============LDAP Result: #{ldap_result}=================="
      raise LDAPFault.new('add user', ldap_result) if ldap_result.code != 0
 
      ldap_result
