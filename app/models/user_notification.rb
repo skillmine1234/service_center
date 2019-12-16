@@ -78,16 +78,34 @@ module UserNotification
   #Notification via sms/email is triggered
   def notify_customer(event)
     puts "=============================================Notify Customer============================================"
-    event_id = ScEvent.find_by_event(event).try(:id)
-    template = NsTemplate.find_by_sc_event_id_and_is_enabled(event_id,'Y') rescue nil
     unless template.nil?
-      plsql.pk_qg_send_email.enqueue1(ENV['CONFIG_IIB_SMTP_BROKER_UUID'], self.email, NsTemplate.render_template(template.email_subject, template_variables(event)), NsTemplate.render_template(template.email_body, template_variables(event))) unless template.email_body.to_s.empty?
-      plsql.pk_qg_send_sms.enqueue(ENV['CONFIG_IIB_SMTP_BROKER_UUID'], self.mobile_no, NsTemplate.render_template(template.sms_text, template_variables(event))) unless template.sms_text.to_s.empty?
-      update_column(:notification_sent_at, Time.zone.now)
+      if self.is_sms == true && self.is_email == false
+        sms_email_notifier("sms",event)
+      elsif self.is_email == true && self.is_sms == false
+        sms_email_notifier("email",event)
+      elsif self.is_sms == true && self.is_email == true
+        sms_email_notifier("both",event)
+      end 
     else
       'Template is not setup for SMS / Email'
     end
   end
+
+  def sms_email_notifier(state,event)
+    event_id = ScEvent.find_by_event(event).try(:id)
+    template = NsTemplate.find_by_sc_event_id_and_is_enabled(event_id,'Y') rescue nil
+    if state == "sms"
+      plsql.pk_qg_send_sms.enqueue(ENV['CONFIG_IIB_SMTP_BROKER_UUID'], self.mobile_no, NsTemplate.render_template(template.sms_text, template_variables(event))) unless template.sms_text.to_s.empty?
+      plsql.pk_qg_send_sms.enqueue(ENV['CONFIG_IIB_SMTP_BROKER_UUID'], self.secondary_mobile_no, NsTemplate.render_template(template.sms_text, template_variables(event))) unless template.sms_text.to_s.empty?
+    elsif state == "email"
+      plsql.pk_qg_send_email.enqueue1(ENV['CONFIG_IIB_SMTP_BROKER_UUID'], self.email, NsTemplate.render_template(template.email_subject, template_variables(event)), NsTemplate.render_template(template.email_body, template_variables(event))) unless template.email_body.to_s.empty?
+      plsql.pk_qg_send_email.enqueue1(ENV['CONFIG_IIB_SMTP_BROKER_UUID'], self.secondary_email, NsTemplate.render_template(template.email_subject, template_variables(event)), NsTemplate.render_template(template.email_body, template_variables(event))) unless template.email_body.to_s.empty?
+    else
+      plsql.pk_qg_send_email.enqueue1(ENV['CONFIG_IIB_SMTP_BROKER_UUID'], self.email, NsTemplate.render_template(template.email_subject, template_variables(event)), NsTemplate.render_template(template.email_body, template_variables(event))) unless template.email_body.to_s.empty?
+      plsql.pk_qg_send_sms.enqueue(ENV['CONFIG_IIB_SMTP_BROKER_UUID'], self.mobile_no, NsTemplate.render_template(template.sms_text, template_variables(event))) unless template.sms_text.to_s.empty?
+    end  
+    update_column(:notification_sent_at, Time.zone.now)
+  end 
 
   def enable_resend_button?
     approval_status == 'A' ? true: false

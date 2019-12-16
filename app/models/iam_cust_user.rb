@@ -7,8 +7,11 @@ class IamCustUser < ActiveRecord::Base
   belongs_to :created_user, :foreign_key =>'created_by', :class_name => 'User'
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
   
+  
+  validate :password_via?
+
   validates_presence_of :username
-  validates_presence_of :first_name, :email, :mobile_no, unless: :skip_presence_validation
+  validates_presence_of :first_name,:email,:mobile_no, unless: :skip_presence_validation
   validates_uniqueness_of :username, :scope => :approval_status
   validates :mobile_no, numericality: true, length: { maximum: 20 }
   validates_length_of :username, :first_name, :last_name, maximum: 100
@@ -19,9 +22,19 @@ class IamCustUser < ActiveRecord::Base
 
   before_save :generate_password
 
+  def password_via?
+    if is_sms == true
+      secondary_mobile_no.blank? ? errors.add(:secondary_mobile_no,"Secondary Mobile Can't be blank?") : nil
+    elsif is_email == true
+      secondary_email.blank? ? errors.add(:secondary_email,"Secondary Email Can't be blank?") : nil
+    elsif is_sms != true || is_email != true
+      errors[:base] << "Please select any one checkbox"
+    end
+  end
+
   def template_variables(event)
     if event == 'Password Generated'
-      { username: username, first_name: first_name, last_name: last_name, mobile_no: mobile_no, email: email, password_part_1: password_part_1(decrypted_password), password_part_2: password_part_2(decrypted_password) }
+      { username: username, first_name: first_name, last_name: last_name, mobile_no: mobile_no,secondary_mobile_no: secondary_mobile_no, email: email,secondary_email: secondary_email,is_sms: is_sms,is_email: is_email, password_part_1: password_part_1(decrypted_password), password_part_2: password_part_2(decrypted_password) }
     elsif event == 'Access Removed'
       { username: username, first_name: first_name, last_name: last_name, mobile_no: mobile_no, email: email }
     end
@@ -35,6 +48,7 @@ class IamCustUser < ActiveRecord::Base
     passwd.slice((passwd.length/2)..passwd.length)
   end
   
+  #With this connection to LDAP is established
   def will_connect_to_ldap
     LDAP.new
     return nil
