@@ -18,7 +18,11 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Email
     %th{:style=>'text-align:left; background-color: lightblue;'}
+      Secondary Email
+    %th{:style=>'text-align:left; background-color: lightblue;'}
       Mobile Number
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Secondary Mobile Number
   .tbody
     - @records.each do |record|
       %tr
@@ -35,4 +39,8 @@
         %td{:style=>'text-align:left;'}
           = record.email
         %td{:style=>'text-align:left;'}
+          = record.secondary_email
+        %td{:style=>'text-align:left;'}
           = record.mobile_no
+        %td{:style=>'text-align:left;'}
+          = record.secondary_mobile_no
