@@ -126,18 +126,27 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git
-  revision: a0d8fc6901ab6c1af542a8de17b6e9307a3175df
+  revision: 30779f37fb53f0013febc5e68f640799d209e216
   branch: current_prod_with_upidrop_with_4000
   specs:
-    qg-inw (3.0.28)
+    qg-inw (3.1.0)
       rails (= 4.2.2)
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ns.git
-  revision: ffaf9d04788954ac2b8890e9138ab012c0b341b7
+  revision: 804bc87e2276f1d1516950c82e69ba4e240fd74e
+  branch: form_for_new_callback_notification
   specs:
-    qg-ns (1.0.3)
+    qg-ns (1.0.5)
       rails (~> 4.2.2)
+
+GIT
+  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-obdx.git
+  revision: 433c2ae98acab3b6e5f18d6b04f60d7c0454a044
+  branch: obdx_reports
+  specs:
+    qg-obdx (2.4.0)
+      rails (= 4.2.2)
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-rpl.git
@@ -695,8 +704,9 @@ DEPENDENCIES
   qg-ic (= 1.0.7)!
   qg-icol (= 1.1.8)!
   qg-imt (= 1.1.11)!
-  qg-inw (= 3.0.28)!
-  qg-ns (= 1.0.3)!
+  qg-inw (= 3.1.0)!
+  qg-ns (= 1.0.5)!
+  qg-obdx (= 2.4.0)!
   qg-rpl (= 1.0.20)!
   qg-rx (= 1.1.7)!
   qg-sc (= 1.1.4)!

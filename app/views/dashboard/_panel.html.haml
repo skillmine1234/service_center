@@ -28,6 +28,12 @@
             = image_tag 'aml.jpeg', :size => "80x80"
           %br
             = "AML Search"
+      - if m[:common_items].include?(:reports)
+        .box
+          = link_to obdx_reports_path do
+            = image_tag 'obdx/reports.png', :size => "80x80"
+          %br
+            = "Reports"
     - if respond_to?("#{group}_unapproved_records_path", sc_service: service)
       .box
         = link_to send("#{group}_unapproved_records_path") do
@@ -70,3 +76,8 @@
           = image_tag "operations.png", :size => "80x80"
         %br
         = "Operations"
+    -  if m[:obdx_operations].present?
+      .box
+        = link_to image_tag("obdx/delete_payment.png", :size => "80x80"),{:controller=>"payment_schedules",:action=>"index"}
+        %br
+        = "Payment Schedule"
