@@ -73,10 +73,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ecol.git
-  revision: c0cad3c29f710266515d6d76f43c75e65198add1
+  revision: 3e5a43612e13d4b03952da727ba76353134b2416
   branch: ecol_approval
   specs:
-    qg-ecol (3.2.0)
+    qg-ecol (3.3.0)
       rails (= 4.2.2)
 
 GIT
@@ -142,10 +142,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-obdx.git
-  revision: 433c2ae98acab3b6e5f18d6b04f60d7c0454a044
+  revision: 6d2bdfb21f128d5232b1f51d8700bf95350100d9
   branch: obdx_reports
   specs:
-    qg-obdx (2.4.0)
+    qg-obdx (2.5.0)
       rails (= 4.2.2)
 
 GIT
@@ -697,7 +697,7 @@ DEPENDENCIES
   qg-bm (= 1.0.5)!
   qg-cc (= 1.2.3)!
   qg-cp (= 1.0.2)!
-  qg-ecol (= 3.2.0)!
+  qg-ecol (= 3.3.0)!
   qg-fp (= 1.0.8)!
   qg-ft (= 1.2.6)!
   qg-gm (= 1.1.6)!
@@ -706,7 +706,7 @@ DEPENDENCIES
   qg-imt (= 1.1.11)!
   qg-inw (= 3.1.0)!
   qg-ns (= 1.0.5)!
-  qg-obdx (= 2.4.0)!
+  qg-obdx (= 2.5.0)!
   qg-rpl (= 1.0.20)!
   qg-rx (= 1.1.7)!
   qg-sc (= 1.1.4)!
