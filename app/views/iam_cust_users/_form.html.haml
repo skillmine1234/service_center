@@ -8,6 +8,12 @@
     = f.hidden_field :approved_id
     = f.hidden_field :approved_version
     .control-group
+      = f.label :password_sent_via, "*Send Password Via", :class => 'control-label'
+      = f.check_box :is_sms,{}, true, false
+      SMS
+      = f.check_box :is_email, {}, true, false
+      Email
+    .control-group
       = f.label :username, "*Username", :class => 'control-label'
       = f.text_field :username, maxlength: 100
       #msg-error
@@ -28,10 +34,20 @@
       #msg-error
         = error_message_for(@iam_cust_user, :email, :prepend_text => "")
     .control-group
+      = f.label :secondary_email, "Secondary Email", :class => 'control-label'
+      = f.text_field :secondary_email, maxlength: 100
+      #msg-error
+        = error_message_for(@iam_cust_user, :secondary_email, :prepend_text => "")
+    .control-group
       = f.label :mobile_no, "*Mobile Number", :class => 'control-label'
       = f.text_field :mobile_no, maxlength: 20
       #msg-error
         = error_message_for(@iam_cust_user, :mobile_no, :prepend_text => "")
+    .control-group
+      = f.label :secondary_mobile_no, "Secondary Mobile Number", :class => 'control-label'
+      = f.text_field :secondary_mobile_no, maxlength: 20
+      #msg-error
+        = error_message_for(@iam_cust_user, :secondary_mobile_no, :prepend_text => "")
     - unless action_name == 'new'
       .control-group
         = f.label :should_reset_password, "Reset Password?", :class => 'control-label'

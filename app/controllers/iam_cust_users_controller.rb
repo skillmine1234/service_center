@@ -12,6 +12,8 @@ class IamCustUsersController < ApplicationController
   end
 
   def create
+    puts "================================================================="
+    puts params[:iam_cust_user]
     @iam_cust_user = IamCustUser.new(params[:iam_cust_user])
     if !@iam_cust_user.valid?
       render "new"
@@ -106,6 +108,6 @@ class IamCustUsersController < ApplicationController
   def iam_cust_user_params
     params.require(:iam_cust_user).permit(:username, :first_name, :last_name, :email, :mobile_no, :last_password_reset_at, 
                                           :created_at, :updated_at, :created_by, :updated_by, :lock_version, :approved_id, :approved_version,
-                                          :should_reset_password, :is_enabled)
+                                          :should_reset_password, :is_enabled,:secondary_email,:secondary_mobile_no,:is_sms,:is_email)
   end
 end
