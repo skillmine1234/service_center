@@ -78,12 +78,10 @@ module UserNotification
   #Notification via sms/email is triggered
   def notify_customer(event)
     puts "=============================================Notify Customer============================================"
-    if self.is_sms == true && self.is_email == false
+    if self.send_password_via == "sms"
       sms_email_notifier("sms",event)
-    elsif self.is_email == true && self.is_sms == false
+    elsif self.send_password_via == "email"
       sms_email_notifier("email",event)
-    elsif self.is_sms == true && self.is_email == true
-      sms_email_notifier("both",event)
     end
   end
 
@@ -97,9 +95,6 @@ module UserNotification
       elsif state == "email"
         plsql.pk_qg_send_email.enqueue1(ENV['CONFIG_IIB_SMTP_BROKER_UUID'], self.email, NsTemplate.render_template(template.email_subject, template_variables(event)), NsTemplate.render_template(template.email_body, template_variables(event))) unless template.email_body.to_s.empty?
         plsql.pk_qg_send_email.enqueue1(ENV['CONFIG_IIB_SMTP_BROKER_UUID'], self.secondary_email, NsTemplate.render_template(template.email_subject, template_variables(event)), NsTemplate.render_template(template.email_body1, template_variables(event))) unless template.email_body1.to_s.empty?
-      else
-        plsql.pk_qg_send_email.enqueue1(ENV['CONFIG_IIB_SMTP_BROKER_UUID'], self.email, NsTemplate.render_template(template.email_subject, template_variables(event)), NsTemplate.render_template(template.email_body, template_variables(event))) unless template.email_body.to_s.empty?
-        plsql.pk_qg_send_sms.enqueue(ENV['CONFIG_IIB_SMTP_BROKER_UUID'], self.mobile_no, NsTemplate.render_template(template.sms_text, template_variables(event))) unless template.sms_text.to_s.empty?
       end  
       update_column(:notification_sent_at, Time.zone.now)
     else

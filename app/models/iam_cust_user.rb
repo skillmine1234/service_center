@@ -8,27 +8,48 @@ class IamCustUser < ActiveRecord::Base
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
   
   
-  validate :password_via?
+  validate :password_via?, :same_field_value_check?
+  validates :mobile_no,:secondary_mobile_no, format: { with: /\A\d+\z/, message: "Integer only." },if: :check_send_password_via_phn?
 
   validates_presence_of :username
-  validates_presence_of :first_name,:email,:mobile_no, unless: :skip_presence_validation
+  validates_presence_of :first_name,unless: :skip_presence_validation
   validates_uniqueness_of :username, :scope => :approval_status
-  validates :mobile_no, numericality: true, length: { maximum: 20 }
   validates_length_of :username, :first_name, :last_name, maximum: 100
   validates_format_of :username, with: /\A[a-z|A-Z|0-9|\_|\.]+\z/, message: "invalid format - expected format is : {[a-z|A-Z|0-9|\_|\.]}"
   validates_format_of :first_name, with: /\A[a-z|A-Z|0-9|\s|\.|\-]+\z/, message: "invalid format - expected format is : {[a-z|A-Z|0-9|\s|\.|\-]}"
   validates_format_of :last_name, with: /\A[a-z|A-Z|0-9|\s|\.|\-]+\z/, message: "invalid format - expected format is : {[a-z|A-Z|0-9|\s|\.|\-]}", allow_blank: true
-  validates :email, format: {with: Devise::email_regexp}, length: { maximum: 100 }
+  validates :email,:secondary_email, format: {with: Devise::email_regexp}, length: { maximum: 100 },if: :check_send_password_via_email?
+  validates :mobile_no,:secondary_mobile_no, numericality: true, length: { minimum: 10,maximum: 20 },if: :check_send_password_via_phn?
 
   before_save :generate_password
 
+  def check_send_password_via_phn?
+    if self.send_password_via == "sms"
+      true
+    end
+  end
+
+  def check_send_password_via_email?
+    if self.send_password_via == "email"
+      true
+    end
+  end
+
   def password_via?
-    if is_sms == true
+    if send_password_via == "sms"
+      mobile_no.blank? ? errors.add(:mobile_no,"Mobile Can't be blank?") : nil
       secondary_mobile_no.blank? ? errors.add(:secondary_mobile_no,"Secondary Mobile Can't be blank?") : nil
-    elsif is_email == true
+    elsif send_password_via == "email"
+      email.blank? ? errors.add(:email,"Email Can't be blank?") : nil
       secondary_email.blank? ? errors.add(:secondary_email,"Secondary Email Can't be blank?") : nil
-    elsif is_sms != true || is_email != true
-      errors[:base] << "Please select any one checkbox"
+    end
+  end
+
+  def same_field_value_check?
+    if send_password_via == "sms" && (mobile_no.present? && secondary_mobile_no.present?)
+      (mobile_no.strip == secondary_mobile_no.strip) ? errors.add(:secondary_mobile_no,"Mobile No & Secondary Mobile No can't be same!") : nil
+    elsif send_password_via == "email" && (email.present? && secondary_email.present?)
+      (email.strip == secondary_email.strip) ? errors.add(:secondary_email,"Email & Secondary Email Can't be same!") : nil
     end
   end
 

@@ -1,7 +1,8 @@
 = semantic_form_for [:admin, @user_group] do |f|
-  = f.inputs "User Role Details" do
+  = f.inputs "User Group Details" do
     = f.input :user, :input_html => { :style => 'display:inline-block; width: 250px;' }
-    = f.input :group, :input_html => { :style => 'display:inline-block; width: 250px;' }
+    = f.input :group,:input_html => {:style => 'display:inline-block; width: 250px;' }
+    = f.input :group, :input_html => { :style => 'display:inline-block; width: 250px;',:disabled => true },label: 'Description', as: :string
     = f.hidden_field :lock_version
     = f.hidden_field :approved_id
     = f.hidden_field :approved_version
@@ -12,3 +13,16 @@
     = f.action :submit
     %li.cancel
       = link_to "Cancel", "/admin/user_groups"
+
+
+:javascript
+  $("#user_group_group_id").change(function(){
+    $.ajax({
+      type: 'GET',
+      url: "/get_group_long_form",
+      data: { id: $(this).val()},
+      success: function(data){
+        $("input[name='user_group[group]']").val(data["group"]["description"]);
+      }
+    });
+  });

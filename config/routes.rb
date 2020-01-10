@@ -216,6 +216,7 @@ ServiceCenter::Application.routes.draw do
   get 'dashboard/operations', as: :operations
   
   root :to => 'dashboard#overview'
+  get '/get_group_long_form' => 'dashboard#get_group_long_form'
 
   # See how all your routes lay out with "rake routes"
 

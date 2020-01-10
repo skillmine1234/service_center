@@ -10,6 +10,8 @@
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
     %th{:style=>'text-align:left; background-color: lightblue;'}
+      Send Password Via
+    %th{:style=>'text-align:left; background-color: lightblue;'}
       Username
     %th{:style=>'text-align:left; background-color: lightblue;'}
       First Name
@@ -23,6 +25,8 @@
       Mobile Number
     %th{:style=>'text-align:left; background-color: lightblue;'}
       Secondary Mobile Number
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Was User Added To LDAP?
   .tbody
     - @records.each do |record|
       %tr
@@ -30,6 +34,8 @@
           = link_to 'Show', record
         %td{:style=>'text-align:left;'}
           = link_to 'Edit', edit_iam_cust_user_path(record)
+        %td{:style=>'text-align:left;'}
+          = record.try(:send_password_via).try(:upcase)
         %td{:style=>'text-align:left;'}
           = record.username
         %td{:style=>'text-align:left;'}
@@ -44,3 +50,5 @@
           = record.mobile_no
         %td{:style=>'text-align:left;'}
           = record.secondary_mobile_no
+        %td{:style=>'text-align:left;'}
+          = record.was_user_added == "Y" ? "Yes" : "No"

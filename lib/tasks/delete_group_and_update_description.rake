@@ -20,7 +20,9 @@ namespace :delete_group do
     old_name.each_with_index do |group_old_name,index|
       puts "#{group_old_name} --- #{new_name[index]}"
       record = Group.where(name: group_old_name).first
-      record.update(description: new_name[index])
+      if record.present?
+        record.update(description: new_name[index])
+      end
     end
     puts "End of the script"  
   end

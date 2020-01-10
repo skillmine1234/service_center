@@ -16,7 +16,7 @@
           %tr
             %td.label Send Password Via
             %td.value
-              = ""
+              = @iam_cust_user.try(:send_password_via).try(:upcase)
           %tr
             %td.label Errors
             %td.value
@@ -69,6 +69,14 @@
               = @iam_cust_user.secondary_mobile_no
             %td#msg-error
               = error_message_for(@iam_cust_user, :secondary_mobile_no, :prepend_text => "")
+
+          %tr
+            %td.label Was User Added To LDAP?
+            %td
+              = @iam_cust_user.was_user_added == "Y" ? "Yes" : "No"
+            %td#msg-error
+              = error_message_for(@iam_cust_user, :was_user_added, :prepend_text => "")
+
           %tr
             %td.label Reset Password
             %td
