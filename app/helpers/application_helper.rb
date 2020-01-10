@@ -68,7 +68,7 @@ module ApplicationHelper
     html1 = content_tag(:h2, class: 'collapsible') do
       ("Advanced Search <span class = 'caret'></span>").html_safe
     end
-    
+  
     html2 = content_tag(:div, class: 'collapsible-content') do
       klass = object.class.included_modules.include?(SearchAbility) ? object.class : object.klass
       form_url = options[:url] || polymorphic_path(klass)
