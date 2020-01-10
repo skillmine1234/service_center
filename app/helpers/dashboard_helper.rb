@@ -37,7 +37,8 @@ module DashboardHelper
       m[:reports] = engine.const_get('REPORTS') rescue false
       
       m[:approval_worklist] = engine.const_get('APPROVAL_WORKLIST') rescue true
-
+      obdx_operations = engine.const_get('OBDX_OPERATIONS') rescue []
+      m[:obdx_operations] = true unless obdx_operations.empty?
       return m
     end
     

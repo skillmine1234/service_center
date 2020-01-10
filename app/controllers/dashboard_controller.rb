@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :block_inactive_user!
+  before_filter :block_inactive_user!,:except =>[:get_group_long_form]
 
   include ActionView::Helpers::TextHelper
   respond_to :html, :js, :json, :xml
@@ -29,6 +29,11 @@ class DashboardController < ApplicationController
   def error_msg
     flash[:alert] = "Rule is not yet configured"
     redirect_to :root
+  end
+
+  def get_group_long_form
+    @group = Group.find_by(id: params[:id])
+    render json: {group: @group}, status: :ok
   end
   
   private

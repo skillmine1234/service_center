@@ -105,9 +105,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ic.git
-  revision: 53a54a0bb7582bea833a863d7e3ecaec8a42fced
+  revision: b20a0c5e4da5d1a653b1f896418de55cdfd65b8d
+  branch: dealer-finance
   specs:
-    qg-ic (1.0.7)
+    qg-ic (1.0.8)
       rails (= 4.2.2)
 
 GIT
@@ -126,10 +127,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git
-  revision: a0d8fc6901ab6c1af542a8de17b6e9307a3175df
-  branch: current_prod_with_upidrop_with_4000
+  revision: c02cd6926433984e8a12f1431e74465f7771f4d4
+  branch: current_4000prod_alipay
   specs:
-    qg-inw (3.0.28)
+    qg-inw (3.4.0)
       rails (= 4.2.2)
 
 GIT
@@ -141,10 +142,19 @@ GIT
       rails (~> 4.2.2)
 
 GIT
-  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-rpl.git
-  revision: 22a19a1bc8985c0b146d62240982832cb33a38d9
+  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-obdx.git
+  revision: 6d2bdfb21f128d5232b1f51d8700bf95350100d9
+  branch: obdx_reports
   specs:
-    qg-rpl (1.0.20)
+    qg-obdx (2.5.0)
+      rails (= 4.2.2)
+
+GIT
+  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-rpl.git
+  revision: 6b11ad4ead1cdc79c8d578e5c1b29a87ef782b88
+  branch: blockchain
+  specs:
+    qg-rpl (1.2.0)
       rails (= 4.2.2)
 
 GIT
@@ -693,12 +703,13 @@ DEPENDENCIES
   qg-fp (= 1.0.8)!
   qg-ft (= 1.2.6)!
   qg-gm (= 1.1.6)!
-  qg-ic (= 1.0.7)!
+  qg-ic (= 1.0.8)!
   qg-icol (= 1.1.8)!
   qg-imt (= 1.1.11)!
-  qg-inw (= 3.0.28)!
+  qg-inw (= 3.4.0)!
   qg-ns (= 1.0.5)!
-  qg-rpl (= 1.0.20)!
+  qg-obdx (= 2.5.0)!
+  qg-rpl (= 1.2.0)!
   qg-rx (= 1.1.7)!
   qg-sc (= 1.1.4)!
   qg-sm (= 1.0.9)!

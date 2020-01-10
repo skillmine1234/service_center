@@ -1,4 +1,9 @@
 - @title = index_model.model_name.human.pluralize
+- if @title == "Rpl remittances"
+  - @title = "Blockchain Remittance"
+- elsif @title == "Remit transactions"
+  - @title = "Blockchain Remittance"
+
 %h1=@title
 %br
 = render "#{index_model.model_name.to_s.pluralize.underscore}/advanced_search"
@@ -14,7 +19,10 @@
           %thead
             %tr
               - columns.each do |column|
-                %th= index_model.human_attribute_name(column)
+                - col_name = index_model.human_attribute_name(column)
+                - if col_name == "Ripple status"
+                  - col_name = "Remit Status"
+                %th= col_name
               %th
           %tbody
             - records.each do |transfer|

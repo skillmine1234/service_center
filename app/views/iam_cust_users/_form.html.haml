@@ -8,6 +8,12 @@
     = f.hidden_field :approved_id
     = f.hidden_field :approved_version
     .control-group
+      = f.label :send_password_via, "*Send Password Via", :class => 'control-label'
+      = f.radio_button :send_password_via, "sms",:checked => true
+      SMS
+      = f.radio_button :send_password_via, "email"
+      Email
+    .control-group
       = f.label :username, "*Username", :class => 'control-label'
       = f.text_field :username, maxlength: 100
       #msg-error
@@ -28,10 +34,20 @@
       #msg-error
         = error_message_for(@iam_cust_user, :email, :prepend_text => "")
     .control-group
+      = f.label :secondary_email, "*Secondary Email", :class => 'control-label'
+      = f.text_field :secondary_email, maxlength: 100
+      #msg-error
+        = error_message_for(@iam_cust_user, :secondary_email, :prepend_text => "")
+    .control-group
       = f.label :mobile_no, "*Mobile Number", :class => 'control-label'
       = f.text_field :mobile_no, maxlength: 20
       #msg-error
         = error_message_for(@iam_cust_user, :mobile_no, :prepend_text => "")
+    .control-group
+      = f.label :secondary_mobile_no, "*Secondary Mobile Number", :class => 'control-label'
+      = f.text_field :secondary_mobile_no, maxlength: 20
+      #msg-error
+        = error_message_for(@iam_cust_user, :secondary_mobile_no, :prepend_text => "")
     - unless action_name == 'new'
       .control-group
         = f.label :should_reset_password, "Reset Password?", :class => 'control-label'
@@ -44,3 +60,50 @@
     - (f.object.new_record? and f.object.username.nil?) ? label_name = "Create" : label_name = "Update"
     = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_iam_cust_user', :value => label_name + ' Customer User'
     = link_to :Cancel,'/iam_cust_users', :name => 'cancel', :class=>"cancel btn"
+
+:javascript
+  $(document).ready(function(){
+    if($("#iam_cust_user_send_password_via_sms").is(':checked')){
+      $("#iam_cust_user_email").val("")
+      $("#iam_cust_user_secondary_email").val("")
+
+      $("#iam_cust_user_mobile_no").prop('disabled', false);
+      $("#iam_cust_user_secondary_mobile_no").prop('disabled', false);
+
+      $("#iam_cust_user_email").prop('disabled', true);
+      $("#iam_cust_user_secondary_email").prop('disabled', true);
+    }
+    if($("#iam_cust_user_send_password_via_email").is(':checked')){
+      $("#iam_cust_user_mobile_no").val("")
+      $("#iam_cust_user_secondary_mobile_no").val("")
+
+      $("#iam_cust_user_mobile_no").prop('disabled', true);
+      $("#iam_cust_user_secondary_mobile_no").prop('disabled', true);
+
+      $("#iam_cust_user_email").prop('disabled', false);
+      $("#iam_cust_user_secondary_email").prop('disabled', false);
+    }
+    $('input[type="radio"]').on('change', function(e) {
+      if($(this).val() == "sms"){
+        $("#iam_cust_user_email").val("")
+        $("#iam_cust_user_secondary_email").val("")
+
+        $("#iam_cust_user_mobile_no").prop('disabled', false);
+        $("#iam_cust_user_secondary_mobile_no").prop('disabled', false);
+
+        $("#iam_cust_user_email").prop('disabled', true);
+        $("#iam_cust_user_secondary_email").prop('disabled', true);
+      }
+      if($(this).val() == "email"){
+        $("#iam_cust_user_mobile_no").val("")
+        $("#iam_cust_user_secondary_mobile_no").val("")
+
+        $("#iam_cust_user_mobile_no").prop('disabled', true);
+        $("#iam_cust_user_secondary_mobile_no").prop('disabled', true);
+
+        $("#iam_cust_user_email").prop('disabled', false);
+        $("#iam_cust_user_secondary_email").prop('disabled', false);
+      }
+    });
+    
+  });
