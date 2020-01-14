@@ -40,7 +40,7 @@ module UserNotification
   #User is added to LDAP on approval
   def add_user_to_ldap_on_approval
     puts "================add_user_to_ldap_on_approval method================"
-    if approval_status == 'A' && last_action == 'C'
+    if approval_status == 'A'
       puts "================IamCustUser ID: #{self.id}================"
       LDAP.new.add_user(username, generated_password) rescue nil
       @max_retries = 2
