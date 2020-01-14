@@ -127,18 +127,18 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git
-  revision: c02cd6926433984e8a12f1431e74465f7771f4d4
+  revision: cf80a057faa3b5a0a632152f395ae442e1b98d69
   branch: current_4000prod_alipay
   specs:
-    qg-inw (3.4.0)
+    qg-inw (3.5.0)
       rails (= 4.2.2)
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ns.git
-  revision: 804bc87e2276f1d1516950c82e69ba4e240fd74e
+  revision: 681c2c4ae01de7c06e6d96d9a37385ca542b506c
   branch: form_for_new_callback_notification
   specs:
-    qg-ns (1.0.5)
+    qg-ns (1.0.6)
       rails (~> 4.2.2)
 
 GIT
@@ -151,10 +151,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-rpl.git
-  revision: c7bb99429b5a8d8fcdadc558da4db3085cb8950a
+  revision: 5ccf9189a8ceba12bfd1aece492c28b551988ead
   branch: blockchain
   specs:
-    qg-rpl (1.3.0)
+    qg-rpl (1.4.0)
       rails (= 4.2.2)
 
 GIT
@@ -706,10 +706,10 @@ DEPENDENCIES
   qg-ic (= 1.0.8)!
   qg-icol (= 1.1.8)!
   qg-imt (= 1.1.11)!
-  qg-inw (= 3.4.0)!
-  qg-ns (= 1.0.5)!
+  qg-inw (= 3.5.0)!
+  qg-ns (= 1.0.6)!
   qg-obdx (= 2.7.0)!
-  qg-rpl (= 1.3.0)!
+  qg-rpl (= 1.4.0)!
   qg-rx (= 1.1.7)!
   qg-sc (= 1.1.4)!
   qg-sm (= 1.1.0)!
