@@ -56,8 +56,8 @@ gem 'font-awesome-rails'
 
 gem 'encrypted_field', '0.1.6'
 
-gem 'qg-rpl','1.4.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-rpl.git",branch: 'blockchain'
-gem 'qg-inw', '3.5.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git", branch: 'current_4000prod_alipay'
+gem 'qg-rpl','1.6.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-rpl.git",branch: 'blockchain'
+gem 'qg-inw', '3.6.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git", branch: 'current_4000prod_alipay'
 gem 'qg-icol', '1.1.8', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-icol.git"
 gem 'qg-ecol','3.3.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ecol.git",branch: "ecol_approval"
 gem 'qg-bm', '1.0.5', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-bm.git"
