@@ -64,13 +64,7 @@ class IamCustUsersController < ApplicationController
   end
   
   def approve
-    @iam_cust_user =  IamCustUser.find_by(id: params[:id])
-    if @iam_cust_user.was_user_added == "Y"
-      redirect_to unapproved_records_path(group_name: 'iam')
-    else
-      flash[:alert] = 'User were not added into LDAP system'
-      redirect_to @iam_cust_user
-    end
+    redirect_to unapproved_records_path(group_name: 'iam')
   end
 
   def try_login
