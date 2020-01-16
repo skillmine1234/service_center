@@ -39,8 +39,19 @@ module UserNotification
 
   #User is added to LDAP on approval
   def add_user_to_ldap_on_approval
-    puts "================add_user_to_ldap_on_approval method================"
-    if approval_status == 'A'
+    puts "================add_user_to_ldap_on_approval method start================"
+    if approval_status == 'A' && should_reset_password == "Y"
+      puts "================Reset Password Block start================"
+      ldap_reset_password = LDAP.new.reset_password(username, generated_password) rescue nil
+      puts "==========Ldap Reset Password response#{ldap_reset_password}==============="
+      if ldap_reset_password != nil
+        puts "==================Success in LDAP Reset Password========================"
+        update_column(:was_user_added, 'Y')
+        puts "===============Was User Added to LDAP: #{was_user_added}==================="
+      end
+    end
+    
+    if approval_status == 'A' && (should_reset_password == "N" || should_reset_password == nil)
       puts "================IamCustUser ID: #{self.id}================"
       LDAP.new.add_user(username, generated_password) rescue nil
       @max_retries = 2
@@ -48,22 +59,22 @@ module UserNotification
         puts "================Connection To LDAP Initiated================="
         connect_to_ldap = LDAP.new.try_login(username, decrypted_password)
       rescue LDAPFault, Psych::SyntaxError, SystemCallError, Net::LDAP::LdapError => error
-        @retries ||= 0
+          @retries ||= 0
         if @retries < @max_retries
-          @retries += 1
-          puts "================Retrying Connection: #{@retries}================"
-          puts "Error code: #{error}"
-          retry
+            @retries += 1
+            puts "================Retrying Connection: #{@retries}================"
+            puts "Error code: #{error}"
+            retry
         end
-          puts "================Failure in LDAP Connection================"
-      else
-        update_column(:was_user_added, 'Y')
-        notify_customer('Password Generated') unless Rails.env.test?
-        puts "================LDAP Connection Successful================"
-      ensure
-        puts "================Execution Completed================"
-      end
-    end
+            puts "================Failure in LDAP Connection================"
+        else
+          update_column(:was_user_added, 'Y')
+          notify_customer('Password Generated') unless Rails.env.test?
+          puts "================LDAP Connection Successful================"
+        ensure
+          puts "================Execution Completed================"
+        end
+     end
   end
 
   def delete_user_from_ldap_on_approval

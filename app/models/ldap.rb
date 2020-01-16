@@ -131,6 +131,10 @@ class LDAP
   end
 
   def reset_password(username, new_password)
+    Rails.logger.info "==========PASSWORD RESET CODE=================="
+    Rails.logger.info "==============LDAP.RB DATA====================="
+    Rails.logger.info "========username=======>#{username}======="
+    Rails.logger.info "=========password=======>#{new_password}========"
      dn = "CN=#{username},#{@base}"
 
      if @ldap_kind == :openldap
@@ -139,6 +143,7 @@ class LDAP
        @ldap.modify(:dn => dn, :operations => [[:replace, :unicodePwd, str2unicodePwd(new_password)]])
      end
      ldap_result = @ldap.get_operation_result
+     Rails.logger.info "=========ldap Result===========#{ldap_result}==="
      raise LDAPFault.new('reset password', ldap_result) if ldap_result.code != 0
   end
 
