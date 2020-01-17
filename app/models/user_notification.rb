@@ -44,15 +44,13 @@ module UserNotification
       puts "================Reset Password Block start================"
       ldap_reset_password = LDAP.new.reset_password(username, generated_password) rescue nil
       puts "==========Ldap Reset Password response#{ldap_reset_password}==============="
-      if ldap_reset_password != nil
-        puts "==================Success in LDAP Reset Password========================"
-        update_column(:was_user_added, 'Y')
-        notify_customer('Password Generated') unless Rails.env.test?
-        puts "===============Was User Added to LDAP: #{was_user_added}==================="
-      end
+      puts "==================Success in LDAP Reset Password========================"
+      update_column(:was_user_added, 'Y',should_reset_password: nil)
+      notify_customer('Password Generated') unless Rails.env.test?
+      puts "===============Was User Added to LDAP: #{was_user_added}==================="
     end
     
-    if approval_status == 'A' && (should_reset_password == "N" || should_reset_password == nil)
+    if self.last_action == 'C' && self.approval_status == 'A' && self.lock_version == 1
       puts "================IamCustUser ID: #{self.id}================"
       puts "================Fresh user addding block start================"
       LDAP.new.add_user(username, generated_password) rescue nil

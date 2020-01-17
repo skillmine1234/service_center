@@ -134,12 +134,12 @@ class LDAP
     Rails.logger.info "==========PASSWORD RESET CODE=================="
     Rails.logger.info "==============LDAP.RB DATA====================="
     Rails.logger.info "========username=======>#{username}======="
-    Rails.logger.info "=========password=======>#{new_password}========"
-     dn = "CN=#{username},#{@base}"
+    Rails.logger.info "=========password=======>#{xxxxxxxxx}========"
+    dn = "CN=#{username},#{@base}"
 
      if @ldap_kind == :openldap
        @ldap.modify(:dn => dn, :operations => [[:replace, :userPassword, new_password]])
-     else
+        
        @ldap.modify(:dn => dn, :operations => [[:replace, :unicodePwd, str2unicodePwd(new_password)]])
      end
      ldap_result = @ldap.get_operation_result
