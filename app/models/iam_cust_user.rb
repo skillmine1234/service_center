@@ -68,6 +68,7 @@ class IamCustUser < ActiveRecord::Base
   def password_part_2(passwd)
     passwd.slice((passwd.length/2)..passwd.length)
   end
+
   
   #With this connection to LDAP is established
   def will_connect_to_ldap
@@ -78,15 +79,17 @@ class IamCustUser < ActiveRecord::Base
   end
   
   def generate_password
-    puts "in generate"
-    if last_action == 'C' || ( approval_status == 'A' && should_reset_password == 'Y' )
+    puts "==============================generate_password method start========================="
+    if self.last_action == 'C' && self.approval_status == 'A' && self.lock_version == 0
+      puts "-----------Fresh User------------"
       self.generated_password = [*('A'..'Z')].sample(4).join + rand(10..99).to_s + [*('a'..'z')].sample(4).join
       self.encrypted_password = EncPassGenerator.new(generated_password, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']).generate_encrypted_password
-      unless last_action ==  'C'
-        # self.should_reset_password = 'N'
-        self.last_password_reset_at = Time.zone.now
-        notify_customer('Password Generated')
-      end
+      self.last_password_reset_at = Time.zone.now
+    elsif (self.last_action == 'U' || self.last_action =='C') && self.approval_status == 'A' && self.should_reset_password == "Y"
+      puts "-----------User Reset Password------------"
+      self.generated_password = [*('A'..'Z')].sample(4).join + rand(10..99).to_s + [*('a'..'z')].sample(4).join
+      self.encrypted_password = EncPassGenerator.new(generated_password, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']).generate_encrypted_password
+      self.last_password_reset_at = Time.zone.now
     end
   end
   

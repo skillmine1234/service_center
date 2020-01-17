@@ -47,12 +47,14 @@ module UserNotification
       if ldap_reset_password != nil
         puts "==================Success in LDAP Reset Password========================"
         update_column(:was_user_added, 'Y')
+        notify_customer('Password Generated') unless Rails.env.test?
         puts "===============Was User Added to LDAP: #{was_user_added}==================="
       end
     end
     
     if approval_status == 'A' && (should_reset_password == "N" || should_reset_password == nil)
       puts "================IamCustUser ID: #{self.id}================"
+      puts "================Fresh user addding block start================"
       LDAP.new.add_user(username, generated_password) rescue nil
       @max_retries = 2
       begin
@@ -70,6 +72,7 @@ module UserNotification
         else
           update_column(:was_user_added, 'Y')
           notify_customer('Password Generated') unless Rails.env.test?
+          puts "================Fresh user successlly added================"
           puts "================LDAP Connection Successful================"
         ensure
           puts "================Execution Completed================"
