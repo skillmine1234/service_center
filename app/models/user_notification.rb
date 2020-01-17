@@ -45,7 +45,7 @@ module UserNotification
       ldap_reset_password = LDAP.new.reset_password(username, generated_password) rescue nil
       puts "==========Ldap Reset Password response#{ldap_reset_password}==============="
       puts "==================Success in LDAP Reset Password========================"
-      update_column(:was_user_added, 'Y',should_reset_password: nil)
+      update_columns(:was_user_added, 'Y',should_reset_password: nil)
       notify_customer('Password Generated') unless Rails.env.test?
       puts "===============Was User Added to LDAP: #{was_user_added}==================="
     end
