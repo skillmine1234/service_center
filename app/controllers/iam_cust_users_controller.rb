@@ -106,6 +106,6 @@ class IamCustUsersController < ApplicationController
   def iam_cust_user_params
     params.require(:iam_cust_user).permit(:username, :first_name, :last_name, :email, :mobile_no, :last_password_reset_at, 
                                           :created_at, :updated_at, :created_by, :updated_by, :lock_version, :approved_id, :approved_version,
-                                          :should_reset_password, :is_enabled,:secondary_email,:secondary_mobile_no,:is_sms,:is_email,:send_password_via)
+                                          :should_reset_password, :is_enabled,:secondary_email,:secondary_mobile_no,:send_password_via)
   end
 end

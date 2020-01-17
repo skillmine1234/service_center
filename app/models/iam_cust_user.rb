@@ -55,7 +55,7 @@ class IamCustUser < ActiveRecord::Base
 
   def template_variables(event)
     if event == 'Password Generated'
-      { username: username, first_name: first_name, last_name: last_name, mobile_no: mobile_no,secondary_mobile_no: secondary_mobile_no, email: email,secondary_email: secondary_email,is_sms: is_sms,is_email: is_email, password_part_1: password_part_1(decrypted_password), password_part_2: password_part_2(decrypted_password) }
+      { username: username, first_name: first_name, last_name: last_name, mobile_no: mobile_no,secondary_mobile_no: secondary_mobile_no, email: email,secondary_email: secondary_email, password_part_1: password_part_1(decrypted_password), password_part_2: password_part_2(decrypted_password) }
     elsif event == 'Access Removed'
       { username: username, first_name: first_name, last_name: last_name, mobile_no: mobile_no, email: email }
     end
