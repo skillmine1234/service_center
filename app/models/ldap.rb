@@ -134,7 +134,7 @@ class LDAP
     Rails.logger.info "==========PASSWORD RESET CODE=================="
     Rails.logger.info "==============LDAP.RB DATA====================="
     Rails.logger.info "========username=======>#{username}======="
-    Rails.logger.info "=========password=======>#{xxxxxxxxx}========"
+    Rails.logger.info "=========password=======>xxxxxxxxx========"
     dn = "CN=#{username},#{@base}"
 
      if @ldap_kind == :openldap
