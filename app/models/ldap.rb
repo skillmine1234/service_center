@@ -137,14 +137,16 @@ class LDAP
     Rails.logger.info "=========password=======>xxxxxxxxx========"
     dn = "CN=#{username},#{@base}"
 
-     if @ldap_kind == :openldap
-       @ldap.modify(:dn => dn, :operations => [[:replace, :userPassword, new_password]])
+    Rails.logger.info "==========LDAP Kind Value #{@ldap_kind}=================="
+    if @ldap_kind == :openldap
+      Rails.logger.info "==========LDAP KIND Block=================="
+      @ldap.modify(:dn => dn, :operations => [[:replace, :userPassword, new_password]])
         
-       @ldap.modify(:dn => dn, :operations => [[:replace, :unicodePwd, str2unicodePwd(new_password)]])
-     end
-     ldap_result = @ldap.get_operation_result
-     Rails.logger.info "=========ldap Result===========#{ldap_result}==="
-     raise LDAPFault.new('reset password', ldap_result) if ldap_result.code != 0
+      @ldap.modify(:dn => dn, :operations => [[:replace, :unicodePwd, str2unicodePwd(new_password)]])
+    end
+    ldap_result = @ldap.get_operation_result
+    Rails.logger.info "=========ldap Result===========#{ldap_result}==="
+    raise LDAPFault.new('reset password', ldap_result) if ldap_result.code != 0
   end
 
   def try_login(username, password)

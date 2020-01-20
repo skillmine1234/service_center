@@ -12,6 +12,12 @@ class IamCustUsersController < ApplicationController
   end
 
   def create
+    to_update_recod = IamCustUser.where(id: params[:iam_cust_user][:approved_id]).first
+    
+    if to_update_recod.present?
+      params[:iam_cust_user].merge!(was_user_added: to_update_recod.was_user_added,encrypted_password: to_update_recod.encrypted_password)
+    end
+
     @iam_cust_user = IamCustUser.new(params[:iam_cust_user])
     if !@iam_cust_user.valid?
       render "new"
@@ -28,6 +34,7 @@ class IamCustUsersController < ApplicationController
   end
 
   def update
+
     @iam_cust_user = IamCustUser.unscoped.find_by_id(params[:id])
     @iam_cust_user.attributes = params[:iam_cust_user]
     if !@iam_cust_user.valid?
