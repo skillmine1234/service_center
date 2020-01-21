@@ -21,7 +21,14 @@ class IamCustUser < ActiveRecord::Base
   validates :email,:secondary_email, format: {with: Devise::email_regexp}, length: { maximum: 100 },if: :check_send_password_via_email?
   validates :mobile_no,:secondary_mobile_no, numericality: true, length: { minimum: 10,maximum: 20 },if: :check_send_password_via_phn?
 
-  before_save :generate_password
+  before_save :generate_password,:set_old_password_value
+
+  def set_old_password_value
+    if self.old_password == nil
+      self.old_password = self.encrypted_password
+    end 
+  end
+
 
   def check_send_password_via_phn?
     if self.send_password_via == "sms"
@@ -96,6 +103,11 @@ class IamCustUser < ActiveRecord::Base
   def decrypted_password
     DecPassGenerator.new(encrypted_password,ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']).generate_decrypted_data
   end
+  
+  def decrypt_old_password(old_password)
+    DecPassGenerator.new(old_password,ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']).generate_decrypted_data
+  end
+
   
   def self.iam_cust_user_exists?(*args)
     args.size.zero? ? true : IamCustUser.find_by(username: args[0]).present?

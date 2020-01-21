@@ -123,11 +123,16 @@ class LDAP
   end
 
   def change_password(username, old_password, new_password)
-     dn = "CN=#{username},#{@base}"
+    Rails.logger.info "============change_password method in LDAP.RB==========="
+    Rails.logger.info "============Username=#{username}==========="
+    Rails.logger.info "============Old Password=#{old_password}==========="
+    Rails.logger.info "============New Password=#{new_password}==========="
 
-     raise  LDAPFault.new('change password', 'invalid user/password') if !login(username, old_password)
+    dn = "CN=#{username},#{@base}"
 
-     reset_password(username, new_password)
+    raise  LDAPFault.new('change password', 'invalid user/password') if !login(username, old_password)
+
+    reset_password(username, new_password)
   end
 
   def reset_password(username, new_password)
@@ -138,18 +143,21 @@ class LDAP
     dn = "CN=#{username},#{@base}"
 
     Rails.logger.info "==========LDAP Kind Value #{@ldap_kind}=================="
-    if @ldap_kind == :openldap
+    #if @ldap_kind == :openldap
       Rails.logger.info "==========LDAP KIND Block=================="
-      @ldap.modify(:dn => dn, :operations => [[:replace, :userPassword, new_password]])
+     # @ldap.modify(:dn => dn, :operations => [[:replace, :userPassword, new_password]])
         
       @ldap.modify(:dn => dn, :operations => [[:replace, :unicodePwd, str2unicodePwd(new_password)]])
-    end
+    #end
     ldap_result = @ldap.get_operation_result
     Rails.logger.info "=========ldap Result===========#{ldap_result}==="
     raise LDAPFault.new('reset password', ldap_result) if ldap_result.code != 0
   end
 
   def try_login(username, password)
+    Rails.logger.info "--------------------->>> try login method in LDAP.RB"
+    Rails.logger.info "========username=======>#{username}======="
+    Rails.logger.info "=========password=======>#{password}========"
     dn = "CN=#{username},#{@base}"
     @ldap.auth dn, password
     raise LDAPFault.new(nil, @ldap.get_operation_result) if @ldap.bind == false

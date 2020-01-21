@@ -6,10 +6,17 @@ module UserNotification
   end
 
   def test_ldap_login
+    puts puts "================test_ldap_login method start================"
     LDAP.new.try_login(username, decrypted_password)
+    puts "=========in test login block=========="
+    puts "username==========#{username}==========="
+    puts "Password============#{decrypted_password}========="
     "Login Successful"
   rescue LDAPFault, Psych::SyntaxError, SystemCallError, Net::LDAP::LdapError => e
+    puts "======================During test_ldap_login =================="
+    puts "Message: #{e}"
     e.message
+   puts "============test login block end===================" 
   end
   
   def resend_password
@@ -42,7 +49,7 @@ module UserNotification
     puts "================add_user_to_ldap_on_approval method start================"
     if approval_status == 'A' && should_reset_password == "Y"
       puts "================Reset Password Block start================"
-      ldap_reset_password = LDAP.new.reset_password(username, generated_password) rescue nil
+      ldap_reset_password = LDAP.new.change_password(username, decrypt_old_password(old_password), generated_password) rescue nil
       puts "==========Ldap Reset Password response#{ldap_reset_password}==============="
       puts "==================Success in LDAP Reset Password========================"
       update_column(:was_user_added, 'Y')
