@@ -49,13 +49,23 @@ module UserNotification
     puts "================add_user_to_ldap_on_approval method start================"
     if approval_status == 'A' && should_reset_password == "Y"
       puts "================Reset Password Block start================"
-      ldap_reset_password = LDAP.new.change_password(username, decrypt_old_password(old_password), generated_password) rescue nil
-      puts "==========Ldap Reset Password response#{ldap_reset_password}==============="
-      puts "==================Success in LDAP Reset Password========================"
-      update_column(:was_user_added, 'Y')
-      update_column(:should_reset_password, nil)
-      notify_customer('Password Generated') unless Rails.env.test?
-      puts "===============Was User Added to LDAP: #{was_user_added}==================="
+      begin
+        puts "================Resetting of LDAP Password Process Initiated================="
+        puts "============username==========>#{username}========================="
+        ldap_reset_password = LDAP.new.change_password(username, decrypt_old_password(old_password), generated_password)
+        update_column(:should_reset_password, "N")
+      rescue LDAPFault, Psych::SyntaxError, SystemCallError, Net::LDAP::LdapError => error
+        puts "================Reset Password Error code: #{error}================"
+        puts "================Failure in LDAP Reset Password================"
+        update_column(:was_user_added, "N")
+      else
+        puts "==================Success in LDAP Reset Password========================"
+        update_column(:was_user_added, 'Y')
+        notify_customer('Password Generated') unless Rails.env.test?
+        puts "===============Was User Added to LDAP: #{was_user_added}==================="
+      ensure
+        puts "================Reset Password Execution Completed================"
+      end
     end
     
     if self.last_action == 'C' && self.approval_status == 'A' && self.lock_version == 1
@@ -67,14 +77,14 @@ module UserNotification
         puts "================Connection To LDAP Initiated================="
         connect_to_ldap = LDAP.new.try_login(username, decrypted_password)
       rescue LDAPFault, Psych::SyntaxError, SystemCallError, Net::LDAP::LdapError => error
-          @retries ||= 0
+        @retries ||= 0
         if @retries < @max_retries
-            @retries += 1
-            puts "================Retrying Connection: #{@retries}================"
-            puts "Error code: #{error}"
-            retry
+          @retries += 1
+          puts "================Retrying Connection: #{@retries}================"
+          puts "Error code: #{error}"
+          retry
         end
-            puts "================Failure in LDAP Connection================"
+          puts "================Failure in LDAP Connection================"
         else
           update_column(:was_user_added, 'Y')
           notify_customer('Password Generated') unless Rails.env.test?
@@ -84,7 +94,26 @@ module UserNotification
           puts "================Execution Completed================"
         end
      end
+
+    if approval_status == "A" && should_reset_password == "N" && was_user_added == "Y"
+      puts "=========On Update of Record when user already added to LDAP========="
+      audits = self.audits.last
+      key_present = []
+
+      if audits.present?
+        %i[send_password_via mobile_no secondary_mobile_no email secondary_email].each do |col_value|
+          data = audits.audited_changes.key? col_value.to_s
+          key_present << data
+        end
+      end  
+
+      if key_present.include? true
+        notify_customer('Password Generated') unless Rails.env.test?
+      end
+    end
+
   end
+
 
   def delete_user_from_ldap_on_approval
     if approval_status == 'A' && is_enabled == 'N' && is_enabled_was == 'Y'
@@ -94,6 +123,7 @@ module UserNotification
   rescue
     nil
   end
+
 
   #Notification via sms/email is triggered
   def notify_customer(event)
@@ -115,7 +145,7 @@ module UserNotification
       elsif state == "email"
         plsql.pk_qg_send_email.enqueue1(ENV['CONFIG_IIB_SMTP_BROKER_UUID'], self.email, NsTemplate.render_template(template.email_subject, template_variables(event)), NsTemplate.render_template(template.email_body, template_variables(event))) unless template.email_body.to_s.empty?
         plsql.pk_qg_send_email.enqueue1(ENV['CONFIG_IIB_SMTP_BROKER_UUID'], self.secondary_email, NsTemplate.render_template(template.email_subject, template_variables(event)), NsTemplate.render_template(template.email_body1, template_variables(event))) unless template.email_body1.to_s.empty?
-      end  
+      end
       update_column(:notification_sent_at, Time.zone.now)
     else
       'Template is not setup for SMS / Email'
