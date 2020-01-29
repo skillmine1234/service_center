@@ -94,24 +94,6 @@ module UserNotification
           puts "================Execution Completed================"
         end
      end
-
-    if approval_status == "A" && should_reset_password == "N" && was_user_added == "Y"
-      puts "=========On Update of Record when user already added to LDAP========="
-      audits = self.audits.last
-      key_present = []
-
-      if audits.present?
-        %i[send_password_via mobile_no secondary_mobile_no email secondary_email].each do |col_value|
-          data = audits.audited_changes.key? col_value.to_s
-          key_present << data
-        end
-      end  
-
-      if key_present.include? true
-        notify_customer('Password Generated') unless Rails.env.test?
-      end
-    end
-
   end
 
 
