@@ -13,6 +13,8 @@
       SMS
       = f.radio_button :send_password_via, "email"
       Email
+      = f.radio_button :send_password_via, "both"
+      Both
     .control-group
       = f.label :username, "*Username", :class => 'control-label'
       = f.text_field :username, maxlength: 100
@@ -103,6 +105,16 @@
 
         $("#iam_cust_user_email").prop('disabled', false);
         $("#iam_cust_user_secondary_email").prop('disabled', false);
+      }
+      if($(this).val() == "both"){
+        $("#iam_cust_user_secondary_mobile_no").val("")
+        $("#iam_cust_user_secondary_email").val("");
+
+        $("#iam_cust_user_mobile_no").prop('disabled', false);
+        $("#iam_cust_user_secondary_mobile_no").prop('disabled', true);
+
+        $("#iam_cust_user_email").prop('disabled', false);
+        $("#iam_cust_user_secondary_email").prop('disabled', true);
       }
     });
     

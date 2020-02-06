@@ -8,7 +8,7 @@ class IamCustUser < ActiveRecord::Base
   belongs_to :updated_user, :foreign_key =>'updated_by', :class_name => 'User'
   
   
-  # validate :password_via?, :same_field_value_check?
+  validate :password_via?, :same_field_value_check?
   validates :mobile_no,:secondary_mobile_no, format: { with: /\A\d+\z/, message: "Integer only." },if: :check_send_password_via_phn?
 
   validates_presence_of :username
