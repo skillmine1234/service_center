@@ -21,6 +21,7 @@ ServiceCenter::Application.routes.draw do
       get 'process_file'
       get 'reset'
       get 'output_file'
+      get 'ecol_process_file'
     end
   end
   

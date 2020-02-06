@@ -216,6 +216,19 @@ class IncomingFilesController < ApplicationController
   def output_file
     @fm_output_file = FmOutputFile.find_by_id(params[:file_id])
   end
+  
+  def ecol_process_file
+    @incoming_file = IncomingFile.where(id: params[:id]).last
+    if @incoming_file.present?
+      @incoming_file.update(pending_approval: "N")
+    end
+    
+    respond_to do |format|
+      format.js {render inline: "location.reload();" }
+    end
+
+  end
+
 
   def incoming_file_params
     params.require(:incoming_file).permit(:file, :size_in_bytes, :line_count, :created_by, :updated_by, :status,
