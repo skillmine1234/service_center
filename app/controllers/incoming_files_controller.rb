@@ -220,7 +220,7 @@ class IncomingFilesController < ApplicationController
   def ecol_process_file
     @incoming_file = IncomingFile.where(id: params[:id]).last
     if @incoming_file.present?
-      @incoming_file.update(pending_approval: "N")
+      @incoming_file.update(pending_approval: "N",fault_code: "",fault_reason: "",fault_subcode: "")
     end
     
     respond_to do |format|
