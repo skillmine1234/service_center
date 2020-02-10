@@ -73,10 +73,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ecol.git
-  revision: d805c00c49d0fb309be15882db1dc8368fc057a7
-  branch: ecol_approval
+  revision: 15da601b6c270a74941173b58db68c9c32511c72
+  branch: ecol_previous_state
   specs:
-    qg-ecol (3.4.0)
+    qg-ecol (3.5.0)
       rails (= 4.2.2)
 
 GIT
@@ -88,10 +88,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ft.git
-  revision: b9fcbe73763f13a2f00a13c04e6cff6072c1851d
+  revision: f7f325932843bd8ba11b5e863f54d6afd2391ff5
   branch: ft_customer
   specs:
-    qg-ft (1.2.8)
+    qg-ft (1.2.9)
       draper
       pundit
       rails (>= 4.2.2)
@@ -700,9 +700,9 @@ DEPENDENCIES
   qg-bm (= 1.0.5)!
   qg-cc (= 1.2.3)!
   qg-cp (= 1.0.2)!
-  qg-ecol (= 3.4.0)!
+  qg-ecol (= 3.5.0)!
   qg-fp (= 1.0.8)!
-  qg-ft (= 1.2.8)!
+  qg-ft (= 1.2.9)!
   qg-gm (= 1.1.6)!
   qg-ic (= 1.0.9)!
   qg-icol (= 1.1.8)!
