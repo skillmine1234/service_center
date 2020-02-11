@@ -85,6 +85,16 @@
       $("#iam_cust_user_email").prop('disabled', false);
       $("#iam_cust_user_secondary_email").prop('disabled', false);
     }
+    if($("#iam_cust_user_send_password_via_both").is(':checked')){
+      $("#iam_cust_user_mobile_no").val("")
+      $("#iam_cust_user_secondary_mobile_no").val("")
+
+      $("#iam_cust_user_secondary_email").prop('disabled', true);
+      $("#iam_cust_user_secondary_mobile_no").prop('disabled', true);
+
+      $("#iam_cust_user_email").prop('disabled', false);
+      $("#iam_cust_user_mobile_no").prop('disabled', false);
+    }
     $('input[type="radio"]').on('change', function(e) {
       if($(this).val() == "sms"){
         $("#iam_cust_user_email").val("")

@@ -44,11 +44,14 @@ class IamCustUser < ActiveRecord::Base
 
   def password_via?
     if send_password_via == "sms"
-      mobile_no.blank? ? errors.add(:mobile_no,"Mobile Can't be blank?") : nil
-      secondary_mobile_no.blank? ? errors.add(:secondary_mobile_no,"Secondary Mobile Can't be blank?") : nil
+      mobile_no.blank? ? errors.add(:mobile_no,"Mobile No Can't be blank?") : nil
+      secondary_mobile_no.blank? ? errors.add(:secondary_mobile_no,"Secondary Mobile No Can't be blank?") : nil
     elsif send_password_via == "email"
       email.blank? ? errors.add(:email,"Email Can't be blank?") : nil
       secondary_email.blank? ? errors.add(:secondary_email,"Secondary Email Can't be blank?") : nil
+    elsif send_password_via == "both"
+      email.blank? ? errors.add(:email,"Email Can't be blank?") : nil
+      mobile_no.blank? ? errors.add(:mobile_no,"Mobile No Can't be blank?") : nil
     end
   end
 
