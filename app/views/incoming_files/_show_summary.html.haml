@@ -56,7 +56,7 @@
       %td{:style=>'text-align:left;font-weight: bold;'}
         = @incoming_file.pending_approval
         &nbsp;&nbsp;
-        - if @incoming_file.pending_approval == 'Y' && @incoming_file.service_name != "ECOL"
+        - if @incoming_file.pending_approval == 'Y'
           - if @incoming_file.last_process_step.nil?
             = render :partial => "process_file"
             = render :partial => "reject"
@@ -64,8 +64,6 @@
             = render :partial => "process_file"
           - elsif @incoming_file.last_process_step == 'R'
             = render :partial => "process_file"
-        - elsif @incoming_file.pending_approval == 'Y' && @incoming_file.service_name == "ECOL"    
-          = render :partial => "ecol_process_file"
 %table.table.table-bordered.table-striped.table-hover.align_center{:style=>'width:45%;float: right;'}
   %thead
     %tr 

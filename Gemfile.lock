@@ -88,10 +88,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ft.git
-  revision: f7f325932843bd8ba11b5e863f54d6afd2391ff5
+  revision: 8052eac7e041cbd7e910a4e02698a28fd7101ed9
   branch: ft_customer
   specs:
-    qg-ft (1.2.9)
+    qg-ft (1.3.0)
       draper
       pundit
       rails (>= 4.2.2)
@@ -702,7 +702,7 @@ DEPENDENCIES
   qg-cp (= 1.0.2)!
   qg-ecol (= 3.5.0)!
   qg-fp (= 1.0.8)!
-  qg-ft (= 1.2.9)!
+  qg-ft (= 1.3.0)!
   qg-gm (= 1.1.6)!
   qg-ic (= 1.0.9)!
   qg-icol (= 1.1.8)!

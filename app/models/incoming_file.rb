@@ -99,9 +99,7 @@ class IncomingFile < ActiveRecord::Base
   def update_file_path
     if self.service_name == "AML"
       self.file_path = self.approval_status == 'A' ? "#{ENV['CONFIG_APPROVED_FILE_UPLOAD_PATH']}/#{self.sc_service.code.downcase}/#{self.incoming_file_type.code.downcase}" : "#{ENV['CONFIG_FILE_UPLOAD_PATH']}/aml/aml_fileuploads"
-    elsif self.service_name == "ECOL"
-      self.file_path =  "#{ENV['CONFIG_APPROVED_FILE_UPLOAD_PATH']}/#{self.sc_service.code.downcase}/#{self.incoming_file_type.code.downcase}"
-    else  
+    else
       self.file_path = self.approval_status == 'A' ? "#{ENV['CONFIG_APPROVED_FILE_UPLOAD_PATH']}/#{self.sc_service.code.downcase}/#{self.incoming_file_type.code.downcase}" : "#{ENV['CONFIG_FILE_UPLOAD_PATH']}"
     end
   end
