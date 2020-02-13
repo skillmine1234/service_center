@@ -9,8 +9,8 @@
     %tr
       %td{:style=>'text-align:left;'}
         = "Response File Name"
-      %td{:style=>'text-align:left;'}
-        = incoming_file.rep_file_name 
+      %td{:style=>'text-align:left;'} 
+        = link_to "#{incoming_file.rep_file_name}", download_ecol_response_file_incoming_files_path(id: incoming_file.id)
         &nbsp;
         - if !incoming_file.auto_upload? and (!ENV['CONFIG_SCP_IIB_FILE_MGR'].nil? or !ENV['CONFIG_SCP_IIB_FILE_MGR'].empty?) and incoming_file.status == 'C' and !incoming_file.rep_file_status.nil?
           = "("

@@ -18,8 +18,14 @@ class IncomingFileUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    if Rails.env == "production"
-      self.model.service_name == "AML" ? "#{ENV['CONFIG_FILE_UPLOAD_PATH']}/aml/aml_fileuploads" : ENV['CONFIG_FILE_UPLOAD_PATH']
+    if Rails.env == "development"
+      if self.model.service_name == "AML" 
+        "#{ENV['CONFIG_FILE_UPLOAD_PATH']}/aml/aml_fileuploads" 
+       elsif self.model.service_name == "ECOL"
+        "#{ENV['CONFIG_APPROVED_FILE_UPLOAD_PATH']}/#{self.model.sc_service.code.downcase}/#{self.model.incoming_file_type.code.downcase}"
+       else
+        ENV['CONFIG_FILE_UPLOAD_PATH']
+       end  
     else
       "uploads"
     end

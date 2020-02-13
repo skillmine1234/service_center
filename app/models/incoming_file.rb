@@ -45,13 +45,22 @@ class IncomingFile < ActiveRecord::Base
   has_one :rr_unapproved_record, :as => :rr_approvable
   has_one :cp_unapporved_record, as: :cp_approvable
 
-  after_create :on_create_create_unapproved_record
-  after_destroy :on_destory_remove_unapproved_records
-  after_update :on_update_remove_unapproved_records
+  after_create :on_create_create_unapproved_record,if: "service_name!='ECOL'"
+  after_destroy :on_destory_remove_unapproved_records,if: "service_name!='ECOL'"
+  after_update :on_update_remove_unapproved_records,if: "service_name!='ECOL'"
 
   mount_uploader :file, IncomingFileUploader
 
   validates_presence_of :file, :on => :create
+
+  before_save :change_approval_status
+
+  def change_approval_status
+    puts self.service_name
+    if self.service_name == "ECOL"
+      self.approval_status = "A"
+    end
+  end
   
   def name
     file_name
@@ -99,7 +108,9 @@ class IncomingFile < ActiveRecord::Base
   def update_file_path
     if self.service_name == "AML"
       self.file_path = self.approval_status == 'A' ? "#{ENV['CONFIG_APPROVED_FILE_UPLOAD_PATH']}/#{self.sc_service.code.downcase}/#{self.incoming_file_type.code.downcase}" : "#{ENV['CONFIG_FILE_UPLOAD_PATH']}/aml/aml_fileuploads"
-    else
+    elsif self.service_name == "ECOL"
+      self.file_path =  "#{ENV['CONFIG_APPROVED_FILE_UPLOAD_PATH']}/#{self.sc_service.code.downcase}/#{self.incoming_file_type.code.downcase}"
+    else  
       self.file_path = self.approval_status == 'A' ? "#{ENV['CONFIG_APPROVED_FILE_UPLOAD_PATH']}/#{self.sc_service.code.downcase}/#{self.incoming_file_type.code.downcase}" : "#{ENV['CONFIG_FILE_UPLOAD_PATH']}"
     end
   end
