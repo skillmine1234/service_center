@@ -127,6 +127,16 @@ class IncomingFilesController < ApplicationController
     end
   end
 
+  def download_ecol_response_file
+    @incoming_file = IncomingFile.find(params[:id])
+    begin
+      send_file "#{@incoming_file.rep_file_path}/#{@incoming_file.rep_file_name}", :disposition => 'attachment'
+    rescue
+      flash[:alert] = "File not present!"
+      redirect_to @incoming_file
+    end  
+  end
+
   def call_api(params, uri)
     if params[:record_ids]
       @incoming_file = IncomingFile.find_by_file_name(params[:file])
@@ -216,6 +226,19 @@ class IncomingFilesController < ApplicationController
   def output_file
     @fm_output_file = FmOutputFile.find_by_id(params[:file_id])
   end
+  
+  def ecol_process_file
+    @incoming_file = IncomingFile.where(id: params[:id]).last
+    if @incoming_file.present?
+      @incoming_file.update(pending_approval: "N")
+    end
+    
+    respond_to do |format|
+      format.js {render inline: "location.reload();" }
+    end
+
+  end
+
 
   def incoming_file_params
     params.require(:incoming_file).permit(:file, :size_in_bytes, :line_count, :created_by, :updated_by, :status,
