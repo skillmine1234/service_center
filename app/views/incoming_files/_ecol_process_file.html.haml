@@ -1,2 +1,2 @@
 - can = !(can? :process_file, IncomingFile) 
-= link_to "Process",ecol_process_file_incoming_file_path,:role => "button",:class => "btn btn-primary", :disabled => can,:remote=>true
+= link_to "Process",can ? "#" : ecol_process_file_incoming_file_path,:role => "button",:class => "btn btn-primary", :disabled => can,:remote=>true
