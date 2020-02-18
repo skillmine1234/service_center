@@ -130,11 +130,11 @@ class IncomingFilesController < ApplicationController
   def download_ecol_response_file
     @incoming_file = IncomingFile.find(params[:id])
     begin
-      send_file "#{@incoming_file.rep_file_path}/#{@incoming_file.rep_file_name}", :disposition => 'attachment'
-    rescue
-      flash[:alert] = "File not present!"
+      send_file "#{ENV['ECOLL_RESPONSE_FILE']}/#{@incoming_file.rep_file_name}", :disposition => 'attachment'
+    rescue Exception => e
+      flash[:alert] = "Error Occurred: #{e}"
       redirect_to @incoming_file
-    end  
+    end
   end
 
   def call_api(params, uri)
