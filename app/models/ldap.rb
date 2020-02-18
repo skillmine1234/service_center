@@ -115,11 +115,15 @@ class LDAP
   end
 
   def delete_user(username)
-     dn = "CN=#{username},#{@base}"
+    Rails.logger.info "============delete_user method in LDAP.RB==========="
+    Rails.logger.info "============Username=#{username}==========="
 
-     @ldap.delete :dn => dn
-     ldap_result = @ldap.get_operation_result
-     raise LDAPFault.new('delete user', ldap_result) if ldap_result.code != 0
+    dn = "CN=#{username},#{@base}"
+
+    @ldap.delete :dn => dn
+    ldap_result = @ldap.get_operation_result
+    Rails.logger.info "=========delete_user ldap Result===========#{ldap_result}==="
+    raise LDAPFault.new('delete user', ldap_result) if ldap_result.code != 0
   end
 
   def change_password(username, old_password, new_password)
@@ -150,7 +154,7 @@ class LDAP
       @ldap.modify(:dn => dn, :operations => [[:replace, :unicodePwd, str2unicodePwd(new_password)]])
     #end
     ldap_result = @ldap.get_operation_result
-    Rails.logger.info "=========ldap Result===========#{ldap_result}==="
+    Rails.logger.info "=========reset_password ldap Result===========#{ldap_result}==="
     raise LDAPFault.new('reset password', ldap_result) if ldap_result.code != 0
   end
 

@@ -7,6 +7,7 @@
     = f.hidden_field :lock_version
     = f.hidden_field :approved_id
     = f.hidden_field :approved_version
+    = hidden_field_tag "send_password_via2", @iam_cust_user.send_password_via
     .control-group
       = f.label :send_password_via, "*Send Password Via", :class => 'control-label'
       = f.radio_button :send_password_via, "sms",:checked => true
@@ -65,6 +66,11 @@
 
 :javascript
   $(document).ready(function(){
+    var primary_email =  $("#iam_cust_user_email").val(); 
+    var secondary_email =  $("#iam_cust_user_secondary_email").val();
+    var primary_mobile_no =  $("#iam_cust_user_mobile_no").val();
+    var secondary_mobile_no =  $("#iam_cust_user_secondary_mobile_no").val();
+
     if($("#iam_cust_user_send_password_via_sms").is(':checked')){
       $("#iam_cust_user_email").val("")
       $("#iam_cust_user_secondary_email").val("")
@@ -81,7 +87,6 @@
 
       $("#iam_cust_user_mobile_no").prop('disabled', true);
       $("#iam_cust_user_secondary_mobile_no").prop('disabled', true);
-
       $("#iam_cust_user_email").prop('disabled', false);
       $("#iam_cust_user_secondary_email").prop('disabled', false);
     }
@@ -91,44 +96,55 @@
 
       $("#iam_cust_user_secondary_email").prop('disabled', true);
       $("#iam_cust_user_secondary_mobile_no").prop('disabled', true);
-
       $("#iam_cust_user_email").prop('disabled', false);
       $("#iam_cust_user_mobile_no").prop('disabled', false);
     }
     $('input[type="radio"]').on('change', function(e) {
       if($(this).val() == "sms"){
         $("#iam_cust_user_email").val("")
-        $("#iam_cust_user_mobile_no").val("")
         $("#iam_cust_user_secondary_email").val("")
+        $("#iam_cust_user_mobile_no").val("")
         $("#iam_cust_user_secondary_mobile_no").val("")
+
+        if($("#send_password_via2").val() == "sms"){
+          $("#iam_cust_user_mobile_no").val(primary_mobile_no)
+          $("#iam_cust_user_secondary_mobile_no").val(secondary_mobile_no)
+        }
 
         $("#iam_cust_user_mobile_no").prop('disabled', false);
         $("#iam_cust_user_secondary_mobile_no").prop('disabled', false);
-
         $("#iam_cust_user_email").prop('disabled', true);
         $("#iam_cust_user_secondary_email").prop('disabled', true);
       }
       if($(this).val() == "email"){
-        $("#iam_cust_user_email").val("")
         $("#iam_cust_user_mobile_no").val("")
-        $("#iam_cust_user_secondary_email").val("")
         $("#iam_cust_user_secondary_mobile_no").val("")
+        $("#iam_cust_user_email").val("")
+        $("#iam_cust_user_secondary_email").val("")
+
+        if($("#send_password_via2").val() == "email"){
+          $("#iam_cust_user_email").val(primary_email)
+          $("#iam_cust_user_secondary_email").val(secondary_email)
+        }
 
         $("#iam_cust_user_mobile_no").prop('disabled', true);
         $("#iam_cust_user_secondary_mobile_no").prop('disabled', true);
-
         $("#iam_cust_user_email").prop('disabled', false);
         $("#iam_cust_user_secondary_email").prop('disabled', false);
       }
       if($(this).val() == "both"){
-        $("#iam_cust_user_email").val("")
         $("#iam_cust_user_mobile_no").val("")
-        $("#iam_cust_user_secondary_email").val("")
         $("#iam_cust_user_secondary_mobile_no").val("")
+        $("#iam_cust_user_email").val("")
+        $("#iam_cust_user_secondary_email").val("")
+
+        if($("#send_password_via2").val() == "both"){
+          $("#iam_cust_user_email").val(primary_email)
+          $("#iam_cust_user_mobile_no").val(primary_mobile_no)
+        }
 
         $("#iam_cust_user_mobile_no").prop('disabled', false);
         $("#iam_cust_user_secondary_mobile_no").prop('disabled', true);
-
         $("#iam_cust_user_email").prop('disabled', false);
         $("#iam_cust_user_secondary_email").prop('disabled', true);
       }
