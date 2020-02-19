@@ -129,8 +129,9 @@ class IncomingFilesController < ApplicationController
 
   def download_ecol_response_file
     @incoming_file = IncomingFile.find(params[:id])
+    download_path = @incoming_file.get_ecol_response_file_path
     begin
-      send_file "#{ENV['ECOLL_RESPONSE_FILE']}/#{@incoming_file.rep_file_name}", :disposition => 'attachment'
+      send_file "#{download_path}/#{@incoming_file.rep_file_name}", :disposition => 'attachment'
     rescue Exception => e
       flash[:alert] = "Error Occurred: #{e}"
       redirect_to @incoming_file

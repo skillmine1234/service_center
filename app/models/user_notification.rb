@@ -37,7 +37,6 @@ module UserNotification
     rescue LDAPFault, Psych::SyntaxError, SystemCallError, Net::LDAP::LdapError, OCIError, ArgumentError => error
       puts "================Add User Error code: #{error}================"
       puts "================Failure adding user to LDAP================"
-      update_column(:was_user_added, "N")
       puts "===============Was User Added to LDAP value after Failure response: #{was_user_added}==================="
       return error
     else

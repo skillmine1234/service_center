@@ -194,4 +194,10 @@ class IncomingFile < ActiveRecord::Base
       rr_unapproved_record.delete if self.service_name == "RR"
     end
   end 
+  
+  def get_ecol_response_file_path
+    mtss_url = ActiveRecord::Base.connection.execute("select value from esb_config where key='ecol_response_file_path'")
+    return mtss_url.fetch.first
+  end
+
 end
