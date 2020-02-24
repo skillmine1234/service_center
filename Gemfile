@@ -77,6 +77,8 @@ gem 'qg-rx', '1.1.7', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:
 gem 'qg-ic', '1.0.9', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ic.git", branch: 'dealer-finance'
 gem 'qg-obdx','3.3.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-obdx.git", branch: 'obdx_reports'
 gem 'qg-retailft', '1.0.0',:git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-retailft.git"
+gem 'qg-retailfp', '1.0.0',:git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-retailfp.git"
+gem 'qg-retailrx', '1.0.0',:git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-retailrx.git"
 # oracle is required only in production, CI tools run against sqlite3
 group :production do
   gem 'activerecord-oracle_enhanced-adapter',:git => 'git://github.com/rsim/oracle-enhanced.git'
@@ -94,6 +96,8 @@ group :assets do
   gem 'coffee-rails'
   gem 'uglifier', '>= 1.0.3'
 end
+
+gem 'pry'
 
 
 group :development, :test do
