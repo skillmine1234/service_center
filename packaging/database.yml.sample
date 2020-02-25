@@ -25,6 +25,7 @@ test: &test
 <%= bcdb.upi_production :production, :upi_production %>
 <%= bcdb.invxp_production :production, :invxp_production %>
 <%= bcdb.obdx_production :production, :obdx_production %>
+<%= bcdb.retail_production :production, :retail_production %>
 
 cucumber:
   <<: *test
