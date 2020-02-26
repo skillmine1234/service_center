@@ -59,12 +59,12 @@ class Group < ActiveRecord::Base
       Qg::Rx::MODELS
     when "Obdx"
       Qg::Obdx::MODELS  
-    when "retailft"
-      Qg::Retailft::MODELS    
+    # when "retailft"
+    #   Qg::Retailft::MODELS    
     when "retailfp"
       Qg::Retailfp::MODELS
-    when "retailrx"
-      Qg::Retailrx::MODELS
+    # when "retailrx"
+    #   Qg::Retailrx::MODELS
     else
       []
     end
