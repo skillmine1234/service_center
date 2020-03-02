@@ -152,7 +152,7 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-retailfp.git
-  revision: 1da3570d9578be6ab5b07f4387ceba5a5cf065ce
+  revision: 5eb8f45b9e6659e508d8c7bb17b9e9bdb5190014
   specs:
     qg-retailfp (1.0.0)
       rails (~> 4.2.2)
