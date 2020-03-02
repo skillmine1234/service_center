@@ -96,9 +96,6 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'pry'
-
-
 group :development, :test do
   gem 'sunspot_solr'
   gem 'dotenv-rails'
