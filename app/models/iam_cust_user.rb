@@ -97,8 +97,8 @@ class IamCustUser < ActiveRecord::Base
   end
   
   def generate_password
-    puts "==============================generate_password method start========================="
-    if self.last_action == 'C' && self.approval_status == 'A' && self.lock_version == 0
+    puts "==============================generate_password method start for username: #{username}========================="
+    if self.last_action == 'C' && self.approval_status == 'A' && self.lock_version >= 0
       puts "-----------Fresh User------------"
       self.generated_password = [*('A'..'Z')].sample(4).join + rand(10..99).to_s + [*('a'..'z')].sample(4).join
       self.encrypted_password = EncPassGenerator.new(generated_password, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']).generate_encrypted_password
