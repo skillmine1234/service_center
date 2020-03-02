@@ -63,8 +63,8 @@ class Group < ActiveRecord::Base
     #   Qg::Retailft::MODELS    
     when "retailfp"
       Qg::Retailfp::MODELS
-    # when "retailrx"
-    #   Qg::Retailrx::MODELS
+    when "retailrx"
+      Qg::Retailrx::MODELS
     else
       []
     end

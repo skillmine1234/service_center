@@ -40,6 +40,7 @@ class Ability
       can :skip_records, model_name.constantize
       can :approve_restart, model_name.constantize
       cannot :process_file, model_name.constantize
+      cannot :ecol_process_file, model_name.constantize
       cannot :reset, model_name.constantize
       can :resend_notification, model_name.constantize
       can :try_login, model_name.constantize

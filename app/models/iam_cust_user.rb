@@ -20,6 +20,8 @@ class IamCustUser < ActiveRecord::Base
   validates_format_of :last_name, with: /\A[a-z|A-Z|0-9|\s|\.|\-]+\z/, message: "invalid format - expected format is : {[a-z|A-Z|0-9|\s|\.|\-]}", allow_blank: true
   validates :email,:secondary_email, format: {with: Devise::email_regexp}, length: { maximum: 100 },if: :check_send_password_via_email?
   validates :mobile_no,:secondary_mobile_no, numericality: true, length: { minimum: 10,maximum: 20 },if: :check_send_password_via_phn?
+  validates :email, format: {with: Devise::email_regexp}, length: { maximum: 100 },if: :check_send_password_via_both?
+  validates :mobile_no, numericality: true, length: { minimum: 10,maximum: 20 },if: :check_send_password_via_both?
 
   before_save :generate_password,:set_old_password_value
 
@@ -38,6 +40,12 @@ class IamCustUser < ActiveRecord::Base
 
   def check_send_password_via_email?
     if self.send_password_via == "email"
+      true
+    end
+  end
+
+  def check_send_password_via_both?
+    if self.send_password_via == "both"
       true
     end
   end
@@ -89,8 +97,8 @@ class IamCustUser < ActiveRecord::Base
   end
   
   def generate_password
-    puts "==============================generate_password method start for username: #{username}========================="
-    if self.last_action == 'C' && self.approval_status == 'A' && self.lock_version >= 0
+    puts "==============================generate_password method start========================="
+    if self.last_action == 'C' && self.approval_status == 'A' && self.lock_version == 0
       puts "-----------Fresh User------------"
       self.generated_password = [*('A'..'Z')].sample(4).join + rand(10..99).to_s + [*('a'..'z')].sample(4).join
       self.encrypted_password = EncPassGenerator.new(generated_password, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']).generate_encrypted_password

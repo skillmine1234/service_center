@@ -115,22 +115,18 @@ class LDAP
   end
 
   def delete_user(username)
-    Rails.logger.info "============delete_user method in LDAP.RB==========="
-    Rails.logger.info "============Username=#{username}==========="
+     dn = "CN=#{username},#{@base}"
 
-    dn = "CN=#{username},#{@base}"
-
-    @ldap.delete :dn => dn
-    ldap_result = @ldap.get_operation_result
-    Rails.logger.info "=========delete_user ldap Result===========#{ldap_result}==="
-    raise LDAPFault.new('delete user', ldap_result) if ldap_result.code != 0
+     @ldap.delete :dn => dn
+     ldap_result = @ldap.get_operation_result
+     raise LDAPFault.new('delete user', ldap_result) if ldap_result.code != 0
   end
 
   def change_password(username, old_password, new_password)
     Rails.logger.info "============change_password method in LDAP.RB==========="
     Rails.logger.info "============Username=#{username}==========="
-    Rails.logger.info "============Old Password=#{old_password}==========="
-    Rails.logger.info "============New Password=#{new_password}==========="
+    Rails.logger.info "============Old Password=xxxxxxxxx==========="
+    Rails.logger.info "============New Password=xxxxxxxxx==========="
 
     dn = "CN=#{username},#{@base}"
 
@@ -154,14 +150,14 @@ class LDAP
       @ldap.modify(:dn => dn, :operations => [[:replace, :unicodePwd, str2unicodePwd(new_password)]])
     #end
     ldap_result = @ldap.get_operation_result
-    Rails.logger.info "=========reset_password ldap Result===========#{ldap_result}==="
+    Rails.logger.info "=========ldap Result===========#{ldap_result}==="
     raise LDAPFault.new('reset password', ldap_result) if ldap_result.code != 0
   end
 
   def try_login(username, password)
     Rails.logger.info "--------------------->>> try login method in LDAP.RB"
     Rails.logger.info "========username=======>#{username}======="
-    Rails.logger.info "=========password=======>#{password}========"
+    Rails.logger.info "=========password=======>xxxxxxxxx========"
     dn = "CN=#{username},#{@base}"
     @ldap.auth dn, password
     raise LDAPFault.new(nil, @ldap.get_operation_result) if @ldap.bind == false
