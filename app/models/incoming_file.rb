@@ -45,19 +45,18 @@ class IncomingFile < ActiveRecord::Base
   has_one :rr_unapproved_record, :as => :rr_approvable
   has_one :cp_unapporved_record, as: :cp_approvable
 
-  after_create :on_create_create_unapproved_record,if: "service_name!='ECOL'"
-  after_destroy :on_destory_remove_unapproved_records,if: "service_name!='ECOL'"
-  after_update :on_update_remove_unapproved_records,if: "service_name!='ECOL'"
+  after_create :on_create_create_unapproved_record
+  after_destroy :on_destory_remove_unapproved_records
+  after_update :on_update_remove_unapproved_records
 
   mount_uploader :file, IncomingFileUploader
 
   validates_presence_of :file, :on => :create
 
-  before_save :change_approval_status
+  #before_save :change_approval_status
 
   def change_approval_status
-    puts self.service_name
-    if self.service_name == "ECOL"
+    if self.service_name == "ECOL" && self.file_type == "ECOL_RMTRS"
       self.approval_status = "A"
     end
   end
@@ -157,6 +156,7 @@ class IncomingFile < ActiveRecord::Base
   
 
   def on_create_create_unapproved_record
+
     if approval_status == 'U'
       ImtUnapprovedRecord.create!(:imt_approvable => self) if self.service_name == "IMTSERVICE"
       UnapprovedRecord.create!(:approvable => self) if (self.service_name == "AML" || self.service_name == "ECOL" || self.service_name == "FR" || self.service_name == "CC" || self.service_name == "CP" || self.service_name == 'GEM')

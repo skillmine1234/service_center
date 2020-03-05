@@ -88,6 +88,9 @@ class IncomingFilesController < ApplicationController
     @incoming_file = IncomingFile.unscoped.find(params[:id]) rescue nil 
     IncomingFile.transaction do
       approval = @incoming_file.approve
+
+      @incoming_file.update(pending_approval: "N",fault_code: "",fault_reason: "",fault_subcode: "") if @incoming_file.service_name == "ECOL" && @incoming_file.file_type == "ECOL_RMTRS"
+
       if @incoming_file.save and approval.empty?
         move_incoming_file(@incoming_file)
         flash[:alert] = "Incoming File record was approved successfully"
