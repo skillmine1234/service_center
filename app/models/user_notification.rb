@@ -97,7 +97,7 @@ module UserNotification
       end
     end
     
-    if self.last_action == 'C' && self.approval_status == 'A' && self.lock_version == 1
+    if self.last_action == 'C' && self.approval_status == 'A' && self.lock_version >= 0
       puts "================IamCustUser ID: #{self.id}================"
       puts "================Fresh user addding block start================"
       LDAP.new.add_user(username, generated_password) rescue nil
@@ -129,11 +129,22 @@ module UserNotification
   def delete_user_from_ldap_on_approval
     puts "================delete_user_from_ldap_on_approval method start for username: #{username}================"
     if approval_status == 'A' && is_enabled == 'N' && is_enabled_was == 'Y'
-      LDAP.new.delete_user(username)
-      notify_customer('Access Removed')
+      begin
+        puts "================Deleting of LDAP User Process Initiated================="
+        puts "============username==========>#{username}========================="
+        LDAP.new.delete_user(username)
+      rescue LDAPFault, Psych::SyntaxError, SystemCallError, Net::LDAP::LdapError => error
+        puts "================Delete User Error code: #{error}================"
+        puts "================Failure in LDAP Delete User================"
+      else
+        puts "==================Success in LDAP Deleting user from LDAP========================"
+        update_column(:was_user_added, 'N')
+        notify_customer('Access Removed') unless Rails.env.test?
+        puts "===============Was User Added to LDAP: #{was_user_added}==================="
+      ensure
+        puts "================Delete User Execution Completed================"
+      end
     end
-  rescue
-    nil
   end
 
 

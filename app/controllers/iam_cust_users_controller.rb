@@ -82,7 +82,7 @@ class IamCustUsersController < ApplicationController
 
   def add_user
     @iam_cust_user = IamCustUser.unscoped.find_by_id(params[:id])
-    @message = @iam_cust_user.add_user_to_ldap
+    @message = @iam_cust_user.was_user_added == "Y" ? 'User already present in LDAP' : @iam_cust_user.add_user_to_ldap
     return_message
   end
 
