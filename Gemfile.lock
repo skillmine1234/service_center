@@ -52,9 +52,9 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-bm.git
-  revision: 68bd5d7db076062b27731cde6b15e313bdfbc2b5
+  revision: dc9513ccc661958935e516de6b68f8985652d558
   specs:
-    qg-bm (1.0.5)
+    qg-bm (1.0.6)
       rails (= 4.2.2)
 
 GIT
@@ -73,25 +73,25 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ecol.git
-  revision: 92d07414952a5491a53a36aee662cc3db84455c7
+  revision: 04e733a1b35686b8f3ec2437f46dd6f5cae66daa
   branch: ecol_approval
   specs:
-    qg-ecol (3.7.0)
+    qg-ecol (3.8.0)
       rails (= 4.2.2)
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-fp.git
-  revision: 750c2227b19f1419f71c1d2269b83b97c7eca7fa
+  revision: 396c774162143a29699fddbf42a0cc71644b4e8c
   specs:
-    qg-fp (1.0.8)
+    qg-fp (1.0.9)
       rails (~> 4.2.2)
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ft.git
-  revision: fc73ba56451d5ccbe54e077369dc8e5455e4d43d
+  revision: 3755ed0a077d77af7e9fef2fc35a96ec249910da
   branch: ft_customer
   specs:
-    qg-ft (1.3.3)
+    qg-ft (1.3.4)
       draper
       pundit
       rails (>= 4.2.2)
@@ -106,62 +106,62 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ic.git
-  revision: 22f50d08cf64f5c81c232aad500490afd5288cad
+  revision: 0dfa69b964da240a10f106248a4dddf1f3ab5fff
   branch: dealer-finance
   specs:
-    qg-ic (1.0.9)
+    qg-ic (1.1.0)
       rails (= 4.2.2)
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-icol.git
-  revision: 9687c3c6af84e1ea6da3f55d352b35122898966f
+  revision: eae66093158ed2330ac24d5db0d28faa26814e31
   specs:
-    qg-icol (1.1.8)
+    qg-icol (1.1.9)
       rails (= 4.2.2)
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-imt.git
-  revision: f932b718ff8b0eca75786a3060d0f3ee979adb37
+  revision: 43ce877601b62c2fe3ac602a4949d1a9892ccb17
   specs:
-    qg-imt (1.1.11)
+    qg-imt (1.2.0)
       rails (~> 4.2.2)
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git
-  revision: ef8b3ce6b7a89b2bca9edb07d34c00b00b0bd1ce
+  revision: b5c654f57f476ab16f7a8596504c80883a031fe4
   branch: current_4000prod_alipay
   specs:
-    qg-inw (3.7.0)
+    qg-inw (3.8.0)
       rails (= 4.2.2)
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ns.git
-  revision: 0d3123c6a93aaadc333e67ea94036fb35f8f286b
+  revision: d6ce90ef6fb251de5a4bdd78cab8c66cd5f93b9a
   branch: form_for_new_callback_notification
   specs:
-    qg-ns (1.0.7)
+    qg-ns (1.0.8)
       rails (~> 4.2.2)
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-obdx.git
-  revision: ffb4e31d0f1afd09f84835e8490f6da9e1367995
+  revision: 8b946ffef590b8b9256a827fde0aa4cd70922231
   branch: obdx_reports
   specs:
-    qg-obdx (3.3.0)
+    qg-obdx (3.4.0)
       rails (= 4.2.2)
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-retailfp.git
-  revision: 5eb8f45b9e6659e508d8c7bb17b9e9bdb5190014
+  revision: f4bcfa6157be20dc47e6c99d86c3f87dfe0d4406
   specs:
-    qg-retailfp (1.0.0)
+    qg-retailfp (1.1.0)
       rails (~> 4.2.2)
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-retailrx.git
-  revision: 63cee687df250d8ba16f2845ed7ef42004a4d78e
+  revision: a56be67fc85c0203ed6ebb6f1f7264246da961d5
   specs:
-    qg-retailrx (1.0.0)
+    qg-retailrx (1.1.0)
       rails (= 4.2.2)
 
 GIT
@@ -711,21 +711,21 @@ DEPENDENCIES
   progress_bar (~> 1.0.0)
   qg-ae (= 1.0.1)!
   qg-asba (= 1.0.4)!
-  qg-bm (= 1.0.5)!
+  qg-bm (= 1.0.6)!
   qg-cc (= 1.2.3)!
   qg-cp (= 1.0.2)!
-  qg-ecol (= 3.7.0)!
-  qg-fp (= 1.0.8)!
-  qg-ft (= 1.3.3)!
+  qg-ecol (= 3.8.0)!
+  qg-fp (= 1.0.9)!
+  qg-ft (= 1.3.4)!
   qg-gm (= 1.1.6)!
-  qg-ic (= 1.0.9)!
-  qg-icol (= 1.1.8)!
-  qg-imt (= 1.1.11)!
-  qg-inw (= 3.7.0)!
-  qg-ns (= 1.0.7)!
-  qg-obdx (= 3.3.0)!
-  qg-retailfp (= 1.0.0)!
-  qg-retailrx (= 1.0.0)!
+  qg-ic (= 1.1.0)!
+  qg-icol (= 1.1.9)!
+  qg-imt (= 1.2.0)!
+  qg-inw (= 3.8.0)!
+  qg-ns (= 1.0.8)!
+  qg-obdx (= 3.4.0)!
+  qg-retailfp (= 1.1.0)!
+  qg-retailrx (= 1.1.0)!
   qg-rpl (= 1.7.0)!
   qg-rx (= 1.1.7)!
   qg-sc (= 1.1.4)!

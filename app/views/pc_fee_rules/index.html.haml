@@ -11,7 +11,7 @@
 %br
 = "Total Count: #{@pc_fee_rules_count}"
 %br
-= will_paginate @pc_fee_rules
+= will_paginate @pc_fee_rules, :page_links => true
 %br
 %table.table.table-bordered.table-striped.table-hover
   .thead

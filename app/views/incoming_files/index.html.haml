@@ -13,7 +13,7 @@
 %br
 = "Total Count: #{@files_count}"
 %br
-= will_paginate @incoming_files
+= will_paginate @incoming_files, :page_links => true
 %br
 %table.table.table-bordered.table-striped.table-hover
   .thead

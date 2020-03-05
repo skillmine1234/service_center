@@ -11,7 +11,7 @@
 %br
 = "Total Count: #{@pc_programs_count}"
 %br
-= will_paginate @pc_programs
+= will_paginate @pc_programs, :page_links => true
 %br
 %table.table.table-bordered.table-striped.table-hover
   .thead

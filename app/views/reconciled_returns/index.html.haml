@@ -11,7 +11,7 @@
 %br
 = "Total Count: #{@reconciled_returns_count}"
 %br
-= will_paginate @reconciled_returns
+= will_paginate @reconciled_returns, :page_links => true
 %br
 %table.table.table-bordered.table-striped.table-hover
   .thead

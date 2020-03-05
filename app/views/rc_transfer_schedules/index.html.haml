@@ -11,7 +11,7 @@
 %br
 = "Total Count: #{@rc_transfer_schedules_count}"
 %br
-= will_paginate @rc_transfer_schedules
+= will_paginate @rc_transfer_schedules, :page_links => true
 %br
 %table.table.table-bordered.table-striped.table-hover
   .thead

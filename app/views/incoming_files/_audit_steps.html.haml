@@ -5,7 +5,7 @@
     %br
     = "Total Count: #{@records_count}"
     %br
-    = will_paginate @record_values
+    = will_paginate @record_values, :page_links => true
     %br
     %table.table.table-bordered.table-striped.table-hover{:style=>'background-color: #F1F2F8;'}
       .thead

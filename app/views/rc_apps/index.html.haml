@@ -4,7 +4,7 @@
 %br
 = "Total Count: #{@rc_apps_count}"
 %br
-= will_paginate @rc_apps
+= will_paginate @rc_apps, :page_links => true
 %br
 %table.table.table-bordered.table-striped.table-hover
   .thead
