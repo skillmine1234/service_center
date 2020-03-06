@@ -64,7 +64,7 @@ module UserNotification
         return error
       else
         puts "==================Success in Deleting User from LDAP========================"
-        update_column(:was_user_added, 'Y')
+        update_column(:was_user_added, 'N')
         notify = notify_customer('Access Removed') unless Rails.env.test?
         notify == true ? "Entry deleted from LDAP for #{username} and notification sent!" : "Entry deleted from LDAP for #{username}!"
       ensure
