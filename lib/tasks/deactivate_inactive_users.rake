@@ -9,4 +9,4 @@ namespace :inactive_users do
     end
     puts "End of the script,Total Users Deactivated:#{@users.size}"
   end
-endTime.now
+end
