@@ -4,9 +4,9 @@ namespace :inactive_users do
     @users = User.where(['last_sign_in_at < ? and inactive = ?', args[:arg1].to_i.days.ago,false]).where.not(last_sign_in_at: nil)
     puts "Deactive User Script Started......"
     @users.each do |user|
-    	user.update(inactive: true) 
+    	user.update(inactive: true,updated_at: Time.now)
     	puts "Deactivating User with id --> #{user.id}"
     end
     puts "End of the script,Total Users Deactivated:#{@users.size}"
   end
-end
+endTime.now
