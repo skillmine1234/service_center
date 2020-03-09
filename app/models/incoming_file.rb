@@ -53,7 +53,7 @@ class IncomingFile < ActiveRecord::Base
 
   validates_presence_of :file, :on => :create
 
-  #before_save :change_approval_status
+  before_save :change_approval_status
 
   def change_approval_status
     if self.service_name == "ECOL" && self.file_type == "ECOL_RMTRS"
