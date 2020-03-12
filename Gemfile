@@ -122,8 +122,6 @@ group :development do
   gem 'capistrano-ext'
 end
 
-gem  'pry'
-
 group :test do
   gem 'webmock'
   gem "codeclimate-test-reporter", group: :test, require: nil
