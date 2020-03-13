@@ -62,7 +62,11 @@ class Searcher
       reln = klass.order("#{klass.table_name}.id desc")
     end
     attrs.each do |a|
-      reln = reln.where("#{klass.table_name}.#{a} = ?", self.try(a)) unless [nil, ''].include?(self.try(a))
+      if klass.table_name == "nach_members" || klass.table_name == "ft_invoice_details" || klass.table_name == "funds_transfers"
+        reln = reln.where("#{klass.table_name}.#{a} IN (?)", self.try(a).split(",").collect(&:strip)) unless [nil, ''].include?(self.try(a))
+      else
+        reln = reln.where("#{klass.table_name}.#{a} = ?", self.try(a)) unless [nil, ''].include?(self.try(a))
+      end  
     end
     
     self.class.between_attributes.each do |a|
