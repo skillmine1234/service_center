@@ -34,9 +34,12 @@ class IncomingFilesController < ApplicationController
 
   def index
     @sc_service = ScService.find_by_code(params[:sc_service])
-    if params[:advanced_search].present?
+    
+    if params[:advanced_search].present?  && params[:approval_status] == 'U'
+      incoming_files = find_incoming_files(params).where("approval_status =?",'U').order("id desc")
+    elsif params[:advanced_search].present?
       incoming_files = find_incoming_files(params).order("id desc")
-    else
+    else 
       incoming_files = (params[:approval_status].present? and params[:approval_status] == 'U') ? IncomingFile.unscoped.where("approval_status=? and service_name=?",'U',params[:sc_service]).order("id desc") : IncomingFile.order("id desc").where(:service_name => params[:sc_service])
     end 
     @files_count = incoming_files.count
