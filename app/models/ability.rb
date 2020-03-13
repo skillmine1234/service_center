@@ -24,6 +24,7 @@ class Ability
       can :incoming_file_summary, model_name.constantize
       can :download_file, model_name.constantize
       can :view_raw_content, model_name.constantize
+      can :download_ecol_response_file, model_name.constantize
       can [:audit_logs, :ecol_audit_logs], model_name.constantize
     end
     can :manage, UnapprovedRecord, approvable_type: @group.try(:model_list)
@@ -41,6 +42,7 @@ class Ability
       can :approve_restart, model_name.constantize
       cannot :process_file, model_name.constantize
       cannot :ecol_process_file, model_name.constantize
+      can :download_ecol_response_file, model_name.constantize
       cannot :reset, model_name.constantize
       can :resend_notification, model_name.constantize
       can :try_login, model_name.constantize
@@ -60,6 +62,7 @@ class Ability
       can :generate_response_file, model_name.constantize
       can :download_file, model_name.constantize
       can :view_raw_content, model_name.constantize
+      can :download_ecol_response_file, model_name.constantize
       can :audit_steps, model_name.constantize
       can :incoming_file_summary, model_name.constantize
       can :reject, model_name.constantize

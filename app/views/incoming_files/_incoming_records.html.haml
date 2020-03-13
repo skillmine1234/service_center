@@ -9,9 +9,10 @@
     %tr
       %td{:style=>'text-align:left;'}
         = "Response File Name"
-      %td{:style=>'text-align:left;'} 
+      %td{:style=>'text-align:left;'}
+        - can = !(can? :download_ecol_response_file, IncomingFile) 
         - if incoming_file.service_name == 'ECOL'
-          = link_to "#{incoming_file.rep_file_name}", download_ecol_response_file_incoming_files_path(id: incoming_file.id)
+          = link_to "#{incoming_file.rep_file_name}", can ? "#" : download_ecol_response_file_incoming_files_path(id: incoming_file.id)
         - else
           = incoming_file.rep_file_name
         &nbsp;

@@ -107,8 +107,8 @@ class IncomingFile < ActiveRecord::Base
   def update_file_path
     if self.service_name == "AML"
       self.file_path = self.approval_status == 'A' ? "#{ENV['CONFIG_APPROVED_FILE_UPLOAD_PATH']}/#{self.sc_service.code.downcase}/#{self.incoming_file_type.code.downcase}" : "#{ENV['CONFIG_FILE_UPLOAD_PATH']}/aml/aml_fileuploads"
-    elsif self.service_name == "ECOL"
-      self.file_path =  "#{ENV['CONFIG_APPROVED_FILE_UPLOAD_PATH']}/#{self.sc_service.code.downcase}/#{self.incoming_file_type.code.downcase}"
+    elsif self.service_name == "ECOL" && self.file_type == "ECOL_RMTRS"
+      self.file_path =  "#{self.get_ecol_file_path}"
     else  
       self.file_path = self.approval_status == 'A' ? "#{ENV['CONFIG_APPROVED_FILE_UPLOAD_PATH']}/#{self.sc_service.code.downcase}/#{self.incoming_file_type.code.downcase}" : "#{ENV['CONFIG_FILE_UPLOAD_PATH']}"
     end
@@ -197,6 +197,16 @@ class IncomingFile < ActiveRecord::Base
   
   def get_ecol_response_file_path
     mtss_url = ActiveRecord::Base.connection.execute("select value from esb_config where key='ecol_response_file_path'")
+    return mtss_url.fetch.first
+  end
+
+  def get_ecol_file_path
+    mtss_url = ActiveRecord::Base.connection.execute("select value from esb_config where key='ecol_file_path'")
+    return mtss_url.fetch.first
+  end
+
+  def self.get_record_display_period
+    mtss_url = ActiveRecord::Base.connection.execute("select value from esb_config where key='record_display_period'")
     return mtss_url.fetch.first
   end
 
