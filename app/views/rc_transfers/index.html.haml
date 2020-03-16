@@ -2,7 +2,8 @@
 %h1 Listing Recurring Transfers
 = render :partial => 'advanced_search'
 %br
-%br
+= "Total Count: #{@records.count}"
+= will_paginate @records, :page_links => true
 = simple_form_for :rc_transfer, :url => update_multiple_rc_transfers_path, :html => { :method => :put, :class => 'form-horizontal', :autocomplete=>"off", :id => 'update_transactions', :style=> 'overflow: auto;'} do |f| 
   %table.table.table-bordered.table-striped.table-hover
     .thead

@@ -81,17 +81,17 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-fp.git
-  revision: 1695e63f39dc806eef1c7560903f07c546acb53b
+  revision: 944b5c7ac16d4783b4ef917546b50673e9e69bc7
   specs:
-    qg-fp (1.3.0)
+    qg-fp (1.4.0)
       rails (~> 4.2.2)
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ft.git
-  revision: a7cf48703d4c4d4e0ebad92e83da862e4ba7926f
+  revision: 14aa3d0ff4463c6658a713f21e0b871bafd7db10
   branch: ft_customer
   specs:
-    qg-ft (1.3.7)
+    qg-ft (1.3.8)
       draper
       pundit
       rails (>= 4.2.2)
@@ -152,9 +152,9 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-retailfp.git
-  revision: 455c4b07129fb95e701ea3b18e35418ce674870e
+  revision: a32c5832f0609567d2b05314b965f3b6febe61e6
   specs:
-    qg-retailfp (1.3.0)
+    qg-retailfp (1.4.0)
       rails (~> 4.2.2)
 
 GIT
@@ -166,10 +166,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-rpl.git
-  revision: b7a000ad05d79bb385955931a71f269ac89a079c
+  revision: 9d0a47a16d06f3330b7a1e8fd3fe10fddcfe8f96
   branch: blockchain
   specs:
-    qg-rpl (1.9.0)
+    qg-rpl (2.0.0)
       rails (= 4.2.2)
 
 GIT
@@ -715,8 +715,8 @@ DEPENDENCIES
   qg-cc (= 1.2.5)!
   qg-cp (= 1.0.2)!
   qg-ecol (= 4.2.0)!
-  qg-fp (= 1.3.0)!
-  qg-ft (= 1.3.7)!
+  qg-fp (= 1.4.0)!
+  qg-ft (= 1.3.8)!
   qg-gm (= 1.1.8)!
   qg-ic (= 1.2.0)!
   qg-icol (= 1.3.0)!
@@ -724,9 +724,9 @@ DEPENDENCIES
   qg-inw (= 4.0.0)!
   qg-ns (= 1.0.9)!
   qg-obdx (= 3.5.0)!
-  qg-retailfp (= 1.3.0)!
+  qg-retailfp (= 1.4.0)!
   qg-retailrx (= 1.3.0)!
-  qg-rpl (= 1.9.0)!
+  qg-rpl (= 2.0.0)!
   qg-rx (= 1.1.9)!
   qg-sc (= 1.1.4)!
   qg-sm (= 1.3.0)!
