@@ -5,10 +5,10 @@
   = form_tag iam_organisations_path, :method => :put, :class => 'form-horizontal', :autocomplete=>"off", id: 'advanced_search' do
     .control-group
       = label_tag "Name", "Name", :class => 'control-label'
-      = text_field_tag :name, params[:name]
+      = text_field_tag :name, params[:name],placeholder: 'Multisearch Search Enabled'
     .control-group
       = label_tag "Organisation UUID", "Organisation UUID", :class => 'control-label'
-      = text_field_tag :org_uuid, params[:org_uuid]
+      = text_field_tag :org_uuid, params[:org_uuid],placeholder: 'Multisearch Search Enabled'
     = hidden_field_tag :page, params[:page] || 1
     .form-actions
       = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"

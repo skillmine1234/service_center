@@ -24,8 +24,8 @@ class IamOrganisationSearcher
 
   def find
     reln = approval_status == 'U' ? IamOrganisation.unscoped.where("approval_status =?",'U').order("id desc") : IamOrganisation.order("id desc")
-    reln = reln.where("name=?", name) if name.present?
-    reln = reln.where("org_uuid=?", org_uuid) if org_uuid.present?
+    reln = reln.where("name IN (?)", name.split(",").collect(&:strip)) if name.present?
+    reln = reln.where("org_uuid IN (?)", org_uuid.split(",").collect(&:strip)) if org_uuid.present?
     reln
   end
 end

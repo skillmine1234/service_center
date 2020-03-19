@@ -5,13 +5,19 @@
   = form_tag iam_cust_users_path, :method => :put, :class => 'form-horizontal', :autocomplete=>"off", id: 'advanced_search' do
     .control-group
       = label_tag "Username", "Username", :class => 'control-label'
-      = text_field_tag :username, params[:username]
+      = text_field_tag :username, params[:username],placeholder: 'Multisearch Search Enabled'
     .control-group
-      = label_tag "Email ID", "Email ID", :class => 'control-label'
-      = text_field_tag :email, params[:email]
+      = label_tag "Email", "Email", :class => 'control-label'
+      = text_field_tag :email, params[:email],placeholder: 'Multisearch Search Enabled'
+    .control-group
+      = label_tag "Secondary Email", "Secondary Email", :class => 'control-label'
+      = text_field_tag :secondary_email, params[:secondary_email],placeholder: 'Multisearch Search Enabled'
     .control-group
       = label_tag "Mobile Number", "Mobile Number", :class => 'control-label'
-      = text_field_tag :mobile_no, params[:mobile_no]
+      = text_field_tag :mobile_no, params[:mobile_no],placeholder: 'Multisearch Search Enabled'
+    .control-group
+      = label_tag "Secondary Mobile Number", "Secondary Mobile Number", :class => 'control-label'
+      = text_field_tag :secondary_mobile_no, params[:secondary_mobile_no],placeholder: 'Multisearch Search Enabled'
     = hidden_field_tag :page, params[:page] || 1
     .form-actions
       = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"

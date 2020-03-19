@@ -24,9 +24,9 @@ class IamAuditLogSearcher
     
     def find
       reln = IamAuditLog.order("id desc")
-      reln = reln.where("org_uuid=?", org_uuid) if org_uuid.present?
-      reln = reln.where("cert_dn=?", cert_dn) if cert_dn.present?
-      reln = reln.where("source_ip=?", source_ip) if source_ip.present?
+      reln = reln.where("org_uuid IN (?)", org_uuid.split(",").collect(&:strip)) if org_uuid.present?
+      reln = reln.where("cert_dn IN (?)", cert_dn.split(",").collect(&:strip)) if cert_dn.present?
+      reln = reln.where("source_ip IN (?)", source_ip.split(",").collect(&:strip)) if source_ip.present?
       reln
     end
 end

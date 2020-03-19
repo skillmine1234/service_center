@@ -107,7 +107,7 @@ class IamCustUsersController < ApplicationController
   end
 
   def search_params
-    params.permit(:page, :username, :email, :mobile_no, :approval_status)
+    params.permit(:page, :username, :email,:secondary_email, :mobile_no,:secondary_mobile_no, :approval_status)
   end
 
   def iam_cust_user_params
