@@ -19,9 +19,9 @@ class IamCustUser < ActiveRecord::Base
   validates_format_of :first_name, with: /\A[a-z|A-Z|0-9|\s|\.|\-]+\z/, message: "invalid format - expected format is : {[a-z|A-Z|0-9|\s|\.|\-]}"
   validates_format_of :last_name, with: /\A[a-z|A-Z|0-9|\s|\.|\-]+\z/, message: "invalid format - expected format is : {[a-z|A-Z|0-9|\s|\.|\-]}", allow_blank: true
   validates :email,:secondary_email, format: {with: Devise::email_regexp}, length: { maximum: 100 },if: :check_send_password_via_email?
-  validates :mobile_no,:secondary_mobile_no, numericality: true, length: { minimum: 10,maximum: 20 },if: :check_send_password_via_phn?
+  validates :mobile_no,:secondary_mobile_no, numericality: true, length: { minimum: 10,maximum: 13 },if: :check_send_password_via_phn?
   validates :email, format: {with: Devise::email_regexp}, length: { maximum: 100 },if: :check_send_password_via_both?
-  validates :mobile_no, numericality: true, length: { minimum: 10,maximum: 20 },if: :check_send_password_via_both?
+  validates :mobile_no, numericality: true, length: { minimum: 10,maximum: 13 },if: :check_send_password_via_both?
 
   before_save :generate_password,:set_old_password_value
 
