@@ -106,10 +106,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ic.git
-  revision: 1c499af68a9b990cb6ad1d3d0eed36508da0aa68
+  revision: ac8f7995d4399a79fa1156ed2cdf2d0c7bf262fb
   branch: dealer-finance
   specs:
-    qg-ic (1.2.0)
+    qg-ic (1.3.0)
       rails (= 4.2.2)
 
 GIT
@@ -121,9 +121,9 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-imt.git
-  revision: 1b5a53900f04e595a1655b4b7b82d50e8fcd7437
+  revision: 3529e44484213859a113e08211a8ced4aa4fcbc6
   specs:
-    qg-imt (1.4.0)
+    qg-imt (1.5.0)
       rails (~> 4.2.2)
 
 GIT
@@ -166,31 +166,31 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-rpl.git
-  revision: 9d0a47a16d06f3330b7a1e8fd3fe10fddcfe8f96
+  revision: 03eba99a342d3b836ec8075ed76057e69095cd38
   branch: blockchain
   specs:
-    qg-rpl (2.0.0)
+    qg-rpl (2.1.0)
       rails (= 4.2.2)
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-rx.git
-  revision: 9898a9bd1d8e1bd3fc38a47b1eb3ee5b117f3a7d
+  revision: 6c847b06f1d80129e11ac78cea3a6115e6a1fbb5
   specs:
-    qg-rx (1.1.9)
+    qg-rx (1.2.0)
       rails (= 4.2.2)
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-sc.git
-  revision: 3829f996b24fc4e49b398448892e0956a253dcd9
+  revision: dffa6a7803e73b3eb869c48cd009511ea4f23024
   specs:
-    qg-sc (1.1.4)
+    qg-sc (1.1.5)
       rails (~> 4.2.2)
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-sm.git
-  revision: 1e5c32fa76b39ec0bac923628090e325dde618ec
+  revision: 5677f17fc59174b1e8a57feb122fd717ae930715
   specs:
-    qg-sm (1.3.0)
+    qg-sm (1.4.0)
       rails (~> 4.2.2)
 
 GIT
@@ -718,18 +718,18 @@ DEPENDENCIES
   qg-fp (= 1.6.0)!
   qg-ft (= 1.4.0)!
   qg-gm (= 1.1.8)!
-  qg-ic (= 1.2.0)!
+  qg-ic (= 1.3.0)!
   qg-icol (= 1.3.0)!
-  qg-imt (= 1.4.0)!
+  qg-imt (= 1.5.0)!
   qg-inw (= 4.0.0)!
   qg-ns (= 1.0.9)!
   qg-obdx (= 3.6.0)!
   qg-retailfp (= 1.4.0)!
   qg-retailrx (= 1.3.0)!
-  qg-rpl (= 2.0.0)!
-  qg-rx (= 1.1.9)!
-  qg-sc (= 1.1.4)!
-  qg-sm (= 1.3.0)!
+  qg-rpl (= 2.1.0)!
+  qg-rx (= 1.2.0)!
+  qg-sc (= 1.1.5)!
+  qg-sm (= 1.4.0)!
   qg-ssp (= 2.2.0)!
   rails (= 4.2.2)
   rails_12factor
