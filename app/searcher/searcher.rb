@@ -62,7 +62,7 @@ class Searcher
       reln = klass.order("#{klass.table_name}.id desc")
     end
     attrs.each do |a|
-      if klass.table_name == "nach_members" || klass.table_name == "ft_invoice_details" || klass.table_name == "funds_transfers"
+      if klass.table_name == "nach_members" || klass.table_name == "ft_invoice_details" || klass.table_name == "funds_transfers" || klass.table_name == "imt_customers" || klass.table_name == "imt_partners" || klass.table_name == "imt_withdrawals" || klass.table_name == "imt_add_beneficiaries" || klass.table_name == "imt_del_beneficiaries" || klass.table_name == "imt_initiate_transfers" || klass.table_name == "imt_cancel_transfers" || klass.table_name == "imt_resend_otp" || klass.table_name == "imt_withdraw_reversals" || klass.table_name == "imt_initiate_withdrawals" || klass.table_name == "rx_apps" || klass.table_name == "rx_services" || klass.table_name == "rx_consumers" || klass.table_name == "rx_access_logs" || klass.table_name == "sc_services" || klass.table_name == "rpl_fault_codes" || klass.table_name == "remit_ledger_credits" || klass.table_name == "rpl_ledger_credits"
         reln = reln.where("#{klass.table_name}.#{a} IN (?)", self.try(a).split(",").collect(&:strip)) unless [nil, ''].include?(self.try(a))
       else
         reln = reln.where("#{klass.table_name}.#{a} = ?", self.try(a)) unless [nil, ''].include?(self.try(a))

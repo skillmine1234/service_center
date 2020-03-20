@@ -37,3 +37,8 @@
           = pc2_cust_account.account_no
         %td{:style=>'text-align:left;'}
           = pc2_cust_account.is_enabled
+
+:javascript
+  $(document).ready(function(){
+    $('input[type="text"]'). attr("placeholder", "Multisearch Search Enabled");
+  });
