@@ -58,13 +58,7 @@ class Group < ActiveRecord::Base
     when "reverse-proxy"
       Qg::Rx::MODELS
     when "Obdx"
-      Qg::Obdx::MODELS  
-    # when "retailft"
-    #   Qg::Retailft::MODELS    
-    when "retailfp"
-      Qg::Retailfp::MODELS
-    when "retailrx"
-      Qg::Retailrx::MODELS
+      Qg::Obdx::MODELS
     else
       []
     end

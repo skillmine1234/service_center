@@ -39,8 +39,6 @@
 //= require rx/rx.js
 //= require encrypted_field
 //= require inw/inw.js
-//= require retailfp/retailfp.js
-//= require retailrx/retailrx.js
 
 jQuery.fn.extend({
     live: function (event, callback) {
