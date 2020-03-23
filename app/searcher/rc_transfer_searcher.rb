@@ -25,10 +25,10 @@ class RcTransferSearcher
   def find
     reln = RcTransfer.order("id desc")
     reln = reln.where.not("status_code IN ('BALINQ FAILED','SKIP CREDIT:NO BALANCE')") unless remove_defaults.present?
-    reln = reln.where("rc_transfer_code=?", rc_code) if rc_code.present?
-    reln = reln.where("bene_account_no=?", bene_account_no) if bene_account_no.present?
-    reln = reln.where("debit_account_no=?", debit_account_no) if debit_account_no.present?
-    reln = reln.where("transfer_rep_ref=?", transfer_rep_ref) if transfer_rep_ref.present?
+    reln = reln.where("rc_transfer_code IN (?)", rc_code.split(",").collect(&:strip)) if rc_code.present?
+    reln = reln.where("bene_account_no IN (?)", bene_account_no.split(",").collect(&:strip)) if bene_account_no.present?
+    reln = reln.where("debit_account_no IN (?)", debit_account_no.split(",").collect(&:strip)) if debit_account_no.present?
+    reln = reln.where("transfer_rep_ref IN (?)", transfer_rep_ref.split(",").collect(&:strip)) if transfer_rep_ref.present?
     reln = reln.where("transfer_amount>=? and transfer_amount <=?",from_amount.to_f,to_amount.to_f) if to_amount.present? && from_amount.present?
     reln = reln.where("status_code=?",status) if status.present?
     reln = reln.where("notify_status=?",notify_status) if notify_status.present?

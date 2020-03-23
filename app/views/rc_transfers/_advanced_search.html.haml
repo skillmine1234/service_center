@@ -8,16 +8,16 @@
       = check_box_tag :remove_defaults, 'Y', params[:remove_defaults]
     .control-group
       = label_tag "Recurring Transfer Code", "Rc Transfer Code", :class => 'control-label'
-      = text_field_tag :rc_code, params[:rc_code]
+      = text_field_tag :rc_code, params[:rc_code],placeholder: 'Multisearch Search Enabled'
     .control-group
       = label_tag "Beneficiary Account No", "Beneficiary Account No", :class => 'control-label'
-      = text_field_tag :bene_account_no, params[:bene_account_no]
+      = text_field_tag :bene_account_no, params[:bene_account_no],placeholder: 'Multisearch Search Enabled'
     .control-group
       = label_tag "Debit Account No", "Debit Account No", :class => 'control-label'
-      = text_field_tag :debit_account_no, params[:debit_account_no]
+      = text_field_tag :debit_account_no, params[:debit_account_no],placeholder: 'Multisearch Search Enabled'
     .control-group
       = label_tag "Transfer Reply Reference", "Transfer Reply Reference", :class => 'control-label'
-      = text_field_tag :transfer_rep_ref, params[:transfer_rep_ref]
+      = text_field_tag :transfer_rep_ref, params[:transfer_rep_ref],placeholder: 'Multisearch Search Enabled'
     .control-group
       = label_tag "Transfer Amount", "Transfer Amount", :class => 'control-label'
       = number_field_tag :from_amount, params[:from_amount]
@@ -44,3 +44,5 @@
 - if @searcher.errors.present?
   :javascript
     $('.collapsible-content').show();
+
+

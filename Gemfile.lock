@@ -114,9 +114,9 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-icol.git
-  revision: a79ae9508e3fcabeb1d8a252691611d9c416fb88
+  revision: 8617dcb68a6de89095ea005dbc3508eaba28d655
   specs:
-    qg-icol (1.3.0)
+    qg-icol (1.4.0)
       rails (= 4.2.2)
 
 GIT
@@ -128,10 +128,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git
-  revision: d8546a5b14b22689a71da4b3aab5404f95980faa
+  revision: 47117895b8cf5f81b52c921553b8d7eb45bbbda1
   branch: current_4000prod_alipay
   specs:
-    qg-inw (4.0.0)
+    qg-inw (4.1.0)
       rails (= 4.2.2)
 
 GIT
@@ -167,16 +167,16 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-sc.git
-  revision: dffa6a7803e73b3eb869c48cd009511ea4f23024
+  revision: 4695e12f3dc9e01c4152c66250d10bba81b11aff
   specs:
-    qg-sc (1.1.5)
+    qg-sc (1.1.6)
       rails (~> 4.2.2)
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-sm.git
-  revision: 5677f17fc59174b1e8a57feb122fd717ae930715
+  revision: 26d280a057efdff5f8b36c7661f85254efbcb698
   specs:
-    qg-sm (1.4.0)
+    qg-sm (1.5.0)
       rails (~> 4.2.2)
 
 GIT
@@ -705,15 +705,15 @@ DEPENDENCIES
   qg-ft (= 1.4.0)!
   qg-gm (= 1.1.8)!
   qg-ic (= 1.3.0)!
-  qg-icol (= 1.3.0)!
+  qg-icol (= 1.4.0)!
   qg-imt (= 1.5.0)!
-  qg-inw (= 4.0.0)!
+  qg-inw (= 4.1.0)!
   qg-ns (= 1.0.9)!
   qg-obdx (= 3.6.0)!
   qg-rpl (= 2.1.0)!
   qg-rx (= 1.2.0)!
-  qg-sc (= 1.1.5)!
-  qg-sm (= 1.4.0)!
+  qg-sc (= 1.1.6)!
+  qg-sm (= 1.5.0)!
   qg-ssp (= 2.2.0)!
   rails (= 4.2.2)
   rails_12factor

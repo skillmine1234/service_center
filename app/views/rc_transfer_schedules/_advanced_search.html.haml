@@ -4,16 +4,16 @@
     = select_tag :is_enabled, options_for_select([['Yes','Y'],['No','N']],params[:is_enabled]),:prompt => "ANY"
   .control-group
     = label_tag "Code", "Code", :class => 'control-label'
-    = text_field_tag :code, params[:code]
+    = text_field_tag :code, params[:code],placeholder: 'Multisearch Search Enabled'
   .control-group
     = label_tag "Beneficiary Account No", "Beneficiary Account No", :class => 'control-label'
-    = text_field_tag :bene_account_no, params[:bene_account_no]
+    = text_field_tag :bene_account_no, params[:bene_account_no],placeholder: 'Multisearch Search Enabled'
   .control-group
     = label_tag "Debit Account No", "Debit Account No", :class => 'control-label'
-    = text_field_tag :debit_account_no, params[:debit_account_no]
+    = text_field_tag :debit_account_no, params[:debit_account_no],placeholder: 'Multisearch Search Enabled'
   .control-group
     = label_tag "Notify Mobile No", "Notify Mobile No", :class => 'control-label'
-    = text_field_tag :notify_mobile_no, params[:notify_mobile_no]
+    = text_field_tag :notify_mobile_no, params[:notify_mobile_no],placeholder: 'Multisearch Search Enabled'
   .control-group
     = label_tag "Next Run At", "Next Run At", :class => 'control-label'
     = text_field_tag :next_from_date, params[:next_from_date]
