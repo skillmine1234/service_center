@@ -52,16 +52,16 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-bm.git
-  revision: 4cf80550b4e53a63791cbbbf74e688409e9b6774
+  revision: f1d7c59c82ef9b82f25c3959cfe967ceff15cbd1
   specs:
-    qg-bm (1.0.7)
+    qg-bm (1.0.8)
       rails (= 4.2.2)
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-cc.git
-  revision: f5024325ac156fc4cd7c35b8c33625aa69718bfa
+  revision: 7a7c105007210ebaa4338786455880133f1cd9d7
   specs:
-    qg-cc (1.2.5)
+    qg-cc (1.2.6)
       rails (= 4.2.2)
 
 GIT
@@ -73,10 +73,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ecol.git
-  revision: fc637750f5f2592b15eeea982eb81027ea1a73ee
+  revision: 344dad3cea6545af290212b5fdcda50bbe5abc5f
   branch: ecol_approval
   specs:
-    qg-ecol (4.2.0)
+    qg-ecol (4.3.0)
       rails (= 4.2.2)
 
 GIT
@@ -98,10 +98,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-gm.git
-  revision: 218c5dd16c1dfe22f97d42241ac69d1d09618c44
+  revision: 2518256eb556d1ffe9a96bf76d631dc2f569bcc3
   branch: production
   specs:
-    qg-gm (1.1.8)
+    qg-gm (1.1.9)
       rails (= 4.2.2)
 
 GIT
@@ -697,13 +697,13 @@ DEPENDENCIES
   progress_bar (~> 1.0.0)
   qg-ae (= 1.0.3)!
   qg-asba (= 1.0.6)!
-  qg-bm (= 1.0.7)!
-  qg-cc (= 1.2.5)!
+  qg-bm (= 1.0.8)!
+  qg-cc (= 1.2.6)!
   qg-cp (= 1.0.2)!
-  qg-ecol (= 4.2.0)!
+  qg-ecol (= 4.3.0)!
   qg-fp (= 1.6.0)!
   qg-ft (= 1.4.0)!
-  qg-gm (= 1.1.8)!
+  qg-gm (= 1.1.9)!
   qg-ic (= 1.3.0)!
   qg-icol (= 1.4.0)!
   qg-imt (= 1.5.0)!
