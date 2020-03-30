@@ -1,5 +1,5 @@
 namespace :update_display_record_period do
-  desc "Deactivate Last 6 Months Inactive Users"
+  desc "Configure Record display period"
   task :set_ecol_display_record_period, [:arg1] => :environment do |t, args|
     @esb_config = EsbConfig.find_by(key: "record_display_period")
     if @esb_config.present?
