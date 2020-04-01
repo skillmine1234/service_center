@@ -41,11 +41,12 @@
         %br
         = "Approval Worklist"
     - else
-      .box
-        = link_to unapproved_records_path(group_name: m[:group], sc_service: service) do
-          = image_tag 'work-list.jpg', :size => "80x80"
-        %br
-        = "Approval Worklist"
+      - if group != 'gm'
+        .box
+          = link_to unapproved_records_path(group_name: m[:group], sc_service: service) do
+            = image_tag 'work-list.jpg', :size => "80x80"
+          %br
+          = "Approval Worklist"
     - if m[:reports].present?
       .box
         = link_to rp_routes.send("#{group}_available_reports_path") do
