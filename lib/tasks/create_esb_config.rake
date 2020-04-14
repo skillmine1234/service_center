@@ -22,7 +22,7 @@ namespace :ecol_file_path_entry_in_esb_config do
     esb_config = EsbConfig.new
     esb_config.s_no = EsbConfig.maximum(:s_no) + 1
     esb_config.key = 'record_display_period'
-    esb_config.value = '30'
+    esb_config.value = '5'
     esb_config.created_date = Time.now
     esb_config.created_user = 'ESB'
     esb_config.updated_date = Time.now
