@@ -58,16 +58,6 @@
         = image_tag 'work-list.jpg', :size => "80x80"
       %br
         = "Approval Worklist"
-    .box
-      = link_to '/rp/su' do
-        = image_tag 'available_report.png', :size => "80x80"
-      %br
-        = "Available Reports"
-    .box
-      = link_to '/rp/reports/su' do
-        = image_tag 'reports_icon.png', :size => "80x80"
-      %br
-        = "Generated Reports"
   .slide-container
     .box
       = link_to '/su_customers' do
@@ -76,26 +66,6 @@
         = "Salary Upload Customers"
 
 = render partial: 'panel', locals: { group: 'ic', :sc_service => 'INSTANTCREDIT' }
-
-- if @current_user.group_names.include?("prepaid-card2")
-  %h1 Prepaid Card2
-  .slide-container
-    .box
-      = link_to unapproved_records_path(group_name: 'prepaid-card2') do
-        = image_tag 'work-list.jpg', :size => "80x80"
-      %br
-        = "Approval Worklist"
-  .slide-container
-    .box
-      = link_to '/pc2_apps' do
-        = image_tag 'pc_apps.png', :size => "80x80"
-      %br
-        = "PC2 Apps"
-    .box
-      = link_to '/pc2_cust_accounts' do
-        = image_tag 'pc2_cust_accounts.png', :size => "80x80"
-      %br
-        = "PC2 Customer Accounts"
 
 = render partial: 'panel', locals: { group: 'sm' }
 
@@ -211,20 +181,10 @@
         %br
           = "IAM Audit Rule"
     .box
-      = link_to '/iam_organisations' do
-        = image_tag 'iam_organisation_icon.png', :size => "80x80"
-      %br
-        = "IAM Organisation"
-    .box
       = link_to '/iam_cust_users' do
         = image_tag 'iam_cust_user_icon.png', :size => "80x80"
       %br
         = "IAM Customer User"
-    .box
-      = link_to iam_audit_logs_path do
-        = image_tag 'i_am_audit_log.png', :size => "80x80"
-      %br
-        = "IAM Audit Logs"
 - if @current_user.group_names.include?("fr")
   %h1 File Reports
   .slide-container

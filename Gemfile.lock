@@ -52,16 +52,16 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-bm.git
-  revision: f4a804e9d6f0904e8f86865c3fa8c74f1b4c002e
+  revision: e50ecf889c693d25c2233808b4f6f340f477509b
   specs:
-    qg-bm (1.1.0)
+    qg-bm (1.2.0)
       rails (= 4.2.2)
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-cc.git
-  revision: e5ebe994a2a63cae64e21af912fe888df46fe6b3
+  revision: 8e970ca4541cd051daafc948c0f80c86b63c3669
   specs:
-    qg-cc (1.3.0)
+    qg-cc (1.4.0)
       rails (= 4.2.2)
 
 GIT
@@ -73,10 +73,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ecol.git
-  revision: baf3665c2b0fc9bcbaf108d0fc0a40b8168fc4be
+  revision: 30e51f05b11695e37897c8899c62cc9ba4d5e612
   branch: ecol_approval
   specs:
-    qg-ecol (5.1.0)
+    qg-ecol (5.2.0)
       rails (= 4.2.2)
 
 GIT
@@ -88,10 +88,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ft.git
-  revision: db15b02f2ff8e39a6f955ca9a718f6a544598e5b
+  revision: c9c14b0c32d8b632cd8bf86b3f6ee393098a4872
   branch: ft_customer
   specs:
-    qg-ft (2.2.0)
+    qg-ft (2.3.0)
       draper
       pundit
       rails (>= 4.2.2)
@@ -106,10 +106,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ic.git
-  revision: 3a2501c8b3815d1bcf9857d358ab161431ba078e
+  revision: f65c286800c3a21b91916e4a2391525fd8f3e459
   branch: dealer-finance
   specs:
-    qg-ic (1.8.0)
+    qg-ic (1.9.0)
       rails (= 4.2.2)
 
 GIT
@@ -121,17 +121,17 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-imt.git
-  revision: 63ef4e8707d2099be3a12fb12c444ff645c248ca
+  revision: 2117b93f06fadecfb60e421d2e141ad6791879bb
   specs:
-    qg-imt (1.8.0)
+    qg-imt (1.9.0)
       rails (~> 4.2.2)
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git
-  revision: ad6d8b1c7c0cb326c12f3d49c7f9ac54c877e542
+  revision: 272a9df3472134e88c09ce8c7f9c33679feac856
   branch: current_4000prod_alipay
   specs:
-    qg-inw (4.4.0)
+    qg-inw (4.5.0)
       rails (= 4.2.2)
 
 GIT
@@ -697,17 +697,17 @@ DEPENDENCIES
   progress_bar (~> 1.0.0)
   qg-ae (= 1.0.5)!
   qg-asba (= 1.0.8)!
-  qg-bm (= 1.1.0)!
-  qg-cc (= 1.3.0)!
+  qg-bm (= 1.2.0)!
+  qg-cc (= 1.4.0)!
   qg-cp (= 1.0.2)!
-  qg-ecol (= 5.1.0)!
+  qg-ecol (= 5.2.0)!
   qg-fp (= 2.2.0)!
-  qg-ft (= 2.2.0)!
+  qg-ft (= 2.3.0)!
   qg-gm (= 1.6.0)!
-  qg-ic (= 1.8.0)!
+  qg-ic (= 1.9.0)!
   qg-icol (= 1.6.0)!
-  qg-imt (= 1.8.0)!
-  qg-inw (= 4.4.0)!
+  qg-imt (= 1.9.0)!
+  qg-inw (= 4.5.0)!
   qg-ns (= 1.2.0)!
   qg-obdx (= 3.6.0)!
   qg-rpl (= 2.4.0)!
