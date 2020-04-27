@@ -59,6 +59,8 @@ class Group < ActiveRecord::Base
       Qg::Rx::MODELS
     when "Obdx"
       Qg::Obdx::MODELS
+    when "es"
+      Qg::Es::MODELS    
     else
       []
     end
