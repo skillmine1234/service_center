@@ -174,9 +174,9 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-sc.git
-  revision: d903bdbb18993f70e0cc8f26e7b949ceee182d1a
+  revision: f79d55b9b66c068e697d79113be18cf157cbc321
   specs:
-    qg-sc (2.0.0)
+    qg-sc (2.1.0)
       rails (~> 4.2.2)
 
 GIT
@@ -720,7 +720,7 @@ DEPENDENCIES
   qg-obdx (= 3.6.0)!
   qg-rpl (= 2.4.0)!
   qg-rx (= 1.6.0)!
-  qg-sc (= 2.0.0)!
+  qg-sc (= 2.1.0)!
   qg-sm (= 1.9.0)!
   qg-ssp (= 2.4.0)!
   rails (= 4.2.2)
