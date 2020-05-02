@@ -81,9 +81,9 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-es.git
-  revision: 2129f8b0db1e5c2954be62871734b066d72be629
+  revision: 7647054aa8ace81364140f5bf5f2c7ab67730850
   specs:
-    qg-es (1.4.0)
+    qg-es (1.5.0)
       rails (= 4.2.2)
 
 GIT
@@ -135,10 +135,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git
-  revision: 272a9df3472134e88c09ce8c7f9c33679feac856
+  revision: 377fac794dc179050cb5528e99f38dcde3045791
   branch: current_4000prod_alipay
   specs:
-    qg-inw (4.5.0)
+    qg-inw (4.6.0)
       rails (= 4.2.2)
 
 GIT
@@ -708,14 +708,14 @@ DEPENDENCIES
   qg-cc (= 1.4.0)!
   qg-cp (= 1.0.2)!
   qg-ecol (= 5.2.0)!
-  qg-es (= 1.4.0)!
+  qg-es (= 1.5.0)!
   qg-fp (= 2.3.0)!
   qg-ft (= 2.4.0)!
   qg-gm (= 1.6.0)!
   qg-ic (= 1.9.0)!
   qg-icol (= 1.7.0)!
   qg-imt (= 1.9.0)!
-  qg-inw (= 4.5.0)!
+  qg-inw (= 4.6.0)!
   qg-ns (= 1.2.0)!
   qg-obdx (= 3.6.0)!
   qg-rpl (= 2.4.0)!
