@@ -5,6 +5,7 @@ class IamCustUsersController < ApplicationController
   respond_to :json  
   include ApplicationHelper
   include Approval2::ControllerAdditions
+  include IamCustUserHelper
   
   def new
     @iam_cust_user = IamCustUser.new
@@ -55,14 +56,14 @@ class IamCustUsersController < ApplicationController
     @iam_cust_user = IamCustUser.unscoped.find_by_id(params[:id])
     @ldap_error = @iam_cust_user.will_connect_to_ldap
   end
-  
+
   def index
-    if request.get?
-      @searcher = IamCustUserSearcher.new(params.permit(:approval_status, :page))
+    if params[:advanced_search].present?
+      iam_cust_users = find_iam_cust_users(params).order("id DESC")
     else
-      @searcher = IamCustUserSearcher.new(search_params)
+      iam_cust_users = (params[:approval_status].present? and params[:approval_status] == 'U') ? IamCustUser.unscoped.where("approval_status =?",'U').order("id desc") : IamCustUser.order("id desc")
     end
-    @records = @searcher.paginate
+    @iam_cust_users = iam_cust_users.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
 
   def audit_logs

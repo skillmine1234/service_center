@@ -73,10 +73,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ecol.git
-  revision: 30e51f05b11695e37897c8899c62cc9ba4d5e612
+  revision: e8ef4b9ab858d14c9a3c9beaa32308957a6ac319
   branch: ecol_approval
   specs:
-    qg-ecol (5.2.0)
+    qg-ecol (5.3.0)
       rails (= 4.2.2)
 
 GIT
@@ -135,10 +135,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git
-  revision: 377fac794dc179050cb5528e99f38dcde3045791
+  revision: a7d83fa739c3ba1c893b1fc0902af7372c976941
   branch: current_4000prod_alipay
   specs:
-    qg-inw (4.6.0)
+    qg-inw (4.7.0)
       rails (= 4.2.2)
 
 GIT
@@ -707,7 +707,7 @@ DEPENDENCIES
   qg-bm (= 1.2.0)!
   qg-cc (= 1.4.0)!
   qg-cp (= 1.0.2)!
-  qg-ecol (= 5.2.0)!
+  qg-ecol (= 5.3.0)!
   qg-es (= 1.5.0)!
   qg-fp (= 2.3.0)!
   qg-ft (= 2.4.0)!
@@ -715,7 +715,7 @@ DEPENDENCIES
   qg-ic (= 1.9.0)!
   qg-icol (= 1.7.0)!
   qg-imt (= 1.9.0)!
-  qg-inw (= 4.6.0)!
+  qg-inw (= 4.7.0)!
   qg-ns (= 1.2.0)!
   qg-obdx (= 3.6.0)!
   qg-rpl (= 2.4.0)!
