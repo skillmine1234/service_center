@@ -121,9 +121,9 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-icol.git
-  revision: a5777cfb69e735225442a7a8fee88429ebd15815
+  revision: f0bbfaf7da6bd2ac8082fff349ff3c1fd524d4b7
   specs:
-    qg-icol (1.7.0)
+    qg-icol (1.8.0)
       rails (= 4.2.2)
 
 GIT
@@ -713,7 +713,7 @@ DEPENDENCIES
   qg-ft (= 2.4.0)!
   qg-gm (= 1.6.0)!
   qg-ic (= 1.9.0)!
-  qg-icol (= 1.7.0)!
+  qg-icol (= 1.8.0)!
   qg-imt (= 1.9.0)!
   qg-inw (= 4.7.0)!
   qg-ns (= 1.2.0)!
