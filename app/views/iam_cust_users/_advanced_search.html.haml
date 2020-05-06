@@ -2,7 +2,7 @@
   Advanced Search
   %span.caret
 .collapsible-content
-  = form_tag iam_cust_users_path, :method => :put, :class => 'form-horizontal', :autocomplete=>"off", id: 'advanced_search' do
+  = form_tag '', :method => 'get', :class => 'form-horizontal', :autocomplete=>"off" do
     = hidden_field_tag :approval_status, params[:approval_status]
     .control-group
       = label_tag "Username", "Username", :class => 'control-label'
