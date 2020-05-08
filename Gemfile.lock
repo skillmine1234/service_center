@@ -88,17 +88,17 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-fp.git
-  revision: 5fe82abeb89f4c0191251d355e27f8db3f64de5b
+  revision: 97c72acc7cd60036ff832989750e153f3254aab5
   specs:
-    qg-fp (2.3.0)
+    qg-fp (2.4.0)
       rails (~> 4.2.2)
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ft.git
-  revision: 7725f5abaddfbbb9972eba6085b8b90003a66bce
+  revision: 25fec1d20889c61cbe8d02568aedd6ffc122e777
   branch: ft_customer_code_changes
   specs:
-    qg-ft (2.4.0)
+    qg-ft (2.5.0)
       draper
       pundit
       rails (>= 4.2.2)
@@ -121,9 +121,9 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-icol.git
-  revision: f8652e5d099f08018f11448572240a44582e11a0
+  revision: fe63786d8ec082d945f2fc683b48cc57459c1f4f
   specs:
-    qg-icol (1.9.0)
+    qg-icol (2.0.0)
       rails (= 4.2.2)
 
 GIT
@@ -174,9 +174,9 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-sc.git
-  revision: 79edd1d1ff49278fda6c8e86a48beb2a8198e2e1
+  revision: c3cd2d4fbafc7e0501c32bc02a292d64b0f24761
   specs:
-    qg-sc (2.2.0)
+    qg-sc (2.3.0)
       rails (~> 4.2.2)
 
 GIT
@@ -709,18 +709,18 @@ DEPENDENCIES
   qg-cp (= 1.0.2)!
   qg-ecol (= 5.3.0)!
   qg-es (= 1.5.0)!
-  qg-fp (= 2.3.0)!
-  qg-ft (= 2.4.0)!
+  qg-fp (= 2.4.0)!
+  qg-ft (= 2.5.0)!
   qg-gm (= 1.6.0)!
   qg-ic (= 1.9.0)!
-  qg-icol (= 1.9.0)!
+  qg-icol (= 2.0.0)!
   qg-imt (= 1.9.0)!
   qg-inw (= 4.7.0)!
   qg-ns (= 1.2.0)!
   qg-obdx (= 3.6.0)!
   qg-rpl (= 2.4.0)!
   qg-rx (= 1.6.0)!
-  qg-sc (= 2.2.0)!
+  qg-sc (= 2.3.0)!
   qg-sm (= 1.9.0)!
   qg-ssp (= 2.4.0)!
   rails (= 4.2.2)
