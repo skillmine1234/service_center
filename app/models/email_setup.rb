@@ -7,6 +7,7 @@ class EmailSetup < ActiveRecord::Base
 
 
 	validates_presence_of :service_name,:app_id,:customer_id
+	validates_uniqueness_of :app_id,:customer_id,:service_name, :scope => [:app_id,:service_name,:customer_id,:approval_status]
 	validate :check_record_exist
 	validate :email_entry
 
@@ -20,12 +21,12 @@ class EmailSetup < ActiveRecord::Base
 
 		@record_exist = false
 		
-		@email_setup = EmailSetup.where(service_name: self.service_name,app_id: self.app_id,customer_id: self.customer_id)
+		# @email_setup = EmailSetup.where(service_name: self.service_name,app_id: self.app_id,customer_id: self.customer_id)
 
-		if @email_setup.present?
-			@record_exist = true
-			self.errors.add(:base, "Record already exist for bellow APP ID & Customer ID")
-		end
+		# if @email_setup.present?
+		# 	@record_exist = true
+		# 	self.errors.add(:base, "Record already exist for bellow APP ID & Customer ID")
+		# end
 
 		if @record_exist == false
 			if self.service_name == "fund_transfer"
@@ -87,9 +88,15 @@ class EmailSetup < ActiveRecord::Base
 	end
 
 	def self.data_search(service_name,app_id,customer_id)
-		@records = EmailSetup.where(service_name: service_name) if service_name.present?
-		@records = EmailSetup.where(app_id: app_id) if app_id.present?
-		@records = EmailSetup.where(customer_id: customer_id) if customer_id.present?
+
+		if service_name == "all"
+			@records = EmailSetup.all
+		else
+			@records = EmailSetup.where(service_name: service_name) if service_name.present?
+			@records = EmailSetup.where(app_id: app_id) if app_id.present?
+			@records = EmailSetup.where(customer_id: customer_id) if customer_id.present?
+		end
+		
 		return @records
 	end
 
