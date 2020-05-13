@@ -80,10 +80,17 @@ GIT
       rails (= 4.2.2)
 
 GIT
-  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-fp.git
-  revision: c7841f433cb758a3a4949753211289c9efa25518
+  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-es.git
+  revision: 7e82b9fc71784a507a6e14f229e8d01765a03057
   specs:
-    qg-fp (2.6.0)
+    qg-es (1.8.0)
+      rails (= 4.2.2)
+
+GIT
+  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-fp.git
+  revision: 757465f0d7f9722b54220dbca37db9e8af68131d
+  specs:
+    qg-fp (2.7.0)
       rails (~> 4.2.2)
 
 GIT
@@ -701,7 +708,8 @@ DEPENDENCIES
   qg-cc (= 1.5.0)!
   qg-cp (= 1.0.2)!
   qg-ecol (= 5.3.0)!
-  qg-fp (= 2.6.0)!
+  qg-es (= 1.8.0)!
+  qg-fp (= 2.7.0)!
   qg-ft (= 2.7.0)!
   qg-gm (= 1.6.0)!
   qg-ic (= 1.9.0)!

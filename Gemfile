@@ -65,7 +65,7 @@ gem 'qg-asba', '1.0.8', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01b
 gem 'qg-sm', '1.9.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-sm.git"
 gem 'qg-ssp', '2.4.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ssp.git"
 gem 'qg-imt', '1.9.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-imt.git"
-gem 'qg-fp','2.6.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-fp.git"
+gem 'qg-fp','2.7.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-fp.git"
 gem 'qg-ft','2.7.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ft.git", branch: 'ft_customer_code_changes'
 gem 'qg-sc', '2.3.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-sc.git"
 gem 'qg-gm', '1.6.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-gm.git", branch: 'production'
@@ -76,6 +76,7 @@ gem 'qg-ns', '1.2.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:
 gem 'qg-rx', '1.8.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-rx.git"
 gem 'qg-ic', '1.9.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ic.git", branch: 'dealer-finance'
 gem 'qg-obdx','3.6.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-obdx.git", branch: 'obdx_reports'
+gem 'qg-es','1.8.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-es.git"
 # oracle is required only in production, CI tools run against sqlite3
 group :production do
   gem 'activerecord-oracle_enhanced-adapter',:git => 'git://github.com/rsim/oracle-enhanced.git'
