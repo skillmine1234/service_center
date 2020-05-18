@@ -8,12 +8,12 @@ class RcTransfersController < ApplicationController
   include RcTransfersHelper
   
   def index
-    if request.get?
-      @searcher = RcTransferSearcher.new(params.permit(:page))
+    if params[:advanced_search].present?
+      rc_transfers = find_rc_transfers(params).order("id DESC")
     else
-      @searcher = RcTransferSearcher.new(search_params)
+      rc_transfers = RcTransfer.order("id desc")
     end
-    @records = @searcher.paginate
+    @rc_transfers = rc_transfers.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
   
   def show

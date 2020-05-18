@@ -1,48 +1,43 @@
-%h2.collapsible
-  Advanced Search
-  %span.caret
-.collapsible-content
-  = form_tag rc_transfers_path, :method => :put, :class => 'form-horizontal', :autocomplete=>"off", id: 'advanced_search' do
-    .control-group
-      = label_tag "Remove Defaults", "Remove Defaults", :class => 'control-label'
-      = check_box_tag :remove_defaults, 'Y', params[:remove_defaults]
-    .control-group
-      = label_tag "Recurring Transfer Code", "Rc Transfer Code", :class => 'control-label'
-      = text_field_tag :rc_code, params[:rc_code],placeholder: 'Multisearch Search Enabled'
-    .control-group
-      = label_tag "Beneficiary Account No", "Beneficiary Account No", :class => 'control-label'
-      = text_field_tag :bene_account_no, params[:bene_account_no],placeholder: 'Multisearch Search Enabled'
-    .control-group
-      = label_tag "Debit Account No", "Debit Account No", :class => 'control-label'
-      = text_field_tag :debit_account_no, params[:debit_account_no],placeholder: 'Multisearch Search Enabled'
-    .control-group
-      = label_tag "Transfer Reply Reference", "Transfer Reply Reference", :class => 'control-label'
-      = text_field_tag :transfer_rep_ref, params[:transfer_rep_ref],placeholder: 'Multisearch Search Enabled'
-    .control-group
-      = label_tag "Transfer Amount", "Transfer Amount", :class => 'control-label'
-      = number_field_tag :from_amount, params[:from_amount]
-      To
-      = number_field_tag :to_amount, params[:to_amount]
-    .control-group
-      = label_tag "Transfer Status", "Transfer Status", :class => 'control-label'
-      = select_tag :status, options_for_select([['NEW','NEW'],['PENDING CREDIT','PENDING CREDIT'],['COMPLETED','COMPLETED'],['CREDIT FAILED','CREDIT FAILED'],['BALINQ FAILED','BALINQ FAILED'],['SENT_TO_BENEFICIARY', 'SENT_TO_BENEFICIARY']],params[:status]),:prompt => 'ANY'
-    .control-group
-      = label_tag "Notify Status", "Notify Status", :class => 'control-label'
-      = select_tag :notify_status, options_for_select([['PENDING NOTIFICATION','PENDING NOTIFICATION'],['NOTIFIED:REJECTED','NOTIFIED:REJECTED'],['NOTIFIED:OK','NOTIFIED:OK'],['NOTIFICATION FAILED','NOTIFICATION FAILED']],params[:notify_status]),:prompt => 'ANY'  
-    .control-group
-      = label_tag "Mobile No", "Mobile No", :class => 'control-label'
-      = text_field_tag :mobile_no, params[:mobile_no]
-    .control-group
-      = label_tag "Pending Approval?", "Pending Approval?", :class => 'control-label'
-      = select_tag :pending_approval, options_for_select([['Yes','Y'],['No','N']],params[:pending_approval]),:prompt => "ANY"
-      = hidden_field_tag :page, params[:page] || 1
-
-    .form-actions
-      = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button",onclick: "$('#page').val(1)"
-      = button_tag "Reset", :type => 'button', :value=>'Reset', :class => 'btn', :id => 'adv_search_reset_button'
-
-- if @searcher.errors.present?
-  :javascript
-    $('.collapsible-content').show();
+= form_tag '', :method => 'get', :class => 'form-horizontal', :autocomplete=>"off" do
+  .control-group
+    = label_tag "Remove Defaults", "Remove Defaults", :class => 'control-label'
+    = check_box_tag :remove_defaults, "Y", params[:remove_defaults]
+  .control-group
+    = label_tag "Rc Transfer Code", "Rc Transfer Code", :class => 'control-label'
+    = text_field_tag :rc_transfer_code, params[:rc_transfer_code],placeholder: 'Multisearch Search Enabled'
+  .control-group
+    = label_tag "Beneficiary Account No", "Beneficiary Account No", :class => 'control-label'
+    = text_field_tag :bene_account_no, params[:bene_account_no],placeholder: 'Multisearch Search Enabled'
+  .control-group
+    = label_tag "Debit Account No", "Debit Account No", :class => 'control-label'
+    = text_field_tag :debit_account_no, params[:debit_account_no],placeholder: 'Multisearch Search Enabled'
+  .control-group
+    = label_tag "Transfer Reply Reference", "Transfer Reply Reference", :class => 'control-label'
+    = text_field_tag :transfer_rep_ref, params[:transfer_rep_ref],placeholder: 'Multisearch Search Enabled'
+  .control-group
+    = label_tag "Transfer Amount", "Transfer Amount", :class => 'control-label'
+    = text_field_tag :from_transfer_amount, params[:from_transfer_amount]
+    To
+    = text_field_tag :to_transfer_amount, params[:to_transfer_amount]
+  .control-group
+    = label_tag "Status Code", "Status Code", :class => 'control-label'
+    = select_tag :status_code, options_for_select([['NEW','NEW'],['FAILED','FAILED'],['PENDING CREDIT','PENDING CREDIT'],['CREDIT FAILED','CREDIT FAILED'],['BALINQ FAILED','BALINQ FAILED'],['SENT_TO_BENEFICIARY','SENT_TO_BENEFICIARY']],params[:status_code]),:prompt => 'ANY'
+  .control-group
+    = label_tag "Notify Status", "Notify Status", :class => 'control-label'
+    = select_tag :notify_status, options_for_select([['PENDING NOTIFICATION','PENDING NOTIFICATION'],['NOTIFIED:REJECTED','NOTIFIED:REJECTED'],['NOTIFIED:OK','NOTIFIED:OK'],['NOTIFICATION FAILED','NOTIFICATION FAILED']],params[:notify_status]),:prompt => 'ANY'
+  .control-group
+    = label_tag "Mobile No", "Mobile No", :class => 'control-label'
+    = text_field_tag :mobile_no, params[:mobile_no],placeholder: 'Multisearch Search Enabled'
+  .control-group
+    = label_tag "Pending Approval?", "Pending Approval?", :class => 'control-label'
+    = select_tag :pending_approval, options_for_select([['Yes','Y'],['No','N']],params[:pending_approval]),:prompt => 'ANY'
+  .form-actions
+    = button_tag "Search", :class => 'btn btn-primary'
+    = button_tag "Reset", :type => 'button', :value=>'Reset', :class => 'btn', :id => 'rc_transfer_reset'
+  = hidden_field_tag :advanced_search, :true
 
 
+:javascript
+  $("#rc_transfer_reset").click(function() {
+    $(this).closest('form').find("input,select").val("");
+  });
