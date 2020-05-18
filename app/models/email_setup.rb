@@ -87,17 +87,4 @@ class EmailSetup < ActiveRecord::Base
 		data = self.email5.present? ? self.email5 : "-"
 	end
 
-	def self.data_search(service_name,app_id,customer_id)
-
-		if service_name == "all"
-			@records = EmailSetup.all
-		else
-			@records = EmailSetup.where(service_name: service_name) if service_name.present?
-			@records = EmailSetup.where(app_id: app_id) if app_id.present?
-			@records = EmailSetup.where(customer_id: customer_id) if customer_id.present?
-		end
-		
-		return @records
-	end
-
 end
