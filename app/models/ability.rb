@@ -76,6 +76,7 @@ class Ability
       can :approve_ecol_trans, model_name.constantize
       can :approve_transaction, model_name.constantize
       can :override_transaction, model_name.constantize
+      can :download_data, model_name.constantize
     end
     can :manage, UnapprovedRecord, approvable_type: @group.try(:model_list)
   end
