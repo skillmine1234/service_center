@@ -59,9 +59,9 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-cc.git
-  revision: c9f909e6450808ee45c3a0c22eed6fa51b7dcef3
+  revision: 1133d5c882f718232686d65278ee6d84c50dd496
   specs:
-    qg-cc (1.5.0)
+    qg-cc (1.6.0)
       rails (= 4.2.2)
 
 GIT
@@ -81,9 +81,9 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-es.git
-  revision: 8fb657f8c6d1c8df3a3f16414b05fc6ff6113fe7
+  revision: bef3046b0c59fe6762cb465f9cf378c6fbeb94aa
   specs:
-    qg-es (2.0.0)
+    qg-es (2.1.0)
       rails (= 4.2.2)
 
 GIT
@@ -705,10 +705,10 @@ DEPENDENCIES
   qg-ae (= 1.0.5)!
   qg-asba (= 1.0.8)!
   qg-bm (= 1.2.0)!
-  qg-cc (= 1.5.0)!
+  qg-cc (= 1.6.0)!
   qg-cp (= 1.0.2)!
   qg-ecol (= 5.3.0)!
-  qg-es (= 2.0.0)!
+  qg-es (= 2.1.0)!
   qg-fp (= 2.7.0)!
   qg-ft (= 3.1.0)!
   qg-gm (= 1.6.0)!

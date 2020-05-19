@@ -40,4 +40,5 @@
 :javascript
   $("#rc_transfer_reset").click(function() {
     $(this).closest('form').find("input,select").val("");
+    $("#remove_defaults").prop('checked', false);
   });
