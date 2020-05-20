@@ -9,7 +9,8 @@ class EmailSetup < ActiveRecord::Base
 	validates_presence_of :service_name,:app_id,:customer_id
 	validates_uniqueness_of :app_id,:customer_id,:service_name, :scope => [:app_id,:service_name,:customer_id,:approval_status]
 	validate :check_record_exist
-	validate :email_entry
+	validate :any_email_present?
+	validates_format_of :email1,:email2,:email3,:email4,:email5, with: /\A([\w\.-]+)@([\w\-]+\.)+([A-Z]{2,4})\Z/i,message: "Not a valid Email Address", length: { maximum: 100 },allow_blank: true
 
 	def data_present?
 		if self.service_name.present? && self.app_id.present? && self.customer_id.present?
@@ -51,19 +52,9 @@ class EmailSetup < ActiveRecord::Base
 		end
 	end
 
-	def email_entry
+	def any_email_present?
 		if [self.email1, self.email2, self.email3, self.email4, self.email5].reject(&:blank?).size == 0
 			self.errors.add(:email_error_base, "Please enter atleast one Email Address")
-		elsif self.email1.present?
-			validates_format_of :email1, with: /\A([\w\.-]+)@([\w\-]+\.)+([A-Z]{2,4})\Z/i,message: "Not a valid Email Address", length: { maximum: 100 }
-		elsif self.email2.present?
-			validates_format_of :email2, with: /\A([\w\.-]+)@([\w\-]+\.)+([A-Z]{2,4})\Z/i,message: "Not a valid Email Address", length: { maximum: 100 }
-		elsif self.email3.present?
-			validates_format_of :email3, with: /\A([\w\.-]+)@([\w\-]+\.)+([A-Z]{2,4})\Z/i,message: "Not a valid Email Address", length: { maximum: 100 }
-		elsif self.email4.present?
-			validates_format_of :email4, with: /\A([\w\.-]+)@([\w\-]+\.)+([A-Z]{2,4})\Z/i,message: "Not a valid Email Address", length: { maximum: 100 }
-		elsif self.email5.present?
-			validates_format_of :email5, with: /\A([\w\.-]+)@([\w\-]+\.)+([A-Z]{2,4})\Z/i,message: "Not a valid Email Address", length: { maximum: 100 }						
 		end
 	end
 
