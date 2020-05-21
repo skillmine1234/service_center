@@ -159,10 +159,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-rpl.git
-  revision: 698a1eb6579640ab727cf3ee05fed4459fd198d7
+  revision: 00396186d8e3ecd55dc82bbbf5880460165ef1b5
   branch: blockchain
   specs:
-    qg-rpl (2.4.0)
+    qg-rpl (2.5.0)
       rails (= 4.2.2)
 
 GIT
@@ -718,7 +718,7 @@ DEPENDENCIES
   qg-inw (= 4.7.0)!
   qg-ns (= 1.2.0)!
   qg-obdx (= 3.6.0)!
-  qg-rpl (= 2.4.0)!
+  qg-rpl (= 2.5.0)!
   qg-rx (= 1.9.0)!
   qg-sc (= 2.3.0)!
   qg-sm (= 1.9.0)!
