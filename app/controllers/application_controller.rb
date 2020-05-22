@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!, if: :protected_by_pundit
   
   after_action :verify_authorized, except: :index, if: :protected_by_pundit
-  after_action :verify_policy_scoped, only: :index, if: :protected_by_pundit
+  # after_action :verify_policy_scoped, only: :index, if: :protected_by_pundit
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   rescue_from CanCan::AccessDenied, with: :user_not_authorized
