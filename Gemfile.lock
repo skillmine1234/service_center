@@ -95,20 +95,20 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ft.git
-  revision: cb998805df4608cc32cafba0ff266cbab266c69c
+  revision: c06b1ac3d0da3b7440c445678500f1ccec4529dd
   branch: ft_customer_code_changes
   specs:
-    qg-ft (3.2.0)
+    qg-ft (3.3.0)
       draper
       pundit
       rails (>= 4.2.2)
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-gm.git
-  revision: d7058809f21836839ee4f29874550c44f448d9d9
+  revision: c69fa4b8b1f34059b905a3186e2fe5e3ee486e6e
   branch: production
   specs:
-    qg-gm (1.7.0)
+    qg-gm (1.8.0)
       rails (= 4.2.2)
 
 GIT
@@ -128,9 +128,9 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-imt.git
-  revision: 57bfb93ea476108868a5bed42a21fbf6dfdae17b
+  revision: 652fb8070f43e5b455f011f258f4b94b50b43e3c
   specs:
-    qg-imt (2.1.0)
+    qg-imt (2.2.0)
       rails (~> 4.2.2)
 
 GIT
@@ -710,11 +710,11 @@ DEPENDENCIES
   qg-ecol (= 5.3.0)!
   qg-es (= 2.2.0)!
   qg-fp (= 2.7.0)!
-  qg-ft (= 3.2.0)!
-  qg-gm (= 1.7.0)!
+  qg-ft (= 3.3.0)!
+  qg-gm (= 1.8.0)!
   qg-ic (= 1.9.0)!
   qg-icol (= 2.0.0)!
-  qg-imt (= 2.1.0)!
+  qg-imt (= 2.2.0)!
   qg-inw (= 4.7.0)!
   qg-ns (= 1.2.0)!
   qg-obdx (= 3.6.0)!
