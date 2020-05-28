@@ -46,7 +46,7 @@ class EmailSetup < ActiveRecord::Base
 			if self.service_name == "dealer_finance"
 				@ic_cust_records = IcCustomer.unscoped.where(app_id: self.app_id,customer_id: self.customer_id)
 				if !@ic_cust_records.present?
-					self.errors.add(:base, "Yet not registered the Customer,first register it as Delear Finance Customer.")
+					self.errors.add(:base, "Yet not registered the Customer,first register it as Dealer Finance Customer.")
 				end
 			end
 		end
