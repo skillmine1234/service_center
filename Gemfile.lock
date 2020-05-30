@@ -59,9 +59,9 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-cc.git
-  revision: cdb75594aa1ad74ea540cf74694f497499281f1c
+  revision: 6e94fa19879cfc7fd17df40a033112dd51800843
   specs:
-    qg-cc (1.7.0)
+    qg-cc (1.8.0)
       rails (= 4.2.2)
 
 GIT
@@ -113,10 +113,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ic.git
-  revision: f65c286800c3a21b91916e4a2391525fd8f3e459
+  revision: e8ae30f2e486817fed5aa044eb187297df0d62ec
   branch: dealer-finance
   specs:
-    qg-ic (1.9.0)
+    qg-ic (2.0.0)
       rails (= 4.2.2)
 
 GIT
@@ -705,14 +705,14 @@ DEPENDENCIES
   qg-ae (= 1.0.5)!
   qg-asba (= 1.0.8)!
   qg-bm (= 1.2.0)!
-  qg-cc (= 1.7.0)!
+  qg-cc (= 1.8.0)!
   qg-cp (= 1.0.2)!
   qg-ecol (= 5.3.0)!
   qg-es (= 2.2.0)!
   qg-fp (= 2.7.0)!
   qg-ft (= 3.4.0)!
   qg-gm (= 2.0.0)!
-  qg-ic (= 1.9.0)!
+  qg-ic (= 2.0.0)!
   qg-icol (= 2.0.0)!
   qg-imt (= 2.2.0)!
   qg-inw (= 4.7.0)!
