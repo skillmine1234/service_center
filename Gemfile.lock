@@ -81,9 +81,9 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-es.git
-  revision: bd4c498eb37c4f69a52183e8d7cf98778e263500
+  revision: 3afbd0dc7b98034769313de8b61fd47f4baa4a4e
   specs:
-    qg-es (2.2.0)
+    qg-es (2.3.0)
       rails (= 4.2.2)
 
 GIT
@@ -181,9 +181,9 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-sm.git
-  revision: 04f102505d788de3a32d8403fcc1db0de81045ac
+  revision: 4dd5226388ccafd4a92f3c92028eed9b7b5f0867
   specs:
-    qg-sm (1.9.0)
+    qg-sm (2.0.0)
       rails (~> 4.2.2)
 
 GIT
@@ -708,7 +708,7 @@ DEPENDENCIES
   qg-cc (= 1.8.0)!
   qg-cp (= 1.0.2)!
   qg-ecol (= 5.3.0)!
-  qg-es (= 2.2.0)!
+  qg-es (= 2.3.0)!
   qg-fp (= 2.7.0)!
   qg-ft (= 3.4.0)!
   qg-gm (= 2.0.0)!
@@ -721,7 +721,7 @@ DEPENDENCIES
   qg-rpl (= 2.5.0)!
   qg-rx (= 1.9.0)!
   qg-sc (= 2.3.0)!
-  qg-sm (= 1.9.0)!
+  qg-sm (= 2.0.0)!
   qg-ssp (= 2.4.0)!
   rails (= 4.2.2)
   rails_12factor
