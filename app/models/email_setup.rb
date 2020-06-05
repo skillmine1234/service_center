@@ -13,19 +13,25 @@ class EmailSetup < ActiveRecord::Base
 	def any_email_present?
 		if [self.email1, self.email2, self.email3, self.email4, self.email5].reject(&:blank?).size == 0
 			self.errors.add(:email_error_base, "Please enter atleast one Email Address")
-		elsif (self.email1.present? && self.email2.present? && self.email3.present? && self.email4.present? && self.email5.present?)
+		end
+			
+		if self.email1.present?
 			validates_format_of :email1, with: /\A([\w\.-]+)@([\w\-]+\.)+([A-Z]{2,4})\Z/i,message: "Not a valid Email Address", length: { maximum: 100 }
+		end
+			
+		if self.email2.present?
 			validates_format_of :email2, with: /\A([\w\.-]+)@([\w\-]+\.)+([A-Z]{2,4})\Z/i,message: "Not a valid Email Address", length: { maximum: 100 }
+		end
+			
+		if self.email3.present?
 			validates_format_of :email3, with: /\A([\w\.-]+)@([\w\-]+\.)+([A-Z]{2,4})\Z/i,message: "Not a valid Email Address", length: { maximum: 100 }
+		end
+			
+		if self.email4.present?
 			validates_format_of :email4, with: /\A([\w\.-]+)@([\w\-]+\.)+([A-Z]{2,4})\Z/i,message: "Not a valid Email Address", length: { maximum: 100 }
-			validates_format_of :email5, with: /\A([\w\.-]+)@([\w\-]+\.)+([A-Z]{2,4})\Z/i,message: "Not a valid Email Address", length: { maximum: 100 }
-		elsif self.email2.present?
-			validates_format_of :email2, with: /\A([\w\.-]+)@([\w\-]+\.)+([A-Z]{2,4})\Z/i,message: "Not a valid Email Address", length: { maximum: 100 }
-		elsif self.email3.present?
-			validates_format_of :email3, with: /\A([\w\.-]+)@([\w\-]+\.)+([A-Z]{2,4})\Z/i,message: "Not a valid Email Address", length: { maximum: 100 }
-		elsif self.email4.present?
-			validates_format_of :email4, with: /\A([\w\.-]+)@([\w\-]+\.)+([A-Z]{2,4})\Z/i,message: "Not a valid Email Address", length: { maximum: 100 }
-		elsif self.email5.present?
+		end
+			
+		if self.email5.present?
 			validates_format_of :email5, with: /\A([\w\.-]+)@([\w\-]+\.)+([A-Z]{2,4})\Z/i,message: "Not a valid Email Address", length: { maximum: 100 }						
 		end
 	end
