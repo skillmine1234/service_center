@@ -15,8 +15,8 @@ class Group < ActiveRecord::Base
       ['Pc2App','Pc2CustAccount']
     when "flex-proxy"
       Qg::Fp::MODELS
-    when "imt"
-      Qg::Imt::MODELS
+    when "imt1"
+      Qg::Imt1::MODELS
     when "funds-transfer"
       Qg::Ft::MODELS
     when "salary-upload"
