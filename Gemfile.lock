@@ -95,10 +95,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ft.git
-  revision: 199176eb1166fc79d7fd3ed3495cce172d4ebb81
+  revision: 2053aeb223ac6f4bdaecce70369bbb046a53c901
   branch: ft_customer_code_changes
   specs:
-    qg-ft (3.6.0)
+    qg-ft (3.7.0)
       draper
       pundit
       rails (>= 4.2.2)
@@ -128,10 +128,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git
-  revision: a7d83fa739c3ba1c893b1fc0902af7372c976941
+  revision: 485bd04f3febcf82677b1f7740cae5df76fb7e82
   branch: current_4000prod_alipay
   specs:
-    qg-inw (4.7.0)
+    qg-inw (4.9.0)
       rails (= 4.2.2)
 
 GIT
@@ -152,10 +152,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-rpl.git
-  revision: d61a66fd21d2c77d1dedb4897af8018826a2f53f
+  revision: 653c44db788e6c2876b440e452b89199379e7ef6
   branch: blockchain
   specs:
-    qg-rpl (3.2.0)
+    qg-rpl (3.3.0)
       rails (= 4.2.2)
 
 GIT
@@ -703,14 +703,14 @@ DEPENDENCIES
   qg-ecol (= 5.3.0)!
   qg-es (= 2.5.0)!
   qg-fp (= 2.7.0)!
-  qg-ft (= 3.6.0)!
+  qg-ft (= 3.7.0)!
   qg-gm (= 2.0.0)!
   qg-ic (= 2.0.0)!
   qg-icol (= 2.0.0)!
-  qg-inw (= 4.7.0)!
+  qg-inw (= 4.9.0)!
   qg-ns (= 1.2.0)!
   qg-obdx (= 3.6.0)!
-  qg-rpl (= 3.2.0)!
+  qg-rpl (= 3.3.0)!
   qg-rx (= 1.9.0)!
   qg-sc (= 2.3.0)!
   qg-sm (= 2.0.0)!
