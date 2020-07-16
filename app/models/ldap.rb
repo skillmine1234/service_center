@@ -46,7 +46,8 @@ class LDAP
     config_obj["admin_password"] = "xxxxxxxxx" if ENV['LDAP_LOGGERS_ENABLED'] == "true"  rescue nil
     Rails.logger.info config_obj.inspect if ENV['LDAP_LOGGERS_ENABLED'] == "true" rescue nil
     Rails.logger.info "================================================" if ENV['LDAP_LOGGERS_ENABLED'] == "true" rescue nil
-
+    
+    Rails.logger.info "==========Required Group--------- #{@required_group}==================" if ENV['LDAP_LOGGERS_ENABLED'] == "true" rescue nil
 
     Rails.logger.info "===========ldap bind response===========================" if ENV['LDAP_LOGGERS_ENABLED'] == "true" rescue nil
     Rails.logger.info @ldap_bind.inspect if ENV['LDAP_LOGGERS_ENABLED'] == "true" rescue nil
@@ -154,12 +155,33 @@ class LDAP
     raise LDAPFault.new('reset password', ldap_result) if ldap_result.code != 0
   end
 
+  def group_registration_check(username)
+    filter = "(&(objectClass=user)(sAMAccountName=#{username}))"
+    @member_variable = []
+
+    @ldap.search(:base => @base, :filter => filter) do |object|
+      Rails.logger.info "==========Inside Group Check Logic============="
+      Rails.logger.info "==========Object Value Inside Group Check Logic=========>#{object}=================="
+      begin
+        Rails.logger.info "================Group Check Process Initiated================="
+        @member_variable << object.memberof.include?("CN=ESB_OTPService,CN=Users,DC=yblpartneruat,DC=local")
+        Rails.logger.info "==========Member Variable value After Group Check Completes without any error==========>#{@member_variable}============"
+      rescue Exception => error
+        Rails.logger.info "================Group Check Failure Error code: #{error}================"
+      end
+    end
+    Rails.logger.info "==============Returned Result Member Variable value outside Group Check Logic===========>#{@member_variable}============"
+    return @member_variable
+  end
+
   def try_login(username, password)
     Rails.logger.info "--------------------->>> try login method in LDAP.RB"
     Rails.logger.info "========username=======>#{username}======="
     Rails.logger.info "=========password=======>xxxxxxxxx========"
     dn = "CN=#{username},#{@base}"
     @ldap.auth dn, password
+    group_reg_check = group_registration_check(username)
+    Rails.logger.info "================Group Check Value inside try login method in LDAP.RB==========>#{group_reg_check}=================="
     raise LDAPFault.new(nil, @ldap.get_operation_result) if @ldap.bind == false
   end
 

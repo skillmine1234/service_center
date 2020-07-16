@@ -8,6 +8,9 @@ class EmailSetup < ActiveRecord::Base
 
 	validates_presence_of :service_name,:app_id,:customer_id
 	validates_uniqueness_of :app_id,:customer_id,:service_name, :scope => [:app_id,:service_name,:customer_id,:approval_status],message: "Record already present"
+	validates_format_of :app_id, with: /\A[a-zA-Z0-9 ]*\z/,message: "Not a valid App ID", length: { maximum: 50 }
+	validates_format_of :customer_id, with: /\A[a-zA-Z0-9 ]*\z/,message: "Not a valid Customer ID", length: { maximum: 50 }
+	validates_format_of :customer_name, with: /\A[a-zA-Z0-9 ]*\z/,message: "Not a valid Customer Name", length: { maximum: 50 }
 	validate :any_email_present?
 
 	def any_email_present?

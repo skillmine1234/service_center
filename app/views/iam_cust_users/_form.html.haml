@@ -52,9 +52,10 @@
       #msg-error
         = error_message_for(@iam_cust_user, :secondary_mobile_no, :prepend_text => "")
     - unless action_name == 'new'
-      .control-group
-        = f.label :should_reset_password, "Reset Password?", :class => 'control-label'
-        = f.check_box :should_reset_password, {},"Y","N"
+      - if @iam_cust_user.was_user_added == "Y"
+        .control-group
+          = f.label :should_reset_password, "Reset Password?", :class => 'control-label'
+          = f.check_box :should_reset_password, {},"Y","N"
       .control-group
         = f.label :is_enabled, "Enabled?", :class => 'control-label'
         = f.check_box :is_enabled, {},"Y","N"
