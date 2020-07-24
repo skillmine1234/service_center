@@ -40,8 +40,14 @@
           = image_tag 'work-list.jpg', :size => "80x80"
         %br
         = "Approval Worklist"
-    - else
-      - if group != 'gm'
+    - elsif group == "obdx"
+      .box
+        = link_to send("#{group}_bm_unapproved_records_path") do
+          = image_tag 'work-list.jpg', :size => "80x80"
+        %br
+        = "Approval Worklist"
+    - else  
+      - if group != 'gm' && group != 'dpesb' && group != 'ctl'
         .box
           = link_to unapproved_records_path(group_name: m[:group], sc_service: service) do
             = image_tag 'work-list.jpg', :size => "80x80"

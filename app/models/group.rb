@@ -60,7 +60,9 @@ class Group < ActiveRecord::Base
     when "Obdx"
       Qg::Obdx::MODELS
     when "es"
-      Qg::Es::MODELS    
+      Qg::Es::MODELS
+    when "dpesb"
+      Qg::Dpesb::MODELS      
     else
       []
     end
