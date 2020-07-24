@@ -17,6 +17,9 @@
       = f.radio_button :send_password_via, "both"
       Both
     .control-group
+      = f.label :sme_maker, "SME Maker", :class => 'control-label'
+      = f.check_box :sme_maker, {},"Y","N"
+    .control-group
       = f.label :username, "*Username", :class => 'control-label'
       = f.text_field :username, maxlength: 100
       #msg-error

@@ -36,7 +36,7 @@
         %td{:style=>'text-align:left;'}
           = link_to 'Show', record
         %td{:style=>'text-align:left;'}
-          = link_to 'Edit', edit_iam_cust_user_path(record)
+          = link_to 'Edit', edit_iam_cust_user_path(record) if record.approval_status == "A"
         %td{:style=>'text-align:left;'}
           = record.try(:send_password_via).try(:upcase)
         %td{:style=>'text-align:left;'}

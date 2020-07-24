@@ -35,7 +35,7 @@ module UserNotification
     if group_check.blank?
       return "Password can't be resend since User not present in Group!"
     end
-    if @message != "Login Successfull"
+    if !@message.include?("Login Successfull") || !@message.include?("Login Successfull but User not present in Group")
       return "Password can't be resend since faced #{@message} error while performing Test Login!"
     end
     if notify != true
@@ -97,33 +97,41 @@ module UserNotification
 
   #User is added to LDAP on approval
   def add_user_to_ldap_on_approval
-    group_check = LDAP.new.group_registration_check(username) rescue nil
-    @message = self.test_ldap_login
     puts "================add_user_to_ldap_on_approval method start for username: #{username}================"
-    puts "================group_check value Inside add_user_to_ldap_on_approval method========>#{group_check}================"
-    if approval_status == 'A' && should_reset_password == "Y" && (group_check.present? && group_check.include?(true)) && @message == "Login Successfull"
-      puts "================Reset Password Block start================"
-      begin
-        puts "================Resetting of LDAP Password Process Initiated================="
-        puts "============username==========>#{username}========================="
-        ldap_reset_password = LDAP.new.change_password(username, decrypt_old_password(old_password), generated_password)
-        update_column(:should_reset_password, "N")
-      rescue LDAPFault, Psych::SyntaxError, SystemCallError, Net::LDAP::LdapError => error
-        puts "================Reset Password Error code: #{error}================"
-        puts "================Failure in LDAP Reset Password================"
-        update_column(:was_user_added, "N")
-      else
-        puts "==================Success in LDAP Reset Password========================"
-        update_column(:was_user_added, 'Y')
-        notify_customer('Password Generated') unless Rails.env.test?
-        puts "===============Was User Added to LDAP: #{was_user_added}==================="
-      ensure
-        puts "================Reset Password Execution Completed================"
+    if approval_status == 'A' && should_reset_password == "Y"
+      group_check = LDAP.new.group_registration_check(username) rescue nil
+      puts "================group_check value Inside add_user_to_ldap_on_approval method for Reset Password Block========>#{group_check}================"
+      if (group_check.present? && group_check.include?(true))
+        puts "================Reset Password Block start================"
+        begin
+          puts "================Resetting of LDAP Password Process Initiated================="
+          puts "============username==========>#{username}========================="
+          ldap_reset_password = LDAP.new.change_password(username, decrypt_old_password(old_password), generated_password)
+          update_column(:should_reset_password, "N")
+        rescue LDAPFault, Psych::SyntaxError, SystemCallError, Net::LDAP::LdapError => error
+          puts "================Reset Password Error code: #{error}================"
+          puts "================Failure in LDAP Reset Password================"
+          update_column(:was_user_added, "N")
+        else
+          puts "==================Success in LDAP Reset Password========================"
+          @message = self.test_ldap_login
+          puts "================LDAP Test Login message value when Reset Password in LDAP Completes========>#{@message}================"
+          if @message == "Login Successfull"
+            puts "========Password Reset Successfully and test login also check with new password=========="
+            notify_customer('Password Generated') unless Rails.env.test?
+            update_column(:was_user_added, 'Y')
+          else
+            puts "========Password Reset Failure and test login also check failure with new password=========="
+            update_column(:was_user_added, 'N')
+          end
+          puts "===============Was User Added to LDAP: #{was_user_added}==================="
+        ensure
+          puts "================Reset Password Execution Completed================"
+        end
       end
     end
     
     if self.last_action == 'C' && self.approval_status == 'A' && self.lock_version >= 0
-      puts "==============Group Check Value Inside Fresh user addding block=======#{group_check}================"
       puts "================IamCustUser ID: #{self.id}================"
       puts "================Fresh user addding block start================"
       LDAP.new.add_user(username, generated_password) rescue nil
@@ -141,6 +149,8 @@ module UserNotification
         end
           puts "================Failure in LDAP Connection================"
         else
+          group_check = LDAP.new.group_registration_check(username) rescue nil
+          puts "==============Group Check Value Inside Fresh user addding block in Else condition=======#{group_check}================"
           if (group_check.present? && group_check.include?(true))
             puts "=================Inside Sending Notification block when Group Check Succeded============"
             puts"=================Group Check value Inside Notification block when Group Check Succeded========#{group_check}==============="

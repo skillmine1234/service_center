@@ -4,6 +4,7 @@
 .collapsible-content
   = form_tag '', :method => 'get', :class => 'form-horizontal', :autocomplete=>"off" do
     = hidden_field_tag :approval_status, params[:approval_status]
+  
     .control-group
       = label_tag "Username", "Username", :class => 'control-label'
       = text_field_tag :username, params[:username],placeholder: 'Multisearch Search Enabled'

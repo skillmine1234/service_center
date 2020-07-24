@@ -5,7 +5,8 @@
       %br
       %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
         - can = can? :edit, @iam_cust_user
-        %a.btn{:href => "#{!(can) ? '#' : '/iam_cust_users/' + @iam_cust_user.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
+        - if @iam_cust_user.approval_status == "A"
+          %a.btn{:href => "#{!(can) ? '#' : '/iam_cust_users/' + @iam_cust_user.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
         = render 'unapproved_records/approve', :@record => @iam_cust_user
       %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
         - if !@iam_cust_user.nil?
@@ -17,6 +18,10 @@
             %td.label Send Password Via
             %td.value
               = @iam_cust_user.try(:send_password_via).try(:upcase)
+          %tr
+            %td.label SME maker
+            %td.value
+              = @iam_cust_user.sme_maker
           %tr
             %td.label Errors
             %td.value
