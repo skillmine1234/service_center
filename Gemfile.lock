@@ -72,6 +72,13 @@ GIT
       rails (= 4.2.2)
 
 GIT
+  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ctl.git
+  revision: 591727df3ee9f50306b2128dd6f9868f839b85ab
+  specs:
+    qg-ctl (4.3.0)
+      rails (~> 4.2.2)
+
+GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-dpesb.git
   revision: 4cd703014ee1aa13be7fae992cd9f2ed694eb440
   specs:
@@ -80,17 +87,17 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ecol.git
-  revision: e8ef4b9ab858d14c9a3c9beaa32308957a6ac319
+  revision: 093677ac7a371eb38c2f8a37d51a86a590bc2256
   branch: ecol_approval
   specs:
-    qg-ecol (5.3.0)
+    qg-ecol (6.2.0)
       rails (= 4.2.2)
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-es.git
-  revision: bf18a4c695dd9223b93eae1a2a34c5f03f2e4fe2
+  revision: 7cd9672dfaf5da3b1e2ad4a0efcbfa0276a95c20
   specs:
-    qg-es (3.1.0)
+    qg-es (3.3.0)
       rails (= 4.2.2)
 
 GIT
@@ -102,10 +109,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ft.git
-  revision: 2d43f60badd2a13817073324a1f593c989f03c2f
+  revision: 8388a6458140c623a8ad80ca44ac4834634080c2
   branch: ft_for_prod
   specs:
-    qg-ft (4.0.0)
+    qg-ft (4.3.0)
       draper
       pundit
       rails (>= 4.2.2)
@@ -120,10 +127,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ic.git
-  revision: e8ae30f2e486817fed5aa044eb187297df0d62ec
-  branch: dealer-finance
+  revision: 625b21c4259a4b2e28c9acde40f298bd676afebb
+  branch: dealer-finance-prod
   specs:
-    qg-ic (2.0.0)
+    qg-ic (2.3.0)
       rails (= 4.2.2)
 
 GIT
@@ -174,9 +181,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-sc.git
-  revision: c3cd2d4fbafc7e0501c32bc02a292d64b0f24761
+  revision: 3ceea5c6c6adea5a14fd63551a027f4d53a9702f
+  branch: esbconfig_without_approval
   specs:
-    qg-sc (2.3.0)
+    qg-sc (3.1.0)
       rails (~> 4.2.2)
 
 GIT
@@ -707,20 +715,21 @@ DEPENDENCIES
   qg-bm (= 1.2.0)!
   qg-cc (= 1.8.0)!
   qg-cp (= 1.0.2)!
+  qg-ctl (= 4.3.0)!
   qg-dpesb (= 1.5.0)!
-  qg-ecol (= 5.3.0)!
-  qg-es (= 3.1.0)!
+  qg-ecol (= 6.2.0)!
+  qg-es (= 3.3.0)!
   qg-fp (= 2.7.0)!
-  qg-ft (= 4.0.0)!
+  qg-ft (= 4.3.0)!
   qg-gm (= 2.0.0)!
-  qg-ic (= 2.0.0)!
+  qg-ic (= 2.3.0)!
   qg-icol (= 2.0.0)!
   qg-inw (= 4.9.0)!
   qg-ns (= 1.2.0)!
   qg-obdx (= 3.8.0)!
   qg-rpl (= 3.3.0)!
   qg-rx (= 1.9.0)!
-  qg-sc (= 2.3.0)!
+  qg-sc (= 3.1.0)!
   qg-sm (= 2.0.0)!
   qg-ssp (= 2.4.0)!
   rails (= 4.2.2)

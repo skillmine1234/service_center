@@ -62,7 +62,9 @@ class Group < ActiveRecord::Base
     when "es"
       Qg::Es::MODELS
     when "dpesb"
-      Qg::Dpesb::MODELS      
+      Qg::Dpesb::MODELS  
+    when "ctl"
+      Qg::Ctl::MODELS    
     else
       []
     end
