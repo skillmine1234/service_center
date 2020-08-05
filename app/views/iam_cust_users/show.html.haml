@@ -19,10 +19,6 @@
             %td.value
               = @iam_cust_user.try(:send_password_via).try(:upcase)
           %tr
-            %td.label SME maker
-            %td.value
-              = @iam_cust_user.sme_maker
-          %tr
             %td.label Errors
             %td.value
               = @ldap_error
