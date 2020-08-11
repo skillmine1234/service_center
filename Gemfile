@@ -56,7 +56,7 @@ gem 'font-awesome-rails'
 
 gem 'encrypted_field', '0.1.6'
 
-gem 'qg-rpl','3.3.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-rpl.git",branch: 'blockchain'
+# gem 'qg-rpl','3.3.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-rpl.git",branch: 'blockchain'
 gem 'qg-inw', '4.9.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git", branch: 'current_4000prod_alipay'
 gem 'qg-icol', '2.0.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-icol.git"
 gem 'qg-ecol','6.2.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ecol.git",branch: "ecol_approval"
@@ -75,10 +75,10 @@ gem 'qg-ae', '1.0.5', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:
 gem 'qg-ns', '1.2.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ns.git",branch: 'form_for_new_callback_notification'
 gem 'qg-rx', '1.9.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-rx.git"
 gem 'qg-ic', '2.3.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ic.git", branch: 'dealer-finance-prod'
-gem 'qg-obdx','3.8.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-obdx.git", branch: 'obdx_reports'
+gem 'qg-obdx','3.9.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-obdx.git", branch: 'obdx_reports'
 gem 'qg-es','3.3.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-es.git"
 gem 'qg-dpesb','1.5.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-dpesb.git"
-gem 'qg-ctl','4.3.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ctl.git"
+gem 'qg-ctl','4.4.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ctl.git"
 
 # oracle is required only in production, CI tools run against sqlite3
 group :production do
