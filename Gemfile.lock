@@ -73,9 +73,9 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ctl.git
-  revision: 591727df3ee9f50306b2128dd6f9868f839b85ab
+  revision: b3e4ae2f67a5f6bc29ab6b8f6c0bd736ce39adde
   specs:
-    qg-ctl (4.3.0)
+    qg-ctl (4.4.0)
       rails (~> 4.2.2)
 
 GIT
@@ -158,18 +158,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-obdx.git
-  revision: 9aa37eddd4c75daa57e804b92d26e3fc21189840
+  revision: 62d897543accd6f71906249f89ab12f8692ef411
   branch: obdx_reports
   specs:
-    qg-obdx (3.8.0)
-      rails (= 4.2.2)
-
-GIT
-  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-rpl.git
-  revision: 653c44db788e6c2876b440e452b89199379e7ef6
-  branch: blockchain
-  specs:
-    qg-rpl (3.3.0)
+    qg-obdx (3.9.0)
       rails (= 4.2.2)
 
 GIT
@@ -715,7 +707,7 @@ DEPENDENCIES
   qg-bm (= 1.2.0)!
   qg-cc (= 1.8.0)!
   qg-cp (= 1.0.2)!
-  qg-ctl (= 4.3.0)!
+  qg-ctl (= 4.4.0)!
   qg-dpesb (= 1.5.0)!
   qg-ecol (= 6.2.0)!
   qg-es (= 3.3.0)!
@@ -726,8 +718,7 @@ DEPENDENCIES
   qg-icol (= 2.0.0)!
   qg-inw (= 4.9.0)!
   qg-ns (= 1.2.0)!
-  qg-obdx (= 3.8.0)!
-  qg-rpl (= 3.3.0)!
+  qg-obdx (= 3.9.0)!
   qg-rx (= 1.9.0)!
   qg-sc (= 3.1.0)!
   qg-sm (= 2.0.0)!
