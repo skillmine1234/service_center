@@ -119,7 +119,25 @@
       %br
         = "Setting"
     .box
-      = link_to '/rp/available_reports' do
+      = link_to '/rp/available_reports?group=rp' do
+        = image_tag 'available_report.png', :size => "80x80"
+      %br
+        = "Available Reports"
+    .box
+      = link_to '/rp/reports' do
+        = image_tag 'reports_icon.png', :size => "80x80"
+      %br
+        = "Generated Reports"
+- if @current_user.group_names.include?("rpv1")
+  %h1 Reports - AML
+  .slide-container
+    .box
+      = link_to "/rp/settings" do
+        = image_tag 'settings_icon.png', :size => "80x80"
+      %br
+        = "Setting"
+    .box
+      = link_to '/rp/available_reports?group=rpv1' do
         = image_tag 'available_report.png', :size => "80x80"
       %br
         = "Available Reports"
@@ -208,10 +226,9 @@
 = render partial: 'panel', locals: { group: 'cp', sc_service: 'CP' }
 = render partial: 'panel', locals: { group: 'ae'}
 = render partial: 'panel', locals: { group: 'rx'}
-/ = render partial: 'panel', locals: { group: 'rpl'}
+= render partial: 'panel', locals: { group: 'rpl'}
 = render partial: 'panel', locals: { group: 'es'}
 = render partial: 'panel', locals: { group: 'dpesb'}
 = render partial: 'panel', locals: { group: 'ctl'}
-
 
 / = render partial: 'panel', locals: { group: 'retailft' }
