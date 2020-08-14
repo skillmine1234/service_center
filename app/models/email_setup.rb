@@ -22,28 +22,28 @@ class EmailSetup < ActiveRecord::Base
 		end
 			
 		if self.email1.present?
-			errors.add(:email1, "Not a Valid Email Address") if check_domain(self.domain_name,self.email1) == false
-			#validates_format_of :email1, with: /\A([\w\.-]+)@([\w\-]+\.)+([A-Z]{2,4})\Z/i,message: "Not a valid Email Address", length: { maximum: 100 }
+			errors.add(:email1, "Not a Valid Domain Name") if check_domain(self.domain_name,self.email1) == false
+			validates_format_of :email1, with: /\A([\w\.-]+)@([\w\-]+\.)+([A-Z]{2,4})\Z/i,message: "Not a valid Email Address", length: { maximum: 100 }
 		end
 			
 		if self.email2.present?
-			errors.add(:email2, "Not a Valid Email Address") if check_domain(self.domain_name,self.email2) == false
-			#validates_format_of :email2, with: /\A([\w\.-]+)@([\w\-]+\.)+([A-Z]{2,4})\Z/i,message: "Not a valid Email Address", length: { maximum: 100 }
+			errors.add(:email2, "Not a Valid Domain Name") if check_domain(self.domain_name,self.email2) == false
+			validates_format_of :email2, with: /\A([\w\.-]+)@([\w\-]+\.)+([A-Z]{2,4})\Z/i,message: "Not a valid Email Address", length: { maximum: 100 }
 		end
 			
 		if self.email3.present?
-			errors.add(:email3, "Not a Valid Email Address") if check_domain(self.domain_name,self.email3) == false
-			#validates_format_of :email3, with: /\A([\w\.-]+)@([\w\-]+\.)+([A-Z]{2,4})\Z/i,message: "Not a valid Email Address", length: { maximum: 100 }
+			errors.add(:email3, "Not a Valid Domain Name") if check_domain(self.domain_name,self.email3) == false
+			validates_format_of :email3, with: /\A([\w\.-]+)@([\w\-]+\.)+([A-Z]{2,4})\Z/i,message: "Not a valid Email Address", length: { maximum: 100 }
 		end
 			
 		if self.email4.present?
-			errors.add(:email4, "Not a Valid Email Address") if check_domain(self.domain_name,self.email4) == false
-			#validates_format_of :email4, with: /\A([\w\.-]+)@([\w\-]+\.)+([A-Z]{2,4})\Z/i,message: "Not a valid Email Address", length: { maximum: 100 }
+			errors.add(:email4, "Not a Valid Domain Name") if check_domain(self.domain_name,self.email4) == false
+			validates_format_of :email4, with: /\A([\w\.-]+)@([\w\-]+\.)+([A-Z]{2,4})\Z/i,message: "Not a valid Email Address", length: { maximum: 100 }
 		end
 			
 		if self.email5.present?
-			errors.add(:email5, "Not a Valid Email Address") if check_domain(self.domain_name,self.email5) == false
-			#validates_format_of :email5, with: /\A([\w\.-]+)@([\w\-]+\.)+([A-Z]{2,4})\Z/i,message: "Not a valid Email Address", length: { maximum: 100 }						
+			errors.add(:email5, "Not a Valid Domain Name") if check_domain(self.domain_name,self.email5) == false
+			validates_format_of :email5, with: /\A([\w\.-]+)@([\w\-]+\.)+([A-Z]{2,4})\Z/i,message: "Not a valid Email Address", length: { maximum: 100 }
 		end
 	end
 
@@ -81,7 +81,6 @@ class EmailSetup < ActiveRecord::Base
 
 	def check_domain(domain,email_id)
 		if domain_name.present?
-
 			mail_id_domain = email_id.split("@")
 			d = domain_name.split("@")
 
@@ -93,7 +92,6 @@ class EmailSetup < ActiveRecord::Base
 		else
 			return false
 		end
-
 	end
 
 end
