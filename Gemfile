@@ -45,7 +45,7 @@ gem 'unscoped_associations'
 gem 'lazy_columns', :git=>'https://github.com/quantiguous/lazy_columns.git'
 gem 'seed-fu'
 gem 'net-scp'
-gem 'rp', :git=>'https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/rr_new_version.git'
+gem 'rp', :github => 'quantiguous/rp'
 gem 'approval2', '0.1.9'
 gem "mustache"
 gem 'simple_enum'
@@ -78,7 +78,7 @@ gem 'qg-ic', '2.3.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:
 gem 'qg-obdx','3.9.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-obdx.git", branch: 'obdx_reports'
 gem 'qg-es','3.3.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-es.git"
 gem 'qg-dpesb','1.5.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-dpesb.git"
-gem 'qg-ctl','4.4.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ctl.git"
+gem 'qg-ctl','4.7.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ctl.git"
 
 # oracle is required only in production, CI tools run against sqlite3
 group :production do

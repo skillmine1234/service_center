@@ -119,25 +119,7 @@
       %br
         = "Setting"
     .box
-      = link_to '/rp/available_reports?group=rp' do
-        = image_tag 'available_report.png', :size => "80x80"
-      %br
-        = "Available Reports"
-    .box
-      = link_to '/rp/reports' do
-        = image_tag 'reports_icon.png', :size => "80x80"
-      %br
-        = "Generated Reports"
-- if @current_user.group_names.include?("rpv1")
-  %h1 Reports - AML
-  .slide-container
-    .box
-      = link_to "/rp/settings" do
-        = image_tag 'settings_icon.png', :size => "80x80"
-      %br
-        = "Setting"
-    .box
-      = link_to '/rp/available_reports?group=rpv1' do
+      = link_to '/rp/available_reports' do
         = image_tag 'available_report.png', :size => "80x80"
       %br
         = "Available Reports"
