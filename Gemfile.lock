@@ -127,10 +127,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ic.git
-  revision: 625b21c4259a4b2e28c9acde40f298bd676afebb
+  revision: 24509aaac754f0b05cb5b569e4f97c5f4c2564e1
   branch: dealer-finance-prod
   specs:
-    qg-ic (2.3.0)
+    qg-ic (2.4.0)
       rails (= 4.2.2)
 
 GIT
@@ -714,7 +714,7 @@ DEPENDENCIES
   qg-fp (= 2.7.0)!
   qg-ft (= 4.3.0)!
   qg-gm (= 2.0.0)!
-  qg-ic (= 2.3.0)!
+  qg-ic (= 2.4.0)!
   qg-icol (= 2.0.0)!
   qg-inw (= 4.9.0)!
   qg-ns (= 1.2.0)!
