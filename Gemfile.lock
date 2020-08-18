@@ -73,9 +73,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ctl.git
-  revision: d63891aa830c1b804d8fd4b6a2e264d4b4153f94
+  revision: 60b83e0285cc0775d534696eb1613b13eee9dbfc
+  branch: ctl_for_prod
   specs:
-    qg-ctl (4.7.0)
+    qg-ctl (4.8.0)
       rails (~> 4.2.2)
 
 GIT
@@ -707,7 +708,7 @@ DEPENDENCIES
   qg-bm (= 1.2.0)!
   qg-cc (= 1.8.0)!
   qg-cp (= 1.0.2)!
-  qg-ctl (= 4.7.0)!
+  qg-ctl (= 4.8.0)!
   qg-dpesb (= 1.5.0)!
   qg-ecol (= 6.2.0)!
   qg-es (= 3.3.0)!

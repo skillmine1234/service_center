@@ -78,7 +78,7 @@ gem 'qg-ic', '2.4.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:
 gem 'qg-obdx','3.9.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-obdx.git", branch: 'obdx_reports'
 gem 'qg-es','3.3.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-es.git"
 gem 'qg-dpesb','1.5.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-dpesb.git"
-gem 'qg-ctl','4.7.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ctl.git"
+gem 'qg-ctl','4.8.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ctl.git", branch: 'ctl_for_prod'
 
 # oracle is required only in production, CI tools run against sqlite3
 group :production do
