@@ -1,15 +1,4 @@
 GIT
-  remote: git://github.com/quantiguous/rp.git
-  revision: bbb9ff8949be4768e372c865fd57e1ece2d4b8c1
-  specs:
-    rp (0.0.1)
-      haml-rails
-      net-scp
-      pundit
-      rails (~> 4.2.0)
-      will_paginate
-
-GIT
   remote: git://github.com/rsim/oracle-enhanced.git
   revision: da33a2c1719d04033f93a5efeac106ec22aece92
   specs:
@@ -193,6 +182,17 @@ GIT
   specs:
     qg-ssp (2.4.0)
       rails (= 4.2.2)
+
+GIT
+  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/rr_new_version.git
+  revision: 5818787d2438bb4ca6161780e15d1ec8fb310357
+  specs:
+    rp (0.0.1)
+      haml-rails
+      net-scp
+      pundit
+      rails (~> 4.2.0)
+      will_paginate
 
 GEM
   remote: https://rubygems.org/
