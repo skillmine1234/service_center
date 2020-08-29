@@ -58,7 +58,7 @@ module UserNotification
       puts "================Add User Error code: #{error}================"
       puts "================Failure adding user to LDAP================"
       puts "===============Was User Added to LDAP value after Failure response: #{was_user_added}==================="
-      return error
+      return error.message
     else
       puts "==================Success in Adding User to LDAP========================"
       update_column(:was_user_added, 'Y')
@@ -83,7 +83,7 @@ module UserNotification
       rescue Exception => error
         puts "================Delete User Error code: #{error}================"
         puts "================Failure deleting user from LDAP================"
-        return error
+        return error.message
       else
         puts "==================Success in Deleting User from LDAP========================"
         update_column(:was_user_added, 'N')
