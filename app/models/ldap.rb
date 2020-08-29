@@ -164,7 +164,7 @@ class LDAP
       Rails.logger.info "==========Object Value Inside Group Check Logic=========>#{object}=================="
       begin
         Rails.logger.info "================Group Check Process Initiated================="
-        @member_variable << object.memberof.include?("CN=ESB_OTPService,CN=Users,DC=yblpartneruat,DC=local")
+        @member_variable << object.memberof.include?(@required_group)
         Rails.logger.info "==========Member Variable value After Group Check Completes without any error==========>#{@member_variable}============"
       rescue Exception => error
         Rails.logger.info "================Group Check Failure Error code: #{error}================"
