@@ -35,7 +35,8 @@ module UserNotification
     if group_check.blank?
       return "Password can't be resend since User not present in Group!"
     end
-    if !@message.include?("Login Successfull") || !@message.include?("Login Successfull but User not present in Group")
+    @message_values = ["Login Successfull","Login Successfull but User not present in Group"]
+    unless @message_values.include?(@message)
       return "Password can't be resend since faced #{@message} error while performing Test Login!"
     end
     if notify != true
