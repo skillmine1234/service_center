@@ -204,6 +204,8 @@ module UserNotification
         return sms_email_notifier("email",event)
       elsif self.send_password_via == "both"
         return sms_email_notifier("both",event)
+      elsif (self.send_password_via == "" || self.send_password_via == nil)
+        return "Password Can't be Resend since Send Password Via vlaue is blank, so kindly update the value first!"
       end
     rescue Exception => e
       puts "===========Error occurred while Sending Notification for username: #{username}============"
