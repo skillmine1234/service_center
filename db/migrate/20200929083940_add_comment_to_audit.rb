@@ -1,5 +1,5 @@
 class AddCommentToAudit < ActiveRecord::Migration
   def change
-    add_column 'inw.audits', :comment, :string
+    add_column 'obdx.audits', :comment, :string
   end
 end
