@@ -12,6 +12,10 @@ class UnapprovedRecordsController < ApplicationController
       if m.approvable_type.constantize.column_names.include?('approval_status')
         if m.approvable_type == 'IncomingFile'
           count = UnapprovedRecord.where("approvable_type =? and approvable_id IN (?)", m.approvable_type,incoming_file_record_ids).count
+        elsif m.approvable_type == 'EcollectRequestTemplate'
+           count = UnapprovedRecord.where("approvable_type =?", m.approvable_type).count
+        elsif m.approvable_type == 'EcollectResponseTemplate'
+           count = UnapprovedRecord.where("approvable_type =?", m.approvable_type).count
         else
           count = UnapprovedRecord.where("approvable_type =?", m.approvable_type).count         
         end
