@@ -99,8 +99,8 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ft.git
-  revision: 6eaaf4a0fc4f9b7c16576bc68092a34b47fb05f3
-  branch: ft_for_prod
+  revision: 67ebbdbc48737535e78a358e010e1c6627946e36
+  branch: ft_for_prod_new
   specs:
     qg-ft (4.5.0)
       draper
@@ -132,8 +132,8 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git
-  revision: 88c2e4c87b378ea57e0110cbdf518cb68158f7f2
-  branch: current_4000prod_alipay
+  revision: e68eeb1bfe98833421dc5bc9a8bd31740139f7b1
+  branch: current_4000prod_alipay_prod
   specs:
     qg-inw (5.0.0)
       rails (= 4.2.2)
