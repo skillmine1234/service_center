@@ -99,10 +99,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ft.git
-  revision: 67ebbdbc48737535e78a358e010e1c6627946e36
+  revision: d9297f27ffc1eed52ae6a9e761e2a994b8be180f
   branch: ft_for_prod_new
   specs:
-    qg-ft (4.5.0)
+    qg-ft (4.6.0)
       draper
       pundit
       rails (>= 4.2.2)
@@ -132,10 +132,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git
-  revision: e68eeb1bfe98833421dc5bc9a8bd31740139f7b1
+  revision: bc71ec16f809938dfc0bddf3ea808f7b80b5faef
   branch: current_4000prod_alipay_prod
   specs:
-    qg-inw (5.0.0)
+    qg-inw (5.1.0)
       rails (= 4.2.2)
 
 GIT
@@ -715,11 +715,11 @@ DEPENDENCIES
   qg-ecol (= 8.7.0)!
   qg-es (= 3.3.0)!
   qg-fp (= 2.7.0)!
-  qg-ft (= 4.5.0)!
+  qg-ft (= 4.6.0)!
   qg-gm (= 2.0.0)!
   qg-ic (= 2.4.0)!
   qg-icol (= 2.0.0)!
-  qg-inw (= 5.0.0)!
+  qg-inw (= 5.1.0)!
   qg-ns (= 1.2.0)!
   qg-obdx (= 4.7.0)!
   qg-rx (= 1.9.0)!
