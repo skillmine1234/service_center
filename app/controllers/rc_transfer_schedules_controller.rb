@@ -104,14 +104,14 @@ class RcTransferSchedulesController < ApplicationController
     puts "recuring transfer customer name api call......"
     begin
 
-      customer_name_api = RcTransferSchedule.get_customer_name_api
-      username = RcTransferSchedule.read_api_username
-      password = RcTransferSchedule.read_api_password
+      customer_name_api = ENV['RBI_API_URL']
+      username = ENV['RBI_API_USERNAME']
+      password = ENV['RBI_API_PASSWORD']
 
 
        uri = URI("#{customer_name_api}")
 
-       headers  = {"X-IBM-Client-ID" => "e6812539-907d-45cf-9455-ad34fa4f2af6","X-IBM-Client-Secret" => "A7gQ7qJ4qB7vU2hO6aY1wI1dK3sL0mM3cN8fR8sB4oL1yH0yX3"}
+       headers  = {"X-IBM-Client-ID" => ENV['RBI_XIBM_CLIENT_ID'],"X-IBM-Client-Secret" => ENV['RBI_XIBM_CLIENT_SECRET']}
 
        Net::HTTP.start(uri.host,uri.port,:use_ssl => uri.scheme == 'https',:verify_mode => OpenSSL::SSL::VERIFY_NONE) do |http|
        request = Net::HTTP::Post.new(uri.request_uri,headers)
