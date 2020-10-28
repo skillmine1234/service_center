@@ -99,6 +99,81 @@ class RcTransferSchedulesController < ApplicationController
     end
   end
 
+  def get_customer_name
+
+    puts "recuring transfer customer name api call......"
+    begin
+
+      customer_name_api = RcTransferSchedule.get_customer_name_api
+      username = RcTransferSchedule.read_api_username
+      password = RcTransferSchedule.read_api_password
+
+
+       uri = URI("#{customer_name_api}")
+
+       headers  = {"X-IBM-Client-ID" => "e6812539-907d-45cf-9455-ad34fa4f2af6","X-IBM-Client-Secret" => "A7gQ7qJ4qB7vU2hO6aY1wI1dK3sL0mM3cN8fR8sB4oL1yH0yX3"}
+
+       Net::HTTP.start(uri.host,uri.port,:use_ssl => uri.scheme == 'https',:verify_mode => OpenSSL::SSL::VERIFY_NONE) do |http|
+       request = Net::HTTP::Post.new(uri.request_uri,headers)
+       request.basic_auth "#{username}","#{password}"
+       request_data = {
+                        "GetCASADetailsExtReq":
+                        {
+                             "ReqHdr":
+                              {
+                                "ConsumerContext":
+                                  {
+                                    "RequesterID": "WRK"
+                                  },
+                                "ServiceContext":
+                                  {
+                                    "ServiceName": "AccountManagementExt",
+                                    "ReqRefNum": "#{rand(111111111111111111)}",
+                                    "ReqRefTimeStamp": "#{Time.now.strftime("%Y-%m-%dT%H:%M:%S")}",
+                                    "ServiceVersionNo": "1.0"
+                                  }
+                              },    
+
+                          "ReqBody":
+                          {
+                            "AccountNumber": "#{params[:debit_account_no]}"
+                          }
+                        }
+                      }   
+       puts "request data for ad hoc statement---> #{request_data}"               
+       request.body = request_data.to_json
+       response = http.request request 
+       parse_json_res = JSON.parse(response.body)
+       
+  
+
+       puts "Recuring Transfer customer name api response-----#{parse_json_res}"
+
+        parse_json_res.each do |key,value|
+          if parse_json_res["GetCASADetailsExtRes"]["ResBody"].present?
+            parse_json_res["GetCASADetailsExtRes"]["ResBody"]["CASADetails"]["CASACustDetails"].each do |s|
+              if s["CustomerRelationship"] == "SOW"
+                @customer_name = s["CustomerFullName"]
+              else
+                @customer_name = "Customer Relationship must be SOW"
+              end
+            end
+          else
+            @customer_name = "Error While Reading the Customer Name"
+          end
+        end    
+      end   
+
+    rescue Exception => e
+      puts "recuring transfer api call error #{e.inspect}"
+      @customer_name = "Error while calling the url #{e.inspect}"
+    end  
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def rc_transfer_schedule_params

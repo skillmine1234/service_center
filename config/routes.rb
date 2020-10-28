@@ -82,7 +82,12 @@ ServiceCenter::Application.routes.draw do
   resources :cn_unapproved_records
   resources :rr_unapproved_records
   
-  resources :rc_transfer_schedules
+  resources :rc_transfer_schedules do 
+    collection do
+      get 'get_customer_name'
+    end
+  end
+
   resources :rc_transfers, except: :index do
     collection do
       put  'update_multiple'

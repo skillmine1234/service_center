@@ -103,4 +103,20 @@ class RcTransferSchedule < ActiveRecord::Base
   def value_of_acct_threshold_amt
     errors.add(:acct_threshold_amt, "is invalid, only two digits are allowed after decimal point") if acct_threshold_amt.to_f != acct_threshold_amt.to_f.round(2)
   end
+
+  def self.get_customer_name_api
+    api_url = ActiveRecord::Base.connection.execute("select url from sc_backends where code='SC_RCT'")
+    return api_url.fetch.first
+  end
+  
+  def self.read_api_username
+    username = ActiveRecord::Base.connection.execute("select http_username from sc_backends where code='SC_RCT'")
+    return username.fetch.first
+ end
+
+ def self.read_api_password
+    password = ActiveRecord::Base.connection.execute("select http_password from sc_backends where code='SC_RCT'")
+   return DecPassGenerator.new(password.fetch.first,ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']).generate_decrypted_data if password.present?
+ end
+
 end
