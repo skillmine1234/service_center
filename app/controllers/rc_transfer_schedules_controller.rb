@@ -105,9 +105,6 @@ class RcTransferSchedulesController < ApplicationController
     begin
 
       customer_name_api = ENV['RBI_API_URL']
-      username = ENV['RBI_API_USERNAME']
-      password = ENV['RBI_API_PASSWORD']
-
 
        uri = URI("#{customer_name_api}")
 
@@ -115,7 +112,6 @@ class RcTransferSchedulesController < ApplicationController
 
        Net::HTTP.start(uri.host,uri.port,:use_ssl => uri.scheme == 'https',:verify_mode => OpenSSL::SSL::VERIFY_NONE) do |http|
        request = Net::HTTP::Post.new(uri.request_uri,headers)
-       request.basic_auth "#{username}","#{password}"
        request_data = {
                         "GetCASADetailsExtReq":
                         {
