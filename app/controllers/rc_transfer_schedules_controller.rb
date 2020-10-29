@@ -116,7 +116,7 @@ class RcTransferSchedulesController < ApplicationController
       
       puts "------------------------------- ENV variable details end"
 
-       Net::HTTP.start(uri.host,uri.port,:use_ssl => uri.scheme == 'https',:verify_mode => OpenSSL::SSL::VERIFY_PEER,:ssl_version => :TLSv1_2) do |http|
+       Net::HTTP.start(uri.host,uri.port,:use_ssl => uri.scheme == 'https',:verify_mode => OpenSSL::SSL::VERIFY_NONE,:ssl_version => :TLSv1_2) do |http|
        request = Net::HTTP::Post.new(uri.request_uri,headers)
        request_data = {
                         "GetCASADetailsExtReq":
