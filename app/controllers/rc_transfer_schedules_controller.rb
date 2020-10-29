@@ -100,6 +100,8 @@ class RcTransferSchedulesController < ApplicationController
   end
 
   def get_customer_name
+    require 'openssl'
+    OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 
     puts "recuring transfer customer name api call......"
     begin
@@ -110,7 +112,7 @@ class RcTransferSchedulesController < ApplicationController
 
        headers  = {"X-IBM-Client-ID" => ENV['RBI_XIBM_CLIENT_ID'],"X-IBM-Client-Secret" => ENV['RBI_XIBM_CLIENT_SECRET']}
 
-       Net::HTTP.start(uri.host,uri.port,:use_ssl => uri.scheme == 'https',:verify_mode => OpenSSL::SSL::VERIFY_NONE) do |http|
+       Net::HTTP.start(uri.host,uri.port,:use_ssl => uri.scheme == 'https',:verify_mode => OpenSSL::SSL::VERIFY_NONE,:ssl_version => :TLSv1_2) do |http|
        request = Net::HTTP::Post.new(uri.request_uri,headers)
        request_data = {
                         "GetCASADetailsExtReq":
