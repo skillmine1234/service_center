@@ -153,13 +153,12 @@ class RcTransferSchedulesController < ApplicationController
 
         parse_json_res.each do |key,value|
           if parse_json_res["GetCASADetailsExtRes"]["ResBody"].present?
-            parse_json_res["GetCASADetailsExtRes"]["ResBody"]["CASADetails"]["CASACustDetails"].each do |s|
-              if s["CustomerRelationship"] == "SOW"
-                @customer_name = s["CustomerFullName"]
-              else
-                @customer_name = "Customer Relationship must be SOW"
-              end
-            end
+            cust_details_response = parse_json_res["GetCASADetailsExtRes"]["ResBody"]["CASADetails"]["CASACustDetails"][0]
+            if cust_details_response["CustomerRelationship"] == "SOW"
+              @customer_name = cust_details_response["CustomerFullName"]
+            else
+              @customer_name = "Customer Relationship must be SOW"
+            end 
           else
             @customer_name = "Error While Reading the Customer Name"
           end
