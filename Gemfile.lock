@@ -77,10 +77,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ecol.git
-  revision: 920d9b9fef467f818ebdefc7a8b80ab20d98c7bf
+  revision: 0fe4ce91fddfe3064d761ab48ca616e991c0154b
   branch: ecol_mapper_maker_checker
   specs:
-    qg-ecol (8.7.0)
+    qg-ecol (8.8.0)
       rails (= 4.2.2)
 
 GIT
@@ -132,10 +132,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git
-  revision: 9889b0434ff9734a545eb7c144e57b158ce92e3f
+  revision: 86e6447f081f3b4b87dc7fc39104cbf9ad4fda59
   branch: current_4000prod_alipay
   specs:
-    qg-inw (5.1.0)
+    qg-inw (5.2.0)
       rails (= 4.2.2)
 
 GIT
@@ -712,14 +712,14 @@ DEPENDENCIES
   qg-cp (= 1.0.2)!
   qg-ctl (= 4.8.0)!
   qg-dpesb (= 1.5.0)!
-  qg-ecol (= 8.7.0)!
+  qg-ecol (= 8.8.0)!
   qg-es (= 3.3.0)!
   qg-fp (= 2.7.0)!
   qg-ft (= 5.0.0)!
   qg-gm (= 2.0.0)!
   qg-ic (= 2.4.0)!
   qg-icol (= 2.0.0)!
-  qg-inw (= 5.1.0)!
+  qg-inw (= 5.2.0)!
   qg-ns (= 1.2.0)!
   qg-obdx (= 4.7.0)!
   qg-rx (= 1.9.0)!
