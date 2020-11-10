@@ -148,10 +148,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-obdx.git
-  revision: a1ef354404602940056522a61481ae6d3952f5ae
-  branch: obdx_reports
+  revision: 8dc14e2bc7c2ad4507db52ff33efe9d63e184b55
+  branch: obdx_reports_new
   specs:
-    qg-obdx (4.9.0)
+    qg-obdx (4.8.0)
       rails (= 4.2.2)
 
 GIT
@@ -721,7 +721,7 @@ DEPENDENCIES
   qg-icol (= 2.0.0)!
   qg-inw (= 5.2.0)!
   qg-ns (= 1.2.0)!
-  qg-obdx (= 4.9.0)!
+  qg-obdx (= 4.8.0)!
   qg-rx (= 1.9.0)!
   qg-sc (= 3.1.0)!
   qg-sm (= 2.0.0)!
