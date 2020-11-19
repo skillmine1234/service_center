@@ -113,6 +113,7 @@ class RcTransferSchedulesController < ApplicationController
       puts "url ----#{ENV['RBI_API_URL']}"
       puts "c-id -#{ENV['RBI_XIBM_CLIENT_ID']}"
       puts "c-sid #{ENV['RBI_XIBM_CLIENT_SECRET']}"
+      puts "SHAKEHAND Value:- #{ENV['SHAKEHAND']}"
       
       puts "------------------------------- ENV variable details end"
 
