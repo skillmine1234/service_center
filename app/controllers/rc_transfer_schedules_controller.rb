@@ -116,11 +116,16 @@ class RcTransferSchedulesController < ApplicationController
       
       puts "------------------------------- ENV variable details end"
 
-       Net::HTTP.start(uri.host,uri.port,:use_ssl => uri.scheme == 'https',:verify_mode => OpenSSL::SSL::VERIFY_NONE) do |http|
-       request = Net::HTTP::Post.new(uri.request_uri,headers)
+      if ENV['SHAKEHAND'] == "true"
+        puts "=========SHAKEHAND Value when its set to true:- #{ENV['SHAKEHAND']}==============="
+        tlsv_req = Net::HTTP.start(uri.host,uri.port,:use_ssl => uri.scheme == 'https',:verify_mode => OpenSSL::SSL::VERIFY_NONE,:ssl_version => :TLSv1,:ciphers => ['DES-CBC3-SHA']) 
+      else
+        puts "=========SHAKEHAND Value when its not set to true:- #{ENV['SHAKEHAND']}==============="
+        tlsv_req = Net::HTTP.start(uri.host,uri.port,:use_ssl => uri.scheme == 'https',:verify_mode => OpenSSL::SSL::VERIFY_NONE)
+      end
 
-       request.ssl_version = :TLSv1 if ENV['SHAKEHAND'] == "true"
-       request.ciphers = ['DES-CBC3-SHA'] if ENV['SHAKEHAND'] == "true"
+       tlsv_req do |http|
+       request = Net::HTTP::Post.new(uri.request_uri,headers)
 
        request_data = {
                         "GetCASADetailsExtReq":
