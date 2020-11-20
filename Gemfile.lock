@@ -77,10 +77,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ecol.git
-  revision: a97c76ae1e72371788f593611926d0535dd2f3d3
-  branch: ecol_approval
+  revision: 36b21d3f192bc98eed85ff87fcbc907777572c18
+  branch: ecol_table_removal
   specs:
-    qg-ecol (6.4.0)
+    qg-ecol (6.5.0)
       rails (= 4.2.2)
 
 GIT
@@ -109,10 +109,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-gm.git
-  revision: d7f6f6273678f1440d06b2046fd5756261dc8877
-  branch: production
+  revision: fb885c626ad110cba7ce25b56a54d5538f39941a
+  branch: production_table_deletion
   specs:
-    qg-gm (2.0.0)
+    qg-gm (2.1.0)
       rails (= 4.2.2)
 
 GIT
@@ -710,11 +710,11 @@ DEPENDENCIES
   qg-cp (= 1.0.2)!
   qg-ctl (= 4.8.0)!
   qg-dpesb (= 1.5.0)!
-  qg-ecol (= 6.4.0)!
+  qg-ecol (= 6.5.0)!
   qg-es (= 3.3.0)!
   qg-fp (= 2.7.0)!
   qg-ft (= 5.0.0)!
-  qg-gm (= 2.0.0)!
+  qg-gm (= 2.1.0)!
   qg-ic (= 2.4.0)!
   qg-icol (= 2.0.0)!
   qg-inw (= 5.2.0)!
