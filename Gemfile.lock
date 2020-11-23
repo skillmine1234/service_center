@@ -77,10 +77,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ecol.git
-  revision: 92e38e7a943d08cc18cbee47aedb428cd845adb7
+  revision: f86f1e83ecb725a440d4542b45a06beaaec36515
   branch: ecol_mapper_maker_checker
   specs:
-    qg-ecol (8.9.0)
+    qg-ecol (9.0.0)
       rails (= 4.2.2)
 
 GIT
@@ -712,7 +712,7 @@ DEPENDENCIES
   qg-cp (= 1.0.2)!
   qg-ctl (= 4.8.0)!
   qg-dpesb (= 1.5.0)!
-  qg-ecol (= 8.9.0)!
+  qg-ecol (= 9.0.0)!
   qg-es (= 3.3.0)!
   qg-fp (= 2.7.0)!
   qg-ft (= 5.0.0)!
