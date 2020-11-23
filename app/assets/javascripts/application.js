@@ -25,6 +25,7 @@
 //= require jquery.flot.resize.js
 //= require jquery.flot.stack.js
 //= require excanvas.js
+//= require cocoon
 //= require jquery.flot.time
 //= require zeroclipboard
 //= require rp/rp.js
