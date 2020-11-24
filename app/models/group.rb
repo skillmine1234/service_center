@@ -49,8 +49,8 @@ class Group < ActiveRecord::Base
       Qg::Cc::MODELS
     when "gm"
       Qg::Gm::MODELS
-    # when "rpl"
-    #   Qg::Rpl::MODELS  
+    when "rpl"
+      Qg::Rpl::MODELS  
     when "cinepolis"
       Qg::Cp::MODELS
     when "account-enquiry"
