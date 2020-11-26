@@ -85,9 +85,9 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-es.git
-  revision: 7cd9672dfaf5da3b1e2ad4a0efcbfa0276a95c20
+  revision: 646ea26c4f02bb4ea301cbfe95f21b1e88c6d13c
   specs:
-    qg-es (3.3.0)
+    qg-es (3.4.0)
       rails (= 4.2.2)
 
 GIT
@@ -148,10 +148,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-obdx.git
-  revision: e904bdf972103c77136401ef9adc4127e78c02c5
+  revision: 4e2dcab4bba3b843a1832535b424c4f4f3756ba1
   branch: obdx_reports
   specs:
-    qg-obdx (5.5.0)
+    qg-obdx (5.6.0)
       rails (= 4.2.2)
 
 GIT
@@ -721,7 +721,7 @@ DEPENDENCIES
   qg-ctl (= 4.8.0)!
   qg-dpesb (= 1.5.0)!
   qg-ecol (= 9.0.0)!
-  qg-es (= 3.3.0)!
+  qg-es (= 3.4.0)!
   qg-fp (= 2.7.0)!
   qg-ft (= 5.0.0)!
   qg-gm (= 2.1.0)!
@@ -729,7 +729,7 @@ DEPENDENCIES
   qg-icol (= 2.0.0)!
   qg-inw (= 5.2.0)!
   qg-ns (= 1.2.0)!
-  qg-obdx (= 5.5.0)!
+  qg-obdx (= 5.6.0)!
   qg-rpl (= 3.6.0)!
   qg-rx (= 1.9.0)!
   qg-sc (= 3.1.0)!
