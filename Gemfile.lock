@@ -77,10 +77,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ecol.git
-  revision: f86f1e83ecb725a440d4542b45a06beaaec36515
-  branch: ecol_mapper_maker_checker
+  revision: db5e89deeb151aaa6918ab2d6daaeb85e34086ee
+  branch: ecol_mapper_maker_checker_without_table_dep_removal
   specs:
-    qg-ecol (9.0.0)
+    qg-ecol (8.8.0)
       rails (= 4.2.2)
 
 GIT
@@ -109,10 +109,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-gm.git
-  revision: fb885c626ad110cba7ce25b56a54d5538f39941a
-  branch: production_table_deletion
+  revision: 1256c26c5a8f33b88a72e61c617ab8aa652e2f49
+  branch: production
   specs:
-    qg-gm (2.1.0)
+    qg-gm (2.2.0)
       rails (= 4.2.2)
 
 GIT
@@ -720,11 +720,11 @@ DEPENDENCIES
   qg-cp (= 1.0.2)!
   qg-ctl (= 4.8.0)!
   qg-dpesb (= 1.5.0)!
-  qg-ecol (= 9.0.0)!
+  qg-ecol (= 8.8.0)!
   qg-es (= 3.4.0)!
   qg-fp (= 2.7.0)!
   qg-ft (= 5.2.0)!
-  qg-gm (= 2.1.0)!
+  qg-gm (= 2.2.0)!
   qg-ic (= 2.4.0)!
   qg-icol (= 2.0.0)!
   qg-inw (= 5.2.0)!
