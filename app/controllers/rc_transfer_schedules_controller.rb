@@ -113,19 +113,10 @@ class RcTransferSchedulesController < ApplicationController
       puts "url ----#{ENV['RBI_API_URL']}"
       puts "c-id -#{ENV['RBI_XIBM_CLIENT_ID']}"
       puts "c-sid #{ENV['RBI_XIBM_CLIENT_SECRET']}"
-      puts "SHAKEHAND Value:- #{ENV['SHAKEHAND']}"
       
       puts "------------------------------- ENV variable details end"
 
-      if ENV['SHAKEHAND'] == "true"
-        puts "=========SHAKEHAND Value when its set to true:- #{ENV['SHAKEHAND']}==============="
-        tlsv_req = Net::HTTP.start(uri.host,uri.port,:use_ssl => uri.scheme == 'https',:verify_mode => OpenSSL::SSL::VERIFY_NONE,:ssl_version => :TLSv1,:ciphers => ['DES-CBC3-SHA']) 
-      else
-        puts "=========SHAKEHAND Value when its not set to true:- #{ENV['SHAKEHAND']}==============="
-        tlsv_req = Net::HTTP.start(uri.host,uri.port,:use_ssl => uri.scheme == 'https',:verify_mode => OpenSSL::SSL::VERIFY_NONE)
-      end
-
-       tlsv_req do |http|
+       Net::HTTP.start(uri.host,uri.port,:use_ssl => uri.scheme == 'https',:verify_mode => OpenSSL::SSL::VERIFY_NONE) do |http|
        request = Net::HTTP::Post.new(uri.request_uri,headers)
 
        request_data = {
