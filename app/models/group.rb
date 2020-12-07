@@ -7,8 +7,8 @@ class Group < ActiveRecord::Base
       Qg::Inw::MODELS
     when "e-collect"
       Qg::Ecol::MODELS
-    when "bill-management"
-      Qg::Bm::MODELS
+    # when "bill-management"
+    #   Qg::Bm::MODELS
     when "prepaid-card"
       ['PcApp','PcProgram', 'PcProduct', 'PcFeeRule','PcUnapprovedRecord','PcMmCdIncomingRecord','IncomingFile','IncomingFileRecord','PcMmCdIncomingFile']
     when "prepaid-card2"

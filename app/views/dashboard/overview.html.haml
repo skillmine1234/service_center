@@ -2,7 +2,6 @@
 
 = render partial: 'panel', locals: { group: 'inw', sc_service: 'AML' }
 = render partial: 'panel', locals: { group: 'ecol', sc_service: 'ECOL' }
-= render partial: 'panel', locals: { group: 'bm' }
 = render partial: 'panel', locals: { group: 'obdx'}
 
 - if @current_user.group_names.include?("prepaid-card")

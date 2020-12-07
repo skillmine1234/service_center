@@ -30,7 +30,6 @@
 //= require zeroclipboard
 //= require rp/rp.js
 //= require ecol/ecol.js
-//= require bm/bm.js
 //= require fp/fp.js
 //= require ft/ft.js
 //= require sc/sc.js
