@@ -23,16 +23,6 @@
       #msg-error
         = error_message_for(@su_customer, :customer_name, :prepend_text => "")
     .control-group
-      = f.label :pool_account_no, "*Pool Account No", :class => 'control-label'
-      = f.text_field :pool_account_no, :maxlength => 20, :required => true
-      #msg-error
-        = error_message_for(@su_customer, :pool_account_no, :prepend_text => "")
-    .control-group
-      = f.label :pool_customer_id, "*Pool Customer ID", :class => 'control-label'
-      = f.text_field :pool_customer_id, :maxlength => 20, :required => true
-      #msg-error
-        = error_message_for(@su_customer, :pool_customer_id, :prepend_text => "")
-    .control-group
       = f.label :max_distance_for_name, "*Max Distance For Name (%)", :class => 'control-label'
       = f.number_field :max_distance_for_name, :min => 0, :max => 100, :required => true
       #msg-error

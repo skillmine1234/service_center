@@ -38,18 +38,6 @@
             %td#msg-error
               = error_message_for(@su_customer, :customer_name, :prepend_text => "")
           %tr
-            %td.label Pool Account No
-            %td.value
-              = @su_customer.pool_account_no
-            %td#msg-error
-              = error_message_for(@su_customer, :pool_account_no, :prepend_text => "")
-          %tr
-            %td.label Pool Customer ID
-            %td.value
-              = @su_customer.pool_customer_id
-            %td#msg-error
-              = error_message_for(@su_customer, :pool_customer_id, :prepend_text => "")
-          %tr
             %td.label Max Distance For Name %
             %td.value
               = @su_customer.max_distance_for_name.nil? ? "-" : "#{@su_customer.max_distance_for_name} %"
