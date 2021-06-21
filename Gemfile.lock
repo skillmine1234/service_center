@@ -70,10 +70,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ecol.git
-  revision: f1cf645b3f0d4ee3ee634e19658b2a2c98cd6890
+  revision: 9644e13b65e818603d1d90a0837d7685b71008f8
   branch: ecol_mapper_maker_checker
   specs:
-    qg-ecol (10.4.0)
+    qg-ecol (10.5.0)
       rails (= 4.2.2)
 
 GIT
@@ -89,16 +89,6 @@ GIT
   specs:
     qg-fp (2.7.0)
       rails (~> 4.2.2)
-
-GIT
-  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ft.git
-  revision: eb313003b20a87f805a96c775cdf8a7d137621f9
-  branch: ft_for_june_prod
-  specs:
-    qg-ft (7.0.0)
-      draper
-      pundit
-      rails (>= 4.2.2)
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-gm.git
@@ -194,6 +184,14 @@ GIT
       pundit
       rails (~> 4.2.0)
       will_paginate
+
+PATH
+  remote: /Users/rubyistdhruv/Mahesh/qg-ft
+  specs:
+    qg-ft (6.9.0)
+      draper
+      pundit
+      rails (>= 4.2.2)
 
 GEM
   remote: https://rubygems.org/
@@ -712,10 +710,10 @@ DEPENDENCIES
   qg-cp (= 1.0.2)!
   qg-ctl (= 6.1.0)!
   qg-dpesb (= 1.5.0)!
-  qg-ecol (= 10.4.0)!
+  qg-ecol (= 10.5.0)!
   qg-es (= 3.4.0)!
   qg-fp (= 2.7.0)!
-  qg-ft (= 7.0.0)!
+  qg-ft!
   qg-gm (= 2.1.0)!
   qg-ic (= 2.4.0)!
   qg-icol (= 2.0.0)!
