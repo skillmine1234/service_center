@@ -15,3 +15,5 @@ The following are the environment variables required to be set:
 8. CONFIG_APPROVED_FILE_UPLOAD_PATH
 9. CONFIG_LOGO_PATH
 10. CONFIG_DEVISE_PASSWORD_EXPIRY_DAYS
+
+===============================
