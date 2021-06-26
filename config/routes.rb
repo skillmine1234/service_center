@@ -1,5 +1,11 @@
 ServiceCenter::Application.routes.draw do
     
+  #get 'ft_customer_disable_lists/index'
+  
+  resources :ft_customer_disable_lists
+  put '/ft_customer_disable_lists/:id/approve' => "ft_customer_disable_lists#approve"
+
+
   mount Rp::Engine, at: '/rp'
 
   resources :encrypted_passwords

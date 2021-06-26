@@ -91,6 +91,16 @@ GIT
       rails (~> 4.2.2)
 
 GIT
+  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ft.git
+  revision: d133b73d64726c66e1e92632e9fabf532284e69d
+  branch: ft_for_june_prod
+  specs:
+    qg-ft (7.1.0)
+      draper
+      pundit
+      rails (>= 4.2.2)
+
+GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-gm.git
   revision: fb885c626ad110cba7ce25b56a54d5538f39941a
   branch: production_table_deletion
@@ -184,14 +194,6 @@ GIT
       pundit
       rails (~> 4.2.0)
       will_paginate
-
-PATH
-  remote: /Users/rubyistdhruv/Mahesh/qg-ft
-  specs:
-    qg-ft (6.9.0)
-      draper
-      pundit
-      rails (>= 4.2.2)
 
 GEM
   remote: https://rubygems.org/
@@ -713,7 +715,7 @@ DEPENDENCIES
   qg-ecol (= 10.5.0)!
   qg-es (= 3.4.0)!
   qg-fp (= 2.7.0)!
-  qg-ft!
+  qg-ft (= 7.1.0)!
   qg-gm (= 2.1.0)!
   qg-ic (= 2.4.0)!
   qg-icol (= 2.0.0)!
