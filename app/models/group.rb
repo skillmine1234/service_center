@@ -64,7 +64,9 @@ class Group < ActiveRecord::Base
     when "dpesb"
       Qg::Dpesb::MODELS  
     when "ctl"
-      Qg::Ctl::MODELS    
+      Qg::Ctl::MODELS
+    when "dashboard"
+      Qg::Dashboard::MODELS       
     else
       []
     end

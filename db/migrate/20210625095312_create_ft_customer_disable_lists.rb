@@ -8,7 +8,8 @@ class CreateFtCustomerDisableLists < ActiveRecord::Migration
       t.integer :approved_version
       t.integer :approved_id
       t.string :last_action,:limit => 1, :default => 'C'
-
+      t.string :created_by, :limit => 20
+      t.string :updated_by, :limit => 20
       t.timestamps null: false
     end
   end
