@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
       end
      puts "End of the script,Total Users Deactivated:#{@users.size}"
    else
-      puts "no one is there"
+      puts "Yet not any one signed in"
     end 
 
     resource = controller_name.singularize.to_sym
