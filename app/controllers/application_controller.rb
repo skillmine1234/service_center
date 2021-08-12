@@ -14,6 +14,23 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied, with: :user_not_authorized
 
   before_filter do
+    
+    ######## Deactivate Users whose last sign in was above 60 days #########
+    
+    first_sign_in = User.where(['last_sign_in_at < ? and inactive = ?', 0.to_i.days.ago,false]).where.not(last_sign_in_at: nil).all.size
+    
+    if first_sign_in == 1
+      @users = User.where(['last_sign_in_at < ? and inactive = ?', 60.to_i.days.ago,false]).where.not(last_sign_in_at: nil)
+      puts "Deactive User Script Started......"
+      @users.each do |user|
+          user.update(inactive: true,updated_at: Time.now)
+         puts "Deactivating User with id --> #{user.id}"
+      end
+     puts "End of the script,Total Users Deactivated:#{@users.size}"
+   else
+      puts "no one is there"
+    end 
+
     resource = controller_name.singularize.to_sym
     method = "#{resource}_params"
     params[resource] &&= send(method) if respond_to?(method, true)
