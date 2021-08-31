@@ -77,10 +77,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ecol.git
-  revision: d1764a1a7ae5991acd9300c8b3b8205607b504a2
+  revision: 1ec55891d0c1779c541608794e434a0e806d6c28
   branch: ecol_mapper_maker_checker
   specs:
-    qg-ecol (11.0.0)
+    qg-ecol (11.1.0)
       rails (= 4.2.2)
 
 GIT
@@ -171,10 +171,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-sc.git
-  revision: 9902e7081b87f63db9b23ce8dfd5859431e190c2
+  revision: b77af1b3c588fe994c7dd73c3a187f7b23b47270
   branch: esbconfig_without_approval
   specs:
-    qg-sc (3.2.0)
+    qg-sc (3.3.0)
       rails (~> 4.2.2)
 
 GIT
@@ -720,7 +720,7 @@ DEPENDENCIES
   qg-ctl (= 6.1.0)!
   qg-dashboard (= 0.2.0)!
   qg-dpesb (= 1.5.0)!
-  qg-ecol (= 11.0.0)!
+  qg-ecol (= 11.1.0)!
   qg-es (= 3.4.0)!
   qg-fp (= 2.7.0)!
   qg-ft (= 7.5.0)!
@@ -732,7 +732,7 @@ DEPENDENCIES
   qg-obdx (= 6.1.0)!
   qg-rpl (= 3.9.0)!
   qg-rx (= 1.9.0)!
-  qg-sc (= 3.2.0)!
+  qg-sc (= 3.3.0)!
   qg-sm (= 2.0.0)!
   qg-ssp (= 2.4.0)!
   rails (= 4.2.2)
