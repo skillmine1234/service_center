@@ -90,4 +90,12 @@
         = "Payment Schedule"
     - if m[:common_items].include?(:dashboard_view)
       .box
-        = link_to image_tag("dashboard/dashboard_views.png", :size => "80x80"),{:controller=>"dashboard_views",:action=>"index"}    
+        = link_to image_tag("dashboard/dashboard_views.png", :size => "80x80"),{:controller=>"dashboard_views",:action=>"index"}
+    - if m[:common_items].include?(:tokenization)
+      .box
+        = link_to tokenize_data_partner_lcy_rates_path do
+          = image_tag 'inw/token.png', :size => "80x80"
+        %br
+          = "Data tokenization"  
+
+
