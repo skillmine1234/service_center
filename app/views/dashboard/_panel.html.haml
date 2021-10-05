@@ -96,6 +96,18 @@
         = link_to tokenize_data_partner_lcy_rates_path do
           = image_tag 'inw/token.png', :size => "80x80"
         %br
-          = "Data tokenization"  
+          = "Data tokenization"
+    - if m[:common_items].include?(:purge_request)
+      .box
+        = link_to purging_request_form_purgings_path do
+          = image_tag 'datapurge/purge_request.png', :size => "80x80"
+        %br
+          = "Purging Request"
+    - if m[:common_items].include?(:purge_analytics)
+      .box
+        = link_to purge_analytics_purgings_path do
+          = image_tag 'datapurge/purge_analytics.png', :size => "80x80"
+        %br
+          = "Purging Analytics"           
 
 

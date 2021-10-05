@@ -57,7 +57,7 @@ gem 'font-awesome-rails'
 gem 'encrypted_field', '0.1.6'
 
 gem 'qg-rpl','3.9.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-rpl.git",branch: 'blockchain'
-gem 'qg-inw','6.0.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git", branch: 'for_july_2021_release'
+gem 'qg-inw','6.1.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git", branch: 'for_july_2021_release'
 gem 'qg-icol', '2.0.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-icol.git"
 gem 'qg-ecol','11.2.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ecol.git",branch: "ecol_req_temp_issue"
 # gem 'qg-bm', '1.3.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-bm.git"
@@ -80,6 +80,7 @@ gem 'qg-es','3.4.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x
 gem 'qg-dpesb','1.5.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-dpesb.git"
 gem 'qg-ctl','6.1.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ctl.git", branch: 'new_chnages'
 gem 'qg-dashboard','0.2.0',:git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-dashboard.git"
+gem 'qg-datapurge','0.4.0',:git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-datapurge.git",branch: 'main'
 
 # oracle is required only in production, CI tools run against sqlite3
 group :production do

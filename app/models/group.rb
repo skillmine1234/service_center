@@ -66,7 +66,9 @@ class Group < ActiveRecord::Base
     when "ctl"
       Qg::Ctl::MODELS
     when "dashboard"
-      Qg::Dashboard::MODELS       
+      Qg::Dashboard::MODELS 
+    when "datapurge"
+      Qg::Datapurge::MODELS         
     else
       []
     end
