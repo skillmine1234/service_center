@@ -3,6 +3,7 @@ module FundsTransferCustomersHelper
     funds_transfer_customers = (params[:approval_status].present? and params[:approval_status] == 'U') ? FundsTransferCustomer.unscoped : FundsTransferCustomer
     funds_transfer_customers = funds_transfer_customers.where("name IN (?)",params[:name].split(",").collect(&:strip)) if params[:name].present?
     funds_transfer_customers = funds_transfer_customers.where("app_id IN (?)",params[:app_id].split(",").collect(&:strip)) if params[:app_id].present?
+    funds_transfer_customers = funds_transfer_customers.where("customer_id IN (?)",params[:customer_id].split(",").collect(&:strip)) if params[:customer_id].present?
     funds_transfer_customers
   end
   
