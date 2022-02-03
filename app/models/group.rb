@@ -68,7 +68,9 @@ class Group < ActiveRecord::Base
     when "dashboard"
       Qg::Dashboard::MODELS 
     when "datapurge"
-      Qg::Datapurge::MODELS         
+      Qg::Datapurge::MODELS 
+    when "ecolmanual"
+      Qg::Ecolmanual::MODELS           
     else
       []
     end

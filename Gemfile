@@ -81,6 +81,7 @@ gem 'qg-dpesb','1.5.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01b
 gem 'qg-ctl','6.1.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ctl.git", branch: 'new_chnages'
 gem 'qg-dashboard','0.4.0',:git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-dashboard.git"
 gem 'qg-datapurge','0.5.0',:git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-datapurge.git",branch: 'main'
+gem 'qg-ecolmanual','0.1.0',:git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ecolmanual.git",branch: 'main'
 
 # oracle is required only in production, CI tools run against sqlite3
 group :production do
