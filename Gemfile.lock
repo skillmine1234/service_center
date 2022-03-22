@@ -55,10 +55,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ctl.git
-  revision: 634910b41dad8c2ce38dac6e3aab42e820a94f64
+  revision: 0f0de0826752bd236217042a5824dbc52b3f8f4c
   branch: new_chnages
   specs:
-    qg-ctl (6.1.0)
+    qg-ctl (6.2.0)
       rails (~> 4.2.2)
 
 GIT
@@ -733,7 +733,7 @@ DEPENDENCIES
   qg-asba (= 1.0.8)!
   qg-cc (= 1.8.0)!
   qg-cp (= 1.0.2)!
-  qg-ctl (= 6.1.0)!
+  qg-ctl (= 6.2.0)!
   qg-dashboard (= 0.4.0)!
   qg-datapurge (= 0.5.0)!
   qg-dpesb (= 1.5.0)!
