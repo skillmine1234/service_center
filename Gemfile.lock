@@ -70,10 +70,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-datapurge.git
-  revision: 134e0c363a97720b6c4234f5202ccca29ebc6c5d
+  revision: 28e31982414b028148a29497dab2f5b19f96f3a7
   branch: main
   specs:
-    qg-datapurge (0.5.0)
+    qg-datapurge (0.6.0)
       rails (~> 4.2.2)
 
 GIT
@@ -735,7 +735,7 @@ DEPENDENCIES
   qg-cp (= 1.0.2)!
   qg-ctl (= 6.2.0)!
   qg-dashboard (= 0.4.0)!
-  qg-datapurge (= 0.5.0)!
+  qg-datapurge (= 0.6.0)!
   qg-dpesb (= 1.5.0)!
   qg-ecol (= 12.2.0)!
   qg-ecolmanual (= 0.2.0)!
