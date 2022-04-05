@@ -93,10 +93,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ecolmanual.git
-  revision: d0f79fe1d15ce868a0b2586abe006649fb9f624e
+  revision: 14bae002e8628181eb294b56db35c81c08cb475b
   branch: main
   specs:
-    qg-ecolmanual (0.2.0)
+    qg-ecolmanual (0.3.0)
       rails (~> 4.2.2)
 
 GIT
@@ -738,7 +738,7 @@ DEPENDENCIES
   qg-datapurge (= 0.6.0)!
   qg-dpesb (= 1.5.0)!
   qg-ecol (= 12.2.0)!
-  qg-ecolmanual (= 0.2.0)!
+  qg-ecolmanual (= 0.3.0)!
   qg-es (= 3.4.0)!
   qg-fp (= 2.7.0)!
   qg-ft (= 8.1.0)!
