@@ -795,7 +795,7 @@ DEPENDENCIES
   zeroclipboard-rails
 
 RUBY VERSION
-   ruby 2.2.2p95
+   ruby 2.7.6
 
 BUNDLED WITH
    1.17.3
