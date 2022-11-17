@@ -1,4 +1,5 @@
-##### For olympiad testing #####
+### new version for new delta server
+
 source 'https://rubygems.org'
 ruby "2.2.2"
 gem 'roo'
@@ -37,7 +38,8 @@ gem "daemons"
 gem "audited-activerecord"
 gem 'httparty'
 gem 'zeroclipboard-rails'
-gem 'country_select', github: 'stefanpenner/country_select'
+# gem 'country_select', '~> 6.0'
+gem 'country_select', '~> 2.1', '>= 2.1.1'
 gem 'faraday'
 # required for packaging (specifically asset precompilation during packaging)
 gem "sqlite3"
@@ -86,7 +88,8 @@ gem 'qg-ecolmanual','0.3.0',:git => "https://6643151ea8ce1aee02a31d27df7f8bf51fa
 
 # oracle is required only in production, CI tools run against sqlite3
 group :production do
-  gem 'activerecord-oracle_enhanced-adapter',:git => 'git://github.com/rsim/oracle-enhanced.git'
+  #gem 'activerecord-oracle_enhanced-adapter',:git => 'https://github.com/rsim/oracle-enhanced.git'
+  gem 'activerecord-oracle_enhanced-adapter', '~> 1.6.0'
   gem 'ruby-oci8', '2.2.5.1'
   gem 'bcdatabase'
   gem 'passenger'
