@@ -7,16 +7,23 @@ class ApplicationController < ActionController::Base
   before_action :set_as_private
   before_action :authenticate_user!, if: :protected_by_pundit
   
-  after_action :verify_authorized, except: :index, if: :protected_by_pundit
+  after_action  :protect_from_host_header_attack,:verify_authorized, except: :index, if: :protected_by_pundit
   # after_action :verify_policy_scoped, only: :index, if: :protected_by_pundit
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   rescue_from CanCan::AccessDenied, with: :user_not_authorized
 
+
+  def protect_from_host_header_attack
+    env['HTTP_HOST'] = default_url_options.fetch(:host, env['HTTP_HOST'])
+  end
+
   before_filter do
     
     ######## Deactivate Users whose last sign in was above 60 days #########
-    
+    ip_address = Socket.ip_address_list.find { |ai| ai.ipv4? && !ai.ipv4_loopback? }.ip_address
+    puts "Client IP Address is -- #{ip_address}"
+
     first_sign_in = User.where(['last_sign_in_at < ? and inactive = ?', 0.to_i.days.ago,false]).where.not(last_sign_in_at: nil).all.size
     
     if first_sign_in == 1
