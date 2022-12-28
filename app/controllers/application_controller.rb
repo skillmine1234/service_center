@@ -13,9 +13,12 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   rescue_from CanCan::AccessDenied, with: :user_not_authorized
 
+  before_action :debug_headers
+
+
 
   def protect_from_host_header_attack
-    env['HTTP_HOST'] = default_url_options.fetch(:host, env['HTTP_HOST'])
+    #env['HTTP_HOST'] = default_url_options.fetch(:host, env['HTTP_HOST'])
   end
 
   before_filter do
@@ -91,4 +94,10 @@ class ApplicationController < ActionController::Base
     flash[:alert] = "You are not authorized to perform this action."
     redirect_to(request.referrer || root_path)
   end
+
+    def debug_headers
+        if request.env['HTTP_X_FORWARDED_HOST']
+            request.env.except!('HTTP_X_FORWARDED_HOST') # just drop the variable
+        end
+    end # def
 end
