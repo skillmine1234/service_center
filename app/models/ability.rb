@@ -79,6 +79,10 @@ class Ability
       can :override_transaction, model_name.constantize
       can :download_data, model_name.constantize
       can :custom_approval_of_record, model_name.constantize
+      
+      can :try_login, model_name.constantize
+      can :add_user, model_name.constantize
+      can :delete_user, model_name.constantize
     end
     can :manage, UnapprovedRecord, approvable_type: @group.try(:model_list)
   end

@@ -106,7 +106,7 @@ class LDAP
      ldap_result
 
      unless @required_group.blank?
-       @ldap.modify(:dn => @required_group, :operations => [[:add, :member, dn]])
+       @ldap.modify(:dn => @required_group, :operations => [[:delete, :member, dn]])
        ldap_result = @ldap.get_operation_result
        Rails.logger.info "============ldap result if required group is blank===========" if ENV['LDAP_LOGGERS_ENABLED'] == "true"  rescue nil
        Rails.logger.info ldap_result.inspect if ENV['LDAP_LOGGERS_ENABLED'] == "true"  rescue nil
