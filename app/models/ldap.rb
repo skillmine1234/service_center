@@ -106,17 +106,12 @@ class LDAP
      ldap_result
 
      unless @required_group.blank?
-        
-     # raise LDAPFault.new('delete user', ldap_result) if ldap_result.code != 0dn = "CN=#{username},#{@base}"
-
-     # @ldap.delete :dn => dn
-     # ldap_result = @ldap.get_operation_result
-       @ldap.modify(:dn => @required_group, :operations => [[:delete, :member, dn]])
-       ldap_result = @ldap.get_operation_result
-       Rails.logger.info "============ldap result if required group is blank===========" if ENV['LDAP_LOGGERS_ENABLED'] == "true"  rescue nil
-       Rails.logger.info ldap_result.inspect if ENV['LDAP_LOGGERS_ENABLED'] == "true"  rescue nil
-       Rails.logger.info " =========================================" if ENV['LDAP_LOGGERS_ENABLED'] == "true"  rescue nil
-       raise LDAPFault.new('add group', ldap_result) if ldap_result.code != 0
+      @ldap.modify(:dn => @required_group, :operations => [[:add, :member, dn]])
+      ldap_result = @ldap.get_operation_result
+      Rails.logger.info "============ldap result if required group is blank===========" if ENV['LDAP_LOGGERS_ENABLED'] == "true"  rescue nil
+      Rails.logger.info ldap_result.inspect if ENV['LDAP_LOGGERS_ENABLED'] == "true"  rescue nil
+      Rails.logger.info " =========================================" if ENV['LDAP_LOGGERS_ENABLED'] == "true"  rescue nil
+      raise LDAPFault.new('add group', ldap_result) if ldap_result.code != 0
      end
   end
 

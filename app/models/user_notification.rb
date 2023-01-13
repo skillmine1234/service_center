@@ -173,7 +173,7 @@ module UserNotification
 
   def delete_user_from_ldap_on_approval
     puts "================delete_user_from_ldap_on_approval method start for username: #{username}================"
-    if approval_status == 'A' && is_enabled == 'N' && is_enabled_was == 'Y'
+    if approval_status == 'A' && was_user_added == 'N'
       begin
         puts "================Deleting of LDAP User Process Initiated================="
         puts "============username==========>#{username}========================="
