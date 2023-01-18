@@ -13,7 +13,7 @@ class IamCustUser < ActiveRecord::Base
 
   validates_presence_of :username
   validates_presence_of :first_name,unless: :skip_presence_validation
-  validates_uniqueness_of :username, :scope => :approval_status
+  validates_uniqueness_of :username,if: "approved_record.nil?", message: 'Username already present in the system'
   validates_length_of :username, :first_name, :last_name, maximum: 100
   validates_format_of :username, with: /\A[a-z|A-Z|0-9|\_|\.]+\z/, message: "invalid format - expected format is : {[a-z|A-Z|0-9|\_|\.]}"
   validates_format_of :first_name, with: /\A[a-z|A-Z|0-9|\s|\.|\-]+\z/, message: "invalid format - expected format is : {[a-z|A-Z|0-9|\s|\.|\-]}"
