@@ -22,14 +22,10 @@ class ApplicationController < ActionController::Base
   end
 
   before_filter do
-    p "---------------------->>>>>>"
-    p request.env["HTTP_X_FORWARDED_FOR"] 
-    p request.remote_ip
-    p request.ip
-    p "---------------------->>>>>>"
+    
     ######## Deactivate Users whose last sign in was above 60 days #########
     ip_address = Socket.ip_address_list.find { |ai| ai.ipv4? && !ai.ipv4_loopback? }.ip_address
-    puts "Client IP Address is -- #{ip_address}"
+    puts "Client IP Address is -- #{request.env["HTTP_X_FORWARDED_FOR"]}"
 
     first_sign_in = User.where(['last_sign_in_at < ? and inactive = ?', 0.to_i.days.ago,false]).where.not(last_sign_in_at: nil).all.size
     
