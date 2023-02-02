@@ -84,7 +84,7 @@ ActiveAdmin.register UserGroup do
     def edit
       user_group = UserGroup.unscoped.find_by_id(params[:id])
       if user_group.approval_status == 'A' && user_group.unapproved_record.nil?
-        params = ({:user_id => user_group.user_id, :group_id=> user_group.group_id}).merge({:approved_id => user_group.id,:approved_version => user_group.lock_version})
+        params = ({:user_id => user_group.user_id, :group_id=> user_group.group_id,:disabled=>user_group.disabled}).merge({:approved_id => user_group.id,:approved_version => user_group.lock_version})
         user_group = UserGroup.new(params)
       end
       @user_group = user_group

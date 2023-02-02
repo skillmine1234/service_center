@@ -1,14 +1,13 @@
 = semantic_form_for [:admin, @user_group] do |f|
   = f.inputs "User Group Details" do
-    = f.input :user, :input_html => { :style => 'display:inline-block; width: 250px;' }
-    = f.input :group,:input_html => {:style => 'display:inline-block; width: 250px;' }
-    = f.input :group, :input_html => { :style => 'display:inline-block; width: 250px;',:disabled => true },label: 'Description', as: :string
+    = f.input :user, :input_html => { :style => 'display:inline-block; width: 250px;'}
+    = f.input :group,:input_html => {:style => 'display:inline-block; width: 250px;'}
     = f.hidden_field :lock_version
     = f.hidden_field :approved_id
     = f.hidden_field :approved_version
     %li
       = f.check_box :disabled
-      = f.label "Disable?", :for => "disable_service_center"
+      = f.label "Disabled?", :for => "disable_service_center"
   = f.actions do
     = f.action :submit
     %li.cancel
