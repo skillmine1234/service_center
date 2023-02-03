@@ -5,7 +5,7 @@ class AdminUser < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
   if ENV['DEVISE_AUTHENTICATE_WITH_LDAP'] == "true"
     devise :ldap_authenticatable, :trackable
-    before_create :get_ldap_name
+    #before_create :get_ldap_name
   else
   devise :database_authenticatable, :password_expirable,
          :rememberable, :trackable, :validatable, :timeoutable, :session_limitable
