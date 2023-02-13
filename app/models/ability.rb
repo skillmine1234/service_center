@@ -21,6 +21,7 @@ class Ability
     models.each do |model_name|
       can :read, model_name.constantize
       can :audit_steps, model_name.constantize
+      can :try_login, model_name.constantize
       can :incoming_file_summary, model_name.constantize
       can :download_file, model_name.constantize
       can :view_raw_content, model_name.constantize
@@ -80,7 +81,7 @@ class Ability
       can :override_transaction, model_name.constantize
       can :download_data, model_name.constantize
       can :custom_approval_of_record, model_name.constantize
-      
+      can :resend_password, model_name.constantize
       can :try_login, model_name.constantize
       can :add_user, model_name.constantize
       can :delete_user, model_name.constantize
