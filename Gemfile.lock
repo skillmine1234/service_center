@@ -71,10 +71,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ecol.git
-  revision: 8cdcb04257f66a4083053dd1084b5db1f215c6b6
+  revision: 4d6d6a73b1dc45c186e0f6492b50889ee6d5aaaf
   branch: ecol_req_temp_issue_new_res
   specs:
-    qg-ecol (12.6.0)
+    qg-ecol (12.7.0)
       rails (= 4.2.2)
 
 GIT
@@ -727,7 +727,7 @@ DEPENDENCIES
   qg-dashboard (= 0.4.0)!
   qg-datapurge (= 0.7.0)!
   qg-dpesb (= 1.5.0)!
-  qg-ecol (= 12.6.0)!
+  qg-ecol (= 12.7.0)!
   qg-ecolmanual (= 0.3.0)!
   qg-es (= 3.4.0)!
   qg-fp (= 2.7.0)!
