@@ -54,6 +54,12 @@ module UserNotification
     begin
       puts "================Add User to LDAP Password Process Initiated================="
       puts "============add_user username==========>#{username}========================="
+      connect_to_ldap = LDAP.new.try_login(username, decrypted_password)
+
+      if connect_to_ldap == true
+        LDAP.new.delete_user(username)
+      end
+      
       LDAP.new.add_user(username, decrypted_password)
     rescue LDAPFault, Psych::SyntaxError, SystemCallError, Net::LDAP::LdapError, OCIError, ArgumentError => error
       puts "================Add User Error code: #{error}================"
