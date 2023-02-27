@@ -71,10 +71,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ecol.git
-  revision: f16d94047aa0f1855f7dacd3792dc31ecfb7789f
+  revision: 8aaf09b5a9a573a54b21b6ff7e9692c2fd3917bd
   branch: ecol_req_temp_issue_new_res
   specs:
-    qg-ecol (12.8.0)
+    qg-ecol (12.9.0)
       rails (= 4.2.2)
 
 GIT
@@ -193,9 +193,8 @@ GIT
     qg-ssp (2.4.0)
       rails (= 4.2.2)
 
-GIT
-  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/rr_new_version.git
-  revision: 2eb6963ee9c92caa233bd78da3f074e16a8b8bad
+PATH
+  remote: /Users/rubyistdhruv/Mahesh/rr_new_version
   specs:
     rp (0.0.3)
       haml-rails
@@ -727,7 +726,7 @@ DEPENDENCIES
   qg-dashboard (= 0.4.0)!
   qg-datapurge (= 0.7.0)!
   qg-dpesb (= 1.5.0)!
-  qg-ecol (= 12.8.0)!
+  qg-ecol (= 12.9.0)!
   qg-ecolmanual (= 0.3.0)!
   qg-es (= 3.4.0)!
   qg-fp (= 2.7.0)!
@@ -750,7 +749,7 @@ DEPENDENCIES
   rolify (>= 3.2.0)
   roo
   rools (= 0.4.1)!
-  rp (= 0.0.3)!
+  rp!
   rspec
   rspec-rails (= 2.14.0)
   ruby-oci8 (= 2.2.5.1)
