@@ -193,8 +193,9 @@ GIT
     qg-ssp (2.4.0)
       rails (= 4.2.2)
 
-PATH
-  remote: /Users/rubyistdhruv/Mahesh/rr_new_version
+GIT
+  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/rr_new_version.git
+  revision: 2eb6963ee9c92caa233bd78da3f074e16a8b8bad
   specs:
     rp (0.0.3)
       haml-rails
@@ -749,7 +750,7 @@ DEPENDENCIES
   rolify (>= 3.2.0)
   roo
   rools (= 0.4.1)!
-  rp!
+  rp (= 0.0.3)!
   rspec
   rspec-rails (= 2.14.0)
   ruby-oci8 (= 2.2.5.1)
