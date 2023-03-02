@@ -99,6 +99,10 @@ class IamCustUsersController < ApplicationController
     return_message
   end
 
+  def ldap_user_list
+    ldap = LDAP.new.list_users
+  end
+
   private
   
   def return_message

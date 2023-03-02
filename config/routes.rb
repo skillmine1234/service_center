@@ -111,6 +111,7 @@ ServiceCenter::Application.routes.draw do
     collection do
       get :index
       put :index
+      get :ldap_user_list
     end
     member do
       put :try_login

@@ -186,6 +186,14 @@ class LDAP
     raise LDAPFault.new(nil, @ldap.get_operation_result) if @ldap.bind == false
   end
 
+  def list_users
+    Rails.logger.info "To list the users==================="
+    users_list = []
+    ldap.search( :base => @base, :attributes => @attributes, :return_result => false ) do |entry|
+      user_list << entry["ou"]
+    end
+  end
+
   private
   def str2unicodePwd(str)
     ('"' + str + '"').encode('utf-16le').force_encoding('utf-8')
