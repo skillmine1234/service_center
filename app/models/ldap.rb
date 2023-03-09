@@ -187,11 +187,16 @@ class LDAP
   end
 
   def list_users
+    
+    filter = Net::LDAP::Filter.eq("sAMAccountName", "*")
+
     Rails.logger.info "To list the users==================="
-    users_list = []
-    ldap.search( :base => @base, :attributes => @attributes, :return_result => false ) do |entry|
-      user_list << entry["ou"]
-    end
+    @users_list = []
+      @ldap.search(:base => treebase, :filter => filter) do |entry|
+       Rails.logger.info "=========user== #{entry.sAMAccountName}"
+      end
+
+    Rails.logger.info "=====================#{@users_list}" 
   end
 
   private

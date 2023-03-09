@@ -195,9 +195,9 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/rr_new_version.git
-  revision: 2b4aa1f7e1765f4ec57be19c2d1ab4944b105de1
+  revision: 45931fbf88f312a15161f159194e3774eb42a338
   specs:
-    rp (0.0.6)
+    rp (0.0.7)
       haml-rails
       net-scp
       pundit
@@ -750,7 +750,7 @@ DEPENDENCIES
   rolify (>= 3.2.0)
   roo
   rools (= 0.4.1)!
-  rp (= 0.0.6)!
+  rp (= 0.0.7)!
   rspec
   rspec-rails (= 2.14.0)
   ruby-oci8 (= 2.2.5.1)
