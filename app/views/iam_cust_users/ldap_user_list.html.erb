@@ -29,11 +29,20 @@
             <%= data[1] %>
           </td>
           <td style="text-align:left;">
-            <%= data[2].to_time %>
+            <%if data[2].present? %>
+              <%= data[2].to_time%>
+            <%else%>
+              <%= "NA"%>
+            <%end%>  
+
           </td>
           <td style="text-align:left;">
-            <% unixTime = data[3].to_i/10000000-11644473600%>
-            <%= rubyTime = Time.at(unixTime) %>
+            <%if data[3].present? %>
+              <% unixTime = data[3].to_i/10000000-11644473600%>
+              <%= rubyTime = Time.at(unixTime) %>
+            <%else%>
+              <%= "NA"%>
+            <%end%>
           </td>
         <tr>  
       <% end %>
