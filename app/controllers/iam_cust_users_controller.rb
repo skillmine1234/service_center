@@ -100,7 +100,7 @@ class IamCustUsersController < ApplicationController
   end
 
   def ldap_user_list
-    ldap = LDAP.new.list_users
+    ldap = LDAP.new.list_users(search_var)
   end
 
   private

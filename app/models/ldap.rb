@@ -186,16 +186,17 @@ class LDAP
     raise LDAPFault.new(nil, @ldap.get_operation_result) if @ldap.bind == false
   end
 
-  def list_users
+  def list_users(search_var)
 
-    filter = Net::LDAP::Filter.eq("sAMAccountName","lastLogonTimestamp","createTimeStamp", "*")
+    filter = Net::LDAP::Filter.eq(search_var, "*")
 
     Rails.logger.info "To list the users==================="
     @users_list = []
       @ldap.search(:base => @base, :filter => filter) do |entry|
-       Rails.logger.info "=========user== #{entry.sAMAccountName}"
-       Rails.logger.info "===============#{entry.lastLogonTimestamp}"
-       Rails.logger.info "===============#{entry.createTimeStamp}"
+      Rails.logger.info "=========user== #{entry.search_var}"
+    #Rails.logger.info "=========user== #{entry.sAMAccountName}"
+       #Rails.logger.info "===============#{entry.lastLogonTimestamp}"
+       #Rails.logger.info "===============#{entry.createTimeStamp}"
       end
 
     Rails.logger.info "=====================#{@users_list}" 
