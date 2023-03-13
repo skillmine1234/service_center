@@ -23,16 +23,17 @@
         <% record.each do |data| %>
         <tr>
           <td style="text-align:left;">
-            <%= data %>
+            <%= data[0] %>
           </td>
           <td style="text-align:left;">
-            <%= data %>
+            <%= data[1] %>
           </td>
           <td style="text-align:left;">
-            <%= data %>
+            <%= data[2].to_time %>
           </td>
           <td style="text-align:left;">
-            <%= data %>
+            <% unixTime = data[3].to_i/10000000-11644473600%>
+            <%= rubyTime = Time.at(unixTime) %>
           </td>
         <tr>  
       <% end %>
