@@ -193,7 +193,7 @@ class LDAP
     Rails.logger.info "To list the users==================="
     @users_list = []
       @ldap.search(:base => @base, :filter => filter) do |entry|
-      Rails.logger.info "=========user== #{entry.search_var}"
+      Rails.logger.info "=========user== #{entry.send(search_var)}"
     #Rails.logger.info "=========user== #{entry.sAMAccountName}"
        #Rails.logger.info "===============#{entry.lastLogonTimestamp}"
        #Rails.logger.info "===============#{entry.createTimeStamp}"
