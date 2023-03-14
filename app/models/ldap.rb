@@ -197,14 +197,31 @@ class LDAP
 
       @raw_user_list = []
       @user_list = []
-      
+
       @ldap.search(:base => @base, :filter => joined_filter) do |entry|
-       @raw_user_list << entry.sAMAccountName << entry.givenName << entry.whenCreated << entry.lastLogon
+       @raw_user_list << entry.sAMAccountName << entry.givenName << created_time_change(entry.whenCreated) << last_login_time_change(entry.lastLogon)
        @user_list << @raw_user_list
        @raw_user_list = []
       end
 
     return @user_list
+  end
+
+  def created_time_change(timevalue)
+    if timevalue.present?
+      timevalue.to_time
+    else
+      "NA"
+    end
+  end
+
+  def last_login_time_change(timevalue)
+    if timevalue.present?
+      unixTime = timevalue.to_i/10000000-11644473600
+      rubyTime = Time.at(unixTime)
+    else
+      "NA"
+    end
   end
 
   private
