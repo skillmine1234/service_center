@@ -199,7 +199,7 @@ class LDAP
       @user_list = []
 
       @ldap.search(:base => @base, :filter => joined_filter) do |entry|
-       @raw_user_list << entry.sAMAccountName << entry.givenName << created_time_change(entry.whenCreated) << last_login_time_change(entry.lastLogon)
+       @raw_user_list << entry.sAMAccountName << entry.givenName << entry.whenCreated << entry.lastLogon
        @user_list << @raw_user_list
        @raw_user_list = []
       end
