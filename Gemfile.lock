@@ -40,21 +40,6 @@ GIT
       rails (= 4.2.2)
 
 GIT
-  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ctl.git
-  revision: 0f0de0826752bd236217042a5824dbc52b3f8f4c
-  branch: new_chnages
-  specs:
-    qg-ctl (6.2.0)
-      rails (~> 4.2.2)
-
-GIT
-  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-dashboard.git
-  revision: 4d63b327f5533b4f3b9d35c2e50981b6dd43c457
-  specs:
-    qg-dashboard (0.4.0)
-      rails (~> 4.2.2)
-
-GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-datapurge.git
   revision: 125952a94e2a2233a62dc9293493b73ed2d4c89f
   branch: main
@@ -76,14 +61,6 @@ GIT
   specs:
     qg-ecol (13.0.0)
       rails (= 4.2.2)
-
-GIT
-  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ecolmanual.git
-  revision: 14bae002e8628181eb294b56db35c81c08cb475b
-  branch: main
-  specs:
-    qg-ecolmanual (0.3.0)
-      rails (~> 4.2.2)
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-es.git
@@ -723,12 +700,9 @@ DEPENDENCIES
   qg-asba (= 1.0.8)!
   qg-cc (= 1.8.0)!
   qg-cp (= 1.0.2)!
-  qg-ctl (= 6.2.0)!
-  qg-dashboard (= 0.4.0)!
   qg-datapurge (= 0.7.0)!
   qg-dpesb (= 1.5.0)!
   qg-ecol (= 13.0.0)!
-  qg-ecolmanual (= 0.3.0)!
   qg-es (= 3.4.0)!
   qg-fp (= 2.7.0)!
   qg-ft (= 8.1.0)!
