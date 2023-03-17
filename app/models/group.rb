@@ -63,14 +63,14 @@ class Group < ActiveRecord::Base
       Qg::Es::MODELS
     when "dpesb"
       Qg::Dpesb::MODELS  
-    when "ctl"
-      Qg::Ctl::MODELS
-    when "dashboard"
-      Qg::Dashboard::MODELS 
+    # when "ctl"
+    #   Qg::Ctl::MODELS
+    # when "dashboard"
+    #   Qg::Dashboard::MODELS 
     when "datapurge"
       Qg::Datapurge::MODELS 
-    when "ecolmanual"
-      Qg::Ecolmanual::MODELS           
+    # when "ecolmanual"
+    #   Qg::Ecolmanual::MODELS           
     else
       []
     end
