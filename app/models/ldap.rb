@@ -207,6 +207,29 @@ class LDAP
     return @user_list
   end
 
+  def test_user_list
+
+  group_name_filter = Net::LDAP::Filter.eq( "cn", "Users" )
+   group_type_filter = Net::LDAP::Filter.eq( "objectclass", "yblpartneruat" )
+   filter = group_name_filter & group_type_filter
+   treebase = @base
+   attrs = ["dn", "cn", "mail", "displayname", "listowner", "members"]
+
+   ldap.search( :base => treebase, :filter => filter, :attributes => attrs, :return_result => true ) do |entry|
+     puts "DN: #{entry.dn}"
+     entry.each do |attribute, values|
+       puts "   #{attribute}:"
+       values.each do |value|
+         puts "      --->#{value}"
+       end
+     end
+   end
+
+   p @ldap.get_operation_result
+
+  end
+
+
   def created_time_change(timevalue)
     if timevalue.present?
       timevalue.to_time
