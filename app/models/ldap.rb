@@ -215,7 +215,7 @@ class LDAP
    treebase = @base
    attrs = ["dn", "cn", "mail", "displayname", "listowner", "members"]
 
-   ldap.search( :base => treebase, :filter => filter, :attributes => attrs, :return_result => true ) do |entry|
+   @ldap.search( :base => treebase, :filter => filter, :attributes => attrs, :return_result => true ) do |entry|
      puts "DN: #{entry.dn}"
      entry.each do |attribute, values|
        puts "   #{attribute}:"
