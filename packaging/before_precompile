@@ -10,13 +10,13 @@ mkdir -p /tmp/oracle
 cd /tmp/oracle
 
 
-array="instantclient-basic-11.1.0.7.0-linux-x86_64.zip instantclient-sdk-11.1.0.7.0-linux-x86_64.zip instantclient-sqlplus-11.1.0.7.0-linux-x86_64.zip"
+array=("instantclient-basic-11.1.0.7.0-linux-x86_64.zip" "instantclient-sdk-11.1.0.7.0-linux-x86_64.zip" "instantclient-sqlplus-11.1.0.7.0-linux-x86_64.zip")
 
-array2="AIN3IpboU3M_7Vw ANO426f5v8TCkUA AH6p0NR3c4HvSOE"
+array2=("AIN3IpboU3M_7Vw" "ADScYtq8sT9m_9U" "ANCFufdEfIC56OQ")
 
 for i in "${!array[@]}"; do
 	wget -q --no-check-certificate "https://onedrive.live.com/download?cid=A12F94714109F76F&resid=A12F94714109F76F%21108&authkey=${array2[i]}" --output-document="${array[i]}" 
-	unzip $array[i]
+	unzip "${array[i]}"
 done
 
 # files="instantclient-basic-11.1.0.7.0-linux-x86_64.zip instantclient-sdk-11.1.0.7.0-linux-x86_64.zip instantclient-sqlplus-11.1.0.7.0-linux-x86_64.zip"
