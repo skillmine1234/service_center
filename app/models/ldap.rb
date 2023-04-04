@@ -187,19 +187,21 @@ class LDAP
   end
 
   def list_users
+    filter1 = Net::LDAP::Filter.eq("objectClass", "*")
+    #filter1 = Net::LDAP::Filter.eq("sAMAccountName", "*")
+    # filter2 = Net::LDAP::Filter.eq("givenName", "*")
+    # filter3 = Net::LDAP::Filter.eq("whenCreated", "*")
+    # filter4 = Net::LDAP::Filter.eq("lastLogon", "*")
 
-    filter1 = Net::LDAP::Filter.eq("sAMAccountName", "*")
-    filter2 = Net::LDAP::Filter.eq("givenName", "*")
-    filter3 = Net::LDAP::Filter.eq("whenCreated", "*")
-    filter4 = Net::LDAP::Filter.eq("lastLogon", "*")
+    #joined_filter = filter1 & filter2 & filter3 & filter4
 
-    joined_filter = filter1 & filter2 & filter3 & filter4
+    joined_filter = filter1
 
       @raw_user_list = []
       @user_list = []
 
       @ldap.search(:base => @base, :filter => joined_filter) do |entry|
-       @raw_user_list << entry.sAMAccountName << entry.givenName << entry.whenCreated << entry.lastLogon
+       @raw_user_list << entry[:sAMAccountName] << entry[:givenName] << entry[:whenCreated] << entry[:lastLogon]
        @user_list << @raw_user_list
        @raw_user_list = []
       end
@@ -208,6 +210,7 @@ class LDAP
   end
 
   def test_user_list
+  Rails.logger.info "================= user list"
 
   group_name_filter = Net::LDAP::Filter.eq( "cn", "Users" )
    group_type_filter = Net::LDAP::Filter.eq( "objectclass", "yblpartneruat" )
@@ -216,16 +219,16 @@ class LDAP
    attrs = ["dn", "cn", "mail", "displayname", "listowner", "members"]
 
    @ldap.search( :base => treebase, :filter => filter, :attributes => attrs, :return_result => true ) do |entry|
-     puts "DN: #{entry.dn}"
+     Rails.logger.info "================= DN: #{entry.dn}"
      entry.each do |attribute, values|
-       puts "   #{attribute}:"
+       Rails.logger.info  " =============  #{attribute}:"
        values.each do |value|
-         puts "      --->#{value}"
+         Rails.logger.info "======================>#{value}"
        end
      end
    end
 
-   p @ldap.get_operation_result
+   Rails.logger.info "--------------- #{@ldap.get_operation_result}"
 
   end
 
