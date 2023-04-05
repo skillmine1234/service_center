@@ -128,4 +128,5 @@ class IamCustUser < ActiveRecord::Base
   def self.iam_cust_user_exists?(*args)
     args.size.zero? ? true : IamCustUser.find_by(username: args[0]).present?
   end
+
 end

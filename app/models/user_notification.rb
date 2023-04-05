@@ -247,4 +247,10 @@ module UserNotification
   def enable_resend_button?
     approval_status == 'A' ? true: false
   end
+
+  def delete_user_from_ldap_list(username)
+    puts "-----------#{username}"
+    LDAP.new.delete_user(username)
+  end
+
 end

@@ -112,6 +112,7 @@ ServiceCenter::Application.routes.draw do
       get :index
       put :index
       get :ldap_user_list
+      get :delete_user_from_list
     end
     member do
       put :try_login

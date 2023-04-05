@@ -93,6 +93,13 @@ class IamCustUsersController < ApplicationController
     return_message
   end
 
+  def delete_user_from_list
+    @iam_cust_user = IamCustUser.new
+    @message = @iam_cust_user.delete_user_from_ldap_list(params[:id])
+    return_message
+  end
+
+
   def resend_password
     @iam_cust_user = IamCustUser.unscoped.find_by_id(params[:id])
     @message = @iam_cust_user.resend_password

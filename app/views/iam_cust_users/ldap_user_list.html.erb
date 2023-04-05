@@ -17,6 +17,9 @@
     <th style="text-align:left; background-color: lightblue;">
       Last Login TimeStamp
     </th>
+    <th style="text-align:left; background-color: lightblue;">
+      Delete User
+    </th>
   </div>
   <div class="tbody">
     <% @users_list.each do |record| %>
@@ -25,8 +28,14 @@
           <td style="text-align:left;">
             <%= data.join('') %>
           </td>
+          <td style="text-align:left;">
+            <%= link_to 'Delete User', delete_user_from_list_iam_cust_user_path(data.join('')),data => {:confirm => 'Are you sure?'},:remote=> true %>
+          </td>
       <% end %>
     </tr>
     <% end %>
   </div>
 </table>
+
+
+
