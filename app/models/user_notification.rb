@@ -253,7 +253,7 @@ module UserNotification
       LDAP.new.delete_user(username)
         return "Successfully Deleted"
     rescue Exception => error
-      return "Error Occured during Delete."
+      return "Error Occured during Delete. #{error}"
     end
     
   end

@@ -106,6 +106,7 @@ class IamCustUsersController < ApplicationController
   end
 
   def ldap_user_list
+    #@users_list = [["sdfsdf","sdfsdfsd","sdfsf","sdfsdfs"],["sdfsdf","sdfsdfsd","sdfsf","sdfsdfs"],["sdfsdf","sdfsdfsd","sdfsf","sdfsdfs"]]
     @users_list = LDAP.new.list_users
   end
 
