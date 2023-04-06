@@ -10,4 +10,20 @@ module IamCustUserHelper
     iam_cust_users
   end
 
+  def created_time_change(timevalue)
+    if timevalue.present?
+      timevalue.to_time
+    else
+      "NA"
+    end
+  end
+
+  def last_login_time_change(timevalue)
+    if timevalue.present?
+      unixTime = timevalue.to_i/10000000-11644473600
+      rubyTime = Time.at(unixTime)
+    else
+      "NA"
+    end
+  end
 end

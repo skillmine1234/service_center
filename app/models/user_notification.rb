@@ -81,7 +81,7 @@ module UserNotification
 
   def delete_user_from_ldap
     puts "=============================delete_user_from_ldap method start for username: #{username}=============================="
-    if is_enabled == 'N'
+    if (is_enabled == 'N' || is_enabled == 'Y')
       begin
         puts "================Delete User to LDAP Password Process Initiated================="
         puts "============delete_user username==========>#{username}========================="
