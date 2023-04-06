@@ -95,7 +95,7 @@ class IamCustUsersController < ApplicationController
 
   def delete_user_from_list
      @iam_cust_user = IamCustUser.new
-     @message = @iam_cust_user.delete_user_from_ldap_list(params[:name])
+     @message = @iam_cust_user.delete_user_from_ldap_list(params[:username])
   end
 
 
