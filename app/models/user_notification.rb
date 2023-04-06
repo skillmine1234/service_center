@@ -249,8 +249,13 @@ module UserNotification
   end
 
   def delete_user_from_ldap_list(username)
-    puts "-----------#{username}"
-    LDAP.new.delete_user(username)
+    begin
+      LDAP.new.delete_user(username)
+        return "Successfully Deleted"
+    rescue Exception => error
+      return "Error Occured during Delete."
+    end
+    
   end
 
 end

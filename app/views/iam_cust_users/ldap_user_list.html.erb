@@ -26,12 +26,12 @@
       <tr>
         <% record.each do |data| %>
           <td style="text-align:left;">
-            <%= data.join('') %>
-          </td>
-          <td style="text-align:left;">
-            <%= link_to 'Delete User', delete_user_from_list_iam_cust_user_path(data.join('')),data => {:confirm => 'Are you sure?'},:remote=> true %>
+            <%= data %>
           </td>
       <% end %>
+      <td style="text-align:left;">
+         <%= link_to 'Delete User',{:action=>"delete_user_from_list",:username=> record[1]},data: {confirm: 'Are you sure?'},:remote=> true,class: "btn btn-primary"%>      
+      </td>
     </tr>
     <% end %>
   </div>
