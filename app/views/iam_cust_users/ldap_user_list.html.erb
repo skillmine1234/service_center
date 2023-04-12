@@ -20,9 +20,9 @@
     <th style="text-align:left; background-color: lightblue;">
       Last Login TimeStamp
     </th>
-    <th style="text-align:left; background-color: lightblue;">
+    <!-- <th style="text-align:left; background-color: lightblue;">
       Delete User
-    </th>
+    </th> -->
   </div>
   <% @cnt = 0 %>
   <div class="tbody">
@@ -31,11 +31,19 @@
         <td>
           <%= @cnt = @cnt+1 %>
         </td>
-        <% record.each do |data| %>
           <td style="text-align:left;">
-            <%= data.join('') %>
+            <%= record[0].join('') %>
           </td>
-      <% end %>
+          <td style="text-align:left;">
+            <%= record[1].join('') %>
+          </td>
+          <td style="text-align:left;">
+            <%= created_time_change(record[2].join(''))%>
+          </td>
+          <td style="text-align:left;">
+            <%= last_login_time_change(record[3].join(''))%>
+          </td>
+      
       <!-- <td style="text-align:left;">
          <%#= link_to 'Delete User',{:action=>"delete_user_from_list",:username=> record[0].join('')},data: {confirm: 'Are you sure?'},:remote=> true,class: "btn btn-primary"%>      
       </td> -->

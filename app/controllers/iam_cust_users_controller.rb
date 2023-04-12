@@ -106,10 +106,8 @@ class IamCustUsersController < ApplicationController
   end
 
   def ldap_user_list
-    #@users_list = [["sdfsdf","sdfsdfsd","sdfsf","sdfsdfs"],["sdfsdf","sdfsdfsd","sdfsf","sdfsdfs"],["sdfsdf","sdfsdfsd","sdfsf","sdfsdfs"]]
+    #@users_list = [[["arvind"],[""],["20150506105212.0Z"],["133252502716082641"]],[["rahul"],[""],["20150506105212.0Z"],[""]]]
     @users_list = LDAP.new.list_users
-    puts "--------------ldap users list"
-    puts @users_list
   end
 
   private
