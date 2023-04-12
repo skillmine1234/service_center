@@ -49,7 +49,7 @@ gem 'unscoped_associations'
 gem 'lazy_columns', :git=>'https://github.com/quantiguous/lazy_columns.git'
 gem 'seed-fu'
 gem 'net-scp'
-gem 'rp','0.0.7',:git=>'https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/rr_new_version.git'
+gem 'rp','0.0.8',:git=>'https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/rr_new_version.git'
 gem 'approval2', '0.1.9'
 gem "mustache"
 gem 'simple_enum'
@@ -61,7 +61,7 @@ gem 'font-awesome-rails'
 gem 'encrypted_field', '0.1.6'
 
 gem 'qg-rpl','3.9.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-rpl.git",branch: 'blockchain'
-gem 'qg-inw','8.0.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git", branch: 'inw_02-2023'
+gem 'qg-inw','8.1.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git", branch: 'prod_code_inw'
 gem 'qg-icol', '2.1.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-icol.git"
 gem 'qg-ecol','13.0.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ecol.git",branch: "ecol_req_temp_issue_new_res"
 # gem 'qg-bm', '1.3.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-bm.git"
@@ -73,7 +73,7 @@ gem 'qg-fp','2.7.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x
 gem 'qg-ft','8.1.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ft.git", branch: 'with_dashboard_ft_issue'
 gem 'qg-sc', '3.3.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-sc.git", branch: 'esbconfig_without_approval'
 gem 'qg-gm', '2.1.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-gm.git", branch: 'production_table_deletion'
-gem 'qg-cc', '1.8.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-cc.git"
+gem 'qg-cc','1.8.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-cc.git"
 gem 'qg-cp', '1.0.2', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-cp.git"
 gem 'qg-ae', '1.0.5', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ae.git"
 gem 'qg-ns', '1.3.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ns.git",branch: 'form_for_new_callback_notification'

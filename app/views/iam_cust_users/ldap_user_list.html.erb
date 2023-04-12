@@ -36,9 +36,9 @@
             <%= data.join('') %>
           </td>
       <% end %>
-      <td style="text-align:left;">
-         <%= link_to 'Delete User',{:action=>"delete_user_from_list",:username=> record[0].join('')},data: {confirm: 'Are you sure?'},:remote=> true,class: "btn btn-primary"%>      
-      </td>
+      <!-- <td style="text-align:left;">
+         <%#= link_to 'Delete User',{:action=>"delete_user_from_list",:username=> record[0].join('')},data: {confirm: 'Are you sure?'},:remote=> true,class: "btn btn-primary"%>      
+      </td> -->
     </tr>
     <% end %>
   </div>
