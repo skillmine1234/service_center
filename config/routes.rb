@@ -112,7 +112,10 @@ ServiceCenter::Application.routes.draw do
       get :index
       put :index
       get :ldap_user_list
-      get :delete_user_from_list
+      post :delete_user_from_list
+      get :pending_approvals_ldap
+      get :delete_show
+      get :after_approval_delete_from_ldap
     end
     member do
       put :try_login

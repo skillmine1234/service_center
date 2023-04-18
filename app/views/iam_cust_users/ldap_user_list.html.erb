@@ -20,9 +20,9 @@
     <th style="text-align:left; background-color: lightblue;">
       Last Login TimeStamp
     </th>
-    <!-- <th style="text-align:left; background-color: lightblue;">
+    <th style="text-align:left; background-color: lightblue;">
       Delete User
-    </th> -->
+    </th>
   </div>
   <% @cnt = 0 %>
   <div class="tbody">
@@ -43,10 +43,11 @@
           <td style="text-align:left;">
             <%= last_login_time_change(record[3].join(''))%>
           </td>
-      
-      <!-- <td style="text-align:left;">
-         <%#= link_to 'Delete User',{:action=>"delete_user_from_list",:username=> record[0].join('')},data: {confirm: 'Are you sure?'},:remote=> true,class: "btn btn-primary"%>      
-      </td> -->
+          <%deleted_user = ldap_deleted_users(record[0].join(''))%>
+
+      <td style="text-align:left;">
+         <%= button_to 'Delete User',{:action=>"delete_user_from_list",:username=> record[0].join('')},data: {confirm: 'You want to delete the LDAP user?'},:remote=> true,class: "btn btn-primary",:disabled => deleted_user%>      
+      </td>
     </tr>
     <% end %>
   </div>

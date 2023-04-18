@@ -1,0 +1,63 @@
+<div class="form-horizontal show_form">
+  <div class="form-main-with-color" style="background-color: #F1F2F8;">
+    <div id="form-details">
+      <h3>User ToBe Deleted From LDAP -- Details </h3>
+      <br/>
+      <p style="text-align:left; padding-left:6px; padding-bottom:17px">
+        
+    <% can = can? :after_approval_delete_from_ldap, @ldap_delete_user %>
+		<% approve_flag = @ldap_delete_user.enable_approve_button? %>
+
+		<%= link_to "Approve",{:action=>'after_approval_delete_from_ldap',:username=>@ldap_delete_user.username,updated_by: current_user.id},:class => "btn btn-primary #{(can && approve_flag) ? '' : 'disabled'}",:remote=>true%>
+      </p>
+      <table class="table no-border" style="table-layout: fixed; width: 100%">
+        <% if !@ldap_delete_user.nil? %>
+          <tr>
+          	<td>
+            	Username
+            </td>
+            <td>
+            	<%= @ldap_delete_user.username%>
+            </td>
+           </tr> 
+
+            <tr>
+	            <td>
+	            	Created At
+	            </td>	
+	            <td>
+	            	<%= @ldap_delete_user.created_at%>
+	            </td>
+           </tr> 
+
+           <tr>
+            <td>
+	            	Updated	At
+	            </td>	
+	            <td>
+	            	<%= @ldap_delete_user.updated_at%>
+	            </td>
+           </tr> 
+
+           <tr>
+            <td>
+	            	Created By
+	            </td>	
+	            <td>
+	            	<%= @ldap_delete_user.created_user.try(:username)%>
+	            </td>
+           </tr> 
+
+           <tr>
+            <td>
+	            	Updated	 By
+	            </td>	
+	            <td>
+	            	<%= @ldap_delete_user.updated_user.try(:username)%>
+	            </td>
+           </tr> 
+        <%end%>   
+      </table>
+    </div>
+  </div>
+</div>

@@ -23,5 +23,7 @@
               = link_to record[:record_count], {:controller => record[:record_type].tableize, :action => :index, :approval_status => 'U', :sc_service => params[:sc_service]}
             - elsif record[:record_type] == 'EcollectResponseTemplate'
               = link_to record[:record_count], {:controller => record[:record_type].tableize, :action => :index, :approval_status => 'U', :sc_service => params[:sc_service]}
-            - else
+            - elsif record[:record_type] == 'LdapUserDeleteLog'
+              = link_to record[:record_count],{:controller => 'iam_cust_users',:action=> 'pending_approvals_ldap'}
+            - else 
               = link_to record[:record_count], {:controller => record[:record_type].tableize, :action => :index, :approval_status => 'U'}

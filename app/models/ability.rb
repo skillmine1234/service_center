@@ -52,6 +52,7 @@ class Ability
       can :resend_password, model_name.constantize
       cannot :custom_approval_of_record, model_name.constantize
       can :download_attachment,model_name.constantize
+      cannot :after_approval_delete_from_ldap, model_name.constantize
     end
     can :manage, UnapprovedRecord, approvable_type: @group.try(:model_list)
   end
@@ -86,6 +87,7 @@ class Ability
       can :add_user, model_name.constantize
       can :delete_user, model_name.constantize
       can :download_attachment,model_name.constantize
+      can :after_approval_delete_from_ldap, model_name.constantize
     end
     can :manage, UnapprovedRecord, approvable_type: @group.try(:model_list)
   end
@@ -96,6 +98,7 @@ class Ability
       can :manage, model_name.constantize
     end
     can :manage, UnapprovedRecord, approvable_type: @group.try(:model_list)
+
   end
 
   def user_admin_permissions

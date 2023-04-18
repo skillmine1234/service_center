@@ -2,7 +2,7 @@ class IamCustUsersController < ApplicationController
   authorize_resource
   before_filter :authenticate_user!
   before_filter :block_inactive_user!
-  respond_to :json  
+  respond_to :json
   include ApplicationHelper
   include Approval2::ControllerAdditions
   include IamCustUserHelper
@@ -92,12 +92,35 @@ class IamCustUsersController < ApplicationController
     @message = @iam_cust_user.delete_user_from_ldap
     return_message
   end
-
-  def delete_user_from_list
-     @iam_cust_user = IamCustUser.new
-     @message = @iam_cust_user.delete_user_from_ldap_list(params[:username])
+  
+  def pending_approvals_ldap
+     @deleted_user_pending = LdapUserDeleteLog.unscoped.where(approval_status: 'U')
   end
 
+  def after_approval_delete_from_ldap
+    @iam_cust_user = IamCustUser.new
+    @message = @iam_cust_user.delete_user_from_ldap_list(params[:username])
+    
+    if @message == "true"
+        @user = LdapUserDeleteLog.unscoped.where(username: params[:username]).first
+        @user.updated_by = params[:updated_by]
+        @user.approval_status = 'A'
+        @user.save
+        @msg = "Approved successfuly and also user deleted from LDAP"
+    else
+      @msg = "There were error during LDAP delete."
+    end
+
+  end
+
+  def delete_user_from_list
+      ldap_delete = LdapUserDeleteLog.new(username: params[:username],created_by: current_user.id)
+      ldap_delete.save
+  end
+
+  def delete_show
+    @ldap_delete_user = LdapUserDeleteLog.unscoped.where(username: params[:username]).first
+  end
 
   def resend_password
     @iam_cust_user = IamCustUser.unscoped.find_by_id(params[:id])
@@ -106,7 +129,7 @@ class IamCustUsersController < ApplicationController
   end
 
   def ldap_user_list
-    #@users_list = [[["arvind"],[""],["20150506105212.0Z"],["133252502716082641"]],[["rahul"],[""],["20150506105212.0Z"],[""]]]
+    #@users_list = [[["arvind"],[""],["20150506105212.0Z"],["133252502716082641"]],[["rahul"],[""],["20150506105212.0Z"],[""]],[["arvind123"],[""],["20150506105212.0Z"],["133252502716082641"]],[["arvind123"],[""],["20150506105212.0Z"],["133252502716082641"]]]
     @users_list = LDAP.new.list_users
   end
 

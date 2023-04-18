@@ -1,0 +1,47 @@
+
+<h1>LDAP Users Pending Approvals For deleted_user_pending</h1>
+<br/>
+<br/>
+<table class="table table-bordered table-striped table-hover">
+  <div class="thead">
+    <th style="text-align:left; background-color: lightblue;"> 
+    </th>
+    <th style="text-align:left; background-color: lightblue;">
+      Username
+    </th>
+    <th style="text-align:left; background-color: lightblue;">
+      Crerated TimeStamp
+    </th>
+    <th style="text-align:left; background-color: lightblue;">
+      Crerated By
+    </th>
+    <th style="text-align:left; background-color: lightblue;">
+      Updated By
+    </th>
+  </div>
+  
+  <div class="tbody">
+    <% @deleted_user_pending.each do |record| %>
+      <tr>
+        <td>
+          <%= link_to "Show",:controller=>'iam_cust_users',:action=>'delete_show',:username=>record.username%>
+        </td>
+        <td>
+          <%= record.username%>
+        </td>
+        <td>
+          <%= record.created_at%>
+        </td>
+        <td>
+          <%= record.created_user.try(:username)%>
+        </td>
+        <td>
+          <%= record.updated_user.try(:username)%>
+        </td>
+    </tr>
+    <% end %>
+  </div>
+</table>
+
+
+

@@ -26,4 +26,10 @@ module IamCustUserHelper
       "NA"
     end
   end
+
+  def ldap_deleted_users(username)
+    user = LdapUserDeleteLog.unscoped.where(approval_status: 'U',username: "#{username}").first
+    return user.present? ? true : false
+  end
+
 end
