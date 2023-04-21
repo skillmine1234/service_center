@@ -27,6 +27,11 @@ class Ability
       can :view_raw_content, model_name.constantize
       can :download_ecol_response_file, model_name.constantize
       can [:audit_logs, :ecol_audit_logs], model_name.constantize
+
+      can :ldap_user_list,model_name.constantize
+      cannot :pending_approvals_ldap,model_name.constantize
+      cannot :delete_show,model_name.constantize
+      cannot :after_approval_delete_from_ldap, model_name.constantize
     end
     can :manage, UnapprovedRecord, approvable_type: @group.try(:model_list)
   end
@@ -52,6 +57,10 @@ class Ability
       can :resend_password, model_name.constantize
       cannot :custom_approval_of_record, model_name.constantize
       can :download_attachment,model_name.constantize
+      
+      can :ldap_user_list,model_name.constantize
+      can :pending_approvals_ldap,model_name.constantize
+      can :delete_show,model_name.constantize
       cannot :after_approval_delete_from_ldap, model_name.constantize
     end
     can :manage, UnapprovedRecord, approvable_type: @group.try(:model_list)
@@ -87,6 +96,11 @@ class Ability
       can :add_user, model_name.constantize
       can :delete_user, model_name.constantize
       can :download_attachment,model_name.constantize
+      
+      can :ldap_user_list,model_name.constantize
+      can :delete_user_from_list,model_name.constantize
+      can :pending_approvals_ldap,model_name.constantize
+      can :delete_show,model_name.constantize
       can :after_approval_delete_from_ldap, model_name.constantize
     end
     can :manage, UnapprovedRecord, approvable_type: @group.try(:model_list)
