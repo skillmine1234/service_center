@@ -56,10 +56,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ecol.git
-  revision: 7361a6ced2ef9cdbfa2f5024e1d31c99ada4c1d0
-  branch: ecol_req_temp_issue_new_res
+  revision: bbbdb33e67f358ff6f8142f639629f9ea12ed48e
+  branch: ecol_transaction
   specs:
-    qg-ecol (13.1.0)
+    qg-ecol (13.2.0)
       rails (= 4.2.2)
 
 GIT
@@ -111,10 +111,10 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git
-  revision: 4706ad44711768be6f82d0c109cc8bd7fe055178
-  branch: inw_02-2023
+  revision: 2810a0f91da24ca71ea761ee0750fd95adc7a4ee
+  branch: prod_code_inw
   specs:
-    qg-inw (8.5.0)
+    qg-inw (8.6.0)
       rails (= 4.2.2)
 
 GIT
@@ -694,14 +694,14 @@ DEPENDENCIES
   qg-cp (= 1.0.2)!
   qg-datapurge (= 0.7.0)!
   qg-dpesb (= 1.5.0)!
-  qg-ecol (= 13.1.0)!
+  qg-ecol (= 13.2.0)!
   qg-es (= 3.4.0)!
   qg-fp (= 2.7.0)!
   qg-ft (= 8.1.0)!
   qg-gm (= 2.1.0)!
   qg-ic (= 2.4.0)!
   qg-icol (= 2.1.0)!
-  qg-inw (= 8.5.0)!
+  qg-inw (= 8.6.0)!
   qg-ns (= 1.3.0)!
   qg-obdx (= 6.6.0)!
   qg-rx (= 1.9.0)!

@@ -18,17 +18,17 @@ module Setting
     validates_presence_of :setting3_name, if: "setting3_name.blank? && !setting4_name.blank?", message: "can't be blank when Setting4 name is present"
     validates_presence_of :setting4_name, if: "setting4_name.blank? && !setting5_name.blank?", message: "can't be blank when Setting5 name is present"
 
-    validates_format_of :setting1_name, :with => /\A[^<>`^\[\]"#%{}|^~\\]*\z/,:message=>'Not allowed the special charachters <>%"`\~^[]%{}'
-    validates_format_of :setting2_name, :with => /\A[^<>`^\[\]"#%{}|^~\\]*\z/,:message=>'Not allowed the special charachters <>%"`\~^[]%{}'
-    validates_format_of :setting3_name, :with => /\A[^<>`^\[\]"#%{}|^~\\]*\z/,:message=>'Not allowed the special charachters <>%"`\~^[]%{}'
-    validates_format_of :setting4_name, :with => /\A[^<>`^\[\]"#%{}|^~\\]*\z/,:message=>'Not allowed the special charachters <>%"`\~^[]%{}'
-    validates_format_of :setting5_name, :with => /\A[^<>`^\[\]"#%{}|^~\\]*\z/,:message=>'Not allowed the special charachters <>%"`\~^[]%{}'
+    # validates_format_of :setting1_name, :with => /\A[^<>`^\[\]"#%{}|^~\\]*\z/,:message=>'Not allowed the special charachters <>%"`\~^[]%{}'
+    # validates_format_of :setting2_name, :with => /\A[^<>`^\[\]"#%{}|^~\\]*\z/,:message=>'Not allowed the special charachters <>%"`\~^[]%{}'
+    # validates_format_of :setting3_name, :with => /\A[^<>`^\[\]"#%{}|^~\\]*\z/,:message=>'Not allowed the special charachters <>%"`\~^[]%{}'
+    # validates_format_of :setting4_name, :with => /\A[^<>`^\[\]"#%{}|^~\\]*\z/,:message=>'Not allowed the special charachters <>%"`\~^[]%{}'
+    # validates_format_of :setting5_name, :with => /\A[^<>`^\[\]"#%{}|^~\\]*\z/,:message=>'Not allowed the special charachters <>%"`\~^[]%{}'
 
-    validates_format_of :setting1_value, :with => /\A[^<>`^\[\]"#%{}|^~\\]*\z/,:message=>'Not allowed the special charachters <>%"`\~^[]%{}'
-    validates_format_of :setting2_value, :with => /\A[^<>`^\[\]"#%{}|^~\\]*\z/,:message=>'Not allowed the special charachters <>%"`\~^[]%{}'
-    validates_format_of :setting3_value, :with => /\A[^<>`^\[\]"#%{}|^~\\]*\z/,:message=>'Not allowed the special charachters <>%"`\~^[]%{}'
-    validates_format_of :setting4_value, :with => /\A[^<>`^\[\]"#%{}|^~\\]*\z/,:message=>'Not allowed the special charachters <>%"`\~^[]%{}'
-    validates_format_of :setting5_value, :with => /\A[^<>`^\[\]"#%{}|^~\\]*\z/,:message=>'Not allowed the special charachters <>%"`\~^[]%{}'
+    # validates_format_of :setting1_value, :with => /\A[^<>`^\[\]"#%{}|^~\\]*\z/,:message=>'Not allowed the special charachters <>%"`\~^[]%{}'
+    # validates_format_of :setting2_value, :with => /\A[^<>`^\[\]"#%{}|^~\\]*\z/,:message=>'Not allowed the special charachters <>%"`\~^[]%{}'
+    # validates_format_of :setting3_value, :with => /\A[^<>`^\[\]"#%{}|^~\\]*\z/,:message=>'Not allowed the special charachters <>%"`\~^[]%{}'
+    # validates_format_of :setting4_value, :with => /\A[^<>`^\[\]"#%{}|^~\\]*\z/,:message=>'Not allowed the special charachters <>%"`\~^[]%{}'
+    # validates_format_of :setting5_value, :with => /\A[^<>`^\[\]"#%{}|^~\\]*\z/,:message=>'Not allowed the special charachters <>%"`\~^[]%{}'
 
 
 
