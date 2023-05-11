@@ -81,6 +81,11 @@ ActiveAdmin.register User do
     def update
       @user = User.find_by_id(params[:id])
       @user.attributes = permitted_params[:user]
+      
+      if permitted_params[:user][:inactive] == "0"
+        @user.dormancy = 'N'
+      end
+
       unless (CONFIG[:authenticate_devise_with_ldap] || Rails.env.test?)
         @user.password = decrypt_encrypted_field(permitted_params[:user][:password])
         @user.password_confirmation = decrypt_encrypted_field(permitted_params[:user][:password_confirmation])
