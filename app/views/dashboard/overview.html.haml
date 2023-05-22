@@ -66,7 +66,7 @@
 
 = render partial: 'panel', locals: { group: 'ic', :sc_service => 'INSTANTCREDIT' }
 
-= render partial: 'panel', locals: { group: 'sm' }
+= #render partial: 'panel', locals: { group: 'sm' }
 
 - if @current_user.group_names.include?("cnb")
   %h1 Corporate Net Banking
@@ -231,7 +231,7 @@
 = #render partial: 'panel', locals: { group: 'ae'}
 = #render partial: 'panel', locals: { group: 'rx'}
 = #render partial: 'panel', locals: { group: 'rpl'}
-= render partial: 'panel', locals: { group: 'es'}
+= #render partial: 'panel', locals: { group: 'es'}
 = #render partial: 'panel', locals: { group: 'dpesb'}
 = #render partial: 'panel', locals: { group: 'ctl'}
 = #render partial: 'panel', locals: { group: 'dashboard'}

@@ -34,7 +34,6 @@
 //= require ft/ft.js
 //= require sc/sc.js
 //= require cc/cc.js
-//= require ae/ae.js
 //= require obdx/obdx.js
 //= require ns/ns_callback.js
 //= require rx/rx.js

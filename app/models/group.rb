@@ -23,8 +23,8 @@ class Group < ActiveRecord::Base
       ['IncomingFile','SuCustomer','SuUnapprovedRecord','SuIncomingRecord','FmAuditStep','SuIncomingFile']
     when "instant-credit"
       Qg::Ic::MODELS
-    when "smb"
-      Qg::Sm::MODELS
+    # when "smb"
+    #   Qg::Sm::MODELS
     when "cnb"
       ['CnUnapprovedRecord','IncomingFile','IncomingFileRecord','CnIncomingFile','CnIncomingRecord','Cnb2IncomingFile','Cnb2IncomingRecord']
     when "recurring-transfer"
