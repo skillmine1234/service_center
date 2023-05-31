@@ -1,0 +1,229 @@
+
+  <style>
+    /* CSS for layout */
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    
+    .search-section {
+      width: 31%;
+    }
+    
+    .results-section {
+      width: 69%;
+      margin-left: 10px;
+    }
+  </style>
+  <script type="text/javascript">
+    function reset_values(){
+      document.getElementById("form-horizontal").reset();
+    }
+  $(document).ready(function(){
+    
+    //$('input[type="text"]'). attr("placeholder", "Enter comma seperated value");
+    document.getElementById("transaction_type").disabled=true;
+  });
+
+  $("#partner_reset").click(function() {
+    $(this).closest('form').find("input,select").val("");
+  });
+
+  $(document).on('change','#service_type',function() {
+
+    if($("#service_type").val() == 'BULK')
+    {
+      document.getElementById("bulk_tbl").style.display = 'block';
+      document.getElementById("transaction_type").disabled=false;
+      document.getElementById("inw_search_fileds").style.display = 'none';
+      document.getElementById("ft_search_fileds").style.display = 'none';
+      document.getElementById("ecol_search_fileds").style.display = 'none';
+      document.getElementById("blk_search_fileds").style.display = 'block';
+    }
+    else if($("#service_type").val() == 'INW')
+    {
+      document.getElementById("bulk_tbl").style.display = 'none';
+      document.getElementById("transaction_type").disabled=false;
+      document.getElementById("inw_search_fileds").style.display = 'block';
+      document.getElementById("ft_search_fileds").style.display = 'none';
+      document.getElementById("ecol_search_fileds").style.display = 'none';
+      document.getElementById("blk_search_fileds").style.display = 'none';
+    }
+    else if($("#service_type").val() == 'ECOLLECT')
+    {
+      document.getElementById("bulk_tbl").style.display = 'none';
+      document.getElementById("transaction_type").disabled=false;
+     document.getElementById("inw_search_fileds").style.display = 'none';
+      document.getElementById("ft_search_fileds").style.display = 'none';
+      document.getElementById("ecol_search_fileds").style.display = 'block';
+      document.getElementById("blk_search_fileds").style.display = 'none';
+      
+    }
+    else if($("#service_type").val() == 'FUND TRANSFER')
+    {
+      document.getElementById("bulk_tbl").style.display = 'none';
+      document.getElementById("transaction_type").disabled=false;
+      document.getElementById("inw_search_fileds").style.display = 'none';
+      document.getElementById("ft_search_fileds").style.display = 'block';
+      document.getElementById("ecol_search_fileds").style.display = 'none';
+      document.getElementById("blk_search_fileds").style.display = 'none';
+    }
+    else if($("#service_type").val() == '')
+    {
+      document.getElementById("bulk_tbl").style.display = 'none';
+      document.getElementById("transaction_type").disabled=true;
+      document.getElementById("inw_search_fileds").style.display = 'none';
+      document.getElementById("ft_search_fileds").style.display = 'none';
+      document.getElementById("ecol_search_fileds").style.display = 'none';
+      document.getElementById("blk_search_fileds").style.display = 'none';
+    }
+  });
+
+</script>
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="search-section">
+
+    <%= form_tag '', :method => 'get',:id=>'form-horizontal', :class => 'form-horizontal', :autocomplete=>"off" do %> 
+  <%= hidden_field_tag :approval_status, params[:approval_status] %>
+  <div class="control-group">
+    <%= label_tag "service_type", "Service Type", :class => 'control-label' %>
+    <%= select_tag :service_type, options_for_select([['INW','INW'],['ECOLLECT','ECOLLECT'],['FUND TRANSFER','FUND TRANSFER'],['BULK','BULK']],params[:service_type]),:prompt => 'Please select Service Type' %>
+  </div>
+  
+  <div class="control-group">
+    <div id="bulk_tbl" style="display: none;">
+    <%= label_tag :bk_table_name, "Select Table", :class => 'control-label'%>
+      <%= radio_button_tag :ft_bulk_headers, "Bulk Header",:checked => true%>
+      Ft Bulk Header
+      <%= radio_button_tag :ft_transfer, "Fund Transfers"%>
+      Ft Transfer
+     </div> 
+  </div>
+
+  <div class="control-group">
+    <%= label_tag "transaction_type", "Transaction Type", :class => 'control-label' %>
+    <%= select_tag :transaction_type, options_for_select([['NEFT','NEFT'],['RTGS','RTGS'],['IMPS','IMPS'],['FT','FT'],['UPI','UPI']],params[:transaction_type]),:prompt => 'Please select Transaction Type'%>
+  </div>
+
+
+
+  <div id='ft_search_fileds' style="display: none;">
+      <div class="control-group">
+      <%= label_tag "ft_req_no", "Request No", :class => 'control-label' %>
+      <%= text_field_tag :ft_req_no, params[:ft_req_no] %>
+  </div>
+     <div class="control-group">
+        <%= label_tag "ft_cbs_req_no", "CBS Request No", :class => 'control-label' %>
+        <%= text_field_tag :ft_cbs_req_no, params[:ft_cbs_req_no] %>
+    </div>
+      <div class="control-group">
+        <%= label_tag "ft_status", "Status", :class => 'control-label' %>
+        <%= text_field_tag :ft_status, params[:ft_status] %>
+    </div>
+      <div class="control-group">
+        <%= label_tag "ft_fault_code", "Fault Code", :class => 'control-label' %>
+        <%= text_field_tag :ft_fault_code, params[:ft_fault_code] %>
+    </div>
+      <div class="control-group">
+        <%= label_tag "ft_fault_reason", "Fault Reason", :class => 'control-label' %>
+        <%= text_field_tag :ft_fault_reason, params[:ft_fault_reason] %>
+    </div>
+      <div class="control-group">
+        <%= label_tag "ft_customer_id", "Customer ID", :class => 'control-label' %>
+        <%= text_field_tag :ft_customer_id, params[:ft_customer_id] %>
+    </div>
+      <div class="control-group">
+        <%= label_tag "ft_app_id", "App ID", :class => 'control-label' %>
+        <%= text_field_tag :ft_app_id, params[:ft_app_id] %>
+      </div>
+    </div>
+    
+    <div id='inw_search_fileds' style="display: none;">  
+      <div class="control-group">
+       <%= label_tag "inw_partner_code", "Partner Code", :class => 'control-label' %>
+       <%= text_field_tag :inw_partner_code, params[:inw_partner_code] %>
+      </div>
+     <div class="control-group">
+     <%= label_tag "inw_subcode", "Sub Code", :class => 'control-label' %>
+     <%= text_field_tag :inw_subcode, params[:inw_subcode] %>
+      </div>
+    </div>
+
+    <div id='ecol_search_fileds' style="display: none;">
+      <div class="control-group">
+       <%= label_tag "ecol_status", "Status", :class => 'control-label' %>
+       <%= text_field_tag :ecol_status, params[:ecol_status] %>
+      </div>
+      
+      <div class="control-group">
+       <%= label_tag "ecol_credit_ref_no", "Credit Reference No", :class => 'control-label' %>
+       <%= text_field_tag :ecol_credit_ref_no, params[:ecol_credit_ref_no] %>
+      </div>
+      
+      <div class="control-group">
+       <%= label_tag "ecol_validation_status", "Validation Status", :class => 'control-label' %>
+       <%= text_field_tag :ecol_validation_status, params[:ecol_validation_status] %>
+      </div>
+
+      <div class="control-group">
+       <%= label_tag "ecol_notification_status", "Notification Status", :class => 'control-label' %>
+       <%= text_field_tag :ecol_notification_status, params[:ecol_notification_status] %>
+      </div>
+
+      <div class="control-group">
+       <%= label_tag "ecol_credit_status", "Credit Status", :class => 'control-label' %>
+       <%= text_field_tag :ecol_credit_status, params[:ecol_credit_status] %>
+      </div>
+  </div>    
+
+  <div id='blk_search_fileds' style="display: none;">
+    <div class="control-group">
+     <%= label_tag "blk_file_name", "File Name", :class => 'control-label' %>
+     <%= text_field_tag :blk_file_name, params[:blk_file_name] %>
+    </div>
+    <div class="control-group">
+     <%= label_tag "blk_file_id", "File Id", :class => 'control-label' %>
+     <%= text_field_tag :blk_file_id, params[:blk_file_id] %>
+    </div>
+    <div class="control-group">
+     <%= label_tag "blk_status", "Status", :class => 'control-label' %>
+     <%= text_field_tag :blk_status, params[:blk_status] %>
+    </div>
+    <div class="control-group">
+     <%= label_tag "blk_fault_code", "Fault Code", :class => 'control-label' %>
+     <%= text_field_tag :blk_fault_code, params[:blk_fault_code] %>
+    </div>
+    <div class="control-group">
+     <%= label_tag "blk_fault_reason", "Fault Reason", :class => 'control-label' %>
+     <%= text_field_tag :blk_fault_reason, params[:blk_fault_reason] %>
+    </div>
+  </div>  
+
+  <div class="control-group">
+    <%= label_tag :dates, "Select Date", :class => 'control-label'%>
+      <%= text_field_tag :from_date,nil,placeholder: "Form",class: 'input-mini'%>
+      <%= text_field_tag :to_date,nil,placeholder: "To",class: 'input-mini'%>
+  </div>
+
+
+  <div class="form-actions">
+    <%= button_tag "Search", :class => 'btn btn-primary' %>
+    <%= button_tag "Reset", :type => 'button',:onclick=>"reset_values()",:value=>'Reset', :class => 'btn', :id => 'partner_reset' %>
+  </div>
+
+  <%= hidden_field_tag :advanced_search, :true %>
+<% end %>
+    </div>
+    <div class="results-section">
+      <%if @partial_name.present?%>
+<div id="record_data">
+  <%= render :partial=>"#{@partial_name}"%>
+</div>
+<%end%>
+    </div>
+  </div>

@@ -1,0 +1,71 @@
+<br/>
+<h1>Ecol Transactions</h1>
+<br/>
+<table class="table table-bordered table-striped table-hover">
+  <div class="thead">
+    <th style="text-align:left; background-color: lightblue;">
+      Beneficiary Account Number
+    </th>
+    <th style="text-align:left; background-color: lightblue;">
+      Beneficiary IFSC
+    </th>
+    <th style="text-align:left; background-color: lightblue;">
+      Beneficiary Name
+    </th>
+    <th style="Text-align:left; background-color: lightblue;">
+      Remitter Name
+    </th>
+    <th style="Text-align:left; background-color: lightblue;">
+      Transfer Date
+    </th>
+    <th style="text-align:left; background-color: lightblue;">
+      Transfer Amount
+    </th>
+    <th style="text-align:left; background-color: lightblue;">
+      Status
+    </th>
+    <th style="text-align:left; background-color: lightblue;">
+      Pending Approval
+    </th>
+    <th style="text-align:left; background-color: lightblue;">
+      Settlement Status
+    </th>
+    <th style="text-align:left; background-color: lightblue;">
+      Validation Status
+    </th>
+  </div>
+  <div class="tbody">
+   <%if @ecol_transaction.present?%> 
+  <% @ecol_transactions.each do |ecol_transaction| %>
+    <tr>
+      </td>
+      <td style="text-align:left;">
+        <%= ecol_transaction.bene_account_no %>
+      </td>
+      <td style="text-align:left;">
+        <%= ecol_transaction.bene_account_ifsc %>
+      </td>
+      <td style="text-align:left;">
+        <%= ecol_transaction.bene_full_name %>
+      </td>
+      <td style="text-align:left;">
+        <%= ecol_transaction.rmtr_full_name %>
+      </td>
+      <td style="text-align:left;">
+        <%= ecol_transaction.transfer_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p") rescue "" %>
+      </td>
+      <td style="text-align:left;">
+        <%= ecol_transaction.transfer_amt %>
+      </td>
+      <td style="text-align:left;">
+        <%= ecol_transaction.status %>
+      </td>
+      <td style="text-align:left;">
+        <%= ecol_transaction.pending_approval %>
+      </td>
+    </tr>
+  <% end %>
+  <%end%>
+</div>
+
+</table>

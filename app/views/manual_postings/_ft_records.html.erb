@@ -1,0 +1,67 @@
+<br/>
+<h1>Ft Transactions</h1>
+<br>
+  <table class="table table-bordered table-striped table-hover">
+    <div class="thead">
+      <th style="text-align:left; background-color: lightblue;"></th>
+      <% if current_user.present? && current_user.try(:accessible_customers).try(:count) != 1 %>
+        <th style="text-align:left; background-color: lightblue;">
+          Customer ID 
+        </th>
+      <% end %>
+      <th style="text-align:left; background-color: lightblue;">
+        Transfer Type  
+      </th>
+      <th style="text-align:left; background-color: lightblue;">
+        Beneficiary Name
+      </th>
+      <th style="text-align:left; background-color: lightblue;">
+        Transfer Amount
+      </th>
+      <th style="text-align:left; background-color: lightblue;">
+        Debit Account No
+      </th>
+      <th style="text-align:left; background-color: lightblue;">
+        Request Timestamp
+      </th>
+      <th style="text-align:left; background-color: lightblue;">
+        Response Timestamp
+      </th>
+      <th style="text-align:left; background-color: lightblue;">
+        Transfer Status
+      </th>
+    </div>
+    <div class="tbody">
+      <%if @funds_transfers.present?%>
+  <% @funds_transfers.each do |funds_transfer| %>
+    <tr>
+      <% if current_user.present? && current_user.try(:accessible_customers).try(:count) != 1 %>
+        <td style="text-align:left;">
+          <%= funds_transfer.customer_id %>
+        </td>
+      <% end %>
+      <td style="text-align:left;">
+        <%= funds_transfer.transfer_type %>
+      </td>
+      <td style="text-align:left;">
+        <%= funds_transfer.bene_full_name %>
+      </td>
+      <td style="text-align:left;">
+        <%= number_to_currency(funds_transfer.transfer_amount, unit: 'Rs ') %>
+      </td>
+      <td style="text-align:left;">
+        <%= funds_transfer.debit_account_no %>
+      </td>
+      <td style="text-align:left;">
+        <%= funds_transfer.req_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p") %>
+      </td>
+      <td style="text-align:left;">
+        <%= funds_transfer.rep_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p") %>
+      </td>
+    </tr>
+  <% end %>
+  <%end%>
+</div>
+
+  </table>
+</br>

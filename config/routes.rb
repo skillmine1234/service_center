@@ -10,6 +10,13 @@ ServiceCenter::Application.routes.draw do
 
   resources :encrypted_passwords
 
+  resources :manual_postings do 
+    collection do
+      get 'search_record'
+    end
+  end
+
+
   devise_for :users, controllers: { sessions: 'sessions' }
   devise_for :admin_users, ActiveAdmin::Devise.config.merge(controllers: { sessions: 'admin/sessions', password_expired: 'password_expired' })
   

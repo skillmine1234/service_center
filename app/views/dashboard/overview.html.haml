@@ -164,6 +164,11 @@
         = image_tag 'reconciled_returns.png', :size => "80x80"
       %br
         = "Reconciled Returns"
+    .box
+      = link_to 'manual_postings/search_record' do
+        = image_tag 'bulk_manual_posting.png', :size => "100x80"
+      %br
+        = "Manual Posting"    
 - if @current_user.group_names.include?("fr")
   %h1 File Reports
   .slide-container
