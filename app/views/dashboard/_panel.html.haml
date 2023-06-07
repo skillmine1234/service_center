@@ -34,6 +34,12 @@
             = image_tag 'obdx/reports.png', :size => "80x80"
           %br
             = "Reports"
+      - if m[:common_items].include?(:console_data)
+        .box
+          = link_to db_list_console_dbs_path do
+            = image_tag 'sc/console_db.png', :size => "80x80"
+          %br
+            = "Console Data"      
     - if respond_to?("#{group}_unapproved_records_path", sc_service: service)
       .box
         = link_to send("#{group}_unapproved_records_path") do
