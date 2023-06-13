@@ -20,4 +20,10 @@ class AdminUser < ActiveRecord::Base
     username
   end
 
+  if ENV['DEVISE_AUTHENTICATE_WITH_LDAP'] == "false"
+    def password_required?
+      false
+    end
+  end  
+
 end
