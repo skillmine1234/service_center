@@ -1,5 +1,10 @@
 ActiveAdmin.register AdminUser do
-  permit_params :email, :username, :password, :password_confirmation, :remember_me, :inactive,:title, :body
+  if  ENV['DEVISE_AUTHENTICATE_WITH_LDAP'] == "true"
+    permit_params :email, :username,:remember_me, :inactive,:title, :body
+  else
+    permit_params :email, :username, :password, :password_confirmation, :remember_me, :inactive,:title, :body
+  end  
+
   filter :id
   filter :email
   filter :username
@@ -68,8 +73,8 @@ ActiveAdmin.register AdminUser do
     f.inputs "Admin Details" do
       f.input :username
       f.input :email
-      f.input :password, input_html: { data: { encrypt: true } }
-      f.input :password_confirmation, input_html: { data: { encrypt: true } }
+      f.input :password, input_html: { data: { encrypt: true } } if ENV['DEVISE_AUTHENTICATE_WITH_LDAP'] == "false"
+      f.input :password_confirmation, input_html: { data: { encrypt: true } } if ENV['DEVISE_AUTHENTICATE_WITH_LDAP'] == "false"
       f.input :inactive
     end
     f.actions
@@ -143,14 +148,14 @@ ActiveAdmin.register AdminUser do
 
     def create
       @admin_user = AdminUser.new(permitted_params[:admin_user])
-      unless Rails.env.test?
+      unless Rails.env.test? && ENV['DEVISE_AUTHENTICATE_WITH_LDAP'] == "false"
         @admin_user.password = decrypt_encrypted_field(permitted_params[:admin_user][:password])
         @admin_user.password_confirmation = decrypt_encrypted_field(permitted_params[:admin_user][:password_confirmation])
       end
       if !@admin_user.valid?
         render "new"
       else
-        @admin_user.save(validate: false)
+        @admin_user.save!
         flash[:alert] = 'Admin User successfully created!'
         redirect_to :action => 'show', :id => @admin_user.id
       end
