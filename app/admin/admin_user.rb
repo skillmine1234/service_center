@@ -150,7 +150,7 @@ ActiveAdmin.register AdminUser do
       if !@admin_user.valid?
         render "new"
       else
-        @admin_user.save!
+        @admin_user.save(validate: false)
         flash[:alert] = 'Admin User successfully created!'
         redirect_to :action => 'show', :id => @admin_user.id
       end

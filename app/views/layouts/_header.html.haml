@@ -1,9 +1,9 @@
-%a.brand{:href => "/", :style => "background: url(#{asset_path 'yesbank_logo.png'})no-repeat center center"}
-  Service Center
+= link_to "/" do
+  = image_tag 'yesbank_logo.png'
 - unless current_user.nil?
   %span.caption
     .brand_name
-      &nbsp;Service Center&nbsp;
+      = "Service Center"
   %ul.nav{:style => "width: 25%;"}
     %li{:style => "width: 33%;"}
       %a{:href => "/"}
@@ -17,4 +17,5 @@
 - else
   %span.caption
     .brand_name
-      &nbsp;&nbsp; Service Center &nbsp
+         Service Center
+
