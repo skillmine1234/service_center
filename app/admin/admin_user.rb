@@ -1,6 +1,6 @@
 ActiveAdmin.register AdminUser do
   permit_params :email, :username, :password, :password_confirmation, :remember_me, :inactive,:title, :body
-  
+
   filter :id
   filter :email
   filter :username
@@ -143,12 +143,15 @@ ActiveAdmin.register AdminUser do
     include EncryptedField::ControllerAdditions
 
     def create
+      p ENV['DEVISE_AUTHENTICATE_WITH_LDAP']
+
       @admin_user = AdminUser.new(permitted_params[:admin_user])
 
       if ENV['DEVISE_AUTHENTICATE_WITH_LDAP'] == "false"
         @admin_user.password = decrypt_encrypted_field(permitted_params[:admin_user][:password])
         @admin_user.password_confirmation = decrypt_encrypted_field(permitted_params[:admin_user][:password_confirmation])
        else
+        p "in the else part"
         @admin_user.password = "******"
         @admin_user.password_confirmation = "******" 
       end
