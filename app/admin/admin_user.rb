@@ -143,17 +143,16 @@ ActiveAdmin.register AdminUser do
     include EncryptedField::ControllerAdditions
 
     def create
-      p ENV['DEVISE_AUTHENTICATE_WITH_LDAP']
-
+    
       @admin_user = AdminUser.new(permitted_params[:admin_user])
 
       if ENV['DEVISE_AUTHENTICATE_WITH_LDAP'] == "false"
         @admin_user.password = decrypt_encrypted_field(permitted_params[:admin_user][:password])
         @admin_user.password_confirmation = decrypt_encrypted_field(permitted_params[:admin_user][:password_confirmation])
        else
-        p "in the else part"
         @admin_user.password = "******"
         @admin_user.password_confirmation = "******" 
+        @admin_user.encrypted_password = "******"
       end
       if !@admin_user.valid?
         render "new"
