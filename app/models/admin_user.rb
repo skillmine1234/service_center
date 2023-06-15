@@ -18,6 +18,6 @@ class AdminUser < ActiveRecord::Base
 
   def name
     username
-  end 
+  end
 
 end

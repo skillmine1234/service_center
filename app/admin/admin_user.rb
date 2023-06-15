@@ -1,10 +1,6 @@
 ActiveAdmin.register AdminUser do
-  if  ENV['DEVISE_AUTHENTICATE_WITH_LDAP'] == "true"
-    permit_params :email, :username,:remember_me, :inactive,:title, :body
-  else
-    permit_params :email, :username, :password, :password_confirmation, :remember_me, :inactive,:title, :body
-  end  
-
+  permit_params :email, :username, :password, :password_confirmation, :remember_me, :inactive,:title, :body
+  
   filter :id
   filter :email
   filter :username
@@ -148,9 +144,13 @@ ActiveAdmin.register AdminUser do
 
     def create
       @admin_user = AdminUser.new(permitted_params[:admin_user])
-      unless Rails.env.test? && ENV['DEVISE_AUTHENTICATE_WITH_LDAP'] == "false"
+
+      if ENV['DEVISE_AUTHENTICATE_WITH_LDAP'] == "false"
         @admin_user.password = decrypt_encrypted_field(permitted_params[:admin_user][:password])
         @admin_user.password_confirmation = decrypt_encrypted_field(permitted_params[:admin_user][:password_confirmation])
+       else
+        @admin_user.password = "******"
+        @admin_user.password_confirmation = "******" 
       end
       if !@admin_user.valid?
         render "new"
