@@ -7,8 +7,7 @@ class ApplicationController < ActionController::Base
   before_action :set_as_private
   before_action :authenticate_user!, if: :protected_by_pundit
   
-  after_action  :protect_from_host_header_attack,:verify_authorized, except: :index, if: :protected_by_pundit
-  # after_action :verify_policy_scoped, only: :index, if: :protected_by_pundit
+  before_action  :protect_from_host_header_attack
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   rescue_from CanCan::AccessDenied, with: :user_not_authorized
@@ -18,7 +17,8 @@ class ApplicationController < ActionController::Base
 
 
   def protect_from_host_header_attack
-    #env['HTTP_HOST'] = default_url_options.fetch(:host, env['HTTP_HOST'])
+    env['HTTP_HOST'] = default_url_options.fetch(:host, env['HTTP_HOST'])
+    #render :nothing => true, :status => :service_unavailable
   end
 
   before_filter do

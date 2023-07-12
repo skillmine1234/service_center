@@ -166,8 +166,17 @@ ActiveAdmin.register AdminUser do
     def update
       @admin_user = AdminUser.find_by_id(params[:id])
       @admin_user.attributes = permitted_params[:admin_user]
-      @admin_user.password = decrypt_encrypted_field(permitted_params[:admin_user][:password])
-      @admin_user.password_confirmation = decrypt_encrypted_field(permitted_params[:admin_user][:password_confirmation])
+      
+      if ENV['DEVISE_AUTHENTICATE_WITH_LDAP'] == "false"
+        @admin_user.password = decrypt_encrypted_field(permitted_params[:admin_user][:password])
+        @admin_user.password_confirmation = decrypt_encrypted_field(permitted_params[:admin_user][:password_confirmation])
+       else
+        @admin_user.password = "******"
+        @admin_user.password_confirmation = "******" 
+        @admin_user.encrypted_password = "******"
+       end 
+      #@admin_user.password = decrypt_encrypted_field(permitted_params[:admin_user][:password])
+      #@admin_user.password_confirmation = decrypt_encrypted_field(permitted_params[:admin_user][:password_confirmation])
       if !@admin_user.valid?
         flash[:error] = @admin_user.errors.full_messages
         render "edit"

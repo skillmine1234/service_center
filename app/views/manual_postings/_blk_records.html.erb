@@ -1,0 +1,92 @@
+<br/>
+<h1>Bulk Transaction</h1>
+<br/>
+<table class="table table-bordered table-striped table-hover">
+  <div class="thead">
+    <th style="text-align:left; background-color: lightblue;"></th>
+    <th style="text-align:left; background-color: lightblue;">
+      Status
+    </th>
+    <th style="text-align:left; background-color: lightblue;">
+      Request No
+    </th>
+    <th style="Text-align:left; background-color: lightblue;">
+      Partner
+    </th>
+    <th style="Text-align:left; background-color: lightblue;">
+      Bank Reference No
+    </th>
+    <th style="Text-align:left; background-color: lightblue;">
+      Remitter Name
+    </th>
+    <th style="text-align:left; background-color: lightblue;">
+      Beneficiary Name
+    </th>
+    <th style="text-align:left; background-color: lightblue;">
+      Request Transfer Type
+    </th>
+    <th style="text-align:left; background-color: lightblue;">
+      Transfer Type
+    </th>
+    <th style="text-align:left; background-color: lightblue;">
+      Transfer Amount
+    </th>
+    <th style="text-align:left; background-color: lightblue;">
+      Notify Status 
+    </th>
+    <th style="text-align:left; background-color: lightblue;">
+      Request Date
+    </th>
+    <th style="text-align:left; background-color: lightblue;">
+      Response Date
+    </th>
+  </div>
+  <div class="tbody">
+  <%if @inward_remittances.present?%>
+  <% @inward_remittances.each do |record|    %>
+    <tr>
+      <td style="text-align:left;">
+        <%= link_to 'Show', record %>
+      </td>
+      <td style="text-align:left;">
+        <%= record.status_code %>
+      </td>
+      <td style="text-align:left;">
+        <%= record.req_no %>
+      </td>
+      <td style="text-align:left;">
+        <%= record.partner_code.to_s + "-" +record.partner.try(:name).to_s %>
+      </td>
+      <td style="text-align:left;">
+        <%= record.bank_ref %>
+      </td>
+      <td style="text-align:left;">
+        <%= record.rmtr_full_name %>
+      </td>
+      <td style="text-align:left;">
+        <%= record.bene_full_name %>
+      </td>
+      <td style="text-align:left;">
+        <%= record.req_transfer_type %>
+      </td>
+      <td style="text-align:left;">
+        <%= record.transfer_type %>
+      </td>
+      <td style="text-align:left;">
+        <%= record.transfer_amount %>
+      </td>
+      <td style="text-align:left;">
+        <%= record.notify_status %>
+      </td>
+      <td style="text-align:left;">
+        <%= record.req_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p") %>
+      </td>
+      <td style="text-align:left;">
+        <%= record.rep_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p") %>
+      </td>
+    </tr>
+  <% end %>
+  <%end%>
+</div>
+
+</table>

@@ -10,13 +10,13 @@ class ManualPostingsController < ApplicationController
   
   def search_record
   	if params[:service_type] == "INW"
-  		@inward_remittances = InwardRemittance.all.order("id desc")
+  		#@inward_remittances = InwardRemittance.all.order("id desc")
   		@partial_name = "inw_records"
   	elsif params[:service_type] == "ECOLLECT"
-  		@ecol_transactions = EcolTransaction.all.order("id desc")
+  		#@ecol_transactions = EcolTransaction.all.order("id desc")
   		@partial_name = "ecol_records"
   	elsif params[:service_type] == "FUND TRANSFER"
-  		@funds_transfers = FundsTransfer.order("id desc")
+  		#@funds_transfers = FundsTransfer.order("id desc")
   		@partial_name = "ft_records"
   	elsif params[:service_type] == "BULK"
   		@partial_name = "blk_records"	
