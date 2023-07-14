@@ -106,10 +106,17 @@ GIT
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-sc.git
-  revision: 139733704e7010599b9cf7f05f36f5a56256d47b
+  revision: b0e9a019b07fd02bcc2ed4f5469c8038825f53d1
   branch: esbconfig_without_approval
   specs:
-    qg-sc (3.6.0)
+    qg-sc (3.7.0)
+      rails (~> 4.2.2)
+
+GIT
+  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-sm.git
+  revision: 4dd5226388ccafd4a92f3c92028eed9b7b5f0867
+  specs:
+    qg-sm (2.0.0)
       rails (~> 4.2.2)
 
 GIT
@@ -650,7 +657,8 @@ DEPENDENCIES
   qg-ns (= 1.3.0)!
   qg-obdx (= 6.6.0)!
   qg-rx (= 1.9.0)!
-  qg-sc (= 3.6.0)!
+  qg-sc (= 3.7.0)!
+  qg-sm (= 2.0.0)!
   rails (= 4.2.2)
   rails_12factor
   rake (< 11.0)

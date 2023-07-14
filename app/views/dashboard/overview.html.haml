@@ -66,7 +66,7 @@
 
 = render partial: 'panel', locals: { group: 'ic', :sc_service => 'INSTANTCREDIT' }
 
-= #render partial: 'panel', locals: { group: 'sm' }
+= render partial: 'panel', locals: { group: 'sm' }
 
 - if @current_user.group_names.include?("cnb")
   %h1 Corporate Net Banking
