@@ -7,19 +7,19 @@ class ApplicationController < ActionController::Base
   before_action :set_as_private
   before_action :authenticate_user!, if: :protected_by_pundit
   
-  before_action  :protect_from_host_header_attack
+  #before_action  :protect_from_host_header_attack
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   rescue_from CanCan::AccessDenied, with: :user_not_authorized
 
-  before_action :debug_headers
+  #before_action :debug_headers
 
 
 
-  def protect_from_host_header_attack
-    env['HTTP_HOST'] = default_url_options.fetch(:host, env['HTTP_HOST'])
-    #render :nothing => true, :status => :service_unavailable
-  end
+  # def protect_from_host_header_attack
+  #   env['HTTP_HOST'] = default_url_options.fetch(:host, env['HTTP_HOST'])
+  #   #render :nothing => true, :status => :service_unavailable
+  # end
 
   before_filter do
     
@@ -99,5 +99,5 @@ class ApplicationController < ActionController::Base
         if request.env['HTTP_X_FORWARDED_HOST']
             request.env.except!('HTTP_X_FORWARDED_HOST') # just drop the variable
         end
-    end # def
+    end 
 end
