@@ -3,6 +3,8 @@ class IamCustUsersController < ApplicationController
   before_filter :authenticate_user!
   before_filter :block_inactive_user!
   respond_to :json
+  require 'will_paginate/array'
+
   include ApplicationHelper
   include Approval2::ControllerAdditions
   include IamCustUserHelper
@@ -131,6 +133,7 @@ class IamCustUsersController < ApplicationController
   def ldap_user_list
     #@users_list = [[["arvind"],[""],["20150506105212.0Z"],["133252502716082641"]],[["rahul"],[""],["20150506105212.0Z"],[""]],[["arvind123"],[""],["20150506105212.0Z"],["133252502716082641"]],[["arvind123"],[""],["20150506105212.0Z"],["133252502716082641"]]]
     @users_list = LDAP.new.list_users
+    @users_list.paginate(:page => 10, :per_page => 1)
   end
 
   private
