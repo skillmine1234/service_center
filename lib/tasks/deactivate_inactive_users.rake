@@ -12,7 +12,7 @@ namespace :inactive_users do
 
   desc "Dormancy Code Update"
   task :domancy_code_update => :environment do
-     @users = User.where(['last_sign_in_at < ? and inactive = ?', "90".to_i.days.ago,false]).where.not(last_sign_in_at: nil)
+     @users = User.where(['last_sign_in_at < ? and inactive = ? OR inactive = ? OR inactive = ?', "90".to_i.days.ago,false,true,nil]).where.not(last_sign_in_at: nil)
      puts "Dormancy User Script Started......"
      @users.each do |user|
       user.update(dormancy: "Y",inactive: true,updated_at: Time.now)
