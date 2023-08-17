@@ -100,7 +100,7 @@ class IamCustUser < ActiveRecord::Base
     puts "==============================generate_password method start for username: #{username}========================="
     if self.last_action == 'C' && self.approval_status == 'A' && self.lock_version >= 0
       puts "-----------Fresh User------------"
-      self.generated_password = [*('A'..'Z')].sample(4).join + rand(10..99).to_s + [*('a'..'z')].sample(4).join
+      self.generated_password = SecureRandom.hex(8)
       self.encrypted_password = EncPassGenerator.new(generated_password, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']).generate_encrypted_password
       self.last_password_reset_at = Time.zone.now
     elsif (self.last_action == 'U' || self.last_action =='C') && self.approval_status == 'A' && self.should_reset_password == "Y"
@@ -109,7 +109,7 @@ class IamCustUser < ActiveRecord::Base
       @message = self.test_ldap_login
       if (group_check.present? && group_check.include?(true)) && @message == "Login Successfull"
         puts "-----------Inside User Reset Password------------"
-        self.generated_password = [*('A'..'Z')].sample(4).join + rand(10..99).to_s + [*('a'..'z')].sample(4).join
+        self.generated_password = SecureRandom.hex(8)
         self.encrypted_password = EncPassGenerator.new(generated_password, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']).generate_encrypted_password
         self.last_password_reset_at = Time.zone.now
       end

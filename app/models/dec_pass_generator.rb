@@ -9,7 +9,7 @@ class DecPassGenerator
     decrypt(@string, @key, @secret)
   end
 
-  ALGO = 'AES-128-CBC'
+  ALGO = 'AES-256-CBC'
 
   private
 
