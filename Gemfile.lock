@@ -1,12 +1,4 @@
 GIT
-  remote: https://github.com/Capgemini008/qg-sc
-  revision: 3cda2a4f3497f2e3ab214c7cc092d754c9fb84c7
-  branch: esbconfig_without_approval
-  specs:
-    qg-sc (3.8.0)
-      rails (~> 4.2.2)
-
-GIT
   remote: https://github.com/quantiguous/lazy_columns.git
   revision: afdcabc9df0bce3e8fd409e857219e7eadcd42f9
   specs:
@@ -111,6 +103,14 @@ GIT
   specs:
     qg-rx (1.9.0)
       rails (= 4.2.2)
+
+GIT
+  remote: https://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:x-oauth-basic@github.com/Capgemini008/qg-sc.git
+  revision: 3cda2a4f3497f2e3ab214c7cc092d754c9fb84c7
+  branch: esbconfig_without_approval
+  specs:
+    qg-sc (3.8.0)
+      rails (~> 4.2.2)
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-sm.git
