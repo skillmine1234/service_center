@@ -125,6 +125,8 @@ class Ability
     cannot :destroy, UserRole
     can :manage, UserGroup
     cannot :destroy, UserGroup
+    can :manage, AdminUser
+    cannot :approve, AdminUser
   end
 
   def admin_permissions
@@ -141,6 +143,10 @@ class Ability
   def approver_admin_permissions
     can :read, UserRole
     can :approve, UserRole
+    can :read, AdminUser
+    can :approve, AdminUser
+
+    can :approve, AdminUser
     can :read, UserGroup
     can :approve, UserGroup 
   end

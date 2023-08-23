@@ -1,4 +1,5 @@
 ActiveAdmin.register AdminUser do
+  menu :parent => "User Config", :priority => 4
   permit_params :email, :username, :password, :password_confirmation, :remember_me, :inactive,:title, :body
 
   filter :id
@@ -15,27 +16,45 @@ ActiveAdmin.register AdminUser do
     column :current_sign_in_at
     column :last_sign_in_at
     column :sign_in_count
+    if current_admin_user.has_role? :user_admin
     column :user_admin do |vt|
-      if vt.id==current_admin_user.id
-        (vt.has_role? :user_admin) ? "Yes" : "No"
-      else
-       (vt.has_role? :user_admin) ? (link_to "Remove User Admin", remove_user_admin_admin_admin_user_path(vt), :method => :put) : (link_to "Make User Admin", make_user_admin_admin_admin_user_path(vt), :method => :put)
-      end
-    end
-    column :admin do |vt|
-      if vt.id==current_admin_user.id
-        (vt.has_role? :admin) ? "Yes" : "No"
-      else
-        (vt.has_role? :admin) ? (link_to "Remove Admin", remove_admin_admin_admin_user_path(vt), :method => :put) : (link_to "Make Admin", make_admin_admin_admin_user_path(vt), :method => :put)
-      end
+      (vt.has_role? :user_admin) ? "Yes" : "No"
     end
     column :approver_admin do |vt|
-      if vt.id==current_admin_user.id
-        (vt.has_role? :approver_admin) ? "Yes" : "No"
-      else
-       (vt.has_role? :approver_admin) ? (link_to "Remove Approver Admin", remove_approver_admin_admin_admin_user_path(vt), :method => :put) : (link_to "Make Approver Admin", make_approver_admin_admin_admin_user_path(vt), :method => :put)
-      end
+      (vt.has_role? :approver_admin) ? "Yes" : "No"
     end
+    end
+    if current_admin_user.has_role? :approver_admin
+    column :user_admin do |vt|
+      (vt.has_role? :user_admin) ? (link_to "Remove User Admin", remove_user_admin_admin_admin_user_path(vt), :method => :put) : (link_to "Make User Admin", make_user_admin_admin_admin_user_path(vt), :method => :put)
+    end
+    column :approver_admin do |vt|
+      (vt.has_role? :approver_admin) ? (link_to "Remove Approver Admin", remove_approver_admin_admin_admin_user_path(vt), :method => :put) : (link_to "Make Approver Admin", make_approver_admin_admin_admin_user_path(vt), :method => :put)
+    end
+    end
+    # column :user_admin do |vt|
+    #   if vt.id==current_admin_user.id
+    #     (vt.has_role? :user_admin) ? "Yes" : "No"
+    #   else
+    #     (vt.has_role? :user_admin) ? "Yes" : "No"
+    #    #(vt.has_role? :user_admin) ? (link_to "Remove User Admin", remove_user_admin_admin_admin_user_path(vt), :method => :put) : (link_to "Make User Admin", make_user_admin_admin_admin_user_path(vt), :method => :put)
+    #   end
+    # end
+    # # column :admin do |vt|
+    # #   if vt.id==current_admin_user.id
+    # #     (vt.has_role? :admin) ? "Yes" : "No"
+    # #   else
+    # #     (vt.has_role? :admin) ? "Yes" : "No"
+    # #     #(vt.has_role? :admin) ? (link_to "Remove Admin", remove_admin_admin_admin_user_path(vt), :method => :put) : (link_to "Make Admin", make_admin_admin_admin_user_path(vt), :method => :put)
+    # #   end
+    # # end
+    # column :approver_admin do |vt|
+    #   if vt.id==current_admin_user.id
+    #     (vt.has_role? :approver_admin) ? "Yes" : "No"
+    #   else
+    #    (vt.has_role? :approver_admin) ? (link_to "Remove Approver Admin", remove_approver_admin_admin_admin_user_path(vt), :method => :put) : (link_to "Make Approver Admin", make_approver_admin_admin_admin_user_path(vt), :method => :put)
+    #   end
+    # end
     column :inactive
     actions
   end
@@ -93,8 +112,8 @@ ActiveAdmin.register AdminUser do
 
   member_action :make_approver_admin, :method => :put do
     user = AdminUser.find(params[:id])
-    if current_admin_user.has_role? :super_admin
-      unless user.has_role?(:user_admin)
+    if current_admin_user.has_role? :approver_admin
+      unless user.has_role?(:approver_admin)
         user.add_role :approver_admin 
       else
         flash[:error] = "User with User admin access cannot be made an approver"
@@ -105,13 +124,13 @@ ActiveAdmin.register AdminUser do
 
   member_action :remove_approver_admin, :method => :put do
     user = AdminUser.find(params[:id])
-    user.remove_role :approver_admin if current_admin_user.has_role? :super_admin
+    user.remove_role :approver_admin if current_admin_user.has_role? :approver_admin
     redirect_to :back
   end
 
   member_action :make_user_admin, :method => :put do
     user = AdminUser.find(params[:id])
-    if current_admin_user.has_role? :super_admin
+    if current_admin_user.has_role? :approver_admin
       unless user.has_role?(:approver_admin)
         user.add_role :user_admin 
       else
@@ -123,7 +142,7 @@ ActiveAdmin.register AdminUser do
 
   member_action :remove_user_admin, :method => :put do
     user = AdminUser.find(params[:id])
-    user.remove_role :user_admin if current_admin_user.has_role? :super_admin
+    user.remove_role :user_admin if current_admin_user.has_role? :approver_admin
     redirect_to :back
   end
 

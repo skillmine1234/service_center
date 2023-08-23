@@ -1,5 +1,5 @@
 ActiveAdmin.register UserGroup do
-  menu :parent => "User Config", :priority => 2
+  menu :parent => "User Config", :priority => 4
   permit_params :user_id, :group_id, :lock_version, :approval_status, :last_action, 
                 :approved_id, :approved_version, :created_at, :updated_at, :created_by,
                 :updated_by, :disabled
