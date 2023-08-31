@@ -49,11 +49,11 @@ GIT
       rails (~> 4.2.2)
 
 GIT
-  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ft.git
-  revision: 93c0f4ca22dfab9c88520bb4629ec44f06044d87
+  remote: https://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:x-oauth-basic@github.com/Capgemini008/qg-ft.git
+  revision: b01645765e353a8f242d0c39a1c0fcac05cf7d03
   branch: with_dashboard_ft_issue
   specs:
-    qg-ft (8.1.0)
+    qg-ft (8.2.0)
       draper
       pundit
       rails (>= 4.2.2)
@@ -650,7 +650,7 @@ DEPENDENCIES
   qg-datapurge (= 0.7.0)!
   qg-ecol (= 13.5.0)!
   qg-fp (= 2.7.0)!
-  qg-ft (= 8.1.0)!
+  qg-ft (= 8.2.0)!
   qg-ic (= 2.4.0)!
   qg-icol (= 2.1.0)!
   qg-inw (= 9.0.0)!
