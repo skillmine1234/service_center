@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 ruby "3.2.2"
+
 #gem 'roo'
 gem "flot-rails"
 gem 'rails', '7.0.4.3'# '7.0.4.3'
