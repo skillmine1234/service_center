@@ -63,7 +63,7 @@ gem 'simple_enum-multiple'
 gem 'draper'
 gem 'font-awesome-rails'
 gem 'i18n', '~> 1.13'
-gem 'encrypted_field',:git=>"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:x-oauth-basic@github.com/skillmine1234/encrypted_field"
+gem 'encrypted_field',:git=>"https://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:x-oauth-basic@github.com/skillmine1234/encrypted_field"
 #gem 'nokogiri'
 #gem 'bcrypt', '~> 3.1', '>= 3.1.18'
 gem 'ffi', '~> 1.15', '>= 1.15.5'
@@ -124,7 +124,7 @@ gem 'will_paginate', '~> 4.0'
 #gem 'activerecord-oracle_enhanced-adapter'
 #gem 'activerecord-oracle_enhanced-adapter', '~> 7.0.0'
 #gem 'ruby-oci8'
-gem 'qg-inw',:git=>"https://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:x-oauth-basic@github.com/skillmine1234/qg-inw", branch: 'inw_changes'
+#gem 'qg-inw',:git =>"https://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:x-oauth-basic@github.com/skillmine1234//qg-inw"#, branch: 'inw_changes'
 gem 'qg-ft',:git=>"https://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:x-oauth-basic@github.com/skillmine1234/qg-ft"
 #gem 'qg-ecol',:path=>"/home/rahul/project/qg-ecol"
 # source "https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/" do
