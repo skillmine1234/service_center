@@ -1,0 +1,43 @@
+#!/bin/bash -e
+
+cp config/database.1.yml config/database.yml
+
+mkdir -p log
+touch log/production.log
+
+echo "Installing Oracle InstantClient Basic/SDK/SQLPlus..."
+echo "yes this is the right file"
+mkdir -p /tmp/oracle
+cd /tmp/oracle
+
+wget -O "instantclient-basic-11.1.0.7.0-linux-x86_64.zip" "https://onedrive.live.com/download?resid=A12F94714109F76F%21151&authkey=!ADfC9DbHHYvHEx4"
+unzip "instantclient-basic-11.1.0.7.0-linux-x86_64.zip"
+
+wget -O "instantclient-sdk-11.1.0.7.0-linux-x86_64.zip" "https://onedrive.live.com/download?resid=A12F94714109F76F%21148&authkey=!ADaW-rEffGotOns"
+unzip "instantclient-sdk-11.1.0.7.0-linux-x86_64.zip"
+
+wget -O "instantclient-sqlplus-11.1.0.7.0-linux-x86_64.zip" "https://onedrive.live.com/download?resid=A12F94714109F76F%21149&authkey=!AEUAfaw9S4BuK4k"
+unzip "instantclient-sqlplus-11.1.0.7.0-linux-x86_64.zip"
+
+
+# array=("instantclient-basic-11.1.0.7.0-linux-x86_64.zip" "instantclient-sdk-11.1.0.7.0-linux-x86_64.zip" "instantclient-sqlplus-11.1.0.7.0-linux-x86_64.zip")
+
+# array2=("AIN3IpboU3M_7Vw" "ADScYtq8sT9m_9U" "ANCFufdEfIC56OQ")
+
+# for i in "${!array[@]}"; do
+# 	wget -q --no-check-certificate "https://onedrive.live.com/download?cid=A12F94714109F76F&resid=A12F94714109F76F%21108&authkey=${array2[i]}" --output-document="${array[i]}" 
+# 	unzip "${array[i]}"
+# done
+
+# files="instantclient-basic-11.1.0.7.0-linux-x86_64.zip instantclient-sdk-11.1.0.7.0-linux-x86_64.zip instantclient-sqlplus-11.1.0.7.0-linux-x86_64.zip"
+# for file in $files ; do
+#         #wget -q "https://s3-us-west-1.amazonaws.com/pkgr.quantiguous.com/ora-11.1.0.7/$file"
+#         wget -q --no-check-certificate "https://onedrive.live.com/download?cid=A12F94714109F76F&resid=A12F94714109F76F%21108&authkey=AIN3IpboU3M_7Vw" --output-document=$file
+# 	unzip $file
+# done
+
+cd instantclient_11_1
+ln -s libclntsh.so.11.1 libclntsh.so
+
+LD_LIBRARY_PATH='/tmp/oracle/instantclient_11_1'
+export LD_LIBRARY_PATH
