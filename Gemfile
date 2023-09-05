@@ -125,6 +125,7 @@ gem 'will_paginate', '~> 4.0'
 #gem 'ruby-oci8'
 gem 'qg-inw',:git=>"https://github.com/skillmine1234/qg-inw", branch: 'inw_changes'
 gem 'qg-ft',:git=>"https://github.com/skillmine1234/qg-ft"
+gem 'qg-ecol',:path=>"/home/rahul/project/qg-ecol"
 # source "https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/" do
 #   gem 'qg-icol', '1.1.8'
 #   gem 'qg-ssp', '2.0.0'
