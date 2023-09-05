@@ -1,11 +1,4 @@
 GIT
-  remote: https://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:x-oauth-basic@github.com/skillmine1234//qg-inw
-  revision: ae61ee9ec6e596a59f89a874dd6786e1d10f0edc
-  specs:
-    qg-inw (8.8.0)
-      rails (= 7.0.4)
-
-GIT
   remote: https://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:x-oauth-basic@github.com/skillmine1234/approval2
   revision: 38c2ae6e75f3cbb782e8254f4af5e73d0856e5a3
   specs:
@@ -684,7 +677,6 @@ DEPENDENCIES
   puma (~> 5.0)
   pundit (~> 2.3)
   qg-ft!
-  qg-inw!
   rails (= 7.0.4)
   rails_12factor
   rake (~> 13.0, >= 13.0.6)
