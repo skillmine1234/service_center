@@ -34,11 +34,11 @@ GIT
       rails (~> 4.2.2)
 
 GIT
-  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ecol.git
-  revision: 533f25abdc1fd972fd080b9e6de1d589918ccb19
+  remote: https://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:x-oauth-basic@github.com/Capgemini008/qg-ecol.git
+  revision: e9070bc740e71b08ef2a2961c4ea77703a16b4e6
   branch: ecol_req_temp_issue_new_res
   specs:
-    qg-ecol (13.5.0)
+    qg-ecol (13.6.0)
       rails (= 4.2.2)
 
 GIT
@@ -50,10 +50,10 @@ GIT
 
 GIT
   remote: https://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:x-oauth-basic@github.com/Capgemini008/qg-ft.git
-  revision: b01645765e353a8f242d0c39a1c0fcac05cf7d03
+  revision: 3171cb4a1511dcac4f6ec14e52002962526f714a
   branch: with_dashboard_ft_issue
   specs:
-    qg-ft (8.2.0)
+    qg-ft (8.3.0)
       draper
       pundit
       rails (>= 4.2.2)
@@ -648,9 +648,9 @@ DEPENDENCIES
   qg-cc (= 1.8.0)!
   qg-cp (= 1.0.2)!
   qg-datapurge (= 0.7.0)!
-  qg-ecol (= 13.5.0)!
+  qg-ecol (= 13.6.0)!
   qg-fp (= 2.7.0)!
-  qg-ft (= 8.2.0)!
+  qg-ft (= 8.3.0)!
   qg-ic (= 2.4.0)!
   qg-icol (= 2.1.0)!
   qg-inw (= 9.0.0)!
