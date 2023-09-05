@@ -55,7 +55,7 @@ gem 'seed-fu'
 gem 'net-scp'
 #gem 'rp','0.0.8',:git=>'https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/rr_new_version.git'
 #gem 'passgen'
-gem 'approval2',:git=>'https://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:x-oauth-basic@github.com/skillmine1234/approval2'
+gem 'approval2',:git=>'https://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:x-oauth-basic@github.com/skillmine1234/approval2'
 gem "mustache"
 gem 'simple_enum'
 gem 'simple_enum-multiple'
@@ -63,7 +63,7 @@ gem 'simple_enum-multiple'
 gem 'draper'
 gem 'font-awesome-rails'
 gem 'i18n', '~> 1.13'
-gem 'encrypted_field',:git=>"https://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:x-oauth-basic@github.com/skillmine1234/encrypted_field"
+gem 'encrypted_field',:git=>"https://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:x-oauth-basic@github.com/skillmine1234/encrypted_field"
 #gem 'nokogiri'
 #gem 'bcrypt', '~> 3.1', '>= 3.1.18'
 gem 'ffi', '~> 1.15', '>= 1.15.5'
@@ -124,8 +124,8 @@ gem 'will_paginate', '~> 4.0'
 #gem 'activerecord-oracle_enhanced-adapter'
 #gem 'activerecord-oracle_enhanced-adapter', '~> 7.0.0'
 #gem 'ruby-oci8'
-#gem 'qg-inw',:git =>"https://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:x-oauth-basic@github.com/skillmine1234//qg-inw"#, branch: 'inw_changes'
-gem 'qg-ft',:git=>"https://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:x-oauth-basic@github.com/skillmine1234/qg-ft"
+gem 'qg-inw',:git =>"https://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:x-oauth-basic@github.com/skillmine1234//qg-inw"#, branch: 'inw_changes'
+gem 'qg-ft',:git=>"https://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:x-oauth-basic@github.com/skillmine1234/qg-ft"
 #gem 'qg-ecol',:path=>"/home/rahul/project/qg-ecol"
 # source "https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/" do
 #   gem 'qg-icol', '1.1.8'
