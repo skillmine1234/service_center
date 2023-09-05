@@ -1,4 +1,13 @@
 GIT
+  remote: https://github.com/skillmine1234/approval2
+  revision: 38c2ae6e75f3cbb782e8254f4af5e73d0856e5a3
+  specs:
+    approval2 (0.2.0)
+      audited
+      unscoped_associations
+      will_paginate
+
+GIT
   remote: https://github.com/skillmine1234/devise_security_extension
   revision: a8f7965253d90f0a5d884374168c3c5d78ec459a
   specs:
@@ -12,25 +21,27 @@ GIT
   specs:
     encrypted_field (0.1.7)
 
-PATH
-  remote: /home/rahul/project/approval2-0.1.9
-  specs:
-    approval2 (0.1.9)
-      audited
-      will_paginate
-
-PATH
-  remote: /home/rahul/project/qg-ft
+GIT
+  remote: https://github.com/skillmine1234/qg-ft
+  revision: b7c84e65355d6aa8425787ff614eed62b2b5d9bb
   specs:
     qg-ft (8.1.0)
       draper
       pundit
       rails (>= 4.2.2)
 
-PATH
-  remote: /home/rahul/project/qg-inw
+GIT
+  remote: https://github.com/skillmine1234/qg-inw
+  revision: 701850334dba9767206ad6878f2c8be80d949199
+  branch: inw_changes
   specs:
     qg-inw (8.8.0)
+      rails (= 7.0.4.3)
+
+PATH
+  remote: /home/rahul/project/qg-ecol
+  specs:
+    qg-ecol (13.5.0)
       rails (= 7.0.4.3)
 
 GEM
@@ -382,7 +393,7 @@ GEM
     multi_xml (0.6.0)
     mustache (1.1.1)
     nested_form (0.3.2)
-    net-imap (0.3.4)
+    net-imap (0.3.7)
       date
       net-protocol
     net-ldap (0.2.2)
@@ -565,7 +576,7 @@ GEM
     thor (1.2.2)
     tilt (2.1.0)
     timecop (0.9.6)
-    timeout (0.3.2)
+    timeout (0.4.0)
     turbo-rails (1.4.0)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
@@ -582,6 +593,8 @@ GEM
       concurrent-ruby (~> 1.0)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
+    unscoped_associations (0.6.5)
+      activerecord
     warden (1.2.9)
       rack (>= 2.0.9)
     webmock (3.18.1)
@@ -590,7 +603,7 @@ GEM
       hashdiff (>= 0.4.0, < 2.0.0)
     webrick (1.8.1)
     websocket (1.2.9)
-    websocket-driver (0.7.5)
+    websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     whenever (1.0.0)
@@ -677,6 +690,7 @@ DEPENDENCIES
   progress_bar (~> 1.0.0)
   puma (~> 5.0)
   pundit (~> 2.3)
+  qg-ecol!
   qg-ft!
   qg-inw!
   rails (= 7.0.4.3)
