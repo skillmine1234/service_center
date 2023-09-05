@@ -1,5 +1,5 @@
 GIT
-  remote: https://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:x-oauth-basic@github.com/skillmine1234/approval2
+  remote: https://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:x-oauth-basic@github.com/skillmine1234/approval2
   revision: 38c2ae6e75f3cbb782e8254f4af5e73d0856e5a3
   specs:
     approval2 (0.2.0)
@@ -16,13 +16,13 @@ GIT
       rails (>= 3.1.1)
 
 GIT
-  remote: https://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:x-oauth-basic@github.com/skillmine1234/encrypted_field
+  remote: https://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:x-oauth-basic@github.com/skillmine1234/encrypted_field
   revision: 73d09e25fb3118064fa61996ebb37af902e81e01
   specs:
     encrypted_field (0.1.7)
 
 GIT
-  remote: https://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:x-oauth-basic@github.com/skillmine1234/qg-ft
+  remote: https://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:x-oauth-basic@github.com/skillmine1234/qg-ft
   revision: b7c84e65355d6aa8425787ff614eed62b2b5d9bb
   specs:
     qg-ft (8.1.0)
