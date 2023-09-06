@@ -1,12 +1,12 @@
 GIT
-  remote: https://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:x-oauth-basic@github.com/skillmine1234//qg-inw
+  remote: https://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:x-oauth-basic@github.com/skillmine1234//qg-inw
   revision: ae61ee9ec6e596a59f89a874dd6786e1d10f0edc
   specs:
     qg-inw (8.8.0)
       rails (= 7.0.4)
 
 GIT
-  remote: https://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:x-oauth-basic@github.com/skillmine1234/approval2
+  remote: https://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:x-oauth-basic@github.com/skillmine1234/approval2
   revision: 38c2ae6e75f3cbb782e8254f4af5e73d0856e5a3
   specs:
     approval2 (0.2.0)
@@ -15,7 +15,7 @@ GIT
       will_paginate
 
 GIT
-  remote: https://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:x-oauth-basic@github.com/skillmine1234/devise_security_extension
+  remote: https://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:x-oauth-basic@github.com/skillmine1234/devise_security_extension
   revision: a8f7965253d90f0a5d884374168c3c5d78ec459a
   specs:
     devise_security_extension (0.9.2)
@@ -23,13 +23,13 @@ GIT
       rails (>= 3.1.1)
 
 GIT
-  remote: https://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:x-oauth-basic@github.com/skillmine1234/encrypted_field
+  remote: https://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:x-oauth-basic@github.com/skillmine1234/encrypted_field
   revision: 73d09e25fb3118064fa61996ebb37af902e81e01
   specs:
     encrypted_field (0.1.7)
 
 GIT
-  remote: https://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:x-oauth-basic@github.com/skillmine1234/qg-ft
+  remote: https://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:x-oauth-basic@github.com/skillmine1234/qg-ft
   revision: b7c84e65355d6aa8425787ff614eed62b2b5d9bb
   specs:
     qg-ft (8.1.0)
