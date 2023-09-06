@@ -63,6 +63,14 @@ gem 'simple_enum-multiple'
 
 
 
+
+
+
+
+
+
+
+
 gem 'draper'
 gem 'font-awesome-rails'
 gem 'i18n', '~> 1.13'
