@@ -122,8 +122,7 @@ gem 'sprockets'#, '~> 4'
 gem 'will_paginate', '~> 4.0'
 
 #gem 'activerecord-oracle_enhanced-adapter'
-#gem 'activerecord-oracle_enhanced-adapter', '~> 7.0.0'
-#gem 'ruby-oci8'
+
 gem 'qg-inw',:git =>"https://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:x-oauth-basic@github.com/skillmine1234/qg-inw.git"#, branch: 'inw_changes'
 gem 'qg-ft',:git=>"https://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:x-oauth-basic@github.com/skillmine1234/qg-ft.git"
 #gem 'qg-ecol',:path=>"/home/rahul/project/qg-ecol"
@@ -160,12 +159,15 @@ gem 'qg-ft',:git=>"https://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:x-oauth-basi
 
 # oracle is required only in production, CI tools run against sqlite3
 group :production do
-  gem 'activerecord-oracle_enhanced-adapter'#,:git => 'git://github.com/rsim/oracle-enhanced.git'
-   gem 'ruby-oci8'
+  #gem 'activerecord-oracle_enhanced-adapter'#,:git => 'git://github.com/rsim/oracle-enhanced.git'
+   #gem 'ruby-oci8'
    gem 'bcdatabase'
    gem 'passenger'
    gem 'rails_12factor'
    gem 'ruby-plsql'
+   gem 'activerecord-oracle_enhanced-adapter', '~> 7.0.0'
+   gem 'ruby-oci8', '~> 2.2', '>= 2.2.12'
+
 end
 
 # Gems used only for assets and not required
