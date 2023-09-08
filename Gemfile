@@ -35,7 +35,7 @@ gem 'chosen.scss', '~> 1.0', '>= 1.0.10.2'
 gem 'turnout'
 gem 'delayed_job_active_record'
 #gem 'rools' , '0.4.1' , :git=>'https://github.com/quantiguous/rools'
-#gem 'devise_security_extension',:git =>"https://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:x-oauth-basic@github.com/skillmine1234/devise_security_extension"
+gem 'devise_security_extension',:git =>"https://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:x-oauth-basic@github.com/skillmine1234/devise_security_extension.git"
 gem 'secure_headers'
 gem 'acts_as_list'
 gem 'activeadmin-sortable'
