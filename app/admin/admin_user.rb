@@ -2,13 +2,13 @@ ActiveAdmin.register AdminUser do
   menu :parent => "User Config", :priority => 4
   permit_params :email, :username, :password, :password_confirmation, :remember_me, :inactive,:title, :body
 
-  filter :id
-  filter :email
+  # filter :id
+  # filter :email
   filter :username
   filter :inactive
-  filter :created_at
-  filter :updated_at
-  filter :sign_in_count
+  # filter :created_at
+  # filter :updated_at
+  # filter :sign_in_count
 
   index do
     column :username

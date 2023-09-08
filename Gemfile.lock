@@ -42,7 +42,7 @@ GIT
       rails (= 4.2.2)
 
 GIT
-  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-fp.git
+  remote: https://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:x-oauth-basic@github.com/Capgemini008/qg-fp.git
   revision: 757465f0d7f9722b54220dbca37db9e8af68131d
   specs:
     qg-fp (2.7.0)
@@ -50,10 +50,10 @@ GIT
 
 GIT
   remote: https://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:x-oauth-basic@github.com/Capgemini008/qg-ft.git
-  revision: 3171cb4a1511dcac4f6ec14e52002962526f714a
-  branch: with_dashboard_ft_issue
+  revision: 9bedcd2adedc8f9a52caf7fddfec2136f2341cca
+  branch: ft_for_prod_2023
   specs:
-    qg-ft (8.3.0)
+    qg-ft (8.5.0)
       draper
       pundit
       rails (>= 4.2.2)
@@ -74,11 +74,11 @@ GIT
       rails (= 4.2.2)
 
 GIT
-  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git
-  revision: db34ca2d8e0965f7ef79bb37bafbbd3704eb48d5
-  branch: prod_code_inw
+  remote: https://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:x-oauth-basic@github.com/Capgemini008/qg-inw.git
+  revision: 249f7f70c8530534386820a5fc6e7747e0ad75cb
+  branch: inw_02-2023
   specs:
-    qg-inw (9.0.0)
+    qg-inw (9.0.1)
       rails (= 4.2.2)
 
 GIT
@@ -106,10 +106,10 @@ GIT
 
 GIT
   remote: https://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:x-oauth-basic@github.com/Capgemini008/qg-sc.git
-  revision: 0900f2ae558ff2c8f6f94a6ffc54dd516e084e8f
+  revision: 3c47f090737cf8b9136331a5cab024fb75c5e6b3
   branch: esbconfig_without_approval
   specs:
-    qg-sc (4.0.0)
+    qg-sc (4.1.0)
       rails (~> 4.2.2)
 
 GIT
@@ -650,14 +650,14 @@ DEPENDENCIES
   qg-datapurge (= 0.7.0)!
   qg-ecol (= 13.6.0)!
   qg-fp (= 2.7.0)!
-  qg-ft (= 8.3.0)!
+  qg-ft (= 8.5.0)!
   qg-ic (= 2.4.0)!
   qg-icol (= 2.1.0)!
-  qg-inw (= 9.0.0)!
+  qg-inw (= 9.0.1)!
   qg-ns (= 1.3.0)!
   qg-obdx (= 6.6.0)!
   qg-rx (= 1.9.0)!
-  qg-sc (= 4.0.0)!
+  qg-sc (= 4.1.0)!
   qg-sm (= 2.0.0)!
   rails (= 4.2.2)
   rails_12factor

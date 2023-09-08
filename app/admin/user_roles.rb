@@ -4,7 +4,7 @@ ActiveAdmin.register UserRole do
                 :approved_id, :approved_version, :created_at, :updated_at, :created_by,
                 :updated_by
 
-  filter :id
+  #filter :id
   filter :user , as: :select, collection: proc {User.all.sort_by(&:id)}
   filter :role, as: :select, collection: proc {Role.all.sort_by(&:id)}
 
@@ -55,10 +55,18 @@ ActiveAdmin.register UserRole do
 
   controller do
     def index
-      if current_admin_user.has_role?(:approver_admin)
-        @collection = UserRole.unscoped.where("approval_status=?",'U').order("id desc").page(params[:page]).per(10) 
+     if current_admin_user.has_role?(:approver_admin)
+        if params[:q].present?
+          @collection = search_data(params[:q]).page(params[:page]).per(10)
+        else
+          @collection = UserRole.unscoped.where("approval_status=?",'U').order("id desc").page(params[:page]).per(10)
+         end  
       else
-        @collection = UserRole.unscoped.where("approval_status=?",'A').order("id desc").page(params[:page]).per(10)
+        if params[:q].present?
+          @collection = search_data(params[:q]).page(params[:page]).per(10)
+        else
+         @collection = UserRole.unscoped.where("approval_status=?",'A').order("id desc").page(params[:page]).per(10)
+        end
       end
       super
     end
@@ -104,6 +112,18 @@ ActiveAdmin.register UserRole do
         @user_role.reload
         flash[:alert] = 'Someone edited the user role the same time you did. Please re-apply your changes to the user role.'
         render "edit"
+    end
+
+    def search_data(params)
+      if params["user_id_eq"].present? && !params["role_id_eq"].present?
+       @data = UserRole.where(user_id: params["user_id_eq"]).all 
+      elsif params["role_id_eq"].present? && !params["user_id_eq"].present?
+        @data = UserRole.where(role_id: params["role_id_eq"]).all
+      elsif (params["user_id_eq"].present? && params["role_id_eq"].present?)
+         @data = UserRole.where(role_id: params["role_id_eq"],user_id: params["user_id_eq"]).all
+       end 
+
+      return @data
     end
   end
 

@@ -3,17 +3,17 @@ ActiveAdmin.register User do
   permit_params :email, :first_name, :last_name, :password, :password_confirmation, :remember_me,
                 :username, :inactive, :title, :body, :role_id, :mobile_no, group_ids: []
 
-  filter :id
+  #filter :id
   filter :username, :label=>"User Id"
-  filter :email
+  #filter :email
   filter :first_name
   filter :last_name
-  filter :mobile_no
+  #filter :mobile_no
   filter :inactive,  as: :select
-  filter :created_at
-  filter :updated_at
-  filter :sign_in_count
-  filter :role
+  # filter :created_at
+  # filter :updated_at
+  # filter :sign_in_count
+  #filter :role
   filter :groups_name, :as => :select, :collection => proc {(User::Groups).collect {|r| [r.humanize, r]}.sort}
 
   index do

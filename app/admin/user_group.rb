@@ -4,7 +4,6 @@ ActiveAdmin.register UserGroup do
                 :approved_id, :approved_version, :created_at, :updated_at, :created_by,
                 :updated_by, :disabled
 
-  filter :id
   filter :user , as: :select, collection: proc {User.all.sort_by(&:id)}
   filter :group, as: :select, collection: proc {Group.all.sort_by(&:id)}
 
@@ -58,10 +57,19 @@ ActiveAdmin.register UserGroup do
   controller do
     def index
       if current_admin_user.has_role?(:approver_admin)
-        @collection = UserGroup.unscoped.where("approval_status=?",'U').order("id desc").page(params[:page]).per(10) 
+        if params[:q].present?
+          @collection = search_data(params[:q]).page(params[:page]).per(10)
+        else
+          @collection = UserGroup.unscoped.where("approval_status=?",'U').order("id desc").page(params[:page]).per(10)
+         end  
       else
-        @collection = UserGroup.unscoped.where("approval_status=?",'A').order("id desc").page(params[:page]).per(10)
+        if params[:q].present?
+          @collection = search_data(params[:q]).page(params[:page]).per(10)
+        else
+         @collection = UserGroup.unscoped.where("approval_status=?",'A').order("id desc").page(params[:page]).per(10)
+        end
       end
+      
       super
     end
 
@@ -107,7 +115,21 @@ ActiveAdmin.register UserGroup do
         flash[:alert] = 'Someone edited the user group the same time you did. Please re-apply your changes to the user group.'
         render "edit"
     end
+    
+    def search_data(params)
+      if params["user_id_eq"].present? && !params["group_id_eq"].present?
+       @data = UserGroup.where(user_id: params["user_id_eq"]).all 
+      elsif params["group_id_eq"].present? && !params["user_id_eq"].present?
+        @data = UserGroup.where(group_id: params["group_id_eq"]).all
+      elsif (params["user_id_eq"].present? && params["group_id_eq"].present?)
+         @data = UserGroup.where(group_id: params["group_id_eq"],user_id: params["user_id_eq"]).all
+       end 
+
+      return @data
+    end
   end
+  
+  
 
   form :partial => "form"
 

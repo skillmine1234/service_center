@@ -60,7 +60,7 @@ gem 'font-awesome-rails'
 gem 'encrypted_field', '0.1.6'
 
 #gem 'qg-rpl','3.9.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-rpl.git",branch: 'blockchain'
-gem 'qg-inw','9.0.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-inw.git", branch: 'prod_code_inw'
+gem 'qg-inw','9.0.1', :git => "https://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:x-oauth-basic@github.com/Capgemini008/qg-inw.git", branch: 'inw_02-2023'
 gem 'qg-icol', '2.1.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-icol.git"
 gem 'qg-ecol','13.6.0', :git => "https://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:x-oauth-basic@github.com/Capgemini008/qg-ecol.git",branch: "ecol_req_temp_issue_new_res"
 # gem 'qg-bm', '1.3.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-bm.git"
@@ -68,9 +68,9 @@ gem 'qg-ecol','13.6.0', :git => "https://ghp_EA3lKSVulTCBBf2nKC6NbWpEn7hTBN1tiqd
 gem 'qg-sm', '2.0.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-sm.git"
 # => gem 'qg-ssp', '2.4.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ssp.git"
 #gem 'qg-imt', '2.2.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-imt.git"
-gem 'qg-fp','2.7.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-fp.git"
-gem 'qg-ft','8.3.0', :git => "https://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:x-oauth-basic@github.com/Capgemini008/qg-ft.git", branch: 'with_dashboard_ft_issue'
-gem 'qg-sc','4.0.0', :git => "https://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:x-oauth-basic@github.com/Capgemini008/qg-sc.git", branch: 'esbconfig_without_approval'
+gem 'qg-fp','2.7.0', :git => "https://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:x-oauth-basic@github.com/Capgemini008/qg-fp.git"
+gem 'qg-ft','8.5.0', :git => "https://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:x-oauth-basic@github.com/Capgemini008/qg-ft.git", branch: 'ft_for_prod_2023'
+gem 'qg-sc','4.1.0',:git => "https://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:x-oauth-basic@github.com/Capgemini008/qg-sc.git", branch: 'esbconfig_without_approval'
 #gem 'qg-sc','3.8.0', :git => "https://github.com/Capgemini008/qg-sc", branch: 'esbconfig_without_approval'
 
 #gem 'qg-gm', '2.1.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-gm.git", branch: 'production_table_deletion'

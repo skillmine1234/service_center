@@ -8,4 +8,8 @@ class UserGroup < ActiveRecord::Base
 
   validates_uniqueness_of :user_id, :scope => [:group_id,:approval_status]
   validates_presence_of :user_id, :group_id
+
+  
+
+
 end
