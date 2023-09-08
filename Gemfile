@@ -35,7 +35,7 @@ gem 'chosen.scss', '~> 1.0', '>= 1.0.10.2'
 gem 'turnout'
 gem 'delayed_job_active_record'
 #gem 'rools' , '0.4.1' , :git=>'https://github.com/quantiguous/rools'
-gem 'devise_security_extension',:git =>"https://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:x-oauth-basic@github.com/skillmine1234/devise_security_extension"
+#gem 'devise_security_extension',:git =>"https://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:x-oauth-basic@github.com/skillmine1234/devise_security_extension"
 gem 'secure_headers'
 gem 'acts_as_list'
 gem 'activeadmin-sortable'
@@ -56,14 +56,14 @@ gem 'seed-fu'
 gem 'net-scp'
 #gem 'rp','0.0.8',:git=>'https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/rr_new_version.git'
 #gem 'passgen'
-gem 'approval2',:git=>'https://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:x-oauth-basic@github.com/skillmine1234/approval2'
+#gem 'approval2',:git=>'https://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:x-oauth-basic@github.com/skillmine1234/approval2'
 gem "mustache"
 gem 'simple_enum'
 gem 'simple_enum-multiple'
 gem 'draper'
 gem 'font-awesome-rails'
 gem 'i18n', '~> 1.13'
-gem 'encrypted_field',:git=>"https://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:x-oauth-basic@github.com/skillmine1234/encrypted_field"
+#gem 'encrypted_field',:git=>"https://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:x-oauth-basic@github.com/skillmine1234/encrypted_field"
 #gem 'nokogiri'
 #gem 'bcrypt', '~> 3.1', '>= 3.1.18'
 gem 'ffi', '~> 1.15', '>= 1.15.5'
