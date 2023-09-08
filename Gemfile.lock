@@ -615,7 +615,7 @@ DEPENDENCIES
   activeadmin
   activeadmin-sortable
   activerecord
-  activerecord-oracle_enhanced-adapter (~> 7.0.0)
+  activerecord-oracle_enhanced-adapter (~> 7.0.2)
   acts_as_commentable (= 3.0.1)
   acts_as_list
   approval2!
