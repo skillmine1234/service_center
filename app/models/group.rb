@@ -21,8 +21,9 @@ class Group < ActiveRecord::Base
       Qg::Ft::MODELS
     when "salary-upload"
       ['IncomingFile','SuCustomer','SuUnapprovedRecord','SuIncomingRecord','FmAuditStep','SuIncomingFile']
-    when "instant-credit"
-      Qg::Ic::MODELS
+    # when "instant-credit"
+    sdfsdf
+    #   Qg::Ic::MODELS
     when "smb"
       Qg::Sm::MODELS
     when "cnb"

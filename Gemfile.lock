@@ -19,13 +19,6 @@ GIT
       rails (= 4.2.2)
 
 GIT
-  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-cp.git
-  revision: 4b88103fbeabfc6358b96935add68eaf59a4e8a9
-  specs:
-    qg-cp (1.0.2)
-      rails (= 4.2.2)
-
-GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-datapurge.git
   revision: 125952a94e2a2233a62dc9293493b73ed2d4c89f
   branch: main
@@ -42,13 +35,6 @@ GIT
       rails (= 4.2.2)
 
 GIT
-  remote: https://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:x-oauth-basic@github.com/Capgemini008/qg-fp.git
-  revision: 757465f0d7f9722b54220dbca37db9e8af68131d
-  specs:
-    qg-fp (2.7.0)
-      rails (~> 4.2.2)
-
-GIT
   remote: https://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:x-oauth-basic@github.com/Capgemini008/qg-ft.git
   revision: 9bedcd2adedc8f9a52caf7fddfec2136f2341cca
   branch: ft_for_prod_2023
@@ -57,14 +43,6 @@ GIT
       draper
       pundit
       rails (>= 4.2.2)
-
-GIT
-  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ic.git
-  revision: 24509aaac754f0b05cb5b569e4f97c5f4c2564e1
-  branch: dealer-finance-prod
-  specs:
-    qg-ic (2.4.0)
-      rails (= 4.2.2)
 
 GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-icol.git
@@ -95,13 +73,6 @@ GIT
   branch: obdx_reports_chnages
   specs:
     qg-obdx (6.6.0)
-      rails (= 4.2.2)
-
-GIT
-  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-rx.git
-  revision: 4cdc198ace94b96243f881069ded57c7be107289
-  specs:
-    qg-rx (1.9.0)
       rails (= 4.2.2)
 
 GIT
@@ -646,17 +617,13 @@ DEPENDENCIES
   passenger
   progress_bar (~> 1.0.0)
   qg-cc (= 1.8.0)!
-  qg-cp (= 1.0.2)!
   qg-datapurge (= 0.7.0)!
   qg-ecol (= 13.6.0)!
-  qg-fp (= 2.7.0)!
   qg-ft (= 8.5.0)!
-  qg-ic (= 2.4.0)!
   qg-icol (= 2.1.0)!
   qg-inw (= 9.0.1)!
   qg-ns (= 1.3.0)!
   qg-obdx (= 6.6.0)!
-  qg-rx (= 1.9.0)!
   qg-sc (= 4.1.0)!
   qg-sm (= 2.0.0)!
   rails (= 4.2.2)
