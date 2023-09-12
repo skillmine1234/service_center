@@ -21,31 +21,28 @@ GIT
   specs:
     encrypted_field (0.1.7)
 
-PATH
-  remote: /home/rahul/project/qg-ecol
+GIT
+  remote: https://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:x-oauth-basic@github.com/skillmine1234/qg-ecol.git
+  revision: 306c9338bad8e0d3d7689a5148092d82c3545639
   specs:
     qg-ecol (13.5.0)
       rails (= 7.0.4)
 
-PATH
-  remote: /home/rahul/project/qg-ft
+GIT
+  remote: https://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:x-oauth-basic@github.com/skillmine1234/qg-ft.git
+  revision: b7c84e65355d6aa8425787ff614eed62b2b5d9bb
   specs:
     qg-ft (8.1.0)
       draper
       pundit
       rails (>= 4.2.2)
 
-PATH
-  remote: /home/rahul/project/qg-inw
+GIT
+  remote: https://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:x-oauth-basic@github.com/skillmine1234/qg-inw.git
+  revision: ae61ee9ec6e596a59f89a874dd6786e1d10f0edc
   specs:
     qg-inw (8.8.0)
       rails (= 7.0.4)
-
-PATH
-  remote: /home/rahul/project/qg-sc
-  specs:
-    qg-sc (4.1.0)
-      rails (~> 7.0.4)
 
 GEM
   remote: https://rubygems.org/
@@ -696,7 +693,6 @@ DEPENDENCIES
   qg-ecol!
   qg-ft!
   qg-inw!
-  qg-sc!
   rails (= 7.0.4)
   rails_12factor
   rake (~> 13.0, >= 13.0.6)
