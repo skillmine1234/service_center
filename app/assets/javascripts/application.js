@@ -36,7 +36,7 @@
 //= require cc/cc.js
 //= require obdx/obdx.js
 //= require ns/ns_callback.js
-//= require rx/rx.js
+//= #require rx/rx.js
 //= require encrypted_field
 //= require inw/inw.js
 
