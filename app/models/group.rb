@@ -13,8 +13,8 @@ class Group < ActiveRecord::Base
     #   ['PcApp','PcProgram', 'PcProduct', 'PcFeeRule','PcUnapprovedRecord','PcMmCdIncomingRecord','IncomingFile','IncomingFileRecord','PcMmCdIncomingFile']
     # when "prepaid-card2"
     #   ['Pc2App','Pc2CustAccount']
-    when "flex-proxy"
-      Qg::Fp::MODELS
+    # when "flex-proxy"
+    #   Qg::Fp::MODELS
     when "imt1"
       Qg::Imt1::MODELS
     when "funds-transfer"
@@ -22,7 +22,6 @@ class Group < ActiveRecord::Base
     when "salary-upload"
       ['IncomingFile','SuCustomer','SuUnapprovedRecord','SuIncomingRecord','FmAuditStep','SuIncomingFile']
     # when "instant-credit"
-    sdfsdf
     #   Qg::Ic::MODELS
     when "smb"
       Qg::Sm::MODELS
