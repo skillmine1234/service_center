@@ -123,13 +123,13 @@ gem 'will_paginate', '~> 4.0'
 
 #gem 'activerecord-oracle_enhanced-adapter'
 
-#gem 'qg-inw',:git =>"https://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:x-oauth-basic@github.com/skillmine1234/qg-inw.git"#, branch: 'inw_changes'
-#gem 'qg-ft',:git=>"https://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:x-oauth-basic@github.com/skillmine1234/qg-ft.git"
-gem 'qg-inw',:path=>"/home/rahul/project/qg-inw"
-gem 'qg-ft', :path=>"/home/rahul/project/qg-ft"
+gem 'qg-inw',:git =>"https://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:x-oauth-basic@github.com/skillmine1234/qg-inw.git"#, branch: 'inw_changes'
+gem 'qg-ft',:git=>"https://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:x-oauth-basic@github.com/skillmine1234/qg-ft.git"
+#gem 'qg-inw',:path=>"/home/rahul/project/qg-inw"
+#gem 'qg-ft', :path=>"/home/rahul/project/qg-ft"
 
-gem 'qg-ecol',:path=>"/home/rahul/project/qg-ecol"
-gem 'qg-sc',:path=>"/home/rahul/project/qg-sc"
+gem 'qg-ecol',:git=>"https://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:x-oauth-basic@github.com/skillmine1234/qg-ecol.git"
+#gem 'qg-sc',:path=>"/home/rahul/project/qg-sc"
 # source "https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/" do
 #   gem 'qg-icol', '1.1.8'
 #   gem 'qg-ssp', '2.0.0'

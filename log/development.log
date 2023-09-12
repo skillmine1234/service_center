@@ -15041,3 +15041,604 @@ Processing by BanksController#new as HTML
 Completed 200 OK in 323ms (Views: 300.5ms | ActiveRecord: 6.7ms | Solr: 0.0ms | Allocations: 337254)
 
 
+DEPRECATION WARNING: 'include Pundit' is deprecated. Please use 'include Pundit::Authorization' instead.
+ (called from include at /home/rahul/project/service_center-ft/app/controllers/application_controller.rb:3)
+DEPRECATION WARNING: 'include Pundit' is deprecated. Please use 'include Pundit::Authorization' instead.
+ (called from include at /home/rahul/project/service_center-ft/app/controllers/application_controller.rb:3)
+DEPRECATION WARNING: 'include Pundit' is deprecated. Please use 'include Pundit::Authorization' instead.
+ (called from include at /home/rahul/project/service_center-ft/app/controllers/application_controller.rb:3)
+DEPRECATION WARNING: 'include Pundit' is deprecated. Please use 'include Pundit::Authorization' instead.
+ (called from include at /home/rahul/project/service_center-ft/app/controllers/application_controller.rb:3)
+DEPRECATION WARNING: 'include Pundit' is deprecated. Please use 'include Pundit::Authorization' instead.
+ (called from include at /home/rahul/project/service_center-ft/app/controllers/application_controller.rb:3)
+Started GET "/ecol_apps" for 127.0.0.1 at 2023-09-12 17:14:57 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/ecol_apps"):
+  
+Started GET "/" for 127.0.0.1 at 2023-09-12 17:15:05 +0530
+Processing by DashboardController#overview as HTML
+Completed 401 Unauthorized in 25ms (Allocations: 3385)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2023-09-12 17:15:05 +0530
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.haml within layouts/application
+  Rendered devise/sessions/new.html.haml within layouts/application (Duration: 24.9ms | Allocations: 13904)
+  Rendered layouts/_header.html.haml (Duration: 7.7ms | Allocations: 7950)
+  Rendered layouts/_footer.html.haml (Duration: 2.5ms | Allocations: 1478)
+  Rendered layout layouts/application.html.erb (Duration: 3351.5ms | Allocations: 1808055)
+Completed 200 OK in 7458ms (Views: 3359.7ms | ActiveRecord: 2410.9ms | Solr: 0.0ms | Allocations: 1826756)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2023-09-12 17:15:26 +0530
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"pEH-gjNTOC6LPw2Ktg69ZIQWuMK92K6TFlclFSvVROYCB9s03fkWY6ZwKPuhiT8FjknvlrDONJw7bLGDvv3zgA", "user"=>{"username"=>"apjanvekar", "password"=>"jbD5Ho1jI/0tAHA32JR07OWvk7Qi9P3mOYkdXqSz7gNDowy1EgbfE82Q+0lE6WAf64HKd4HG5qZaty4+G5/Ej6HU4G0X6sgap/tLtru6nmT4BkSC1uN7AmuT/peh/11Np3db3kBikO9+81vPZ5ikjswc4Cfw6MtnRz6pBssmgko2Llo1A4gKzqX0q3ntoNcc15CjZDxhqod3C5x/gTwA2C4IhYQ/lCDcLhmJv3OQxODQatYlUI2eBz71zwi5lyQeevQrxhWb/pWWuEM9ktoiM8Z8b6yzyZRO9vgcboUmCZV0lF8o599OUbhwtbY/alfjPEEmvAXqRRsC4XEyf6SLjw=="}, "commit"=>"Sign In"}
+  [1m[36mUser Load (166.2ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."USERNAME" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["username", "apjanvekar"], ["LIMIT", 1]]
+  [1m[36mUser Update (23.3ms)[0m  [1m[33mUPDATE "USERS" SET "UPDATED_AT" = :a1, "UNIQUE_SESSION_ID" = :a2 WHERE "USERS"."ID" = :a3[0m  [["updated_at", "2023-09-12 11:45:26.545668"], ["unique_session_id", "Fqix3eXNxD6Gv1hZEmrM"], ["id", 1]]
+  [1m[36mUser Update (6.1ms)[0m  [1m[33mUPDATE "USERS" SET "SIGN_IN_COUNT" = :a1, "CURRENT_SIGN_IN_AT" = :a2, "LAST_SIGN_IN_AT" = :a3, "UPDATED_AT" = :a4 WHERE "USERS"."ID" = :a5[0m  [["sign_in_count", 56], ["current_sign_in_at", "2023-09-12 11:45:26.591238"], ["last_sign_in_at", "2023-09-04 07:27:27.702150"], ["updated_at", "2023-09-12 11:45:26.591651"], ["id", 1]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 508ms (ActiveRecord: 195.5ms | Allocations: 9513)
+
+
+Started GET "/" for 127.0.0.1 at 2023-09-12 17:15:27 +0530
+Processing by DashboardController#overview as HTML
+  [1m[36mUser Load (7.6ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/overview.html.haml within layouts/application
+  Rendered dashboard/_panel.html.haml (Duration: 71.5ms | Allocations: 37637)
+  Rendered dashboard/_panel.html.haml (Duration: 17.1ms | Allocations: 4350)
+  Rendered dashboard/_panel.html.haml (Duration: 1.2ms | Allocations: 275)
+  Rendered dashboard/overview.html.haml within layouts/application (Duration: 109.9ms | Allocations: 53112)
+  Rendered layout layouts/application.html.erb (Duration: 110.4ms | Allocations: 53226)
+Completed 500 Internal Server Error in 130ms (ActiveRecord: 7.6ms | Allocations: 55030)
+
+
+  
+ActionView::Template::Error (uninitialized constant Qg::Sc):
+    1: - p group
+    2: - m = build_menu(group)
+    3: - service = sc_service rescue nil
+    4: - unless m.nil?
+    5:   %h1 #{m[:name]}
+  
+app/helpers/dashboard_helper.rb:3:in `build_menu'
+app/views/dashboard/_panel.html.haml:2
+app/views/dashboard/overview.html.haml:5
+Started GET "/admin/login" for 127.0.0.1 at 2023-09-12 17:18:53 +0530
+Processing by Admin::SessionsController#new as HTML
+  Rendering layout /home/rahul/.rbenv/versions/3.2.2/lib/ruby/gems/3.2.0/gems/activeadmin-2.13.1/app/views/layouts/active_admin_logged_out.html.erb
+  Rendering active_admin/devise/sessions/new.html.erb within layouts/active_admin_logged_out
+  Rendered /home/rahul/.rbenv/versions/3.2.2/lib/ruby/gems/3.2.0/gems/activeadmin-2.13.1/app/views/active_admin/devise/shared/_links.erb (Duration: 2.1ms | Allocations: 529)
+  Rendered active_admin/devise/sessions/new.html.erb within layouts/active_admin_logged_out (Duration: 50.0ms | Allocations: 3444)
+  Rendered layout /home/rahul/.rbenv/versions/3.2.2/lib/ruby/gems/3.2.0/gems/activeadmin-2.13.1/app/views/layouts/active_admin_logged_out.html.erb (Duration: 642.4ms | Allocations: 265883)
+Completed 200 OK in 3813ms (Views: 662.5ms | ActiveRecord: 1541.2ms | Solr: 0.0ms | Allocations: 275325)
+
+
+DEPRECATION WARNING: 'include Pundit' is deprecated. Please use 'include Pundit::Authorization' instead.
+ (called from include at /home/rahul/project/service_center-ft/app/controllers/application_controller.rb:3)
+Started GET "/" for 127.0.0.1 at 2023-09-12 17:21:49 +0530
+Processing by DashboardController#overview as HTML
+  [1m[36mUser Load (6.7ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/overview.html.haml within layouts/application
+  Rendered dashboard/_panel.html.haml (Duration: 10186.8ms | Allocations: 3569753)
+  Rendered dashboard/_panel.html.haml (Duration: 13.1ms | Allocations: 5632)
+  Rendered dashboard/_panel.html.haml (Duration: 1076.7ms | Allocations: 710977)
+  Rendered dashboard/overview.html.haml within layouts/application (Duration: 11306.0ms | Allocations: 4303104)
+  Rendered layout layouts/application.html.erb (Duration: 11306.9ms | Allocations: 4303270)
+Completed 500 Internal Server Error in 11882ms (ActiveRecord: 158.0ms | Allocations: 4339242)
+
+
+  
+ActionView::Template::Error (Asset was not declared to be precompiled in production.
+Add `Rails.application.config.assets.precompile += %w( sc/sc_backend.png )` to `config/initializers/assets.rb` and restart your server):
+    75:     - m[:items].each do |i|
+    76:       .box
+    77:         = link_to i[:link_to] do
+    78:           = image_tag i[:image_tag], :size => i[:size]
+    79:         %br
+    80:           = i[:name]
+    81:     - if m[:ops_menu].present?
+  
+app/views/dashboard/_panel.html.haml:78
+app/views/dashboard/_panel.html.haml:77
+app/views/dashboard/_panel.html.haml:75:in `each'
+app/views/dashboard/_panel.html.haml:75
+app/views/dashboard/overview.html.haml:5
+Started GET "/" for 127.0.0.1 at 2023-09-12 17:23:49 +0530
+Processing by DashboardController#overview as HTML
+  [1m[36mUser Load (2.9ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/overview.html.haml within layouts/application
+  Rendered dashboard/_panel.html.haml (Duration: 36.4ms | Allocations: 10201)
+  Rendered dashboard/_panel.html.haml (Duration: 14.9ms | Allocations: 5510)
+  Rendered dashboard/_panel.html.haml (Duration: 1455.2ms | Allocations: 707146)
+  Rendered dashboard/overview.html.haml within layouts/application (Duration: 1508.4ms | Allocations: 723113)
+  Rendered layout layouts/application.html.erb (Duration: 1508.7ms | Allocations: 723226)
+Completed 500 Internal Server Error in 1559ms (ActiveRecord: 2.9ms | Allocations: 724393)
+
+
+  
+ActionView::Template::Error (Asset was not declared to be precompiled in production.
+Add `Rails.application.config.assets.precompile += %w( sc/sc_backend.png )` to `config/initializers/assets.rb` and restart your server):
+    75:     - m[:items].each do |i|
+    76:       .box
+    77:         = link_to i[:link_to] do
+    78:           = image_tag i[:image_tag], :size => i[:size]
+    79:         %br
+    80:           = i[:name]
+    81:     - if m[:ops_menu].present?
+  
+app/views/dashboard/_panel.html.haml:78
+app/views/dashboard/_panel.html.haml:77
+app/views/dashboard/_panel.html.haml:75:in `each'
+app/views/dashboard/_panel.html.haml:75
+app/views/dashboard/overview.html.haml:5
+DEPRECATION WARNING: 'include Pundit' is deprecated. Please use 'include Pundit::Authorization' instead.
+ (called from include at /home/rahul/project/service_center-ft/app/controllers/application_controller.rb:3)
+Started GET "/" for 127.0.0.1 at 2023-09-12 17:24:21 +0530
+Processing by DashboardController#overview as HTML
+  [1m[36mUser Load (6.3ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/overview.html.haml within layouts/application
+  Rendered dashboard/_panel.html.haml (Duration: 2119.0ms | Allocations: 1111383)
+  Rendered dashboard/_panel.html.haml (Duration: 6.6ms | Allocations: 5632)
+  Rendered dashboard/_panel.html.haml (Duration: 7.5ms | Allocations: 5906)
+  [1m[36mGroup Pluck (124.2ms)[0m  [1m[34mSELECT "GROUPS"."NAME" FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"]]
+  [1m[36mIamAuditRule Load (9.2ms)[0m  [1m[34mSELECT "IAM_AUDIT_RULES".* FROM "IAM_AUDIT_RULES" ORDER BY "IAM_AUDIT_RULES"."ID" ASC FETCH FIRST :a1 ROWS ONLY[0m  [["LIMIT", 1]]
+  Rendered dashboard/overview.html.haml within layouts/application (Duration: 2782.1ms | Allocations: 1155586)
+  Rendered layouts/_header.html.haml (Duration: 517.7ms | Allocations: 8420)
+  Rendered layouts/_footer.html.haml (Duration: 2.8ms | Allocations: 1480)
+  Rendered layout layouts/application.html.erb (Duration: 4549.6ms | Allocations: 1646470)
+Completed 200 OK in 5130ms (Views: 4405.5ms | ActiveRecord: 325.9ms | Solr: 0.0ms | Allocations: 1673773)
+
+
+Started GET "/sc_backends" for 127.0.0.1 at 2023-09-12 17:24:43 +0530
+  
+NoMethodError (undefined method `before_filter' for ScBackendsController:Class):
+  
+/home/rahul/project/qg-sc/app/controllers/sc_backends_controller.rb:3:in `<class:ScBackendsController>'
+/home/rahul/project/qg-sc/app/controllers/sc_backends_controller.rb:1:in `<top (required)>'
+<internal:/home/rahul/.rbenv/versions/3.2.2/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>:37:in `require'
+<internal:/home/rahul/.rbenv/versions/3.2.2/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>:37:in `require'
+zeitwerk (2.6.8) lib/zeitwerk/kernel.rb:30:in `require'
+activesupport (7.0.4) lib/active_support/inflector/methods.rb:280:in `const_get'
+activesupport (7.0.4) lib/active_support/inflector/methods.rb:280:in `constantize'
+activesupport (7.0.4) lib/active_support/core_ext/string/inflections.rb:74:in `constantize'
+actionpack (7.0.4) lib/action_dispatch/http/request.rb:90:in `controller_class_for'
+actionpack (7.0.4) lib/action_dispatch/request/utils.rb:95:in `action_encoding_template'
+actionpack (7.0.4) lib/action_dispatch/request/utils.rb:83:in `encode'
+actionpack (7.0.4) lib/action_dispatch/request/utils.rb:45:in `set_binary_encoding'
+actionpack (7.0.4) lib/action_dispatch/http/parameters.rb:68:in `path_parameters='
+actionpack (7.0.4) lib/action_dispatch/journey/router.rb:48:in `block in serve'
+actionpack (7.0.4) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.4) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.4) lib/action_dispatch/routing/route_set.rb:852:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+turnout (2.5.0) lib/rack/turnout.rb:25:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/rack/agent_hooks.rb:30:in `traced_call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/rack/browser_monitoring.rb:38:in `traced_call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+rack (2.2.7) lib/rack/tempfile_reaper.rb:15:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+rack (2.2.7) lib/rack/etag.rb:27:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+rack (2.2.7) lib/rack/conditional_get.rb:27:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+rack (2.2.7) lib/rack/head.rb:12:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+actionpack (7.0.4) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+actionpack (7.0.4) lib/action_dispatch/http/content_security_policy.rb:36:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+rack (2.2.7) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.7) lib/rack/session/abstract/id.rb:260:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/cookies.rb:696:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.4) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.4) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/executor.rb:14:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/show_exceptions.rb:26:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+railties (7.0.4) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.4) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.4) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.4) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.4) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.4) lib/rails/rack/logger.rb:25:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+request_store (1.5.1) lib/request_store/middleware.rb:19:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+rack (2.2.7) lib/rack/method_override.rb:24:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+rack (2.2.7) lib/rack/runtime.rb:22:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+activesupport (7.0.4) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/executor.rb:14:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/static.rb:23:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+rack (2.2.7) lib/rack/sendfile.rb:110:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/host_authorization.rb:137:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+secure_headers (6.5.0) lib/secure_headers/middleware.rb:11:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+railties (7.0.4) lib/rails/engine.rb:530:in `call'
+newrelic_rpm (9.2.2) lib/new_relic/agent/instrumentation/middleware_tracing.rb:99:in `call'
+puma (5.6.5) lib/puma/configuration.rb:252:in `call'
+puma (5.6.5) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.5) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.5) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.5) lib/puma/server.rb:443:in `process_client'
+puma (5.6.5) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+newrelic_rpm (9.2.2) lib/new_relic/agent/tracer.rb:434:in `block (2 levels) in thread_block_with_current_transaction'
+newrelic_rpm (9.2.2) lib/new_relic/agent/tracer.rb:356:in `capture_segment_error'
+newrelic_rpm (9.2.2) lib/new_relic/agent/tracer.rb:433:in `block in thread_block_with_current_transaction'
+Started GET "/banks" for 127.0.0.1 at 2023-09-12 17:30:03 +0530
+Processing by BanksController#index as HTML
+  [1m[36mUser Load (6.4ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (17.1ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3 AND "GROUPS"."NAME" IS NULL FETCH FIRST :a4 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"], ["LIMIT", 1]]
+  [1m[36mUserRole Load (44.5ms)[0m  [1m[34mSELECT "USER_ROLES".* FROM "USER_ROLES" WHERE "USER_ROLES"."APPROVAL_STATUS" = :a1 AND "USER_ROLES"."USER_ID" = :a2 FETCH FIRST :a3 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["LIMIT", 1]]
+  [1m[36mRole Load (13.7ms)[0m  [1m[34mSELECT "ROLES".* FROM "ROLES" WHERE "ROLES"."ID" = :a1 FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (5.2ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 1872ms (ActiveRecord: 128.1ms | Allocations: 58311)
+
+
+Started GET "/" for 127.0.0.1 at 2023-09-12 17:30:06 +0530
+Processing by DashboardController#overview as HTML
+  [1m[36mUser Load (6.1ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/overview.html.haml within layouts/application
+  Rendered dashboard/_panel.html.haml (Duration: 478.8ms | Allocations: 10380)
+  Rendered dashboard/_panel.html.haml (Duration: 30.7ms | Allocations: 5598)
+  Rendered dashboard/_panel.html.haml (Duration: 22.5ms | Allocations: 5870)
+  [1m[36mGroup Pluck (3.0ms)[0m  [1m[34mSELECT "GROUPS"."NAME" FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"]]
+  [1m[36mIamAuditRule Load (1.5ms)[0m  [1m[34mSELECT "IAM_AUDIT_RULES".* FROM "IAM_AUDIT_RULES" ORDER BY "IAM_AUDIT_RULES"."ID" ASC FETCH FIRST :a1 ROWS ONLY[0m  [["LIMIT", 1]]
+  Rendered dashboard/overview.html.haml within layouts/application (Duration: 552.7ms | Allocations: 25369)
+  Rendered layouts/_header.html.haml (Duration: 2.4ms | Allocations: 181)
+  Rendered layouts/_footer.html.haml (Duration: 0.2ms | Allocations: 39)
+  Rendered layout layouts/application.html.erb (Duration: 1997.8ms | Allocations: 389568)
+Completed 200 OK in 2065ms (Views: 1994.3ms | ActiveRecord: 10.6ms | Solr: 0.0ms | Allocations: 390878)
+
+
+Started GET "/banks" for 127.0.0.1 at 2023-09-12 17:30:16 +0530
+Processing by BanksController#index as HTML
+  [1m[36mUser Load (3.9ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.6ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3 AND "GROUPS"."NAME" IS NULL FETCH FIRST :a4 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"], ["LIMIT", 1]]
+  [1m[36mUserRole Load (1.5ms)[0m  [1m[34mSELECT "USER_ROLES".* FROM "USER_ROLES" WHERE "USER_ROLES"."APPROVAL_STATUS" = :a1 AND "USER_ROLES"."USER_ID" = :a2 FETCH FIRST :a3 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["LIMIT", 1]]
+  [1m[36mRole Load (1.4ms)[0m  [1m[34mSELECT "ROLES".* FROM "ROLES" WHERE "ROLES"."ID" = :a1 FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.8ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 105ms (ActiveRecord: 10.2ms | Allocations: 3876)
+
+
+Started GET "/" for 127.0.0.1 at 2023-09-12 17:30:16 +0530
+Processing by DashboardController#overview as HTML
+  [1m[36mUser Load (2.5ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/overview.html.haml within layouts/application
+  Rendered dashboard/_panel.html.haml (Duration: 145.4ms | Allocations: 10200)
+  Rendered dashboard/_panel.html.haml (Duration: 36.2ms | Allocations: 5511)
+  Rendered dashboard/_panel.html.haml (Duration: 34.7ms | Allocations: 5800)
+  [1m[36mGroup Pluck (2.2ms)[0m  [1m[34mSELECT "GROUPS"."NAME" FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"]]
+  [1m[36mIamAuditRule Load (1.0ms)[0m  [1m[34mSELECT "IAM_AUDIT_RULES".* FROM "IAM_AUDIT_RULES" ORDER BY "IAM_AUDIT_RULES"."ID" ASC FETCH FIRST :a1 ROWS ONLY[0m  [["LIMIT", 1]]
+  Rendered dashboard/overview.html.haml within layouts/application (Duration: 240.6ms | Allocations: 24947)
+  Rendered layouts/_header.html.haml (Duration: 3.0ms | Allocations: 179)
+  Rendered layouts/_footer.html.haml (Duration: 0.2ms | Allocations: 39)
+  Rendered layout layouts/application.html.erb (Duration: 1196.6ms | Allocations: 386051)
+Completed 200 OK in 1229ms (Views: 1194.3ms | ActiveRecord: 5.7ms | Solr: 0.0ms | Allocations: 387254)
+
+
+Started GET "/banks" for 127.0.0.1 at 2023-09-12 17:30:22 +0530
+Processing by BanksController#index as HTML
+  [1m[36mUser Load (3.7ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.2ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3 AND "GROUPS"."NAME" IS NULL FETCH FIRST :a4 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"], ["LIMIT", 1]]
+  [1m[36mUserRole Load (1.4ms)[0m  [1m[34mSELECT "USER_ROLES".* FROM "USER_ROLES" WHERE "USER_ROLES"."APPROVAL_STATUS" = :a1 AND "USER_ROLES"."USER_ID" = :a2 FETCH FIRST :a3 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["LIMIT", 1]]
+  [1m[36mRole Load (1.0ms)[0m  [1m[34mSELECT "ROLES".* FROM "ROLES" WHERE "ROLES"."ID" = :a1 FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.2ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 82ms (ActiveRecord: 8.5ms | Allocations: 3731)
+
+
+Started GET "/" for 127.0.0.1 at 2023-09-12 17:30:23 +0530
+Processing by DashboardController#overview as HTML
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/overview.html.haml within layouts/application
+  Rendered dashboard/_panel.html.haml (Duration: 156.1ms | Allocations: 10212)
+  Rendered dashboard/_panel.html.haml (Duration: 50.9ms | Allocations: 5510)
+  Rendered dashboard/_panel.html.haml (Duration: 40.5ms | Allocations: 5800)
+  [1m[36mGroup Pluck (5.0ms)[0m  [1m[34mSELECT "GROUPS"."NAME" FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"]]
+  [1m[36mIamAuditRule Load (0.8ms)[0m  [1m[34mSELECT "IAM_AUDIT_RULES".* FROM "IAM_AUDIT_RULES" ORDER BY "IAM_AUDIT_RULES"."ID" ASC FETCH FIRST :a1 ROWS ONLY[0m  [["LIMIT", 1]]
+  Rendered dashboard/overview.html.haml within layouts/application (Duration: 268.6ms | Allocations: 24957)
+  Rendered layouts/_header.html.haml (Duration: 4.3ms | Allocations: 180)
+  Rendered layouts/_footer.html.haml (Duration: 0.2ms | Allocations: 38)
+  Rendered layout layouts/application.html.erb (Duration: 1349.4ms | Allocations: 386122)
+Completed 200 OK in 1357ms (Views: 1344.4ms | ActiveRecord: 7.1ms | Solr: 0.0ms | Allocations: 387315)
+
+
+Started GET "/banks" for 127.0.0.1 at 2023-09-12 17:30:27 +0530
+Processing by BanksController#index as HTML
+  [1m[36mUser Load (9.2ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.4ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3 AND "GROUPS"."NAME" IS NULL FETCH FIRST :a4 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"], ["LIMIT", 1]]
+  [1m[36mUserRole Load (1.6ms)[0m  [1m[34mSELECT "USER_ROLES".* FROM "USER_ROLES" WHERE "USER_ROLES"."APPROVAL_STATUS" = :a1 AND "USER_ROLES"."USER_ID" = :a2 FETCH FIRST :a3 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["LIMIT", 1]]
+  [1m[36mRole Load (1.6ms)[0m  [1m[34mSELECT "ROLES".* FROM "ROLES" WHERE "ROLES"."ID" = :a1 FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.5ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"]]
+Redirected to http://localhost:3000/banks
+Completed 302 Found in 101ms (ActiveRecord: 15.3ms | Allocations: 3699)
+
+
+Started GET "/banks" for 127.0.0.1 at 2023-09-12 17:30:28 +0530
+Processing by BanksController#index as HTML
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (0.9ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3 AND "GROUPS"."NAME" IS NULL FETCH FIRST :a4 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"], ["LIMIT", 1]]
+  [1m[36mUserRole Load (1.1ms)[0m  [1m[34mSELECT "USER_ROLES".* FROM "USER_ROLES" WHERE "USER_ROLES"."APPROVAL_STATUS" = :a1 AND "USER_ROLES"."USER_ID" = :a2 FETCH FIRST :a3 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["LIMIT", 1]]
+  [1m[36mRole Load (1.0ms)[0m  [1m[34mSELECT "ROLES".* FROM "ROLES" WHERE "ROLES"."ID" = :a1 FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.2ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"]]
+Redirected to http://localhost:3000/banks
+Completed 302 Found in 42ms (ActiveRecord: 6.2ms | Allocations: 3707)
+
+
+Started GET "/banks" for 127.0.0.1 at 2023-09-12 17:30:28 +0530
+Processing by BanksController#index as HTML
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (0.8ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3 AND "GROUPS"."NAME" IS NULL FETCH FIRST :a4 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"], ["LIMIT", 1]]
+  [1m[36mUserRole Load (1.1ms)[0m  [1m[34mSELECT "USER_ROLES".* FROM "USER_ROLES" WHERE "USER_ROLES"."APPROVAL_STATUS" = :a1 AND "USER_ROLES"."USER_ID" = :a2 FETCH FIRST :a3 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["LIMIT", 1]]
+  [1m[36mRole Load (0.8ms)[0m  [1m[34mSELECT "ROLES".* FROM "ROLES" WHERE "ROLES"."ID" = :a1 FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.1ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"]]
+Redirected to http://localhost:3000/banks
+Completed 302 Found in 16ms (ActiveRecord: 4.8ms | Allocations: 3709)
+
+
+Started GET "/banks" for 127.0.0.1 at 2023-09-12 17:30:28 +0530
+Processing by BanksController#index as HTML
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (2.2ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3 AND "GROUPS"."NAME" IS NULL FETCH FIRST :a4 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"], ["LIMIT", 1]]
+  [1m[36mUserRole Load (0.9ms)[0m  [1m[34mSELECT "USER_ROLES".* FROM "USER_ROLES" WHERE "USER_ROLES"."APPROVAL_STATUS" = :a1 AND "USER_ROLES"."USER_ID" = :a2 FETCH FIRST :a3 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["LIMIT", 1]]
+  [1m[36mRole Load (0.9ms)[0m  [1m[34mSELECT "ROLES".* FROM "ROLES" WHERE "ROLES"."ID" = :a1 FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (0.9ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"]]
+Redirected to http://localhost:3000/banks
+Completed 302 Found in 17ms (ActiveRecord: 6.1ms | Allocations: 3739)
+
+
+Started GET "/banks" for 127.0.0.1 at 2023-09-12 17:30:28 +0530
+Processing by BanksController#index as HTML
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (0.9ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3 AND "GROUPS"."NAME" IS NULL FETCH FIRST :a4 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"], ["LIMIT", 1]]
+  [1m[36mUserRole Load (1.1ms)[0m  [1m[34mSELECT "USER_ROLES".* FROM "USER_ROLES" WHERE "USER_ROLES"."APPROVAL_STATUS" = :a1 AND "USER_ROLES"."USER_ID" = :a2 FETCH FIRST :a3 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["LIMIT", 1]]
+  [1m[36mRole Load (0.9ms)[0m  [1m[34mSELECT "ROLES".* FROM "ROLES" WHERE "ROLES"."ID" = :a1 FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.6ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"]]
+Redirected to http://localhost:3000/banks
+Completed 302 Found in 18ms (ActiveRecord: 5.6ms | Allocations: 3713)
+
+
+Started GET "/banks" for 127.0.0.1 at 2023-09-12 17:30:28 +0530
+Processing by BanksController#index as HTML
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.1ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3 AND "GROUPS"."NAME" IS NULL FETCH FIRST :a4 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"], ["LIMIT", 1]]
+  [1m[36mUserRole Load (1.1ms)[0m  [1m[34mSELECT "USER_ROLES".* FROM "USER_ROLES" WHERE "USER_ROLES"."APPROVAL_STATUS" = :a1 AND "USER_ROLES"."USER_ID" = :a2 FETCH FIRST :a3 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["LIMIT", 1]]
+  [1m[36mRole Load (0.8ms)[0m  [1m[34mSELECT "ROLES".* FROM "ROLES" WHERE "ROLES"."ID" = :a1 FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.3ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"]]
+Redirected to http://localhost:3000/banks
+Completed 302 Found in 21ms (ActiveRecord: 6.0ms | Allocations: 3712)
+
+
+Started GET "/banks" for 127.0.0.1 at 2023-09-12 17:30:28 +0530
+Processing by BanksController#index as HTML
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.2ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3 AND "GROUPS"."NAME" IS NULL FETCH FIRST :a4 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"], ["LIMIT", 1]]
+  [1m[36mUserRole Load (1.0ms)[0m  [1m[34mSELECT "USER_ROLES".* FROM "USER_ROLES" WHERE "USER_ROLES"."APPROVAL_STATUS" = :a1 AND "USER_ROLES"."USER_ID" = :a2 FETCH FIRST :a3 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["LIMIT", 1]]
+  [1m[36mRole Load (0.9ms)[0m  [1m[34mSELECT "ROLES".* FROM "ROLES" WHERE "ROLES"."ID" = :a1 FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.1ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"]]
+Redirected to http://localhost:3000/banks
+Completed 302 Found in 18ms (ActiveRecord: 5.6ms | Allocations: 3648)
+
+
+Started GET "/banks" for 127.0.0.1 at 2023-09-12 17:30:28 +0530
+Processing by BanksController#index as HTML
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.3ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3 AND "GROUPS"."NAME" IS NULL FETCH FIRST :a4 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"], ["LIMIT", 1]]
+  [1m[36mUserRole Load (1.4ms)[0m  [1m[34mSELECT "USER_ROLES".* FROM "USER_ROLES" WHERE "USER_ROLES"."APPROVAL_STATUS" = :a1 AND "USER_ROLES"."USER_ID" = :a2 FETCH FIRST :a3 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["LIMIT", 1]]
+  [1m[36mRole Load (1.0ms)[0m  [1m[34mSELECT "ROLES".* FROM "ROLES" WHERE "ROLES"."ID" = :a1 FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.3ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"]]
+Redirected to http://localhost:3000/banks
+Completed 302 Found in 25ms (ActiveRecord: 7.0ms | Allocations: 3681)
+
+
+Started GET "/banks" for 127.0.0.1 at 2023-09-12 17:30:28 +0530
+Processing by BanksController#index as HTML
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.1ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3 AND "GROUPS"."NAME" IS NULL FETCH FIRST :a4 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"], ["LIMIT", 1]]
+  [1m[36mUserRole Load (1.4ms)[0m  [1m[34mSELECT "USER_ROLES".* FROM "USER_ROLES" WHERE "USER_ROLES"."APPROVAL_STATUS" = :a1 AND "USER_ROLES"."USER_ID" = :a2 FETCH FIRST :a3 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["LIMIT", 1]]
+  [1m[36mRole Load (1.0ms)[0m  [1m[34mSELECT "ROLES".* FROM "ROLES" WHERE "ROLES"."ID" = :a1 FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.3ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"]]
+Redirected to http://localhost:3000/banks
+Completed 302 Found in 23ms (ActiveRecord: 6.3ms | Allocations: 3738)
+
+
+Started GET "/banks" for 127.0.0.1 at 2023-09-12 17:30:28 +0530
+Processing by BanksController#index as HTML
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.1ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3 AND "GROUPS"."NAME" IS NULL FETCH FIRST :a4 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"], ["LIMIT", 1]]
+  [1m[36mUserRole Load (1.2ms)[0m  [1m[34mSELECT "USER_ROLES".* FROM "USER_ROLES" WHERE "USER_ROLES"."APPROVAL_STATUS" = :a1 AND "USER_ROLES"."USER_ID" = :a2 FETCH FIRST :a3 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["LIMIT", 1]]
+  [1m[36mRole Load (1.0ms)[0m  [1m[34mSELECT "ROLES".* FROM "ROLES" WHERE "ROLES"."ID" = :a1 FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.4ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"]]
+Redirected to http://localhost:3000/banks
+Completed 302 Found in 22ms (ActiveRecord: 5.8ms | Allocations: 3726)
+
+
+Started GET "/banks" for 127.0.0.1 at 2023-09-12 17:30:28 +0530
+Processing by BanksController#index as HTML
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (0.8ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3 AND "GROUPS"."NAME" IS NULL FETCH FIRST :a4 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"], ["LIMIT", 1]]
+  [1m[36mUserRole Load (1.0ms)[0m  [1m[34mSELECT "USER_ROLES".* FROM "USER_ROLES" WHERE "USER_ROLES"."APPROVAL_STATUS" = :a1 AND "USER_ROLES"."USER_ID" = :a2 FETCH FIRST :a3 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["LIMIT", 1]]
+  [1m[36mRole Load (1.1ms)[0m  [1m[34mSELECT "ROLES".* FROM "ROLES" WHERE "ROLES"."ID" = :a1 FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.4ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"]]
+Redirected to http://localhost:3000/banks
+Completed 302 Found in 19ms (ActiveRecord: 5.8ms | Allocations: 3676)
+
+
+Started GET "/banks" for 127.0.0.1 at 2023-09-12 17:30:28 +0530
+Processing by BanksController#index as HTML
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (0.9ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3 AND "GROUPS"."NAME" IS NULL FETCH FIRST :a4 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"], ["LIMIT", 1]]
+  [1m[36mUserRole Load (1.2ms)[0m  [1m[34mSELECT "USER_ROLES".* FROM "USER_ROLES" WHERE "USER_ROLES"."APPROVAL_STATUS" = :a1 AND "USER_ROLES"."USER_ID" = :a2 FETCH FIRST :a3 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["LIMIT", 1]]
+  [1m[36mRole Load (1.0ms)[0m  [1m[34mSELECT "ROLES".* FROM "ROLES" WHERE "ROLES"."ID" = :a1 FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.0ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"]]
+Redirected to http://localhost:3000/banks
+Completed 302 Found in 18ms (ActiveRecord: 5.7ms | Allocations: 3638)
+
+
+Started GET "/banks" for 127.0.0.1 at 2023-09-12 17:30:28 +0530
+Processing by BanksController#index as HTML
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (0.8ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3 AND "GROUPS"."NAME" IS NULL FETCH FIRST :a4 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"], ["LIMIT", 1]]
+  [1m[36mUserRole Load (1.1ms)[0m  [1m[34mSELECT "USER_ROLES".* FROM "USER_ROLES" WHERE "USER_ROLES"."APPROVAL_STATUS" = :a1 AND "USER_ROLES"."USER_ID" = :a2 FETCH FIRST :a3 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["LIMIT", 1]]
+  [1m[36mRole Load (1.1ms)[0m  [1m[34mSELECT "ROLES".* FROM "ROLES" WHERE "ROLES"."ID" = :a1 FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.4ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"]]
+Redirected to http://localhost:3000/banks
+Completed 302 Found in 18ms (ActiveRecord: 5.6ms | Allocations: 3653)
+
+
+Started GET "/banks" for 127.0.0.1 at 2023-09-12 17:30:28 +0530
+Processing by BanksController#index as HTML
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (0.9ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3 AND "GROUPS"."NAME" IS NULL FETCH FIRST :a4 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"], ["LIMIT", 1]]
+  [1m[36mUserRole Load (1.0ms)[0m  [1m[34mSELECT "USER_ROLES".* FROM "USER_ROLES" WHERE "USER_ROLES"."APPROVAL_STATUS" = :a1 AND "USER_ROLES"."USER_ID" = :a2 FETCH FIRST :a3 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["LIMIT", 1]]
+  [1m[36mRole Load (1.0ms)[0m  [1m[34mSELECT "ROLES".* FROM "ROLES" WHERE "ROLES"."ID" = :a1 FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.4ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"]]
+Redirected to http://localhost:3000/banks
+Completed 302 Found in 20ms (ActiveRecord: 5.5ms | Allocations: 3652)
+
+
+Started GET "/banks" for 127.0.0.1 at 2023-09-12 17:30:28 +0530
+Processing by BanksController#index as HTML
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.0ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3 AND "GROUPS"."NAME" IS NULL FETCH FIRST :a4 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"], ["LIMIT", 1]]
+  [1m[36mUserRole Load (1.1ms)[0m  [1m[34mSELECT "USER_ROLES".* FROM "USER_ROLES" WHERE "USER_ROLES"."APPROVAL_STATUS" = :a1 AND "USER_ROLES"."USER_ID" = :a2 FETCH FIRST :a3 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["LIMIT", 1]]
+  [1m[36mRole Load (0.9ms)[0m  [1m[34mSELECT "ROLES".* FROM "ROLES" WHERE "ROLES"."ID" = :a1 FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.0ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"]]
+Redirected to http://localhost:3000/banks
+Completed 302 Found in 17ms (ActiveRecord: 5.4ms | Allocations: 3658)
+
+
+Started GET "/banks" for 127.0.0.1 at 2023-09-12 17:30:28 +0530
+Processing by BanksController#index as HTML
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (0.8ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3 AND "GROUPS"."NAME" IS NULL FETCH FIRST :a4 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"], ["LIMIT", 1]]
+  [1m[36mUserRole Load (1.4ms)[0m  [1m[34mSELECT "USER_ROLES".* FROM "USER_ROLES" WHERE "USER_ROLES"."APPROVAL_STATUS" = :a1 AND "USER_ROLES"."USER_ID" = :a2 FETCH FIRST :a3 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["LIMIT", 1]]
+  [1m[36mRole Load (0.9ms)[0m  [1m[34mSELECT "ROLES".* FROM "ROLES" WHERE "ROLES"."ID" = :a1 FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.6ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"]]
+Redirected to http://localhost:3000/banks
+Completed 302 Found in 20ms (ActiveRecord: 5.6ms | Allocations: 3720)
+
+
+Started GET "/banks" for 127.0.0.1 at 2023-09-12 17:30:28 +0530
+Processing by BanksController#index as HTML
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.7ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3 AND "GROUPS"."NAME" IS NULL FETCH FIRST :a4 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"], ["LIMIT", 1]]
+  [1m[36mUserRole Load (1.3ms)[0m  [1m[34mSELECT "USER_ROLES".* FROM "USER_ROLES" WHERE "USER_ROLES"."APPROVAL_STATUS" = :a1 AND "USER_ROLES"."USER_ID" = :a2 FETCH FIRST :a3 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["LIMIT", 1]]
+  [1m[36mRole Load (1.4ms)[0m  [1m[34mSELECT "ROLES".* FROM "ROLES" WHERE "ROLES"."ID" = :a1 FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.0ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"]]
+Redirected to http://localhost:3000/banks
+Completed 302 Found in 20ms (ActiveRecord: 6.6ms | Allocations: 3597)
+
+
+Started GET "/banks" for 127.0.0.1 at 2023-09-12 17:30:28 +0530
+Processing by BanksController#index as HTML
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (2.0ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3 AND "GROUPS"."NAME" IS NULL FETCH FIRST :a4 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"], ["LIMIT", 1]]
+  [1m[36mUserRole Load (1.4ms)[0m  [1m[34mSELECT "USER_ROLES".* FROM "USER_ROLES" WHERE "USER_ROLES"."APPROVAL_STATUS" = :a1 AND "USER_ROLES"."USER_ID" = :a2 FETCH FIRST :a3 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["LIMIT", 1]]
+  [1m[36mRole Load (1.0ms)[0m  [1m[34mSELECT "ROLES".* FROM "ROLES" WHERE "ROLES"."ID" = :a1 FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.3ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"]]
+Redirected to http://localhost:3000/banks
+Completed 302 Found in 21ms (ActiveRecord: 6.9ms | Allocations: 3626)
+
+
+Started GET "/banks" for 127.0.0.1 at 2023-09-12 17:30:28 +0530
+Processing by BanksController#index as HTML
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.3ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3 AND "GROUPS"."NAME" IS NULL FETCH FIRST :a4 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"], ["LIMIT", 1]]
+  [1m[36mUserRole Load (1.3ms)[0m  [1m[34mSELECT "USER_ROLES".* FROM "USER_ROLES" WHERE "USER_ROLES"."APPROVAL_STATUS" = :a1 AND "USER_ROLES"."USER_ID" = :a2 FETCH FIRST :a3 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["LIMIT", 1]]
+  [1m[36mRole Load (1.1ms)[0m  [1m[34mSELECT "ROLES".* FROM "ROLES" WHERE "ROLES"."ID" = :a1 FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.1ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"]]
+Redirected to http://localhost:3000/banks
+Completed 302 Found in 19ms (ActiveRecord: 5.7ms | Allocations: 3666)
+
+
+Started GET "/banks" for 127.0.0.1 at 2023-09-12 17:30:28 +0530
+Processing by BanksController#index as HTML
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.2ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3 AND "GROUPS"."NAME" IS NULL FETCH FIRST :a4 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"], ["LIMIT", 1]]
+  [1m[36mUserRole Load (1.1ms)[0m  [1m[34mSELECT "USER_ROLES".* FROM "USER_ROLES" WHERE "USER_ROLES"."APPROVAL_STATUS" = :a1 AND "USER_ROLES"."USER_ID" = :a2 FETCH FIRST :a3 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["LIMIT", 1]]
+  [1m[36mRole Load (1.0ms)[0m  [1m[34mSELECT "ROLES".* FROM "ROLES" WHERE "ROLES"."ID" = :a1 FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.2ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"]]
+Redirected to http://localhost:3000/banks
+Completed 302 Found in 20ms (ActiveRecord: 5.6ms | Allocations: 3719)
+
+
+Started GET "/banks" for 127.0.0.1 at 2023-09-12 17:30:28 +0530
+Processing by BanksController#index as HTML
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (0.9ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3 AND "GROUPS"."NAME" IS NULL FETCH FIRST :a4 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"], ["LIMIT", 1]]
+  [1m[36mUserRole Load (2.0ms)[0m  [1m[34mSELECT "USER_ROLES".* FROM "USER_ROLES" WHERE "USER_ROLES"."APPROVAL_STATUS" = :a1 AND "USER_ROLES"."USER_ID" = :a2 FETCH FIRST :a3 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["LIMIT", 1]]
+  [1m[36mRole Load (1.2ms)[0m  [1m[34mSELECT "ROLES".* FROM "ROLES" WHERE "ROLES"."ID" = :a1 FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.1ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"]]
+Redirected to http://localhost:3000/banks
+Completed 302 Found in 19ms (ActiveRecord: 6.3ms | Allocations: 3634)
+
+
+Started GET "/banks" for 127.0.0.1 at 2023-09-12 17:30:30 +0530
+Processing by BanksController#index as HTML
+  [1m[36mUser Load (10.1ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (2.5ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3 AND "GROUPS"."NAME" IS NULL FETCH FIRST :a4 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"], ["LIMIT", 1]]
+  [1m[36mUserRole Load (1.2ms)[0m  [1m[34mSELECT "USER_ROLES".* FROM "USER_ROLES" WHERE "USER_ROLES"."APPROVAL_STATUS" = :a1 AND "USER_ROLES"."USER_ID" = :a2 FETCH FIRST :a3 ROWS ONLY[0m  [["approval_status", "A"], ["user_id", 1], ["LIMIT", 1]]
+  [1m[36mRole Load (1.3ms)[0m  [1m[34mSELECT "ROLES".* FROM "ROLES" WHERE "ROLES"."ID" = :a1 FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroup Load (1.2ms)[0m  [1m[34mSELECT "GROUPS".* FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 93ms (ActiveRecord: 16.3ms | Allocations: 3661)
+
+
+Started GET "/" for 127.0.0.1 at 2023-09-12 17:30:32 +0530
+Processing by DashboardController#overview as HTML
+  [1m[36mUser Load (6.6ms)[0m  [1m[34mSELECT "USERS".* FROM "USERS" WHERE "USERS"."ID" = :a1 ORDER BY "USERS"."ID" ASC FETCH FIRST :a2 ROWS ONLY[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/overview.html.haml within layouts/application
+  Rendered dashboard/_panel.html.haml (Duration: 60.7ms | Allocations: 10205)
+  Rendered dashboard/_panel.html.haml (Duration: 19.1ms | Allocations: 5502)
+  Rendered dashboard/_panel.html.haml (Duration: 22.0ms | Allocations: 5792)
+  [1m[36mGroup Pluck (3.6ms)[0m  [1m[34mSELECT "GROUPS"."NAME" FROM "GROUPS" INNER JOIN "USER_GROUPS" ON "GROUPS"."ID" = "USER_GROUPS"."GROUP_ID" WHERE "USER_GROUPS"."APPROVAL_STATUS" = :a1 AND "USER_GROUPS"."USER_ID" = :a2 AND "USER_GROUPS"."DISABLED" = :a3[0m  [["approval_status", "A"], ["user_id", 1], ["disabled", "0"]]
+  [1m[36mIamAuditRule Load (6.0ms)[0m  [1m[34mSELECT "IAM_AUDIT_RULES".* FROM "IAM_AUDIT_RULES" ORDER BY "IAM_AUDIT_RULES"."ID" ASC FETCH FIRST :a1 ROWS ONLY[0m  [["LIMIT", 1]]
+  Rendered dashboard/overview.html.haml within layouts/application (Duration: 124.6ms | Allocations: 24900)
+  Rendered layouts/_header.html.haml (Duration: 3.3ms | Allocations: 172)
+  Rendered layouts/_footer.html.haml (Duration: 0.1ms | Allocations: 31)
+  Rendered layout layouts/application.html.erb (Duration: 948.6ms | Allocations: 385613)
+Completed 200 OK in 1027ms (Views: 939.7ms | ActiveRecord: 16.3ms | Solr: 0.0ms | Allocations: 386789)
+
+
+DEPRECATION WARNING: 'include Pundit' is deprecated. Please use 'include Pundit::Authorization' instead.
+ (called from include at /home/rahul/project/service_center-ft/app/controllers/application_controller.rb:3)

@@ -2,6 +2,8 @@
 
 = render partial: 'panel', locals: { group: 'inw', sc_service: 'AML' }
 = render partial: 'panel', locals: { group: 'ft', sc_service: 'FUNDSTRANSFER' }
+= render partial: 'panel', locals: { group: 'sc', sc_service: 'SERVICECENTER' }
+
 - if @current_user.group_names.include?("iam")
   %h1 Identity & Access Management
   .slide-container

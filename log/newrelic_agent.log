@@ -2089,3 +2089,322 @@
 [2023-09-05 10:29:01 +0530 SMTC-R-0090 (5838)] ERROR : NewRelic::Agent::ForceRestartException: 401: Unauthorized, restarting.
 [2023-09-05 10:29:01 +0530 SMTC-R-0090 (5838)] INFO : Will re-attempt in 300 seconds
 [2023-09-05 10:29:32 +0530 SMTC-R-0090 (5838)] INFO : Starting Agent shutdown
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Starting the New Relic agent version 9.2.2 in "development" environment.
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : To prevent agent startup add a NEW_RELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] WARN : No configuration file found. Working directory = /home/rahul/project/service_center-ft
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] WARN : Looked in these locations (based on defaults): /home/rahul/project/service_center-ft/config/newrelic.yml, /home/rahul/project/service_center-ft/newrelic.yml, /home/rahul/project/service_center-ft/config/newrelic.yml.erb, /home/rahul/project/service_center-ft/newrelic.yml.erb, /home/rahul/project/service_center-ft/config/newrelic.yml, /home/rahul/project/service_center-ft/newrelic.yml, /home/rahul/project/service_center-ft/config/newrelic.yml.erb, /home/rahul/project/service_center-ft/newrelic.yml.erb, /home/rahul/.newrelic/newrelic.yml, /home/rahul/newrelic.yml, /home/rahul/.newrelic/newrelic.yml.erb, /home/rahul/newrelic.yml.erb
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Environment: development
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : No known dispatcher detected.
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Application: development
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] WARN : No license key found. This often means your newrelic.yml file was not found, or it lacks a section for the running environment, 'development'. You may also want to try linting your newrelic.yml to ensure it is valid YML.
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Installing ActionMailer instrumentation
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Installing base ActiveJob instrumentation
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Installing notifications based ActiveJob instrumentation
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Installing notifications based Active Record instrumentation
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Installing ActiveStorage instrumentation
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Installing ActiveSupport instrumentation
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Installing ActiveSupport::Logger instrumentation
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Installing New Relic supported ActiveSupportLogger instrumentation using Prepend
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Installing concurrent-ruby instrumentation
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Installing New Relic supported ConcurrentRuby instrumentation using Prepend
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Installing DelayedJob instrumentation [part 1/2]
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Installing New Relic supported DelayedJob instrumentation using Prepend
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Installing Fiber instrumentation
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Installing New Relic supported MonitoredFiber instrumentation using Prepend
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Installing Logger instrumentation
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Installing New Relic supported Logger instrumentation using Prepend
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Installing Net:HTTP Wrappers
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Installing New Relic supported NetHTTP instrumentation using Prepend
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Installing New Relic supported Rack instrumentation using Prepend
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Installing New Relic supported URLMap instrumentation using Prepend
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Installing Rails 3+ middleware instrumentation
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Installing Thread Instrumentation
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Installing New Relic supported MonitoredThread instrumentation using Prepend
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Installing Tilt instrumentation
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Installing New Relic supported Tilt instrumentation using Prepend
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Installing notifications based Action Cable instrumentation
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Installing notifications based Action Controller instrumentation
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Installing notification based Action View instrumentation
+[2023-09-11 16:56:22 +0530 SMTC-R-0090 (5538)] INFO : Finished instrumentation
+[2023-09-11 16:56:26 +0530 SMTC-R-0090 (5538)] INFO : Doing deferred dependency-detection before Rack startup
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Starting the New Relic agent version 9.2.2 in "development" environment.
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : To prevent agent startup add a NEW_RELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] WARN : No configuration file found. Working directory = /home/rahul/project/service_center-ft
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] WARN : Looked in these locations (based on defaults): /home/rahul/project/service_center-ft/config/newrelic.yml, /home/rahul/project/service_center-ft/newrelic.yml, /home/rahul/project/service_center-ft/config/newrelic.yml.erb, /home/rahul/project/service_center-ft/newrelic.yml.erb, /home/rahul/project/service_center-ft/config/newrelic.yml, /home/rahul/project/service_center-ft/newrelic.yml, /home/rahul/project/service_center-ft/config/newrelic.yml.erb, /home/rahul/project/service_center-ft/newrelic.yml.erb, /home/rahul/.newrelic/newrelic.yml, /home/rahul/newrelic.yml, /home/rahul/.newrelic/newrelic.yml.erb, /home/rahul/newrelic.yml.erb
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Environment: development
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : No known dispatcher detected.
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Application: development
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] WARN : No license key found. This often means your newrelic.yml file was not found, or it lacks a section for the running environment, 'development'. You may also want to try linting your newrelic.yml to ensure it is valid YML.
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Installing ActionMailer instrumentation
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Installing base ActiveJob instrumentation
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Installing notifications based ActiveJob instrumentation
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Installing notifications based Active Record instrumentation
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Installing ActiveStorage instrumentation
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Installing ActiveSupport instrumentation
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Installing ActiveSupport::Logger instrumentation
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Installing New Relic supported ActiveSupportLogger instrumentation using Prepend
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Installing concurrent-ruby instrumentation
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Installing New Relic supported ConcurrentRuby instrumentation using Prepend
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Installing DelayedJob instrumentation [part 1/2]
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Installing New Relic supported DelayedJob instrumentation using Prepend
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Installing Fiber instrumentation
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Installing New Relic supported MonitoredFiber instrumentation using Prepend
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Installing Logger instrumentation
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Installing New Relic supported Logger instrumentation using Prepend
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Installing Net:HTTP Wrappers
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Installing New Relic supported NetHTTP instrumentation using Prepend
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Installing New Relic supported Rack instrumentation using Prepend
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Installing New Relic supported URLMap instrumentation using Prepend
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Installing Rails 3+ middleware instrumentation
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Installing Thread Instrumentation
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Installing New Relic supported MonitoredThread instrumentation using Prepend
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Installing Tilt instrumentation
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Installing New Relic supported Tilt instrumentation using Prepend
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Installing notifications based Action Cable instrumentation
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Installing notifications based Action Controller instrumentation
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Installing notification based Action View instrumentation
+[2023-09-12 11:45:16 +0530 SMTC-R-0090 (6093)] INFO : Finished instrumentation
+[2023-09-12 11:45:19 +0530 SMTC-R-0090 (6093)] INFO : Doing deferred dependency-detection before Rack startup
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Starting the New Relic agent version 9.2.2 in "development" environment.
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : To prevent agent startup add a NEW_RELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] WARN : No configuration file found. Working directory = /home/rahul/project/service_center-ft
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] WARN : Looked in these locations (based on defaults): /home/rahul/project/service_center-ft/config/newrelic.yml, /home/rahul/project/service_center-ft/newrelic.yml, /home/rahul/project/service_center-ft/config/newrelic.yml.erb, /home/rahul/project/service_center-ft/newrelic.yml.erb, /home/rahul/project/service_center-ft/config/newrelic.yml, /home/rahul/project/service_center-ft/newrelic.yml, /home/rahul/project/service_center-ft/config/newrelic.yml.erb, /home/rahul/project/service_center-ft/newrelic.yml.erb, /home/rahul/.newrelic/newrelic.yml, /home/rahul/newrelic.yml, /home/rahul/.newrelic/newrelic.yml.erb, /home/rahul/newrelic.yml.erb
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Environment: development
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : No known dispatcher detected.
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Application: development
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] WARN : No license key found. This often means your newrelic.yml file was not found, or it lacks a section for the running environment, 'development'. You may also want to try linting your newrelic.yml to ensure it is valid YML.
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Installing ActionMailer instrumentation
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Installing base ActiveJob instrumentation
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Installing notifications based ActiveJob instrumentation
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Installing notifications based Active Record instrumentation
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Installing ActiveStorage instrumentation
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Installing ActiveSupport instrumentation
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Installing ActiveSupport::Logger instrumentation
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Installing New Relic supported ActiveSupportLogger instrumentation using Prepend
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Installing concurrent-ruby instrumentation
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Installing New Relic supported ConcurrentRuby instrumentation using Prepend
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Installing DelayedJob instrumentation [part 1/2]
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Installing New Relic supported DelayedJob instrumentation using Prepend
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Installing Fiber instrumentation
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Installing New Relic supported MonitoredFiber instrumentation using Prepend
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Installing Logger instrumentation
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Installing New Relic supported Logger instrumentation using Prepend
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Installing Net:HTTP Wrappers
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Installing New Relic supported NetHTTP instrumentation using Prepend
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Installing New Relic supported Rack instrumentation using Prepend
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Installing New Relic supported URLMap instrumentation using Prepend
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Installing Rails 3+ middleware instrumentation
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Installing Thread Instrumentation
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Installing New Relic supported MonitoredThread instrumentation using Prepend
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Installing Tilt instrumentation
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Installing New Relic supported Tilt instrumentation using Prepend
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Installing notifications based Action Cable instrumentation
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Installing notifications based Action Controller instrumentation
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Installing notification based Action View instrumentation
+[2023-09-12 17:14:36 +0530 SMTC-R-0090 (32027)] INFO : Finished instrumentation
+[2023-09-12 17:14:39 +0530 SMTC-R-0090 (32027)] INFO : Doing deferred dependency-detection before Rack startup
+[2023-09-12 17:14:57 +0530 SMTC-R-0090 (32027)] INFO : NewRelic::Agent::Samplers::DelayedJobSampler not available: No DJ worker present. Skipping DJ queue sampler
+[2023-09-12 17:14:59 +0530 SMTC-R-0090 (32027)] ERROR : Error establishing connection with New Relic Service at collector.newrelic.com:443:
+[2023-09-12 17:14:59 +0530 SMTC-R-0090 (32027)] ERROR : NewRelic::Agent::ForceRestartException: 401: Unauthorized, restarting.
+[2023-09-12 17:14:59 +0530 SMTC-R-0090 (32027)] INFO : Will re-attempt in 15 seconds
+[2023-09-12 17:15:17 +0530 SMTC-R-0090 (32027)] ERROR : Error establishing connection with New Relic Service at collector.newrelic.com:443:
+[2023-09-12 17:15:17 +0530 SMTC-R-0090 (32027)] ERROR : NewRelic::Agent::ForceRestartException: 401: Unauthorized, restarting.
+[2023-09-12 17:15:17 +0530 SMTC-R-0090 (32027)] INFO : Will re-attempt in 30 seconds
+[2023-09-12 17:15:49 +0530 SMTC-R-0090 (32027)] ERROR : Error establishing connection with New Relic Service at collector.newrelic.com:443:
+[2023-09-12 17:15:49 +0530 SMTC-R-0090 (32027)] ERROR : NewRelic::Agent::ForceRestartException: 401: , restarting.
+[2023-09-12 17:15:49 +0530 SMTC-R-0090 (32027)] INFO : Will re-attempt in 60 seconds
+[2023-09-12 17:16:51 +0530 SMTC-R-0090 (32027)] ERROR : Error establishing connection with New Relic Service at collector.newrelic.com:443:
+[2023-09-12 17:16:51 +0530 SMTC-R-0090 (32027)] ERROR : NewRelic::Agent::ForceRestartException: 401: Unauthorized, restarting.
+[2023-09-12 17:16:51 +0530 SMTC-R-0090 (32027)] INFO : Will re-attempt in 120 seconds
+[2023-09-12 17:18:53 +0530 SMTC-R-0090 (32027)] ERROR : Error establishing connection with New Relic Service at collector.newrelic.com:443:
+[2023-09-12 17:18:53 +0530 SMTC-R-0090 (32027)] ERROR : NewRelic::Agent::ForceRestartException: 401: Unauthorized, restarting.
+[2023-09-12 17:18:53 +0530 SMTC-R-0090 (32027)] INFO : Will re-attempt in 300 seconds
+[2023-09-12 17:19:30 +0530 SMTC-R-0090 (32027)] INFO : Starting Agent shutdown
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Starting the New Relic agent version 9.2.2 in "development" environment.
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : To prevent agent startup add a NEW_RELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] WARN : No configuration file found. Working directory = /home/rahul/project/service_center-ft
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] WARN : Looked in these locations (based on defaults): /home/rahul/project/service_center-ft/config/newrelic.yml, /home/rahul/project/service_center-ft/newrelic.yml, /home/rahul/project/service_center-ft/config/newrelic.yml.erb, /home/rahul/project/service_center-ft/newrelic.yml.erb, /home/rahul/project/service_center-ft/config/newrelic.yml, /home/rahul/project/service_center-ft/newrelic.yml, /home/rahul/project/service_center-ft/config/newrelic.yml.erb, /home/rahul/project/service_center-ft/newrelic.yml.erb, /home/rahul/.newrelic/newrelic.yml, /home/rahul/newrelic.yml, /home/rahul/.newrelic/newrelic.yml.erb, /home/rahul/newrelic.yml.erb
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Environment: development
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : No known dispatcher detected.
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Application: development
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] WARN : No license key found. This often means your newrelic.yml file was not found, or it lacks a section for the running environment, 'development'. You may also want to try linting your newrelic.yml to ensure it is valid YML.
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Installing ActionMailer instrumentation
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Installing base ActiveJob instrumentation
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Installing notifications based ActiveJob instrumentation
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Installing notifications based Active Record instrumentation
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Installing ActiveStorage instrumentation
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Installing ActiveSupport instrumentation
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Installing ActiveSupport::Logger instrumentation
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Installing New Relic supported ActiveSupportLogger instrumentation using Prepend
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Installing concurrent-ruby instrumentation
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Installing New Relic supported ConcurrentRuby instrumentation using Prepend
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Installing DelayedJob instrumentation [part 1/2]
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Installing New Relic supported DelayedJob instrumentation using Prepend
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Installing Fiber instrumentation
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Installing New Relic supported MonitoredFiber instrumentation using Prepend
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Installing Logger instrumentation
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Installing New Relic supported Logger instrumentation using Prepend
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Installing Net:HTTP Wrappers
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Installing New Relic supported NetHTTP instrumentation using Prepend
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Installing New Relic supported Rack instrumentation using Prepend
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Installing New Relic supported URLMap instrumentation using Prepend
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Installing Rails 3+ middleware instrumentation
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Installing Thread Instrumentation
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Installing New Relic supported MonitoredThread instrumentation using Prepend
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Installing Tilt instrumentation
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Installing New Relic supported Tilt instrumentation using Prepend
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Installing notifications based Action Cable instrumentation
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Installing notifications based Action Controller instrumentation
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Installing notification based Action View instrumentation
+[2023-09-12 17:21:38 +0530 SMTC-R-0090 (32944)] INFO : Finished instrumentation
+[2023-09-12 17:21:42 +0530 SMTC-R-0090 (32944)] INFO : Doing deferred dependency-detection before Rack startup
+[2023-09-12 17:21:49 +0530 SMTC-R-0090 (32944)] INFO : NewRelic::Agent::Samplers::DelayedJobSampler not available: No DJ worker present. Skipping DJ queue sampler
+[2023-09-12 17:21:52 +0530 SMTC-R-0090 (32944)] ERROR : Error establishing connection with New Relic Service at collector.newrelic.com:443:
+[2023-09-12 17:21:52 +0530 SMTC-R-0090 (32944)] ERROR : NewRelic::Agent::ForceRestartException: 401: Unauthorized, restarting.
+[2023-09-12 17:21:52 +0530 SMTC-R-0090 (32944)] INFO : Will re-attempt in 15 seconds
+[2023-09-12 17:22:09 +0530 SMTC-R-0090 (32944)] ERROR : Error establishing connection with New Relic Service at collector.newrelic.com:443:
+[2023-09-12 17:22:09 +0530 SMTC-R-0090 (32944)] ERROR : NewRelic::Agent::ForceRestartException: 401: Unauthorized, restarting.
+[2023-09-12 17:22:09 +0530 SMTC-R-0090 (32944)] INFO : Will re-attempt in 30 seconds
+[2023-09-12 17:22:42 +0530 SMTC-R-0090 (32944)] ERROR : Error establishing connection with New Relic Service at collector.newrelic.com:443:
+[2023-09-12 17:22:42 +0530 SMTC-R-0090 (32944)] ERROR : NewRelic::Agent::ForceRestartException: 401: Unauthorized, restarting.
+[2023-09-12 17:22:42 +0530 SMTC-R-0090 (32944)] INFO : Will re-attempt in 60 seconds
+[2023-09-12 17:23:44 +0530 SMTC-R-0090 (32944)] ERROR : Error establishing connection with New Relic Service at collector.newrelic.com:443:
+[2023-09-12 17:23:44 +0530 SMTC-R-0090 (32944)] ERROR : NewRelic::Agent::ForceRestartException: 401: Unauthorized, restarting.
+[2023-09-12 17:23:44 +0530 SMTC-R-0090 (32944)] INFO : Will re-attempt in 120 seconds
+[2023-09-12 17:23:59 +0530 SMTC-R-0090 (32944)] INFO : Starting Agent shutdown
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Starting the New Relic agent version 9.2.2 in "development" environment.
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : To prevent agent startup add a NEW_RELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] WARN : No configuration file found. Working directory = /home/rahul/project/service_center-ft
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] WARN : Looked in these locations (based on defaults): /home/rahul/project/service_center-ft/config/newrelic.yml, /home/rahul/project/service_center-ft/newrelic.yml, /home/rahul/project/service_center-ft/config/newrelic.yml.erb, /home/rahul/project/service_center-ft/newrelic.yml.erb, /home/rahul/project/service_center-ft/config/newrelic.yml, /home/rahul/project/service_center-ft/newrelic.yml, /home/rahul/project/service_center-ft/config/newrelic.yml.erb, /home/rahul/project/service_center-ft/newrelic.yml.erb, /home/rahul/.newrelic/newrelic.yml, /home/rahul/newrelic.yml, /home/rahul/.newrelic/newrelic.yml.erb, /home/rahul/newrelic.yml.erb
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Environment: development
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : No known dispatcher detected.
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Application: development
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] WARN : No license key found. This often means your newrelic.yml file was not found, or it lacks a section for the running environment, 'development'. You may also want to try linting your newrelic.yml to ensure it is valid YML.
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Installing ActionMailer instrumentation
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Installing base ActiveJob instrumentation
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Installing notifications based ActiveJob instrumentation
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Installing notifications based Active Record instrumentation
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Installing ActiveStorage instrumentation
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Installing ActiveSupport instrumentation
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Installing ActiveSupport::Logger instrumentation
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Installing New Relic supported ActiveSupportLogger instrumentation using Prepend
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Installing concurrent-ruby instrumentation
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Installing New Relic supported ConcurrentRuby instrumentation using Prepend
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Installing DelayedJob instrumentation [part 1/2]
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Installing New Relic supported DelayedJob instrumentation using Prepend
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Installing Fiber instrumentation
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Installing New Relic supported MonitoredFiber instrumentation using Prepend
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Installing Logger instrumentation
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Installing New Relic supported Logger instrumentation using Prepend
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Installing Net:HTTP Wrappers
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Installing New Relic supported NetHTTP instrumentation using Prepend
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Installing New Relic supported Rack instrumentation using Prepend
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Installing New Relic supported URLMap instrumentation using Prepend
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Installing Rails 3+ middleware instrumentation
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Installing Thread Instrumentation
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Installing New Relic supported MonitoredThread instrumentation using Prepend
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Installing Tilt instrumentation
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Installing New Relic supported Tilt instrumentation using Prepend
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Installing notifications based Action Cable instrumentation
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Installing notifications based Action Controller instrumentation
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Installing notification based Action View instrumentation
+[2023-09-12 17:24:14 +0530 SMTC-R-0090 (33321)] INFO : Finished instrumentation
+[2023-09-12 17:24:17 +0530 SMTC-R-0090 (33321)] INFO : Doing deferred dependency-detection before Rack startup
+[2023-09-12 17:24:21 +0530 SMTC-R-0090 (33321)] INFO : NewRelic::Agent::Samplers::DelayedJobSampler not available: No DJ worker present. Skipping DJ queue sampler
+[2023-09-12 17:24:23 +0530 SMTC-R-0090 (33321)] ERROR : Error establishing connection with New Relic Service at collector.newrelic.com:443:
+[2023-09-12 17:24:23 +0530 SMTC-R-0090 (33321)] ERROR : NewRelic::Agent::ForceRestartException: 401: Unauthorized, restarting.
+[2023-09-12 17:24:23 +0530 SMTC-R-0090 (33321)] INFO : Will re-attempt in 15 seconds
+[2023-09-12 17:24:40 +0530 SMTC-R-0090 (33321)] ERROR : Error establishing connection with New Relic Service at collector.newrelic.com:443:
+[2023-09-12 17:24:40 +0530 SMTC-R-0090 (33321)] ERROR : NewRelic::Agent::ForceRestartException: 401: Unauthorized, restarting.
+[2023-09-12 17:24:40 +0530 SMTC-R-0090 (33321)] INFO : Will re-attempt in 30 seconds
+[2023-09-12 17:25:13 +0530 SMTC-R-0090 (33321)] ERROR : Error establishing connection with New Relic Service at collector.newrelic.com:443:
+[2023-09-12 17:25:13 +0530 SMTC-R-0090 (33321)] ERROR : NewRelic::Agent::ForceRestartException: 401: Unauthorized, restarting.
+[2023-09-12 17:25:13 +0530 SMTC-R-0090 (33321)] INFO : Will re-attempt in 60 seconds
+[2023-09-12 17:26:15 +0530 SMTC-R-0090 (33321)] ERROR : Error establishing connection with New Relic Service at collector.newrelic.com:443:
+[2023-09-12 17:26:15 +0530 SMTC-R-0090 (33321)] ERROR : NewRelic::Agent::ForceRestartException: 401: Unauthorized, restarting.
+[2023-09-12 17:26:15 +0530 SMTC-R-0090 (33321)] INFO : Will re-attempt in 120 seconds
+[2023-09-12 17:28:17 +0530 SMTC-R-0090 (33321)] ERROR : Error establishing connection with New Relic Service at collector.newrelic.com:443:
+[2023-09-12 17:28:17 +0530 SMTC-R-0090 (33321)] ERROR : NewRelic::Agent::ForceRestartException: 401: Unauthorized, restarting.
+[2023-09-12 17:28:17 +0530 SMTC-R-0090 (33321)] INFO : Will re-attempt in 300 seconds
+[2023-09-12 17:33:20 +0530 SMTC-R-0090 (33321)] ERROR : Error establishing connection with New Relic Service at collector.newrelic.com:443:
+[2023-09-12 17:33:20 +0530 SMTC-R-0090 (33321)] ERROR : NewRelic::Agent::ForceRestartException: 401: Unauthorized, restarting.
+[2023-09-12 17:33:20 +0530 SMTC-R-0090 (33321)] INFO : Will re-attempt in 300 seconds
+[2023-09-12 17:38:22 +0530 SMTC-R-0090 (33321)] ERROR : Error establishing connection with New Relic Service at collector.newrelic.com:443:
+[2023-09-12 17:38:22 +0530 SMTC-R-0090 (33321)] ERROR : NewRelic::Agent::ForceRestartException: 401: Unauthorized, restarting.
+[2023-09-12 17:38:22 +0530 SMTC-R-0090 (33321)] INFO : Will re-attempt in 300 seconds
+[2023-09-12 17:40:27 +0530 SMTC-R-0090 (33321)] INFO : Starting Agent shutdown
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Starting the New Relic agent version 9.2.2 in "development" environment.
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : To prevent agent startup add a NEW_RELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] WARN : No configuration file found. Working directory = /home/rahul/project/service_center-ft
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] WARN : Looked in these locations (based on defaults): /home/rahul/project/service_center-ft/config/newrelic.yml, /home/rahul/project/service_center-ft/newrelic.yml, /home/rahul/project/service_center-ft/config/newrelic.yml.erb, /home/rahul/project/service_center-ft/newrelic.yml.erb, /home/rahul/project/service_center-ft/config/newrelic.yml, /home/rahul/project/service_center-ft/newrelic.yml, /home/rahul/project/service_center-ft/config/newrelic.yml.erb, /home/rahul/project/service_center-ft/newrelic.yml.erb, /home/rahul/.newrelic/newrelic.yml, /home/rahul/newrelic.yml, /home/rahul/.newrelic/newrelic.yml.erb, /home/rahul/newrelic.yml.erb
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Environment: development
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : No known dispatcher detected.
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Application: development
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] WARN : No license key found. This often means your newrelic.yml file was not found, or it lacks a section for the running environment, 'development'. You may also want to try linting your newrelic.yml to ensure it is valid YML.
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Installing ActionMailer instrumentation
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Installing base ActiveJob instrumentation
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Installing notifications based ActiveJob instrumentation
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Installing notifications based Active Record instrumentation
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Installing ActiveStorage instrumentation
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Installing ActiveSupport instrumentation
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Installing ActiveSupport::Logger instrumentation
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Installing New Relic supported ActiveSupportLogger instrumentation using Prepend
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Installing concurrent-ruby instrumentation
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Installing New Relic supported ConcurrentRuby instrumentation using Prepend
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Installing DelayedJob instrumentation [part 1/2]
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Installing New Relic supported DelayedJob instrumentation using Prepend
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Installing Fiber instrumentation
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Installing New Relic supported MonitoredFiber instrumentation using Prepend
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Installing Logger instrumentation
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Installing New Relic supported Logger instrumentation using Prepend
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Installing Net:HTTP Wrappers
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Installing New Relic supported NetHTTP instrumentation using Prepend
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Installing New Relic supported Rack instrumentation using Prepend
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Installing New Relic supported URLMap instrumentation using Prepend
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Installing Rails 3+ middleware instrumentation
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Installing Thread Instrumentation
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Installing New Relic supported MonitoredThread instrumentation using Prepend
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Installing Tilt instrumentation
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Installing New Relic supported Tilt instrumentation using Prepend
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Installing notifications based Action Cable instrumentation
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Installing notifications based Action Controller instrumentation
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Installing notification based Action View instrumentation
+[2023-09-12 17:44:12 +0530 SMTC-R-0090 (35638)] INFO : Finished instrumentation
+[2023-09-12 17:46:48 +0530 SMTC-R-0090 (36029)] INFO : Starting the New Relic agent version 9.2.2 in "development" environment.
+[2023-09-12 17:46:48 +0530 SMTC-R-0090 (36029)] INFO : To prevent agent startup add a NEW_RELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[2023-09-12 17:46:48 +0530 SMTC-R-0090 (36029)] WARN : No configuration file found. Working directory = /home/rahul/project/service_center-ft
+[2023-09-12 17:46:48 +0530 SMTC-R-0090 (36029)] WARN : Looked in these locations (based on defaults): /home/rahul/project/service_center-ft/config/newrelic.yml, /home/rahul/project/service_center-ft/newrelic.yml, /home/rahul/project/service_center-ft/config/newrelic.yml.erb, /home/rahul/project/service_center-ft/newrelic.yml.erb, /home/rahul/project/service_center-ft/config/newrelic.yml, /home/rahul/project/service_center-ft/newrelic.yml, /home/rahul/project/service_center-ft/config/newrelic.yml.erb, /home/rahul/project/service_center-ft/newrelic.yml.erb, /home/rahul/.newrelic/newrelic.yml, /home/rahul/newrelic.yml, /home/rahul/.newrelic/newrelic.yml.erb, /home/rahul/newrelic.yml.erb
+[2023-09-12 17:46:48 +0530 SMTC-R-0090 (36029)] INFO : Environment: development
+[2023-09-12 17:46:48 +0530 SMTC-R-0090 (36029)] INFO : No known dispatcher detected.
+[2023-09-12 17:46:48 +0530 SMTC-R-0090 (36029)] INFO : Application: development
+[2023-09-12 17:46:48 +0530 SMTC-R-0090 (36029)] WARN : No license key found. This often means your newrelic.yml file was not found, or it lacks a section for the running environment, 'development'. You may also want to try linting your newrelic.yml to ensure it is valid YML.
+[2023-09-12 17:46:49 +0530 SMTC-R-0090 (36029)] INFO : Installing ActionMailer instrumentation
+[2023-09-12 17:46:49 +0530 SMTC-R-0090 (36029)] INFO : Installing base ActiveJob instrumentation
+[2023-09-12 17:46:49 +0530 SMTC-R-0090 (36029)] INFO : Installing notifications based ActiveJob instrumentation
+[2023-09-12 17:46:49 +0530 SMTC-R-0090 (36029)] INFO : Installing notifications based Active Record instrumentation
+[2023-09-12 17:46:49 +0530 SMTC-R-0090 (36029)] INFO : Installing ActiveStorage instrumentation
+[2023-09-12 17:46:49 +0530 SMTC-R-0090 (36029)] INFO : Installing ActiveSupport instrumentation
+[2023-09-12 17:46:49 +0530 SMTC-R-0090 (36029)] INFO : Installing ActiveSupport::Logger instrumentation
+[2023-09-12 17:46:49 +0530 SMTC-R-0090 (36029)] INFO : Installing New Relic supported ActiveSupportLogger instrumentation using Prepend
+[2023-09-12 17:46:49 +0530 SMTC-R-0090 (36029)] INFO : Installing concurrent-ruby instrumentation
+[2023-09-12 17:46:49 +0530 SMTC-R-0090 (36029)] INFO : Installing New Relic supported ConcurrentRuby instrumentation using Prepend
+[2023-09-12 17:46:49 +0530 SMTC-R-0090 (36029)] INFO : Installing DelayedJob instrumentation [part 1/2]
+[2023-09-12 17:46:49 +0530 SMTC-R-0090 (36029)] INFO : Installing New Relic supported DelayedJob instrumentation using Prepend
+[2023-09-12 17:46:49 +0530 SMTC-R-0090 (36029)] INFO : Installing Fiber instrumentation
+[2023-09-12 17:46:49 +0530 SMTC-R-0090 (36029)] INFO : Installing New Relic supported MonitoredFiber instrumentation using Prepend
+[2023-09-12 17:46:49 +0530 SMTC-R-0090 (36029)] INFO : Installing Logger instrumentation
+[2023-09-12 17:46:49 +0530 SMTC-R-0090 (36029)] INFO : Installing New Relic supported Logger instrumentation using Prepend
+[2023-09-12 17:46:49 +0530 SMTC-R-0090 (36029)] INFO : Installing Net:HTTP Wrappers
+[2023-09-12 17:46:49 +0530 SMTC-R-0090 (36029)] INFO : Installing New Relic supported NetHTTP instrumentation using Prepend
+[2023-09-12 17:46:49 +0530 SMTC-R-0090 (36029)] INFO : Installing New Relic supported Rack instrumentation using Prepend
+[2023-09-12 17:46:49 +0530 SMTC-R-0090 (36029)] INFO : Installing New Relic supported URLMap instrumentation using Prepend
+[2023-09-12 17:46:49 +0530 SMTC-R-0090 (36029)] INFO : Installing Rails 3+ middleware instrumentation
+[2023-09-12 17:46:49 +0530 SMTC-R-0090 (36029)] INFO : Installing Thread Instrumentation
+[2023-09-12 17:46:49 +0530 SMTC-R-0090 (36029)] INFO : Installing New Relic supported MonitoredThread instrumentation using Prepend
+[2023-09-12 17:46:49 +0530 SMTC-R-0090 (36029)] INFO : Installing Tilt instrumentation
+[2023-09-12 17:46:49 +0530 SMTC-R-0090 (36029)] INFO : Installing New Relic supported Tilt instrumentation using Prepend
+[2023-09-12 17:46:49 +0530 SMTC-R-0090 (36029)] INFO : Installing notifications based Action Cable instrumentation
+[2023-09-12 17:46:49 +0530 SMTC-R-0090 (36029)] INFO : Installing notifications based Action Controller instrumentation
+[2023-09-12 17:46:49 +0530 SMTC-R-0090 (36029)] INFO : Installing notification based Action View instrumentation
+[2023-09-12 17:46:49 +0530 SMTC-R-0090 (36029)] INFO : Finished instrumentation
+[2023-09-12 17:46:52 +0530 SMTC-R-0090 (36029)] INFO : Doing deferred dependency-detection before Rack startup
