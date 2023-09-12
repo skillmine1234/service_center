@@ -6,7 +6,6 @@ mkdir -p log
 touch log/production.log
 
 echo "Installing Oracle InstantClient Basic/SDK/SQLPlus..."
-echo "yes this is the right file"
 mkdir -p /tmp/oracle
 cd /tmp/oracle
 
@@ -18,7 +17,6 @@ unzip "instantclient-sdk-11.1.0.7.0-linux-x86_64.zip"
 
 wget -O "instantclient-sqlplus-11.1.0.7.0-linux-x86_64.zip" "https://onedrive.live.com/download?resid=A12F94714109F76F%21149&authkey=!AEUAfaw9S4BuK4k"
 unzip "instantclient-sqlplus-11.1.0.7.0-linux-x86_64.zip"
-
 
 # array=("instantclient-basic-11.1.0.7.0-linux-x86_64.zip" "instantclient-sdk-11.1.0.7.0-linux-x86_64.zip" "instantclient-sqlplus-11.1.0.7.0-linux-x86_64.zip")
 
@@ -38,6 +36,3 @@ unzip "instantclient-sqlplus-11.1.0.7.0-linux-x86_64.zip"
 
 cd instantclient_11_1
 ln -s libclntsh.so.11.1 libclntsh.so
-
-LD_LIBRARY_PATH='/tmp/oracle/instantclient_11_1'
-export LD_LIBRARY_PATH

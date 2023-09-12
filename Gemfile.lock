@@ -21,21 +21,31 @@ GIT
   specs:
     encrypted_field (0.1.7)
 
-GIT
-  remote: https://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:x-oauth-basic@github.com/skillmine1234/qg-ft.git
-  revision: b7c84e65355d6aa8425787ff614eed62b2b5d9bb
+PATH
+  remote: /home/rahul/project/qg-ecol
+  specs:
+    qg-ecol (13.5.0)
+      rails (= 7.0.4)
+
+PATH
+  remote: /home/rahul/project/qg-ft
   specs:
     qg-ft (8.1.0)
       draper
       pundit
       rails (>= 4.2.2)
 
-GIT
-  remote: https://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:x-oauth-basic@github.com/skillmine1234/qg-inw.git
-  revision: ae61ee9ec6e596a59f89a874dd6786e1d10f0edc
+PATH
+  remote: /home/rahul/project/qg-inw
   specs:
     qg-inw (8.8.0)
       rails (= 7.0.4)
+
+PATH
+  remote: /home/rahul/project/qg-sc
+  specs:
+    qg-sc (4.1.0)
+      rails (~> 7.0.4)
 
 GEM
   remote: https://rubygems.org/
@@ -683,8 +693,10 @@ DEPENDENCIES
   progress_bar (~> 1.0.0)
   puma (~> 5.0)
   pundit (~> 2.3)
+  qg-ecol!
   qg-ft!
   qg-inw!
+  qg-sc!
   rails (= 7.0.4)
   rails_12factor
   rake (~> 13.0, >= 13.0.6)
