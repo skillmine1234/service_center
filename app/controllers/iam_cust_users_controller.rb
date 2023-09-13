@@ -131,7 +131,7 @@ class IamCustUsersController < ApplicationController
   end
 
   def ldap_user_list
-    #@users_list = [[["arvind"],[""],["20150506105212.0Z"],["133252502716082641"]],[["rahul"],[""],["20150506105212.0Z"],[""]],[["arvind123"],[""],["20150506105212.0Z"],["133252502716082641"]],[["arvind123"],[""],["20150506105212.0Z"],["133252502716082641"]]]
+    #@users_list = [[["arvind"],["dfdf"],["20150506105212.0Z"],["133252502716082641"]],[["rahul"],["dfdsdf"],["20150506105212.0Z"],["sdfsf"]],[["arvind123"],["sdfsd"],["20150506105212.0Z"],["133252502716082641"]],[["arvind123"],["sdfs"],["20150506105212.0Z"],["133252502716082641"]]]
     @users_list = LDAP.new.list_users
     @users_list = @users_list.paginate(:page => params[:page], :per_page => 25)
     
