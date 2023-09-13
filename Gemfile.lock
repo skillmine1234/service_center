@@ -44,6 +44,12 @@ GIT
     qg-inw (8.8.0)
       rails (= 7.0.4)
 
+PATH
+  remote: /home/rahul/project/qg-sc
+  specs:
+    qg-sc (4.1.0)
+      rails (~> 7.0.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -693,6 +699,7 @@ DEPENDENCIES
   qg-ecol!
   qg-ft!
   qg-inw!
+  qg-sc!
   rails (= 7.0.4)
   rails_12factor
   rake (~> 13.0, >= 13.0.6)

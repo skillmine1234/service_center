@@ -12,7 +12,7 @@ Rails.application.config.assets.precompile += %w( 123.js )
 Rails.application.config.assets.precompile += %w( application.js )
 Rails.application.config.assets.precompile += %w( inw/*.png)
 Rails.application.config.assets.precompile += %w( ft/*.png )
-#Rails.application.config.assets.precompile += %w( sc/*.png )
+Rails.application.config.assets.precompile += %w( sc/*.png )
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
