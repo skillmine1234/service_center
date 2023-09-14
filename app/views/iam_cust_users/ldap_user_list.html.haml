@@ -37,25 +37,19 @@
         %td{:style => "text-align:left;"}
           = button_to 'Delete User',{:action=>"delete_user_from_list",:username=> record[0].join('')},data: {confirm: 'You want to delete the LDAP user?'},:remote=> true,class: "btn btn-primary",:disabled => deleted_user
 :javascript
-  function searchTable() {
-      var input, filter, found, table, tr, td, i, j;
-      input = document.getElementById("myInput");
-      filter = input.value.toUpperCase();
-      table = document.getElementById("myTable");
-      tr = table.getElementsByTagName("tr");
-      for (i = 0; i < tr.length; i++) {
-          td = tr[i].getElementsByTagName("td");
-          for (j = 0; j < td.length; j++) {
-              if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
-                  found = true;
-              }
-          }
-          if (found) {
-              tr[i].style.display = "";
-              found = false;
-          } else {
-              tr[i].style.display = "none";
-          }
-      }
-  }
+  $("#myInput").keyup(function () {
+  var value = this.value.toLowerCase().trim();
+
+  $("table tr").each(function (index) {
+  if (!index) return;
+  $(this).find("td").each(function () {
+  var id = $(this).text().toLowerCase().trim();
+  var not_found = (id.indexOf(value) == -1);
+  $(this).closest('tr').toggle(!not_found);
+  return not_found;
+  });
+  });
+  });
+
+
 
