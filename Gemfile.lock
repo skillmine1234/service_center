@@ -1,11 +1,9 @@
 GIT
-  remote: https://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:x-oauth-basic@github.com/skillmine1234/approval2.git
-  revision: 38c2ae6e75f3cbb782e8254f4af5e73d0856e5a3
+  remote: https://github.com/stefanpenner/country_select.git
+  revision: 95ad4d115284f8592abb95b154b4eaec65debb97
   specs:
-    approval2 (0.2.0)
-      audited
-      unscoped_associations
-      will_paginate
+    country_select (8.0.2)
+      countries (~> 5.0)
 
 GIT
   remote: https://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:x-oauth-basic@github.com/skillmine1234/devise_security_extension.git
@@ -39,16 +37,18 @@ GIT
 
 GIT
   remote: https://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:x-oauth-basic@github.com/skillmine1234/qg-inw.git
-  revision: ae61ee9ec6e596a59f89a874dd6786e1d10f0edc
+  revision: 6c496efa397799173e5e8727c017a32b754c1433
   specs:
     qg-inw (8.8.0)
       rails (= 7.0.4)
 
 PATH
-  remote: /home/rahul/project/qg-sc
+  remote: /home/rahul/project/approval2
   specs:
-    qg-sc (4.1.0)
-      rails (~> 7.0.4)
+    approval2 (0.2.0)
+      audited
+      unscoped_associations
+      will_paginate
 
 GEM
   remote: https://rubygems.org/
@@ -218,6 +218,8 @@ GEM
       sass-rails (< 5.1)
       sprockets (< 4.0)
     concurrent-ruby (1.2.2)
+    countries (5.6.0)
+      unaccent (~> 0.3)
     crack (0.4.5)
       rexml
     crass (1.0.6)
@@ -599,6 +601,7 @@ GEM
       concurrent-ruby (~> 1.0)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
+    unaccent (0.4.0)
     unscoped_associations (0.6.5)
       activerecord
     warden (1.2.9)
@@ -648,6 +651,7 @@ DEPENDENCIES
   compass
   compass-normalize (~> 1.5)
   compass-rails (~> 4.0)
+  country_select!
   csp (~> 0.0.1)
   csp-solver
   cucumber-rails
@@ -699,7 +703,6 @@ DEPENDENCIES
   qg-ecol!
   qg-ft!
   qg-inw!
-  qg-sc!
   rails (= 7.0.4)
   rails_12factor
   rake (~> 13.0, >= 13.0.6)

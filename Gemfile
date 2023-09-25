@@ -44,19 +44,19 @@ gem "daemons"
 gem "audited"
 gem 'httparty'
 gem 'zeroclipboard-rails'
-#gem 'country_select', github: 'stefanpenner/country_select'
+gem 'country_select', github: 'stefanpenner/country_select'
 gem 'faraday'
 # required for packaging (specifically asset precompilation during packaging)
 gem "sqlite3"
 gem 'florrick', '~> 1.1'
-#gem 'unscoped_associations'
+#gem 'unscoped_associapproations'
 #gem 'unscoped_associations', '~> 0.7.1'
 gem 'lazy_columns'#, :git=>'https://github.com/quantiguous/lazy_columns.git'
 gem 'seed-fu'
 gem 'net-scp'
 #gem 'rp','0.0.8',:git=>'https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/rr_new_version.git'
 #gem 'passgen'
-gem 'approval2',:git=>'https://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:x-oauth-basic@github.com/skillmine1234/approval2.git'
+gem 'approval2',:path=>'/home/rahul/project/approval2'#:git=>'https://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:x-oauth-basic@github.com/skillmine1234/approval2.git'
 gem "mustache"
 gem 'simple_enum'
 gem 'simple_enum-multiple'
@@ -123,13 +123,13 @@ gem 'will_paginate', '~> 4.0'
 
 #gem 'activerecord-oracle_enhanced-adapter'
 
-gem 'qg-inw',:git =>"https://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:x-oauth-basic@github.com/skillmine1234/qg-inw.git"
+gem 'qg-inw',:git =>"https://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:x-oauth-basic@github.com/skillmine1234/qg-inw.git"#, branch: 'inw_changes'
 gem 'qg-ft',:git=>"https://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:x-oauth-basic@github.com/skillmine1234/qg-ft.git"
 #gem 'qg-inw',:path=>"/home/rahul/project/qg-inw"
 #gem 'qg-ft', :path=>"/home/rahul/project/qg-ft"
 
 gem 'qg-ecol',:git=>"https://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:x-oauth-basic@github.com/skillmine1234/qg-ecol.git"
-gem 'qg-sc',:path=>"/home/rahul/project/qg-sc"
+#gem 'qg-sc',:path=>"/home/rahul/project/qg-sc"
 # source "https://-p72Ximzp5o1QKVqLPgc@repo.fury.io/qg-ci/" do
 #   gem 'qg-icol', '1.1.8'
 #   gem 'qg-ssp', '2.0.0'
