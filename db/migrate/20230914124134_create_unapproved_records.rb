@@ -1,6 +1,6 @@
-class CreateUnapprovedRecords < ActiveRecord::Migration[7.0]
+class CreateUnapprovedRecords < ActiveRecord::Migration[5.1]
   def change
-    create_table :unapproved_records do |t| #, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
+    create_table :unapproved_records, {:sequence_start_value => '1 cache 20 order increment by 1'} do |t|
       t.integer :approvable_id
       t.string :approvable_type
       t.timestamps null: false      
