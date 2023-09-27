@@ -127,7 +127,7 @@
         = image_tag 'reports_icon.png', :size => "80x80"
       %br
         = "Generated Reports"
-- if @current_user.group_names.include?("rpv1")
+- if @current_user.group_names.include?("rpv2")
   %h1 Reports - AML
   .slide-container
     .box
@@ -136,7 +136,7 @@
       %br
         = "Setting"
     .box
-      = link_to '/rp/available_reports?group=rpv1' do
+      = link_to '/rp/available_reports?group=rpv2' do
         = image_tag 'available_report.png', :size => "80x80"
       %br
         = "Available Reports"

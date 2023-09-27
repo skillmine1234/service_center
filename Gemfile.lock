@@ -91,10 +91,10 @@ GIT
       rails (~> 4.2.2)
 
 GIT
-  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/rr_new_version.git
-  revision: 80c2a7195a287f2efc742962720ce6daef856d03
+  remote: https://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:x-oauth-basic@github.com/Capgemini008/rr_new_version.git
+  revision: 14e4a058caffd0eeb1f0d04b2f0b97288a230d77
   specs:
-    rp (1.1.0)
+    rp (1.2.0)
       haml-rails
       net-scp
       pundit
@@ -633,7 +633,7 @@ DEPENDENCIES
   rolify (>= 3.2.0)
   roo
   rools (= 0.4.1)!
-  rp (= 1.1.0)!
+  rp (= 1.2.0)!
   rspec
   rspec-rails (= 2.14.0)
   ruby-oci8 (= 2.2.5.1)

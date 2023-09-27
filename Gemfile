@@ -48,7 +48,7 @@ gem 'unscoped_associations'
 gem 'lazy_columns', :git=>'https://github.com/quantiguous/lazy_columns.git'
 gem 'seed-fu'
 gem 'net-scp'
-gem 'rp','1.1.0',:git=>'https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/rr_new_version.git'
+gem 'rp','1.2.0',:git=>'https://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:x-oauth-basic@github.com/Capgemini008/rr_new_version.git'
 gem 'approval2', '0.1.9'
 gem "mustache"
 gem 'simple_enum'
