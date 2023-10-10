@@ -1,6 +1,8 @@
 %h1 Listing LDAP Users
 %br/
 %br/
+%input#myInput{:onkeyup => "searchTable()", :placeholder => "Search For LDAP Names..", :title => "Type in a name", :type => "text"}/
+%br/
 %br/
 = will_paginate @users_list, :page_links => true
 %table#myTable.table.table-bordered.table-striped.table-hover
@@ -34,4 +36,25 @@
         - deleted_user = ldap_deleted_users(record[0].join(''))
         %td{:style => "text-align:left;"}
           = button_to 'Delete User',{:action=>"delete_user_from_list",:username=> record[0].join('')},data: {confirm: 'You want to delete the LDAP user?'},:remote=> true,class: "btn btn-primary",:disabled => deleted_user
-s
+:javascript
+  function searchTable() {
+      var input, filter, found, table, tr, td, i, j;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td");
+          for (j = 0; j < td.length; j++) {
+              if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                  found = true;
+              }
+          }
+          if (found) {
+              tr[i].style.display = "";
+              found = false;
+          } else {
+              tr[i].style.display = "none";
+          }
+      }
+  }

@@ -15,6 +15,8 @@ class IamCustUsersController < ApplicationController
   end
 
   def create
+    p params[:iam_cust_user][:created_by]
+    p params[:iam_cust_user][:updated_by]
     to_update_recod = IamCustUser.where(id: params[:iam_cust_user][:approved_id]).first
     
     if to_update_recod.present?

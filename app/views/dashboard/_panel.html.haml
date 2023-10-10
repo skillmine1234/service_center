@@ -40,6 +40,12 @@
             = image_tag 'sc/console_db.png', :size => "80x80"
           %br
             = "Console Data"      
+      - if m[:common_items].include?(:cc_report)
+        .box
+          = link_to reports_payby_reports_path do
+            = image_tag 'cc/report.png', :size => "80x80"
+          %br
+            = "CC Reports"            
     - if respond_to?("#{group}_unapproved_records_path", sc_service: service)
       .box
         = link_to send("#{group}_unapproved_records_path") do
