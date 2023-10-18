@@ -201,7 +201,10 @@ class LDAP
       @user_list = []
 
       @ldap.search(:base => @base, :filter => joined_filter) do |entry|
-       @raw_user_list << entry[:sAMAccountName] << entry[:givenName] << entry[:whenCreated] << entry[:lastLogon]
+         p "---------------LDAP Attributes"
+        p entry
+        p "---------------LDAP Attributes"
+       @raw_user_list << entry[:sAMAccountName] << entry[:givenName] << entry[:whenCreated] << entry[:lastLogonTimeStamp]
        @user_list << @raw_user_list
        @raw_user_list = []
       end
@@ -215,7 +218,7 @@ class LDAP
   group_name_filter = Net::LDAP::Filter.eq( "cn", "Users" )
    group_type_filter = Net::LDAP::Filter.eq( "objectclass", "yblpartneruat" )
    filter = group_name_filter & group_type_filter
-   treebase = @base
+   treebase = @base 
    attrs = ["dn", "cn", "mail", "displayname", "listowner", "members"]
 
    @ldap.search( :base => treebase, :filter => filter, :attributes => attrs, :return_result => true ) do |entry|
