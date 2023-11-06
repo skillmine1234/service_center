@@ -75,7 +75,7 @@ gem 'qg-sc','4.1.0',:git => "https://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:x-
 #gem 'qg-sc','3.8.0', :git => "https://github.com/Capgemini008/qg-sc", branch: 'esbconfig_without_approval'
 
 #gem 'qg-gm', '2.1.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-gm.git", branch: 'production_table_deletion'
-gem 'qg-cc','2.1.0',:git => "https://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:x-oauth-basic@github.com/Capgemini008/qg-cc.git",branch: 'master'
+gem 'qg-cc','2.2.0',:git => "https://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:x-oauth-basic@github.com/Capgemini008/qg-cc.git",branch: 'master'
 #gem 'qg-cp', '1.0.2', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-cp.git"
 #gem 'qg-ae', '1.0.5', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ae.git"
 gem 'qg-ns', '1.3.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-ns.git",branch: 'form_for_new_callback_notification'
