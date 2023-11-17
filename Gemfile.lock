@@ -13,10 +13,10 @@ GIT
 
 GIT
   remote: https://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:x-oauth-basic@github.com/Capgemini008/qg-cc.git
-  revision: 947a1229df1a2782d16f25c16d1649112effadb8
+  revision: 04a2fb60469a240c2203b5443af77768af065b82
   branch: master
   specs:
-    qg-cc (2.6.0)
+    qg-cc (2.7.0)
       rails (= 4.2.2)
 
 GIT
@@ -617,7 +617,7 @@ DEPENDENCIES
   newrelic_rpm
   passenger
   progress_bar (~> 1.0.0)
-  qg-cc (= 2.6.0)!
+  qg-cc (= 2.7.0)!
   qg-datapurge (= 0.7.0)!
   qg-ecol (= 13.7.0)!
   qg-ft (= 9.1.0)!
