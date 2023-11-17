@@ -13,10 +13,10 @@ GIT
 
 GIT
   remote: https://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:x-oauth-basic@github.com/Capgemini008/qg-cc.git
-  revision: ecbf98269abc16fed57f259e648b04bbe46ffd5b
+  revision: 947a1229df1a2782d16f25c16d1649112effadb8
   branch: master
   specs:
-    qg-cc (2.5.0)
+    qg-cc (2.6.0)
       rails (= 4.2.2)
 
 GIT
@@ -77,14 +77,6 @@ GIT
       rails (= 4.2.2)
 
 GIT
-  remote: https://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:x-oauth-basic@github.com/Capgemini008/qg-sc.git
-  revision: 3c47f090737cf8b9136331a5cab024fb75c5e6b3
-  branch: esbconfig_without_approval
-  specs:
-    qg-sc (4.1.0)
-      rails (~> 4.2.2)
-
-GIT
   remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-sm.git
   revision: 4dd5226388ccafd4a92f3c92028eed9b7b5f0867
   specs:
@@ -101,6 +93,12 @@ GIT
       pundit
       rails (~> 4.2.0)
       will_paginate
+
+PATH
+  remote: /Users/rubyistdhruv/Mahesh/qg-sc
+  specs:
+    qg-sc (4.1.0)
+      rails (~> 4.2.2)
 
 GEM
   remote: https://rubygems.org/
@@ -617,7 +615,7 @@ DEPENDENCIES
   newrelic_rpm
   passenger
   progress_bar (~> 1.0.0)
-  qg-cc (= 2.5.0)!
+  qg-cc (= 2.6.0)!
   qg-datapurge (= 0.7.0)!
   qg-ecol (= 13.7.0)!
   qg-ft (= 9.1.0)!
@@ -625,7 +623,7 @@ DEPENDENCIES
   qg-inw (= 9.0.1)!
   qg-ns (= 1.3.0)!
   qg-obdx (= 6.6.0)!
-  qg-sc (= 4.1.0)!
+  qg-sc!
   qg-sm (= 2.0.0)!
   rails (= 4.2.2)
   rails_12factor
