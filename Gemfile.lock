@@ -12,12 +12,84 @@ GIT
     rools (0.4.1)
 
 GIT
+  remote: https://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:x-oauth-basic@github.com/Capgemini008/qg-cc.git
+  revision: 2875cba4666b0b0fd3f555b83a8f49c37590119c
+  branch: master
+  specs:
+    qg-cc (11.0.0)
+      rails (= 4.2.2)
+
+GIT
+  remote: https://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:x-oauth-basic@github.com/Capgemini008/qg-datapurge.git
+  revision: 5813f1c5bceae6f862ec100015c0515920e80f2a
+  branch: main
+  specs:
+    qg-datapurge (11.0.0)
+      rails (~> 4.2.2)
+
+GIT
+  remote: https://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:x-oauth-basic@github.com/Capgemini008/qg-ecol.git
+  revision: 21d649b4c4bad7ac12de9a3d26ba50e1e079b32a
+  branch: ecol_req_temp_issue_new_res
+  specs:
+    qg-ecol (15.1.0)
+      rails (= 4.2.2)
+
+GIT
+  remote: https://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:x-oauth-basic@github.com/Capgemini008/qg-ft.git
+  revision: 8132983606044fe0a8c965535d72483970fcef3d
+  branch: 2f_method_with_prod
+  specs:
+    qg-ft (11.1.0)
+      draper
+      pundit
+      rails (>= 4.2.2)
+
+GIT
+  remote: https://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:x-oauth-basic@github.com/Capgemini008/qg-icol.git
+  revision: e41c185b58fbb60318f2bc7f5dc157ccbad9fe0c
+  specs:
+    qg-icol (11.0.0)
+      rails (= 4.2.2)
+
+GIT
   remote: https://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:x-oauth-basic@github.com/Capgemini008/qg-inw.git
   revision: 40d6682481464c286efe16a628a5f50701c91592
   branch: inw_02-2023
   specs:
     qg-inw (11.0.0)
       rails (= 4.2.2)
+
+GIT
+  remote: https://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:x-oauth-basic@github.com/Capgemini008/qg-ns.git
+  revision: e050af3ba7c00e1d1f4a9ad1e6a09ca9d054e91b
+  branch: new_prod_ns
+  specs:
+    qg-ns (11.0.1)
+      rails (~> 4.2.2)
+
+GIT
+  remote: https://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:x-oauth-basic@github.com/Capgemini008/qg-obdx.git
+  revision: 0f7589b6d7c732afeb3423a8bfd0cf84443957a9
+  branch: obdx_reports_chnages
+  specs:
+    qg-obdx (11.0.0)
+      rails (= 4.2.2)
+
+GIT
+  remote: https://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:x-oauth-basic@github.com/Capgemini008/qg-sc.git
+  revision: 3ed25041232882ee90ccd31a4966cad59276b141
+  branch: esbconfig_without_approval
+  specs:
+    qg-sc (11.0.0)
+      rails (~> 4.2.2)
+
+GIT
+  remote: https://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:x-oauth-basic@github.com/Capgemini008/qg-sm.git
+  revision: 7e4aca95c195f1ded057248f4e7d32d56ec35ae4
+  specs:
+    qg-sm (11.0.0)
+      rails (~> 4.2.2)
 
 GIT
   remote: https://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:x-oauth-basic@github.com/Capgemini008/rr_new_version.git
@@ -545,7 +617,16 @@ DEPENDENCIES
   newrelic_rpm
   passenger
   progress_bar (~> 1.0.0)
+  qg-cc (= 11.0.0)!
+  qg-datapurge (= 11.0.0)!
+  qg-ecol (= 15.1.0)!
+  qg-ft (= 11.1.0)!
+  qg-icol (= 11.0.0)!
   qg-inw (= 11.0.0)!
+  qg-ns (= 11.0.1)!
+  qg-obdx (= 11.0.0)!
+  qg-sc (= 11.0.0)!
+  qg-sm (= 11.0.0)!
   rails (= 4.2.2)
   rails_12factor
   rake (< 11.0)
