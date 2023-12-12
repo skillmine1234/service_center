@@ -20,14 +20,6 @@ GIT
       rails (= 4.2.2)
 
 GIT
-  remote: https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-datapurge.git
-  revision: 125952a94e2a2233a62dc9293493b73ed2d4c89f
-  branch: main
-  specs:
-    qg-datapurge (0.7.0)
-      rails (~> 4.2.2)
-
-GIT
   remote: https://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:x-oauth-basic@github.com/Capgemini008/qg-ecol.git
   revision: c35d14ff08cf7b29ab96ee46f23e89c44a4b4ed3
   branch: ecol_req_temp_issue_new_res
@@ -618,7 +610,6 @@ DEPENDENCIES
   passenger
   progress_bar (~> 1.0.0)
   qg-cc (= 2.8.0)!
-  qg-datapurge (= 0.7.0)!
   qg-ecol (= 13.7.0)!
   qg-ft (= 9.2.0)!
   qg-icol (= 2.1.0)!
