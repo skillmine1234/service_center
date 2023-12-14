@@ -56,7 +56,7 @@ gem 'seed-fu'
 gem 'net-scp'
 #gem 'rp','0.0.8',:git=>'https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/rr_new_version.git'
 #gem 'passgen'
-gem 'approval2',:path=>'/home/rahul/project/approval2'#:git=>'https://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:x-oauth-basic@github.com/skillmine1234/approval2.git'
+#gem 'approval2',:path=>'/home/rahul/project/approval2'#:git=>'https://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:x-oauth-basic@github.com/skillmine1234/approval2.git'
 gem "mustache"
 gem 'simple_enum'
 gem 'simple_enum-multiple'
