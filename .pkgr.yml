@@ -7,6 +7,7 @@ targets:
   centos-8:
 env:
   - SKIP_INIT=yes
+  - "LD_LIBRARY_PATH=/tmp/oracle/instantclient_11_1:$LD_LIBRARY_PATH"
 before_precompile: packaging/before_precompile
 after_install: packaging/post_install
 after:
