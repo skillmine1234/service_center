@@ -26,6 +26,8 @@ sudo cp instantclient_11_!/*.so*           /usr/lib
 
 sudo cp tnsnames.ora /etc
 
+/usr/bin/sqlplus scott/tiger@myoracle
+
 # array=("instantclient-basic-11.1.0.7.0-linux-x86_64.zip" "instantclient-sdk-11.1.0.7.0-linux-x86_64.zip" "instantclient-sqlplus-11.1.0.7.0-linux-x86_64.zip")
 
 # array2=("AIN3IpboU3M_7Vw" "ADScYtq8sT9m_9U" "ANCFufdEfIC56OQ")
