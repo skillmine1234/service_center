@@ -9,9 +9,6 @@ echo "Installing Oracle InstantClient Basic/SDK/SQLPlus..."
 mkdir -p /tmp/oracle
 cd /tmp/oracle
 
-LD_LIBRARY_PATH=/tmp/oracle/instantclient_11_1
-export LD_LIBRARY_PATH
-
 
 wget -O "instantclient-basic-11.1.0.7.0-linux-x86_64.zip" "https://onedrive.live.com/download?resid=A12F94714109F76F%21151&authkey=!ADfC9DbHHYvHEx4"
 unzip "instantclient-basic-11.1.0.7.0-linux-x86_64.zip"
@@ -21,6 +18,11 @@ unzip "instantclient-sdk-11.1.0.7.0-linux-x86_64.zip"
 
 wget -O "instantclient-sqlplus-11.1.0.7.0-linux-x86_64.zip" "https://onedrive.live.com/download?resid=A12F94714109F76F%21149&authkey=!AEUAfaw9S4BuK4k"
 unzip "instantclient-sqlplus-11.1.0.7.0-linux-x86_64.zip"
+
+
+sudo cp instantclient_11_1/sdk/include/*.h /usr/include
+sudo cp instantclient_11_1/sqlplus         /usr/bin
+sudo cp instantclient_11_!/*.so*           /usr/lib
 
 
 # array=("instantclient-basic-11.1.0.7.0-linux-x86_64.zip" "instantclient-sdk-11.1.0.7.0-linux-x86_64.zip" "instantclient-sqlplus-11.1.0.7.0-linux-x86_64.zip")
@@ -43,8 +45,3 @@ unzip "instantclient-sqlplus-11.1.0.7.0-linux-x86_64.zip"
 cd instantclient_11_1
 ln -s libclntsh.so.11.1 libclntsh.so
 
-
-
-echo "-----------test1------------"
-printenv LD_LIBRARY_PATH
-echo "------------test2-------------"
