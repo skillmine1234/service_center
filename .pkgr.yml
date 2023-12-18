@@ -4,8 +4,7 @@ build_dependencies:
 dependencies:
   - libaio
 targets:
-  centos-6:
-  centos-7:  
+  centos-8:
 env:
   - "LD_LIBRARY_PATH=/tmp/oracle/instantclient_11_1:$LD_LIBRARY_PATH"
   - SKIP_INIT=yes
