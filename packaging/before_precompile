@@ -24,6 +24,7 @@ sudo cp instantclient_11_1/sdk/include/*.h /usr/include
 sudo cp instantclient_11_1/sqlplus         /usr/bin
 sudo cp instantclient_11_!/*.so*           /usr/lib
 
+sudo cp tnsnames.ora /etc
 
 # array=("instantclient-basic-11.1.0.7.0-linux-x86_64.zip" "instantclient-sdk-11.1.0.7.0-linux-x86_64.zip" "instantclient-sqlplus-11.1.0.7.0-linux-x86_64.zip")
 
@@ -42,6 +43,5 @@ sudo cp instantclient_11_!/*.so*           /usr/lib
 # done
 
 
-cd instantclient_11_1
-ln -s libclntsh.so.11.1 libclntsh.so
+
 
