@@ -1,4 +1,5 @@
 #!/bin/bash -e
+export TEST123=/user/home
 
 cp config/database.1.yml config/database.yml
 
