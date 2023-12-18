@@ -37,7 +37,5 @@ unzip "instantclient-sqlplus-11.1.0.7.0-linux-x86_64.zip"
 # done
 
 
-LD_LIBRARY_PATH=/tmp/oracle/instantclient_11_1:$LD_LIBRARY_PATH
-
 cd /tmp/oracle/instantclient_11_1
 ln -s libclntsh.so.11.1 libclntsh.so
