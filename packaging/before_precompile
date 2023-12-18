@@ -44,5 +44,5 @@ ln -s libclntsh.so.11.1 libclntsh.so
 
 
 echo "-----------test1------------"
-echo env | grep TEST123 
+printenv  TEST123 
 echo "------------test2-------------"
