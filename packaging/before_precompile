@@ -2,8 +2,7 @@
 
 cp config/database.1.yml config/database.yml
 
- LD_LIBRARY_PATH=/tmp/oracle/instantclient_11_1
- export LD_LIBRARY_PATH
+
 
 mkdir -p log
 touch log/production.log
@@ -38,6 +37,8 @@ unzip "instantclient-sqlplus-11.1.0.7.0-linux-x86_64.zip"
 # done
 
 
+ LD_LIBRARY_PATH=/tmp/oracle/instantclient_11_1
+ export LD_LIBRARY_PATH
 
 cd /tmp/oracle/instantclient_11_1
 ln -s libclntsh.so.11.1 libclntsh.so
