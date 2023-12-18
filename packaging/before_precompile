@@ -40,3 +40,6 @@ ln -s libclntsh.so.11.1 libclntsh.so
 
 export LD_LIBRARY_PATH=/opt/oracle/instantclient_11_1:$LD_LIBRARY_PATH
 
+echo "-----------------------"
+echo env | grep LD_LIBRARY_PATH 
+echo "-------------------------"
