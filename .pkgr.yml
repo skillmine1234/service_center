@@ -6,7 +6,7 @@ dependencies:
 targets:
   centos-8:
 env:
-  - LD_LIBRARY_PATH=/tmp/oracle/instantclient_11_1:$LD_LIBRARY_PATH
+  - LD_LIBRARY_PATH=/tmp/oracle/instantclient_11_1
   - SKIP_INIT=yes
   - TEST123=arvind
 before_precompile: packaging/before_precompile
