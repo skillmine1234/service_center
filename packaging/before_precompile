@@ -20,9 +20,9 @@ wget -O "instantclient-sqlplus-11.1.0.7.0-linux-x86_64.zip" "https://onedrive.li
 unzip "instantclient-sqlplus-11.1.0.7.0-linux-x86_64.zip"
 
 
-sudo cp /tmp/oracle/instantclient_11_1/sdk/include/*.h /usr/include
-sudo cp /tmp/oracle/instantclient_11_1/sqlplus         /usr/bin
-sudo cp /tmp/oracle/instantclient_11_!/*.so*           /usr/lib
+ cp /tmp/oracle/instantclient_11_1/sdk/include/*.h /usr/include
+ cp /tmp/oracle/instantclient_11_1/sqlplus         /usr/bin
+ cp /tmp/oracle/instantclient_11_!/*.so*           /usr/lib
 
 
 # array=("instantclient-basic-11.1.0.7.0-linux-x86_64.zip" "instantclient-sdk-11.1.0.7.0-linux-x86_64.zip" "instantclient-sqlplus-11.1.0.7.0-linux-x86_64.zip")
