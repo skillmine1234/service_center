@@ -1,5 +1,4 @@
 #!/bin/bash -e
-export TEST123=/user/home
 
 cp config/database.1.yml config/database.yml
 
@@ -44,5 +43,5 @@ ln -s libclntsh.so.11.1 libclntsh.so
 
 
 echo "-----------test1------------"
-printenv  TEST123 
+printenv LD_LIBRARY_PATH
 echo "------------test2-------------"
