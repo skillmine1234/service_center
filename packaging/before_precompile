@@ -1,7 +1,10 @@
 #!/bin/bash -e
 
 cp config/database.1.yml config/database.yml
-export LD_LIBRARY_PATH
+
+ LD_LIBRARY_PATH=/tmp/oracle/instantclient_11_1
+ export LD_LIBRARY_PATH
+
 mkdir -p log
 touch log/production.log
 
