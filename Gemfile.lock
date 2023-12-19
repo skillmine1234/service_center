@@ -29,18 +29,18 @@ GIT
 
 GIT
   remote: https://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:x-oauth-basic@github.com/Capgemini008/qg-ecol.git
-  revision: 21d649b4c4bad7ac12de9a3d26ba50e1e079b32a
-  branch: ecol_req_temp_issue_new_res
+  revision: d8c3b87e2919112b8f5ce4e77e917e5a69a00aec
+  branch: new_search_param
   specs:
-    qg-ecol (15.1.0)
+    qg-ecol (15.1.1)
       rails (= 4.2.2)
 
 GIT
   remote: https://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:x-oauth-basic@github.com/Capgemini008/qg-ft.git
-  revision: 8132983606044fe0a8c965535d72483970fcef3d
-  branch: 2f_method_with_prod
+  revision: dc7cb3c7bafadda4d516d6689ff8b746047cda1a
+  branch: new_search_param
   specs:
-    qg-ft (11.1.0)
+    qg-ft (11.1.1)
       draper
       pundit
       rails (>= 4.2.2)
@@ -54,10 +54,10 @@ GIT
 
 GIT
   remote: https://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:x-oauth-basic@github.com/Capgemini008/qg-inw.git
-  revision: 40d6682481464c286efe16a628a5f50701c91592
-  branch: inw_02-2023
+  revision: 3a5db1812b1ef68f4eadbb2435374ad7558cc9dc
+  branch: new_search_param
   specs:
-    qg-inw (11.0.0)
+    qg-inw (11.0.2)
       rails (= 4.2.2)
 
 GIT
@@ -619,10 +619,10 @@ DEPENDENCIES
   progress_bar (~> 1.0.0)
   qg-cc (= 11.0.0)!
   qg-datapurge (= 11.0.0)!
-  qg-ecol (= 15.1.0)!
-  qg-ft (= 11.1.0)!
+  qg-ecol (= 15.1.1)!
+  qg-ft (= 11.1.1)!
   qg-icol (= 11.0.0)!
-  qg-inw (= 11.0.0)!
+  qg-inw (= 11.0.2)!
   qg-ns (= 11.0.1)!
   qg-obdx (= 11.0.0)!
   qg-sc (= 11.0.0)!
