@@ -60,7 +60,7 @@ gem 'font-awesome-rails'
 gem 'encrypted_field', '0.1.6'
 
 #gem 'qg-rpl','3.9.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-rpl.git",branch: 'blockchain'
-gem 'qg-inw','11.0.1', :git => "https://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:x-oauth-basic@github.com/Capgemini008/qg-inw.git", branch: 'new_search_param'
+gem 'qg-inw','11.0.2', :git => "https://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:x-oauth-basic@github.com/Capgemini008/qg-inw.git", branch: 'new_search_param'
 gem 'qg-icol', '11.0.0', :git => "https://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:x-oauth-basic@github.com/Capgemini008/qg-icol.git"
 gem 'qg-ecol','15.1.1', :git => "https://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:x-oauth-basic@github.com/Capgemini008/qg-ecol.git",branch: "new_search_param"
 # gem 'qg-bm', '1.3.0', :git => "https://6643151ea8ce1aee02a31d27df7f8bf51fae01ba:x-oauth-basic@github.com/Capgemini008/qg-bm.git"
