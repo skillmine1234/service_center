@@ -2,8 +2,6 @@
 
 cp config/database.1.yml config/database.yml
 
-
-
 mkdir -p log
 touch log/production.log
 
@@ -11,14 +9,14 @@ echo "Installing Oracle InstantClient Basic/SDK/SQLPlus..."
 mkdir -p /tmp/oracle
 cd /tmp/oracle
 
-wget -O "instantclient-basic-11.1.0.7.0-linux-x86_64.zip" "https://onedrive.live.com/download?resid=A12F94714109F76F%21151&authkey=!ADfC9DbHHYvHEx4"
-unzip "instantclient-basic-11.1.0.7.0-linux-x86_64.zip"
+wget -O "instantclient-sdk-linux.x64-21.12.0.0.0dbru.zip" "https://download.oracle.com/otn_software/linux/instantclient/2112000/instantclient-sdk-linux.x64-21.12.0.0.0dbru.zip"
+unzip "instantclient-sdk-linux.x64-21.12.0.0.0dbru.zip"
 
-wget -O "instantclient-sdk-11.1.0.7.0-linux-x86_64.zip" "https://onedrive.live.com/download?resid=A12F94714109F76F%21148&authkey=!ADaW-rEffGotOns"
-unzip "instantclient-sdk-11.1.0.7.0-linux-x86_64.zip"
+wget -O "instantclient-basic-linux.x64-21.12.0.0.0dbru.zip" "https://download.oracle.com/otn_software/linux/instantclient/2112000/instantclient-basic-linux.x64-21.12.0.0.0dbru.zip"
+unzip "instantclient-basic-linux.x64-21.12.0.0.0dbru.zip"
 
-wget -O "instantclient-sqlplus-11.1.0.7.0-linux-x86_64.zip" "https://onedrive.live.com/download?resid=A12F94714109F76F%21149&authkey=!AEUAfaw9S4BuK4k"
-unzip "instantclient-sqlplus-11.1.0.7.0-linux-x86_64.zip"
+wget -O "instantclient-sqlplus-linux.x64-21.12.0.0.0dbru.zip" "https://download.oracle.com/otn_software/linux/instantclient/2112000/instantclient-sqlplus-linux.x64-21.12.0.0.0dbru.zip"
+unzip "instantclient-sqlplus-linux.x64-21.12.0.0.0dbru.zip"
 
 # array=("instantclient-basic-11.1.0.7.0-linux-x86_64.zip" "instantclient-sdk-11.1.0.7.0-linux-x86_64.zip" "instantclient-sqlplus-11.1.0.7.0-linux-x86_64.zip")
 
@@ -36,6 +34,5 @@ unzip "instantclient-sqlplus-11.1.0.7.0-linux-x86_64.zip"
 # 	unzip $file
 # done
 
-
-cd /tmp/oracle/instantclient_11_1
-ln -s libclntsh.so.11.1 libclntsh.so
+cd instantclient_21_12
+ln -s libclntsh.so.21.12 libclntsh.so
