@@ -25,7 +25,9 @@ class IamCustUserSearcher
     
   def find
     reln = approval_status == 'U' ? IamCustUser.unscoped.where("approval_status =?",'U').order("id desc") : IamCustUser.order("id desc")
-    reln = reln.where("username IN (?)", username.split(",").collect(&:strip)) if username.present?
+    reln = reln.where("username LIKE ?", "#{username}%") if username.present?
+
+    #reln = reln.where("username IN (?)", username.split(",").collect(&:strip)) if username.present?
     reln = reln.where("email IN (?)", email.split(",").collect(&:strip)) if email.present?
     reln = reln.where("secondary_email IN (?)", secondary_email.split(",").collect(&:strip)) if secondary_email.present?
     reln = reln.where("mobile_no IN (?)", mobile_no.split(",").collect(&:strip)) if mobile_no.present?

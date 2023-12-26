@@ -8,7 +8,7 @@ class Searcher
   
   def self.attr_searchable(*vars)
     @attributes ||= []
-    @between_attributes ||= []    
+    @between_attributes ||= []   
     vars = vars.flat_map { |attr|
       if attr.is_a?(Hash) 
         @between_attributes << attr.key(:range)
