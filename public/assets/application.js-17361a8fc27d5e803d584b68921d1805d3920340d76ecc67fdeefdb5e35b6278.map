@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../javascript/application.js"],
+  "sourcesContent": ["// Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails\nalert(\"sdfsd\");"],
+  "mappings": ";;AACA,QAAM,OAAO;",
+  "names": []
+}

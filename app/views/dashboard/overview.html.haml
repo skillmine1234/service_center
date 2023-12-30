@@ -1,0 +1,39 @@
+%br
+
+= render partial: 'panel', locals: { group: 'inw', sc_service: 'AML' }
+= render partial: 'panel', locals: { group: 'ft', sc_service: 'FUNDSTRANSFER' }
+= render partial: 'panel', locals: { group: 'sc', sc_service: 'SERVICECENTERBACKEND' }
+
+- if @current_user.group_names.include?("iam")
+  %h1 Identity & Access Management
+  .slide-container
+    .box
+      = link_to '/unapproved_records?group_name=iam' do
+        = image_tag 'work-list.jpg', :size => "80x80"
+      %br
+        = "Approval Worklist"
+  .slide-container
+    .box
+      - if !IamAuditRule.first.nil?
+        = link_to edit_iam_audit_rule_path(IamAuditRule.first) do
+          = image_tag 'ecol_rule.png', :size => "80x80"
+        %br
+          = "IAM Audit Rule"
+      - else
+        = link_to iam_audit_rule_error_msg_path do
+          = image_tag 'ecol_rule.png', :size => "80x80"
+        %br
+          = "IAM Audit Rule"
+    .box
+      = link_to '/iam_cust_users' do
+        = image_tag 'iam_cust_user_icon.png', :size => "80x80"
+      %br
+        = "IAM Customer User"
+    .box
+      = link_to 'iam_cust_users/ldap_user_list' do
+        = image_tag 'iam_users_list.png', :size => "80x80"
+      %br
+        = "LDAP Users"    
+
+%br
+
