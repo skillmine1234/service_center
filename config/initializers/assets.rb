@@ -13,6 +13,26 @@ Rails.application.config.assets.precompile += %w( application.js )
 Rails.application.config.assets.precompile += %w( inw/*.png)
 Rails.application.config.assets.precompile += %w( ft/*.png )
 Rails.application.config.assets.precompile += %w( sc/*.png )
+Rails.application.config.assets.precompile += %w( ecol/*.png )
+
+Rails.application.config.assets.precompile += %w( obdx/*.png )
+Rails.application.config.assets.precompile += %w( sm/*.png )
+Rails.application.config.assets.precompile += %w( rc/*.png )
+Rails.application.config.assets.precompile += %w( rr/*.png )
+Rails.application.config.assets.precompile += %w( datapurge/*.png )
+Rails.application.config.assets.precompile += %w( pc/*.png )
+Rails.application.config.assets.precompile += %w( ns/*.png )
+Rails.application.config.assets.precompile += %w( rp/*.png )
+Rails.application.config.assets.precompile += %w( icol/*.png )
+
+
+
+
+
+
+
+
+
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
