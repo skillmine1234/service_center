@@ -758,7 +758,7 @@ DEPENDENCIES
   rb-readline
   rolify (>= 3.2.0)
   rspec
-  ruby-oci8 (~> 2.2, >= 2.2.12)
+  ruby-oci8
   rufus-scheduler
   saas (~> 0.1.1)
   sass-rails (>= 5)
