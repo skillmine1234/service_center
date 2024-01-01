@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 ruby "3.2.2"
+
+
 #gem 'roo'
 gem "flot-rails"
 gem 'rails', '7.0.4' #.3'# '7.0.4.3'
@@ -70,12 +72,12 @@ gem 'ffi', '~> 1.15', '>= 1.15.5'
 #gem 'kgio', '~> 2.9', '>= 2.9.3'
 #gem 'railties'#, '~> 7.0', '>= 7.0.4.3'
 #gem 'ruby-oci8', '~> 2.2', '>= 2.2.12'
-#gem 'compass'#, '~> 1.0', '>= 1.0.3'
+gem 'compass'#, '~> 1.0', '>= 1.0.3'
 
 gem 'puma', '~> 5.0'
 
 #gem 'railties', '~> 7.0', '>= 7.0.4.2'
-#gem 'compass-rails', '~> 4.0'
+gem 'compass-rails', '~> 4.0'
 gem 'bundler'#, '~> 2.4', '>= 2.4.10'
 gem 'thor', '~> 1.2', '>= 1.2.1'
 gem 'pundit', '~> 2.3'
@@ -87,7 +89,7 @@ gem 'warden', '~> 1.2', '>= 1.2.9'#
 #gem 'normalize', '~> 0.0.3'
 gem 'normalize-rails', '~> 8.0', '>= 8.0.1'
 gem 'normalize-scss', '~> 7.0', '>= 7.0.1'
-#gem 'compass-normalize', '~> 1.5'
+gem 'compass-normalize', '~> 1.5'
 gem 'normalize-json', '~> 0.0.2'
 gem 'normalize_rails', '~> 0.1.0'
 gem 'normalize-json', '~> 0.0.2'
@@ -181,8 +183,8 @@ group :production do
    gem 'passenger'
    gem 'rails_12factor'
    #gem 'ruby-plsql'
-   gem 'activerecord-oracle_enhanced-adapter'#, '~> 7.0.2'
-   gem 'ruby-oci8'#, '~> 2.2', '>= 2.2.12' 
+   gem 'activerecord-oracle_enhanced-adapter', '~> 7.0.2'
+   #gem 'ruby-oci8', '~> 2.2', '>= 2.2.12'
 
 end
 

@@ -263,6 +263,12 @@ GEM
       sass (>= 3.3.0, < 3.5)
     compass-import-once (1.0.5)
       sass (>= 3.2, < 3.5)
+    compass-normalize (1.5)
+      compass (>= 0.12.0)
+    compass-rails (4.0.0)
+      compass (~> 1.0.0)
+      sass-rails (< 5.1)
+      sprockets (< 4.0)
     concurrent-ruby (1.2.2)
     countries (5.6.0)
       unaccent (~> 0.3)
@@ -677,7 +683,7 @@ DEPENDENCIES
   activeadmin
   activeadmin-sortable
   activerecord
-  activerecord-oracle_enhanced-adapter
+  activerecord-oracle_enhanced-adapter (~> 7.0.2)
   acts_as_commentable (= 3.0.1)
   acts_as_list
   approval2!
@@ -694,6 +700,9 @@ DEPENDENCIES
   cipher (~> 0.1.1)
   cocoon (~> 1.2, >= 1.2.15)
   coffee-rails
+  compass
+  compass-normalize (~> 1.5)
+  compass-rails (~> 4.0)
   country_select!
   csp (~> 0.0.1)
   csp-solver
@@ -758,7 +767,6 @@ DEPENDENCIES
   rb-readline
   rolify (>= 3.2.0)
   rspec
-  ruby-oci8
   rufus-scheduler
   saas (~> 0.1.1)
   sass-rails (>= 5)
