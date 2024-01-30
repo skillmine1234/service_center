@@ -121,6 +121,8 @@ gem 'sprockets'#, '~> 4'
 #gem 'sprockets-rails', :require => 'sprockets/railtie'
 #gem "formtastic", github: "justinfrench/formtastic"
 gem 'will_paginate', '~> 4.0'
+gem 'recaptcha'
+
 
 #gem 'activerecord-oracle_enhanced-adapter'
 

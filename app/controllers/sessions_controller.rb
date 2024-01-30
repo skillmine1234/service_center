@@ -12,6 +12,9 @@ class SessionsController < Devise::SessionsController
 
     request.params[:user] = {username: params[:user][:username], password: decrypted_password}
     warden.clear_strategies_cache!(:scope => :user)
-    super
+    #super
+    if verify_recaptcha(model: @user)
+      super
+    end
   end
 end

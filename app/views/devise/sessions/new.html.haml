@@ -18,5 +18,7 @@
   = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:autocomplete => "off",:id => 'sign-in-form'}) do |f|
     = f.hidden_field :username, :autofocus => true, :class=>"span3", :autocomplete => "off", :id => 'username-hidden'
     = f.hidden_field :password, :class=>"span3", :autocomplete => "new-password", :id => 'password-hidden', data: { encrypt: true }
+    = recaptcha_tags
+
     .helper
       = f.submit "Sign In" ,:class=>"btn btn-primary"

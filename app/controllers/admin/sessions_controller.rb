@@ -6,7 +6,10 @@ class Admin::SessionsController < ActiveAdmin::Devise::SessionsController
     params[:admin_user][:password] = decrypted_password
     request.params[:admin_user] = {username: params[:admin_user][:username], password: decrypted_password}
     warden.clear_strategies_cache!(:scope => :admin_user)
-    super
+    #super
+    if verify_recaptcha(model: @user)
+      super
+    end
   end
 end
 
